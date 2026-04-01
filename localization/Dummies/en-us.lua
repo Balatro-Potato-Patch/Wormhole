@@ -6,7 +6,7 @@ return {
             PotatoPatchDev_ghostsalt = { name = 'GhostSalt', text = { ":3" } }
         },
         Joker = {
-            j_worm_worm = {
+            j_worm_dum_worm = {
                 name = "Worm The Eater",
                 text = {
                     {
@@ -31,6 +31,8 @@ return {
     },
     misc = {
         dictionary = {
+            k_worm_dum_worm_free="Free packs!",
+            k_worm_dum_worm_eat="Nom!",
             worm_moony_menu_tooltip = {
                 "Select one of the above",
                 "poker hands to upgrade."
