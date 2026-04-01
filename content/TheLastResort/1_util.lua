@@ -44,8 +44,14 @@ PotatoPatchUtils.Developer({
 
 WORM_TLR = WORM_TLR or {}
 
-function WORM_TLR.const_info_queue(info_queue)
-	info_queue[#info_queue+1] = {set = "Other", key = "worm_tlr_const_info"}
+function WORM_TLR.const_info_queue(info_queue, tier)
+	if tier < 3 then
+		info_queue[#info_queue+1] = {set = "Other", key = "worm_tlr_const_info"}
+	elseif tier < 4 then
+		info_queue[#info_queue+1] = {set = "Other", key = "worm_tlr_const_max_level"}
+	else
+		info_queue[#info_queue+1] = {set = "Other", key = "worm_tlr_const_max_real"}
+	end
 end
 
 function WORM_TLR.update_const_sprite(card_self, card_card)
