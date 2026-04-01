@@ -15,12 +15,6 @@ SMODS.Joker { -- :3
             vars = { card.ability.extra.multi, (planets_used + 1) }, 
         }
     end,
-    loc_txt = {
-        name = "Astro Novalite",
-        text = {
-            ":3"
-        }
-    },
     calculate = function(self, card, context)
         if context.setting_blind then
             G.E_MANAGER:add_event(Event({
