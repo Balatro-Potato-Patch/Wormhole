@@ -1,5 +1,5 @@
 SMODS.Joker {
-    key = "",
-    cost = 1,
-    rarity = 1
+    key = "alienx",
+    cost = 20,
+    rarity = 4
 }

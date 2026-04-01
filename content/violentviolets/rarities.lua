@@ -1,5 +1,5 @@
 SMODS.Rarity {
-key = "otherwordly",
+key = "otherworldly",
 pools = {
   ["Joker"] = true --uses self.default_rate when polled
 },

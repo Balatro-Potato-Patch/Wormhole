@@ -1,6 +1,6 @@
 SMODS.Joker { -- :3
     key = 'astro_n',
-    rarity = 4,
+    rarity = 'worm_otherworldly',
     cost = 30,
     config = {
         extra = {
