@@ -15,4 +15,4 @@ if PotatoPatchUtils then
     function Wormhole.reset_game_globals(run_start) end
 end
 
-PotatoPatchUtils.Team("Violent Violets", HEX(a83ee7), false)
+PotatoPatchUtils.Team("Violent Violets", a83ee7, false)
