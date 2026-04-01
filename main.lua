@@ -16,3 +16,8 @@ if PotatoPatchUtils then
 end
 
 PotatoPatchUtils.Team("Violent Violets", a83ee7, false)
+
+PotatoPatchUtils.Developer("FireIce", AF00AF, false, nil, "Violent Violets")
+PotatoPatchUtils.Developer("Isotypical", D781FF, false, nil, "Violent Violets")
+PotatoPatchUtils.Developer("Gud", PURPLE, false, nil, "Violent Violets")
+PotatoPatchUtils.Developer("FirstTry", DARK_EDITION, false, nil, "Violent Violets")
