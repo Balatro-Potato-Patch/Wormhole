@@ -1,5 +1,5 @@
 SMODS.Joker {
-    key = "8-3",
+    key = "temp",
     rarity = 1,
     cost = 1,
     config = {
