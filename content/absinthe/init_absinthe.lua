@@ -3,6 +3,13 @@ PotatoPatchUtils.Team {
     colour = HEX('5fd47e')
 }
 
+SMODS.Atlas({
+    key = 'abs_credits',
+	px = 71,
+    py = 95,
+    path = 'absinthe/abs_credits'
+})
+
 PotatoPatchUtils.Developer {
     name = 'pangaea47',
     team = 'absinthe',
@@ -32,6 +39,7 @@ PotatoPatchUtils.Developer {
 PotatoPatchUtils.Developer {
     name = 'nixthatoneartist',
     team = 'absinthe',
+    colour = HEX("0db829"),
 }
 
 PotatoPatchUtils.Developer {
