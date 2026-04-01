@@ -10,11 +10,11 @@ return {
             },
             PotatoPatchDev_vissa = {
                 name = 'vissa',
-                text = { "glorpalicious"}
+                text = { "glorpalicious" }
             },
             PotatoPatchDev_bakersdozenbagels = {
                 name = 'BakersDozenBagels',
-                text = { ":transgender_flag:"}
+                text = { "gwah" }
             },
             PotatoPatchDev_theonegoofali = {
                 name = 'TheOneGoofAli',
@@ -66,7 +66,7 @@ return {
                     }
                 },
             },
-			j_worm_dum_garlicbread = {
+            j_worm_dum_garlicbread = {
                 name = { "Garlic Bread that", "went to Space" },
                 text = {
                     "{C:attention}All{} poker hands are {C:attention}upgraded{}",
@@ -74,9 +74,9 @@ return {
                     "{C:inactive}(Currently {C:attention}#1#{C:inactive}){}"
                 },
             },
-			j_worm_dum_farfromhome = {
+            j_worm_dum_farfromhome = {
                 name = "Far from Home",
-                text = {{
+                text = { {
                     "Store {X:chips,C:white}X#1#{} Chips when",
                     "a {C:planet}Planet{} card is used",
                     "{C:inactive}(Stored: {X:chips,C:white}X#2#{C:inactive} Chips){}"
@@ -86,9 +86,9 @@ return {
                     "lose {X:chips,C:white}X#3#{} Chips for",
                     "every hand played",
                     "{C:inactive}(Currently {X:chips,C:white}X#4#{C:inactive} Chips){}"
-                }},
+                } },
             },
-			j_worm_dum_gleebleglorp = {
+            j_worm_dum_gleebleglorp = {
                 name = "Gleebleglorp",
                 text = {
                     {
@@ -98,15 +98,15 @@ return {
                     }
                 },
             },
-			j_worm_dum_scrooge = {
+            j_worm_dum_scrooge = {
                 name = "DuckTales: The Moon",
                 text = {
-					"Earn {C:money}#1#{} for {C:attention}every{} poker hand",
-					"in played hand when holding their",
-					"{C:attention}respective{} {C:planet}Planet{} card"
+                    "Earn {C:money}#1#{} for {C:attention}every{} poker hand",
+                    "in played hand when holding their",
+                    "{C:attention}respective{} {C:planet}Planet{} card"
                 },
             },
-			j_worm_dum_spaghet = {
+            j_worm_dum_spaghet = {
                 name = "Spaghettification",
                 text = {
 					"If a {C:planet}Planet{} card is held for {C:attention}discarded{}",
@@ -163,10 +163,10 @@ return {
                 },
             },
         },
-		Voucher = {
-			v_worm_dum_spacesuit = {
-				name = "Space Suit",
-				text = {{
+        Voucher = {
+            v_worm_dum_spacesuit = {
+                name = "Space Suit",
+                text = { {
                     "{C:attention}Gain{} and {C:attention}Increase{} your",
                     "maximum amount of",
                     "{C:spectral}Oxygen{} by {C:attention}#1#{} minutes",
@@ -174,14 +174,14 @@ return {
                     "Gain {C:attention}#2#{} seconds of {C:spectral}Oxygen{}",
                     "after beating a {C:attention}Blind{}",
                 }, {
-				    "Multiply {C:chips}Chips{} and {C:mult}Mult{} by",
-				    "half of your current {C:spectral}Oxygen{}",
+                    "Multiply {C:chips}Chips{} and {C:mult}Mult{} by",
+                    "half of your current {C:spectral}Oxygen{}",
                     "{C:inactive,s:0.8}(ex. {C:attention,s:0.8}2:53{C:inactive,s:0.8} -> {X:purple,C:white,s:0.8}X1.27{C:inactive,s:0.8} Mult and Chips){}",
-				}}
-			},
-			v_worm_dum_oxygentank = {
-				name = "Oxygen Tank",
-				text = {{
+                } }
+            },
+            v_worm_dum_oxygentank = {
+                name = "Oxygen Tank",
+                text = { {
                     "{C:attention}Gain{} and {C:attention}Increase{} your",
                     "maximum amount of",
                     "{C:spectral}Oxygen{} by {C:attention}#1#{} minutes",
@@ -189,13 +189,13 @@ return {
                     "{u:inactive}Reduce{} the {C:spectral}Oxygen{}",
                     "gained, after beating",
                     "a {C:attention}Blind{}, by {C:attention}#2#{} seconds",
-				}}
-			},
+                } }
+            },
         },
-		Tag = {
-			tag_worm_dum_trinary = {
-				name = "Trinary System",
-				text = {
+        Tag = {
+            tag_worm_dum_trinary = {
+                name = "Trinary System",
+                text = {
                     "Gives either a {C:planet}Planet{},",
                     "{C:spectral}Spectral{} or {C:tarot}Tarot{} card",
                     "when {C:attention}Blind{} is selected",
@@ -210,31 +210,41 @@ return {
 				},
 			},
         },
-		Other = {
-			worm_dum_spacesuit_warning = {
-				name = "{s:1.2}Warning{}",
-				text = {
+        Other = {
+            worm_dum_spacesuit_warning = {
+                name = "{s:1.2}Warning{}",
+                text = {
                     "When {C:spectral}Oxygen{} runs out,",
                     "{C:red,E:2}Lose{E:2} the Game",
                 }
-			},
-			worm_dum_spacesuit_upgrade = {
-				name = "Oxygen Upgrade",
-				text = {
+            },
+            worm_dum_spacesuit_upgrade = {
+                name = "Oxygen Upgrade",
+                text = {
                     "{C:inactive}Maximum Oxygen:", "{C:spectral}#1#{} -> {C:spectral}#2#{}",
                     "{s:0.5} ",
                     "{C:inactive}Replenish Time:", "{C:attention}#3#{} -> {C:attention}#4#{}",
                 }
-			},
+            },
         },
+        Edition = {
+            e_worm_dum_Celestial = {
+                name = 'Celestial',
+                text = {
+                    "{C:green}#1# in #2#{} chance to",
+                    "upgrade a {C:attention}random{} Poker Hand",
+                    "when using a {C:planet}Planet{} Card"
+                }
+            }
+        }
     },
     misc = {
         dictionary = {
-            k_worm_dum_worm_free="Free packs!",
-            k_worm_dum_worm_eat="Gulp!",
+            k_worm_dum_worm_free = "Free packs!",
+            k_worm_dum_worm_eat = "Gulp!",
             k_worm_dum_dummy_blind_saved = "Test flight failed!",
-            k_worm_dum_greg_eat="Nom!",
-            k_worm_dum_carnivore_eat="Chomp!",
+            k_worm_dum_greg_eat = "Nom!",
+            k_worm_dum_carnivore_eat = "Chomp!",
             worm_moony_menu_tooltip = {
                 "Select one of the above",
                 "poker hands to upgrade."
@@ -242,26 +252,26 @@ return {
             k_worm_dum_low_oxygen = "Low Oxygen",
 			worm_tim_curry_space = "SPAAACE!",
         },
-		v_dictionary = {
-			worm_dum_store = "+X#1# Stored",
-			worm_dum_apply = "+X#1# Applied",
+        v_dictionary = {
+            worm_dum_store = "+X#1# Stored",
+            worm_dum_apply = "+X#1# Applied",
             worm_dum_percent = "#1#%",
             worm_dum_xgeneric = "X#1#",
         },
-		challenge_names = {
-			c_worm_dum_low_oxygen = "Low Oxygen",
-			c_worm_dum_buff_spacesuit = "Buff Space Suit",
+        challenge_names = {
+            c_worm_dum_low_oxygen = "Low Oxygen",
+            c_worm_dum_buff_spacesuit = "Buff Space Suit",
         },
-		v_text = {
+        v_text = {
             -- Challenge Descs.
-			ch_c_worm_dum_low_oxygen_1 = { "Start with {C:attention}30{} minutes of {C:spectral}Oxygen{},", },
-			ch_c_worm_dum_low_oxygen_2 = { "{C:spectral}Oxygen{} doesn't affect scoring.", },
+            ch_c_worm_dum_low_oxygen_1 = { "Start with {C:attention}30{} minutes of {C:spectral}Oxygen{},", },
+            ch_c_worm_dum_low_oxygen_2 = { "{C:spectral}Oxygen{} doesn't affect scoring.", },
             ch_c_worm_dum_buff_spacesuit_1 = { "Enjoy {C:green,E:1}Pre-Nerfed {C:attention}Space Suit{} stats!", },
             ch_c_worm_dum_buff_spacesuit_2 = { "{C:inactive}Maximum Oxygen: {C:spectral}05:00{C:inactive} minutes", },
             ch_c_worm_dum_buff_spacesuit_3 = { "{C:inactive}Replenish Time: {C:attention}01:00{C:inactive} minute", },
             -- Generic/Misc.
-			ch_c_worm_dum_gold_stake = { "Apply {C:money}Gold Stake{} difficulty" },
-			ch_c_worm_dum_space = { "{s:0.5} ", },
+            ch_c_worm_dum_gold_stake = { "Apply {C:money}Gold Stake{} difficulty" },
+            ch_c_worm_dum_space = { "{s:0.5} ", },
         },
         --# See "dummies_quips.lua":
         --# Update the Amount of "EXPECTED" when using the [Generic] method!
@@ -295,5 +305,8 @@ return {
             worm_dummies_flowire_2 = { "nil" },
             worm_dummies_flowire_3 = { "{s:5.0} " },
         },
+        labels = {
+            worm_dum_Celestial = 'Celestial'
+        }
     }
 }
