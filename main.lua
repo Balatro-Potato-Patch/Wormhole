@@ -17,7 +17,7 @@ end
 
 PotatoPatchUtils.Team("Violent Violets", a83ee7, false)
 
-PotatoPatchUtils.Developer("FireIce", AF00AF, false, nil, "Violent Violets")
-PotatoPatchUtils.Developer("Isotypical", D781FF, false, nil, "Violent Violets")
-PotatoPatchUtils.Developer("Gud", PURPLE, false, nil, "Violent Violets")
-PotatoPatchUtils.Developer("FirstTry", DARK_EDITION, false, nil, "Violent Violets")
+PotatoPatchUtils.Developer("FireIce", HEX('AF00AF'), false, nil, "Violent Violets")
+PotatoPatchUtils.Developer("Isotypical", HEX('D781FF'), false, nil, "Violent Violets")
+PotatoPatchUtils.Developer("Gud", HEX("BA89F9"), false, nil, "Violent Violets")
+PotatoPatchUtils.Developer("FirstTry", HEX("FFFFFF"), false, nil, "Violent Violets")

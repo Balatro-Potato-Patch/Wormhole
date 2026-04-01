@@ -1,4 +1,7 @@
 return {
+    Joker = {
+
+    },
     descriptions = {
         PotatoPatch = {
             
