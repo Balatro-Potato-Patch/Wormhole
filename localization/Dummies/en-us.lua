@@ -5,7 +5,7 @@ return {
             PotatoPatchDev_vissa = {name = 'vissa', text = { "take me to your dealer"}}
         },
         Joker = {
-            j_worm_worm = {
+            j_worm_dum_worm = {
                 name = "Worm The Eater",
                 text = {
                     {
@@ -16,5 +16,12 @@ return {
                 },
             },
         },
+    },
+    misc = {
+        dictionary = {
+            k_worm_dum_worm_free="Free packs!",
+            k_worm_dum_worm_eat="Nom!",
+        },
+
     }
 }
