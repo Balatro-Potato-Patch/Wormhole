@@ -17,8 +17,8 @@ SMODS.Joker{
     -- unlocked = true,
     -- discovered = true,
     
-    ppu_coder = { "worm_vissa" },
-    ppu_team = { "worm_dummies" },
+    ppu_coder = { "vissa" },
+    ppu_team = { "dummies" },
 
     pronouns = "he_him",
 
