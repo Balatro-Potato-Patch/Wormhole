@@ -24,6 +24,6 @@ PotatoPatchUtils.Developer{
 PotatoPatchUtils.Developer{
     name = "theonegoofali",
     colour = HEX("FD9712"),
-    team = "dum",
+    team = "dummies",
     loc = true,
 }
