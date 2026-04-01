@@ -1,3 +1,7 @@
 return {
-    
+    descriptions = {
+        PotatoPatch = {
+            
+        }
+    }
 }
