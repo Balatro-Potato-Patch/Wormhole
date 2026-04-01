@@ -2,6 +2,7 @@ SMODS.ConsumableType{
     key = 'worm_tlr_constellation',
     secondary_colour = HEX("75008f"),
     primary_colour = HEX("7FB768"),
+    text_colour = HEX("aFf7a8"),
     collection_rows = {5, 2},
     shop_rate = 0,
     select_card = "consumeables",
