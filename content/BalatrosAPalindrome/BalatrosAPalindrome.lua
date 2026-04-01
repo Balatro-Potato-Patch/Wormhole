@@ -18,6 +18,23 @@ SMODS.Atlas {
 	py = 95
 }
 
+-- Nothing planet card
+SMODS.Consumable {
+    key = "nothing",
+    loc_txt = {
+		name = 'Nothing',
+		text = {
+			"bruh",
+		}
+	},
+    set = "Planet",
+    cost = 3,
+    atlas = 'Palindrome',
+    pos = { x = 0, y = 0 },
+    config = { hand_type = 'Pair' },
+    can_use = function(self, card) return true end
+}
+
 SMODS.Joker {
 	key = 'perkeo2',
 	loc_txt = {
