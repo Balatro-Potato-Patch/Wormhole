@@ -1,0 +1,1 @@
+Wormhole.COLON_THREE = {}
