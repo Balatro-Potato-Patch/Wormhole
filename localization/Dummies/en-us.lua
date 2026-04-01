@@ -1,8 +1,9 @@
 return {
     descriptions = {
         PotatoPatch = {
-            PotatoPatchTeam_dum = {name = 'Dummies'},
-            PotatoPatchDev_vissa = {name = 'vissa', text = { "take me to your dealer"}}
+            PotatoPatchTeam_dummies = { name = 'Dummies' },
+            PotatoPatchDev_vissa = { name = 'vissa', text = { "take me to your dealer" } },
+            PotatoPatchDev_ghostsalt = { name = 'GhostSalt', text = { ":3" } }
         },
         Joker = {
             j_worm_dum_worm = {
@@ -16,12 +17,26 @@ return {
                 },
             },
         },
+        Planet = {
+            c_worm_dum_moony = {
+                name = "Moony",
+                text = {
+                    "Select between {C:attention}2{}",
+                    "random {C:attention}poker hands{},",
+                    "upgrade selected",
+                    "hand by {C:attention}#1#{} level"
+                }
+            }
+        }
     },
     misc = {
         dictionary = {
             k_worm_dum_worm_free="Free packs!",
             k_worm_dum_worm_eat="Nom!",
-        },
-
+            worm_moony_menu_tooltip = {
+                "Select one of the above",
+                "poker hands to upgrade."
+            }
+        }
     }
 }

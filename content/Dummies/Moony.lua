@@ -1,13 +1,6 @@
-SMODS.Atlas {
-    key = "DummiesPlanets",
-    path = "Dummies/WormholePlanets.png",
-    px = 71,
-    py = 95
-}
-
 SMODS.Consumable {
     set = "Planet",
-    key = "moony",
+    key = "dum_moony",
     pos = { x = 0, y = 0 },
     config = {
         extra = { levels = 1 },
@@ -67,7 +60,11 @@ SMODS.Consumable {
             end
         }))
     end,
-    pronouns = "she_her"
+    pronouns = "she_her",
+    
+    ppu_team = { "dummies" },
+    ppu_artist = { "ghostsalt" },
+    ppu_coder = { "ghostsalt" }
 }
 
 G.FUNCS.worm_run_moony_menu = function(e)
