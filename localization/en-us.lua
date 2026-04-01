@@ -1,10 +1,7 @@
 return {
-    Joker = {
-
-    },
     descriptions = {
         PotatoPatch = {
-            
-        }
+
+        },
     }
 }
