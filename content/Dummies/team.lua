@@ -12,4 +12,11 @@ PotatoPatchUtils.Developer{
     loc = true,
 }
 
+PotatoPatchUtils.Developer{
+    name = "theonegoofali",
+    colour = HEX("FD9712"),
+    team = "dum",
+    loc = true,
+}
+
 
