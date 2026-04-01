@@ -30,7 +30,7 @@ PotatoPatchUtils.Developer {
 }
 
 PotatoPatchUtils.Developer {
-    name = 'NixThatOneArtist',
+    name = 'nixthatoneartist',
     team = 'absinthe',
 }
 
