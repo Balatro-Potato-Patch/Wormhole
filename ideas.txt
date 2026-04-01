@@ -1,0 +1,22 @@
+DELETE ME BEFORE FINAL MERGE!
+
+star lifecycle consumable (6 Objects+1 for type)
+Stellar Nebula, Red Giant, White Dwarf
+^, Supergiant, Supernova, Neutron Star + Black Hole*
+proceeds to next step at end of round
+
+
+star lifecycle pack set (1 object)
+
+Joker Ideas:
+Vaccume, blue dot, Accretion Disk, Space Elevator
+Hedonistic space station (creates consumables not normally accessable)
+space jam (food joker)
+event horizon
+
+
+--- BAR ---
+
+Deck that makes our content more likely
+bartender jokers that create drinks/food
+all other slots left for drinks/food
