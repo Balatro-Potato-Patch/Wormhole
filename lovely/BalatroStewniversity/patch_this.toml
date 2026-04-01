@@ -1,0 +1,14 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+
+[[patches]]
+[patches.pattern]
+target = 'game.lua'
+pattern = '''djtsd;krtj'''
+position = 'after'
+payload = '''
+-- wooo'''
+match_indent = true
