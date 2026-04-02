@@ -29,10 +29,15 @@ SMODS.Consumable {
 	},
     set = "Planet",
     cost = 3,
-    atlas = 'Palindrome',
     pos = { x = 0, y = 0 },
-    config = { hand_type = 'Pair' },
-    can_use = function(self, card) return true end
+    config = { anim_time = 0 },
+    can_use = function(self, card) return true end,
+    keep_on_use = function(self, card) return true end,
+    --use = function(self, card, area, copier) self.pos.x = self.pos.x + 1 end,
+    update = function(self, card, dt)
+        self.config.anim_time = self.config.anim_time + dt
+        self.pos.x = math.sin(self.config.anim_time) * 0.5 + 0.5
+    end
 }
 
 SMODS.Joker {
