@@ -29,6 +29,64 @@ local CONSTELLATIONS = {
 			"Choices may include blinds",
 			"That cannot usually appear",
 		}
+	},
+
+	c_worm_tlr_const_serpens_t1 = {
+		name = "Serpens",
+		text = {
+			"{C:blue}+1{} Hands and {C:red}+1{} Discards",
+			"for the next {C:attention}Blind"
+		}
+	},
+	c_worm_tlr_const_serpens_t2 = {
+		name = "Serpens",
+		text = {
+			"{C:blue}+1{} Hands and {C:red}+2{} Discards",
+			"for the next {C:attention}Blind"
+		}
+	},
+	c_worm_tlr_const_serpens_t3 = {
+		name = "Serpens",
+		text = {
+			"{C:blue}+2{} Hands and {C:red}+2{} Discards",
+			"for the next {C:attention}Blind"
+		}
+	},
+	c_worm_tlr_const_serpens_t4 = {
+		name = "Serpens",
+		text = {
+			"{C:blue}+3{} Hands and {C:red}+3{} Discards",
+			"for the next {C:attention}Blind"
+		}
+	},
+
+	c_worm_tlr_const_ursa_minor_t1 = {
+		name = "Ursa Minor",
+		text = {
+			"Reduce current {C:attention}Blind", 
+			"size by {C:attention}10%"
+		}
+	},
+	c_worm_tlr_const_ursa_minor_t2 = {
+		name = "Ursa Minor",
+		text = {
+			"Reduce current {C:attention}Blind", 
+			"size by {C:attention}15%"
+		}
+	},
+	c_worm_tlr_const_ursa_minor_t3 = {
+		name = "Ursa Minor",
+		text = {
+			"Reduce current {C:attention}Blind", 
+			"size by {C:attention}25%"
+		}
+	},
+	c_worm_tlr_const_ursa_minor_t4 = {
+	name = "Ursa Minor",
+		text = {
+			"Reduce current {C:attention}Blind", 
+			"size by {C:attention}50%"
+		}
 	}
 }
 for key, obj in pairs(CONSTELLATIONS) do
