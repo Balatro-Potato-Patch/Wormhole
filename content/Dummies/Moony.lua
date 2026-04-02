@@ -2,6 +2,25 @@ SMODS.Consumable {
     set = "Planet",
     key = "dum_moony",
     pos = { x = 0, y = 0 },
+    wormhole_pos_extra = { x = 0, y = 2 },
+    wormhole_anim = {
+        { x = 0,                            y = 0, t = 5 },
+        { xrange = { first = 1, last = 5 }, y = 0, t = 0.1 },
+        { x = 0,                            y = 1, t = 0.1 },
+        { x = 1,                            y = 1, t = 1 },
+        { x = 2,                            y = 1, t = 0.1 },
+        { x = 3,                            y = 1, t = 1 },
+        { x = 2,                            y = 1, t = 0.1 },
+        { x = 1,                            y = 1, t = 1 },
+        { xrange = { first = 4, last = 5 }, y = 1, t = 0.1 },
+        { xrange = { first = 4, last = 5 }, y = 1, t = 0.1 },
+        { xrange = { first = 4, last = 5 }, y = 1, t = 0.1 },
+        { x = 0,                            y = 0, t = 5 },
+    },
+    wormhole_anim_extra = {
+        { xrange = { first = 0, last = 4 }, y = 2, t = 0.2 }
+    },
+    wormhole_extra_wiggle = true,
     config = {
         extra = { levels = 1 },
     },
@@ -61,7 +80,7 @@ SMODS.Consumable {
         }))
     end,
     pronouns = "she_her",
-    
+
     ppu_team = { "dummies" },
     ppu_artist = { "ghostsalt" },
     ppu_coder = { "ghostsalt" }
