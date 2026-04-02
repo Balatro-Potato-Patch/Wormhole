@@ -87,6 +87,64 @@ local CONSTELLATIONS = {
 			"Reduce current {C:attention}Blind", 
 			"size by {C:attention}50%"
 		}
+	},
+
+	c_worm_tlr_const_ursa_major_t1 = {
+		name = "Ursa Major",
+		text = {
+			"Increase current {C:attention}Blind's",
+			"reward by {C:money}$3"
+		}
+	},
+	c_worm_tlr_const_ursa_major_t2 = {
+		name = "Ursa Major",
+		text = {
+			"Increase current {C:attention}Blind's",
+			"reward by {C:money}$6"
+		}
+	},
+	c_worm_tlr_const_ursa_major_t3 = {
+		name = "Ursa Major",
+		text = {
+			"Increase current {C:attention}Blind's",
+			"reward by {C:money}$10"
+		}
+	},
+	c_worm_tlr_const_ursa_major_t4 = {
+	name = "Ursa Major",
+		text = {
+			"Increase current {C:attention}Blind's",
+			"reward by {C:money}$25"
+		}
+	},
+
+	c_worm_tlr_const_pictor_t1 = {
+		name = "Pictor",
+		text = {
+			"{C:attention}+1{} Hand size for",
+			"the next {C:attention}Blind"
+		}
+	},
+	c_worm_tlr_const_pictor_t2 = {
+		name = "Pictor",
+		text = {
+			"{C:attention}+2{} Hand size for",
+			"the next {C:attention}Blind"
+		}
+	},
+	c_worm_tlr_const_pictor_t3 = {
+		name = "Pictor",
+		text = {
+			"{C:attention}+3{} Hand size for",
+			"the next {C:attention}Blind"
+		}
+	},
+	c_worm_tlr_const_pictor_t4 = {
+	name = "Pictor",
+		text = {
+			"{C:attention}+4{} Hand size for",
+			"the next {C:attention}Blind"
+		}
 	}
 }
 for key, obj in pairs(CONSTELLATIONS) do
