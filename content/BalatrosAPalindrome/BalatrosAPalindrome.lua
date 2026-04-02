@@ -45,18 +45,28 @@ SMODS.Enhancement {
     loc_txt = {
         name = 'Void',
 		text = {
-			"{C:chips}-10{} chips",
-			"when {C:attention}visible{}"
+			"{C:chips}#1#{} chips when",
+			"{C:attention}played{} or {C:attention}held{}"
 		}
     },
     atlas = 'Palindrome',
     pos = { x = 1, y = 0 },
-    config = { bonus = -10, h_chips = -10 }
+    config = { bonus = -25, h_chips = -25 },
+	loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.bonus, card.ability.h_chips } }
+    end,
 }
 
 -- The Abyss
 SMODS.Consumable {
     key = 'bap_abyss',
+	loc_txt = {
+        name = 'The Abyss',
+		text = {
+			"Creates {C:attention}#2#{} random {C:attention}Void cards{}",
+			"and gives {C:money}$#1#{}"
+		}
+    },
     set = 'Tarot',
 	atlas = 'Palindrome',
     pos = { x = 2, y = 0 },
