@@ -165,6 +165,7 @@ end
 function Card:abs_empty_drink()
     if self.ability.drink_values.filled then
         self.ability.drink_values.filled = false
+        self.ability.drink_values.primed = false
 
         if self.config.center.empty and type(self.config.center.empty) == 'function' then
             self.config.center:empty(self)
@@ -196,10 +197,11 @@ SMODS.Consumable { -- Please god delete this before we finish
             empty_pos = { x = 1, y = 0 },
             filled = true,
             visibly_filled = true,
+            primed = false
         }
     },
     calculate = function(self, card, context)
-        if card.ability.drink_values.filled and context.setting_blind then
+        if card.ability.drink_values.filled and card.ability.drink_values.primed and context.setting_blind then
             card:abs_empty_drink()
         end
 
@@ -209,6 +211,17 @@ SMODS.Consumable { -- Please god delete this before we finish
     end,
     empty = function(self, card)
         ease_dollars(4)
+    end,
+    use = function(self, card, area, copier)
+        card.ability.drink_values.primed = not card.ability.drink_values.primed
+        local eval = function(card) return card.ability.drink_values.primed end
+        juice_card_until(card, eval, true)
+    end,
+    can_use = function(self, card)
+        return card.ability.drink_values.filled
+    end,
+    keep_on_use = function(self, card)
+        return true;
     end
 }
 
@@ -222,6 +235,7 @@ SMODS.Consumable { -- Supergiant Cider
             empty_pos = { x = 3, y = 0 },
             filled = true,
             visibly_filled = true,
+            primed = false
         },
         extra = { discards = 1, poker_hand = 'Full House' },
     },
@@ -244,7 +258,7 @@ SMODS.Consumable { -- Supergiant Cider
             card:abs_refill_drink()
         end
         
-        if context.hand_drawn and card.ability.drink_values.filled and not context.repetition then
+        if context.hand_drawn and card.ability.drink_values.filled and card.ability.drink_values.primed and not context.repetition then
             G.E_MANAGER:add_event(Event({
                 func = function()
                     ease_discard(card.ability.extra.discards)
@@ -257,6 +271,19 @@ SMODS.Consumable { -- Supergiant Cider
             }))
         end
     end,
+    use = function(self, card, area, copier)
+        print(card.ability.drink_values.primed)
+        card.ability.drink_values.primed = not card.ability.drink_values.primed
+        print(card.ability.drink_values.primed)
+        local eval = function(card) return card.ability.drink_values.primed end
+        juice_card_until(card, eval, true)
+    end,
+    can_use = function(self, card)
+        return card.ability.drink_values.filled
+    end,
+    keep_on_use = function(self, card)
+        return true;
+    end
     --empty = function(self, card)
     --    ease_dollars(4)
     --end
@@ -272,6 +299,7 @@ SMODS.Consumable { -- Hubble Trouble
             empty_pos = { x = 5, y = 0 },
             filled = true,
             visibly_filled = true,
+            primed = false,
         },
     },
     loc_vars = function(self, info_queue, card)
@@ -289,7 +317,7 @@ SMODS.Consumable { -- Hubble Trouble
             card:abs_refill_drink()
         end
         
-        if context.after and card.ability.drink_values.filled and not context.repetition then
+        if context.after and card.ability.drink_values.filled and card.ability.drink_values.primed and not context.repetition then
             G.E_MANAGER:add_event(Event({
                 trigger = 'before',
                 delay = 0.0,
@@ -322,6 +350,17 @@ SMODS.Consumable { -- Hubble Trouble
             }))
         end
     end,
+    use = function(self, card, area, copier)
+        card.ability.drink_values.primed = not card.ability.drink_values.primed
+        local eval = function(card) return card.ability.drink_values.primed end
+        juice_card_until(card, eval, true)
+    end,
+    can_use = function(self, card)
+        return card.ability.drink_values.filled
+    end,
+    keep_on_use = function(self, card)
+        return true;
+    end
     --empty = function(self, card)
     --    ease_dollars(4)
     --end
