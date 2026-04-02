@@ -18,7 +18,7 @@ SMODS.ConsumableType{
 			if main_end then ret.main_end = ret.main_end or {main_end} end
             if not ret.vars then ret.vars = {} end
             if not ret.vars.colours then ret.vars.colours = {} end
-            table.insert(ret.vars.colours, SMODS.ConsumableTypes.worm_tlr_constellation.primary_colour)
+            table.insert(ret.vars.colours, 1, SMODS.ConsumableTypes.worm_tlr_constellation.primary_colour)
             ret.key = _self.key .. "_t" .. _card.ability.tier
 			return ret
 		end
