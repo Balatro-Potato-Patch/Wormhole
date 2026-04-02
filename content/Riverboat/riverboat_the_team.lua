@@ -9,3 +9,9 @@ PotatoPatchUtils.Developer {
     team = "riverboat",
     loc = true
 }
+
+PotatoPatchUtils.Developer {
+    name = "fooping",
+    team = "riverboat",
+    loc = true
+}
