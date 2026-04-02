@@ -251,6 +251,25 @@ end
 
 return {
 	descriptions = {
+		Tarot = {
+			c_worm_tlr_observation = {
+				name = "Observation",
+				text = {
+					"Upgrades leftmost",
+					"{V:1}Constellation{} card",
+					"{C:inactive,s:0.7}Faint -> Noticable -> Bright -> Shining"
+				}
+			}
+		},
+		Spectral = {
+			c_worm_tlr_starmap = {
+				name = "Star Map",
+				text = {
+					"Upgrade all {V:1}Constellation{} cards",
+					"held to {C:edition}Shining"
+				}
+			}
+		},
 		worm_tlr_constellation = CONSTELLATIONS,
 		PotatoPatch = {
 			PotatoPatchTeam_TLR = {name = "The Last Resort"},
@@ -343,12 +362,43 @@ return {
 					"unseeded run to",
 					"learn what it does"
 				},
-			}
+			},
+			p_worm_tlr_const_normal = {
+				name = "Constellation Pack",
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{V:1} Constellation{} cards to take",
+				}
+			},
+			p_worm_tlr_const_jumbo = {
+				name = "Jumbo Constellation Pack",
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{V:1} Constellation{} cards to take",
+				}
+			},
+			p_worm_tlr_const_mega = {
+				name = "Mega Constellation Pack",
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{V:1} Constellation{} cards to take",
+				}
+			},
+		},
+		Tag = {
+			tag_worm_tlr_const = {
+				name = "Stellar Tag",
+				text = {
+					"Gives a free",
+					"{C:attention}Mega Constellation Pack",
+				},
+			},
 		}
 	},
 	misc = {
 		dictionary = {
 			k_worm_tlr_constellation = "Constellation",
+			k_tlr_const_pack = "Constellation Pack",
 			b_worm_tlr_constellation_cards = "Constellation",
 			k_worm_tlr_add = "Add",
 			k_worm_tlr_remove = "Remove",

@@ -45,5 +45,7 @@ SMODS.Consumable{
 				end
 			}))
 		end
-	end
+	end,
+	ppu_artist = {"Quinn"},
+	ppu_coder = {"Foo54"}
 }

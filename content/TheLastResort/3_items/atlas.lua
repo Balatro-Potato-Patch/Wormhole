@@ -7,14 +7,14 @@ SMODS.Atlas{
 
 SMODS.Atlas{
 	key = "tlr_foo54",
-	path = "TheLastResort/foo54.png",
+	path = "TheLastResort/foo54..png",
 	px = 71,
 	py = 95
 }
 
 SMODS.Atlas{
-	key = "tlr_breh",
-	path = "TheLastResort/breh.png",
-	px = 71,
-	py = 95
+	key = "tlr_starmap",
+	path = "TheLastResort/starmap_temp.png",
+	px = 600,
+	py = 665
 }
