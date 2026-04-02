@@ -1,15 +1,20 @@
+-- Dev Atals
 SMODS.Atlas {
     key = "shrug_developers",
     px = 71,
     py = 95,
     path = "TeamShrug/developers.png"
 }
+
+-- Team establish
 PotatoPatchUtils.Team({
     name = "shrug", 
     loc = true,
     colour = HEX("B6334C"),
     --colour = HEX("A65A60"), --low contrast variant
 })
+
+-- RandomsongV2
 PotatoPatchUtils.Developer({
     team = "shrug",
     name = "randomsongv2",
@@ -19,6 +24,8 @@ PotatoPatchUtils.Developer({
     pos = {x = 6, y = 8},
     soul_pos = {x = 6, y = 9},
 })
+
+-- Microwave
 PotatoPatchUtils.Developer({
     team = "shrug",
     name = "microwave",
@@ -27,6 +34,8 @@ PotatoPatchUtils.Developer({
     atlas = "worm_shrug_developers",
     pos = {x = 0, y = 0},
 })
+
+-- Waffle
 PotatoPatchUtils.Developer({
     team = "shrug",
     name = "waffle",
@@ -36,6 +45,8 @@ PotatoPatchUtils.Developer({
     pos = {x = 7, y = 8},
     soul_pos = {x = 7, y = 9},
 })
+
+-- A Tired Guy
 PotatoPatchUtils.Developer({
     team = "shrug",
     name = "atiredguy",
@@ -45,6 +56,8 @@ PotatoPatchUtils.Developer({
     pos = {x = 5, y = 8},
     soul_pos = {x = 5, y = 9},
 })
+
+-- Edward Robinson
 PotatoPatchUtils.Developer({
     team = "shrug",
     name = "edwardrobinson",

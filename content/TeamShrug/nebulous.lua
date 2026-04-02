@@ -2,6 +2,8 @@ SMODS.Enhancement {
     key = 'shrug_nebulous',
     pos = {x = 3, y = 0}, -- this is placeholder sprite
     discovered = true,
+    
+    -- Calculations
     calculate = function(self, card, context)
         if context.cardarea == G.play then
             if context.before then
