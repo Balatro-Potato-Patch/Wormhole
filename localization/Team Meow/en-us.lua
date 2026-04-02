@@ -17,37 +17,49 @@ return {
 			PotatoPatchDev_corobo = {
 				name = "Corobo",
 				text = {
-					"Programmer",
+					{
+						"Programmer",
+					},
 				},
 			},
 			PotatoPatchDev_revo = {
 				name = "Revo",
 				text = {
-					"Programmer",
+					{
+						"Programmer",
+					},
 				},
 			},
 			PotatoPatchDev_gappie = {
 				name = "Gappie",
 				text = {
-					"Artist",
+					{
+						"Artist",
+					},
 				},
 			},
 			PotatoPatchDev_incognito = {
 				name = "Incognito",
 				text = {
-					"Programmer, Artist",
+					{
+						"Programmer, Artist",
+					},
 				},
 			},
 			PotatoPatchDev_toma = {
 				name = "Tomatose",
 				text = {
-					"Programmer, Artist",
+					{
+						"Programmer, Artist",
+					},
 				},
 			},
 			PotatoPatchDev_silverautumn = {
 				name = "SilverAutumn",
 				text = {
-					"Programmer, Artist",
+					{
+						"Programmer, Artist",
+					},
 				},
 			},
 		},
