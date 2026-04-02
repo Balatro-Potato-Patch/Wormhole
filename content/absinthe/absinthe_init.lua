@@ -38,6 +38,7 @@ PotatoPatchUtils.Developer {
 PotatoPatchUtils.Developer {
     name = 'pi_cubed',
     team = 'absinthe',
+    colour = HEX('e14159'),
     atlas = 'worm_abs_credits',
     pos = { x = 0, y = 2 },
     soul_pos = { x = 1, y = 2 }

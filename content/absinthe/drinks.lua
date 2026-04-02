@@ -211,4 +211,54 @@ SMODS.Consumable { -- Please god delete this before we finish
     end
 }
 
+SMODS.Consumable { -- Supergiant Cider
+    set = 'abs_drinks',
+    key = 'abs_supergiant_cider',
+    pos = { x = 2, y = 0 },
+    config = {
+        drink_values = {
+            filled_pos = { x = 2, y = 0 },
+            empty_pos = { x = 3, y = 0 },
+            filled = true,
+            visibly_filled = true,
+        },
+        extra = { discards = 1, poker_hand = 'Full House' },
+    },
+    loc_vars = function(self, info_queue, card)
+        local key
+        if not card.ability.drink_values.filled then
+            key = self.key .. '_empty'
+        else
+            key = self.key
+        end
+        return { key = key, vars = { 
+            card.ability.extra.discards, 
+            localize(card.ability.extra.poker_hand, 'poker_hands') 
+        } }
+    end,
+    calculate = function(self, card, context)
+        if not card.ability.drink_values.filled and context.before and 
+        (next(context.poker_hands["Full House"]) or next(context.poker_hands["Four of a Kind"]) 
+        or next(context.poker_hands["Straight Flush"])) then
+            card:abs_refill_drink()
+        end
+        
+        if card.ability.drink_values.filled and (context.hand_drawn) then
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    ease_discard(card.ability.extra.discards)
+                    SMODS.calculate_effect(
+                        { message = localize { type = 'variable', key = 'a_discards', vars = { card.ability.extra.discards } }, colour = G.C.RED, },
+                        card)
+                    card:abs_empty_drink()
+                    return true
+                end
+            }))
+        end
+    end,
+    --empty = function(self, card)
+    --    ease_dollars(4)
+    --end
+}
+
 --#endregion
