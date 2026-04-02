@@ -38,12 +38,26 @@ return {
                     "hand by {C:attention}#1#{} level"
                 }
             }
+        },
+        Blind = {
+            bl_worm_dum_dummy_blind = {
+                name = "Test Flight",
+                text = {
+                    "You cannot lose to this blind.",
+                    "Gives {C:attention}rewards{} based",
+                    "on how well you scored.",
+                    "",
+                    "{s:0.8,C:worm_dum_brown}Let's see if you can",
+                    "{s:0.8,C:worm_dum_brown}defeat this Test Dummy!"
+                },
+            },
         }
     },
     misc = {
         dictionary = {
             k_worm_dum_worm_free="Free packs!",
             k_worm_dum_worm_eat="Nom!",
+            k_worm_dum_dummy_blind_saved = "Test flight failed!",
             worm_moony_menu_tooltip = {
                 "Select one of the above",
                 "poker hands to upgrade."
