@@ -1,5 +1,15 @@
 return {
     descriptions = {
+        Joker = {
+            j_worm_laika = {
+                name = "Laika",
+                text = {
+                    "Every {C:attention}space-themed{}",
+                    "Joker gives {C:attention}+1{}",
+                    "temporary level"
+                }
+            }
+        },
         PotatoPatch = {
             PotatoPatchTeam_colon_three = {
                 name = ":3"
