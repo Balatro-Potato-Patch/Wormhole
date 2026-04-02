@@ -57,7 +57,7 @@ end
 function WORM_TLR.update_const_sprite(card_self, card_card)
 	G.E_MANAGER:add_event(Event({
 		func = function()
-			card_self:set_sprites(card_card, card_card.config.center)
+			card_self:set_sprites(card_card)
 			return true
 		end
 	}))
