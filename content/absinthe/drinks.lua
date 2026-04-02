@@ -171,7 +171,7 @@ end
 
 --#region Drink Objects
 
-SMODS.Consumable {
+SMODS.Consumable { -- Please god delete this before we finish
     set = 'abs_drinks',
     name = 'testname',
     key = 'test_drink',
