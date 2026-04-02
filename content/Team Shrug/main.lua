@@ -1,5 +1,9 @@
--- [["¯\_(ツ)_/¯"]]
---
+SMODS.Atlas {
+    key = "shrug_developers",
+    px = 71,
+    py = 95,
+    path = "Team Shrug/developers.png"
+}
 PotatoPatchUtils.Team({
     name = "shrug", 
     loc = true,
@@ -20,9 +24,8 @@ PotatoPatchUtils.Developer({
     name = "microwave",
     loc = true,
     colour = HEX("845aad"),
-    atlas = 'Joker',
-    pos = {x = 4, y = 8},
-    soul_pos = {x = 4, y = 9},
+    atlas = "worm_shrug_developers",
+    pos = {x = 0, y = 0},
 })
 PotatoPatchUtils.Developer({
     team = "shrug",
