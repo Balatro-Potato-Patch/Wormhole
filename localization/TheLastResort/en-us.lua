@@ -29,6 +29,34 @@ local CONSTELLATIONS = {
 			"Choices may include blinds",
 			"That cannot usually appear",
 		}
+	},
+	c_worm_tlr_const_perseus_t1 = {
+		name = "Perseus",
+		text = {
+			"Disable next boss blind",
+			"for the first {C:attention}#1#",
+			"{C:attention}hands{} or {C:attention}discards"
+		}
+	},
+	c_worm_tlr_const_perseus_t2 = {
+		name = "Perseus",
+		text = {
+			"Disable next boss blind",
+			"for the first {C:attention}#1#",
+			"{C:attention}hands{} or {C:attention}discards"
+		}
+	},
+	c_worm_tlr_const_perseus_t3 = {
+		name = "Perseus",
+		text = {
+			"Disable next #1# boss blinds",
+		}
+	},
+	c_worm_tlr_const_perseus_t4 = {
+		name = "Perseus",
+		text = {
+			"Disable next #1# boss blinds",
+		}
 	}
 }
 for key, obj in pairs(CONSTELLATIONS) do
@@ -44,7 +72,23 @@ return {
 			PotatoPatchDev_Foo54 = {
 				name = "Foo54",
 				text = {
-					"idk i'll fill this out later"
+					{
+						"hi i'm foo",
+						"yeah i code",
+						"kinda new to this I started in february this year"
+					},
+					{
+						"I named most of these cards",
+						"and did a lot of setup",
+						"and utility work"
+					},
+					{
+						"Also shoutout to our artists they are cooking"
+					},
+					{
+						"Go play FooBar after you play this",
+						"its got some cool things"
+					}
 				}
 			},
 			PotatoPatchDev_Jolga = {
