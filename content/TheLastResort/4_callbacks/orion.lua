@@ -1,6 +1,8 @@
 function G.FUNCS.Wormhole_TLR_orion(e)
     local args = e or {}
     if args.config and args.config.ref_table then args = args.config.ref_table end
+    args.instant = false
+    print(args)
 --G.SETTINGS.paused = true
     G.FUNCS.overlay_menu{
         definition = G.UIDEF.Wormhole_TLR_orion(args),

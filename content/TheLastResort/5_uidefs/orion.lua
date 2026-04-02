@@ -1,9 +1,9 @@
 function G.UIDEF.Wormhole_TLR_orion(args)
     args = args or {}
     args.rerolls_left = args.rerolls_left or 0
-    args.bypass = args.bypass or false
+    args.allow = args.allow or {non_boss = false, standard = true, showdown = false}
     args.instant = true
-
+    print(args)
     local function reload(s_args)
         s_args = {config = {ref_table = s_args or {}}}
         local ret = {}
@@ -31,15 +31,29 @@ function G.UIDEF.Wormhole_TLR_orion(args)
 
     local blind_choices = {}
     for _, v in pairs(G.P_BLINDS) do
-        if not (v.key == "bl_small" or v.key == "bl_big" or v.boss.showdown) or args.bypass then
+
+        -- for the love of god I can't figure out how to separate blinds into non_boss, boss and showdown
+        local is_boss = v.boss ~= nil and v.boss.showdown == nil
+        local is_showdown = v.boss and v.boss.showdown ~= nil
+        print(("blind: %s, boss: %s, showdown: %s"):format(v.key, is_boss, is_showdown))
+        if (args.allow.non_boss or not is_boss)
+        or (args.allow.standard or is_boss and not is_showdown)
+        or (args.allow.showdown or not is_boss and is_showdown) then
+            print("Added!")
             table.insert(blind_choices,v.key)
+        end
+    end
+
+    if #blind_choices < 2 then
+        for i=1, 2 do
+            table.insert(blind_choices,'bl_small')
         end
     end
 
     for i=1, 2 do
         local choice_i = math.random(1,#blind_choices)
         local choice = blind_choices[choice_i]
-
+        if not choice then error("No blind found!") end
         local blind_col = get_blind_main_colour(choice)
         --local blind_amt = get_blind_amount(G.GAME.round_resets.blind_ante)*G.P_BLINDS[choice].config.mult*G.GAME.starting_params.ante_scaling
 
@@ -58,7 +72,9 @@ function G.UIDEF.Wormhole_TLR_orion(args)
 
         local n = {n = G.UIT.C, config = {align = "cm", minw = 5, minh = 8, colour = G.C.BLACK, r = 0.2, outline_colour = blind_col, outline = 1.5, id = ("blind_choice_%d"):format(i), padding = 0}, nodes = {
             {n = G.UIT.R, config = {align = 'cm', minw = 1, minh = 1, colour = G.C.CLEAR}, nodes = {{n = G.UIT.O, config = {object = blind_sprite}}}},
-            {n = G.UIT.R, config = {align = 'cm', minh = 3}, nodes = desc_nodes},
+            {n = G.UIT.R, config = {minh = 0.4}},
+            {n = G.UIT.R, config = {align = 'cm', minh = 1}, nodes = {{n = G.UIT.T, config = {text = localize{type = "name_text", set = "Blind", key = choice}, scale = 0.55, colour = G.C.WHITE}}}},
+            {n = G.UIT.R, config = {align = 'cm', minh = 2}, nodes = desc_nodes},
             {n = G.UIT.R, config = {minh = 0.4}},
             UIBox_button{
                 label = {"Select"},
