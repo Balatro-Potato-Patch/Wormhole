@@ -12,15 +12,15 @@ SMODS.current_mod.calculate = function(self, context)
     if G.GAME and context.buying_card and not context.blueprint then
         -- Track Joker purchases for "The Future"
         if context.card and context.card.ability.set == 'Joker' then
-            G.GAME.wh_jokers_bought = (G.GAME.wh_jokers_bought or 0) + 1
+            G.GAME.worm_jokers_bought = (G.GAME.worm_jokers_bought or 0) + 1
         end
     end
 end
 
 -- Helper to check if both cosmic jokers are held simultaneously
 function get_pair_status()
-    local past = SMODS.find_card('j_wh_the_past')
-    local future = SMODS.find_card('j_wh_the_future')
+    local past = SMODS.find_card('j_worm_the_past')
+    local future = SMODS.find_card('j_worm_the_future')
     
     if #past > 0 and #future > 0 then
         return true, past[1]
