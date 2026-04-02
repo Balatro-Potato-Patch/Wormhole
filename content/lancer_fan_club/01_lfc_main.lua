@@ -17,16 +17,19 @@ SMODS.Atlas({
 PotatoPatchUtils.Developer {
     name = "ProdByProto",
     colour = HEX("d57a02"),
-    loc = true, -- Can also be `loc = 'k_doofus_name'` where the string is an arbitrary localization dictionary entry
+    --loc = "PotatoPatchDev_ProdByProto", -- Can also be `loc = 'k_doofus_name'` where the string is an arbitrary localization dictionary entry
     team = "Lancer Fan Club", -- Must match an already existing Team name
     atlas = "worm_lfc_devs",
     pos = { x = 0, y = 0 },
-    soul_pos = { x = 1, y = 0 },
+    soul_pos = { x = 0, y = 1 },
 }
 
 PotatoPatchUtils.Developer({
-    name = "ellestuff",
+    name = "ellestuff.",
     colour = HEX('ff53a9'),
-    loc = true,
-    team = "Lancer Fan Club"
+    loc = "PotatoPatchDev_ellestuff",
+    team = "Lancer Fan Club",
+    atlas = "worm_lfc_devs",
+    pos = { x = 1, y = 0 },
+    soul_pos = { x = 1, y = 1 }
 })

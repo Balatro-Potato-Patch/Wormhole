@@ -1,18 +1,7 @@
 return {
-    misc = {
-        dictionary = {
-
-        },
-        v_dictionary = {
-
-        },
-    },
     descriptions = {
-        Joker = {
-
-        },
         PotatoPatch = {
-            PotatoPatchTeam_lancer_fan_club = "Lancer Fan Club",
+            PotatoPatchTeam_lancer_fan_club = {name = "Lancer Fan Club"},
             
             PotatoPatchDev_ProdByProto = {
                 name = "ProdByProto",
