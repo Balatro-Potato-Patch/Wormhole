@@ -126,15 +126,30 @@ SMODS.Booster {
 
 --#region Drink Utils
 
+SMODS.DrawStep {
+    key = 'abs_drinks',
+    order = -9,
+    func = function(self, layer)
+        if self.ability.set == 'abs_drinks' then
+            if self.visibly_filled and self.children.center.sprite_pos ~= self.filled_pos then
+                self.children.center:set_sprite_pos(self.filled_pos)
+            elseif not self.visibly_filled and self.children.center.sprite_pos ~= self.empty_pos then
+                self.children.center:set_sprite_pos(self.empty_pos)
+            end
+        end
+    end,
+    conditions = { vortex = false, facing = 'front' },
+}
+
 function Card:refill_drink()
     self.filled = true
-    --self.children.center:set_sprite_pos(self.config.filled_pos) -- Remove comment once we have sprites!
 
     if self.config.refill and type(self.config.refill) == 'function' then
         self.config:refill(self)
     end
 
-    SMODS.calculate_effect({ message = localize('k_worm_abs_refilled_ex'), colour = G.C.ATTENTION }, self)
+    SMODS.calculate_effect({ message = localize('k_worm_abs_refilled_ex'), colour = G.C.ATTENTION, func = function() self.visibly_filled = true end }, self)
+    SMODS.calculate_context({abs_drink_refilled = true, card = self})
 end
 
 --#endregion
