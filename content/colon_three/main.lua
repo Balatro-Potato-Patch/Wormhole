@@ -1,1 +1,34 @@
 Wormhole.COLON_THREE = {}
+
+PotatoPatchUtils.Team{
+    name = ":3",
+    colour = HEX("b52961"),
+    loc = "PotatoPatchTeam_colon_three"
+}
+
+SMODS.Atlas {
+    path = "colon_three/credits.png",
+    key = "ct_credits",
+    px = 71, py = 95
+}
+
+PotatoPatchUtils.Developer{
+    name = "lordruby",
+    loc = true,
+    team = ":3",
+    colour = SMODS.Gradient{
+        key = "colon_three_ruby_gradient",
+        colours = {
+            HEX("FF0000"),
+            HEX("f61e8e")
+        }
+    },
+    atlas = "worm_ct_credits",
+    pos = {x=0,y=0}
+}
+Wormhole.COLON_THREE.loaded = true
+for i, v in pairs({
+
+})  do
+    assert(SMODS.load_file("content/colon_three/"..v..".lua"))()
+end
