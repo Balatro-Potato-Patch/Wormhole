@@ -18,7 +18,7 @@ local CONSTELLATIONS = {
 		text = {
 			"Set Boss Blind to",
 			"{C:attention}1{} of {C:attention}2{} choices",
-			"Reroll these choices {C:attention}1{} time"
+			"Reroll choices up to {C:attention}#1#{} time"
 		}
 	},
 	c_worm_tlr_const_orion_t4 = {
@@ -26,10 +26,9 @@ local CONSTELLATIONS = {
 		text = {
 			"Set Boss Blind to",
 			"{C:attention}1{} of {C:attention}2{} choices",
-			"{C:attention}1{} of {C:attention}2{} choices",
-			"Reroll these choices up to {C:attention}2{} times",
-			"{C:attention}Choices may include blinds{}",
-			"{C:attention}that cannot usually appear{}",
+			"Reroll choices up to {C:attention}#1#{} times",
+			"{C:inactive}Choices may include blinds{}",
+			"{C:inactive}that cannot usually appear{}",
 		}
 	},
 	c_worm_tlr_const_canis_major_t1 = {

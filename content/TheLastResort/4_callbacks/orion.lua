@@ -1,31 +1,15 @@
 function G.FUNCS.Wormhole_TLR_orion(e)
     local args = e or {}
     if args.config and args.config.ref_table then args = args.config.ref_table end
-    args.instant = false
-    print(args)
---G.SETTINGS.paused = true
+    args.instant = args.instant or false
+
+    local off = args.instant and {x = 0, y = 0} or nil
     G.FUNCS.overlay_menu{
         definition = G.UIDEF.Wormhole_TLR_orion(args),
         config = {
-            offset = args.instant and {x = 0, y = 0} or nil
+            offset = off
         }
     }
-
-
-
-    if false and args.instant then
-        return -- maybe get to this 
-        G.E_MANAGER:add_event(Event{
-            func = function ()
-                for i=1,2 do
-                    local el = G.OVERLAY_MENU:get_UIE_by_ID(("blind_choice_%d"):format(i))
-                    --el:juice_up(2)
-                    print(el)
-                end
-                
-            return true end
-        })
-    end
 end
 
 function G.FUNCS.Wormhole_TLR_orion_confirm(e)

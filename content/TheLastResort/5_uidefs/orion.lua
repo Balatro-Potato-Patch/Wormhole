@@ -3,7 +3,6 @@ function G.UIDEF.Wormhole_TLR_orion(args)
     args.rerolls_left = args.rerolls_left or 0
     args.allow = args.allow or {non_boss = false, standard = true, showdown = false}
     args.instant = true
-    print(args)
     local function reload(s_args)
         s_args = {config = {ref_table = s_args or {}}}
         local ret = {}
@@ -35,11 +34,11 @@ function G.UIDEF.Wormhole_TLR_orion(args)
         -- for the love of god I can't figure out how to separate blinds into non_boss, boss and showdown
         local is_boss = v.boss ~= nil and v.boss.showdown == nil
         local is_showdown = v.boss and v.boss.showdown ~= nil
-        print(("blind: %s, boss: %s, showdown: %s"):format(v.key, is_boss, is_showdown))
+        --print(("blind: %s, boss: %s, showdown: %s"):format(v.key, is_boss, is_showdown))
         if (args.allow.non_boss and not is_boss)
         or (args.allow.standard and is_boss )
         or (args.allow.showdown and is_showdown) then
-            print("Added!")
+            --print("Added!")
             table.insert(blind_choices,v.key)
         end
     end
