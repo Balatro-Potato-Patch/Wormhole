@@ -13,6 +13,12 @@ SMODS.Atlas{
 }
 
 SMODS.Atlas{
+	key = "tlr_breh",
+	path = "TheLastResort/breh.png",
+	px = 71,
+	py = 95
+}
+SMODS.Atlas{
 	key = "tlr_starmap",
 	path = "TheLastResort/starmap_temp.png",
 	px = 600,

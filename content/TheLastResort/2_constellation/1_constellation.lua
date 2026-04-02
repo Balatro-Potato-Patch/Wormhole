@@ -58,11 +58,7 @@ SMODS.ConsumableType{
             G.GAME.worm_tlr_last_const_used = _self.key ~= "c_worm_tlr_const_canis_minor" and _self.key or nil
         end
         card.ppu_team = {"TheLastResort"}
-<<<<<<< HEAD
     end,
-=======
-    end
->>>>>>> origin/foo54
 }
 
 --[[
