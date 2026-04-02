@@ -1,20 +1,13 @@
+-- Joker is very wonky and buggy, need more time in the oven
+if true then
+	return
+end
+
 local rock = SMODS.Joker({
-	key = "quantum_rock",
+	key = "jtem2_quantum_rock",
 
 	ppu_team = { "jtem2" },
 	ppu_coder = { "sleepyg11" },
-
-	discovered = true,
-
-	loc_txt = {
-		name = "Quantum Rock",
-		text = {
-			{
-				"Exist in all places at the same time",
-				"Only one can be observed",
-			},
-		},
-	},
 })
 
 rock.emplace_in_area = function(card, area)

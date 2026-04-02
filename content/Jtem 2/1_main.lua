@@ -20,7 +20,9 @@ PotatoPatchUtils.Developer({
 	team = "jtem2",
 	loc = true,
 	calculate = function(self, context)
-		WORM_JTEM.quantum_rock.calculate(context)
+		if WORM_JTEM.quantum_rock then
+			WORM_JTEM.quantum_rock.calculate(context)
+		end
 	end,
 	-- pos = { x = 1, y = 0 },
 	-- atlas = "atlas_key",

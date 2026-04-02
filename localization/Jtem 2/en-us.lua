@@ -1,5 +1,26 @@
 return {
 	descriptions = {
+		Joker = {
+			j_worm_jtem2_cosmic_ray = {
+				name = "Cosmic Ray",
+				text = {
+					"Convert a random card in full deck",
+					"to a {C:attention}Gold{} card whenever a",
+					"{C:planet}Planet{} card different from the most",
+					"recently used one is used",
+					"{C:inactive}(Last used planet: {V:1}#1#{C:inactive}){}",
+				},
+			},
+			j_worm_jtem2_quantum_rock = {
+				name = "Quantum Rock",
+				text = {
+					{
+						"Exist in all places at the same time",
+						"Only one can be observed",
+					},
+				},
+			},
+		},
 		PotatoPatch = {
 			PotatoPatchTeam_jtem2 = { name = "Jtem 2" },
 			PotatoPatchDev_aikoyori = {
@@ -33,7 +54,7 @@ return {
 				},
 			},
 			PotatoPatchDev_missingnumber = {
-				name = "MissingNumber",
+				name = "missingnumber",
 				text = {
 					{ "box numero 1" },
 				},

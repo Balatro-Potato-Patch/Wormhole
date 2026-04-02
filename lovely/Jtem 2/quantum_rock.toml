@@ -14,6 +14,6 @@ local wormhole_deck_areas = {}
 for _, deck_table in ipairs(deck_tables) do
     table.insert(wormhole_deck_areas, deck_table.nodes[1].config.object)
 end
-WORM_JTEM.quantum_rock.calculate({ wormhole_opening_deck = true, areas = wormhole_deck_areas })
+-- WORM_JTEM.quantum_rock.calculate({ wormhole_opening_deck = true, areas = wormhole_deck_areas })
 '''
 match_indent = true
