@@ -33,10 +33,14 @@ SMODS.Consumable {
     config = { anim_time = 0 },
     can_use = function(self, card) return true end,
     keep_on_use = function(self, card) return true end,
-    --use = function(self, card, area, copier) self.pos.x = self.pos.x + 1 end,
+    use = function(self, card, area, copier)
+		SMODS.add_card({ area = G.consumeables, key = 'bap_abyss' })
+
+	end,
     update = function(self, card, dt)
         self.config.anim_time = self.config.anim_time + dt
         self.pos.x = math.sin(self.config.anim_time) * 0.5 + 0.5
+		self.pos.y = math.cos(self.config.anim_time) * 0.5 + 0.5
     end
 }
 
@@ -52,9 +56,11 @@ SMODS.Enhancement {
     atlas = 'Palindrome',
     pos = { x = 1, y = 0 },
     config = { bonus = -25, h_chips = -25 },
+	always_scores = true,
 	loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.bonus, card.ability.h_chips } }
     end,
+	set_ability = function(self, card, initial, delay_sprites) end
 }
 
 -- The Abyss
@@ -63,8 +69,8 @@ SMODS.Consumable {
 	loc_txt = {
         name = 'The Abyss',
 		text = {
-			"Creates {C:attention}#2#{} random {C:attention}Void cards{}",
-			"and gives {C:money}$#1#{}"
+			"Gives {C:money}$#1#{} and",
+			"creates {C:attention}#2#{} random {C:attention}Void cards{}",
 		}
     },
     set = 'Tarot',
@@ -95,7 +101,7 @@ SMODS.Consumable {
                 local cards = {}
                 for i = 1, card.ability.extra.cards do
                     local _rank = pseudorandom_element(SMODS.Ranks, 'abyss_create').card_key
-                    cards[i] = SMODS.add_card { set = "Base", rank = _rank, enhancement = 'bap_void' }
+                    cards[i] = SMODS.add_card { area = G.hand, set = "Base", rank = _rank }
                 end
                 SMODS.calculate_context({ playing_card_added = true, cards = cards })
                 return true
