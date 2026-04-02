@@ -13,9 +13,7 @@ SMODS.ConsumableType{
         local mem_loc_vars = card.loc_vars or function() return {} end
 		card.loc_vars = function(_self, info_queue, _card)
 			local main_end = nil
-            if _card.ability.tier < 4 then
-                WORM_TLR.const_info_queue(info_queue)
-            end
+            WORM_TLR.const_info_queue(info_queue, _card.ability.tier)
 			local ret = mem_loc_vars(_self, info_queue, _card)
 			if main_end then ret.main_end = ret.main_end or {main_end} end
             ret.key = _self.key .. "_t" .. _card.ability.tier
@@ -24,7 +22,7 @@ SMODS.ConsumableType{
         local mem_calculate = card.calculate or function() end
         card.calculate = function(_self, _card, context)
             if context.end_of_round and context.main_eval and context.beat_boss then
-                if _card.ability.tier < 4 then
+                if _card.ability.tier < 3 then
                     SMODS.scale_card(_card, {
                         ref_table = _card.ability,
                         ref_value = "tier",
