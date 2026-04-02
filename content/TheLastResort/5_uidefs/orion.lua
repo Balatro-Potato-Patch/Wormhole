@@ -14,11 +14,11 @@ function G.UIDEF.Wormhole_TLR_orion(args)
 
     local reroll_section = {
         {n = G.UIT.R, config = {align = 'cm'}, nodes = {{n = G.UIT.T, config = {ref_table = args, ref_value = 'rerolls_left', scale = 1, colour = G.C.WHITE}}}},
-        {n = G.UIT.R, config = {align = 'cm'}, nodes = {{n = G.UIT.T, config = {text = "Rerolls", scale = 0.8, colour = G.C.WHITE}}}},
-        {n = G.UIT.R, config = {align = 'cm'}, nodes = {{n = G.UIT.T, config = {text = "Left", scale = 0.8, colour = G.C.WHITE}}}},
+        {n = G.UIT.R, config = {align = 'cm'}, nodes = {{n = G.UIT.T, config = {text = localize("k_worm_tlr_orion_rerolls_left_1"), scale = 0.8, colour = G.C.WHITE}}}},
+        {n = G.UIT.R, config = {align = 'cm'}, nodes = {{n = G.UIT.T, config = {text = localize("k_worm_tlr_orion_rerolls_left_2"), scale = 0.8, colour = G.C.WHITE}}}},
         {n = G.UIT.R, config = {minh = 2}},
         UIBox_button{
-            label = {"Reroll"},
+            label = {localize("k_reroll")},
             minw = 3.5,
             mihh = 3.2,
             ref_table = reload{rerolls_left = args.rerolls_left - 1},
@@ -50,7 +50,7 @@ function G.UIDEF.Wormhole_TLR_orion(args)
     end
 
     for i=1, 2 do
-        local choice_i = math.random(1,#blind_choices)
+        local choice_i = pseudorandom('orion',1,#blind_choices)
         local choice = blind_choices[choice_i]
         if not choice then error("No blind found!") end
         local blind_col = get_blind_main_colour(choice)
@@ -76,7 +76,7 @@ function G.UIDEF.Wormhole_TLR_orion(args)
             {n = G.UIT.R, config = {align = 'cm', minh = 2}, nodes = desc_nodes},
             {n = G.UIT.R, config = {minh = 0.4}},
             UIBox_button{
-                label = {"Select"},
+                label = {localize("k_choose")},
                 minw = 4,
                 minh = 1,
                 ref_table = {key = choice},

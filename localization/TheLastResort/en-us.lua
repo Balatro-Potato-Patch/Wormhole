@@ -404,6 +404,9 @@ return {
 			k_worm_tlr_remove = "Remove",
 			k_worm_tlr_selected = "Selected",
 			k_worm_tlr_confirm = "Confirm",
+			k_worm_tlr_orion_rerolls_left_1 = "Rerolls",
+			k_worm_tlr_orion_rerolls_left_2 = "Left",
+			
 		},
 		labels = {
 			worm_tlr_constellation = "Constellation",

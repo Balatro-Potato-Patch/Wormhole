@@ -14,7 +14,8 @@ function G.FUNCS.Wormhole_TLR_canis_major(e)
     G.FUNCS.overlay_menu{
         definition = G.UIDEF.Wormhole_TLR_canis_major(e),
         config = {
-            offset = args.instant and {x = 0, y = 0} or nil
+            offset = args.instant and {x = 0, y = 0} or nil,
+            no_esc = true
         }
     }
 end

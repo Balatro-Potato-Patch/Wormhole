@@ -7,7 +7,8 @@ function G.FUNCS.Wormhole_TLR_orion(e)
     G.FUNCS.overlay_menu{
         definition = G.UIDEF.Wormhole_TLR_orion(args),
         config = {
-            offset = off
+            offset = off,
+            no_esc = true
         }
     }
 end
