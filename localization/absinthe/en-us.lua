@@ -5,6 +5,7 @@ return {
                 name = 'Supergiant Cider',
                 text = {
                     {
+                        "When {C:attention}primed,{}",
                         "{C:red}+#1#{} Discard when hand",
                         "is drawn, then is {C:gold}drank{}",
                     },
@@ -33,7 +34,8 @@ return {
                 name = 'Hubble Trouble',
                 text = {
                     {
-                        "Create the {C:planet}Planet{} card",
+                        "When {C:attention}primed,{}", 
+                        "create the {C:planet}Planet{} card",
                         "of played {C:attention}poker hand{},",
                         "then is {C:gold}drank{}",
                         "{C:inactive,s:0.8}(Planet card has $0 sell value)",
@@ -67,7 +69,7 @@ return {
                 name = 'Moonshine',
                 text = {
                     {
-                        "{X:chips,C:white}X#1#{} Chips if played hand",
+                        "When {C:attention}primed,{} {X:chips,C:white}X#1#{} Chips if played hand",
                         "contains a {C:spades}Dark{} suit card,",
                         "then is {C:gold}drank{}",
                     },
@@ -87,6 +89,7 @@ return {
                         "{C:inactive,s:0.8}(#2#/5)",
                     },
                     {
+                        "{C:inactive,s:0.8}Whilst Filled:{}",
                         "{X:chips,C:white}X#1#{} Chips if played hand",
                         "contains a {C:spades}Dark{} suit card,",
                         "then is {C:gold}drank{}",
@@ -97,7 +100,7 @@ return {
                 name = 'Pina Solada',
                 text = {
                     {
-                        "{X:mult,C:white}X#1#{} Mult if played hand",
+                        "When {C:attention}primed,{} {X:mult,C:white}X#1#{} Mult if played hand",
                         "contains a {C:diamonds}Light{} suit card,",
                         "then is {C:gold}drank{}",
                     },
@@ -117,6 +120,7 @@ return {
                         "{C:inactive,s:0.8}(#2#/5)",
                     },
                     {
+                        "{C:inactive,s:0.8}Whilst Filled:{}",
                         "{X:mult,C:white}X#1#{} Mult if played hand",
                         "contains a {C:diamonds}Light{} suit card,",
                         "then is {C:gold}drank{}",
