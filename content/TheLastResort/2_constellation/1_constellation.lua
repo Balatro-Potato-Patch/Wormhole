@@ -46,7 +46,7 @@ SMODS.ConsumableType{
         end
         local mem_use = card.use or function() end
         card.use = function(_self, _card, area, copier)
-            G.GAME.worm_tlr_last_const_used = _self.key ~= "c_worm_tlr_canis_minor" and _self.key or nil
+            G.GAME.worm_tlr_last_const_used = _self.key ~= "c_worm_tlr_const_canis_minor" and _self.key or nil
             mem_use(_self, _card, area, copier)
         end
     end,
