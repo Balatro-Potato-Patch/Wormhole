@@ -17,8 +17,8 @@ end
 
 -- Atlas registrations
 SMODS.Atlas({
-    key = "jokers",
-    path = "wh_jokers.png",
+    key = "worm_jokers",
+    path = "Riverboat/worm_jokers.png",
     px = 71,
     py = 95,
 })
