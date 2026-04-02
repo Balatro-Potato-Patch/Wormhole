@@ -34,7 +34,7 @@ local CONSTELLATIONS = {
 		name = "Canis Major",
 		text = {
 			"Create up to {C:attention}#1#{} random",
-			"Constellation cards",
+			"{V:1}Constellation{} cards",
 			"{C:inactive}(Must have room){}"
 		},
 	},
@@ -42,21 +42,21 @@ local CONSTELLATIONS = {
 		name = "Canis Major",
 		text = {
 			"Create up to {C:attention}#1#{} selected",
-			"Constellation cards",
+			"{V:1}Constellation{} cards",
 		},
 	},
 	c_worm_tlr_const_canis_major_t3 = {
 		name = "Canis Major",
 		text = {
 			"Create up to {C:attention}#1#{} selected",
-			"Constellation cards",
+			"{V:1}Constellation{} cards",
 		},
 	},
 	c_worm_tlr_const_canis_major_t4 = {
 		name = "Canis Major",
 		text = {
 			"Create up to {C:attention}#1#{} selected",
-			"{C:dark_edition}negative {}Constellation cards",
+			"{C:dark_edition}negative {V:1}Constellation{} cards",
 		},
 	c_worm_tlr_const_perseus_t1 = {
 		name = "Perseus",
@@ -278,7 +278,10 @@ return {
 			PotatoPatchDev_Jolga = {
 				name = "Jolga",
 				text = {
-					"fill out pls"
+					{
+						"{C:red}Not{} a wizard",
+						"{C:inactive,s:0.7}...Though I do UI wizardy"
+					},
 				}
 			},
 			PotatoPatchDev_Breuhh = {
