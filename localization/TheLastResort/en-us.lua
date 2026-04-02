@@ -70,9 +70,17 @@ return {
 				name = "Observation",
 				text = {
 					"Upgrades leftmost",
-					"{V:1}Constellation{} card to",
-					"the next tier",
+					"{V:1}Constellation{} card",
 					"{C:inactive,s:0.7}Faint -> Noticable -> Bright -> Shining"
+				}
+			}
+		},
+		Spectral = {
+			c_worm_tlr_starmap = {
+				name = "Star Map",
+				text = {
+					"Upgrade all {V:1}Constellation{} cards",
+					"held to {C:edition}Shining"
 				}
 			}
 		},
