@@ -1,6 +1,35 @@
 function G.FUNCS.Wormhole_TLR_canis_major(e)
-    G.SETTINGS.paused = true
+
+    local args = e or {}
+    if args.config and args.config.ref_table then args = args.config.ref_table end
+    args.instant = args.instant or false
+    if args.add and #args.selected_cards < 2 then
+        table.insert(args.selected_cards, args.add)
+    end
+    if args.remove then
+        table.remove(args.selected_cards, args.remove)
+    end
+
+    --G.SETTINGS.paused = true
     G.FUNCS.overlay_menu{
-        definition = G.UIDEF.Wormhole_TLR_canis_major()
+        definition = G.UIDEF.Wormhole_TLR_canis_major(e),
+        config = {
+            offset = args.instant and {x = 0, y = 0} or nil
+        }
     }
+end
+
+function G.FUNCS.Wormhole_TLR_canis_major_confirm(e)
+    G.FUNCS.exit_overlay_menu()
+    --G.SETTINGS.paused = false
+    if not G.consumeables then return end
+    local args = e or {}
+    if args.config and args.config.ref_table then args = args.config.ref_table end
+    for i,v in ipairs(args.selected_keys) do
+        local c = SMODS.add_card{
+            key = v,
+            area = G.consumeables,
+            edition = args.negative and "e_negative" or nil,
+        }
+    end
 end

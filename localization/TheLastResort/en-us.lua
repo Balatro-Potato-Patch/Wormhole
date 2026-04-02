@@ -29,6 +29,35 @@ local CONSTELLATIONS = {
 			"Choices may include blinds",
 			"That cannot usually appear",
 		}
+	},
+	c_worm_tlr_const_canis_major_t1 = {
+		name = "Canis Major",
+		text = {
+			"Create up to {C:attention}#1#{} random",
+			"Constellation cards",
+			"{C:inactive}(Must have room){}"
+		},
+	},
+	c_worm_tlr_const_canis_major_t2 = {
+		name = "Canis Major",
+		text = {
+			"Create up to {C:attention}#1#{} selected",
+			"Constellation cards",
+		},
+	},
+	c_worm_tlr_const_canis_major_t3 = {
+		name = "Canis Major",
+		text = {
+			"Create up to {C:attention}#1#{} selected",
+			"Constellation cards",
+		},
+	},
+	c_worm_tlr_const_canis_major_t4 = {
+		name = "Canis Major",
+		text = {
+			"Create up to {C:attention}#1#{} selected",
+			"{C:dark_edition}negative {}Constellation cards",
+		},
 	}
 }
 for key, obj in pairs(CONSTELLATIONS) do
@@ -117,6 +146,10 @@ return {
 		dictionary = {
 			k_worm_tlr_constellation = "Constellation",
 			b_worm_tlr_constellation_cards = "Constellation",
+			k_worm_tlr_add = "Add",
+			k_worm_tlr_remove = "Remove",
+			k_worm_tlr_selected = "Selected",
+			k_worm_tlr_confirm = "Confirm",
 		},
 		labels = {
 			worm_tlr_constellation = "Constellation",
