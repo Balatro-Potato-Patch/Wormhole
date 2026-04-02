@@ -63,6 +63,66 @@ return {
                     }
                 }
             },
+            c_worm_abs_moonshine = {
+                name = 'Moonshine',
+                text = {
+                    {
+                        "{X:chips,C:white}X#1#{} Chips if played hand",
+                        "contains a {C:spades}Dark{} suit card,",
+                        "then is {C:gold}drank{}",
+                    },
+                    {
+                        "{C:gold}Refill{} by {C:attention}scoring{}",
+                        "5 {C:diamonds}Light{} suit cards",
+                        "{C:inactive,s:0.8}(#2#/5)",
+                    }
+                }
+            },
+            c_worm_abs_moonshine_empty = {
+                name = 'Moonshine',
+                text = {
+                    {
+                        "{C:gold}Refill{} by {C:attention}scoring{}",
+                        "5 {C:diamonds}Light{} suit cards",
+                        "{C:inactive,s:0.8}(#2#/5)",
+                    },
+                    {
+                        "{X:chips,C:white}X#1#{} Chips if played hand",
+                        "contains a {C:spades}Dark{} suit card,",
+                        "then is {C:gold}drank{}",
+                    },
+                }
+            },
+            c_worm_abs_pina_solada = {
+                name = 'Pina Solada',
+                text = {
+                    {
+                        "{X:mult,C:white}X#1#{} Mult if played hand",
+                        "contains a {C:diamonds}Light{} suit card,",
+                        "then is {C:gold}drank{}",
+                    },
+                    {
+                        "{C:gold}Refill{} by {C:attention}scoring{}",
+                        "5 {C:spades}Dark{} suit cards",
+                        "{C:inactive,s:0.8}(#2#/5)",
+                    }
+                }
+            },
+            c_worm_abs_pina_solada_empty = {
+                name = 'Pina Solada',
+                text = {
+                    {
+                        "{C:gold}Refill{} by {C:attention}scoring{}",
+                        "5 {C:spades}Dark{} suit cards",
+                        "{C:inactive,s:0.8}(#2#/5)",
+                    },
+                    {
+                        "{X:mult,C:white}X#1#{} Mult if played hand",
+                        "contains a {C:diamonds}Light{} suit card,",
+                        "then is {C:gold}drank{}",
+                    },
+                }
+            },
         },
         Jokers = {
 

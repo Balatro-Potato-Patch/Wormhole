@@ -272,9 +272,7 @@ SMODS.Consumable { -- Supergiant Cider
         end
     end,
     use = function(self, card, area, copier)
-        print(card.ability.drink_values.primed)
         card.ability.drink_values.primed = not card.ability.drink_values.primed
-        print(card.ability.drink_values.primed)
         local eval = function(card) return card.ability.drink_values.primed end
         juice_card_until(card, eval, true)
     end,
@@ -348,6 +346,148 @@ SMODS.Consumable { -- Hubble Trouble
                     return true
                 end
             }))
+        end
+    end,
+    use = function(self, card, area, copier)
+        card.ability.drink_values.primed = not card.ability.drink_values.primed
+        local eval = function(card) return card.ability.drink_values.primed end
+        juice_card_until(card, eval, true)
+    end,
+    can_use = function(self, card)
+        return card.ability.drink_values.filled
+    end,
+    keep_on_use = function(self, card)
+        return true;
+    end
+    --empty = function(self, card)
+    --    ease_dollars(4)
+    --end
+}
+
+SMODS.Consumable { -- Moonshine
+    set = 'abs_drinks',
+    key = 'abs_moonshine',
+    pos = { x = 8, y = 1 },
+    config = {
+        drink_values = {
+            filled_pos = { x = 8, y = 1 },
+            empty_pos = { x = 1, y = 2 },
+            filled = true,
+            visibly_filled = true,
+            primed = false
+        },
+        extra = { xchips = 2, light_counter = 0 },
+    },
+    loc_vars = function(self, info_queue, card)
+        local key
+        if not card.ability.drink_values.filled then
+            key = self.key .. '_empty'
+        else
+            key = self.key
+        end
+        return { key = key, vars = { 
+            card.ability.extra.xchips, card.ability.extra.light_counter
+        } }
+    end,
+    calculate = function(self, card, context)
+        if context.individual and context.cardarea == G.play and not card.ability.drink_values.filled and
+        (context.other_card:is_suit("Hearts") or context.other_card:is_suit("Diamonds")) and not context.repetition then
+            card.ability.extra.light_counter = card.ability.extra.light_counter + 1
+            if card.ability.extra.light_counter >= 5 then
+                card:abs_refill_drink()
+            end
+        end
+        if context.joker_main and card.ability.drink_values.filled and card.ability.drink_values.primed and not context.repetition then
+            local has_black = false
+            for k, v in ipairs(G.hand.cards) do 
+                if v:is_suit('Clubs', nil, true) or v:is_suit('Spades', nil, true) then
+                    has_black = true
+                    break
+                end
+            end
+            if has_black then
+                card.ability.extra.light_counter = 0
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        card:abs_empty_drink()
+                        return true
+                    end
+                }))
+                return {
+                    xchips = card.ability.extra.xchips
+                }
+            end
+        end
+    end,
+    use = function(self, card, area, copier)
+        card.ability.drink_values.primed = not card.ability.drink_values.primed
+        local eval = function(card) return card.ability.drink_values.primed end
+        juice_card_until(card, eval, true)
+    end,
+    can_use = function(self, card)
+        return card.ability.drink_values.filled
+    end,
+    keep_on_use = function(self, card)
+        return true;
+    end
+    --empty = function(self, card)
+    --    ease_dollars(4)
+    --end
+}
+
+SMODS.Consumable { -- Pina Solada
+    set = 'abs_drinks',
+    key = 'abs_pina_solada',
+    pos = { x = 9, y = 1 },
+    config = {
+        drink_values = {
+            filled_pos = { x = 9, y = 1 },
+            empty_pos = { x = 7, y = 1 },
+            filled = true,
+            visibly_filled = true,
+            primed = false
+        },
+        extra = { xmult = 2, dark_counter = 0 },
+    },
+    loc_vars = function(self, info_queue, card)
+        local key
+        if not card.ability.drink_values.filled then
+            key = self.key .. '_empty'
+        else
+            key = self.key
+        end
+        return { key = key, vars = { 
+            card.ability.extra.xmult, card.ability.extra.dark_counter
+        } }
+    end,
+    calculate = function(self, card, context)
+        if context.individual and context.cardarea == G.play and not card.ability.drink_values.filled and
+        (context.other_card:is_suit("Clubs") or context.other_card:is_suit("Spades")) and not context.repetition then
+            card.ability.extra.dark_counter = card.ability.extra.dark_counter + 1
+            if card.ability.extra.dark_counter >= 5 then
+                card:abs_refill_drink()
+            end
+        end
+        if context.joker_main and card.ability.drink_values.filled and card.ability.drink_values.primed and not context.repetition then
+            local has_light = false
+            for k, v in ipairs(G.hand.cards) do 
+                if v:is_suit('Hearts', nil, true) or v:is_suit('Diamonds', nil, true) then
+                    has_light = true
+                    break
+                end
+            end
+            if has_light then
+                card.ability.extra.light_counter = 0
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        card:abs_empty_drink()
+                        return true
+                    end
+                }))
+                return {
+                    xmult = card.ability.extra.xmult
+                }
+            end
         end
     end,
     use = function(self, card, area, copier)
