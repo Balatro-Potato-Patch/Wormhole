@@ -58,6 +58,33 @@ local CONSTELLATIONS = {
 			"Create up to {C:attention}#1#{} selected",
 			"{C:dark_edition}negative {}Constellation cards",
 		},
+	c_worm_tlr_const_perseus_t1 = {
+		name = "Perseus",
+		text = {
+			"{C:green}#1# in #2#{} chance to",
+			"disable current boss blind"
+		}
+	},
+	c_worm_tlr_const_perseus_t2 = {
+		name = "Perseus",
+		text = {
+			"{C:green}#1# in #2#{} chance to",
+			"disable current boss blind"
+		}
+	},
+	c_worm_tlr_const_perseus_t3 = {
+		name = "Perseus",
+		text = {
+			"{C:green}#1# in #2#{} chance to",
+			"disable current boss blind"
+		}
+	},
+	c_worm_tlr_const_perseus_t4 = {
+		name = "Perseus",
+		text = {
+			"Disable current boss blind",
+			}
+		}
 	}
 }
 for key, obj in pairs(CONSTELLATIONS) do
@@ -73,7 +100,23 @@ return {
 			PotatoPatchDev_Foo54 = {
 				name = "Foo54",
 				text = {
-					"idk i'll fill this out later"
+					{
+						"hi i'm foo",
+						"yeah i code",
+						"kinda new to this I started in february this year"
+					},
+					{
+						"I named most of these cards",
+						"and did a lot of setup",
+						"and utility work"
+					},
+					{
+						"Also shoutout to our artists they are cooking"
+					},
+					{
+						"Go play FooBar after you play this",
+						"its got some cool things"
+					}
 				}
 			},
 			PotatoPatchDev_Jolga = {
