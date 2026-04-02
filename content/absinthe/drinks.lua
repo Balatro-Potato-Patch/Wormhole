@@ -2,7 +2,7 @@
 
 SMODS.ConsumableType {
     key = 'abs_drinks',
-    default = 'c_worm_abs_stargarita',
+    default = 'c_worm_abs_test_drink',
     primary_colour = HEX('e3dbc8'),
     secondary_colour = HEX('f5c242'),
     collection_rows = { 5, 4 },
@@ -25,7 +25,7 @@ SMODS.Booster {
     ppu_team = { 'absinthe' },
     cost = 7,
     weight = 0.48,
-    select_card = 'consumeable',
+    select_card = 'consumeables',
     create_card = function(self, card)
         return create_card("abs_drinks", G.pack_cards, nil, nil, true, true, nil, "worm_abs_top_shelf")
     end,
@@ -53,7 +53,7 @@ SMODS.Booster {
     ppu_team = { 'absinthe' },
     cost = 10,
     weight = 0.12,
-    select_card = 'consumeable',
+    select_card = 'consumeables',
     create_card = function(self, card)
         return create_card("abs_drinks", G.pack_cards, nil, nil, true, true, nil, "worm_abs_top_shelf")
     end,
@@ -81,7 +81,7 @@ SMODS.Booster {
     ppu_team = { 'absinthe' },
     cost = 5,
     weight = 0.96,
-    select_card = 'consumeable',
+    select_card = 'consumeables',
     create_card = function(self, card)
         return create_card("abs_drinks", G.pack_cards, nil, nil, true, true, nil, "worm_abs_top_shelf")
     end,
@@ -109,7 +109,7 @@ SMODS.Booster {
     ppu_team = { 'absinthe' },
     cost = 5,
     weight = 0.96,
-    select_card = 'consumeable',
+    select_card = 'consumeables',
     create_card = function(self, card)
         return create_card("abs_drinks", G.pack_cards, nil, nil, true, true, nil, "worm_abs_top_shelf")
     end,
@@ -149,7 +149,9 @@ function Card:abs_refill_drink()
             self.config.center:refill(self)
         end
 
-        SMODS.calculate_effect({ message = localize('k_worm_abs_refilled_ex'), colour = G.C.ATTENTION, func = function() self.ability.drink_values.visibly_filled = true end }, self)
+        SMODS.calculate_effect(
+            { message = localize('k_worm_abs_refilled_ex'), colour = G.C.ATTENTION, func = function() self.ability.drink_values.visibly_filled = true end },
+            self)
         SMODS.calculate_context({ abs_drink_refilled = true, card = self })
     end
 end
@@ -162,7 +164,9 @@ function Card:abs_empty_drink()
             self.config.center:empty(self)
         end
 
-        SMODS.calculate_effect({ message = localize('k_worm_abs_emptied_ex'), colour = G.C.ATTENTION, func = function() self.ability.drink_values.visibly_filled = false end }, self)
+        SMODS.calculate_effect(
+            { message = localize('k_worm_abs_emptied_ex'), colour = G.C.ATTENTION, func = function() self.ability.drink_values.visibly_filled = false end },
+            self)
         SMODS.calculate_context({ abs_drink_emptied = true, card = self })
     end
 end
@@ -173,7 +177,6 @@ end
 
 SMODS.Consumable { -- Please god delete this before we finish
     set = 'abs_drinks',
-    name = 'testname',
     key = 'test_drink',
     pos = { x = 0, y = 0 },
     config = {
