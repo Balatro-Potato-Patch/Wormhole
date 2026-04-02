@@ -183,7 +183,7 @@ SMODS.Joker{
 		text = {
 			"{C:attention}+#2#{} Hand Size",
 			"Gains {C:attention}+#1#{} Hand Size for",
-			"every {C:attention}3{} {C:blue}Planet{} Cards used",
+			"every {C:attention}2{} {C:blue}Planet{} Cards used",
 			"{C:attention}#3#{} {C:inactive}Planet Cards left"
 		}
 	},
