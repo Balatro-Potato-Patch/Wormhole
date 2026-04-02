@@ -10,7 +10,7 @@ Ben Roffey (Reson8r)
 
 --Potato Patch Credits
 PotatoPatchUtils.Team{
-	name = "Vegas",
+	name = "People Who I Found On The Streets In Vegas",
 	colour = HEX("73fdff")
 }
 
@@ -98,7 +98,7 @@ SMODS.Joker{
 	discovered = true,
 	eternal_compat = true,
 	perishable_compat = true,
-	ppu_team = {"Vegas"},
+	ppu_team = {"People Who I Found On The Streets In Vegas"},
 	ppu_coder = {"Ben Roffey"},
 	ppu_artist = {"Ben Roffey"}, --Placeholder?
 	calculate = function(self, card, context)
@@ -145,7 +145,7 @@ SMODS.Joker{
 	discovered = true,
 	eternal_compat = true,
 	perishable_compat = true,
-	ppu_team = {"Vegas"},
+	ppu_team = {"People Who I Found On The Streets In Vegas"},
 	ppu_coder = {"Ben Roffey"},
 	ppu_artist = {"Ben Roffey"},
 	calculate = function(self, card, context)
