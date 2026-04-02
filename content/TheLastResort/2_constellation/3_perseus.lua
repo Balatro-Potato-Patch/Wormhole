@@ -4,18 +4,46 @@ SMODS.Consumable{
 	atlas = "tlr_const",
 	pos = {x=0, y=1},
 	config = {
-		disable = {1, 2, 1, 2}
+		odds = {4, 3, 2, 1}
 	},
 	loc_vars = function(self, info_queue, card)
-		return {vars = {card.ability.disable[card.ability.tier]}}
+		local num, dem = SMODS.get_probability_vars(card, 1, card.ability.odds[card.ability.tier], "perseus_disable_t" .. card.ability.tier)
+		return {vars = {num, dem}}
 	end,
-	can_use = function (self, card) return true end,
+	can_use = function (self, card) return G.GAME.blind and G.GAME.blind.in_blind and G.GAME.blind.boss end,
 	use = function (self, card, area, copier)
-		if card.ability.tier < 3 then
-			G.GAME.worm_tlr_const_disable_hands = card.ability.disable[card.ability.tier]
+		if SMODS.pseudorandom_probability(card, "perseus_disable_t" .. card.ability.tier, 1, card.ability.odds[card.ability.tier]) then
+			G.E_MANAGER:add_event(Event({
+				func = function()
+					G.E_MANAGER:add_event(Event({
+						func = function()
+							G.GAME.blind:disable()
+							play_sound('timpani')
+							delay(0.4)
+							return true
+						end
+					}))
+					SMODS.calculate_effect({ message = localize('ph_boss_disabled') }, card)
+					return true
+				end
+			}))
 		else
-			G.GAME.worm_tlr_const_disable_blinds = card.ability.disable[card.ability.tier]
+			G.E_MANAGER:add_event(Event({
+				func = function()
+					attention_text({
+						text = localize('k_nope_ex'),
+						scale = 1.3,
+						hold = 1.4,
+						major = card,
+						backdrop_colour = G.C.SECONDARY_SET.Tarot,
+						align = (G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK or G.STATE == G.STATES.SMODS_BOOSTER_OPENED) and
+								'tm' or 'cm',
+						offset = { x = 0, y = (G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK or G.STATE == G.STATES.SMODS_BOOSTER_OPENED) and -0.2 or 0 },
+						silent = true
+					})
+					return true
+				end
+			}))
 		end
-		SMODS.calculate_effect({message = "Applied!"}, card)
 	end
 }

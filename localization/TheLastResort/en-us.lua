@@ -33,29 +33,28 @@ local CONSTELLATIONS = {
 	c_worm_tlr_const_perseus_t1 = {
 		name = "Perseus",
 		text = {
-			"Disable next boss blind",
-			"for the first {C:attention}#1#",
-			"{C:attention}hands{} or {C:attention}discards"
+			"{C:green}#1# in #2#{} chance to",
+			"disable current boss blind"
 		}
 	},
 	c_worm_tlr_const_perseus_t2 = {
 		name = "Perseus",
 		text = {
-			"Disable next boss blind",
-			"for the first {C:attention}#1#",
-			"{C:attention}hands{} or {C:attention}discards"
+			"{C:green}#1# in #2#{} chance to",
+			"disable current boss blind"
 		}
 	},
 	c_worm_tlr_const_perseus_t3 = {
 		name = "Perseus",
 		text = {
-			"Disable next #1# boss blinds",
+			"{C:green}#1# in #2#{} chance to",
+			"disable current boss blind"
 		}
 	},
 	c_worm_tlr_const_perseus_t4 = {
 		name = "Perseus",
 		text = {
-			"Disable next #1# boss blinds",
+			"Disable current boss blind",
 		}
 	}
 }
