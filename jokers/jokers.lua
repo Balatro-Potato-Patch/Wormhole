@@ -1,14 +1,15 @@
 -- The Past
 SMODS.Joker({
     key = 'the_past',
-    atlas = 'jokers',
+    atlas = 'worm_jokers',
     pos = { x = 0, y = 0 },
-    rarity = 'wh_cosmic',
+    rarity = 'worm_cosmic',
     cost = 20,
     blueprint_compat = true,
+    discovered = true,
     loc_vars = function(self, info_queue, card)
         local hands = G.GAME and G.GAME.hands_played or 0
-        local bought = G.GAME and G.GAME.wh_jokers_bought or 0
+        local bought = G.GAME and G.GAME.worm_jokers_bought or 0
         local paired = get_pair_status()
 
         if paired then
@@ -24,14 +25,15 @@ SMODS.Joker({
 -- The Future
 SMODS.Joker({
     key = 'the_future',
-    atlas = 'jokers',
+    atlas = 'worm_jokers',
     pos = { x = 1, y = 0 },
-    rarity = 'wh_cosmic',
+    rarity = 'worm_cosmic',
     cost = 20,
     blueprint_compat = true,
+    discovered = true,
     loc_vars = function(self, info_queue, card)
         local hands = G.GAME and G.GAME.hands_played or 0
-        local bought = G.GAME and G.GAME.wh_jokers_bought or 0
+        local bought = G.GAME and G.GAME.worm_jokers_bought or 0
         local paired = get_pair_status()
         
         if paired then
@@ -45,7 +47,7 @@ SMODS.Joker({
     calculate = function(self, card, context)
         if context.joker_main then
             local hands = G.GAME and G.GAME.hands_played or 0
-            local bought = G.GAME and G.GAME.wh_jokers_bought or 0
+            local bought = G.GAME and G.GAME.worm_jokers_bought or 0
             local paired = get_pair_status()
             
             local x_mult = paired and (hands * bought) or bought
