@@ -24,7 +24,7 @@ SMODS.Consumable {
     loc_txt = {
 		name = 'Nothing',
 		text = {
-			"bruh",
+			"UNFINISHED",
 		}
 	},
     set = "Planet",
@@ -44,6 +44,10 @@ SMODS.Enhancement {
     key = 'bap_void',
     loc_txt = {
         name = 'Void',
+		text = {
+			"{C:chips}-10{} chips",
+			"when {C:attention}visible{}"
+		}
     },
     atlas = 'Palindrome',
     pos = { x = 1, y = 0 },
