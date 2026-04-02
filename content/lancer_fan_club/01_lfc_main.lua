@@ -1,8 +1,28 @@
+-- Team
 Wormhole.LancerFanClub = PotatoPatchUtils.Team {
     name = "Lancer Fan Club",
-    loc = "worm_PotatoPatchTeam_lancer_fan_club",
+    loc = "PotatoPatchTeam_lancer_fan_club",
     colour = HEX("5585bd") -- this was colorpicked directly from lancer's sprite
 }
+
+-- Proto
+PotatoPatchUtils.Developer {
+    name = "ProdByProto",
+    colour = HEX("d57a02"),
+    loc = true, -- Can also be `loc = 'k_doofus_name'` where the string is an arbitrary localization dictionary entry
+    team = "Lancer Fan Club", -- Must match an already existing Team name
+    atlas = "worm_proot",
+    pos = { x = 0, y = 0 },
+    soul_pos = { x = 1, y = 0 },
+}
+SMODS.Atlas({
+    key = "worm_proot",
+    px = 71,
+    py = 95,
+    path = "lancer_fan_club/proot.png"
+})
+
+
 
 PotatoPatchUtils.Developer({
     name = "ellestuff.",
