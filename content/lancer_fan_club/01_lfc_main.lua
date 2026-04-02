@@ -7,10 +7,10 @@ Wormhole.LancerFanClub = PotatoPatchUtils.Team {
 
 -- Atlases
 SMODS.Atlas({
-    key = "worm_proot",
+    key = "worm_lfc_devs",
     px = 71,
     py = 95,
-    path = "lancer_fan_club/icons.png"
+    path = "lancer_fan_club/devs.png"
 })
 
 -- Proto
@@ -19,7 +19,7 @@ PotatoPatchUtils.Developer {
     colour = HEX("d57a02"),
     loc = true, -- Can also be `loc = 'k_doofus_name'` where the string is an arbitrary localization dictionary entry
     team = "Lancer Fan Club", -- Must match an already existing Team name
-    atlas = "worm_proot",
+    atlas = "worm_lfc_devs",
     pos = { x = 0, y = 0 },
     soul_pos = { x = 1, y = 0 },
 }
