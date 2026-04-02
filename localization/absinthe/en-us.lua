@@ -171,6 +171,23 @@ return {
                     "learn what it does",
                 },
             },
+        },
+        PotatoPatch = {
+            PotatoPatchDev_theAstra = {
+                name = 'theAstra',
+                text = { {
+                    'Yo, I\'m Astra! I\'m The head of the Potato Patch',
+                    'Dev Group and one of the organizers of this event!',
+                    'Aside from that I created most of the backend for',
+                    'the Drinks consumables as well as a few playable',
+                    'objects here and there',
+                }, {
+                    'Thank you so much for checking out our work,',
+                    'and keep an eye out for whatever thing',
+                    'we decide to do next!! {f:9,s:0.6}🐟'
+                }
+                }
+            }
         }
     },
     misc = {
@@ -181,8 +198,8 @@ return {
             k_worm_abs_refilled_ex = 'Refilled!',
             k_worm_abs_top_shelf_pack = 'Top Shelf Pack'
         },
-        v_dictionary={
-            a_discards="+#1# Discards",
+        v_dictionary = {
+            a_discards = "+#1# Discards",
         },
     }
 }
