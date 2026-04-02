@@ -149,9 +149,7 @@ function Card:abs_refill_drink()
             self.config.center:refill(self)
         end
 
-        SMODS.calculate_effect(
-        { message = localize('k_worm_abs_refilled_ex'), colour = G.C.ATTENTION, func = function() self.ability.drink_values.visibly_filled = true end },
-            self)
+        SMODS.calculate_effect({ message = localize('k_worm_abs_refilled_ex'), colour = G.C.ATTENTION, func = function() self.ability.drink_values.visibly_filled = true end }, self)
         SMODS.calculate_context({ abs_drink_refilled = true, card = self })
     end
 end
