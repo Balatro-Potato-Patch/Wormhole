@@ -85,6 +85,162 @@ local CONSTELLATIONS = {
 			"Disable current boss blind",
 			}
 		}
+	},
+	c_worm_tlr_const_serpens_t1 = {
+		name = "Serpens",
+		text = {
+			"{C:blue}+1{} Hands and {C:red}+1{} Discards",
+			"for the next {C:attention}Blind"
+		}
+	},
+	c_worm_tlr_const_serpens_t2 = {
+		name = "Serpens",
+		text = {
+			"{C:blue}+1{} Hands and {C:red}+2{} Discards",
+			"for the next {C:attention}Blind"
+		}
+	},
+	c_worm_tlr_const_serpens_t3 = {
+		name = "Serpens",
+		text = {
+			"{C:blue}+2{} Hands and {C:red}+2{} Discards",
+			"for the next {C:attention}Blind"
+		}
+	},
+	c_worm_tlr_const_serpens_t4 = {
+		name = "Serpens",
+		text = {
+			"{C:blue}+3{} Hands and {C:red}+3{} Discards",
+			"for the next {C:attention}Blind"
+		}
+	},
+
+	c_worm_tlr_const_ursa_minor_t1 = {
+		name = "Ursa Minor",
+		text = {
+			"Reduce current {C:attention}Blind", 
+			"size by {C:attention}10%"
+		}
+	},
+	c_worm_tlr_const_ursa_minor_t2 = {
+		name = "Ursa Minor",
+		text = {
+			"Reduce current {C:attention}Blind", 
+			"size by {C:attention}15%"
+		}
+	},
+	c_worm_tlr_const_ursa_minor_t3 = {
+		name = "Ursa Minor",
+		text = {
+			"Reduce current {C:attention}Blind", 
+			"size by {C:attention}25%"
+		}
+	},
+	c_worm_tlr_const_ursa_minor_t4 = {
+	name = "Ursa Minor",
+		text = {
+			"Reduce current {C:attention}Blind", 
+			"size by {C:attention}50%"
+		}
+	},
+
+	c_worm_tlr_const_ursa_major_t1 = {
+		name = "Ursa Major",
+		text = {
+			"Increase current {C:attention}Blind's",
+			"reward by {C:money}$3"
+		}
+	},
+	c_worm_tlr_const_ursa_major_t2 = {
+		name = "Ursa Major",
+		text = {
+			"Increase current {C:attention}Blind's",
+			"reward by {C:money}$6"
+		}
+	},
+	c_worm_tlr_const_ursa_major_t3 = {
+		name = "Ursa Major",
+		text = {
+			"Increase current {C:attention}Blind's",
+			"reward by {C:money}$10"
+		}
+	},
+	c_worm_tlr_const_ursa_major_t4 = {
+	name = "Ursa Major",
+		text = {
+			"Increase current {C:attention}Blind's",
+			"reward by {C:money}$25"
+		}
+	},
+
+	c_worm_tlr_const_pictor_t1 = {
+		name = "Pictor",
+		text = {
+			"{C:attention}+1{} Hand size for",
+			"the next {C:attention}Blind"
+		}
+	},
+	c_worm_tlr_const_pictor_t2 = {
+		name = "Pictor",
+		text = {
+			"{C:attention}+2{} Hand size for",
+			"the next {C:attention}Blind"
+		}
+	},
+	c_worm_tlr_const_pictor_t3 = {
+		name = "Pictor",
+		text = {
+			"{C:attention}+3{} Hand size for",
+			"the next {C:attention}Blind"
+		}
+	},
+	c_worm_tlr_const_pictor_t4 = {
+	name = "Pictor",
+		text = {
+			"{C:attention}+4{} Hand size for",
+			"the next {C:attention}Blind"
+		}
+	},
+
+	c_worm_tlr_const_canis_minor_t1 = {
+		name = "Canis Minor",
+		text = {
+			"Creates the last",
+			"{V:1}Constellation{} card",
+			"used during this run",
+			"as a Noticeable",
+			"{V:1, s:0.8}Canis Minor{s:0.8} excluded"
+		}
+	},
+	c_worm_tlr_const_canis_minor_t2 = {
+		name = "Canis Minor",
+		text = {
+			"Creates the last",
+			"{V:1}Constellation{} card",
+			"used during this run",
+			"as a Bright",
+			"{V:1, s:0.8}Canis Minor{s:0.8} excluded"
+		}
+	},
+	c_worm_tlr_const_canis_minor_t3 = {
+		name = "Canis Minor",
+		text = {
+			"Creates the last",
+			"{V:1}Constellation{} card",
+			"used during this run",
+			"as a {C:dark_edition}Negative{} Bright",
+			"{s:0.8,V:1}Canis Minor{s:0.8} excluded"
+		}
+	},
+	c_worm_tlr_const_canis_minor_t4 = {
+	name = "Canis Minor",
+	text = {
+			"Creates the last",
+			"{V:1}Constellation{} card",
+			"used during this run",
+			"as 2 {C:dark_edition}Negative{} Shining",
+			"{V:1, s:0.8}Canis Minor{s:0.8} excluded"
+		}
 	}
 }
 for key, obj in pairs(CONSTELLATIONS) do
@@ -128,7 +284,8 @@ return {
 			PotatoPatchDev_Breuh = {
 				name = "Breuh",
 				text = {
-					"fill out pls"
+					"Play my hit",
+					"mod {E:1,C:common}Oscillate"
 				}
 			},
 			PotatoPatchDev_Amphiapple = {
