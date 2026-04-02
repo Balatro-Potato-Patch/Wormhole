@@ -1,0 +1,35 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 1
+
+# PREVENTS THE 'coin2' SOUND FROM PLAYING WHEN SELLING CARDS IF THEY HAVE $0 SELL VALUE
+# (eg. IF THEY WERE CREATED BY HUBBLE TROUBLE)
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+play_sound('coin2')
+'''
+position = "at"
+payload = '''
+if self.sell_cost ~= 0 then
+    play_sound('coin2')
+end
+'''
+match_indent = true
+
+# PREVENTS THE 'coin1' SOUND FROM PLAYING FROM ease_dollars WHEN mod IS 0
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = '''
+play_sound('coin1')
+'''
+position = "at"
+payload = '''
+if mod ~= 0 then
+    play_sound('coin1')
+end
+'''
+match_indent = true

@@ -130,7 +130,8 @@ SMODS.DrawStep {
     key = 'abs_drinks',
     order = -9,
     func = function(self, layer)
-        if self.ability.set == 'abs_drinks' and self.discovered then
+        if self.ability.set == 'abs_drinks' then
+        --if self.ability.set == 'abs_drinks' and self.discovered then
             if self.ability.drink_values.visibly_filled and self.children.center.sprite_pos ~= self.ability.drink_values.filled_pos then
                 self.children.center:set_sprite_pos(self.ability.drink_values.filled_pos)
             elseif not self.ability.drink_values.visibly_filled and self.children.center.sprite_pos ~= self.ability.drink_values.empty_pos then
@@ -237,13 +238,13 @@ SMODS.Consumable { -- Supergiant Cider
         } }
     end,
     calculate = function(self, card, context)
-        if not card.ability.drink_values.filled and context.before and 
+        if context.before and not card.ability.drink_values.filled and  
         (next(context.poker_hands["Full House"]) or next(context.poker_hands["Four of a Kind"]) 
-        or next(context.poker_hands["Straight Flush"])) then
+        or next(context.poker_hands["Straight Flush"])) and not context.repetition then
             card:abs_refill_drink()
         end
         
-        if card.ability.drink_values.filled and (context.hand_drawn) then
+        if context.hand_drawn and card.ability.drink_values.filled and not context.repetition then
             G.E_MANAGER:add_event(Event({
                 func = function()
                     ease_discard(card.ability.extra.discards)
@@ -251,6 +252,71 @@ SMODS.Consumable { -- Supergiant Cider
                         { message = localize { type = 'variable', key = 'a_discards', vars = { card.ability.extra.discards } }, colour = G.C.RED, },
                         card)
                     card:abs_empty_drink()
+                    return true
+                end
+            }))
+        end
+    end,
+    --empty = function(self, card)
+    --    ease_dollars(4)
+    --end
+}
+
+SMODS.Consumable { -- Hubble Trouble
+    set = 'abs_drinks',
+    key = 'abs_hubble_trouble',
+    pos = { x = 4, y = 0 },
+    config = {
+        drink_values = {
+            filled_pos = { x = 4, y = 0 },
+            empty_pos = { x = 5, y = 0 },
+            filled = true,
+            visibly_filled = true,
+        },
+    },
+    loc_vars = function(self, info_queue, card)
+        local key
+        if not card.ability.drink_values.filled then
+            key = self.key .. '_empty'
+        else
+            key = self.key
+        end
+        return { key = key }
+    end,
+    calculate = function(self, card, context)
+        if context.selling_card and not card.ability.drink_values.filled and 
+        context.card.config.center.set == 'Planet' and not context.repetition then
+            card:abs_refill_drink()
+        end
+        
+        if context.after and card.ability.drink_values.filled and not context.repetition then
+            G.E_MANAGER:add_event(Event({
+                trigger = 'before',
+                delay = 0.0,
+                func = function()
+                    if context.scoring_name then
+                        local _planet = nil
+                        for k, v in pairs(G.P_CENTER_POOLS.Planet) do
+                            if v.config.hand_type == context.scoring_name then
+                                _planet = v.key
+                            end
+                        end
+                        if _planet then
+                            --SMODS.add_card({ key = _planet })
+                            G.E_MANAGER:add_event(Event({
+                                func = function()
+                                    local planet_card = SMODS.create_card({ key = _planet })
+                                    planet_card.sell_cost = 0
+                                    G.consumeables:emplace(planet_card)
+                                    return true
+                                end
+                            }))
+                            SMODS.calculate_effect(
+                                { message = localize('k_plus_planet'), colour = G.C.SECONDARY_SET.Planet }, card )
+                            card:abs_empty_drink()
+                        end
+                        G.GAME.consumeable_buffer = 0
+                    end
                     return true
                 end
             }))

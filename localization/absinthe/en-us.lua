@@ -23,9 +23,41 @@ return {
                         "{C:attention}#2#{} or better",
                     },
                     {
-                        "{C:inactive,s:0.8}After being filled:{}",
+                        "{C:inactive,s:0.8}Whilst Filled:{}",
                         "{C:red}+#1#{} Discard when hand,",
                         "is drawn, then is {C:gold}drank{}",
+                    }
+                }
+            },
+            c_worm_abs_hubble_trouble = {
+                name = 'Hubble Trouble',
+                text = {
+                    {
+                        "Create the {C:planet}Planet{} card",
+                        "of played {C:attention}poker hand{},",
+                        "then is {C:gold}drank{}",
+                        "{C:inactive,s:0.8}(Planet card has $0 sell value)",
+                    },
+                    {
+                        "{C:gold}Refill{} by {C:attention}selling{}",
+                        "a {C:planet}Planet{} card",
+                    }
+                }
+            },
+            c_worm_abs_hubble_trouble_empty = {
+                name = 'Hubble Trouble',
+                text = {
+                    {
+                        "{C:inactive,s:0.8}Currently Empty{}",
+                        "{C:gold}Refill{} by selling",
+                        "a {C:planet}Planet{} card",
+                    },
+                    {
+                        "{C:inactive,s:0.8}Whilst Filled:{}",
+                        "Create the {C:planet}Planet{} card",
+                        "of played {C:attention}poker hand{},",
+                        "then is {C:gold}drank{}",
+                        "{C:inactive,s:0.8}(Planet card has $0 sell value)",
                     }
                 }
             },
