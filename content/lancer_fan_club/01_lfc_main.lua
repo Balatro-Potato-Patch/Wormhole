@@ -17,7 +17,7 @@ SMODS.Atlas({
 PotatoPatchUtils.Developer {
     name = "ProdByProto",
     colour = HEX("d57a02"),
-    --loc = "PotatoPatchDev_ProdByProto", -- Can also be `loc = 'k_doofus_name'` where the string is an arbitrary localization dictionary entry
+    loc = "PotatoPatchDev_ProdByProto", -- Can also be `loc = 'k_doofus_name'` where the string is an arbitrary localization dictionary entry
     team = "Lancer Fan Club", -- Must match an already existing Team name
     atlas = "worm_lfc_devs",
     pos = { x = 0, y = 0 },
