@@ -5,7 +5,7 @@ return {
                 name = 'Supergiant Cider',
                 text = {
                     {
-                        "{C:red}+#1#{} Discard when hand,",
+                        "{C:red}+#1#{} Discard when hand",
                         "is drawn, then is {C:gold}drank{}",
                     },
                     {
@@ -70,32 +70,28 @@ return {
                 name = 'Jumbo Top Shelf Pack',
                 text = {
                     "Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2#{C:abs_drink} Drinks{} to",
-                    "be used immediately",
+                    "{C:attention}#2#{C:abs_drink} Drinks{}",
                 },
             },
             p_worm_abs_top_shelf_mega_1 = {
                 name = 'Mega Top Shelf Pack',
                 text = {
                     "Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2#{C:abs_drink} Drinks{} to",
-                    "be used immediately",
+                    "{C:attention}#2#{C:abs_drink} Drinks{}",
                 },
             },
             p_worm_abs_top_shelf_normal_1 = {
                 name = 'Top Shelf Pack',
                 text = {
                     "Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2#{C:abs_drink} Drinks{} to",
-                    "be used immediately",
+                    "{C:attention}#2#{C:abs_drink} Drinks{}",
                 },
             },
             p_worm_abs_top_shelf_normal_2 = {
                 name = 'Top Shelf Pack',
                 text = {
                     "Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2#{C:abs_drink} Drinks{} to",
-                    "be used immediately",
+                    "{C:attention}#2#{C:abs_drink} Drinks{}",
                 },
             },
         }
