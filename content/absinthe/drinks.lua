@@ -141,7 +141,7 @@ SMODS.DrawStep {
     conditions = { vortex = false, facing = 'front' },
 }
 
-function Card:refill_drink()
+function Card:abs_refill_drink()
     if not self.filled then
         self.filled = true
 
