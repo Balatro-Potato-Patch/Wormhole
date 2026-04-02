@@ -23,7 +23,7 @@ return {
             },
             PotatoPatchDev_iamarta = {
                 name = "iamarta",
-                text = {"."}
+                text = {"bonjour"}
             },
             PotatoPatchDev_m0x3s = {
                 name = "m0x3s",

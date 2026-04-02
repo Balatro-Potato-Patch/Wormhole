@@ -58,7 +58,7 @@ PotatoPatchUtils.Developer({
     colour = HEX('FFBC57'),
     loc = true,
     team = "TeamEudaimonia",
-    atlas = "worm_eud_teamArta"
+    atlas = "worm_eud_teamArta",
     pos = {x=0,y=0}
 })
 PotatoPatchUtils.Developer({
