@@ -40,6 +40,61 @@ SMODS.Consumable {
     end
 }
 
+SMODS.Enhancement {
+    key = 'bap_void',
+    loc_txt = {
+        name = 'Void',
+    },
+    atlas = 'Palindrome',
+    pos = { x = 1, y = 0 },
+    config = { bonus = -10, h_chips = -10 }
+}
+
+-- The Abyss
+SMODS.Consumable {
+    key = 'bap_abyss',
+    set = 'Tarot',
+	atlas = 'Palindrome',
+    pos = { x = 2, y = 0 },
+    config = { extra = { money = 10, cards = 5 } },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.money, card.ability.extra.cards } }
+    end,
+    use = function(self, card, area, copier)
+		-- give money
+		G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.4,
+            func = function()
+                play_sound('timpani')
+                card:juice_up(0.3, 0.5)
+                ease_dollars(card.ability.extra.money, true)
+                return true
+            end
+        }))
+
+		--add cards
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.7,
+            func = function()
+                local cards = {}
+                for i = 1, card.ability.extra.cards do
+                    local _rank = pseudorandom_element(SMODS.Ranks, 'abyss_create').card_key
+                    cards[i] = SMODS.add_card { set = "Base", rank = _rank, enhancement = 'bap_void' }
+                end
+                SMODS.calculate_context({ playing_card_added = true, cards = cards })
+                return true
+            end
+        }))
+
+        delay(0.3)
+    end,
+    can_use = function(self, card)
+        return G.hand and true
+    end
+}
+
 SMODS.Joker {
 	key = 'perkeo2',
 	loc_txt = {
