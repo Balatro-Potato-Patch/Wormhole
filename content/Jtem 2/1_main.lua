@@ -37,6 +37,7 @@ PotatoPatchUtils.Developer({
 			G.C.WHITE,
 			G.C.ORANGE,
 		},
+		cycle = 2,
 	}),
 	team = "jtem2",
 	loc = true,
