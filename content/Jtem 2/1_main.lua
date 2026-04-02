@@ -29,7 +29,7 @@ PotatoPatchUtils.Developer({
 })
 PotatoPatchUtils.Developer({
 	name = "haya",
-	colour = G.C.ORANGE,
+	colour = HEX("515aa8"),
 	team = "jtem2",
 	loc = true,
 	-- pos = { x = 1, y = 0 },
