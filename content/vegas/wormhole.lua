@@ -16,7 +16,7 @@ PotatoPatchUtils.Team{
 
 PotatoPatchUtils.Developer{
 	name = "Jammbo",
-	colour = G.C.MULT,
+	colour = G.C.GREEN,
 	team = "Vegas",
 	atlas = "worm_vegas_credits",
 	pos = {x = 0, y = 0},
@@ -95,14 +95,16 @@ SMODS.Joker{
 	atlas = "vegas_jokers",
 	pos = {x = 0, y = 0},
 	rarity = 1,
+	cost = 5,
+	blueprint_compat = true,
 	discovered = true,
 	eternal_compat = true,
 	perishable_compat = true,
 	ppu_team = {"People Who I Found On The Streets In Vegas"},
 	ppu_coder = {"Ben Roffey"},
-	ppu_artist = {"Ben Roffey"}, --Placeholder?
+	ppu_artist = {"Ben Roffey", "Jammbo"}, --no
 	calculate = function(self, card, context)
-		if context.individual and context.cardarea == G.play then
+		if context.individual and context.cardarea == G.play and not context.blueprint then
 			if context.other_card:get_id() == card.ability.extra.rank then
 				card.ability.extra.current = card.ability.extra.current + card.ability.extra.gain
 				card.ability.extra.rank = card.ability.extra.rank - 1
@@ -142,12 +144,14 @@ SMODS.Joker{
 	atlas = "vegas_jokers",
 	pos = {x = 1, y = 0},
 	rarity = 1,
+	cost = 6,
+	blueprint_compat = true,
 	discovered = true,
 	eternal_compat = true,
 	perishable_compat = true,
 	ppu_team = {"People Who I Found On The Streets In Vegas"},
 	ppu_coder = {"Ben Roffey"},
-	ppu_artist = {"Ben Roffey"},
+	ppu_artist = {"Ben Roffey", "Jammbo"},
 	calculate = function(self, card, context)
 		if context.before then
 			if pseudorandom('spaghettification') < G.GAME.probabilities.normal/card.ability.extra.odds then
@@ -172,6 +176,54 @@ SMODS.Joker{
 	end
 }
 
+SMODS.Joker{
+	key = "hubble",
+	loc_txt = {
+		name = "Hubble Space Telescope",
+		text = {
+			"{C:attention}+#2#{} Hand Size",
+			"Gains {C:attention}+#1#{} Hand Size for",
+			"every {C:attention}3{} {C:blue}Planet{} Cards used",
+			"{C:attention}#3#{} {C:inactive}Planet Cards left"
+		}
+	},
+	config = { extra = { h_size = 1, h_size_gain = 1, counter = 2 }},
+	loc_vars = function(self, info_queue, card)
+		return { vars = { card.ability.extra.h_size_gain, card.ability.extra.h_size, card.ability.extra.counter }}
+	end,
+	atlas = "vegas_jokers",
+	pos = {x = 2, y = 0},
+	rarity = 2,
+	cost = 6,
+	blueprint_compat = false,
+	discovered = true,
+	eternal_compat = true,
+	perishable_compat = true,
+	ppu_team = {"People Who I Found On The Streets In Vegas"},
+	ppu_coder = {"Jammbo"},
+	ppu_artist = {"Jammbo"},
+	calculate = function(self, card, context)
+		if context.using_consumeable and not context.blueprint and context.consumeable.ability.set == ("Planet") then
+			if card.ability.extra.counter == 1 then
+				G.hand:change_size(-card.ability.extra.h_size)
+				card.ability.extra.h_size = card.ability.extra.h_size + card.ability.extra.h_size_gain
+				G.hand:change_size(card.ability.extra.h_size)
+				card.ability.extra.counter = 2
+				return {
+					message = "Upgrade!"
+				}
+			end
+			card.ability.extra.counter = card.ability.extra.counter - 1
+        end
+	end,
+	add_to_deck = function(self, card, from_debuff)
+        G.hand:change_size(card.ability.extra.h_size)
+    end,
+    remove_from_deck = function(self, card, from_debuff)
+        G.hand:change_size(-card.ability.extra.h_size)
+    end
+}
+
 --[[
 SMODS.Joker{
 	key = "template",
@@ -188,10 +240,11 @@ SMODS.Joker{
 	atlas = "vegas_jokers",
 	pos = {x = 0, y = 0},
 	rarity = 1,
+	cost = 5,
 	discovered = true,
 	eternal_compat = true,
 	perishable_compat = true,
-	ppu_team = {"Vegas"},
+	ppu_team = {"People Who I Found On The Streets In Vegas"},
 	ppu_coder = {},
 	ppu_artist = {},
 	calculate = function(self, card, context)
