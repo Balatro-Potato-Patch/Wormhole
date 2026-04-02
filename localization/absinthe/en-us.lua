@@ -124,8 +124,14 @@ return {
                 }
             },
         },
-        Jokers = {
-
+        Joker = {
+            j_worm_abs_clg = {
+                name = 'Cosmically Large Glass',
+                text = {
+                    'When {C:attention}Blind{} is selected,',
+                    'create an {C:attention}Empty {C:abs_drinks}Drink'
+                }
+            }
         },
         Other = {
             p_worm_abs_top_shelf_jumbo_1 = {
@@ -154,6 +160,15 @@ return {
                 text = {
                     "Choose {C:attention}#1#{} of up to",
                     "{C:attention}#2#{C:abs_drink} Drinks{}",
+                },
+            },
+            undiscovered_abs_drinks = {
+                name = "Not Discovered",
+                text = {
+                    "Purchase this",
+                    "card in an",
+                    "unseeded run to",
+                    "learn what it does",
                 },
             },
         }

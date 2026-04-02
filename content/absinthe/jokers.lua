@@ -1,0 +1,20 @@
+SMODS.Joker {
+    key = 'abs_clg',
+    rarity = 2,
+    cost = 5,
+    ppu_coder = { 'theAstra' },
+    ppu_team = { 'absinthe' },
+    calculate = function(self, card, context)
+        if context.setting_blind and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+            G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    local new_drink = SMODS.add_card({set = 'abs_drinks'})
+                    new_drink.ability.drink_values.filled = false
+                    new_drink.ability.drink_values.visibly_filled = false
+                    return true;
+                end
+            }))
+        end
+    end,
+}
