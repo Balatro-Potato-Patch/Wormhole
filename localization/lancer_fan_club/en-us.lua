@@ -29,5 +29,18 @@ return {
                 }
             },
         },
+
+        Joker = {
+            j_worm_pissstream = {
+                name = "Urination Station",
+                text = {
+                    "This Joker gains {C:chips}+#1#{} Chips, {C:mult}+#2#{} Mult,",
+                    "and {C:money}+$#3#{} per {C:attention}% full{} the ISS'",
+                    "{C:chips}water{}, {C:mult}waste{}, and {C:money}urine{} tanks",
+                    "are respectively (rounded up)",
+                    "{C:inactive}(Currently {C:chips}+#4#{C:inactive}, {C:mult}+#5#{C:inactive}, {C:money}+$#6#{C:inactive})"
+                }
+            }
+        }
     },
 }

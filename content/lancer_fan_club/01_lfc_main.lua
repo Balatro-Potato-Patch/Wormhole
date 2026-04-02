@@ -2,7 +2,16 @@
 Wormhole.LancerFanClub = PotatoPatchUtils.Team {
     name = "Lancer Fan Club",
     loc = "PotatoPatchTeam_lancer_fan_club",
-    colour = HEX("5585bd") -- this was colorpicked directly from lancer's sprite
+    colour = HEX("5585bd"), -- this was colorpicked directly from lancer's sprite
+    calculate = function(self, context)
+        local effects = {}
+
+        if context.after or context.setting_blind and not context.blueprint then
+            Wormhole.LancerFanClub.get_piss()
+        end
+
+        if #effects > 0 then return SMODS.merge_effects(effects) end
+    end
 }
 
 -- Atlases
