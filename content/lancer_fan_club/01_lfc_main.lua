@@ -6,14 +6,20 @@ Wormhole.LancerFanClub = PotatoPatchUtils.Team {
 }
 
 -- Atlases
-SMODS.Atlas({
-    key = "worm_lfc_devs",
+SMODS.Atlas {
+    key = "lfc_devs",
     px = 71,
     py = 95,
     path = "lancer_fan_club/devs.png"
-})
+}
 
--- Proto
+-- Sounds
+SMODS.Sound {
+    key = "lfc_explosion",
+    path = "lfc_explosion.ogg"
+}
+
+-- Developers
 PotatoPatchUtils.Developer {
     name = "ProdByProto",
     colour = HEX("d57a02"),

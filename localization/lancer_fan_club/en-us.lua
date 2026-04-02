@@ -23,9 +23,13 @@ return {
             PotatoPatchDev_ellestuff = {
                 name = "ellestuff.",
                 text = {
-                    "hey.",
-                    "did i do things?",
-                    "good question,,",
+                    {
+                        "hey.",
+                        "did i do things?"
+                    },
+                    {
+                        "good question,,",
+                    }
                 }
             },
         },
