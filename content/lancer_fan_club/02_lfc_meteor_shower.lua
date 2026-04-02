@@ -8,6 +8,10 @@ local joker = SMODS.Joker {
 }
 
 local meteor_sprite = love.graphics.newImage(love.image.newImageData(SMODS.NFS.newFileData(SMODS.current_mod.path .. "assets/lancer_fan_club/meteors.png")))
+local explosion_sprite = love.graphics.newImage(love.image.newImageData(SMODS.NFS.newFileData(SMODS.current_mod.path .. "assets/lancer_fan_club/explosion.png")))
+
+local mx,my=meteor_sprite:getDimensions()
+local ex,ey=explosion_sprite:getDimensions()
 
 local meteor_click = function(meteor)
 	play_sound("worm_lfc_explosion")
@@ -20,7 +24,7 @@ local meteor_quad = love.graphics.newQuad(0,0,1,1,1,1)
 
 local function create_meteor(value)
 	local meteor = {
-		spr = pseudorandom("worm_lfc_meteorsprite", 0, 1),
+		spr = pseudorandom("worm_lfc_meteorsprite", 0, math.ceil(mx/64)),
 		vel = {
 			x = pseudorandom("worm_lfc_meteor_velx") * 4,		-- random float in range 0  to 40
 			y = pseudorandom("worm_lfc_meteor_vely") * 4+4,	-- random float in range 40 to 80
@@ -59,33 +63,35 @@ function love.update(dt)
 	local is_down = love.mouse.isDown(1)
 	local space_down = love.keyboard.isDown("space")
 
-	if space_down and space_down~=spacetest then create_meteor(5) end
-
 	if is_down and is_down~=last_mouse_pressed then
 		local mx,my = love.mouse.getPosition()
 		for i, v in ipairs(meteors) do
 			local dist = math.sqrt(math.abs(mx-v.pos.x)^2 + math.abs(my-v.pos.y)^2)
-			if dist<64 then
+			if dist<64 and not v.clicked then
 				meteor_click(v)
-				table.remove(meteors,i)
+				v.clicked = 0
 				break
 			end
 		end
 	end
 
 	for i, v in ipairs(meteors) do
-		v.pos.x = v.pos.x + v.vel.x*dt*vel_mult
-		v.pos.y = v.pos.y + v.vel.y*dt*vel_mult
-		v.pos.rot = (v.pos.rot + v.vel.rot*dt*5) % (math.pi*2)
+		if v.clicked then
+			if v.clicked > 1 then table.remove(meteors,i) end
+			v.clicked = v.clicked + dt
+		else
+			v.pos.x = v.pos.x + v.vel.x*dt*vel_mult
+			v.pos.y = v.pos.y + v.vel.y*dt*vel_mult
+			v.pos.rot = (v.pos.rot + v.vel.rot*dt*5) % (math.pi*2)
 
-		if v.pos.y > love.graphics.getHeight()+64 then table.remove(meteors,i) end
+			if v.pos.y > love.graphics.getHeight()+64 then table.remove(meteors,i) end
+		end
 	end
 
 	last_mouse_pressed = is_down
 	spacetest = space_down
 end
 
-local mx,my=meteor_sprite:getDimensions()
 
 -- Draw hook to place meteors onscreen
 if not love.draw then function love.draw() end end
@@ -94,10 +100,15 @@ function love.draw()
 	draw_hook()
 
 	love.graphics.setColor(1,1,1,1)
-	love.graphics.print("Meteor Count: "..#meteors,10,50)
+	--love.graphics.print("Meteor Count: "..#meteors,10,50) -- Debug line
 	for i, v in ipairs(meteors) do
-		meteor_quad:setViewport(v.spr*64,0,64,64,mx,my) -- Reposition quad to use the correct dimensions
-		love.graphics.draw(meteor_sprite, meteor_quad, v.pos.x, v.pos.y, v.pos.rot, 2, 2, 32, 32)
+		if v.clicked then
+			local f = math.floor(v.clicked*17)
+			meteor_quad:setViewport(f*71,0,71,100,ex,ey) -- Reposition quad to use the correct frame
+			love.graphics.draw(explosion_sprite, meteor_quad, v.pos.x, v.pos.y, 0, 2, 2, 35, 55)
+		else
+			meteor_quad:setViewport(v.spr*64,0,64,64,mx,my) -- Reposition quad to use the correct frame
+			love.graphics.draw(meteor_sprite, meteor_quad, v.pos.x, v.pos.y, v.pos.rot, 2, 2, 32, 32)
+		end
 	end
 end
-
