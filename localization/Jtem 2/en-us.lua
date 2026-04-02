@@ -21,7 +21,7 @@ return {
 				},
 			},
 			PotatoPatchDev_lexi = {
-				name = "Lexi",
+				name = "lexi",
 				text = {
 					{ "box numero 1" },
 				},
