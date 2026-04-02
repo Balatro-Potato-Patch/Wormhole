@@ -145,6 +145,47 @@ local CONSTELLATIONS = {
 			"{C:attention}+4{} Hand size for",
 			"the next {C:attention}Blind"
 		}
+	},
+
+	c_worm_tlr_const_canis_minor_t1 = {
+		name = "Canis Minor",
+		text = {
+			"Creates the last",
+			"{V:1}Constellation{} card",
+			"used during this run",
+			"as a Noticeable",
+			"{V:1, s:0.8}Canis Minor{s:0.8} excluded"
+		}
+	},
+	c_worm_tlr_const_canis_minor_t2 = {
+		name = "Canis Minor",
+		text = {
+			"Creates the last",
+			"{V:1}Constellation{} card",
+			"used during this run",
+			"as a Bright",
+			"{V:1, s:0.8}Canis Minor{s:0.8} excluded"
+		}
+	},
+	c_worm_tlr_const_canis_minor_t3 = {
+		name = "Canis Minor",
+		text = {
+			"Creates the last",
+			"{V:1}Constellation{} card",
+			"used during this run",
+			"as a {C:dark_edition}Negative{} Bright",
+			"{s:0.8,V:1}Canis Minor{s:0.8} excluded"
+		}
+	},
+	c_worm_tlr_const_canis_minor_t4 = {
+	name = "Canis Minor",
+	text = {
+			"Creates the last",
+			"{V:1}Constellation{} card",
+			"used during this run",
+			"as 2 {C:dark_edition}Negative{} Shining",
+			"{V:1, s:0.8}Canis Minor{s:0.8} excluded"
+		}
 	}
 }
 for key, obj in pairs(CONSTELLATIONS) do
@@ -172,7 +213,8 @@ return {
 			PotatoPatchDev_Breuh = {
 				name = "Breuh",
 				text = {
-					"fill out pls"
+					"Play my hit",
+					"mod {E:1,C:common}Oscillate"
 				}
 			},
 			PotatoPatchDev_Amphiapple = {

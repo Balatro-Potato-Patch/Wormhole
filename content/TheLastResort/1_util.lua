@@ -15,13 +15,15 @@ PotatoPatchUtils.Developer({
 PotatoPatchUtils.Developer({
 	name = "Jolga",
 	loc = true,
-	team = "TheLastResort"
+	team = "TheLastResort",
 })
 
 PotatoPatchUtils.Developer({
-	name = "Breuh",
+	name = "Breuhh",
 	loc = true,
-	team = "TheLastResort"
+	team = "TheLastResort",
+	pos = {x=0,y=0},
+	atlas = "worm_tlr_breh"
 })
 
 PotatoPatchUtils.Developer({
