@@ -137,7 +137,7 @@ end
 -- A board is a 2D array of values, a character (corresponding to the piece type it came from) means its occupied
 -- if it is 0 then it is not occupied
 local BOARD_W, BOARD_H = 10, 20 -- Additional 5 blocks out of view, all pieces start at the 20th cell
-local BLOCK_W, BLOCK_H = 8, 8
+local BLOCK_W, BLOCK_H = 2, 2
 -- Clearance
 local BOARD_HCLEARANCE = -5
 
@@ -146,6 +146,13 @@ local function GtoSpeed(g)
 end
 
 local function ResetPlayerState()
+	local board = {}
+	for y = BOARD_HCLEARANCE, BOARD_H - 1 do
+		board[y] = {}
+		for x = 0, BOARD_W - 1 do
+			board[y][x] = 0
+		end
+	end
 	return {
 		state = 0,          -- Literal current state
 		state_complete = false, -- Checks if the state is considered as complete or not
@@ -187,6 +194,13 @@ local function ResetPlayerState()
 
 		credit_fadeout = 0,
 		credit_time = 0,
+
+		history = { "Z", "Z", "Z", "Z" },
+		next_pieces = {},
+		current_piece = {},
+		ghost_piece = {},
+
+		board = board,
 	}
 end
 
