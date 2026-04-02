@@ -137,7 +137,8 @@ function worm_create_moony_menu()
         contents = {
             first_hand_button,
             second_hand_button
-        }
+        },
+        back_label = localize('b_skip')
     })
     return t
 end
