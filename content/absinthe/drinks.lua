@@ -236,6 +236,8 @@ SMODS.Consumable { -- Supergiant Cider
     set = 'abs_drinks',
     key = 'abs_supergiant_cider',
     pos = { x = 2, y = 0 },
+    ppu_coder = { 'pi_cubed' },
+    ppu_team = { 'absinthe' },
     config = {
         drink_values = {
             filled_pos = { x = 2, y = 0 },
@@ -293,6 +295,8 @@ SMODS.Consumable { -- Hubble Trouble
     set = 'abs_drinks',
     key = 'abs_hubble_trouble',
     pos = { x = 4, y = 0 },
+    ppu_coder = { 'pi_cubed' },
+    ppu_team = { 'absinthe' },
     config = {
         drink_values = {
             filled_pos = { x = 4, y = 0 },
@@ -365,6 +369,8 @@ SMODS.Consumable { -- Moonshine
     set = 'abs_drinks',
     key = 'abs_moonshine',
     pos = { x = 8, y = 1 },
+    ppu_coder = { 'iwas_nevergood' },
+    ppu_team = { 'absinthe' },
     config = {
         drink_values = {
             filled_pos = { x = 8, y = 1 },
@@ -430,6 +436,8 @@ SMODS.Consumable { -- Moonshine
 SMODS.Consumable { -- Pina Solada
     set = 'abs_drinks',
     key = 'abs_pina_solada',
+    ppu_coder = { 'iwas_nevergood' },
+    ppu_team = { 'absinthe' },
     pos = { x = 9, y = 1 },
     config = {
         drink_values = {
