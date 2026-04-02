@@ -29,7 +29,7 @@ PotatoPatchUtils.Developer({
 
 PotatoPatchUtils.Developer({
 	name = "revo",
-    colour = G.C.UI.TEXT_LIGHT, -- Change this
+    colour = HEX("7E7AFF"),
     loc = true,
     team = "meow",
 })
