@@ -17,10 +17,10 @@ PotatoPatchUtils.Team{
 PotatoPatchUtils.Developer{
 	name = "Jammbo",
 	colour = G.C.MULT,
-	team = "Vegas" --[[,
+	team = "Vegas",
 	atlas = "worm_vegas_credits",
 	pos = {x = 0, y = 0},
-	soul_pos = {x = 0, y = 1}]]
+	soul_pos = {x = 0, y = 1}
 }
 
 PotatoPatchUtils.Developer{
