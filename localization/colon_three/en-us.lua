@@ -25,6 +25,13 @@ return {
                 text = {
                     "waow :3"
                 }
+            },
+            PotatoPatchDev_ophelia = {
+                name = "Ophelia",
+                text = {
+                    "I am so interesting",
+                    "Keep looking at this text"
+                }
             }
         }
     }

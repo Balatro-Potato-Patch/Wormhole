@@ -42,6 +42,21 @@ PotatoPatchUtils.Developer {
     pos = { x = 1, y = 0 }
 }
 
+PotatoPatchUtils.Developer {
+    name = "ophelia",
+    loc = true,
+    team = ":3",
+    colour = SMODS.Gradient {
+        key = "colon_three_ophelia_gradient",
+        colours = {
+            HEX("FFA24A"),
+            HEX("FAEB69")
+        }
+    },
+    atlas = "worm_ct_credits",
+    pos = { x = 2, y = 0 }
+}
+
 Wormhole.COLON_THREE.loaded = true
 for i, v in pairs({
     "laika",
