@@ -38,7 +38,7 @@ G.E_MANAGER:add_event(Event({
 }))
 
 SMODS.Joker {
-    key = "pissstream",
+    key = "lfc_pissstream",
     --atlas = "placeholders",
     --pos = {x = 2, y = 0},
 

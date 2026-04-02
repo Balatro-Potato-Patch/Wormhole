@@ -35,7 +35,7 @@ return {
         },
 
         Joker = {
-            j_worm_pissstream = {
+            j_worm_lfc_pissstream = {
                 name = "Urination Station",
                 text = {
                     "This Joker gains {C:chips}+#1#{} Chips, {C:mult}+#2#{} Mult,",
@@ -43,6 +43,17 @@ return {
                     "{C:chips}water{}, {C:mult}waste{}, and {C:money}urine{} tanks",
                     "are respectively (rounded up)",
                     "{C:inactive}(Currently {C:chips}+#4#{C:inactive}, {C:mult}+#5#{C:inactive}, {C:money}+$#6#{C:inactive})"
+                }
+            },
+
+            j_worm_lfc_meteor_shower = {
+                name = "Meteor Shower",
+                text = {
+                    {
+                        "{C:attention,E:1}Meteors{} fall on screen",
+                        "when cards are scored,",
+                        "giving {C:money}$#1#{} when clicked"
+                    }
                 }
             }
         }

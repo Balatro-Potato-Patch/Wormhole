@@ -11,7 +11,7 @@ local meteor_sprite = love.graphics.newImage(love.image.newImageData(SMODS.NFS.n
 
 local meteor_click = function(meteor)
 	play_sound("worm_lfc_explosion")
-	ease_dollars(meteor.dollars)
+	ease_dollars(meteor.dollars, true)
 	print("test")
 end
 
