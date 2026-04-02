@@ -53,7 +53,7 @@ return {
 					"fill out pls"
 				}
 			},
-			PotatoPatchDev_Breuh = {
+			PotatoPatchDev_Breuhh = {
 				name = "Breuh",
 				text = {
 					"fill out pls"

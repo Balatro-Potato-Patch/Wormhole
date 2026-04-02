@@ -19,7 +19,7 @@ PotatoPatchUtils.Developer({
 })
 
 PotatoPatchUtils.Developer({
-	name = "Breuh",
+	name = "Breuhh",
 	loc = true,
 	team = "TheLastResort"
 })
