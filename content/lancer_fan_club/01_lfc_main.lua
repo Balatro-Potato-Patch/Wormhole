@@ -32,13 +32,26 @@ SMODS.Sound {
 PotatoPatchUtils.Developer {
     name = "ProdByProto",
     colour = HEX("d57a02"),
-    loc = "PotatoPatchDev_ProdByProto", -- Can also be `loc = 'k_doofus_name'` where the string is an arbitrary localization dictionary entry
-    team = "Lancer Fan Club", -- Must match an already existing Team name
+    loc = "PotatoPatchDev_ProdByProto",
+    team = "Lancer Fan Club",
     atlas = "worm_lfc_devs",
     pos = { x = 0, y = 0 },
     soul_pos = { x = 0, y = 1 },
+    calculate = function(self,context)
+        if context.card_added then
+            if context.card.ability.set == "Joker" then
+                if not G.GAME.worm_log then G.GAME.worm_log = 0 end
+                G.GAME.worm_log = G.GAME.worm_log + 1
+                if G.GAME.worm_debug then
+                    print("scale jokers log")
+                end
+            end
+        end
+    end
 }
 
+
+-- Elle
 PotatoPatchUtils.Developer({
     name = "ellestuff.",
     colour = HEX('ff53a9'),

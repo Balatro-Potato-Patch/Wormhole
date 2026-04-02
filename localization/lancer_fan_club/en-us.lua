@@ -8,7 +8,8 @@ return {
                 text = {
                     {
                         "Placeholder, replace with what I did at some point",
-                        "{C:inactive}The clippy!Ralsei was drawn by{}{C:inactive} ThunderEdge {}{C:inactive}this time, call that immersive character development."
+                        "{C:inactive}The clippy!Ralsei was drawn by{}{C:attention} ThunderEdge {}{C:inactive}this time,",
+                        "call that immersive character development."
                     },
                     {
                         "Placeholder text, I still like the 3 textbox format tho",
@@ -45,15 +46,18 @@ return {
                     "{C:inactive}(Currently {C:chips}+#4#{C:inactive}, {C:mult}+#5#{C:inactive}, {C:money}+$#6#{C:inactive})"
                 }
             },
-
-            j_worm_lfc_meteor_shower = {
-                name = "Meteor Shower",
+            j_worm_log = {
+                name = "Joker\'s Log",
                 text = {
                     {
-                        "{C:attention,E:1}Meteors{} fall on screen",
-                        "when cards are scored,",
-                        "giving {C:money}$#1#{} when clicked"
+                        "This Joker gains {C:mult}+#1#{} Mult for every",
+                        "joker obtained this run.",
+                        "{C:inactive}(Currently {}{C:mult}+#2#{} {C:inactive}mult){}",
+                    },
+                    {
+                        "{C:inactive}Joker\'s Log: Stardate 6727247{}",
                     }
+
                 }
             }
         }
