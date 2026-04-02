@@ -23,7 +23,10 @@ SMODS.Booster{
 			skip_materialize = true,
 			soulable = true,
 		}
-	end
+	end,
+	ppu_team = {"TheLastResort"},
+	ppu_coder = {"Foo54"},
+	ppu_artists = {"None yet"}
 }
 
 SMODS.Booster{
@@ -51,7 +54,10 @@ SMODS.Booster{
 			skip_materialize = true,
 			soulable = true,
 		}
-	end
+	end,
+	ppu_team = {"TheLastResort"},
+	ppu_coder = {"Foo54"},
+	ppu_artists = {"None yet"}
 }
 
 SMODS.Booster{
@@ -79,7 +85,10 @@ SMODS.Booster{
 			skip_materialize = true,
 			soulable = true,
 		}
-	end
+	end,
+	ppu_team = {"TheLastResort"},
+	ppu_coder = {"Foo54"},
+	ppu_artists = {"None yet"}
 }
 
 SMODS.Booster{
@@ -107,5 +116,8 @@ SMODS.Booster{
 			skip_materialize = true,
 			soulable = true,
 		}
-	end
+	end,
+	ppu_team = {"TheLastResort"},
+	ppu_coder = {"Foo54"},
+	ppu_artists = {"None yet"}
 }

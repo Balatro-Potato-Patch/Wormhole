@@ -175,6 +175,15 @@ return {
 					"{C:attention}#2#{V:1} Constellation{} cards to take",
 				}
 			},
+		},
+		Tag = {
+			tag_worm_tlr_const = {
+				name = "Stellar Tag",
+				text = {
+					"Gives a free",
+					"{C:attention}Mega Constellation Pack",
+				},
+			},
 		}
 	},
 	misc = {

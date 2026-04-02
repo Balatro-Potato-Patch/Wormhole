@@ -52,7 +52,10 @@ SMODS.ConsumableType{
             mem_use(_self, _card, area, copier)
             G.GAME.worm_tlr_last_const_used = _self.key ~= "c_worm_tlr_const_canis_minor" and _self.key or nil
         end
+        card.ppu_team = {"TheLastResort"}
     end,
+	ppu_team = {"TheLastResort"},
+	ppu_coder = {"Foo54"}
 }
 
 --[[
