@@ -36,9 +36,9 @@ function G.UIDEF.Wormhole_TLR_orion(args)
         local is_boss = v.boss ~= nil and v.boss.showdown == nil
         local is_showdown = v.boss and v.boss.showdown ~= nil
         print(("blind: %s, boss: %s, showdown: %s"):format(v.key, is_boss, is_showdown))
-        if (args.allow.non_boss or not is_boss)
-        or (args.allow.standard or is_boss and not is_showdown)
-        or (args.allow.showdown or not is_boss and is_showdown) then
+        if (args.allow.non_boss and not is_boss)
+        or (args.allow.standard and is_boss )
+        or (args.allow.showdown and is_showdown) then
             print("Added!")
             table.insert(blind_choices,v.key)
         end
