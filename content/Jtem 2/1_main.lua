@@ -1,3 +1,5 @@
+WORM_JTEM = {}
+
 PotatoPatchUtils.Team({
 	name = "jtem2",
 	colour = HEX("ff4267"),
@@ -17,6 +19,9 @@ PotatoPatchUtils.Developer({
 	colour = G.C.BLUE,
 	team = "jtem2",
 	loc = true,
+	calculate = function(self, context)
+		WORM_JTEM.quantum_rock.calculate(context)
+	end,
 	-- pos = { x = 1, y = 0 },
 	-- atlas = "atlas_key",
 })
