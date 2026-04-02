@@ -34,7 +34,7 @@ SMODS.ConsumableType{
                     })
                     G.E_MANAGER:add_event(Event({
                         func = function()
-                            _self:set_sprites(_card, _card.config.center)
+                            _card.config.center:update_sprites(_card)
                             return true
                         end
                     }))
@@ -42,7 +42,12 @@ SMODS.ConsumableType{
             end
             return mem_calculate(_self, _card, context)
         end
-        card.set_sprites = function(_self, _card, front)
+        local mem_set_sprites = card.set_sprites or function() end
+        card.set_sprites = function (_self, _card, front)
+            mem_set_sprites(_self, _card, front)
+            _card.config.center:update_sprites(_card)
+        end
+        card.update_sprites = function(_self, _card)
             if _card.ability and _card.ability.tier then
                 _card.children.center:set_sprite_pos({x = card.pos.x - 1 + _card.ability.tier, y = card.pos.y})
             end
@@ -53,9 +58,7 @@ SMODS.ConsumableType{
             G.GAME.worm_tlr_last_const_used = _self.key ~= "c_worm_tlr_const_canis_minor" and _self.key or nil
         end
         card.ppu_team = {"TheLastResort"}
-    end,
-	ppu_team = {"TheLastResort"},
-	ppu_coder = {"Foo54"}
+    end
 }
 
 --[[
@@ -80,7 +83,7 @@ do not generate info_queues for the tiering information, thats already done
 {V:1} will always be the constellation primary colour
 If you introduce other custom colours, their index starts at 2 instead of 1
 
-if a card changes its tier, call WORM_TLR.update_const_sprite(self, card) to update the sprites
+if a card changes its tier, call WORM_TLR.update_const_sprite(card.config.center, card) to update the sprites
 
 
 ]]

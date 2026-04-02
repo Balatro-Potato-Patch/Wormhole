@@ -65,6 +65,17 @@ end
 
 return {
 	descriptions = {
+		Tarot = {
+			c_worm_tlr_observation = {
+				name = "Observation",
+				text = {
+					"Upgrades leftmost",
+					"{V:1}Constellation{} card to",
+					"the next tier",
+					"{C:inactive,s:0.7}Faint -> Noticable -> Bright -> Shining"
+				}
+			}
+		},
 		worm_tlr_constellation = CONSTELLATIONS,
 		PotatoPatch = {
 			PotatoPatchTeam_TLR = {name = "The Last Resort"},
