@@ -34,6 +34,7 @@ SMODS.Edition {
                 local hand = pseudorandom_element(visible_hands, 'dum_Celestial')
                 SMODS.smart_level_up_hand(card, hand)
             end
+            return {}, {}
         end
     end,
     get_weight = function(self)
