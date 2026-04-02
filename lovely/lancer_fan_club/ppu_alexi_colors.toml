@@ -12,6 +12,6 @@ pattern = 'colours = { dev and dev.colour or G.C.UI.BACKGROUND_WHITE }, scale = 
 position = 'at'
 payload = '''
 colours = (dev and dev.colours) or { dev and dev.colour or G.C.UI.BACKGROUND_WHITE }, scale = 0.27,
-effect = dev and dev.text_effect or nil, shaders = dev and dev.shaders or nil
+effect = dev and dev.text_effect or nil, shaders = dev and dev.shaders or nil,
 '''
 match_indent = true
