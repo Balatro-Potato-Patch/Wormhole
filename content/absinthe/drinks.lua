@@ -130,8 +130,7 @@ SMODS.DrawStep {
     key = 'abs_drinks',
     order = -9,
     func = function(self, layer)
-        if self.ability.set == 'abs_drinks' then
-        --if self.ability.set == 'abs_drinks' and self.config.center.discovered then
+        if self.ability.set == 'abs_drinks' and self.config.center.discovered then
             if self.ability.drink_values.visibly_filled and self.children.center.sprite_pos ~= self.ability.drink_values.filled_pos then
                 self.children.center:set_sprite_pos(self.ability.drink_values.filled_pos)
             elseif not self.ability.drink_values.visibly_filled and self.children.center.sprite_pos ~= self.ability.drink_values.empty_pos then
