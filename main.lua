@@ -2,6 +2,7 @@ Wormhole = SMODS.current_mod
 
 if PotatoPatchUtils then
     local file_blacklist = {
+        ['tlr_gorilla.dll'] = true
         -- Format entries as `['filename.txt'] = true`
     }
 

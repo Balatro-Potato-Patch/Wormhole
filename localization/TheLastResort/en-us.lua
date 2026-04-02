@@ -153,12 +153,34 @@ return {
 					"unseeded run to",
 					"learn what it does"
 				},
-			}
+			},
+			p_worm_tlr_const_normal = {
+				name = "Constellation Pack",
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{V:1} Constellation{} cards to take",
+				}
+			},
+			p_worm_tlr_const_jumbo = {
+				name = "Jumbo Constellation Pack",
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{V:1} Constellation{} cards to take",
+				}
+			},
+			p_worm_tlr_const_mega = {
+				name = "Mega Constellation Pack",
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{V:1} Constellation{} cards to take",
+				}
+			},
 		}
 	},
 	misc = {
 		dictionary = {
 			k_worm_tlr_constellation = "Constellation",
+			k_tlr_const_pack = "Constellation Pack",
 			b_worm_tlr_constellation_cards = "Constellation",
 		},
 		labels = {
