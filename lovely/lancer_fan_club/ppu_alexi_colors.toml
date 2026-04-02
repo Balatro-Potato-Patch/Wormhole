@@ -1,0 +1,17 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = -10
+
+# this is a lovely patch instead of a pr so i can gatekeep this until the mod releases :3
+# PotatoPatchUtils.CREDITS.generate_string()
+[[patches]]
+[patches.pattern]
+target = '=[SMODS PotatoPatchUtils "src/credits.lua"]'
+pattern = 'colours = { dev and dev.colour or G.C.UI.BACKGROUND_WHITE }, scale = 0.27,'
+position = 'at'
+payload = '''
+colours = (dev and dev.colours) or { dev and dev.colour or G.C.UI.BACKGROUND_WHITE }, scale = 0.27,
+effect = dev and dev.text_effect or nil, shaders = dev and dev.shaders or nil
+'''
+match_indent = true
