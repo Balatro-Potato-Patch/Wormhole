@@ -3,3 +3,8 @@ Wormhole.LancerFanClub = PotatoPatchUtils.Team {
     loc = "worm_PotatoPatchTeam_lancer_fan_club",
     colour = HEX("5585bd") -- this was colorpicked directly from lancer's sprite
 }
+
+PotatoPatchUtils.Developer({
+    name = "ellestuff.",
+    colour = HEX('ff53a9')
+})
