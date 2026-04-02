@@ -183,6 +183,16 @@ function Card:abs_empty_drink()
     end
 end
 
+function Card:abs_toggle_drink_prime()
+    if self.ability.set == 'abs_drinks' then
+        self.ability.drink_values.primed = not self.ability.drink_values.primed
+        if self.ability.drink_values.primed then
+            local eval = function(self) return self.ability.drink_values.primed end
+            juice_card_until(self, eval, true)
+        end
+    end
+end
+
 --#endregion
 
 --#region Drink Objects
@@ -213,9 +223,7 @@ SMODS.Consumable { -- Please god delete this before we finish
         ease_dollars(4)
     end,
     use = function(self, card, area, copier)
-        card.ability.drink_values.primed = not card.ability.drink_values.primed
-        local eval = function(card) return card.ability.drink_values.primed end
-        juice_card_until(card, eval, true)
+        card:abs_toggle_drink_prime()
     end,
     can_use = function(self, card)
         return card.ability.drink_values.filled
@@ -272,9 +280,7 @@ SMODS.Consumable { -- Supergiant Cider
         end
     end,
     use = function(self, card, area, copier)
-        card.ability.drink_values.primed = not card.ability.drink_values.primed
-        local eval = function(card) return card.ability.drink_values.primed end
-        juice_card_until(card, eval, true)
+        card:abs_toggle_drink_prime()
     end,
     can_use = function(self, card)
         return card.ability.drink_values.filled
@@ -282,9 +288,6 @@ SMODS.Consumable { -- Supergiant Cider
     keep_on_use = function(self, card)
         return true;
     end
-    --empty = function(self, card)
-    --    ease_dollars(4)
-    --end
 }
 
 SMODS.Consumable { -- Hubble Trouble
@@ -349,9 +352,7 @@ SMODS.Consumable { -- Hubble Trouble
         end
     end,
     use = function(self, card, area, copier)
-        card.ability.drink_values.primed = not card.ability.drink_values.primed
-        local eval = function(card) return card.ability.drink_values.primed end
-        juice_card_until(card, eval, true)
+        card:abs_toggle_drink_prime()
     end,
     can_use = function(self, card)
         return card.ability.drink_values.filled
@@ -359,9 +360,6 @@ SMODS.Consumable { -- Hubble Trouble
     keep_on_use = function(self, card)
         return true;
     end
-    --empty = function(self, card)
-    --    ease_dollars(4)
-    --end
 }
 
 SMODS.Consumable { -- Moonshine
@@ -420,9 +418,7 @@ SMODS.Consumable { -- Moonshine
         end
     end,
     use = function(self, card, area, copier)
-        card.ability.drink_values.primed = not card.ability.drink_values.primed
-        local eval = function(card) return card.ability.drink_values.primed end
-        juice_card_until(card, eval, true)
+        card:abs_toggle_drink_prime()
     end,
     can_use = function(self, card)
         return card.ability.drink_values.filled
@@ -430,9 +426,6 @@ SMODS.Consumable { -- Moonshine
     keep_on_use = function(self, card)
         return true;
     end
-    --empty = function(self, card)
-    --    ease_dollars(4)
-    --end
 }
 
 SMODS.Consumable { -- Pina Solada
@@ -491,9 +484,7 @@ SMODS.Consumable { -- Pina Solada
         end
     end,
     use = function(self, card, area, copier)
-        card.ability.drink_values.primed = not card.ability.drink_values.primed
-        local eval = function(card) return card.ability.drink_values.primed end
-        juice_card_until(card, eval, true)
+        card:abs_toggle_drink_prime()
     end,
     can_use = function(self, card)
         return card.ability.drink_values.filled
@@ -501,9 +492,6 @@ SMODS.Consumable { -- Pina Solada
     keep_on_use = function(self, card)
         return true;
     end
-    --empty = function(self, card)
-    --    ease_dollars(4)
-    --end
 }
 
 --#endregion
