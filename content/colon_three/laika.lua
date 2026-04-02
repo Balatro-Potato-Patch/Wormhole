@@ -14,8 +14,8 @@ SMODS.Joker {
     calculate = function(self, card, context)
         if context.before then
             for i, v in ipairs(G.jokers.cards) do
-                for ii, vv in ipairs(SMODS.Attributes.space.keys) do
-                    if vv == v.config.center.key then
+                for ii, vv in ipairs(v.config.center.attributes) do
+                    if vv == "space" then
                         card.ability.extra.levels = card.ability.extra.levels + 1
                         G.E_MANAGER:add_event(Event {
                             trigger = "after",
