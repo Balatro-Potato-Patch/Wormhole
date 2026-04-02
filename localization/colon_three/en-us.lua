@@ -9,6 +9,12 @@ return {
                 text = {
                     ":3"
                 }
+            },
+            PotatoPatchDev_meta = {
+                name = "Meta",
+                text = {
+                    "waow :3"
+                }
             }
         }
     }

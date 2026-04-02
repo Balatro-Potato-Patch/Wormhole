@@ -26,6 +26,22 @@ PotatoPatchUtils.Developer{
     atlas = "worm_ct_credits",
     pos = {x=0,y=0}
 }
+
+PotatoPatchUtils.Developer {
+    name = "meta",
+    loc = true,
+    team = ":3",
+    colour = SMODS.Gradient {
+        key = "colon_three_meta_gradient",
+        colours = {
+            HEX("FA69EB"),
+            HEX("6970FA")
+        }
+    },
+    atlas = "worm_ct_credits",
+    pos = { x = 1, y = 0 }
+}
+
 Wormhole.COLON_THREE.loaded = true
 for i, v in pairs({
 
