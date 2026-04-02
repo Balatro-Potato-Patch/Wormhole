@@ -30,7 +30,7 @@ SMODS.Booster {
         return create_card("abs_drinks", G.pack_cards, nil, nil, true, true, nil, "worm_abs_top_shelf")
     end,
     ease_background_colour = function(self)
-        
+
     end,
     loc_vars = function(self, info_queue, card)
         return { vars = { math.min(card.ability.choose + (G.GAME.modifiers.booster_choice_mod or 0), math.max(1, card.ability.extra + (G.GAME.modifiers.booster_size_mod or 0))), math.max(1, card.ability.extra + (G.GAME.modifiers.booster_size_mod or 0)) } }
@@ -58,7 +58,7 @@ SMODS.Booster {
         return create_card("abs_drinks", G.pack_cards, nil, nil, true, true, nil, "worm_abs_top_shelf")
     end,
     ease_background_colour = function(self)
-        
+
     end,
     loc_vars = function(self, info_queue, card)
         return { vars = { math.min(card.ability.choose + (G.GAME.modifiers.booster_choice_mod or 0), math.max(1, card.ability.extra + (G.GAME.modifiers.booster_size_mod or 0))), math.max(1, card.ability.extra + (G.GAME.modifiers.booster_size_mod or 0)) } }
@@ -86,7 +86,7 @@ SMODS.Booster {
         return create_card("abs_drinks", G.pack_cards, nil, nil, true, true, nil, "worm_abs_top_shelf")
     end,
     ease_background_colour = function(self)
-        
+
     end,
     loc_vars = function(self, info_queue, card)
         return { vars = { math.min(card.ability.choose + (G.GAME.modifiers.booster_choice_mod or 0), math.max(1, card.ability.extra + (G.GAME.modifiers.booster_size_mod or 0))), math.max(1, card.ability.extra + (G.GAME.modifiers.booster_size_mod or 0)) } }
@@ -114,7 +114,7 @@ SMODS.Booster {
         return create_card("abs_drinks", G.pack_cards, nil, nil, true, true, nil, "worm_abs_top_shelf")
     end,
     ease_background_colour = function(self)
-        
+
     end,
     loc_vars = function(self, info_queue, card)
         return { vars = { math.min(card.ability.choose + (G.GAME.modifiers.booster_choice_mod or 0), math.max(1, card.ability.extra + (G.GAME.modifiers.booster_size_mod or 0))), math.max(1, card.ability.extra + (G.GAME.modifiers.booster_size_mod or 0)) } }
@@ -131,10 +131,10 @@ SMODS.DrawStep {
     order = -9,
     func = function(self, layer)
         if self.ability.set == 'abs_drinks' then
-            if self.visibly_filled and self.children.center.sprite_pos ~= self.filled_pos then
-                self.children.center:set_sprite_pos(self.filled_pos)
-            elseif not self.visibly_filled and self.children.center.sprite_pos ~= self.empty_pos then
-                self.children.center:set_sprite_pos(self.empty_pos)
+            if self.ability.drink_values.visibly_filled and self.children.center.sprite_pos ~= self.ability.drink_values.filled_pos then
+                self.children.center:set_sprite_pos(self.ability.drink_values.filled_pos)
+            elseif not self.ability.drink_values.visibly_filled and self.children.center.sprite_pos ~= self.ability.drink_values.empty_pos then
+                self.children.center:set_sprite_pos(self.ability.drink_values.empty_pos)
             end
         end
     end,
@@ -142,15 +142,30 @@ SMODS.DrawStep {
 }
 
 function Card:abs_refill_drink()
-    if not self.filled then
-        self.filled = true
+    if not self.ability.drink_values.filled then
+        self.ability.drink_values.filled = true
 
-        if self.config.refill and type(self.config.refill) == 'function' then
-            self.config:refill(self)
+        if self.config.center.refill and type(self.config.center.refill) == 'function' then
+            self.config.center:refill(self)
         end
 
-        SMODS.calculate_effect({ message = localize('k_worm_abs_refilled_ex'), colour = G.C.ATTENTION, func = function() self.visibly_filled = true end }, self)
-        SMODS.calculate_context({abs_drink_refilled = true, card = self})
+        SMODS.calculate_effect(
+        { message = localize('k_worm_abs_refilled_ex'), colour = G.C.ATTENTION, func = function() self.ability.drink_values.visibly_filled = true end },
+            self)
+        SMODS.calculate_context({ abs_drink_refilled = true, card = self })
+    end
+end
+
+function Card:abs_empty_drink()
+    if self.ability.drink_values.filled then
+        self.ability.drink_values.filled = false
+
+        if self.config.center.empty and type(self.config.center.empty) == 'function' then
+            self.config.center:empty(self)
+        end
+
+        SMODS.calculate_effect({ message = localize('k_worm_abs_emptied_ex'), colour = G.C.ATTENTION, func = function() self.ability.drink_values.visibly_filled = false end }, self)
+        SMODS.calculate_context({ abs_drink_emptied = true, card = self })
     end
 end
 
@@ -161,7 +176,28 @@ end
 SMODS.Consumable {
     set = 'abs_drinks',
     name = 'testname',
-    key = 'test_drink'
+    key = 'test_drink',
+    pos = { x = 0, y = 0 },
+    config = {
+        drink_values = {
+            filled_pos = { x = 0, y = 0 },
+            empty_pos = { x = 1, y = 0 },
+            filled = true,
+            visibly_filled = true,
+        }
+    },
+    calculate = function(self, card, context)
+        if card.ability.drink_values.filled and context.setting_blind then
+            card:abs_empty_drink()
+        end
+
+        if not card.ability.drink_values.filled and context.end_of_round and not context.individual and not context.repetition then
+            card:abs_refill_drink()
+        end
+    end,
+    empty = function(self, card)
+        ease_dollars(4)
+    end
 }
 
 --#endregion
