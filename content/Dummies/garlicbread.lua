@@ -74,5 +74,5 @@ SMODS.Joker{
 	end,
 	pixel_size = { w = 69, h = 61 },
 	ppu_coder = { "theonegoofali" },
-    ppu_team = { "dum" },
+    ppu_team = { "dummies" },
 }
