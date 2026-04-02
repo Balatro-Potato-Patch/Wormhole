@@ -1,4 +1,4 @@
-Wormhole.COLON_THREE = {}
+Wormhole.COLON_THREE = {C = {}}
 
 PotatoPatchUtils.Team{
     name = ":3",
@@ -60,6 +60,8 @@ PotatoPatchUtils.Developer {
 Wormhole.COLON_THREE.loaded = true
 for i, v in pairs({
     "laika",
+    "junk/main",
+    "junk/asteroid_harvester"
 })  do
     assert(SMODS.load_file("content/colon_three/"..v..".lua"))()
 end
