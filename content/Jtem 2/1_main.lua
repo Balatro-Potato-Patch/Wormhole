@@ -30,7 +30,14 @@ PotatoPatchUtils.Developer({
 })
 PotatoPatchUtils.Developer({
 	name = "lexi",
-	colour = G.C.ORANGE,
+	colour = SMODS.Gradient({
+		key = "jtem2_lexi_color",
+		colours = {
+			HEX("ff75c9"),
+			G.C.WHITE,
+			G.C.ORANGE,
+		},
+	}),
 	team = "jtem2",
 	loc = true,
 	-- pos = { x = 1, y = 0 },
