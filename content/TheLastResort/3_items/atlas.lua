@@ -7,7 +7,7 @@ SMODS.Atlas{
 
 SMODS.Atlas{
 	key = "tlr_foo54",
-	path = "TheLastResort/foo54.png",
+	path = "TheLastResort/foo54..png",
 	px = 71,
 	py = 95
 }

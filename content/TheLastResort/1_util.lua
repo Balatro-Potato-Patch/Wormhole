@@ -9,7 +9,8 @@ PotatoPatchUtils.Developer({
 	loc = true,
 	team = "TheLastResort",
 	pos = {x=0,y=0},
-	atlas = "worm_tlr_foo54"
+	atlas = "worm_tlr_foo54",
+	soul_pos = {x=1, y=0}
 })
 
 PotatoPatchUtils.Developer({
