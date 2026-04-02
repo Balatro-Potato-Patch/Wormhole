@@ -4,7 +4,8 @@ local joker = SMODS.Joker {
 	loc_vars = function(self, info_queue, card) return { vars = { card.ability.extra.dollars } } end,
 	config = { extra = { dollars = 3 } },
 	rarity = 2,
-	cost = 6
+	cost = 6,
+    ppu_coder = {"ellestuff."},
 }
 
 local meteor_sprite = love.graphics.newImage(love.image.newImageData(SMODS.NFS.newFileData(SMODS.current_mod.path .. "assets/lancer_fan_club/meteors.png")))
