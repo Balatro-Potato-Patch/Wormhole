@@ -5,6 +5,14 @@ Wormhole.LancerFanClub = PotatoPatchUtils.Team {
     colour = HEX("5585bd") -- this was colorpicked directly from lancer's sprite
 }
 
+-- Atlases
+SMODS.Atlas({
+    key = "worm_proot",
+    px = 71,
+    py = 95,
+    path = "lancer_fan_club/icons.png"
+})
+
 -- Proto
 PotatoPatchUtils.Developer {
     name = "ProdByProto",
@@ -15,16 +23,10 @@ PotatoPatchUtils.Developer {
     pos = { x = 0, y = 0 },
     soul_pos = { x = 1, y = 0 },
 }
-SMODS.Atlas({
-    key = "worm_proot",
-    px = 71,
-    py = 95,
-    path = "lancer_fan_club/proot.png"
-})
-
-
 
 PotatoPatchUtils.Developer({
-    name = "ellestuff.",
-    colour = HEX('ff53a9')
+    name = "ellestuff",
+    colour = HEX('ff53a9'),
+    loc = true,
+    team = "Lancer Fan Club"
 })

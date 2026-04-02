@@ -12,7 +12,8 @@ return {
 
         },
         PotatoPatch = {
-            PotatoPatchTeam_lancer_fan_club = {name = "Lancer Fan Club"},
+            PotatoPatchTeam_lancer_fan_club = "Lancer Fan Club",
+            
             PotatoPatchDev_ProdByProto = {
                 name = "ProdByProto",
                 text = {
@@ -28,6 +29,15 @@ return {
                         "More placeholder, replace with something funny at some point",
                     }
                 },
+            },
+
+            PotatoPatchDev_ellestuff = {
+                name = "ellestuff.",
+                text = {
+                    "hey.",
+                    "did i do things?",
+                    "good question,,",
+                }
             },
         },
     },
