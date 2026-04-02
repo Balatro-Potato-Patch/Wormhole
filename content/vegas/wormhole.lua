@@ -56,6 +56,13 @@ SMODS.Atlas{
 	py = 95
 }
 
+SMODS.Atlas{
+	key = "vegas_blinds",
+	path = "vegas/blinds.png",
+	px = 34,
+	py = 34
+}
+
 --Jokers
 SMODS.Joker{
 	key = "orbit",
@@ -140,7 +147,7 @@ SMODS.Joker{
 	perishable_compat = true,
 	ppu_team = {"Vegas"},
 	ppu_coder = {"Ben Roffey"},
-	ppu_artist = {},
+	ppu_artist = {"Ben Roffey"},
 	calculate = function(self, card, context)
 		if context.before then
 			if pseudorandom('spaghettification') < G.GAME.probabilities.normal/card.ability.extra.odds then
@@ -192,3 +199,52 @@ SMODS.Joker{
 	end
 }
 ]]
+
+--Blinds
+SMODS.Blind{
+	key = "whitehole",
+	loc_txt = {
+		name = "White Hole",
+		text = {
+			"Decrease level of all",
+			"poker hands by 1"
+		}
+	},
+	atlas = "vegas_blinds",
+	pos = {x = 0, y = 0},
+	discovered = true,
+	boss = {showdown = true},
+	dollars = 8,
+    mult = 2,
+	boss_colour = HEX("c3c3c3"),
+	ppu_team = {"Vegas"},
+	ppu_coder = {"Ben Roffey"},
+	ppu_artist = {"Ben Roffey"},
+	calculate = function(self, blind, context)
+		if context.before then
+			update_hand_text({sound = 'button', volume = 0.7, pitch = 0.8, delay = 0.3}, {handname=localize('k_all_hands'),chips = '...', mult = '...', level=''})
+			G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.2, func = function()
+				play_sound('tarot1')
+				blind:juice_up(0.8, 0.5)
+				G.TAROT_INTERRUPT_PULSE = true
+				return true end }))
+			update_hand_text({delay = 0}, {mult = '-', StatusText = true})
+			G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.9, func = function()
+				play_sound('tarot1')
+				blind:juice_up(0.8, 0.5)
+				return true end }))
+			update_hand_text({delay = 0}, {chips = '-', StatusText = true})
+			G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.9, func = function()
+				play_sound('tarot1')
+				blind:juice_up(0.8, 0.5)
+				G.TAROT_INTERRUPT_PULSE = nil
+				return true end }))
+			update_hand_text({sound = 'button', volume = 0.7, pitch = 0.9, delay = 0}, {level='-1'})
+			delay(1.3)
+			for k, v in pairs(G.GAME.hands) do
+				level_up_hand(blind, k, true, -1)
+			end
+			update_hand_text({sound = 'button', volume = 0.7, pitch = 1.1, delay = 0}, {mult = 0, chips = 0, handname = '', level = ''})
+		end
+	end
+}
