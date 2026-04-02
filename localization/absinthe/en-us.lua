@@ -37,6 +37,7 @@ return {
                         "of played {C:attention}poker hand{},",
                         "then is {C:gold}drank{}",
                         "{C:inactive,s:0.8}(Planet card has $0 sell value)",
+                        "{C:inactive,s:0.8}(Must have space!)",
                     },
                     {
                         "{C:gold}Refill{} by {C:attention}selling{}",
@@ -58,6 +59,7 @@ return {
                         "of played {C:attention}poker hand{},",
                         "then is {C:gold}drank{}",
                         "{C:inactive,s:0.8}(Planet card has $0 sell value)",
+                        "{C:inactive,s:0.8}(Must have space!)",
                     }
                 }
             },

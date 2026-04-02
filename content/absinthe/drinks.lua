@@ -294,7 +294,7 @@ SMODS.Consumable { -- Hubble Trouble
                 trigger = 'before',
                 delay = 0.0,
                 func = function()
-                    if context.scoring_name then
+                    if context.scoring_name and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
                         local _planet = nil
                         for k, v in pairs(G.P_CENTER_POOLS.Planet) do
                             if v.config.hand_type == context.scoring_name then
