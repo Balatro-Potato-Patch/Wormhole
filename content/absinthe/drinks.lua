@@ -142,14 +142,16 @@ SMODS.DrawStep {
 }
 
 function Card:refill_drink()
-    self.filled = true
+    if not self.filled then
+        self.filled = true
 
-    if self.config.refill and type(self.config.refill) == 'function' then
-        self.config:refill(self)
+        if self.config.refill and type(self.config.refill) == 'function' then
+            self.config:refill(self)
+        end
+
+        SMODS.calculate_effect({ message = localize('k_worm_abs_refilled_ex'), colour = G.C.ATTENTION, func = function() self.visibly_filled = true end }, self)
+        SMODS.calculate_context({abs_drink_refilled = true, card = self})
     end
-
-    SMODS.calculate_effect({ message = localize('k_worm_abs_refilled_ex'), colour = G.C.ATTENTION, func = function() self.visibly_filled = true end }, self)
-    SMODS.calculate_context({abs_drink_refilled = true, card = self})
 end
 
 --#endregion
