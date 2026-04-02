@@ -44,6 +44,11 @@ SMODS.ConsumableType{
                 _card.children.center:set_sprite_pos({x = card.pos.x - 1 + _card.ability.tier, y = card.pos.y})
             end
         end
+        local mem_use = card.use or function() end
+        card.use = function(_self, _card, area, copier)
+            G.GAME.worm_tlr_last_const_used = _self.key ~= "c_worm_tlr_canis_minor" and _self.key or nil
+            mem_use(_self, _card, area, copier)
+        end
     end,
 }
 
