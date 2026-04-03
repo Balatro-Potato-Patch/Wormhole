@@ -39,15 +39,13 @@ G.E_MANAGER:add_event(Event({
 
 SMODS.Joker {
     key = "lfc_pissstream",
-    --atlas = "placeholders",
-    --pos = {x = 2, y = 0},
+    atlas = "lfc_jokers",
+    pos = { x = 0, y = 0 },
 
     rarity = 2,
     cost = 6,
     blueprint_compat = true,
     demicoloncompat = true,
-    atlas = "lfc_jokers",
-    pos = { x = 0, y = 0 },
 
     config = {
         extra = {
