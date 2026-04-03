@@ -1,6 +1,6 @@
 local joker = SMODS.Joker {
 	key = 'lfc_meteor_shower',
-	blueprint_compat = false,
+	blueprint_compat = true,
 	loc_vars = function(self, info_queue, card) return { vars = { card.ability.extra.dollars } } end,
 	config = { extra = { dollars = 3 } },
 	rarity = 2,
@@ -21,7 +21,7 @@ local ex, ey = explosion_sprite:getDimensions()
 local meteor_click = function(meteor)
 	play_sound("worm_lfc_explosion")
 	ease_dollars(meteor.dollars, true)
-	print("test")
+	meteor.clicked = 0
 end
 
 local meteors = {}
@@ -51,6 +51,7 @@ joker.calculate = function(self, card, context)
 		G.E_MANAGER:add_event(Event({
 			func = function()
 				create_meteor(card.ability.extra.dollars)
+				card:juice_up(0.4,0.4)
 				return true
 			end
 		}))
@@ -59,29 +60,11 @@ end
 
 local vel_mult = 150             -- Multiplier for meteor velocity
 
-local last_mouse_pressed = false -- Using this to track if it's a click so i don't have to add a love.mousepressed hook :)
-local spacetest = false          -- Using this to track if it's a click so i don't have to add a love.mousepressed hook :)
-
 -- Update hook to move and destroy offscreen meteors
 if not love.update then function love.update(dt) end end
 local update_hook = love.update
 function love.update(dt)
 	update_hook(dt)
-
-	local is_down = love.mouse.isDown(1)
-	local space_down = love.keyboard.isDown("space")
-
-	if is_down and is_down ~= last_mouse_pressed then
-		local mx, my = love.mouse.getPosition()
-		for i, v in ipairs(meteors) do
-			local dist = math.sqrt(math.abs(mx - v.pos.x) ^ 2 + math.abs(my - v.pos.y) ^ 2)
-			if dist < 64 and not v.clicked then
-				meteor_click(v)
-				v.clicked = 0
-				break
-			end
-		end
-	end
 
 	for i, v in ipairs(meteors) do
 		if v.clicked then
@@ -95,9 +78,21 @@ function love.update(dt)
 			if v.pos.y > love.graphics.getHeight() + 64 then table.remove(meteors, i) end
 		end
 	end
+end
 
-	last_mouse_pressed = is_down
-	spacetest = space_down
+-- Update hook to click and destroy meteors
+if not love.mousepressed then function love.mousepressed(x, y, button, istouch, presses) end end
+local click_hook = love.mousepressed
+function love.mousepressed(x, y, button, istouch, presses)
+	for i, v in ipairs(meteors) do
+		local dist = math.sqrt(math.abs(x - v.pos.x) ^ 2 + math.abs(y - v.pos.y) ^ 2)
+		if dist < 64 and not v.clicked then
+			meteor_click(v)
+			return
+		end
+	end
+
+	click_hook(x, y, button, istouch, presses)
 end
 
 -- Draw hook to place meteors onscreen
