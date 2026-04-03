@@ -18,6 +18,12 @@ SMODS.Joker({
 	atlas = "jtem2_cosmic_ray",
 	pos = { x = 0, y = 0 },
 
+	attributes = {
+		"modify_card",
+		"enhancements",
+		"space",
+	},
+
 	loc_vars = function(self, info_queue, card)
 		info_queue[#info_queue + 1] = G.P_CENTERS.m_gold
 		local last_used_planet_key = G.GAME.worm_last_used_planet
