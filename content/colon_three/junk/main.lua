@@ -17,7 +17,7 @@ function Game:start_run(args)
 
     if not self.GAME.worm_c3_junk_stats then
         self.GAME.worm_c3_junk_stats = {
-            chips = 5,
+            chips = 1,
             mult = 0,
             retriggers = 1,
         }
@@ -36,7 +36,7 @@ SMODS.Enhancement {
         return { 
             key = ((G.GAME.worm_c3_junk_stats or {}).mult or 0) ~= 0 and "m_worm_junk_card_mult" or nil,
             vars = {
-                (G.GAME.worm_c3_junk_stats or {}).chips or 5,
+                (G.GAME.worm_c3_junk_stats or {}).chips or 1,
                 (G.GAME.worm_c3_junk_stats or {}).mult or 0,
                 (G.GAME.worm_c3_junk_stats or {}).retriggers or 1,
                 ((G.GAME.worm_c3_junk_stats or {}).retriggers or 1) == 1 and "" or "s",
@@ -51,7 +51,7 @@ SMODS.Enhancement {
         end
         if context.main_scoring and context.cardarea == G.play then
             return {
-                chips = (G.GAME.worm_c3_junk_stats or {}).chips or 5,
+                chips = (G.GAME.worm_c3_junk_stats or {}).chips or 1,
                 mult = (G.GAME.worm_c3_junk_stats or {}).mult or nil,
             }
         end
