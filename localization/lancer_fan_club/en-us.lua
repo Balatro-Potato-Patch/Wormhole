@@ -102,6 +102,16 @@ return {
                     }
 
                 }
+            },
+            j_worm_lfc_stakataka = {
+                name = {
+                    "UB ASSEMBLY",
+                    "{s:0.5}Stakataka"
+                },
+                text = {
+                    "{C:attention}Stone{} cards held in hand",
+                    "are added to played {C:attention}poker hand"
+                }
             }
         },
         Tag = {
