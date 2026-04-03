@@ -12,9 +12,7 @@ SMODS.Joker({
         }
     },
     loc_vars = function(self, info_queue, card)
-        local var_two = 0
-        if G.GAME.worm_log then var_two = card.ability.extra.scalar * Wormhole.LFC_Util.total_keys(G.GAME.worm_log) end
-        return { vars = { card.ability.extra.scalar, var_two , G.GAME and G.GAME.round or 1 } }
+        return { vars = { card.ability.extra.scalar, G.GAME and G.GAME.worm_log_count or 0, G.GAME and G.GAME.round or 1 } }
     end,
     calculate = function(self, card, context)
         local cae = card.ability.extra
@@ -25,7 +23,7 @@ SMODS.Joker({
         end
 
         if context.joker_main then
-            return { mult = cae.scalar * Wormhole.LFC_Util.total_keys(G.GAME.worm_log)}
+            return { mult = cae.scalar * G.GAME.worm_log_count}
         end
     end
 
