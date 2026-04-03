@@ -20,7 +20,7 @@ SMODS.Joker {
         local num, denom = SMODS.get_probability_vars(card, card.ability.extra.numerator, card.ability.extra.denominator)
     end,
     calculate = function(self, card, context)
-        if context.joker_main  
+        if context.joker_main then
             if SMODS.pseudorandom_probability(card, 'wowsignalprob', card.ability.extra.numerator, card.ability.extra.denominator) then
                 return {
                     message = 'Wow!',
