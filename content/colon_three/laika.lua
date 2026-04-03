@@ -1,5 +1,15 @@
 if not Wormhole.COLON_THREE or not Wormhole.COLON_THREE.loaded then return end
 
+local function has_attribute (card, key)
+    local card_key = card
+    if Object.is(card, Card) then card_key = card.config.center.key end
+    local pool = SMODS.get_attribute_pool(key)
+    for _, c in pairs(pool) do
+        if c == card_key then return true end
+    end
+    return false
+end
+
 SMODS.Joker {
     key = "laika",
     --atlas = "ct_jokers",
@@ -14,19 +24,16 @@ SMODS.Joker {
     calculate = function(self, card, context)
         if context.before then
             for i, v in ipairs(G.jokers.cards) do
-                for ii, vv in ipairs(v.config.center.attributes) do
-                    if vv == "space" then
-                        card.ability.extra.levels = card.ability.extra.levels + 1
-                        G.E_MANAGER:add_event(Event {
-                            trigger = "after",
-                            delay = 0.1,
-                            func = function()
-                                v:juice_up()
-                                return true
-                            end
-                        })
-                        break
-                    end
+                if has_attribute(v, "space") then
+                    card.ability.extra.levels = card.ability.extra.levels + 1
+                    G.E_MANAGER:add_event(Event {
+                        trigger = "after",
+                        delay = 0.1,
+                        func = function()
+                            v:juice_up()
+                            return true
+                        end
+                    })
                 end
             end
             return {

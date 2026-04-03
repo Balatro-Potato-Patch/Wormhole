@@ -18,20 +18,20 @@ SMODS.Consumable {
             }
         }
     end,
-    use = Wormhole.COLON_THREE.junk_use(function(self, card)
-        for _, v in ipairs(G.hand.highlighted) do
+    use = Wormhole.COLON_THREE.junk_use {
+        individual = function(self, card, other_card, clean_up)
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
                 delay = 0.4,
                 func = function()
                     local edition = SMODS.poll_edition { key = "solar_sail", no_negative = true, guaranteed = true, }
-                    v:set_edition(edition, true)
+                    other_card:set_edition(edition, true)
                     card:juice_up(0.3, 0.5)
                     return true
                 end
             }))
         end
-    end, true),
+    },
     can_use = Wormhole.COLON_THREE.junk_can_use(),
     ppu_coder = {"notmario"}
 }
