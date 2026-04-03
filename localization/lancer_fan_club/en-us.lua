@@ -103,24 +103,16 @@ return {
             k_lfc_none = "None",
             k_lfc_brackets_rank = "[rank]",
             lfc_dex_blacephalon_us = {
-                name = {
-                    "{s:0.5}From {B:1,C:white,s:0.5}Pokémon Ultra Sun{s:0.5}:",
-                },
-                text = {
-                    "{s:0.5}It slithers toward people. Then, without warning,",
-                    "{s:0.5}it triggers the explosion of its own head. It's",
-                    "{s:0.5}apparently one kind of Ultra Beast.",
-                },
+                "{s:0.5}From {B:1,C:white,s:0.5}Pokémon Ultra Sun{s:0.5}:",
+                "{s:0.5}It slithers toward people. Then, without warning,",
+                "{s:0.5}it triggers the explosion of its own head. It's",
+                "{s:0.5}apparently one kind of Ultra Beast.",
             },
             lfc_dex_blacephalon_um = {
-                name = {
-                    "{s:0.5}From {B:1,C:white,s:0.5}Pokémon Ultra Moon{s:0.5}:",
-                },
-                text = {
-                    "{s:0.5}A UB that appeared from an Ultra Wormhole,",
-                    "{s:0.5}it causes explosions, then takes advantage of",
-                    "{s:0.5}opponents' surprise to rob them of their vitality."
-                },
+                "{s:0.5}From {B:1,C:white,s:0.5}Pokémon Ultra Moon{s:0.5}:",
+                "{s:0.5}A UB that appeared from an Ultra Wormhole,",
+                "{s:0.5}it causes explosions, then takes advantage of",
+                "{s:0.5}opponents' surprise to rob them of their vitality."
             },
         }
     }

@@ -7,19 +7,20 @@ SMODS.Joker {
     rarity = 2,
     cost = 8,
     atlas = "lfc_jokers",
+    ppu_coder = { "J8-Bit" },
     pos = { x = 2, y = 0 },
     discovered = false,
     config = { extra = { dollars = 4 } },
     loc_vars = function(self, info_queue, card)
         local version = pseudorandom_element({ 'us', 'um' }, "lfc_blacephalon")
-        --info_queue[#info_queue + 1] = localize({ type = "name_text", key = "lfc_dex_blacephalon_" .. version })
+        --info_queue[#info_queue + 1] = localize("lfc_dex_blacephalon_" .. version, "dictionary")
         return {
             vars = {
                 card.ability.extra.dollars,
                 colours = {
                     G.ARGS.LOC_COLOURS["lfc_pkmn_" .. version]
                 }
-            }
+            },
         }
     end,
     calculate = function(self, card, context)
