@@ -27,9 +27,14 @@ SMODS.Joker {
                     local new_drink = SMODS.add_card({set = 'abs_drinks'})
                     new_drink.ability.drink_values.filled = false
                     new_drink.ability.drink_values.visibly_filled = false
+                    G.GAME.consumeable_buffer = 0
                     return true;
                 end
             }))
+            return {
+                message = localize('k_plus_drink'),
+                colour = G.C.SECONDARY_SET.abs_drinks,
+            }
         end
     end,
 }

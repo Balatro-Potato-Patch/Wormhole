@@ -222,6 +222,7 @@ return {
         dictionary = {
             b_abs_drinks_cards = "Drinks",
             k_abs_drinks = 'Drinks',
+            k_plus_drink = '+1 Drink',
             k_worm_abs_emptied_ex = 'Emptied!',
             k_worm_abs_refilled_ex = 'Refilled!',
             k_worm_abs_top_shelf_pack = 'Top Shelf Pack'
