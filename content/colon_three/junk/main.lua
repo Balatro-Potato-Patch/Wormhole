@@ -1,6 +1,8 @@
 if not Wormhole.COLON_THREE or not Wormhole.COLON_THREE.loaded then return end
 
 Wormhole.COLON_THREE.C.JunkSet = HEX("ff5e25")
+loc_colour()
+G.ARGS.LOC_COLOURS.worm_c3_junkset = Wormhole.COLON_THREE.C.JunkSet 
 
 SMODS.ConsumableType {
     key = "JunkSet",

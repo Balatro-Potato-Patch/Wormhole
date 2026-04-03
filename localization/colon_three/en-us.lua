@@ -111,6 +111,32 @@ return {
                 }
             },
         },
+        Other = {
+			p_worm_junkset_normal = {
+				name = "[JUNKSET] Pack",
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{} {C:worm_c3_junkset}[JUNKSET]{} cards to",
+					"be used immediately",
+				},
+			},
+			p_worm_junkset_jumbo = {
+				name = "Jumbo [JUNKSET] Pack",
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{} {C:worm_c3_junkset}[JUNKSET]{} cards to",
+					"be used immediately",
+				},
+			},
+			p_worm_junkset_mega = {
+				name = "Mega [JUNKSET] Pack",
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{} {C:worm_c3_junkset}[JUNKSET]{} cards to",
+					"be used immediately",
+				},
+			},
+        },
         PotatoPatch = {
             PotatoPatchTeam_colon_three = {
                 name = ":3"
@@ -144,7 +170,7 @@ return {
     },
     misc = {
         dictionary = {
-
+			k_junkset_pack = "[JUNKSET] Pack",
         },
         labels = {
 

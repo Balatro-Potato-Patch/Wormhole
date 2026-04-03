@@ -77,6 +77,7 @@ for i, v in pairs({
     "laika",
     "dyson_sphere",
     "junk/main",
+    "junk/packs",
     "junk/asteroid_harvester",
     "junk/solar_sail",
     "junk/futuristic",
