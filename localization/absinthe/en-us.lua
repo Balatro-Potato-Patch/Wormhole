@@ -191,6 +191,29 @@ return {
                     'we decide to do next!! {f:9,s:0.6}🐟'
                 }
                 }
+            },
+            PotatoPatchDev_nixthatoneartist = {
+                name = 'nixthatoneartist',
+                text = { {
+                    'Some call me Nix, some call me Gabriella,',
+                    'but regardless, I exist, that\'s for sure.',
+                    '{s:0.75}(One could say I {C:edition,E:1,s:0.75}nixist...{}{s:0.75})',
+                }, {
+                    '{s:0.6}i could squeak on about how technically this is my public debut{}',
+                    '{s:0.6}Balatrowise cuz my own mod is taking a while but shhhh{}',
+                    'Most of my contributions to team absinthe are',
+                    'art-related, so I do hope everything looks swag B>'
+                    -- may adjust if i end up contributing more to programming but i wasnt thinking so LOL
+                    -- gabby
+                }, {
+                    'in any case, we really appreciate you',
+                    'seeing what we brewed up for this jam,', -- ba dum tiss
+                    'and hopefully you enjoy whatever we',
+                    'may end up cooking in the future! :3',
+                    '{s:0.5} {}',
+                    '{s:0.75}jame'
+                }
+                }
             }
         }
     },

@@ -59,7 +59,8 @@ PotatoPatchUtils.Developer {
     colour = HEX("0db829"),
     atlas = 'worm_abs_credits',
     pos = { x = 0, y = 3 },
-    soul_pos = { x = 1, y = 3 }
+    soul_pos = { x = 1, y = 3 },
+    loc = true
 }
 
 PotatoPatchUtils.Developer {
