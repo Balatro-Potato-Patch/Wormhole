@@ -25,6 +25,7 @@ for _, booster_type in ipairs({
 			unlocked = true,
             draw_hand = true,
             ppu_coder = { "notmario" },
+			ppu_team = {":3"},
 			create_card = function(self, card)
                 return SMODS.create_card {
                     set = "JunkSet",
