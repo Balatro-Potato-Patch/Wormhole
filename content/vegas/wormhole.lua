@@ -71,7 +71,7 @@ SMODS.Joker{
 		text = {
 			"Gains {C:mult}+#1#{} Mult when",
 			"scoring a {C:attention}#2#",
-			"Rank decreases after scoring",
+			"{C:inactive}Rank decreases after scoring",
 			"{C:inactive}(Currently {C:mult}+#3#{C:inactive} Mult)"
 		}
 	},
@@ -99,7 +99,7 @@ SMODS.Joker{
 	blueprint_compat = true,
 	discovered = true,
 	eternal_compat = true,
-	perishable_compat = true,
+	perishable_compat = false,
 	ppu_team = {"People Found In Vegas"},
 	ppu_coder = {"Ben Roffey"},
 	ppu_artist = {"Ben Roffey", "Jammbo"}, --no
@@ -148,7 +148,7 @@ SMODS.Joker{
 	blueprint_compat = true,
 	discovered = true,
 	eternal_compat = true,
-	perishable_compat = true,
+	perishable_compat = false,
 	ppu_team = {"People Found In Vegas"},
 	ppu_coder = {"Ben Roffey"},
 	ppu_artist = {"Ben Roffey", "Jammbo"},
@@ -224,6 +224,38 @@ SMODS.Joker{
     end
 }
 
+SMODS.Joker{
+	key = "inferior_planet",
+	loc_txt = {
+		name = "Inferior Planet",
+		text = {
+			"Creates an {C:attention}inferior{} {C:blue}Planet{}",
+			"Card when a {C:blue}Planet{} Card is used",
+			"{C:inactive}(Must have room)"
+		}
+	},
+	config = { extra = { }},
+	loc_vars = function(self, info_queue, card)
+		return { vars = {}}
+	end,
+	atlas = "vegas_jokers",
+	pos = {x = 0, y = 0},
+	rarity = 1,
+	cost = 5,
+	blueprint_compat = true,
+	discovered = true,
+	eternal_compat = true,
+	perishable_compat = true,
+	ppu_team = {"People Found In Vegas"},
+	ppu_coder = {},
+	ppu_artist = {},
+	calculate = function(self, card, context)
+		if context.joke_main then
+			print(G.P_CENTERS)
+		end
+	end
+}
+
 --[[
 SMODS.Joker{
 	key = "template",
@@ -241,6 +273,7 @@ SMODS.Joker{
 	pos = {x = 0, y = 0},
 	rarity = 1,
 	cost = 5,
+	blueprint_compat = true,
 	discovered = true,
 	eternal_compat = true,
 	perishable_compat = true,
