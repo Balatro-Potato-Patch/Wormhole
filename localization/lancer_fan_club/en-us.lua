@@ -78,7 +78,11 @@ return {
                 }
             },
             j_worm_lfc_log = {
-                name = "Joker\'s Log",
+                name =
+                {
+                    "Joker\'s Log",
+                    "{s:0.5,C:inactive}Stardate #4#"
+                },
                 text = {
                     {
                         "{C:inactive,s:0.8}#3# Days since Impact",
@@ -109,9 +113,40 @@ return {
                     "{s:0.5}Stakataka"
                 },
                 text = {
-                    "{C:attention}Stone{} cards held in hand",
+                    "{C:attention}#1#s{} held in hand",
                     "are added to played {C:attention}poker hand"
                 }
+            },
+            j_worm_lfc_brain_scrambler = {
+                name = {
+                    "Brain Scrambler"
+                },
+                text = {
+                    "Retrigger and",
+                    "{C:attention,E:1}shuffle{} all",
+                    "cards played",
+                }
+            },
+            j_worm_lfc_golden_record = {
+                name = {
+                    "Golden Record"
+                },
+                text = {
+                    "Creates a {V:1}#2#{} card",
+                    "every {C:red}#3#{} {C:inactive}[#4#]{} {C:attention}#1#s{}",
+                    "discarded",
+                    "{C:inactive}(Must have room)"
+                }
+            },
+            j_worm_lfc_galaxy_fantasy = {
+                name = "Galaxy Fantasy",
+                text = {
+                    "After defeating {C:attention}#1#{} Blinds,",
+                    "sell this card to create",
+                    "a copy of {V:1}#3#{}",
+                    "{C:inactive}(Must have room)",
+                    "{C:inactive}(Currently {C:attention}#2#{C:inactive}/#1#)",
+                },
             }
         },
         Tag = {
@@ -123,23 +158,41 @@ return {
                 },
             },
         },
+        Other = {
+            lfc_dex_blacephalon_us = {
+                "{s:0.5}From {B:1,C:white,s:0.5}Pokémon Ultra Sun{s:0.5}:",
+                "{s:0.5}It slithers toward people. Then, without warning,",
+                "{s:0.5}it triggers the explosion of its own head. It's",
+                "{s:0.5}apparently one kind of {s:0.5,C:dark_edition}Ultra Beast{}.",
+            },
+            lfc_dex_blacephalon_um = {
+                "{s:0.5}From {B:1,C:white,s:0.5}Pokémon Ultra Moon{s:0.5}:",
+                "{s:0.5}A {s:0.5,C:dark_edition}UB{s:0.5} that appeared from an {s:0.5,C:dark_edition}Ultra Wormhole{s:0.5},",
+                "{s:0.5}it causes explosions, then takes advantage of",
+                "{s:0.5}opponents' surprise to rob them of their vitality."
+            },
+            lfc_dex_stakataka_us = {
+                "{s:0.5}From {B:1,C:white,s:0.5}Pokémon Ultra Moon{s:0.5}:",
+                "{s:0.5}It appeared from an {s:0.5,C:dark_edition}Ultra Wormhole{s:0.5}. Each one",
+                "{s:0.5}appears to be made up of many life-forms",
+                "{s:0.5}stacked one on top of each other."
+            },
+            lfc_dex_stakataka_um = {
+                "{s:0.5}From {B:1,C:white,s:0.5}Pokémon Ultra Moon{s:0.5}:",
+                "{s:0.5}When stone walls started moving and attacking,",
+                "{s:0.5}the brute's true identity was this mysterious",
+                "{s:0.5}life-form, which brings to mind an {s:0.5,C:dark_edition}Ultra Beast{s:0.5}."
+            },
+            lfc_obtain_pokemon_warning = {
+                "{s:0.5}Obtain this {C:attention,s:0.5}Joker{s:0.5} to",
+                "{s:0.5}unlock its {C:dark_edition,s:0.5}Pokédex entry{s:0.5}!",
+            }
+        }
     },
     misc = {
         dictionary = {
             k_lfc_none = "None",
             k_lfc_brackets_rank = "[rank]",
-            lfc_dex_blacephalon_us = {
-                "{s:0.5}From {B:1,C:white,s:0.5}Pokémon Ultra Sun{s:0.5}:",
-                "{s:0.5}It slithers toward people. Then, without warning,",
-                "{s:0.5}it triggers the explosion of its own head. It's",
-                "{s:0.5}apparently one kind of Ultra Beast.",
-            },
-            lfc_dex_blacephalon_um = {
-                "{s:0.5}From {B:1,C:white,s:0.5}Pokémon Ultra Moon{s:0.5}:",
-                "{s:0.5}A UB that appeared from an Ultra Wormhole,",
-                "{s:0.5}it causes explosions, then takes advantage of",
-                "{s:0.5}opponents' surprise to rob them of their vitality."
-            },
         }
     }
 }

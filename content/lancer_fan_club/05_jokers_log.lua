@@ -12,18 +12,13 @@ SMODS.Joker({
         }
     },
     loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.scalar, G.GAME and G.GAME.worm_log_count or 0, G.GAME and G.GAME.round or 1 } }
+        return { vars = { card.ability.extra.scalar, (G.GAME and G.GAME.worm_log_count or 0) * card.ability.extra.scalar, G.GAME and G.GAME.round or 1, string.gsub(os.date("%x"), '/', '') } }
     end,
     calculate = function(self, card, context)
         local cae = card.ability.extra
-        if context.card_added and not context.repetition then
-            if context.card.ability.set == "Joker" then
-                return{message = "+"..cae.scalar.." "..localize("k_mult")}
-            end
-        end
 
         if context.joker_main then
-            return { mult = cae.scalar * G.GAME.worm_log_count}
+            return { mult = cae.scalar * G.GAME.worm_log_count }
         end
     end
 

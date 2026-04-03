@@ -2,7 +2,7 @@ local function emplace_stone_cards()
     if #SMODS.find_card("j_worm_lfc_stakataka") > 0 then
         for _, other_card in ipairs(G.playing_cards) do
             if
-                other_card.area == G.hand -- fucking awful hack
+                other_card.area == G.hand                                                                                                -- fucking awful hack
                 and SMODS.has_enhancement(other_card, "m_stone")
                 and not (other_card.ability and (other_card.ability.entr_marked_bypass or other_card.ability.worm_lfc_stakataka_bypass)) -- this shouldn't really be needed here but just in case
                 and not other_card.highlighted
@@ -38,7 +38,7 @@ end
 SMODS.Joker {
     key = "lfc_stakataka",
     atlas = "lfc_jokers",
-    pos = {x = 3, y = 0},
+    pos = { x = 3, y = 0 },
 
     rarity = 2,
     cost = 6,
@@ -46,8 +46,13 @@ SMODS.Joker {
     demicoloncompat = false,
 
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue+1] = G.P_CENTERS.m_stone
+        info_queue[#info_queue + 1] = G.P_CENTERS.m_stone
+        return {
+            vars = {
+                localize({ type = 'name_text', set = "Enhanced", key = "m_stone" }) or "Stone Card"
+            }
+        }
     end,
 
-    ppu_coder = {"InvalidOS"}
+    ppu_coder = { "InvalidOS" }
 }
