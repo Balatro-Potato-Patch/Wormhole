@@ -30,16 +30,19 @@ return {
             
             -- Waffle
             PotatoPatchDev_waffle = {
-                name = "waffle",
+                name = "Waffle",
                 text = {
                     "doctor with PHD",
-                    "wow!"}},
+                    "wow!"
+                }
+            },
             
             -- A Tired Guy
             PotatoPatchDev_atiredguy = {
                 name = "A tired guy",
                 text = {
-                    "seems very tired", "wow!"
+                    "seems very tired",
+                    "wow!"
                 }
             },
             
@@ -60,7 +63,7 @@ return {
         ---JOKERS---
         ------------
         ---JOKERS---
-        ---
+        
         Joker = {
 
             -- SPACEWALK

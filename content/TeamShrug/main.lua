@@ -1,4 +1,4 @@
--- Dev Atals
+-- Dev Atlas
 SMODS.Atlas {
     key = "shrug_developers",
     px = 71,
