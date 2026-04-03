@@ -68,7 +68,7 @@ return {
                         "{C:attention}Junk Cards"
                     },
                     {
-                        "Clean-up {C:attention}#2#{} {f:6}—{} Give the",
+                        "Clean-up {C:attention}#2#{} {f:6}—{} Give the first two",
                         "cleaned-up cards an {C:dark_edition}Edition",
                         "{C:inactive,s:0.8}(You may use this on #2# Junk Cards,",
                         "{C:inactive,s:0.8}if you do, remove their enhancement",

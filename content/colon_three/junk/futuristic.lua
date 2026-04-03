@@ -5,7 +5,7 @@ SMODS.Consumable {
     key = "futuristic",
     config = {
         extra = {
-            junk_num = 2,
+            junk_num = 3,
             cleanup_num = 3,
             chips_mod = 10
         }

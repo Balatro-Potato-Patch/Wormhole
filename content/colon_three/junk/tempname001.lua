@@ -5,7 +5,7 @@ SMODS.Consumable {
     key = "tempname001",
     config = {
         extra = {
-            junk_num = 2,
+            junk_num = 3,
             cleanup_num = 3,
             mult_mod = 1
         }
