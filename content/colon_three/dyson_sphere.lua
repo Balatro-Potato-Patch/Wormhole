@@ -6,7 +6,7 @@ SMODS.Joker {
     --pos = { x = 0, y = 0 },
     config = { extra = { mult = 0, mult_per = 1 } },
     rarity = 2,
-    attributes = { "space" },
+    attributes = { "space", "mult", "scaling", },
     --ppu_artist = {},
     ppu_coder = { "notmario" },
     ppu_team = { ":3" },
