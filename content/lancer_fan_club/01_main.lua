@@ -43,7 +43,9 @@ SMODS.Sound {
 }
 
 -- Colors
-
+loc_colour('red')
+G.ARGS.LOC_COLOURS.lfc_pkmn_us = HEX('E95B2B')
+G.ARGS.LOC_COLOURS.lfc_pkmn_um = HEX('226DB5')
 
 -- Developers
 PotatoPatchUtils.Developer {

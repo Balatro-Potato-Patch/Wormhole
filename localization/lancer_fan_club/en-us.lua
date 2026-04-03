@@ -72,6 +72,20 @@ return {
                     }
 
                 }
+            },
+            j_worm_lfc_blacephalon = {
+                name = {
+                    "UB BURST",
+                    "{s:0.5}Blacephalon"
+                },
+                text = {
+                    {
+                        "Earn {C:money}$#1#{} per",
+                        "playing card",
+                        "{C:red}destroyed"
+                    }
+
+                }
             }
         },
         Tag = {
@@ -88,17 +102,25 @@ return {
         dictionary = {
             k_lfc_none = "None",
             k_lfc_brackets_rank = "[rank]",
-            dex_blacephalon_us = {
-                "{s:0.5}From {V:1,s:0.5}Pokémon Ultra Sun{s:0.5}:",
-                "{s:0.5}It slithers toward people. Then, without warning,",
-                "{s:0.5}it triggers the explosion of its own head. It's",
-                "{s:0.5}apparently one kind of Ultra Beast.",
+            lfc_dex_blacephalon_us = {
+                name = {
+                    "{s:0.5}From {B:1,C:white,s:0.5}Pokémon Ultra Sun{s:0.5}:",
+                },
+                text = {
+                    "{s:0.5}It slithers toward people. Then, without warning,",
+                    "{s:0.5}it triggers the explosion of its own head. It's",
+                    "{s:0.5}apparently one kind of Ultra Beast.",
+                },
             },
-            dex_blacephalon_um = {
-                "{s:0.5}From {V:1,s:0.5}Pokémon Ultra Moon{s:0.5}:",
-                "{s:0.5}A UB that appeared from an Ultra Wormhole,",
-                "{s:0.5}it causes explosions, then takes advantage of",
-                "{s:0.5}opponents' surprise to rob them of their vitality."
+            lfc_dex_blacephalon_um = {
+                name = {
+                    "{s:0.5}From {B:1,C:white,s:0.5}Pokémon Ultra Moon{s:0.5}:",
+                },
+                text = {
+                    "{s:0.5}A UB that appeared from an Ultra Wormhole,",
+                    "{s:0.5}it causes explosions, then takes advantage of",
+                    "{s:0.5}opponents' surprise to rob them of their vitality."
+                },
             },
         }
     }

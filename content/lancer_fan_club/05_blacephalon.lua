@@ -1,19 +1,24 @@
--- Spider Bake Sale
+-- Blacephalon
 SMODS.Joker {
-    key = "spider_bake_sale",
+    key = "lfc_blacephalon",
     blueprint_compat = false,
     perishable_compat = false,
     eternal_compat = true,
     rarity = 2,
-    cost = 12,
-    atlas = "j8jokers",
-    pos = { x = 1, y = 5 },
+    cost = 8,
+    atlas = "lfc_jokers",
+    pos = { x = 2, y = 0 },
     discovered = false,
     config = { extra = { dollars = 4 } },
     loc_vars = function(self, info_queue, card)
+        local version = pseudorandom_element({ 'us', 'um' }, "lfc_blacephalon")
+        --info_queue[#info_queue + 1] = localize({ type = "name_text", key = "lfc_dex_blacephalon_" .. version })
         return {
             vars = {
-                card.ability.extra.dollars
+                card.ability.extra.dollars,
+                colours = {
+                    G.ARGS.LOC_COLOURS["lfc_pkmn_" .. version]
+                }
             }
         }
     end,
