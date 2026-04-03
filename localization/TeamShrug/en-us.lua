@@ -30,7 +30,7 @@ return {
             
             -- Waffle
             PotatoPatchDev_waffle = {
-                name = "waffle",
+                name = "Waffle",
                 text = {
                     "nondescript agender entity",
                     "\"you guys ever listen to {C:edition}MCR{}?\""
@@ -41,7 +41,8 @@ return {
             PotatoPatchDev_atiredguy = {
                 name = "A tired guy",
                 text = {
-                    "seems very tired", "wow!"
+                    "seems very tired",
+                    "wow!"
                 }
             },
             

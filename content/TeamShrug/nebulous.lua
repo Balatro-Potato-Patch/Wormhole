@@ -8,17 +8,17 @@ SMODS.Atlas {
 SMODS.Enhancement {
     key = 'shrug_nebulous',
     atlas = "shrug_enhancements",
-    pos = {x = 0, y = 0},
+    pos = { x = 0, y = 0 },
     discovered = true,
 
     -- Calculations
     calculate = function(self, card, context)
         if context.cardarea == G.play then
             if context.before then
-                return {level_up = 1}
+                return { level_up = 1 }
             end
             if context.after then
-                return {level_up = -1}
+                return { level_up = -1 }
             end
         end
     end,
@@ -30,5 +30,5 @@ SMODS.Enhancement {
     ppu_coder = {
         "randomsongv2"
     },
-    ppu_team = {"shrug"}
+    ppu_team = { "shrug" }
 }

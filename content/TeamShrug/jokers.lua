@@ -3,9 +3,8 @@ Wormhole.SHRUG_Joker = SMODS.Joker:extend{
     discovered = true
 }
 
----SPACEWALK---
----------------
----SPACEWALK---
+
+-- Atlas
 
 SMODS.Atlas {
     key = "shrug_jokers",
@@ -13,6 +12,12 @@ SMODS.Atlas {
     py = 95,
     path = "TeamShrug/jokers.png"
 }
+
+
+
+---SPACEWALK---
+---------------
+---SPACEWALK---
 
 Wormhole.SHRUG_Joker {
     key = "shrug_spacewalk",
