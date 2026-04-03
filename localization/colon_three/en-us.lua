@@ -23,6 +23,7 @@ return {
             m_worm_junk_card = {
                 name = "Junk",
                 text = {
+                    "{C:chips}+#1#{} Chips",
                     "No rank or suit,",
                     "always scores,",
                     "retrigger this",

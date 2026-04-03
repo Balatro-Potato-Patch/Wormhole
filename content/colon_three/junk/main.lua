@@ -18,10 +18,19 @@ SMODS.Enhancement {
     no_rank = true,
     no_suit = true,
     always_scores = true,
+    config = { extra = { chips = 5 } },
+    loc_vars = function(self, q, card)
+        return { vars = { card and card.ability.extra.chips or self.config.extra.chips } }
+    end,
     calculate = function(self, card, context)
         if context.repetition and context.cardarea == G.play then
             return {
                 repetitions = 1
+            }
+        end
+        if context.main_scoring and context.cardarea == G.play then
+            return {
+                chips = card.ability.extra.chips
             }
         end
     end
