@@ -61,4 +61,13 @@ Wormhole.SHRUG_Joker {
 
         end
     end,
+
+    
+
+    -- Credits
+    ppu_coder = {
+        "microwave",
+        "randomsongv2"
+    },
+    ppu_team = { "shrug" }
 }

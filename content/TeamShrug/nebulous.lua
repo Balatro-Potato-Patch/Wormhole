@@ -10,9 +10,9 @@ SMODS.Enhancement {
     atlas = "shrug_enhancements",
     pos = { x = 0, y = 0 },
     discovered = true,
-    config = {extra = {
-        levels = 1
-    }},
+    config = { extra = { levels = 1 } },
+
+    -- Return localization
     loc_vars = function (self, info_queue, card)
         local levels = card.ability.extra.levels
         local key = "m_worm_shrug_nebulous"

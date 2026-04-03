@@ -23,7 +23,7 @@ return {
             PotatoPatchDev_microwave = {
                 name = "Microwave",
                 text = {
-                    'loves to say "sweet"',
+                    "locked in",
                     "wow!"
                 }
             },
