@@ -126,6 +126,27 @@ return {
                     "{C:attention,E:1}shuffle{} all",
                     "cards played",
                 }
+            },
+            j_worm_lfc_golden_record = {
+                name = {
+                    "Golden Record"
+                },
+                text = {
+                    "Creates a {V:1}#2#{} card",
+                    "every {C:red}#3#{} {C:inactive}[#4#]{} {C:attention}#1#s{}",
+                    "discarded",
+                    "{C:inactive}(Must have room)"
+                }
+            },
+            j_worm_lfc_galaxy_fantasy = {
+                name = "Galaxy Fantasy",
+                text = {
+                    "After defeating {C:attention}#1#{} Blinds,",
+                    "sell this card to create",
+                    "a copy of {V:1}#3#{}",
+                    "{C:inactive}(Must have room)",
+                    "{C:inactive}(Currently {C:attention}#2#{C:inactive}/#1#)",
+                },
             }
         },
         Tag = {
