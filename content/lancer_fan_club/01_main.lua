@@ -14,19 +14,6 @@ Wormhole.LancerFanClub = PotatoPatchUtils.Team {
     end
 }
 
--- Misc helper functions
-G.lfc_print = function(str)
-    if print and G.GAME.lfc_debug then print(str) end
-end
-G.iter = function(table)
-    local length = 0
-    for _, __ in pairs(table) do
-        length = length + 1
-    end
-    return length
-end
-
-
 -- Atlases
 SMODS.Atlas {
     key = "lfc_devs",
@@ -76,7 +63,8 @@ PotatoPatchUtils.Developer {
                 if not G.GAME.worm_log then G.GAME.worm_log = {} end
                 if not G.GAME.worm_log[cck] then
                     G.GAME.worm_log[cck] = true
-                    G.lfc_print(G.GAME.worm_log)
+                    G.GAME.worm_log_count = (G.GAME.worm_log_count or 0) + 1
+                    Wormhole.LFC_Util.debug_print(G.GAME.worm_log)
                 end
             end
         end
