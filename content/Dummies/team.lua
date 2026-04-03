@@ -11,7 +11,7 @@ PotatoPatchUtils.Developer{
     team = "dummies",
     loc = true,
     atlas = "worm_DummiesJokers",
-    pos = { x = 0, y = 0 }
+    pos = { x = 0, y = 0 },
 }
 
 PotatoPatchUtils.Developer{
@@ -26,4 +26,13 @@ PotatoPatchUtils.Developer{
     colour = HEX("FD9712"),
     team = "dummies",
     loc = true,
+}
+
+PotatoPatchUtils.Developer{
+    name = "flowire",
+    colour = HEX("FF8FA9"),
+    team = "dummies",
+    loc = true,
+    atlas = "worm_DummiesJokers_Flowire",
+    pos = { x = 0, y = 0 },
 }

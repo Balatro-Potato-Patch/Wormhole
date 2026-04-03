@@ -4,40 +4,16 @@ dump_lua = true
 priority = 0
 
 # From GhostSalts BFDI mod
-# G.GAME.blind.config.blind.unkillable is used to check if blind has unkillable tag
+# G.GAME.blind.config.blind.dummy_unkillable is used to check if blind is unkillable
 
-# Credit to NotJustYet for this scrumptious section of code! Mod priority is 2 because NotJustYet needs to go first.
+# Credit to NotJustYet for this scrumptious section of code!
 [[patches]]
 [patches.pattern]
 target = "game.lua"
 pattern = "if G.GAME.chips - G.GAME.blind.chips >= 0 or G.GAME.current_round.hands_left < 1 then"
 position = "at"
 payload = '''
-if (G.GAME.chips - G.GAME.blind.chips >= 0 and not G.GAME.blind.config.blind.unkillable) or G.GAME.current_round.hands_left < 1 then
-    stop_use()
-'''
-match_indent = true
-
-# Talisman
-[[patches]]
-[patches.pattern]
-target = "game.lua"
-pattern = "if Big:new(G.GAME.chips) >= Big:new(G.GAME.blind.chips) or G.GAME.current_round.hands_left < 1 then"
-position = "at"
-payload = '''
-if (Big:new(G.GAME.chips) >= Big:new(G.GAME.blind.chips) and not G.GAME.blind.config.blind.unkillable) or G.GAME.current_round.hands_left < 1 then
-    stop_use()
-'''
-match_indent = true
-
-# LobCorp
-[[patches]]
-[patches.pattern]
-target = "game.lua"
-pattern = "if to_big(G.GAME.chips) >= to_big(G.GAME.blind.chips) or G.GAME.current_round.hands_left <= 0 then"
-position = "at"
-payload = '''
-if (to_big(G.GAME.chips) >= to_big(G.GAME.blind.chips) and not G.GAME.blind.config.blind.unkillable) or G.GAME.current_round.hands_left <= 0 then
+if (G.GAME.chips - G.GAME.blind.chips >= 0 and not G.GAME.blind.config.blind.dummy_unkillable) or G.GAME.current_round.hands_left < 1 then
     stop_use()
 '''
 match_indent = true

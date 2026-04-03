@@ -1,0 +1,15 @@
+[manifest]
+version = "1.0.1"
+dump_lua = true
+priority = 10
+
+# From Flowires Shimmerberry mod
+# This makes sure that "Reward-Tags" don't Trigger Double-Tag
+
+[[patches]]
+[patches.pattern]
+target = "tag.lua"
+pattern = "if self.name == 'Double Tag' and _context.tag.key ~= 'tag_double' then"
+position = "after"
+payload = "if _context.tag.ability and _context.tag.ability.dummy_no_double then return true end"
+match_indent = true
