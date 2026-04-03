@@ -32,8 +32,10 @@ return {
             PotatoPatchDev_waffle = {
                 name = "waffle",
                 text = {
-                    "doctor with PHD",
-                    "wow!"}},
+                    "nondescript agender entity",
+                    "\"you guys ever listen to {C:edition}MCR{}?\""
+                }
+            },
             
             -- A Tired Guy
             PotatoPatchDev_atiredguy = {
@@ -60,7 +62,7 @@ return {
         ---JOKERS---
         ------------
         ---JOKERS---
-        ---
+        
         Joker = {
 
             -- SPACEWALK
@@ -105,6 +107,12 @@ return {
         -- DICTIONARY
         dictionary = {
             k_shrug_plus_meteor = "+Tag",
+            k_waffle = "waffle",
+            waffle = "waffle"
         },
+
+        k_waffle = "waffle",
+        waffle = "waffle",
+
     },
 }

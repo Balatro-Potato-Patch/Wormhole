@@ -1,4 +1,4 @@
--- Dev Atals
+-- Dev Atlas
 SMODS.Atlas {
     key = "shrug_developers",
     px = 71,
@@ -41,9 +41,9 @@ PotatoPatchUtils.Developer({
     name = "waffle",
     loc = true,
     colour = HEX("45ad71"),
-    atlas = 'Joker',
-    pos = {x = 7, y = 8},
-    soul_pos = {x = 7, y = 9},
+    atlas = 'worm_shrug_developers',
+    pos = {x = 0, y = 1},
+    soul_pos = {x = 1, y = 1},
 })
 
 -- A Tired Guy
