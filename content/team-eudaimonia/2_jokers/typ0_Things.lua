@@ -20,15 +20,17 @@ SMODS.Joker {
         local num, denom = SMODS.get_probability_vars(card, card.ability.extra.numerator, card.ability.extra.denominator)
     end,
     calculate = function(self, card, context)
-        if context.joker_main and SMODS.pseudorandom_probability(card, 'wowsignalprob', card.ability.extra.numerator, card.ability.extra.denominator) then
-            return {
-                message = 'Wow!',
-                xchips = SMODS.pseudorandom_probability(card, 'wowsignalwow', card.ability.extra.wowmin, card.ability.extra.wowmax)
-            }
-        else
-            return {
-                chips = SMODS.pseudorandom_probability(card, 'wowsignalchips', card.ability.extra.chipsmin, card.ability.extra.chipsmax)
-            }
+        if context.joker_main  
+            if SMODS.pseudorandom_probability(card, 'wowsignalprob', card.ability.extra.numerator, card.ability.extra.denominator) then
+                return {
+                    message = 'Wow!',
+                    xchips = SMODS.pseudorandom_probability(card, 'wowsignalwow', card.ability.extra.wowmin, card.ability.extra.wowmax)
+                }
+            else
+                return {
+                    chips = SMODS.pseudorandom_probability(card, 'wowsignalchips', card.ability.extra.chipsmin, card.ability.extra.chipsmax)
+                }
+            end
         end
     end
 }
