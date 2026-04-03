@@ -1,0 +1,51 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+dump_lua = true
+
+
+# play the meow sound
+[[patches]]
+[patches.pattern]
+target = '=[SMODS PotatoPatchUtils "src/credits.lua"]'
+pattern = '''card.hover = function(self)'''
+position = "after"
+payload = '''
+if team.name == "meow" then
+	card.children.center:set_sprite_pos({ x = member.pos and member.pos.x or 0, y = member.name == "toma" and 0 or 1 })
+	local r = math.random(1, 3)
+	play_sound("worm_meowMeow"..r, 1 + 0.5 * (math.random()-0.5), 0.6)
+end
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '=[SMODS PotatoPatchUtils "src/credits.lua"]'
+pattern = '''
+			Moveable.hover(self)
+		end
+'''
+position = "after"
+payload = '''
+if team.name == "meow" then
+	card.stop_hover = function(self)
+		card.children.center:set_sprite_pos({ x = member.pos and member.pos.x or 0, y = 0 })
+		Moveable.stop_hover(self)
+	end
+end
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '=[SMODS PotatoPatchUtils "src/credits.lua"]'
+pattern = '''
+        local card = Card(G.ROOM.T.x, G.ROOM.T.y, G.CARD_W / 1.25, G.CARD_H / 1.25, nil, G.P_CENTERS.c_base)
+'''
+position = "at"
+payload = '''
+        local card = Card(G.ROOM.T.x, G.ROOM.T.y, G.CARD_W / 1.25 * (member.name == "toma" and 107 / 71 or 1),
+            G.CARD_H / 1.25 * (member.name == "toma" and 100 / 95 or 1), nil, G.P_CENTERS.c_base)
+'''
+match_indent = true

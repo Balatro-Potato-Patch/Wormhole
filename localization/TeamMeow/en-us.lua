@@ -47,7 +47,7 @@ return {
 				},
 			},
 			PotatoPatchDev_toma = {
-				name = "Tomatose",
+				name = "Jolyne",
 				text = {
 					{
 						"Programmer, Artist",
@@ -55,10 +55,15 @@ return {
 				},
 			},
 			PotatoPatchDev_silverautumn = {
-				name = "SilverAutumn",
+				name = "NakuAutumn",
 				text = {
 					{
 						"Programmer, Artist",
+					},
+					{
+						"Ex-developer of {C:red}Fool's Gambit{} and {C:purple}Medium{}",
+						"{C:attention}Hot Potato{} and {C:red}Stocking {C:green}Stuffer{} participant",
+						"will i get flamed if i self promote non balatro things here - NA",
 					},
 				},
 			},

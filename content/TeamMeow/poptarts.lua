@@ -9,7 +9,7 @@
 -- 	key = "meow_placeholder_poptart",
 -- 	px = 71,
 -- 	py = 95,
--- 	path = "Team Meow/placeholder_poptart.png",
+-- 	path = "TeamMeow/placeholder_poptart.png",
 -- })
 
 -- Wormhole.TEAM_MEOW.Poptart = SMODS.Consumable:extend({
