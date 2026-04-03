@@ -10,7 +10,7 @@ SMODS.Atlas {
 -- weights are higher to end up being the same as tarots
 for _, booster_type in ipairs({
 	{ "normal", 4, 2, 0, 0, 2, 3, 2 },
-	{ "jumbo", 6, 1, 2, 0, 2, 5, 2 },
+	{ "jumbo", 6, 1, 2, 0, 2, 4, 2 },
 	{ "mega", 8, 1, 3, 0, 3, 5, 1 },
 }) do
 	for i = 1, booster_type[3] do
