@@ -1,6 +1,6 @@
 --[[
 
-Wormhole Mod - Team People I Found On The Street In Las Vegas (Vegas for short :D)
+Wormhole Mod - Team People I Found On The Street In Las Vegas (People Found In Vegas for short :D)
 
 Jammbo
 h0l
@@ -10,14 +10,14 @@ Ben Roffey (Reson8r)
 
 --Potato Patch Credits
 PotatoPatchUtils.Team{
-	name = "People Who I Found On The Streets In Vegas",
+	name = "People Found In Vegas",
 	colour = HEX("73fdff")
 }
 
 PotatoPatchUtils.Developer{
 	name = "Jammbo",
 	colour = G.C.GREEN,
-	team = "Vegas",
+	team = "People Found In Vegas",
 	atlas = "worm_vegas_credits",
 	pos = {x = 0, y = 0},
 	soul_pos = {x = 0, y = 1}
@@ -26,7 +26,7 @@ PotatoPatchUtils.Developer{
 PotatoPatchUtils.Developer{
 	name = "h0l",
 	colour = G.C.MONEY,
-	team = "Vegas" --[[,
+	team = "People Found In Vegas" --[[,
 	atlas = "worm_vegas_credits",
 	pos = {x = 1, y = 0},
 	soul_pos = {x = 1, y = 1}]]
@@ -35,7 +35,7 @@ PotatoPatchUtils.Developer{
 PotatoPatchUtils.Developer{
 	name = "Ben Roffey",
 	colour = G.C.CHIPS,
-	team = "Vegas",
+	team = "People Found In Vegas",
 	atlas = "worm_vegas_credits",
 	pos = {x = 2, y = 0},
 	soul_pos = {x = 2, y = 1}
@@ -100,7 +100,7 @@ SMODS.Joker{
 	discovered = true,
 	eternal_compat = true,
 	perishable_compat = true,
-	ppu_team = {"People Who I Found On The Streets In Vegas"},
+	ppu_team = {"People Found In Vegas"},
 	ppu_coder = {"Ben Roffey"},
 	ppu_artist = {"Ben Roffey", "Jammbo"}, --no
 	calculate = function(self, card, context)
@@ -149,7 +149,7 @@ SMODS.Joker{
 	discovered = true,
 	eternal_compat = true,
 	perishable_compat = true,
-	ppu_team = {"People Who I Found On The Streets In Vegas"},
+	ppu_team = {"People Found In Vegas"},
 	ppu_coder = {"Ben Roffey"},
 	ppu_artist = {"Ben Roffey", "Jammbo"},
 	calculate = function(self, card, context)
@@ -199,7 +199,7 @@ SMODS.Joker{
 	discovered = true,
 	eternal_compat = true,
 	perishable_compat = true,
-	ppu_team = {"People Who I Found On The Streets In Vegas"},
+	ppu_team = {"People Found In Vegas"},
 	ppu_coder = {"Jammbo"},
 	ppu_artist = {"Jammbo"},
 	calculate = function(self, card, context)
@@ -244,7 +244,7 @@ SMODS.Joker{
 	discovered = true,
 	eternal_compat = true,
 	perishable_compat = true,
-	ppu_team = {"People Who I Found On The Streets In Vegas"},
+	ppu_team = {"People Found In Vegas"},
 	ppu_coder = {},
 	ppu_artist = {},
 	calculate = function(self, card, context)
@@ -270,7 +270,7 @@ SMODS.Blind{
 	dollars = 8,
     mult = 2,
 	boss_colour = HEX("c3c3c3"),
-	ppu_team = {"Vegas"},
+	ppu_team = {"People Found In Vegas"},
 	ppu_coder = {"Ben Roffey"},
 	ppu_artist = {"Ben Roffey"},
 	calculate = function(self, blind, context)
