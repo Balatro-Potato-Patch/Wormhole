@@ -76,8 +76,8 @@ return {
                     }
                 }
             },
-            c_worm_futuristic = {
-                name = "[futuristic]",
+            c_worm_abandoned_wrench = {
+                name = "Abandoned Wrench",
                 text = {
                     {
                         "Convert {C:attention}#1#{} selected",
@@ -93,8 +93,8 @@ return {
                     }
                 }
             },
-            c_worm_tempname001 = {
-                name = "[tempname]",
+            c_worm_lost_pliers = {
+                name = "Lost Pliers",
                 text = {
                     {
                         "Convert {C:attention}#1#{} selected",

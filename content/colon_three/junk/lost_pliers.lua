@@ -2,12 +2,12 @@ if not Wormhole.COLON_THREE or not Wormhole.COLON_THREE.loaded then return end
 
 SMODS.Consumable {
     set = "JunkSet",
-    key = "futuristic",
+    key = "lost_pliers",
     config = {
         extra = {
             junk_num = 3,
             cleanup_num = 3,
-            chips_mod = 10
+            mult_mod = 1
         }
     },
     loc_vars = function(_,info_queue,card)
@@ -16,18 +16,18 @@ SMODS.Consumable {
             vars = {
                 card.ability.extra.junk_num,
                 card.ability.extra.cleanup_num,
-                card.ability.extra.chips_mod
+                card.ability.extra.mult_mod
             }
         }
     end,
     use = Wormhole.COLON_THREE.junk_use {
         clean_func = function(self, card, cards, clean_up)
-            (G.GAME.worm_c3_junk_stats or {}).chips = (G.GAME.worm_c3_junk_stats or {}).chips + card.ability.extra.chips_mod
+            (G.GAME.worm_c3_junk_stats or {}).mult = (G.GAME.worm_c3_junk_stats or {}).mult + card.ability.extra.mult_mod
             G.E_MANAGER:add_event(Event({
                 trigger = 'before',
                 delay = 0.4,
                 func = function()
-                    play_sound("xchips", 0.9)
+                    play_sound("multhit2", 0.8)
                     card:juice_up(0.3, 0.5)
                     return true
                 end
