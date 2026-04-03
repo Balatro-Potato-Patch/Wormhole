@@ -50,7 +50,7 @@ SMODS.Joker({
     config = {
         extra = {
             xmult = 2.5,
-            secret = false
+            secret = 0
         }
     },
     loc_vars = function(self, info_queue, card)
@@ -76,8 +76,8 @@ SMODS.Joker({
             end
 
             if context.ante_change and context.ante_end then
-                if G.GAME.round_resets >= 9 then
-                    cae.secret = true
+                if G.GAME.round_resets.ante >= 9 then
+                    if cae.secret == 0 then cae.secret = 1 end
                     local eval = function(card) return not card.REMOVED end
                     juice_card_until(card, eval, true)
                 end
@@ -88,7 +88,8 @@ SMODS.Joker({
                 }
             end
 
-            if context.selling_self then
+            if context.selling_self and G.GAME.round_resets.ante >= 9 and cae.secret == 1 then
+                cae.secret = 2
                 SMODS.add_card({"j_worm_lfc_fw"})
                 return{ 
                     func = function()
