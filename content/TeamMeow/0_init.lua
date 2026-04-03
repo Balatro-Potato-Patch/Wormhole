@@ -38,7 +38,7 @@ PotatoPatchUtils.Developer({
 
 PotatoPatchUtils.Developer({
 	name = "gappie",
-	colour = G.C.UI.TEXT_LIGHT, -- Change this
+	colour = HEX("FFDE3B"),
 	loc = true,
 	team = "meow",
 })
@@ -57,9 +57,18 @@ PotatoPatchUtils.Developer({
 	team = "meow",
 })
 
+local silverautumn_colour = SMODS.Gradient({
+	key = "silverautumn_gradient",
+	colours = {
+		HEX("FF0044"),
+		G.C.WHITE,
+	},
+	cycle = 3,
+})
+
 PotatoPatchUtils.Developer({
 	name = "silverautumn",
-	colour = HEX("FF0044"),
+	colour = silverautumn_colour,
 	loc = true,
 	team = "meow",
 })
