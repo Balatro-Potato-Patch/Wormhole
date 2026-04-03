@@ -27,3 +27,10 @@ PotatoPatchUtils.Developer{
     team = "dummies",
     loc = true,
 }
+
+PotatoPatchUtils.Developer{
+    name = "baltdev",
+    colour = HEX("707880"),
+    team = "dummies",
+    loc = true,
+}
