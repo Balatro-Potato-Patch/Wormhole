@@ -131,26 +131,26 @@ return {
         },
         Other = {
 			p_worm_junkset_normal = {
-				name = "[JUNKSET] Pack",
+				name = "Derelict Pack",
 				text = {
 					"Choose {C:attention}#1#{} of up to",
-					"{C:attention}#2#{} {C:worm_c3_junkset}[JUNKSET]{} cards to",
+					"{C:attention}#2#{} {C:worm_c3_junkset}Derelict{} cards to",
 					"be used immediately",
 				},
 			},
 			p_worm_junkset_jumbo = {
-				name = "Jumbo [JUNKSET] Pack",
+				name = "Jumbo Derelict Pack",
 				text = {
 					"Choose {C:attention}#1#{} of up to",
-					"{C:attention}#2#{} {C:worm_c3_junkset}[JUNKSET]{} cards to",
+					"{C:attention}#2#{} {C:worm_c3_junkset}Derelict{} cards to",
 					"be used immediately",
 				},
 			},
 			p_worm_junkset_mega = {
-				name = "Mega [JUNKSET] Pack",
+				name = "Mega Derelict Pack",
 				text = {
 					"Choose {C:attention}#1#{} of up to",
-					"{C:attention}#2#{} {C:worm_c3_junkset}[JUNKSET]{} cards to",
+					"{C:attention}#2#{} {C:worm_c3_junkset}Derelict{} cards to",
 					"be used immediately",
 				},
 			},
@@ -188,10 +188,12 @@ return {
     },
     misc = {
         dictionary = {
-			k_junkset_pack = "[JUNKSET] Pack",
+            k_junkset = "Derelict",
+            b_junkset_cards = "Derelict Cards",
+			k_junkset_pack = "Derelict Pack",
         },
         labels = {
-
+            JunkSet = "Derelict"
         },
     }
 }
