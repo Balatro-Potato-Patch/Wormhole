@@ -10,15 +10,29 @@ SMODS.Enhancement {
     atlas = "shrug_enhancements",
     pos = { x = 0, y = 0 },
     discovered = true,
+    config = {extra = {
+        levels = 1
+    }},
+    loc_vars = function (self, info_queue, card)
+        local levels = card.ability.extra.levels
+        local key = "m_worm_shrug_nebulous"
+        if math.abs(levels) ~= 1 then
+            key = "m_worm_shrug_nebulous_plural"
+        end
+        return {
+            key = key,
+            vars = {levels}
+        }
+    end,
 
     -- Calculations
     calculate = function(self, card, context)
         if context.cardarea == G.play then
             if context.before then
-                return { level_up = 1 }
+                return { level_up = card.ability.extra.levels }
             end
             if context.after then
-                return { level_up = -1 }
+                return { level_up = -(card.ability.extra.levels) }
             end
         end
     end,

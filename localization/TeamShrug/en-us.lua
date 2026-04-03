@@ -92,10 +92,19 @@ return {
             m_worm_shrug_nebulous = {
                 name = "Nebulous",
                 text = {
-                    "{C:attention}+1{} temporary level to",
+                    "{C:attention}+#1#{} temporary level to",
                     "played hand"
                 }
             },
+
+            m_worm_shrug_nebulous_plural = {
+                name = "Nebulous",
+                text = {
+                    "{C:attention}+#1#{} temporary levels to",
+                    "played hand"
+                }
+            },
+
         },
     },
 
@@ -108,12 +117,7 @@ return {
         -- DICTIONARY
         dictionary = {
             k_shrug_plus_meteor = "+Tag",
-            k_waffle = "waffle",
-            waffle = "waffle"
         },
-
-        k_waffle = "waffle",
-        waffle = "waffle",
 
     },
 }
