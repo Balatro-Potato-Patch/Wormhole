@@ -34,7 +34,7 @@ function Wormhole.COLON_THREE.junk_can_use(func)
         for i, v in pairs(G.hand.highlighted) do
             if v.config.center.key == "m_worm_junk_card" then junk = junk + 1 end
         end
-        return G.hand and #G.hand.highlighted == num and (not func or func(self, card)) and (junk == 0 or junk == num)
+        return G.hand and #G.hand.highlighted ~= 0 and #G.hand.highlighted <= num and (not func or func(self, card)) and (junk == 0 or junk == num)
     end
 end
 
@@ -50,10 +50,12 @@ function Wormhole.COLON_THREE.junk_use(func, once)
         end
         for i, v in ipairs(h) do
             local card = h[i]
+            local percent = 1.15 - (i - 0.999) / (#h - 0.998) * 0.3
             G.E_MANAGER:add_event(Event({
                 trigger = "after",
                 delay = 0.25,
                 func = function()
+                    play_sound("card1", percent)
                     card:flip()
                     return true
                 end
@@ -91,10 +93,12 @@ function Wormhole.COLON_THREE.junk_use(func, once)
         end
         for i, v in ipairs(h) do
             local card = h[i]
+            local percent = 0.85 + (i - 0.999) / (#h - 0.998) * 0.3
             G.E_MANAGER:add_event(Event({
                 trigger = "after",
                 delay = 0.25,
                 func = function()
+                    play_sound("tarot2", percent)
                     card:flip()
                     return true
                 end

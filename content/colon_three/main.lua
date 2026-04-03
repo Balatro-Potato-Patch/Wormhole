@@ -57,6 +57,15 @@ PotatoPatchUtils.Developer {
     pos = { x = 2, y = 0 }
 }
 
+PotatoPatchUtils.Developer {
+    name = "notmario",
+    loc = true,
+    team = ":3",
+    colour = HEX("c34242"),
+    atlas = "worm_ct_credits",
+    pos = { x = 3, y = 0 }
+}
+
 Wormhole.COLON_THREE.loaded = true
 for i, v in pairs({
     "laika",
