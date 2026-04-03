@@ -166,6 +166,67 @@ local function GtoSpeed(g)
 	return g / 256
 end
 
+local igs = {
+	[0] = { "9", 125, 10, 20, 40, 50 },
+	[1] = { "8", 80, 10, 20, 30, 40 },
+	[2] = { "7", 80, 10, 20, 30, 40 },
+	[3] = { "6", 50, 10, 15, 30, 40 },
+	[4] = { "5", 45, 10, 15, 20, 40 },
+	[5] = { "4", 45, 5, 15, 20, 30 },
+	[6] = { "4", 45, 5, 10, 20, 30 },
+	[7] = { "3", 40, 5, 10, 15, 30 },
+	[8] = { "3", 40, 5, 10, 15, 30 },
+	[9] = { "2", 40, 5, 10, 15, 30 },
+	[10] = { "2", 40, 2, 12, 13, 30 },
+	[11] = { "2", 40, 2, 12, 13, 30 },
+	[12] = { "1", 30, 2, 12, 13, 30 },
+	[13] = { "1", 30, 2, 12, 13, 30 },
+	[14] = { "1", 30, 2, 12, 13, 30 },
+	[15] = { "S1", 20, 2, 12, 13, 30 },
+	[16] = { "S1", 20, 2, 12, 13, 30 },
+	[17] = { "S1", 20, 2, 12, 13, 30 },
+	[18] = { "S2", 20, 2, 12, 13, 30 },
+	[19] = { "S3", 20, 2, 12, 13, 30 },
+	[20] = { "S4", 15, 2, 12, 13, 30 },
+	[21] = { "S4", 15, 2, 12, 13, 30 },
+	[22] = { "S4", 15, 2, 12, 13, 30 },
+	[23] = { "S5", 15, 2, 12, 13, 30 },
+	[24] = { "S5", 15, 2, 12, 13, 30 },
+	[25] = { "S6", 15, 2, 12, 13, 30 },
+	[26] = { "S6", 15, 2, 12, 13, 30 },
+	[27] = { "S7", 15, 2, 12, 13, 30 },
+	[28] = { "S7", 15, 2, 12, 13, 30 },
+	[29] = { "S8", 15, 2, 12, 13, 30 },
+	[30] = { "S8", 10, 2, 12, 13, 30 },
+	[31] = { "S9", 10, 2, 12, 13, 30 },
+}
+
+function JtemTGM.GetLinePoints(grade, lines)
+	if lines <= 0 then return 0 end
+	return igs[grade][lines + 2] or 0
+end
+
+function JtemTGM.GetDecayRate(grade)
+	return igs[grade][2]
+end
+
+function JtemTGM.GetGradeName(grade)
+	return igs[grade][1]
+end
+
+local COMBO_MULTIPLIER = {
+	{ 1.0, 1.0, 1.0, 1.0 },
+	{ 1.2, 1.4, 1.5, 1.0 },
+	{ 1.2, 1.5, 1.8, 1.0 },
+	{ 1.4, 1.6, 2.0, 1.0 },
+	{ 1.4, 1.7, 2.2, 1.0 },
+	{ 1.4, 1.8, 2.3, 1.0 },
+	{ 1.4, 1.9, 2.4, 1.0 },
+	{ 1.5, 2.0, 2.5, 1.0 },
+	{ 1.5, 2.1, 2.6, 1.0 },
+	{ 2.0, 2.5, 3.0, 1.0 },
+}
+
 --#endregion
 
 --#region Piece randomizer
@@ -348,6 +409,7 @@ function JtemTGM.ResetPlayerState()
 		das_time = 0,       -- Current DAS time
 		das_delay = 12,     -- Current DAS
 
+		cleared = 0,        -- All lines cleared
 		clears = 0,         -- Line clears for one piece
 		clear_cols = {},    -- Lines cleared (literal)
 
@@ -370,6 +432,7 @@ function JtemTGM.ResetPlayerState()
 		ghost_piece = {},
 
 		board = board,
+		lightup = {},
 	}
 	return state
 end
@@ -425,7 +488,104 @@ function JtemTGM.ChangeState(game, newstate)
 	end
 
 	if newstate == STATE_LOCKED and game.state == STATE_LOCKING then
+		game.clears = 0
+		game.clear_cols = {}
+		-- todo placepiece
+		game.current_piece = {}
+		game.ghost_piece = {}
+		-- calculate lines to clear
+		local line_count = 0
+		for y = BOARD_H - 1, 0, -1 do
+			local col = game.board[y]
+			if col ~= nil then
+				local add = true
+				for x = 0, BOARD_W - 1 do
+					local cell = col[x]
+					if cell == 0 then add = false end
+				end
+				if add then
+					line_count = line_count + 1
+					game.clear_cols[y] = true
+					for x = 0, BOARD_W - 1 do
+						col[x] = 'C'
+						if game.lightup[y] and game.lightup[y][x] then
+							game.lightup[y][x] = nil
+						end
+					end
+				end
+			end
+		end
+		game.clears = line_count
+		game.combo = game.combo + ((2 * line_count) - 2)
+		if line_count == 0 then
+			game.combo = 1
+		end
+		game.level = game.level + line_count
+		if game.level >= MAX_LEVEL then
+			game.level = MAX_LEVEL
+			if not game.credits then
+				newstate = STATE_INVISIBLETETRIS
+			end
+			game.credits = true
+		end
+		-- calculate score
+		local lc = math.max(1, game.level) / 4.0
+		if line_count > 0 then
+			local add = (lc + game.soft) * line_count * game.combo
+			game.score = game.score + add
+			-- Award internal points
+			local level_multiplier = math.floor(game.level / 250) + 1
+			local c = math.min(10, game.combo)
+			local mul = math.ceil(JtemTGM.GetLinePoints(game.grade, line_count) *
+				(COMBO_MULTIPLIER[c] and COMBO_MULTIPLIER[c][line_count] or 1.0))
+			game.points = game.points + (mul * level_multiplier)
+			-- Increase internal grade if points exceeds or is 100
+			if game.points >= 100 then
+				game.points = 0
+				game.grade = math.min(game.grade + 1, 31)
+				game.point_decay = 0
+			end
+		end
+	end
+	game.old_level = game.level
+	if newstate == STATE_READY or newstate == STATE_GO then
+		game.state_timer = game.start_delay
+	end
+	if newstate == STATE_YOUR or newstate == STATE_AER then
+		game.state_timer = 0
+	end
+	if newstate == STATE_GAMEOVER then
+		game.credit_fadeout = 0
+		game.state_timer = game.topped_out and 1.0 or 2.0
+	end
+	if newstate == STATE_DROPOUT then
+		-- TODO
+	end
+	if newstate == STATE_CONGRATULATIONS or newstate == STATE_INVISIBLETETRIS then
+		if next(game.current_piece) then
+			game.current_piece = {}
+		end
+		game.ghost_piece = {}
+		game.credit_fadeout = 0
+		if newstate == STATE_CONGRATULATIONS then
+			if game.topped_out then
+				local board = p.etm_board
+				for y = BOARD_HCLEARANCE, BOARD_H - 1 do
+					board[y] = {}
+					for x = 0, BOARD_W - 1 do
+						board[y][x] = 0
+					end
+				end
+			end
+			game.credit_time = 0
+		else
+			game.state_timer = 2.0
+		end
+	end
+	if newstate == STATE_ARE and game.clears > 0 then
+		for i = 1, game.clears do
 
+		end
 	end
 end
 
