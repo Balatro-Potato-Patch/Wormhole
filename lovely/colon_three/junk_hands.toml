@@ -18,8 +18,8 @@ local junks = 0
 for i, v in pairs(scoring_hand) do
     if v.config.center.key == "m_worm_junk_card" then junks = junks + 1 end
 end
-G.GAME.junk_hands_mult = G.GAME.junk_hands_mult or 1.5
-local junk_hands_mult = G.GAME.junk_hands_mult ^ junks
+G.GAME.worm_c3_junk_stats.x_hand_stats = G.GAME.worm_c3_junk_stats.x_hand_stats or 1.5
+local junk_hands_mult = G.GAME.worm_c3_junk_stats.x_hand_stats ^ junks
 mult = mult * junk_hands_mult
 hand_chips = hand_chips * junk_hands_mult
 update_hand_text({sound = G.GAME.current_round.current_hand.handname ~= disp_text and 'button' or nil, volume = 0.4, immediate = true, nopulse = nil,

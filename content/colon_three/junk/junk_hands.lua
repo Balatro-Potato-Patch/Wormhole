@@ -36,8 +36,8 @@ function CardArea:parse_highlighted(...)
         for i, v in pairs(self.highlighted) do
             if v.config.center.key == "m_worm_junk_card" then junks = junks + 1 end
         end
-        G.GAME.junk_hands_mult = G.GAME.junk_hands_mult or 1.5
-        local junk_hands_mult = G.GAME.junk_hands_mult ^ junks
+        G.GAME.worm_c3_junk_stats.x_hand_stats = G.GAME.worm_c3_junk_stats.x_hand_stats or 1.5
+        local junk_hands_mult = G.GAME.worm_c3_junk_stats.x_hand_stats ^ junks
         for name, parameter in pairs(SMODS.Scoring_Parameters) do
             parameter.current = parameter.current * junk_hands_mult
             update_hand_text({immediate = true, nopulse = nil, delay = 0}, {[name] = parameter.current})
