@@ -33,15 +33,18 @@ SMODS.Joker {
                 if G.GAME.current_round.hands_played <= 0 then
                     check_for_unlock { type = "riverboat_instaplanet" }
                 end
-                G.E_MANAGER:add_event(Event({
-                    func = function()
-                        G.STATE = G.STATES.NEW_ROUND
-                        G.STATE_COMPLETE = false
-                        G:update_new_round(0)
-                        -- end_round()
-                        return true
-                    end
-                }))
+                -- G.E_MANAGER:add_event(Event({
+                --     func = function()
+                --         G.STATE = G.STATES.NEW_ROUND
+                --         G.STATE_COMPLETE = false
+                --         G:update_new_round(0)
+                --         -- end_round()
+                --         return true
+                --     end
+                -- }))
+                G.STATE = G.STATES.HAND_PLAYED
+                G.STATE_COMPLETE = true
+                end_round()
             end
         end
     end
