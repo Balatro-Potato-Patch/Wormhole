@@ -14,6 +14,10 @@ SMODS.Joker {
     ppu_artist = { 'nixthatoneartist' },
     ppu_coder = { 'theAstra' },
     ppu_team = { 'absinthe' },
+    attributes = {
+        'generation',
+        'drinks'
+    },
     calculate = function(self, card, context)
         if context.setting_blind and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
             G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1

@@ -9,6 +9,10 @@ SMODS.ConsumableType {
     shop_rate = 0.8
 }
 
+SMODS.attribute {
+    key = 'drinks'
+}
+
 SMODS.Booster {
     key = "abs_top_shelf_jumbo_1",
     kind = "abs_drinks",
