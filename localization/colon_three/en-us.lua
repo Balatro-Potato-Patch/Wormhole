@@ -33,7 +33,7 @@ return {
                     {
                         "When used on {C:attention}#1#{} Junk Cards",
                         "instead earn {C:money}$#2#{} and",
-                        "remove their enhancements",
+                        "remove their {C:attention}enhancements",
                     }
                 }
             }
@@ -68,7 +68,7 @@ return {
 
         },
         labels = {
-            
+
         },
     }
 }

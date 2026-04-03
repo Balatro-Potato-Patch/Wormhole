@@ -4,11 +4,11 @@ Wormhole.COLON_THREE.C.JunkSet = HEX("ff5e25")
 
 SMODS.ConsumableType {
     key = "JunkSet",
-	primary_colour = Wormhole.COLON_THREE.C.JunkSet,
-	secondary_colour = Wormhole.COLON_THREE.C.JunkSet,
-	collection_rows = { 4, 4 },
-	shop_rate = 0.0,
-	default = "c_worm_asteroid_harvester"
+    primary_colour = Wormhole.COLON_THREE.C.JunkSet,
+    secondary_colour = Wormhole.COLON_THREE.C.JunkSet,
+    collection_rows = { 4, 4 },
+    shop_rate = 0.0,
+    default = "c_worm_asteroid_harvester"
 }
 
 SMODS.Enhancement {
@@ -27,6 +27,31 @@ SMODS.Enhancement {
     end
 }
 
+function Wormhole.COLON_THREE.junk_get_highlighted_cards(cards)
+    local all_junk_selected = true
+    local highlighted = {}
+    for i, v in pairs(cards) do
+        if v.highlighted then
+            table.insert(highlighted, v) --t[#t+1] is marginally faster perf-wise, but this is cleaner
+            if v.config.center.key ~= "m_worm_junk_card" then all_junk_selected = false end
+        end
+    end
+    return highlighted, all_junk_selected
+end
+
+function Wormhole.COLON_THREE.flip_cards_events(cards)
+    for _, card in ipairs(cards) do
+        G.E_MANAGER:add_event(Event({
+            trigger = "after",
+            delay = 0.25,
+            func = function()
+                card:flip()
+                return true
+            end
+        }))
+    end
+end
+
 function Wormhole.COLON_THREE.junk_can_use(func)
     return function(self, card)
         local num = card.ability.extra.junk_num or 1
@@ -38,67 +63,52 @@ function Wormhole.COLON_THREE.junk_can_use(func)
     end
 end
 
-function Wormhole.COLON_THREE.junk_use(func, once)
+local empty_function = function() end
+
+function Wormhole.COLON_THREE.junk_use(config)
+    --[[
+    used config values:
+        config.junk_func | Function | Called with parameters (self, card, cards) while playing cards are flipped. Called during junking
+        config.clean_func | Function | Same as config.junk_func but called during cleaning.
+        config.individual | Function |  Called with parameters (self, card, playing_card, clean_up) on each individual
+            playing card while flipped. Only called if cleaning up.
+    ]]
+
+    config.junk_func = config.junk_func or empty_function
+    config.clean_func = config.clean_func or empty_function
+    config.individual = config.individual or empty_function
+    -- Avoids checks later
+
     return function(self, card)
-        local h = {}
-        local aj = true
-        for i, v in pairs(G.hand.cards) do
-            if v.highlighted then 
-                h[#h+1] = v 
-                if v.config.center.key ~= "m_worm_junk_card" then aj = nil end
+        local hand, clean_up = Wormhole.COLON_THREE.junk_get_highlighted_cards(G.hand.cards)
+        Wormhole.COLON_THREE.flip_cards_events(hand)
+        G.E_MANAGER:add_event(Event({
+            trigger = "after",
+            delay = 0.25,
+            func = function()
+                if clean_up then
+                    config.clean_func(self, card, hand)
+                else
+                    config.junk_func(self, card, hand)
+                end
+                return true
             end
-        end
-        for i, v in ipairs(h) do
-            local card = h[i]
+        }))
+        for _, playing_card in ipairs(hand) do
             G.E_MANAGER:add_event(Event({
                 trigger = "after",
                 delay = 0.25,
                 func = function()
-                    card:flip()
-                    return true
-                end
-            }))
-        end
-        if aj and once then
-            G.E_MANAGER:add_event(Event({
-                trigger = "after",
-                delay = 0.3,
-                func = function()
-                    func(self, card)
-                    for i, v in ipairs(h) do
-                        v:set_ability(G.P_CENTERS.c_base)
+                    if clean_up then
+                        config.individual(self, card, playing_card, clean_up)
+                        playing_card:set_ability("c_base")
+                    else
+                        playing_card:set_ability("m_worm_junk_card")
                     end
                     return true
                 end
             }))
-        else
-            for i, v in ipairs(h) do
-                local card = h[i]
-                G.E_MANAGER:add_event(Event({
-                    trigger = "after",
-                    delay = 0.3,
-                    func = function()
-                        if aj then
-                            func(self, card, v)
-                            v:set_ability(G.P_CENTERS.c_base)
-                        else
-                            v:set_ability(G.P_CENTERS.m_worm_junk_card)
-                        end
-                        return true
-                    end
-                }))
-            end
         end
-        for i, v in ipairs(h) do
-            local card = h[i]
-            G.E_MANAGER:add_event(Event({
-                trigger = "after",
-                delay = 0.25,
-                func = function()
-                    card:flip()
-                    return true
-                end
-            }))
-        end
+        Wormhole.COLON_THREE.flip_cards_events(hand)
     end
 end

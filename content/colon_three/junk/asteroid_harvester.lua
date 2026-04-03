@@ -18,9 +18,11 @@ SMODS.Consumable {
             }
         }
     end,
-    use = Wormhole.COLON_THREE.junk_use(function(self, card)
-        ease_dollars(card.ability.extra.dollars_earn)
-    end, true),
+    use = Wormhole.COLON_THREE.junk_use {
+        clean_func = function(self, card, cards, clean_up)
+            ease_dollars(card.ability.extra.dollars_earn)
+        end,
+    },
     can_use = Wormhole.COLON_THREE.junk_can_use(),
     ppu_coder = {"lordruby"}
 }
