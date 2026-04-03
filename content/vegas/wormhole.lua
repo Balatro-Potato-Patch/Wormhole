@@ -241,7 +241,7 @@ SMODS.Joker{
         return { vars = { numerator, denominator } }
 	end,
 	atlas = "vegas_jokers",
-	pos = {x = 0, y = 0},
+	pos = {x = 3, y = 0},
 	rarity = 2,
 	cost = 7,
 	blueprint_compat = true,
@@ -250,7 +250,7 @@ SMODS.Joker{
 	perishable_compat = true,
 	ppu_team = {"People Found In Vegas"},
 	ppu_coder = {"Jammbo"},
-	ppu_artist = {},
+	ppu_artist = {"Jammbo"},
 	calculate = function(self, card, context)
 		if context.using_consumeable and context.consumeable.ability.set == ("Planet") and SMODS.pseudorandom_probability(card, 'inferiorplanet', 1, card.ability.extra.odds) then
 			local key = context.consumeable.config.center.key
