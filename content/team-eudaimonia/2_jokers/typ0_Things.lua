@@ -36,3 +36,166 @@ SMODS.Joker {
         end
     end
 }
+
+
+--ripped from yahimod
+SMODS.PokerHand({
+    key = "pkr_wow",
+    mult = 5,
+    chips = 30,
+    l_mult = 2,
+    l_chips = 30,
+    example = {
+        { 'H_6', true }, 
+        { 'D_3', true },
+        { 'H_Q', true }, 
+        { 'S_J', true },
+        { 'D_5', true } 
+    },
+    visible = true,
+
+    evaluate = function(parts, hand)
+        if #hand >= 3 then
+            local _has6 = false
+            local _has3 = false
+            local _has5 = false
+            local _hasQ = false
+            local _hasJ = false
+            local eligible_cards = {}
+            local other_hands = next(parts._flush) or next(parts._straight) or next(parts._all_pairs)
+
+            for i, card in ipairs(hand) do
+                if card:get_id() == 6 and _has6 == false then
+                    _has6 = true
+                    eligible_cards[#eligible_cards + 1] = card
+                elseif card:get_id() == 3 and _has3 == false then
+                    _has3 = true
+                    eligible_cards[#eligible_cards + 1] = card
+                elseif card:get_id() == 5 and _has5 == false then
+                    _has5 = true
+                    eligible_cards[#eligible_cards + 1] = card
+                elseif card:get_id() == 12 and _hasQ == false then
+                    _hasQ = true
+                    eligible_cards[#eligible_cards + 1] = card
+                elseif card:get_id() == 11 and _hasJ == false then
+                    _hasJ = true
+                    eligible_cards[#eligible_cards + 1] = card
+                end
+            end
+
+
+            if _has6 and _has3 and _has5 and _hasQ and _hasJ and not other_hands then
+                return{eligible_cards}
+            end
+        end
+
+
+    end,
+
+
+})
+
+SMODS.PokerHand({
+    key = "pkr_wow",
+    mult = 5,
+    chips = 30,
+    l_mult = 3,
+    l_chips = 30,
+    example = {
+        { 'S_6', true},
+        { 'D_3', true},
+        { 'H_Q', true},
+        { 'S_J', true},
+        { 'D_5', true}
+    },
+    visible = false,
+
+    evaluate = function(parts, hand)
+        if #hand >= 5 then
+            local _has3 = false
+            local _has6 = false
+            local _has5 = false
+            local _hasQ = false
+            local _hasJ = false
+            local eligible_cards = {}
+            local other_hands = next(parts._flush) or next(parts._straight) or next(parts._all_pairs)
+
+            for i, card in ipairs(hand) do
+                if card:get_id() == 9 and _has6 == false then
+                    _has6 = true
+                    eligible_cards[#eligible_cards + 1] = card
+                elseif card:get_id() == 8 and _has3 == false then
+                    _has3 = true
+                    eligible_cards[#eligible_cards + 1] = card
+                elseif card:get_id() == 5 and _has5 == false then
+                    _has5 = true
+                    eligible_cards[#eligible_cards + 1] = card
+                elseif card:get_id() == 11 and _hasJ == false then
+                    _hasJ = true
+                    eligible_cards[#eligible_cards + 1] = card
+                elseif card:get_id() == 12 and _hasQ == false then
+                    _hasQ = true
+                    eligible_cards[#eligible_cards + 1] = card
+                end
+            end
+
+
+            if _has3 and _has5 and _has6 and _hasJ and _hasQ and not other_hands then
+                return{eligible_cards}
+            end
+        end
+    end,
+})
+
+SMODS.PokerHand({
+    key = "pkr_wow_f",
+    mult = 10,
+    chips = 300,
+    l_mult = 5,
+    l_chips = 60,
+    example = {
+        { 'S_6', true},
+        { 'D_3', true},
+        { 'H_Q', true},
+        { 'S_J', true},
+        { 'D_5', true}
+    },
+    visible = false,
+
+    evaluate = function(parts, hand)
+        if #hand >= 5 then
+            local _has6 = false
+            local _has3 = false
+            local _has5 = false
+            local _hasQ = false
+            local _hasJ = false
+            local eligible_cards = {}
+            local other_hands =next(parts._straight) or next(parts._all_pairs)
+
+            if not next(parts._flush) then return end
+            for i, card in ipairs(hand) do
+                if card:get_id() == 6 and _has6 == false then
+                    _has6 = true
+                    eligible_cards[#eligible_cards + 1] = card
+                elseif card:get_id() == 8 and _has3 == false then
+                    _has3 = true
+                    eligible_cards[#eligible_cards + 1] = card
+                elseif card:get_id() == 5 and _has5 == false then
+                    _has5 = true
+                    eligible_cards[#eligible_cards + 1] = card
+                elseif card:get_id() == 11 and _hasJ == false then
+                    _hasJ = true
+                    eligible_cards[#eligible_cards + 1] = card
+                elseif card:get_id() == 12 and _hasQ == false then
+                    _hasQ = true
+                    eligible_cards[#eligible_cards + 1] = card
+                end
+            end
+
+
+            if _has3 and _has5 and _has6 and _hasJ and _hasQ and not other_hands then
+                return{eligible_cards}
+            end
+        end
+    end,
+})
