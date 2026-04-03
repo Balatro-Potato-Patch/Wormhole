@@ -14,6 +14,19 @@ Wormhole.LancerFanClub = PotatoPatchUtils.Team {
     end
 }
 
+-- Misc helper functions
+G.lfc_print = function(str)
+    if print and G.GAME.lfc_debug then print(str) end
+end
+G.iter = function(table)
+    local length = 0
+    for _, __ in pairs(table) do
+        length = length + 1
+    end
+    return length
+end
+
+
 -- Atlases
 SMODS.Atlas {
     key = "lfc_devs",
@@ -59,10 +72,11 @@ PotatoPatchUtils.Developer {
     calculate = function(self, context)
         if context.card_added then
             if context.card.ability.set == "Joker" then
-                if not G.GAME.worm_log then G.GAME.worm_log = 0 end
-                G.GAME.worm_log = G.GAME.worm_log + 1
-                if G.GAME.worm_debug then
-                    print("scale jokers log")
+                local cck = context.card.config.center.key
+                if not G.GAME.worm_log then G.GAME.worm_log = {} end
+                if not G.GAME.worm_log[cck] then
+                    G.GAME.worm_log[cck] = true
+                    G.lfc_print(G.GAME.worm_log)
                 end
             end
         end
