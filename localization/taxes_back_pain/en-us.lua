@@ -15,7 +15,7 @@ return {
                 }
             },
             PotatoPatchDev_sdm = {
-                name = 'SDM0',
+                name = 'SDM_0',
                 text = {
                     'placeholder'
                 }
@@ -45,5 +45,36 @@ return {
                 }
             },
         },
+        Joker = {
+            j_worm_spaceship = {
+                name = "Spaceship",
+                text = {
+                    "Does {C:attention}awesome{} stuff!"
+                }
+            }
+        },
+        module = {
+            c_worm_laser = {
+                name = "Laser",
+                text = {
+                    "{C:mult}+#1#{} Mult"
+                }
+            }
+        },
+        Back = {
+            b_worm_spaceship_deck = {
+                name = "Spaceship Deck",
+                text = {
+                    "Start with ship and laser",
+                    "(DEBUG PURPOSES)"
+                },
+            },
+        },
+    },
+    misc = {
+        dictionary = {
+            k_module = "Module",
+            b_module_cards = "Modules",
+        }
     }
 }
