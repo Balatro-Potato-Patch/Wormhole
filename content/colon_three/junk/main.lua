@@ -62,9 +62,9 @@ function Wormhole.COLON_THREE.junk_can_use(func)
         for i, v in pairs(G.hand.highlighted) do
             if v.config.center.key == "m_worm_junk_card" then junk = junk + 1 end
         end
-        local will_cleanup = #G.hand.highlighted == cleanup_num and junk == cleanup_num
-        local will_convert = #G.hand.highlighted ~= 0 and #G.hand.highlighted <= junk_num and junk == 0
-        return G.hand and #G.hand.highlighted ~= 0 and (not func or func(self, card)) and (will_convert or will_cleanup)
+        local will_cleanup = G.hand and #G.hand.highlighted == cleanup_num and junk == cleanup_num
+        local will_convert = G.hand and #G.hand.highlighted == junk_num and junk == 0
+        return (not func or func(self, card)) and (will_convert or will_cleanup)
     end
 end
 

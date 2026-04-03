@@ -35,7 +35,7 @@ return {
                 name = "Asteroid Harvester",
                 text = {
                     {
-                        "Convert up to {C:attention}#1#{} selected",
+                        "Convert {C:attention}#1#{} selected",
                         "non-{C:attention}Junk Cards{} into",
                         "{C:attention}Junk Cards"
                     },
@@ -51,7 +51,7 @@ return {
                 name = "Solar Sail",
                 text = {
                     {
-                        "Convert up to {C:attention}#1#{} selected",
+                        "Convert {C:attention}#1#{} selected",
                         "non-{C:attention}Junk Card{} into",
                         "a {C:attention}Junk Card"
                     },
