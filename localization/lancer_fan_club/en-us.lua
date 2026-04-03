@@ -1,8 +1,8 @@
 return {
     descriptions = {
         PotatoPatch = {
-            PotatoPatchTeam_lancer_fan_club = {name = "Lancer Fan Club"},
-            
+            PotatoPatchTeam_lancer_fan_club = { name = "Lancer Fan Club" },
+
             PotatoPatchDev_ProdByProto = {
                 name = "ProdByProto",
                 text = {
@@ -33,6 +33,21 @@ return {
                     }
                 }
             },
+
+            PotatoPatchDev_j8bit = {
+                name = "J8-Bit",
+                text = {
+                    {
+                        "Just happy to be here!",
+                        "{s:0.8,C:inactive}(temp description)"
+                    },
+                    {
+                        "If you're interested in",
+                        "more of my stuff:",
+                        "{s:0.8,C:inactive}(add socials later)"
+                    }
+                }
+            },
         },
 
         Joker = {
@@ -43,23 +58,48 @@ return {
                     "and {C:money}+$#3#{} per {C:attention}% full{} the ISS'",
                     "{C:chips}water{}, {C:mult}waste{}, and {C:money}urine{} tanks",
                     "are respectively (rounded up)",
-                    "{C:inactive}(Currently {C:chips}+#4#{C:inactive}, {C:mult}+#5#{C:inactive}, {C:money}+$#6#{C:inactive})"
+                    "{C:inactive}(Currently {C:chips}+#4#{C:inactive} Chips, {C:mult}+#5#{C:inactive} Mult, and {C:money}+$#6#{C:inactive})"
                 }
             },
-            j_worm_log = {
+            j_worm_lfc_log = {
                 name = "Joker\'s Log",
                 text = {
                     {
+                        "{C:inactive,s:0.8}#3# Days since Impact",
                         "This Joker gains {C:mult}+#1#{} Mult for every",
-                        "joker obtained this run.",
-                        "{C:inactive}(Currently {}{C:mult}+#2#{} {C:inactive}mult){}",
-                    },
-                    {
-                        "{C:inactive}Joker\'s Log: Stardate 6727247{}",
+                        "{C:attention}unique{} Joker obtained this run",
+                        "{C:inactive}(Currently {}{C:mult}+#2#{} {C:inactive}Mult){}",
                     }
 
                 }
             }
-        }
+        },
+        Tag = {
+            tag_worm_lfc_laser = {
+                name = "Laser Tag",
+                text = {
+                    "{C:red}Destroy{} every",
+                    "{C:attention}#1#{} in {C:attention}full deck{}",
+                },
+            },
+        },
     },
+    misc = {
+        dictionary = {
+            k_lfc_none = "None",
+            k_lfc_brackets_rank = "[rank]",
+            dex_blacephalon_us = {
+                "{s:0.5}From {V:1,s:0.5}Pokémon Ultra Sun{s:0.5}:",
+                "{s:0.5}It slithers toward people. Then, without warning,",
+                "{s:0.5}it triggers the explosion of its own head. It's",
+                "{s:0.5}apparently one kind of Ultra Beast.",
+            },
+            dex_blacephalon_um = {
+                "{s:0.5}From {V:1,s:0.5}Pokémon Ultra Moon{s:0.5}:",
+                "{s:0.5}A UB that appeared from an Ultra Wormhole,",
+                "{s:0.5}it causes explosions, then takes advantage of",
+                "{s:0.5}opponents' surprise to rob them of their vitality."
+            },
+        }
+    }
 }

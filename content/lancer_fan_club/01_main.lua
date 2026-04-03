@@ -22,11 +22,28 @@ SMODS.Atlas {
     path = "lancer_fan_club/devs.png"
 }
 
+SMODS.Atlas {
+    key = "lfc_tags",
+    px = 32,
+    py = 32,
+    path = "lancer_fan_club/tags.png"
+}
+
+SMODS.Atlas {
+    key = "lfc_jokers",
+    px = 71,
+    py = 95,
+    path = "lancer_fan_club/jokers.png"
+}
+
 -- Sounds
 SMODS.Sound {
     key = "lfc_explosion",
     path = "lfc_explosion.ogg"
 }
+
+-- Colors
+
 
 -- Developers
 PotatoPatchUtils.Developer {
@@ -37,7 +54,7 @@ PotatoPatchUtils.Developer {
     atlas = "worm_lfc_devs",
     pos = { x = 0, y = 0 },
     soul_pos = { x = 0, y = 1 },
-    calculate = function(self,context)
+    calculate = function(self, context)
         if context.card_added then
             if context.card.ability.set == "Joker" then
                 if not G.GAME.worm_log then G.GAME.worm_log = 0 end
@@ -60,4 +77,16 @@ PotatoPatchUtils.Developer({
     atlas = "worm_lfc_devs",
     pos = { x = 1, y = 0 },
     soul_pos = { x = 1, y = 1 }
+})
+
+-- J8-Bit
+PotatoPatchUtils.Developer({
+    name = "J8-Bit",
+    colour = HEX('FDB157'),
+    loc = "PotatoPatchDev_j8bit",
+    team = "Lancer Fan Club",
+    atlas = "worm_lfc_devs",
+    pos = { x = 2, y = 0 },
+    soul_pos = { x = 2, y = 1 }
+
 })

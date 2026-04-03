@@ -5,14 +5,18 @@ local joker = SMODS.Joker {
 	config = { extra = { dollars = 3 } },
 	rarity = 2,
 	cost = 6,
-    ppu_coder = {"ellestuff."},
+	ppu_coder = { "ellestuff." },
+	atlas = "lfc_jokers",
+	pos = { x = 1, y = 0 },
 }
 
-local meteor_sprite = love.graphics.newImage(love.image.newImageData(SMODS.NFS.newFileData(SMODS.current_mod.path .. "assets/lancer_fan_club/meteors.png")))
-local explosion_sprite = love.graphics.newImage(love.image.newImageData(SMODS.NFS.newFileData(SMODS.current_mod.path .. "assets/lancer_fan_club/explosion.png")))
+local meteor_sprite = love.graphics.newImage(love.image.newImageData(SMODS.NFS.newFileData(SMODS.current_mod.path ..
+	"assets/lancer_fan_club/meteors.png")))
+local explosion_sprite = love.graphics.newImage(love.image.newImageData(SMODS.NFS.newFileData(SMODS.current_mod.path ..
+	"assets/lancer_fan_club/explosion.png")))
 
-local mx,my=meteor_sprite:getDimensions()
-local ex,ey=explosion_sprite:getDimensions()
+local mx, my = meteor_sprite:getDimensions()
+local ex, ey = explosion_sprite:getDimensions()
 
 local meteor_click = function(meteor)
 	play_sound("worm_lfc_explosion")
@@ -21,54 +25,57 @@ local meteor_click = function(meteor)
 end
 
 local meteors = {}
-local meteor_quad = love.graphics.newQuad(0,0,1,1,1,1)
+local meteor_quad = love.graphics.newQuad(0, 0, 1, 1, 1, 1)
 
 local function create_meteor(value)
 	local meteor = {
-		spr = pseudorandom("worm_lfc_meteorsprite", 0, math.ceil(mx/64)),
+		spr = pseudorandom("worm_lfc_meteorsprite", 0, math.ceil(mx / 64)),
 		vel = {
-			x = pseudorandom("worm_lfc_meteor_velx") * 4,		-- random float in range 0  to 40
-			y = pseudorandom("worm_lfc_meteor_vely") * 4+4,	-- random float in range 40 to 80
+			x = pseudorandom("worm_lfc_meteor_velx") * 4, -- random float in range 0  to 40
+			y = pseudorandom("worm_lfc_meteor_vely") * 4 + 4, -- random float in range 40 to 80
 			rot = pseudorandom("worm_lfc_meteor_velrot") * 2
 		},
 		pos = {
-			x = pseudorandom("worm_lfc_meteor_x")*(love.graphics.getWidth()-128)-64,
+			x = pseudorandom("worm_lfc_meteor_x") * (love.graphics.getWidth() - 128) - 64,
 			y = -64,
-			rot = pseudorandom("worm_lfc_meteor_rot") * math.pi*2
+			rot = pseudorandom("worm_lfc_meteor_rot") * math.pi * 2
 		},
 		dollars = value
 	}
 
-	meteors[#meteors+1] = meteor
+	meteors[#meteors + 1] = meteor
 end
 
 joker.calculate = function(self, card, context)
-	if context.individual and not context.end_of_round and context.cardarea == G.play  then
-		G.E_MANAGER:add_event(Event({func=function()
-			create_meteor(card.ability.extra.dollars)
-		return true end}))
+	if context.individual and not context.end_of_round and context.cardarea == G.play then
+		G.E_MANAGER:add_event(Event({
+			func = function()
+				create_meteor(card.ability.extra.dollars)
+				return true
+			end
+		}))
 	end
 end
 
-local vel_mult = 150 -- Multiplier for meteor velocity
+local vel_mult = 150             -- Multiplier for meteor velocity
 
 local last_mouse_pressed = false -- Using this to track if it's a click so i don't have to add a love.mousepressed hook :)
-local spacetest = false -- Using this to track if it's a click so i don't have to add a love.mousepressed hook :)
+local spacetest = false          -- Using this to track if it's a click so i don't have to add a love.mousepressed hook :)
 
 -- Update hook to move and destroy offscreen meteors
 if not love.update then function love.update(dt) end end
 local update_hook = love.update
 function love.update(dt)
 	update_hook(dt)
-	
+
 	local is_down = love.mouse.isDown(1)
 	local space_down = love.keyboard.isDown("space")
 
-	if is_down and is_down~=last_mouse_pressed then
-		local mx,my = love.mouse.getPosition()
+	if is_down and is_down ~= last_mouse_pressed then
+		local mx, my = love.mouse.getPosition()
 		for i, v in ipairs(meteors) do
-			local dist = math.sqrt(math.abs(mx-v.pos.x)^2 + math.abs(my-v.pos.y)^2)
-			if dist<64 and not v.clicked then
+			local dist = math.sqrt(math.abs(mx - v.pos.x) ^ 2 + math.abs(my - v.pos.y) ^ 2)
+			if dist < 64 and not v.clicked then
 				meteor_click(v)
 				v.clicked = 0
 				break
@@ -78,14 +85,14 @@ function love.update(dt)
 
 	for i, v in ipairs(meteors) do
 		if v.clicked then
-			if v.clicked > 1 then table.remove(meteors,i) end
+			if v.clicked > 1 then table.remove(meteors, i) end
 			v.clicked = v.clicked + dt
 		else
-			v.pos.x = v.pos.x + v.vel.x*dt*vel_mult
-			v.pos.y = v.pos.y + v.vel.y*dt*vel_mult
-			v.pos.rot = (v.pos.rot + v.vel.rot*dt*5) % (math.pi*2)
+			v.pos.x = v.pos.x + v.vel.x * dt * vel_mult
+			v.pos.y = v.pos.y + v.vel.y * dt * vel_mult
+			v.pos.rot = (v.pos.rot + v.vel.rot * dt * 5) % (math.pi * 2)
 
-			if v.pos.y > love.graphics.getHeight()+64 then table.remove(meteors,i) end
+			if v.pos.y > love.graphics.getHeight() + 64 then table.remove(meteors, i) end
 		end
 	end
 
@@ -93,22 +100,21 @@ function love.update(dt)
 	spacetest = space_down
 end
 
-
 -- Draw hook to place meteors onscreen
 if not love.draw then function love.draw() end end
 local draw_hook = love.draw
 function love.draw()
 	draw_hook()
 
-	love.graphics.setColor(1,1,1,1)
+	love.graphics.setColor(1, 1, 1, 1)
 	--love.graphics.print("Meteor Count: "..#meteors,10,50) -- Debug line
 	for i, v in ipairs(meteors) do
 		if v.clicked then
-			local f = math.floor(v.clicked*17)
-			meteor_quad:setViewport(f*71,0,71,100,ex,ey) -- Reposition quad to use the correct frame
+			local f = math.floor(v.clicked * 17)
+			meteor_quad:setViewport(f * 71, 0, 71, 100, ex, ey) -- Reposition quad to use the correct frame
 			love.graphics.draw(explosion_sprite, meteor_quad, v.pos.x, v.pos.y, 0, 2, 2, 35, 55)
 		else
-			meteor_quad:setViewport(v.spr*64,0,64,64,mx,my) -- Reposition quad to use the correct frame
+			meteor_quad:setViewport(v.spr * 64, 0, 64, 64, mx, my) -- Reposition quad to use the correct frame
 			love.graphics.draw(meteor_sprite, meteor_quad, v.pos.x, v.pos.y, v.pos.rot, 2, 2, 32, 32)
 		end
 	end

@@ -17,7 +17,7 @@ local last_piss_ping
 
 local function process_piss_info(...)
     print(...)
-    local ret = ({...})
+    local ret = ({ ... })
     if ret[1] == 200 then
         Wormhole.LancerFanClub.piss_info = json.decode(ret[2])
     end
@@ -46,6 +46,8 @@ SMODS.Joker {
     cost = 6,
     blueprint_compat = true,
     demicoloncompat = true,
+    atlas = "lfc_jokers",
+    pos = { x = 0, y = 0 },
 
     config = {
         extra = {
@@ -56,17 +58,17 @@ SMODS.Joker {
     },
 
     loc_vars = function(self, info_queue, card)
-		return {
-			vars = {
+        return {
+            vars = {
                 card.ability.extra.water,
                 card.ability.extra.shit,
                 card.ability.extra.piss,
                 math.ceil(card.ability.extra.water * Wormhole.LancerFanClub.piss_info.current.cleanWater.value),
                 math.ceil(card.ability.extra.shit * Wormhole.LancerFanClub.piss_info.current.wasteWater.value),
                 math.ceil(card.ability.extra.piss * Wormhole.LancerFanClub.piss_info.current.urine.value)
-			},
+            },
         }
-	end,
+    end,
 
     calculate = function(self, card, context)
         if context.joker_main or context.forcetrigger then
