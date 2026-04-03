@@ -67,6 +67,16 @@ return {
         },
 
         Joker = {
+            j_worm_lfc_meteor_shower = {
+                name = "Meteor Shower",
+                text = {
+                    {
+                        "{C:attention,E:1}Meteors{} fall on screen",
+                        "when cards are scored,",
+                        "giving {C:money}$#1#{} when clicked"
+                    }
+                }
+            },
             j_worm_lfc_pissstream = {
                 name = "Urination Station",
                 text = {
