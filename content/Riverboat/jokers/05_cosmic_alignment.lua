@@ -30,7 +30,7 @@ SMODS.Joker {
         return {
             vars = {
                 card.ability.extra.level_mult,
-                1 + (levels_over_one(SMODS.last_hand.scoring_name) * card.ability.extra.level_mult)
+                1 + (levels_over_one(SMODS.last_hand and SMODS.last_hand.scoring_name or "") * card.ability.extra.level_mult)
             }
         }
     end,
