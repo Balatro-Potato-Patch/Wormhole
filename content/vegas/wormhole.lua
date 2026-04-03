@@ -229,30 +229,69 @@ SMODS.Joker{
 	loc_txt = {
 		name = "Inferior Planet",
 		text = {
-			"Creates an {C:attention}inferior{} {C:blue}Planet{}",
-			"Card when a {C:blue}Planet{} Card is used",
+			"{C:green}#1# in #2#{} chance to create an",
+			"{C:attention}inferior{} {C:blue}Planet{} Card",
+			"when a {C:blue}Planet{} Card is used",
 			"{C:inactive}(Must have room)"
 		}
 	},
-	config = { extra = { }},
+	config = { extra = { odds = 2 }},
 	loc_vars = function(self, info_queue, card)
-		return { vars = {}}
+		local numerator, denominator = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, 'inferiorplanet')
+        return { vars = { numerator, denominator } }
 	end,
 	atlas = "vegas_jokers",
 	pos = {x = 0, y = 0},
-	rarity = 1,
-	cost = 5,
+	rarity = 2,
+	cost = 7,
 	blueprint_compat = true,
 	discovered = true,
 	eternal_compat = true,
 	perishable_compat = true,
 	ppu_team = {"People Found In Vegas"},
-	ppu_coder = {},
+	ppu_coder = {"Jammbo"},
 	ppu_artist = {},
 	calculate = function(self, card, context)
-		if context.joke_main then
-			print(G.P_CENTERS)
-		end
+		if context.using_consumeable and context.consumeable.ability.set == ("Planet") and SMODS.pseudorandom_probability(card, 'inferiorplanet', 1, card.ability.extra.odds) then
+			local key = context.consumeable.config.center.key
+			local hand_type = nil
+			local order = 0
+			for i = 1, #G.P_CENTER_POOLS.Planet do
+				if key == G.P_CENTER_POOLS.Planet[i].key then
+					hand_type = G.GAME.hands[G.P_CENTER_POOLS.Planet[i].config.hand_type]
+					order = hand_type.order
+				end
+			end
+			local hands_lower_equal = {}
+			if hand_type and hand_type.key ~= 'High Card' then
+				for i = 1, #G.P_CENTER_POOLS.Planet do
+					if G.GAME.hands[G.P_CENTER_POOLS.Planet[i].config.hand_type].order > order then
+						hands_lower_equal[#hands_lower_equal + 1] = G.GAME.hands[G.P_CENTER_POOLS.Planet[i].config.hand_type]
+					end
+				end
+				local chosen_hand = pseudorandom_element(hands_lower_equal, 'inferior')
+				G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+				G.E_MANAGER:add_event(Event({
+					trigger = 'before',
+					delay = 0.0,
+					func = function()
+						local _planet = nil
+						for k, v in pairs(G.P_CENTER_POOLS.Planet) do
+							if v.config.hand_type == chosen_hand.key then
+								_planet = v.key
+							end
+						end
+						if _planet then
+
+							SMODS.add_card({ key = _planet })
+						end
+						G.GAME.consumeable_buffer = 0
+						return true
+					end
+				}))
+				return { message = localize('k_plus_planet'), colour = G.C.SECONDARY_SET.Planet }
+			end
+        end
 	end
 }
 
