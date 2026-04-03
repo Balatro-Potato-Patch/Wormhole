@@ -85,6 +85,7 @@ for i, v in pairs({
     "junk/abandoned_wrench",
     "junk/lost_pliers",
     "junk/manhole_cover",
+    "junk/starfish_prime"
 })  do
     assert(SMODS.load_file("content/colon_three/"..v..".lua"))()
 end
