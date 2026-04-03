@@ -59,18 +59,20 @@ return {
                 
             },
         },
-        poker_hand_descriptions = {
-            worm_pkr_wow = {
-                "Play a 6, a 3, a Queen, a Jack, and a 5",
-            },
-            worm_pkr_wow_f = {
+    },
+    misc = {
+            poker_hand_descriptions = {
+                worm_pkr_wow = {
                     "Play a 6, a 3, a Queen, a Jack, and a 5",
-                    "with all cards sharing the same suit",
+                },
+                worm_pkr_wow_f = {
+                        "Play a 6, a 3, a Queen, a Jack, and a 5",
+                        "with all cards sharing the same suit",
+                },
             },
+            poker_hands = {
+                worm_pkr_wow = "Wow!",
+                worm_pkr_wow_f = "Wow! Flush"
+            }
         },
-        poker_hands = {
-            worm_pkr_wow = "Wow!",
-            worm_pkr_wow_f = "Wow! Flush"
-        }
-    }
 }
