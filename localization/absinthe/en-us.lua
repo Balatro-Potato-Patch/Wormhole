@@ -156,6 +156,31 @@ return {
                     "{C:red}#2#{} Joker Slots",
                 }
             },
+            j_worm_abs_heavyweight_joker = {
+                name = {
+                    'Heavyweight Joker',
+                    "{C:inactive,s:0.6}temp name?",
+                },
+                text = {
+                    "This Joker gains {C:chips}+#1#{} Chips",
+                    "when a {C:abs_drinks}Drink{} is {C:abs_drinks}Drank{}",
+                    "{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)",
+                }
+            },
+            j_worm_abs_binary_system = {
+                name = {
+                    'Binary System',
+                    "{C:inactive,s:0.6}temp name?",
+                },
+                text = {
+                    "{C:abs_drinks}Fill{} and {C:attention}copy{} a random owned", 
+                    "{C:abs_drinks}Drink{} if played poker hand is",
+                    "a {C:attention}Straight Flush{} or better",
+                    "{C:red,E:2}self destructs{}",
+                    "{C:inactive}(Must have space!)",
+
+                }
+            },
         },
         Other = {
             p_worm_abs_top_shelf_normal_1 = {
