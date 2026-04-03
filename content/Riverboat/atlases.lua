@@ -5,3 +5,10 @@ SMODS.Atlas({
     px = 71,
     py = 95,
 })
+
+SMODS.Atlas {
+    key = "worm_modifiers",
+    path = "Riverboat/worm_modifiers.png",
+    px = 71,
+    py = 95
+}
