@@ -61,7 +61,13 @@ PotatoPatchUtils.Developer {
     name = "notmario",
     loc = true,
     team = ":3",
-    colour = HEX("c34242"),
+    colour = SMODS.Gradient {
+        key = "colon_three_notmario_gradient",
+        colours = {
+            HEX("c34242"),
+            HEX("ff6868")
+        }
+    },
     atlas = "worm_ct_credits",
     pos = { x = 3, y = 0 }
 }
@@ -69,6 +75,7 @@ PotatoPatchUtils.Developer {
 Wormhole.COLON_THREE.loaded = true
 for i, v in pairs({
     "laika",
+    "dyson_sphere",
     "junk/main",
     "junk/asteroid_harvester",
     "junk/solar_sail",

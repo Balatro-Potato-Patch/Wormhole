@@ -8,7 +8,16 @@ return {
                     "Joker gives {C:attention}+1{}",
                     "temporary level"
                 }
-            }
+            },
+            j_worm_dyson_sphere = {
+                name = "Dyson Sphere",
+                text = {
+                    "Whenever you {C:attention}Clean-up{}, this",
+                    "{C:attention}Joker{} gains {C:mult}+#2#{} Mult for",
+                    "each card cleaned up",
+                    "{C:inactive}(Currently {C:mult}+#1#{C:inactive})"
+                }
+            },
         },
         Enhanced = {
             m_worm_junk_card = {

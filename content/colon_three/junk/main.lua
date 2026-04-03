@@ -115,5 +115,9 @@ function Wormhole.COLON_THREE.junk_use(config)
             }))
         end
         Wormhole.COLON_THREE.flip_cards_events(hand, "tarot2", 0.85, 1)
+
+        if clean_up then
+            SMODS.calculate_context { worm_c3_cleanup = true, cards = hand }
+        end
     end
 end
