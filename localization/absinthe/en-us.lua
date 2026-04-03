@@ -139,32 +139,36 @@ return {
             }
         },
         Other = {
-            p_worm_abs_top_shelf_jumbo_1 = {
-                name = 'Jumbo Top Shelf Pack',
-                text = {
-                    "Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2#{C:abs_drinks} Drinks{} to obtain",
-                },
-            },
-            p_worm_abs_top_shelf_mega_1 = {
-                name = 'Mega Top Shelf Pack',
-                text = {
-                    "Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2#{C:abs_drinks} Drinks{} to obtain",
-                },
-            },
             p_worm_abs_top_shelf_normal_1 = {
                 name = 'Top Shelf Pack',
                 text = {
                     "Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2#{C:abs_drinks} Drinks{} to obtain",
+                    "{C:attention}#2#{C:abs_drinks} Drinks{} to add to",
+                    "your consumables",
                 },
             },
             p_worm_abs_top_shelf_normal_2 = {
                 name = 'Top Shelf Pack',
                 text = {
                     "Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2#{C:abs_drinks} Drinks{} to obtain",
+                    "{C:attention}#2#{C:abs_drinks} Drinks{} to add to",
+                    "your consumables",
+                },
+            },
+            p_worm_abs_top_shelf_jumbo_1 = {
+                name = 'Jumbo Top Shelf Pack',
+                text = {
+                    "Choose {C:attention}#1#{} of up to",
+                    "{C:attention}#2#{C:abs_drinks} Drinks{} to add to",
+                    "your consumables",
+                },
+            },
+            p_worm_abs_top_shelf_mega_1 = {
+                name = 'Mega Top Shelf Pack',
+                text = {
+                    "Choose {C:attention}#1#{} of up to",
+                    "{C:attention}#2#{C:abs_drinks} Drinks{} to add to",
+                    "your consumables",
                 },
             },
             undiscovered_abs_drinks = {

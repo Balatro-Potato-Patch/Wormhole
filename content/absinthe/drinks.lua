@@ -159,7 +159,7 @@ function Card:abs_refill_drink()
             end
         }))
 
-        SMODS.calculate_effect({ message = localize('k_worm_abs_refilled_ex'), colour = G.C.ATTENTION }, self)
+        SMODS.calculate_effect({ message = localize('k_worm_abs_refilled_ex'), colour = G.C.SECONDARY_SET.abs_drinks }, self)
         SMODS.calculate_context({ abs_drink_refilled = true, card = self })
     end
 end
@@ -180,7 +180,7 @@ function Card:abs_empty_drink()
             end
         }))
 
-        SMODS.calculate_effect({ message = localize('k_worm_abs_emptied_ex'), colour = G.C.ATTENTION }, self)
+        SMODS.calculate_effect({ message = localize('k_worm_abs_emptied_ex'), colour = G.C.SECONDARY_SET.abs_drinks }, self)
         SMODS.calculate_context({ abs_drink_emptied = true, card = self })
     end
 end
