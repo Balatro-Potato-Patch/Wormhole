@@ -54,12 +54,12 @@ end
 
 function Wormhole.COLON_THREE.junk_can_use(func)
     return function(self, card)
-        local num = card.ability.extra.junk_num or 1
+        local num = card.ability.extra.cleanup_num or card.ability.extra.junk_num or 1
         local junk = 0
         for i, v in pairs(G.hand.highlighted) do
             if v.config.center.key == "m_worm_junk_card" then junk = junk + 1 end
         end
-        return G.hand and #G.hand.highlighted == num and (not func or func(self, card)) and (junk == 0 or junk == num)
+        return G.hand and #G.hand.highlighted ~= 0 and #G.hand.highlighted <= num and (not func or func(self, card)) and (junk == 0 or junk == num)
     end
 end
 

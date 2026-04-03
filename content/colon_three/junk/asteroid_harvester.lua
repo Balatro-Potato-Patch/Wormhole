@@ -6,6 +6,7 @@ SMODS.Consumable {
     config = {
         extra = {
             junk_num = 2,
+            cleanup_num = 2,
             dollars_earn = 15
         }
     },
@@ -14,6 +15,7 @@ SMODS.Consumable {
         return {
             vars = {
                 card.ability.extra.junk_num,
+                card.ability.extra.cleanup_num,
                 card.ability.extra.dollars_earn
             }
         }
