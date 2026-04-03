@@ -29,12 +29,15 @@ SMODS.Enhancement {
 
 function Wormhole.COLON_THREE.junk_can_use(func)
     return function(self, card)
-        local num = card.ability.extra.cleanup_num or card.ability.extra.junk_num or 1
+        local junk_num = card.ability.extra.junk_num or 1
+        local cleanup_num = card.ability.extra.cleanup_num or 1
         local junk = 0
         for i, v in pairs(G.hand.highlighted) do
             if v.config.center.key == "m_worm_junk_card" then junk = junk + 1 end
         end
-        return G.hand and #G.hand.highlighted ~= 0 and #G.hand.highlighted <= num and (not func or func(self, card)) and (junk == 0 or junk == num)
+        local will_cleanup = #G.hand.highlighted == cleanup_num and junk == cleanup_num
+        local will_convert = #G.hand.highlighted ~= 0 and #G.hand.highlighted <= junk_num and junk == 0
+        return G.hand and #G.hand.highlighted ~= 0 and (not func or func(self, card)) and (will_convert or will_cleanup)
     end
 end
 

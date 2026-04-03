@@ -28,10 +28,27 @@ return {
                     {
                         "Convert up to {C:attention}#1#{} selected",
                         "non-{C:attention}Junk Cards{} into",
-                        "Junk Cards"
+                        "{C:attention}Junk Cards"
                     },
                     {
                         "Clean-up {C:attention}#2#{} {f:6}—{} Earn {C:money}$#3#{}",
+                        "{C:inactive,s:0.8}(You may use this on #2# Junk Cards,",
+                        "{C:inactive,s:0.8}if you do, remove their enhancement",
+                        "{C:inactive,s:0.8}and trigger this effect instead)",
+                    }
+                }
+            },
+            c_worm_solar_sail = {
+                name = "Solar Sail",
+                text = {
+                    {
+                        "Convert up to {C:attention}#1#{} selected",
+                        "non-{C:attention}Junk Card{} into",
+                        "a {C:attention}Junk Card"
+                    },
+                    {
+                        "Clean-up {C:attention}#2#{} {f:6}—{} Give the",
+                        "cleaned-up cards an {C:dark_edition}Edition",
                         "{C:inactive,s:0.8}(You may use this on #2# Junk Cards,",
                         "{C:inactive,s:0.8}if you do, remove their enhancement",
                         "{C:inactive,s:0.8}and trigger this effect instead)",
