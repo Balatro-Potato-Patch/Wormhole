@@ -12,6 +12,27 @@ pattern = 'colours = { dev and dev.colour or G.C.UI.BACKGROUND_WHITE }, scale = 
 position = 'at'
 payload = '''
 colours = (dev and dev.colours) or { dev and dev.colour or G.C.UI.BACKGROUND_WHITE }, scale = 0.27,
-effect = dev and dev.text_effect or nil, shaders = dev and dev.shaders or nil,
+text_effect = dev and dev.text_effect or nil, shaders = dev and dev.shaders or nil,
+'''
+match_indent = true
+
+# make team credit page also use dynatext
+# PotatoPatchUtils.CREDITS.create_team_credit_page()
+[[patches]]
+[patches.pattern]
+target = '=[SMODS PotatoPatchUtils "src/credits.lua"]'
+pattern = 'name = name[1] and name[1][1] or {n=G.UIT.T, config={scale = 0.47, colour = member.colour, text = member.name}}'
+position = 'at'
+payload = '''
+if member.always_use_dynatext or member.text_effect or member.shaders then
+    name = {n=G.UIT.O, config = {object = DynaText({
+        string = member.loc and localize({type = 'name_text', key = member.loc, set = 'PotatoPatch'}) or dev.name or 'ERROR',
+        colours = member.colours or { member.colour or G.C.UI.BACKGROUND_WHITE }, scale = 0.47,
+        text_effect = member.text_effect or nil, shaders = member.shaders or nil,
+        silent = true, shadow = false, y_offset = -0.6,
+    })}}
+else
+    name = name[1] and name[1][1] or {n=G.UIT.T, config={scale = 0.47, colour = member.colour, text = member.name}}
+end
 '''
 match_indent = true

@@ -81,5 +81,7 @@ SMODS.Joker {
 
     calc_dollar_bonus = function(self, card)
         return math.ceil(card.ability.extra.piss * Wormhole.LancerFanClub.piss_info.current.urine.value)
-    end
+    end,
+
+    ppu_coder = {"InvalidOS"}
 }

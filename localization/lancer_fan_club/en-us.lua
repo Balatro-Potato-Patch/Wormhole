@@ -48,6 +48,22 @@ return {
                     }
                 }
             },
+
+            PotatoPatchDev_alexi = {
+                name = "Alexi!",
+                text = {
+                    {
+                        "the weird and deranged",
+                        "shapeshifting slimegirl!"
+                    },
+                    {
+                        "proudly a fucked up lil bastard"
+                    },
+                    {
+                        "lemniscate tomorrow"
+                    }
+                }
+            }
         },
 
         Joker = {

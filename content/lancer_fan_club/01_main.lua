@@ -92,3 +92,32 @@ PotatoPatchUtils.Developer({
     soul_pos = { x = 2, y = 1 }
 
 })
+
+-- Alexi
+local alexi_text_colors = {
+    HEX("45FFDA"),
+    HEX("2AC2FF"),
+    HEX("307FFF"),
+    HEX("C180FF"),
+    HEX("FFC7FF"),
+}
+
+-- very likely to be changed to fit "InvalidOS"
+SMODS.DynaTextEffect {
+    key = "alexi_text",
+    func = function(dynatext, index, letter)
+        local idx = math.min(index, 5)
+        letter.colour = alexi_text_colors[idx]
+        letter.offset.y = math.cos(G.TIMERS.REAL * 2.95 + index) * 9
+    end,
+}
+
+PotatoPatchUtils.Developer {
+    name = "InvalidOS",
+    text_effect = "worm_alexi_text",
+    loc = "PotatoPatchDev_alexi",
+    team = "Lancer Fan Club",
+    atlas = "worm_lfc_devs",
+    pos = { x = 3, y = 0 },
+    soul_pos = { x = 3, y = 1 }
+}
