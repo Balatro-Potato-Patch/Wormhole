@@ -39,7 +39,7 @@ return {
             },
             PotatoPatchDev_Typ0 = {
                 name = "Typ0",
-                text = {"."}
+                text = {"Hit Game Dev Right Here"}
             },
             PotatoPatchDev_Jewel = {
                 name = "Jewel",
@@ -48,6 +48,14 @@ return {
 
 
         },
-
+        Joker = {
+            j_worm_wowsignal = {
+                name = "Wow! Signal",
+                text = {
+                    "man idk",
+                },
+                
+            },
+        },
     }
 }
