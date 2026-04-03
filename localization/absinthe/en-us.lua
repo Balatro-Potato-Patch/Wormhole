@@ -5,12 +5,11 @@ return {
                 name = 'Supergiant Cider',
                 text = {
                     {
-                        "When {C:attention}primed,{}",
-                        "{C:red}+#1#{} Discard when hand",
-                        "is drawn, then is {C:gold}drank{}",
+                        "When {C:attention}primed{}, {C:red}+#1#{} Discard",
+                        "for this Blind, then is {C:abs_drinks}drank{}"
                     },
                     {
-                        "{C:gold}Refill{} by playing a",
+                        "{C:abs_drinks}Refill{} by playing a",
                         "{C:attention}#2#{} or better",
                     }
                 }
@@ -20,13 +19,13 @@ return {
                 text = {
                     {
                         "{C:inactive,s:0.8}Currently Empty{}",
-                        "{C:gold}Refill{} by playing a",
+                        "{C:abs_drinks}Refill{} by playing a",
                         "{C:attention}#2#{} or better",
                     },
                     {
-                        "{C:inactive,s:0.8}Whilst Filled:{}",
-                        "{C:red}+#1#{} Discard when hand,",
-                        "is drawn, then is {C:gold}drank{}",
+                        "{C:inactive,s:0.8}After being Refilled:{}",
+                        "When {C:attention}primed,{} {C:red}+#1#{} Discard",
+                        "for this Blind, then is {C:abs_drinks}drank{}"
                     }
                 }
             },
@@ -34,15 +33,14 @@ return {
                 name = 'Hubble Trouble',
                 text = {
                     {
-                        "When {C:attention}primed,{}", 
-                        "create the {C:planet}Planet{} card",
-                        "of played {C:attention}poker hand{},",
-                        "then is {C:gold}drank{}",
+                        "When {C:attention}primed{}, create the", 
+                        "{C:planet}Planet{} card of next played",
+                        "{C:attention}poker hand{}, then is {C:abs_drinks}drank{}",
+                        "{C:inactive}(Must have space!)",
                         "{C:inactive,s:0.8}(Planet card has $0 sell value)",
-                        "{C:inactive,s:0.8}(Must have space!)",
                     },
                     {
-                        "{C:gold}Refill{} by {C:attention}selling{}",
+                        "{C:abs_drinks}Refill{} by {C:attention}selling{}",
                         "a {C:planet}Planet{} card",
                     }
                 }
@@ -52,16 +50,16 @@ return {
                 text = {
                     {
                         "{C:inactive,s:0.8}Currently Empty{}",
-                        "{C:gold}Refill{} by selling",
+                        "{C:abs_drinks}Refill{} by selling",
                         "a {C:planet}Planet{} card",
                     },
                     {
-                        "{C:inactive,s:0.8}Whilst Filled:{}",
-                        "Create the {C:planet}Planet{} card",
-                        "of played {C:attention}poker hand{},",
-                        "then is {C:gold}drank{}",
+                        "{C:inactive,s:0.8}After being Refilled:{}",
+                        "When {C:attention}primed{}, create the", 
+                        "{C:planet}Planet{} card of next played",
+                        "{C:attention}poker hand{}, then is {C:abs_drinks}drank{}",
+                        "{C:inactive}(Must have space!)",
                         "{C:inactive,s:0.8}(Planet card has $0 sell value)",
-                        "{C:inactive,s:0.8}(Must have space!)",
                     }
                 }
             },
@@ -69,14 +67,14 @@ return {
                 name = 'Moonshine',
                 text = {
                     {
-                        "When {C:attention}primed,{} {X:chips,C:white}X#1#{} Chips if played hand",
-                        "contains a {C:spades}Dark{} suit card,",
-                        "then is {C:gold}drank{}",
+                        "When {C:attention}primed{}, {X:chips,C:white}X#1#{} Chips if",
+                        "played hand contains a",
+                        "{C:spades}Da{C:clubs}rk{} suit card, then is {C:abs_drinks}drank{}",
                     },
                     {
-                        "{C:gold}Refill{} by {C:attention}scoring{}",
-                        "5 {C:diamonds}Light{} suit cards",
-                        "{C:inactive,s:0.8}(#2#/5)",
+                        "{C:abs_drinks}Refill{} by {C:attention}scoring{}",
+                        "#3# {C:diamonds}Lig{C:hearts}ht{} suit cards",
+                        "{C:inactive,s:0.8}(#2#/#3#){}",
                     }
                 }
             },
@@ -84,15 +82,16 @@ return {
                 name = 'Moonshine',
                 text = {
                     {
-                        "{C:gold}Refill{} by {C:attention}scoring{}",
-                        "5 {C:diamonds}Light{} suit cards",
-                        "{C:inactive,s:0.8}(#2#/5)",
+                        "{C:inactive,s:0.8}Currently Empty{}",
+                        "{C:abs_drinks}Refill{} by {C:attention}scoring{}",
+                        "#3# {C:diamonds}Lig{C:hearts}ht{} suit cards",
+                        "{C:inactive,s:0.8}(#2#/#3#){}",
                     },
                     {
-                        "{C:inactive,s:0.8}Whilst Filled:{}",
-                        "{X:chips,C:white}X#1#{} Chips if played hand",
-                        "contains a {C:spades}Dark{} suit card,",
-                        "then is {C:gold}drank{}",
+                        "{C:inactive,s:0.8}After being Refilled:{}",
+                        "When {C:attention}primed{}, {X:chips,C:white}X#1#{} Chips if",
+                        "played hand contains a",
+                        "{C:spades}Da{C:clubs}rk{} suit card, then is {C:abs_drinks}drank{}",
                     },
                 }
             },
@@ -100,14 +99,14 @@ return {
                 name = 'Pina Solada',
                 text = {
                     {
-                        "When {C:attention}primed,{} {X:mult,C:white}X#1#{} Mult if played hand",
-                        "contains a {C:diamonds}Light{} suit card,",
-                        "then is {C:gold}drank{}",
+                        "When {C:attention}primed{}, {X:mult,C:white}X#1#{} Mult if",
+                        "played hand contains a",
+                        "{C:diamonds}Lig{C:hearts}ht{} suit card, then is {C:abs_drinks}drank{}",
                     },
                     {
-                        "{C:gold}Refill{} by {C:attention}scoring{}",
-                        "5 {C:spades}Dark{} suit cards",
-                        "{C:inactive,s:0.8}(#2#/5)",
+                        "{C:abs_drinks}Refill{} by {C:attention}scoring{}",
+                        "#3# {C:spades}Da{C:clubs}rk{} suit cards",
+                        "{C:inactive,s:0.8}(#2#/#3#){}",
                     }
                 }
             },
@@ -115,15 +114,16 @@ return {
                 name = 'Pina Solada',
                 text = {
                     {
-                        "{C:gold}Refill{} by {C:attention}scoring{}",
-                        "5 {C:spades}Dark{} suit cards",
-                        "{C:inactive,s:0.8}(#2#/5)",
+                        "{C:inactive,s:0.8}Currently Empty{}",
+                        "{C:abs_drinks}Refill{} by {C:attention}scoring{}",
+                        "#3# {C:spades}Da{C:clubs}rk{} suit cards",
+                        "{C:inactive,s:0.8}(#2#/#3#){}",
                     },
                     {
-                        "{C:inactive,s:0.8}Whilst Filled:{}",
-                        "{X:mult,C:white}X#1#{} Mult if played hand",
-                        "contains a {C:diamonds}Light{} suit card,",
-                        "then is {C:gold}drank{}",
+                        "{C:inactive,s:0.8}After being Refilled:{}",
+                        "When {C:attention}primed{}, {X:mult,C:white}X#1#{} Mult if",
+                        "played hand contains a",
+                        "{C:diamonds}Lig{C:hearts}ht{} suit card, then is {C:abs_drinks}drank{}",
                     },
                 }
             },
@@ -132,8 +132,9 @@ return {
             j_worm_abs_clg = {
                 name = 'Cosmically Large Glass',
                 text = {
-                    'When {C:attention}Blind{} is selected,',
-                    'create an {C:attention}Empty {C:abs_drinks}Drink'
+                    "When {C:attention}Blind{} is selected,",
+                    "create an {C:attention}Empty {C:abs_drinks}Drink",
+                    "{C:inactive}(Must have space!)",
                 }
             }
         },
@@ -142,28 +143,28 @@ return {
                 name = 'Jumbo Top Shelf Pack',
                 text = {
                     "Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2#{C:abs_drink} Drinks{}",
+                    "{C:attention}#2#{C:abs_drinks} Drinks{} to obtain",
                 },
             },
             p_worm_abs_top_shelf_mega_1 = {
                 name = 'Mega Top Shelf Pack',
                 text = {
                     "Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2#{C:abs_drink} Drinks{}",
+                    "{C:attention}#2#{C:abs_drinks} Drinks{} to obtain",
                 },
             },
             p_worm_abs_top_shelf_normal_1 = {
                 name = 'Top Shelf Pack',
                 text = {
                     "Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2#{C:abs_drink} Drinks{}",
+                    "{C:attention}#2#{C:abs_drinks} Drinks{} to obtain",
                 },
             },
             p_worm_abs_top_shelf_normal_2 = {
                 name = 'Top Shelf Pack',
                 text = {
                     "Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2#{C:abs_drink} Drinks{}",
+                    "{C:attention}#2#{C:abs_drinks} Drinks{} to obtain",
                 },
             },
             undiscovered_abs_drinks = {

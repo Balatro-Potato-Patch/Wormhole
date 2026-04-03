@@ -9,64 +9,8 @@ SMODS.ConsumableType {
     shop_rate = 0.8
 }
 
-SMODS.attribute {
+SMODS.Attribute {
     key = 'drinks'
-}
-
-SMODS.Booster {
-    key = "abs_top_shelf_jumbo_1",
-    kind = "abs_drinks",
-    group_key = "k_worm_abs_top_shelf_pack",
-    pos = {
-        x = 2,
-        y = 0
-    },
-    config = {
-        extra = 4,
-        choose = 1
-    },
-    ppu_coder = { 'theAstra' },
-    ppu_team = { 'absinthe' },
-    cost = 7,
-    weight = 0.48,
-    select_card = 'consumeables',
-    create_card = function(self, card)
-        return create_card("abs_drinks", G.pack_cards, nil, nil, true, true, nil, "worm_abs_top_shelf")
-    end,
-    ease_background_colour = function(self)
-
-    end,
-    loc_vars = function(self, info_queue, card)
-        return { vars = { math.min(card.ability.choose + (G.GAME.modifiers.booster_choice_mod or 0), math.max(1, card.ability.extra + (G.GAME.modifiers.booster_size_mod or 0))), math.max(1, card.ability.extra + (G.GAME.modifiers.booster_size_mod or 0)) } }
-    end
-}
-
-SMODS.Booster {
-    key = "abs_top_shelf_mega_1",
-    kind = "abs_drinks",
-    group_key = "k_worm_abs_top_shelf_pack",
-    pos = {
-        x = 2,
-        y = 0
-    },
-    config = {
-        extra = 4,
-        choose = 2
-    },
-    ppu_coder = { 'theAstra' },
-    ppu_team = { 'absinthe' },
-    cost = 10,
-    weight = 0.12,
-    select_card = 'consumeables',
-    create_card = function(self, card)
-        return create_card("abs_drinks", G.pack_cards, nil, nil, true, true, nil, "worm_abs_top_shelf")
-    end,
-    ease_background_colour = function(self)
-
-    end,
-    loc_vars = function(self, info_queue, card)
-        return { vars = { math.min(card.ability.choose + (G.GAME.modifiers.booster_choice_mod or 0), math.max(1, card.ability.extra + (G.GAME.modifiers.booster_size_mod or 0))), math.max(1, card.ability.extra + (G.GAME.modifiers.booster_size_mod or 0)) } }
-    end
 }
 
 SMODS.Booster {
@@ -125,6 +69,61 @@ SMODS.Booster {
     end
 }
 
+SMODS.Booster {
+    key = "abs_top_shelf_jumbo_1",
+    kind = "abs_drinks",
+    group_key = "k_worm_abs_top_shelf_pack",
+    pos = {
+        x = 2,
+        y = 0
+    },
+    config = {
+        extra = 4,
+        choose = 1
+    },
+    ppu_coder = { 'theAstra' },
+    ppu_team = { 'absinthe' },
+    cost = 7,
+    weight = 0.48,
+    select_card = 'consumeables',
+    create_card = function(self, card)
+        return create_card("abs_drinks", G.pack_cards, nil, nil, true, true, nil, "worm_abs_top_shelf")
+    end,
+    ease_background_colour = function(self)
+
+    end,
+    loc_vars = function(self, info_queue, card)
+        return { vars = { math.min(card.ability.choose + (G.GAME.modifiers.booster_choice_mod or 0), math.max(1, card.ability.extra + (G.GAME.modifiers.booster_size_mod or 0))), math.max(1, card.ability.extra + (G.GAME.modifiers.booster_size_mod or 0)) } }
+    end
+}
+
+SMODS.Booster {
+    key = "abs_top_shelf_mega_1",
+    kind = "abs_drinks",
+    group_key = "k_worm_abs_top_shelf_pack",
+    pos = {
+        x = 2,
+        y = 0
+    },
+    config = {
+        extra = 4,
+        choose = 2
+    },
+    ppu_coder = { 'theAstra' },
+    ppu_team = { 'absinthe' },
+    cost = 10,
+    weight = 0.12,
+    select_card = 'consumeables',
+    create_card = function(self, card)
+        return create_card("abs_drinks", G.pack_cards, nil, nil, true, true, nil, "worm_abs_top_shelf")
+    end,
+    ease_background_colour = function(self)
+
+    end,
+    loc_vars = function(self, info_queue, card)
+        return { vars = { math.min(card.ability.choose + (G.GAME.modifiers.booster_choice_mod or 0), math.max(1, card.ability.extra + (G.GAME.modifiers.booster_size_mod or 0))), math.max(1, card.ability.extra + (G.GAME.modifiers.booster_size_mod or 0)) } }
+    end
+}
 
 --#endregion
 
@@ -285,7 +284,20 @@ SMODS.Consumable { -- Supergiant Cider
         end
     end,
     use = function(self, card, area, copier)
-        card:abs_toggle_drink_prime()
+        if G.GAME.blind.in_blind then
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    ease_discard(card.ability.extra.discards)
+                    SMODS.calculate_effect(
+                        { message = localize { type = 'variable', key = 'a_discards', vars = { card.ability.extra.discards } }, colour = G.C.RED, },
+                        card)
+                    card:abs_empty_drink()
+                    return true
+                end
+            }))
+        else
+            card:abs_toggle_drink_prime()
+        end
     end,
     can_use = function(self, card)
         return card.ability.drink_values.filled
@@ -383,7 +395,7 @@ SMODS.Consumable { -- Moonshine
             visibly_filled = true,
             primed = false
         },
-        extra = { xchips = 2, light_counter = 0 },
+        extra = { xchips = 2, light_counter = 0, light_counter_req = 5 },
     },
     loc_vars = function(self, info_queue, card)
         local key
@@ -393,14 +405,15 @@ SMODS.Consumable { -- Moonshine
             key = self.key
         end
         return { key = key, vars = { 
-            card.ability.extra.xchips, card.ability.extra.light_counter
+            card.ability.extra.xchips, card.ability.extra.light_counter, card.ability.extra.light_counter_req
         } }
     end,
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play and not card.ability.drink_values.filled and
         (context.other_card:is_suit("Hearts") or context.other_card:is_suit("Diamonds")) and not context.repetition then
             card.ability.extra.light_counter = card.ability.extra.light_counter + 1
-            if card.ability.extra.light_counter >= 5 then
+            if card.ability.extra.light_counter >= card.ability.extra.light_counter_req then
+                card.ability.extra.light_counter = 0
                 card:abs_refill_drink()
             end
         end
@@ -451,7 +464,7 @@ SMODS.Consumable { -- Pina Solada
             visibly_filled = true,
             primed = false
         },
-        extra = { xmult = 2, dark_counter = 0 },
+        extra = { xmult = 2, dark_counter = 0, dark_counter_req = 5 },
     },
     loc_vars = function(self, info_queue, card)
         local key
@@ -461,14 +474,15 @@ SMODS.Consumable { -- Pina Solada
             key = self.key
         end
         return { key = key, vars = { 
-            card.ability.extra.xmult, card.ability.extra.dark_counter
+            card.ability.extra.xmult, card.ability.extra.dark_counter, card.ability.extra.dark_counter_req
         } }
     end,
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play and not card.ability.drink_values.filled and
         (context.other_card:is_suit("Clubs") or context.other_card:is_suit("Spades")) and not context.repetition then
             card.ability.extra.dark_counter = card.ability.extra.dark_counter + 1
-            if card.ability.extra.dark_counter >= 5 then
+            if card.ability.extra.dark_counter >= card.ability.extra.dark_counter_req then
+                card.ability.extra.dark_counter = 0
                 card:abs_refill_drink()
             end
         end
