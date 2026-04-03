@@ -65,6 +65,15 @@ return {
                     "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)"
                 }
             }
+        },
+        Enhanced = {
+            m_worm_riverboat_stardust = {
+                name = "Stardust Card",
+                text = {
+                    "Adds {C:chips}+#1#{} Chips or {C:mult}+#2#{} Mult",
+                    "to played hand if scored"
+                }
+            }
         }
     }
 }

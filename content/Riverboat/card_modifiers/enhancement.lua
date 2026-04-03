@@ -10,6 +10,9 @@ SMODS.Enhancement {
             mult = 1
         }
     },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.chips, card.ability.extra.mult } }
+    end,
     calculate = function(self, card, context)
         if context.before and context.cardarea == G.play then
             if SMODS.in_scoring(card, context.scoring_hand) then
