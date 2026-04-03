@@ -1,6 +1,8 @@
+Wormhole.TEAM_MEOW = {}
+
 PotatoPatchUtils.Team({
 	name = "meow",
-	colour = HEX("f9d0d1"),
+	colour = HEX("F9D0D1"),
 	loc = true,
 })
 
@@ -57,7 +59,7 @@ PotatoPatchUtils.Developer({
 
 PotatoPatchUtils.Developer({
 	name = "silverautumn",
-	colour = G.C.UI.TEXT_LIGHT, -- Change this
+	colour = HEX("FF0044"),
 	loc = true,
 	team = "meow",
 })

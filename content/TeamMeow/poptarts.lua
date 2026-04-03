@@ -1,0 +1,39 @@
+-- SMODS.ConsumableType({
+-- 	key = "meow_poptart",
+-- 	primary_colour = lighten(G.C.BLUE, 0.3),
+-- 	secondary_colour = HEX("F9D0D1"),
+-- 	shop_rate = 4,
+-- })
+
+-- SMODS.Atlas({
+-- 	key = "meow_placeholder_poptart",
+-- 	px = 71,
+-- 	py = 95,
+-- 	path = "Team Meow/placeholder_poptart.png",
+-- })
+
+-- Wormhole.TEAM_MEOW.Poptart = SMODS.Consumable:extend({
+-- 	set = "meow_poptart",
+-- 	select_card = "consumeables",
+-- 	atlas = "worm_meow_placeholder_poptart",
+-- 	nyan_calculate = function(self, poptart, card, context) end,
+-- 	nyan_update = function(self, poptart, card, dt) end,
+-- })
+
+-- -- Joker calculation hook to let Poptarts utilize the context system
+-- -- Poptart effects always trigger after Joker effects, and cannot be copied or retriggered
+-- local calc_joker_hook = Card.calculate_joker
+-- function Card:calculate_joker(context, ...)
+-- 	local ret = calc_joker_hook(self, context, ...)
+-- 	local poptart_rets = {}
+-- 	if not context.blueprint and not context.retrigger_joker and self.ability.meow_poptarts then
+-- 		for _, poptart in ipairs(self.ability.meow_poptarts) do
+-- 			local obj = G.P_CENTERS[poptart.key] or {}
+-- 			if obj.nyan_calculate and type(obj.nyan_calculate) == "function" then
+-- 				poptart_rets[#poptart_rets + 1] = obj:nyan_calculate(poptart, self, context)
+-- 			end
+-- 		end
+-- 	end
+-- 	ret = SMODS.merge_effects(ret, unpack(poptart_rets))
+-- 	return ret
+-- end

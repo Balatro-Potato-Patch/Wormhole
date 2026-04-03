@@ -2,3 +2,5 @@
 .luarc.json
 .lovelyignore
 /.vscode
+downscale_image.py
+upscale_image.py

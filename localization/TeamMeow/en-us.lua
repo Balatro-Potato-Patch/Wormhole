@@ -64,5 +64,12 @@ return {
 			},
 		},
 	},
-	misc = {},
+	misc = {
+        dictionary = {
+
+        },
+        labels = {
+            
+        },
+    },
 }
