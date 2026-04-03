@@ -54,6 +54,16 @@ return {
                     "{X:purple,C:white}#1#X{} the product of its {C:chips}Chips{} and {C:mult}Mult",
                     "to {C:purple}Score{} immediately"
                 }
+            },
+            j_worm_riverboat_calignment = {
+                name = "Cosmic Alignment",
+                text = {
+                    "Gives {X:mult,C:white}X#1#{} Mult for",
+                    "every level {C:attention}above 1",
+                    "on all poker hands which",
+                    "are {C:red}not{} the played hand",
+                    "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)"
+                }
             }
         }
     }
