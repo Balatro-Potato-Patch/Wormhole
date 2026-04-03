@@ -39,7 +39,8 @@ PotatoPatchUtils.Developer {
         }
     },
     atlas = "worm_ct_credits",
-    pos = { x = 1, y = 0 }
+    pos = { x = 1, y = 0 },
+    calculate = function(self, context) return end -- empty for hookability elsewhere
 }
 
 PotatoPatchUtils.Developer {
@@ -77,6 +78,7 @@ for i, v in pairs({
     "laika",
     "dyson_sphere",
     "junk/main",
+    "junk/junk_hands",
     "junk/packs",
     "junk/asteroid_harvester",
     "junk/solar_sail",

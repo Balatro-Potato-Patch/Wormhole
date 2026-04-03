@@ -22,6 +22,7 @@ function Game:start_run(args)
             chips = 1,
             mult = 0,
             retriggers = 1,
+            x_hand_stats = 1.5,
         }
     end
 end
@@ -55,6 +56,13 @@ SMODS.Enhancement {
             return {
                 chips = (G.GAME.worm_c3_junk_stats or {}).chips or 1,
                 mult = (G.GAME.worm_c3_junk_stats or {}).mult or nil,
+            }
+        end
+        if context.initial_scoring_step and context.cardarea == G.play then
+            hand_chips = mod_chips(hand_chips * (G.GAME.worm_c3_junk_stats or {}).x_hand_stats or 1.5)
+            mult = mod_mult(mult * (G.GAME.worm_c3_junk_stats or {}).x_hand_stats or 1.5)
+            return {
+                message = "Junked!"
             }
         end
     end
