@@ -116,6 +116,16 @@ return {
                     "{C:attention}#1#s{} held in hand",
                     "are added to played {C:attention}poker hand"
                 }
+            },
+            j_worm_lfc_brain_scrambler = {
+                name = {
+                    "Brain Scrambler"
+                },
+                text = {
+                    "Retrigger and",
+                    "{C:attention,E:1}shuffle{} all",
+                    "cards played",
+                }
             }
         },
         Tag = {

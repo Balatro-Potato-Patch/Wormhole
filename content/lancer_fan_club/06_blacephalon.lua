@@ -1,8 +1,8 @@
 -- Blacephalon
 SMODS.Joker {
     key = "lfc_blacephalon",
-    blueprint_compat = false,
-    perishable_compat = false,
+    blueprint_compat = true,
+    perishable_compat = true,
     eternal_compat = true,
     rarity = 2,
     cost = 8,
