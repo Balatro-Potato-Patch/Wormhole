@@ -8,6 +8,8 @@ SMODS.Joker({
     blueprint_compat = true,
     discovered = true,
     config = { extra = { mult = 0, gain = 5 } },
+    ppu_coder = {"fooping"},
+    ppu_team = {"riverboat"},
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.mult, card.ability.extra.gain } }
     end,
