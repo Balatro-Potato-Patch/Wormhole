@@ -14,17 +14,3 @@ if PotatoPatchUtils then
     -- Reset Game Globals func to hook
     function Wormhole.reset_game_globals(run_start) end
 end
-
--- Atlas registrations
-SMODS.Atlas({
-    key = "worm_jokers",
-    path = "Riverboat/worm_jokers.png",
-    px = 71,
-    py = 95,
-})
-
--- Load utilities (Rarity, Helpers, Tracking)
-SMODS.load_file("content/Riverboat/utils.lua")()
-
--- Load Joker definitions
-SMODS.load_file("content/Riverboat/jokers.lua")()
