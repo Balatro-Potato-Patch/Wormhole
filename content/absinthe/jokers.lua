@@ -1,7 +1,17 @@
+SMODS.Atlas {
+    key = "abs_jokers",
+    path = 'absinthe/abs_jokers.png',
+    px = 71,
+    py = 95
+}
+
 SMODS.Joker {
     key = 'abs_clg',
     rarity = 2,
     cost = 5,
+    atlas = 'worm_abs_jokers',
+    pos = { x = 0, y = 0 },
+    ppu_artist = { 'nixthatoneartist' },
     ppu_coder = { 'theAstra' },
     ppu_team = { 'absinthe' },
     calculate = function(self, card, context)
