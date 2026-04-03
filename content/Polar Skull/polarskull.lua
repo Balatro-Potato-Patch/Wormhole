@@ -5,6 +5,16 @@ SMODS.Atlas {
 	py = 95,
 }
 
+local sounds = NFS.getDirectoryItems(SMODS.current_mod.path.."assets/sounds")
+for _, filename in pairs(sounds) do
+	if string.sub(filename, string.len(filename) - 3) == '.ogg' then
+		SMODS.Sound({
+			key = string.sub(filename, 1, string.len(filename) - 4),
+			path = filename
+		})
+	end
+end
+
 SMODS.ConsumableType{
 	key = "polarskull_rocket",
 	primary_colour = HEX("4f6367"),
@@ -12,6 +22,10 @@ SMODS.ConsumableType{
 	default = "c_worm_polarskull_vostok1",
 	shop_rate = 2 --Half the default rate of Planet Cards
 }
+
+local ACTIVE_SOUND_LENGTH = 4.750
+local ACTIVE_SOUND_START = 0.500
+local active_sound_timer = ACTIVE_SOUND_START
 
 local function register_rocket(args)
 	args.key = "polarskull_"..args.key
@@ -39,14 +53,19 @@ local function register_rocket(args)
 		return not card.ability.extra.active
 	end
 	args.use = args.use or function(self, card, area)
+		local other = false
 		for _, other_card in ipairs(G.consumeables.cards) do
 			if other_card.ability.set == "polarskull_rocket" and other_card.ability.extra.active and not other_card.getting_sliced then
 				other_card.ability.extra.active = false
 				other_card:start_dissolve()
+				other = true
 			end
 		end
 		card.ability.extra.active = true
-		SMODS.calculate_effect({message = localize("k_active_ex")}, card)
+		SMODS.calculate_effect({message = localize("k_active_ex"), sound = "worm_polarskull_rocketlaunch"}, card)
+		if not other then
+			active_sound_timer = ACTIVE_SOUND_START
+		end
 	end
 	args.calculate = args.calculate or function(self, card, context)
 		if not card.ability.extra.active then return end
@@ -61,6 +80,14 @@ local function register_rocket(args)
 			return {message = localize{type = "variable", key = "k_polarskull_left", vars = {card.ability.extra.rounds}}}
 		elseif context.check_eternal and context.other_card == card then
 			return {no_destroy = true}
+		end
+	end
+	args.update = args.update or function(self, card, dt)
+		if not card.ability.extra.active then return end
+		active_sound_timer = active_sound_timer - dt
+		if active_sound_timer <= 0 then
+			active_sound_timer = ACTIVE_SOUND_LENGTH
+			play_sound("worm_polarskull_rocketactive", nil, 0.5)
 		end
 	end
 
