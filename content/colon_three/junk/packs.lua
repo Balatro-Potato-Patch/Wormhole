@@ -40,6 +40,10 @@ for _, booster_type in ipairs({
 				return { vars = { cfg.choose, cfg.extra }, key = self.key:sub(1, -3) }
 			end,
 			group_key = "k_junkset_pack",
+			ease_background_colour = function(self)
+				ease_colour(G.C.DYN_UI.MAIN, HEX("233854"))
+				ease_background_colour({ new_colour = HEX("233854"), special_colour = HEX("0a0d28"), contrast = 2 })
+			end,
 		})
 	end
 end

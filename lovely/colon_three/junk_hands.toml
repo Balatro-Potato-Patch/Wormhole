@@ -40,3 +40,33 @@ payload = '''
 
 '''
 match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = 'game.lua'
+pattern = '''
+    if G.SPLASH_BACK then
+        if G.debug_background_toggle then
+            love.graphics.clear({0,1,0,1})
+        else
+            love.graphics.push()
+            G.SPLASH_BACK:translate_container()
+            G.SPLASH_BACK:draw()
+            love.graphics.pop()
+        end
+    end
+'''
+position = 'after'
+payload = '''
+    if G.SPLASH_JUNK_PACK then
+        if G.debug_background_toggle then
+            
+        else
+            love.graphics.push()
+            G.SPLASH_JUNK_PACK:translate_container()
+            G.SPLASH_JUNK_PACK:draw()
+            love.graphics.pop()
+        end
+    end
+'''
+match_indent = true
