@@ -1,44 +1,41 @@
-bsfx = function(str,prefix)
-    return ((prefix == true and "worm_") or "").."lfc_berry_"..str
-end
 SMODS.Sound({
-    key = bsfx("wow"),
-    path = bsfx("wow")..".ogg",
+    key = "lfc_berry_wow",
+    path = "lfc_berry_wow.ogg",
     pitch = 1
 })
 SMODS.Sound({
-    key = bsfx("sfx1"),
-    path = bsfx("sfx1")..".ogg",
+    key = "lfc_berry_sfx1",
+    path = "lfc_berry_sfx1.ogg",
     pitch = 1
 })
 SMODS.Sound({
-    key = bsfx("sfx2"),
-    path = bsfx("sfx2")..".ogg",
+    key = "lfc_berry_sfx2",
+    path = "lfc_berry_sfx2.ogg",
     pitch = 1
 })
 SMODS.Sound({
-    key = bsfx("sfx3"),
-    path = bsfx("sfx3")..".ogg",
+    key = "lfc_berry_sfx3",
+    path = "lfc_berry_sfx3.ogg",
     pitch = 1
 })
 SMODS.Sound({
-    key = bsfx("sfx4"),
-    path = bsfx("sfx4")..".ogg",
+    key = "lfc_berry_sfx4",
+    path = "lfc_berry_sfx4.ogg",
     pitch = 1
 })
 SMODS.Sound({
-    key = bsfx("sfx5"),
-    path = bsfx("sfx5")..".ogg",
+    key = "lfc_berry_sfx5",
+    path = "lfc_berry_sfx5.ogg",
     pitch = 1
 })
 SMODS.Sound({
-    key = bsfx("ante"),
-    path = bsfx("ante")..".ogg",
+    key = "lfc_berry_ante",
+    path = "lfc_berry_ante.ogg",
     pitch = 1
 })
 SMODS.Sound({
-    key = bsfx("secret"),
-    path = bsfx("secret")..".ogg",
+    key = "lfc_berry_secret",
+    path = "lfc_berry_secret.ogg",
     pitch = 1
 })
 
@@ -63,7 +60,7 @@ SMODS.Joker({
         local cae = card.ability.extra
         if context.card_added and not context.repetition then
             if context.card == card then
-                play_sound(bsfx("wow",1),1,0.6)
+                play_sound("worm_lfc_berry_wow",1,0.6)
             end
         end
 
@@ -73,7 +70,7 @@ SMODS.Joker({
                     mult = cae.xmult,
                     remove_default_message = true,
                     message = localize{type = "variable", key = "a_xmult", vars = {cae.xmult}},
-                    sound = bsfx("sfx",1)..pseudorandom("moonberry xmult sfx",1,5),
+                    sound = "worm_lfc_berry_sfx"..pseudorandom("moonberry_xmult_sfx",1,5),
                     colour = G.C.MULT
                 }
             end
@@ -86,7 +83,7 @@ SMODS.Joker({
                 end
                 return{ 
                     func = function()
-                        play_sound(bsfx("ante",1),1,0.6)
+                        play_sound("worm_lfc_berry_ante",1,0.6)
                     end
                 }
             end
@@ -95,7 +92,7 @@ SMODS.Joker({
                 SMODS.add_card({"j_worm_lfc_fw"})
                 return{ 
                     func = function()
-                        play_sound(bsfx("secret",1),1,0.6)
+                        play_sound("worm_lfc_berry_secret",1,0.6)
                     end
                 }
             end
