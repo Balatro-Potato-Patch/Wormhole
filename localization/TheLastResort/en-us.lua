@@ -38,6 +38,43 @@ end
 
 return {
 	descriptions = {
+		Back = {
+			b_worm_tlr_astrologist = {
+				name = "Astrologist's Deck",
+				text = {
+					'Start run with',
+                    '{C:worm_tlr_constellation,T:v_worm_tlr_skywatching}#1#{}',
+                    'and {C:worm_tlr_constellation,T:v_worm_tlr_stargazing}#2#{}',
+				}
+			}
+		},
+		Joker = {
+			j_worm_tlr_chert = {
+				name = 'Chert',
+				text = {
+					'Create a tier {C:attention}1{}',
+					'or {C:attention}2{C:worm_tlr_constellation} Constellation{}',
+					'when {C:attention}Blind{} is selected',
+					'{C:inactive}(Must have room){}',
+				}
+			}
+		},
+		Voucher = {
+			v_worm_tlr_skywatching = {
+				name = 'Skywatching',
+				text = {
+					'Tier {C:attention}1{C:worm_tlr_constellation} Constellations{}',
+            		'may appear in the shop'
+				}
+			},
+			v_worm_tlr_stargazing = {
+				name = 'Stargazing',
+				text = {
+					'Higher tier {C:worm_tlr_constellation}Constellations{}',
+            		'may appear in the shop'
+				}
+			}
+		},
 		worm_tlr_constellation = CONSTELLATIONS,
 		PotatoPatch = {
 			PotatoPatchTeam_TLR = {name = "The Last Resort"},
@@ -62,7 +99,7 @@ return {
 			PotatoPatchDev_Amphiapple = {
 				name = "Amphiapple",
 				text = {
-					"fill out pls"
+					"h"
 				}
 			},
 			PotatoPatchDev_Aura2247 = {
