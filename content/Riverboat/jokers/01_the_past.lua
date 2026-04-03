@@ -7,9 +7,10 @@ SMODS.Joker({
     cost = 20,
     blueprint_compat = true,
     discovered = true,
-    ppu_artist = {"fooping"},
-    ppu_coder = {"fooping"},
-    ppu_team = {"riverboat"},
+    ppu_artist = { "fooping" },
+    ppu_coder = { "fooping" },
+    ppu_team = { "riverboat" },
+    attributes = {},
     loc_vars = function(self, info_queue, card)
         local hands = G.GAME and G.GAME.hands_played or 0
         local bought = G.GAME and G.GAME.worm_jokers_bought or 0
