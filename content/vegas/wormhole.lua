@@ -183,13 +183,13 @@ SMODS.Joker{
 		text = {
 			"{C:attention}+#2#{} Hand Size",
 			"Gains {C:attention}+#1#{} Hand Size for",
-			"every {C:attention}2{} {C:blue}Planet{} Cards used",
+			"every {C:attention}#4#{} {C:blue}Planet{} Cards used",
 			"{C:attention}#3#{} {C:inactive}Planet Cards left"
 		}
 	},
-	config = { extra = { h_size = 1, h_size_gain = 1, counter = 2 }},
+	config = { extra = { h_size = 1, h_size_gain = 1, counter = 3, max = 3 }},
 	loc_vars = function(self, info_queue, card)
-		return { vars = { card.ability.extra.h_size_gain, card.ability.extra.h_size, card.ability.extra.counter }}
+		return { vars = { card.ability.extra.h_size_gain, card.ability.extra.h_size, card.ability.extra.counter, card.ability.extra.max }}
 	end,
 	atlas = "vegas_jokers",
 	pos = {x = 2, y = 0},
@@ -208,7 +208,7 @@ SMODS.Joker{
 				G.hand:change_size(-card.ability.extra.h_size)
 				card.ability.extra.h_size = card.ability.extra.h_size + card.ability.extra.h_size_gain
 				G.hand:change_size(card.ability.extra.h_size)
-				card.ability.extra.counter = 2
+				card.ability.extra.counter = card.ability.extra.max
 				return {
 					message = "Upgrade!"
 				}
