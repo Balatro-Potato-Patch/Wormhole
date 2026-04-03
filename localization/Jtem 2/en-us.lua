@@ -20,6 +20,19 @@ return {
 					},
 				},
 			},
+			j_worm_jtem2_solar_system = {
+				name = "Artificial Solar System",
+				text = {
+					{
+						"This Joker gains more effects for each",
+						"unique vanilla {C:planet}Planet{} card used",
+					},
+					{
+						"{C:attention}USE{} this joker to",
+						"toggle planets render",
+					},
+				},
+			},
 		},
 		PotatoPatch = {
 			PotatoPatchTeam_jtem2 = { name = "Jtem 2" },
