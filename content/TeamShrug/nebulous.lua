@@ -1,8 +1,16 @@
+SMODS.Atlas {
+    key = "shrug_enhancements",
+    path = "TeamShrug/enhancements.png",
+    px = 71,
+    py = 95,
+}
+
 SMODS.Enhancement {
     key = 'shrug_nebulous',
-    pos = {x = 3, y = 0}, -- this is placeholder sprite
+    atlas = "shrug_enhancements",
+    pos = {x = 0, y = 0},
     discovered = true,
-    
+
     -- Calculations
     calculate = function(self, card, context)
         if context.cardarea == G.play then
@@ -13,5 +21,14 @@ SMODS.Enhancement {
                 return {level_up = -1}
             end
         end
-    end
+    end,
+
+    -- Credits
+    ppu_artist = {
+        "waffle"
+    },
+    ppu_coder = {
+        "randomsongv2"
+    },
+    ppu_team = {"shrug"}
 }
