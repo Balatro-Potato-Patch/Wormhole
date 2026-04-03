@@ -11,6 +11,19 @@ SMODS.ConsumableType {
     default = "c_worm_asteroid_harvester"
 }
 
+local start_run = Game.start_run
+function Game:start_run(args)
+    start_run(self, args)
+
+    if not self.GAME.worm_c3_junk_stats then
+        self.GAME.worm_c3_junk_stats = {
+            chips = 5,
+            mult = 0,
+            retriggers = 1,
+        }
+    end
+end
+
 SMODS.Enhancement {
     key = "junk_card",
     ppu_coder = "lordruby",
@@ -18,19 +31,28 @@ SMODS.Enhancement {
     no_rank = true,
     no_suit = true,
     always_scores = true,
-    config = { extra = { chips = 5 } },
+    -- config = { extra = { chips = 5, mult = 2, retriggers = 1 } },
     loc_vars = function(self, q, card)
-        return { vars = { card and card.ability.extra.chips or self.config.extra.chips } }
+        return { 
+            key = ((G.GAME.worm_c3_junk_stats or {}).mult or 0) ~= 0 and "m_worm_junk_card_mult" or nil,
+            vars = {
+                (G.GAME.worm_c3_junk_stats or {}).chips or 5,
+                (G.GAME.worm_c3_junk_stats or {}).mult or 0,
+                (G.GAME.worm_c3_junk_stats or {}).retriggers or 1,
+                ((G.GAME.worm_c3_junk_stats or {}).retriggers or 1) == 1 and "" or "s",
+            }
+        }
     end,
     calculate = function(self, card, context)
         if context.repetition and context.cardarea == G.play then
             return {
-                repetitions = 1
+                repetitions = (G.GAME.worm_c3_junk_stats or {}).retriggers or 1
             }
         end
         if context.main_scoring and context.cardarea == G.play then
             return {
-                chips = card.ability.extra.chips
+                chips = (G.GAME.worm_c3_junk_stats or {}).chips or 5,
+                mult = (G.GAME.worm_c3_junk_stats or {}).mult or nil,
             }
         end
     end
@@ -128,5 +150,14 @@ function Wormhole.COLON_THREE.junk_use(config)
         if clean_up then
             SMODS.calculate_context { worm_c3_cleanup = true, cards = hand }
         end
+
+        G.E_MANAGER:add_event(Event({
+            trigger = "after",
+            delay = 0.25,
+            func = function()
+                G.hand:unhighlight_all()
+                return true
+            end
+        }))
     end
 end

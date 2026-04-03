@@ -2,11 +2,12 @@ if not Wormhole.COLON_THREE or not Wormhole.COLON_THREE.loaded then return end
 
 SMODS.Consumable {
     set = "JunkSet",
-    key = "solar_sail",
+    key = "futuristic",
     config = {
         extra = {
             junk_num = 2,
-            cleanup_num = 2,
+            cleanup_num = 3,
+            chips_mod = 10
         }
     },
     loc_vars = function(_,info_queue,card)
@@ -14,23 +15,24 @@ SMODS.Consumable {
         return {
             vars = {
                 card.ability.extra.junk_num,
-                card.ability.extra.cleanup_num
+                card.ability.extra.cleanup_num,
+                card.ability.extra.chips_mod
             }
         }
     end,
     use = Wormhole.COLON_THREE.junk_use {
-        individual = function(self, card, other_card, clean_up)
+        clean_func = function(self, card, cards, clean_up)
+            (G.GAME.worm_c3_junk_stats or {}).chips = (G.GAME.worm_c3_junk_stats or {}).chips + card.ability.extra.chips_mod
             G.E_MANAGER:add_event(Event({
-                trigger = 'after',
+                trigger = 'before',
                 delay = 0.4,
                 func = function()
-                    local edition = SMODS.poll_edition { key = "solar_sail", no_negative = true, guaranteed = true, }
-                    other_card:set_edition(edition, true)
+                    play_sound("xchips", 0.9)
                     card:juice_up(0.3, 0.5)
                     return true
                 end
             }))
-        end
+        end,
     },
     can_use = Wormhole.COLON_THREE.junk_can_use(),
     ppu_coder = {"notmario"}
