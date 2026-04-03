@@ -24,7 +24,7 @@ SMODS.Atlas({
 })
 
 -- Load utilities (Rarity, Helpers, Tracking)
-SMODS.load_file("jokers/utils.lua")()
+SMODS.load_file("content/Riverboat/utils.lua")()
 
 -- Load Joker definitions
-SMODS.load_file("jokers/jokers.lua")()
+SMODS.load_file("content/Riverboat/jokers.lua")()
