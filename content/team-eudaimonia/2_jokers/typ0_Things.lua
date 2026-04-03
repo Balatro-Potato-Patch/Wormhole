@@ -23,12 +23,13 @@ SMODS.Joker {
         if context.joker_main then
             if SMODS.pseudorandom_probability(card, 'wowsignalprob', card.ability.extra.numerator, card.ability.extra.denominator) then
                 return {
+                    colour = G.C.RED,
                     message = 'Wow!',
-                    xchips = SMODS.pseudorandom_probability(card, 'wowsignalwow', card.ability.extra.wowmin, card.ability.extra.wowmax)
+                    xchips = pseudorandom('7rands', card.ability.extra.wowmin, card.ability.extra.wowmax),
                 }
             else
                 return {
-                    chips = SMODS.pseudorandom_probability(card, 'wowsignalchips', card.ability.extra.chipsmin, card.ability.extra.chipsmax)
+                    chips = pseudorandom('7rands', card.ability.extra.chipsmin, card.ability.extra.chipsmax),
                 }
             end
         end
