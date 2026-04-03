@@ -39,12 +39,14 @@ function Wormhole.COLON_THREE.junk_get_highlighted_cards(cards)
     return highlighted, all_junk_selected
 end
 
-function Wormhole.COLON_THREE.flip_cards_events(cards)
-    for _, card in ipairs(cards) do
+function Wormhole.COLON_THREE.flip_cards_events(cards, sound, sound_pitch, sound_direction)
+    for i, card in ipairs(cards) do
+        local percent = (sound_pitch or 1) + (i - 0.999) / (#cards - 0.998) * 0.3 * (sound_direction or 1)
         G.E_MANAGER:add_event(Event({
             trigger = "after",
             delay = 0.25,
             func = function()
+                if sound then play_sound(sound, percent) end
                 card:flip()
                 return true
             end
@@ -84,7 +86,7 @@ function Wormhole.COLON_THREE.junk_use(config)
 
     return function(self, card)
         local hand, clean_up = Wormhole.COLON_THREE.junk_get_highlighted_cards(G.hand.cards)
-        Wormhole.COLON_THREE.flip_cards_events(hand)
+        Wormhole.COLON_THREE.flip_cards_events(hand, "card1", 1.15, -1)
         G.E_MANAGER:add_event(Event({
             trigger = "after",
             delay = 0.25,
@@ -112,6 +114,6 @@ function Wormhole.COLON_THREE.junk_use(config)
                 end
             }))
         end
-        Wormhole.COLON_THREE.flip_cards_events(hand)
+        Wormhole.COLON_THREE.flip_cards_events(hand, "tarot2", 0.85, 1)
     end
 end
