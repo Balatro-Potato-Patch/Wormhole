@@ -70,7 +70,8 @@ Wormhole.COLON_THREE.loaded = true
 for i, v in pairs({
     "laika",
     "junk/main",
-    "junk/asteroid_harvester"
+    "junk/asteroid_harvester",
+    "junk/solar_sail",
 })  do
     assert(SMODS.load_file("content/colon_three/"..v..".lua"))()
 end
