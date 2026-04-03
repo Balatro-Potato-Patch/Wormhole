@@ -13,11 +13,12 @@ SMODS.Joker {
     blueprint_compat = true,
     cost = 2,
     discovered = true,
-    config = {extra = {numerator = 1, denominator = 4, chipsmin = 20, chipsmax = 50, wowmin = 2, wowmax = 5}},
+    config = {extra = {numerator = 1, denominator = 6, chipsmin = 20, chipsmax = 50, wowmin = 2, wowmax = 5}},
     ppu_coder = {'Typ0'},
     ppu_artist = {'LasagnaFelidae'},
     loc_vars = function(self, info_queue, card)
         local num, denom = SMODS.get_probability_vars(card, card.ability.extra.numerator, card.ability.extra.denominator)
+        return { vars = { num, denom, card.ability.extra.chipsmin, card.ability.extra.chipsmax, card.ability.extra.wowmin, card.ability.extra.wowmax} }
     end,
     calculate = function(self, card, context)
         if context.joker_main then

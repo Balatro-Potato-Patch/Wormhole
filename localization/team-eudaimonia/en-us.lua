@@ -52,7 +52,9 @@ return {
             j_worm_wowsignal = {
                 name = "Wow! Signal",
                 text = {
-                    "man idk",
+                    "{C:green}#1# in #2#{} chance to give ",
+                    "{X:chips,C:white}X#3#-#4#{} Chips otherwise,",
+                    "give {C:chips}#5#-#6#{} Chips",
                 },
                 
             },
