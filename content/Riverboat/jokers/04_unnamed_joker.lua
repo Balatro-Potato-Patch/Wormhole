@@ -13,8 +13,8 @@ SMODS.Joker {
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = true,
-    ppu_coder = {"blamperer"},
-    ppu_team = {"riverboat"},
+    ppu_coder = { "blamperer" },
+    ppu_team = { "riverboat" },
     loc_vars = function(self, info_queue, card)
         return {
             vars = {
@@ -35,18 +35,17 @@ SMODS.Joker {
                 if G.GAME.current_round.hands_played <= 0 then
                     check_for_unlock { type = "riverboat_instaplanet" }
                 end
-                -- G.E_MANAGER:add_event(Event({
-                --     func = function()
-                --         G.STATE = G.STATES.NEW_ROUND
-                --         G.STATE_COMPLETE = false
-                --         G:update_new_round(0)
-                --         -- end_round()
-                --         return true
-                --     end
-                -- }))
-                G.STATE = G.STATES.HAND_PLAYED
-                G.STATE_COMPLETE = true
-                end_round()
+                G.E_MANAGER:add_event(Event({
+                    blocking = false,
+                    func = function()
+                        if G.STATE == G.STATES.SELECTING_HAND then
+                            G.STATE = G.STATES.HAND_PLAYED
+                            G.STATE_COMPLETE = true
+                            end_round()
+                            return true
+                        end
+                    end
+                }))
             end
         end
     end
