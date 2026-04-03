@@ -10,3 +10,8 @@ Wormhole.LFC_Util.total_keys = function(table)
     end
     return length
 end
+
+-- Copied from slimeutils :)
+Wormhole.LFC_Util.card_obscured = function(card)
+	return not card.config.center.discovered and (card.ability.consumeable or card.config.center.unlocked) and not card.bypass_discovery_center
+end

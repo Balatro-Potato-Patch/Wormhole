@@ -1,8 +1,8 @@
 -- Blacephalon
 SMODS.Joker {
     key = "lfc_blacephalon",
-    blueprint_compat = false,
-    perishable_compat = false,
+    blueprint_compat = true,
+    perishable_compat = true,
     eternal_compat = true,
     rarity = 2,
     cost = 8,
@@ -13,6 +13,14 @@ SMODS.Joker {
     config = { extra = { dollars = 4 } },
     loc_vars = function(self, info_queue, card)
         local version = pseudorandom_element({ 'us', 'um' }, "lfc_blacephalon")
+        local main_start = {}
+        if G.GAME.worm_log and G.GAME.worm_log[card.config.center.key] then
+            localize { type = 'descriptions', set = 'Other', key = "lfc_dex_blacephalon_" .. version, nodes = main_start, vars = { colours = {
+                G.ARGS.LOC_COLOURS["lfc_pkmn_" .. version]
+            } } }
+        else
+            localize { type = 'descriptions', set = 'Other', key = "lfc_obtain_pokemon_warning", nodes = main_start, vars = {} }
+        end
         --info_queue[#info_queue + 1] = localize("lfc_dex_blacephalon_" .. version, "dictionary")
         return {
             vars = {
@@ -21,6 +29,7 @@ SMODS.Joker {
                     G.ARGS.LOC_COLOURS["lfc_pkmn_" .. version]
                 }
             },
+            main_start = main_start
         }
     end,
     calculate = function(self, card, context)
