@@ -136,7 +136,26 @@ return {
                     "create an {C:attention}Empty {C:abs_drinks}Drink",
                     "{C:inactive}(Must have space!)",
                 }
-            }
+            },
+            j_worm_abs_put_it_on_my_tab = {
+                name = 'Put It On My Tab!',
+                text = {
+                    "{C:attention}+#2#{} Consumable Slot",
+                    "Earn {C:money}$#1#{} when a",
+                    "{C:abs_drinks}Drink{} is {C:abs_drinks}Refilled{}",
+                }
+            },
+            j_worm_abs_drinkmaxxing = {
+                name = {
+                    'Drinkmaxxing',
+                    "{C:inactive,s:0.8}someone give this joker a better name plz",
+                },
+                text = {
+                    "{C:attention}+#1#{} Consumable Slots",
+                    "This Joker occupies",
+                    "{C:red}#2#{} Joker Slots",
+                }
+            },
         },
         Other = {
             p_worm_abs_top_shelf_normal_1 = {
