@@ -5,8 +5,8 @@ SMODS.Consumable {
     key = "solar_sail",
     config = {
         extra = {
-            junk_num = 3,
-            cleanup_num = 3,
+            junk_num = 2,
+            cleanup_num = 4,
         }
     },
     loc_vars = function(_,info_queue,card)
@@ -20,16 +20,18 @@ SMODS.Consumable {
     end,
     use = Wormhole.COLON_THREE.junk_use {
         clean_func = function(self, card, cards, clean_up)
-            G.E_MANAGER:add_event(Event({
-                trigger = 'after',
-                delay = 0.4,
-                func = function()
-                    local edition = SMODS.poll_edition { key = "solar_sail", no_negative = true, guaranteed = true, }
-                    cards[1]:set_edition(edition, true)
-                    card:juice_up(0.3, 0.5)
-                    return true
-                end
-            }))
+            for i = 1, math.min(2, #cards) do
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'after',
+                    delay = 0.4,
+                    func = function()
+                        local edition = SMODS.poll_edition { key = "solar_sail", no_negative = true, guaranteed = true, }
+                        cards[i]:set_edition(edition, true)
+                        card:juice_up(0.3, 0.5)
+                        return true
+                    end
+                }))
+            end
         end
     },
     can_use = Wormhole.COLON_THREE.junk_can_use(),
