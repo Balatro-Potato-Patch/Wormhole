@@ -66,7 +66,8 @@ local function create_tart(tart, tartPos, foilPos, regFunc, boostFunc, boostKey)
         loc_vars = function(self, info_queue, card)
             info_queue[#info_queue + 1] = {
                 set = "Other",
-                key = "spacetart_"..tart.."_regular"
+                key = "spacetart_" .. tart .. "_regular",
+                specific_vars = { "","","" }
             }
         end,
         can_use = function(self, card)
@@ -77,10 +78,10 @@ local function create_tart(tart, tartPos, foilPos, regFunc, boostFunc, boostKey)
         regular_func = regFunc,
         boosted_func = boostFunc,
         boost_key = boostKey,
-        pos = tartPos
+        pos = foilPos
     }
 end
-create_tart("stellar_strawberry", { x = 1, y = 0 }, { x = 0, y = 2 }, function (card, context) return { message = "test" } end, function (card, context)
+create_tart("stellar_strawberry", { x = 0, y = 2 }, { x = 1, y = 0 }, function (card, context) return { message = "test" } end, function (card, context)
     if context.joker_main then
         return {
             message = "betterTest",
@@ -100,7 +101,7 @@ function generate_card_ui(_c, full_UI_table, specific_vars, card_type, badges, h
             generate_card_ui({
                 set = "Other",
                 key = "spacetart_"..k.."_"..(card.config.center.key == Wormhole.TEAM_MEOW.tartInfo[k].boost_key and "boosted" or "regular")
-            }, ret, {v})
+            }, ret, { localize("k_stack1"), v, localize("k_stack2") })
         end
     end
     return ret
