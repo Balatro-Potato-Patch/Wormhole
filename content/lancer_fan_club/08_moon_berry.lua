@@ -41,7 +41,8 @@ SMODS.Sound({
 
 SMODS.Joker({
     key = "lfc_fw",
-    pos = { x = 0, y = 3 },
+    pos = { x = 0, y = 2 },
+    soul_pos = { x = 0, y = 3 },
     rarity = 4,
     cost = 20,
     blueprint_compat = true,
@@ -49,28 +50,33 @@ SMODS.Joker({
     ppu_coder = { "ProdByProto" },
     config = {
         extra = {
+            enhancement = "m_bonus",
             xmult = 2.5,
             secret = 0
         }
     },
     loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.xmult } }
+        return {
+            vars = { card.ability.extra.enhancement and
+            localize({ type = 'name_text', set = "Enhanced", key = card.ability.extra.enhancement }) or "Bonus Card",
+                card.ability.extra.xmult }
+        }
     end,
     calculate = function(self, card, context)
         local cae = card.ability.extra
         if context.card_added and not context.repetition then
             if context.card == card then
-                play_sound("worm_lfc_berry_wow",1,0.6)
+                play_sound("worm_lfc_berry_wow", 1, 0.6)
             end
         end
 
         if context.individual and context.cardarea == G.play and not context.end_of_round then
-			if SMODS.has_enhancement(context.other_card, "m_bonus") then
-                return{
+            if SMODS.has_enhancement(context.other_card, card.ability.extra.enhancement) then
+                return {
                     mult = cae.xmult,
                     remove_default_message = true,
-                    message = localize{type = "variable", key = "a_xmult", vars = {cae.xmult}},
-                    sound = "worm_lfc_berry_sfx"..pseudorandom("moonberry_xmult_sfx",1,5),
+                    message = localize { type = "variable", key = "a_xmult", vars = { cae.xmult } },
+                    sound = "worm_lfc_berry_sfx" .. pseudorandom("moonberry_xmult_sfx", 1, 5),
                     colour = G.C.MULT
                 }
             end
@@ -81,26 +87,23 @@ SMODS.Joker({
                     local eval = function(card) return not card.REMOVED end
                     juice_card_until(card, eval, true)
                 end
-                return{ 
+                return {
                     func = function()
-                        play_sound("worm_lfc_berry_ante",1,0.6)
+                        play_sound("worm_lfc_berry_ante", 1, 0.6)
                     end
                 }
             end
 
             if context.selling_self and G.GAME.round_resets.ante >= 9 and cae.secret == 1 then
                 cae.secret = 2
-                SMODS.add_card({"j_worm_lfc_fw"})
-                return{ 
+                SMODS.add_card({ "j_worm_lfc_fw" })
+                return {
                     func = function()
-                        play_sound("worm_lfc_berry_secret",1,0.6)
+                        play_sound("worm_lfc_berry_secret", 1, 0.6)
                     end
                 }
             end
-
-
         end
-
     end
 
 })

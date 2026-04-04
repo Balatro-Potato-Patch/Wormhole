@@ -157,6 +157,17 @@ return {
                     "{C:inactive}(Must have room)",
                     "{C:inactive}(Currently {C:attention}#2#{C:inactive}/#1#)",
                 },
+            },
+            j_worm_lfc_fw = {
+                name = {
+                    "Moon Berry",
+                    "{E:1,C:inactive,s:0.5}WOW"
+                },
+                text = {
+                    "Scored {C:attention}#1#s{}",
+                    "give {X:mult,C:white} X#2# {} Mult",
+                    "when scored"
+                }
             }
         },
         Spectral = {
