@@ -54,5 +54,8 @@ SMODS.Joker {
         }
     end,
 
+    dex_entry_key = "lfc_dex_stakataka",
+    generate_ui = Wormhole.LFC_Util.generate_pokedex_entry_ui,
+
     ppu_coder = { "InvalidOS" }
 }

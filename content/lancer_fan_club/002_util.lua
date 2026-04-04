@@ -47,3 +47,45 @@ Wormhole.LFC_Util.create_random_tag = function(rng_key)
         end
     }))
 end
+
+-- copied from Entropy's Entropy.generate_void_invert_uibox, which i also wrote most of -alexi
+Wormhole.LFC_Util.generate_pokedex_entry_ui = function(center, info_queue, card, desc_nodes, specific_vars, full_UI_table)
+    SMODS.Center.generate_ui(center, info_queue, card, desc_nodes, specific_vars, full_UI_table)
+    if center.generate_extra_ui then
+        center:generate_extra_ui(info_queue, card, desc_nodes, specific_vars, full_UI_table)
+    end
+    if not center.discovered or center.locked then return end
+
+    local version = pseudorandom_element({ 'us', 'um' }, center.key .. "_dex_entry")
+    local lines = (G.GAME.worm_log or {})[center.key]
+        and G.localization.misc.v_dictionary_parsed[center.dex_entry_key .. "_" .. version]
+        or G.localization.misc.v_dictionary_parsed["lfc_obtain_pokemon_warning"]
+
+    local vars = {
+        colours = {
+            G.ARGS.LOC_COLOURS["lfc_pkmn_" .. version]
+        }
+    }
+
+    local localize_args = {
+        AUT = full_UI_table,
+        nodes = desc_nodes,
+        vars = vars,
+    }
+    -- taken from localize; adds the multibox text
+    localize_args.AUT.multi_box = localize_args.AUT.multi_box or {}
+    local i = #full_UI_table.multi_box + 1 -- fucking janky ass method
+    for _, line in ipairs(lines) do
+        local final_line = SMODS.localize_box(line, localize_args)
+        if i == 1 or next(localize_args.AUT.info) then
+            localize_args.nodes[#localize_args.nodes+1] = final_line -- Sends main box to AUT.main
+            if not next(localize_args.AUT.info) then localize_args.nodes.main_box_flag = true end
+        elseif not next(localize_args.AUT.info) then
+            localize_args.AUT.multi_box[i-1] = localize_args.AUT.multi_box[i-1] or {}
+            localize_args.AUT.multi_box[i-1][#localize_args.AUT.multi_box[i-1]+1] = final_line
+        end
+        if not next(localize_args.AUT.info) and localize_args.AUT.box_colours then
+            localize_args.AUT.box_colours[i] = localize_args.vars.box_colours and localize_args.vars.box_colours[i] or G.C.UI.BACKGROUND_WHITE
+        end
+    end
+end

@@ -111,10 +111,11 @@ return {
                 text = {
                     {
                         "Earn {C:money}$#1#{} per",
-                        "playing card",
-                        "{C:red}destroyed"
+                        "playing card {C:red}destroyed",
+                    },
+                    {
+                        "{s:0} " -- this is where the dex entry gets added!
                     }
-
                 }
             },
             j_worm_lfc_stakataka = {
@@ -123,8 +124,13 @@ return {
                     "{s:0.5}Stakataka"
                 },
                 text = {
-                    "{C:attention}#1#s{} held in hand",
-                    "are added to played {C:attention}poker hand"
+                    {
+                        "{C:attention}#1#s{} held in hand",
+                        "are added to played {C:attention}poker hand"
+                    },
+                    {
+                        "{s:0} " -- this is where the dex entry gets added!
+                    }
                 }
             },
             j_worm_lfc_brain_scrambler = {
@@ -203,41 +209,41 @@ return {
                 },
             },
         },
-        Other = {
-            lfc_dex_blacephalon_us = {
-                "{s:0.5}From {B:1,C:white,s:0.5}Pokémon Ultra Sun{s:0.5}:",
-                "{s:0.5}It slithers toward people. Then, without warning,",
-                "{s:0.5}it triggers the explosion of its own head. It's",
-                "{s:0.5}apparently one kind of {s:0.5,C:dark_edition}Ultra Beast{}.",
-            },
-            lfc_dex_blacephalon_um = {
-                "{s:0.5}From {B:1,C:white,s:0.5}Pokémon Ultra Moon{s:0.5}:",
-                "{s:0.5}A {s:0.5,C:dark_edition}UB{s:0.5} that appeared from an {s:0.5,C:dark_edition}Ultra Wormhole{s:0.5},",
-                "{s:0.5}it causes explosions, then takes advantage of",
-                "{s:0.5}opponents' surprise to rob them of their vitality."
-            },
-            lfc_dex_stakataka_us = {
-                "{s:0.5}From {B:1,C:white,s:0.5}Pokémon Ultra Moon{s:0.5}:",
-                "{s:0.5}It appeared from an {s:0.5,C:dark_edition}Ultra Wormhole{s:0.5}. Each one",
-                "{s:0.5}appears to be made up of many life-forms",
-                "{s:0.5}stacked one on top of each other."
-            },
-            lfc_dex_stakataka_um = {
-                "{s:0.5}From {B:1,C:white,s:0.5}Pokémon Ultra Moon{s:0.5}:",
-                "{s:0.5}When stone walls started moving and attacking,",
-                "{s:0.5}the brute's true identity was this mysterious",
-                "{s:0.5}life-form, which brings to mind an {s:0.5,C:dark_edition}Ultra Beast{s:0.5}."
-            },
-            lfc_obtain_pokemon_warning = {
-                "{s:0.5}Obtain this {C:attention,s:0.5}Joker{s:0.5} to",
-                "{s:0.5}unlock its {C:dark_edition,s:0.5}Pokédex entry{s:0.5}!",
-            }
-        }
     },
     misc = {
         dictionary = {
             k_lfc_none = "None",
             k_lfc_brackets_rank = "[rank]",
+        },
+        v_dictionary = {
+            lfc_dex_blacephalon_us = {
+                "{s:0.75}From {B:1,C:white,s:0.75}Pokémon Ultra Sun{s:0.75}:",
+                "{s:0.75}It slithers toward people. Then, without warning,",
+                "{s:0.75}it triggers the explosion of its own head. It's",
+                "{s:0.75}apparently one kind of {s:0.75,C:dark_edition,E:1}Ultra Beast{}.",
+            },
+            lfc_dex_blacephalon_um = {
+                "{s:0.75}From {B:1,C:white,s:0.75}Pokémon Ultra Moon{s:0.75}:",
+                "{s:0.75}A {s:0.75,C:dark_edition,E:1}UB{s:0.75} that appeared from an {s:0.75,C:dark_edition,E:1}Ultra Wormhole{s:0.75},",
+                "{s:0.75}it causes explosions, then takes advantage of",
+                "{s:0.75}opponents' surprise to rob them of their vitality."
+            },
+            lfc_dex_stakataka_us = {
+                "{s:0.75}From {B:1,C:white,s:0.75}Pokémon Ultra Moon{s:0.75}:",
+                "{s:0.75}It appeared from an {s:0.75,C:dark_edition,E:1}Ultra Wormhole{s:0.75}. Each one",
+                "{s:0.75}appears to be made up of many life-forms",
+                "{s:0.75}stacked one on top of each other."
+            },
+            lfc_dex_stakataka_um = {
+                "{s:0.75}From {B:1,C:white,s:0.75}Pokémon Ultra Moon{s:0.75}:",
+                "{s:0.75}When stone walls started moving and attacking,",
+                "{s:0.75}the brute's true identity was this mysterious",
+                "{s:0.75}life-form, which brings to mind an {s:0.75,C:dark_edition,E:1}Ultra Beast{s:0.75}."
+            },
+            lfc_obtain_pokemon_warning = {
+                "{s:0.75}Obtain this {C:attention,s:0.75}Joker{s:0.75} to",
+                "{s:0.75}unlock its {C:dark_edition,s:0.75}Pokédex entry{s:0.75}!",
+            }
         }
     }
 }
