@@ -55,6 +55,11 @@ SMODS.Joker({
             secret = 0,
         }
     },
+    attributes = {
+        "xmult",
+        "enhancements",
+        
+    },
     loc_vars = function(self, info_queue, card)
         local hint1, hint2 = "..."," "
         if card.ability.extra.secret == 1 then
