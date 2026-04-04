@@ -24,7 +24,7 @@ SMODS.Joker {
         }
     end,
     calculate = function(self, card, context)
-        if context.using_consumeable and context.consumeable.ability.set == "Planet" then
+        if context.using_consumeable and context.consumeable.ability.set == "Planet" and G.GAME.blind.in_blind then
             local hand_for_planet = context.consumeable.ability.hand_type
             local hand_info = G.GAME.hands[hand_for_planet]
             local hand_chips = hand_info.l_chips
