@@ -84,7 +84,11 @@ local descriptions = {
         spaceship = {
             name = 'Spaceship',
             text = {
-                'palceholder'
+                'palceholder',
+                '{C:red}#1#',
+                '#2#',
+                '#3#',
+                '#4#'
             }
         },
     },
@@ -92,7 +96,13 @@ local descriptions = {
         laser = {
             name = 'Laser',
             text = {
-                'test desc'
+                '+#1# Mult'
+            }
+        },
+        core = {
+            name = 'Core',
+            text = {
+                '+#1# Chips'
             }
         },
     }

@@ -70,16 +70,44 @@ SMODS.Joker({
 	eternal_compat = false,
 	perishable_compat = false,
     ppu_team = {'tbp'},
-    config = { extra = { modules = {} } },
-	loc_vars = function(self, info_queue, center)
-        for _, v in ipairs(center.ability.extra.modules) do
+    config = { extra = { modules = { -- TODO: add actual module slots here
+        core = {},
+        weapons = {},
+        thrusters = {},
+    } } },
+	loc_vars = function(self, info_queue, card)
+        for _, v in ipairs(card.ability.extra.modules) do
             info_queue[#info_queue+1] = G.P_CENTERS[v[1]]
         end
-        return { vars = { } }
+        return {vars = {
+            self:modules_equipped(card) and 'yes' or 'no',
+            'Core: '..(card.ability.extra.modules.core.durability or 'None'), 
+            'Weapons: '..(card.ability.extra.modules.weapons.durability or 'None'),
+            'Thrusters: '..(card.ability.extra.modules.thrusters.durability or 'None')
+        }}
+    end,
+    modules_equipped = function(self, card)
+        return next(card.ability.extra.modules.core) or next(card.ability.extra.modules.weapons) or next(card.ability.extra.modules.thrusters)
+    end,
+    modify_module_durability = function(self, card, change, modules)
+        -- temporary code to test module destruction
+        if not modules then modules = {'core', 'weapons', 'thrusters'} end
+        for _, module in ipairs(modules) do
+            if card.ability.extra.modules[module].durability then
+                card.ability.extra.modules[module].durability = card.ability.extra.modules[module].durability + change
+                if card.ability.extra.modules[module].durability <= 0 then
+                    card.ability.extra.modules[module] = {}
+                    SMODS.calculate_effect({
+                        message = module .. ' lost!',
+                        colour = G.C.RED
+                    }, card)
+                end
+            end
+        end
     end,
 	calculate = function(self, card, context)
 		if not context.blueprint then
-            if context.starting_shop and #card.ability.extra.modules == 0 then
+            if context.starting_shop and not self:modules_equipped(card) then
                 G.E_MANAGER:add_event(Event({
                     func = function()
                         card:juice_up(0.3, 0.5)
@@ -90,11 +118,19 @@ SMODS.Joker({
                     end
                 }))
             end
-            if context.joker_main and card:tbp_has_module("c_worm_tbp_laser") then
-                return {
-                    mult = card.ability.extra.mult,
-                }
+            local module_calcs = {}
+            for _, module in ipairs({'core', 'weapons', 'thrusters'}) do -- TODO: add actual module slots here
+                if card.ability.extra.modules[module].key then
+                    local ret = G.P_CENTERS[card.ability.extra.modules[module].key]:calculate(card.ability.extra.modules[module], context)
+                    if ret and next(ret) then
+                        module_calcs[#module_calcs + 1] = ret
+                    end
+                end
             end
+            if context.after then
+                self:modify_module_durability(card, -1)
+            end
+            return next(module_calcs) and SMODS.merge_effects(module_calcs)
         end
 	end,
     add_to_deck = function(self, card, from_debuff)
@@ -120,6 +156,11 @@ SMODS.ConsumableType {
 }
 
 Wormhole.tbp.Module = SMODS.Consumable:extend{
+    required_params = {
+        'key',
+        'slot',
+        'durability'
+    },
     set = "tbp_module",
     config = {
 		extra = {},
@@ -138,16 +179,36 @@ Wormhole.tbp.Module = SMODS.Consumable:extend{
     use = function(self, card, area, copier)
 		local spaceship = SMODS.find_card("j_worm_tbp_spaceship")
         if next(spaceship) then
-            spaceship[1].ability.extra.modules[#spaceship[1].ability.extra.modules+1] = {self.key, self.cooldown}
+            spaceship[1].ability.extra.modules[self.slot] = {
+                key = self.key,
+                durability = self.durability,
+            }
+            -- spaceship[1].ability.extra.modules[#spaceship[1].ability.extra.modules+1] = {self.key, self.cooldown}
             for k, v in pairs(self.config.extra) do
-                spaceship[1].ability.extra[k] = v
+                spaceship[1].ability.extra.modules[self.slot][k] = v
             end
+            SMODS.calculate_effect({
+                message = self.slot .. ' equipped!',
+                colour = G.C.GREEN
+            }, spaceship[1])
         end
 	end,
 }
 
+-- Autmoatically prefix modules with '_tbp_'
+-- TODO: modify this if we ever extend past the event
+local smods_add_prefixes = SMODS.add_prefixes
+function SMODS.add_prefixes(cls, obj, from_take_ownership)
+    if cls == Wormhole.tbp.Module then
+        SMODS.modify_key(obj, 'tbp', nil, 'key')
+    end
+    smods_add_prefixes(cls, obj, from_take_ownership)
+end
+
 Wormhole.tbp.Module({
 	key = "laser",
+    slot = 'weapons',
+    durability = 3,
 	pos = { x = 0, y = 0 },
 	config = {
 		extra = {
@@ -157,4 +218,33 @@ Wormhole.tbp.Module({
 	loc_vars = function(self, info_queue, card)
 		return { vars = { card.ability.extra.mult } }
 	end,
+    calculate = function(self, card, context)
+        if context.joker_main then
+            return {
+                mult = card.mult
+            }
+        end
+    end,
+})
+
+Wormhole.tbp.Module({
+	key = "core",
+    slot = 'core',
+    durability = 3,
+	pos = { x = 0, y = 0 },
+	config = {
+		extra = {
+			chips = 10,
+		},
+	},
+	loc_vars = function(self, info_queue, card)
+		return { vars = { card.ability.extra.chips } }
+	end,
+    calculate = function(self, card, context)
+        if context.joker_main then
+            return {
+                chips = card.chips
+            }
+        end
+    end,
 })

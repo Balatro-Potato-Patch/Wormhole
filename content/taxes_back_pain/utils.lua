@@ -17,16 +17,6 @@ function Wormhole.tbp.prefix_loc_table(input, output)
     return output
 end
 
--- Autmoatically prefix modules with '_tbp_'
--- TODO: modify this if we ever extend past the event
-local smods_add_prefixes = SMODS.add_prefixes
-function SMODS.add_prefixes(cls, obj, from_take_ownership)
-    if cls == Wormhole.tbp.Module then
-        SMODS.modify_key(obj, 'tbp', nil, 'key')
-    end
-    smods_add_prefixes(cls, obj, from_take_ownership)
-end
-
 function Card:tbp_has_module(m)
     if self and self.config and self.config.center and self.config.center.key == "j_worm_tbp_spaceship" then
         for k, v in ipairs(self.ability.extra.modules) do
