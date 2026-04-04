@@ -62,6 +62,15 @@ return {
                     "every hand played",
                     "{C:inactive}(Currently {X:chips,C:white}X#4#{C:inactive} Chips){}"
                 }},
+			j_worm_dum_gleebleglorp = {
+                name = "Gleebleglorp",
+                text = {
+                    {
+                        "{C:white,X:mult}X#1#{} Mult if played",
+                        "{C:attention}poker hand{} is not",
+                        "your {C:attention}highest-level{} hand"
+                    }
+                },
             },
         },
         Planet = {
