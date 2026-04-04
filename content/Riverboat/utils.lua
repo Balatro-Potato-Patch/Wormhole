@@ -9,6 +9,10 @@ SMODS.Rarity({
     pools = { ["Joker"] = true }
 })
 
+SMODS.Attribute {
+    key = "unscored"
+}
+
 -- Global tracking for the entire run
 SMODS.current_mod.calculate = function(self, context)
     if G.GAME and context.buying_card and not context.blueprint then
@@ -41,5 +45,31 @@ end
 Wormhole.Riverboat.get_planet_for_hand = function(hand)
     for _, v in pairs(G.P_CENTER_POOLS.Planet) do
         if v.config.hand_type == hand then return v.key end
+    end
+end
+
+---Base game flip + unflip code.
+---Delays after flipping not included
+---@param cards table[]|Card[]
+---@param direction "f2b"|"b2f"
+Wormhole.Riverboat.flip_cards = function(cards, direction)
+    for i = 1, #cards do
+        local percent = 0
+        local delta = (i - 0.999) / (#cards - 0.998) * 0.3
+        if direction == "f2b" then
+            percent = 1.15 - delta
+        else
+            percent = 0.85 + delta
+        end
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.15,
+            func = function()
+                cards[i]:flip()
+                play_sound(direction == "f2b" and 'card1' or 'tarot2', percent, direction == "b2f" and 0.6 or 1)
+                cards[i]:juice_up(0.3, 0.3)
+                return true
+            end
+        }))
     end
 end

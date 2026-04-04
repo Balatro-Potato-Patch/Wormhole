@@ -81,6 +81,16 @@ return {
                     "{C:mult}+#1#{} Mult and {C:chips}+#2#{} Chips",
                     "when scored"
                 }
+            },
+            j_worm_riverboat_worm_hole = {
+                name = "Worm Hole",
+                text = {
+                    "Played but {C:attention}unscored{} cards have a",
+                    "{C:green}#1# in #2#{} chance to {C:red}lose one rank{} and",
+                    "give this Joker {C:chips}+#3#{} Chips",
+                    "{C:inactive}(Currently {C:chips}+#4# {C:inactive}Chips)",
+                    "{C:inactive}(2s are destroyed instead)"
+                }
             }
         },
         Enhanced = {
