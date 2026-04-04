@@ -20,3 +20,13 @@ event horizon
 Deck that makes our content more likely
 bartender jokers that create drinks/food
 all other slots left for drinks/food
+
+Drink names:
+Hadra Colida - Pina Colada + Hadron Collider (Wombat Country)
+Cosmospolitan - Cosmopolitan, but with an emphasis on the cosmos (Prof. Renderer)
+Mojitury - Mojito + Mercury. Mojito because it has mint in it, and Axy mentioned something minty for Mercury. (Prof. Renderer / Axyraandas)
+
+Food names:
+Jupiter Jawbreakers (Axyraandas)
+Saturn's Onion Rings (Axyraandas / Stanza Rorae)
+Little Debbie's Cosmic Brownies (Axyraandas)
