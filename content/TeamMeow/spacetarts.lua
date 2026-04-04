@@ -78,7 +78,6 @@ local function create_tart(tart, tartPos, foilPos, regFunc, boostFunc, boostKey)
 		can_use = function(self, card)
 			return false
 		end,
-		joker_calc = regFunc,
 	})
 	Wormhole.TEAM_MEOW.tartInfo[tart] = {
 		regular_func = regFunc,
@@ -134,19 +133,6 @@ end, function(card, context)
 end, "j_joker")
 create_tart("big_bang_blackberry", { x = 3, y = 3 }, { x = 3, y = 1 }, function(card, context)
 	return { message = "test" }
-end, function(card, context)
-	if context.joker_main then
-		return {
-			message = "betterTest",
-		}
-	end
-end, "j_joker")
-create_tart("stellar_strawberry", { x = 0, y = 2 }, { x = 1, y = 0 }, function(card, context)
-	if context.joker_main then
-		return {
-			message = "Test",
-		}
-	end
 end, function(card, context)
 	if context.joker_main then
 		return {
