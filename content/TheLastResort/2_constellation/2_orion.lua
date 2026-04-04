@@ -2,8 +2,11 @@ SMODS.Consumable{
     key = "tlr_const_orion",
     set = 'worm_tlr_constellation',
     atlas = "tlr_const",
-    pos = {x=0, y=0},
+    pos = {x=0, y=2},
     config = {rerolls = {0, 0, 1, 2}},
+    ppu_team = {"TheLastResort"},
+	ppu_coder = {"Jogla"},
+    ppu_artist = {"Aura2247"},
     loc_vars = function (self, info_queue, card)
         return {vars = {card.ability.rerolls[card.ability.tier]}}
     end,

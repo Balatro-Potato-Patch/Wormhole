@@ -14,7 +14,7 @@ PotatoPatchUtils.Developer({
 })
 
 PotatoPatchUtils.Developer({
-	name = "Jolga",
+	name = "Jogla",
 	loc = true,
 	team = "TheLastResort",
 })

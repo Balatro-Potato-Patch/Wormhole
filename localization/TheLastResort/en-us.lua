@@ -295,8 +295,8 @@ return {
 					}
 				}
 			},
-			PotatoPatchDev_Jolga = {
-				name = "Jolga",
+			PotatoPatchDev_Jogla = {
+				name = "{C:blue}Jogla{}",
 				text = {
 					{
 						"{C:red}Not{} a wizard",
