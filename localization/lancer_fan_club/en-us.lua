@@ -171,14 +171,23 @@ return {
                 },
                 text = {
                     {
-                    "Scored {C:attention}#1#s{}",
-                    "give {X:mult,C:white} X#2# {} Mult",
-                    "when scored",
+                        "Scored {C:attention}#1#s{}",
+                        "give {X:mult,C:white} X#2# {} Mult",
+                        "when scored",
                     },
                     {
-                    "{C:inactive,s:0.85}#3#{}",
-                    "{C:inactive,s:0.85}#4#{}",
+                        "{C:inactive,s:0.85}#3#{}",
+                        "{C:inactive,s:0.85}#4#{}",
                     }
+                }
+            },
+            j_worm_lfc_magical_girl = {
+                name = "Magical Girl",
+                text = {
+                    "This Joker gains {C:chips}+#1#{} Chips",
+                    "each time a playing card",
+                    "gains a new {C:attention}Enhancement{}",
+                    "{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)"
                 }
             }
         },
