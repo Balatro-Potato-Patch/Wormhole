@@ -62,11 +62,11 @@ descriptions={
 		--[[]]
 		j_worm_gofish ={
 			name=
-				"Go Fish"
+				"Pisces"
 			, text={
-				"If played hand is a {C:attention}#1#{},",
-				"this Joker destroys all scored cards",
-				"and itself, then creates a {C:attention}#2#{}"
+				"If poker hand contains a {C:attention}#1#{},",
+				"destroy it, then create a {C:attention}#2#{}",
+				"{C:red}self-destructs{}"
 			}
 		},
 		j_worm_goldilocks ={
