@@ -433,6 +433,10 @@ function JtemTGM.ResetPlayerState()
 
 		board = board,
 		lightup = {},
+
+		justPressedLeftRot = false,
+		justPressedRightRot = false,
+		olddir = 0,
 	}
 	return state
 end
@@ -490,7 +494,8 @@ function JtemTGM.ChangeState(game, newstate)
 	if newstate == STATE_LOCKED and game.state == STATE_LOCKING then
 		game.clears = 0
 		game.clear_cols = {}
-		-- todo placepiece
+		-- place le piece
+		JtemTGM.PlacePiece(game.current_piece, game.board, game.lightup)
 		game.current_piece = {}
 		game.ghost_piece = {}
 		-- calculate lines to clear
@@ -563,13 +568,14 @@ function JtemTGM.ChangeState(game, newstate)
 	end
 	if newstate == STATE_CONGRATULATIONS or newstate == STATE_INVISIBLETETRIS then
 		if next(game.current_piece) then
+			JtemTGM.PlacePiece(game.current_piece, game.board)
 			game.current_piece = {}
 		end
 		game.ghost_piece = {}
 		game.credit_fadeout = 0
 		if newstate == STATE_CONGRATULATIONS then
 			if game.topped_out then
-				local board = p.etm_board
+				local board = game.board
 				for y = BOARD_HCLEARANCE, BOARD_H - 1 do
 					board[y] = {}
 					for x = 0, BOARD_W - 1 do
@@ -582,11 +588,312 @@ function JtemTGM.ChangeState(game, newstate)
 			game.state_timer = 2.0
 		end
 	end
+
 	if newstate == STATE_ARE and game.clears > 0 then
 		for i = 1, game.clears do
-
+			for y = BOARD_H - 1, 0, -1 do
+				local zeros = 0
+				local col = game.board[y]
+				for x = 0, BOARD_W - 1 do
+					local cell = col[x]
+					if cell ~= nil and cell == 0 then
+						zeros = zeros + 1
+					end
+				end
+				if zeros == 0 then
+					for y1 = y, 0, -1 do
+						for x = 0, BOARD_W - 1 do
+							if game.board[y1] ~= nil and game.board[y1][x] ~= nil and game.board[y1 - 1] ~= nil and game.board[y1 - 1][x] ~= nil then
+								game.board[y1][x] = game.board[y1 - 1][x]
+							end
+						end
+					end
+				end
+			end
 		end
+	end
+
+	game.state = newstate
+end
+
+--#endregion
+
+--#region Piece placing and such
+
+function JtemTGM.ValidPiece(cell)
+	return tonumber(cell) == nil
+end
+
+function JtemTGM.PieceOccupied(board, x, y)
+	local col = board[y]
+	if col == nil then return false end
+	local cell = col[x]
+	if cell == nil then return false end
+	local piece = JtemTGM.pieces[cell]
+
+	return not (not (tonumber(cell) == nil and piece))
+end
+
+function JtemTGM.ValidMove(board, x, y, piece)
+	if JtemTGM.ValidPiece(piece) and JtemTGM.PieceOccupied(board, x, y) then return false end
+
+	if x > BOARD_W - 1 and JtemTGM.ValidPiece(piece) then return false end
+	if y > BOARD_H - 1 and JtemTGM.ValidPiece(piece) then return false end
+	if x < 0 and JtemTGM.ValidPiece(piece) then return false end
+	if y < BOARD_HCLEARANCE and JtemTGM.ValidPiece(piece) then return false end
+
+	return true
+end
+
+function JtemTGM.CreatePieceWithOffset(current, offs)
+	local t = {}
+	t.rotation = current.rotation
+	t.piece = current.piece
+	t.x = current.x + offs.x
+	t.y = current.y + offs.y
+	return t
+end
+
+function JtemTGM.CanPlacePiece(current, board)
+	if next(current) == nil then return true end
+	-- check if we can move
+	-- check for its position on the board
+	local piece = JtemTGM.pieces[current.piece][current.rotation]
+	if not piece then return false end
+
+	-- check the piece if we can collide with the board
+	for y = 1, 4 do
+		local col = piece[y]
+		if col == nil then goto continue end
+		for x = 1, 4 do
+			local cell = piece[y][x]
+			if cell == nil then goto continue end
+			if cell == 0 then goto continue end -- nope!
+			if not JtemTGM.ValidMove(board, current.x + (x - 1), current.y + (y - 1), current.piece) then
+				-- NOPE!
+				return false
+			end
+		end
+		::continue::
+	end
+	return true
+end
+
+-- Returns true if the movement was successful
+-- Taken from https://github.com/cambridge-stacker/cambridge/blob/main/tetris/components/piece.lua
+function JtemTGM.MoveInGrid(current, step, squares, board, instant)
+	if next(current) == nil then return true end
+	local moved = false
+	for i = 1, squares do
+		if JtemTGM.CanPlacePiece(JtemTGM.CreatePieceWithOffset(current, step), board) then
+			moved = true
+			current.x = current.x + step.x
+			current.y = current.y + step.y
+			if instant then
+				JtemTGM.MoveInGrid(current, { x = 0, y = 1 }, BOARD_H - BOARD_HCLEARANCE, board)
+			end
+		else
+			break
+		end
+	end
+	return moved
+end
+
+function JtemTGM.IsMoveBlocked(current, offset, board)
+	local moved_piece = JtemTGM.CreatePieceWithOffset(current, offset)
+	return not JtemTGM.CanPlacePiece(moved_piece, board)
+end
+
+function JtemTGM.IsDropBlocked(current, board)
+	return JtemTGM.IsMoveBlocked(current, { x = 0, y = 1 }, board)
+end
+
+function JtemTGM.CheckMoveX(current, inc, board)
+	local dir = inc < 0 and -1 or 1
+	return JtemTGM.MoveInGrid(current, { x = dir, y = 0 }, math.abs(inc), board)
+end
+
+function JtemTGM.CheckMoveY(current, inc, board, nomove)
+	local dir = inc < 0 and -1 or 1
+	return JtemTGM.MoveInGrid(current, { x = 0, y = dir }, math.abs(inc), board)
+end
+
+function JtemTGM.CheckTopout(current, board)
+	if next(current) == nil then return true end
+	-- check if we can move
+	-- check for its position on the board
+	local piece = JtemTGM.pieces[current.piece][current.rotation]
+	if not piece then return false end
+
+	-- check the piece if we can collide with the board
+	for y = 1, 4 do
+		local col = piece[y]
+		if col == nil then return false end
+		for x = 1, 4 do
+			local cell = piece[y][x]
+			if cell == nil then return false end
+			if cell == 0 then goto continue end -- nope!
+			if not JtemTGM.ValidMove(board, current.x + (x - 1), current.y + (y - 1), current.piece) then
+				-- NOPE!
+				return false
+			end
+		end
+		::continue::
+	end
+	return true
+end
+
+function JtemTGM.CheckRotation(current, inc, board)
+	if next(current) == nil then return true end
+	local newrot = current.rotation + inc
+	if newrot < 1 then newrot = 4 end
+	if newrot > 4 then newrot = 1 end
+
+	-- O never kicks
+	if current.piece == "O" then return end
+
+	-- check if we can rotate
+	-- check for its position on the board
+	local piece = JtemTGM.pieces[current.piece][newrot]
+	if not piece then return false end
+
+	local first = false
+	local center_check = (current.piece == "L" or current.piece == "J" or current.piece == "T") and
+		(current.rotation == 1 or current.rotation == 3)
+
+	-- check the piece if we can collide with the board
+	for y = 1, 4 do
+		local col = piece[y]
+		if col == nil then return false end
+		for x = 1, 4 do
+			local cell = piece[y][x]
+			if cell == nil then return false end
+			if cell == 0 then goto continue end -- nope!
+			local px = current.x + (x - 1)
+			local py = current.y + (y - 1)
+			if not first and JtemTGM.PieceOccupied(board, px, py) then first = true end
+			-- center column rule (needs testing)
+			if center_check and x == 2 and JtemTGM.PieceOccupied(board, px, py) and first then return false end
+			if not JtemTGM.ValidMove(board, px, py, current.piece) then
+				local oldrot = current.rotation
+				current.rotation = newrot
+				-- special kick rules for I
+				if current.piece == "I" then
+					-- wallkick if horizontal
+					if (current.rotation == 1 or current.rotation == 3)
+						and (JtemTGM.IsMoveBlocked(current, { x = -1, y = 0 }, board) or JtemTGM.IsMoveBlocked(current, { x = 1, y = 0 }, board)) then
+						-- Try again, this time 1 unit to the right
+						if JtemTGM.CanPlacePiece(JtemTGM.CreatePieceWithOffset(current, { x = 1, y = 0 }), board) then
+							current.x = current.x + 1
+							return true
+						end
+						-- Try AGAIN gain, 2 more units to the right
+						if JtemTGM.CanPlacePiece(JtemTGM.CreatePieceWithOffset(current, { x = 2, y = 0 }), board) then
+							current.x = current.x + 2
+							return true
+						end
+						-- Try again, this time 1 unit to the left
+						if JtemTGM.CanPlacePiece(JtemTGM.CreatePieceWithOffset(current, { x = -1, y = 0 }), board) then
+							current.x = current.x - 1
+							return true
+						end
+						-- floorkick if vertical
+					elseif (current.rotation == 2 or current.rotation == 4) and not current.floorkick then
+						if JtemTGM.CanPlacePiece(JtemTGM.CreatePieceWithOffset(current, { x = 0, y = -1 }), board) then
+							current.y = current.y - 1
+							current.floorkick = 1
+							return true
+						end
+						if JtemTGM.CanPlacePiece(JtemTGM.CreatePieceWithOffset(current, { x = 0, y = -2 }), board) then
+							current.y = current.y - 2
+							current.floorkick = 1
+							return true
+						end
+					end
+				else
+					-- Try again, this time 1 unit to the right
+					if JtemTGM.CanPlacePiece(JtemTGM.CreatePieceWithOffset(current, { x = 1, y = 0 }), board) then
+						current.x = current.x + 1
+						return true
+					end
+					-- Try again, this time 1 unit to the left
+					if JtemTGM.CanPlacePiece(JtemTGM.CreatePieceWithOffset(current, { x = -1, y = 0 }), board) then
+						current.x = current.x - 1
+						return true
+					end
+					-- T piece specifics
+					if current.piece == "T" and current.rotation == 1 and not current.floorkick and JtemTGM.CanPlacePiece(JtemTGM.CreatePieceWithOffset(current, { x = 0, y = -1 }), board) then
+						current.y = current.y - 1
+						current.floorkick = 1
+						return true
+					end
+				end
+				current.rotation = oldrot
+				return false
+			end
+			::continue::
+		end
+	end
+
+	current.rotation = newrot
+	return true
+end
+
+function JtemTGM.PlacePiece(current, board, lightup)
+	local piece = JtemTGM.pieces[current.piece][current.rotation]
+	if not piece then return false end
+
+	for y = 1, 4 do
+		local col = piece[y]
+		if col == nil then goto continue end
+		for x = 1, 4 do
+			local cell = piece[y][x]
+			if cell == nil then goto ycontinue end
+			if cell == 0 then goto ycontinue end -- nope!
+			board[current.y + (y - 1)][current.x + (x - 1)] = current.piece
+			if lightup then
+				lightup[current.y + (y - 1)] = lightup[current.y + (y - 1)] or {}
+				lightup[current.y + (y - 1)][current.x + (x - 1)] = true
+			end
+			::ycontinue::
+		end
+		::continue::
 	end
 end
 
 --#endregion
+
+--#region Actual logic
+
+function JtemTGM.HandleMove(game)
+	if game.state == STATE_ARE then return end
+	if game.state == STATE_LOCKED then return end
+
+	-- Unfortunately for now I'll hardcode the keybinds
+	-- I don't want to deal with controllers right now.
+	local left = love.keyboard.isDown("left") and -1 or 0
+	local right = love.keyboard.isDown("right") and 1 or 0
+	local dir = left + right
+
+	-- Annoyingly, Love2D has no concept of dedicated "just" pressed buttons, so do that myself
+	if love.keyboard.isDown("z") and not game.justPressedLeftRot then
+		JtemTGM.CheckRotation(game.current_piece, -1, game.board)
+	end
+	if love.keyboard.isDown("x") and not game.justPressedRightRot then
+		JtemTGM.CheckRotation(game.current_piece, 1, game.board)
+	end
+
+	if dir > 0 then
+		if (not (game.olddir > 0)) or game.das_time > game.das_delay then
+			JtemTGM.CheckMoveX(game.current_piece, -1, game.board)
+			game.das_time = game.das_time + 1
+		end
+	elseif dir < 0 then
+		if (not (game.olddir < 0)) or game.das_time > game.das_delay then
+			JtemTGM.CheckMoveX(game.current_piece, 1, game.board)
+			game.das_time = game.das_time + 1
+		end
+	else
+		game.das_time = 0
+	end
+end
