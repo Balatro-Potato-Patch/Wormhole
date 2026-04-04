@@ -78,6 +78,65 @@ return {
 
         },
 
+        --- OTHER LOCALIZATION BECAUSE APPARENTLY IT ISNT WRITTEN THREE LINES LOWER ---
+        --- ----------------------------------------------------------------------- ---
+        --- OTHER LOCALIZATION BECAUSE APPARENTLY IT ISNT WRITTEN ONE LINE LOWER    ---
+        Other = {
+            -- NORMAL ALIEN PACK BECAUSE HOW ELSE WOULD YOU FIND ITS LOCALIZATION
+            p_worm_shrug_alien_normal = {
+                name="Alien Pack",
+                text={
+                    "Choose {C:attention}#1#{} of up to",
+                    "{C:attention}#2#{C:tarot} Alien{} cards to",
+                    "be used immediately",
+                },
+            },
+            p_worm_shrug_alien_normal2 = {
+                name="Alien Pack",
+                text={
+                    "Choose {C:attention}#1#{} of up to",
+                    "{C:attention}#2#{C:tarot} Alien{} cards to",
+                    "be used immediately",
+                },
+            },
+
+
+
+
+
+
+
+            --JUMBO ALIEN PACK BECAUSE ITS VERY USEFUL TO SPACE OUT THINGS
+            p_worm_shrug_alien_jumbo = {
+                name="Jumbo Alien Pack",
+                text={
+                    "Choose {C:attention}#1#{} of up to",
+                    "{C:attention}#2#{C:tarot} Alien{} cards to",
+                    "be used immediately",
+                },
+            },
+            -- MEGA ALIEN PACK YEAH YOU GET IT. OR NO, I DONT CARE ANYMORE
+            p_worm_shrug_alien_mega = {
+                name="Mega Alien Pack",
+                text={
+                    "Choose {C:attention}#1#{} of up to",
+                    "{C:attention}#2#{C:tarot} Alien{} cards to",
+                    "be used immediately",
+                },
+            },
+
+            -- UNDISCOVERED TEXT
+            undiscovered_shrug_alien = {
+                name = "Not Discovered",
+                text = {
+                    "Purchase or use",
+                    "this card in an",
+                    "unseeded run to",
+                    "learn what it does",
+                },
+            },
+        },
+
 
 
 
@@ -109,6 +168,12 @@ return {
         -- DICTIONARY
         dictionary = {
             k_shrug_plus_meteor = "+Tag",
+            k_shrug_alien_pack = "Alien Pack",
+        },
+
+        -- LABELS, HOW ELSE WOULD YOU FIND IT?
+        labels={
+            shrug_alien="Alien",
         },
 
     },
