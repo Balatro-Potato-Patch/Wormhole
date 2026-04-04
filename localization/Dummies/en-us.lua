@@ -62,6 +62,7 @@ return {
                     "every hand played",
                     "{C:inactive}(Currently {X:chips,C:white}X#4#{C:inactive} Chips){}"
                 }},
+            },
 			j_worm_dum_gleebleglorp = {
                 name = "Gleebleglorp",
                 text = {
