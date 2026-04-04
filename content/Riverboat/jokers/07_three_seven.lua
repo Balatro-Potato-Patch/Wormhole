@@ -14,6 +14,8 @@ SMODS.Joker {
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = true,
+    ppu_coder = { "blamperer" },
+    ppu_team = { "riverboat" },
     attributes = { "chips", "mult" },
     loc_vars = function(self, info_queue, card)
         return {
