@@ -52,7 +52,8 @@ SMODS.Joker({
         extra = {
             enhancement = "m_bonus",
             xmult = 2.5,
-            secret = 0
+            secret = 0,
+            added = 1
         }
     },
     loc_vars = function(self, info_queue, card)
@@ -65,15 +66,16 @@ SMODS.Joker({
     calculate = function(self, card, context)
         local cae = card.ability.extra
         if context.card_added and not context.repetition then
-            if context.card == card then
-                play_sound("worm_lfc_berry_wow", 1, 0.6)
+            if cae.added == 1 then
+                play_sound("worm_lfc_berry_wow",1,0.6)
+                cae.added = 0
             end
         end
 
         if context.individual and context.cardarea == G.play and not context.end_of_round then
-            if SMODS.has_enhancement(context.other_card, card.ability.extra.enhancement) then
-                return {
-                    mult = cae.xmult,
+			if SMODS.has_enhancement(context.other_card, "m_bonus") then
+                return{
+                    xmult = cae.xmult,
                     remove_default_message = true,
                     message = localize { type = "variable", key = "a_xmult", vars = { cae.xmult } },
                     sound = "worm_lfc_berry_sfx" .. pseudorandom("moonberry_xmult_sfx", 1, 5),
@@ -96,8 +98,8 @@ SMODS.Joker({
 
             if context.selling_self and G.GAME.round_resets.ante >= 9 and cae.secret == 1 then
                 cae.secret = 2
-                SMODS.add_card({ "j_worm_lfc_fw" })
-                return {
+                SMODS.add_card({ key = "j_worm_lfc_fw" })
+                return{ 
                     func = function()
                         play_sound("worm_lfc_berry_secret", 1, 0.6)
                     end
