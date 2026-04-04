@@ -144,6 +144,27 @@ return {
 
 
 
+        ---ALIEN CARDS---
+        -----------------
+        ---ALIEN CARDS---
+
+        shrug_alien = {
+
+            c_worm_shrug_placeholderalien = {
+                name = "PLACEHOLDER ALIEN",
+                text = {
+                    "This is a placeholder!",
+                    "It holds its place very well.",
+                    "Hooray!"
+                }
+            }
+
+        },
+
+
+
+
+
         ---ENHANCEMENTS---
         ------------------
         ---ENHANCEMENTS---

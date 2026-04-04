@@ -153,9 +153,8 @@ SMODS.Atlas{
 
 -- Placeholder
 SMODS.Consumable{
-    key = 'shrug_alien',
+    key = 'shrug_placeholderalien',
     set = 'shrug_alien',
-    loc_txt = {name = '', text = {"i didnt want to code any aliens so here's placeholder, just delete it if you're gonna add an alien"}},
     atlas = 'shrug_alien_cards',
     unlocked = true,
     discovered = true,
