@@ -4,7 +4,7 @@ priority = 0
 dump_lua = true
 
 
-# Play the meow sound when credits sprite is hovered over
+# When credits sprite is hovered over
 [[patches]]
 [patches.pattern]
 target = '=[SMODS PotatoPatchUtils "src/credits.lua"]'

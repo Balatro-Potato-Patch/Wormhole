@@ -259,7 +259,8 @@ end
 local old = Game.update
 function Game:update(dt, ...)
     local ret = old(self, dt, ...)
-    if G.consumeables and G.consumeables.cards then
+    local alreadyset = false
+    if G.consumeables and G.consumeables.cards and not G.SETTINGS.paused then
         for k, v in pairs(G.consumeables.cards) do
             if v.ability and v.ability.set == "worm_meow_Spacetart" then
                 local bool = false
@@ -272,7 +273,8 @@ function Game:update(dt, ...)
                 end
                 if bool then
                     love.mouse.setCursor(Wormhole.TEAM_MEOW.cursor)
-                else
+                    alreadyset = true
+                elseif not alreadyset then
                     love.mouse.setCursor()
                 end
             end
