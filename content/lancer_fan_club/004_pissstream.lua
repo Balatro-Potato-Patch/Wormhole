@@ -56,6 +56,11 @@ SMODS.Joker {
             piss = 0.1,
         }
     },
+    attributes = {
+        "economy",
+        "mult",
+        "chips",
+    },
 
     loc_vars = function(self, info_queue, card)
         return {

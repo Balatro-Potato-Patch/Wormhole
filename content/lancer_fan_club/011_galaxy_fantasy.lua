@@ -12,6 +12,11 @@ SMODS.Joker {
     atlas = "lfc_jokers",
     pos = { x = 3, y = 1 },
     config = { extra = { rounds = 0, total_rounds = 3, card_type = G.P_CENTERS["c_black_hole"] } },
+    attributes = {
+        "on_sell",
+        "spectral",
+        "generation",
+    },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = card.ability.extra.card_type
         return {

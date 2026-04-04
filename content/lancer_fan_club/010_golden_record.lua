@@ -13,6 +13,12 @@ SMODS.Joker {
     display_size = { w = 69, h = 69 },
     discovered = false,
     config = { extra = { enhancement = "m_gold", card_type = "Spectral", discards = 5, discards_remaining = 5 } },
+    attributes = {
+        "enhancements",
+        "discards",
+        "spectral",
+        "generation"
+    },
     loc_vars = function(self, info_queue, card)
         return {
             vars = {

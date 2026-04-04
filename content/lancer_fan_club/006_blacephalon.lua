@@ -11,6 +11,9 @@ SMODS.Joker {
     pos = { x = 2, y = 0 },
     discovered = false,
     config = { extra = { dollars = 4 } },
+    attributes = {
+        "economy"
+    },
     loc_vars = function(self, info_queue, card)
         return {
             vars = {

@@ -11,6 +11,10 @@ SMODS.Joker({
             scalar = 2,
         }
     },
+    attributes = {
+        "mult",
+        "joker"
+    },
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.scalar, (G.GAME and G.GAME.worm_log_count or 0) * card.ability.extra.scalar, G.GAME and G.GAME.round or 1, string.gsub(os.date("%x"), '/', '') } }
     end,
@@ -21,5 +25,4 @@ SMODS.Joker({
             return { mult = cae.scalar * G.GAME.worm_log_count }
         end
     end
-
 })

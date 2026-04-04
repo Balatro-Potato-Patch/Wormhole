@@ -8,6 +8,7 @@ local joker = SMODS.Joker {
 	ppu_coder = { "ellestuff." },
 	atlas = "lfc_jokers",
 	pos = { x = 1, y = 0 },
+	attributes = { "economy" }
 }
 
 local meteor_sprite = love.graphics.newImage(love.image.newImageData(SMODS.NFS.newFileData(SMODS.current_mod.path ..
