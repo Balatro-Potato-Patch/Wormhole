@@ -13,6 +13,7 @@ SMODS.Booster({
     --atlas = 'polarskull_boosters',
     pos = { x = 0, y = 0 },
     config = { extra = 3, choose = 1 },
+    select_card = 'consumeables',
 
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.choose, card.ability.extra } }
@@ -62,6 +63,7 @@ SMODS.Booster({
     --atlas = 'polarskull_boosters',
     pos = { x = 0, y = 0 },
     config = { extra = 3, choose = 1 },
+    select_card = 'consumeables',
 
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.choose, card.ability.extra } }
@@ -111,6 +113,7 @@ SMODS.Booster({
     --atlas = 'polarskull_boosters',
     pos = { x = 0, y = 0 },
     config = { extra = 5, choose = 1 },
+    select_card = 'consumeables',
 
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.choose, card.ability.extra } }
@@ -160,6 +163,7 @@ SMODS.Booster({
     --atlas = 'polarskull_boosters',
     pos = { x = 0, y = 0 },
     config = { extra = 5, choose = 2 },
+    select_card = 'consumeables',
 
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.choose, card.ability.extra } }

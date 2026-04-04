@@ -95,32 +95,28 @@ return {
 				name = 'Rocket Pack',
 				text = {
 					'Choose {C:attention}#1#{} of up to',
-					'{C:attention}#2#{} {C:polarskull_rocket}Rocket{} cards to',
-					'be used immediately'
+					'{C:attention}#2#{} {C:polarskull_rocket}Rocket{} cards',
 				}
 			},
 			p_worm_rocket_normal_2 = {
 				name = 'Rocket Pack',
 				text = {
 					'Choose {C:attention}#1#{} of up to',
-					'{C:attention}#2#{} {C:polarskull_rocket}Rocket{} cards to',
-					'be used immediately'
+					'{C:attention}#2#{} {C:polarskull_rocket}Rocket{} cards',
 				}
 			},
 			p_worm_rocket_jumbo = {
 				name = 'Jumbo Rocket Pack',
 				text = {
 					'Choose {C:attention}#1#{} of up to',
-					'{C:attention}#2#{} {C:polarskull_rocket}Rocket{} cards to',
-					'be used immediately'
+					'{C:attention}#2#{} {C:polarskull_rocket}Rocket{} cards',
 				}
 			},
 			p_worm_rocket_mega = {
 				name = 'Mega Rocket Pack',
 				text = {
 					'Choose {C:attention}#1#{} of up to',
-					'{C:attention}#2#{} {C:polarskull_rocket}Rocket{} cards to',
-					'be used immediately'
+					'{C:attention}#2#{} {C:polarskull_rocket}Rocket{} cards',
 				}
 			},
 		},
