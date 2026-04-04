@@ -28,6 +28,7 @@ SMODS.Consumable {
                 delay = 0.4,
                 func = function()
                     play_sound("tarot1", 0.8)
+                    SMODS.destroy_cards(cards)
                     card:juice_up(0.3, 0.5)
                     return true
                 end

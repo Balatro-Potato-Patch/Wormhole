@@ -14,7 +14,7 @@ return {
                 text = {
                     "Whenever you {C:attention}Clean-up{}, this",
                     "{C:attention}Joker{} gains {C:mult}+#2#{} Mult for",
-                    "each card cleaned up",
+                    "each card cleaned-up",
                     "{C:inactive}(Currently {C:mult}+#1#{C:inactive})"
                 }
             },
@@ -133,13 +133,14 @@ return {
                 text = {
                     {
                         "Convert {C:attention}#1#{} selected",
-                        "non-{C:attention}Junk Cards{} into",
-                        "{C:attention}Junk Cards"
+                        "non-{C:attention}Junk Card{} into",
+                        "a {C:attention}Junk Card"
                     },
                     {
                         "Clean-up {C:attention}#2#{} {f:6}—{} played hands with",
                         "{C:attention}Junk Cards{} gain an additional {C:attention}+#3#{}",
-                        "multiplier to {C:chips}Chips{} and {C:mult}Mult",
+                        "multiplier to {C:chips}Chips{} and {C:mult}Mult{},",
+                        "destroys the cleaned-up cards",
                         "{C:inactive,s:0.8}(You may use this on #2# Junk Cards,",
                         "{C:inactive,s:0.8}if you do, remove their enhancement",
                         "{C:inactive,s:0.8}and trigger this effect instead)",

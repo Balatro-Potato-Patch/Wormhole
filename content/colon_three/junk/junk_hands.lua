@@ -12,8 +12,12 @@ PotatoPatchUtils.Developers.worm_meta.calculate = function(self, context)
         end
         if junks then
             local txt = "Junk"
+            local replacement = txt .. " " .. context.display_name
+            if replacement == "Junk High Card" then
+                replacement = "Junk"
+            end
             return {
-                replace_display_name = txt .. " " .. context.display_name
+                replace_display_name = replacement
             }
         end
     end
