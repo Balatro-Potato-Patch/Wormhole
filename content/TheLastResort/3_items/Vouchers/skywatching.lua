@@ -3,7 +3,7 @@ SMODS.Voucher {
 	set = 'Voucher',
 	pos = { x = 0, y = 0 },
 	cost = 10,
-    config = { extra = { rate = 4 } }, --Variables: rate = power card shop rate
+    config = { extra = { rate = 4 } },
 
     redeem = function(self, card)
         G.E_MANAGER:add_event(Event({

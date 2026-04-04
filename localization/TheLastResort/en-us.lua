@@ -116,6 +116,16 @@ return {
 			},
 		},
 		Other = {
+			worm_tlr_star_seal = {
+				name = 'Star Seal',
+				text = {
+					'Create a tier {C:attention}2{}',
+					'{C:worm_tlr_constellation}Constellation{} when scored',
+					'if chips scored exceeds',
+					'{C:attention}#1#%{} of required chips',
+					'{C:inactive}(Must have room)'
+				}
+			},
 			worm_tlr_const_info = {
 				name = "Constellation Info",
 				text = {
@@ -154,9 +164,11 @@ return {
 		dictionary = {
 			k_worm_tlr_constellation = "Constellation",
 			b_worm_tlr_constellation_cards = "Constellation",
+			k_plus_constellation = "+1 Constellation",
 		},
 		labels = {
 			worm_tlr_constellation = "Constellation",
+			worm_tlr_star_seal = 'Star Seal'
 		}
 	}
 }
