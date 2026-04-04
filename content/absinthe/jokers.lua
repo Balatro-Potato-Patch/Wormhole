@@ -232,3 +232,138 @@ SMODS.Joker {
         end
     end,
 }
+
+
+
+SMODS.Joker {
+    key = 'abs_glass_storm',
+    rarity = 2,
+    cost = 7,
+    --atlas = 'worm_abs_jokers',
+    pos = { x = 5, y = 0 },
+    --ppu_artist = { '' },
+    ppu_coder = { 'pi_cubed' },
+    ppu_team = { 'absinthe' },
+    attributes = {
+        'full_deck',
+        'enhancements',
+        'modify_card',
+        'on_sell',
+        'drinks',
+        'space'
+    },
+    blueprint_compat = true, perishable_compat = true, eternal_compat = true,
+    config = { extra = { glassed_cards = 5 }},
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = G.P_CENTERS.m_glass
+        return { vars = { 
+            card.ability.extra.glassed_cards
+        } }
+    end,
+    calculate = function(self, card, context)
+        if context.selling_card and context.card.ability.set == 'abs_drinks' 
+        and context.card.ability.drink_values.filled == false then
+            local glassed_list = {}
+            if #G.deck.cards > card.ability.extra.glassed_cards then -- pick 5 random cards
+                local available_cards = {}
+                for k,v in ipairs(G.deck.cards) do
+                    if not v.glass_stormed then
+                        available_cards[#available_cards+1] = v
+                    end
+                end
+                for i = 1, card.ability.extra.glassed_cards do
+                    local chosen_card = pseudorandom_element(available_cards, 'abs_glass_storm')
+                    for j = 1, #available_cards do
+                        if available_cards[j] == chosen_card then
+                            available_cards[j] = nil
+                        end
+                    end
+                    if chosen_card and not chosen_card.glass_stormed then
+                        glassed_list[#glassed_list+1] = chosen_card
+                        chosen_card.glass_stormed = true
+                    end
+                end
+            else -- pick all remaining cards
+                for k,v in ipairs(G.deck.cards) do
+                    if not v.glass_stormed then
+                        glassed_list[#glassed_list+1] = v
+                    end
+                end
+            end
+            if #glassed_list > 0 then
+                local original_state = G.STATE
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'after',
+                    func = function()
+                        if G.STATE == G.STATES.SELECTING_HAND then
+                            G.STATE = G.STATES.HAND_PLAYED
+                        end
+                        card:juice_up()
+                        play_sound('generic1')
+                        for i = 1, #glassed_list do
+                            G.play.config.card_limits.total_slots = G.play.config.card_limits.total_slots + 1
+                            draw_card(G.deck, G.play, 90, 'up', nil, glassed_list[i])
+                        end
+                        
+                        G.E_MANAGER:add_event(Event({
+                            delay = 0,
+                            trigger = 'after',
+                            func = function()
+                                for i = 1, #glassed_list do
+                                    if glassed_list[i].ability.effect ~= 'Glass Card' then
+                                        glassed_list[i].glass_storm_shadow = true
+                                    end
+                                    glassed_list[i]:set_ability('m_glass', nil, true)
+                                    G.E_MANAGER:add_event(Event({
+                                        func = function()
+                                            glassed_list[i]:juice_up()
+                                            glassed_list[i].glass_storm_shadow = nil
+                                            return true
+                                        end
+                                    }))
+                                end
+                                return true
+                            end
+                        }))
+
+                        G.E_MANAGER:add_event(Event({
+                            delay = 0.1,
+                            trigger = 'after',
+                            func = function()
+                                SMODS.calculate_effect({message = localize('k_glass'), 
+                                    colour = G.C.SECONDARY_SET.Enhanced}, 
+                                    context.blueprint_card or card)
+                                return true
+                            end
+                        }))
+
+                        G.E_MANAGER:add_event(Event({
+                            delay = 1,
+                            trigger = 'after',
+                            func = function()
+                                for i = 1, #glassed_list do
+                                    G.play.config.card_limits.total_slots = G.play.config.card_limits.total_slots - 1
+                                    draw_card(G.play, G.deck, 90, 'up', nil, glassed_list[i])
+                                    glassed_list[i].glass_stormed = false
+                                end
+                                G.E_MANAGER:add_event(Event({
+                                    trigger = 'after',
+                                    func = function()
+                                        if #G.play.cards <= #glassed_list then
+                                            G.STATE = original_state
+                                        end
+                                        return true
+                                    end
+                                }))
+                                return true
+                            end
+                        }))
+
+                        return true
+                    end
+                }))
+
+            end
+        end
+    end,
+}

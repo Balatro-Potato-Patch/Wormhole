@@ -1,0 +1,23 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = -1
+
+# Show the shadow under "Glass" cards if they haven't actually
+# turned into one yet because the sprite is delayed
+# (glass_storm_shadow is manually timed)
+[[patches]]
+[patches.pattern]
+target = '=[SMODS _ "src/card_draw.lua"]'
+pattern = '''
+--Draw the shadow
+'''
+position = "before"
+payload = '''
+if G.SETTINGS.GRAPHICS.shadows == 'On' and self.glass_storm_shadow then
+    self.shadow_height = 0*(0.08 + 0.4*math.sqrt(self.velocity.x^2)) + ((((self.highlighted and self.area == G.play) or self.states.drag.is) and 0.35) or (self.area and self.area.config.type == 'title_2') and 0.04 or 0.1)
+    G.shared_shadow:draw_shader('dissolve', self.shadow_height)
+end
+
+'''
+match_indent = true

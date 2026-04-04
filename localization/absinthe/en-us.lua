@@ -211,6 +211,15 @@ return {
 
                 }
             },
+            j_worm_abs_glass_storm = {
+                name = 'Glass Storm',
+                text = {
+                    "{C:attention}#1#{} random cards remaining",
+                    "in deck become {C:attention}Glass Cards{}", 
+                    "when an {C:attention}Empty {C:abs_drinks}Drink{} is {C:attention}sold{}",
+
+                }
+            },
         },
         Other = {
             p_worm_abs_top_shelf_normal_1 = {
@@ -298,6 +307,7 @@ return {
     },
     misc = {
         dictionary = {
+            k_glass = "Glass",
             b_abs_drinks_cards = "Drinks",
             k_abs_drinks = 'Drinks',
             k_plus_drink = '+1 Drink',
