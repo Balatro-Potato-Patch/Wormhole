@@ -80,11 +80,11 @@ descriptions={
 		},
 		j_worm_nasahiring ={
 			name=
-				"NASA's Hiring Team"
+				"NASA's Exploration Team"
 			, text={
 				"When {C:attention}Blind{} is selected,",
 				"create a {C:dark_edition}#1#{}",
-				"{C:money}#2#{} {C:attention}#3#{}",
+				"{C:money}#2#{} {C:attention}Space{} Joker",
 			}
 		},
 		j_worm_capitalism ={

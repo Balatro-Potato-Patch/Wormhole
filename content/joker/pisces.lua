@@ -6,6 +6,13 @@ SMODS.Joker {
 	blueprint_compat = false,
 	eternal_compat = false,
 	perishable_compat = true,
+	
+	attributes = {
+        "space",
+		"hand_type",
+		"destroy_card",
+		"generation"
+    },
 
 	config = {extra = {hand = "Four of a Kind", tag = "tag_rare"}},
 	loc_vars = function (self, info_queue, card)

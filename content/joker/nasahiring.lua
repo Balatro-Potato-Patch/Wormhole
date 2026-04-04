@@ -7,14 +7,24 @@ SMODS.Joker {
 	eternal_compat = true,
 	perishable_compat = true,
 
-	config = {extra = {edition="e_negative", sticker="rental", joker="j_space"}},
+    attributes = {
+        "space",
+        "generation",
+        "joker"
+    },
+
+	config = {extra = {edition="e_negative", sticker="rental"}},
 	loc_vars = function (self, info_queue, card)
-        info_queue[#info_queue+1] = G.P_CENTERS.j_space
+        if not (card.edition and card.edition.negative) then
+            info_queue[#info_queue+1] = G.P_CENTERS.e_negative
+        end
+        if not (card.ability and card.ability.rental) then
+            info_queue[#info_queue+1] = { set = "Other", key = "rental", specific_vars = { G.GAME.rental_rate or 3 } }
+        end
 		return {
 			vars = {
 				localize({type='name_text', set="Edition", key=card.ability.extra.edition}),
 				localize({type='name_text', set="Other", key=card.ability.extra.sticker}),
-				localize({type='name_text', set="Joker", key=card.ability.extra.joker})
 			}
 		}
 	end,
@@ -22,7 +32,7 @@ SMODS.Joker {
 	calculate = function(self, card, context)
 		if context.setting_blind then
             SMODS.add_card{
-                key = card.ability.extra.joker,
+                attributes = {"space"},
                 edition = card.ability.extra.edition,
                 stickers = {
                     card.ability.extra.sticker
