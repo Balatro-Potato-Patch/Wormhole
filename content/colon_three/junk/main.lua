@@ -103,7 +103,13 @@ function Wormhole.COLON_THREE.junk_can_use(func)
         for i, v in pairs(G.hand.highlighted) do
             if v.config.center.key == "m_worm_junk_card" then junk = junk + 1 end
         end
-        local will_cleanup = G.hand and #G.hand.highlighted == cleanup_num and junk == cleanup_num
+
+        local cleanup_vals = { [cleanup_num] = true }
+        for i = 1, math.min ( #SMODS.find_card("j_worm_wall_e"), cleanup_num - 1 ) do
+            cleanup_vals[cleanup_num-i] = true
+        end
+
+        local will_cleanup = G.hand and cleanup_vals[#G.hand.highlighted] and #G.hand.highlighted == junk
         local will_convert = G.hand and #G.hand.highlighted == junk_num and junk == 0
         return (not func or func(self, card)) and (will_convert or will_cleanup)
     end

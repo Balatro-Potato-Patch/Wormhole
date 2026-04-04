@@ -18,6 +18,14 @@ return {
                     "{C:inactive}(Currently {C:mult}+#1#{C:inactive})"
                 }
             },
+            j_worm_wall_e = {
+                name = "WALL-E",
+                text = {
+                    "You may pay {C:attention}Clean-up{} costs",
+                    "by selecting {C:attention}one{} fewer card",
+                    "{C:inactive}(Minimum of 1 card)"
+                }
+            },
         },
         Enhanced = {
             m_worm_junk_card = {
