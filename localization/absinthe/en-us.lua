@@ -132,12 +132,13 @@ return {
                 text = {
                     {
                         "When {C:attention}primed{}, {C:blue}+#1#{} Hand",
-                        "for this Blind, then is {C:abs_drinks}drank{}"
+                        "for this Blind, then is {C:abs_drinks}drank{}",
+                        '{C:inactive,s:0.8}Current hand: #2#'
                     },
                     {
                         "{C:abs_drinks}Refill{} by discarding",
-                        "{C:attention}#3#{} {C:enhanced}Enhanced cards{}",
-                        "{C:inactive,s:0.8}(#2#/#3#){}",
+                        "{C:attention}#4#{} {C:enhanced}Enhanced cards{}",
+                        "{C:inactive,s:0.8}(#3#/#4#){}",
                     }
                 }
             },
@@ -147,13 +148,14 @@ return {
                     {
                         "{C:inactive,s:0.8}Currently Empty{}",
                         "{C:abs_drinks}Refill{} by discarding",
-                        "{C:attention}#3#{} {C:enhanced}Enhanced cards{}",
-                        "{C:inactive,s:0.8}(#2#/#3#){}",
+                        "{C:attention}#4#{} {C:enhanced}Enhanced cards{}",
+                        "{C:inactive,s:0.8}(#3#/#4#){}",
                     },
                     {
                         "{C:inactive,s:0.8}After being Refilled:{}",
                         "When {C:attention}primed{}, {C:blue}+#1#{} Hand",
-                        "for this Blind, then is {C:abs_drinks}drank{}"
+                        "for this Blind, then is {C:abs_drinks}drank{}",
+                        '{C:inactive,s:0.8}Current hand: #2#'
                     }
                 }
             },
