@@ -294,56 +294,6 @@ SMODS.Joker{
 	end
 }
 
-SMODS.Joker{
-	key = "bigbangtheory",
-	loc_txt = {
-		name = "The Big Bang Theory",
-		text = {
-			"Sell {C:attention}#1#{} Jokers to",
-			"create a {C:RARITY.Legendary}Legendary{} Joker"
-		}
-	},
-	config = { extra = { counter = 15 }},
-	loc_vars = function(self, info_queue, card)
-		return { vars = { card.ability.extra.counter }}
-	end,
-	atlas = "vegas_jokers",
-	pos = {x = 0, y = 0},
-	rarity = 3,
-	cost = 16,
-	blueprint_compat = false,
-	discovered = true,
-	eternal_compat = true,
-	perishable_compat = true,
-	ppu_team = {"People Found In Vegas"},
-	ppu_coder = {"Jammbo"},
-	ppu_artist = {"Jammbo"},
-	calculate = function(self, card, context)
-		if context.selling_card and context.card.ability and context.card.ability.set == 'Joker' and not context.blueprint then
-            card.ability.extra.counter = card.ability.extra.counter - 1
-			if card.ability.extra.counter > 0 then
-				return {
-					message = card.ability.extra.counter
-				}
-			else
-				card:remove()
-				G.E_MANAGER:add_event(Event({
-					trigger = 'after',
-					delay = 0.4,
-					func = function()
-						play_sound('timpani')
-						SMODS.add_card({ set = 'Joker', legendary = true })
-						check_for_unlock { type = 'spawn_legendary' }
-						card:juice_up(0.3, 0.5)
-						return true
-					end
-				}))
-				delay(0.6)
-			end
-        end
-	end
-}
-
 --[[
 SMODS.Joker{
 	key = "template",
