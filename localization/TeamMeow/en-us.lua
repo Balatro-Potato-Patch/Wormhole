@@ -8,6 +8,46 @@ return {
 					"Chips permanently",
 				},
 			},
+			c_worm_zodicat2 = {
+				name = "TBD",
+				text = {
+					"{C:attention}3s{} and {C:attention}4s{} gain {C:mult}+#1#{}",
+					"Mult permanently",
+				},
+			},
+			c_worm_zodicat3 = {
+				name = "TBD",
+				text = {
+					"{C:attention}5s{} and {C:attention}6s{} have a",
+					"{C:green}#1# in #2#{} chance to",
+					"gain {C:money}$#3#{} while held",
+					"in hand permanently",
+				},
+			},
+			c_worm_zodicat4 = {
+				name = "TBD",
+				text = {
+					"{C:attention}7s{} and {C:attention}8s{} gain {C:chips}+#1#{}",
+					"Chips while held in",
+					"hand permanently",
+				},
+			},
+			c_worm_zodicat5 = {
+				name = "TBD",
+				text = {
+					"{C:attention}9s{} and {C:attention}10s{} gain {C:mult}+#1#{}",
+					"Mult while held in",
+					"hand permanently",
+				},
+			},
+			c_worm_zodicat6 = {
+				name = "TBD",
+				text = {
+					"{C:attention}Face cards{} gain",
+					"gain {C:mult}$#3#{}",
+					"permanently",
+				},
+			},
 		},
 		worm_meow_Spacetart = {
 			c_worm_stellar_strawberry = {
