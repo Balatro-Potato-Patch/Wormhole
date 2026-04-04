@@ -4,7 +4,7 @@ priority = 0
 dump_lua = true
 
 
-# play the meow sound
+# Play the meow sound when credits sprite is hovered over
 [[patches]]
 [patches.pattern]
 target = '=[SMODS PotatoPatchUtils "src/credits.lua"]'
@@ -19,6 +19,7 @@ end
 '''
 match_indent = true
 
+# Reset sprites to normal when credits sprite is not hovered anymore
 [[patches]]
 [patches.pattern]
 target = '=[SMODS PotatoPatchUtils "src/credits.lua"]'
@@ -37,6 +38,7 @@ end
 '''
 match_indent = true
 
+# Toma card sprite size manipulation
 [[patches]]
 [patches.pattern]
 target = '=[SMODS PotatoPatchUtils "src/credits.lua"]'
