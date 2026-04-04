@@ -17,6 +17,17 @@ return {
                     }
                 },
             },
+            j_worm_dum_greg = {
+                name = "Greg The Spitter",
+                text = {
+                    {
+                        "After a hand is scored",
+                        "{C:attention}Eats{} your {C:attention}rightmost played{} card,",
+                        "{C:attention}Enhances{} your {C:attention}leftmost played{} card.",
+                        "{C:red}Cannot be sold."
+                    }
+                },
+            },
 			j_worm_dum_garlicbread = {
                 name = "Garlic Bread That Went To Space",
                 text = {
