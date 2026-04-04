@@ -1,3 +1,5 @@
+Wormhole.tbp = {}
+
 PotatoPatchUtils.Team({
     name = 'tbp',
     loc = true,
@@ -7,7 +9,7 @@ PotatoPatchUtils.Team({
 PotatoPatchUtils.Developer({
     name = 'eremel',
     team = 'tbp',
-    loc = true,
+    -- loc = true,
 })
 
 PotatoPatchUtils.Developer({
@@ -52,13 +54,13 @@ PotatoPatchUtils.Developer({
 SMODS.Back{
     key = "spaceship_deck",
     pos = {x = 0, y = 0},
-    config = {consumables = {'c_worm_laser'}, jokers = {'j_worm_spaceship'}, consumable_slot = 100},
+    config = {consumables = {'c_worm_tbp_laser'}, jokers = {'j_worm_tbp_spaceship'}, consumable_slot = 100},
 }
 
 ---
 
 SMODS.Joker({
-	key = "spaceship",
+	key = "tbp_spaceship",
 	rarity = 4, -- TODO: Does it need its own rarity?
 	cost = 1,
 	unlocked = true,
@@ -67,6 +69,7 @@ SMODS.Joker({
 	blueprint_compat = false,
 	eternal_compat = false,
 	perishable_compat = false,
+    ppu_team = {'tbp'},
     config = { extra = { modules = {} } },
 	loc_vars = function(self, info_queue, center)
         for _, v in ipairs(center.ability.extra.modules) do
@@ -87,7 +90,7 @@ SMODS.Joker({
                     end
                 }))
             end
-            if context.joker_main and card:tbp_has_module("c_worm_laser") then
+            if context.joker_main and card:tbp_has_module("c_worm_tbp_laser") then
                 return {
                     mult = card.ability.extra.mult,
                 }
@@ -95,7 +98,7 @@ SMODS.Joker({
         end
 	end,
     add_to_deck = function(self, card, from_debuff)
-		if next(SMODS.find_card("j_worm_spaceship")) then
+		if next(SMODS.find_card("j_worm_tbp_spaceship")) then
             G.E_MANAGER:add_event(Event({
                 func = function()
                     card:remove()
@@ -110,23 +113,30 @@ SMODS.Joker({
 })
 
 SMODS.ConsumableType {
-    key = 'module',
+    key = 'tbp_module',
     collection_rows = { 5, 6 },
     primary_colour = G.C.SET.Spectral, -- TODO: Change color?
     secondary_colour = G.C.SECONDARY_SET.Spectral,
 }
 
-SMODS.Module = SMODS.Consumable:extend{
-    set = "module",
+Wormhole.tbp.Module = SMODS.Consumable:extend{
+    set = "tbp_module",
     config = {
 		extra = {},
 	},
     cooldown = false,
+    pre_inject_class = function(self, func)
+        for _, obj in pairs(self.obj_table) do
+            if obj.set == 'tbp_module' then
+                obj.ppu_team = obj.ppu_team or {'tbp'}
+            end
+        end
+    end,
     can_use = function(self, card)
-		return next(SMODS.find_card("j_worm_spaceship"))
+		return next(SMODS.find_card("j_worm_tbp_spaceship"))
 	end,
     use = function(self, card, area, copier)
-		local spaceship = SMODS.find_card("j_worm_spaceship")
+		local spaceship = SMODS.find_card("j_worm_tbp_spaceship")
         if next(spaceship) then
             spaceship[1].ability.extra.modules[#spaceship[1].ability.extra.modules+1] = {self.key, self.cooldown}
             for k, v in pairs(self.config.extra) do
@@ -136,7 +146,7 @@ SMODS.Module = SMODS.Consumable:extend{
 	end,
 }
 
-SMODS.Module({
+Wormhole.tbp.Module({
 	key = "laser",
 	pos = { x = 0, y = 0 },
 	config = {

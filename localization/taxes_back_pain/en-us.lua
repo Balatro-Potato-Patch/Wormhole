@@ -1,9 +1,15 @@
-return {
+local other_loc_table = {
+    misc = {
+        dictionary = {
+            k_tbp_module = "Module",
+            b_tbp_module_cards = "Modules",
+        }
+    },
     descriptions = {
         PotatoPatch = {
             PotatoPatchTeam_tbp = {name = 'Taxes and Back Pain'},
             PotatoPatchDev_eremel = {
-                name = 'Eremel',
+                name = 'Eremel pro',
                 text = {
                     'placeholder'
                 }
@@ -71,10 +77,25 @@ return {
             },
         },
     },
-    misc = {
-        dictionary = {
-            k_module = "Module",
-            b_module_cards = "Modules",
-        }
+}
+
+local descriptions = {
+    Joker = {
+        spaceship = {
+            name = 'Spaceship',
+            text = {
+                'palceholder'
+            }
+        },
+    },
+    tbp_module = {
+        laser = {
+            name = 'Laser',
+            text = {
+                'test desc'
+            }
+        },
     }
 }
+
+return Wormhole.tbp.prefix_loc_table(descriptions, other_loc_table)
