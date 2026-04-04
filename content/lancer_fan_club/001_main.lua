@@ -10,6 +10,10 @@ Wormhole.LancerFanClub = PotatoPatchUtils.Team {
             Wormhole.LancerFanClub.get_piss()
         end
 
+        if context.remove_playing_cards and #context.removed > 0 then
+            G.GAME.lfc_can_blacephalon_appear = true
+        end
+
         if #effects > 0 then return SMODS.merge_effects(effects) end
     end
 }

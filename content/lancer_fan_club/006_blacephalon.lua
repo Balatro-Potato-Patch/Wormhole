@@ -35,6 +35,9 @@ SMODS.Joker {
             }
         end
     end,
+    in_pool = function(self, args)
+        return G.GAME.lfc_can_blacephalon_appear
+    end,
 
     dex_entry_key = "lfc_dex_blacephalon",
     generate_ui = Wormhole.LFC_Util.generate_pokedex_entry_ui

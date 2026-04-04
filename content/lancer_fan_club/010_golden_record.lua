@@ -60,4 +60,11 @@ SMODS.Joker {
             end
         end
     end,
+    in_pool = function(self, args)
+        for _, card in ipairs(G.playing_cards or {}) do
+            if SMODS.has_enhancement(card, "m_gold") then
+                return true
+            end
+        end
+    end,
 }

@@ -1,6 +1,6 @@
 local function emplace_stone_cards()
     if #SMODS.find_card("j_worm_lfc_stakataka") > 0 then
-        for _, other_card in ipairs(G.playing_cards) do
+        for _, other_card in ipairs(G.playing_cards or {}) do
             if
                 other_card.area == G.hand                                                                                                -- fucking awful hack
                 and SMODS.has_enhancement(other_card, "m_stone")
@@ -51,6 +51,14 @@ SMODS.Joker {
                 localize({ type = 'name_text', set = "Enhanced", key = "m_stone" }) or "Stone Card"
             }
         }
+    end,
+
+    in_pool = function(self, args)
+        for _, card in ipairs(G.playing_cards or {}) do
+            if SMODS.has_enhancement(card, "m_stone") then
+                return true
+            end
+        end
     end,
 
     dex_entry_key = "lfc_dex_stakataka",
