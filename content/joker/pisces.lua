@@ -16,6 +16,7 @@ SMODS.Joker {
 
 	config = {extra = {hand = "Four of a Kind", tag = "tag_rare"}},
 	loc_vars = function (self, info_queue, card)
+		info_queue[#info_queue+1] = {key = 'tag_rare', set = 'Tag'}
 		return {
 			vars = {
 				localize(card.ability.extra.hand, "poker_hands"),
@@ -27,7 +28,6 @@ SMODS.Joker {
 	calculate = function(self, card, context)
 		if context.joker_main and next(context.poker_hands[card.ability.extra.hand]) then
 			local books = get_X_same(4, context.scoring_hand, true)
-			G.lolpiscesdebugtime = books
 
 			for _,book in ipairs(books) do
 				SMODS.destroy_cards(book)
