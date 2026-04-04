@@ -24,6 +24,15 @@ return {
                 }
             }
             }
+        },
+        Spectral = {
+            c_worm_omnipotence = {
+                name = "Omnipotence",
+                text = {
+                    "Create one Otherworldly Joker, but",
+                    "set money to 0 and {C:red}destroy{} one random Joker"
+                }
+            }
         }
         
     },
