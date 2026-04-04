@@ -53,16 +53,15 @@ SMODS.Joker({
             enhancement = "m_bonus",
             xmult = 2.5,
             secret = 0,
-            added = 1
         }
     },
     loc_vars = function(self, info_queue, card)
         local hint1, hint2 = "..."," "
         if card.ability.extra.secret == 1 then
-            hint1 = "Sell this joker to reveal a secret!"
-            hint2 = "(creates extra copy of Moon Berry, must have room)"
+            hint1 = localize("k_lfc_secret1")
+            hint2 = localize("k_lfc_secret2")
         elseif card.ability.extra.secret == 2 then
-            hint1, hint2 = "gotcha, lol", "wow so secret"
+            hint1, hint2 = localize("k_lfc_secret3"), localize("k_lfc_secret4")
         end
         return {
             vars = { card.ability.extra.enhancement and
@@ -70,31 +69,46 @@ SMODS.Joker({
                 card.ability.extra.xmult, hint1, hint2 }
         }
     end,
+    add_to_deck = function(self, card, from_debuff)
+        if not from_debuff then
+            if not G.GAME.lfc_berry_secret then G.GAME.lfc_berry_secret = 0 end
+            card.ability.extra.secret = G.GAME.lfc_berry_secret
+            G.E_MANAGER:add_event(Event({
+                trigger = "immeadiate",
+                no_delete = true,
+                pause_force = true,
+                blockable = false,
+                blocking = false,
+                func = function()
+                    play_sound("worm_lfc_berry_wow", 1, 0.6)
+                    return true
+                end
+            }))
+        end
+    end,
+
+    remove_from_deck = function(self, card, from_debuff)
+        if not from_debuff then
+            SMODS.add_card({ key = "j_worm_lfc_fw" })
+            if G.GAME.round_resets.ante >= 9 and card.ability.extra.secret == 1 then
+                G.GAME.lfc_berry_secret = 2
+                G.E_MANAGER:add_event(Event({
+                    trigger = "immeadiate",
+                    no_delete = true,
+                    pause_force = true,
+                    blockable = false,
+                    blocking = false,
+                    func = function()
+                        play_sound("worm_lfc_berry_secret", 1, 0.6)
+                        return true
+                    end
+                }))
+            end
+        end
+    end,
+
     calculate = function(self, card, context)
         local cae = card.ability.extra
-        if context.card_added and not context.repetition then
-            if cae.added == 1 then
-                cae.added = 0
-                return{ 
-                    func = function()
-                        G.E_MANAGER:add_event(Event({
-                            trigger = "immeadiate",
-                            no_delete = true,
-                            pause_force = true,
-                            blockable = false,
-                            blocking = false,
-                            func = function()
-                                play_sound("worm_lfc_berry_wow", 1, 0.6)
-                                return true
-                            end
-                        }))
-                    end
-                }
-            end
-            if not G.GAME.lfc_berry_secret then G.GAME.lfc_berry_secret = 0 end
-            cae.secret = G.GAME.lfc_berry_secret
-        end
-
         if context.individual and context.cardarea == G.play and not context.end_of_round then
 			if SMODS.has_enhancement(context.other_card, "m_bonus") then
                 return{
@@ -105,39 +119,19 @@ SMODS.Joker({
                     colour = G.C.MULT
                 }
             end
+        end
 
-            if context.ante_change and context.ante_end then
-                if G.GAME.round_resets.ante >= 9 then
-                    if cae.secret == 0 then cae.secret = 1 end
-                    local eval = function(card) return not card.REMOVED end
-                    juice_card_until(card, eval, true)
+        if context.ante_change and context.ante_end then
+            if G.GAME.round_resets.ante >= 9 then
+                if cae.secret == 0 then cae.secret = 1 end
+                local eval = function(card) return not card.REMOVED end
+                juice_card_until(card, eval, true)
+            end
+            return {
+                func = function()
+                    play_sound("worm_lfc_berry_ante", 1, 0.6)
                 end
-                return {
-                    func = function()
-                        play_sound("worm_lfc_berry_ante", 1, 0.6)
-                    end
-                }
-            end
-
-            if context.selling_self and G.GAME.round_resets.ante >= 9 and cae.secret == 1 then
-                G.GAME.lfc_berry_secret = 2
-                SMODS.add_card({ key = "j_worm_lfc_fw" })
-                return{ 
-                    func = function()
-                        G.E_MANAGER:add_event(Event({
-                            trigger = "immeadiate",
-                            no_delete = true,
-                            pause_force = true,
-                            blockable = false,
-                            blocking = false,
-                            func = function()
-                                play_sound("worm_lfc_berry_secret", 1, 0.6)
-                                return true
-                            end
-                        }))
-                    end
-                }
-            end
+            }
         end
     end
 

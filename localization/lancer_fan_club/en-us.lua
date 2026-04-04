@@ -214,6 +214,10 @@ return {
         dictionary = {
             k_lfc_none = "None",
             k_lfc_brackets_rank = "[rank]",
+            k_lfc_secret1 = "Sell this joker to reveal a secret!",
+            k_lfc_secret2 = "(creates extra copy of Moon Berry, must have room)",
+            k_lfc_secret3 = "gotcha, lol",
+            k_lfc_secret4 = "wow so secret",
         },
         v_dictionary = {
             lfc_dex_blacephalon_us = {
@@ -243,7 +247,7 @@ return {
             lfc_obtain_pokemon_warning = {
                 "{s:0.75}Obtain this {C:attention,s:0.75}Joker{s:0.75} to",
                 "{s:0.75}unlock its {C:dark_edition,s:0.75}Pokédex entry{s:0.75}!",
-            }
+            },
         }
     }
 }
