@@ -1,5 +1,10 @@
 -- It's fucking tetris
 
+-- This is still ridiculously incomplete, will work more on this later
+if true then
+	return
+end
+
 JtemTGM = {}
 
 -- Pieces, arranged in a 2d array
@@ -437,6 +442,7 @@ function JtemTGM.ResetPlayerState()
 		justPressedLeftRot = false,
 		justPressedRightRot = false,
 		olddir = 0,
+		oldvdir = 0,
 	}
 	return state
 end
@@ -492,6 +498,7 @@ function JtemTGM.ChangeState(game, newstate)
 	end
 
 	if newstate == STATE_LOCKED and game.state == STATE_LOCKING then
+		game.clear_time = game.clear_delay
 		game.clears = 0
 		game.clear_cols = {}
 		-- place le piece
@@ -523,6 +530,7 @@ function JtemTGM.ChangeState(game, newstate)
 		game.clears = line_count
 		game.combo = game.combo + ((2 * line_count) - 2)
 		if line_count == 0 then
+			game.clear_time = 1
 			game.combo = 1
 		end
 		game.level = game.level + line_count
@@ -625,6 +633,8 @@ function JtemTGM.ValidPiece(cell)
 end
 
 function JtemTGM.PieceOccupied(board, x, y)
+	x = math.floor(x); y = math.floor(y)
+
 	local col = board[y]
 	if col == nil then return false end
 	local cell = col[x]
@@ -865,15 +875,24 @@ end
 
 --#region Actual logic
 
-function JtemTGM.HandleMove(game)
-	if game.state == STATE_ARE then return end
-	if game.state == STATE_LOCKED then return end
-
+function JtemTGM.GetDirectionalInput()
 	-- Unfortunately for now I'll hardcode the keybinds
 	-- I don't want to deal with controllers right now.
 	local left = love.keyboard.isDown("left") and -1 or 0
 	local right = love.keyboard.isDown("right") and 1 or 0
 	local dir = left + right
+	local up = love.keyboard.isDown("up") and -1 or 0
+	local down = love.keyboard.isDown("down") and 1 or 0
+	local vdir = up + down
+
+	return dir, vdir
+end
+
+function JtemTGM.HandleMove(game)
+	if game.state == STATE_ARE then return end
+	if game.state == STATE_LOCKED then return end
+
+	local dir, vdir = JtemTGM.GetDirectionalInput()
 
 	-- Annoyingly, Love2D has no concept of dedicated "just" pressed buttons, so do that myself
 	if love.keyboard.isDown("z") and not game.justPressedLeftRot then
@@ -886,14 +905,178 @@ function JtemTGM.HandleMove(game)
 	if dir > 0 then
 		if (not (game.olddir > 0)) or game.das_time > game.das_delay then
 			JtemTGM.CheckMoveX(game.current_piece, -1, game.board)
-			game.das_time = game.das_time + 1
 		end
 	elseif dir < 0 then
 		if (not (game.olddir < 0)) or game.das_time > game.das_delay then
 			JtemTGM.CheckMoveX(game.current_piece, 1, game.board)
-			game.das_time = game.das_time + 1
 		end
 	else
 		game.das_time = 0
 	end
+
+	if vdir > 0 then
+		local ret = JtemTGM.MoveInGrid(game.current_piece, { x = 0, y = 1 }, 1, game.board)
+		if not ret then
+			if game.state < STATE_LOCKING then
+				JtemTGM.ChangeState(game, STATE_LOCKING)
+			else
+				game.lock_timer = 1
+			end
+		end
+		game.soft = game.soft + 1
+	end
+
+	-- Sonic Drop > Hard Drop btw
+	if vdir < 0 and game.oldvdir >= 0 then
+		JtemTGM.MoveInGrid(game.current_piece, { x = 0, y = 1 }, 1, game.board, true)
+		if game.state < STATE_LOCKING then
+			JtemTGM.ChangeState(game, STATE_LOCKING)
+		end
+	end
+
+	if vdir == 0 and game.state == STATE_DROPPING then
+		JtemTGM.MoveInGrid(game.current_piece, { x = 0, y = game.fall_speed }, 1, game.board)
+		if JtemTGM.IsDropBlocked(game.current_piece, game.board) then
+			JtemTGM.ChangeState(game, STATE_LOCKING)
+		end
+	end
+
+	game.olddir = dir
+	game.oldvdir = vdir
 end
+
+function JtemTGM.HandleGame(game)
+	if not game.board then return end
+
+	local dir, vdir = JtemTGM.GetDirectionalInput()
+
+	if dir > 0 then
+		game.das_time = game.das_time + 1
+	elseif dir < 0 then
+		game.das_time = game.das_time + 1
+	end
+
+	if game.state == STATE_DROPPING or game.state == STATE_LOCKING then
+		JtemTGM.HandleMove(game)
+	end
+
+	if game.state == STATE_LOCKING then
+		if not JtemTGM.IsDropBlocked(game.current_piece, game.board) then
+			JtemTGM.ChangeState(game, STATE_DROPPING)
+		end
+
+		game.lock_timer = math.max(0, game.lock_timer - 1)
+		if game.lock_timer <= 0 then
+			JtemTGM.ChangeState(game, STATE_LOCKED)
+		end
+	end
+
+	if game.state == STATE_LOCKED then
+		if game.clear_time == game.clear_delay - 2 then
+			for y, col in pairs(game.lightup) do
+				for x, cell in pairs(col) do
+					game.lightup[y][x] = nil
+				end
+			end
+		end
+		game.clear_time = math.max(0, game.clear_time - 1)
+		if game.clear_time <= 0 then
+			game.entry_time = game.entry_delay
+			JtemTGM.ChangeState(game, STATE_ARE)
+		end
+	end
+
+	if game.state == STATE_ARE then
+		game.clear_cols = {}
+
+		game.entry_time = math.max(0, game.entry_time - 1)
+		if game.entry_time == math.max(0, game.entry_delay - 2) then
+			for y, col in pairs(game.lightup) do
+				for x, cell in pairs(col) do
+					game.lightup[y][x] = nil
+				end
+			end
+		end
+		if game.entry_time <= 0 then
+			JtemTGM.ChangeState(game, STATE_DROPPING)
+		end
+	end
+
+	if game.state == STATE_READY or game.state == STATE_GO then
+		game.state_timer = math.max(0, game.state_timer - 1)
+		if game.state_timer <= 0 then
+			JtemTGM.ChangeState(game, game.state == STATE_READY and STATE_GO or STATE_DROPPING)
+		end
+	end
+end
+
+---@param canvas love.Canvas|table
+---@param game table
+function JtemTGM.HandleDraw(canvas, game)
+	local oldcanvas = love.graphics.getCanvas()
+	love.graphics.push()
+	love.graphics.origin()
+	love.graphics.setCanvas(canvas)
+
+	love.graphics.translate(0, -BOARD_HCLEARANCE * BLOCK_H)
+
+	-- draw the current board first
+	for y = BOARD_HCLEARANCE, BOARD_H - 1 do
+		local col = game.board[y]
+		if col == nil then goto continue end
+		local py = y * BLOCK_H
+		for x = 0, BOARD_W - 1 do
+			local cell = game.board[y][x]
+			if cell == nil then goto xcontinue end
+			local px = x * BLOCK_W
+
+			local p = JtemTGM.pieces[cell]
+			if not p then goto xcontinue end
+			local piece = p[1]
+
+			if JtemTGM.ValidPiece(cell) and piece then
+				love.graphics.setColor(p.color)
+				love.graphics.rectangle("fill", px, py, BLOCK_W, BLOCK_H)
+				love.graphics.setColor(G.C.WHITE)
+			end
+			::xcontinue::
+		end
+		::continue::
+	end
+
+	love.graphics.pop()
+	love.graphics.setCanvas(oldcanvas)
+end
+
+-- Here's the actual Joker definition
+SMODS.Joker {
+	key = "jtem2_tetris",
+
+	ppu_team = { "jtem2" },
+	ppu_coder = { "haya" },
+	-- ppu_artist = { "missingnumber" },
+
+	rarity = 2,
+	cost = 8,
+
+	atlas = "jokers",
+	pos = { x = 0, y = 0 },
+
+	attributes = {
+		'xmult',
+		'scaling',
+	},
+
+	config = { extra = { game_state = {} } },
+
+	update = function(self, card, dt)
+		if next(card.ability.extra.game_state) then
+			JtemTGM.HandleGame(card.ability.extra.game_state)
+		end
+	end,
+
+	add_to_deck = function(self, card, from_debuff)
+		if from_debuff then return end
+		card.ability.extra.game_state = JtemTGM.ResetPlayerState()
+	end
+}

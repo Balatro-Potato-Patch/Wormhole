@@ -33,6 +33,21 @@ return {
 					},
 				},
 			},
+			j_worm_jtem2_tetris = {
+				name = "Terror Instinct",
+				text = {
+					{
+						"{E:2}Play Tetris!",
+						"This Joker's XMult is determined by",
+						"it's {C:attention}current level{} divided by 100 plus one",
+						"{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)"
+					},
+					{
+						"Use the arrow keys to control the piece",
+						"Press Z and X to rotate left and right",
+					}
+				}
+			}
 		},
 		PotatoPatch = {
 			PotatoPatchTeam_jtem2 = { name = "Jtem 2" },
