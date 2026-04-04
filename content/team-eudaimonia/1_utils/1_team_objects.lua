@@ -28,11 +28,11 @@ PotatoPatchUtils.Developer({
 })
 
 PotatoPatchUtils.Developer({
-    name = "Plasma",
+    name = "cosmeggo",
     colour = HEX('baa1db'),
     loc = true,
     team = "TeamEudaimonia",
-    --atlas_key = "eud_teamPlasma"
+    --atlas_key = "eud_teamCosmeggo"
     --pos = {x=0,y=0}
 })
 

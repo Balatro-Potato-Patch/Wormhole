@@ -9,8 +9,8 @@ return {
                 name = "LasagnaFelidae",
                 text = {"big fat hairy deal"}
             },
-            PotatoPatchDev_Plasma = {
-                name = "Plasma",
+            PotatoPatchDev_cosmeggo = {
+                name = "Cosmeggo",
                 text = {"."}
             },
             PotatoPatchDev_soulware = {
