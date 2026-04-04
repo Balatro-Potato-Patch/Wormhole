@@ -24,7 +24,8 @@ SMODS.Enhancement {
                     func = function(base, _, param, _)
                         return base + card.ability.extra[param]
                     end,
-                    StatusText = true
+                    StatusText = true,
+                    from = card
                 }
             end
         end
