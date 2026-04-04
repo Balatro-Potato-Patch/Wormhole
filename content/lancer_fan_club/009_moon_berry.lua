@@ -57,19 +57,42 @@ SMODS.Joker({
         }
     },
     loc_vars = function(self, info_queue, card)
+        local hint1, hint2 = "..."," "
+        if card.ability.extra.secret == 1 then
+            hint1 = "Sell this joker to reveal a secret!"
+            hint2 = "(creates extra copy of Moon Berry, must have room)"
+        elseif card.ability.extra.secret == 2 then
+            hint1, hint2 = "gotcha, lol", "wow so secret"
+        end
         return {
             vars = { card.ability.extra.enhancement and
             localize({ type = 'name_text', set = "Enhanced", key = card.ability.extra.enhancement }) or "Bonus Card",
-                card.ability.extra.xmult }
+                card.ability.extra.xmult, hint1, hint2 }
         }
     end,
     calculate = function(self, card, context)
         local cae = card.ability.extra
         if context.card_added and not context.repetition then
             if cae.added == 1 then
-                play_sound("worm_lfc_berry_wow",1,0.6)
                 cae.added = 0
+                return{ 
+                    func = function()
+                        G.E_MANAGER:add_event(Event({
+                            trigger = "immeadiate",
+                            no_delete = true,
+                            pause_force = true,
+                            blockable = false,
+                            blocking = false,
+                            func = function()
+                                play_sound("worm_lfc_berry_wow", 1, 0.6)
+                                return true
+                            end
+                        }))
+                    end
+                }
             end
+            if not G.GAME.lfc_berry_secret then G.GAME.lfc_berry_secret = 0 end
+            cae.secret = G.GAME.lfc_berry_secret
         end
 
         if context.individual and context.cardarea == G.play and not context.end_of_round then
@@ -97,11 +120,21 @@ SMODS.Joker({
             end
 
             if context.selling_self and G.GAME.round_resets.ante >= 9 and cae.secret == 1 then
-                cae.secret = 2
+                G.GAME.lfc_berry_secret = 2
                 SMODS.add_card({ key = "j_worm_lfc_fw" })
                 return{ 
                     func = function()
-                        play_sound("worm_lfc_berry_secret", 1, 0.6)
+                        G.E_MANAGER:add_event(Event({
+                            trigger = "immeadiate",
+                            no_delete = true,
+                            pause_force = true,
+                            blockable = false,
+                            blocking = false,
+                            func = function()
+                                play_sound("worm_lfc_berry_secret", 1, 0.6)
+                                return true
+                            end
+                        }))
                     end
                 }
             end

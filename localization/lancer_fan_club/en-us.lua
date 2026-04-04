@@ -164,9 +164,15 @@ return {
                     "{E:1,C:inactive,s:0.5}WOW"
                 },
                 text = {
+                    {
                     "Scored {C:attention}#1#s{}",
                     "give {X:mult,C:white} X#2# {} Mult",
-                    "when scored"
+                    "when scored",
+                    },
+                    {
+                    "{C:inactive,s:0.85}#3#{}",
+                    "{C:inactive,s:0.85}#4#{}",
+                    }
                 }
             }
         },
