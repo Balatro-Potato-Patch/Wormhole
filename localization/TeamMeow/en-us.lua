@@ -4,8 +4,16 @@ return {
 			c_worm_zodicat1 = {
 				name = "TBD",
 				text = {
-					"{C:attention}Aces{} and {C:attention}2s{} gain {C:chips}+#1#{}",
+					"{C:attention}Aces{} and {C:attention}2s Held in hand{} gain {C:chips}+#1#{}",
 					"Chips permanently",
+				},
+			},
+		},
+		worm_meow_Spacetart = {
+			c_worm_stellar_strawberry = {
+				name = "Stellar Strawberry",
+				text = {
+					"penis"
 				},
 			},
 		},
@@ -78,7 +86,34 @@ return {
 			},
 		},
 		Other = {
+			spacetart_stellar_strawberry_boosted = {
+				name = "Stellar Strawberry",
+				text = {
+					"idk if u can do non hard-coded",
+					"values easily in here :shrug:",
+					" ",
+					"{C:inactive,s:0.8}(Currently stacked: {C:attention,s:0.8}#1#{C:inactive,s:0.8})"
+				}
+			},
+			spacetart_stellar_strawberry_regular = {
+				name = "Stellar Strawberry",
+				text = {
+					"lame ass",
+					" ",
+					"{C:inactive,s:0.8}(Currently stacked: {C:attention,s:0.8}#1#{C:inactive,s:0.8})"
+				}
+			},
 			undiscovered_worm_meow_zodicat = {
+				name = "Not Discovered",
+				text = {
+					"Purchase or use",
+					"this card in an",
+					"unseeded run to",
+					"learn what it does",
+					"{C:inactive}meow :3{}",
+				},
+			},
+			undiscovered_worm_meow_spacetart = {
 				name = "Not Discovered",
 				text = {
 					"Purchase or use",
@@ -94,9 +129,12 @@ return {
 		dictionary = {
 			k_worm_meow_zodicat = "Zodicat",
 			b_worm_meow_zodicat_cards = "Zodicat Cards",
+			k_worm_meow_spacetart = "Spacetart",
+			b_worm_meow_spacetart_cards = "Spacetart Foils",
 		},
 		labels = {
 			worm_meow_zodicat = "Zodicat",
+			worm_meow_spacetart = "Spacetart",
 		},
 	},
 }
