@@ -9,6 +9,7 @@ SMODS.Joker {
 
 	config = {extra = {edition="e_negative", sticker="rental", joker="j_space"}},
 	loc_vars = function (self, info_queue, card)
+        info_queue[#info_queue+1] = G.P_CENTERS.j_space
 		return {
 			vars = {
 				localize({type='name_text', set="Edition", key=card.ability.extra.edition}),
