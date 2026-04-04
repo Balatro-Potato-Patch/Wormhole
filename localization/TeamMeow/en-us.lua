@@ -45,6 +45,11 @@ return {
 					{
 						"Programmer",
 					},
+					{
+						"Developer of {C:worm_revo_gradient}Revo's Vault{}",
+						"{C:attention}Hot Potato{} participant",
+						"{C:inactive}PLAY MY MOD",
+					},
 				},
 			},
 			PotatoPatchDev_gappie = {
@@ -121,6 +126,56 @@ return {
 					"{C:inactive}meow :3{}",
 				},
 			},
+
+			p_worm_spacetart_booster_1 = {
+				name = "Spacetart Pack",
+				text = { "Choose {C:attention}#1#{} of up to", "{C:attention}#2#{C:worm_meow_spacetart} Spacetart{} Foils" },
+			},
+			p_worm_spacetart_booster_2 = {
+				name = "Spacetart Pack",
+				text = { "Choose {C:attention}#1#{} of up to", "{C:attention}#2#{C:worm_meow_spacetart} Spacetart{} Foils" },
+			},
+			p_worm_spacetart_booster_jumbo_1 = {
+				name = "Jumbo Spacetart Pack",
+				text = { "Choose {C:attention}#1#{} of up to", "{C:attention}#2#{C:worm_meow_spacetart} Spacetart{} Foils" },
+			},
+			p_worm_spacetart_booster_mega_1 = {
+				name = "Mega Spacetart Pack",
+				text = { "Choose {C:attention}#1#{} of up to", "{C:attention}#2#{C:worm_meow_spacetart} Spacetart{} Foils" },
+			},
+
+			 p_worm_zodicat_booster_1 ={
+                name= "Zodicat Pack",
+                text={
+                    "Choose {C:attention}#1#{} of up to",
+                    "{C:attention}#2#{C:worm_meow_zodicat} Zodicat{} cards to",
+                    "be used immediately",
+                },
+            },
+			p_worm_zodicat_booster_2 ={
+                name= "Zodicat Pack",
+                text={
+                    "Choose {C:attention}#1#{} of up to",
+                    "{C:attention}#2#{C:worm_meow_zodicat} Zodicat{} cards to",
+                    "be used immediately",
+                },
+            },
+			p_worm_zodicat_booster_jumbo_1 ={
+                name= "Jumbo Zodicat Pack",
+                text={
+                    "Choose {C:attention}#1#{} of up to",
+                    "{C:attention}#2#{C:worm_meow_zodicat} Zodicat{} cards to",
+                    "be used immediately",
+                },
+            },
+			p_worm_zodicat_booster_mega_1 ={
+                name= "Mega Zodicat Pack",
+                text={
+                    "Choose {C:attention}#1#{} of up to",
+                    "{C:attention}#2#{C:worm_meow_zodicat} Zodicat{} cards to",
+                    "be used immediately",
+                },
+            },
 		},
 	},
 	misc = {
@@ -131,6 +186,8 @@ return {
 			b_worm_meow_spacetart_cards = "Spacetart Foils",
 			k_stack1 = "(Currently stacked: ",
 			k_stack2 = ")",
+			k_worm_meow_spacetart_pack = "Spacetart Pack",
+			k_worm_meow_Zodicat_pack = "Zodicat Pack"
 		},
 		labels = {
 			worm_meow_zodicat = "Zodicat",

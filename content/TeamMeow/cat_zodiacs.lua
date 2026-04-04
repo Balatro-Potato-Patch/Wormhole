@@ -2,6 +2,7 @@ SMODS.ConsumableType({
 	key = "worm_meow_Zodicat",
 	primary_colour = HEX("FDDCA0"),
 	secondary_colour = HEX("A7D6E0"),
+	default = "c_worm_zodicat1",
 	collection_rows = { 6 },
 	shop_rate = 4,
 	text_colour = G.C.UI.TEXT_DARK,

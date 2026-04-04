@@ -2,6 +2,8 @@ SMODS.ConsumableType({
     key = "worm_meow_Spacetart",
     primary_colour = HEX("2e4bff"),
     secondary_colour = HEX("5b4bf0"),
+    select_card = "consumeables",
+    default = "c_worm_stellar_strawberry",
     collection_rows = { 6 },
     shop_rate = 4,
     text_colour = G.C.UI.TEXT_LIGHT,
