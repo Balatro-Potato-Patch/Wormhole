@@ -519,7 +519,7 @@ SMODS.Consumable { -- Meteor Sour
         return { key = key, vars = { card.ability.extra.hands, localize(Wormhole.Absinthe.get_most_played_hand(), 'poker_hands'), card.ability.extra.enh_discarded, card.ability.extra.goal } }
     end,
     calculate = function(self, card, context)
-        if context.after and context.scoring_name == Wormhole.Absinthe.get_most_played_hand() and card.ability.drink_values.filled and card.ability.drink_values.primed then
+        if context.after and G.GAME.hands[context.scoring_name].played >= G.GAME.hands[Wormhole.Absinthe.get_most_played_hand()].played and card.ability.drink_values.filled and card.ability.drink_values.primed then
             G.E_MANAGER:add_event(Event({
                 func = function()
                     ease_hands_played(card.ability.extra.hands, true)
