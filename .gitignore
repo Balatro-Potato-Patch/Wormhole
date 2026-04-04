@@ -2,3 +2,4 @@
 .luarc.json
 .lovelyignore
 /.vscode
+*.bat
