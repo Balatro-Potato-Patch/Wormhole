@@ -38,6 +38,8 @@ PotatoPatchUtils.Developer({
 	colour = thunderedge_colour,
 	loc = true,
 	team = "meow",
+	atlas = "worm_meowCredits",
+	pos = { x = 4, y = 0 }
 })
 
 PotatoPatchUtils.Developer({
@@ -49,9 +51,17 @@ PotatoPatchUtils.Developer({
 	pos = {x = 3, y = 0}
 })
 
+local revo_colour = SMODS.Gradient({
+	key = "revo_gradient",
+	colours = {
+		HEX("7e7aff"),
+		HEX("c57aff"),
+	},
+	cycle = 2,
+})
 PotatoPatchUtils.Developer({
 	name = "revo",
-	colour = HEX("7E7AFF"),
+	colour = revo_colour,
 	loc = true,
 	team = "meow",
 	atlas = "worm_meowCredits",
