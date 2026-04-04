@@ -178,9 +178,9 @@ SMODS.DrawStep {
     end,
     conditions = { vortex = false, facing = 'front' },
 }
-local old_draw = Card.draw
+local old = Card.draw
 function Card:draw(...)
-    local ret = old_draw(self, ...)
+    local ret = old(self, ...)
     local bool = false
     if G.jokers and G.jokers.cards then
         for k, v in ipairs(G.jokers.cards) do
@@ -198,9 +198,9 @@ function Card:draw(...)
     end
     love.graphics.setColor(r,g,b,a)
 end
-local old_stop_drag = Card.stop_drag
+local old = Card.stop_drag
 function Card:stop_drag(...)
-    local ret = old_stop_drag(self, ...)
+    local ret = old(self, ...)
     local bool = false
     local colliders = {}
     if G.jokers and G.jokers.cards then
@@ -256,9 +256,9 @@ function Card:stop_drag(...)
     end
     return ret
 end
-local old_game_upd = Game.update
+local old = Game.update
 function Game:update(dt, ...)
-    local ret = old_game_upd(self, dt, ...)
+    local ret = old(self, dt, ...)
     local alreadyset = false
     if G.consumeables and G.consumeables.cards and not G.SETTINGS.paused then
         for k, v in pairs(G.consumeables.cards) do
