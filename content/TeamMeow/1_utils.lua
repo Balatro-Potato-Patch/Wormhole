@@ -11,3 +11,13 @@ function meow_add_dev_calc_functionality(dev, func)
         return ret
     end
 end
+function meow_cards_are_colliding(c1,c2)
+    local xiscolliding = (c1.T.x <= c2.T.x + c2.T.w) and (c1.T.x + c1.T.w >= c2.T.x)
+    local yiscolliding = (c1.T.y <= c2.T.y + c2.T.h) and (c1.T.y + c1.T.h >= c2.T.y)
+    return xiscolliding and yiscolliding
+end
+
+function meow_get_distance_between_two_cards(c1,c2)
+    return ((c1.T.x + c1.T.w / 2 - (c2.T.x + c2.T.w / 2)) ^ 2 + (c1.T.y + c1.T.h / 2 - (c2.T.y + c2.T.h / 2)) ^ 2)^(1/2)
+    
+end

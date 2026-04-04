@@ -1,5 +1,7 @@
 Wormhole.TEAM_MEOW = {}
 
+Wormhole.TEAM_MEOW.DEBUG = false
+
 SMODS.Atlas({
 	key = "meowCredits",
 	px = 71,
@@ -18,6 +20,10 @@ for i = 1, 3 do
 		path = "TeamMeow/meow"..i..".ogg",
 	}
 end
+SMODS.Sound {
+	key = "meowChomp",
+	path = "TeamMeow/chomp.ogg",
+}
 PotatoPatchUtils.Team({
 	name = "meow",
 	colour = HEX("F9D0D1"),

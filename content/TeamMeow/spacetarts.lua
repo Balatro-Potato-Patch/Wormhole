@@ -13,7 +13,22 @@ SMODS.Atlas({
     py = 95,
     path = "TeamMeow/spacetarts.png",
 })
-
+SMODS.Atlas({
+    key = "meow_sparkle",
+    px = 71,
+    py = 95,
+    path = "TeamMeow/sparkle.png",
+    frames = 7,
+    atlas_table = "ANIMATION_ATLAS"
+})
+SMODS.Atlas({
+    key = "meow_sparkleBg",
+    px = 71,
+    py = 95,
+    path = "TeamMeow/sparkleBg.png",
+    frames = 7,
+    atlas_table = "ANIMATION_ATLAS"
+})
 local ref = Card.init
 function Card:init(...)
     local ret = ref(self, ...)
@@ -43,6 +58,7 @@ SMODS.Consumable({
     config = {
         extra = {
             perma_chips = 25,
+            tart = "stellar_strawberry",
         },
     },
     loc_vars = function(self, info_queue, card)
@@ -53,14 +69,13 @@ SMODS.Consumable({
         }
     end,
     use = function(self, card, area, copier)
-        table.insert(G.jokers.cards[1].tarts, "stellar_strawberry")
     end,
     can_use = function(self, card)
-        return #G.jokers.cards >= 1
+        return false
     end,
 })
--- todo: rename variable to be better
-local g = {
+
+Wormhole.TEAM_MEOW.tartInfo = {
     stellar_strawberry = {
         regular_func = function (card, context)
             return {
@@ -79,11 +94,11 @@ local g = {
         pos = {x=1,y=0}
     }
 }
-
+local g = Wormhole.TEAM_MEOW.tartInfo
 local gcu = generate_card_ui
 function generate_card_ui(_c, full_UI_table, specific_vars, card_type, badges, hide_desc, main_start, main_end, card, ...)
     local ret = gcu(_c, full_UI_table, specific_vars, card_type, badges, hide_desc, main_start, main_end, card, ...)
-    if card then
+    if card and card.tarts then
         local Table = {}
         for k, v in ipairs(card.tarts) do
             Table[v] = Table[v] and Table[v] + 1 or 1
@@ -91,7 +106,7 @@ function generate_card_ui(_c, full_UI_table, specific_vars, card_type, badges, h
         for k, v in pairs(Table) do
             generate_card_ui({
                 set = "Other",
-                key = "spacetart_"..k.."_"..(card.config.center.key == g[k].boost_key and "boosted" or "regular")
+                key = "spacetart_"..k.."_"..(card.config.center.key == Wormhole.TEAM_MEOW.tartInfo[k].boost_key and "boosted" or "regular")
             }, ret, {v})
         end
     end
@@ -99,33 +114,148 @@ function generate_card_ui(_c, full_UI_table, specific_vars, card_type, badges, h
 end
 meow_add_dev_calc_functionality("silverautumn", function (old, _, context)
     for k, card in pairs(G.jokers.cards) do
-        for kk, tart in ipairs(card.tarts) do
-            local key = card.config.center.key
-            if key == g[tart].boost_key then
-                SMODS.calculate_effect(g[tart].boosted_func(card, context) or {}, card)
-            else
-                SMODS.calculate_effect(g[tart].regular_func(card, context) or {}, card)
+        if card.tarts then
+            for kk, tart in ipairs(card.tarts) do
+                local key = card.config.center.key
+                if key == g[tart].boost_key then
+                    SMODS.calculate_effect(g[tart].boosted_func(card, context) or {}, card)
+                else
+                    SMODS.calculate_effect(g[tart].regular_func(card, context) or {}, card)
+                end
             end
         end
     end
     return old
 end)
+
 SMODS.DrawStep {
     key = 'tarts',
     order = 100,
     func = function(card)
         local yshift = 0
         local yinc = 0.2/3
-        for k, v in ipairs(card.tarts) do
-            local tartObj = g[v]
-            tartObj.sprite = tartObj.sprite or
-            Sprite(0, 0, G.CARD_W, G.CARD_H, G.ASSET_ATLAS["worm_meow_spacetart"], tartObj.pos)
-            local tartSprite = tartObj.sprite
-            tartSprite.role.draw_major = card
-            tartSprite:draw_shader('dissolve', 0, nil, nil, card.children.center, 0, 0, 0, yshift, nil, 0.6)
-            tartSprite:draw_shader('dissolve', nil, nil, nil, card.children.center, 0, 0, 0, yshift)
-            yshift = yshift + yinc
+        if card.tarts then
+            for k, v in ipairs(card.tarts) do
+                local tartObj = g[v]
+                tartObj.sprite = tartObj.sprite or
+                Sprite(0, 0, G.CARD_W, G.CARD_H, G.ASSET_ATLAS["worm_meow_spacetart"], tartObj.pos)
+                local tartSprite = tartObj.sprite
+                tartSprite.role.draw_major = card
+                tartSprite:draw_shader('dissolve', 0, nil, nil, card.children.center, 0, 0, 0, yshift, nil, 0.6)
+                tartSprite:draw_shader('dissolve', nil, nil, nil, card.children.center, 0, 0, 0, yshift)
+                yshift = yshift + yinc
+            end
         end
     end,
     conditions = { vortex = false, facing = 'front' },
 }
+SMODS.DrawStep {
+    key = 'sparkle',
+    order = 150,
+    func = function(card)
+        local bool = false
+        if G.jokers and G.jokers.cards then
+            for k, v in pairs(G.jokers.cards) do
+                if meow_cards_are_colliding(card, v) then
+                    bool = true
+                end
+            end
+        end
+        local playerHas = false
+        if G.consumeables and G.consumeables.cards then
+            for k, v in pairs(G.consumeables.cards) do
+                if v == card then
+                    playerHas = true
+                end
+            end
+        end
+        if card.ability.set == "worm_meow_Spacetart" and bool and playerHas then
+            Wormhole.TEAM_MEOW.sharedSparkleBg = Wormhole.TEAM_MEOW.sharedSparkleBg or
+                AnimatedSprite(0, 0, G.CARD_W, G.CARD_H, G.ANIMATION_ATLAS["worm_meow_sparkleBg"], {x=0,y=0})
+            Wormhole.TEAM_MEOW.sharedSparkleBg.role.draw_major = card
+            Wormhole.TEAM_MEOW.sharedSparkleBg:draw_shader('dissolve', nil, nil, nil, card.children.center, 0.025, 0, 0, 0)
+            Wormhole.TEAM_MEOW.sharedSparkle = Wormhole.TEAM_MEOW.sharedSparkle or
+                AnimatedSprite(0, 0, G.CARD_W, G.CARD_H, G.ANIMATION_ATLAS["worm_meow_sparkle"], {x=0,y=0})
+            Wormhole.TEAM_MEOW.sharedSparkle.role.draw_major = card
+            Wormhole.TEAM_MEOW.sharedSparkle:draw_shader('dissolve', nil, nil, nil, card.children.center, 0, 0, 0, 0)
+        end
+    end,
+    conditions = { vortex = false, facing = 'front' },
+}
+local old = Card.draw
+function Card:draw(...)
+    local ret = old(self, ...)
+    local bool = false
+    if G.jokers and G.jokers.cards then
+        for k, v in ipairs(G.jokers.cards) do
+            if meow_cards_are_colliding(self, v) and self ~= v then
+                bool = true
+            end
+        end
+    end
+    local color = bool and HEX("63c74d") or HEX("ff0044")
+    local r, g, b, a = love.graphics.getColor()
+    love.graphics.setColor(color[1],color[2],color[3],0.25)
+    if Wormhole.TEAM_MEOW.DEBUG then
+    love.graphics.rectangle("fill", self.T.x * G.TILESIZE * G.TILESCALE, self.T.y * G.TILESIZE * G.TILESCALE,
+    self.T.w * G.TILESIZE * G.TILESCALE, self.T.h * G.TILESIZE * G.TILESCALE)
+    end
+    love.graphics.setColor(r,g,b,a)
+end
+local old = Card.stop_drag
+function Card:stop_drag(...)
+    local ret = old(self, ...)
+    local bool = false
+    local colliders = {}
+    if G.jokers and G.jokers.cards then
+        for k, v in pairs(G.jokers.cards) do
+            if meow_cards_are_colliding(self, v) then
+                bool = true
+                table.insert(colliders, { card = v, dist = meow_get_distance_between_two_cards(v, self)})
+            end
+        end
+    end
+    local playerHas = false
+    if G.consumeables and G.consumeables.cards then
+        for k, v in pairs(G.consumeables.cards) do
+            if v == self then
+                playerHas = true
+            end
+        end
+    end
+    if self.ability and self.ability.set == "worm_meow_Spacetart" and bool and playerHas then
+        local tart = self.ability.extra.tart
+        table.sort(colliders, function (a, b)
+            return a.dist < b.dist
+        end)
+        table.insert(colliders[1].card.tarts, tart)
+        G.E_MANAGER:add_event(Event({
+            trigger = "after",
+            delay = 0,
+            func = function()
+                self:start_dissolve(nil, nil, 0.9)
+                play_sound("worm_meowChomp", 1 + 0.5 * (math.random() - 0.5), 0.6)
+                return true
+            end,
+        }))
+        G.E_MANAGER:add_event(Event({
+            trigger = "after",
+            delay = 0.6,
+            func = function()
+                play_sound("tarot1")
+                colliders[1].card:juice_up(0.5, 0.5)
+                return true
+            end,
+        }))
+        G.E_MANAGER:add_event(Event({
+            trigger = "after",
+            delay = 0.4,
+            func = function()
+                play_sound("tarot2", nil, 0.8)
+                colliders[1].card:juice_up(0.2, 0.5)
+                return true
+            end,
+        }))
+    end
+    return ret
+end
