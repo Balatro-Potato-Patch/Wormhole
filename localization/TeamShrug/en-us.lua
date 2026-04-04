@@ -78,49 +78,52 @@ return {
 
         },
 
-        --- OTHER LOCALIZATION BECAUSE APPARENTLY IT ISNT WRITTEN THREE LINES LOWER ---
-        --- ----------------------------------------------------------------------- ---
-        --- OTHER LOCALIZATION BECAUSE APPARENTLY IT ISNT WRITTEN ONE LINE LOWER    ---
+
+
+
+
+        ---OTHER---
+        -----------
+        ---OTHER---
+
         Other = {
-            -- NORMAL ALIEN PACK BECAUSE HOW ELSE WOULD YOU FIND ITS LOCALIZATION
+
+            -- ALIEN PACK 1
             p_worm_shrug_alien_normal = {
-                name="Alien Pack",
-                text={
+                name = "Sighting Pack",
+                text = {
                     "Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2#{C:tarot} Alien{} cards to",
+                    "{C:attention}#2#{}{C:dark_edition} Alien{} cards to",
                     "be used immediately",
                 },
             },
+
+            -- ALIEN PACK 2
             p_worm_shrug_alien_normal2 = {
-                name="Alien Pack",
-                text={
+                name = "Sighting Pack",
+                text = {
                     "Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2#{C:tarot} Alien{} cards to",
+                    "{C:attention}#2#{}{C:dark_edition} Alien{} cards to",
                     "be used immediately",
                 },
             },
 
-
-
-
-
-
-
-            --JUMBO ALIEN PACK BECAUSE ITS VERY USEFUL TO SPACE OUT THINGS
+            -- JUMBO ALIEN PACK
             p_worm_shrug_alien_jumbo = {
-                name="Jumbo Alien Pack",
-                text={
+                name = "Jumbo Sighting Pack",
+                text = {
                     "Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2#{C:tarot} Alien{} cards to",
+                    "{C:attention}#2#{}{C:dark_edition} Alien{} cards to",
                     "be used immediately",
                 },
             },
-            -- MEGA ALIEN PACK YEAH YOU GET IT. OR NO, I DONT CARE ANYMORE
+
+            -- MEGA ALIEN PACK
             p_worm_shrug_alien_mega = {
-                name="Mega Alien Pack",
-                text={
+                name = "Mega Sighting Pack",
+                text = {
                     "Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2#{C:tarot} Alien{} cards to",
+                    "{C:attention}#2#{}{C:dark_edition} Alien{} cards to",
                     "be used immediately",
                 },
             },
@@ -162,18 +165,23 @@ return {
 
 
 
-    -- MISC
+
+    ---MISC---
+    ----------
+    ---MISC---
+
     misc = {
 
         -- DICTIONARY
         dictionary = {
             k_shrug_plus_meteor = "+Tag",
-            k_shrug_alien_pack = "Alien Pack",
+            b_shrug_alien_cards = "Alien Cards",
+            k_shrug_alien = "Alien",
         },
 
-        -- LABELS, HOW ELSE WOULD YOU FIND IT?
-        labels={
-            shrug_alien="Alien",
+        -- LABELS
+        labels = {
+            shrug_alien = "Alien",
         },
 
     },

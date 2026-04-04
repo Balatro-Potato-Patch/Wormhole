@@ -1,3 +1,4 @@
+-- Define Consumable Type
 SMODS.ConsumableType{
     key = 'shrug_alien',
     default = 'c_fool',
@@ -5,29 +6,30 @@ SMODS.ConsumableType{
     primary_colour = G.C.UI.TEXT_DARK,
     secondary_colour = G.C.DARK_EDITION,
     shop_rate = 0.0,
-    loc_txt = { -- i dont know how to put it in localization
-            collection = 'Aliens',
-            name = 'Alien',
-        },
 }
-SMODS.Atlas{
-    key = 'shrug_alien_cards',
-    path = 'TeamShrug/consumables.png',
-    px = 71,
-    py = 95
-}
+
+
+
+-- Undiscovered Sprite
 SMODS.UndiscoveredSprite{
     key = 'shrug_alien',
     atlas = 'shrug_alien_cards',
     pos = {x = 0, y = 0}
 }
 
+
+
+-- Booster Pack Atlas
 SMODS.Atlas{
     key = 'shrug_boosters',
     path = 'TeamShrug/boosters.png',
     px = 71,
     py = 95
 }
+
+
+
+-- Normal Pack 1
 SMODS.Booster {
     key = "shrug_alien_normal",
     config = {extra = 2, choose = 1},
@@ -53,6 +55,9 @@ SMODS.Booster {
     ppu_team = {"shrug"}
 }
 
+
+
+-- Normal Pack 2
 SMODS.Booster {
     key = "shrug_alien_normal2",
     config = {extra = 2, choose = 1},
@@ -78,6 +83,9 @@ SMODS.Booster {
     ppu_team = {"shrug"}
 }
 
+
+
+-- Jumbo Pack
 SMODS.Booster {
     key = "shrug_alien_jumbo",
     config = {extra = 4, choose = 1},
@@ -103,6 +111,9 @@ SMODS.Booster {
     ppu_team = {"shrug"}
 }
 
+
+
+-- Mega Pack
 SMODS.Booster {
     key = "shrug_alien_mega",
     config = {extra = 4, choose = 2},
@@ -128,6 +139,19 @@ SMODS.Booster {
     ppu_team = {"shrug"}
 }
 
+
+
+-- Define Card Atlas
+SMODS.Atlas{
+    key = 'shrug_alien_cards',
+    path = 'TeamShrug/consumables.png',
+    px = 71,
+    py = 95
+}
+
+
+
+-- Placeholder
 SMODS.Consumable{
     key = 'shrug_alien',
     set = 'shrug_alien',
