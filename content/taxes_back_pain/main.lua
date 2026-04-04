@@ -9,7 +9,7 @@ PotatoPatchUtils.Team({
 PotatoPatchUtils.Developer({
     name = 'eremel',
     team = 'tbp',
-    -- loc = true,
+    loc = true,
 })
 
 PotatoPatchUtils.Developer({

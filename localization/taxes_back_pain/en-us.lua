@@ -9,7 +9,7 @@ local other_loc_table = {
         PotatoPatch = {
             PotatoPatchTeam_tbp = {name = 'Taxes and Back Pain'},
             PotatoPatchDev_eremel = {
-                name = 'Eremel pro',
+                name = 'Eremel',
                 text = {
                     'placeholder'
                 }
