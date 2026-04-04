@@ -121,7 +121,7 @@ return {
                     {
                         "Clean-up {C:attention}#2#{} {f:6}—{} ALL current and",
                         "future {C:attention}Junk Cards{} gain {C:attention}+#3#{} retrigger",
-                        "The next {C:attention}Blind must be skipped",
+                        "The next {C:attention}Blind{} must be skipped",
                         "{C:inactive,s:0.8}(You may use this on #2# Junk Cards,",
                         "{C:inactive,s:0.8}if you do, remove their enhancement",
                         "{C:inactive,s:0.8}and trigger this effect instead)",
