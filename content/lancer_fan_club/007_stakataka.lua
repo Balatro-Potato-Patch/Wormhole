@@ -15,7 +15,6 @@ local function emplace_stone_cards()
                     end
                 }))
                 G.play:emplace(other_card)
-                -- other_card.worm_lfc_stakataka_targeted = false
             end
         end
     end
