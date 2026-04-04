@@ -33,11 +33,9 @@ return {
                 name = 'Hubble Trouble',
                 text = {
                     {
-                        "When {C:attention}primed{}, create the", 
-                        "{C:planet}Planet{} card of next played",
-                        "{C:attention}poker hand{}, then is {C:abs_drinks}drank{}",
-                        "{C:inactive}(Must have space!)",
-                        "{C:inactive,s:0.8}(Planet card has $0 sell value)",
+                        "When {C:attention}primed{}, upgrade", 
+                        "the level of next played",
+                        "poker hand, then is {C:abs_drinks}drank{}",
                     },
                     {
                         "{C:abs_drinks}Refill{} by {C:attention}selling{}",
@@ -55,11 +53,9 @@ return {
                     },
                     {
                         "{C:inactive,s:0.8}After being Refilled:{}",
-                        "When {C:attention}primed{}, create the", 
-                        "{C:planet}Planet{} card of next played",
-                        "{C:attention}poker hand{}, then is {C:abs_drinks}drank{}",
-                        "{C:inactive}(Must have space!)",
-                        "{C:inactive,s:0.8}(Planet card has $0 sell value)",
+                        "When {C:attention}primed{}, upgrade", 
+                        "the level of next played",
+                        "poker hand, then is {C:abs_drinks}drank{}",
                     }
                 }
             },
@@ -131,9 +127,10 @@ return {
                 name = 'Meteor Sour',
                 text = {
                     {
-                        "When {C:attention}primed{}, {C:blue}+#1#{} Hand",
-                        "for this Blind, then is {C:abs_drinks}drank{}",
-                        '{C:inactive,s:0.8}Current hand: #2#'
+                        "When {C:attention}primed{}, {C:blue}+#1#{} Hand for this",
+                        "Blind if next played poker hand is",
+                        "your {C:attention}most played{}, then is {C:abs_drinks}drank{}",
+                        '{C:inactive}(Currently {C:attention}#2#{C:inactive})'
                     },
                     {
                         "{C:abs_drinks}Refill{} by discarding",
@@ -153,9 +150,10 @@ return {
                     },
                     {
                         "{C:inactive,s:0.8}After being Refilled:{}",
-                        "When {C:attention}primed{}, {C:blue}+#1#{} Hand",
-                        "for this Blind, then is {C:abs_drinks}drank{}",
-                        '{C:inactive,s:0.8}Current hand: #2#'
+                        "When {C:attention}primed{}, {C:blue}+#1#{} Hand for this",
+                        "Blind if next played poker hand is",
+                        "your {C:attention}most played{}, then is {C:abs_drinks}drank{}",
+                        '{C:inactive}(Currently {C:attention}#2#{C:inactive})'
                     }
                 }
             },
@@ -195,7 +193,7 @@ return {
                 },
                 text = {
                     "This Joker gains {C:chips}+#1#{} Chips",
-                    "when a {C:abs_drinks}Drink{} is {C:abs_drinks}Drank{}",
+                    "when a {C:abs_drinks}Drink{} is {C:abs_drinks}drank{}",
                     "{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)",
                 }
             },
@@ -205,7 +203,7 @@ return {
                     "{C:inactive,s:0.6}temp name?",
                 },
                 text = {
-                    "{C:abs_drinks}Fill{} and {C:attention}copy{} a random owned", 
+                    "{C:abs_drinks}Refill{} and {C:attention}copy{} a random owned", 
                     "{C:abs_drinks}Drink{} if played poker hand is",
                     "a {C:attention}Straight Flush{} or better",
                     "{C:red,E:2}self destructs{}",
