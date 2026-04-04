@@ -50,9 +50,10 @@ return {
             j_worm_riverboat_test = {
                 name = "test joker",
                 text = {
-                    "When a {C:planet}Planet{} card is used, add",
-                    "{X:purple,C:white}#1#X{} the product of its {C:chips}Chips{} and {C:mult}Mult",
-                    "to {C:purple}Score{} immediately"
+                    "When a {C:planet}Planet{} card is used,",
+                    "add {X:purple,C:white}#1#X{} the product of its",
+                    "{C:chips}Chips{} and {C:mult}Mult to",
+                    "{C:purple}Score{} immediately"
                 }
             },
             j_worm_riverboat_calignment = {
