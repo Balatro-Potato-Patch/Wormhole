@@ -269,7 +269,7 @@ SMODS.Consumable { -- Supergiant Cider
         or next(context.poker_hands["Straight Flush"])) and not context.repetition then
             card:abs_refill_drink()
         end
-        
+
         if context.hand_drawn and card.ability.drink_values.filled and card.ability.drink_values.primed and not context.repetition then
             G.E_MANAGER:add_event(Event({
                 func = function()
@@ -332,11 +332,11 @@ SMODS.Consumable { -- Hubble Trouble
         return { key = key }
     end,
     calculate = function(self, card, context)
-        if context.selling_card and not card.ability.drink_values.filled and 
-        context.card.config.center.set == 'Planet' and not context.repetition then
+        if context.selling_card and not card.ability.drink_values.filled and
+            context.card.config.center.set == 'Planet' and not context.repetition then
             card:abs_refill_drink()
         end
-        
+
         if context.after and card.ability.drink_values.filled and card.ability.drink_values.primed and not context.repetition then
             G.E_MANAGER:add_event(Event({
                 trigger = 'before',
@@ -360,7 +360,7 @@ SMODS.Consumable { -- Hubble Trouble
                                 end
                             }))
                             SMODS.calculate_effect(
-                                { message = localize('k_plus_planet'), colour = G.C.SECONDARY_SET.Planet }, card )
+                                { message = localize('k_plus_planet'), colour = G.C.SECONDARY_SET.Planet }, card)
                             card:abs_empty_drink()
                         end
                         G.GAME.consumeable_buffer = 0
@@ -410,7 +410,7 @@ SMODS.Consumable { -- Moonshine
     end,
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play and not card.ability.drink_values.filled and
-        (context.other_card:is_suit("Hearts") or context.other_card:is_suit("Diamonds")) and not context.repetition then
+            (context.other_card:is_suit("Hearts") or context.other_card:is_suit("Diamonds")) and not context.repetition then
             card.ability.extra.light_counter = card.ability.extra.light_counter + 1
             if card.ability.extra.light_counter >= card.ability.extra.light_counter_req then
                 card.ability.extra.light_counter = 0
@@ -419,7 +419,7 @@ SMODS.Consumable { -- Moonshine
         end
         if context.joker_main and card.ability.drink_values.filled and card.ability.drink_values.primed and not context.repetition then
             local has_black = false
-            for k, v in ipairs(G.hand.cards) do 
+            for k, v in ipairs(G.hand.cards) do
                 if v:is_suit('Clubs', nil, true) or v:is_suit('Spades', nil, true) then
                     has_black = true
                     break
@@ -479,7 +479,7 @@ SMODS.Consumable { -- Pina Solada
     end,
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play and not card.ability.drink_values.filled and
-        (context.other_card:is_suit("Clubs") or context.other_card:is_suit("Spades")) and not context.repetition then
+            (context.other_card:is_suit("Clubs") or context.other_card:is_suit("Spades")) and not context.repetition then
             card.ability.extra.dark_counter = card.ability.extra.dark_counter + 1
             if card.ability.extra.dark_counter >= card.ability.extra.dark_counter_req then
                 card.ability.extra.dark_counter = 0
@@ -488,7 +488,7 @@ SMODS.Consumable { -- Pina Solada
         end
         if context.joker_main and card.ability.drink_values.filled and card.ability.drink_values.primed and not context.repetition then
             local has_light = false
-            for k, v in ipairs(G.hand.cards) do 
+            for k, v in ipairs(G.hand.cards) do
                 if v:is_suit('Hearts', nil, true) or v:is_suit('Diamonds', nil, true) then
                     has_light = true
                     break
@@ -518,5 +518,70 @@ SMODS.Consumable { -- Pina Solada
         return true;
     end
 }
+
+SMODS.Consumable { -- Meteor Sour
+    set = 'abs_drinks',
+    key = 'abs_meteor_sour',
+    ppu_coder = { 'theAstra' },
+    ppu_team = { 'absinthe' },
+    pos = { x = 0, y = 0 },
+    config = {
+        drink_values = {
+            filled_pos = { x = 0, y = 0 },
+            empty_pos = { x = 1, y = 0 },
+            filled = true,
+            visibly_filled = true,
+            primed = false
+        },
+        extra = { hands = 1, enh_discarded = 0, goal = 5 },
+    },
+    loc_vars = function(self, info_queue, card)
+        local key
+        if not card.ability.drink_values.filled then
+            key = self.key .. '_empty'
+        else
+            key = self.key
+        end
+        return { key = key, vars = { card.ability.extra.hands, card.ability.extra.enh_discarded, card.ability.extra.goal } }
+    end,
+    calculate = function(self, card, context)
+        if context.before and context.scoring_name == Wormhole.Absinthe.get_most_played_hand() and card.ability.drink_values.filled and card.ability.drink_values.primed then
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    ease_hands_played(card.ability.extra.hands)
+                    SMODS.calculate_effect( { message = localize { type = 'variable', key = 'a_hands', vars = { card.ability.extra.hands } }, colour = G.C.BLUE }, card)
+                    card:abs_empty_drink()
+                    return true;
+                end
+            }))
+        end
+
+        if context.discard and next(SMODS.get_enhancements(context.other_card)) and not card.ability.extra.goal_met and not card.ability.drink_values.filled then
+            card.ability.extra.enh_discarded = card.ability.extra.enh_discarded + 1
+            SMODS.calculate_effect( { message = card.ability.extra.enh_discarded .. '/' .. card.ability.extra.goal, colour = G.C.ATTENTION, delay = 0.2 }, card )
+            if card.ability.extra.enh_discarded >= card.ability.extra.goal then
+                card.ability.extra.goal_met = true
+                card.ability.extra.enh_discarded = 0
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        card.ability.extra.goal_met = nil
+                        card:abs_refill_drink()
+                        return true;
+                    end
+                }))
+            end
+        end
+    end,
+    use = function(self, card, area, copier)
+        card:abs_toggle_drink_prime()
+    end,
+    can_use = function(self, card)
+        return card.ability.drink_values.filled
+    end,
+    keep_on_use = function(self, card)
+        return true;
+    end
+}
+
 
 --#endregion

@@ -127,6 +127,36 @@ return {
                     },
                 }
             },
+            c_worm_abs_meteor_sour = {
+                name = 'Meteor Sour',
+                text = {
+                    {
+                        "When {C:attention}primed{}, {C:blue}+#1#{} Hand",
+                        "for this Blind, then is {C:abs_drinks}drank{}"
+                    },
+                    {
+                        "{C:abs_drinks}Refill{} by discarding",
+                        "{C:attention}#3#{} {C:enhanced}Enhanced cards{}",
+                        "{C:inactive,s:0.8}(#2#/#3#){}",
+                    }
+                }
+            },
+            c_worm_abs_meteor_sour_empty = {
+                name = 'Meteor Sour',
+                text = {
+                    {
+                        "{C:inactive,s:0.8}Currently Empty{}",
+                        "{C:abs_drinks}Refill{} by discarding",
+                        "{C:attention}#3#{} {C:enhanced}Enhanced cards{}",
+                        "{C:inactive,s:0.8}(#2#/#3#){}",
+                    },
+                    {
+                        "{C:inactive,s:0.8}After being Refilled:{}",
+                        "When {C:attention}primed{}, {C:blue}+#1#{} Hand",
+                        "for this Blind, then is {C:abs_drinks}drank{}"
+                    }
+                }
+            },
         },
         Joker = {
             j_worm_abs_clg = {

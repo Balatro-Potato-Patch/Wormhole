@@ -72,3 +72,16 @@ PotatoPatchUtils.Developer {
 }
 
 Wormhole.Absinthe = {}
+
+---Returns the name of the most played poker hand
+function Wormhole.Absinthe.get_most_played_hand()
+    local _handname, _played, _order = 'High Card', -1, 100
+    for k, v in pairs(G.GAME.hands) do
+        if v.played > _played or (v.played == _played and _order > v.order) then
+            _played = v.played
+            _handname = k
+        end
+    end
+
+    return _handname
+end
