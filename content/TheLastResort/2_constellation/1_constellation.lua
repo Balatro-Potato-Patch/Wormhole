@@ -16,6 +16,9 @@ SMODS.ConsumableType{
             WORM_TLR.const_info_queue(info_queue, _card.ability.tier)
 			local ret = mem_loc_vars(_self, info_queue, _card)
 			if main_end then ret.main_end = ret.main_end or {main_end} end
+            if not ret.vars then ret.vars = {} end
+            if not ret.vars.colours then ret.vars.colours = {} end
+            table.insert(ret.vars.colours, 1, SMODS.ConsumableTypes.worm_tlr_constellation.primary_colour)
             ret.key = _self.key .. "_t" .. _card.ability.tier
 			return ret
 		end
@@ -31,7 +34,7 @@ SMODS.ConsumableType{
                     })
                     G.E_MANAGER:add_event(Event({
                         func = function()
-                            _self:set_sprites(_card, _card.config.center)
+                            _card.config.center:update_sprites(_card)
                             return true
                         end
                     }))
@@ -39,11 +42,22 @@ SMODS.ConsumableType{
             end
             return mem_calculate(_self, _card, context)
         end
-        card.set_sprites = function(_self, _card, front)
+        local mem_set_sprites = card.set_sprites or function() end
+        card.set_sprites = function (_self, _card, front)
+            mem_set_sprites(_self, _card, front)
+            _card.config.center:update_sprites(_card)
+        end
+        card.update_sprites = function(_self, _card)
             if _card.ability and _card.ability.tier then
                 _card.children.center:set_sprite_pos({x = card.pos.x - 1 + _card.ability.tier, y = card.pos.y})
             end
         end
+        local mem_use = card.use or function() end
+        card.use = function(_self, _card, area, copier)
+            mem_use(_self, _card, area, copier)
+            G.GAME.worm_tlr_last_const_used = _self.key ~= "c_worm_tlr_const_canis_minor" and _self.key or nil
+        end
+        card.ppu_team = {"TheLastResort"}
     end,
 }
 
@@ -66,7 +80,10 @@ texture will also change
 loc_vars must still be defined as normal, however all values except vars will be ignored
 if you want to change this let me (foo) know and i'll add what you want
 do not generate info_queues for the tiering information, thats already done
+{V:1} will always be the constellation primary colour
+If you introduce other custom colours, their index starts at 2 instead of 1
 
-if a card changes its tier, call WORM_TLR.update_const_sprite(self, card) to update the sprite
+if a card changes its tier, call WORM_TLR.update_const_sprite(card.config.center, card) to update the sprites
+
 
 ]]
