@@ -2,6 +2,7 @@ if not to_number then to_number = function(x) return x end end
 
 SMODS.Joker {
     key = "dum_gleebleglorp",
+    attributes = {"alien"},
     config = { extra = { xmult = 2 } },
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.xmult } }

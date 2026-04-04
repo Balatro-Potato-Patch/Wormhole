@@ -14,8 +14,24 @@ function Card.can_sell_card(self, context)
     return old_sell(self, context)
 end
 
+SMODS.Sound{
+    key = "dum_sfx_greg_nom",
+    path = "Dummies/sfx_greg_nom.ogg",
+    pitch = 1.0,
+    volume = 0.9
+}
+
+SMODS.Sound{
+    key = "dum_sfx_greg_goodbye",
+    path = "Dummies/sfx_greg_goodbye.ogg",
+    pitch = 1.0,
+    volume = 0.9
+}
+
+
 SMODS.Joker{
     key = "dum_greg",
+    attributes = {"destroy_card","enhancements", "alien"},
     config = { extra = {  } },
     atlas = 'dum_greg',
     pos = { x = 0, y = 0 },
@@ -40,19 +56,34 @@ SMODS.Joker{
                     
             if eaten_card then
                 SMODS.destroy_cards(eaten_card)
+                
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'after',
+                    func = function()
+                        play_sound('worm_dum_sfx_greg_nom', 0.96 + math.random() * 0.08)
+                        return true
+                    end
+                }))
             end
 
             local enhanced_card = G.play.cards[1]
 
             if enhanced_card then
-                local edition = SMODS.poll_edition { key = "worm_dum_greg", guaranteed = true, no_negative = true }
-                enhanced_card:set_edition(edition, false, false, true)
+                
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'after',
+                    func = function()
+                        local edition = SMODS.poll_edition { key = "worm_dum_greg", guaranteed = true, no_negative = true }
+                        enhanced_card:set_edition(edition, true, false, false)
+                        return true
+                    end
+                }))
             end
 
             return { 
                 card = card,
                 colour = G.C.RED,
-                message = localize('k_worm_dum_worm_eat'),
+                message = localize('k_worm_dum_greg_eat'),
             }
         end
     end,
@@ -62,7 +93,7 @@ SMODS.Joker{
     end,
 
     remove_from_deck = function (self, card, from_debuff)
-        print("DEAD")
+        play_sound('worm_dum_sfx_greg_goodbye', 0.96 + math.random() * 0.08)
     end,
 
     loc_vars = function(self, info_queue, card)

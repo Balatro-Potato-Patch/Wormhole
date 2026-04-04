@@ -5,8 +5,16 @@ SMODS.Atlas {
   py = 95
 }
 
+SMODS.Sound{
+    key = "dum_sfx_worm_gulp",
+    path = "Dummies/sfx_worm_gulp.ogg",
+    pitch = 1.0,
+    volume = 1.0
+}
+
 SMODS.Joker{
     key = "dum_worm",
+    attributes = {"booster", "economy", "alien"},
     config = { extra = {  } },
     atlas = 'dum_worm',
     pos = { x = 0, y = 0 },
@@ -46,7 +54,14 @@ SMODS.Joker{
             if G.shop_booster and G.shop_booster.cards and next(G.shop_booster.cards) then
                 local deleted_booster = pseudorandom_element(G.shop_booster.cards, 'worm_dum_worm')
                 
-                deleted_booster:start_dissolve(nil, true)
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'after',
+                    func = function()
+                        deleted_booster:start_dissolve(nil, true)
+                        play_sound('worm_dum_sfx_worm_gulp', 0.96 + math.random() * 0.08)
+                        return true
+                    end
+                }))
 
                 return { 
                     card = card,

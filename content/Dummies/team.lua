@@ -16,8 +16,10 @@ PotatoPatchUtils.Developer{
 
 PotatoPatchUtils.Developer{
     name = "vissa",
-    colour = HEX("A00000"),
+    colour = HEX("B00B1E"),
     team = "dummies",
+    atlas = "worm_dum_greg",
+    pos = { x = 0, y = 0},
     loc = true,
 }
 

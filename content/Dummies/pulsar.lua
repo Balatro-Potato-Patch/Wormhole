@@ -1,10 +1,17 @@
 if not to_big then to_big = function(val) return val end end
 
+SMODS.Atlas {
+  key = "dum_pulsar",
+  path = "Dummies/pulsar.png",
+  px = 71,
+  py = 95
+}
+
 SMODS.Consumable {
     set = "Spectral",
     key = "dum_pulsar",
-    pos = { x = 0, y = 1 },
-    atlas = "DummiesPlanets",
+    pos = { x = 0, y = 0 },
+    atlas = "dum_pulsar",
     loc_vars = function(self)
         return { vars = { localize(G.GAME.current_round.most_played_poker_hand, 'poker_hands') } }
     end,
@@ -57,5 +64,6 @@ SMODS.Consumable {
     end,
 
     ppu_team = { "dummies" },
-    ppu_coder = { "baltdev" }
+    ppu_coder = { "baltdev" },
+    ppu_artist = { "vissa" },
 }
