@@ -4,3 +4,4 @@
 /.vscode
 downscale_image.py
 upscale_image.py
+.DS_Store

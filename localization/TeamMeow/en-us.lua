@@ -1,62 +1,5 @@
 return {
 	descriptions = {
-		worm_meow_Zodicat = {
-			c_worm_zodicat1 = {
-				name = "TBD",
-				text = {
-					"{C:attention}Aces{} and {C:attention}2s Held in hand{} gain {C:chips}+#1#{}",
-					"Chips permanently",
-				},
-			},
-			c_worm_zodicat2 = {
-				name = "TBD",
-				text = {
-					"{C:attention}3s{} and {C:attention}4s{} gain {C:mult}+#1#{}",
-					"Mult permanently",
-				},
-			},
-			c_worm_zodicat3 = {
-				name = "TBD",
-				text = {
-					"{C:attention}5s{} and {C:attention}6s{} have a",
-					"{C:green}#1# in #2#{} chance to",
-					"gain {C:money}$#3#{} while held",
-					"in hand permanently",
-				},
-			},
-			c_worm_zodicat4 = {
-				name = "TBD",
-				text = {
-					"{C:attention}7s{} and {C:attention}8s{} gain {C:chips}+#1#{}",
-					"Chips while held in",
-					"hand permanently",
-				},
-			},
-			c_worm_zodicat5 = {
-				name = "TBD",
-				text = {
-					"{C:attention}9s{} and {C:attention}10s{} gain {C:mult}+#1#{}",
-					"Mult while held in",
-					"hand permanently",
-				},
-			},
-			c_worm_zodicat6 = {
-				name = "TBD",
-				text = {
-					"{C:attention}Face cards{} gain",
-					"gain {C:mult}$#3#{}",
-					"permanently",
-				},
-			},
-		},
-		worm_meow_Spacetart = {
-			c_worm_stellar_strawberry = {
-				name = "Stellar Strawberry",
-				text = {
-					"penis"
-				},
-			},
-		},
 		PotatoPatch = {
 			PotatoPatchTeam_meow = { name = "Team Meow" },
 			PotatoPatchDev_thunderedge = {
@@ -135,6 +78,93 @@ return {
 				},
 			},
 		},
+		worm_meow_Zodicat = {
+			c_worm_zodicat1 = {
+				name = "TBD",
+				text = {
+					"{C:attention}Aces{} and {C:attention}2s Held in hand{} gain {C:chips}+#1#{}",
+					"Chips permanently",
+				},
+			},
+			c_worm_zodicat2 = {
+				name = "TBD",
+				text = {
+					"{C:attention}3s{} and {C:attention}4s{} gain {C:mult}+#1#{}",
+					"Mult permanently",
+				},
+			},
+			c_worm_zodicat3 = {
+				name = "TBD",
+				text = {
+					"{C:attention}5s{} and {C:attention}6s{} have a",
+					"{C:green}#1# in #2#{} chance to",
+					"gain {C:money}$#3#{} while held",
+					"in hand permanently",
+				},
+			},
+			c_worm_zodicat4 = {
+				name = "TBD",
+				text = {
+					"{C:attention}7s{} and {C:attention}8s{} gain {C:chips}+#1#{}",
+					"Chips while held in",
+					"hand permanently",
+				},
+			},
+			c_worm_zodicat5 = {
+				name = "TBD",
+				text = {
+					"{C:attention}9s{} and {C:attention}10s{} gain {C:mult}+#1#{}",
+					"Mult while held in",
+					"hand permanently",
+				},
+			},
+			c_worm_zodicat6 = {
+				name = "TBD",
+				text = {
+					"{C:attention}Face cards{} gain",
+					"gain {C:mult}$#3#{}",
+					"permanently",
+				},
+			},
+		},
+		worm_meow_Spacetart = {
+			c_worm_stellar_strawberry = {
+				name = "Stellar Strawberry",
+				text = {
+					"red penis"
+				},
+			},
+			c_worm_celestial_cinnamon = {
+				name = "Celestial Cinnamon",
+				text = {
+					"orange penis"
+				},
+			},
+			c_worm_lunar_lemon = {
+				name = "Lunar Lemon",
+				text = {
+					"yellow penis"
+				},
+			},
+			c_worm_meteor_mint = {
+				name = "Meteor Mint",
+				text = {
+					"green penis"
+				},
+			},
+			c_worm_blueshift_blueberry = {
+				name = "Blueshift Blueberry",
+				text = {
+					"blue penis"
+				},
+			},
+			c_worm_big_bang_blackberry = {
+				name = "Big Bang Blackberry",
+				text = {
+					"purple penis"
+				},
+			},
+		},
 		Other = {
 			spacetart_stellar_strawberry_boosted = {
 				name = "Stellar Strawberry",
@@ -151,6 +181,85 @@ return {
 					"{C:inactive,s:0.8}#1#{C:attention,s:0.8}#2#{C:inactive,s:0.8}#3#"
 				}
 			},
+			spacetart_celestial_cinnamon_boosted = {
+				name = "Celestial Cinnamon",
+				text = {
+					"idk if u can do non hard-coded",
+					"values easily in here :shrug:",
+					"{C:inactive,s:0.8}#1#{C:attention,s:0.8}#2#{C:inactive,s:0.8}#3#"
+				}
+			},
+			spacetart_celestial_cinnamon_regular = {
+				name = "Celestial Cinnamon",
+				text = {
+					"lame ass",
+					"{C:inactive,s:0.8}#1#{C:attention,s:0.8}#2#{C:inactive,s:0.8}#3#"
+				}
+			},
+			spacetart_lunar_lemon_boosted = {
+				name = "Lunar Lemon",
+				text = {
+					"idk if u can do non hard-coded",
+					"values easily in here :shrug:",
+					"{C:inactive,s:0.8}#1#{C:attention,s:0.8}#2#{C:inactive,s:0.8}#3#"
+				}
+			},
+			spacetart_lunar_lemon_regular = {
+				name = "Lunar Lemon",
+				text = {
+					"lame ass",
+					"{C:inactive,s:0.8}#1#{C:attention,s:0.8}#2#{C:inactive,s:0.8}#3#"
+				}
+			},
+			spacetart_meteor_mint_boosted = {
+				name = "Stellar Strawberry",
+				text = {
+					"idk if u can do non hard-coded",
+					"values easily in here :shrug:",
+					"{C:inactive,s:0.8}#1#{C:attention,s:0.8}#2#{C:inactive,s:0.8}#3#"
+				}
+			},
+			spacetart_meteor_mint_regular = {
+				name = "Stellar Strawberry",
+				text = {
+					"lame ass",
+					"{C:inactive,s:0.8}#1#{C:attention,s:0.8}#2#{C:inactive,s:0.8}#3#"
+				}
+			},
+			spacetart_blueshift_blueberry_boosted = {
+				name = "Meteor Mint",
+				text = {
+					"idk if u can do non hard-coded",
+					"values easily in here :shrug:",
+					"{C:inactive,s:0.8}#1#{C:attention,s:0.8}#2#{C:inactive,s:0.8}#3#"
+				}
+			},
+			spacetart_blueshift_blueberry_regular = {
+				name = "Meteor Mint",
+				text = {
+					"lame ass",
+					"{C:inactive,s:0.8}#1#{C:attention,s:0.8}#2#{C:inactive,s:0.8}#3#"
+				}
+			},
+			spacetart_big_bang_blackberry_boosted = {
+				name = "Big Bang Blackberry",
+				text = {
+					"idk if u can do non hard-coded",
+					"values easily in here :shrug:",
+					"{C:inactive,s:0.8}#1#{C:attention,s:0.8}#2#{C:inactive,s:0.8}#3#"
+				}
+			},
+			spacetart_big_bang_blackberry_regular = {
+				name = "Big Bang Blackberry",
+				text = {
+					"lame ass",
+					"{C:inactive,s:0.8}#1#{C:attention,s:0.8}#2#{C:inactive,s:0.8}#3#"
+				}
+			},
+
+
+			
+
 			undiscovered_worm_meow_zodicat = {
 				name = "Not Discovered",
 				text = {
