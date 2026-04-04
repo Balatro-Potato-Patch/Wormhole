@@ -1,5 +1,7 @@
 -- planets definition & render
 
+local start_angle = os.time()
+
 local planets = {
 	c_mercury = {
 		speedfactor = 1 / 0.241,
@@ -131,7 +133,9 @@ local planets = {
 
 local function get_planet_dims(planet)
 	local center = planet.center or {}
-	local current_angle = (planet.angle or 0) + G.TIMERS.REAL * 30 * math.sqrt(planet.speedfactor or 1)
+	local current_angle = (planet.angle or 0)
+		+ G.TIMERS.REAL * 30 * math.sqrt(planet.speedfactor or 1)
+		+ (start_angle % 360)
 	local current_radius = planet.radius * 1.5
 	local x = math.cos(math.rad(current_angle)) * current_radius + (center.dx or 0)
 	local y = math.sin(math.rad(current_angle)) * current_radius + (center.dy or 0)
@@ -184,7 +188,7 @@ local function draw_planet_arc(planet, system_uibox, planet_uibox)
 
 	love.graphics.pop()
 end
-local function update_system_render(center, card, dt)
+local function update_system_render(card)
 	if
 		card.config.center_key == "j_worm_jtem2_solar_system"
 		and not card.worm_jtem2_hide_solar_system
@@ -392,9 +396,6 @@ SMODS.Joker({
 			}
 		end
 	end,
-	update = function(self, card, dt)
-		update_system_render(self, card, dt)
-	end,
 
 	ppu_team = { "jtem2" },
 	ppu_coder = { "sleepyg11" },
@@ -409,4 +410,13 @@ SMODS.DrawStep({
 			card.children.worm_toggle_solar_system_button:draw()
 		end
 	end,
+})
+
+SMODS.DrawStep({
+	key = "jtem2_solar_system_render",
+	order = 85,
+	func = function(self, layer)
+		update_system_render(self)
+	end,
+	conditions = { vortex = false },
 })
