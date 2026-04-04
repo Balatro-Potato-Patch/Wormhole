@@ -1,32 +1,24 @@
 DELETE ME BEFORE FINAL MERGE!
 
-star lifecycle consumable (6 Objects+1 for type)
-Stellar Nebula, Red Giant, White Dwarf
-^, Supergiant, Supernova, Neutron Star + Black Hole*
-proceeds to next step at end of round
-
-
-star lifecycle pack set (1 object)
-
-Joker Ideas:
-Vaccume, blue dot, Accretion Disk, Space Elevator
-Hedonistic space station (creates consumables not normally accessable)
-space jam (food joker)
-event horizon
-
-
 --- BAR ---
 
-Deck that makes our content more likely
-bartender jokers that create drinks/food
-all other slots left for drinks/food
+7 menu consumables that revolve around the 4 drunk editions (tipsy, drunk, very drunk, blackout) (11)
+the object type and booster set for the menu consumables (12)
+the deck (13)
+7 jokers (some bartenders, some other). (20)
 
-Drink names:
+Drink names: (approx 4 required)
 Hadra Colida - Pina Colada + Hadron Collider (Wombat Country)
 Cosmospolitan - Cosmopolitan, but with an emphasis on the cosmos (Prof. Renderer)
 Mojitury - Mojito + Mercury. Mojito because it has mint in it, and Axy mentioned something minty for Mercury. (Prof. Renderer / Axyraandas)
 
-Food names:
+Food names: (approx 3 required)
 Jupiter Jawbreakers (Axyraandas)
 Saturn's Onion Rings (Axyraandas / Stanza Rorae)
 Little Debbie's Cosmic Brownies (Axyraandas)
+
+Bartender ideas: (3-4 required)
+Casino Bartender, makes lucky cards drunk and provides food/drink on lucky card hit
+
+Non-Bartender Joker Ideas:
+Trash Compactor, -1 joker slot, gains the effect of all jokers sold until end of round. (including during shopping)
