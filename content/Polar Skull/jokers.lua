@@ -1,15 +1,16 @@
---[[SMODS.Atlas {
+SMODS.Atlas {
     key = "polarskull_jokers",
     path = "Polar Skull/jokers.png",
     px = 71,
     py = 95,
-}--]]
+}
+
 SMODS.Joker {
     key = 'polarskull_untitled',
 
     rarity = 2,
-    --atlas = 'polarskull_jokers',
-    pos = { x = 0, y = 0 },
+    atlas = 'polarskull_jokers',
+    pos = { x = 2, y = 0 },
     cost = 6,
     discovered = false,
     blueprint_compat = true,

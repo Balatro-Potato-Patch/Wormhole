@@ -10,8 +10,8 @@ PotatoPatchUtils.Developer {
     team = 'polar_skull',
 }
 PotatoPatchUtils.Developer {
-    name = 'mire',
-    colour = HEX("ffffff"),
+    name = 'noodlemire',
+    colour = HEX("e9b524"),
     loc = true,
     team = 'polar_skull',
 }

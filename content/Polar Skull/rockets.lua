@@ -151,6 +151,8 @@ local function register_rocket(args)
 		elseif context.end_of_round and context.main_eval then
 			card.ability.extra.rounds = card.ability.extra.rounds - 1
 			if card.ability.extra.rounds <= 0 then
+				cache_bonus_chips = 0
+				cache_bonus_mult = 0
 				card.ability.extra.active = false
 				card:start_dissolve()
 			end
@@ -190,7 +192,7 @@ register_rocket{
 }
 
 register_rocket{
-	key = "soyuz",
+	key = "soyuz1",
 	pos = {x = 3, y = 0},
 	config = {extra = {hand = "Three of a Kind", rounds = 3}}
 }

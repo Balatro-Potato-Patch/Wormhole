@@ -34,8 +34,8 @@ return {
 				name = "Changzheng 5",
 				text = rocket_text
 			},
-			c_worm_polarskull_soyuz = {
-				name = "Soyuz",
+			c_worm_polarskull_soyuz1 = {
+				name = "Soyuz 1",
 				text = rocket_text
 			},
 			c_worm_polarskull_titaniv = {
@@ -131,8 +131,8 @@ return {
 					"e"
 				}
 			},
-			PotatoPatchDev_mire = {
-				name = "Mire",
+			PotatoPatchDev_noodlemire = {
+				name = "Noodlemire",
 				text = {
 					"e"
 				}

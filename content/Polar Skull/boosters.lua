@@ -1,16 +1,16 @@
---[[SMODS.Atlas {
+SMODS.Atlas {
     key = "polarskull_boosters",
     path = "Polar Skull/boosters.png",
     px = 71,
     py = 95,
-}--]]
+}
 
 SMODS.Booster({
     key = 'rocket_normal_1',
     group_key = 'k_polarskull_rocket_pack',
     kind = 'polarskull_Rocket',
     cost = 4,
-    --atlas = 'polarskull_boosters',
+    atlas = 'polarskull_boosters',
     pos = { x = 0, y = 0 },
     config = { extra = 3, choose = 1 },
     select_card = 'consumeables',
@@ -60,8 +60,8 @@ SMODS.Booster({
     group_key = 'k_polarskull_rocket_pack',
     kind = 'polarskull_Rocket',
     cost = 4,
-    --atlas = 'polarskull_boosters',
-    pos = { x = 0, y = 0 },
+    atlas = 'polarskull_boosters',
+    pos = { x = 1, y = 0 },
     config = { extra = 3, choose = 1 },
     select_card = 'consumeables',
 
@@ -110,8 +110,8 @@ SMODS.Booster({
     group_key = 'k_polarskull_rocket_pack',
     kind = 'polarskull_Rocket',
     cost = 6,
-    --atlas = 'polarskull_boosters',
-    pos = { x = 0, y = 0 },
+    atlas = 'polarskull_boosters',
+    pos = { x = 2, y = 0 },
     config = { extra = 5, choose = 1 },
     select_card = 'consumeables',
 
@@ -160,8 +160,8 @@ SMODS.Booster({
     group_key = 'k_polarskull_rocket_pack',
     kind = 'polarskull_Rocket',
     cost = 8,
-    --atlas = 'polarskull_boosters',
-    pos = { x = 0, y = 0 },
+    atlas = 'polarskull_boosters',
+    pos = { x = 3, y = 0 },
     config = { extra = 5, choose = 2 },
     select_card = 'consumeables',
 
