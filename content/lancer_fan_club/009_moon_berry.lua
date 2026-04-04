@@ -78,36 +78,18 @@ SMODS.Joker({
         if not from_debuff then
             if not G.GAME.lfc_berry_secret then G.GAME.lfc_berry_secret = 0 end
             card.ability.extra.secret = G.GAME.lfc_berry_secret
-            G.E_MANAGER:add_event(Event({
-                trigger = "immeadiate",
-                no_delete = true,
-                pause_force = true,
-                blockable = false,
-                blocking = false,
-                func = function()
-                    play_sound("worm_lfc_berry_wow", 1, 0.6)
-                    return true
-                end
-            }))
+            if not card.ability.extra.secret == 1 then
+                play_sound("worm_lfc_berry_wow", 1, 0.6)
+            end
         end
     end,
 
     remove_from_deck = function(self, card, from_debuff)
         if not from_debuff then
-            SMODS.add_card({ key = "j_worm_lfc_fw" })
             if G.GAME.round_resets.ante >= 9 and card.ability.extra.secret == 1 then
                 G.GAME.lfc_berry_secret = 2
-                G.E_MANAGER:add_event(Event({
-                    trigger = "immeadiate",
-                    no_delete = true,
-                    pause_force = true,
-                    blockable = false,
-                    blocking = false,
-                    func = function()
-                        play_sound("worm_lfc_berry_secret", 1, 0.6)
-                        return true
-                    end
-                }))
+                play_sound("worm_lfc_berry_secret", 1, 0.6)
+                SMODS.add_card({ key = "j_worm_lfc_fw" })
             end
         end
     end,
