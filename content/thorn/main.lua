@@ -1,3 +1,12 @@
+loc_colour()
+G.ARGS.LOC_COLOURS.worm_thorn_willow = HEX('38A336')
+
+SMODS.Atlas {
+    key = 'TeamCredits',
+    path = 'thorn/TeamCredits.png',
+    px = 71,
+    py = 95
+}
 
 PotatoPatchUtils.Team({
     name = "thorn", 
@@ -15,16 +24,17 @@ PotatoPatchUtils.Developer({
 PotatoPatchUtils.Developer({
     team = "thorn",
     name = "willow",
+    colour = G.ARGS.LOC_COLOURS.worm_thorn_willow,
     loc = true,
-    atlas = 'Joker',
+    atlas = 'worm_TeamCredits',
     pos = {x = 0, y = 0},
 })
 PotatoPatchUtils.Developer({
     team = "thorn",
     name = "mtw",
     loc = true,
-    atlas = 'Joker',
-    pos = {x = 0, y = 0},
+    atlas = 'worm_TeamCredits',
+    pos = {x = 3, y = 0},
 })
 PotatoPatchUtils.Developer({
     team = "thorn",
@@ -37,9 +47,11 @@ PotatoPatchUtils.Developer({
 PotatoPatchUtils.Developer({
     team = "thorn",
     name = "sophie",
+    colour = HEX("fd72eb"),
     loc = true,
-    atlas = 'Joker',
-    pos = {x = 0, y = 0},
+    atlas = 'worm_TeamCredits',
+    pos = {x = 2, y = 0},
+    soul_pos = {x = 1, y = 0},
 })
 PotatoPatchUtils.Developer({
     team = "thorn",
