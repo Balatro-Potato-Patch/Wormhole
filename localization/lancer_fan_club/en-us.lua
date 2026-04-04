@@ -159,6 +159,24 @@ return {
                 },
             }
         },
+        Spectral = {
+            c_worm_lfc_dark_matter = {
+                name = "Dark Matter",
+                text = {
+                    "Destroys {C:attention}#1#{}-{C:attention}#2#{}",
+                    "random cards in hand,",
+                    "creates {C:attention}#3#{} random Tags",
+                    "per card destroyed",
+                },
+            },
+            c_worm_lfc_time_dilation = {
+                name = "Time Dilation",
+                text = {
+                    "{C:attention}#1#{} Ante,",
+                    "{C:attention}#2#{} Winning Ante",
+                },
+            },
+        },
         Tag = {
             tag_worm_lfc_laser = {
                 name = "Laser Tag",

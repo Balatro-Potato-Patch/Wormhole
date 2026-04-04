@@ -36,6 +36,14 @@ SMODS.Atlas {
     path = "lancer_fan_club/jokers.png"
 }
 
+SMODS.Atlas {
+    key = "lfc_spectrals",
+    px = 65,
+    py = 95,
+    path = "lancer_fan_club/spectrals.png"
+}
+
+
 -- Sounds
 SMODS.Sound {
     key = "lfc_explosion",
