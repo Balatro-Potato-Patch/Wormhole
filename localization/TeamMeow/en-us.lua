@@ -1,5 +1,14 @@
 return {
 	descriptions = {
+		worm_meow_Zodicat = {
+			c_worm_zodicat1 = {
+				name = "TBD",
+				text = {
+					"{C:attention}Aces{} and {C:attention}2s{} gain {C:chips}+#1#{}",
+					"Chips permanently",
+				},
+			},
+		},
 		PotatoPatch = {
 			PotatoPatchTeam_meow = { name = "Team Meow" },
 			PotatoPatchDev_thunderedge = {
@@ -68,13 +77,26 @@ return {
 				},
 			},
 		},
+		Other = {
+			undiscovered_worm_meow_zodicat = {
+				name = "Not Discovered",
+				text = {
+					"Purchase or use",
+					"this card in an",
+					"unseeded run to",
+					"learn what it does",
+					"{C:inactive}meow :3{}",
+				},
+			},
+		},
 	},
 	misc = {
-        dictionary = {
-
-        },
-        labels = {
-            
-        },
-    },
+		dictionary = {
+			k_worm_meow_zodicat = "Zodicat",
+			b_worm_meow_zodicat_cards = "Zodicat Cards",
+		},
+		labels = {
+			worm_meow_zodicat = "Zodicat",
+		},
+	},
 }
