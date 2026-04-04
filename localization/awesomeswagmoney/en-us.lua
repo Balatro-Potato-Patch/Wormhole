@@ -12,6 +12,29 @@ return {
         Tag={},
         Tarot={},
         Voucher={},
+        PotatoPatch = {
+            PotatoPatchTeam_awesomeswagmoney = { name = "Team Awesomeswagmoney" },
+            PotatoPatchDev_wh_garb = {
+                name = "Garb",
+                text = {"TEMP"}
+            },
+            PotatoPatchDev_wh_poker = {
+                name = "Poker The Poker",
+                text = {"TEMP"}
+            },
+            PotatoPatchDev_wh_omega = {
+                name = "Omega",
+                text = {"TEMP"}
+            },
+            PotatoPatchDev_wh_superb = {
+                name = "Superb Thing",
+                text = {"TEMP"}
+            },
+            PotatoPatchDev_wh_eris = {
+                name = "Eris",
+                text = {"TEMP"}
+            },
+        }
     },
     misc = {
         achievement_descriptions={},
