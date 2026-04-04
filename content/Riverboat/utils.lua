@@ -1,10 +1,12 @@
+Wormhole.Riverboat = {}
+
 -- Define the Cosmic rarity tier (Step above Legendary)
 SMODS.Rarity({
     key = 'cosmic',
     loc_txt = { name = 'Cosmic' },
-    badge_colour = HEX('011638'), 
+    badge_colour = HEX('011638'),
     default_weight = 0.005,
-    pools = {["Joker"] = true}
+    pools = { ["Joker"] = true }
 })
 
 -- Global tracking for the entire run
@@ -21,9 +23,17 @@ end
 function get_pair_status()
     local past = SMODS.find_card('j_worm_the_past')
     local future = SMODS.find_card('j_worm_the_future')
-    
+
     if #past > 0 and #future > 0 then
         return true, past[1]
     end
     return false
+end
+
+Wormhole.Riverboat.level_params_for_planet = function(planet)
+    local hand_for_planet = planet.ability.hand_type
+    local hand_info = G.GAME.hands[hand_for_planet]
+    local hand_chips = hand_info.l_chips
+    local hand_mult = hand_info.l_mult
+    return hand_chips, hand_mult
 end
