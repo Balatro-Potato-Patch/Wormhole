@@ -64,6 +64,14 @@ return {
                     "are {C:red}not{} the played hand",
                     "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)"
                 }
+            },
+            j_worm_riverboat_orbital = {
+                name = "Orbital Period",
+                text = {
+                    "Creates the {C:planet}Planet{} for the",
+                    "{C:attention}#1##2# played{} hand this round",
+                    "{C:inactive}(Must have room, progresses each round)"
+                }
             }
         },
         Enhanced = {
@@ -74,6 +82,11 @@ return {
                     "to played hand if scored"
                 }
             }
+        }
+    },
+    misc = {
+        dictionary = {
+            k_revolve_ex = "Revolve!"
         }
     }
 }

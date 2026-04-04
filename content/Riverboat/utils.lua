@@ -37,3 +37,9 @@ Wormhole.Riverboat.level_params_for_planet = function(planet)
     local hand_mult = hand_info.l_mult
     return hand_chips, hand_mult
 end
+
+Wormhole.Riverboat.get_planet_for_hand = function(hand)
+    for _, v in pairs(G.P_CENTER_POOLS.Planet) do
+        if v.config.hand_type == hand then return v.key end
+    end
+end
