@@ -247,9 +247,33 @@ function Card:stop_drag(...)
             func = function()
                 play_sound("tarot2", nil, 0.8)
                 colliders[1].card:juice_up(0.2, 0.5)
+                love.mouse.setCursor()
                 return true
             end,
         }))
     end
     return ret
+end
+local old = Game.update
+function Game:update(dt, ...)
+    local ret = old(self, dt, ...)
+    if G.consumeables and G.consumeables.cards then
+        for k, v in pairs(G.consumeables.cards) do
+            if v.ability and v.ability.set == "worm_meow_Spacetart" then
+                local bool = false
+                if G.jokers and G.jokers.cards then
+                    for k, vv in pairs(G.jokers.cards) do
+                        if meow_cards_are_colliding(v, vv) then
+                            bool = true
+                        end
+                    end
+                end
+                if bool then
+                    love.mouse.setCursor(Wormhole.TEAM_MEOW.cursor)
+                else
+                    love.mouse.setCursor()
+                end
+            end
+        end
+    end
 end

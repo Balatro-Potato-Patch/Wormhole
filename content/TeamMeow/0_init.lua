@@ -14,6 +14,20 @@ SMODS.Atlas({
 	py = 100,
 	path = "TeamMeow/creditCardsJolyne.png",
 })
+SMODS.Atlas({
+	key = "meowPaw",
+	px = 40,
+	py = 38,
+	path = "TeamMeow/paw.png",
+})
+G.E_MANAGER:add_event(Event({
+	trigger = "after",
+	delay = 0,
+	func = function()
+		Wormhole.TEAM_MEOW.cursor = love.mouse.newCursor(G.ASSET_ATLAS.worm_meowPaw.image_data, 20, 19)
+		return true
+	end,
+}))
 for i = 1, 3 do
 	SMODS.Sound {
 		key = "meowMeow"..i,
