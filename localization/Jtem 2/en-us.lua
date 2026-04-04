@@ -28,8 +28,7 @@ return {
 						"unique vanilla {C:planet}Planet{} card used",
 					},
 					{
-						"{C:attention}USE{} this joker to",
-						"toggle planets render",
+						"{C:attention}USE{} to toggle planets render",
 					},
 				},
 			},
