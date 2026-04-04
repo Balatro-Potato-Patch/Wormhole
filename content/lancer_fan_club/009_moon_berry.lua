@@ -58,7 +58,8 @@ SMODS.Joker({
     attributes = {
         "xmult",
         "enhancements",
-        
+        --"on_sell",
+        --"generation"
     },
     loc_vars = function(self, info_queue, card)
         local hint1, hint2 = "..."," "
