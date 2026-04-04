@@ -5,7 +5,7 @@ SMODS.Joker {
     perishable_compat = true,
     eternal_compat = true,
     rarity = 2,
-    cost = 9,
+    cost = 7,
     atlas = "lfc_jokers",
     ppu_coder = { "J8-Bit" },
     pos = { x = 1, y = 1 },
@@ -26,8 +26,7 @@ SMODS.Joker {
                     G.E_MANAGER:add_event(Event({
                         trigger = 'after',
                         func = function()
-                            G.play:shuffle('nr' .. G.GAME.round_resets.ante .. G.GAME.round .. G.GAME.current_round
-                                .hands_left)
+                            G.play:shuffle('worm_lfc_scrambler' .. G.GAME.round_resets.ante .. G.GAME.round .. G.GAME.current_round.hands_left)
                             return true
                         end
                     }))
