@@ -3,7 +3,7 @@ return {
         PotatoPatch = {
             PotatoPatchTeam_dummies = { name = 'Dummies' },
             PotatoPatchDev_ghostsalt = { name = 'GhostSalt', text = { ":3" } },
-            PotatoPatchDev_vissa = {name = 'vissa', text = { "take me to your dealer"}},
+            PotatoPatchDev_vissa = {name = 'vissa', text = { "glorpalicious"}},
             PotatoPatchDev_theonegoofali = {name = 'TheOneGoofAli', text = { "aeiou" }},
             PotatoPatchDev_baltdev = {name = 'baltdev', text = { "hi im a slugcat" }},
             PotatoPatchDev_flowire = {name = 'Flowire', text = { "Tastes like a", "{C:red}Strawberry{}!" }},
