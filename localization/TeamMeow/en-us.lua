@@ -100,22 +100,6 @@ return {
 					},
 				},
 			},
-			PotatoPatchDev_incognito = {
-				name = "Incognito",
-				text = {
-					{
-						"Programmer, Artist",
-					},
-				},
-			},
-			PotatoPatchDev_toma = {
-				name = "Jolyne",
-				text = {
-					{
-						"Programmer, Artist",
-					},
-				},
-			},
 			PotatoPatchDev_silverautumn = {
 				name = "NakuAutumn",
 				text = {
@@ -126,6 +110,27 @@ return {
 						"Ex-developer of {C:red}Fool's Gambit{} and {C:purple}Medium{}",
 						"{C:attention}Hot Potato{} and {C:red}Stocking {C:green}Stuffer{} participant",
 						"will i get flamed if i self promote non balatro things here - NA",
+					},
+				},
+			},
+			PotatoPatchDev_incognito = {
+				name = "Incognito",
+				text = {
+					{
+						"Programmer, Artist",
+					},
+					{
+						"Developer of {C:incognito}Incognito",
+						"Co-Developer of {C:attention}Hyperfixation{},",
+						"{C:attention}Bad Director{}, and {C:attention}Tangent",
+					}
+				},
+			},
+			PotatoPatchDev_toma = {
+				name = "Jolyne",
+				text = {
+					{
+						"Programmer, Artist",
 					},
 				},
 			},

@@ -95,6 +95,27 @@ PotatoPatchUtils.Developer({
 	team = "meow",
 })
 
+local silverautumn_colour = SMODS.Gradient({
+	key = "silverautumn_gradient",
+	colours = {
+		HEX("FF0044"),
+		G.C.WHITE,
+	},
+	cycle = 3,
+})
+
+PotatoPatchUtils.Developer({
+	name = "silverautumn",
+	colour = silverautumn_colour,
+	loc = true,
+	team = "meow",
+	atlas = "worm_meowCredits",
+	pos = { x = 0, y = 0 }
+})
+
+loc_colour('red')
+G.ARGS.LOC_COLOURS['incognito'] = HEX("D0D0D0")
+
 PotatoPatchUtils.Developer({
 	name = "incognito",
 	colour = HEX("D0D0D0"),
@@ -113,20 +134,3 @@ PotatoPatchUtils.Developer({
 	pos = { x = 0, y = 0 }
 })
 
-local silverautumn_colour = SMODS.Gradient({
-	key = "silverautumn_gradient",
-	colours = {
-		HEX("FF0044"),
-		G.C.WHITE,
-	},
-	cycle = 3,
-})
-
-PotatoPatchUtils.Developer({
-	name = "silverautumn",
-	colour = silverautumn_colour,
-	loc = true,
-	team = "meow",
-	atlas = "worm_meowCredits",
-	pos = { x = 0, y = 0 }
-})
