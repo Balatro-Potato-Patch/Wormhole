@@ -1,5 +1,6 @@
 SMODS.Joker {
     key = "dum_gleebleglorp",
+    attributes = {"alien"},
     config = { extra = { } },
     loc_vars = function(self, info_queue, card)
         return { vars = { } }

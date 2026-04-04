@@ -7,6 +7,7 @@ SMODS.Atlas {
 
 SMODS.Joker{
     key = "dum_worm",
+    attributes = {"booster", "economy", "alien"},
     config = { extra = {  } },
     atlas = 'dum_worm',
     pos = { x = 0, y = 0 },

@@ -16,6 +16,7 @@ end
 
 SMODS.Joker{
     key = "dum_greg",
+    attributes = {"destroy_card","enhancements", "alien"},
     config = { extra = {  } },
     atlas = 'dum_greg',
     pos = { x = 0, y = 0 },
@@ -52,7 +53,7 @@ SMODS.Joker{
             return { 
                 card = card,
                 colour = G.C.RED,
-                message = localize('k_worm_dum_worm_eat'),
+                message = localize('k_worm_dum_greg_eat'),
             }
         end
     end,
@@ -62,7 +63,7 @@ SMODS.Joker{
     end,
 
     remove_from_deck = function (self, card, from_debuff)
-        print("DEAD")
+
     end,
 
     loc_vars = function(self, info_queue, card)

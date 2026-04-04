@@ -28,6 +28,19 @@ return {
                     }
                 },
             },
+            j_worm_dum_carnivore = {
+                name = "Moku the Carnivore",
+                text = {
+                    {
+                        "When {C:attention}Blind{} is selected,",
+                        "if Joker to the right is:",
+                        "{X:chips,C:white}Fish{} - eat it and gain {C:chips}+#2#{} Chips",
+                        "{X:grey,C:white}Cat{} - eat it and gain {C:mult}+#1#{} Mult",
+                        "{X:green,C:white}Alien{} - eat it and gain {X:mult,C:white} X#3# {} Mult",
+                        "{C:inactive}(Currently {C:chips}+#5#{C:inactive} Chips, {C:mult}+#4#{C:inactive} Mult, {X:mult,C:white} X#6# {C:inactive} Mult",
+                    }
+                },
+            },
 			j_worm_dum_garlicbread = {
                 name = { "Garlic Bread that", "went to Space" },
                 text = {
@@ -88,8 +101,10 @@ return {
     misc = {
         dictionary = {
             k_worm_dum_worm_free="Free packs!",
-            k_worm_dum_worm_eat="Nom!",
+            k_worm_dum_worm_eat="Gulp!",
             k_worm_dum_dummy_blind_saved = "Test flight failed!",
+            k_worm_dum_greg_eat="Nom!",
+            k_worm_dum_carnivore_eat="Chomp!",
             worm_moony_menu_tooltip = {
                 "Select one of the above",
                 "poker hands to upgrade."
