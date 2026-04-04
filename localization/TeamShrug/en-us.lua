@@ -90,17 +90,9 @@ return {
 
             -- NEBULOUS
             m_worm_shrug_nebulous = {
-                name = "Nebulous",
+                name = "Nebulous Card",
                 text = {
-                    "{C:attention}+#1#{} temporary level to",
-                    "played hand"
-                }
-            },
-
-            m_worm_shrug_nebulous_plural = {
-                name = "Nebulous",
-                text = {
-                    "{C:attention}+#1#{} temporary levels to",
+                    "{C:attention}+#1#{} temporary level#2# to",
                     "played hand"
                 }
             },

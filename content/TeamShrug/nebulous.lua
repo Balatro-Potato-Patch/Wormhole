@@ -15,14 +15,11 @@ SMODS.Enhancement {
     -- Return localization
     loc_vars = function (self, info_queue, card)
         local levels = card.ability.extra.levels
-        local key = "m_worm_shrug_nebulous"
+        local present = ""
         if math.abs(levels) ~= 1 then
-            key = "m_worm_shrug_nebulous_plural"
+            present = "s"
         end
-        return {
-            key = key,
-            vars = {levels}
-        }
+        return { vars = { levels, present } }
     end,
 
     -- Calculations
