@@ -1,7 +1,11 @@
 SMODS.Consumable{
 	key = "tlr_starmap",
 	set = "Spectral",
-	pos = {x=0,y=0},
+	atlas = "Joker",
+	prefix_config = {
+		atlas = false
+	},
+  pos = { x = 2, y = 5 },
 	can_use = function() return true end,
 	soul_set = "worm_tlr_constellation",
 	select_card = function (self, card, pack)
@@ -14,19 +18,33 @@ SMODS.Consumable{
 		return {vars = {colours = {SMODS.ConsumableTypes.worm_tlr_constellation.primary_colour}}}
 	end,
 	set_sprites = function (self, card, front)
-		card.canvas_text = SMODS.CanvasSprite{
+		card.worm_tlr_canvas_text = SMODS.CanvasSprite{
 			worm_tlr_func = function(self, other_obj, ms, mr, mx, my)
 				love.graphics.push()
-				love.graphics.scale((other_obj.scale_mag or other_obj.VT.scale))
+				local scale = (other_obj.scale_mag or other_obj.VT.scale)
+				love.graphics.scale(scale)
 				love.graphics.translate(other_obj.T.w/2, other_obj.T.h/2)
-				love.graphics.scale(1/(other_obj.scale_mag or other_obj.VT.scale))
+				love.graphics.scale(1/scale)
 				love.graphics.stencil(function()
-					love.graphics.circle("fill", 0, 0, 20)
+					love.graphics.circle("fill", 0, 0, 25)
 				end, "replace", 1)
 				love.graphics.setStencilTest("greater", 0)
 				love.graphics.push()
 				love.graphics.origin()
-				love.graphics.draw(SMODS.Atlases.worm_tlr_starmap.image, 0, 0)
+				local shader = love.graphics.getShader()
+				love.graphics.setShader()
+				local x, y = love.mouse.getPosition()
+				local img = SMODS.Atlases.worm_tlr_starmap.image
+				--love.graphics.scale(scale)
+				--love.graphics.translate(other_obj.T.x, other_obj.T.y)
+				love.graphics.translate(img:getWidth() / 2, img:getHeight() / 2)
+    		prep_draw(other_obj, (1 + (ms or 0)), (mr or 0), self.ARGS.draw_from_offset, true)
+				love.graphics.scale(1/scale)
+				love.graphics.translate((x) / 10, (y) / 10)
+				love.graphics.translate(-img:getWidth() / 2, -img:getHeight() / 2)
+				love.graphics.draw(img, 0, 0)
+				love.graphics.setShader(shader)
+				love.graphics.pop()
 				love.graphics.pop()
 				love.graphics.setStencilTest()
 				love.graphics.pop()
@@ -92,4 +110,24 @@ SMODS.Consumable{
 	end,
 	ppu_team = {"TheLastResort"},
 	ppu_coder = {"Foo54"}
+}
+
+SMODS.DrawStep {
+	key = 'behind_canvas_text',
+	order = -200,
+	func = function(self, layer)
+		if self.worm_tlr_canvas_text and (self.config.center.discovered or self.bypass_discovery_center) then
+			for _, sprite in ipairs(self.worm_tlr_canvas_text[1] and self.worm_tlr_canvas_text or {self.worm_tlr_canvas_text}) do
+				love.graphics.push()
+				love.graphics.origin()
+				sprite.canvas:renderTo(love.graphics.clear, 0, 0, 0, 0)
+				local text = love.graphics.newText(sprite.font, {sprite.text_colour or G.C.UI.TEXT_LIGHT, sprite.ref_table and sprite.ref_table[sprite.ref_value] or sprite.text})
+				local scale_fac = math.min((sprite.text_width or sprite.canvasW)/text:getWidth(), (sprite.text_height or sprite.canvasH)/text:getHeight()) * sprite.canvasScale
+				love.graphics.pop()
+				sprite.role.draw_major = self
+				sprite:draw_shader('dissolve', nil, nil, nil, self.children.center)
+			end
+		end
+	end,
+	conditions = { vortex = false, facing = 'front' },
 }

@@ -257,7 +257,7 @@ return {
 				text = {
 					"Upgrades leftmost",
 					"{V:1}Constellation{} card",
-					"{C:inactive,s:0.7}Faint -> Noticable -> Bright -> Shining"
+					"{C:inactive,s:0.7}Faint -> Noticable -> Bright -> ???"
 				}
 			}
 		},
@@ -266,7 +266,7 @@ return {
 				name = "Star Map",
 				text = {
 					"Upgrade all {V:1}Constellation{} cards",
-					"held to {C:edition}Shining"
+					"held to {C:edition}???"
 				}
 			}
 		},
