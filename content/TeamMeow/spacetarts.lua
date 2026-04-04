@@ -49,51 +49,44 @@ function Card:load(cardTable, other_card, ...)
     self.tarts = cardTable.tarts
     return st
 end
-SMODS.Consumable({
-    key = "stellar_strawberry",
-    set = "worm_meow_Spacetart",
-    atlas = "meow_spacetart",
-    soul_pos = { x = 1, y = 0 },
-    pos = { x = 0, y = 2 },
-    config = {
-        extra = {
-            perma_chips = 25,
-            tart = "stellar_strawberry",
-        },
-    },
-    loc_vars = function(self, info_queue, card)
-        return {
-            vars = {
-                card.ability.extra.perma_chips,
-            },
-        }
-    end,
-    use = function(self, card, area, copier)
-    end,
-    can_use = function(self, card)
-        return false
-    end,
-})
 
-Wormhole.TEAM_MEOW.tartInfo = {
-    stellar_strawberry = {
-        regular_func = function (card, context)
-            return {
-                message = "test",
+Wormhole.TEAM_MEOW.tartInfo = {}
+local function create_tart(tart, tartPos, foilPos, regFunc, boostFunc, boostKey)
+    SMODS.Consumable({
+        key = tart,
+        set = "worm_meow_Spacetart",
+        atlas = "meow_spacetart",
+        soul_pos = foilPos,
+        pos = tartPos,
+        config = {
+            extra = {
+                tart = tart,
+            },
+        },
+        loc_vars = function(self, info_queue, card)
+            info_queue[#info_queue + 1] = {
+                set = "Other",
+                key = "spacetart_"..tart.."_regular"
             }
         end,
-        
-        boosted_func = function (card, context)
-            if context.joker_main then
-                return {
-                    message = "betterTest",
-                }
-            end
+        can_use = function(self, card)
+            return false
         end,
-        boost_key = "j_joker",
-        pos = {x=1,y=0}
+    })
+    Wormhole.TEAM_MEOW.tartInfo[tart] = {
+        regular_func = regFunc,
+        boosted_func = boostFunc,
+        boost_key = boostKey,
+        pos = tartPos
     }
-}
+end
+create_tart("stellar_strawberry", { x = 1, y = 0 }, { x = 0, y = 2 }, function (card, context) return { message = "test" } end, function (card, context)
+    if context.joker_main then
+        return {
+            message = "betterTest",
+        }
+    end
+end, "j_joker")
 local g = Wormhole.TEAM_MEOW.tartInfo
 local gcu = generate_card_ui
 function generate_card_ui(_c, full_UI_table, specific_vars, card_type, badges, hide_desc, main_start, main_end, card, ...)
