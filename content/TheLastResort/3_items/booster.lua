@@ -121,3 +121,19 @@ SMODS.Booster{
 	ppu_coder = {"Foo54"},
 	ppu_artists = {"None yet"}
 }
+
+SMODS.Sound{
+	key = "tlr_const_pack_music",
+	path = "TheLastResort/booster.ogg",
+	pitch = 1/0.95,
+	sync = {
+		['music1'] = true,
+		['music2'] = true,
+		['music3'] = true,
+		['music4'] = true,
+		['music5'] = true,
+	},
+	select_music_track = function()
+    return G.booster_pack and not G.booster_pack.REMOVED and SMODS.OPENED_BOOSTER and SMODS.OPENED_BOOSTER.config.center.kind == 'worm_tlr_constellation' and 100 or nil
+	end
+}

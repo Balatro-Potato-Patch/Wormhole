@@ -14,7 +14,7 @@ SMODS.Atlas{
 
 SMODS.Atlas{
 	key = "tlr_starmap",
-	path = "TheLastResort/starmap_temp.png",
+	path = "TheLastResort/starmap.png",
 	px = 600,
 	py = 665
 }
