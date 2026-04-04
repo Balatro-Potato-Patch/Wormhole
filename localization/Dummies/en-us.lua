@@ -5,6 +5,7 @@ return {
             PotatoPatchDev_ghostsalt = { name = 'GhostSalt', text = { ":3" } },
             PotatoPatchDev_vissa = {name = 'vissa', text = { "take me to your dealer"}},
             PotatoPatchDev_theonegoofali = {name = 'TheOneGoofAli', text = { "aeiou" }},
+            PotatoPatchDev_baltdev = {name = 'baltdev', text = { "hi im a slugcat" }},
             PotatoPatchDev_flowire = {name = 'Flowire', text = { "Tastes like a", "{C:red}Strawberry{}!" }},
         },
         Joker = {
@@ -60,6 +61,16 @@ return {
                     "hand by {C:attention}#1#{} level"
                 }
             },
+        },
+        Spectral = {
+            c_worm_dum_pulsar = {
+                name = "Pulsar",
+                text = {
+                    "{C:attention}Doubles{} the per-level",
+                    "Chips/Mult of {C:attention}#1#{}",
+                    "and sets its level to 1"
+                }
+            }
         },
         Blind = {
             bl_worm_dum_dummy_blind = {
