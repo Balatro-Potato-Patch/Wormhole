@@ -12,5 +12,21 @@ if PotatoPatchUtils then
     SMODS.current_mod.extra_tabs = PotatoPatchUtils.CREDITS.register_page(SMODS.current_mod)
 
     -- Reset Game Globals func to hook
-    function Wormhole.reset_game_globals(run_start) end
+    function Wormhole.reset_game_globals(run_start)
+    end
 end
+
+Card.is_3 = Card.is_3 or function(self, bypass_debuff)
+    if self.debuff and not bypass_debuff then
+        return false
+    elseif self:get_id() == 3 then
+        return 1
+    end
+end
+
+SMODS.Atlas {
+    key = "mrrp_j",
+    path = "mrrp mew meow/mrrp-Jokers.png",
+    px = 71,
+    py = 95
+}

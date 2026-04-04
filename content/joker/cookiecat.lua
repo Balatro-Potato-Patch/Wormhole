@@ -1,0 +1,63 @@
+SMODS.Joker {
+    key = 'cookie_cat',
+    atlas = "mrrp_j",
+    pos = {
+        x = 4,
+        y = 0
+    },
+    rarity = 2,
+    cost = 7,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = true,
+    attributes = {'cat', 'food'},
+    config = {
+        extra = {
+            level = 6,
+            level_mod = 1
+        }
+    },
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = {card.ability.extra.level,
+                    (card.ability.extra.level_mod > 0 and "-" or "+") .. card.ability.extra.level_mod}
+        }
+    end,
+
+    calculate = function(self, card, context)
+        if context.before then
+            return {
+                message = localize('k_upgrade_ex'),
+                colour = G.C.SECONDARY_SET.Planet,
+                func = function()
+                    SMODS.upgrade_poker_hands({
+                        hands = context.scoring_name,
+                        level_up = card.ability.extra.level,
+                        from = card
+                    })
+                end
+            }
+        end
+        if context.after then
+            SMODS.upgrade_poker_hands({
+                hands = context.scoring_name,
+                level_up = -card.ability.extra.level,
+                from = card
+            })
+            if card.ability.extra.level - card.ability.extra.level_mod <= 0 then
+                SMODS.destroy_cards(card, nil, nil, true)
+                return {
+                    message = localize("k_eaten_ex")
+                }
+            else
+                SMODS.scale_card(card, {
+                    ref_value = "level",
+                    scalar_value = "level_mod",
+                    operation = '-',
+                    message_key = "a_level_minus",
+                    message_colour = G.C.SECONDARY_SET.Planet
+                })
+            end
+        end
+    end
+}
