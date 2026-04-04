@@ -5,6 +5,13 @@ SMODS.Atlas {
   py = 95
 }
 
+SMODS.Sound{
+    key = "dum_sfx_carnivore_chomp",
+    path = "Dummies/sfx_carnivore_chomp.ogg",
+    pitch = 1.0,
+    volume = 1.0
+}
+
 --- comment
 --- @param card balatro.Card
 --- @return boolean
@@ -67,7 +74,7 @@ SMODS.Joker {
                         end
                         card:juice_up(0.8, 0.8)
                         sliced_card:start_dissolve({ HEX("57ecab") }, nil, 1.6)
-                        play_sound('slice1', 0.96 + math.random() * 0.08)
+                        play_sound('worm_dum_sfx_carnivore_chomp', 0.96 + math.random() * 0.08)
                         return true
                     end
                 }))
