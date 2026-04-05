@@ -56,6 +56,12 @@ return {
 					{
 						"Programmer",
 					},
+					{
+						"Developer of {C:mult}Alloy{}, {C:chips}JoJo Mod{},",
+						"and {C:attention}Photon Mod Manager{}",
+						"{C:inactive}Please use Photon",
+						"{C:attention}Meowww nya nyan meoww meowww{} {C:inactive}(meow){}"
+					}
 				},
 			},
 			PotatoPatchDev_revo = {
@@ -205,11 +211,18 @@ return {
 					"purple penis",
 				},
 			},
-			c_worm_stellar_strawberry_boosted = {
+			c_worm_stellar_strawberry_boosted1 = {
 				name = " Stellar Strawberry ",
 				text = {
 					"{X:red,C:white}X#1#{} Mult",
-					"(boosted)",
+					"(Level 1 Boost active)",
+				},
+			},
+			c_worm_stellar_strawberry_boosted2 = {
+				name = " Stellar Strawberry ",
+				text = {
+					"{X:red,C:white}X#1#{} Mult",
+					"(Level 2 Boost active)",
 				},
 			},
 			c_worm_stellar_strawberry_regular = {
