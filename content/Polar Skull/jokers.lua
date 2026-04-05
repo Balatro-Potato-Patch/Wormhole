@@ -6,12 +6,12 @@ SMODS.Atlas {
 }
 
 SMODS.Joker {
-    key = 'polarskull_untitled',
+    key = 'polarskull_launchpad',
 
     rarity = 2,
     atlas = 'polarskull_jokers',
     pos = { x = 2, y = 0 },
-    cost = 6,
+    cost = 5,
     discovered = false,
     blueprint_compat = true,
 

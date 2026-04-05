@@ -10,8 +10,8 @@ return {
 	descriptions = {
 		Back = {},
 		Joker = {
-			j_worm_polarskull_untitled = {
-				name = "???",
+			j_worm_polarskull_launchpad = {
+				name = "Launch Pad",
 				text = {
 					"When {C:attention}Boss Blind{} is defeated,",
 					"create the {C:polarskull_rocket}Rocket{} Card",
