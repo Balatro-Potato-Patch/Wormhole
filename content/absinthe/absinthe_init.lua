@@ -1,9 +1,16 @@
+--#region Atlases
+
 SMODS.Atlas {
     key = "abs_credits",
     path = 'absinthe/abs_credits.png',
     px = 71,
     py = 95
 }
+
+--#endregion
+
+
+--#region Team and Dev Objects
 
 PotatoPatchUtils.Team {
     name = 'absinthe',
@@ -71,6 +78,10 @@ PotatoPatchUtils.Developer {
     soul_pos = { x = 1, y = 1 }
 }
 
+--#endregion
+
+--#region Utils
+
 Wormhole.Absinthe = {}
 
 ---Returns the name of the most played poker hand
@@ -85,3 +96,31 @@ function Wormhole.Absinthe.get_most_played_hand()
 
     return _handname
 end
+
+function Wormhole.Absinthe.get_random_team()
+    local valid_teams = {}
+    for k, v in pairs(PotatoPatchUtils.Teams) do
+        if v.mod_id == 'Wormhole' then
+            table.insert(valid_teams, v)
+        end
+    end
+
+    return pseudorandom_element(valid_teams, 'abs_rand_team')
+end
+
+function Wormhole.Absinthe.get_team_card_key(team, seed)
+    local cards = {}
+    for i, v in pairs(G.P_CENTERS) do
+        if not v.hidden and not G.GAME.banned_keys[v.key] and v.ppu_team and v.rarity ~= 4 then
+            for k, t in pairs(v.ppu_team) do
+                if t == team then
+                    cards[#cards+1] = v.key
+                    break
+                end
+            end
+        end
+    end
+    return pseudorandom_element(cards, pseudoseed(seed))
+end
+
+--#endregion

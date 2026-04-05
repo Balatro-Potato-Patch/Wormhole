@@ -157,6 +157,40 @@ return {
                     }
                 }
             },
+            c_worm_abs_cosmospolitan = {
+                name = 'Cosmospolitan',
+                text = {
+                    {
+                        "When {C:attention}primed{} and",
+                        "{C:attention}setting Blind,{}",
+                        "create a random card",
+                        "from {V:1}#1#{}"
+                    },
+                    {
+                        "{C:abs_drinks}Refill{} by using",
+                        "{C:attention}#3#{} {C:planet}Planet cards{}",
+                        "{C:inactive,s:0.8}(#2#/#3#){}",
+                    }
+                }
+            },
+            c_worm_abs_cosmospolitan_empty = {
+                name = 'Cosmospolitan',
+                text = {
+                    {
+                        "{C:inactive,s:0.8}Currently Empty{}",
+                        "{C:abs_drinks}Refill{} by using",
+                        "{C:attention}#3#{} {C:planet}Planet cards{}",
+                        "{C:inactive,s:0.8}(#2#/#3#){}",
+                    },
+                    {
+                        "{C:inactive,s:0.8}After being Refilled:{}",
+                        "When {C:attention}primed{} and",
+                        "{C:attention}setting Blind,{}",
+                        "create a random card",
+                        "from {V:1}#1#{}"
+                    }
+                }
+            },
         },
         Joker = {
             j_worm_abs_clg = {

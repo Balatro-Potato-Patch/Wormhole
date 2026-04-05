@@ -557,5 +557,67 @@ SMODS.Consumable { -- Meteor Sour
     end
 }
 
+SMODS.Consumable { -- Cosmospolitan
+    set = 'abs_drinks',
+    key = 'abs_cosmospolitan',
+    ppu_coder = { 'theAstra' },
+    ppu_team = { 'absinthe' },
+    pos = { x = 0, y = 0 },
+    config = {
+        drink_values = {
+            filled_pos = { x = 0, y = 0 },
+            empty_pos = { x = 1, y = 0 },
+            filled = true,
+            visibly_filled = true,
+            primed = false
+        },
+        extra = { current_team = nil, planets_used = 0, goal = 2 },
+    },
+    loc_vars = function(self, info_queue, card)
+        local key
+        if not card.ability.drink_values.filled then
+            key = self.key .. '_empty'
+        else
+            key = self.key
+        end
+        local team_name = card.ability.extra.current_team.loc and localize{ type = 'name', set = 'PotatoPatch', key = card.ability.extra.current_team.loc } or card.ability.extra.current_team.name
+        return { key = key, vars = { team_name, card.ability.extra.planets_used, card.ability.extra.goal, colours = { card.ability.extra.current_team.colour } } }
+    end,
+    calculate = function(self, card, context)
+        if context.setting_blind and card.ability.drink_values.primed and card.ability.drink_values.filled then
+            SMODS.add_card({ key = Wormhole.Absinthe.get_team_card_key(card.ability.extra.current_team.name, 'abs_cosmos') })
+            card:abs_empty_drink()
+        end
+
+        if context.using_consumeable and context.consumeable.ability.set == 'Planet' and not card.ability.drink_values.filled and not card.ability.extra.goal_met then
+            card.ability.extra.planets_used = card.ability.extra.planets_used + 1
+            SMODS.calculate_effect({ message = card.ability.extra.planets_used .. '/' .. card.ability.extra.goal, colour = G.C.ATTENTION }, card)
+            if card.ability.extra.planets_used >= card.ability.extra.goal then
+                card.ability.extra.goal_met = true
+                card.ability.extra.planets_used = 0
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        card.ability.extra.goal_met = nil
+                        card:abs_refill_drink()
+                        return true;
+                    end
+                }))
+            end
+        end
+    end,
+    set_ability = function(self, card, initial, delay_sprites)
+        card.ability.extra.current_team = Wormhole.Absinthe.get_random_team()
+    end,
+    use = function(self, card, area, copier)
+        card:abs_toggle_drink_prime()
+    end,
+    can_use = function(self, card)
+        return card.ability.drink_values.filled
+    end,
+    keep_on_use = function(self, card)
+        return true;
+    end
+}
+
 
 --#endregion
