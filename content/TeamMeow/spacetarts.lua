@@ -509,7 +509,7 @@ function Game:update(dt, ...)
 				local bool = false
 				if G.jokers and G.jokers.cards then
 					for k, vv in pairs(G.jokers.cards) do
-						if meow_cards_are_colliding(v, vv) then
+						if meow_cards_are_colliding(v, vv) and meow_can_apply_foil(vv) then
 							bool = true
 						end
 					end
