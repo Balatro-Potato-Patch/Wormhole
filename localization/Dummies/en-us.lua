@@ -1,12 +1,33 @@
 return {
     descriptions = {
         PotatoPatch = {
+            -- Team-Name:
             PotatoPatchTeam_dummies = { name = 'Dummies' },
-            PotatoPatchDev_ghostsalt = { name = 'GhostSalt', text = { ":3" } },
-            PotatoPatchDev_vissa = {name = 'vissa', text = { "glorpalicious"}},
-            PotatoPatchDev_theonegoofali = {name = 'TheOneGoofAli', text = { "aeiou" }},
-            PotatoPatchDev_baltdev = {name = 'baltdev', text = { "hi im a slugcat" }},
-            PotatoPatchDev_flowire = {name = 'Flowire', text = { "Tastes like a", "{C:red}Strawberry{}!" }},
+            -- Team-Members:
+            PotatoPatchDev_ghostsalt = {
+                name = 'GhostSalt',
+                text = { ":3" }
+            },
+            PotatoPatchDev_vissa = {
+                name = 'vissa',
+                text = { "glorpalicious"}
+            },
+            PotatoPatchDev_bakersdozenbagels = {
+                name = 'BakersDozenBagels',
+                text = { ":transgender_flag:"}
+            },
+            PotatoPatchDev_theonegoofali = {
+                name = 'TheOneGoofAli',
+                text = { "aeiou" }
+            },
+            PotatoPatchDev_baltdev = {
+                name = 'baltdev',
+                text = { "hi im a slugcat" }
+            },
+            PotatoPatchDev_flowire = {
+                name = 'Flowire',
+                text = { "Tastes like a", "{C:red}Strawberry{}!" }
+            },
         },
         Joker = {
             j_worm_dum_worm = {

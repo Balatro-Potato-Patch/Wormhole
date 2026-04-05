@@ -3,6 +3,13 @@
 -- - 'start_run(args)'
 -- - 'update(dt)'
 
+SMODS.Atlas {
+	key = "dummies_spacesuit",
+	path = "Dummies/spacesuit.png",
+	px = 71,
+	py = 95
+}
+
 local OXYGEN_INCREASE = 300
 local OXYGEN_REPLENISH = 40
 local VOUCHER_REPLENISH = 5
@@ -201,10 +208,10 @@ end
 
 SMODS.Voucher {
 	key = "dum_spacesuit",
-	atlas = "worm_DummiesJokers_Flowire", --!! WRONG ATLAS; CURRENTLY NO TEXTURE
+	atlas = "worm_dummies_spacesuit",
     pos = { x = 0, y = 0 },
     ppu_team = { "dummies" },
-    ppu_artist = { "flowire" }, -- vissa
+    ppu_artist = { "vissa", "flowire" },
     ppu_coder = { "flowire" },
 	--config = { extra = { oxygen_increase = 300, oxygen_replenish = 5, } },
     loc_vars = function(self, info_queue, card)
