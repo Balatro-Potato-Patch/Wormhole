@@ -97,7 +97,7 @@ SMODS.Consumable({
 })
 
 SMODS.Consumable({
-	key = "zodicat2",
+	key = "lemon",
 	set = "worm_meow_Zodicat",
 	attributes = { "modify_card", "mult", "three", "four", "space" },
 	config = {
@@ -125,7 +125,7 @@ SMODS.Consumable({
 })
 
 SMODS.Consumable({
-	key = "zodicat3",
+	key = "viridian",
 	set = "worm_meow_Zodicat",
 	attributes = { "modify_card", "economy", "chance", "five", "six", "space" },
 	config = {
@@ -160,7 +160,7 @@ SMODS.Consumable({
 })
 
 SMODS.Consumable({
-	key = "zodicat4",
+	key = "clear_sky",
 	set = "worm_meow_Zodicat",
 	attributes = { "modify_card", "chips", "seven", "eight", "space" },
 	config = {
@@ -188,7 +188,7 @@ SMODS.Consumable({
 })
 
 SMODS.Consumable({
-	key = "zodicat5",
+	key = "deep_sea",
 	set = "worm_meow_Zodicat",
 	attributes = { "modify_card", "mult", "nine", "ten", "space" },
 	config = {
@@ -216,7 +216,7 @@ SMODS.Consumable({
 })
 
 SMODS.Consumable({
-	key = "zodicat6",
+	key = "blossom",
 	set = "worm_meow_Zodicat",
 	attributes = { "modify_card", "xmult", "face", "space" },
 	config = {
