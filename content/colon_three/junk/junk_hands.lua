@@ -68,6 +68,21 @@ function CardArea:parse_highlighted(...)
     return ret
 end
 
+if Spectrallib and Spectrallib.ascend then
+    local sasc = Spectrallib.ascend
+    function Spectrallib.ascend(...)
+        local cards = G.STATE == G.STATES.SELECTING_HAND and G.hand.highlighted or G.play.cards
+        local junks = 0
+        for i, v in pairs(cards) do
+            if v.config.center.key == "m_worm_junk_card" then junks = junks + 1 end
+        end
+        G.GAME.worm_c3_junk_stats.x_hand_stats = G.GAME.worm_c3_junk_stats.x_hand_stats or 1.5
+        local junk_hands_mult = G.GAME.worm_c3_junk_stats.x_hand_stats ^ junks
+
+        return sasc(...) * junk_hands_mult
+    end
+end
+
 -- display level in run info
 -- patched in
 function create_UIBox_junk_hand_row()
