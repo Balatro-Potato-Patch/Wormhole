@@ -466,11 +466,11 @@ SMODS.Consumable { -- Meteor Sour
     key = 'abs_meteor_sour',
     ppu_coder = { 'theAstra' },
     ppu_team = { 'absinthe' },
-    pos = { x = 0, y = 0 },
+    pos = { x = 0, y = 2 },
     config = {
         drink_values = {
-            filled_pos = { x = 0, y = 0 },
-            empty_pos = { x = 1, y = 0 },
+            filled_pos = { x = 0, y = 2 },
+            empty_pos = { x = 1, y = 2 },
             filled = true,
             visibly_filled = true,
             primed = false
