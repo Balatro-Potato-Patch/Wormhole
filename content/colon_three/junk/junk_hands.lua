@@ -112,13 +112,11 @@ function create_UIBox_junk_hands_tip(handname)
             {'S_A', true},
             {'D_A', true},
             {'D_Q', false},
-            {'D_Q', true, enhancement = "m_worm_junk_card"},
-            {'D_Q', true, enhancement = "m_worm_junk_card"},
+            {'S_A', true, true, enhancement = "m_worm_junk_card"},
+            {'S_A', true, true, enhancement = "m_worm_junk_card"},
         }) do
         local card = Card(0,0, 0.5*G.CARD_W, 0.5*G.CARD_H, G.P_CARDS[v[1]], G.P_CENTERS[v.enhancement or 'c_base'])
-        -- if v.edition then card:set_edition(v.edition, true, true) end
-        -- if v.seal then card:set_seal(v.seal, true, true) end
-        -- if v[2] then card:juice_up(0.3, 0.2) end
+        if v[3] then card:juice_up(0.6, 0.4) elseif v[2] then card:juice_up(0.3, 0.2) end
         if k == 1 then play_sound('paper1',0.95 + math.random()*0.1, 0.3) end
         ease_value(card.T, 'scale',v[2] and 0.25 or -0.15,nil,'REAL',true,0.2)
         cardarea:emplace(card)
