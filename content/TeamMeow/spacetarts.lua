@@ -169,10 +169,9 @@ function SpaceTart(args)
 	})
 	Wormhole.TEAM_MEOW.tartInfo[args.key] = {
 		--boosts = args.boosted_jokers,
-        boosted_cond = args.boosted_cond,
+        boosted_conds = args.boosted_conds,
 		pos = args.foil_pos,
-		regular_func = args.calculate,
-		boosted_func = args.boosted_calculate,
+		funcs = args.calculates,
 	}
 end
 
@@ -200,7 +199,21 @@ function generate_card_ui(
 			if not seen[v.key] then
 				seen[v.key] = true
                 local tab = Wormhole.TEAM_MEOW.tartInfo[v.key]
-                local is_boosted = tab.boosted_cond(card)
+				
+				local boost_count = 0
+				if type(tab.boosted_conds) == "function" then
+					if tab.boosted_conds(card) then
+						boost_count = boost_count + 1
+					end
+				else
+					for _, boost_test in pairs(tab.boosted_conds) do
+						if boost_test(card) then
+							boost_count = boost_count + 1
+						end
+					end
+				end
+				
+                local is_boosted = boost_count > 0
 				local amt = nil
 				for k, num in pairs(map) do
 					if k == v.center_key then
@@ -233,19 +246,30 @@ function Card:calculate_joker(context, ...)
 		for _, tart in ipairs(self.tarts) do
 			local entry = Wormhole.TEAM_MEOW.tartInfo[tart.key]
 			local calc_res = nil
-			local is_boosted = entry.boosted_cond(self)
+			
+			local boost_count = 0
+			if type(entry.boosted_conds) == "function" then
+				if entry.boosted_conds(self) then
+					boost_count = boost_count + 1
+				end
+			else
+				for _, boost_test in pairs(entry.boosted_conds) do
+					if boost_test(self) then
+						boost_count = boost_count + 1
+					end
+				end
+			end
+				
 			--[[for _, key in ipairs(entry.boosts) do
 				if key == self.config.center_key then
 					is_boosted = true
 					break
 				end
 			end]]
-			if is_boosted then
-				calc_res = entry.boosted_func(self, tart.config, context)
-			else
-				calc_res = entry.regular_func(self, tart.config, context)
-			end
-			calc_res = calc_res or {}
+			
+			local ability_number = math.min(#entry.funcs, boost_count + 1)
+			calc_res = entry.funcs[ability_number](self, tart.config, context) or {}
+
 			ret[#ret + 1] = calc_res
 		end
 	end
@@ -258,22 +282,37 @@ SpaceTart({
 	foil_pos = { x = 1, y = 0 },
 	config = {
 		reg = 1.5,
-		boosted = 2.5,
+		boostedLevel1 = 2.5,
+		boostedLevel2 = 4
 	},
-	calculate = function(card, tart_config, context)
-		if context.joker_main then
-			return {
-				xmult = tart_config.reg,
-			}
+	calculates = {
+		-- Default ability
+		function(card, tart_config, context)
+			if context.joker_main then
+				return {
+					xmult = tart_config.reg,
+				}
+			end
+		end,
+		
+		-- Level 1 boosted ability
+		function(card, tart_config, context)
+			if context.joker_main then
+				return {
+					xmult = tart_config.boostedLevel1
+				}
+			end
+		end,
+		
+		-- Level 2 boosted ability
+		function(card, tart_config, context)
+			if context.joker_main then
+				return {
+					xmult = tart_config.boostedLevel2
+				}
+			end
 		end
-	end,
-	boosted_calculate = function(card, tart_config, context)
-		if context.joker_main then
-			return {
-				xmult = tart_config.boosted,
-			}
-		end
-	end,
+	},
 	loc_vars = function(self, info_queue, card, tart_config, is_boosted)
 		return {
 			vars = {
@@ -284,9 +323,17 @@ SpaceTart({
 	--[[boosted_jokers = {
 		"j_joker",
 	},]]
-    boosted_cond = function (card)
-        return card.config and card.config.center_key == "j_joker" or false
-    end
+    boosted_conds = {
+		-- First condition
+		function (card)
+			return card.config and card.config.center_key == "j_joker"
+		end,
+		
+		-- Second condition
+		function (card)
+			return G.GAME.blind.boss
+		end
+	}
 })
 
 -- create_tart("stellar_strawberry", { x = 1, y = 2 }, { x = 1, y = 0 }, function(card, context)
