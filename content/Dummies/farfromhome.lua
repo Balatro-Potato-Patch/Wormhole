@@ -1,7 +1,14 @@
+SMODS.Atlas {
+  key = "dummies_home",
+  path = "Dummies/home.png",
+  px = 71,
+  py = 95
+}
+
 SMODS.Joker{
 	key = "dum_farfromhome",
-    atlas = 'worm_DummiesJokers_Flowire',
-    pos = { x = 1, y = 0 },
+    atlas = 'worm_dummies_home',
+    pos = { x = 0, y = 0 },
     ppu_team = { "dummies" },
     ppu_artist = { "flowire" },
     ppu_coder = { "flowire" },

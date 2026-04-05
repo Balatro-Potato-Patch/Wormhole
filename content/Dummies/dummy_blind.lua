@@ -1,7 +1,7 @@
 SMODS.Atlas({
     atlas_table = 'ANIMATION_ATLAS',
     frames = 21,
-    key = "dum_dummy_blind",
+    key = "dum_dummy_blind_atlas",
     path = "Dummies/dummy_blind.png",
     px = 34,
     py = 34
@@ -95,13 +95,13 @@ end
 
 local function DummyAddRewardTag(tag_id)
     local reward_tag = Tag(tag_id)
-    reward_tag.ability.dummy_no_double = true --> Makes sure that Double-Tag won't trigger
+    --reward_tag.ability.dummy_no_double = true --> Makes sure that Double-Tag won't trigger
+    --Flowire: I removed this because it actually breaks the Jam-Rules, oopsie :)
 	G.E_MANAGER:add_event(Event({
 		trigger = 'after',
 		delay = 0.2,
 		func = function()
             add_tag(reward_tag)
-			--play_sound('tarot2', 0.8 + math.random() * 0.2, 0.6)
             play_sound('highlight1', 1.2 + math.random() * 0.1, 0.6)
 			return true
 		end
@@ -110,7 +110,7 @@ end
 
 SMODS.Blind {
     key = "dum_dummy_blind",
-    atlas = "dum_dummy_blind",
+    atlas = "dum_dummy_blind_atlas",
     ppu_coder = { "vissa", "flowire" },
     ppu_team = { "dummies" },
     dollars = 0,
@@ -124,17 +124,18 @@ SMODS.Blind {
         local coefficient = G.GAME.chips / blind.chips
         local reward_level = DummyCalculateLevel(coefficient, false) --> Validates final level
         G.GAME.dum_dummy_level = nil
-        print("Coefficient: "..coefficient)
-        print("Reward-Level: "..reward_level)
+        --print("Coefficient: "..coefficient)
+        --print("Reward-Level: "..reward_level)
         if reward_level ~= -1 then
-            -- Extra High Rewards
-            if reward_level >= 13 then DummyAddRewardTag('tag_ethereal') end -- 375%+
-            if reward_level >= 11 then DummyAddRewardTag('tag_charm') end -- 325%+
-            if reward_level >= 9 then DummyAddRewardTag('tag_meteor') end -- 275%+
+            -- Ordered such that Double-Tag always duplicates the best Tag first:
             -- Normal Rewards
             if reward_level >= 7 then DummyAddRewardTag('tag_ethereal') end -- 225%+
             if reward_level >= 5 then DummyAddRewardTag('tag_charm') end -- 175%+
             if reward_level >= 3 then DummyAddRewardTag('tag_meteor') end -- 125%+
+            -- Extra High Rewards
+            if reward_level >= 13 then DummyAddRewardTag('tag_ethereal') end -- 375%+
+            if reward_level >= 11 then DummyAddRewardTag('tag_charm') end -- 325%+
+            if reward_level >= 9 then DummyAddRewardTag('tag_meteor') end -- 275%+
             -- Money-Cap
             return math.min(100, reward_level * 2 - 1)
         else return -5 end --> Penalty for not reaching 50%
