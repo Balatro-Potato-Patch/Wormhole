@@ -332,14 +332,14 @@ SMODS.Consumable { -- Moonshine
     set = 'abs_drinks',
     key = 'abs_moonshine',
     atlas = 'abs_drinks',
-    pos = { x = 0, y = 1 },
+    pos = { x = 0, y = 3 },
     ppu_coder = { 'iwas_nevergood' },
     ppu_artist = { 'iwas_nevergood' },
     ppu_team = { 'absinthe' },
     config = {
         drink_values = {
-            filled_pos = { x = 0, y = 1 },
-            empty_pos = { x = 1, y = 1 },
+            filled_pos = { x = 0, y = 3 },
+            empty_pos = { x = 1, y = 3 },
             filled = true,
             visibly_filled = true,
             primed = false
