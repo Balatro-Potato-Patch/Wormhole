@@ -4,7 +4,7 @@ SMODS.ConsumableType({
     secondary_colour = HEX("5b4bf0"),
     select_card = "consumeables",
     default = "c_worm_stellar_strawberry",
-    collection_rows = { 6 },
+    collection_rows = { 3,3 },
     shop_rate = 4,
     text_colour = G.C.UI.TEXT_LIGHT,
 })

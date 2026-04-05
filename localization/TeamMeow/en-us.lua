@@ -82,22 +82,24 @@ return {
 			c_worm_zodicat1 = {
 				name = "TBD",
 				text = {
-					"{C:attention}Aces{} and {C:attention}2s Held in hand{} gain {C:chips}+#1#{}",
-					"Chips permanently",
+					"{C:attention}Aces{} and {C:attention}2s Held in hand{}",
+					"gain {C:chips}+#1#{} Chips",
+					"permanently",
 				},
 			},
 			c_worm_zodicat2 = {
 				name = "TBD",
 				text = {
-					"{C:attention}3s{} and {C:attention}4s{} gain {C:mult}+#1#{}",
-					"Mult permanently",
+					"{C:attention}3s{} and {C:attention}4s Held in hand{}",
+					"gain {C:mult}+#1#{} Mult",
+					"permanently",
 				},
 			},
 			c_worm_zodicat3 = {
 				name = "TBD",
 				text = {
-					"{C:attention}5s{} and {C:attention}6s{} have a",
-					"{C:green}#1# in #2#{} chance to",
+					"{C:attention}5s{} and {C:attention}6s Held in hand{}",
+					"have a {C:green}#1# in #2#{} chance to",
 					"gain {C:money}$#3#{} while held",
 					"in hand permanently",
 				},
@@ -105,23 +107,25 @@ return {
 			c_worm_zodicat4 = {
 				name = "TBD",
 				text = {
-					"{C:attention}7s{} and {C:attention}8s{} gain {C:chips}+#1#{}",
-					"Chips while held in",
-					"hand permanently",
+					"{C:attention}7s{} and {C:attention}8s Held in hand{}",
+					"gain {C:chips}+#1#{} Chips while",
+					"held in hand",
+					"permanently"
 				},
 			},
 			c_worm_zodicat5 = {
 				name = "TBD",
 				text = {
-					"{C:attention}9s{} and {C:attention}10s{} gain {C:mult}+#1#{}",
-					"Mult while held in",
-					"hand permanently",
+					"{C:attention}9s{} and {C:attention}10s Held in hand{}",
+					"gain {C:mult}+#1#{} Mult while",
+					"held in hand",
+					"permanently"
 				},
 			},
 			c_worm_zodicat6 = {
 				name = "TBD",
 				text = {
-					"{C:attention}Face cards{} gain",
+					"{C:attention}Face cards Held in hand{}",
 					"gain {X:mult,C:white}X#3#{} Mult",
 					"permanently",
 				},
