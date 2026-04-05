@@ -87,42 +87,42 @@ local function create_tart(tart, tartPos, foilPos, regFunc, boostFunc, boostKey)
         pos = foilPos
     }
 end
-create_tart("stellar_strawberry", { x = 1, y = 2 }, { x = 1, y = 0 }, function (card, context) return { message = "test" } end, function (card, context)
+create_tart("stellar_strawberry", { x = 1, y = 2 }, { x = 1, y = 0 }, function (card, context) end, function (card, context)
     if context.joker_main then
         return {
             message = "betterTest",
         }
     end
 end, "j_joker")
-create_tart("celestial_cinnamon", { x = 2, y = 2 }, { x = 2, y = 0 }, function (card, context) return { message = "test" } end, function (card, context)
+create_tart("celestial_cinnamon", { x = 2, y = 2 }, { x = 2, y = 0 }, function (card, context) end, function (card, context)
     if context.joker_main then
         return {
             message = "betterTest",
         }
     end
 end, "j_joker")
-create_tart("lunar_lemon", { x = 3, y = 2 }, { x = 3, y = 0 }, function (card, context) return { message = "test" } end, function (card, context)
+create_tart("lunar_lemon", { x = 3, y = 2 }, { x = 3, y = 0 }, function (card, context) end, function (card, context)
     if context.joker_main then
         return {
             message = "betterTest",
         }
     end
 end, "j_joker")
-create_tart("meteor_mint", { x = 1, y = 3 }, { x = 1, y = 1 }, function (card, context) return { message = "test" } end, function (card, context)
+create_tart("meteor_mint", { x = 1, y = 3 }, { x = 1, y = 1 }, function (card, context) end, function (card, context)
     if context.joker_main then
         return {
             message = "betterTest",
         }
     end
 end, "j_joker")
-create_tart("blueshift_blueberry", { x = 2, y = 3 }, { x = 2, y = 1 }, function (card, context) return { message = "test" } end, function (card, context)
+create_tart("blueshift_blueberry", { x = 2, y = 3 }, { x = 2, y = 1 }, function (card, context) end, function (card, context)
     if context.joker_main then
         return {
             message = "betterTest",
         }
     end
 end, "j_joker")
-create_tart("big_bang_blackberry", { x = 3, y = 3 }, { x = 3, y = 1 }, function (card, context) return { message = "test" } end, function (card, context)
+create_tart("big_bang_blackberry", { x = 3, y = 3 }, { x = 3, y = 1 }, function (card, context) end, function (card, context)
     if context.joker_main then
         return {
             message = "betterTest",
