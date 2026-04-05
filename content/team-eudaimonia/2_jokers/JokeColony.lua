@@ -8,9 +8,9 @@ SMODS.Joker {
     key = "jokecolony",
     atlas = 'jokecolonyatlas',
     pos = { x = 0, y = 0 },
-    rarity = 1,
+    rarity = 2,
     blueprint_compat = true,
-    cost = 2,
+    cost = 8,
     discovered = true,
     config = {extra={mult = 2}},
     ppu_coder = {'M0xes'},
@@ -54,7 +54,13 @@ SMODS.Joker {
       end
       for _, joker in ipairs(G.worm_colony and G.worm_colony.cards or {}) do
           if joker.ability.worm_colonycitizen == card.ability.colonyid then
-              SMODS.destroy_cards(joker)
+              if SMODS.is_eternal(joker, card) then
+                joker.area:remove_card(joker)
+                joker:add_to_deck()
+                G.jokers:emplace(joker)
+              else
+                SMODS.destroy_cards(joker)
+              end
           end
       end
     end,
