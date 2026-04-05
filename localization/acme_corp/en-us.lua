@@ -4,6 +4,9 @@ return{
             PotatoPatchTeam_ACME = {
                 name = 'ACME Corporation'
             },
-        }
+        },
+		Joker = {
+			
+		}
     }
 }
