@@ -38,7 +38,7 @@ JtemTGM.pieces = {
 			{ 1, 1, 1 },
 			{ 0, 1, 0 },
 		},
-		color = G.C.BLUE,
+		color = lighten(G.C.BLUE, 0.2),
 	},
 	L = {
 		{
@@ -54,7 +54,7 @@ JtemTGM.pieces = {
 			{ 1, 1, 1 },
 			{ 0, 0, 1 },
 		},
-		color = darken(G.C.BLUE, 0.5),
+		color = darken(G.C.BLUE, 0.2),
 	},
 	S = {
 		{
@@ -901,8 +901,9 @@ end
 
 --#endregion
 
---#region Sounds
+--#region Sounds and other Misc stuff
 
+-- Sounds
 ---@type love.filesystem
 local nativefs = SMODS.NFS
 local files = nativefs.getDirectoryItems(Wormhole.path .. "/assets/sounds/Jtem 2/tetris")
@@ -917,6 +918,12 @@ end
 function JtemTGM.PlaySound(id)
 	play_sound("worm_jtem2_tetris_" .. id, 1.0, 0.7)
 end
+
+-- The funny clear animation
+local img = assert(nativefs.newFileData(Wormhole.path .. "/assets/jtem2/tetris_clearanim.png",
+	"Failed to load the goddamn clear anim ping"))
+local clearanim_data = assert(love.image.newImageData(img), "uh oh")
+local clearanim = love.graphics.newImage(clearanim_data)
 
 --#endregion
 
@@ -1147,12 +1154,26 @@ function JtemTGM.HandleDraw(canvas, game)
 			local piece = p[1]
 
 			if JtemTGM.ValidPiece(cell) and piece then
-				love.graphics.setColor(darken(p.color, 0.2))
+				if game.lightup[y] and game.lightup[y][x] then
+					love.graphics.setColor(G.C.WHITE)
+				else
+					love.graphics.setColor(darken(p.color, 0.3))
+				end
 				love.graphics.rectangle("fill", px, py, BLOCK_W, BLOCK_H)
 			end
 			::xcontinue::
 		end
 		::continue::
+	end
+
+	-- clear animation
+	for cy, _ in pairs(game.clear_cols or {}) do
+		local fy = cy * BLOCK_H
+		local t = game.clear_delay - game.clear_time
+		local max = math.max(8, 4 * game.clear_delay / 6)
+		local fx = (math.min(max, t / max) * 44) - 4
+		love.graphics.setColor(G.C.WHITE)
+		love.graphics.draw(clearanim, fx, fy)
 	end
 
 	love.graphics.setStencilTest()
@@ -1161,7 +1182,7 @@ function JtemTGM.HandleDraw(canvas, game)
 	local current = game.current_piece
 	if current and current.piece then
 		local darken = game.lock_delay - game.lock_timer
-		local t = (darken / game.lock_delay) * 0.2
+		local t = (darken / game.lock_delay) * 0.3
 		if game.state ~= STATE_LOCKING then t = 0 end
 		JtemTGM.DrawPiece(current.piece, current.x, current.y, BLOCK_W, BLOCK_H,
 			current.rotation, t)
