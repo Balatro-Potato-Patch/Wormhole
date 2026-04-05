@@ -331,13 +331,13 @@ SMODS.Consumable { -- Hubble Trouble
 SMODS.Consumable { -- Moonshine
     set = 'abs_drinks',
     key = 'abs_moonshine',
-    pos = { x = 8, y = 1 },
+    pos = { x = 0, y = 1 },
     ppu_coder = { 'iwas_nevergood' },
     ppu_team = { 'absinthe' },
     config = {
         drink_values = {
-            filled_pos = { x = 8, y = 1 },
-            empty_pos = { x = 1, y = 2 },
+            filled_pos = { x = 0, y = 1 },
+            empty_pos = { x = 1, y = 1 },
             filled = true,
             visibly_filled = true,
             primed = false
