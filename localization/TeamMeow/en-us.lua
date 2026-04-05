@@ -186,7 +186,7 @@ return {
 				name = "Stellar Strawberry",
 				text = {
 					"Attached {C:attention}Joker{}",
-					"gives {X:mult,C:white}X#1#{} Mult",
+					"gives {C:mult}+#1#{} Mult",
 				},
 			},
 			c_worm_celestial_cinnamon = {
@@ -219,30 +219,64 @@ return {
 					"purple penis",
 				},
 			},
-			c_worm_stellar_strawberry_boosted1 = {
+			c_worm_stellar_strawberry_regular = {
 				name = " Stellar Strawberry ",
 				text = {
-					"{X:red,C:white}X#1#{} Mult",
-					"(Level 1 Boost active)",
+					"{C:mult}+#1#{} Mult",
 				},
 			},
 			c_worm_stellar_strawberry_boosted2 = {
 				name = " Stellar Strawberry ",
 				text = {
-					"{X:red,C:white}X#1#{} Mult",
-					"(Level 2 Boost active)",
+					"{X:red,C:white}X#1#{} Mult"
 				},
 			},
-			c_worm_stellar_strawberry_regular = {
-				name = " Stellar Strawberry ",
+			c_worm_celestial_cinnamon_regular = {
+				name = " Celestial Cinnamon ",
 				text = {
-					"{X:red,C:white}X#1#{} Mult",
+					"{C:green}#1# in #2# chance to",
+					"{C:attention}retrigger{} the attached Joker",
+					"{C:inactive}(Unimplemented)"
+				},
+			},
+			c_worm_lunar_lemon_regular = {
+				name = " Lunar Lemon ",
+				text = {
+					"{C:green}1 in #1#{} chance to",
+					"earn {C:money}$#2#"
+				}
+			},
+			c_worm_meteor_mint_regular = {
+				name = " Meteor Mint ",
+				text = {
+					"{C:attention}Boosts{} other tarts applied",
+					"onto the same Joker",
+					"{C:inactive}(Total mint boosts on this Joker: #1#)"
+				}
+			},
+			c_worm_blueshift_blueberry_regular = {
+				name = " Blueshift Blueberry ",
+				text = {
+					"{C:chips}+#1#{} Chips",
+				},
+			},
+			c_worm_blueshift_blueberry_boosted2 = {
+				name = " Blueshift Blueberry ",
+				text = {
+					"{X:blue,C:white}X#1#{} Chips"
+				},
+			},
+			c_worm_big_bang_blackberry_regular = {
+				name = " Big Bang Blackberry ",
+				text = {
+					"Balances Chips and Mult {X:legendary,C:white}#1#%{}"
 				},
 			},
 		},
 		Other = {
 			worm_meow_spacetart_stacks = {
 				text = {
+					"{C:inactive,s:0.8}(Boost level: {C:attention,s:0.8}#2#{C:inactive,s:0.8})",
 					"{C:inactive,s:0.8}(Currently stacked: {C:attention,s:0.8}#1#{C:inactive,s:0.8})",
 				},
 			},
