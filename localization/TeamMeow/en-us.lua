@@ -1,4 +1,40 @@
 return {
+	PotatoPatch = {
+		Info_Menu = {
+			tarts = {
+				name = "Spacetarts!",
+				text = {
+					{
+						name = "Overview",
+						text = {
+							{
+								"After providing you with so many effects, your {C:attention}Joker{}s are surely",
+								"tired from all that hassle! Worry not, Team Meow's greatest nutritionists",
+								"have worked out a solution! Introducing, {C:inactive,s:0.7}(drumroll pls){} {C:worm_meow_spacetart}©Spacetart{}s!"
+							},
+							{
+								"Use the mouse to {C:attention}drag{} the {C:worm_meow_spacetart}©Spacetart{} on the {C:attention}Joker{} to feed it to them!",
+								"If a {C:attention}Joker{} is about to eat the {C:worm_meow_spacetart}©Spacetart{}, the cursor will turn into a {C:attention}cat paw{}!",
+								"The foil will remain on the {C:attention}Joker{}. Don't worry, they love it!",
+							},
+							{
+								"Some {C:attention}Joker{}s might get too full after eating too many {C:worm_meow_spacetart}©Spacetart{}s...",
+								"In this case, they won't be able to consume any more {C:worm_meow_spacetart}©Spacetart{}s!",
+								"After our extensive testing, a {C:attention}Joker{} can consume at most {C:attention}#1# {C:worm_meow_spacetart}©Spacetart{}s",
+								"before refusing to eat more under normal circumstances."
+							},
+							{
+								"If you think a {C:attention}Joker{} has too many foils and its unevenly distributed,",
+								"don't worry! Simply {C:attention}drag{} the {C:attention}Joker{} onto another one, and the foil will be",
+								"given to the other {C:attention}Joker{}, while also enabling the original {C:attention}Joker{} to",
+								"consume {C:attention}another {C:worm_meow_spacetart}©Spacetart{}!"
+							},
+						}
+					}
+				}
+			}
+		},
+	},
 	descriptions = {
 		PotatoPatch = {
 			PotatoPatchTeam_meow = { name = "Team Meow" },
@@ -135,7 +171,7 @@ return {
 			c_worm_stellar_strawberry = {
 				name = "Stellar Strawberry",
 				text = {
-					"Attached Joker",
+					"Attached {C:attention}Joker{}",
 					"gives {X:mult,C:white}X#1#{} Mult",
 				},
 			},
@@ -170,81 +206,16 @@ return {
 				},
 			},
 			c_worm_stellar_strawberry_boosted = {
-				name = "Stellar Strawberry",
+				name = " Stellar Strawberry ",
 				text = {
 					"{X:red,C:white}X#1#{} Mult",
 					"(boosted)",
 				},
 			},
 			c_worm_stellar_strawberry_regular = {
-				name = "Stellar Strawberry",
+				name = " Stellar Strawberry ",
 				text = {
 					"{X:red,C:white}X#1#{} Mult",
-				},
-			},
-			c_worm_celestial_cinnamon_boosted = {
-				name = "Celestial Cinnamon",
-				text = {
-					"idk if u can do non hard-coded",
-					"values easily in here :shrug:",
-				},
-			},
-			c_worm_celestial_cinnamon_regular = {
-				name = "Celestial Cinnamon",
-				text = {
-					"lame ass",
-				},
-			},
-			c_worm_lunar_lemon_boosted = {
-				name = "Lunar Lemon",
-				text = {
-					"idk if u can do non hard-coded",
-					"values easily in here :shrug:",
-				},
-			},
-			c_worm_lunar_lemon_regular = {
-				name = "Lunar Lemon",
-				text = {
-					"lame ass",
-				},
-			},
-			c_worm_meteor_mint_boosted = {
-				name = "Stellar Strawberry",
-				text = {
-					"idk if u can do non hard-coded",
-					"values easily in here :shrug:",
-				},
-			},
-			c_worm_meteor_mint_regular = {
-				name = "Stellar Strawberry",
-				text = {
-					"lame ass",
-				},
-			},
-			c_worm_blueshift_blueberry_boosted = {
-				name = "Meteor Mint",
-				text = {
-					"idk if u can do non hard-coded",
-					"values easily in here :shrug:",
-				},
-			},
-			c_worm_blueshift_blueberry_regular = {
-				name = "Meteor Mint",
-				text = {
-					"lame ass",
-				},
-			},
-			c_worm_big_bang_blackberry_boosted = {
-				name = "Big Bang Blackberry",
-				text = {
-					"idk if u can do non hard-coded",
-					"values easily in here :shrug:",
-				},
-			},
-			c_worm_big_bang_blackberry_regular = {
-				name = "Big Bang Blackberry",
-				text = {
-					"lame ass",
 				},
 			},
 		},
@@ -345,6 +316,7 @@ return {
 			b_worm_meow_spacetart_cards = "Spacetart Foils",
 			k_worm_meow_spacetart_pack = "Spacetart Pack",
 			k_worm_meow_Zodicat_pack = "Zodicat Pack",
+			k_worm_meow_ate = "Ate!"
 		},
 		labels = {
 			worm_meow_zodicat = "Zodicat",

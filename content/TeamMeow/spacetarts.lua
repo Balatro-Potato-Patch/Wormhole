@@ -56,7 +56,7 @@ function Card:load(cardTable, other_card, ...)
 end
 
 Wormhole.TEAM_MEOW.tartInfo = {}
-local function SpaceTart(args)
+function SpaceTart(args)
 	local ex_table = {}
 	ex_table.tart = args.key
 	ex_table.tart_cfg = args.config
@@ -168,7 +168,8 @@ local function SpaceTart(args)
 		end,
 	})
 	Wormhole.TEAM_MEOW.tartInfo[args.key] = {
-		boosts = args.boosted_jokers,
+		--boosts = args.boosted_jokers,
+        boosted_cond = args.boosted_cond,
 		pos = args.foil_pos,
 		regular_func = args.calculate,
 		boosted_func = args.boosted_calculate,
@@ -198,20 +199,21 @@ function generate_card_ui(
 		for _, v in ipairs(card.tarts) do
 			if not seen[v.key] then
 				seen[v.key] = true
-				local is_boosted = false
-				local tab = Wormhole.TEAM_MEOW.tartInfo[v.key]
+                local tab = Wormhole.TEAM_MEOW.tartInfo[v.key]
+                local is_boosted = tab.boosted_cond(card)
 				local amt = nil
 				for k, num in pairs(map) do
 					if k == v.center_key then
 						amt = num
 					end
 				end
+                --[[
 				for _, k in ipairs(tab.boosts) do
 					if k == card.config.center_key then
 						is_boosted = true
 						break
 					end
-				end
+				end]]
 				generate_card_ui(
 					G.P_CENTERS[v.center_key],
 					ret,
@@ -231,13 +233,13 @@ function Card:calculate_joker(context, ...)
 		for _, tart in ipairs(self.tarts) do
 			local entry = Wormhole.TEAM_MEOW.tartInfo[tart.key]
 			local calc_res = nil
-			local is_boosted = false
-			for _, key in ipairs(entry.boosts) do
+			local is_boosted = entry.boosted_cond(self)
+			--[[for _, key in ipairs(entry.boosts) do
 				if key == self.config.center_key then
 					is_boosted = true
 					break
 				end
-			end
+			end]]
 			if is_boosted then
 				calc_res = entry.boosted_func(self, tart.config, context)
 			else
@@ -279,9 +281,12 @@ SpaceTart({
 			},
 		}
 	end,
-	boosted_jokers = {
+	--[[boosted_jokers = {
 		"j_joker",
-	},
+	},]]
+    boosted_cond = function (card)
+        return card.config and card.config.center_key == "j_joker" or false
+    end
 })
 
 -- create_tart("stellar_strawberry", { x = 1, y = 2 }, { x = 1, y = 0 }, function(card, context)
@@ -431,6 +436,8 @@ function Card:draw(...)
 	love.graphics.setColor(r, g, b, a)
 end
 
+-- Dragging tarts on jokers
+
 local old = Card.stop_drag
 function Card:stop_drag(...)
 	local ret = old(self, ...)
@@ -481,7 +488,9 @@ function Card:stop_drag(...)
 			delay = 0.6,
 			func = function()
 				play_sound("tarot1")
-				colliders[1].card:juice_up(0.5, 0.5)
+                colliders[1].card:juice_up(0.5, 0.5)
+                card_eval_status_text(colliders[1].card, 'extra', nil, nil, nil,
+                    { message = localize("k_worm_meow_ate") })
 				return true
 			end,
 		}))
@@ -523,4 +532,98 @@ function Game:update(dt, ...)
 			end
 		end
 	end
+end
+
+-- Exchanging tarts
+
+local old = Card.stop_drag
+function Card:stop_drag(...)
+    local ret = old(self, ...)
+    local bool = false
+    local colliders = {}
+    if G.jokers and G.jokers.cards then
+        for k, v in pairs(G.jokers.cards) do
+            if meow_cards_are_colliding(self, v) and meow_can_apply_foil(v) and v ~= self then
+                bool = true
+                table.insert(colliders, { card = v, dist = meow_get_distance_between_two_cards(v, self) })
+            end
+        end
+    end
+    table.sort(colliders, function(a, b)
+        return a.dist < b.dist
+    end)
+    if
+        self.ability
+        and self.ability.set == "Joker"
+        and bool
+        and self.tarts
+        and #self.tarts > 0
+    then
+        local tart
+        G.E_MANAGER:add_event(Event({
+            trigger = "after",
+            delay = 0,
+            func = function()
+                tart = table.remove(self.tarts, #self.tarts)
+                table.insert(colliders[1].card.tarts, tart)
+                return true
+            end,
+        }))
+        G.E_MANAGER:add_event(Event({
+            trigger = "after",
+            delay = 0.6,
+            func = function()
+                play_sound("tarot1")
+                colliders[1].card:juice_up(0.5, 0.5)
+                return true
+            end,
+        }))
+        G.E_MANAGER:add_event(Event({
+            trigger = "after",
+            delay = 0.4,
+            func = function()
+                play_sound("tarot2", nil, 0.8)
+                colliders[1].card:juice_up(0.2, 0.5)
+                love.mouse.setCursor()
+                return true
+            end,
+        }))
+    end
+    return ret
+end
+
+local old = Game.update
+function Game:update(dt, ...)
+	local ret = old(self, dt, ...)
+	local alreadyset = false
+    if G.jokers and G.jokers.cards and not G.SETTINGS.paused then
+		for k, v in pairs(G.jokers.cards) do
+			if v.ability and v.ability.set == "Joker" and v.tarts and #v.tarts > 0 then
+				local bool = false
+				for kk, vv in pairs(G.jokers.cards) do
+					if vv ~= v and meow_cards_are_colliding(v, vv) and meow_can_apply_foil(vv) then
+						bool = true
+					end
+				end
+				if bool then
+					love.mouse.setCursor(Wormhole.TEAM_MEOW.cursor)
+					alreadyset = true
+				elseif not alreadyset then
+					love.mouse.setCursor()
+				end
+			end
+		end
+	end
+end
+local old = Game.update
+function Game:update(dt, ...)
+    local ret = old(self, dt, ...)
+    if G.consumeables and G.consumeables.cards then
+        for k, v in ipairs(G.consumeables.cards) do
+            if v.ability and v.ability.set == "worm_meow_Spacetart" and not G.GAME.shown_tart_poppup then
+                G.GAME.shown_tart_poppup = true
+                PotatoPatchUtils.INFO_MENU.create_menu({ menu_type = "tarts", vars = { G.GAME.max_foil_slots } })
+            end
+        end
+    end
 end

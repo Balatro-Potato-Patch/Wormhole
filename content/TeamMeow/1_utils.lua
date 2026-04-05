@@ -22,9 +22,9 @@ function meow_get_distance_between_two_cards(c1,c2)
 end
     
 function meow_can_apply_foil(card)
-    if not card.tarts then
+    if not card.tarts or not G.GAME or type(G.GAME.max_foil_slots) ~= "number" then
         return false
     else
-        return #card.tarts < 6
+        return #card.tarts < G.GAME.max_foil_slots
     end
 end

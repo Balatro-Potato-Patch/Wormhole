@@ -1,6 +1,12 @@
 Wormhole.TEAM_MEOW = {}
 
 Wormhole.TEAM_MEOW.DEBUG = false
+local old = Game.init_game_object
+function Game:init_game_object(...)
+	local ret = old(self, ...)
+	ret.max_foil_slots = 7
+	return ret
+end
 
 SMODS.Atlas({
 	key = "meowCredits",
