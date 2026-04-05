@@ -268,6 +268,43 @@ return {
 					"Upgrade all {V:1}Constellation{} cards",
 					"held to {C:edition}???"
 				}
+			},
+		},
+		Back = {
+			b_worm_tlr_astrologist = {
+				name = "Astrologist's Deck",
+				text = {
+					'Start run with',
+                    '{C:worm_tlr_constellation,T:v_worm_tlr_skywatching}#1#{}',
+                    'and {C:worm_tlr_constellation,T:v_worm_tlr_stargazing}#2#{}',
+				}
+			}
+		},
+		Joker = {
+			j_worm_tlr_chert = {
+				name = 'Chert',
+				text = {
+					'Create a tier {C:attention}1{}',
+					'or {C:attention}2{C:worm_tlr_constellation} Constellation{}',
+					'when {C:attention}Blind{} is selected',
+					'{C:inactive}(Must have room){}',
+				}
+			}
+		},
+		Voucher = {
+			v_worm_tlr_skywatching = {
+				name = 'Skywatching',
+				text = {
+					'Tier {C:attention}1{C:worm_tlr_constellation} Constellations{}',
+            		'may appear in the shop'
+				}
+			},
+			v_worm_tlr_stargazing = {
+				name = 'Stargazing',
+				text = {
+					'Higher tier {C:worm_tlr_constellation}Constellations{}',
+            		'may appear in the shop'
+				}
 			}
 		},
 		worm_tlr_constellation = CONSTELLATIONS,
@@ -314,7 +351,7 @@ return {
 			PotatoPatchDev_Amphiapple = {
 				name = "Amphiapple",
 				text = {
-					"fill out pls"
+					"h"
 				}
 			},
 			PotatoPatchDev_Aura2247 = {
@@ -331,6 +368,16 @@ return {
 			},
 		},
 		Other = {
+			worm_tlr_star_seal = {
+				name = 'Star Seal',
+				text = {
+					'Create a tier {C:attention}2{}',
+					'{C:worm_tlr_constellation}Constellation{} when scored',
+					'if chips scored exceeds',
+					'{C:attention}#1#%{} of required chips',
+					'{C:inactive}(Must have room)'
+				}
+			},
 			worm_tlr_const_info = {
 				name = "Constellation Info",
 				text = {
@@ -406,10 +453,11 @@ return {
 			k_worm_tlr_confirm = "Confirm",
 			k_worm_tlr_orion_rerolls_left_1 = "Rerolls",
 			k_worm_tlr_orion_rerolls_left_2 = "Left",
-			
+			k_plus_constellation = "+1 Constellation",
 		},
 		labels = {
 			worm_tlr_constellation = "Constellation",
+			worm_tlr_star_seal = 'Star Seal'
 		}
 	}
 }
