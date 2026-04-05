@@ -202,13 +202,21 @@ function generate_card_ui(
 				
 				local boost_count = 0
 				if type(tab.boosted_conds) == "function" then
-					if tab.boosted_conds(card) then
+					local v = tab.boosted_conds(card)
+					
+					if type(v) == "boolean" and v then
 						boost_count = boost_count + 1
+					elseif type(v) == "number" then
+						boost_count = boost_count + v
 					end
 				else
 					for _, boost_test in pairs(tab.boosted_conds) do
-						if boost_test(card) then
+						local v = boost_test(card)
+						
+						if type(v) == "boolean" and v then
 							boost_count = boost_count + 1
+						elseif type(v) == "number" then
+							boost_count = boost_count + v
 						end
 					end
 				end
@@ -249,13 +257,21 @@ function Card:calculate_joker(context, ...)
 			
 			local boost_count = 0
 			if type(entry.boosted_conds) == "function" then
-				if entry.boosted_conds(self) then
+				local v = entry.boosted_conds(self)
+				
+				if type(v) == "boolean" and v then
 					boost_count = boost_count + 1
+				elseif type(v) == "number" then
+					boost_count = boost_count + v
 				end
 			else
 				for _, boost_test in pairs(entry.boosted_conds) do
-					if boost_test(self) then
+					local v = boost_test(self)
+					
+					if type(v) == "boolean" and v then
 						boost_count = boost_count + 1
+					elseif type(v) == "number" then
+						boost_count = boost_count + v
 					end
 				end
 			end
@@ -268,7 +284,7 @@ function Card:calculate_joker(context, ...)
 			end]]
 			
 			local ability_number = math.min(#entry.funcs, boost_count + 1)
-			calc_res = entry.funcs[ability_number](self, tart.config, context) or {}
+			calc_res = entry.funcs[ability_number](self, tart.config, context, boost_count) or {}
 
 			ret[#ret + 1] = calc_res
 		end
@@ -287,7 +303,7 @@ SpaceTart({
 	},
 	calculates = {
 		-- Default ability
-		function(card, tart_config, context)
+		function(card, tart_config, context, boost_count)
 			if context.joker_main then
 				return {
 					xmult = tart_config.reg,
@@ -296,7 +312,7 @@ SpaceTart({
 		end,
 		
 		-- Level 1 boosted ability
-		function(card, tart_config, context)
+		function(card, tart_config, context, boost_count)
 			if context.joker_main then
 				return {
 					xmult = tart_config.boostedLevel1
