@@ -8,26 +8,34 @@ return {
 						name = "Overview",
 						text = {
 							{
-								"Use the mouse to {C:attention}drag{} the {C:worm_meow_spacetart}©Spacetart{} on a {C:attention}Joker{}",
+								--[["Use the mouse to {C:attention}drag{} the {C:worm_meow_spacetart}©Spacetart{} on a {C:attention}Joker{}",
 								"to feed it to them.",
 								"If a {C:attention}Joker{} is about to eat the {C:worm_meow_spacetart}©Spacetart{},",
-								"the cursor will turn into a {C:attention}cat paw{}.",
+								"the cursor will turn into a {C:attention}cat paw{}.",]]
+								"Feed the {C:attention}Jokers{} by simply {C:attention}dragging",
+								"the {C:worm_meow_spacetart}©Spacetart{} onto them!",
 							},
 							{
-								"Some {C:attention}Jokers{} might get too full after eating too many {C:worm_meow_spacetart}©Spacetarts{}",
+								--[["Some {C:attention}Jokers{} might get too full after eating too many {C:worm_meow_spacetart}©Spacetarts{}",
 								"and won't be able to consume any more {C:worm_meow_spacetart}©Spacetarts{}.",
 								"A {C:attention}Joker{} can consume at most {C:attention}#1# {C:worm_meow_spacetart}©Spacetarts{}",
-								"before refusing to eat more under normal circumstances."
+								"before refusing to eat more under normal circumstances."]]
+								"Fed {C:attention}Jokers{} gain {C:attention}foils{}, stackable up to {C:attention}#1#{} times,",
+								"which give Jokers{C:attention} varying additional effects{}!"
 							},
 							{
-								"If you think a {C:attention}Joker{} has too many foils and it's unevenly distributed,",
+								--[["If you think a {C:attention}Joker{} has too many foils and it's unevenly distributed,",
 								"simply {C:attention}drag{} the {C:attention}Joker{} onto another one, and the topmost foil will be",
 								"given to the other {C:attention}Joker{}, while also enabling the original {C:attention}Joker{} to",
-								"consume {C:attention}another {C:worm_meow_spacetart}©Spacetart{}."
+								"consume {C:attention}another {C:worm_meow_spacetart}©Spacetart{}."]]
+								"You can drag a {C:attention}foiled Joker{} onto",
+								"other jokers to {C:attention}transfer{} the {C:attention}topmost foil{}!"
 							},
 							{
-								"Certain {C:attention}Jokers{} prefer different flavours of {C:worm_meow_spacetart}©Spacetarts{}",
-								"and the effect of the {C:worm_meow_spacetart}©Spacetart{} will be greatly {C:attention}boosted{}."
+								--[["Certain {C:attention}Jokers{} prefer different flavours of {C:worm_meow_spacetart}©Spacetarts{}",
+								"and the effect of the {C:worm_meow_spacetart}©Spacetart{} will be greatly {C:attention}boosted{}."]]
+								"{C:attention}Jokers{} have their own taste too, and will {C:attention}boost",
+								"their {C:attention}foil{} if they like the flavour of its {C:worm_meow_spacetart}©Spacetart{}!"
 							},
 						}
 					}

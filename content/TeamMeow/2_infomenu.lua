@@ -99,7 +99,7 @@ function Wormhole.TEAM_MEOW.create_spacetart_UIBox_definition(args)
 			nodes = {
 				{
 					n = G.UIT.R,
-					config = { align = "cm", colour = G.C.BLACK, r = 0.2, minw = 10, minh = 1.5 },
+					config = { align = "cm", colour = G.C.BLACK, r = 0.2, minw = 8, minh = 1.5 },
 					nodes = {
 						{
 							n = G.UIT.C,
@@ -201,7 +201,7 @@ function Wormhole.TEAM_MEOW.create_spacetart_UIBox_definition(args)
 					nodes = {
 						i % 2 == 0 and create_info_sprite(sprites[i]) or nil,
 						i % 2 == 0 and { n = G.UIT.C, config = { minw = 0.2 } } or nil,
-						create_text_box({ loc_target = v, text_parsed = target.text_parsed[i], vars = args.vars }, i),
+						create_text_box({ loc_target = v, text_parsed = target.text_parsed[i], vars = args.vars }),
 						i % 2 == 1 and { n = G.UIT.C, config = { minw = 0.2 } } or nil,
 						i % 2 == 1 and create_info_sprite(sprites[i]) or nil,
 					},
