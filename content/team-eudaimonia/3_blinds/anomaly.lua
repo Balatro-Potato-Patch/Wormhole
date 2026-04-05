@@ -17,10 +17,30 @@ SMODS.Blind {
         G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
     end,
     calculate = function(self, blind, context)
-        if  not blind.disabled and context.press_play then
+        if  not blind.disabled and context.before then
             G.GAME.blind.chips = G.GAME.blind.chips * (1 + self.percent_change)
             G.GAME.blind.effect.extra.tot_change = G.GAME.blind.effect.extra.tot_change * (1 + self.percent_change)
             G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
+            blind.triggered = true
+            G.E_MANAGER:add_event(Event({
+                trigger = 'immediate',
+                func = (function()
+                    SMODS.juice_up_blind()
+                    G.E_MANAGER:add_event(Event({
+                        trigger = 'after',
+                        delay = 0.06 * G.SETTINGS.GAMESPEED,
+                        blockable = false,
+                        blocking = false,
+                        func = function()
+                            play_sound('tarot2', 0.76, 0.4)
+                            return true
+                        end
+                    }))
+                    play_sound('tarot2', 1, 0.4)
+                    return true
+                end)
+            }))
+            delay(0.4)
         end
     end,
     in_pool = function(self) return false end,
