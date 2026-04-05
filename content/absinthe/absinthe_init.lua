@@ -39,7 +39,7 @@ PotatoPatchUtils.Developer {
 }
 
 PotatoPatchUtils.Developer {
-    name = 'iwas_nevergood',
+    name = 'AstraLuna',
     team = 'absinthe',
     atlas = 'worm_abs_credits',
     pos = { x = 2, y = 1 },

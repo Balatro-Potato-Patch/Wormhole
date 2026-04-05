@@ -333,8 +333,8 @@ SMODS.Consumable { -- Moonshine
     key = 'abs_moonshine',
     atlas = 'abs_drinks',
     pos = { x = 0, y = 3 },
-    ppu_coder = { 'iwas_nevergood' },
-    ppu_artist = { 'iwas_nevergood' },
+    ppu_coder = { 'AstraLuna' },
+    ppu_artist = { 'AstraLuna' },
     ppu_team = { 'absinthe' },
     config = {
         drink_values = {
@@ -404,8 +404,8 @@ SMODS.Consumable { -- Pina Solada
     set = 'abs_drinks',
     key = 'abs_pina_solada',
     atlas = 'abs_drinks',
-    ppu_coder = { 'iwas_nevergood' },
-    ppu_artist = { 'iwas_nevergood' },
+    ppu_coder = { 'AstraLuna' },
+    ppu_artist = { 'AstraLuna' },
     ppu_team = { 'absinthe' },
     pos = { x = 0, y = 0 },
     config = {

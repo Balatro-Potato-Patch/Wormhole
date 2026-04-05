@@ -46,7 +46,7 @@ SMODS.Joker {
     atlas = 'worm_abs_jokers',
     pos = { x = 1, y = 0 },
     ppu_coder = { 'pi_cubed' },
-    ppu_artist = { 'iwas_nevergood' },
+    ppu_artist = { 'AstraLuna' },
     ppu_team = { 'absinthe' },
     attributes = {
         'economy',
@@ -175,7 +175,7 @@ SMODS.Joker {
     atlas = 'worm_abs_jokers',
     pos = { x = 5, y = 0 },
     ppu_coder = { 'pi_cubed' },
-    ppu_artist = { 'iwas_nevergood'},
+    ppu_artist = { 'AstraLuna'},
     ppu_team = { 'absinthe' },
     attributes = {
         'hand_type',
