@@ -48,15 +48,6 @@ PotatoPatchUtils.Team({
 	name = "meow",
 	colour = HEX("F9D0D1"),
 	loc = true,
-	calculate = function(self, context)
-		for _, joker in ipairs(G.jokers.cards) do
-			if joker.worm_meow_tarts and not joker.debuff then
-				for _, tart in ipairs(joker.worm_meow_tarts) do
-					
-				end
-			end
-		end
-	end
 })
 
 local thunderedge_colour = SMODS.Gradient({
