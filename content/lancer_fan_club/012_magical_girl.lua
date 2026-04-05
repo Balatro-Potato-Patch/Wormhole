@@ -8,7 +8,7 @@ SMODS.Joker {
     cost = 6,
     atlas = "lfc_jokers",
     ppu_coder = { "J8-Bit" },
-    pos = { x = 1, y = 2 },
+    pos = { x = 0, y = 2 },
     discovered = false,
     config = { extra = { chips = 0, chips_inc = 15 } },
     attributes = {

@@ -88,11 +88,11 @@ SMODS.Joker {
         return math.ceil(card.ability.extra.piss * currentvalues.urine.value)
     end,
 
-    set_ability = function (self, card, initial, delay_sprites)
+    set_ability = function(self, card, initial, delay_sprites)
         Wormhole.LancerFanClub.get_piss()
     end,
 
-    ppu_coder = {"InvalidOS"}
+    ppu_coder = { "InvalidOS" }
 }
 
 -- Elle moment
@@ -137,56 +137,56 @@ vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords
 	
 	return c;
 }
-]])--SMODS.current_mod.path .. "assets/shaders/shader.fs" ) -- Gives me more control than SMODS.Shader
+]]) --SMODS.current_mod.path .. "assets/shaders/shader.fs" ) -- Gives me more control than SMODS.Shader
 
 
-local function draw_piss_bar(fac,x,y,w,h,colours)
+local function draw_piss_bar(fac, x, y, w, h, colours)
     local old_shader = love.graphics.getShader()
 
 
     shader:sendColor("palette", colours[1], colours[2], colours[3], colours[4])
 
     shader:send("fac", fac)
-    shader:send("dims", {w,h})
+    shader:send("dims", { w, h })
 
     love.graphics.setShader(shader)
 
-    love.graphics.rectangle("fill",x,y,w,h)
+    love.graphics.rectangle("fill", x, y, w, h)
 
     love.graphics.setShader(old_shader)
 end
 
 local bar_palettes = {
-    piss = {HEX("fff39a"), HEX("f5d15a"), HEX("eca94e"), HEX("dc8c40")}
+    piss = { HEX("fff39a"), HEX("f5d15a"), HEX("eca94e"), HEX("dc8c40") }
 }
 
 local function piss_draw(card)
     love.graphics.clear()
 
-    draw_piss_bar(currentvalues.urine.value,10,10,10,40,bar_palettes.piss)
+    draw_piss_bar(currentvalues.urine.value, 10, 10, 10, 40, bar_palettes.piss)
 end
 
 SMODS.DrawStep {
-	key = 'pisscanvas',
-	order = 100,
-	func = function(self, layer)
-		-- Copied this from my Wordle Joker lol
+    key = 'pisscanvas',
+    order = 100,
+    func = function(self, layer)
+        -- Copied this from my Wordle Joker lol
         if self.config.center.key == "j_worm_lfc_pissstream" and not Wormhole.LFC_Util.card_obscured(self) then
-			if not self.pisscanvas then
-				self.pisscanvas = SMODS.CanvasSprite({
-					canvasScale = 1
-				})
-			end
+            if not self.pisscanvas then
+                self.pisscanvas = SMODS.CanvasSprite({
+                    canvasScale = 1
+                })
+            end
 
-			local c = love.graphics.getCanvas()
+            local c = love.graphics.getCanvas()
 
-			love.graphics.push()
-			love.graphics.origin()
-			self.pisscanvas.canvas:renderTo(function() piss_draw(self) end)
-			love.graphics.pop()
+            love.graphics.push()
+            love.graphics.origin()
+            self.pisscanvas.canvas:renderTo(function() piss_draw(self) end)
+            love.graphics.pop()
 
-			self.pisscanvas.role.draw_major = self
-			self.pisscanvas:draw_shader("dissolve", nil, nil, nil, self.children.center)
-		end
-	end
+            self.pisscanvas.role.draw_major = self
+            self.pisscanvas:draw_shader("dissolve", nil, nil, nil, self.children.center)
+        end
+    end
 }

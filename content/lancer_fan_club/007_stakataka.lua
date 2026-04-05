@@ -37,7 +37,7 @@ end
 SMODS.Joker {
     key = "lfc_stakataka",
     atlas = "lfc_jokers",
-    pos = { x = 3, y = 0 },
+    pos = { x = 4, y = 0 },
 
     rarity = 2,
     cost = 6,
@@ -65,7 +65,13 @@ SMODS.Joker {
             end
         end
     end,
-
+    set_sprites = function(self, card, front)
+        local secret = pseudorandom("lfc_stakataka_shiny", 1, 16) <= 1
+        if secret then
+            --print("Oooh, secret!")
+            card.children.center:set_sprite_pos({ x = 5, y = 0 })
+        end
+    end,
     dex_entry_key = "lfc_dex_stakataka",
     generate_ui = Wormhole.LFC_Util.generate_pokedex_entry_ui,
 

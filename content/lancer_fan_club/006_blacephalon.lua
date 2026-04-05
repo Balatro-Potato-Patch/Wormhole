@@ -41,7 +41,13 @@ SMODS.Joker {
     in_pool = function(self, args)
         return G.GAME.lfc_can_blacephalon_appear
     end,
-
+    set_sprites = function(self, card, front)
+        local secret = pseudorandom("lfc_blacephalon_shiny", 1, 16) <= 1
+        if secret then
+            --print("Oooh, secret!")
+            card.children.center:set_sprite_pos({ x = 3, y = 0 })
+        end
+    end,
     dex_entry_key = "lfc_dex_blacephalon",
     generate_ui = Wormhole.LFC_Util.generate_pokedex_entry_ui
 }

@@ -41,8 +41,8 @@ SMODS.Sound({
 
 SMODS.Joker({
     key = "lfc_fw",
-    pos = { x = 0, y = 2 },
-    soul_pos = { x = 0, y = 3 },
+    pos = { x = 4, y = 1 },
+    soul_pos = { x = 5, y = 1 },
     rarity = 4,
     cost = 20,
     blueprint_compat = true,
@@ -62,7 +62,7 @@ SMODS.Joker({
         --"generation"
     },
     loc_vars = function(self, info_queue, card)
-        local hint1, hint2 = "..."," "
+        local hint1, hint2 = "...", " "
         if card.ability.extra.secret == 1 then
             hint1 = localize("k_lfc_secret1")
             hint2 = localize("k_lfc_secret2")
@@ -98,8 +98,8 @@ SMODS.Joker({
     calculate = function(self, card, context)
         local cae = card.ability.extra
         if context.individual and context.cardarea == G.play and not context.end_of_round then
-			if SMODS.has_enhancement(context.other_card, "m_bonus") then
-                return{
+            if SMODS.has_enhancement(context.other_card, "m_bonus") then
+                return {
                     xmult = cae.xmult,
                     remove_default_message = true,
                     message = localize { type = "variable", key = "a_xmult", vars = { cae.xmult } },
