@@ -88,11 +88,11 @@ function SpaceTart(args)
 			}
 			local res = {}
 			if self.loc_vars and type(self.loc_vars) == "function" then
-				res = self:loc_vars(info_queue, card, card.ability.extra.tart_cfg, specific_vars.is_boosted) or {}
+				res = self:loc_vars(info_queue, card, card.ability.extra.tart_cfg, specific_vars.boost_count) or {}
 				target.vars = res.vars or target.vars
 				target.key = res.key or target.key
-				if specific_vars.is_boosted ~= nil then
-					target.key = self.key .. "_" .. (specific_vars.is_boosted and "boosted" or "regular")
+				if specific_vars.boost_count ~= nil then
+					target.key = self.key .. "_" .. ((specific_vars.boost_count > 0) and "boosted" .. specific_vars.boost_count or "regular")
 				end
 				target.set = res.set or target.set
 				target.scale = res.scale
@@ -221,7 +221,6 @@ function generate_card_ui(
 					end
 				end
 				
-                local is_boosted = boost_count > 0
 				local amt = nil
 				for k, num in pairs(map) do
 					if k == v.center_key then
@@ -238,7 +237,7 @@ function generate_card_ui(
 				generate_card_ui(
 					G.P_CENTERS[v.center_key],
 					ret,
-					{ stacks = amt, is_boosted = is_boosted, tart_cfg = v.config }
+					{ stacks = amt, boost_count = boost_count, tart_cfg = v.config }
 				)
 			end
 		end
@@ -298,8 +297,8 @@ SpaceTart({
 	foil_pos = { x = 1, y = 0 },
 	config = {
 		reg = 1.5,
-		boostedLevel1 = 2.5,
-		boostedLevel2 = 4
+		boosted1 = 2.5,
+		boosted2 = 4
 	},
 	calculates = {
 		-- Default ability
@@ -315,7 +314,7 @@ SpaceTart({
 		function(card, tart_config, context, boost_count)
 			if context.joker_main then
 				return {
-					xmult = tart_config.boostedLevel1
+					xmult = tart_config.boosted1
 				}
 			end
 		end,
@@ -324,15 +323,15 @@ SpaceTart({
 		function(card, tart_config, context)
 			if context.joker_main then
 				return {
-					xmult = tart_config.boostedLevel2
+					xmult = tart_config.boosted2
 				}
 			end
 		end
 	},
-	loc_vars = function(self, info_queue, card, tart_config, is_boosted)
+	loc_vars = function(self, info_queue, card, tart_config, boost_count)
 		return {
 			vars = {
-				is_boosted and tart_config.boosted or tart_config.reg,
+				boost_count and (tart_config["boosted" .. boost_count] or tart_config.boosted) or tart_config.reg,
 			},
 		}
 	end,
