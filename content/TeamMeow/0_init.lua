@@ -102,6 +102,8 @@ PotatoPatchUtils.Developer({
 	colour = HEX("FFDE3B"),
 	loc = true,
 	team = "meow",
+	atlas = "worm_meowCredits",
+	pos = { x = 5, y = 0 }
 })
 
 local silverautumn_colour = SMODS.Gradient({
