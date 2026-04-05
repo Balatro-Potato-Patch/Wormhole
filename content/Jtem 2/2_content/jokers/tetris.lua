@@ -2,7 +2,7 @@
 
 -- This is still ridiculously incomplete, will work more on this later
 if true then
-	return
+	-- return
 end
 
 JtemTGM = {}
@@ -144,7 +144,7 @@ end
 -- A board is a 2D array of values, a character (corresponding to the piece type it came from) means its occupied
 -- if it is 0 then it is not occupied
 local BOARD_W, BOARD_H = 10, 20 -- Additional 5 blocks out of view, all pieces start at the 20th cell
-local BLOCK_W, BLOCK_H = 2, 2
+local BLOCK_W, BLOCK_H = 4, 4
 -- Clearance
 local BOARD_HCLEARANCE = -5
 -- Max level
@@ -394,7 +394,7 @@ function JtemTGM.ResetPlayerState()
 		level = 0,          -- Current level
 		old_level = 0,      -- Last level
 		score = 0,          -- Current score
-		internal_grade = 0, -- Current grade
+		grade = 0,          -- Current grade
 		visual_grade = "9", -- Visual grade
 		combo = 0,          -- Current combo
 		time = 0,           -- Current time spent wasting your life on Tetris
@@ -443,6 +443,8 @@ function JtemTGM.ResetPlayerState()
 		justPressedRightRot = false,
 		olddir = 0,
 		oldvdir = 0,
+
+		dt = 0,
 	}
 	return state
 end
@@ -518,6 +520,7 @@ function JtemTGM.ChangeState(game, newstate)
 				if add then
 					line_count = line_count + 1
 					game.clear_cols[y] = true
+					print("hi please clear")
 					for x = 0, BOARD_W - 1 do
 						col[x] = 'C'
 						if game.lightup[y] and game.lightup[y][x] then
@@ -645,10 +648,14 @@ function JtemTGM.PieceOccupied(board, x, y)
 end
 
 function JtemTGM.ValidMove(board, x, y, piece)
+	x = math.floor(x); y = math.floor(y);
+
 	if JtemTGM.ValidPiece(piece) and JtemTGM.PieceOccupied(board, x, y) then return false end
 
 	if x > BOARD_W - 1 and JtemTGM.ValidPiece(piece) then return false end
-	if y > BOARD_H - 1 and JtemTGM.ValidPiece(piece) then return false end
+	if y > BOARD_H - 1 and JtemTGM.ValidPiece(piece) then
+		return false
+	end
 	if x < 0 and JtemTGM.ValidPiece(piece) then return false end
 	if y < BOARD_HCLEARANCE and JtemTGM.ValidPiece(piece) then return false end
 
@@ -659,8 +666,8 @@ function JtemTGM.CreatePieceWithOffset(current, offs)
 	local t = {}
 	t.rotation = current.rotation
 	t.piece = current.piece
-	t.x = current.x + offs.x
-	t.y = current.y + offs.y
+	t.x = math.floor(current.x + offs.x)
+	t.y = math.floor(current.y + offs.y)
 	return t
 end
 
@@ -677,12 +684,13 @@ function JtemTGM.CanPlacePiece(current, board)
 		if col == nil then goto continue end
 		for x = 1, 4 do
 			local cell = piece[y][x]
-			if cell == nil then goto continue end
-			if cell == 0 then goto continue end -- nope!
-			if not JtemTGM.ValidMove(board, current.x + (x - 1), current.y + (y - 1), current.piece) then
+			if cell == nil then goto xcontinue end
+			if cell == 0 then goto xcontinue end -- nope!
+			if not JtemTGM.ValidMove(board, math.floor(current.x + (x - 1)), math.floor(current.y + (y - 1)), current.piece) then
 				-- NOPE!
 				return false
 			end
+			::xcontinue::
 		end
 		::continue::
 	end
@@ -700,7 +708,9 @@ function JtemTGM.MoveInGrid(current, step, squares, board, instant)
 			current.x = current.x + step.x
 			current.y = current.y + step.y
 			if instant then
-				JtemTGM.MoveInGrid(current, { x = 0, y = 1 }, BOARD_H - BOARD_HCLEARANCE, board)
+				current.x = math.floor(current.x)
+				current.y = math.floor(current.y)
+				JtemTGM.MoveInGrid(current, { x = 0, y = 1 }, BOARD_H * 2, board)
 			end
 		else
 			break
@@ -742,11 +752,12 @@ function JtemTGM.CheckTopout(current, board)
 		for x = 1, 4 do
 			local cell = piece[y][x]
 			if cell == nil then return false end
-			if cell == 0 then goto continue end -- nope!
+			if cell == 0 then goto xcontinue end -- nope!
 			if not JtemTGM.ValidMove(board, current.x + (x - 1), current.y + (y - 1), current.piece) then
 				-- NOPE!
 				return false
 			end
+			::xcontinue::
 		end
 		::continue::
 	end
@@ -810,12 +821,12 @@ function JtemTGM.CheckRotation(current, inc, board)
 						-- floorkick if vertical
 					elseif (current.rotation == 2 or current.rotation == 4) and not current.floorkick then
 						if JtemTGM.CanPlacePiece(JtemTGM.CreatePieceWithOffset(current, { x = 0, y = -1 }), board) then
-							current.y = current.y - 1
+							current.y = math.floor(current.y) - 1
 							current.floorkick = 1
 							return true
 						end
 						if JtemTGM.CanPlacePiece(JtemTGM.CreatePieceWithOffset(current, { x = 0, y = -2 }), board) then
-							current.y = current.y - 2
+							current.y = math.floor(current.y) - 2
 							current.floorkick = 1
 							return true
 						end
@@ -833,7 +844,7 @@ function JtemTGM.CheckRotation(current, inc, board)
 					end
 					-- T piece specifics
 					if current.piece == "T" and current.rotation == 1 and not current.floorkick and JtemTGM.CanPlacePiece(JtemTGM.CreatePieceWithOffset(current, { x = 0, y = -1 }), board) then
-						current.y = current.y - 1
+						current.y = math.floor(current.y) - 1
 						current.floorkick = 1
 						return true
 					end
@@ -860,10 +871,10 @@ function JtemTGM.PlacePiece(current, board, lightup)
 			local cell = piece[y][x]
 			if cell == nil then goto ycontinue end
 			if cell == 0 then goto ycontinue end -- nope!
-			board[current.y + (y - 1)][current.x + (x - 1)] = current.piece
+			board[math.floor(current.y) + (y - 1)][math.floor(current.x) + (x - 1)] = current.piece
 			if lightup then
-				lightup[current.y + (y - 1)] = lightup[current.y + (y - 1)] or {}
-				lightup[current.y + (y - 1)][current.x + (x - 1)] = true
+				lightup[math.floor(current.y) + (y - 1)] = lightup[math.floor(current.y) + (y - 1)] or {}
+				lightup[math.floor(current.y) + (y - 1)][math.floor(current.x) + (x - 1)] = true
 			end
 			::ycontinue::
 		end
@@ -904,17 +915,18 @@ function JtemTGM.HandleMove(game)
 
 	if dir > 0 then
 		if (not (game.olddir > 0)) or game.das_time > game.das_delay then
-			JtemTGM.CheckMoveX(game.current_piece, -1, game.board)
+			JtemTGM.CheckMoveX(game.current_piece, 1, game.board)
 		end
 	elseif dir < 0 then
 		if (not (game.olddir < 0)) or game.das_time > game.das_delay then
-			JtemTGM.CheckMoveX(game.current_piece, 1, game.board)
+			JtemTGM.CheckMoveX(game.current_piece, -1, game.board)
 		end
 	else
 		game.das_time = 0
 	end
 
 	if vdir > 0 then
+		game.current_piece.y = math.floor(game.current_piece.y)
 		local ret = JtemTGM.MoveInGrid(game.current_piece, { x = 0, y = 1 }, 1, game.board)
 		if not ret then
 			if game.state < STATE_LOCKING then
@@ -928,6 +940,7 @@ function JtemTGM.HandleMove(game)
 
 	-- Sonic Drop > Hard Drop btw
 	if vdir < 0 and game.oldvdir >= 0 then
+		game.current_piece.y = math.floor(game.current_piece.y)
 		JtemTGM.MoveInGrid(game.current_piece, { x = 0, y = 1 }, 1, game.board, true)
 		if game.state < STATE_LOCKING then
 			JtemTGM.ChangeState(game, STATE_LOCKING)
@@ -943,6 +956,8 @@ function JtemTGM.HandleMove(game)
 
 	game.olddir = dir
 	game.oldvdir = vdir
+	game.justPressedLeftRot = love.keyboard.isDown("z")
+	game.justPressedRightRot = love.keyboard.isDown("x")
 end
 
 function JtemTGM.HandleGame(game)
@@ -1010,6 +1025,31 @@ function JtemTGM.HandleGame(game)
 	end
 end
 
+JtemTGM.targetTPS = 1.0 / 60
+function JtemTGM.UpdateGame(game, dt)
+	if dt == 0 then return end
+	game.dt = game.dt + dt
+	if game.dt >= JtemTGM.targetTPS then
+		JtemTGM.HandleGame(game)
+		game.dt = game.dt - JtemTGM.targetTPS
+	end
+end
+
+function JtemTGM.DrawPiece(piece, x, y, piece_w, piece_h, rotation)
+	love.graphics.push()
+	love.graphics.translate(x * piece_w, y * piece_h)
+	local p = JtemTGM.pieces[piece][rotation]
+	love.graphics.setColor(JtemTGM.pieces[piece].color)
+	for fy = 0, 3 do
+		for fx = 0, 3 do
+			if p[fy + 1][fx + 1] == 1 then
+				love.graphics.rectangle("fill", fx * piece_w, fy * piece_h, piece_w, piece_h)
+			end
+		end
+	end
+	love.graphics.pop()
+end
+
 ---@param canvas love.Canvas|table
 ---@param game table
 function JtemTGM.HandleDraw(canvas, game)
@@ -1018,7 +1058,8 @@ function JtemTGM.HandleDraw(canvas, game)
 	love.graphics.origin()
 	love.graphics.setCanvas(canvas)
 
-	love.graphics.translate(0, -BOARD_HCLEARANCE * BLOCK_H)
+	love.graphics.translate(0, 0)
+	love.graphics.clear()
 
 	-- draw the current board first
 	for y = BOARD_HCLEARANCE, BOARD_H - 1 do
@@ -1044,8 +1085,15 @@ function JtemTGM.HandleDraw(canvas, game)
 		::continue::
 	end
 
+	-- draw the piece being dealt
+	local current = game.current_piece
+	if current and current.piece then
+		JtemTGM.DrawPiece(current.piece, current.x, current.y, BLOCK_W, BLOCK_H,
+			current.rotation)
+	end
+
 	love.graphics.pop()
-	love.graphics.setCanvas(oldcanvas)
+	love.graphics.setCanvas({ oldcanvas, stencil = true })
 end
 
 -- Here's the actual Joker definition
@@ -1059,7 +1107,7 @@ SMODS.Joker {
 	rarity = 2,
 	cost = 8,
 
-	atlas = "jokers",
+	-- atlas = "jokers",
 	pos = { x = 0, y = 0 },
 
 	attributes = {
@@ -1071,12 +1119,37 @@ SMODS.Joker {
 
 	update = function(self, card, dt)
 		if next(card.ability.extra.game_state) then
-			JtemTGM.HandleGame(card.ability.extra.game_state)
+			JtemTGM.UpdateGame(card.ability.extra.game_state, dt)
 		end
+	end,
+
+	loc_vars = function(self, info_queue, card)
+		return {
+			vars = { ((card.ability.extra.game_state.level or 0) / 100) + 1 }
+		}
+	end,
+
+	set_sprites = function(self, card, front)
+		card.jtem2_tetris_canvas = SMODS.CanvasSprite { canvasScale = 1 }
 	end,
 
 	add_to_deck = function(self, card, from_debuff)
 		if from_debuff then return end
 		card.ability.extra.game_state = JtemTGM.ResetPlayerState()
+		card.ability.extra.game_state.state = STATE_READY
 	end
+}
+
+SMODS.DrawStep {
+	key = "jtem2_tetris_draw",
+	order = 9,
+	func = function(card, layer)
+		if card.config.center_key == "j_worm_jtem2_tetris" and card.jtem2_tetris_canvas and next(card.ability.extra.game_state or {}) then
+			JtemTGM.HandleDraw(card.jtem2_tetris_canvas.canvas, card.ability.extra.game_state)
+			---@type balatro.Sprite
+			local spr = card.jtem2_tetris_canvas
+			spr:draw_shader('dissolve', nil, nil, nil, card.children.center)
+		end
+	end,
+	conditions = { vortex = false, facing = 'front' },
 }
