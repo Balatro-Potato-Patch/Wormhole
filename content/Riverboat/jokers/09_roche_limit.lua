@@ -25,7 +25,7 @@ SMODS.Joker {
         if context.end_of_round and context.main_eval and not context.blueprint then
             local score_pct = (G.GAME.chips / G.GAME.blind.chips) * 100
             if score_pct > card.ability.extra.percentage then
-                print("nice job")
+                -- print("nice job")
                 local planece = {}
                 for _, v in ipairs(G.consumeables.cards) do
                     if v.ability.set == "Planet" then planece[#planece + 1] = v end
