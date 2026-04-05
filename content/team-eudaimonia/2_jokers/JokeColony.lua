@@ -342,9 +342,7 @@ SMODS.DrawStep {
 }
 SMODS.draw_ignore_keys.worm_jokecolony_button = true
 
-local custom_card_areas_ref = SMODS.current_mod.custom_card_areas
-SMODS.current_mod.custom_card_areas = function(game) -- game is the same as G
-  custom_card_areas_ref(game)  
+SMODS.current_mod.custom_card_areas = function(game) -- game is the same as G 
   game.worm_colony = CardArea(
         4.75,
         2,
