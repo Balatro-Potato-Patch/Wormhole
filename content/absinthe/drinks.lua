@@ -337,37 +337,11 @@ SMODS.Consumable { -- Hubble Trouble
             card:abs_refill_drink()
         end
 
-        if context.after and card.ability.drink_values.filled and card.ability.drink_values.primed and not context.repetition then
-            G.E_MANAGER:add_event(Event({
-                trigger = 'before',
-                delay = 0.0,
-                func = function()
-                    if context.scoring_name and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
-                        local _planet = nil
-                        for k, v in pairs(G.P_CENTER_POOLS.Planet) do
-                            if v.config.hand_type == context.scoring_name then
-                                _planet = v.key
-                            end
-                        end
-                        if _planet then
-                            --SMODS.add_card({ key = _planet })
-                            G.E_MANAGER:add_event(Event({
-                                func = function()
-                                    local planet_card = SMODS.create_card({ key = _planet })
-                                    planet_card.sell_cost = 0
-                                    G.consumeables:emplace(planet_card)
-                                    return true
-                                end
-                            }))
-                            SMODS.calculate_effect(
-                                { message = localize('k_plus_planet'), colour = G.C.SECONDARY_SET.Planet }, card)
-                            card:abs_empty_drink()
-                        end
-                        G.GAME.consumeable_buffer = 0
-                    end
-                    return true
-                end
-            }))
+        if context.before and card.ability.drink_values.filled and card.ability.drink_values.primed and not context.repetition then
+            local text, _ = G.FUNCS.get_poker_hand_info(G.play.cards)
+            SMODS.calculate_effect(
+                { level_up = true, level_up_hand = text }, card)
+            card:abs_empty_drink()
         end
     end,
     use = function(self, card, area, copier)
@@ -545,10 +519,10 @@ SMODS.Consumable { -- Meteor Sour
         return { key = key, vars = { card.ability.extra.hands, localize(Wormhole.Absinthe.get_most_played_hand(), 'poker_hands'), card.ability.extra.enh_discarded, card.ability.extra.goal } }
     end,
     calculate = function(self, card, context)
-        if context.before and context.scoring_name == Wormhole.Absinthe.get_most_played_hand() and card.ability.drink_values.filled and card.ability.drink_values.primed then
+        if context.after and G.GAME.hands[context.scoring_name].played >= G.GAME.hands[Wormhole.Absinthe.get_most_played_hand()].played and card.ability.drink_values.filled and card.ability.drink_values.primed then
             G.E_MANAGER:add_event(Event({
                 func = function()
-                    ease_hands_played(card.ability.extra.hands)
+                    ease_hands_played(card.ability.extra.hands, true)
                     SMODS.calculate_effect( { message = localize { type = 'variable', key = 'a_hands', vars = { card.ability.extra.hands } }, colour = G.C.BLUE }, card)
                     card:abs_empty_drink()
                     return true;
