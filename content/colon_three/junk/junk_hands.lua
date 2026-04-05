@@ -59,8 +59,10 @@ function CardArea:parse_highlighted(...)
         G.GAME.worm_c3_junk_stats.x_hand_stats = G.GAME.worm_c3_junk_stats.x_hand_stats or 1.5
         local junk_hands_mult = G.GAME.worm_c3_junk_stats.x_hand_stats ^ junks
         for name, parameter in pairs(SMODS.Scoring_Parameters) do
-            parameter.current = parameter.current * junk_hands_mult
-            update_hand_text({immediate = true, nopulse = nil, delay = 0}, {[name] = parameter.current})
+            if name == "chips" or name == "mult" then
+                parameter.current = parameter.current * junk_hands_mult
+                update_hand_text({immediate = true, nopulse = nil, delay = 0}, {[name] = parameter.current})
+            end
         end
     end
     return ret
