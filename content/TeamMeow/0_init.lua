@@ -142,3 +142,7 @@ PotatoPatchUtils.Developer({
 	pos = { x = 0, y = 0 }
 })
 
+SMODS.Attribute({
+	key = "cat",
+	keys = {"j_lucky_cat"}
+})
