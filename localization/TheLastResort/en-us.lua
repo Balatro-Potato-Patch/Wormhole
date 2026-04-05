@@ -59,6 +59,7 @@ local CONSTELLATIONS = {
 			"Create up to {C:attention}#1#{} selected",
 			"{C:dark_edition}negative {V:1}Constellation{} cards",
 		},
+	},
 	c_worm_tlr_const_perseus_t1 = {
 		name = "Perseus",
 		text = {
@@ -84,7 +85,6 @@ local CONSTELLATIONS = {
 		name = "Perseus",
 		text = {
 			"Disable current boss blind",
-			}
 		}
 	},
 	c_worm_tlr_const_serpens_t1 = {
@@ -244,10 +244,23 @@ local CONSTELLATIONS = {
 		}
 	}
 }
+
+print("CONSTELLATIONS")
+print(CONSTELLATIONS.c_worm_tlr_const_perseus_t1)
+print(CONSTELLATIONS.c_worm_tlr_const_perseus_t2)
+print(CONSTELLATIONS.c_worm_tlr_const_perseus_t3)
+print(CONSTELLATIONS.c_worm_tlr_const_perseus_t4)
+
 for key, obj in pairs(CONSTELLATIONS) do
 	local add = "{s:0.7,E:2}" .. constellation_text[string.sub(key, -2)]
 	obj.name = {obj.name, add}
 end
+
+print("CONSTELLATIONS")
+print(CONSTELLATIONS.c_worm_tlr_const_perseus_t1)
+print(CONSTELLATIONS.c_worm_tlr_const_perseus_t2)
+print(CONSTELLATIONS.c_worm_tlr_const_perseus_t3)
+print(CONSTELLATIONS.c_worm_tlr_const_perseus_t4)
 
 return {
 	descriptions = {
