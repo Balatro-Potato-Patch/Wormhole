@@ -684,7 +684,7 @@ function Game:update(dt, ...)
         for k, v in ipairs(G.consumeables.cards) do
             if v.ability and v.ability.set == "worm_meow_Spacetart" and not G.GAME.shown_tart_poppup then
                 G.GAME.shown_tart_poppup = true
-                PotatoPatchUtils.INFO_MENU.create_menu({ menu_type = "worm_meow_tarts", vars = { G.GAME.max_foil_slots } })
+                Wormhole.TEAM_MEOW.open_spacetart_info_menu()
             end
         end
     end
