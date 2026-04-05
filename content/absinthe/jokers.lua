@@ -173,7 +173,7 @@ SMODS.Joker {
     rarity = 2,
     cost = 6,
     atlas = 'worm_abs_jokers',
-    pos = { x = 4, y = 0 },
+    pos = { x = 5, y = 0 },
     ppu_coder = { 'pi_cubed' },
     ppu_artist = { 'iwas_nevergood'},
     ppu_team = { 'absinthe' },
