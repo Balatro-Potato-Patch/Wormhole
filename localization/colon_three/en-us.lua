@@ -36,6 +36,15 @@ return {
                     "{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)",
                 }
             },
+            j_worm_event_horizon = {
+                name = "Event Horizon",
+                text = {
+                    "This Joker interrupts all",
+                    "hand {C:attention}level-ups{} and redirects",
+                    "them to the {C:attention}next played{} hand",
+                    "{C:inactive}(Currently {C:attention}#1#{C:inactive} levels stored){}"
+                }
+            },
         },
         Enhanced = {
             m_worm_junk_card = {

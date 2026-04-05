@@ -85,6 +85,7 @@ for i, v in pairs({
     "dyson_sphere",
     "wall_e",
     "nyan_cat",
+    "event_horizon",
 
     "decrepit_deck",
 
