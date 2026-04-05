@@ -411,6 +411,25 @@ return {
             },
         },
         PotatoPatch = {
+            PotatoPatchDev_pangaea47 = {
+                name = 'pangaea47',
+                text = { {
+                    'Nothing much to say about myself, but you can',
+                    'call me {E:2,C:planet}Argel{} instead of Pangaea. I\'m a spider.',
+                }, {
+                    'I\'m also a spriter who is at fault for a lot of things,',
+                    'but mainly pulling up this absolute juggernaut of a team',
+                    'and I can\'t say how much I\'m thankful to everyone who',
+                    'worked on our {s:1.2,C:absinthe}pint{} of the Jam.',
+                    '{s:0.5,C:inactive}(big chance for something in the future involving us){}',
+                }, {
+                    'I\'ve also made the logo for this {C:edition,E:1}event{}, the logo for ', --(possibly redact this part if its not true i really do think the logo is awesome and it will be accepted :pleading_face:)
+                    'our team {C:absinthe,E:1}absinthe{}, and a bunch of sprites for our part.',
+                    'I show a lot of gratitude for being able to play our ',
+                    'droplet on this ocean of content, it really means a lot.',
+                }
+                }
+            },
             PotatoPatchDev_theAstra = {
                 name = 'theAstra',
                 text = { {

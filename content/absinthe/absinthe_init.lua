@@ -10,6 +10,8 @@ SMODS.Atlas {
 --#endregion
 
 --#region Team and Dev Objects
+loc_colour()
+G.ARGS.LOC_COLOURS.absinthe = HEX('5fd47e')
 
 PotatoPatchUtils.Team {
     name = 'absinthe',
@@ -19,9 +21,11 @@ PotatoPatchUtils.Team {
 PotatoPatchUtils.Developer {
     name = 'pangaea47',
     team = 'absinthe',
+    colour = HEX('e6fab8'),
     atlas = 'worm_abs_credits',
     pos = { x = 0, y = 0 },
-    soul_pos = { x = 1, y = 0 }
+    soul_pos = { x = 1, y = 0 },
+    loc = true
 }
 
 PotatoPatchUtils.Developer {
