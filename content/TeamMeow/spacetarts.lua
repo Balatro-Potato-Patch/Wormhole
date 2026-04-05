@@ -57,7 +57,6 @@ end
 
 Wormhole.TEAM_MEOW.tartInfo = {}
 local function SpaceTart(args)
-	local tart, tartPos, foilPos, regFunc, boostFunc, boostKey, config
 	local ex_table = {}
 	ex_table.tart = args.key
 	ex_table.tart_cfg = args.config
@@ -170,7 +169,7 @@ local function SpaceTart(args)
 	})
 	Wormhole.TEAM_MEOW.tartInfo[args.key] = {
 		boosts = args.boosted_jokers,
-		pos = foilPos,
+		pos = args.foil_pos,
 		regular_func = args.calculate,
 		boosted_func = args.boosted_calculate,
 	}
