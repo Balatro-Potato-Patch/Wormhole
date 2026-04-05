@@ -16,7 +16,7 @@ PotatoPatchUtils.Developer {
     colour = HEX("fccf50"),
     loc = true,
     team = 'polar_skull',
-    atlas = 'polarskull_credits',
+    atlas = 'worm_polarskull_credits',
     pos = { x = 0, y = 0 }
 }
 PotatoPatchUtils.Developer {
@@ -24,7 +24,7 @@ PotatoPatchUtils.Developer {
     colour = HEX("e9b524"),
     loc = true,
     team = 'polar_skull',
-    atlas = 'polarskull_credits',
+    atlas = 'worm_polarskull_credits',
     pos = { x = 1, y = 0 }
 }
 PotatoPatchUtils.Developer {
@@ -32,7 +32,7 @@ PotatoPatchUtils.Developer {
     colour = HEX("ffffff"),
     loc = true,
     team = 'polar_skull',
-    atlas = 'polarskull_credits',
+    atlas = 'worm_polarskull_credits',
     pos = { x = 2, y = 0 }
 }
 PotatoPatchUtils.Developer {
@@ -40,7 +40,7 @@ PotatoPatchUtils.Developer {
     colour = HEX("ffffff"),
     loc = true,
     team = 'polar_skull',
-    atlas = 'polarskull_credits',
+    atlas = 'worm_polarskull_credits',
     pos = { x = 3, y = 0 }
 }
 PotatoPatchUtils.Developer {
@@ -48,7 +48,7 @@ PotatoPatchUtils.Developer {
     colour = HEX("ffffff"),
     loc = true,
     team = 'polar_skull',
-    atlas = 'polarskull_credits',
+    atlas = 'worm_polarskull_credits',
     pos = { x = 4, y = 0 }
 }
 PotatoPatchUtils.Developer {
@@ -56,6 +56,6 @@ PotatoPatchUtils.Developer {
     colour = HEX("ffffff"),
     loc = true,
     team = 'polar_skull',
-    atlas = 'polarskull_credits',
+    atlas = 'worm_polarskull_credits',
     pos = { x = 5, y = 0 }
 }
