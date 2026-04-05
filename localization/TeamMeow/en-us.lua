@@ -59,7 +59,7 @@ return {
 					{
 						"Developer of {C:mult}Alloy{}, {C:chips}JoJo Mod{},",
 						"and {C:attention}Photon Mod Manager{}",
-						"{C:inactive}Please use Photon",
+						"{C:inactive}Please use Photon i beg, it even has a website",
 						"{C:attention}Meowww nya nyan meoww meowww{} {C:inactive}(meow){}"
 					}
 				},
