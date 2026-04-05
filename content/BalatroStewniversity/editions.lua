@@ -8,7 +8,7 @@ SMODS.Edition{
         name = 'Stellar',
         text = {'{C:green}#1# in #2#{} chance to',
         'upgrade level of',
-        'played {c:attention}poker hand{}'
+        'played {C:attention}poker hand{}'
         },
         label = 'Stellar'
     },
