@@ -3,6 +3,7 @@ Wormhole = SMODS.current_mod
 if PotatoPatchUtils then
     local file_blacklist = {
         -- Format entries as `['filename.txt'] = true`
+		['loadlogo.lua'] = true
     }
 
     PotatoPatchUtils.load_files(Wormhole.path .. '/content', file_blacklist)
