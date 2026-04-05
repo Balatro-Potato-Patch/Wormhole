@@ -1,4 +1,4 @@
---#region Type and Boosters
+--#region Objects
 
 SMODS.ConsumableType {
     key = 'abs_drinks',
@@ -7,6 +7,13 @@ SMODS.ConsumableType {
     secondary_colour = HEX('f5c242'),
     collection_rows = { 5, 4 },
     shop_rate = 0.0
+}
+
+SMODS.Atlas {
+    key = 'abs_drinks',
+    path = 'absinthe/abs_drinks.png',
+    px = 71,
+    py = 95
 }
 
 SMODS.Attribute {
@@ -394,13 +401,14 @@ SMODS.Consumable { -- Moonshine
 SMODS.Consumable { -- Pina Solada
     set = 'abs_drinks',
     key = 'abs_pina_solada',
+    atlas = 'abs_drinks',
     ppu_coder = { 'iwas_nevergood' },
     ppu_team = { 'absinthe' },
-    pos = { x = 9, y = 1 },
+    pos = { x = 0, y = 0 },
     config = {
         drink_values = {
-            filled_pos = { x = 9, y = 1 },
-            empty_pos = { x = 7, y = 1 },
+            filled_pos = { x = 0, y = 0 },
+            empty_pos = { x = 1, y = 0 },
             filled = true,
             visibly_filled = true,
             primed = false
@@ -464,6 +472,7 @@ SMODS.Consumable { -- Pina Solada
 SMODS.Consumable { -- Meteor Sour
     set = 'abs_drinks',
     key = 'abs_meteor_sour',
+    atlas = 'abs_drinks',
     ppu_coder = { 'theAstra' },
     ppu_team = { 'absinthe' },
     pos = { x = 0, y = 2 },
@@ -529,13 +538,14 @@ SMODS.Consumable { -- Meteor Sour
 SMODS.Consumable { -- Cosmospolitan
     set = 'abs_drinks',
     key = 'abs_cosmospolitan',
+    atlas = 'abs_drinks',
     ppu_coder = { 'theAstra' },
     ppu_team = { 'absinthe' },
-    pos = { x = 4, y = 2 },
+    pos = { x = 5, y = 2 },
     config = {
         drink_values = {
-            filled_pos = { x = 4, y = 2 },
-            empty_pos = { x = 5, y = 2 },
+            filled_pos = { x = 5, y = 2 },
+            empty_pos = { x = 6, y = 2 },
             filled = true,
             visibly_filled = true,
             primed = false
