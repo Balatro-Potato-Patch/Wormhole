@@ -135,9 +135,10 @@ function Wormhole.COLON_THREE.junk_can_use(func)
         end
 
         local cleanup_vals = { [cleanup_num] = true }
-        for i = 1, math.min ( #SMODS.find_card("j_worm_wall_e"), cleanup_num - 1 ) do
-            cleanup_vals[cleanup_num-i] = true
-        end
+        -- for i = 1, math.min ( #SMODS.find_card("j_worm_wall_e"), cleanup_num - 1 ) do
+        --     cleanup_vals[cleanup_num-i] = true
+        -- end
+        SMODS.calculate_context { worm_c3_cleanup_cost = true, valid_costs = cleanup_vals }
 
         local will_cleanup = G.hand and cleanup_vals[#G.hand.highlighted] and #G.hand.highlighted == junk
         local will_convert = G.hand and #G.hand.highlighted == junk_num and junk == 0

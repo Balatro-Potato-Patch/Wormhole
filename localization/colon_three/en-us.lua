@@ -21,8 +21,8 @@ return {
             j_worm_wall_e = {
                 name = "WALL-E",
                 text = {
-                    "You may pay {C:attention}Clean-up{} costs",
-                    "by selecting {C:attention}one{} fewer card",
+                    "You may pay {C:attention}Clean-up{} costs by",
+                    "selecting up to {C:attention}one{} fewer card",
                     "{C:inactive}(Minimum of 1 card)"
                 }
             },
