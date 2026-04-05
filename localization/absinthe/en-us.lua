@@ -406,7 +406,7 @@ return {
                 name = 'On The House',
                 text = {
                     '{C:abs_drinks}Drinks{} in the {C:attention}Shop',
-                    'are not {C:money}free'
+                    'are {C:money}free'
                 }
             },
         },
