@@ -1,26 +1,34 @@
 local function emplace_stone_cards()
     if #SMODS.find_card("j_worm_lfc_stakataka") > 0 then
-        for _, other_card in ipairs(G.playing_cards or {}) do
+        local stones = {}
+        -- has to be done with pairs because ipairs fails to iterate properly here, thanks localthunk
+        for i, other_card in pairs(G.hand and G.hand.cards or {}) do
             if
-                other_card.area == G.hand                                                                                                -- fucking awful hack
-                and SMODS.has_enhancement(other_card, "m_stone")
+                SMODS.has_enhancement(other_card, "m_stone")
                 and not (other_card.ability and (other_card.ability.entr_marked_bypass or other_card.ability.worm_lfc_stakataka_bypass)) -- this shouldn't really be needed here but just in case
                 and not other_card.highlighted
             then
-                G.hand:remove_card(other_card)
-                G.E_MANAGER:add_event(Event({
-                    func = function()
-                        other_card:highlight()
-                        return true
-                    end
-                }))
-                G.play:emplace(other_card)
+                stones[#stones+1] = {idx = i, card = other_card}
             end
+        end
+        -- ensure the order is the same as the hand order
+        table.sort(stones, function(a, b) return a.idx < b.idx end)
+        -- emplace everything
+        for _, stone in ipairs(stones) do
+            G.hand:remove_card(stone.card)
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    stone.card:highlight()
+                    return true
+                end,
+            }))
+            G.play:emplace(stone.card)
         end
     end
 end
 
-if not (SMODS.Mods.Amulet or {}).can_load then
+-- hooks amulet's evaluate_play_info if amulet is installed, else hooks G.FUNCS.evaluate_play
+if (SMODS.Mods.Amulet or {}).can_load then
     local epi = evaluate_play_intro
     function evaluate_play_intro(...)
         emplace_stone_cards()
