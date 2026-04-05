@@ -9,6 +9,9 @@ return{
                 }
             }
         },
+        Joker = {
+            
+        },
         Other = {
             undiscovered_acme_gadget = {
                 name = 'Undiscovered',
