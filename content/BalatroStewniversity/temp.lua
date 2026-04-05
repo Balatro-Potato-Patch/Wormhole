@@ -1,4 +1,4 @@
-
+--[[
 SMODS.ScreenShader {
     key = "black_hole",
     path = "BalatroStewniversity/black_hole.fs",
@@ -8,4 +8,4 @@ SMODS.ScreenShader {
         }
     end
 }
-
+]]

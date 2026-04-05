@@ -2,7 +2,7 @@ SMODS.Edition{
     key = 'stellar',
     shader = false,
     config = {odds = 4},
-    in_shop = false,
+    in_shop = true,
     extra_cost = 2,
     loc_txt = {
         name = 'Stellar',
@@ -12,7 +12,7 @@ SMODS.Edition{
         },
         label = 'Stellar'
     },
-    weight = 5,
+    weight = 17,
 
     sound = { sound = "foil1", per = 1.2, vol = 0.4 },
     loc_vars = function(self, info_queue, card)
