@@ -11,6 +11,8 @@ SMODS.Joker {
     ppu_coder = { "notmario" },
     ppu_team = { ":3" },
 
+    perishable_compat = false,
+
     loc_vars = function(self, q, card)
         return { vars = { card.ability.extra.mult, card.ability.extra.mult_per } }
     end,
