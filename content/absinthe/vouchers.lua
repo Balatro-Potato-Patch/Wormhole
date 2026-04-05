@@ -12,23 +12,9 @@ SMODS.Voucher {
     ppu_coder = { 'theAstra' },
     ppu_team = { 'absinthe' },
     requires = {'v_worm_abs_star_tap'},
-    config = {
-        extra = {
-            chance = 1,
-            odds = 3
-        }
-    },
-    loc_vars = function(self, info_queue, card)
-        local num, denom = SMODS.get_probability_vars(card, card.ability.extra.chance, card.ability.extra.odds)
-        return { vars = { num, denom } }
-    end,
     calculate = function(self, card, context)
-        if context.end_of_round and context.main_eval then
-            for k, v in pairs(G.consumeables.cards) do
-                if v.ability.set == 'abs_drinks' and not v.ability.drink_values.filled and SMODS.pseudorandom_probability(card, 'abs_oth', card.ability.extra.chance, card.ability.extra.odds) then
-                    v:abs_refill_drink()
-                end
-            end
+        if context.modify_shop_card and context.card.ability.set == 'abs_drinks' then
+            context.card.cost = 0
         end
     end
 }

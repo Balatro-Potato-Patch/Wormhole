@@ -328,9 +328,8 @@ return {
             v_worm_abs_on_the_house = {
                 name = 'On The House',
                 text = {
-                    '{C:green}#1# in #2#{} chance to {C:attention}refill',
-                    'empty {C:abs_drinks}Drinks{} at',
-                    'the end of a round'
+                    '{C:abs_drinks}Drinks{} in the {C:attention}Shop',
+                    'are not {C:money}free'
                 }
             },
         },
