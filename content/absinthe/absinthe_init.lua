@@ -9,7 +9,6 @@ SMODS.Atlas {
 
 --#endregion
 
-
 --#region Team and Dev Objects
 
 PotatoPatchUtils.Team {
