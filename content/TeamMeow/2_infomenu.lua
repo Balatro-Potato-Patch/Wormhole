@@ -476,9 +476,12 @@ function Wormhole.TEAM_MEOW.create_spacetart_info_menu(args)
 	})
 end
 
-function Wormhole.TEAM_MEOW.open_spacetart_info_menu(menu_type)
+function Wormhole.TEAM_MEOW.open_spacetart_info_menu()
 	G.PROFILES[G.SETTINGS.profile].first_time_disable = G.PROFILES[G.SETTINGS.profile].first_time_disable or {}
-	if not G.PROFILES[G.SETTINGS.profile].first_time_disable[menu_type] then
-		Wormhole.TEAM_MEOW.create_spacetart_info_menu({ menu_type = menu_type, vars = { G.GAME.max_foil_slots or 7 } })
+	if not G.PROFILES[G.SETTINGS.profile].first_time_disable["worm_meow_tarts"] then
+		Wormhole.TEAM_MEOW.create_spacetart_info_menu({
+			menu_type = "worm_meow_tarts",
+			vars = { G.GAME.max_foil_slots or 7 },
+		})
 	end
 end
