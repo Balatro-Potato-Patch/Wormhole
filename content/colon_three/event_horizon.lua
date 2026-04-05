@@ -13,7 +13,7 @@ SMODS.Joker {
         return { vars = { card.ability.extra.levels } }
     end,
     calculate = function(self, card, context)
-        if context.before and card.ability.extra.levels > 0 then
+        if context.before and card.ability.extra.levels ~= 0 then
             SMODS.upgrade_poker_hands({
                 hands = context.scoring_name,
                 level_up = card.ability.extra.levels,
