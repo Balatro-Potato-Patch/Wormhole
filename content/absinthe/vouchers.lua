@@ -11,6 +11,7 @@ SMODS.Voucher {
     key = 'abs_on_the_house',
     ppu_coder = { 'theAstra' },
     ppu_team = { 'absinthe' },
+    requires = {'v_worm_abs_star_tap'},
     config = {
         extra = {
             chance = 1,
