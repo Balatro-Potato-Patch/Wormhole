@@ -159,19 +159,18 @@ local function draw_planet_arc(planet, system_uibox, planet_uibox)
 	)
 	love.graphics.translate(planet.center and planet.center.dx or 0, planet.center and planet.center.dy or 0)
 
-	love.graphics.setLineWidth(3 / G.TILESIZE / G.TILESCALE)
 	local current_opacity = 0.15
-	love.graphics.setColor(1, 1, 1, current_opacity)
 	local current_angle = dims.angle
+	love.graphics.setLineWidth(3 / G.TILESIZE / G.TILESCALE)
+	love.graphics.setColor(1, 1, 1, current_opacity)
 	love.graphics.arc("line", "open", 0, 0, dims.radius, math.rad(current_angle), math.rad(current_angle - 6), 25)
 	current_angle = current_angle - 6
+
 	local opacity_step = 0.015
 	local angle_step = 2
+	current_opacity = current_opacity - opacity_step
+
 	while current_opacity > 0 do
-		current_opacity = math.max(0, current_opacity - opacity_step)
-		if current_opacity == 0 then
-			break
-		end
 		love.graphics.setColor(1, 1, 1, current_opacity)
 		love.graphics.arc(
 			"line",
@@ -184,6 +183,7 @@ local function draw_planet_arc(planet, system_uibox, planet_uibox)
 			25
 		)
 		current_angle = current_angle - angle_step
+		current_opacity = current_opacity - opacity_step
 	end
 
 	love.graphics.pop()
@@ -217,7 +217,7 @@ local function update_system_render(card)
 		for k, v in pairs(planets) do
 			local can_show = (card.ability.extra.planets[k] or card.ability.extra.show_all)
 				or (card.area and card.area.config.collection and v.collection)
-			if can_show and not system.children[k] then
+			if can_show and not system.children[k] and not card.worm_solar_system_delay_update then
 				local dims = get_planet_dims(v)
 
 				local old_paused = G.SETTINGS.paused
@@ -373,6 +373,19 @@ SMODS.Joker({
 	config = {
 		extra = {
 			planets = {},
+
+			c_mercury = {
+				chips = 50,
+				mult = 12,
+			},
+			c_jupiter = {
+				xmult = 1.5,
+			},
+			c_neptune = {
+				hand_odds = 2,
+				play_odds = 2,
+				money = 1,
+			},
 		},
 	},
 
@@ -383,6 +396,28 @@ SMODS.Joker({
 		self.worm_jtem2_hide_solar_system = not self.worm_jtem2_hide_solar_system
 	end,
 	calculate = function(self, card, context)
+		-- + mercury: +12 mult or +50 chips
+		---- (extreme temperature changes)
+		-- venus: create tarot if score is on fire
+		---- (hottest planet in solar system)
+		-- earth: ?
+		-- mars: create splash when blind is selected
+		---- (all knows there's a lot of water on in right)
+		-- ceres: ?
+		---- (dwarf planet in main asteroid belt)
+		-- jupiter: X1.5 Mult
+		---- (biggest planet, red dot)
+		-- + saturn: adds 12 6 of diamonds as rocks
+		---- (famous circles, hexagon on top, diamond rains, 285 moons WHAT A HELL)
+		-- uranus: ?
+		---- (planet rotated 98 degrees)
+		-- + neptune: each played or held in hand diamond 1 in 2 chance to give 1 dollar
+		---- (diamond rains)
+		-- pluto: ?
+		--- (so it's planet or dwarf planet?)
+		--- eris: ?
+		---- (orbit significantly shifted from Sun)
+
 		if
 			context.using_consumeable
 			and context.consumeable.ability.set == "Planet"
@@ -390,10 +425,119 @@ SMODS.Joker({
 			and not card.ability.extra.planets[context.consumeable.config.center_key]
 		then
 			card.ability.extra.planets[context.consumeable.config.center_key] = true
+			card.worm_solar_system_delay_update = true
+
+			if context.consumeable.config.center_key == "c_saturn" then
+				G.E_MANAGER:add_event(Event({
+					func = function()
+						local center_x, center_y = context.consumeable.T.x, context.consumeable.T.y
+						local radius = G.CARD_H * 1.1
+						for i = 1, 12 do
+							local circle_part = 2 * math.pi / 12
+							local card_x, card_y =
+								math.cos(circle_part * i) * radius + center_x,
+								math.sin(circle_part * i) * radius + center_y
+							local playing_card = Card(
+								card_x,
+								card_y,
+								G.CARD_W,
+								G.CARD_H,
+								G.P_CARDS.D_6,
+								G.P_CENTERS.m_stone,
+								{ bypass_discovery_center = true }
+							)
+							playing_card:start_materialize()
+							local old_drag = playing_card.states.drag.can
+							playing_card.states.drag.can = false
+							G.E_MANAGER:add_event(Event({
+								trigger = "after",
+								delay = 0.1,
+								func = function()
+									playing_card.states.drag.can = old_drag
+									G.playing_card = (G.playing_card and G.playing_card + 1) or 1
+									playing_card:add_to_deck()
+									G.deck.config.card_limit = G.deck.config.card_limit + 1
+									table.insert(G.playing_cards, playing_card)
+									G.deck:emplace(playing_card)
+									return true
+								end,
+							}))
+						end
+						return true
+					end,
+				}))
+			end
+
+			G.E_MANAGER:add_event(Event({
+				blocking = false,
+				func = function()
+					card.worm_solar_system_delay_update = nil
+					return true
+				end,
+			}))
+
 			return {
 				message = localize({ type = "name_text", set = "Planet", key = context.consumeable.config.center_key }),
 				colour = G.C.SECONDARY_SET.Planet,
 			}
+		end
+
+		if context.joker_main then
+			local effects = {}
+			if card.ability.extra.planets.c_mercury then
+				if pseudorandom("worm_solar_system_mercury") < 0.5 then
+					table.insert(effects, {
+						chips = card.ability.extra.c_mercury.chips,
+					})
+				else
+					table.insert(effects, {
+						mult = card.ability.extra.c_mercury.mult,
+					})
+				end
+			end
+			if card.ability.extra.planets.c_jupiter then
+				table.insert(effects, {
+					xmult = card.ability.extra.c_jupiter.xmult,
+				})
+			end
+			return SMODS.merge_effects(effects)
+		end
+		if context.individual and context.cardarea == G.hand and not context.end_of_round then
+			if
+				context.other_card:is_suit("Diamonds", nil, true)
+				and SMODS.pseudorandom_probability(
+					card,
+					"worm_solar_system_neptune_hand",
+					1,
+					card.ability.extra.c_neptune.hand_odds
+				)
+			then
+				if context.other_card.debuff then
+					return {
+						message = localize("k_debuffed"),
+						colour = G.C.RED,
+					}
+				else
+					return {
+						dollars = card.ability.extra.c_neptune.money,
+					}
+				end
+			end
+		end
+		if context.individual and context.cardarea == G.play then
+			if
+				context.other_card:is_suit("Diamonds", nil, true)
+				and SMODS.pseudorandom_probability(
+					card,
+					"worm_solar_system_neptune_play",
+					1,
+					card.ability.extra.c_neptune.play_odds
+				)
+			then
+				return {
+					dollars = card.ability.extra.c_neptune.money,
+				}
+			end
 		end
 	end,
 
