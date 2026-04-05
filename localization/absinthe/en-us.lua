@@ -161,10 +161,10 @@ return {
                 name = 'Cosmospolitan',
                 text = {
                     {
-                        "When {C:attention}primed{} and",
-                        "{C:attention}setting Blind,{}",
-                        "create a random card",
-                        "from {V:1}#1#{}"
+                        "When {C:attention}primed{} and {C:attention}setting Blind{},",
+                        "create a random card from",
+                        "{V:1}#1#{}, then is {C:abs_drinks}drank{}",
+                        "{C:inactive}(Must have space!)",
                     },
                     {
                         "{C:abs_drinks}Refill{} by using",
@@ -184,10 +184,10 @@ return {
                     },
                     {
                         "{C:inactive,s:0.8}After being Refilled:{}",
-                        "When {C:attention}primed{} and",
-                        "{C:attention}setting Blind,{}",
-                        "create a random card",
-                        "from {V:1}#1#{}"
+                        "When {C:attention}primed{} and {C:attention}setting Blind{},",
+                        "create a random card from",
+                        "{V:1}#1#{}, then is {C:abs_drinks}drank{}",
+                        "{C:inactive}(Must have space!)",
                     }
                 }
             },
@@ -201,30 +201,24 @@ return {
                     "{C:inactive}(Must have space!)",
                 }
             },
-            j_worm_abs_put_it_on_my_tab = {
-                name = 'Put It On My Tab!',
+            j_worm_abs_seeing_stars = {
+                name = 'Seeing Stars',
                 text = {
                     "{C:attention}+#2#{} Consumable Slot",
                     "Earn {C:money}$#1#{} when a",
                     "{C:abs_drinks}Drink{} is {C:abs_drinks}Refilled{}",
                 }
             },
-            j_worm_abs_drinkmaxxing = {
-                name = {
-                    'Drinkmaxxing',
-                    "{C:inactive,s:0.8}someone give this joker a better name plz",
-                },
+            j_worm_abs_water_world = {
+                name = 'Water World',
                 text = {
                     "{C:attention}+#1#{} Consumable Slots",
                     "This Joker occupies",
                     "{C:red}#2#{} Joker Slots",
                 }
             },
-            j_worm_abs_heavyweight_joker = {
-                name = {
-                    'Heavyweight Joker',
-                    "{C:inactive,s:0.6}temp name?",
-                },
+            j_worm_abs_gravity_well = {
+                name = "Gravity Well",
                 text = {
                     "This Joker gains {C:chips}+#1#{} Chips",
                     "when a {C:abs_drinks}Drink{} is {C:abs_drinks}drank{}",
@@ -232,10 +226,7 @@ return {
                 }
             },
             j_worm_abs_binary_system = {
-                name = {
-                    'Binary System',
-                    "{C:inactive,s:0.6}temp name?",
-                },
+                name = 'Binary System',
                 text = {
                     "{C:abs_drinks}Refill{} and {C:attention}copy{} a random owned", 
                     "{C:abs_drinks}Drink{} if played poker hand is",

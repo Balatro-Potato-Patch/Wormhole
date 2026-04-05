@@ -40,7 +40,7 @@ SMODS.Joker {
 }
 
 SMODS.Joker {
-    key = 'abs_put_it_on_my_tab',
+    key = 'abs_seeing_stars',
     rarity = 1,
     cost = 4,
     --atlas = 'worm_abs_jokers',
@@ -95,9 +95,9 @@ SMODS.Joker {
 }
 
 SMODS.Joker {
-    key = 'abs_drinkmaxxing',
+    key = 'abs_water_world',
     rarity = 2,
-    cost = 4,
+    cost = 5,
     --atlas = 'worm_abs_jokers',
     pos = { x = 2, y = 0 },
     --ppu_artist = { '' },
@@ -128,7 +128,7 @@ SMODS.Joker {
 }
 
 SMODS.Joker {
-    key = 'abs_heavyweight_joker',
+    key = 'abs_gravity_well',
     rarity = 1,
     cost = 5,
     --atlas = 'worm_abs_jokers',
