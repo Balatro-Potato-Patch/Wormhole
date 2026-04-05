@@ -56,90 +56,282 @@ function Card:load(cardTable, other_card, ...)
 end
 
 Wormhole.TEAM_MEOW.tartInfo = {}
-local function create_tart(tart, tartPos, foilPos, regFunc, boostFunc, boostKey)
+local function SpaceTart(args)
+	local tart, tartPos, foilPos, regFunc, boostFunc, boostKey, config
+	local ex_table = {}
+	ex_table.tart = args.key
+	ex_table.tart_cfg = args.config
 	SMODS.Consumable({
-		key = tart,
+		key = args.key,
 		set = "worm_meow_Spacetart",
 		atlas = "meow_spacetart",
-		soul_pos = foilPos,
-		pos = tartPos,
+		soul_pos = args.foil_pos,
+		pos = args.tart_pos,
 		config = {
-			extra = {
-				tart = tart,
-			},
+			extra = ex_table,
 		},
-		loc_vars = function(self, info_queue, card)
-			info_queue[#info_queue + 1] = {
-				set = "Other",
-				key = "spacetart_" .. tart .. "_regular",
-				specific_vars = { "", "", "" },
-			}
-		end,
+		loc_vars = args.loc_vars,
 		can_use = function(self, card)
 			return false
 		end,
+		generate_ui = function(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
+			if not card then
+				card = self:create_fake_card()
+			end
+            card.ability.extra.tart_cfg = specific_vars.tart_cfg or card.ability.extra.tart_cfg
+			local target = {
+				type = "descriptions",
+				key = self.key,
+				set = self.set,
+				nodes = desc_nodes,
+				AUT = full_UI_table,
+				vars = specific_vars or {},
+			}
+			local res = {}
+			if self.loc_vars and type(self.loc_vars) == "function" then
+				res = self:loc_vars(info_queue, card, card.ability.extra.tart_cfg, specific_vars.is_boosted) or {}
+				target.vars = res.vars or target.vars
+				target.key = res.key or target.key
+				if specific_vars.is_boosted ~= nil then
+					target.key = self.key .. "_" .. (specific_vars.is_boosted and "boosted" or "regular")
+				end
+				target.set = res.set or target.set
+				target.scale = res.scale
+				target.text_colour = res.text_colour
+				if desc_nodes == full_UI_table.main then
+					full_UI_table.box_starts = res.box_starts
+					full_UI_table.box_ends = res.box_ends
+				end
+			end
+
+			if desc_nodes == full_UI_table.main and not full_UI_table.name then
+				full_UI_table.name = localize({
+					type = "name",
+					set = target.set,
+					key = res.name_key or target.key,
+					nodes = full_UI_table.name,
+					vars = res.name_vars or target.vars or {},
+				})
+			elseif desc_nodes ~= full_UI_table.main and not desc_nodes.name then
+				desc_nodes.name = localize({ type = "name_text", key = res.name_key or target.key, set = target.set })
+				if
+					(full_UI_table.from_detailed_tooltip and full_UI_table.info[1] == desc_nodes)
+					and not full_UI_table.no_styled_name
+				then
+					desc_nodes.name_styled = {}
+
+					localize({
+						type = "name",
+						key = res.name_key or target.key,
+						set = target.set,
+						nodes = desc_nodes.name_styled,
+						fixed_scale = 0.63,
+						no_pop_in = true,
+						no_shadow = true,
+						y_offset = 0,
+						no_spacing = true,
+						no_bump = true,
+						vars = target.vars,
+					})
+					desc_nodes.name_styled = SMODS.info_queue_desc_from_rows(desc_nodes.name_styled, true)
+					desc_nodes.name_styled.config.align = "cm"
+				end
+			end
+
+			if specific_vars and specific_vars.debuffed and not res.replace_debuff then
+				target = {
+					type = "other",
+					key = "debuffed_" .. (specific_vars.playing_card and "playing_card" or "default"),
+					nodes = desc_nodes,
+					AUT = full_UI_table,
+				}
+			end
+			if res.main_start then
+				desc_nodes[#desc_nodes + 1] = res.main_start
+			end
+
+			localize(target)
+
+			if type(specific_vars.stacks) == "number" then
+				localize({
+					type = "other",
+					key = "worm_meow_spacetart_stacks",
+					vars = { specific_vars.stacks },
+					nodes = desc_nodes,
+					AUT = full_UI_table,
+				})
+			end
+
+			if res.main_end then
+				desc_nodes[#desc_nodes + 1] = res.main_end
+			end
+			desc_nodes.background_colour = res.background_colour
+		end,
 	})
-	Wormhole.TEAM_MEOW.tartInfo[tart] = {
-		regular_func = regFunc,
-		boosted_func = boostFunc,
-		boost_key = boostKey,
+	Wormhole.TEAM_MEOW.tartInfo[args.key] = {
+		boosts = args.boosted_jokers,
 		pos = foilPos,
+        regular_func = args.calculate,
+        boosted_func = args.boosted_calculate
 	}
 end
-create_tart("stellar_strawberry", { x = 1, y = 2 }, { x = 1, y = 0 }, function(card, context)
-	return { message = "test" }
-end, function(card, context)
-	if context.joker_main then
-		return {
-			message = "betterTest",
-		}
+
+local gcu = generate_card_ui
+function generate_card_ui(
+	_c,
+	full_UI_table,
+	specific_vars,
+	card_type,
+	badges,
+	hide_desc,
+	main_start,
+	main_end,
+	card,
+	...
+)
+	local ret = gcu(_c, full_UI_table, specific_vars, card_type, badges, hide_desc, main_start, main_end, card, ...)
+	if card and card.tarts then
+		local map = {}
+		for _, v in ipairs(card.tarts) do
+			map[v.center_key] = map[v.center_key] and (map[v.center_key] + 1) or 1
+		end
+        for _, v in ipairs(card.tarts) do
+			local is_boosted = false
+            local tab = Wormhole.TEAM_MEOW.tartInfo[v.key]
+            local amt = nil
+            for k, num in pairs(map) do
+                if k == v then
+                    amt = num
+                end
+            end
+			for _, k in ipairs(tab.boosts) do
+				if k == card.config.center_key then
+					is_boosted = true
+					break
+				end
+			end
+			generate_card_ui(G.P_CENTERS[v.center_key], ret, { stacks = amt, is_boosted = is_boosted, tart_cfg = v.config })
+		end
 	end
-end, "j_joker")
-create_tart("celestial_cinnamon", { x = 2, y = 2 }, { x = 2, y = 0 }, function(card, context)
-	return { message = "test" }
-end, function(card, context)
-	if context.joker_main then
-		return {
-			message = "betterTest",
-		}
+	return ret
+end
+
+local card_joker_calc = Card.calculate_joker
+function Card:calculate_joker(context, ...)
+    local calc_res, has_post = card_joker_calc(self, context, ...)
+	local ret = { calc_res }
+	if self.tarts and not self.debuff and not context.blueprint and not context.retrigger_joker then
+		for _, tart in ipairs(self.tarts) do
+			local entry = Wormhole.TEAM_MEOW.tartInfo[tart.key]
+			local calc_res = nil
+			local is_boosted = false
+			for _, key in ipairs(entry.boosts) do
+				if key == self.config.center_key then
+					is_boosted = true
+					break
+				end
+			end
+			if is_boosted then
+				calc_res = entry.boosted_func(self, tart.config, context)
+			else
+				calc_res = entry.regular_func(self, tart.config, context)
+			end
+			calc_res = calc_res or {}
+			ret[#ret + 1] = calc_res
+		end
 	end
-end, "j_joker")
-create_tart("lunar_lemon", { x = 3, y = 2 }, { x = 3, y = 0 }, function(card, context)
-	return { message = "test" }
-end, function(card, context)
-	if context.joker_main then
+	return SMODS.merge_effects(ret), has_post
+end
+
+SpaceTart({
+	key = "stellar_strawberry",
+	tart_pos = { x = 1, y = 2 },
+	foil_pos = { x = 1, y = 0 },
+    config = {
+        reg = 1.5,
+        boosted = 2.5
+    },
+	calculate = function(card, tart_config, context)
+		if context.joker_main then
+			return {
+				xmult = tart_config.reg,
+			}
+		end
+	end,
+	boosted_calculate = function(card, tart_config, context)
+		if context.joker_main then
+			return {
+				xmult = tart_config.boosted,
+			}
+		end
+	end,
+	loc_vars = function(self, info_queue, card, tart_config, is_boosted)
 		return {
-			message = "betterTest",
-		}
-	end
-end, "j_joker")
-create_tart("meteor_mint", { x = 1, y = 3 }, { x = 1, y = 1 }, function(card, context)
-	return { message = "test" }
-end, function(card, context)
-	if context.joker_main then
-		return {
-			message = "betterTest",
-		}
-	end
-end, "j_joker")
-create_tart("blueshift_blueberry", { x = 2, y = 3 }, { x = 2, y = 1 }, function(card, context)
-	return { message = "test" }
-end, function(card, context)
-	if context.joker_main then
-		return {
-			message = "betterTest",
-		}
-	end
-end, "j_joker")
-create_tart("big_bang_blackberry", { x = 3, y = 3 }, { x = 3, y = 1 }, function(card, context)
-	return { message = "test" }
-end, function(card, context)
-	if context.joker_main then
-		return {
-			message = "betterTest",
-		}
-	end
-end, "j_joker")
+            vars = {
+                is_boosted and tart_config.boosted or tart_config.reg,
+            }
+        }
+	end,
+	boosted_jokers = {
+		"j_joker",
+	},
+})
+
+
+-- create_tart("stellar_strawberry", { x = 1, y = 2 }, { x = 1, y = 0 }, function(card, context)
+-- 	return { message = "test" }
+-- end, function(card, context)
+-- 	if context.joker_main then
+-- 		return {
+-- 			message = "betterTest",
+-- 		}
+-- 	end
+-- end, "j_joker")
+-- create_tart("celestial_cinnamon", { x = 2, y = 2 }, { x = 2, y = 0 }, function(card, context)
+-- 	return { message = "test" }
+-- end, function(card, context)
+-- 	if context.joker_main then
+-- 		return {
+-- 			message = "betterTest",
+-- 		}
+-- 	end
+-- end, "j_joker")
+-- create_tart("lunar_lemon", { x = 3, y = 2 }, { x = 3, y = 0 }, function(card, context)
+-- 	return { message = "test" }
+-- end, function(card, context)
+-- 	if context.joker_main then
+-- 		return {
+-- 			message = "betterTest",
+-- 		}
+-- 	end
+-- end, "j_joker")
+-- create_tart("meteor_mint", { x = 1, y = 3 }, { x = 1, y = 1 }, function(card, context)
+-- 	return { message = "test" }
+-- end, function(card, context)
+-- 	if context.joker_main then
+-- 		return {
+-- 			message = "betterTest",
+-- 		}
+-- 	end
+-- end, "j_joker")
+-- create_tart("blueshift_blueberry", { x = 2, y = 3 }, { x = 2, y = 1 }, function(card, context)
+-- 	return { message = "test" }
+-- end, function(card, context)
+-- 	if context.joker_main then
+-- 		return {
+-- 			message = "betterTest",
+-- 		}
+-- 	end
+-- end, "j_joker")
+-- create_tart("big_bang_blackberry", { x = 3, y = 3 }, { x = 3, y = 1 }, function(card, context)
+-- 	return { message = "test" }
+-- end, function(card, context)
+-- 	if context.joker_main then
+-- 		return {
+-- 			message = "betterTest",
+-- 		}
+-- 	end
+-- end, "j_joker")
 
 SMODS.DrawStep({
 	key = "tarts",
@@ -148,8 +340,8 @@ SMODS.DrawStep({
 		local yshift = 0
 		local yinc = 0.2 / 3
 		if card.tarts then
-			for k, v in ipairs(card.tarts) do
-				local tartObj = g[v]
+			for _, v in ipairs(card.tarts) do
+				local tartObj = Wormhole.TEAM_MEOW.tartInfo[v.key]
 				tartObj.sprite = tartObj.sprite
 					or Sprite(0, 0, G.CARD_W, G.CARD_H, G.ASSET_ATLAS["worm_meow_spacetart"], tartObj.pos)
 				local tartSprite = tartObj.sprite
@@ -254,8 +446,12 @@ function Card:stop_drag(...)
 			end
 		end
 	end
-	if self.ability and self.ability.set == "worm_meow_Spacetart" and bool and playerHas then
-		local tart = self.ability.extra.tart
+	if self.ability and self.ability.set == "worm_meow_Spacetart" and bool and playerHas and meow_can_apply_foil(self) then
+		local tart = {
+			key = self.ability.extra.tart,
+			config = self.ability.extra.tart_cfg or {},
+			center_key = self.config.center_key,
+		}
 		table.sort(colliders, function(a, b)
 			return a.dist < b.dist
 		end)

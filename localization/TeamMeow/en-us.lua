@@ -66,7 +66,7 @@ return {
 						"Developer of {C:incognito}Incognito",
 						"Co-Developer of {C:attention}Hyperfixation{},",
 						"{C:attention}Bad Director{}, and {C:attention}Tangent",
-					}
+					},
 				},
 			},
 			PotatoPatchDev_toma = {
@@ -110,7 +110,7 @@ return {
 					"{C:attention}7s{} and {C:attention}8s Held in hand{}",
 					"gain {C:chips}+#1#{} Chips while",
 					"held in hand",
-					"permanently"
+					"permanently",
 				},
 			},
 			c_worm_zodicat5 = {
@@ -119,7 +119,7 @@ return {
 					"{C:attention}9s{} and {C:attention}10s Held in hand{}",
 					"gain {C:mult}+#1#{} Mult while",
 					"held in hand",
-					"permanently"
+					"permanently",
 				},
 			},
 			c_worm_zodicat6 = {
@@ -135,143 +135,125 @@ return {
 			c_worm_stellar_strawberry = {
 				name = "Stellar Strawberry",
 				text = {
-					"red penis"
+					"Attached Joker",
+					"gives {X:mult,C:white}X#1#{} Mult",
 				},
 			},
 			c_worm_celestial_cinnamon = {
 				name = "Celestial Cinnamon",
 				text = {
-					"orange penis"
+					"orange penis",
 				},
 			},
 			c_worm_lunar_lemon = {
 				name = "Lunar Lemon",
 				text = {
-					"yellow penis"
+					"yellow penis",
 				},
 			},
 			c_worm_meteor_mint = {
 				name = "Meteor Mint",
 				text = {
-					"green penis"
+					"green penis",
 				},
 			},
 			c_worm_blueshift_blueberry = {
 				name = "Blueshift Blueberry",
 				text = {
-					"blue penis"
+					"blue penis",
 				},
 			},
 			c_worm_big_bang_blackberry = {
 				name = "Big Bang Blackberry",
 				text = {
-					"purple penis"
+					"purple penis",
+				},
+			},
+			c_worm_stellar_strawberry_boosted = {
+				name = "Stellar Strawberry",
+				text = {
+					"{X:red,C:white}X#1#{} Mult",
+					"(boosted)",
+				},
+			},
+			c_worm_stellar_strawberry_regular = {
+				name = "Stellar Strawberry",
+				text = {
+					"{X:red,C:white}X#1#{} Mult",
+				},
+			},
+			c_worm_celestial_cinnamon_boosted = {
+				name = "Celestial Cinnamon",
+				text = {
+					"idk if u can do non hard-coded",
+					"values easily in here :shrug:",
+				},
+			},
+			c_worm_celestial_cinnamon_regular = {
+				name = "Celestial Cinnamon",
+				text = {
+					"lame ass",
+				},
+			},
+			c_worm_lunar_lemon_boosted = {
+				name = "Lunar Lemon",
+				text = {
+					"idk if u can do non hard-coded",
+					"values easily in here :shrug:",
+				},
+			},
+			c_worm_lunar_lemon_regular = {
+				name = "Lunar Lemon",
+				text = {
+					"lame ass",
+				},
+			},
+			c_worm_meteor_mint_boosted = {
+				name = "Stellar Strawberry",
+				text = {
+					"idk if u can do non hard-coded",
+					"values easily in here :shrug:",
+				},
+			},
+			c_worm_meteor_mint_regular = {
+				name = "Stellar Strawberry",
+				text = {
+					"lame ass",
+				},
+			},
+			c_worm_blueshift_blueberry_boosted = {
+				name = "Meteor Mint",
+				text = {
+					"idk if u can do non hard-coded",
+					"values easily in here :shrug:",
+				},
+			},
+			c_worm_blueshift_blueberry_regular = {
+				name = "Meteor Mint",
+				text = {
+					"lame ass",
+				},
+			},
+			c_worm_big_bang_blackberry_boosted = {
+				name = "Big Bang Blackberry",
+				text = {
+					"idk if u can do non hard-coded",
+					"values easily in here :shrug:",
+				},
+			},
+			c_worm_big_bang_blackberry_regular = {
+				name = "Big Bang Blackberry",
+				text = {
+					"lame ass",
 				},
 			},
 		},
 		Other = {
-			spacetart_stellar_strawberry_boosted = {
-				name = "Stellar Strawberry",
+			worm_meow_spacetart_stacks = {
 				text = {
-					"idk if u can do non hard-coded",
-					"values easily in here :shrug:",
-					"{C:inactive,s:0.8}#1#{C:attention,s:0.8}#2#{C:inactive,s:0.8}#3#"
-				}
+					"{C:inactive,s:0.8}(Currently stacked: {C:attention,s:0.8}#1#{C:inactive,s:0.8})",
+				},
 			},
-			spacetart_stellar_strawberry_regular = {
-				name = "Stellar Strawberry",
-				text = {
-					"lame ass",
-					"{C:inactive,s:0.8}#1#{C:attention,s:0.8}#2#{C:inactive,s:0.8}#3#"
-				}
-			},
-			spacetart_celestial_cinnamon_boosted = {
-				name = "Celestial Cinnamon",
-				text = {
-					"idk if u can do non hard-coded",
-					"values easily in here :shrug:",
-					"{C:inactive,s:0.8}#1#{C:attention,s:0.8}#2#{C:inactive,s:0.8}#3#"
-				}
-			},
-			spacetart_celestial_cinnamon_regular = {
-				name = "Celestial Cinnamon",
-				text = {
-					"lame ass",
-					"{C:inactive,s:0.8}#1#{C:attention,s:0.8}#2#{C:inactive,s:0.8}#3#"
-				}
-			},
-			spacetart_lunar_lemon_boosted = {
-				name = "Lunar Lemon",
-				text = {
-					"idk if u can do non hard-coded",
-					"values easily in here :shrug:",
-					"{C:inactive,s:0.8}#1#{C:attention,s:0.8}#2#{C:inactive,s:0.8}#3#"
-				}
-			},
-			spacetart_lunar_lemon_regular = {
-				name = "Lunar Lemon",
-				text = {
-					"lame ass",
-					"{C:inactive,s:0.8}#1#{C:attention,s:0.8}#2#{C:inactive,s:0.8}#3#"
-				}
-			},
-			spacetart_meteor_mint_boosted = {
-				name = "Meteor Mint",
-				text = {
-					"idk if u can do non hard-coded",
-					"values easily in here :shrug:",
-					"{C:inactive,s:0.8}#1#{C:attention,s:0.8}#2#{C:inactive,s:0.8}#3#"
-				}
-			},
-			spacetart_meteor_mint_regular = {
-				name = "Meteor Mint",
-				text = {
-					"lame ass",
-					"{C:inactive,s:0.8}#1#{C:attention,s:0.8}#2#{C:inactive,s:0.8}#3#"
-				}
-			},
-			spacetart_blueshift_blueberry_boosted = {
-				name = "Blueshift Blueberry",
-				text = {
-					"idk if u can do non hard-coded",
-					"values easily in here :shrug:",
-					"{C:inactive,s:0.8}#1#{C:attention,s:0.8}#2#{C:inactive,s:0.8}#3#"
-				}
-			},
-			spacetart_blueshift_blueberry_regular = {
-				name = "Blueshift Blueberry",
-				text = {
-					"lame ass",
-					"{C:inactive,s:0.8}#1#{C:attention,s:0.8}#2#{C:inactive,s:0.8}#3#"
-				}
-			},
-			spacetart_big_bang_blackberry_boosted = {
-				name = "Big Bang Blackberry",
-				text = {
-					"idk if u can do non hard-coded",
-					"values easily in here :shrug:",
-					"{C:inactive,s:0.8}#1#{C:attention,s:0.8}#2#{C:inactive,s:0.8}#3#"
-				}
-			},
-			spacetart_big_bang_blackberry_regular = {
-				name = "Big Bang Blackberry",
-				text = {
-					"lame ass",
-					"{C:inactive,s:0.8}#1#{C:attention,s:0.8}#2#{C:inactive,s:0.8}#3#"
-				}
-			},
-			spacetart_hint = {
-				name = "Spacetarts",
-				text = {
-					"Drag me on a joker to",
-					"{C:attention}equip{} me to it",
-					"{C:inactive,s:0.8}:3"
-				}
-			},
-
-
-			
-
 			undiscovered_worm_meow_zodicat = {
 				name = "Not Discovered",
 				text = {
@@ -292,56 +274,67 @@ return {
 					"{C:inactive}meow :3{}",
 				},
 			},
-
 			p_worm_spacetart_booster_1 = {
 				name = "Spacetart Pack",
-				text = { "Choose {C:attention}#1#{} of up to", "{C:attention}#2#{C:worm_meow_spacetart} Spacetart{} Foils" },
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{C:worm_meow_spacetart} Spacetart{} Foils",
+				},
 			},
 			p_worm_spacetart_booster_2 = {
 				name = "Spacetart Pack",
-				text = { "Choose {C:attention}#1#{} of up to", "{C:attention}#2#{C:worm_meow_spacetart} Spacetart{} Foils" },
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{C:worm_meow_spacetart} Spacetart{} Foils",
+				},
 			},
 			p_worm_spacetart_booster_jumbo_1 = {
 				name = "Jumbo Spacetart Pack",
-				text = { "Choose {C:attention}#1#{} of up to", "{C:attention}#2#{C:worm_meow_spacetart} Spacetart{} Foils" },
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{C:worm_meow_spacetart} Spacetart{} Foils",
+				},
 			},
 			p_worm_spacetart_booster_mega_1 = {
 				name = "Mega Spacetart Pack",
-				text = { "Choose {C:attention}#1#{} of up to", "{C:attention}#2#{C:worm_meow_spacetart} Spacetart{} Foils" },
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{C:worm_meow_spacetart} Spacetart{} Foils",
+				},
 			},
 
-			 p_worm_zodicat_booster_1 ={
-                name= "Zodicat Pack",
-                text={
-                    "Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2#{C:worm_meow_zodicat} Zodicat{} cards to",
-                    "be used immediately",
-                },
-            },
-			p_worm_zodicat_booster_2 ={
-                name= "Zodicat Pack",
-                text={
-                    "Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2#{C:worm_meow_zodicat} Zodicat{} cards to",
-                    "be used immediately",
-                },
-            },
-			p_worm_zodicat_booster_jumbo_1 ={
-                name= "Jumbo Zodicat Pack",
-                text={
-                    "Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2#{C:worm_meow_zodicat} Zodicat{} cards to",
-                    "be used immediately",
-                },
-            },
-			p_worm_zodicat_booster_mega_1 ={
-                name= "Mega Zodicat Pack",
-                text={
-                    "Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2#{C:worm_meow_zodicat} Zodicat{} cards to",
-                    "be used immediately",
-                },
-            },
+			p_worm_zodicat_booster_1 = {
+				name = "Zodicat Pack",
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{C:worm_meow_zodicat} Zodicat{} cards to",
+					"be used immediately",
+				},
+			},
+			p_worm_zodicat_booster_2 = {
+				name = "Zodicat Pack",
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{C:worm_meow_zodicat} Zodicat{} cards to",
+					"be used immediately",
+				},
+			},
+			p_worm_zodicat_booster_jumbo_1 = {
+				name = "Jumbo Zodicat Pack",
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{C:worm_meow_zodicat} Zodicat{} cards to",
+					"be used immediately",
+				},
+			},
+			p_worm_zodicat_booster_mega_1 = {
+				name = "Mega Zodicat Pack",
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{C:worm_meow_zodicat} Zodicat{} cards to",
+					"be used immediately",
+				},
+			},
 		},
 	},
 	misc = {
@@ -350,10 +343,8 @@ return {
 			b_worm_meow_zodicat_cards = "Zodicat Cards",
 			k_worm_meow_spacetart = "Spacetart",
 			b_worm_meow_spacetart_cards = "Spacetart Foils",
-			k_stack1 = "(Currently stacked: ",
-			k_stack2 = ")",
 			k_worm_meow_spacetart_pack = "Spacetart Pack",
-			k_worm_meow_Zodicat_pack = "Zodicat Pack"
+			k_worm_meow_Zodicat_pack = "Zodicat Pack",
 		},
 		labels = {
 			worm_meow_zodicat = "Zodicat",
