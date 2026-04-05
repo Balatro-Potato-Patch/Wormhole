@@ -67,10 +67,10 @@ local cache_bonus_mult = 0
 local cache_bonus_chips = 0
 local old_update_hand_text = update_hand_text
 function update_hand_text(config, vals)
-	if type(vals.mult) == "number" then
+	if type(vals.mult) == "number" or (is_big and is_big(vals.mult)) then
 		vals.mult = vals.mult + cache_bonus_mult
 	end
-	if type(vals.chips) == "number" then
+	if type(vals.chips) == "number" or (is_big and is_big(vals.chips)) then
 		vals.chips = vals.chips + cache_bonus_chips
 	end
 	return old_update_hand_text(config, vals)
