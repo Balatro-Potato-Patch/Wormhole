@@ -33,17 +33,22 @@ return {
 				},
 			},
 			j_worm_jtem2_tetris = {
-				name = "Terror Instinct",
+				name = {
+					"Terror Instinct",
+					"{E:1,s:0.5,C:edition}Tetris: The Grandmaster 3"
+				},
 				text = {
 					{
-						"{E:2}Play Tetris!",
+						"{E:1,s:1.2,C:dark_edition}Play Tetris!",
 						"This Joker's XMult is determined by",
-						"it's {C:attention}current level{} divided by 100 plus one",
+						"{C:attention}current level{} divided by 100 plus one",
 						"{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)"
 					},
 					{
-						"Use the arrow keys to control the piece",
-						"Press Z and X to rotate left and right",
+						"Use the {C:attention}arrow keys{} to control the piece",
+						"Press {C:attention}Z{} and {C:attention}X{} to rotate left and right",
+						"Level {C:attention}increases{} per piece placed",
+						"{C:inactive,s:0.8}(A line clear is required at 99, 199, etc)"
 					}
 				}
 			}
