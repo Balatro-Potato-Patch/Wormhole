@@ -79,7 +79,7 @@ SMODS.Consumable({
 	loc_vars = function(self, info_queue, card)
 		return {
 			vars = {
-				card.ability.extra.perma_chips,
+				card.ability.extra.perma_bonus,
 			},
 		}
 	end,
