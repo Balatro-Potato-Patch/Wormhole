@@ -21,7 +21,7 @@ return {
 								"A {C:attention}Joker{} can consume at most {C:attention}#1# {C:worm_meow_spacetart}©Spacetarts{}",
 								"before refusing to eat more under normal circumstances."]]
 								"Fed {C:attention}Jokers{} gain {C:attention}foils{}, stackable up to {C:attention}#1#{} times,",
-								"which give Jokers{C:attention} varying additional effects{}!"
+								"which give Jokers{C:attention} varying additional effects{}!",
 							},
 							{
 								--[["If you think a {C:attention}Joker{} has too many foils and it's unevenly distributed,",
@@ -29,18 +29,18 @@ return {
 								"given to the other {C:attention}Joker{}, while also enabling the original {C:attention}Joker{} to",
 								"consume {C:attention}another {C:worm_meow_spacetart}©Spacetart{}."]]
 								"You can drag a {C:attention}foiled Joker{} onto",
-								"other jokers to {C:attention}transfer{} the {C:attention}topmost foil{}!"
+								"other jokers to {C:attention}transfer{} the {C:attention}topmost foil{}!",
 							},
 							{
 								--[["Certain {C:attention}Jokers{} prefer different flavours of {C:worm_meow_spacetart}©Spacetarts{}",
 								"and the effect of the {C:worm_meow_spacetart}©Spacetart{} will be greatly {C:attention}boosted{}."]]
 								"{C:attention}Jokers{} have their own taste too, and will {C:attention}boost",
-								"their {C:attention}foil{} if they like the flavour of its {C:worm_meow_spacetart}©Spacetart{}!"
+								"their {C:attention}foil{} if they like the flavour of its {C:worm_meow_spacetart}©Spacetart{}!",
 							},
-						}
-					}
-				}
-			}
+						},
+					},
+				},
+			},
 		},
 	},
 	descriptions = {
@@ -68,8 +68,8 @@ return {
 						"Developer of {C:mult}Alloy{}, {C:chips}JoJo Mod{},",
 						"and {C:attention}Photon Mod Manager{}",
 						"{C:inactive}Please use Photon i beg, it even has a website",
-						"{C:attention}Meowww nya nyan meoww meowww{} {C:inactive}(meow){}"
-					}
+						"{C:attention}Meowww nya nyan meoww meowww{} {C:inactive}(meow){}",
+					},
 				},
 			},
 			PotatoPatchDev_revo = {
@@ -129,8 +129,8 @@ return {
 			},
 		},
 		worm_meow_Zodicat = {
-			c_worm_zodicat1 = {
-				name = "TBD",
+			c_worm_crimson = {
+				name = { "Crimson", "{s:0.6}Aries & Taurus" },
 				text = {
 					"{C:attention}Aces{} and {C:attention}2s{} held in",
 					"hand gain {C:chips}+#1#{} Chips",
@@ -337,7 +337,7 @@ return {
 			b_worm_meow_spacetart_cards = "Spacetart Foils",
 			k_worm_meow_spacetart_pack = "Spacetart Pack",
 			k_worm_meow_Zodicat_pack = "Zodicat Pack",
-			k_worm_meow_ate = "Ate!"
+			k_worm_meow_ate = "Ate!",
 		},
 		labels = {
 			worm_meow_zodicat = "Zodicat",

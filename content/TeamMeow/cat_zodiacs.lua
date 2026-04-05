@@ -69,7 +69,7 @@ function Wormhole.TEAM_MEOW.zodicat_use(card, condition, func)
 end
 
 SMODS.Consumable({
-	key = "zodicat1",
+	key = "crimson",
 	set = "worm_meow_Zodicat",
 	attributes = { "modify_card", "chips", "ace", "two", "space" },
 	config = {
