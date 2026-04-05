@@ -331,6 +331,7 @@ SMODS.Consumable { -- Hubble Trouble
 SMODS.Consumable { -- Moonshine
     set = 'abs_drinks',
     key = 'abs_moonshine',
+    atlas = 'abs_drinks',
     pos = { x = 0, y = 1 },
     ppu_coder = { 'iwas_nevergood' },
     ppu_artist = { 'iwas_nevergood' },
