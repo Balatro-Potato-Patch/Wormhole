@@ -3,7 +3,7 @@ SMODS.ConsumableType({
 	primary_colour = HEX("FDDCA0"),
 	secondary_colour = HEX("A7D6E0"),
 	default = "c_worm_zodicat1",
-	collection_rows = { 3,3 },
+	collection_rows = { 3, 3 },
 	shop_rate = 3,
 	text_colour = G.C.UI.TEXT_DARK,
 })
@@ -70,10 +70,10 @@ end
 
 SMODS.Consumable({
 	key = "zodicat1",
-    set = "worm_meow_Zodicat",
+	set = "worm_meow_Zodicat",
 	config = {
 		extra = {
-			perma_chips = 25,
+			perma_bonus = 25,
 		},
 	},
 	loc_vars = function(self, info_queue, card)
@@ -88,7 +88,149 @@ SMODS.Consumable({
 			return p_card:get_id() == 14 or p_card:get_id() == 2
 		end, function(p_card)
 			p_card.ability.perma_bonus = (p_card.ability.perma_bonus or 0) + card.ability.extra.perma_bonus
-        end)
+		end)
+	end,
+	can_use = function(self, card)
+		return G.hand and #G.hand.cards > 0
+	end,
+})
+
+SMODS.Consumable({
+	key = "zodicat2",
+	set = "worm_meow_Zodicat",
+	config = {
+		extra = {
+			perma_mult = 5,
+		},
+	},
+	loc_vars = function(self, info_queue, card)
+		return {
+			vars = {
+				card.ability.extra.perma_mult,
+			},
+		}
+	end,
+	use = function(self, card, area, copier)
+		Wormhole.TEAM_MEOW.zodicat_use(card, function(p_card)
+			return p_card:get_id() == 3 or p_card:get_id() == 4
+		end, function(p_card)
+			p_card.ability.perma_mult = (p_card.ability.perma_mult or 0) + card.ability.extra.perma_mult
+		end)
+	end,
+	can_use = function(self, card)
+		return G.hand and #G.hand.cards > 0
+	end,
+})
+
+SMODS.Consumable({
+	key = "zodicat3",
+	set = "worm_meow_Zodicat",
+	config = {
+		extra = {
+			perma_h_dollars = 1,
+			odds = 2,
+		},
+	},
+	loc_vars = function(self, info_queue, card)
+		local n, d = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, "zodicat3")
+		return {
+			vars = {
+				n,
+				d,
+				card.ability.extra.perma_h_dollars,
+			},
+		}
+	end,
+	use = function(self, card, area, copier)
+		Wormhole.TEAM_MEOW.zodicat_use(card, function(p_card)
+			return p_card:get_id() == 5 or p_card:get_id() == 6
+		end, function(p_card)
+			if SMODS.pseudorandom_probability(card, "zodicat3", 1, card.ability.extra.odds) then
+				p_card.ability.perma_h_dollars = (p_card.ability.perma_h_dollars or 0)
+					+ card.ability.extra.perma_h_dollars
+			end
+		end)
+	end,
+	can_use = function(self, card)
+		return G.hand and #G.hand.cards > 0
+	end,
+})
+
+SMODS.Consumable({
+	key = "zodicat4",
+	set = "worm_meow_Zodicat",
+	config = {
+		extra = {
+			perma_h_chips = 20,
+		},
+	},
+	loc_vars = function(self, info_queue, card)
+		return {
+			vars = {
+				card.ability.extra.perma_h_chips,
+			},
+		}
+	end,
+	use = function(self, card, area, copier)
+		Wormhole.TEAM_MEOW.zodicat_use(card, function(p_card)
+			return p_card:get_id() == 7 or p_card:get_id() == 8
+		end, function(p_card)
+			p_card.ability.perma_h_chips = (p_card.ability.perma_h_chips or 0) + card.ability.extra.perma_h_chips
+		end)
+	end,
+	can_use = function(self, card)
+		return G.hand and #G.hand.cards > 0
+	end,
+})
+
+SMODS.Consumable({
+	key = "zodicat5",
+	set = "worm_meow_Zodicat",
+	config = {
+		extra = {
+			perma_h_mult = 4,
+		},
+	},
+	loc_vars = function(self, info_queue, card)
+		return {
+			vars = {
+				card.ability.extra.perma_h_mult,
+			},
+		}
+	end,
+	use = function(self, card, area, copier)
+		Wormhole.TEAM_MEOW.zodicat_use(card, function(p_card)
+			return p_card:get_id() == 9 or p_card:get_id() == 10
+		end, function(p_card)
+			p_card.ability.perma_h_mult = (p_card.ability.perma_h_mult or 0) + card.ability.extra.perma_h_mult
+		end)
+	end,
+	can_use = function(self, card)
+		return G.hand and #G.hand.cards > 0
+	end,
+})
+
+SMODS.Consumable({
+	key = "zodicat6",
+	set = "worm_meow_Zodicat",
+	config = {
+		extra = {
+			perma_x_mult = 0.1,
+		},
+	},
+	loc_vars = function(self, info_queue, card)
+		return {
+			vars = {
+				card.ability.extra.perma_x_mult,
+			},
+		}
+	end,
+	use = function(self, card, area, copier)
+		Wormhole.TEAM_MEOW.zodicat_use(card, function(p_card)
+			return p_card:is_face()
+		end, function(p_card)
+			p_card.ability.perma_x_mult = (p_card.ability.perma_x_mult or 0) + card.ability.extra.perma_x_mult
+		end)
 	end,
 	can_use = function(self, card)
 		return G.hand and #G.hand.cards > 0
