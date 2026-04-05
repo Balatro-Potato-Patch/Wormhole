@@ -151,8 +151,6 @@ return {
 					"{C:attention}5s{} and {C:attention}6s{} held in",
 					"hand have a {C:green}#1# in #2#{}",
 					"chance to gain {C:money}$#3#{}",
-					"while held in hand",
-					"at end of round",
 					"permanently",
 				},
 			},

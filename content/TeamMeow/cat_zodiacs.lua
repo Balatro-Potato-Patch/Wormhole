@@ -71,6 +71,7 @@ end
 SMODS.Consumable({
 	key = "zodicat1",
 	set = "worm_meow_Zodicat",
+	attributes = { "modify_card", "chips", "ace", "two", "space" },
 	config = {
 		extra = {
 			perma_bonus = 25,
@@ -98,6 +99,7 @@ SMODS.Consumable({
 SMODS.Consumable({
 	key = "zodicat2",
 	set = "worm_meow_Zodicat",
+	attributes = { "modify_card", "mult", "three", "four", "space" },
 	config = {
 		extra = {
 			perma_mult = 5,
@@ -125,9 +127,10 @@ SMODS.Consumable({
 SMODS.Consumable({
 	key = "zodicat3",
 	set = "worm_meow_Zodicat",
+	attributes = { "modify_card", "economy", "chance", "five", "six", "space" },
 	config = {
 		extra = {
-			perma_h_dollars = 1,
+			perma_p_dollars = 1,
 			odds = 2,
 		},
 	},
@@ -137,7 +140,7 @@ SMODS.Consumable({
 			vars = {
 				n,
 				d,
-				card.ability.extra.perma_h_dollars,
+				card.ability.extra.perma_p_dollars,
 			},
 		}
 	end,
@@ -146,8 +149,8 @@ SMODS.Consumable({
 			return p_card:get_id() == 5 or p_card:get_id() == 6
 		end, function(p_card)
 			if SMODS.pseudorandom_probability(card, "zodicat3", 1, card.ability.extra.odds) then
-				p_card.ability.perma_h_dollars = (p_card.ability.perma_h_dollars or 0)
-					+ card.ability.extra.perma_h_dollars
+				p_card.ability.perma_p_dollars = (p_card.ability.perma_p_dollars or 0)
+					+ card.ability.extra.perma_p_dollars
 			end
 		end)
 	end,
@@ -159,6 +162,7 @@ SMODS.Consumable({
 SMODS.Consumable({
 	key = "zodicat4",
 	set = "worm_meow_Zodicat",
+	attributes = { "modify_card", "chips", "seven", "eight", "space" },
 	config = {
 		extra = {
 			perma_h_chips = 20,
@@ -186,6 +190,7 @@ SMODS.Consumable({
 SMODS.Consumable({
 	key = "zodicat5",
 	set = "worm_meow_Zodicat",
+	attributes = { "modify_card", "mult", "nine", "ten", "space" },
 	config = {
 		extra = {
 			perma_h_mult = 4,
@@ -213,6 +218,7 @@ SMODS.Consumable({
 SMODS.Consumable({
 	key = "zodicat6",
 	set = "worm_meow_Zodicat",
+	attributes = { "modify_card", "xmult", "face", "space" },
 	config = {
 		extra = {
 			perma_x_mult = 0.1,
