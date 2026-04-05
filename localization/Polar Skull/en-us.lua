@@ -2,14 +2,13 @@ local rocket_text = {
 	"All played hands score as",
 	"{C:attention}#1#{}, while also",
 	"gaining the original hand's",
-	"{C:mult}mult{} and {C:chips}chips{} for {C:attention}#2#{} #4#",
-	"{B:1,C:white}#3#"
+	"{C:mult}Mult{} and {C:chips}Chips{} for {C:attention}#2#{} #4#",
+	"{B:1,C:white}#3#",
 }
 
 return {
 	descriptions = {
-		Back = {
-		},
+		Back = {},
 		Joker = {
 			j_worm_polarskull_untitled = {
 				name = "???",
@@ -18,66 +17,68 @@ return {
 					"create the {C:polarskull_rocket}Rocket{} Card",
 					"for final played {C:attention}poker hand{}",
 					"that round",
-				}
-			}
+				},
+			},
 		},
 		polarskull_rocket = {
 			c_worm_polarskull_atlasv = {
 				name = "Atlas V",
-				text = rocket_text
+				text = rocket_text,
 			},
 			c_worm_polarskull_vostok1 = {
 				name = "Vostok 1",
-				text = rocket_text
+				text = rocket_text,
 			},
 			c_worm_polarskull_changzheng5 = {
 				name = "Changzheng 5",
-				text = rocket_text
+				text = rocket_text,
 			},
 			c_worm_polarskull_soyuz1 = {
 				name = "Soyuz 1",
-				text = rocket_text
+				text = rocket_text,
 			},
 			c_worm_polarskull_titaniv = {
 				name = "Titan IV",
-				text = rocket_text
+				text = rocket_text,
 			},
 			c_worm_polarskull_atlascentaur = {
 				name = "Atlas-Centaur",
-				text = rocket_text
+				text = rocket_text,
 			},
 			c_worm_polarskull_spaceshuttle = {
 				name = "Space Shuttle",
-				text = rocket_text
+				text = rocket_text,
 			},
 			c_worm_polarskull_sls = {
 				name = "Space Launch System",
-				text = rocket_text
+				text = rocket_text,
 			},
 			c_worm_polarskull_titanieee = {
 				name = "Titan IEEE",
-				text = rocket_text
+				text = rocket_text,
 			},
 			c_worm_polarskull_saturnv = {
 				name = "Saturn V",
-				text = rocket_text
+				text = rocket_text,
 			},
 			c_worm_polarskull_deltaii = {
 				name = "Delta II",
-				text = rocket_text
+				text = rocket_text,
 			},
 			c_worm_polarskull_ariane5 = {
 				name = "Ariane 5",
-				text = rocket_text
+				text = rocket_text,
 			},
+		},
+		Spectral = {
 			c_worm_polarskull_ssdolphin = {
 				name = "SS Dolphin",
 				text = {
-					"All played hands count as",
-					"containing all hands for {C:attention}#2#{} #4#,",
-					"all base {C:mult}mult{} and {C:chips}chips{} included",
-					"{B:1,C:white}#3#"
-				}
+					"All played hands contain every",
+					"{C:legendary,E:1}Poker Hand{} for {C:attention}#2#{} #4#,",
+					"their base {C:mult}Mult{} and {C:chips}Chips{} included",
+					"{B:1,C:white}#3#",
+				},
 			},
 		},
 		Other = {
@@ -92,76 +93,76 @@ return {
 			},
 
 			p_worm_rocket_normal_1 = {
-				name = 'Rocket Pack',
+				name = "Rocket Pack",
 				text = {
-					'Choose {C:attention}#1#{} of up to',
-					'{C:attention}#2#{} {C:polarskull_rocket}Rocket{} cards',
-				}
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{} {C:polarskull_rocket}Rocket{} cards",
+				},
 			},
 			p_worm_rocket_normal_2 = {
-				name = 'Rocket Pack',
+				name = "Rocket Pack",
 				text = {
-					'Choose {C:attention}#1#{} of up to',
-					'{C:attention}#2#{} {C:polarskull_rocket}Rocket{} cards',
-				}
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{} {C:polarskull_rocket}Rocket{} cards",
+				},
 			},
 			p_worm_rocket_jumbo = {
-				name = 'Jumbo Rocket Pack',
+				name = "Jumbo Rocket Pack",
 				text = {
-					'Choose {C:attention}#1#{} of up to',
-					'{C:attention}#2#{} {C:polarskull_rocket}Rocket{} cards',
-				}
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{} {C:polarskull_rocket}Rocket{} cards",
+				},
 			},
 			p_worm_rocket_mega = {
-				name = 'Mega Rocket Pack',
+				name = "Mega Rocket Pack",
 				text = {
-					'Choose {C:attention}#1#{} of up to',
-					'{C:attention}#2#{} {C:polarskull_rocket}Rocket{} cards',
-				}
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{} {C:polarskull_rocket}Rocket{} cards",
+				},
 			},
 		},
 
 		PotatoPatch = {
 			PotatoPatchTeam_polar_skull = {
-				name = "Polar Skull"
+				name = "Polar Skull",
 			},
 			PotatoPatchDev_cloudzxiii = {
 				name = "cloudzXIII",
 				text = {
-					"e"
-				}
+					"e",
+				},
 			},
 			PotatoPatchDev_noodlemire = {
 				name = "Noodlemire",
 				text = {
-					"e"
-				}
+					"e",
+				},
 			},
 			PotatoPatchDev_mariofan = {
 				name = "MarioFan597",
 				text = {
-					"e"
-				}
+					"e",
+				},
 			},
 			PotatoPatchDev_rainstar = {
 				name = "Rainstar",
 				text = {
-					"e"
-				}
+					"e",
+				},
 			},
 			PotatoPatchDev_comykel = {
 				name = "Comykel",
 				text = {
-					"e"
-				}
+					"e",
+				},
 			},
 			PotatoPatchDev_jade = {
 				name = "Jade Penguin",
 				text = {
-					"e"
-				}
-			}
-		}
+					"e",
+				},
+			},
+		},
 	},
 	misc = {
 		dictionary = {
@@ -171,10 +172,10 @@ return {
 			k_polarskull_round_singular = "Round",
 			k_polarskull_round_plural = "Rounds",
 			k_polarskull_rocket_pack = "Rocket Pack",
-			k_polarskull_plus_rocket = "+1 Rocket"
+			k_polarskull_plus_rocket = "+1 Rocket",
 		},
 		v_dictionary = {
-			k_polarskull_left = "#1# left"
-		}
-	}
+			k_polarskull_left = "#1# left",
+		},
+	},
 }
