@@ -14,6 +14,9 @@ SMODS.Joker {
     cost = 5,
     discovered = false,
     blueprint_compat = true,
+	--ppu_artist = {"placeholder"},
+	ppu_coder = {"cloudzxiii"},
+	ppu_team = {"polar_skull"},
 
     config = {},
 

@@ -76,7 +76,7 @@ return {
 				text = {
 					"All played hands contain every",
 					"{C:legendary,E:1}Poker Hand{} for {C:attention}#2#{} #4#,",
-					"their base {C:mult}Mult{} and {C:chips}Chips{} included",
+					"combining all base {C:mult}Mult{} and {C:chips}Chips{} values",
 					"{B:1,C:white}#3#",
 				},
 			},

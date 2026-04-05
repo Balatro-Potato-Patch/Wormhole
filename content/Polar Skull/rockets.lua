@@ -81,6 +81,9 @@ local function register_rocket(args)
 	args.atlas = "polarskull_rockets"
 	args.cost = args.cost or 4
 	args.config.extra.active = false
+	--args.ppu_artist = args.ppu_artist or {"comykel"}
+	args.ppu_coder = args.ppu_coder or {"noodlemire"}
+	args.ppu_team = {"polar_skull"}
 	args.loc_vars = args.loc_vars or function(self, info_queue, card)
 		return {
 			vars = {
@@ -188,6 +191,7 @@ register_rocket({
 	key = "vostok1",
 	pos = {x = 1, y = 0},
 	config = {extra = {hand = "Pair", rounds = 3}},
+	ppu_artist = {"comykel"}
 })
 
 register_rocket({
@@ -200,6 +204,7 @@ register_rocket({
 	key = "soyuz1",
 	pos = {x = 3, y = 0},
 	config = {extra = {hand = "Three of a Kind", rounds = 3}},
+	ppu_artist = {"comykel"}
 })
 
 register_rocket({
@@ -218,6 +223,7 @@ register_rocket({
 	key = "spaceshuttle",
 	pos = {x = 0, y = 1},
 	config = {extra = {hand = "Full House", rounds = 2}},
+	ppu_artist = {"comykel"}
 })
 
 register_rocket({
@@ -236,6 +242,7 @@ register_rocket({
 	key = "saturnv",
 	pos = {x = 3, y = 1},
 	config = {extra = {hand = "Five of a Kind", rounds = 1}},
+	ppu_artist = {"comykel"},
 	in_pool = function(self, args)
 		return G.GAME.hands[self.config.extra.hand].played > 0
 	end,
@@ -264,6 +271,7 @@ register_rocket({
 	set = "Spectral",
 	pos = {x = 6, y = 0},
 	config = {extra = {hand = "Special: Everything", rounds = 3}},
+	ppu_artist = {"noodlemire", "jade"},
 	hidden = true,
 	soul_set = "polarskull_rocket",
 	draw = function(self, card, layer)
