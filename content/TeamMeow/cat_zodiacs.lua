@@ -4,7 +4,7 @@ SMODS.ConsumableType({
 	secondary_colour = HEX("A7D6E0"),
 	default = "c_worm_zodicat1",
 	collection_rows = { 3,3 },
-	shop_rate = 4,
+	shop_rate = 3,
 	text_colour = G.C.UI.TEXT_DARK,
 })
 
