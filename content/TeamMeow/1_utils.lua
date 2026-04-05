@@ -25,6 +25,6 @@ function meow_can_apply_foil(card)
     if not card.tarts then
         return false
     else
-        return card.tarts < 7
+        return #card.tarts < 7
     end
 end
