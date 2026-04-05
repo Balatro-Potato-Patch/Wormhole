@@ -1,12 +1,12 @@
 SMODS.ConsumableType({
-    key = "worm_meow_Spacetart",
-    primary_colour = HEX("2e4bff"),
-    secondary_colour = HEX("5b4bf0"),
-    select_card = "consumeables",
-    default = "c_worm_stellar_strawberry",
-    collection_rows = { 3,3 },
-    shop_rate = 4,
-    text_colour = G.C.UI.TEXT_LIGHT,
+	key = "worm_meow_Spacetart",
+	primary_colour = HEX("2e4bff"),
+	secondary_colour = HEX("5b4bf0"),
+	select_card = "consumeables",
+	default = "c_worm_stellar_strawberry",
+	collection_rows = { 3, 3 },
+	shop_rate = 4,
+	text_colour = G.C.UI.TEXT_LIGHT,
 })
 
 SMODS.Atlas({
@@ -78,7 +78,7 @@ local function SpaceTart(args)
 			if not card then
 				card = self:create_fake_card()
 			end
-            card.ability.extra.tart_cfg = specific_vars.tart_cfg or card.ability.extra.tart_cfg
+			card.ability.extra.tart_cfg = specific_vars.tart_cfg or card.ability.extra.tart_cfg
 			local target = {
 				type = "descriptions",
 				key = self.key,
@@ -171,8 +171,8 @@ local function SpaceTart(args)
 	Wormhole.TEAM_MEOW.tartInfo[args.key] = {
 		boosts = args.boosted_jokers,
 		pos = foilPos,
-        regular_func = args.calculate,
-        boosted_func = args.boosted_calculate
+		regular_func = args.calculate,
+		boosted_func = args.boosted_calculate,
 	}
 end
 
@@ -195,22 +195,30 @@ function generate_card_ui(
 		for _, v in ipairs(card.tarts) do
 			map[v.center_key] = map[v.center_key] and (map[v.center_key] + 1) or 1
 		end
-        for _, v in ipairs(card.tarts) do
-			local is_boosted = false
-            local tab = Wormhole.TEAM_MEOW.tartInfo[v.key]
-            local amt = nil
-            for k, num in pairs(map) do
-                if k == v then
-                    amt = num
-                end
-            end
-			for _, k in ipairs(tab.boosts) do
-				if k == card.config.center_key then
-					is_boosted = true
-					break
+		local seen = {}
+		for _, v in ipairs(card.tarts) do
+			if not seen[v.key] then
+				seen[v.key] = true
+				local is_boosted = false
+				local tab = Wormhole.TEAM_MEOW.tartInfo[v.key]
+				local amt = nil
+				for k, num in pairs(map) do
+					if k == v.center_key then
+						amt = num
+					end
 				end
+				for _, k in ipairs(tab.boosts) do
+					if k == card.config.center_key then
+						is_boosted = true
+						break
+					end
+				end
+				generate_card_ui(
+					G.P_CENTERS[v.center_key],
+					ret,
+					{ stacks = amt, is_boosted = is_boosted, tart_cfg = v.config }
+				)
 			end
-			generate_card_ui(G.P_CENTERS[v.center_key], ret, { stacks = amt, is_boosted = is_boosted, tart_cfg = v.config })
 		end
 	end
 	return ret
@@ -218,7 +226,7 @@ end
 
 local card_joker_calc = Card.calculate_joker
 function Card:calculate_joker(context, ...)
-    local calc_res, has_post = card_joker_calc(self, context, ...)
+	local calc_res, has_post = card_joker_calc(self, context, ...)
 	local ret = { calc_res }
 	if self.tarts and not self.debuff and not context.blueprint and not context.retrigger_joker then
 		for _, tart in ipairs(self.tarts) do
@@ -247,10 +255,10 @@ SpaceTart({
 	key = "stellar_strawberry",
 	tart_pos = { x = 1, y = 2 },
 	foil_pos = { x = 1, y = 0 },
-    config = {
-        reg = 1.5,
-        boosted = 2.5
-    },
+	config = {
+		reg = 1.5,
+		boosted = 2.5,
+	},
 	calculate = function(card, tart_config, context)
 		if context.joker_main then
 			return {
@@ -267,16 +275,15 @@ SpaceTart({
 	end,
 	loc_vars = function(self, info_queue, card, tart_config, is_boosted)
 		return {
-            vars = {
-                is_boosted and tart_config.boosted or tart_config.reg,
-            }
-        }
+			vars = {
+				is_boosted and tart_config.boosted or tart_config.reg,
+			},
+		}
 	end,
 	boosted_jokers = {
 		"j_joker",
 	},
 })
-
 
 -- create_tart("stellar_strawberry", { x = 1, y = 2 }, { x = 1, y = 0 }, function(card, context)
 -- 	return { message = "test" }
@@ -446,7 +453,13 @@ function Card:stop_drag(...)
 			end
 		end
 	end
-	if self.ability and self.ability.set == "worm_meow_Spacetart" and bool and playerHas and meow_can_apply_foil(self) then
+	if
+		self.ability
+		and self.ability.set == "worm_meow_Spacetart"
+		and bool
+		and playerHas
+		and meow_can_apply_foil(self)
+	then
 		local tart = {
 			key = self.ability.extra.tart,
 			config = self.ability.extra.tart_cfg or {},
