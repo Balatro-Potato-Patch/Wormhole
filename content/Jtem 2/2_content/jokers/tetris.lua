@@ -465,15 +465,19 @@ function JtemTGM.ChangeState(game, newstate)
 		newstate = STATE_LOCKED
 	end
 
-	if newstate == STATE_LOCKING then
+	if newstate == STATE_LOCKING and game.state ~= STATE_LOCKING then
 		game.lock_timer = game.lock_delay
 		game.clears = 0
+		JtemTGM.PlaySound("land")
 	end
 
 	if newstate == STATE_DROPPING then
 		if game.state == STATE_ARE then
 			if (game.level % 100) ~= 99 and game.level ~= MAX_LEVEL - 1 then
 				game.level = game.level + 1
+				if (game.level % 100) == 99 or game.level == MAX_LEVEL - 1 then
+					JtemTGM.PlaySound("bell")
+				end
 			end
 		end
 		if game.level >= MAX_LEVEL then
@@ -486,14 +490,16 @@ function JtemTGM.ChangeState(game, newstate)
 			game.current_piece = JtemTGM.CreateCurrentPiece(3, -1, game.next_pieces[1], 1)
 			-- IRS
 			if love.keyboard.isDown("z") then
-
+				JtemTGM.PlaySound("irs")
+				JtemTGM.CheckRotation(game.current_piece, -1, game.board)
 			end
 			if love.keyboard.isDown("x") then
-
+				JtemTGM.PlaySound("irs")
+				JtemTGM.CheckRotation(game.current_piece, 1, game.board)
 			end
 			table.remove(game.next_pieces, 1)
 			table.insert(game.next_pieces, JtemTGM.GeneratePiece(game.randomizer))
-			-- TODO sound
+			JtemTGM.PlaySound("piece_" .. game.next_pieces[1])
 		end
 		game.clears = 0
 		game.soft = game.state == STATE_ARE and 0 or game.soft
@@ -520,7 +526,6 @@ function JtemTGM.ChangeState(game, newstate)
 				if add then
 					line_count = line_count + 1
 					game.clear_cols[y] = true
-					print("hi please clear")
 					for x = 0, BOARD_W - 1 do
 						col[x] = 'C'
 						if game.lightup[y] and game.lightup[y][x] then
@@ -531,6 +536,14 @@ function JtemTGM.ChangeState(game, newstate)
 			end
 		end
 		game.clears = line_count
+		if line_count > 0 then
+			JtemTGM.PlaySound("line_clear")
+			if line_count >= 4 then
+				JtemTGM.PlaySound("cheer")
+			end
+		else
+			JtemTGM.PlaySound("lock")
+		end
 		game.combo = game.combo + ((2 * line_count) - 2)
 		if line_count == 0 then
 			game.clear_time = 1
@@ -560,6 +573,9 @@ function JtemTGM.ChangeState(game, newstate)
 				game.points = 0
 				game.grade = math.min(game.grade + 1, 31)
 				game.point_decay = 0
+			end
+			if math.max(0, math.floor(game.old_level / 100)) ~= math.max(0, math.floor(game.level / 100)) then
+				JtemTGM.PlaySound("level_up")
 			end
 		end
 	end
@@ -622,6 +638,7 @@ function JtemTGM.ChangeState(game, newstate)
 				end
 			end
 		end
+		JtemTGM.PlaySound("thud")
 	end
 
 	game.state = newstate
@@ -884,6 +901,25 @@ end
 
 --#endregion
 
+--#region Sounds
+
+---@type love.filesystem
+local nativefs = SMODS.NFS
+local files = nativefs.getDirectoryItems(Wormhole.path .. "/assets/sounds/Jtem 2/tetris")
+for k, file in ipairs(files) do
+	local basename = file:gsub("%.%w+$", "")
+	SMODS.Sound {
+		key = "jtem2_tetris_" .. basename,
+		path = "Jtem 2/tetris/" .. file
+	}
+end
+
+function JtemTGM.PlaySound(id)
+	play_sound("worm_jtem2_tetris_" .. id, 1.0, 0.7)
+end
+
+--#endregion
+
 --#region Actual logic
 
 function JtemTGM.GetDirectionalInput()
@@ -1035,11 +1071,17 @@ function JtemTGM.UpdateGame(game, dt)
 	end
 end
 
-function JtemTGM.DrawPiece(piece, x, y, piece_w, piece_h, rotation)
+local BOARD_XOFFSET = 5
+local BOARD_YOFFSET = 9
+
+function JtemTGM.DrawPiece(piece, x, y, piece_w, piece_h, rotation, dark)
 	love.graphics.push()
 	love.graphics.translate(x * piece_w, y * piece_h)
 	local p = JtemTGM.pieces[piece][rotation]
 	love.graphics.setColor(JtemTGM.pieces[piece].color)
+	if dark and dark > 0 then
+		love.graphics.setColor(darken(JtemTGM.pieces[piece].color, dark))
+	end
 	for fy = 0, 3 do
 		for fx = 0, 3 do
 			if p[fy + 1][fx + 1] == 1 then
@@ -1050,16 +1092,23 @@ function JtemTGM.DrawPiece(piece, x, y, piece_w, piece_h, rotation)
 	love.graphics.pop()
 end
 
+function JtemTGM.BoardStencil()
+	love.graphics.rectangle("fill", 0, 0, BOARD_W * BLOCK_W, BOARD_H * BLOCK_H)
+end
+
 ---@param canvas love.Canvas|table
 ---@param game table
 function JtemTGM.HandleDraw(canvas, game)
 	local oldcanvas = love.graphics.getCanvas()
 	love.graphics.push()
 	love.graphics.origin()
-	love.graphics.setCanvas(canvas)
+	love.graphics.setCanvas({ canvas, stencil = true })
 
-	love.graphics.translate(0, 0)
+	love.graphics.translate(BOARD_XOFFSET, BOARD_YOFFSET)
 	love.graphics.clear()
+
+	love.graphics.stencil(JtemTGM.BoardStencil, "replace", 1)
+	love.graphics.setStencilTest("greater", 0)
 
 	-- draw the current board first
 	for y = BOARD_HCLEARANCE, BOARD_H - 1 do
@@ -1076,25 +1125,68 @@ function JtemTGM.HandleDraw(canvas, game)
 			local piece = p[1]
 
 			if JtemTGM.ValidPiece(cell) and piece then
-				love.graphics.setColor(p.color)
-				love.graphics.rectangle("fill", px, py, BLOCK_W, BLOCK_H)
 				love.graphics.setColor(G.C.WHITE)
+				love.graphics.rectangle("fill", px - 1, py - 1, BLOCK_W + 2, BLOCK_H + 2)
 			end
 			::xcontinue::
 		end
 		::continue::
 	end
 
+	for y = BOARD_HCLEARANCE, BOARD_H - 1 do
+		local col = game.board[y]
+		if col == nil then goto continue end
+		local py = y * BLOCK_H
+		for x = 0, BOARD_W - 1 do
+			local cell = game.board[y][x]
+			if cell == nil then goto xcontinue end
+			local px = x * BLOCK_W
+
+			local p = JtemTGM.pieces[cell]
+			if not p then goto xcontinue end
+			local piece = p[1]
+
+			if JtemTGM.ValidPiece(cell) and piece then
+				love.graphics.setColor(darken(p.color, 0.2))
+				love.graphics.rectangle("fill", px, py, BLOCK_W, BLOCK_H)
+			end
+			::xcontinue::
+		end
+		::continue::
+	end
+
+	love.graphics.setStencilTest()
+
 	-- draw the piece being dealt
 	local current = game.current_piece
 	if current and current.piece then
+		local darken = game.lock_delay - game.lock_timer
+		local t = (darken / game.lock_delay) * 0.2
+		if game.state ~= STATE_LOCKING then t = 0 end
 		JtemTGM.DrawPiece(current.piece, current.x, current.y, BLOCK_W, BLOCK_H,
-			current.rotation)
+			current.rotation, t)
+	end
+
+	-- draw next piece
+	local next = game.next_pieces[1]
+	if next then
+		JtemTGM.DrawPiece(next, 11, 0, BLOCK_W, BLOCK_H, 1, 0)
 	end
 
 	love.graphics.pop()
 	love.graphics.setCanvas({ oldcanvas, stencil = true })
 end
+
+--#endregion
+
+--#region SMODS Joker definition
+
+SMODS.Atlas({
+	key = "jtem2_tetris",
+	path = "Jtem 2/jokers/tetris.png",
+	px = 71,
+	py = 95,
+})
 
 -- Here's the actual Joker definition
 SMODS.Joker {
@@ -1107,7 +1199,7 @@ SMODS.Joker {
 	rarity = 2,
 	cost = 8,
 
-	-- atlas = "jokers",
+	atlas = "jtem2_tetris",
 	pos = { x = 0, y = 0 },
 
 	attributes = {
@@ -1130,13 +1222,24 @@ SMODS.Joker {
 	end,
 
 	set_sprites = function(self, card, front)
-		card.jtem2_tetris_canvas = SMODS.CanvasSprite { canvasScale = 1 }
+		card.children.jtem2_tetris_canvas = SMODS.CanvasSprite { canvasScale = 1 }
+		card.children.jtem2_tetris_canvas.role.draw_major = card
+		card.children.jtem2_tetris_canvas.states.hover.can = false
+		card.children.jtem2_tetris_canvas.states.click.can = false
 	end,
 
 	add_to_deck = function(self, card, from_debuff)
 		if from_debuff then return end
 		card.ability.extra.game_state = JtemTGM.ResetPlayerState()
 		card.ability.extra.game_state.state = STATE_READY
+	end,
+
+	calculate = function(self, card, context)
+		if context.joker_main then
+			return {
+				xmult = ((card.ability.extra.game_state.level or 0) / 100) + 1
+			}
+		end
 	end
 }
 
@@ -1144,12 +1247,15 @@ SMODS.DrawStep {
 	key = "jtem2_tetris_draw",
 	order = 9,
 	func = function(card, layer)
-		if card.config.center_key == "j_worm_jtem2_tetris" and card.jtem2_tetris_canvas and next(card.ability.extra.game_state or {}) then
-			JtemTGM.HandleDraw(card.jtem2_tetris_canvas.canvas, card.ability.extra.game_state)
+		if card.config.center_key == "j_worm_jtem2_tetris" and card.children.jtem2_tetris_canvas and next(card.ability.extra.game_state or {}) then
+			JtemTGM.HandleDraw(card.children.jtem2_tetris_canvas.canvas, card.ability.extra.game_state)
 			---@type balatro.Sprite
-			local spr = card.jtem2_tetris_canvas
+			local spr = card.children.jtem2_tetris_canvas
 			spr:draw_shader('dissolve', nil, nil, nil, card.children.center)
 		end
 	end,
 	conditions = { vortex = false, facing = 'front' },
 }
+SMODS.draw_ignore_keys.jtem2_tetris_canvas = true
+
+--#endregion
