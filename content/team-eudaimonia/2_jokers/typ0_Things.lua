@@ -1,18 +1,19 @@
 SMODS.Atlas {
-    key = 'wowsignalatlas',
+    key = 'euda_wow',
     px = 71,
     py = 95,
     path = 'team-eudaimonia/wowsignal.png',
 }
 
 SMODS.Joker {
-    key = "wowsignal",
-    atlas = 'wowsignalatlas',
+    key = "euda_wowsignal",
+    atlas = 'euda_wow',
     pos = { x = 0, y = 0 },
     rarity = 1,
     blueprint_compat = true,
     cost = 2,
     discovered = true,
+    attributes = {"chance","xchips", "chips", "space"},
     config = {extra = {numerator = 1, denominator = 6, chipsmin = 20, chipsmax = 50, wowmin = 2, wowmax = 5}},
     ppu_coder = {'Typ0'},
     ppu_artist = {'LasagnaFelidae'},
@@ -40,7 +41,7 @@ SMODS.Joker {
 
 --ripped from yahimod
 SMODS.PokerHand({
-    key = "pkr_wow",
+    key = "euda_pkr_wow",
     mult = 5,
     chips = 30,
     l_mult = 2,
@@ -96,7 +97,7 @@ SMODS.PokerHand({
 })
 
 SMODS.PokerHand({
-    key = "pkr_wow_f",
+    key = "euda_pkr_wow_f",
     mult = 10,
     chips = 30,
     l_mult = 5,
