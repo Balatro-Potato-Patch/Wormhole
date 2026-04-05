@@ -430,6 +430,26 @@ return {
                 }
                 }
             },
+            PotatoPatchDev_AstraLuna = {
+                name = 'AstraLuna',
+                text = { {
+                    'Heyo!!! The name\'s {E:2,C:green}Luna{} and I exist here!',
+                    'I\'m one of the artists for this team! I made quite',
+                    'a few of the Jokers and am mildly proud of my work here.',
+                    'Usually I\'d be the main coder, but with the scope of this Jam',
+                    'and the stacked team we have, I left most of it to the others lmao.',
+                }, {
+                    "I\'m super grateful to my two dev partners base4 and Annebean for joining",
+                    "me on this team, helping out and doing god's work out here.",
+                    "It was an amazing experience refining this concept and",
+                    "putting it out there for yall, and Id love to work with this group again.",
+                },{
+                    "Good luck!",
+                    "Dont die!",
+                    "Dont let the breadbugs bite."
+                }
+                }
+            },
             PotatoPatchDev_theAstra = {
                 name = 'theAstra',
                 text = { {
