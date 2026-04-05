@@ -48,6 +48,18 @@ return {
 
 
         },
+        Blind = {
+            bl_worm_anomaly = {
+                name = {
+                    "The Anomaly"
+                },
+                text = {
+                    "When a hand played",
+                    "the blind is increased",
+                    "by #1#%"
+                }
+            }
+        },
         Joker = {
             j_worm_message = {
                 name = {

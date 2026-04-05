@@ -1,7 +1,7 @@
 -- Atlas
 SMODS.Atlas({
     key = "message", 
-    path = "team-eudaimonia/message.png", 
+    path = "team-eudaimonia/jokers/message.png", 
     px = 71,
     py = 95,
     atlas_table = "ASSET_ATLAS"
@@ -59,7 +59,7 @@ SMODS.Joker {
 -- Atlas
 SMODS.Atlas({
     key = "answer", 
-    path = "team-eudaimonia/answer.png", 
+    path = "team-eudaimonia/jokers/answer.png", 
     px = 71,
     py = 95,
     atlas_table = "ASSET_ATLAS"
@@ -75,4 +75,17 @@ SMODS.Joker {
     config = { extra = {}, },
     discovered = true,
     atlas = 'answer',
+    calculate = function(self, card, context)
+        if context.ante_change and context.ante_end then
+            G.GAME.round_resets.blind_choices.Boss = 'bl_worm_anomaly'
+        end
+    end
 }
+
+local get_new_boss_ref = get_new_boss
+function get_new_boss()
+    if next(SMODS.find_card("j_worm_answer")) then
+        return "bl_worm_anomaly"
+    end
+    return get_new_boss_ref()
+end
