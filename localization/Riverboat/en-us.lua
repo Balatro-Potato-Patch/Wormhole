@@ -91,6 +91,14 @@ return {
                     "{C:inactive}(Currently {C:chips}+#4# {C:inactive}Chips)",
                     "{C:inactive}(2s are destroyed instead)"
                 }
+            },
+            j_worm_riverboat_roche = {
+                name = "Roche Limit",
+                text = {
+                    "If final score is {C:attention}#1#%{} of Blind score,",
+                    "{C:red}destroy{} a held {C:planet}Planet{} and add",
+                    "its {C:chips}Chips{} and {C:mult}Mult{} to the winning hand"
+                }
             }
         },
         Enhanced = {
@@ -105,7 +113,8 @@ return {
     },
     misc = {
         dictionary = {
-            k_revolve_ex = "Revolve!"
+            k_revolve_ex = "Revolve!",
+            k_disintegrated_ex = "Disintegrated!"
         }
     }
 }

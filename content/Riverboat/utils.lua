@@ -73,3 +73,19 @@ Wormhole.Riverboat.flip_cards = function(cards, direction)
         }))
     end
 end
+
+Wormhole.Riverboat.upgrade_hands = function(hand_list, params, card)
+    if type(hand_list) == "string" then hand_list = { hand_list } end
+    local param_keys = {}
+    for k, _ in pairs(params) do
+        param_keys[#param_keys + 1] = k
+    end
+    SMODS.upgrade_poker_hands {
+        hands = hand_list,
+        parameters = param_keys,
+        func = function(base, _, param, _)
+            return base + params[param]
+        end,
+        from = card
+    }
+end
