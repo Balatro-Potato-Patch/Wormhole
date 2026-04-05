@@ -25,9 +25,9 @@ return {
                 name = "iamarta",
                 text = {"bonjour"}
             },
-            PotatoPatchDev_m0x3s = {
-                name = "m0x3s",
-                text = {"."}
+            PotatoPatchDev_M0xes = {
+                name = "M0xes",
+                text = {"Me."}
             },
             PotatoPatchDev_Hunter = {
                 name = "ARandomHunter",
@@ -58,6 +58,15 @@ return {
                 },
                 
             },
+            j_worm_jokecolony = {
+                name = "Joke Colony",
+                text = {
+                    "Store Jokers in a {C:attention}Colony",
+                    "Gives {C:mult}+#1#{} Mult per Joker in the {C:attention}Colony",
+                    "{C:inactive}(Population #2# for {C:red}+#3#{C:inactive} Mult)",
+                },
+                
+            },
         },
     },
     misc = {
@@ -73,6 +82,14 @@ return {
             poker_hands = {
                 worm_pkr_wow = "Wow!",
                 worm_pkr_wow_f = "Wow! Flush"
+            },
+            dictionary = {
+                k_worm_jokecolony_ship_button = "SHIP",
+                k_worm_jokecolony_receive_button = "RELEASE",
+                k_worm_specificcolony_ship_button = "Ship Jokers",
+                k_worm_specificcolony_receive_button = "Release Jokers",
+                k_worm_specificcolony_ship_title = "Sending to Colony ",
+                k_worm_specificcolony_receive_title = "Release from Colony "
             }
         },
 }

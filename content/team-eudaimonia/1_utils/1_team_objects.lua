@@ -11,6 +11,12 @@ SMODS.Atlas {
 	px = 71,
 	py = 95,
 }
+SMODS.Atlas {
+	key = "eud_teamM0xes",
+	path = "team-eudaimonia/teamcards/M0xes.png",
+	px = 71,
+	py = 95,
+}
 
 PotatoPatchUtils.Team({
     name = "TeamEudaimonia",
@@ -62,12 +68,12 @@ PotatoPatchUtils.Developer({
     pos = {x=0,y=0}
 })
 PotatoPatchUtils.Developer({
-    name = "m0x3s",
+    name = "M0xes",
     colour = HEX('9d39c4'),
     loc = true,
     team = "TeamEudaimonia",
-    --atlas_key = "eud_teamM0x3s"
-    --pos = {x=0,y=0}
+    atlas = "worm_eud_teamM0xes",
+    pos = {x=0,y=0}
 })
 PotatoPatchUtils.Developer({
     name = "Sillyz",
