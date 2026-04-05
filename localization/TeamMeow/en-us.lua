@@ -1,33 +1,33 @@
 return {
 	PotatoPatch = {
 		Info_Menu = {
-			tarts = {
-				name = "Spacetarts!",
+			worm_meow_tarts = {
+				name = "Spacetarts",
 				text = {
 					{
 						name = "Overview",
 						text = {
 							{
-								"After providing you with so many effects, your {C:attention}Joker{}s are surely",
-								"tired from all that hassle! Worry not, Team Meow's greatest nutritionists",
-								"have worked out a solution! Introducing, {C:inactive,s:0.7}(drumroll pls){} {C:worm_meow_spacetart}©Spacetart{}s!"
+								"Use the mouse to {C:attention}drag{} the {C:worm_meow_spacetart}©Spacetart{} on a {C:attention}Joker{}",
+								"to feed it to them.",
+								"If a {C:attention}Joker{} is about to eat the {C:worm_meow_spacetart}©Spacetart{},",
+								"the cursor will turn into a {C:attention}cat paw{}.",
 							},
 							{
-								"Use the mouse to {C:attention}drag{} the {C:worm_meow_spacetart}©Spacetart{} on the {C:attention}Joker{} to feed it to them!",
-								"If a {C:attention}Joker{} is about to eat the {C:worm_meow_spacetart}©Spacetart{}, the cursor will turn into a {C:attention}cat paw{}!",
-								"The foil will remain on the {C:attention}Joker{}. Don't worry, they love it!",
-							},
-							{
-								"Some {C:attention}Joker{}s might get too full after eating too many {C:worm_meow_spacetart}©Spacetart{}s...",
-								"In this case, they won't be able to consume any more {C:worm_meow_spacetart}©Spacetart{}s!",
-								"After our extensive testing, a {C:attention}Joker{} can consume at most {C:attention}#1# {C:worm_meow_spacetart}©Spacetart{}s",
+								"Some {C:attention}Joker{}s might get too full after eating too many {C:worm_meow_spacetart}©Spacetart{}s",
+								"and won't be able to consume any more {C:worm_meow_spacetart}©Spacetart{}s.",
+								"A {C:attention}Joker{} can consume at most {C:attention}#1# {C:worm_meow_spacetart}©Spacetart{}s",
 								"before refusing to eat more under normal circumstances."
 							},
 							{
 								"If you think a {C:attention}Joker{} has too many foils and its unevenly distributed,",
-								"don't worry! Simply {C:attention}drag{} the {C:attention}Joker{} onto another one, and the foil will be",
+								"simply {C:attention}drag{} the {C:attention}Joker{} onto another one, and the topmost foil will be",
 								"given to the other {C:attention}Joker{}, while also enabling the original {C:attention}Joker{} to",
-								"consume {C:attention}another {C:worm_meow_spacetart}©Spacetart{}!"
+								"consume {C:attention}another {C:worm_meow_spacetart}©Spacetart{}."
+							},
+							{
+								"Certain {C:attention}Joker{}s prefer different flavours of {C:worm_meow_spacetart}©Spacetart{}s",
+								"and the effect of the {C:worm_meow_spacetart}©Spacetart{} will be greatly {C:attention}boosted{}."
 							},
 						}
 					}

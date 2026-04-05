@@ -622,8 +622,37 @@ function Game:update(dt, ...)
         for k, v in ipairs(G.consumeables.cards) do
             if v.ability and v.ability.set == "worm_meow_Spacetart" and not G.GAME.shown_tart_poppup then
                 G.GAME.shown_tart_poppup = true
-                PotatoPatchUtils.INFO_MENU.create_menu({ menu_type = "tarts", vars = { G.GAME.max_foil_slots } })
+                PotatoPatchUtils.INFO_MENU.create_menu({ menu_type = "worm_meow_tarts", vars = { G.GAME.max_foil_slots } })
             end
         end
     end
 end
+
+SMODS.Atlas({
+	key = "meowPanelApply",
+	px = 80,
+	py = 60,
+	path = "TeamMeow/panelApply.png",
+	frames = 30,
+	atlas_table = "ANIMATION_ATLAS",
+})
+SMODS.Atlas({
+    key = "meowPanelSwitch",
+    px = 80,
+    py = 60,
+    path = "TeamMeow/panelSwitch.png",
+    frames = 24,
+    atlas_table = "ANIMATION_ATLAS",
+})
+SMODS.Atlas({
+    key = "meowPanelStack",
+    px = 80,
+    py = 60,
+    path = "TeamMeow/panelStack.png",
+})
+SMODS.Atlas({
+    key = "meowPanelBoosts",
+    px = 80,
+    py = 60,
+    path = "TeamMeow/panelBoosts.png",
+})
