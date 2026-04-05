@@ -212,7 +212,7 @@ return {
 				}
 			},
 			spacetart_meteor_mint_boosted = {
-				name = "Stellar Strawberry",
+				name = "Meteor Mint",
 				text = {
 					"idk if u can do non hard-coded",
 					"values easily in here :shrug:",
@@ -220,14 +220,14 @@ return {
 				}
 			},
 			spacetart_meteor_mint_regular = {
-				name = "Stellar Strawberry",
+				name = "Meteor Mint",
 				text = {
 					"lame ass",
 					"{C:inactive,s:0.8}#1#{C:attention,s:0.8}#2#{C:inactive,s:0.8}#3#"
 				}
 			},
 			spacetart_blueshift_blueberry_boosted = {
-				name = "Meteor Mint",
+				name = "Blueshift Blueberry",
 				text = {
 					"idk if u can do non hard-coded",
 					"values easily in here :shrug:",
@@ -235,7 +235,7 @@ return {
 				}
 			},
 			spacetart_blueshift_blueberry_regular = {
-				name = "Meteor Mint",
+				name = "Blueshift Blueberry",
 				text = {
 					"lame ass",
 					"{C:inactive,s:0.8}#1#{C:attention,s:0.8}#2#{C:inactive,s:0.8}#3#"
