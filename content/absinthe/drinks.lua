@@ -403,6 +403,7 @@ SMODS.Consumable { -- Pina Solada
     key = 'abs_pina_solada',
     atlas = 'abs_drinks',
     ppu_coder = { 'iwas_nevergood' },
+    ppu_artist = { 'iwas_nevergood' },
     ppu_team = { 'absinthe' },
     pos = { x = 0, y = 0 },
     config = {
@@ -474,6 +475,7 @@ SMODS.Consumable { -- Meteor Sour
     key = 'abs_meteor_sour',
     atlas = 'abs_drinks',
     ppu_coder = { 'theAstra' },
+    ppu_artist = { 'pangaea47' },
     ppu_team = { 'absinthe' },
     pos = { x = 0, y = 2 },
     config = {
@@ -540,6 +542,7 @@ SMODS.Consumable { -- Cosmospolitan
     key = 'abs_cosmospolitan',
     atlas = 'abs_drinks',
     ppu_coder = { 'theAstra' },
+    ppu_artist = { 'pangaea47' },
     ppu_team = { 'absinthe' },
     pos = { x = 4, y = 2 },
     config = {
