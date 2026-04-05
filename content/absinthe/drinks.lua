@@ -541,11 +541,11 @@ SMODS.Consumable { -- Cosmospolitan
     atlas = 'abs_drinks',
     ppu_coder = { 'theAstra' },
     ppu_team = { 'absinthe' },
-    pos = { x = 5, y = 2 },
+    pos = { x = 4, y = 2 },
     config = {
         drink_values = {
-            filled_pos = { x = 5, y = 2 },
-            empty_pos = { x = 6, y = 2 },
+            filled_pos = { x = 4, y = 2 },
+            empty_pos = { x = 5, y = 2 },
             filled = true,
             visibly_filled = true,
             primed = false
