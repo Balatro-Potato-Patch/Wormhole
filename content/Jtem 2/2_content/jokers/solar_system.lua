@@ -382,6 +382,19 @@ SMODS.Atlas({
 
 SMODS.Joker({
 	key = "jtem2_solar_system",
+	attributes = {
+		"space",
+		"mult",
+		"chips",
+		"xmult",
+		"diamonds",
+		"economy",
+		"generation",
+		"chance",
+		"joker",
+		"tarot",
+		"enhancements",
+	},
 
 	blueprint_compat = true,
 
@@ -401,8 +414,14 @@ SMODS.Joker({
 				play_odds = 2,
 				money = 1,
 			},
+			c_saturn = {
+				stones = 12,
+			},
 		},
 	},
+
+	rarity = 3,
+	cost = 10,
 
 	loc_vars = function(self, info_queue, card)
 		local neptune_play_n, neptune_play_d = SMODS.get_probability_vars(
@@ -428,7 +447,7 @@ SMODS.Joker({
 			c_ceres = {},
 			c_mars = { localize({ type = "name_text", key = "j_splash", set = "Joker" }) },
 			c_jupiter = { card.ability.extra.c_jupiter.xmult },
-			c_saturn = { 12 },
+			c_saturn = { card.ability.extra.c_saturn.stones },
 			c_uranus = {},
 			c_neptune = {
 				localize("Diamonds", "suits_singular"),
@@ -483,68 +502,87 @@ SMODS.Joker({
 		-- eris: ?
 		---- (orbit significantly shifted from Sun)
 
-		if
-			context.using_consumeable
-			and context.consumeable.ability.set == "Planet"
-			and planets[context.consumeable.config.center_key]
-			and not card.ability.extra.planets[context.consumeable.config.center_key]
-		then
-			card.ability.extra.planets[context.consumeable.config.center_key] = true
-			card.worm_solar_system_delay_update = true
+		if context.using_consumeable and not context.blueprint and context.consumeable.ability.set == "Planet" then
+			-- I'm not sure that Planet X is a real planet.
+			if
+				context.consumeable.config.center_key == "c_planet_x"
+				and not card.ability.extra.planets.exception_planet_x
+			then
+				card.ability.extra.planets.exception_planet_x = true
+				return {
+					message = localize("k_planet_q"),
+					colour = G.C.SECONDARY_SET.Planet,
+				}
+			end
 
-			if context.consumeable.config.center_key == "c_saturn" and not context.blueprint then
+			if
+				planets[context.consumeable.config.center_key]
+				and not card.ability.extra.planets[context.consumeable.config.center_key]
+			then
+				card.ability.extra.planets[context.consumeable.config.center_key] = true
+				card.worm_solar_system_delay_update = true
+
+				if context.consumeable.config.center_key == "c_saturn" then
+					local amount_of_stones = math.floor(card.ability.extra.c_saturn.stones)
+					if amount_of_stones > 0 then
+						G.E_MANAGER:add_event(Event({
+							func = function()
+								local center_x, center_y = context.consumeable.T.x, context.consumeable.T.y
+								local radius = G.CARD_H * 1.1
+								for i = 1, amount_of_stones do
+									local circle_part = 2 * math.pi / amount_of_stones
+									local card_x, card_y =
+										math.cos(circle_part * i) * radius + center_x,
+										math.sin(circle_part * i) * radius + center_y
+									local playing_card = Card(
+										card_x,
+										card_y,
+										G.CARD_W,
+										G.CARD_H,
+										G.P_CARDS.D_6,
+										G.P_CENTERS.m_stone,
+										{ bypass_discovery_center = true }
+									)
+									playing_card:start_materialize()
+									local old_drag = playing_card.states.drag.can
+									playing_card.states.drag.can = false
+									G.E_MANAGER:add_event(Event({
+										trigger = "after",
+										delay = 0.1,
+										func = function()
+											playing_card.states.drag.can = old_drag
+											G.playing_card = (G.playing_card and G.playing_card + 1) or 1
+											playing_card:add_to_deck()
+											G.deck.config.card_limit = G.deck.config.card_limit + 1
+											table.insert(G.playing_cards, playing_card)
+											G.deck:emplace(playing_card)
+											return true
+										end,
+									}))
+								end
+								return true
+							end,
+						}))
+					end
+				end
+
 				G.E_MANAGER:add_event(Event({
+					blocking = false,
 					func = function()
-						local center_x, center_y = context.consumeable.T.x, context.consumeable.T.y
-						local radius = G.CARD_H * 1.1
-						for i = 1, 12 do
-							local circle_part = 2 * math.pi / 12
-							local card_x, card_y =
-								math.cos(circle_part * i) * radius + center_x,
-								math.sin(circle_part * i) * radius + center_y
-							local playing_card = Card(
-								card_x,
-								card_y,
-								G.CARD_W,
-								G.CARD_H,
-								G.P_CARDS.D_6,
-								G.P_CENTERS.m_stone,
-								{ bypass_discovery_center = true }
-							)
-							playing_card:start_materialize()
-							local old_drag = playing_card.states.drag.can
-							playing_card.states.drag.can = false
-							G.E_MANAGER:add_event(Event({
-								trigger = "after",
-								delay = 0.1,
-								func = function()
-									playing_card.states.drag.can = old_drag
-									G.playing_card = (G.playing_card and G.playing_card + 1) or 1
-									playing_card:add_to_deck()
-									G.deck.config.card_limit = G.deck.config.card_limit + 1
-									table.insert(G.playing_cards, playing_card)
-									G.deck:emplace(playing_card)
-									return true
-								end,
-							}))
-						end
+						card.worm_solar_system_delay_update = nil
 						return true
 					end,
 				}))
+
+				return {
+					message = localize({
+						type = "name_text",
+						set = "Planet",
+						key = context.consumeable.config.center_key,
+					}),
+					colour = G.C.SECONDARY_SET.Planet,
+				}
 			end
-
-			G.E_MANAGER:add_event(Event({
-				blocking = false,
-				func = function()
-					card.worm_solar_system_delay_update = nil
-					return true
-				end,
-			}))
-
-			return {
-				message = localize({ type = "name_text", set = "Planet", key = context.consumeable.config.center_key }),
-				colour = G.C.SECONDARY_SET.Planet,
-			}
 		end
 
 		if context.joker_main then
