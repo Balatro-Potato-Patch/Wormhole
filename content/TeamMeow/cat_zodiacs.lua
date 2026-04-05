@@ -3,7 +3,7 @@ SMODS.ConsumableType({
 	primary_colour = HEX("FDDCA0"),
 	secondary_colour = HEX("A7D6E0"),
 	default = "c_worm_zodicat1",
-	collection_rows = { 6 },
+	collection_rows = { 3,3 },
 	shop_rate = 4,
 	text_colour = G.C.UI.TEXT_DARK,
 })
@@ -87,7 +87,7 @@ SMODS.Consumable({
 		Wormhole.TEAM_MEOW.zodicat_use(card, function(p_card)
 			return p_card:get_id() == 14 or p_card:get_id() == 2
 		end, function(p_card)
-            p_card.ability.perma_chips = (p_card.ability.perma_chips or 0) + card.ability.extra.perma_chips
+			p_card.ability.perma_bonus = (p_card.ability.perma_bonus or 0) + card.ability.extra.perma_bonus
         end)
 	end,
 	can_use = function(self, card)

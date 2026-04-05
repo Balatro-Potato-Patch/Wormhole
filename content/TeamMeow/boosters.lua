@@ -17,7 +17,8 @@ SMODS.Sound({
 	},
     select_music_track = function(self) 
         return G.booster_pack and not G.booster_pack.REMOVED and SMODS.OPENED_BOOSTER and SMODS.OPENED_BOOSTER.config.center.kind == 'worm_meow_Spacetart' and 100 or nil
-    end    
+    end,
+	pitch = 1
 })
 
 SMODS.Booster({
@@ -158,7 +159,7 @@ SMODS.Booster({
 	pos = { x = 2, y = 0 },
 	config = { extra = 4,  choose = 2 },
 	group_key = "k_worm_meow_spacetart_pack",
-    kind = "Spacetart",
+    kind = "worm_meow_Spacetart",
 	select_card = "consumeables",
 	cost = 8,
 	weight = 0.09,
@@ -211,7 +212,8 @@ SMODS.Sound({
 	},
     select_music_track = function(self) 
         return G.booster_pack and not G.booster_pack.REMOVED and SMODS.OPENED_BOOSTER and SMODS.OPENED_BOOSTER.config.center.kind == 'worm_meow_Zodicat' and 100 or nil
-    end    
+    end,
+	pitch = 1
 })
 
 SMODS.Booster({
