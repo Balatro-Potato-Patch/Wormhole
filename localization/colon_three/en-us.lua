@@ -41,22 +41,30 @@ return {
             m_worm_junk_card = {
                 name = "Junk",
                 text = {
-                    "{C:chips}+#1#{} Chips",
-                    "No rank or suit,",
-                    "always scores,",
-                    "retrigger this",
-                    "card {C:attention}#3#{} time#4#"
+                    {
+                        "No rank or suit,",
+                        "always scores",
+                    },
+                    {
+                        "{C:chips}+#1#{} Chips",
+                        "Retrigger this",
+                        "card {C:attention}#3#{} time#4#"
+                    }
                 }
             },
             m_worm_junk_card_mult = {
                 name = "Junk",
                 text = {
-                    "{C:chips}+#1#{} Chips",
-                    "{C:mult}+#2#{} Mult",
-                    "No rank or suit,",
-                    "always scores,",
-                    "retrigger this",
-                    "card {C:attention}#3#{} time#4#"
+                    {
+                        "No rank or suit,",
+                        "always scores",
+                    },
+                    {
+                        "{C:chips}+#1#{} Chips",
+                        "{C:mult}+#2#{} Mult",
+                        "Retrigger this",
+                        "card {C:attention}#3#{} time#4#"
+                    }
                 }
             },
         },

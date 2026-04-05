@@ -27,10 +27,17 @@ function Game:start_run(args)
     end
 end
 
+SMODS.Atlas {
+    path = "colon_three/junk_card.png",
+    key = "ct_junk_card",
+    px = 71, py = 95
+}
+
 SMODS.Enhancement {
     key = "junk_card",
     ppu_coder = "lordruby",
     replace_base_card = true,
+    pos = { x = 1, y = 0 },
     no_rank = true,
     no_suit = true,
     always_scores = true,
@@ -66,6 +73,29 @@ SMODS.Enhancement {
         --     }
         -- end
     end
+}
+
+SMODS.DrawStep {
+    key = 'worm_c3_junk_card',
+    order = 1,
+    func = function(self, layer)
+        if not (self.config and self.config.center and self.config.center.key == "m_worm_junk_card") then return nil end
+        --Draw the main part of the card
+        if self.children.front then
+            if (self.edition and self.edition.negative and (not self.delay_edition or self.delay_edition.negative)) then
+                self.children.front:draw_shader('negative', nil, self.ARGS.send_to_shader)
+            elseif not self.greyed then
+                self.children.front:draw_shader('dissolve')
+            end
+        end
+        if not Wormhole.COLON_THREE.shared_junk_card then
+            Wormhole.COLON_THREE.shared_junk_card = Sprite(0, 0, G.CARD_W, G.CARD_H, G.ASSET_ATLAS["worm_ct_junk_card"], {x = 0, y = 0})
+        end
+        Wormhole.COLON_THREE.shared_junk_card:set_sprite_pos({ x = not not self.children.front and 0 or 1, y = 0 })
+        Wormhole.COLON_THREE.shared_junk_card.role.draw_major = self
+        Wormhole.COLON_THREE.shared_junk_card:draw_shader('dissolve', nil, nil, nil, self.children.center)
+    end,
+    conditions = { vortex = false, facing = 'front' },
 }
 
 function Wormhole.COLON_THREE.junk_get_highlighted_cards(cards)
