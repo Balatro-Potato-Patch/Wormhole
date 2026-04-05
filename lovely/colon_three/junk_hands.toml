@@ -7,12 +7,10 @@ priority = 0
 [patches.pattern]
 target = "functions/state_events.lua"
 pattern = '''
-mult = mod_mult(G.GAME.hands[text].mult)
-hand_chips = mod_chips(G.GAME.hands[text].chips)
-
-local modded = false
+update_hand_text({sound = G.GAME.current_round.current_hand.handname ~= disp_text and 'button' or nil, volume = 0.4, immediate = true, nopulse = nil,
+delay = G.GAME.current_round.current_hand.handname ~= disp_text and 0.4 or 0}, {handname=disp_text, level=G.GAME.hands[text].level, mult = G.GAME.hands[text].mult, chips = G.GAME.hands[text].chips})
 '''
-position = "after"
+position = "at"
 payload = '''
 local junks = 0
 for i, v in pairs(scoring_hand) do
@@ -20,24 +18,24 @@ for i, v in pairs(scoring_hand) do
 end
 G.GAME.worm_c3_junk_stats.x_hand_stats = G.GAME.worm_c3_junk_stats.x_hand_stats or 1.5
 local junk_hands_mult = G.GAME.worm_c3_junk_stats.x_hand_stats ^ junks
-mult = mult * junk_hands_mult
-hand_chips = hand_chips * junk_hands_mult
+
 update_hand_text({sound = G.GAME.current_round.current_hand.handname ~= disp_text and 'button' or nil, volume = 0.4, immediate = true, nopulse = nil,
-                                    delay = G.GAME.current_round.current_hand.handname ~= disp_text and 0.4 or 0}, {handname=disp_text, level=G.GAME.hands[text].level, mult = mult, chips = hand_chips})
+    delay = G.GAME.current_round.current_hand.handname ~= disp_text and 0.4 or 0}, 
+    {handname=disp_text, level=G.GAME.hands[text].level, mult = G.GAME.hands[text].mult * junk_hands_mult, chips = G.GAME.hands[text].chips * junk_hands_mult})
 '''
 match_indent = true
-
 
 [[patches]]
 [patches.pattern]
 target = "functions/state_events.lua"
 pattern = '''
-update_hand_text({sound = G.GAME.current_round.current_hand.handname ~= disp_text and 'button' or nil, volume = 0.4, immediate = true, nopulse = nil,
-                delay = G.GAME.current_round.current_hand.handname ~= disp_text and 0.4 or 0}, {handname=disp_text, level=G.GAME.hands[text].level, mult = G.GAME.hands[text].mult, chips = G.GAME.hands[text].chips})
+mult = mod_mult(G.GAME.hands[text].mult)
+hand_chips = mod_chips(G.GAME.hands[text].chips)
 '''
 position = "at"
 payload = '''
-
+mult = mod_mult(G.GAME.hands[text].mult * junk_hands_mult)
+hand_chips = mod_chips(G.GAME.hands[text].chips * junk_hands_mult)
 '''
 match_indent = true
 
