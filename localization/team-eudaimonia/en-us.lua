@@ -49,7 +49,7 @@ return {
 
         },
         Joker = {
-            j_worm_wowsignal = {
+            j_worm_euda_wowsignal = {
                 name = "Wow! Signal",
                 text = {
                     "{C:green}#1# in #2#{} chance to give ",
@@ -65,16 +65,35 @@ return {
                     "Gives {C:mult}+#1#{} Mult per Joker in the {C:attention}Colony",
                     "{C:inactive}(Population #2# for {C:red}+#3#{C:inactive} Mult)",
                 },
-                
+            },
+            j_worm_euda_rocket = {
+                name = "Space Shuttle",
+                text = {
+                    "{C:red}+#1#{} Mult?",
+                    "{C:inactive}(Blast off in: #3#)"
+                },
+            },
+			j_worm_euda_rocket_a = {
+                name = "Space Shuttle",
+                text = {
+					{
+                    "{C:red}+#1#{} Mult",
+					},
+					{
+					"Increase Mult by {C:red}#2#{}",
+					"if the {C:attention}scored hand{} isn't",
+					"the most played {C:attention}poker hand"
+					},
+                },
             },
         },
     },
     misc = {
             poker_hand_descriptions = {
-                worm_pkr_wow = {
+                worm_euda_pkr_wow = {
                     "Play a 6, a 3, a Queen, a Jack, and a 5",
                 },
-                worm_pkr_wow_f = {
+                worm_euda_pkr_wow_f = {
                         "Play a 6, a 3, a Queen, a Jack, and a 5",
                         "with all cards sharing the same suit",
                 },
@@ -90,6 +109,8 @@ return {
                 k_worm_specificcolony_receive_button = "Release Jokers",
                 k_worm_specificcolony_ship_title = "Sending to Colony ",
                 k_worm_specificcolony_receive_title = "Release from Colony "
+                worm_euda_pkr_wow = "Wow!",
+                worm_euda_pkr_wow_f = "Wow! Flush"
             }
         },
 }
