@@ -333,6 +333,7 @@ SMODS.Consumable { -- Moonshine
     key = 'abs_moonshine',
     pos = { x = 0, y = 1 },
     ppu_coder = { 'iwas_nevergood' },
+    ppu_artist = { 'iwas_nevergood' },
     ppu_team = { 'absinthe' },
     config = {
         drink_values = {
