@@ -1,11 +1,8 @@
 SMODS.Consumable{
 	key = "tlr_starmap",
 	set = "Spectral",
-	atlas = "Joker",
-	prefix_config = {
-		atlas = false
-	},
-  pos = { x = 2, y = 5 },
+	atlas = "tlr_misc",
+	pos = {x = 0, y = 0},
 	can_use = function() return true end,
 	soul_set = "worm_tlr_constellation",
 	select_card = function (self, card, pack)
@@ -61,7 +58,7 @@ SMODS.Consumable{
 				return true
 			end
 		}))
-		for _, _card in ipairs(G.consumeables) do
+		for _, _card in ipairs(G.consumeables.cards) do
 			G.E_MANAGER:add_event(Event({
 				trigger = 'after',
 				delay = 0.15,
@@ -74,7 +71,7 @@ SMODS.Consumable{
 			}))
 		end
 		delay(0.2)
-		for _, _card in ipairs(G.consumeables) do
+		for _, _card in ipairs(G.consumeables.cards) do
 			G.E_MANAGER:add_event(Event({
 				trigger = 'after',
 				delay = 0.1,
@@ -85,7 +82,7 @@ SMODS.Consumable{
 				end
 			}))
 		end
-		for _, _card in ipairs(G.consumeables) do
+		for _, _card in ipairs(G.consumeables.cards) do
 			G.E_MANAGER:add_event(Event({
 				trigger = 'after',
 				delay = 0.15,

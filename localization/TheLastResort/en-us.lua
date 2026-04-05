@@ -345,7 +345,7 @@ return {
 					}
 				}
 			},
-			PotatoPatchDev_Jogla = {
+			PotatoPatchDev_Jolga = { --- yes this is spelled wrong but I don't want to change all the incorrect references so its staying
 				name = "{C:blue}Jogla{}",
 				text = {
 					{

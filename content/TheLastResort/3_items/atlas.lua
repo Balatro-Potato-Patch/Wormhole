@@ -18,3 +18,10 @@ SMODS.Atlas{
 	px = 600,
 	py = 665
 }
+
+SMODS.Atlas{
+	key = "tlr_misc",
+	path = "TheLastResort/temp.png",
+	px = 71,
+	py = 95
+}
