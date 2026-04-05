@@ -5,23 +5,6 @@ SMODS.Atlas {
 	py = 95,
 }
 
-<<<<<<< Updated upstream
-=======
-SMODS.Atlas {
-	key = "eud_teamArta",
-	path = "team-eudaimonia/teamcards/arta.png",
-	px = 71,
-	py = 95,
-}
-
-SMODS.Atlas {
-	key = "eud_teamM0x3s",
-	path = "team-eudaimonia/teamcards/M0xes.png",
-	px = 71,
-	py = 95,
-}
-
->>>>>>> Stashed changes
 PotatoPatchUtils.Team({
     name = "TeamEudaimonia",
     colour = HEX('757bc8'),
@@ -72,12 +55,12 @@ PotatoPatchUtils.Developer({
     --pos = {x=0,y=0}
 })
 PotatoPatchUtils.Developer({
-    name = "M0xes",
+    name = "m0x3s",
     colour = HEX('9d39c4'),
     loc = true,
     team = "TeamEudaimonia",
-    atlas = "worm_eud_teamM0x3s",
-    pos = {x=0,y=0}
+    --atlas_key = "eud_teamM0x3s"
+    --pos = {x=0,y=0}
 })
 PotatoPatchUtils.Developer({
     name = "Sillyz",
