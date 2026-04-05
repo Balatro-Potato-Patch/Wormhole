@@ -93,4 +93,9 @@ return {
 			},
 		},
 	},
+	misc = {
+		dictionary = {
+			b_worm_jtem_reset = "RESET"
+		}
+	}
 }
