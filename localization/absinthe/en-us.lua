@@ -167,8 +167,7 @@ return {
                         "{C:inactive}(Must have space!)",
                     },
                     {
-                        "{C:abs_drinks}Refill{} by using",
-                        "{C:attention}#3#{} {C:planet}Planet cards{}",
+                        "{C:abs_drinks}Refill{} by using {C:attention}#3#{} {C:planet}Planet{} cards",
                         "{C:inactive,s:0.8}(#2#/#3#){}",
                     }
                 }
@@ -178,8 +177,7 @@ return {
                 text = {
                     {
                         "{C:inactive,s:0.8}Currently Empty{}",
-                        "{C:abs_drinks}Refill{} by using",
-                        "{C:attention}#3#{} {C:planet}Planet cards{}",
+                        "{C:abs_drinks}Refill{} by using {C:attention}#3#{} {C:planet}Planet{} cards",
                         "{C:inactive,s:0.8}(#2#/#3#){}",
                     },
                     {
@@ -188,6 +186,36 @@ return {
                         "create a random card from",
                         "{V:1}#1#{}, then is {C:abs_drinks}drank{}",
                         "{C:inactive}(Must have space!)",
+                    }
+                }
+            },
+            c_worm_abs_voidka = {
+                name = 'Voidka',
+                text = {
+                    {
+                        "When {C:attention}primed{}, destroy first",
+                        "scoring card in next",
+                        "played hand, then is {C:abs_drinks}drank{}",
+                    },
+                    {
+                        "{C:abs_drinks}Refill{} by spending {C:money}$#1#{}",
+                        "{C:inactive,s:0.8}($#2#/$#1#){}",
+                    }
+                }
+            },
+            c_worm_abs_voidka_empty = {
+                name = 'Voidka',
+                text = {
+                    {
+                        "{C:inactive,s:0.8}Currently Empty{}",
+                        "{C:abs_drinks}Refill{} by spending {C:money}$#1#{}",
+                        "{C:inactive,s:0.8}($#2#/$#1#){}",
+                    },
+                    {
+                        "{C:inactive,s:0.8}After being Refilled:{}",
+                        "When {C:attention}primed{}, destroy first",
+                        "scoring card in next",
+                        "played hand, then is {C:abs_drinks}drank{}",
                     }
                 }
             },

@@ -598,5 +598,60 @@ SMODS.Consumable { -- Cosmospolitan
     end
 }
 
+SMODS.Consumable { -- Voidka
+    set = 'abs_drinks',
+    key = 'abs_voidka',
+    ppu_coder = { 'pi_cubed' },
+    ppu_team = { 'absinthe' },
+    pos = { x = 0, y = 1 },
+    config = {
+        drink_values = {
+            filled_pos = { x = 0, y = 1 },
+            empty_pos = { x = 1, y = 1 },
+            filled = true,
+            visibly_filled = true,
+            primed = false
+        },
+        extra = { dollars_req = 10, dollars_spent = 0 },
+    },
+    cost = 3,
+    loc_vars = function(self, info_queue, card)
+        local key
+        if not card.ability.drink_values.filled then
+            key = self.key .. '_empty'
+        else
+            key = self.key
+        end
+        return { key = key, vars = {
+            card.ability.extra.dollars_req, card.ability.extra.dollars_spent
+        } }
+    end,
+    calculate = function(self, card, context)
+        if context.destroy_card and context.cardarea == G.play and context.destroying_card -- somehow this successfully only destroys the 1st card??
+        and card.ability.drink_values.filled and card.ability.drink_values.primed and not context.repetition then
+            card:abs_empty_drink()
+            return {
+                remove = true,
+            }
+        end
+        
+        if context.money_altered and context.amount < 0 and not card.ability.drink_values.filled then
+            card.ability.extra.dollars_spent = card.ability.extra.dollars_spent - context.amount
+            if card.ability.extra.dollars_spent >= card.ability.extra.dollars_req then
+                card.ability.extra.dollars_spent = 0
+                card:abs_refill_drink()
+            end
+        end
+    end,
+    use = function(self, card, area, copier)
+        card:abs_toggle_drink_prime()
+    end,
+    can_use = function(self, card)
+        return card.ability.drink_values.filled
+    end,
+    keep_on_use = function(self, card)
+        return true;
+    end
+}
 
 --#endregion
