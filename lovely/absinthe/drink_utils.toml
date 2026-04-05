@@ -22,26 +22,16 @@ end
 '''
 match_indent = true
 
-
-# Prevent "USE" button on Drinks in deck
-# [[patches]]
-# [patches.pattern]
-# target = "functions/UI_definitions.lua"
-# pattern = '''
-# end
-# if card.ability.consumeable then
-# '''
-# position = "after"
-# payload = '''
-#     if card.ability.set == "abs_drinks" then
-#         return {
-#         n=G.UIT.ROOT, config = {padding = 0, colour = G.C.CLEAR}, nodes={
-#             {n=G.UIT.C, config={padding = 0.15, align = 'cl'}, nodes={
-#             {n=G.UIT.R, config={align = 'cl'}, nodes={
-#                 sell
-#             }},
-#             }},
-#         }}
-#     end
-# '''
-# match_indent = true
+[[patches]]
+[patches.pattern]
+target = 'functions/button_callbacks.lua'
+pattern = '''
+SMODS.calculate_context({using_consumeable = true, consumeable = card, area = card.from_area})
+'''
+position = 'at'
+payload = '''
+if card.ability.set ~= 'abs_drinks' then
+  SMODS.calculate_context({using_consumeable = true, consumeable = card, area = card.from_area})
+end
+'''
+match_indent = true
