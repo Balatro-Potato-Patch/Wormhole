@@ -199,42 +199,6 @@ end
 
 --#region Drink Objects
 
-SMODS.Consumable { -- Please god delete this before we finish
-    set = 'abs_drinks',
-    key = 'test_drink',
-    pos = { x = 0, y = 0 },
-    config = {
-        drink_values = {
-            filled_pos = { x = 0, y = 0 },
-            empty_pos = { x = 1, y = 0 },
-            filled = true,
-            visibly_filled = true,
-            primed = false
-        }
-    },
-    calculate = function(self, card, context)
-        if card.ability.drink_values.filled and card.ability.drink_values.primed and context.setting_blind then
-            card:abs_empty_drink()
-        end
-
-        if not card.ability.drink_values.filled and context.end_of_round and not context.individual and not context.repetition then
-            card:abs_refill_drink()
-        end
-    end,
-    empty = function(self, card)
-        ease_dollars(4)
-    end,
-    use = function(self, card, area, copier)
-        card:abs_toggle_drink_prime()
-    end,
-    can_use = function(self, card)
-        return card.ability.drink_values.filled
-    end,
-    keep_on_use = function(self, card)
-        return true;
-    end
-}
-
 SMODS.Consumable { -- Supergiant Cider
     set = 'abs_drinks',
     key = 'abs_supergiant_cider',
@@ -251,6 +215,7 @@ SMODS.Consumable { -- Supergiant Cider
         },
         extra = { discards = 1, poker_hand = 'Full House' },
     },
+    cost = 3,
     loc_vars = function(self, info_queue, card)
         local key
         if not card.ability.drink_values.filled then
@@ -322,6 +287,7 @@ SMODS.Consumable { -- Hubble Trouble
             primed = false,
         },
     },
+    cost = 3,
     loc_vars = function(self, info_queue, card)
         local key
         if not card.ability.drink_values.filled then
@@ -371,6 +337,7 @@ SMODS.Consumable { -- Moonshine
         },
         extra = { xchips = 2, light_counter = 0, light_counter_req = 5 },
     },
+    cost = 3,
     loc_vars = function(self, info_queue, card)
         local key
         if not card.ability.drink_values.filled then
@@ -440,6 +407,7 @@ SMODS.Consumable { -- Pina Solada
         },
         extra = { xmult = 2, dark_counter = 0, dark_counter_req = 5 },
     },
+    cost = 3,
     loc_vars = function(self, info_queue, card)
         local key
         if not card.ability.drink_values.filled then
@@ -509,6 +477,7 @@ SMODS.Consumable { -- Meteor Sour
         },
         extra = { hands = 1, enh_discarded = 0, goal = 5 },
     },
+    cost = 3,
     loc_vars = function(self, info_queue, card)
         local key
         if not card.ability.drink_values.filled then
