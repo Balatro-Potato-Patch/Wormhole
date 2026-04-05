@@ -85,15 +85,19 @@ for i, v in pairs({
     "dyson_sphere",
     "wall_e",
     "nyan_cat",
+
+    "decrepit_deck",
+
     "junk/main",
     "junk/junk_hands",
     "junk/packs",
+
     "junk/asteroid_harvester",
     "junk/solar_sail",
     "junk/abandoned_wrench",
     "junk/lost_pliers",
     "junk/manhole_cover",
-    "junk/starfish_prime"
+    "junk/starfish_prime",
 })  do
     assert(SMODS.load_file("content/colon_three/"..v..".lua"))()
 end

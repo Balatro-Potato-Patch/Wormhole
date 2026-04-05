@@ -166,6 +166,15 @@ return {
                 }
             }
         },
+        Back = {
+            b_worm_decrepit_deck = {
+                name = "Decrepit Deck",
+                text = {
+                    "Start run with each {C:attention}face",
+                    "{C:attention}card{} as a {C:attention,T:m_worm_junk_card}Junk Card",
+                },
+            },
+        },
         Other = {
 			p_worm_junkset_normal = {
 				name = "Derelict Pack",
