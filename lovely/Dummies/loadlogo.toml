@@ -1,0 +1,18 @@
+# TheOneGoofAli's loading screen patches.
+
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 5
+
+[[patches]]
+[patches.copy]
+target = '=[SMODS _ "src/utils.lua"]'
+position = "append"
+sources = ["base64.lua"]
+
+[[patches]]
+[patches.copy]
+target = "main.lua"
+position = "append"
+sources = ["content/Dummies/loadlogo.lua"]
