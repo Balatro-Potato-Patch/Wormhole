@@ -71,9 +71,6 @@ return {
                     },
                     {
                         "Clean-up {C:attention}#2#{} {f:6}—{} Earn {C:money}$#3#{}",
-                        "{C:inactive,s:0.8}(You may use this on #2# Junk Cards,",
-                        "{C:inactive,s:0.8}if you do, remove their enhancement",
-                        "{C:inactive,s:0.8}and trigger this effect instead)",
                     }
                 }
             },
@@ -88,9 +85,6 @@ return {
                     {
                         "Clean-up {C:attention}#2#{} {f:6}—{} Give the first two",
                         "{C:attention}cleaned-up cards{} an {C:dark_edition}Edition",
-                        "{C:inactive,s:0.8}(You may use this on #2# Junk Cards,",
-                        "{C:inactive,s:0.8}if you do, remove their enhancement",
-                        "{C:inactive,s:0.8}and trigger this effect instead)",
                     }
                 }
             },
@@ -105,9 +99,6 @@ return {
                     {
                         "Clean-up {C:attention}#2#{} {f:6}—{} ALL current and",
                         "future {C:attention}Junk Cards{} gain {C:chips}+#3#{} Chips",
-                        "{C:inactive,s:0.8}(You may use this on #2# Junk Cards,",
-                        "{C:inactive,s:0.8}if you do, remove their enhancement",
-                        "{C:inactive,s:0.8}and trigger this effect instead)",
                     }
                 }
             },
@@ -122,9 +113,6 @@ return {
                     {
                         "Clean-up {C:attention}#2#{} {f:6}—{} ALL current and",
                         "future {C:attention}Junk Cards{} gain {C:mult}+#3#{} Mult",
-                        "{C:inactive,s:0.8}(You may use this on #2# Junk Cards,",
-                        "{C:inactive,s:0.8}if you do, remove their enhancement",
-                        "{C:inactive,s:0.8}and trigger this effect instead)",
                     }
                 }
             },
@@ -140,9 +128,6 @@ return {
                         "Clean-up {C:attention}#2#{} {f:6}—{} ALL current and",
                         "future {C:attention}Junk Cards{} gain {C:attention}+#3#{} retrigger",
                         "The next {C:attention}Blind{} must be skipped",
-                        "{C:inactive,s:0.8}(You may use this on #2# Junk Cards,",
-                        "{C:inactive,s:0.8}if you do, remove their enhancement",
-                        "{C:inactive,s:0.8}and trigger this effect instead)",
                     }
                 }
             },
@@ -151,17 +136,14 @@ return {
                 text = {
                     {
                         "Convert {C:attention}#1#{} selected",
-                        "non-{C:attention}Junk Card{} into",
-                        "a {C:attention}Junk Card"
+                        "non-{C:attention}Junk Cards{} into",
+                        "{C:attention}Junk Cards"
                     },
                     {
                         "Clean-up {C:attention}#2#{} {f:6}—{} played hands with",
                         "{C:attention}Junk Cards{} gain an additional {C:attention}+#3#{}",
                         "multiplier to {C:chips}Chips{} and {C:mult}Mult{}, then",
-                        "destroy the {C:attention}cleaned-up cards{}",
-                        "{C:inactive,s:0.8}(You may use this on #2# Junk Cards,",
-                        "{C:inactive,s:0.8}if you do, remove their enhancement",
-                        "{C:inactive,s:0.8}and trigger this effect instead)",
+                        "destroy {C:attention}#4#{} random {C:attention}cleaned-up cards{}",
                     }
                 }
             }
@@ -200,6 +182,16 @@ return {
 					"be used immediately",
 				},
 			},
+
+            worm_clean_up_keyword = {
+                name = "Clean-up",
+                text = {
+                    "Clean-up {C:attention}X{} means",
+                    "{s:0.8}\"You may use this on {C:attention,s:0.8}X {C:attention,s:0.8}Junk Cards{s:0.8},",
+                    "{s:0.8}if you do, remove their enhancement then",
+                    "{s:0.8}trigger the {C:attention,s:0.8}Clean-Up{s:0.8} effect instead\"",
+                }
+            }
         },
         PotatoPatch = {
             PotatoPatchTeam_colon_three = {

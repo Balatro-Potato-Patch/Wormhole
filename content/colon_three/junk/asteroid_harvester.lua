@@ -12,6 +12,7 @@ SMODS.Consumable {
     },
     loc_vars = function(_,info_queue,card)
         info_queue[#info_queue+1] = G.P_CENTERS.m_worm_junk_card
+        info_queue[#info_queue+1] = { key = "worm_clean_up_keyword", set="Other", specific_vars = { card.ability.extra.cleanup_num } }
         return {
             vars = {
                 card.ability.extra.junk_num,
