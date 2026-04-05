@@ -107,10 +107,14 @@ function Wormhole.Absinthe.get_random_team()
     return pseudorandom_element(valid_teams, 'abs_rand_team')
 end
 
+Wormhole.Absinthe.type_blacklist = {
+    ['Back'] = true
+}
+
 function Wormhole.Absinthe.get_team_card_key(team, seed)
     local cards = {}
     for i, v in pairs(G.P_CENTERS) do
-        if not v.hidden and not G.GAME.banned_keys[v.key] and v.ppu_team and v.rarity ~= 4 then
+        if not v.hidden and not G.GAME.banned_keys[v.key] and v.set and not Wormhole.Absinthe.type_blacklist[v.set] and v.ppu_team and v.rarity ~= 4 then
             for k, t in pairs(v.ppu_team) do
                 if t == team then
                     cards[#cards+1] = v.key
