@@ -418,7 +418,7 @@ function JtemTGM.ResetPlayerState()
 		clears = 0,         -- Line clears for one piece
 		clear_cols = {},    -- Lines cleared (literal)
 
-		start_delay = 1.25, -- Ready? Go!
+		start_delay = 75,   -- Ready? Go!
 
 		points = 0,         -- This game uses TA's hidden point system to award grades
 		point_decay = 0,
@@ -429,6 +429,7 @@ function JtemTGM.ResetPlayerState()
 
 		credit_fadeout = 0,
 		credit_time = 0,
+		drop_offsets = {},
 
 		history = { starting_piece, "Z", "Z", "Z" },
 		randomizer = randomizer,
@@ -446,6 +447,7 @@ function JtemTGM.ResetPlayerState()
 
 		dt = 0,
 	}
+	JtemTGM.ChangeState(state, STATE_READY)
 	return state
 end
 
@@ -500,6 +502,12 @@ function JtemTGM.ChangeState(game, newstate)
 			table.remove(game.next_pieces, 1)
 			table.insert(game.next_pieces, JtemTGM.GeneratePiece(game.randomizer))
 			JtemTGM.PlaySound("piece_" .. game.next_pieces[1])
+			if not JtemTGM.CheckTopout(game.current_piece, game.board) then
+				newstate = STATE_GAMEOVER
+				game.topped_out = true
+				game.current_piece = {}
+				game.ghost_piece = {}
+			end
 		end
 		game.clears = 0
 		game.soft = game.state == STATE_ARE and 0 or game.soft
@@ -582,16 +590,23 @@ function JtemTGM.ChangeState(game, newstate)
 	game.old_level = game.level
 	if newstate == STATE_READY or newstate == STATE_GO then
 		game.state_timer = game.start_delay
+		if newstate == STATE_GO then
+			JtemTGM.PlaySound("go")
+		end
 	end
 	if newstate == STATE_YOUR or newstate == STATE_AER then
 		game.state_timer = 0
 	end
 	if newstate == STATE_GAMEOVER then
 		game.credit_fadeout = 0
-		game.state_timer = game.topped_out and 1.0 or 2.0
+		game.state_timer = game.topped_out and 60 or 120
 	end
 	if newstate == STATE_DROPOUT then
-		-- TODO
+		game.drop_offsets = {}
+		for i = 0, BOARD_W - 1 do
+			game.drop_offsets[i] = G.TIMERS.TOTAL + pseudorandom("jtem2_tetris_dropoffset", 0.0, 0.5)
+		end
+		game.state_timer = 120
 	end
 	if newstate == STATE_CONGRATULATIONS or newstate == STATE_INVISIBLETETRIS then
 		if next(game.current_piece) then
@@ -612,7 +627,7 @@ function JtemTGM.ChangeState(game, newstate)
 			end
 			game.credit_time = 0
 		else
-			game.state_timer = 2.0
+			game.state_timer = 120
 		end
 	end
 
@@ -916,7 +931,7 @@ for k, file in ipairs(files) do
 end
 
 function JtemTGM.PlaySound(id)
-	play_sound("worm_jtem2_tetris_" .. id, 1.0, 0.7)
+	play_sound("worm_jtem2_tetris_" .. id, 1.0, 0.5)
 end
 
 -- The funny clear animation
@@ -996,11 +1011,15 @@ function JtemTGM.HandleMove(game)
 			JtemTGM.ChangeState(game, STATE_LOCKING)
 		end
 	end
+end
 
-	game.olddir = dir
-	game.oldvdir = vdir
-	game.justPressedLeftRot = love.keyboard.isDown("z")
-	game.justPressedRightRot = love.keyboard.isDown("x")
+function JtemTGM.HandleGenericState(game, state, newstate)
+	if game.state == state then
+		game.state_timer = math.max(0, game.state_timer - 1)
+		if game.state_timer <= 0 then
+			JtemTGM.ChangeState(game, newstate)
+		end
+	end
 end
 
 function JtemTGM.HandleGame(game)
@@ -1061,11 +1080,94 @@ function JtemTGM.HandleGame(game)
 	end
 
 	if game.state == STATE_READY or game.state == STATE_GO then
+		if game.state == STATE_READY and game.state_timer == math.floor(game.start_delay / 2) then
+			JtemTGM.PlaySound("ready")
+		end
 		game.state_timer = math.max(0, game.state_timer - 1)
 		if game.state_timer <= 0 then
 			JtemTGM.ChangeState(game, game.state == STATE_READY and STATE_GO or STATE_DROPPING)
 		end
 	end
+
+	if game.state == STATE_GAMEOVER then
+		game.state_timer = math.max(0, game.state_timer - 1)
+		if game.state_timer % 7 == 0 and not game.topped_out then
+			for x, cell in pairs(game.board[BOARD_H - game.credit_fadeout - 1] or {}) do
+				game.board[BOARD_H - game.credit_fadeout - 1][x] = 0
+			end
+			game.credit_fadeout = game.credit_fadeout + 1
+		end
+		if game.state_timer <= 0 then
+			JtemTGM.ChangeState(game, not game.topped_out and STATE_YOUR or STATE_DROPOUT)
+		end
+	end
+
+	if game.state == STATE_DROPOUT then
+		game.state_timer = math.max(0, game.state_timer - 1)
+		if game.state_timer <= 0 and not game.credits then
+			local board = game.board
+			for y = BOARD_HCLEARANCE, BOARD_H - 1 do
+				board[y] = {}
+				for x = 0, BOARD_W - 1 do
+					board[y][x] = 0
+				end
+			end
+			JtemTGM.ChangeState(game, STATE_YOUR)
+		end
+	end
+
+	JtemTGM.HandleGenericState(game, STATE_YOUR, STATE_AER)
+	JtemTGM.HandleGenericState(game, STATE_AER, STATE_GRADESHOW)
+
+	if game.state < STATE_CONGRATULATIONS and game.credits then
+		game.credit_time = game.credit_time + 1
+		if game.credit_time > 3600 then
+			game.credit_time = 0
+			JtemTGM.ChangeState(game, STATE_CONGRATULATIONS)
+		end
+	end
+
+	if game.state == STATE_INVISIBLETETRIS then
+		game.state_timer = math.max(0, game.state_timer - 1)
+		if game.state_timer % 7 == 0 then
+			for x, cell in pairs(game.board[BOARD_H - game.credit_fadeout - 1] or {}) do
+				game.board[BOARD_H - game.credit_fadeout - 1][x] = 0
+			end
+			game.credit_fadeout = game.credit_fadeout + 1
+		end
+		if game.state_timer <= 0 then
+			JtemTGM.ChangeState(game, STATE_DROPPING)
+		end
+	end
+
+	if game.state == STATE_CONGRATULATIONS then
+		game.topped_out = false
+		game.credit_fadeout = 0
+		game.credits = false
+		JtemTGM.ChangeState(game, STATE_GAMEOVER)
+	end
+
+	if game.state == STATE_GRADESHOW then
+		game.state_timer = game.state_timer + 1
+		if game.state_timer == 10 then
+			JtemTGM.PlaySound("thud")
+			JtemTGM.PlaySound("grade")
+		end
+		if game.state_timer >= 90 then
+			if love.keyboard.isDown("z") or love.keyboard.isDown("x") then
+				game.please_reset = true
+			end
+		end
+	end
+
+	if game.state < STATE_READY and not game.credits then
+		game.time = game.time + G.real_dt
+	end
+
+	game.olddir = dir
+	game.oldvdir = vdir
+	game.justPressedLeftRot = love.keyboard.isDown("z")
+	game.justPressedRightRot = love.keyboard.isDown("x")
 end
 
 JtemTGM.targetTPS = 1.0 / 60
@@ -1103,6 +1205,22 @@ function JtemTGM.BoardStencil()
 	love.graphics.rectangle("fill", 0, 0, BOARD_W * BLOCK_W, BOARD_H * BLOCK_H)
 end
 
+local function EaseInSine(x)
+	x = math.min(1, math.max(0, x))
+	return 1 - math.cos((x * math.pi) / 2)
+end
+
+SMODS.Font {
+	key = "Tarot",
+	path = "Jtem 2/tarot.ttf",
+	render_scale = 6,
+	TEXT_HEIGHT_SCALE = 1,
+	TEXT_OFFSET = { x = 0, y = -24 },
+	FONTSCALE = 0.1,
+	squish = 1,
+	DESCSCALE = 1
+}
+
 ---@param canvas love.Canvas|table
 ---@param game table
 function JtemTGM.HandleDraw(canvas, game)
@@ -1113,6 +1231,21 @@ function JtemTGM.HandleDraw(canvas, game)
 
 	love.graphics.translate(BOARD_XOFFSET, BOARD_YOFFSET)
 	love.graphics.clear()
+
+	---@type love.Font
+	local font = SMODS.Fonts["worm_Tarot"].FONT
+	love.graphics.setColor(G.C.WHITE)
+	if game.state == STATE_READY and game.state_timer <= math.floor(game.start_delay / 2) then
+		love.graphics.printf({ G.C.WHITE, "READY" }, font, -15, 36, 71, "center")
+	end
+	if game.state == STATE_GO then
+		love.graphics.printf({ G.C.WHITE, "GO" }, font, -15, 36, 71, "center")
+	end
+	if game.state == STATE_GRADESHOW then
+		love.graphics.printf({ G.C.WHITE, "GOOD JOB" }, font, -15, 24, 71, "center")
+		love.graphics.printf({ G.C.WHITE, "USE Z OR X" }, font, -15, 24 + 12, 71, "center")
+		love.graphics.printf({ G.C.WHITE, "TO RESET" }, font, -15, 24 + 18, 71, "center")
+	end
 
 	love.graphics.stencil(JtemTGM.BoardStencil, "replace", 1)
 	love.graphics.setStencilTest("greater", 0)
@@ -1131,9 +1264,14 @@ function JtemTGM.HandleDraw(canvas, game)
 			if not p then goto xcontinue end
 			local piece = p[1]
 
+			local ofs = 0
+			if game.state == STATE_DROPOUT then
+				ofs = (EaseInSine((G.TIMERS.TOTAL - game.drop_offsets[x]) / G.SPEEDFACTOR) * (BLOCK_H * BOARD_H))
+			end
+
 			if JtemTGM.ValidPiece(cell) and piece then
 				love.graphics.setColor(G.C.WHITE)
-				love.graphics.rectangle("fill", px - 1, py - 1, BLOCK_W + 2, BLOCK_H + 2)
+				love.graphics.rectangle("fill", px - 1, py - 1 + ofs, BLOCK_W + 2, BLOCK_H + 2)
 			end
 			::xcontinue::
 		end
@@ -1153,13 +1291,18 @@ function JtemTGM.HandleDraw(canvas, game)
 			if not p then goto xcontinue end
 			local piece = p[1]
 
+			local ofs = 0
+			if game.state == STATE_DROPOUT then
+				ofs = (EaseInSine((G.TIMERS.TOTAL - game.drop_offsets[x]) / G.SPEEDFACTOR) * (BLOCK_H * BOARD_H))
+			end
+
 			if JtemTGM.ValidPiece(cell) and piece then
 				if game.lightup[y] and game.lightup[y][x] then
 					love.graphics.setColor(G.C.WHITE)
 				else
 					love.graphics.setColor(darken(p.color, 0.3))
 				end
-				love.graphics.rectangle("fill", px, py, BLOCK_W, BLOCK_H)
+				love.graphics.rectangle("fill", px, py + ofs, BLOCK_W, BLOCK_H)
 			end
 			::xcontinue::
 		end
@@ -1232,7 +1375,10 @@ SMODS.Joker {
 
 	update = function(self, card, dt)
 		if next(card.ability.extra.game_state) then
-			JtemTGM.UpdateGame(card.ability.extra.game_state, dt)
+			JtemTGM.UpdateGame(card.ability.extra.game_state, G.SETTINGS.paused and 0 or G.real_dt)
+			if card.ability.extra.game_state.please_reset then
+				card.ability.extra.game_state = JtemTGM.ResetPlayerState()
+			end
 		end
 	end,
 
@@ -1252,7 +1398,7 @@ SMODS.Joker {
 	add_to_deck = function(self, card, from_debuff)
 		if from_debuff then return end
 		card.ability.extra.game_state = JtemTGM.ResetPlayerState()
-		card.ability.extra.game_state.state = STATE_READY
+		-- card.ability.extra.game_state.state = STATE_READY
 	end,
 
 	calculate = function(self, card, context)
@@ -1263,6 +1409,83 @@ SMODS.Joker {
 		end
 	end
 }
+
+G.FUNCS.worm_reset_tetris = function(e)
+	local card = e.config.ref_table
+	card.ability.extra.game_state = JtemTGM.ResetPlayerState()
+end
+
+local function create_use_button_ui(card)
+	return UIBox({
+		definition = {
+			n = G.UIT.ROOT,
+			config = {
+				colour = G.C.CLEAR,
+			},
+			nodes = {
+				{
+					n = G.UIT.C,
+					config = {
+						align = "cm",
+						padding = 0.15,
+						r = 0.08,
+						hover = true,
+						shadow = true,
+						colour = G.C.MULT,
+						button = "worm_reset_tetris",
+						ref_table = card,
+					},
+					nodes = {
+						{
+							n = G.UIT.R,
+							nodes = {
+								{
+									n = G.UIT.T,
+									config = {
+										text = localize("b_worm_jtem_reset"),
+										colour = G.C.UI.TEXT_LIGHT,
+										scale = 0.4,
+									},
+								},
+								{
+									n = G.UIT.B,
+									config = {
+										w = 0.1,
+										h = 0.4,
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		config = {
+			align = "cl",
+			major = card,
+			parent = card,
+			offset = { x = 0.2, y = 0 },
+		},
+	})
+end
+local highlight_ref = Card.highlight
+function Card:highlight(is_highlighted)
+	if
+		is_highlighted
+		and self.ability.set == "Joker"
+		and self.area == G.jokers
+		and self.config.center_key == "j_worm_jtem2_tetris"
+	then
+		if not self.children.worm_reset_tetris then
+			self.children.worm_reset_tetris = create_use_button_ui(self)
+		end
+	elseif self.children.worm_reset_tetris then
+		self.children.worm_reset_tetris:remove()
+		self.children.worm_reset_tetris = nil
+	end
+
+	return highlight_ref(self, is_highlighted)
+end
 
 SMODS.DrawStep {
 	key = "jtem2_tetris_draw",
