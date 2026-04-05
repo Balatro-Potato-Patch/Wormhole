@@ -24,12 +24,12 @@ PotatoPatchUtils.Developer{
 }
 
 PotatoPatchUtils.Developer{
-	name = "h0l",
-	colour = G.C.MONEY,
-	team = "People Found In Vegas" --[[,
-	atlas = "worm_vegas_credits",
-	pos = {x = 1, y = 0},
-	soul_pos = {x = 1, y = 1}]]
+    name = "Sn0vvBall",
+    colour = G.C.MONEY,
+    team = "People Found In Vegas" --[[,
+    atlas = "worm_vegas_credits",
+    pos = {x = 1, y = 0},
+    soul_pos = {x = 1, y = 1}]]
 }
 
 PotatoPatchUtils.Developer{
@@ -294,6 +294,133 @@ SMODS.Joker{
 	end
 }
 
+SMODS.Joker{
+	key = "astronaut",
+	loc_txt = {
+		name = "Astronaut",
+		text = {
+			"{C:money}$#1#{} for each level",
+			"of the {C:attention}final hand"
+		}
+	},
+	config = { extra = { dollars = 1 }},
+	loc_vars = function(self, info_queue, card)
+		return { vars = { card.ability.extra.dollars }}
+	end,
+	atlas = "vegas_jokers",
+	pos = {x = 0, y = 4},
+	rarity = 2,
+	cost = 6,
+	blueprint_compat = true,
+	discovered = true,
+	eternal_compat = true,
+	perishable_compat = true,
+	ppu_team = {"People Found In Vegas"},
+	ppu_coder = {"Jammbo"},
+	ppu_artist = {},
+	calculate = function(self, card, context)
+		if context.joker_main and G.GAME.current_round.hands_left == 0 then
+            return {
+                dollars = G.GAME.hands[context.scoring_name].level
+            }
+        end
+	end
+}
+
+SMODS.Joker{
+	key = "icegiant",
+	loc_txt = {
+		name = "Ice Giant",
+		text = {
+			"If {C:attention}final discard{} of",
+			"round is {C:attention}#1#{} card, make",
+			"the {C:attention}first{} card {C:attention}Glass{}"
+		}
+	},
+	config = { extra = { size = 2 }},
+	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue + 1] = G.P_CENTERS.m_mult
+		return { vars = { card.ability.extra.size }}
+	end,
+	atlas = "vegas_jokers",
+	pos = {x = 0, y = 4},
+	rarity = 2,
+	cost = 7,
+	blueprint_compat = true,
+	discovered = true,
+	eternal_compat = true,
+	perishable_compat = true,
+	ppu_team = {"People Found In Vegas"},
+	ppu_coder = {"Jammbo"},
+	ppu_artist = {},
+	calculate = function(self, card, context)
+		if context.discard and G.GAME.current_round.discards_left == 1 and #context.full_hand == 2 and context.other_card then
+            if (context.other_card == context.full_hand[1]) or (context.other_card == context.full_hand[2]) then
+				context.other_card:set_ability("m_glass", nil, true)
+			end
+			return{
+				message = "It's ice, I promise"
+			}
+        end
+	end
+}
+
+SMODS.Joker{
+    key = "goldielocks",
+    loc_txt = {
+        name = "Goldielocks",
+        text = {
+            "If the played hand has an",
+			"{C:attention}odd{} number of playing cards,",
+			"retrigger the {C:attention}middle{} card {C:attention}#2#{} times",
+			"If the played hand has an",
+			"{C:attention}even{} number of playing cards,",
+			"retrigger the {C:attention}middle 2{} cards {C:attention}#1#{} time",
+        }
+    },
+    config = { extra = { repetitions = 1, repetitions_odd = 2 }},
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.repetitions, card.ability.extra.repetitions_odd }}
+    end,
+    atlas = "vegas_jokers",
+    pos = {x = 0, y = 4},
+    rarity = 1,
+    cost = 5,
+    blueprint_compat = true,
+    discovered = true,
+    eternal_compat = true,
+    perishable_compat = true,
+    ppu_team = {"People Found In Vegas"},
+    ppu_coder = {"Sn0vvBall"},
+    ppu_artist = {"Sn0vvBall"},
+    calculate = function(self, card, context)
+		local MidNum = nil
+		local IsOdd = false
+		if context.repetition and context.cardarea == G.play and context.other_card then
+			MidNum = #context.scoring_hand/2
+            if math.fmod(#context.scoring_hand, 2) == 0  then
+                IsOdd = false
+            else
+                IsOdd = true
+            end
+			if IsOdd == true then
+				if context.other_card == context.scoring_hand[MidNum + 0.5] then
+					return {
+						repetitions = card.ability.extra.repetitions_odd
+					}
+				end
+			end
+			if IsOdd == false then
+				if context.other_card == context.scoring_hand[MidNum] or context.other_card == context.scoring_hand[MidNum + 1] then
+					return {
+						repetitions = card.ability.extra.repetitions
+					}
+				end
+			end
+		end
+    end
+}
+
 --[[
 SMODS.Joker{
 	key = "template",
@@ -303,9 +430,9 @@ SMODS.Joker{
 			"Description"
 		}
 	},
-	config = { extra = { }},
+	config = { extra = {  }},
 	loc_vars = function(self, info_queue, card)
-		return { vars = {}}
+		return { vars = {  }}
 	end,
 	atlas = "vegas_jokers",
 	pos = {x = 0, y = 0},
