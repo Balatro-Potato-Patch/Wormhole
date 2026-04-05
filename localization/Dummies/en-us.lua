@@ -61,7 +61,41 @@ return {
                     "{s:0.8,C:worm_dum_brown}steer this Space Ship!"
                 },
             },
-        }
+        },
+		Voucher = {
+			v_worm_dum_spacesuit = {
+				name = "Space Suit",
+				text = {{
+                    "{C:attention}Gain{} and {C:attention}Increase{} your",
+                    "maximum amount of",
+                    "{C:spectral}Oxygen{} by {C:attention}#1#{} minutes",
+                }, {
+                    "Gain {C:attention}#2#{} seconds of {C:spectral}Oxygen{}",
+                    "after beating a {C:attention}Blind{}",
+                }, {
+				    "Multiply {C:chips}Chips{} and {C:mult}Mult{} by",
+				    "half of your current {C:spectral}Oxygen{}",
+                    "{C:inactive,s:0.8}(ex. {C:attention,s:0.8}2:53{C:inactive,s:0.8} -> {X:purple,C:white,s:0.8}X1.27{C:inactive,s:0.8} Mult and Chips){}",
+				}}
+			},
+        },
+		Other = {
+			worm_dum_spacesuit_warning = {
+				name = "{s:1.2}Warning{}",
+				text = {
+                    "When {C:spectral}Oxygen{} runs out,",
+                    "{C:red,E:2}Lose{E:2} the Game",
+                }
+			},
+			worm_dum_spacesuit_upgrade = {
+				name = "Space Suit Upgrade",
+				text = {
+                    "Maximum Oxygen: {C:spectral}#1#{} -> {C:spectral}#2#{}",
+                    "Beating a Blind: {C:attention}#3#{} -> {C:attention}#4#{}",
+                    "{C:inactive}The multiplier doesn't change!"
+                }
+			},
+        },
     },
     misc = {
         dictionary = {
@@ -77,6 +111,7 @@ return {
 			worm_dum_store = "+X#1# Stored",
 			worm_dum_apply = "+X#1# Applied",
             worm_dum_percent = "#1#%",
+            worm_dum_xgeneric = "X#1#",
         },
     }
 }
