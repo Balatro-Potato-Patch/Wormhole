@@ -130,6 +130,19 @@ local planets = {
 		pos = { y = 0, x = 0 },
 	},
 }
+local planets_order = {
+	"c_mercury",
+	"c_venus",
+	"c_earth",
+	"c_mars",
+	"c_ceres",
+	"c_jupiter",
+	"c_saturn",
+	"c_uranus",
+	"c_neptune",
+	"c_pluto",
+	"c_eris",
+}
 
 local function get_planet_dims(planet)
 	local center = planet.center or {}
@@ -370,6 +383,8 @@ SMODS.Atlas({
 SMODS.Joker({
 	key = "jtem2_solar_system",
 
+	blueprint_compat = true,
+
 	config = {
 		extra = {
 			planets = {},
@@ -382,40 +397,90 @@ SMODS.Joker({
 				xmult = 1.5,
 			},
 			c_neptune = {
-				hand_odds = 2,
+				hand_odds = 4,
 				play_odds = 2,
 				money = 1,
 			},
 		},
 	},
 
-	can_use = function()
-		return true
+	loc_vars = function(self, info_queue, card)
+		local neptune_play_n, neptune_play_d = SMODS.get_probability_vars(
+			card,
+			1,
+			card.ability.extra.c_neptune.play_odds,
+			"worm_solar_system_neptune_play"
+		)
+		local neptune_hand_n, neptune_hand_d = SMODS.get_probability_vars(
+			card,
+			1,
+			card.ability.extra.c_neptune.hand_odds,
+			"worm_solar_system_neptune_hand"
+		)
+
+		local vars = {
+			c_mercury = {
+				SMODS.signed(card.ability.extra.c_mercury.mult),
+				SMODS.signed(card.ability.extra.c_mercury.chips),
+			},
+			c_venus = {},
+			c_earth = {},
+			c_ceres = {},
+			c_mars = { localize({ type = "name_text", key = "j_splash", set = "Joker" }) },
+			c_jupiter = { card.ability.extra.c_jupiter.xmult },
+			c_saturn = { 12 },
+			c_uranus = {},
+			c_neptune = {
+				localize("Diamonds", "suits_singular"),
+				card.ability.extra.c_neptune.money,
+				neptune_play_n,
+				neptune_play_d,
+				neptune_hand_n,
+				neptune_hand_d,
+			},
+			c_pluto = {},
+			c_eris = {},
+		}
+		for _, k in pairs(planets_order) do
+			if card.ability.extra.planets[k] then
+				info_queue[#info_queue + 1] =
+					{ set = "Other", key = "worm_jtem2_solar_system_effect_" .. k, vars = vars[k] }
+			end
+		end
 	end,
-	use = function(self, card)
-		self.worm_jtem2_hide_solar_system = not self.worm_jtem2_hide_solar_system
-	end,
+
 	calculate = function(self, card, context)
 		-- + mercury: +12 mult or +50 chips
 		---- (extreme temperature changes)
-		-- venus: create tarot if score is on fire
+		--
+		-- + venus: create tarot if score is on fire
 		---- (hottest planet in solar system)
+		--
 		-- earth: ?
-		-- mars: create splash when blind is selected
+		--
+		--
+		-- + mars: create splash when blind is selected
 		---- (all knows there's a lot of water on in right)
+		--
 		-- ceres: ?
 		---- (dwarf planet in main asteroid belt)
-		-- jupiter: X1.5 Mult
+		--
+		-- + jupiter: X1.5 Mult
 		---- (biggest planet, red dot)
+		--
 		-- + saturn: adds 12 6 of diamonds as rocks
 		---- (famous circles, hexagon on top, diamond rains, 285 moons WHAT A HELL)
+		--
 		-- uranus: ?
 		---- (planet rotated 98 degrees)
+		--
 		-- + neptune: each played or held in hand diamond 1 in 2 chance to give 1 dollar
 		---- (diamond rains)
+		--
 		-- pluto: ?
-		--- (so it's planet or dwarf planet?)
-		--- eris: ?
+		---- (so it's planet or dwarf planet?)
+		--
+		-- eris: ?
 		---- (orbit significantly shifted from Sun)
 
 		if
@@ -427,7 +492,7 @@ SMODS.Joker({
 			card.ability.extra.planets[context.consumeable.config.center_key] = true
 			card.worm_solar_system_delay_update = true
 
-			if context.consumeable.config.center_key == "c_saturn" then
+			if context.consumeable.config.center_key == "c_saturn" and not context.blueprint then
 				G.E_MANAGER:add_event(Event({
 					func = function()
 						local center_x, center_y = context.consumeable.T.x, context.consumeable.T.y
@@ -502,7 +567,12 @@ SMODS.Joker({
 			end
 			return SMODS.merge_effects(effects)
 		end
-		if context.individual and context.cardarea == G.hand and not context.end_of_round then
+		if
+			card.ability.extra.planets.c_neptune
+			and context.individual
+			and context.cardarea == G.hand
+			and not context.end_of_round
+		then
 			if
 				context.other_card:is_suit("Diamonds", nil, true)
 				and SMODS.pseudorandom_probability(
@@ -524,7 +594,7 @@ SMODS.Joker({
 				end
 			end
 		end
-		if context.individual and context.cardarea == G.play then
+		if card.ability.extra.planets.c_neptune and context.individual and context.cardarea == G.play then
 			if
 				context.other_card:is_suit("Diamonds", nil, true)
 				and SMODS.pseudorandom_probability(
@@ -538,6 +608,61 @@ SMODS.Joker({
 					dollars = card.ability.extra.c_neptune.money,
 				}
 			end
+		end
+		if
+			card.ability.extra.planets.c_mars
+			and context.setting_blind
+			and #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit
+		then
+			G.GAME.joker_buffer = G.GAME.joker_buffer + 1
+			G.E_MANAGER:add_event(Event({
+				func = function()
+					G.E_MANAGER:add_event(Event({
+						func = function()
+							SMODS.add_card({
+								key = "j_splash",
+							})
+							G.GAME.joker_buffer = 0
+							return true
+						end,
+					}))
+					SMODS.calculate_effect(
+						{ message = localize("k_plus_joker"), colour = G.C.BLUE },
+						context.blueprint_card or card
+					)
+					return true
+				end,
+			}))
+			return nil, true
+		end
+
+		if
+			card.ability.extra.planets.c_venus
+			and context.after
+			and SMODS.last_hand_oneshot
+			and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit
+		then
+			G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+			G.E_MANAGER:add_event(Event({
+				func = function()
+					G.E_MANAGER:add_event(Event({
+						func = function()
+							SMODS.add_card({
+								set = "Tarot",
+								key_append = "worm_solay_system_venus",
+							})
+							G.GAME.consumeable_buffer = 0
+							return true
+						end,
+					}))
+					SMODS.calculate_effect(
+						{ message = localize("k_plus_tarot"), colour = G.C.PURPLE },
+						context.blueprint_card or card
+					)
+					return true
+				end,
+			}))
+			return nil, true
 		end
 	end,
 

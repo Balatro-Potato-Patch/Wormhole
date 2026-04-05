@@ -1,0 +1,16 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = -1
+
+# More vertical info_queue for solar system
+# Thanks N'
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "local nodes_per_col = math.ceil(#info_boxes/cols)"
+position = 'before'
+match_indent = true
+payload = '''
+if card.config.center_key == "j_worm_jtem2_solar_system" then cols = math.ceil(#info_boxes/6) or 1 end
+'''
