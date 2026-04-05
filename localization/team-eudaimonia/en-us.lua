@@ -25,9 +25,9 @@ return {
                 name = "iamarta",
                 text = {"."}
             },
-            PotatoPatchDev_m0x3s = {
-                name = "m0x3s",
-                text = {"."}
+            PotatoPatchDev_M0xes = {
+                name = "M0xes",
+                text = {"Where am I"}
             },
             PotatoPatchDev_Hunter = {
                 name = "ARandomHunter",
@@ -48,6 +48,54 @@ return {
 
 
         },
+<<<<<<< Updated upstream
 
     }
+=======
+        Joker = {
+            j_worm_wowsignal = {
+                name = "Wow! Signal",
+                text = {
+                    "{C:green}#1# in #2#{} chance to give ",
+                    "{X:chips,C:white}X#3#-#4#{} Chips otherwise,",
+                    "give {C:chips}#5#-#6#{} Chips",
+                },
+                
+            },
+            j_worm_jokecolony = {
+                name = "Joke Colony",
+                text = {
+                    "Stores Jokers in a {C:attention}Colony{}",
+                    "Gives {C:red}+#1#{} Mult per Joker in the {C:attention}Colony{}",
+                    "{C:inactive}(Population of #2# for {C:red}+#3#{}{C:inactive} Mult)"
+                },
+                
+            },
+        },
+    },
+    misc = {
+            poker_hand_descriptions = {
+                worm_pkr_wow = {
+                    "Play a 6, a 3, a Queen, a Jack, and a 5",
+                },
+                worm_pkr_wow_f = {
+                        "Play a 6, a 3, a Queen, a Jack, and a 5",
+                        "with all cards sharing the same suit",
+                },
+            },
+            poker_hands = {
+                worm_pkr_wow = "Wow!",
+                worm_pkr_wow_f = "Wow! Flush"
+            },
+            dictionary = {
+                k_worm_jokecolony_ship_button = "SHIP",
+                k_worm_jokecolony_receive_button = "RELEASE",
+                k_worm_specificcolony_ship_button = "Ship Jokers",
+                k_worm_specificcolony_receive_button = "Release Jokers",
+                k_worm_specificcolony_ship_title = "Sending to Colony ",
+                k_worm_specificcolony_receive_title = "Release from Colony "
+            }
+        },
+        
+>>>>>>> Stashed changes
 }
