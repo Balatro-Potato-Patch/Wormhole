@@ -258,6 +258,7 @@ G.FUNCS.worm_release_colony = function(e)
           og.area:remove_card(og)
           og:add_to_deck()
           G.jokers:emplace(og)
+          if joker.ability.eternal then joker.ability.eternal = nil end
           SMODS.destroy_cards(joker)
           break
         end
@@ -283,6 +284,7 @@ G.FUNCS.worm_join_colony = function(e)
           og.area:remove_card(og)
           og:add_to_deck()
           G.worm_colony:emplace(og)
+          if joker.ability.eternal then joker.ability.eternal = nil end
           SMODS.destroy_cards(joker)
           break
         end
