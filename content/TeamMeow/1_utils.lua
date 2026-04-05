@@ -19,5 +19,12 @@ end
 
 function meow_get_distance_between_two_cards(c1,c2)
     return ((c1.T.x + c1.T.w / 2 - (c2.T.x + c2.T.w / 2)) ^ 2 + (c1.T.y + c1.T.h / 2 - (c2.T.y + c2.T.h / 2)) ^ 2)^(1/2)
+end
     
+function meow_can_apply_foil(card)
+    if not card.tarts then
+        return false
+    else
+        return card.tarts < 7
+    end
 end
