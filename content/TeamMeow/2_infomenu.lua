@@ -103,7 +103,7 @@ function Wormhole.TEAM_MEOW.create_spacetart_UIBox_definition(args)
 					nodes = {
 						{
 							n = G.UIT.C,
-							config = { align = "cm", padding = 0.05, r = 0.2, no_overflow = true },
+							config = { align = "cm", padding = 0.05, r = 0.2 },
 							nodes = {
 								desc_node,
 							},
