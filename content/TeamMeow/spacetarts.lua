@@ -368,7 +368,7 @@ SMODS.DrawStep({
 		local bool = false
 		if G.jokers and G.jokers.cards then
 			for k, v in pairs(G.jokers.cards) do
-				if meow_cards_are_colliding(card, v) then
+				if meow_cards_are_colliding(card, v) and meow_can_apply_foil(v) then
 					bool = true
 				end
 			end
@@ -438,7 +438,7 @@ function Card:stop_drag(...)
 	local colliders = {}
 	if G.jokers and G.jokers.cards then
 		for k, v in pairs(G.jokers.cards) do
-			if meow_cards_are_colliding(self, v) then
+			if meow_cards_are_colliding(self, v) and meow_can_apply_foil(v) then
 				bool = true
 				table.insert(colliders, { card = v, dist = meow_get_distance_between_two_cards(v, self) })
 			end
@@ -457,7 +457,6 @@ function Card:stop_drag(...)
 		and self.ability.set == "worm_meow_Spacetart"
 		and bool
 		and playerHas
-		and meow_can_apply_foil(self)
 	then
 		local tart = {
 			key = self.ability.extra.tart,
