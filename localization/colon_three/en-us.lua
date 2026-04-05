@@ -228,9 +228,16 @@ return {
             k_junkset = "Derelict",
             b_junkset_cards = "Derelict Cards",
 			k_junkset_pack = "Derelict Pack",
+            k_junk_hands = "Junk Hands",
         },
         labels = {
             JunkSet = "Derelict"
         },
+        poker_hand_descriptions = {
+            ["Junk Hands"] = {
+                "Adding Junk Cards to other Poker Hands",
+                "increases their base Chips and Mult"
+            }
+        }
     }
 }
