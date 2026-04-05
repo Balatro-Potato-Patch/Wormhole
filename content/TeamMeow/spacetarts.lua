@@ -71,6 +71,10 @@ local function create_tart(tart, tartPos, foilPos, regFunc, boostFunc, boostKey)
                 key = "spacetart_" .. tart .. "_regular",
                 specific_vars = { "","","" }
             }
+            info_queue[#info_queue + 1] = {
+                set = "Other",
+                key = "spacetart_hint"
+            }
         end,
         can_use = function(self, card)
             return false

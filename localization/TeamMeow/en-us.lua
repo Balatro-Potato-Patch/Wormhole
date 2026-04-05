@@ -260,6 +260,14 @@ return {
 					"{C:inactive,s:0.8}#1#{C:attention,s:0.8}#2#{C:inactive,s:0.8}#3#"
 				}
 			},
+			spacetart_hint = {
+				name = "Spacetarts",
+				text = {
+					"Drag me on a joker to",
+					"{C:attention}equip{} me to it",
+					"{C:inactive,s:0.8}:3"
+				}
+			},
 
 
 			
