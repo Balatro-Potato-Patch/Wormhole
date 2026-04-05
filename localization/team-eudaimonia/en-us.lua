@@ -108,9 +108,9 @@ return {
                 k_worm_specificcolony_ship_button = "Ship Jokers",
                 k_worm_specificcolony_receive_button = "Release Jokers",
                 k_worm_specificcolony_ship_title = "Sending to Colony ",
-                k_worm_specificcolony_receive_title = "Release from Colony "
+                k_worm_specificcolony_receive_title = "Release from Colony ",
                 worm_euda_pkr_wow = "Wow!",
-                worm_euda_pkr_wow_f = "Wow! Flush"
+                worm_euda_pkr_wow_f = "Wow! Flush",
             }
         },
 }
