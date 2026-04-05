@@ -10,8 +10,8 @@ return {
                 text = {"big fat hairy deal"}
             },
             PotatoPatchDev_Plasma = {
-                name = "Plasma",
-                text = {"."}
+                name = "cosmeggo",
+                text = {"Formerly Plasma!"}
             },
             PotatoPatchDev_soulware = {
                 name = "soulware",
@@ -23,7 +23,7 @@ return {
             },
             PotatoPatchDev_iamarta = {
                 name = "iamarta",
-                text = {"."}
+                text = {"bonjour"}
             },
             PotatoPatchDev_m0x3s = {
                 name = "m0x3s",
@@ -48,6 +48,37 @@ return {
 
 
         },
-
+        Joker = {
+            j_worm_message = {
+                name = {
+                    "The Message",
+                },
+                text = {
+                    {
+                    "{X:red,C:white}X#1#{} Mult",
+                    "{C:green}#2# in #3#{} chance to",
+                    "receive an {C:inactive}answer{}"
+                    },
+                    {
+                    "{C:red}Use with caution.{}"
+                    }
+                }
+            },
+            j_worm_answer = {
+                name = {
+                    "The Answer",
+                },
+                text = {
+                    {
+                    "All {C:attention}Boss Blinds{}",
+                    "are replaced with",
+                    "{C:inactive}The Anomaly{}"
+                    },
+                    {
+                    "{C:inactive}You should have listened...{}",
+                    }
+                }
+            },
+        }
     }
 }
