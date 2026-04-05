@@ -46,6 +46,13 @@ SMODS.Consumable {
     end,
     can_use = function(self, card)
         return G.hand and #G.hand.cards > 1
+    end,
+    set_sprites = function(self, card, front)
+        local secret = pseudorandom("lfc_dark_matter_secret", 1, 5) <= 1
+        if secret then
+            --print("Oooh, secret!")
+            card.children.center:set_sprite_pos({ x = 1, y = 0 })
+        end
     end
 }
 
@@ -54,7 +61,7 @@ SMODS.Consumable {
     key = 'lfc_time_dilation',
     set = 'Spectral',
     atlas = "lfc_spectrals",
-    pos = { x = 1, y = 0 },
+    pos = { x = 2, y = 0 },
     cost = 4,
     config = { extra = { ante_inc = -1, win_ante_inc = 1 } },
     loc_vars = function(self, info_queue, card)
