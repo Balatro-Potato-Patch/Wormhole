@@ -122,7 +122,7 @@ return {
 				name = "TBD",
 				text = {
 					"{C:attention}Face cards{} gain",
-					"gain {C:mult}$#3#{}",
+					"gain {X:mult,C:white}X#3#{} Mult",
 					"permanently",
 				},
 			},
