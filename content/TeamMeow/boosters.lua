@@ -159,7 +159,7 @@ SMODS.Booster({
 	pos = { x = 2, y = 0 },
 	config = { extra = 4,  choose = 2 },
 	group_key = "k_worm_meow_spacetart_pack",
-    kind = "Spacetart",
+    kind = "worm_meow_Spacetart",
 	select_card = "consumeables",
 	cost = 8,
 	weight = 0.09,
