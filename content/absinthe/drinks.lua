@@ -716,4 +716,78 @@ SMODS.Consumable { -- Big Bang Brandy
     end
 }
 
+SMODS.Consumable { -- John Absinthe
+    set = 'abs_drinks',
+    key = 'abs_absinthe',
+    ppu_coder = { 'pi_cubed' },
+    ppu_team = { 'absinthe' },
+    pos = { x = 4, y = 1 },
+    config = {
+        drink_values = {
+            filled_pos = { x = 4, y = 1 },
+            empty_pos = { x = 5, y = 1 },
+            filled = true,
+            visibly_filled = true,
+            primed = false
+        },
+        extra = { xmult_mod = 0.2, xmult = 1 },
+    },
+    hidden = true,
+    cost = 10,
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'e_negative_consumable', set = 'Edition', config = { extra = 1 } }
+        local key
+        if not card.ability.drink_values.filled then
+            key = self.key .. '_empty'
+        else
+            key = self.key
+        end
+        return { key = key, vars = {
+            card.ability.extra.xmult_mod, card.ability.extra.xmult
+        } }
+    end,
+    calculate = function(self, card, context)
+        if context.joker_main and card.ability.extra.xmult > 1 then
+            return {
+                xmult = card.ability.extra.xmult
+            }
+        end
+        
+        if context.setting_blind and G.consumeables.cards[1] and card.ability.drink_values.filled then
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    local new_drink = SMODS.add_card({set = 'abs_drinks'})
+                    new_drink:set_edition("e_negative", true)
+                    return true
+                end
+            }))
+            return { message = localize('k_duplicated_ex') }
+        end
+
+        if context.abs_drink_emptied and context.card.edition 
+        and context.card.edition.key == 'e_negative' and card.ability.drink_values.filled then
+            SMODS.scale_card(card, {
+                ref_table = card.ability.extra,
+                ref_value = "xmult",
+                scalar_value = "xmult_mod",
+            })
+            card:abs_empty_drink()
+        end
+
+        if context.using_consumeable and context.consumeable.config.center.set == 'Spectral' 
+        and not card.ability.drink_values.filled then
+            card:abs_refill_drink()
+        end
+    end,
+    --[[use = function(self, card, area, copier)
+        card:abs_toggle_drink_prime()
+    end,
+    can_use = function(self, card)
+        return card.ability.drink_values.filled
+    end,
+    keep_on_use = function(self, card)
+        return true;
+    end]]
+}
+
 --#endregion
