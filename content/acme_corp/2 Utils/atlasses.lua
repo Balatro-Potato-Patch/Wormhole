@@ -1,0 +1,1 @@
+SMODS.Atlas{key = 'acmeGadgets', px = 71, py = 95, path = 'acme_corp/gadgets.png'}

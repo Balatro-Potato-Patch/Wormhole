@@ -1,0 +1,39 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+[[patches]]
+[patches.pattern]
+target = "engine/sprite.lua"
+pattern = '''love.graphics.draw(
+        self.atlas.image,
+        self.sprite,
+        -(other_obj.T.w/2 -other_obj.VT.w/2)*10,
+        0,
+        0,
+        other_obj.VT.w/(other_obj.T.w),
+        other_obj.VT.h/(other_obj.T.h)
+    )'''
+position = "at"
+payload = '''if other_obj.is_acme_ball then
+    love.graphics.draw(
+        self.atlas.image,
+        self.sprite,
+        -(other_obj.T.w/2 -other_obj.VT.w/2)*10,
+        0,
+        0,
+        self.VT.w/(self.T.w),
+        self.VT.h/(self.T.h)
+    )
+else
+    love.graphics.draw(
+        self.atlas.image,
+        self.sprite,
+        -(other_obj.T.w/2 -other_obj.VT.w/2)*10,
+        0,
+        0,
+        other_obj.VT.w/(other_obj.T.w),
+        other_obj.VT.h/(other_obj.T.h)
+    )
+end'''
+match_indent = true    
