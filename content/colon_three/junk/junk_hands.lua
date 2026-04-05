@@ -40,34 +40,6 @@ PotatoPatchUtils.Developers.worm_meta.calculate = function(self, context)
     return meta_calc_ref(self, context)
 end
 
-local parse_highlighted = CardArea.parse_highlighted
-function CardArea:parse_highlighted(...)
-    local text,disp_text,poker_hands,scoring = G.FUNCS.get_poker_hand_info(self.highlighted)
-    local ret = parse_highlighted(self, ...)
-    local backwards = nil
-    for k, v in pairs(self.highlighted) do
-        if v.facing == 'back' then
-            backwards = true
-        end
-    end
-    if backwards then return end
-    if text and G.GAME.hands[text] then
-        local junks = 0
-        for i, v in pairs(self.highlighted) do
-            if v.config.center.key == "m_worm_junk_card" then junks = junks + 1 end
-        end
-        G.GAME.worm_c3_junk_stats.x_hand_stats = G.GAME.worm_c3_junk_stats.x_hand_stats or 1.5
-        local junk_hands_mult = G.GAME.worm_c3_junk_stats.x_hand_stats ^ junks
-        for name, parameter in pairs(SMODS.Scoring_Parameters) do
-            if name == "chips" or name == "mult" then
-                parameter.current = parameter.current * junk_hands_mult
-                update_hand_text({immediate = true, nopulse = nil, delay = 0}, {[name] = parameter.current})
-            end
-        end
-    end
-    return ret
-end
-
 if Spectrallib and Spectrallib.ascend then
     local sasc = Spectrallib.ascend
     function Spectrallib.ascend(...)
@@ -80,6 +52,34 @@ if Spectrallib and Spectrallib.ascend then
         local junk_hands_mult = G.GAME.worm_c3_junk_stats.x_hand_stats ^ junks
 
         return sasc(...) * junk_hands_mult
+    end
+else
+    local parse_highlighted = CardArea.parse_highlighted
+    function CardArea:parse_highlighted(...)
+        local text,disp_text,poker_hands,scoring = G.FUNCS.get_poker_hand_info(self.highlighted)
+        local ret = parse_highlighted(self, ...)
+        local backwards = nil
+        for k, v in pairs(self.highlighted) do
+            if v.facing == 'back' then
+                backwards = true
+            end
+        end
+        if backwards then return end
+        if text and G.GAME.hands[text] then
+            local junks = 0
+            for i, v in pairs(self.highlighted) do
+                if v.config.center.key == "m_worm_junk_card" then junks = junks + 1 end
+            end
+            G.GAME.worm_c3_junk_stats.x_hand_stats = G.GAME.worm_c3_junk_stats.x_hand_stats or 1.5
+            local junk_hands_mult = G.GAME.worm_c3_junk_stats.x_hand_stats ^ junks
+            for name, parameter in pairs(SMODS.Scoring_Parameters) do
+                if name == "chips" or name == "mult" then
+                    parameter.current = parameter.current * junk_hands_mult
+                    update_hand_text({immediate = true, nopulse = nil, delay = 0}, {[name] = parameter.current})
+                end
+            end
+        end
+        return ret
     end
 end
 
