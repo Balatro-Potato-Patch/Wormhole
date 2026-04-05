@@ -13,4 +13,142 @@ if PotatoPatchUtils then
 
     -- Reset Game Globals func to hook
     function Wormhole.reset_game_globals(run_start) end
+
+    --#region Custom Menu
+    SMODS.Atlas {
+        key = 'logo',
+        path = 'wormhole logo.png',
+        px = 148,
+        py = 158
+    }
+
+    Wormhole.colours = {
+        primary = HEX('73fdff'),
+        secondary = HEX('011638')
+    }
+
+    local gmm = Game.main_menu
+    function Game:main_menu(change_context)
+        local ret = gmm(self, change_context)
+
+        if not G.title_top.cards[1].mod_flag then
+            G.title_top.cards[1]:remove()
+            G.title_top.T.w = G.title_top.T.w - (1.7675 / math.max(#G.title_top.cards, 1))
+            G.title_top.T.x = G.title_top.T.x + (0.885 / math.max(#G.title_top.cards, 1))
+        end
+
+        if Wormhole.config.menu then
+            -- Creates Wormhole Logo Sprite
+            local SC_scale = 1.1 * (G.debug_splash_size_toggle and 0.8 or 1)
+            G.SPLASH_WORMHOLE_LOGO = Sprite(0, 0,
+                3.5 * SC_scale,
+                3.5 * SC_scale * (G.ASSET_ATLAS["worm_logo"].py / G.ASSET_ATLAS["worm_logo"].px),
+                G.ASSET_ATLAS["worm_logo"], { x = 0, y = 0 }
+            )
+            G.SPLASH_WORMHOLE_LOGO:set_alignment({
+                major = G.title_top,
+                type = 'cm',
+                bond = 'Strong',
+                offset = { x = 0, y = 0 }
+            })
+            G.SPLASH_WORMHOLE_LOGO:define_draw_steps({ {
+                shader = 'dissolve',
+            } })
+
+            -- Define logo properties
+            G.SPLASH_WORMHOLE_LOGO.tilt_var = { mx = 0, my = 0, dx = 0, dy = 0, amt = 0 }
+
+            G.SPLASH_WORMHOLE_LOGO.dissolve_colours = { Wormhole.colours.primary, Wormhole.colours.secondary }
+            G.SPLASH_WORMHOLE_LOGO.dissolve = 1
+
+            G.SPLASH_WORMHOLE_LOGO.states.collide.can = true
+
+            -- Define node functions for Logo
+            function G.SPLASH_WORMHOLE_LOGO:click()
+                play_sound('button', 1, 0.3)
+                SMODS.LAST_SELECTED_MOD_TAB = nil
+                G.FUNCS['openModUI_Wormhole']()
+                G.OVERLAY_MENU:get_UIE_by_ID("overlay_menu_back_button").config.button = "exit_overlay_menu_Wormhole"
+            end
+
+            G.FUNCS.exit_overlay_menu_Wormhole = function()
+                G.ACTIVE_MOD_UI = nil
+                G.FUNCS.exit_overlay_menu()
+            end
+
+            function G.SPLASH_WORMHOLE_LOGO:hover()
+                G.SPLASH_WORMHOLE_LOGO:juice_up(0.05, 0.03)
+                play_sound('paper1', math.random() * 0.2 + 0.9, 0.35)
+                Node.hover(self)
+            end
+
+            function G.SPLASH_WORMHOLE_LOGO:stop_hover() Node.stop_hover(self) end
+
+            --Logo animation
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = change_context == 'splash' and 3.6 or change_context == 'game' and 4 or 1,
+                blockable = false,
+                blocking = false,
+                func = (function()
+                    play_sound('magic_crumple' .. (change_context == 'splash' and 2 or 3),
+                        (change_context == 'splash' and 1 or 1.3), 0.9)
+                    play_sound('whoosh1', 0.2, 0.8)
+                    ease_value(G.SPLASH_WORMHOLE_LOGO, 'dissolve', -1, nil, nil, nil,
+                        change_context == 'splash' and 2.3 or 0.9)
+                    G.VIBRATION = G.VIBRATION + 1.5
+                    return true
+                end)
+            }))
+
+            -- make the title screen use different background colors
+            G.SPLASH_BACK:define_draw_steps({ {
+                shader = 'splash',
+                send = {
+                    { name = 'time',       ref_table = G.TIMERS,         ref_value = 'REAL_SHADER' },
+                    { name = 'vort_speed', val = 0.4 },
+                    { name = 'colour_1',   ref_table = Wormhole.colours, ref_value = 'primary' },
+                    { name = 'colour_2',   ref_table = Wormhole.colours, ref_value = 'secondary' },
+                }
+            } })
+        end
+
+        return ret
+    end
+    --#endregion
+
+    --#region Config
+    Wormhole.config_tab = function()
+        return {
+            n = G.UIT.ROOT,
+            config = { align = "m", r = 0.1, padding = 0.05, colour = G.C.BLACK, minw = 8, minh = 6 },
+            nodes = {
+                { n = G.UIT.R, config = { align = "cl", padding = 0, minh = 0.1 }, nodes = {} },
+
+                -- Custom Menu Toggle
+                {
+                    n = G.UIT.R,
+                    config = { align = "cm", padding = 0 },
+                    nodes = {
+                        {
+                            n = G.UIT.C,
+                            config = { align = "cl", padding = 0.05 },
+                            nodes = {
+                                create_toggle { col = true, label = "", scale = 0.8, w = 0, shadow = true, ref_table = Wormhole.config, ref_value = "menu" },
+                            }
+                        },
+                        {
+                            n = G.UIT.C,
+                            config = { align = "c", padding = 0 },
+                            nodes = {
+                                { n = G.UIT.T, config = { text = localize('b_wormhole_custom_menu'), scale = 0.35, colour = G.C.UI.TEXT_LIGHT } },
+                            }
+                        },
+                    },
+                },
+
+            }
+        }
+    end
+    --#endregion
 end
