@@ -689,32 +689,3 @@ function Game:update(dt, ...)
         end
     end
 end
-
-SMODS.Atlas({
-	key = "meowPanelApply",
-	px = 80,
-	py = 60,
-	path = "TeamMeow/panelApply.png",
-	frames = 30,
-	atlas_table = "ANIMATION_ATLAS",
-})
-SMODS.Atlas({
-    key = "meowPanelSwitch",
-    px = 80,
-    py = 60,
-    path = "TeamMeow/panelSwitch.png",
-    frames = 24,
-    atlas_table = "ANIMATION_ATLAS",
-})
-SMODS.Atlas({
-    key = "meowPanelStack",
-    px = 80,
-    py = 60,
-    path = "TeamMeow/panelStack.png",
-})
-SMODS.Atlas({
-    key = "meowPanelBoosts",
-    px = 80,
-    py = 60,
-    path = "TeamMeow/panelBoosts.png",
-})

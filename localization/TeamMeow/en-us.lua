@@ -14,19 +14,19 @@ return {
 								"the cursor will turn into a {C:attention}cat paw{}.",
 							},
 							{
-								"Some {C:attention}Joker{}s might get too full after eating too many {C:worm_meow_spacetart}©Spacetart{}s",
-								"and won't be able to consume any more {C:worm_meow_spacetart}©Spacetart{}s.",
-								"A {C:attention}Joker{} can consume at most {C:attention}#1# {C:worm_meow_spacetart}©Spacetart{}s",
+								"Some {C:attention}Jokers{} might get too full after eating too many {C:worm_meow_spacetart}©Spacetarts{}",
+								"and won't be able to consume any more {C:worm_meow_spacetart}©Spacetarts{}.",
+								"A {C:attention}Joker{} can consume at most {C:attention}#1# {C:worm_meow_spacetart}©Spacetarts{}",
 								"before refusing to eat more under normal circumstances."
 							},
 							{
-								"If you think a {C:attention}Joker{} has too many foils and its unevenly distributed,",
+								"If you think a {C:attention}Joker{} has too many foils and it's unevenly distributed,",
 								"simply {C:attention}drag{} the {C:attention}Joker{} onto another one, and the topmost foil will be",
 								"given to the other {C:attention}Joker{}, while also enabling the original {C:attention}Joker{} to",
 								"consume {C:attention}another {C:worm_meow_spacetart}©Spacetart{}."
 							},
 							{
-								"Certain {C:attention}Joker{}s prefer different flavours of {C:worm_meow_spacetart}©Spacetart{}s",
+								"Certain {C:attention}Jokers{} prefer different flavours of {C:worm_meow_spacetart}©Spacetarts{}",
 								"and the effect of the {C:worm_meow_spacetart}©Spacetart{} will be greatly {C:attention}boosted{}."
 							},
 						}
