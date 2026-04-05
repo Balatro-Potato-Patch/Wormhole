@@ -4,12 +4,13 @@ SMODS.Atlas {
 	px = 71,
 	py = 95
 }
---[[ SMODS.Atlas {
+SMODS.Atlas {
 	key = 'ACME_gadgets',
-	path = 'acme_corp/ACME_gadgets.png',
+	path = 'acme_corp/gadgets.png',
 	px = 71,
 	py = 95
 }
+--[[
 SMODS.Atlas {
 	key = 'ACME_backs',
 	path = 'acme_corp/ACME_backs.png',
