@@ -657,4 +657,63 @@ SMODS.Consumable { -- Voidka
     end
 }
 
+SMODS.Consumable { -- Big Bang Brandy
+    set = 'abs_drinks',
+    key = 'abs_big_bang_brandy',
+    ppu_coder = { 'pi_cubed' },
+    ppu_team = { 'absinthe' },
+    pos = { x = 2, y = 1 },
+    config = {
+        drink_values = {
+            filled_pos = { x = 2, y = 1 },
+            empty_pos = { x = 3, y = 1 },
+            filled = true,
+            visibly_filled = true,
+            primed = false
+        },
+    },
+    cost = 3,
+    loc_vars = function(self, info_queue, card)
+        local key
+        if not card.ability.drink_values.filled then
+            key = self.key .. '_empty'
+        else
+            key = self.key
+        end
+        return { key = key }  
+    end,
+    calculate = function(self, card, context)
+        if context.before and card.ability.drink_values.filled 
+        and card.ability.drink_values.primed and not context.repetition 
+        and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+            G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+            G.E_MANAGER:add_event(Event({
+                func = (function()
+                    SMODS.add_card {
+                        set = 'Spectral',
+                    }
+                    G.GAME.consumeable_buffer = 0
+                    return true
+                end)
+            }))
+            SMODS.calculate_effect( { 
+                message = localize('k_plus_spectral'), colour = G.C.SECONDARY_SET.Spectral }, card)
+            card:abs_empty_drink()
+        end
+        
+        if context.skipping_booster and not card.ability.drink_values.filled then
+            card:abs_refill_drink()
+        end
+    end,
+    use = function(self, card, area, copier)
+        card:abs_toggle_drink_prime()
+    end,
+    can_use = function(self, card)
+        return card.ability.drink_values.filled
+    end,
+    keep_on_use = function(self, card)
+        return true;
+    end
+}
+
 --#endregion

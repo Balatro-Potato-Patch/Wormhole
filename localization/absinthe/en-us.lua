@@ -219,6 +219,38 @@ return {
                     }
                 }
             },
+            c_worm_abs_big_bang_brandy = {
+                name = 'Big Bang Brandy',
+                text = {
+                    {
+                        "When {C:attention}primed{}, create a",
+                        "{C:spectral}Spectral{} card when next",
+                        "hand is played, then is {C:abs_drinks}drank{}",
+                        "{C:inactive}(Must have space!)",
+                    },
+                    {
+                        "{C:abs_drinks}Refill{} by skipping",
+                        "a {C:attention}Booster Pack{}",
+                    }
+                }
+            },
+            c_worm_abs_big_bang_brandy_empty = {
+                name = 'Big Bang Brandy',
+                text = {
+                    {
+                        "{C:inactive,s:0.8}Currently Empty{}",
+                        "{C:abs_drinks}Refill{} by skipping",
+                        "a {C:attention}Booster Pack{}",
+                    },
+                    {
+                        "{C:inactive,s:0.8}After being Refilled:{}",
+                        "When {C:attention}primed{}, create a",
+                        "{C:spectral}Spectral{} card when next",
+                        "hand is played, then is {C:abs_drinks}drank{}",
+                        "{C:inactive}(Must have space!)",
+                    }
+                }
+            },
         },
         Joker = {
             j_worm_abs_clg = {
