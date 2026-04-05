@@ -165,7 +165,7 @@ SMODS.Consumable({
 	attributes = { "modify_card", "chips", "seven", "eight", "space" },
 	config = {
 		extra = {
-			perma_h_chips = 20,
+			perma_h_chips = 25,
 		},
 	},
 	loc_vars = function(self, info_queue, card)
@@ -193,7 +193,7 @@ SMODS.Consumable({
 	attributes = { "modify_card", "mult", "nine", "ten", "space" },
 	config = {
 		extra = {
-			perma_h_mult = 4,
+			perma_h_mult = 5,
 		},
 	},
 	loc_vars = function(self, info_queue, card)
