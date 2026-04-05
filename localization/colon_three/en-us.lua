@@ -26,6 +26,16 @@ return {
                     "{C:inactive}(Minimum of 1 card)"
                 }
             },
+            j_worm_nyan_cat = {
+                name = "Nyan Cat",
+                text = {
+                    "This Joker gains {C:chips}+#1#{} Chips",
+                    "per {C:attention}consecutive{} hand",
+                    "played with {C:attention}two or more",
+                    "unique scoring suits",
+                    "{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)",
+                }
+            },
         },
         Enhanced = {
             m_worm_junk_card = {
@@ -77,7 +87,7 @@ return {
                     },
                     {
                         "Clean-up {C:attention}#2#{} {f:6}—{} Give the first two",
-                        "cleaned-up cards an {C:dark_edition}Edition",
+                        "{C:attention}cleaned-up cards{} an {C:dark_edition}Edition",
                         "{C:inactive,s:0.8}(You may use this on #2# Junk Cards,",
                         "{C:inactive,s:0.8}if you do, remove their enhancement",
                         "{C:inactive,s:0.8}and trigger this effect instead)",
@@ -147,8 +157,8 @@ return {
                     {
                         "Clean-up {C:attention}#2#{} {f:6}—{} played hands with",
                         "{C:attention}Junk Cards{} gain an additional {C:attention}+#3#{}",
-                        "multiplier to {C:chips}Chips{} and {C:mult}Mult{},",
-                        "destroys the cleaned-up cards",
+                        "multiplier to {C:chips}Chips{} and {C:mult}Mult{}, then",
+                        "destroy the {C:attention}cleaned-up cards{}",
                         "{C:inactive,s:0.8}(You may use this on #2# Junk Cards,",
                         "{C:inactive,s:0.8}if you do, remove their enhancement",
                         "{C:inactive,s:0.8}and trigger this effect instead)",

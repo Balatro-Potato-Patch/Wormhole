@@ -1,5 +1,11 @@
 Wormhole.COLON_THREE = {C = {}}
 
+SMODS.Atlas {
+    path = "colon_three/jokers.png",
+    key = "ct_jokers",
+    px = 71, py = 95
+}
+
 PotatoPatchUtils.Team{
     name = ":3",
     colour = HEX("b52961"),
@@ -78,6 +84,7 @@ for i, v in pairs({
     "laika",
     "dyson_sphere",
     "wall_e",
+    "nyan_cat",
     "junk/main",
     "junk/junk_hands",
     "junk/packs",
