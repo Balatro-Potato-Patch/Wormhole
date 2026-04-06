@@ -296,6 +296,36 @@ return {
                     }
                 }
             },
+            c_worm_abs_spacewalk_selzer = {
+                name = 'Spacewalk Seltzer',
+                text = {
+                    {
+                        "When {C:attention}primed{}, {C:attention}retriggers",
+                        "each played card {C:attention}#1#{} time,",
+                        "then is {C:abs_drinks}drank{}",
+                    },
+                    {
+                        "{C:abs_drinks}Refill{} by {C:red}destroying",
+                        "1 {C:attention}Playing Card{}",
+                    }
+                }
+            },
+            c_worm_abs_spacewalk_selzer_empty = {
+                name = 'Spacewalk Seltzer',
+                text = {
+                    {
+                        "{C:inactive,s:0.8}Currently Empty{}",
+                        "{C:abs_drinks}Refill{} by {C:red}destroying",
+                        "1 {C:attention}Playing Card{}",
+                    },
+                    {
+                        "{C:inactive,s:0.8}After being Refilled:{}",
+                        "When {C:attention}primed{}, {C:attention}retriggers",
+                        "each played card {C:attention}#1#{} time,",
+                        "then is {C:abs_drinks}drank{}",
+                    }
+                }
+            },
         },
         Joker = {
             j_worm_abs_clg = {

@@ -793,4 +793,58 @@ SMODS.Consumable { -- John Absinthe
     end]]
 }
 
+SMODS.Consumable { -- Spacewalk Seltzer
+    set = 'abs_drinks',
+    key = 'abs_spacewalk_selzer', -- yes I misspelled this on purpose because of vanilla balatro lmao
+    ppu_coder = { 'theAstra' },
+    ppu_artist = { 'AnneBean' },
+    ppu_team = { 'absinthe' },
+    atlas = 'abs_drinks',
+    pos = { x = 2, y = 2 },
+    config = {
+        drink_values = {
+            filled_pos = { x = 2, y = 2 },
+            empty_pos = { x = 3, y = 2 },
+            filled = true,
+            visibly_filled = true,
+            primed = false
+        },
+        extra = { reps = 1 },
+    },
+    cost = 3,
+    loc_vars = function(self, info_queue, card)
+        local key
+        if not card.ability.drink_values.filled then
+            key = self.key .. '_empty'
+        else
+            key = self.key
+        end
+        return { key = key, vars = { card.ability.extra.reps } }
+    end,
+    calculate = function(self, card, context)
+        if context.repetition and context.cardarea == G.play and card.ability.drink_values.primed and card.ability.drink_values.filled then
+            return {
+                repetitions = card.ability.extra.reps
+            }
+        end
+
+        if context.after and card.ability.drink_values.primed and card.ability.drink_values.filled then
+            card:abs_empty_drink()
+        end
+
+        if context.remove_playing_cards and not card.ability.extra.filled then
+            card:abs_refill_drink()
+        end
+    end,
+    use = function(self, card, area, copier)
+        card:abs_toggle_drink_prime()
+    end,
+    can_use = function(self, card)
+        return card.ability.drink_values.filled
+    end,
+    keep_on_use = function(self, card)
+        return true;
+    end
+}
+
 --#endregion
