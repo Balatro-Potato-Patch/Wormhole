@@ -100,9 +100,8 @@ local shader = love.graphics.newShader([[
 uniform vec2 dims;
 uniform float fac;
 uniform vec3 palette[4];
-//extern sampler2D bubbles;
-
-extern number time;
+uniform sampler2D bubbles;
+uniform float time;
 
 vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords ) {
 	float progress = clamp(fac,0.,1.);
@@ -114,33 +113,34 @@ vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords
 	
 	float waveB = sin(texture_coords.y*4.+time*progress*-4.)/10.+.5; // Health bar flowing
 	
-	float waveC = sin(texture_coords.y*.5+time*progress)/60.; // Bubble texture X offset
+	float waveC = sin(texture_coords.x*.5+time*progress)/60.; // Bubble texture X offset
 	
 	
 	waveA = flowEdge ? 0. : waveA; // Only flow if HP isn't full/empty
-	waveB = waveB+texture_coords.x*2.;
+	waveB = waveB+texture_coords.y*2.;
 	
 	waveB = waveB>2. ? 2.-(waveB-2.)*1.5 : waveB;
 	
-	waveB += float(texture_coords.y>(progress+waveA-1./dims.y) && !flowEdge)*.75;
+	waveB += float(texture_coords.y<(1-progress+waveA+1./dims.y) && !flowEdge)*.75;
 	
-	//vec2 bubbleTexCoord = texture_coords*dims/128.;
-	//bubbleTexCoord += vec2(waveC+.2,time*progress/11.-floor(time*progress/11.));
-	//bubbleTexCoord -= floor(bubbleTexCoord); // Like modulo, but better :3
+	vec2 bubbleTexCoord = texture_coords*dims/128.;
+	bubbleTexCoord += vec2(waveC+.2,time*progress/11.-floor(time*progress/11.));
+	bubbleTexCoord -= floor(bubbleTexCoord); // Like modulo, but better :3
 	
-	//float bubbleTex = texture2D( bubbles, bubbleTexCoord ).x*.5;
-	//waveB = clamp(waveB-bubbleTex, 0.,3.);
+	float bubbleTex = texture2D( bubbles, bubbleTexCoord ).x*.5;
+	waveB = clamp(waveB-bubbleTex, 0.,3.);
 	
 	vec3 fac = mix(palette[int(floor(waveB))],palette[int(ceil(waveB))],waveB-floor(waveB));
 	
-	if ( texture_coords.y<(progress+waveA) ) { c = vec4(fac,c.a); } else { discard; }
-	
-	return c;
-}
-]]) --SMODS.current_mod.path .. "assets/shaders/shader.fs" ) -- Gives me more control than SMODS.Shader
+	if ( texture_coords.y>(1-progress+waveA) ) { return vec4(fac,c.a); } else { discard; }
+}]]) --SMODS.current_mod.path .. "assets/shaders/shader.fs" ) -- Gives me more control than SMODS.Shader
 
+local barsprite = love.graphics.newImage(love.image.newImageData(1,1)) -- Turns out rectangles don't work for uv stuff so i'm doing this
+local bubblesprite = love.graphics.newImage(love.image.newImageData(SMODS.NFS.newFileData(SMODS.current_mod.path .. "assets/lancer_fan_club/bubbles.png")))
+shader:send("bubbles", bubblesprite)
 
-local function draw_piss_bar(fac, x, y, w, h, colours)
+local function draw_piss_bar(fac, x, y, w, h, colours, back)
+    local back = back or false
     local old_shader = love.graphics.getShader()
 
 
@@ -148,10 +148,18 @@ local function draw_piss_bar(fac, x, y, w, h, colours)
 
     shader:send("fac", fac)
     shader:send("dims", { w, h })
+    shader:send("time", G.TIMERS.REAL)
+
+    if back then
+        local c = HEX("4f6367")
+        love.graphics.setColor(c[1],c[2],c[3])
+        love.graphics.rectangle("fill", x, y, w, h)
+    end
 
     love.graphics.setShader(shader)
 
-    love.graphics.rectangle("fill", x, y, w, h)
+    love.graphics.setColor(1,1,1)
+    love.graphics.draw(barsprite, x, y, 0, w, h)
 
     love.graphics.setShader(old_shader)
 end
@@ -163,7 +171,7 @@ local bar_palettes = {
 local function piss_draw(card)
     love.graphics.clear()
 
-    draw_piss_bar(currentvalues.urine.value, 10, 10, 10, 40, bar_palettes.piss)
+    draw_piss_bar(currentvalues.urine.value/100, 10, 10, 40, 40, bar_palettes.piss, true)
 end
 
 SMODS.DrawStep {
