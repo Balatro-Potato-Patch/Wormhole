@@ -35,32 +35,24 @@ return {
                 text = {
                     { "It's" },
                 },
-                atlas = "ACME_Credits",
-                pos = { x = 0, y = 0 }
             },
             PotatoPatchDev_FlameThrowerFIM = {
                 name = "FlameThrowerFIM",
                 text = {
                     { "Snowing" },
                 },
-                atlas = "ACME_Credits",
-                pos = { x = 0, y = 0 }
             },
             PotatoPatchDev_Opal = {
                 name = "Opal",
                 text = {
                     { "On" },
                 },
-                atlas = "ACME_Credits",
-                pos = { x = 0, y = 0 }
             },
             PotatoPatchDev_Youh = {
                 name = "Youh !",
                 text = {
                     { "Mount" },
                 },
-                atlas = "ACME_Credits",
-                pos = { x = 0, y = 0 }
             }
             ,
             PotatoPatchDev_Basil_Squared = {
@@ -68,8 +60,6 @@ return {
                 text = {
                     { "Fuji" },
                 },
-                atlas = "ACME_Credits",
-                pos = { x = 0, y = 0 }
             }
         }
     },
