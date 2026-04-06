@@ -339,7 +339,7 @@ SMODS.Joker{
 	},
 	config = { extra = { size = 2 }},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue + 1] = G.P_CENTERS.m_mult
+		info_queue[#info_queue + 1] = G.P_CENTERS.m_glass
 		return { vars = { card.ability.extra.size }}
 	end,
 	atlas = "vegas_jokers",
@@ -499,4 +499,47 @@ SMODS.Blind{
 			update_hand_text({sound = 'button', volume = 0.7, pitch = 1.1, delay = 0}, {mult = 0, chips = 0, handname = '', level = ''})
 		end
 	end
+}
+
+--Consumeables
+SMODS.Consumable {
+    key = 'expanse',
+    set = 'Spectral',
+	loc_txt = {
+		name = "Expansion",
+		text = {
+			"Add {C:purple}Negative{} effect to up",
+			"to {C:attention}#1#{}} selected cards in hand"
+		}
+	},
+    pos = { x = 4, y = 4 },
+	discovered = true,
+    config = { max_highlighted = 2 },
+	ppu_team = {"People Found In Vegas"},
+    ppu_coder = {"Jammbo"},
+    ppu_artist = {},
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = G.P_CENTERS.e_negative
+        return { vars = { card.ability.max_highlighted } }
+    end,
+    use = function(self, card, area, copier)
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.4,
+            func = function()
+                G.hand.highlighted[1]:set_edition("e_negative", true)
+                card:juice_up(0.3, 0.5)
+				if #G.hand.highlighted == 2 then
+					G.hand.highlighted[2]:set_edition("e_negative", true)
+					card:juice_up(0.3, 0.5)
+				end
+                return true
+            end
+        }))
+    end,
+    draw = function(self, card, layer)
+        if (layer == 'card' or layer == 'both') and card.sprite_facing == 'front' then
+            card.children.center:draw_shader('booster', nil, card.ARGS.send_to_shader)
+        end
+    end
 }
