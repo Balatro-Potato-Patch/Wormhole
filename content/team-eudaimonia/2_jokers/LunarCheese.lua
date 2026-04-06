@@ -1,12 +1,12 @@
 SMODS.Atlas {
-    key = 'rocketscienceatlas',
+    key = 'lunarcheeseatlas',
     px = 71,
     py = 95,
     path = 'team-eudaimonia/wowsignal.png', --Update with actual art
 }
 SMODS.Joker {
-    key = "rocketscience",
-    atlas = 'rocketscienceatlas',
+    key = "lunarcheese",
+    atlas = 'lunarcheeseatlas',
     pos = { x = 0, y = 0 },
     rarity = 2,
     blueprint_compat = false,
@@ -29,11 +29,10 @@ SMODS.Joker {
                 return
             end
             other_joker.ability.worm_researchprogress = card.ability.extra.research_length
-            other_joker.ability.worm_amount_researching = other_joker.ability.worm_amount_researching or 0 
-            other_joker.ability.worm_amount_researching = other_joker.ability.worm_amount_researching + card.ability.extra.retriggers
+            other_joker.ability.worm_researched_retriggers = (other_joker.ability.worm_researched_retriggers or 0) + card.ability.extra.retriggers
             SMODS.debuff_card(other_joker, true, "worm_research")
             return {
-                message = localize("k_worm_rocketscience_research")
+                message = localize("k_worm_lunarcheese_message")
             }
         end
     end
@@ -55,13 +54,9 @@ SMODS.current_mod.calculate = function(self, context)
     if context.end_of_round and not context.game_over  and context.main_eval then
         for _, joker in ipairs(G.jokers and G.jokers.cards or {}) do
             if (joker.ability.worm_researchprogress and joker.ability.worm_researchprogress > 0) then
-                print(joker.ability.worm_researchprogress)
                 joker.ability.worm_researchprogress = joker.ability.worm_researchprogress - 1
                 if (joker.ability.worm_researchprogress <= 0) then
-                    joker.ability.worm_researched_retriggers = joker.ability.worm_researched_retriggers or 0
-                    joker.ability.worm_researched_retriggers = joker.ability.worm_researched_retriggers + joker.ability.worm_amount_researching
                     joker.ability.worm_researchprogress = nil
-                    joker.ability.worm_amount_researching = nil
                     SMODS.debuff_card(joker, nil, "worm_research")
                 end
             end
