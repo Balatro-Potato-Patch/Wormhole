@@ -88,11 +88,9 @@ local descriptions = {
         spaceship = {
             name = 'Spaceship',
             text = {
-                'palceholder',
-                '{C:red}#1#',
-                '#2#',
-                '#3#',
-                '#4#'
+                '{V:1}Adds a {V:2}#1#',
+                '{V:1}to the shop when',
+                '{V:1}no modules are equipped'
             }
         },
     },

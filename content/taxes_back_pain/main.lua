@@ -95,12 +95,13 @@ SMODS.Joker({
                 info_queue[#info_queue+1] = {set = 'tbp_module', key = 'c_worm_tbp_module_missing', module_type = v, vars = {colours = {mix_colours(G.ARGS.LOC_COLOURS.inactive, Wormhole.tbp.module_colours[v], 0.5)}}}
             end
         end
-        return {vars = {
-            self:modules_equipped(card) and 'yes' or 'no',
-            'Core: '..(card.ability.extra.modules.core.durability or 'None'), 
-            'Weapons: '..(card.ability.extra.modules.weapons.durability or 'None'),
-            'Thrusters: '..(card.ability.extra.modules.thrusters.durability or 'None')
-        }}
+        local modules = self:modules_equipped(card)
+        return {
+            vars = {
+                colours = {modules and G.ARGS.LOC_COLOURS.inactive or G.C.UI.TEXT_DARK, modules and mix_colours(G.ARGS.LOC_COLOURS.inactive, G.ARGS.LOC_COLOURS.attention, 0.65) or G.ARGS.LOC_COLOURS.attention},
+                'space booster back name' -- TODO: replace with localize booster name
+            }
+        }
     end,
     modules_equipped = function(self, card)
         return next(card.ability.extra.modules.core) or next(card.ability.extra.modules.weapons) or next(card.ability.extra.modules.thrusters)
@@ -114,7 +115,7 @@ SMODS.Joker({
                 if card.ability.extra.modules[module].durability <= 0 then
                     card.ability.extra.modules[module] = {}
                     SMODS.calculate_effect({
-                        message = module .. ' lost!',
+                        message = localize({type='name_text', set='tbp_module', key=card.ability.extra.modules[module].key}) .. ' lost!',
                         colour = G.C.RED
                     }, card)
                 end
@@ -205,7 +206,7 @@ Wormhole.tbp.Module = SMODS.Consumable:extend{
                 spaceship[1].ability.extra.modules[self.slot][k] = v
             end
             SMODS.calculate_effect({
-                message = self.slot .. ' equipped!',
+                message = localize({type='name_text', set='tbp_module', key=self.key}) .. ' equipped!',
                 colour = G.C.GREEN
             }, spaceship[1])
         end
