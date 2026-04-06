@@ -16,15 +16,15 @@ SMODS.Joker {
 
     config = {
         extra = {
-            denom_mod = -1,
-            scale_by = 0.1
+            denom_mod = 1,
+            denom_mod_mod = 0.1
         }
     },
 
     loc_vars = function(self, info_queue, card)
         return {
             vars = {
-                card.ability.extra.denom_mod, card.ability.extra.scale_by
+                SMODS.signed(-card.ability.extra.denom_mod), card.ability.extra.denom_mod_mod
             }
         }
     end,
@@ -32,6 +32,7 @@ SMODS.Joker {
     calculate = function(self, card, context)
 
         if context.worm_c3_cleanup then
+			card.ability.extra.scale_by = card.ability.extra.denom_mod_mod * #context.cards
             SMODS.scale_card(card, {
                 ref_table = card.ability.extra,
                 ref_value = "denom_mod",
@@ -41,11 +42,15 @@ SMODS.Joker {
         end
 
         if context.mod_probability and not context.blueprint then
-            return {
-                denominator = math.max(1,
+			local new_denominator = context.denominator
+			if context.denominator >= 1 then
+				new_denominator = math.max(1,
                     context.denominator - card.ability.extra.denom_mod
                 )
-            }
+			end
+			return {
+				denominator = new_denominator,
+			}
         end
 
     end

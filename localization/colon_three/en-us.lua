@@ -48,10 +48,9 @@ return {
             j_worm_quantum_tunneling = {
                 name = "Quantum Tunneling",
                 text = {
-                    "{C:attention}-1{} to all {C:attention}listed{} {C:green,E:1,S:1.1}probabilities.",
-                    "When you {C:attention}Clean-Up{}, increase this by {C:attention}#2#{}",
-                    "for each card cleaned",
-                    "{C:inactive}(Currently: {C:green}#1#{}{C:inactive})"
+                    "{C:green}#1#{} to all {C:attention}listed{} {C:green,E:1,S:1.1}probabilities.",
+                    "When you {C:attention}Clean-up{}, increase this by",
+                    "{C:green}#2#{} for each card cleaned-up",
                 }
             },
         },
