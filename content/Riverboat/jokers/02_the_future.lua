@@ -17,12 +17,13 @@ SMODS.Joker({
         local paired = get_pair_status()
 
         if paired then
-            return {
-                key = self.key .. '_paired',
-                vars = { math.max(1, hands * bought), hands, bought }
+            local exponent = 1 + (bought * 0.1)
+            return { 
+                key = self.key .. '_paired', 
+                vars = { hands, bought, exponent } 
             }
         end
-        return { vars = { math.max(1, bought) } }
+        return { vars = { number_format(math.max(1, bought)) } }
     end,
     calculate = function(self, card, context)
         if context.joker_main then
@@ -30,11 +31,15 @@ SMODS.Joker({
             local bought = G.GAME and G.GAME.worm_jokers_bought or 0
             local paired = get_pair_status()
 
-            local x_mult = paired and (hands * bought) or bought
+            local x_mult = bought
+            if paired then
+                local exponent = 1 + (bought * 0.1)
+                x_mult = to_big(math.max(1, hands)) ^ exponent
+            end
 
-            if x_mult > 1 then
+            if to_big(x_mult) > to_big(1) then
                 return {
-                    message = localize({ type = 'variable', key = 'a_xmult', vars = { x_mult } }),
+                    message = localize({type='variable', key='a_xmult', vars={number_format(x_mult)}}),
                     Xmult_mod = x_mult
                 }
             end
