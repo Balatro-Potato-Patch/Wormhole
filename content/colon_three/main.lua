@@ -9,7 +9,8 @@ SMODS.Atlas {
 PotatoPatchUtils.Team{
     name = ":3",
     colour = HEX("b52961"),
-    loc = "PotatoPatchTeam_colon_three"
+    loc = "PotatoPatchTeam_colon_three",
+    credit_rows = {3,2}
 }
 
 SMODS.Atlas {
@@ -77,6 +78,26 @@ PotatoPatchUtils.Developer {
     },
     atlas = "worm_ct_credits",
     pos = { x = 3, y = 0 }
+}
+
+-- mf credits drawstep for polychrome stars
+SMODS.DrawStep {
+    key = 'edition',
+    order = 21,
+    func = function(self, layer)
+        if (((self.children or {}).center or {}).atlas or {}).name ~= "worm_ct_credits" then
+            return nil
+        end
+        if self.children.center.sprite_pos.x ~= 3 then return nil end
+        self.children.center:set_sprite_pos({ x = 3, y = 1 })
+        self.children.center:draw_shader("polychrome", nil, self.ARGS.send_to_shader)
+        self.children.center:draw_shader("polychrome", nil, self.ARGS.send_to_shader)
+        self.children.center:draw_shader("polychrome", nil, self.ARGS.send_to_shader)
+        self.children.center:draw_shader("polychrome", nil, self.ARGS.send_to_shader)
+        self.children.center:draw_shader("polychrome", nil, self.ARGS.send_to_shader)
+        self.children.center:set_sprite_pos({ x = 3, y = 0 })
+    end,
+    conditions = { vortex = false, facing = 'front' },
 }
 
 PotatoPatchUtils.Developer{ -- im sorry
