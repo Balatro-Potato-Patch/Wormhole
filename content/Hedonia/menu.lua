@@ -15,6 +15,13 @@ SMODS.Atlas {
     path = "Hedonia/sungwon.png"
 }
 
+SMODS.Atlas {
+    key = "booster_placeholder",
+    px = 71,
+    py = 95,
+    path = "Hedonia/boosters placeholder.png"
+}
+
 SMODS.Consumable {
     key = "template",
     set = "wormhole_hedonia_menu",
@@ -22,5 +29,109 @@ SMODS.Consumable {
     pos = {x = 0, y = 0},
     use = function(self, card, area, copier)
         
+    end
+}
+
+SMODS.Booster {
+    key = "hedonia_menu_normal_1",
+    kind = "hedonia_menu_booster",
+    cost = 4,
+    atlas = "booster_placeholder",
+    pos = { x = 0, y = 0 },
+    config = { extra = 3, choose = 1 },
+    draw_hand = true,
+    create_card = function(self, card)
+        return {set = "wormhole_hedonia_menu", area = G.pack_cards}
+    end
+}
+
+SMODS.Booster {
+    key = "hedonia_menu_normal_2",
+    kind = "hedonia_menu_booster",
+    cost = 4,
+    atlas = "booster_placeholder",
+    pos = { x = 1, y = 0 },
+    config = { extra = 3, choose = 1 },
+    draw_hand = true,
+    create_card = function(self, card)
+        return {set = "wormhole_hedonia_menu", area = G.pack_cards}
+    end
+}
+
+SMODS.Booster {
+    key = "hedonia_menu_normal_3",
+    kind = "hedonia_menu_booster",
+    cost = 4,
+    atlas = "booster_placeholder",
+    pos = { x = 2, y = 0 },
+    config = { extra = 3, choose = 1 },
+    draw_hand = true,
+    create_card = function(self, card)
+        return {set = "wormhole_hedonia_menu", area = G.pack_cards}
+    end
+}
+
+SMODS.Booster {
+    key = "hedonia_menu_normal_4",
+    kind = "hedonia_menu_booster",
+    cost = 4,
+    atlas = "booster_placeholder",
+    pos = { x = 3, y = 0 },
+    config = { extra = 3, choose = 1 },
+    draw_hand = true,
+    create_card = function(self, card)
+        return {set = "wormhole_hedonia_menu", area = G.pack_cards}
+    end
+}
+
+SMODS.Booster {
+    key = "hedonia_menu_jumbo_1",
+    kind = "hedonia_menu_booster",
+    cost = 6,
+    atlas = "booster_placeholder",
+    pos = { x = 0, y = 1 },
+    config = { extra = 4, choose = 1 },
+    draw_hand = true,
+    create_card = function(self, card)
+        return {set = "wormhole_hedonia_menu", area = G.pack_cards}
+    end
+}
+
+SMODS.Booster {
+    key = "hedonia_menu_jumbo_2",
+    kind = "hedonia_menu_booster",
+    cost = 6,
+    atlas = "booster_placeholder",
+    pos = { x = 1, y = 1 },
+    config = { extra = 4, choose = 1 },
+    draw_hand = true,
+    create_card = function(self, card)
+        return {set = "wormhole_hedonia_menu", area = G.pack_cards}
+    end
+}
+
+SMODS.Booster {
+    key = "hedonia_menu_mega_1",
+    kind = "hedonia_menu_booster",
+    cost = 8,
+    atlas = "booster_placeholder",
+    pos = { x = 2, y = 1 },
+    config = { extra = 4, choose = 2 },
+    draw_hand = true,
+    create_card = function(self, card)
+        return {set = "wormhole_hedonia_menu", area = G.pack_cards}
+    end
+}
+
+SMODS.Booster {
+    key = "hedonia_menu_mega_2",
+    kind = "hedonia_menu_booster",
+    cost = 8,
+    atlas = "booster_placeholder",
+    pos = { x = 3, y = 1 },
+    config = { extra = 4, choose = 2 },
+    draw_hand = true,
+    create_card = function(self, card)
+        return {set = "wormhole_hedonia_menu", area = G.pack_cards}
     end
 }
