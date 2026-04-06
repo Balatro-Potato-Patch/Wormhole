@@ -652,6 +652,7 @@ SMODS.Consumable { -- Cosmospolitan
 SMODS.Consumable { -- Voidka
     set = 'abs_drinks',
     key = 'abs_voidka',
+    atlas = 'abs_drinks',
     ppu_coder = { 'pi_cubed' },
     ppu_artist = { 'AstraLuna' },
     ppu_team = { 'absinthe' },
