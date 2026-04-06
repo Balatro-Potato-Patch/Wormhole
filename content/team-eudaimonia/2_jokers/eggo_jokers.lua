@@ -75,11 +75,16 @@ SMODS.Joker {
     config = { extra = {}, },
     discovered = true,
     atlas = 'answer',
-    calculate = function(self, card, context)
-        if context.ante_change and context.ante_end then
-            G.GAME.round_resets.blind_choices.Boss = 'bl_worm_anomaly'
+    add_to_deck = function(self, card, from_debuff)
+        if (G.GAME.round_resets.blind_choices.Boss ~= 'bl_worm_anomaly') then
+            G.from_boss_tag = true
+            G.FUNCS.reroll_boss()
         end
-    end
+    end,
+    remove_from_deck = function(self, card, from_debuff)
+        G.from_boss_tag = true
+        G.FUNCS.reroll_boss()
+    end,
 }
 
 local get_new_boss_ref = get_new_boss
