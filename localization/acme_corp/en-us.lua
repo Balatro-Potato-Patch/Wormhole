@@ -2,14 +2,19 @@ return {
     descriptions = {
         ACME_Gadget = {
             c_worm_acme_ball = {
-                name = 'Ball',
+                name = 'ACME "Bounce-O-Matic" Spherical Impact Projectile',
                 text = {
                     'COME ON AND {C:attention}SLAM',
                     'AND WELCOME TO THE {C:red}JAM'
                 }
             },
             c_worm_acme_ray_gun = {
-                name = 'ACME Disintegrator-Inverse-Atron'
+                name = 'ACME Disintegrator-Inverse-Atron',
+                text = {
+                    "{X:attention,C:white}After{} selling {C:attention}#1#{} cards",
+                    "{X:attention,C:white}Use{} to apply a random {C:dark_edition}Edition{}",
+                    "to a random held {C:attention}Joker{}"
+                }
             }
         },
         Joker = {
