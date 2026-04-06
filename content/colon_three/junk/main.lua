@@ -47,13 +47,13 @@ SMODS.Enhancement {
     no_rank = true,
     no_suit = true,
     always_scores = true,
-    -- config = { extra = { chips = 5, mult = 2, retriggers = 1 } },
+    config = { extra = { junk_mult = 1, } },
     loc_vars = function(self, q, card)
         return { 
             key = ((G.GAME.worm_c3_junk_stats or {}).mult or 0) ~= 0 and "m_worm_junk_card_mult" or nil,
             vars = {
-                (G.GAME.worm_c3_junk_stats or {}).chips or 1,
-                (G.GAME.worm_c3_junk_stats or {}).mult or 0,
+                ((G.GAME.worm_c3_junk_stats or {}).chips or 1) * card.ability.extra.junk_mult,
+                ((G.GAME.worm_c3_junk_stats or {}).mult or 0) * card.ability.extra.junk_mult,
                 (G.GAME.worm_c3_junk_stats or {}).retriggers or 1,
                 ((G.GAME.worm_c3_junk_stats or {}).retriggers or 1) == 1 and "" or "s",
             }
@@ -67,8 +67,8 @@ SMODS.Enhancement {
         end
         if context.main_scoring and context.cardarea == G.play then
             return {
-                chips = (G.GAME.worm_c3_junk_stats or {}).chips or 1,
-                mult = (G.GAME.worm_c3_junk_stats or {}).mult or nil,
+                chips = ((G.GAME.worm_c3_junk_stats or {}).chips or 1) * card.ability.extra.junk_mult,
+                mult = ((G.GAME.worm_c3_junk_stats or {}).mult or 0) * card.ability.extra.junk_mult,
             }
         end
         -- if context.initial_scoring_step and context.cardarea == G.play then
@@ -190,7 +190,10 @@ function Wormhole.COLON_THREE.junk_use(config)
                 func = function()
                     if clean_up then
                         config.individual(self, card, playing_card, clean_up)
-                        playing_card:set_ability("c_base")
+                        if not playing_card.stay_junk then
+                            playing_card:set_ability("c_base")
+                        end
+                        playing_card.stay_junk = nil
                     else
                         playing_card:set_ability("m_worm_junk_card")
                     end

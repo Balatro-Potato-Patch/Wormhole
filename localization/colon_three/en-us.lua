@@ -165,13 +165,43 @@ return {
                         "{C:attention}Junk Cards"
                     },
                     {
-                        "Clean-up {C:attention}#2#{} {f:6}—{} played hands with",
+                        "Clean-up {C:attention}#2#{} {f:6}—{} Played hands with",
                         "{C:attention}Junk Cards{} gain an additional {C:attention}+#3#{}",
                         "multiplier to {C:chips}Chips{} and {C:mult}Mult{}, then",
                         "destroy {C:attention}#4#{} random {C:attention}cleaned-up cards{}",
                     }
                 }
-            }
+            },
+            c_worm_busted_3d_printer = {
+                name = "Busted 3D Printer",
+                text = {
+                    {
+                        "Convert {C:attention}#1#{} selected",
+                        "non-{C:attention}Junk Card{} into",
+                        "a {C:attention}Junk Card"
+                    },
+                    {
+                        "Clean-up {C:attention}#2#{} {f:6}—{} Copy each of",
+                        "the {C:attention}cleaned-up cards",
+                    }
+                }
+            },
+            c_worm_trash_compactor = {
+                name = "Trash Compactor",
+                text = {
+                    {
+                        "Convert {C:attention}#1#{} selected",
+                        "non-{C:attention}Junk Cards{} into",
+                        "{C:attention}Junk Cards"
+                    },
+                    {
+                        "Clean-up {C:attention}#2#{} {f:6}—{} Merge the {C:attention}cleaned-up",
+                        "{C:attention}cards{} into a singular {C:attention}Junk Card{}",
+                        "with added values",
+                        "{C:inactive}(Retriggers excluded)",
+                    }
+                }
+            },
         },
         Back = {
             b_worm_decrepit_deck = {
