@@ -33,7 +33,7 @@ return {
                 name = 'Hubble Trouble',
                 text = {
                     {
-                        "When {C:attention}primed{}, upgrade", 
+                        "When {C:attention}primed{}, upgrade",
                         "the level of next played",
                         "poker hand, then is {C:abs_drinks}drank{}",
                     },
@@ -53,7 +53,7 @@ return {
                     },
                     {
                         "{C:inactive,s:0.8}After being Refilled:{}",
-                        "When {C:attention}primed{}, upgrade", 
+                        "When {C:attention}primed{}, upgrade",
                         "the level of next played",
                         "poker hand, then is {C:abs_drinks}drank{}",
                     }
@@ -251,51 +251,6 @@ return {
                     }
                 }
             },
-            c_worm_abs_absinthe = {
-                name = 'Absinthe (WIP)',
-                text = {
-                    {
-                        "When {C:attention}Blind{} is selected,",
-                        "if this drink is {C:attention}not {C:abs_drink}empty{},",
-                        "create a {C:dark_edition}Negative{C:abs_drink} Drink{}",
-                    },
-                    {
-                        "If this drink is {C:attention}not {C:abs_drink}empty{},",
-                        "when a {C:dark_edition}Negative{C:abs_drink} Drink{} is",
-                        "{C:abs_drinks}drank{}, this drink gains", 
-                        "{X:mult,C:white}X#1#{} Mult and is {C:abs_drinks}drank{}",
-                        "{C:inactive}(Currently {{X:mult,C:white}X#2#{C:inactive} Mult)",
-                    },
-                    {
-                        "{C:abs_drinks}Refill{} by using",
-                        "a {C:spectral}Spectral{} card",
-                    }
-                }
-            },
-            c_worm_abs_absinthe_empty = {
-                name = 'Absinthe (WIP)',
-                text = {
-                    {
-                        "{C:inactive,s:0.8}Currently Empty{}",
-                        "{C:abs_drinks}Refill{} by using",
-                        "a {C:spectral}Spectral{} card",
-                    },
-                    {
-                        "{C:inactive}(Currently {{X:mult,C:white}X#2#{C:inactive} Mult)",
-                        "{C:inactive,s:0.8}After being Refilled:{}",
-                        "If this drink is {C:attention}not {C:abs_drink}empty{},",
-                        "when a {C:dark_edition}Negative{C:abs_drink} Drink{} is",
-                        "{C:abs_drinks}drank{}, this drink gains", 
-                        "{X:mult,C:white}X#1#{} Mult and is {C:abs_drinks}drank{}",
-                    },
-                    {
-                        "{C:inactive,s:0.8}After being Refilled:{}",
-                        "When {C:attention}Blind{} is selected,",
-                        "if this drink is {C:attention}not {C:abs_drink}empty{},",
-                        "create a {C:dark_edition}Negative{C:abs_drink} Drink{}",
-                    }
-                }
-            },
             c_worm_abs_spacewalk_selzer = {
                 name = 'Spacewalk Seltzer',
                 text = {
@@ -363,7 +318,7 @@ return {
             j_worm_abs_binary_system = {
                 name = 'Binary System',
                 text = {
-                    "{C:abs_drinks}Refill{} and {C:attention}copy{} a random owned", 
+                    "{C:abs_drinks}Refill{} and {C:attention}copy{} a random owned",
                     "{C:abs_drinks}Drink{} if played poker hand is",
                     "a {C:attention}Straight Flush{} or better",
                     "{C:red,E:2}self destructs{}",
@@ -375,7 +330,7 @@ return {
                 name = 'Glass Storm',
                 text = {
                     "{C:attention}#1#{} random cards remaining",
-                    "in deck become {C:attention}Glass Cards{}", 
+                    "in deck become {C:attention}Glass Cards{}",
                     "when an {C:attention}Empty {C:abs_drinks}Drink{} is {C:attention}sold{}",
 
                 }
@@ -422,6 +377,54 @@ return {
                     "unseeded run to",
                     "learn what it does",
                 },
+            },
+        },
+        Spectral = {
+
+            c_worm_abs_absinthe = {
+                name = 'Absinthe (WIP)',
+                text = {
+                    {
+                        "When {C:attention}Blind{} is selected,",
+                        "if this drink is {C:attention}not {C:abs_drink}empty{},",
+                        "create a {C:dark_edition}Negative{C:abs_drink} Drink{}",
+                    },
+                    {
+                        "If this drink is {C:attention}not {C:abs_drink}empty{},",
+                        "when a {C:dark_edition}Negative{C:abs_drink} Drink{} is",
+                        "{C:abs_drinks}drank{}, this drink gains",
+                        "{X:mult,C:white}X#1#{} Mult and is {C:abs_drinks}drank{}",
+                        "{C:inactive}(Currently {{X:mult,C:white}X#2#{C:inactive} Mult)",
+                    },
+                    {
+                        "{C:abs_drinks}Refill{} by using",
+                        "a {C:spectral}Spectral{} card",
+                    }
+                }
+            },
+            c_worm_abs_absinthe_empty = {
+                name = 'Absinthe (WIP)',
+                text = {
+                    {
+                        "{C:inactive,s:0.8}Currently Empty{}",
+                        "{C:abs_drinks}Refill{} by using",
+                        "a {C:spectral}Spectral{} card",
+                    },
+                    {
+                        "{C:inactive}(Currently {{X:mult,C:white}X#2#{C:inactive} Mult)",
+                        "{C:inactive,s:0.8}After being Refilled:{}",
+                        "If this drink is {C:attention}not {C:abs_drink}empty{},",
+                        "when a {C:dark_edition}Negative{C:abs_drink} Drink{} is",
+                        "{C:abs_drinks}drank{}, this drink gains",
+                        "{X:mult,C:white}X#1#{} Mult and is {C:abs_drinks}drank{}",
+                    },
+                    {
+                        "{C:inactive,s:0.8}After being Refilled:{}",
+                        "When {C:attention}Blind{} is selected,",
+                        "if this drink is {C:attention}not {C:abs_drink}empty{},",
+                        "create a {C:dark_edition}Negative{C:abs_drink} Drink{}",
+                    }
+                }
             },
         },
         Voucher = {
@@ -473,7 +476,7 @@ return {
                     "me on this team, helping out and doing god's work out here.",
                     "It was an amazing experience refining this concept and",
                     "putting it out there for yall, and Id love to work with this group again.",
-                },{
+                }, {
                     "Good luck!",
                     "Dont die!",
                     "Dont let the breadbugs bite."

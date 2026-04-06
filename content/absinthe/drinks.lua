@@ -720,7 +720,8 @@ SMODS.Consumable { -- Big Bang Brandy
 }
 
 SMODS.Consumable { -- John Absinthe
-    set = 'abs_drinks',
+    set = 'Spectral',
+    soul_set = 'abs_drinks',
     key = 'abs_absinthe',
     ppu_coder = { 'pi_cubed' },
     ppu_team = { 'absinthe' },
@@ -737,6 +738,7 @@ SMODS.Consumable { -- John Absinthe
     },
     hidden = true,
     cost = 10,
+    select_card = 'consumeables',
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'e_negative_consumable', set = 'Edition', config = { extra = 1 } }
         local key
