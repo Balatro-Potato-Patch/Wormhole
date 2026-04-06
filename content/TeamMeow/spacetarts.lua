@@ -1043,7 +1043,6 @@ function Card:stop_drag(...)
 			func = function()
 				play_sound("tarot1")
                 colliders[1].card:juice_up(0.5, 0.5)
-                colliders[1].card:juice_up(0.5, 0.5)
 				card_eval_status_text(
 					colliders[1].card,
 					"extra",
@@ -1113,13 +1112,7 @@ function Card:stop_drag(...)
     table.sort(colliders, function(a, b)
         return a.dist < b.dist
     end)
-    if
-        self.ability
-        and self.ability.set == "Joker"
-        and bool
-        and self.tarts
-        and #self.tarts > 0
-    then
+    if self.ability and self.ability.set == "Joker" and bool and self.tarts and #self.tarts > 0 then
         local tart
         G.E_MANAGER:add_event(Event({
             trigger = "after",
@@ -1153,29 +1146,6 @@ function Card:stop_drag(...)
     return ret
 end
 
-local old = Game.update
-function Game:update(dt, ...)
-	local ret = old(self, dt, ...)
-	local alreadyset = false
-    if G.jokers and G.jokers.cards and not G.SETTINGS.paused then
-		for k, v in pairs(G.jokers.cards) do
-			if v.ability and v.ability.set == "Joker" and v.tarts and #v.tarts > 0 then
-				local bool = false
-				for kk, vv in pairs(G.jokers.cards) do
-					if vv ~= v and meow_cards_are_colliding(v, vv) and meow_can_apply_foil(vv) then
-						bool = true
-					end
-				end
-				if bool then
-					love.mouse.setCursor(Wormhole.TEAM_MEOW.cursor)
-					alreadyset = true
-				elseif not alreadyset then
-					love.mouse.setCursor()
-				end
-			end
-		end
-	end
-end
 local old = Game.update
 function Game:update(dt, ...)
     local ret = old(self, dt, ...)
