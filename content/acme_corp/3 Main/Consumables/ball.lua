@@ -30,7 +30,20 @@ SMODS.Consumable{
     atlas = 'ACME_gadgets',
     pos = {x=0, y=0},
     soul_pos = {x=0, y=1, draw = function(self, scale_mod) Wormhole.ACME.ball_function(self, scale_mod) end},
-	use = function(self, card, area, copier)
+    ppu_coder = {'Youh', 'Opal'},
+    ppu_artist = {'RadiationV2'},
+	config = {extra = {aces_scored = 0, aces_required = 7}},
+    loc_vars = function(self, info_queue, card)
+        local aces_left = (card.ability.extra.aces_required - card.ability.extra.aces_scored)
+        if aces_left > 1 then
+            return{vars = {aces_left, localize('k_aces')}}
+        elseif aces_left == 1 then
+            return{vars = {aces_left, localize('k_ace')}}
+        else
+            return{key = self.key..'_alt'}
+        end
+    end,
+    use = function(self, card, area, copier)
         local used = copier or card
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
@@ -41,44 +54,70 @@ SMODS.Consumable{
                 return true
             end
         }))
-        for i = 1, #G.hand.cards do
-            local percent = 1.15 - (i - 0.999) / (#G.hand.cards - 0.998) * 0.3
+        local _cards = {}
+        for k, v in ipairs(G.hand.cards) do
+            if v:is_face() and not next(SMODS.get_enhancements(v)) then
+                _cards[#_cards+1] = v
+            end
+        end
+        for i = 1, #_cards do
+            local percent = 1.15 - (i - 0.999) / (#_cards - 0.998) * 0.3
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
                 delay = 0.15,
                 func = function()
-                    G.hand.cards[i]:flip()
+                    _cards[i]:flip()
                     play_sound('card1', percent)
-                    G.hand.cards[i]:juice_up(0.3, 0.3)
+                    _cards[i]:juice_up(0.3, 0.3)
                     return true
                 end
             }))
         end
-        for i = 1, #G.hand.cards do
+        for i = 1, #_cards do
             G.E_MANAGER:add_event(Event({
                 func = function()
-                    local _card = G.hand.cards[i]
+                    local _card = _cards[i]
                     _card:set_ability(SMODS.poll_enhancement {key = 'ACME_ball', guaranteed = true})
                     return true
                 end
             }))
         end
-        for i = 1, #G.hand.cards do
-            local percent = 0.85 + (i - 0.999) / (#G.hand.cards - 0.998) * 0.3
+        for i = 1, #_cards do
+            local percent = 0.85 + (i - 0.999) / (#_cards - 0.998) * 0.3
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
                 delay = 0.15,
                 func = function()
-                    G.hand.cards[i]:flip()
+                    _cards[i]:flip()
                     play_sound('tarot2', percent, 0.6)
-                    G.hand.cards[i]:juice_up(0.3, 0.3)
+                    _cards[i]:juice_up(0.3, 0.3)
                     return true
                 end
             }))
         end
         delay(0.5)
     end,
+    calculate = function(self, card, context)
+        if context.joker_main then
+            for k, v in ipairs(context.scoring_hand) do
+                if v.base.value == 'Ace' and not SMODS.has_no_rank(v) then
+                    card.ability.extra.aces_scored = card.ability.extra.aces_scored + 1
+                end
+            end
+            if card.ability.extra.aces_scored >= card.ability.extra.aces_required then
+                return{
+                    message = localize('k_active_ex')
+                }
+            end
+        end
+    end,
     can_use = function(self, card)
-        return G.hand and #G.hand.cards > 0  
+        local _cards = {}
+        for k, v in ipairs(G.hand.cards) do
+            if v:is_face() and not next(SMODS.get_enhancements(v)) then
+                _cards[#_cards+1] = v
+            end
+        end
+        return G.hand and #_cards > 0 and (card.ability.extra.aces_scored >= card.ability.extra.aces_required)
     end,
 }

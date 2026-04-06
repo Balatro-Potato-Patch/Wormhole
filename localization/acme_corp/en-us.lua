@@ -4,8 +4,18 @@ return {
             c_worm_acme_ball = {
                 name = 'Ball',
                 text = {
-                    'COME ON AND {C:attention}SLAM',
-                    'AND WELCOME TO THE {C:red}JAM'
+                    '{X:attention,C:white}After{} scoring {C:attention}#1# #2#{},',
+                    '{X:attention,C:white}Use{} to give a random {C:attention}enhancement',
+                    'to all {C:attention}unenhanced Face Cards',
+                    '{C:attention}held in hand'
+                }
+            },
+            c_worm_acme_ball_alt = {
+                name = 'Ball',
+                text = {
+                    'Give a random {C:attention}enhancement',
+                    'to all {C:attention}unenhanced Face Cards',
+                    '{C:attention}held in hand'
                 }
             },
             c_worm_acme_ray_gun = {
@@ -67,6 +77,8 @@ return {
         dictionary = {
             k_acme_gadget = 'Gadget',
             b_acme_gadget_cards = 'Gadget Cards',
+            k_aces = 'Aces',
+            k_ace = 'Ace',
         },
         labels = {
             acme_gadget = 'Gadget',
