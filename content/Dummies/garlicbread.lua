@@ -86,4 +86,5 @@ SMODS.Joker {
 	ppu_coder = { "theonegoofali" },
 	ppu_artist = { "ghostsalt" },
 	ppu_team = { "dummies" },
+	attributes = { "space", "hand_type", "planet" }
 }

@@ -94,6 +94,24 @@ return {
                     }
                 },
             },
+			j_worm_dum_scrooge = {
+                name = "DuckTales: The Moon",
+                text = {
+					"Earn {C:money}#1#{} for {C:attention}every{} poker hand",
+					"in played hand when holding their",
+					"{C:attention}respective{} {C:planet}Planet{} card"
+                },
+            },
+			j_worm_dum_spaghet = {
+                name = "Spaghettification",
+                text = {
+					"If a {C:planet}Planet{} card is held for {C:attention}discarded{}",
+					"poker hand, {C:red}destroy{} it and add",
+					"{C:attention}per-level{} {C:chips}Chips{} of said poker hand",
+					"to this Joker",
+					"{C:inactive}(Currently {C:chips}#1#{C:inactive} Chips)"
+                },
+            },
         },
         Planet = {
             c_worm_dum_moony = {
