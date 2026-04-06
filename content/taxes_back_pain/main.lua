@@ -129,12 +129,7 @@ SMODS.Joker({
                 G.E_MANAGER:add_event(Event({
                     func = function()
                         card:juice_up(0.3, 0.5)
-                        local key = 'p_worm_module_normal_'..(math.random(1,2))
-                        local _booster = Card(G.play.T.x + G.play.T.w/2 - G.CARD_W*1.27/2,
-                        G.play.T.y + G.play.T.h/2-G.CARD_H*1.27/2, G.CARD_W*1.27, G.CARD_H*1.27, G.P_CARDS.empty, G.P_CENTERS[key], {bypass_discovery_center = true, bypass_discovery_ui = true})
-                        _booster.cost = 0
-                        G.FUNCS.use_card({config = {ref_table = _booster}})
-                        _booster:start_materialize()
+                        SMODS.add_booster_to_shop("p_worm_module_normal_" .. (math.random(1,2)))
                     return true
                     end
                 }))
