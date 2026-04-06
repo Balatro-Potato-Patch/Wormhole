@@ -21,8 +21,11 @@ SMODS.Consumable {
         if context.selling_card and context.card ~= card then
             card.ability.extra.cards_sold = card.ability.extra.cards_sold + 1
             card_eval_status_text(card, 'extra', nil, nil, nil,
-                { message = card.ability.extra.cards_sold .. '/' .. card.ability.extra.sold_threshold, colour = G.C
-                .FILTER })
+                {
+                    message = card.ability.extra.cards_sold .. '/' .. card.ability.extra.sold_threshold,
+                    colour = G.C
+                        .FILTER
+                })
             card:juice_up(0.3, 0.5)
         end
     end,
@@ -40,7 +43,8 @@ SMODS.Consumable {
                 guaranteed = true
             })
 
-            G.E_ME_LIST:add(Event({
+            -- Use G.E_MANAGER:add_event for the animation queue
+            G.E_MANAGER:add_event(Event({
                 trigger = 'after',
                 delay = 0.4,
                 func = function()
