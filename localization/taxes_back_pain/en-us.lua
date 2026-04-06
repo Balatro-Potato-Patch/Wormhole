@@ -1,7 +1,11 @@
 local other_loc_table = {
     misc = {
+        labels = {
+            tbp_module = "Module"
+        },
         dictionary = {
             b_tbp_module_cards = "Modules",
+            k_tbp_module = "Module",
             k_worm_tbp_module = "Module Pack",
             tbp_module_weapons = 'WEAPON',
             tbp_module_core = 'CORE',
