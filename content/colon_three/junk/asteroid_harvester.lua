@@ -4,7 +4,7 @@ SMODS.Consumable {
     set = "JunkSet",
     key = "asteroid_harvester",
     atlas = "ct_derelict",
-    pos = { x = 0, y = 0 },
+    pos = { x = 3, y = 0 },
     config = {
         extra = {
             junk_num = 2,

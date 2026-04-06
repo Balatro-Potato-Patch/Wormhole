@@ -4,7 +4,7 @@ SMODS.Consumable {
     set = "JunkSet",
     key = "lost_pliers",
     atlas = "ct_derelict",
-    pos = { x = 0, y = 0 },
+    pos = { x = 2, y = 0 },
     config = {
         extra = {
             junk_num = 3,
@@ -39,5 +39,6 @@ SMODS.Consumable {
     },
     can_use = Wormhole.COLON_THREE.junk_can_use(),
     ppu_coder = {"notmario"},
+    ppu_artist = {"notmario"},
     ppu_team = {":3"}
 }
