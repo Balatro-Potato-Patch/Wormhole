@@ -160,9 +160,9 @@ local function draw_piss_bar(fac, x, y, w, h, colours, back)
 end
 
 local bar_palettes = {
-    water = { HEX("ffffff"), HEX("d3f8fe"), HEX("90cdfa"), HEX("5dadfb") }
+    water = { HEX("ffffff"), HEX("d3f8fe"), HEX("90cdfa"), HEX("5dadfb") },
     waste = { HEX("f7aa5e"), HEX("e26d42"), HEX("c3543a"), HEX("a4473b") },
-    piss = { HEX("fff39a"), HEX("f5d15a"), HEX("eca94e"), HEX("dc8c40") },
+    piss = { HEX("fff39a"), HEX("f5d15a"), HEX("eca94e"), HEX("dc8c40") }
 }
 
 local function piss_draw(card)
