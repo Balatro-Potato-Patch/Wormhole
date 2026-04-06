@@ -1514,15 +1514,17 @@ SMODS.Joker {
 	end,
 
 	set_sprites = function(self, card, front)
-		card.children.jtem2_tetris_canvas = SMODS.CanvasSprite { canvasScale = 1 }
-		card.children.jtem2_tetris_canvas.role.draw_major = card
-		card.children.jtem2_tetris_canvas.states.hover.can = false
-		card.children.jtem2_tetris_canvas.states.click.can = false
-		if card.ability.extra.game_state then
-			card.ability.extra.game_state.grade_quad = love.graphics.newQuad(0, 0, 20, 20,
-				JtemTGM.grades_graph:getWidth(),
-				JtemTGM.grades_graph:getHeight())
-		end
+        if card.ability then
+            card.children.jtem2_tetris_canvas = SMODS.CanvasSprite { canvasScale = 1 }
+            card.children.jtem2_tetris_canvas.role.draw_major = card
+            card.children.jtem2_tetris_canvas.states.hover.can = false
+            card.children.jtem2_tetris_canvas.states.click.can = false
+            if card.ability.extra.game_state then
+                card.ability.extra.game_state.grade_quad = love.graphics.newQuad(0, 0, 20, 20,
+                    JtemTGM.grades_graph:getWidth(),
+                    JtemTGM.grades_graph:getHeight())
+            end
+        end
 	end,
 
 	add_to_deck = function(self, card, from_debuff)

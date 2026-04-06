@@ -1,17 +1,34 @@
--- Joker is very wonky and buggy, need more time in the oven
-if true then
-	return
-end
+SMODS.Atlas({
+	key = "jtem2_quantum_rock",
+	path = "Jtem 2/jokers/cosmic_ray.png",
+	px = 71,
+	py = 95,
+})
 
 local rock = SMODS.Joker({
 	key = "jtem2_quantum_rock",
 
 	ppu_team = { "jtem2" },
 	ppu_coder = { "sleepyg11" },
+
+	replace_base_card = true,
+
+	atlas = "worm_jtem2_quantum_rock",
+	pos = { x = 0, y = 0 },
 })
 
-rock.emplace_in_area = function(card, area)
-	local new_index = pseudorandom("wormhole_quantum_rock" .. os.time(), 1, #area.cards + 1)
+local function is_rock_present()
+	return G.worm_quantum_rock
+			and not G.worm_quantum_rock.REMOVED
+			and not G.worm_quantum_rock.worm_delay_quantum_rock_remove
+			and true
+		or false
+end
+local function is_rock(card)
+	return card and card.worm_was_quantum_rock or (card.config.center and card.config.center.key == rock.key)
+end
+local function emplace_and_shuffle_in_area(card, area)
+	local new_index = pseudorandom("worm_quantum_rock" .. os.time(), 1, #area.cards + 1)
 	table.insert(area.cards, new_index, card)
 	if card.facing == "back" and area.config.type ~= "discard" and area.config.type ~= "deck" then
 		card:flip()
@@ -22,45 +39,120 @@ rock.emplace_in_area = function(card, area)
 	area:align_cards()
 	card:hard_set_T()
 end
-rock.shuffle_in_area = function(card, area)
+local function shuffle_in_area(card, area)
 	for index, _card in ipairs(area.cards) do
 		if _card == card then
 			table.remove(area.cards, index)
 			break
 		end
 	end
-	local new_index = pseudorandom("wormhole_quantum_rock" .. os.time(), 1, #area.cards + 1)
+	local new_index = pseudorandom("worm_quantum_rock" .. os.time(), 1, #area.cards + 1)
 	table.insert(area.cards, new_index, card)
 	card:hard_set_T()
 end
-rock.is_present = function()
-	return G.wormhole_quantum_rock
-		and not G.wormhole_quantum_rock.REMOVED
-		and not G.wormhole_quantum_rock.wormhole_delay_quantum_rock_remove
-end
-rock.force_destroy = function(card, delay, no_replace)
-	card.states.visible = false
-	if delay then
-		card.wormhole_delay_quantum_rock_remove = true
-		G.E_MANAGER:add_event(Event({
-			blocking = false,
-			func = function()
-				card.wormhole_keep_quantum_rock_target = true
-				card:remove()
-				return true
-			end,
-		}))
+local function roll_new_rock_target()
+	local result
+	if not WORM_JTEM.quantum_rock.enabled or pseudorandom("worm_quantum_rock" .. os.time()) < 0.90 then
+		result = nil
 	else
-		card.wormhole_keep_quantum_rock_target = true
-		card:remove()
+		local targets = {
+			"hand",
+			"play",
+			"deck",
+			"jokers",
+			"consumeables",
+			"booster_pack",
+			"shop_jokers",
+			"shop_boosters",
+			"shop_vouchers",
+		}
+		result = pseudorandom_element(targets, "worm_quantum_rock" .. os.time())
+	end
+	G.worm_quantum_rock_target = result
+	return result
+end
+local function spawn_new_rock(protect, whitelist)
+	if is_rock_present() then
+		return
+	end
+	local target = G.worm_quantum_rock_target
+	if whitelist and not whitelist[target] then
+		roll_new_rock_target()
+		return
+	end
+	local function simple_create(area, real_emplace)
+		if not area or not area.cards then
+			return
+		end
+		local card = Card(area.T.x + area.T.w / 2 - G.CARD_W / 2, area.T.y, G.CARD_W, G.CARD_H, G.P_CARDS["C_J"], rock)
+		if real_emplace == true then
+			area:emplace(card)
+			shuffle_in_area(card, area)
+		elseif real_emplace == 2 then
+			area:emplace(card)
+		else
+			emplace_and_shuffle_in_area(card, area)
+		end
+		roll_new_rock_target()
+		if protect then
+			card.worm_protect_quantum_rock = true
+			G.E_MANAGER:add_event(Event({
+				trigger = "after",
+				delay = 0.25,
+				timer = "REAL",
+				blocking = false,
+				blockable = false,
+				func = function()
+					card.worm_protect_quantum_rock = nil
+					return true
+				end,
+			}))
+		end
+	end
+	if target == "hand" and G.hand and G.STATE == G.STATES.SELECTING_HAND then
+		simple_create(G.hand, true)
+	elseif target == "play" and G.play and G.STATE == G.STATES.HAND_PLAYED then
+		simple_create(G.play)
+	elseif target == "jokers" and G.jokers then
+		simple_create(G.jokers)
+	elseif target == "consumeables" and G.consumeables then
+		simple_create(G.consumeables)
+	elseif target == "booster_pack" and G.pack_cards then
+		simple_create(G.pack_cards)
+	elseif target == "shop_jokers" and G.shop_jokers then
+		simple_create(G.shop_jokers)
+	elseif target == "shop_boosters" and G.shop_booster then
+		simple_create(G.shop_booster)
+	elseif target == "shop_vouchers" and G.shop_vouchers then
+		simple_create(G.shop_vouchers, true)
+		G.shop_vouchers.config.card_limit = #G.shop_vouchers.cards
+	elseif target == "title" and G.title_top then
+		simple_create(G.title_top, 2)
+	end
+end
+local function destroy_rock(delay, no_replace, whitelist)
+	local card = G.worm_quantum_rock
+	if card then
+		card.states.visible = false
+		if delay then
+			card.worm_delay_quantum_rock_remove = true
+			G.E_MANAGER:add_event(Event({
+				blocking = false,
+				func = function()
+					card.worm_keep_quantum_rock_target = true
+					card:remove()
+					return true
+				end,
+			}))
+		else
+			card.worm_keep_quantum_rock_target = true
+			card:remove()
+		end
 	end
 	if not no_replace then
-		rock.spawn_new_one()
+		spawn_new_rock(whitelist)
 	end
-	G.wormhole_quantum_rock_target = rock.roll_new_target()
-end
-rock.is_rock = function(card)
-	return card and card.wormhole_was_quantum_rock or (card.config.center and card.config.center.key == rock.key)
+	roll_new_rock_target()
 end
 
 --
@@ -77,43 +169,42 @@ local old_game_update = Game.update
 function Game:update(...)
 	old_game_update(self, ...)
 	if WORM_JTEM.quantum_rock.enabled then
-		G.wormhole_quantum_rock_target = G.wormhole_quantum_rock_target or rock.roll_new_target()
-		G.wormhole_quantum_rock_target_dt = G.wormhole_quantum_rock_target_dt or G.TIMERS.REAL
-		if G.TIMERS.REAL - G.wormhole_quantum_rock_target_dt > 1 then
-			-- G.wormhole_quantum_rock_target = rock.roll_new_target()
-			G.wormhole_quantum_rock_target_dt = G.TIMERS.REAL
+		G.worm_quantum_rock_target_dt = G.worm_quantum_rock_target_dt or G.TIMERS.REAL
+		if G.TIMERS.REAL - G.worm_quantum_rock_target_dt > 0.5 then
+			roll_new_rock_target()
+			G.worm_quantum_rock_target_dt = G.TIMERS.REAL
 		end
-		if G.wormhole_quantum_rock then
-			if G.wormhole_quantum_rock.REMOVED and G.wormhole_quantum_rock.area then
-				G.wormhole_quantum_rock:remove()
-				G.wormhole_quantum_rock = nil
+		if G.worm_quantum_rock then
+			if G.worm_quantum_rock.REMOVED and G.worm_quantum_rock.area then
+				G.worm_quantum_rock:remove()
+				G.worm_quantum_rock = nil
 			end
 		end
 	else
-		G.wormhole_quantum_rock_target = nil
+		G.worm_quantum_rock_target = nil
 	end
 end
 
 local old_card_update = Card.update
 function Card:update(...)
 	local should_remove_rock = false
-	if rock.is_rock(self) then
-		self.wormhole_was_quantum_rock = true
+	if is_rock(self) then
+		self.worm_was_quantum_rock = true
 		if self.area == G.play and G.STATE ~= G.STATES.HAND_PLAYED then
 			G.play:remove_card(self)
 			G.discard:emplace(self)
 		end
-		if not self.REMOVED and not self.wormhole_delay_quantum_rock_remove then
-			if not rock.is_present() then
-				G.wormhole_quantum_rock = self
+		if not self.REMOVED and not self.worm_delay_quantum_rock_remove then
+			if not is_rock_present() then
+				G.worm_quantum_rock = self
 			end
-			if not self.wormhole_protect_quantum_rock then
+			if not self.worm_protect_quantum_rock then
 				if
-					G.wormhole_quantum_rock ~= self
+					G.worm_quantum_rock ~= self
 					or not self.states.visible
-					or (not self.wormhole_protect_quantum_rock_area and (self.area == G.deck))
+					or (not self.worm_protect_quantum_rock_area and (self.area == G.deck))
 					or (
-						not self.wormhole_protect_quantum_rock_boundaries
+						not self.worm_protect_quantum_rock_boundaries
 						and (
 							(self.VT.w <= 0 or self.VT.h <= 0)
 							or (self.VT.x + self.VT.w < 0)
@@ -133,13 +224,13 @@ function Card:update(...)
 	end
 	old_card_update(self, ...)
 	if should_remove_rock then
-		rock.force_destroy(self, true)
+		destroy_rock(true)
 	end
 end
 
 local old_save = Card.save
 function Card:save(...)
-	if rock.is_rock(self) then
+	if is_rock(self) then
 		return nil
 	end
 	return old_save(self, ...)
@@ -148,8 +239,8 @@ end
 local old_load = Card.load
 function Card:load(...)
 	old_load(self, ...)
-	if rock.is_rock(self) then
-		rock.force_destroy(self, true)
+	if is_rock(self) then
+		destroy_rock(true)
 	end
 end
 
@@ -167,7 +258,7 @@ function G.FUNCS.overlay_menu(...)
 			blockable = false,
 			func = function()
 				if G.OVERLAY_MENU then
-					if rock.is_present() then
+					if is_rock_present() then
 						function crawl(e)
 							local parent = e.UIBox or e.parent
 							while parent do
@@ -176,12 +267,12 @@ function G.FUNCS.overlay_menu(...)
 							end
 							return e
 						end
-						local parent = crawl(G.wormhole_quantum_rock)
+						local parent = crawl(G.worm_quantum_rock)
 						if parent ~= G.OVERLAY_MENU then
-							rock.force_destroy(G.wormhole_quantum_rock, true)
+							destroy_rock(true)
 						end
 					else
-						rock.spawn_new_one()
+						spawn_new_rock()
 					end
 				end
 				return true
@@ -194,45 +285,52 @@ end
 local old_card_init = Card.init
 function Card:init(...)
 	local r = old_card_init(self, ...)
-	if rock.is_rock(self) then
-		if not rock.is_present() then
-			G.wormhole_quantum_rock = self
+	if is_rock(self) then
+		if not is_rock_present() then
+			G.worm_quantum_rock = self
 		end
-		if G.wormhole_quantum_rock ~= self then
-			rock.force_destroy(self, true)
+		if G.worm_force_replace_quantum_rock then
+			if is_rock_present() and G.worm_quantum_rock ~= self then
+				destroy_rock()
+			end
+			G.worm_quantum_rock = self
+		else
+			if G.worm_quantum_rock ~= self then
+				destroy_rock(true)
+			end
 		end
 	end
 	return r
 end
 
+local wipe_on_ref = G.FUNCS.wipe_on
+function G.FUNCS.wipe_on(...)
+	local r = wipe_on_ref(...)
+	if G.screenwipecard then
+		if G.worm_quantum_rock_target == "screenswipe" then
+			G.screenwipecard.children.front.states.visible = false
+			G.screenwipecard.children.center.atlas = SMODS.get_atlas(rock.atlas)
+			G.screenwipecard.children.center:set_sprite_pos(rock.pos)
+		end
+	end
+	return r
+end
+
+local old_end_consumeable = G.FUNCS.end_consumeable
+function G.FUNCS.end_consumeable(...)
+	spawn_new_rock(true, {
+		shop_jokers = true,
+		shop_boosters = true,
+		shop_vouchers = true,
+	})
+	return old_end_consumeable(...)
+end
+
 --
 
-rock.roll_new_target = function()
-	if not WORM_JTEM.quantum_rock.enabled then
-		return nil
-	end
-	local targets = {
-		"hand",
-		"play",
-		"deck",
-		"jokers",
-		"consumeables",
-		-- "booster_pack",
-		-- "collection_jokers",
-		-- "shop_jokers",
-		-- "shop_boosters",
-		-- "shop_vouchers",
-		-- "vouchers",
-		-- "poker_hand",
-		-- "collection_jokers",
-	}
-	local result = pseudorandom_element(targets, "wormhole_quantum_rock" .. os.time())
-	print("new target is", result)
-	return result
-end
-rock.calculate_rock = function(context)
-	local target = G.wormhole_quantum_rock_target or rock.roll_new_target()
-	local is_present = rock.is_present()
+local function calculate_rock(context)
+	local target = G.worm_quantum_rock_target or roll_new_rock_target()
+	local is_present = is_rock_present()
 	if target == "hand" then
 		if
 			context.stay_flipped
@@ -241,20 +339,20 @@ rock.calculate_rock = function(context)
 		then
 			G.E_MANAGER:add_event(Event({
 				func = function()
-					if rock.is_present() then
+					if is_rock_present() then
 						return true
 					end
 					local _area = G.deck
 					local card = Card(_area.T.x, _area.T.y, G.CARD_W, G.CARD_H, G.P_CARDS["C_J"], rock)
+					G.worm_quantum_rock = card
 					card.facing = "back"
 					card.sprite_facing = "back"
-					card.wormhole_protect_quantum_rock = true
-					G.wormhole_quantum_rock_target = rock.roll_new_target()
-					G.wormhole_quantum_rock = card
+					card.worm_protect_quantum_rock = true
+					roll_new_rock_target()
 					G.E_MANAGER:add_event(Event({
 						func = function()
 							G.hand:emplace(card)
-							rock.shuffle_in_area(card, G.hand)
+							shuffle_in_area(card, G.hand)
 							G.E_MANAGER:add_event(Event({
 								trigger = "after",
 								delay = 0.25,
@@ -262,7 +360,7 @@ rock.calculate_rock = function(context)
 								blocking = false,
 								blockable = false,
 								func = function()
-									card.wormhole_protect_quantum_rock = nil
+									card.worm_protect_quantum_rock = nil
 									return true
 								end,
 							}))
@@ -275,13 +373,15 @@ rock.calculate_rock = function(context)
 			return true
 		end
 	elseif target == "deck" then
-		if context.wormhole_opening_deck and not is_present then
-			local _area = pseudorandom_element(context.areas, "wormhole_quantum_rock" .. os.time())
+		if context.worm_opening_deck then
+			G.worm_force_replace_quantum_rock = true
+			local _area = pseudorandom_element(context.areas, "worm_quantum_rock" .. os.time())
 			local card = Card(_area.T.x, _area.T.y, G.CARD_W * 0.7, G.CARD_H * 0.7, nil, rock)
-			card.wormhole_protect_quantum_rock_boundaries = true
-			rock.emplace_in_area(card, _area)
-			G.wormhole_quantum_rock_target = rock.roll_new_target()
-			G.wormhole_quantum_rock = card
+			G.worm_force_replace_quantum_rock = nil
+			G.worm_quantum_rock = card
+			card.worm_protect_quantum_rock_boundaries = true
+			emplace_and_shuffle_in_area(card, _area)
+			roll_new_rock_target()
 		end
 	elseif target == "booster_pack" then
 		if context.open_booster and not is_present then
@@ -289,16 +389,19 @@ rock.calculate_rock = function(context)
 				blocking = false,
 				blockable = false,
 				func = function()
+					if not G.GAME.PACK_INTERRUPT then
+						return true
+					end
 					if G.pack_cards then
 						G.E_MANAGER:add_event(Event({
 							blocking = false,
 							func = function()
 								local _area = G.pack_cards
-								local card = Card(_area.T.x, _area.T.y, G.CARD_W, G.CARD_H, nil, rock)
-								rock.emplace_in_area(card, _area)
+								local card = Card(_area.T.x, _area.T.y, G.CARD_W, G.CARD_H, G.P_CARDS["C_J"], rock)
+								G.worm_quantum_rock = card
+								emplace_and_shuffle_in_area(card, _area)
 								card:start_materialize()
-								G.wormhole_quantum_rock_target = rock.roll_new_target()
-								G.wormhole_quantum_rock = card
+								roll_new_rock_target()
 								return true
 							end,
 						}))
@@ -307,41 +410,15 @@ rock.calculate_rock = function(context)
 				end,
 			}))
 		end
-		--     return true
-		-- 	G.E_MANAGER:add_event(Event({
-		-- 		func = function()
-		-- 		end,
-		-- 	}))
-		-- end
-	end
-end
-rock.spawn_new_one = function()
-	local target = G.wormhole_quantum_rock_target
-	local function simple_create(area)
-		local card = Card(area.T.x + area.T.w / 2 - G.CARD_W / 2, area.T.y, G.CARD_W, G.CARD_H, G.P_CARDS["C_J"], rock)
-		rock.emplace_in_area(card, area)
-	end
-	if target == "play" and G.play and G.STATE == G.STATES.HAND_PLAYED then
-		simple_create(G.play)
-	elseif target == "hand" and G.hand and G.STATE == G.STATES.SELECTING_HAND then
-		local area = G.hand
-		local card = Card(area.T.x + area.T.w / 2 - G.CARD_W / 2, area.T.y, G.CARD_W, G.CARD_H, G.P_CARDS["C_J"], rock)
-		area:emplace(card)
-		rock.shuffle_in_area(card, area)
-		G.wormhole_quantum_rock_target = rock.roll_new_target()
-	elseif target == "jokers" and G.jokers then
-		simple_create(G.jokers)
-	elseif target == "consumeables" and G.consumeables then
-		simple_create(G.consumeables)
-	elseif target == "voucher" and G.voucher then
-		simple_create(G.voucher)
-	elseif target == "booster_pack" and G.pack_cards then
-		simple_create(G.pack_cards)
+	elseif target == "shop_jokers" or target == "shop_vouchers" or target == "shop_boosters" then
+		if context.starting_shop then
+			spawn_new_rock()
+		end
 	end
 end
 
 WORM_JTEM.quantum_rock = {
-	enabled = false,
+	enabled = true,
 	center = rock,
-	calculate = rock.calculate_rock,
+	calculate = calculate_rock,
 }
