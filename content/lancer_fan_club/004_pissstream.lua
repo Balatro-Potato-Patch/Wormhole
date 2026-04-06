@@ -160,17 +160,17 @@ local function draw_piss_bar(fac, x, y, w, h, colours, back)
 end
 
 local bar_palettes = {
-    piss = { HEX("fff39a"), HEX("f5d15a"), HEX("eca94e"), HEX("dc8c40") },
-    waste = { HEX("f7aa5e"), HEX("e26d42"), HEX("c3543a"), HEX("a4473b") },
     water = { HEX("ffffff"), HEX("d3f8fe"), HEX("90cdfa"), HEX("5dadfb") }
+    waste = { HEX("f7aa5e"), HEX("e26d42"), HEX("c3543a"), HEX("a4473b") },
+    piss = { HEX("fff39a"), HEX("f5d15a"), HEX("eca94e"), HEX("dc8c40") },
 }
 
 local function piss_draw(card)
     love.graphics.clear()
 
-    draw_piss_bar(Wormhole.LancerFanClub.piss_info.urine/100, 9, 24, 13, 47, bar_palettes.piss)
+    draw_piss_bar(Wormhole.LancerFanClub.piss_info.water/100, 99, 24, 13, 47, bar_palettes.water)
     draw_piss_bar(Wormhole.LancerFanClub.piss_info.waste/100, 29, 24, 13, 47, bar_palettes.waste)
-    draw_piss_bar(Wormhole.LancerFanClub.piss_info.water/100, 49, 24, 13, 47, bar_palettes.water)
+    draw_piss_bar(Wormhole.LancerFanClub.piss_info.urine/100, 49, 24, 13, 47, bar_palettes.piss)
 end
 
 SMODS.DrawStep {
