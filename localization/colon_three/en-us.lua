@@ -45,6 +45,15 @@ return {
                     "{C:inactive}(Currently {C:attention}#1#{C:inactive} levels stored){}"
                 }
             },
+            j_worm_quantum_tunneling = {
+                name = "Quantum Tunneling",
+                text = {
+                    "{C:attention}-1{} to all {C:attention}listed{} {C:green,E:1,S:1.1}probabilities.",
+                    "When you {C:attention}Clean-Up{}, increase this by {C:attention}#2#{}",
+                    "for each card cleaned",
+                    "{C:inactive}(Currently: {C:green}#1#{}{C:inactive})"
+                }
+            },
         },
         Enhanced = {
             m_worm_junk_card = {
@@ -225,6 +234,12 @@ return {
                 name = "lord.ruby",
                 text = {
                     ":3"
+                }
+            },
+            PotatoPatchDev_nxkoo = {
+                name = "N____",
+                text = {
+                    "Apathy."
                 }
             },
             PotatoPatchDev_meta = {

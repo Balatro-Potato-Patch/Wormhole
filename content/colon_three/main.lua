@@ -79,6 +79,45 @@ PotatoPatchUtils.Developer {
     pos = { x = 3, y = 0 }
 }
 
+PotatoPatchUtils.Developer{ -- im sorry
+    name = "nxkoo",
+    loc = true,
+    team = ":3",
+    colour = SMODS.Gradient{
+        key = "colon_three_nxkoo_gradient",
+        colours = {
+            HEX("FF0000"),
+        }
+    },
+    atlas = "worm_ct_credits",
+    pos = {x=4,y=0}
+}
+
+--[[
+> Lack of Empathy
+> Lack of Remorse or Guilt
+> Impulsivity
+> Superficial Charm
+> Shallow Emotions
+> Grandiose sense of self-worth
+> Irresponsibility
+> Manipulative Behavior
+> Early Behavioral problems
+> Highly theatrical 
+> Volatile
+> Inconsiderate
+> Excitable
+> Demanding
+< Egocentric
+> Dependent
+> Erratic
+> Self-Indulgent
+> Sexually provocative
+> Unstable Relationships with other People
+
+I AM THE ARCHITECT OF MY OWN DESTRUCTION.
+]]
+
 Wormhole.COLON_THREE.loaded = true
 for i, v in pairs({
     "laika",
