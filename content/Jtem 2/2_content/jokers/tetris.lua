@@ -450,6 +450,8 @@ function JtemTGM.ResetPlayerState()
 		oldvdir = 0,
 
 		dt = 0,
+
+		grade_quad = nil,
 	}
 	JtemTGM.ChangeState(state, STATE_READY)
 	return state
@@ -997,7 +999,7 @@ local clearanim = JtemTGM.LoadImage("tetris_clearanim.png")
 
 -- The grades
 local grades = JtemTGM.LoadImage("tetris_grades.png")
-
+JtemTGM.grades_graph = grades
 
 --#endregion
 
@@ -1292,7 +1294,14 @@ SMODS.Font {
 	DESCSCALE = 1
 }
 
-function JtemTGM.DrawGrade(canvas, grade, anim)
+---comment
+---@param canvas any
+---@param grade any
+---@param anim any
+---@param quad love.Quad
+function JtemTGM.DrawGrade(canvas, grade, anim, quad)
+	if not quad then return end
+
 	love.graphics.push()
 	love.graphics.translate(44, -4)
 	love.graphics.setColor(G.C.WHITE)
@@ -1300,19 +1309,16 @@ function JtemTGM.DrawGrade(canvas, grade, anim)
 	local x = (grade % 5)
 	local y = math.floor(grade / 5)
 
-	love.graphics.setScissor(49, 5, 20, 20)
-
-	love.graphics.draw(grades, -x * 20, -y * 20)
+	quad:setViewport(x * 20, y * 20, 20, 20)
+	love.graphics.draw(grades, quad)
 
 	if anim > 0 then
-		love.graphics.stencil(function() love.graphics.draw(grades, -x * 20, -y * 20) end, "replace", 1)
+		love.graphics.stencil(function() love.graphics.draw(grades, quad) end, "replace", 1)
 		love.graphics.setStencilTest("greater", 0)
 		love.graphics.setColor(adjust_alpha(G.C.WHITE, anim / 60))
 		love.graphics.rectangle("fill", 0, 0, 20, 20)
 		love.graphics.setStencilTest()
 	end
-
-	love.graphics.setScissor()
 
 	love.graphics.pop()
 end
@@ -1347,32 +1353,32 @@ function JtemTGM.HandleDraw(canvas, game)
 	love.graphics.setStencilTest("greater", 0)
 
 	-- draw the current board first
-	for y = BOARD_HCLEARANCE, BOARD_H - 1 do
-		local col = game.board[y]
-		if col == nil then goto continue end
-		local py = y * BLOCK_H
-		for x = 0, BOARD_W - 1 do
-			local cell = game.board[y][x]
-			if cell == nil then goto xcontinue end
-			local px = x * BLOCK_W
+	-- for y = BOARD_HCLEARANCE, BOARD_H - 1 do
+	-- 	local col = game.board[y]
+	-- 	if col == nil then goto continue end
+	-- 	local py = y * BLOCK_H
+	-- 	for x = 0, BOARD_W - 1 do
+	-- 		local cell = game.board[y][x]
+	-- 		if cell == nil then goto xcontinue end
+	-- 		local px = x * BLOCK_W
 
-			local p = JtemTGM.pieces[cell]
-			if not p then goto xcontinue end
-			local piece = p[1]
+	-- 		local p = JtemTGM.pieces[cell]
+	-- 		if not p then goto xcontinue end
+	-- 		local piece = p[1]
 
-			local ofs = 0
-			if game.state == STATE_DROPOUT then
-				ofs = (EaseInSine((G.TIMERS.TOTAL - game.drop_offsets[x]) / G.SPEEDFACTOR) * (BLOCK_H * BOARD_H))
-			end
+	-- 		local ofs = 0
+	-- 		if game.state == STATE_DROPOUT then
+	-- 			ofs = (EaseInSine((G.TIMERS.TOTAL - game.drop_offsets[x]) / G.SPEEDFACTOR) * (BLOCK_H * BOARD_H))
+	-- 		end
 
-			if JtemTGM.ValidPiece(cell) and piece then
-				love.graphics.setColor(G.C.WHITE)
-				love.graphics.rectangle("fill", px - 1, py - 1 + ofs, BLOCK_W + 2, BLOCK_H + 2)
-			end
-			::xcontinue::
-		end
-		::continue::
-	end
+	-- 		if JtemTGM.ValidPiece(cell) and piece then
+	-- 			love.graphics.setColor(G.C.WHITE)
+	-- 			love.graphics.rectangle("fill", px - 1, py - 1 + ofs, BLOCK_W + 2, BLOCK_H + 2)
+	-- 		end
+	-- 		::xcontinue::
+	-- 	end
+	-- 	::continue::
+	-- end
 
 	for y = BOARD_HCLEARANCE, BOARD_H - 1 do
 		local col = game.board[y]
@@ -1399,6 +1405,21 @@ function JtemTGM.HandleDraw(canvas, game)
 					love.graphics.setColor(darken(p.color, 0.3))
 				end
 				love.graphics.rectangle("fill", px, py + ofs, BLOCK_W, BLOCK_H)
+				-- Add outlines (real)
+				love.graphics.setColor(adjust_alpha(G.C.WHITE, 0.8))
+				love.graphics.setLineWidth(1)
+				if y >= 0 and not JtemTGM.ValidPiece(game.board[y - 1][x] or "0") then
+					love.graphics.line(px, -0.5 + py, px + BLOCK_W, -0.5 + py)
+				end
+				if (y < BOARD_H - 1 and not JtemTGM.ValidPiece(game.board[y + 1][x] or "0")) then
+					love.graphics.line(px, -0.5 + py + BLOCK_H, px + BLOCK_W, -0.5 + py + BLOCK_H)
+				end
+				if x > 0 and not JtemTGM.ValidPiece(game.board[y][x - 1] or "0") then
+					love.graphics.line(-0.5 + px, py, -0.5 + px, py + BLOCK_H)
+				end
+				if (x < BOARD_W - 1 and not JtemTGM.ValidPiece(game.board[y][x + 1] or "0")) then
+					love.graphics.line(-0.5 + px + BLOCK_W, py, -0.5 + px + BLOCK_W, py + BLOCK_H)
+				end
 			end
 			::xcontinue::
 		end
@@ -1439,7 +1460,7 @@ function JtemTGM.HandleDraw(canvas, game)
 		JtemTGM.DrawPiece(next, 11, 5, BLOCK_W, BLOCK_H, 1, 0)
 	end
 
-	JtemTGM.DrawGrade(canvas, game.visual_grade or 0, game.visual_grade_anim or 0)
+	JtemTGM.DrawGrade(canvas, game.visual_grade or 0, game.visual_grade_anim or 0, game.grade_quad)
 
 	love.graphics.pop()
 	love.graphics.setCanvas({ oldcanvas, stencil = true })
@@ -1497,11 +1518,19 @@ SMODS.Joker {
 		card.children.jtem2_tetris_canvas.role.draw_major = card
 		card.children.jtem2_tetris_canvas.states.hover.can = false
 		card.children.jtem2_tetris_canvas.states.click.can = false
+		if card.ability.extra.game_state then
+			card.ability.extra.game_state.grade_quad = love.graphics.newQuad(0, 0, 20, 20,
+				JtemTGM.grades_graph:getWidth(),
+				JtemTGM.grades_graph:getHeight())
+		end
 	end,
 
 	add_to_deck = function(self, card, from_debuff)
 		if from_debuff then return end
 		card.ability.extra.game_state = JtemTGM.ResetPlayerState()
+		card.ability.extra.game_state.grade_quad = love.graphics.newQuad(0, 0, 20, 20,
+			JtemTGM.grades_graph:getWidth(),
+			JtemTGM.grades_graph:getHeight())
 		-- card.ability.extra.game_state.state = STATE_READY
 	end,
 
@@ -1518,6 +1547,9 @@ G.FUNCS.worm_reset_tetris = function(e)
 	---@type balatro.Card
 	local card = e.config.ref_table
 	card.ability.extra.game_state = JtemTGM.ResetPlayerState()
+	card.ability.extra.game_state.grade_quad = love.graphics.newQuad(0, 0, 20, 20,
+		JtemTGM.grades_graph:getWidth(),
+		JtemTGM.grades_graph:getHeight())
 	card:highlight(false)
 	SMODS.calculate_effect({ message = localize('k_reset') }, card)
 end

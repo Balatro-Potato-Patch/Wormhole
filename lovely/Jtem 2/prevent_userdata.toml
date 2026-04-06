@@ -1,0 +1,16 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = -1
+
+# Prevent Love2D userdata from being attempted in save serialization
+[[patches]]
+[patches.pattern]
+target = '''functions/misc_functions.lua'''
+pattern = '''else ret_t[k] = v end'''
+position = "before"
+payload = '''
+elseif type(v) == "userdata" and v.typeOf and v:typeOf("Object") then
+	-- Nothing
+'''
+match_indent = true
