@@ -21,7 +21,9 @@ SMODS.Joker {
         }
     },
 
-    loc_vars = function(self, info_queue, card)
+    loc_vars = function(self, q, card)
+        q[#q+1] = { key = "worm_clean_up_reminder", set="Other", specific_vars = { } }
+        q[#q+1] = G.P_CENTERS.m_worm_junk_card
         return {
             vars = {
                 SMODS.signed(-card.ability.extra.denom_mod), card.ability.extra.denom_mod_mod
