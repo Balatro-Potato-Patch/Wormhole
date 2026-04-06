@@ -102,6 +102,14 @@ return {
                     "are always drawn first",
                 },
             },
+            j_worm_lunarcheese = {
+                name = "Lunar Cheese",
+                text = {
+                    "When sold, debuffs the {C:attention}Joker",
+                    "to its right for #1# rounds",
+                    "It {C:attention}permanently{} gains a retrigger"
+                },
+            },
             j_worm_euda_rocket = {
                 name = "Space Shuttle",
                 text = {
@@ -147,6 +155,7 @@ return {
                 k_worm_specificcolony_receive_title = "Release from Colony ",
                 worm_euda_pkr_wow = "Wow!",
                 worm_euda_pkr_wow_f = "Wow! Flush",
+                k_worm_lunarcheese_message = "Cheesy!",
             }
         },
 }

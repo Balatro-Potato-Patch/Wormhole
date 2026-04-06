@@ -2,7 +2,7 @@ SMODS.Atlas {
     key = 'jokecolonyatlas',
     px = 71,
     py = 95,
-    path = 'team-eudaimonia/wowsignal.png', --Update with actual art
+    path = 'team-eudaimonia/JokeColony.png', --Update with actual art
 }
 SMODS.Joker {
     key = "jokecolony",
@@ -14,7 +14,7 @@ SMODS.Joker {
     discovered = true,
     config = {extra= { mult = 4 }},
     ppu_coder = {'M0xes'},
-    ppu_artist = {'LasagnaFelidae'},
+    ppu_artist = {'Jewel'},
     loc_vars = function(self, info_queue, card)
         local pop = 0
         for _, joker in ipairs(G.worm_colony and G.worm_colony.cards or {}) do
@@ -282,7 +282,7 @@ G.FUNCS.worm_join_colony = function(e)
         if joker.ability.source_joker == og then
           og.ability.worm_colonycitizen = joker.ability.worm_colonycitizen
           og.area:remove_card(og)
-          og:add_to_deck()
+          og:remove_from_deck()
           G.worm_colony:emplace(og)
           if joker.ability.eternal then joker.ability.eternal = nil end
           SMODS.destroy_cards(joker)
