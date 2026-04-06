@@ -59,6 +59,14 @@ SMODS.Back{
 
 ---
 
+-- TODO: add actual module slots and colours here
+Wormhole.tbp.module_colours = {
+    weapons = G.C.PURPLE,
+    core = G.C.BLUE,
+    thrusters = G.C.GREEN,
+    shields = G.C.YELLOW
+}
+
 SMODS.Joker({
 	key = "tbp_spaceship",
 	rarity = 4, -- TODO: Does it need its own rarity?
@@ -70,14 +78,22 @@ SMODS.Joker({
 	eternal_compat = false,
 	perishable_compat = false,
     ppu_team = {'tbp'},
+    module_types = {'core', 'weapons', 'shields', 'thrusters'}, -- TODO: add actual module slots here
     config = { extra = { modules = { -- TODO: add actual module slots here
         core = {},
         weapons = {},
         thrusters = {},
+        shields = {}
     } } },
 	loc_vars = function(self, info_queue, card)
-        for _, v in ipairs(card.ability.extra.modules) do
-            info_queue[#info_queue+1] = G.P_CENTERS[v[1]]
+        for _, v in ipairs(self.module_types) do
+            if card.ability.extra.modules[v].key then
+                local vars = G.P_CENTERS[card.ability.extra.modules[v].key]:loc_vars({}, {ability = {extra = card.ability.extra.modules[v]}}).vars
+                vars.colours = {darken(Wormhole.tbp.module_colours[v], 0.3)}
+                info_queue[#info_queue+1] = {set = 'tbp_module', key = card.ability.extra.modules[v].key .. '_equipped', vars = vars, module_type = v, module_info = card.ability.extra.modules[v]}
+            else
+                info_queue[#info_queue+1] = {set = 'tbp_module', key = 'c_worm_tbp_module_missing', module_type = v, vars = {colours = {mix_colours(G.ARGS.LOC_COLOURS.inactive, Wormhole.tbp.module_colours[v], 0.5)}}}
+            end
         end
         return {vars = {
             self:modules_equipped(card) and 'yes' or 'no',
@@ -91,7 +107,7 @@ SMODS.Joker({
     end,
     modify_module_durability = function(self, card, change, modules)
         -- temporary code to test module destruction
-        if not modules then modules = {'core', 'weapons', 'thrusters'} end
+        if not modules then modules = self.module_types end
         for _, module in ipairs(modules) do
             if card.ability.extra.modules[module].durability then
                 card.ability.extra.modules[module].durability = card.ability.extra.modules[module].durability + change
@@ -119,7 +135,7 @@ SMODS.Joker({
                 }))
             end
             local module_calcs = {}
-            for _, module in ipairs({'core', 'weapons', 'thrusters'}) do -- TODO: add actual module slots here
+            for _, module in ipairs(self.module_types) do -- TODO: add actual module slots here
                 if card.ability.extra.modules[module].key then
                     local ret = G.P_CENTERS[card.ability.extra.modules[module].key]:calculate(card.ability.extra.modules[module], context)
                     if ret and next(ret) then
@@ -182,6 +198,7 @@ Wormhole.tbp.Module = SMODS.Consumable:extend{
             spaceship[1].ability.extra.modules[self.slot] = {
                 key = self.key,
                 durability = self.durability,
+                total_durability = self.durability
             }
             -- spaceship[1].ability.extra.modules[#spaceship[1].ability.extra.modules+1] = {self.key, self.cooldown}
             for k, v in pairs(self.config.extra) do

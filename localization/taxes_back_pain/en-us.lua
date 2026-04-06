@@ -3,6 +3,10 @@ local other_loc_table = {
         dictionary = {
             k_tbp_module = "Module",
             b_tbp_module_cards = "Modules",
+            tbp_module_weapons = 'WEAPON',
+            tbp_module_core = 'CORE',
+            tbp_module_thrusters = 'THRUSTERS',
+            tbp_module_shields = 'SHIELD'
         }
     },
     descriptions = {
@@ -99,10 +103,31 @@ local descriptions = {
                 '+#1# Mult'
             }
         },
+        laser_equipped = {
+            name = '{C:attention}Weapon',
+            text = {
+                '{s:1.2,V:1}Laser',
+                '{C:red}+#1#{} Mult'
+            }
+        },
         core = {
             name = 'Core',
             text = {
                 '+#1# Chips'
+            }
+        },
+        core_equipped = {
+            name = 'name',
+            text = {
+                '{s:1.2,V:1}Core',
+                '{C:blue}+#1#{} Chips when a',
+                '{C:attention}Ace{} is scored'
+            }
+        },
+        module_missing = {
+            name = 'name',
+            text = {
+                '{V:1}EMPTY'
             }
         },
     }

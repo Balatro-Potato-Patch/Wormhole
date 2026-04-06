@@ -1,0 +1,77 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+# Support modules in generate_card_ui
+[[patches]]
+[patches.pattern]
+target = 'functions/common_events.lua'
+match_indent = true
+position = 'before'
+pattern = '''
+elseif _c.set == 'Joker' then
+'''
+payload = '''
+elseif _c.set == 'tbp_module' then
+    localize{type = 'descriptions', set = 'tbp_module', key = _c.key, nodes = desc_nodes, text_colour = darken(Wormhole.tbp.module_colours[_c.module_type], 0.15), vars = specific_vars or _c.vars, background_colour = G.C.BLUE}
+    desc_nodes.tbp_module = _c.module_type
+    desc_nodes.module_info = _c.module_info
+'''
+
+# Add module info_boxes
+[[patches]]
+[patches.pattern]
+target = 'functions/UI_definitions.lua'
+match_indent = true
+position = 'after'
+pattern = '''
+local info_boxes = {}
+'''
+payload = '''
+local tbp_module_info_boxes = {}
+'''
+
+# Modify info_queue to add spaceship modules
+[[patches]]
+[patches.pattern]
+target = 'functions/UI_definitions.lua'
+match_indent = true
+position = 'at'
+pattern = '''
+info_boxes[#info_boxes+1] =
+          {n=G.UIT.R, config={align = "cm"}, nodes={
+          {n=G.UIT.R, config={align = "cm", colour = lighten(G.C.JOKER_GREY, 0.5), r = 0.1, padding = 0.05, emboss = 0.05}, nodes={
+            info_tip_from_rows(v, v.name),
+                      }}
+                    }}
+'''
+payload = '''
+if v.tbp_module then
+    tbp_module_info_boxes[#tbp_module_info_boxes+1] = {n=G.UIT.R, config={align = "cl"}, nodes={
+        {n=G.UIT.R, config={align = "cm", colour = darken(Wormhole.tbp.module_colours[v.tbp_module], 0.5), padding = 0.05, emboss = 0.1}, nodes={
+            info_tip_from_rows(v, v.name),
+        }}
+    }}
+else
+    info_boxes[#info_boxes+1] =
+        {n=G.UIT.R, config={align = "cm"}, nodes={
+            {n=G.UIT.R, config={align = "cm", colour = lighten(G.C.JOKER_GREY, 0.5), r = 0.1, padding = 0.05, emboss = 0.05}, nodes={
+                info_tip_from_rows(v, v.name),
+            }}
+        }}
+end
+'''
+[[patches]]
+[patches.pattern]
+target = 'functions/UI_definitions.lua'
+match_indent = true
+position = 'before'
+pattern = '''
+if multi_boxes[1] then
+'''
+payload = '''
+if next(tbp_module_info_boxes) then
+    ret_val.nodes[#ret_val.nodes + 1] = {n=G.UIT.C, config={align = "cm", func = 'show_spaceship_tooltips',object = Moveable(), ref_table = next(tbp_module_info_boxes) and tbp_module_info_boxes or nil}, nodes={}}
+end
+'''
