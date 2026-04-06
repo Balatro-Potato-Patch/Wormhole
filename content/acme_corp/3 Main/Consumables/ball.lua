@@ -27,7 +27,7 @@ end
 SMODS.Consumable{
     key = 'acme_ball',
     set = 'ACME_Gadget',
-    atlas = 'acmeGadgets',
+    atlas = 'ACME_gadgets',
     pos = {x=0, y=0},
     soul_pos = {x=0, y=1, draw = function(self, scale_mod) Wormhole.ACME.ball_function(self, scale_mod) end},
 }

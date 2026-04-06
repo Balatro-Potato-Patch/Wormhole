@@ -6,7 +6,7 @@ SMODS.Atlas {
 }
 SMODS.Atlas {
 	key = 'ACME_gadgets',
-	path = 'acme_corp/gadgets.png',
+	path = 'acme_corp/ACME_gadgets.png',
 	px = 71,
 	py = 95
 }

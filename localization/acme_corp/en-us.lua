@@ -1,4 +1,4 @@
-return{
+return {
     descriptions = {
         ACME_Gadget = {
             c_worm_acme_ball = {
@@ -10,7 +10,7 @@ return{
             }
         },
         Joker = {
-            
+
         },
         Other = {
             undiscovered_acme_gadget = {
@@ -27,6 +27,47 @@ return{
             PotatoPatchTeam_ACME = {
                 name = 'ACME Corporation',
             },
+            PotatoPatchDev_RadiationV2 = {
+                name = "RadiationV2",
+                text = {
+                    { "It's" },
+                },
+                atlas = "ACME_Credits",
+                pos = { x = 0, y = 0 }
+            },
+            PotatoPatchDev_FlameThrowerFIM = {
+                name = "FlameThrowerFIM",
+                text = {
+                    { "Snowing" },
+                },
+                atlas = "ACME_Credits",
+                pos = { x = 0, y = 0 }
+            },
+            PotatoPatchDev_Opal = {
+                name = "Opal",
+                text = {
+                    { "On" },
+                },
+                atlas = "ACME_Credits",
+                pos = { x = 0, y = 0 }
+            },
+            PotatoPatchDev_Youh = {
+                name = "Youh !",
+                text = {
+                    { "Mount" },
+                },
+                atlas = "ACME_Credits",
+                pos = { x = 0, y = 0 }
+            }
+            ,
+            PotatoPatchDev_Basil_Squared = {
+                name = "Basil_Squared",
+                text = {
+                    { "Fuji" },
+                },
+                atlas = "ACME_Credits",
+                pos = { x = 0, y = 0 }
+            }
         }
     },
     misc = {
