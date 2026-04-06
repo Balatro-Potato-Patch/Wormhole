@@ -131,6 +131,91 @@ return {
                 },
             },
         },
+        Fate = {
+            c_worm_crunch = {
+                name = {"Big Crunch"},
+                text = {
+                    "Sets each card in {C:attention}deck",
+                    "to {C:attention}1{} of {C:attention}2{} random {C:attention}suits"
+                }
+            },
+            c_worm_freeze = {
+                name = {"Big Freeze"},
+                text = {
+                    "Sets each card in {C:attention}deck",
+                    "to {C:attention}1{} of {C:attention}4{} random {C:attention}ranks"
+                }
+            },
+            c_worm_rip = {
+                name = {"Big Rip"},
+                text = {
+                    "{C:attention}Duplicates{} each card in {C:attention}deck",
+                    "and {C:attention}halves{} all their {C:attention}ranks",
+                    "{C:inactive}(Rounded down)"
+                }
+            },
+            c_worm_slurp = {
+                name = {"Big Slurp"},
+                text = {
+                    "Randomly {C:attention}destroys{} half",
+                    "of the {C:attention}deck",
+                    "{C:inactive}(Rounded up)"
+                }
+            },
+            c_worm_bounce = {
+                name = {"Big Bounce"},
+                text = {
+                    "{C:attention}Destroys{} all cards in",
+                    "deck and {C:attention}replaces{} them with",
+                    "one card of each {C:attention}rank{} and {C:attention}suit"
+                }
+            }
+        },
+        Spectral = {
+            c_worm_bang = {
+                name = {"The Big Bang"},
+                text = {
+                    "{C:attention}Replaces{} all cards in deck",
+                    "with {C:attention,E:2}randomized{} ones",
+                    "{C:inactive}(Random suit, rank, enhancement, edition, seal)"
+                }
+            }
+        },
+        Other = {
+            p_worm_avadon_normal = {
+                name = "Avadon Pack",
+                text = {
+                    "Choose {C:attention}#1#{} of up to",
+                    "{C:attention}#2#{C:fate} Fate{} cards to",
+                    "be used immediately"
+                },
+            },
+            p_worm_avadon_jumbo = {
+                name = "Jumbo Avadon Pack",
+                text = {
+                    "Choose {C:attention}#1#{} of up to",
+                    "{C:attention}#2#{C:fate} Fate{} cards to",
+                    "be used immediately"
+                },
+            },
+            p_worm_avadon_mega = {
+                name = "Mega Avadon Pack",
+                text = {
+                    "Choose {C:attention}#1#{} of up to",
+                    "{C:attention}#2#{C:fate} Fate{} cards to",
+                    "be used immediately"
+                },
+            },
+            undiscovered_fate = {
+                name = "Not Discovered",
+                text = {
+                    "Purchase or use",
+                    "this card in an",
+                    "unseeded run to",
+                    "learn what it does",
+                },
+            },
+        },
     },
     misc = {
             poker_hand_descriptions = {
@@ -155,7 +240,13 @@ return {
                 k_worm_specificcolony_receive_title = "Release from Colony ",
                 worm_euda_pkr_wow = "Wow!",
                 worm_euda_pkr_wow_f = "Wow! Flush",
+<<<<<<< arta
+                k_fate = "Fate",
+                b_fate_cards = "Fate Cards",
+                k_avadon_pack = "Avadon Pack",
+=======
                 k_worm_lunarcheese_message = "Cheesy!",
+>>>>>>> main
             }
         },
 }
