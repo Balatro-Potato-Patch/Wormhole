@@ -655,11 +655,11 @@ SMODS.Consumable { -- Voidka
     ppu_coder = { 'pi_cubed' },
     ppu_artist = { 'AstraLuna' },
     ppu_team = { 'absinthe' },
-    pos = { x = 0, y = 1 },
+    pos = { x = 2, y = 1 },
     config = {
         drink_values = {
-            filled_pos = { x = 0, y = 1 },
-            empty_pos = { x = 1, y = 1 },
+            filled_pos = { x = 2, y = 1 },
+            empty_pos = { x = 3, y = 1 },
             filled = true,
             visibly_filled = true,
             primed = false
