@@ -186,6 +186,7 @@ return {
 			},
 		},
 		worm_meow_Spacetart = {
+			-- Spacetart Alone
 			c_worm_stellar_strawberry = {
 				name = "Stellar Strawberry",
 				text = {
@@ -196,33 +197,42 @@ return {
 			c_worm_celestial_cinnamon = {
 				name = "Celestial Cinnamon",
 				text = {
-					"orange penis",
+					"Attached {C:attention}Joker{} has a",
+					"{C:green}#1# in #2#{} chance to {C:attention}retrigger{}",
 				},
 			},
 			c_worm_lunar_lemon = {
 				name = "Lunar Lemon",
 				text = {
-					"yellow penis",
+					"Attached {C:attention}Joker{} has a",
+					"{C:green}#1# in #2#{} chance to earn",
+					"{C:money}$#3#{} at end of round",
 				},
 			},
 			c_worm_meteor_mint = {
 				name = "Meteor Mint",
 				text = {
-					"green penis",
+					"{C:attention}Boosts{} other {C:worm_meow_spacetart}Spacetarts{}",
+					"attached to the applied {C:attention}Joker{}",
 				},
 			},
 			c_worm_blueshift_blueberry = {
 				name = "Blueshift Blueberry",
 				text = {
-					"blue penis",
+					"Attached {C:attention}Joker{}",
+					"gives {C:chips}+#1#{} Chips",
 				},
 			},
-			c_worm_big_bang_blackberry = {
-				name = "Big Bang Blackberry",
+			c_worm_black_hole_blackberry = {
+				name = "Black Hole Blackberry",
 				text = {
-					"purple penis",
+					"Attached {C:attention}Joker{}",
+					"Balances {C:chips}Chips{} and",
+					"{C:mult}Mult{} score by {X:legendary,C:white}#1#%{}",
 				},
 			},
+
+			-- Spacetart Attached
 			c_worm_stellar_strawberry_regular = {
 				name = " Stellar Strawberry ",
 				text = {
@@ -238,23 +248,24 @@ return {
 			c_worm_celestial_cinnamon_regular = {
 				name = " Celestial Cinnamon ",
 				text = {
-					"{C:green}#1# in #2# chance to",
-					"{C:attention}retrigger{} the attached Joker",
+					"{C:green}#1# in #2#{} chance",
+					"to {C:attention}retrigger{}",
 					"{C:inactive}(Unimplemented)"
 				},
 			},
 			c_worm_lunar_lemon_regular = {
 				name = " Lunar Lemon ",
 				text = {
-					"{C:green}1 in #1#{} chance to",
-					"earn {C:money}$#2#"
+					"{C:green}#1# in #2#{} chance",
+					"to earn {C:money}$#3#{} at",
+					"end of round"
 				}
 			},
 			c_worm_meteor_mint_regular = {
 				name = " Meteor Mint ",
 				text = {
-					"{C:attention}Boosts{} other tarts applied",
-					"onto the same Joker",
+					"{C:attention}Boosts{} other {C:worm_meow_spacetart}Spacetarts{}",
+					"attached to this {C:attention}Joker{}",
 					"{C:inactive}(Total mint boosts on this Joker: #1#)"
 				}
 			},
@@ -267,13 +278,14 @@ return {
 			c_worm_blueshift_blueberry_boosted2 = {
 				name = " Blueshift Blueberry ",
 				text = {
-					"{X:blue,C:white}X#1#{} Chips"
+					"{X:blue,C:white}X#1#{} Chips",
 				},
 			},
-			c_worm_big_bang_blackberry_regular = {
-				name = " Big Bang Blackberry ",
+			c_worm_black_hole_blackberry_regular = {
+				name = " Black Hole Blackberry ",
 				text = {
-					"Balances Chips and Mult {X:legendary,C:white}#1#%{}"
+					"Balances {C:chips}Chips{} and",
+					"{C:mult}Mult{} score by {X:legendary,C:white}#1#%{}",
 				},
 			},
 		},

@@ -346,7 +346,7 @@ local function has_rainbow(card)
 			has_green = true
 		elseif v.key == "blueshift_blueberry" then
 			has_blue = true
-		elseif v.key == "big_bang_blackberry" then
+		elseif v.key == "black_hole_blackberry" then
 			has_purple = true
 		end
 	end
@@ -380,7 +380,7 @@ end
 local function semi_balance(x, y, alpha)
 	local a = 0.5 * alpha
 	local delta = y - x
-	local t = alpha * delta
+	local t = a * delta
 	return math.floor(x + t), math.floor(y - t)
 end
 
@@ -534,8 +534,7 @@ SpaceTart {
 	tart_pos = { x = 2, y = 2 },
 	foil_pos = { x = 2, y = 0 },
 	config = {
-		chance_numerator = 1,
-		chance_denominator = 5
+		odds = 5
 	},
 	
 	calculates = {
@@ -546,10 +545,11 @@ SpaceTart {
 	},
 	
 	loc_vars = function(self, info_queue, card, tart_config, boost_count)
+        local numerator, denominator = SMODS.get_probability_vars(card, 1, tart_config.odds)
 		return {
 			vars = {
-				tart_config.chance_numerator, 
-				tart_config.chance_denominator
+                numerator,
+                denominator
 			},
 		}
 	end,
@@ -668,9 +668,11 @@ SpaceTart {
 	},
 	
 	loc_vars = function(self, info_queue, card, tart_config, boost_count)
+        local numerator, denominator = SMODS.get_probability_vars(card, 1, ((boost_count or 0) > 0) and tart_config.odds_boosted or tart_config.odds)
 		return {
 			vars = {
-				((boost_count or 0) > 0) and tart_config.odds_boosted or tart_config.odds,
+                numerator,
+                denominator,
 				tart_config.reg + (boost_count or 0)
 			}
 		}
@@ -804,7 +806,7 @@ SpaceTart {
 }
 
 SpaceTart {
-	key = "big_bang_blackberry",
+	key = "black_hole_blackberry",
 	tart_pos = { x = 3, y = 3 },
 	foil_pos = { x = 3, y = 1 },
 	config = {
@@ -893,7 +895,7 @@ SpaceTart {
 -- 		}
 -- 	end
 -- end, "j_joker")
--- create_tart("big_bang_blackberry", { x = 3, y = 3 }, { x = 3, y = 1 }, function(card, context)
+-- create_tart("black_hole_blackberry", { x = 3, y = 3 }, { x = 3, y = 1 }, function(card, context)
 -- 	return { message = "test" }
 -- end, function(card, context)
 -- 	if context.joker_main then
