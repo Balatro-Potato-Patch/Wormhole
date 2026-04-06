@@ -86,6 +86,7 @@ SMODS.Joker({
         shields = {}
     } } },
 	loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue+1] = G.P_CENTERS["p_worm_module_normal_1"] -- TODO: Change to poll winner
         for _, v in ipairs(self.module_types) do
             if card.ability.extra.modules[v].key then
                 local vars = G.P_CENTERS[card.ability.extra.modules[v].key]:loc_vars({}, {ability = {extra = card.ability.extra.modules[v]}}).vars
@@ -99,7 +100,7 @@ SMODS.Joker({
         return {
             vars = {
                 colours = {modules and G.ARGS.LOC_COLOURS.inactive or G.C.UI.TEXT_DARK, modules and mix_colours(G.ARGS.LOC_COLOURS.inactive, G.ARGS.LOC_COLOURS.attention, 0.65) or G.ARGS.LOC_COLOURS.attention},
-                'space booster back name' -- TODO: replace with localize booster name
+                localize{type = 'name_text', set = 'Other', key = 'p_worm_module_normal_1'} -- TODO: Change to poll winner
             }
         }
     end,
@@ -128,9 +129,12 @@ SMODS.Joker({
                 G.E_MANAGER:add_event(Event({
                     func = function()
                         card:juice_up(0.3, 0.5)
-                        SMODS.add_booster_to_shop('p_arcana_normal_1') -- TODO: Replace booster with module one
-                        -- TODO: Should it be forced to be open? Tried using
-                        -- card:open() but the game doesn't like it
+                        local key = 'p_worm_module_normal_'..(math.random(1,2))
+                        local _booster = Card(G.play.T.x + G.play.T.w/2 - G.CARD_W*1.27/2,
+                        G.play.T.y + G.play.T.h/2-G.CARD_H*1.27/2, G.CARD_W*1.27, G.CARD_H*1.27, G.P_CARDS.empty, G.P_CENTERS[key], {bypass_discovery_center = true, bypass_discovery_ui = true})
+                        _booster.cost = 0
+                        G.FUNCS.use_card({config = {ref_table = _booster}})
+                        _booster:start_materialize()
                     return true
                     end
                 }))
@@ -170,6 +174,7 @@ SMODS.ConsumableType {
     collection_rows = { 5, 6 },
     primary_colour = G.C.SET.Spectral, -- TODO: Change color?
     secondary_colour = G.C.SECONDARY_SET.Spectral,
+    default = "c_worm_tbp_laser",
 }
 
 Wormhole.tbp.Module = SMODS.Consumable:extend{
@@ -265,4 +270,55 @@ Wormhole.tbp.Module({
             }
         end
     end,
+})
+
+-- Module boosters
+SMODS.Booster({
+	key = "module_normal_1",
+	config = { extra = 3, choose = 1 },
+	group_key = "k_worm_tbp_module",
+	cost = 4,
+	create_card = function(self, card, i)
+        print(card.config.center.key)
+		return SMODS.create_card({
+			set = "tbp_module",
+		})
+	end,
+})
+
+SMODS.Booster({
+	key = "module_normal_2",
+	config = { extra = 3, choose = 1 },
+	group_key = "k_worm_tbp_module",
+	cost = 4,
+	create_card = function(self, card, i)
+        print(card.config.center.key)
+		return SMODS.create_card({
+			set = "tbp_module",
+		})
+	end,
+})
+
+SMODS.Booster({
+	key = "module_jumbo_1",
+	config = { extra = 5, choose = 1 },
+	group_key = "k_worm_tbp_module",
+	cost = 4,
+	create_card = function(self, card, i)
+		return SMODS.create_card({
+			set = "tbp_module",
+		})
+	end,
+})
+
+SMODS.Booster({
+	key = "module_mega_1",
+	config = { extra = 5, choose = 2 },
+	group_key = "k_worm_tbp_module",
+	cost = 4,
+	create_card = function(self, card, i)
+		return SMODS.create_card({
+			set = "tbp_module",
+		})
+	end,
 })

@@ -1,8 +1,8 @@
 local other_loc_table = {
     misc = {
         dictionary = {
-            k_tbp_module = "Module",
             b_tbp_module_cards = "Modules",
+            k_worm_tbp_module = "Module Pack",
             tbp_module_weapons = 'WEAPON',
             tbp_module_core = 'CORE',
             tbp_module_thrusters = 'THRUSTERS',
@@ -80,6 +80,40 @@ local other_loc_table = {
                 },
             },
         },
+        Other = {
+            p_worm_module_normal_1 = {
+                name = "Module Pack",
+                text={
+                    "Choose {C:attention}#1#{} of up to",
+                    "{C:attention}#2#{C:spectral} Module{} cards to", -- TODO: change color to new Module one if changed
+                    "be used immediately",
+                },
+            },
+            p_worm_module_normal_2 = {
+                name = "Module Pack",
+                text={
+                    "Choose {C:attention}#1#{} of up to",
+                    "{C:attention}#2#{C:spectral} Module{} cards to", -- TODO: change color to new Module one if changed
+                    "be used immediately",
+                },
+            },
+            p_worm_module_jumbo_1 = {
+                name = "Jumbo Module Pack",
+                text={
+                    "Choose {C:attention}#1#{} of up to",
+                    "{C:attention}#2#{C:spectral} Module{} cards to", -- TODO: change color to new Module one if changed
+                    "be used immediately",
+                },
+            },
+            p_worm_module_mega_1 = {
+                name = "Mega Module Pack",
+                text={
+                    "Choose {C:attention}#1#{} of up to",
+                    "{C:attention}#2#{C:spectral} Module{} cards to", -- TODO: change color to new Module one if changed
+                    "be used immediately",
+                },
+            },
+        }
     },
 }
 
