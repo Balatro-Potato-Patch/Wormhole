@@ -199,6 +199,7 @@ return {
 				text = {
 					"Attached {C:attention}Joker{} has a",
 					"{C:green}#1# in #2#{} chance to {C:attention}retrigger{}",
+					"{C:inactive}(Unimplemented)",
 				},
 			},
 			c_worm_lunar_lemon = {
@@ -242,7 +243,7 @@ return {
 			c_worm_stellar_strawberry_boosted2 = {
 				name = " Stellar Strawberry ",
 				text = {
-					"{X:red,C:white}X#1#{} Mult"
+					"{X:red,C:white}X#1#{} Mult",
 				},
 			},
 			c_worm_celestial_cinnamon_regular = {
@@ -250,7 +251,7 @@ return {
 				text = {
 					"{C:green}#1# in #2#{} chance",
 					"to {C:attention}retrigger{}",
-					"{C:inactive}(Unimplemented)"
+					"{C:inactive}(Unimplemented)",
 				},
 			},
 			c_worm_lunar_lemon_regular = {
@@ -258,7 +259,7 @@ return {
 				text = {
 					"{C:green}#1# in #2#{} chance",
 					"to earn {C:money}$#3#{} at",
-					"end of round"
+					"end of round",
 				}
 			},
 			c_worm_meteor_mint_regular = {
@@ -266,7 +267,7 @@ return {
 				text = {
 					"{C:attention}Boosts{} other {C:worm_meow_spacetart}Spacetarts{}",
 					"attached to this {C:attention}Joker{}",
-					"{C:inactive}(Total mint boosts on this Joker: #1#)"
+					"{C:inactive}(Total mint boosts on this Joker: #1#)",
 				}
 			},
 			c_worm_blueshift_blueberry_regular = {
