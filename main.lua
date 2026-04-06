@@ -27,10 +27,7 @@ if PotatoPatchUtils then
         secondary = HEX('011638')
     }
 
-    local gmm = Game.main_menu
-    function Game:main_menu(change_context)
-        local ret = gmm(self, change_context)
-
+    function Wormhole.init_custom_menu(change_context)
         if not G.title_top.cards[1].mod_flag then
             G.title_top.cards[1]:remove()
             G.title_top.T.w = G.title_top.T.w - (1.7675 / math.max(#G.title_top.cards, 1))
@@ -87,13 +84,10 @@ if PotatoPatchUtils then
             --Logo animation
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
-                delay = change_context == 'splash' and 3.6 or change_context == 'game' and 4 or 1,
+                delay = change_context == 'game' and 1.5 or 0,
                 blockable = false,
                 blocking = false,
                 func = (function()
-                    play_sound('magic_crumple' .. (change_context == 'splash' and 2 or 3),
-                        (change_context == 'splash' and 1 or 1.3), 0.9)
-                    play_sound('whoosh1', 0.2, 0.8)
                     ease_value(G.SPLASH_WORMHOLE_LOGO, 'dissolve', -1, nil, nil, nil,
                         change_context == 'splash' and 2.3 or 0.9)
                     G.VIBRATION = G.VIBRATION + 1.5
@@ -112,9 +106,8 @@ if PotatoPatchUtils then
                 }
             } })
         end
-
-        return ret
     end
+
     --#endregion
 
     --#region Config

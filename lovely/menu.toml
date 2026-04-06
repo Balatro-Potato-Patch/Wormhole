@@ -51,3 +51,18 @@ end
 '''
 match_indent = true
 times = 1
+
+[[patches]]
+[patches.pattern]
+target = 'game.lua'
+pattern = '''
+        G.VIBRATION = G.VIBRATION + 1
+        return true
+end)}))
+'''
+position = 'after'
+payload = '''
+
+Wormhole.init_custom_menu(change_context)
+'''
+match_indent = true
