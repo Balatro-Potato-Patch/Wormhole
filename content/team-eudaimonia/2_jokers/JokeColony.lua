@@ -2,7 +2,7 @@ SMODS.Atlas {
     key = 'jokecolonyatlas',
     px = 71,
     py = 95,
-    path = 'team-eudaimonia/wowsignal.png', --Update with actual art
+    path = 'team-eudaimonia/JokeColony.png', --Update with actual art
 }
 SMODS.Joker {
     key = "jokecolony",
@@ -14,7 +14,7 @@ SMODS.Joker {
     discovered = true,
     config = {extra= { mult = 4 }},
     ppu_coder = {'M0xes'},
-    ppu_artist = {'LasagnaFelidae'},
+    ppu_artist = {'Jewel'},
     loc_vars = function(self, info_queue, card)
         local pop = 0
         for _, joker in ipairs(G.worm_colony and G.worm_colony.cards or {}) do
