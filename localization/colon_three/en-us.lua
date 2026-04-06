@@ -257,7 +257,7 @@ return {
             PotatoPatchDev_notmario = {
                 name = "notmario",
                 text = {
-                    "TO DO: WRITE FUNNY JOKE"
+                    "this {C:spectral}hexes{} me"
                 }
             },
         }
