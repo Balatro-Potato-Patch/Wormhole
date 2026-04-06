@@ -43,7 +43,8 @@ PotatoPatchUtils.Developer {
     team = 'absinthe',
     atlas = 'worm_abs_credits',
     pos = { x = 2, y = 1 },
-    soul_pos = { x = 3, y = 1 }
+    soul_pos = { x = 3, y = 1 },
+    loc = true
 }
 
 PotatoPatchUtils.Developer {
