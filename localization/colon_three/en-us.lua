@@ -69,6 +69,7 @@ return {
                     }
                 }
             },
+            -- i lowkey hate this but whatever
             m_worm_junk_card_mult = {
                 name = "Junk",
                 text = {
@@ -79,6 +80,39 @@ return {
                     {
                         "{C:chips}+#1#{} Chips",
                         "{C:mult}+#2#{} Mult",
+                        "Retrigger this",
+                        "card {C:attention}#3#{} time#4#"
+                    }
+                }
+            },
+            m_worm_junk_card_ringularity = {
+                name = "Junk",
+                text = {
+                    {
+                        "No rank or suit,",
+                        "always scores",
+                    },
+                    {
+                        "{C:chips}+#1#{} Chips",
+                        "{X:mult,C:white}X#5#{} Mult",
+                        "Earn {C:gold}+$#6#{}",
+                        "Retrigger this",
+                        "card {C:attention}#3#{} time#4#"
+                    }
+                }
+            },
+            m_worm_junk_card_mult_ringularity = {
+                name = "Junk",
+                text = {
+                    {
+                        "No rank or suit,",
+                        "always scores",
+                    },
+                    {
+                        "{C:chips}+#1#{} Chips",
+                        "{C:mult}+#2#{} Mult",
+                        "{X:mult,C:white}X#5#{} Mult",
+                        "Earn {C:gold}+$#6#{}",
                         "Retrigger this",
                         "card {C:attention}#3#{} time#4#"
                     }
@@ -200,6 +234,21 @@ return {
                         "with added values",
                         "{C:inactive}(Retriggers excluded)",
                     }
+                }
+            },
+        },
+        Spectral = {
+            c_worm_ringularity = {
+                name = "Ringularity",
+                text = {
+                    {
+                        "Convert all non-{C:attention}Junk Cards{} in hand",
+                        "into {C:attention}Junk Cards",
+                    },
+                    {
+                        "ALL current and future {C:attention}Junk Cards{}",
+                        "gain {X:mult,C:white}X#1#{} Mult and {C:gold}+$#2#{}",
+                    },
                 }
             },
         },

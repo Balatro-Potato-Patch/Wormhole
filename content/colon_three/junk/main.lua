@@ -29,6 +29,8 @@ function Game:start_run(args)
             mult = 0,
             retriggers = 1,
             x_hand_stats = 1.5,
+            x_mult = 0,
+            money = 0,
         }
     end
 end
@@ -49,13 +51,22 @@ SMODS.Enhancement {
     always_scores = true,
     config = { extra = { junk_mult = 1, } },
     loc_vars = function(self, q, card)
-        return { 
-            key = ((G.GAME.worm_c3_junk_stats or {}).mult or 0) ~= 0 and "m_worm_junk_card_mult" or nil,
+        local key_append = ""
+        if ((G.GAME.worm_c3_junk_stats or {}).mult or 0) ~= 0 then
+            key_append = key_append.."_mult"
+        end
+        if ((G.GAME.worm_c3_junk_stats or {}).x_mult or 0) ~= 0 then
+            key_append = key_append.."_ringularity"
+        end
+        return {
+            key = (key_append ~= "") and "m_worm_junk_card"..key_append or nil,
             vars = {
                 ((G.GAME.worm_c3_junk_stats or {}).chips or 1) * card.ability.extra.junk_mult,
                 ((G.GAME.worm_c3_junk_stats or {}).mult or 0) * card.ability.extra.junk_mult,
                 (G.GAME.worm_c3_junk_stats or {}).retriggers or 1,
                 ((G.GAME.worm_c3_junk_stats or {}).retriggers or 1) == 1 and "" or "s",
+                ((G.GAME.worm_c3_junk_stats or {}).x_mult or 0) * card.ability.extra.junk_mult + 1,
+                ((G.GAME.worm_c3_junk_stats or {}).money or 0) * card.ability.extra.junk_mult,
             }
         }
     end,
@@ -66,10 +77,18 @@ SMODS.Enhancement {
             }
         end
         if context.main_scoring and context.cardarea == G.play then
-            return {
-                chips = ((G.GAME.worm_c3_junk_stats or {}).chips or 1) * card.ability.extra.junk_mult,
-                mult = ((G.GAME.worm_c3_junk_stats or {}).mult or 0) * card.ability.extra.junk_mult,
-            }
+            local rets = {}
+            rets["chips"] = ((G.GAME.worm_c3_junk_stats or {}).chips or 1) * card.ability.extra.junk_mult
+            if ((G.GAME.worm_c3_junk_stats or {}).mult or 0) ~= 0 then
+                rets["mult"] = ((G.GAME.worm_c3_junk_stats or {}).mult or 0) * card.ability.extra.junk_mult
+            end
+            if ((G.GAME.worm_c3_junk_stats or {}).x_mult or 0) ~= 0 then
+                rets["xmult"] = ((G.GAME.worm_c3_junk_stats or {}).x_mult or 0) * card.ability.extra.junk_mult + 1
+            end
+            if ((G.GAME.worm_c3_junk_stats or {}).money or 0) ~= 0 then
+                rets["dollars"] = ((G.GAME.worm_c3_junk_stats or {}).money or 0) * card.ability.extra.junk_mult
+            end
+            return rets
         end
         -- if context.initial_scoring_step and context.cardarea == G.play then
         --     hand_chips = mod_chips(hand_chips * (G.GAME.worm_c3_junk_stats or {}).x_hand_stats or 1.5)
