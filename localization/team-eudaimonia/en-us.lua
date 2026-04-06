@@ -255,8 +255,8 @@ return {
                 },
             },
             poker_hands = {
-                worm_pkr_wow = "Wow!",
-                worm_pkr_wow_f = "Wow! Flush"
+                worm_euda_pkr_wow = "Wow!",
+                worm_euda_pkr_wow_f = "Wow! Flush",
             },
             dictionary = {
                 k_worm_jokecolony_ship_button = "SHIP",
@@ -265,11 +265,7 @@ return {
                 k_worm_specificcolony_receive_button = "Release Jokers",
                 k_worm_specificcolony_ship_title = "Sending to Colony ",
                 k_worm_specificcolony_receive_title = "Release from Colony ",
-			
-                worm_euda_pkr_wow = "Wow!",
-                worm_euda_pkr_wow_f = "Wow! Flush",
-				worm_pkr_pyramid = "pyramid"
-			
+
                 k_fate = "Fate",
                 b_fate_cards = "Fate Cards",
                 k_avadon_pack = "Avadon Pack",
