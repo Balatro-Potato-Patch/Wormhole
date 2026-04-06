@@ -3,6 +3,5 @@ SMODS.Consumable {
     atlas = Atlas_AcmeGadgets.key,
     pos = { x = 1, y = 0 },
     soul_pos = { x = 1, y = 1 },
-
-
+    set = 'ACME_Gadget'
 }
