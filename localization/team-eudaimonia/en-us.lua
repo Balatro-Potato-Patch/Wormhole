@@ -73,6 +73,14 @@ return {
                     "are always drawn first",
                 },
             },
+            j_worm_rocketscience = {
+                name = "Rocket Science",
+                text = {
+                    "When sold, debuffs the Joker",
+                    "to its right for #1# rounds.",
+                    "Then, it permanently gains #2# retrigger"
+                },
+            },
             j_worm_euda_rocket = {
                 name = "Space Shuttle",
                 text = {
@@ -118,6 +126,7 @@ return {
                 k_worm_specificcolony_receive_title = "Release from Colony ",
                 worm_euda_pkr_wow = "Wow!",
                 worm_euda_pkr_wow_f = "Wow! Flush",
+                k_worm_rocketscience_research = "Science!"
             }
         },
 }
