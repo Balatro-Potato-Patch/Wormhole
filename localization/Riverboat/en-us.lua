@@ -17,23 +17,29 @@ return {
             j_worm_the_past_paired = {
                 name = "The Past",
                 text = {
-                    "{C:attention}#1#{} hands played X {C:attention}#2#{} Jokers bought",
+                    "When paired, gives {X:mult,C:white} XMult {}",
+                    "equal to {C:attention}Hands played{} raised",
+                    "to the power of {C:attention}1{} + {C:attention}0.1{} per {C:attention}Joker{} bought",
+                    "{C:inactive}(Currently {X:dark_edition,C:white} X#1#^#3# {C:inactive} Mult)",
                     "{C:inactive}They were never apart. Only waiting."
                 }
             },
             j_worm_the_future = {
                 name = "The Future",
                 text = {
-                    "{X:mult,C:white} X#1# {} Mult",
-                    "for each {C:attention}Joker{} purchased this run",
+                    "Gives {X:mult,C:white} XMult {} equal to",
+                    "total {C:attention}Jokers{} purchased this run",
+                    "{C:inactive}(Currently {X:mult,C:white} X#1# {C:inactive} Mult)",
                     "{C:inactive}Yearns for the Past."
                 }
             },
             j_worm_the_future_paired = {
                 name = "The Future",
                 text = {
-                    "{X:mult,C:white} X#1# {} Mult",
-                    "{C:attention}#2#{} hands played X {C:attention}#3#{} Jokers bought",
+                    "When paired, gives {X:mult,C:white} XMult {}",
+                    "equal to {C:attention}Hands played{} raised",
+                    "to the power of {C:attention}1{} + {C:attention}0.1{} per {C:attention}Joker{} bought",
+                    "{C:inactive}(Currently {X:dark_edition,C:white} X#1#^#3# {C:inactive} Mult)",
                     "{C:inactive}They were never apart. Only waiting."
                 }
             },
