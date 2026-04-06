@@ -1,8 +1,18 @@
 Wormhole.JR_UTILS = {}
 
+Wormhole.JR_UTILS.reset_game_globals = function(run_start)
+  if run_start then
+    -- Reset/init satellite levels
+  end
+end
+
 Wormhole.JR_UTILS.ENABLED_SATELLITES = {
   ['High Card'] = 'new_horizon'
 }
+
+-- Satellite.inject populates this table
+Wormhole.JR_UTILS.Satellites = {}
+
 
 Wormhole.JR_UTILS.get_satellite = function(hand)
   return Wormhole.JR_UTILS.ENABLED_SATELLITES[hand]

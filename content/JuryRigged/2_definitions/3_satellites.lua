@@ -18,10 +18,18 @@ Wormhole.JR_UTILS.Satellite = SMODS.Consumable:extend {
   ppu_team = { 'jr' },
   atlas = 'worm_jr_Satellites',
 
+  inject = function(self, i)
+    SMODS.Consumable.inject(self)
+    Wormhole.JR_UTILS.Satellites[self.key] = {
+      vars = self.config.extra,
+      calculate = self.jr_calculate,
+      loc_vars = self
+          .jr_loc_vars
+    }
+  end,
+
   use = function(self, card, area, copier)
     Wormhole.JR_UTILS.level_up_satellite(card)
-    print('Using ' .. card.config.center.key)
-    print('Set: ' .. card.config.center.set)
   end,
 
   can_use = function(self, card)
@@ -32,7 +40,18 @@ Wormhole.JR_UTILS.Satellite = SMODS.Consumable:extend {
 
 Wormhole.JR_UTILS.Satellite {
   key = 'new_horizon',
-  config = { extra = { hand = 'High Card' } },
+  config = { extra = { hand = 'High Card' }, },
   pos = { x = 0, y = 0 },
   soul_pos = { x = 0, y = 1, draw = Wormhole.JR_UTILS.draw_satellite_soul },
+
+  jr_ability = function(self, context)
+    if context.before then
+      print("")
+    end
+  end,
+
+  jr_loc_vars = function(self)
+    return {
+    }
+  end
 }

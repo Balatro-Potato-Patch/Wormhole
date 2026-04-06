@@ -13,6 +13,7 @@ if PotatoPatchUtils then
 
   -- Reset Game Globals func to hook
   function Wormhole.reset_game_globals(run_start)
+    -- TODO: replace this with our own util init and use Satellites or ENABLED_SATELLITES
     G.GAME.jr = {
       satellite_hands = {
         ['High Card'] = { level = 0 },
