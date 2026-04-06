@@ -1,4 +1,4 @@
--- Blacephalon
+-- Magical Girl
 SMODS.Joker {
     key = "lfc_magical_girl",
     blueprint_compat = true,
@@ -51,4 +51,48 @@ SMODS.Joker {
             end
         end
     end,
+}
+
+-- Images
+SMODS.current_mod.lfc_custom_image = function(filename)
+    local full_path = (SMODS.current_mod.path .. "assets/lancer_fan_club/" .. filename)
+    print("Loading image at " .. full_path)
+    local file_data = assert(NFS.newFileData(full_path), ("Failed to create file_data"))
+    local tempimagedata = assert(love.image.newImageData(file_data), ("Failed to create tempimagedata"))
+    return (assert(love.graphics.newImage(tempimagedata), ("Failed to create return image")))
+end
+
+for i = 1, 5 do
+    local name = "lfc_sm_bg" .. tostring(i)
+    --print(name)
+    SMODS.current_mod[name] = SMODS.current_mod.lfc_custom_image(name .. ".png")
+end
+
+-- Shader
+SMODS.Shader {
+    key = 'lfc_magical_girl',
+    path = 'lfc_magical_girl.fs',
+
+    send_vars = function(self, sprite, card)
+        local img_array = {}
+        for i = 1, 5 do
+            table.insert(img_array, SMODS.current_mod["lfc_sm_bg" .. tostring(i)])
+        end
+        return {
+            imgs = img_array
+        }
+    end
+}
+
+-- DrawStep
+SMODS.DrawStep {
+    key = "lfc_magical_girl",
+    order = 1,
+    func = function(self, layer)
+        if self.config.center_key == "j_wormhole_lfc_magical_girl" then
+            print("DO THE DRAW THING")
+            self.children.center:draw_shader('lfc_magical_girl', nil, self.ARGS.send_to_shader)
+        end
+    end,
+    conditions = { vortex = false, facing = 'front' }
 }
