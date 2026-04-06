@@ -6,6 +6,16 @@ SMODS.Atlas {
     path = "TeamShrug/developers.png"
 }
 
+SMODS.Atlas{
+    key = 'shrug_randomsong',
+    path = 'TeamShrug/rory_nyte.png',
+    px = 80,
+    py = 97,
+    atlas_table = 'ANIMATION_ATLAS',
+    frames = 71,
+    fps = 30
+}
+
 -- Team establish
 PotatoPatchUtils.Team({
     name = "shrug", 
@@ -20,9 +30,9 @@ PotatoPatchUtils.Developer({
     name = "randomsongv2",
     loc = true,
     colour = HEX("7b1414"),
-    atlas = 'Joker',
-    pos = {x = 6, y = 8},
-    soul_pos = {x = 6, y = 9},
+    atlas = 'worm_shrug_randomsong',
+    pos = {y = -1},
+    soul_pos = {y = 0},
 })
 
 -- Microwave

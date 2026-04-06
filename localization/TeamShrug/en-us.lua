@@ -14,8 +14,9 @@ return {
             PotatoPatchDev_randomsongv2 = {
                 name = "RandomsongV2",
                 text = {
-                    "made 0 songs",
-                    "wow!"
+                    "I couldnt think of",
+                    "what to put as sprite",
+                    "so here is dancing rory nyte"
                 }
             },
             
@@ -75,60 +76,40 @@ return {
                     "{C:planet}Planets{} were used this round",
                 }
             },
-
         },
-
-
-
-
-
-        ---OTHER---
-        -----------
-        ---OTHER---
-
         Other = {
-
-            -- ALIEN PACK 1
-            p_worm_shrug_alien_normal = {
+            p_worm_shrug_alien_normal_1 = {
                 name = "Sighting Pack",
                 text = {
                     "Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2#{}{C:dark_edition} Alien{} cards to",
+                    "{C:attention}#2#{C:tarot} Alien{} cards to",
                     "be used immediately",
                 },
             },
-
-            -- ALIEN PACK 2
-            p_worm_shrug_alien_normal2 = {
+            p_worm_shrug_alien_normal_2 = {
                 name = "Sighting Pack",
                 text = {
                     "Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2#{}{C:dark_edition} Alien{} cards to",
+                    "{C:attention}#2#{C:tarot} Alien{} cards to",
                     "be used immediately",
                 },
             },
-
-            -- JUMBO ALIEN PACK
             p_worm_shrug_alien_jumbo = {
                 name = "Jumbo Sighting Pack",
                 text = {
                     "Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2#{}{C:dark_edition} Alien{} cards to",
+                    "{C:attention}#2#{C:tarot} Alien{} cards to",
                     "be used immediately",
                 },
             },
-
-            -- MEGA ALIEN PACK
             p_worm_shrug_alien_mega = {
                 name = "Mega Sighting Pack",
                 text = {
                     "Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2#{}{C:dark_edition} Alien{} cards to",
+                    "{C:attention}#2#{C:tarot} Alien{} cards to",
                     "be used immediately",
                 },
             },
-
-            -- UNDISCOVERED TEXT
             undiscovered_shrug_alien = {
                 name = "Not Discovered",
                 text = {
@@ -139,31 +120,6 @@ return {
                 },
             },
         },
-
-
-
-
-
-        ---ALIEN CARDS---
-        -----------------
-        ---ALIEN CARDS---
-
-        shrug_alien = {
-
-            c_worm_shrug_placeholderalien = {
-                name = "PLACEHOLDER ALIEN",
-                text = {
-                    "This is a placeholder!",
-                    "It holds its place very well.",
-                    "Hooray!"
-                }
-            }
-
-        },
-
-
-
-
 
         ---ENHANCEMENTS---
         ------------------
@@ -181,29 +137,64 @@ return {
             },
 
         },
+
+        shrug_alien = {
+            c_worm_shrug_alien_spades = {
+                name = 'name',
+                text = {
+                    'Convert {C:attention}#1#{} random',
+                    'non-spade cards in deck',
+                    'into {C:spades}Spades{}, lose {C:money}$#2#',
+                }
+            },
+            c_worm_shrug_alien_hearts = {
+                name = 'name',
+                text = {
+                    'Convert {C:attention}#1#{} random',
+                    'non-heart cards in deck',
+                    'into {C:hearts}Hearts{}, lose {C:money}$#2#',
+                }
+            },
+            c_worm_shrug_alien_clubs = {
+                name = 'name',
+                text = {
+                    'Convert {C:attention}#1#{} random',
+                    'non-club cards in deck',
+                    'into {C:clubs}Clubs{}, lose {C:money}$#2#',
+                }
+            },
+            c_worm_shrug_alien_diamonds = {
+                name = 'name',
+                text = {
+                    'Convert {C:attention}#1#{} random',
+                    'non-diamond cards in deck',
+                    'into {C:diamonds}Diamonds{}, lose {C:money}$#2#',
+                }
+            },
+        },
+        Tag = {
+            tag_worm_shrug_conspiracy = {
+                name = "Conspiracy Tag",
+                text = {
+                    "Gives a free",
+                    "{C:attention}Sighting Pack"
+                }
+            },
+        },
     },
 
 
 
 
-
-    ---MISC---
-    ----------
-    ---MISC---
-
+    -- MISC
     misc = {
 
         -- DICTIONARY
         dictionary = {
             k_shrug_plus_meteor = "+Tag",
+            k_shrug_alien_pack = "Alien Pack",
             b_shrug_alien_cards = "Alien Cards",
             k_shrug_alien = "Alien",
         },
-
-        -- LABELS
-        labels = {
-            shrug_alien = "Alien",
-        },
-
     },
 }
