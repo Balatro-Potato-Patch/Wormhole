@@ -92,7 +92,7 @@ SMODS.Joker {
         Wormhole.LancerFanClub.get_piss()
     end,
 
-    ppu_coder = { "InvalidOS" }
+    ppu_coder = { "InvalidOS", "ellestuff." }
 }
 
 -- Elle moment
@@ -171,7 +171,7 @@ local bar_palettes = {
 local function piss_draw(card)
     love.graphics.clear()
 
-    draw_piss_bar(currentvalues.urine.value/100, 10, 10, 40, 40, bar_palettes.piss, true)
+    draw_piss_bar(currentvalues.urine.value/100, 10, 10, 40, 40, bar_palettes.piss)
 end
 
 SMODS.DrawStep {
