@@ -207,46 +207,6 @@ SMODS.Joker {
     end
 }
 
-SMODS.PokerHand({
-    key = "pkr_pyramid",
-    mult = 30,
-    chips = 30,
-    l_mult = 3,
-    l_chips = 3,
-    example = {
-        { 'D_3', true }, 
-        { 'C_2', true },
-        { 'H_4', true }, 
-        { 'S_4', true }
-    },
-    visible = false,
-
-    evaluate = function(parts, hand)
-        if #hand >= 4 then
-            local twos = {}
-            local threes = {}
-            local fours = {}
-            local other_hands = (next(parts._flush) ~= nil) or (next(parts._straight) ~= nil)
-
-            for _, card in ipairs(hand) do  
-                if card:get_id() == 2 then
-                    twos[#twos + 1] = card
-                elseif card:get_id() == 3 then
-                    threes[#threes + 1] = card
-                elseif card:get_id() == 4 then
-                    fours[#fours + 1] = card
-                end
-            end
-
-            if #twos >= 1 and #threes >= 1 and #fours >= 2 and not other_hands then
-                local eligible_cards = { twos[1], threes[1], fours[1], fours[2] }
-                return { eligible_cards }
-            end
-        end
-    end,
-
-
-})
 
 --from cryptid
 
