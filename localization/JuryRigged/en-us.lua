@@ -4,7 +4,14 @@ return {
       sat_worm_new_horizon = {
         name = "New Horizon",
         text = {
-          "Placeholder",
+          {
+            "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
+            "{C:attention}#2#",
+          },
+          {
+            "After playing a {C:attention}#2#{},",
+            "draw {C:attention}#1#{} more card#3#"
+          }
         }
       }
     },

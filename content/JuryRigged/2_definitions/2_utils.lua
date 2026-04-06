@@ -1,14 +1,27 @@
 Wormhole.JR_UTILS = {}
 
+Wormhole.JR_UTILS.ENABLED_SATELLITES = {
+  ['High Card'] = 'new_horizon',
+  --['Pair'] = 'messenger',
+  --['Two Pair'] = 'tianwen_4',
+  --['Three of a Kind'] = 'venera_9',
+  --['Flush'] = 'galileo',
+  --['Straight'] = 'cassini_huygens',
+  --['Full House'] = 'sputnik_1',
+  --['Four of a Kind'] = 'mariner_9',
+  --['Straight Flush'] = 'voyager_2';
+  --['Five of a Kind'] = '',
+  --['Flush House'] = 'dawn',
+  --['Flush Five'] = '',
+}
+
 Wormhole.JR_UTILS.reset_game_globals = function(run_start)
   if run_start then
-    -- Reset/init satellite levels
+    for hand, _ in pairs(Wormhole.JR_UTILS.ENABLED_SATELLITES) do
+      G.GAME.jr.satellite_hands[hand].level = 0
+    end
   end
 end
-
-Wormhole.JR_UTILS.ENABLED_SATELLITES = {
-  ['High Card'] = 'new_horizon'
-}
 
 -- Satellite.inject populates this table
 Wormhole.JR_UTILS.Satellites = {}
@@ -32,15 +45,15 @@ end
 
 Wormhole.JR_UTILS.level_up_satellite = function(card, amount)
   amount = amount or 1
-  local hand = card.ability.extra.hand
+  local hand = card.ability.extra.hand_type
   update_hand_text(
     { sound = 'button', volume = 0.7, pitch = 0.8, delay = 1.3 },
     {
       handname = Wormhole.JR_UTILS.localize_satellite(hand),
-      level = G.GAME.jr.satellite_hands[hand].level or 0
+      level = G.GAME.jr.satellite_hands[hand].level
     }
   )
-  G.GAME.jr.satellite_hands[hand].level = (G.GAME.jr.satellite_hands[hand].level or 0) + amount
+  G.GAME.jr.satellite_hands[hand].level = G.GAME.jr.satellite_hands[hand].level + amount
   --delay(1.3)
 
 

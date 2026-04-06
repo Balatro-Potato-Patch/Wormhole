@@ -13,18 +13,18 @@ Wormhole.JR_UTILS.Satellite = SMODS.Consumable:extend {
   unlocked = true,
   discovered = false,
   cost = 4,
-  ppu_coder = { 'DowFrin' },
+  ppu_coder = { 'DowFrin', 'Maelmc' },
   ppu_artist = { 'DoggFly', 'Inky' },
-  ppu_team = { 'jr' },
+  ppu_team = { 'JuryRigged' },
   atlas = 'worm_jr_Satellites',
 
   inject = function(self, i)
     SMODS.Consumable.inject(self)
     Wormhole.JR_UTILS.Satellites[self.key] = {
+      name = self.name,
       vars = self.config.extra,
       calculate = self.jr_calculate,
-      loc_vars = self
-          .jr_loc_vars
+      loc_vars = self.jr_loc_vars
     }
   end,
 
@@ -40,18 +40,31 @@ Wormhole.JR_UTILS.Satellite = SMODS.Consumable:extend {
 
 Wormhole.JR_UTILS.Satellite {
   key = 'new_horizon',
-  config = { extra = { hand = 'High Card' }, },
+  name = 'new_horizon',
+  config = { extra = { hand_type = 'High Card' }, },
   pos = { x = 0, y = 0 },
   soul_pos = { x = 0, y = 1, draw = Wormhole.JR_UTILS.draw_satellite_soul },
 
-  jr_ability = function(self, context)
-    if context.before then
-      print("")
+  jr_calculate = function(self, context,vars)
+    if context.hand_drawn and G.GAME.jr.curr_hand then
+      --print("new_horizon calc")
+      G.GAME.jr.curr_hand = nil
+      SMODS.draw_cards(G.GAME.jr.satellite_hands[vars.hand_type].level)
+      return nil, true
     end
   end,
-
-  jr_loc_vars = function(self)
-    return {
+  loc_vars = function(self, info_queue, card)
+    local _level = G.GAME.jr and G.GAME.jr.satellite_hands[card.ability.extra.hand_type].level or 0
+    return  {
+      vars = {
+        _level,
+        localize(card.ability.extra.hand_type, 'poker_hands'),
+        _level <= 1 and '' or 's',
+        colours = { (_level == 1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, _level)]) }
+      }
     }
+  end,
+  jr_loc_vars = function(self)
+    return {}
   end
 }
