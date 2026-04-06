@@ -104,12 +104,22 @@ descriptions={
 		
 	},
 	Other={
-		
+		worm_celestial ={
+			name=
+				"Celestial"
+			, text={
+				"Halves all {C:attention}poker hand{}",
+				"levels when acquired"
+			}
+		}
 	},
 },
 misc={
 	v_dictionary={
 		a_level_minus = "-#1# Levels"
+	},
+	labels={
+		worm_celestial = "Celestial",
 	},
 	dictionary={
 		k_downgrade_ex = "Downgrade!"
