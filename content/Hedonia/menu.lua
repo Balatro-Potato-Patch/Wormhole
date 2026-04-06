@@ -41,7 +41,7 @@ SMODS.Booster {
     config = { extra = 3, choose = 1 },
     draw_hand = true,
     create_card = function(self, card)
-        return {set = "wormhole_hedonia_menu", area = G.pack_cards}
+        return {set = "wormhole_hedonia_menu", area = G.pack_cards, skip_materialize = true}
     end
 }
 
@@ -54,7 +54,7 @@ SMODS.Booster {
     config = { extra = 3, choose = 1 },
     draw_hand = true,
     create_card = function(self, card)
-        return {set = "wormhole_hedonia_menu", area = G.pack_cards}
+        return {set = "wormhole_hedonia_menu", area = G.pack_cards, skip_materialize = true}
     end
 }
 
@@ -67,7 +67,7 @@ SMODS.Booster {
     config = { extra = 3, choose = 1 },
     draw_hand = true,
     create_card = function(self, card)
-        return {set = "wormhole_hedonia_menu", area = G.pack_cards}
+        return {set = "wormhole_hedonia_menu", area = G.pack_cards, skip_materialize = true}
     end
 }
 
@@ -80,7 +80,7 @@ SMODS.Booster {
     config = { extra = 3, choose = 1 },
     draw_hand = true,
     create_card = function(self, card)
-        return {set = "wormhole_hedonia_menu", area = G.pack_cards}
+        return {set = "wormhole_hedonia_menu", area = G.pack_cards, skip_materialize = true}
     end
 }
 
@@ -93,7 +93,7 @@ SMODS.Booster {
     config = { extra = 4, choose = 1 },
     draw_hand = true,
     create_card = function(self, card)
-        return {set = "wormhole_hedonia_menu", area = G.pack_cards}
+        return {set = "wormhole_hedonia_menu", area = G.pack_cards, skip_materialize = true}
     end
 }
 
@@ -106,7 +106,7 @@ SMODS.Booster {
     config = { extra = 4, choose = 1 },
     draw_hand = true,
     create_card = function(self, card)
-        return {set = "wormhole_hedonia_menu", area = G.pack_cards}
+        return {set = "wormhole_hedonia_menu", area = G.pack_cards, skip_materialize = true}
     end
 }
 
@@ -119,7 +119,7 @@ SMODS.Booster {
     config = { extra = 4, choose = 2 },
     draw_hand = true,
     create_card = function(self, card)
-        return {set = "wormhole_hedonia_menu", area = G.pack_cards}
+        return {set = "wormhole_hedonia_menu", area = G.pack_cards, skip_materialize = true}
     end
 }
 
@@ -132,6 +132,6 @@ SMODS.Booster {
     config = { extra = 4, choose = 2 },
     draw_hand = true,
     create_card = function(self, card)
-        return {set = "wormhole_hedonia_menu", area = G.pack_cards}
+        return {set = "wormhole_hedonia_menu", area = G.pack_cards, skip_materialize = true}
     end
 }
