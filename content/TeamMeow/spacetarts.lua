@@ -547,45 +547,41 @@ SpaceTart {
 	calculates = {
 		-- Default ability
 		function(card, tart_config, context, boost_count)
-            if context.post_trigger and context.other_card == card then
+            if context.retrigger_joker_check and context.other_card == card then
                 if SMODS.pseudorandom_probability(card, 'cinnamon', 1, tart_config.odds) then
                     return {
                         repetitions = 1
                     }
                 else
-                    return {
+					G.E_MANAGER:add_event(Event({
+						trigger = 'after',
+						delay = 0.4,
 						func = function()
+							attention_text({
+								text = localize('k_nope_ex'),
+								scale = 1.3,
+								hold = 1.4,
+								major = card,
+								backdrop_colour = G.C.SECONDARY_SET.Tarot,
+								align = 'cm',
+								offset = { x = 0, y = 0 },
+								silent = true
+							})
 							G.E_MANAGER:add_event(Event({
 								trigger = 'after',
-								delay = 0.4,
+								delay = 0.06 * G.SETTINGS.GAMESPEED,
+								blockable = false,
+								blocking = false,
 								func = function()
-									attention_text({
-										text = localize('k_nope_ex'),
-										scale = 1.3,
-										hold = 1.4,
-										major = card,
-										backdrop_colour = G.C.SECONDARY_SET.Tarot,
-										align = 'cm',
-										offset = { x = 0, y = 0 },
-										silent = true
-									})
-									G.E_MANAGER:add_event(Event({
-										trigger = 'after',
-										delay = 0.06 * G.SETTINGS.GAMESPEED,
-										blockable = false,
-										blocking = false,
-										func = function()
-											play_sound('tarot2', 0.76, 0.4)
-											return true
-										end
-									}))
-									play_sound('tarot2', 1, 0.4)
-									card:juice_up(0.3, 0.5)
+									play_sound('tarot2', 0.76, 0.4)
 									return true
 								end
 							}))
+							play_sound('tarot2', 1, 0.4)
+							card:juice_up(0.3, 0.5)
+							return true
 						end
-					}
+					}))
                 end
             end
 		end,
