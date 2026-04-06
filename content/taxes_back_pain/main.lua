@@ -79,12 +79,17 @@ SMODS.Joker({
 	perishable_compat = false,
     ppu_team = {'tbp'},
     module_types = {'core', 'weapons', 'shields', 'thrusters'}, -- TODO: add actual module slots here
-    config = { extra = { modules = { -- TODO: add actual module slots here
-        core = {},
-        weapons = {},
-        thrusters = {},
-        shields = {}
-    } } },
+    config = {
+        card_limit = 1,
+        extra = {
+            modules = { -- TODO: add actual module slots here
+                core = {},
+                weapons = {},
+                thrusters = {},
+                shields = {}
+            }
+        },
+    },
 	loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = G.P_CENTERS["p_worm_module_normal_1"] -- TODO: Change to poll winner
         for _, v in ipairs(self.module_types) do
@@ -267,18 +272,30 @@ Wormhole.tbp.Module({
     end,
 })
 
+local module_create_card = function(self, card, i)
+    if i == 1 and not next(SMODS.find_card("j_worm_tbp_spaceship")) then
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                SMODS.add_card{ key = "j_worm_tbp_spaceship" }                
+                return true
+            end
+        }))
+    end
+    return SMODS.create_card({
+        set = "tbp_module",
+        skip_materialize = true,
+        key_append = "worm_tbp_module_booster"
+    })
+end
+
 -- Module boosters
 SMODS.Booster({
 	key = "module_normal_1",
 	config = { extra = 3, choose = 1 },
 	group_key = "k_worm_tbp_module",
 	cost = 4,
-	create_card = function(self, card, i)
-        print(card.config.center.key)
-		return SMODS.create_card({
-			set = "tbp_module",
-		})
-	end,
+    kind = "worm_tbp_module",
+	create_card = module_create_card,
 })
 
 SMODS.Booster({
@@ -286,34 +303,24 @@ SMODS.Booster({
 	config = { extra = 3, choose = 1 },
 	group_key = "k_worm_tbp_module",
 	cost = 4,
-	create_card = function(self, card, i)
-        print(card.config.center.key)
-		return SMODS.create_card({
-			set = "tbp_module",
-		})
-	end,
+    kind = "worm_tbp_module",
+	create_card = module_create_card,
 })
 
 SMODS.Booster({
 	key = "module_jumbo_1",
 	config = { extra = 5, choose = 1 },
 	group_key = "k_worm_tbp_module",
-	cost = 4,
-	create_card = function(self, card, i)
-		return SMODS.create_card({
-			set = "tbp_module",
-		})
-	end,
+	cost = 6,
+    kind = "worm_tbp_module",
+	create_card = module_create_card,
 })
 
 SMODS.Booster({
 	key = "module_mega_1",
 	config = { extra = 5, choose = 2 },
 	group_key = "k_worm_tbp_module",
-	cost = 4,
-	create_card = function(self, card, i)
-		return SMODS.create_card({
-			set = "tbp_module",
-		})
-	end,
+	cost = 8,
+    kind = "worm_tbp_module",
+	create_card = module_create_card,
 })
