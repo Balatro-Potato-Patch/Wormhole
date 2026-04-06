@@ -282,7 +282,7 @@ G.FUNCS.worm_join_colony = function(e)
         if joker.ability.source_joker == og then
           og.ability.worm_colonycitizen = joker.ability.worm_colonycitizen
           og.area:remove_card(og)
-          og:add_to_deck()
+          og:remove_from_deck()
           G.worm_colony:emplace(og)
           if joker.ability.eternal then joker.ability.eternal = nil end
           SMODS.destroy_cards(joker)
