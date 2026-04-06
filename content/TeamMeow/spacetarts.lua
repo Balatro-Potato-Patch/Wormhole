@@ -1148,6 +1148,29 @@ end
 
 local old = Game.update
 function Game:update(dt, ...)
+	local ret = old(self, dt, ...)
+	local alreadyset = false
+	if G.jokers and G.jokers.cards and not G.SETTINGS.paused then
+		for k, v in pairs(G.jokers.cards) do
+			if v.ability and v.ability.set == "Joker" and v.tarts and #v.tarts > 0 then
+				local bool = false
+				for kk, vv in pairs(G.jokers.cards) do
+					if vv ~= v and meow_cards_are_colliding(v, vv) and meow_can_apply_foil(vv) then
+						bool = true
+					end
+				end
+				if bool then
+					love.mouse.setCursor(Wormhole.TEAM_MEOW.cursor)
+					alreadyset = true
+				elseif not alreadyset then
+					love.mouse.setCursor()
+				end
+			end
+		end
+	end
+end
+local old = Game.update
+function Game:update(dt, ...)
     local ret = old(self, dt, ...)
     if G.consumeables and G.consumeables.cards then
         for k, v in ipairs(G.consumeables.cards) do
