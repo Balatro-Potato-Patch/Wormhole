@@ -131,9 +131,9 @@ SMODS.Joker {
     key = 'abs_gravity_well',
     rarity = 1,
     cost = 5,
-    --atlas = 'worm_abs_jokers',
+    atlas = 'worm_abs_jokers',
     pos = { x = 3, y = 0 },
-    --ppu_artist = { '' },
+    ppu_artist = { 'nixthatoneartist' },
     ppu_coder = { 'pi_cubed' },
     ppu_team = { 'absinthe' },
     attributes = {
