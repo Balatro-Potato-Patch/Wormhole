@@ -86,6 +86,7 @@ SMODS.Tag{
     key = "shrug_conspiracy",
     min_ante = 2,
     atlas = 'shrug_alien_tag',
+    discovered = true,
     pos = {x = 0, y = 0},
     loc_vars = function(self, info_queue, tag)
         info_queue[#info_queue + 1] = G.P_CENTERS.p_worm_shrug_alien_normal_1
