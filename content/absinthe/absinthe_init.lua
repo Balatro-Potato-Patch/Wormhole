@@ -113,7 +113,8 @@ function Wormhole.Absinthe.get_random_team()
 end
 
 Wormhole.Absinthe.type_blacklist = {
-    ['Back'] = true
+    ['Back'] = true,
+    ['Booster'] = true
 }
 
 function Wormhole.Absinthe.get_team_card_key(team, seed)
@@ -129,6 +130,34 @@ function Wormhole.Absinthe.get_team_card_key(team, seed)
         end
     end
     return pseudorandom_element(cards, pseudoseed(seed))
+end
+
+function Wormhole.Absinthe.get_card_area_to_emplace(key)
+    local area
+    local center = G.P_CENTERS[key]
+    if center.select_card and not center.set == 'Booster' then
+        if type(center.select_card) == "function" then -- Card's value takes first priority
+            area = center.config.center:select_card(center)
+        else
+            area = center.select_card
+        end
+    elseif SMODS.ConsumableTypes[center.set] and SMODS.ConsumableTypes[center.set].select_card then -- ConsumableType is second priority
+        if type(SMODS.ConsumableTypes[center.set].select_card) == "function" then
+            area = SMODS.ConsumableTypes[center.set]:select_card(center)
+        else
+            area = SMODS.ConsumableTypes[center.set].select_card
+        end
+    end
+
+    if not area then
+        if center.set == 'Joker' then
+            area = 'jokers'
+        elseif center.consumeable then
+            area = 'consumeables'
+        end
+    end
+
+    return area
 end
 
 --#endregion

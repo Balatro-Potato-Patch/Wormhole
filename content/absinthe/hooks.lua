@@ -15,4 +15,3 @@ function Card:sell_card()
         return sell_card_ref(self)
     end
 end
-

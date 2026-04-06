@@ -22,6 +22,7 @@ end
 '''
 match_indent = true
 
+# Prevent context.using_consumeable on drink prime toggle
 [[patches]]
 [patches.pattern]
 target = 'functions/button_callbacks.lua'

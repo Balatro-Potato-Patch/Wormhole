@@ -166,7 +166,8 @@ function Card:abs_refill_drink()
             end
         }))
 
-        SMODS.calculate_effect({ message = localize('k_worm_abs_refilled_ex'), colour = G.C.SECONDARY_SET.abs_drinks }, self)
+        SMODS.calculate_effect({ message = localize('k_worm_abs_refilled_ex'), colour = G.C.SECONDARY_SET.abs_drinks },
+            self)
         SMODS.calculate_context({ abs_drink_refilled = true, card = self })
     end
 end
@@ -187,7 +188,8 @@ function Card:abs_empty_drink()
             end
         }))
 
-        SMODS.calculate_effect({ message = localize('k_worm_abs_emptied_ex'), colour = G.C.SECONDARY_SET.abs_drinks }, self)
+        SMODS.calculate_effect({ message = localize('k_worm_abs_emptied_ex'), colour = G.C.SECONDARY_SET.abs_drinks },
+            self)
         SMODS.calculate_context({ abs_drink_emptied = true, card = self })
     end
 end
@@ -230,15 +232,18 @@ SMODS.Consumable { -- Supergiant Cider
         else
             key = self.key
         end
-        return { key = key, vars = { 
-            card.ability.extra.discards, 
-            localize(card.ability.extra.poker_hand, 'poker_hands') 
-        } }
+        return {
+            key = key,
+            vars = {
+                card.ability.extra.discards,
+                localize(card.ability.extra.poker_hand, 'poker_hands')
+            }
+        }
     end,
     calculate = function(self, card, context)
-        if context.before and not card.ability.drink_values.filled and  
-        (next(context.poker_hands["Full House"]) or next(context.poker_hands["Four of a Kind"]) 
-        or next(context.poker_hands["Straight Flush"])) and not context.repetition then
+        if context.before and not card.ability.drink_values.filled and
+            (next(context.poker_hands["Full House"]) or next(context.poker_hands["Four of a Kind"])
+                or next(context.poker_hands["Straight Flush"])) and not context.repetition then
             card:abs_refill_drink()
         end
 
@@ -247,7 +252,8 @@ SMODS.Consumable { -- Supergiant Cider
                 func = function()
                     ease_discard(card.ability.extra.discards)
                     SMODS.calculate_effect(
-                        { message = localize { type = 'variable', key = 'a_discards', vars = { card.ability.extra.discards } }, colour = G.C.RED, },
+                        { message = localize { type = 'variable', key = 'a_discards', vars = { card.ability.extra.discards } }, colour =
+                        G.C.RED, },
                         card)
                     card:abs_empty_drink()
                     return true
@@ -261,7 +267,8 @@ SMODS.Consumable { -- Supergiant Cider
                 func = function()
                     ease_discard(card.ability.extra.discards)
                     SMODS.calculate_effect(
-                        { message = localize { type = 'variable', key = 'a_discards', vars = { card.ability.extra.discards } }, colour = G.C.RED, },
+                        { message = localize { type = 'variable', key = 'a_discards', vars = { card.ability.extra.discards } }, colour =
+                        G.C.RED, },
                         card)
                     card:abs_empty_drink()
                     return true
@@ -354,9 +361,12 @@ SMODS.Consumable { -- Moonshine
         else
             key = self.key
         end
-        return { key = key, vars = { 
-            card.ability.extra.xchips, card.ability.extra.light_counter, card.ability.extra.light_counter_req
-        } }
+        return {
+            key = key,
+            vars = {
+                card.ability.extra.xchips, card.ability.extra.light_counter, card.ability.extra.light_counter_req
+            }
+        }
     end,
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play and not card.ability.drink_values.filled and
@@ -426,9 +436,12 @@ SMODS.Consumable { -- Pina Solada
         else
             key = self.key
         end
-        return { key = key, vars = { 
-            card.ability.extra.xmult, card.ability.extra.dark_counter, card.ability.extra.dark_counter_req
-        } }
+        return {
+            key = key,
+            vars = {
+                card.ability.extra.xmult, card.ability.extra.dark_counter, card.ability.extra.dark_counter_req
+            }
+        }
     end,
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play and not card.ability.drink_values.filled and
@@ -505,7 +518,9 @@ SMODS.Consumable { -- Meteor Sour
             G.E_MANAGER:add_event(Event({
                 func = function()
                     ease_hands_played(card.ability.extra.hands, true)
-                    SMODS.calculate_effect( { message = localize { type = 'variable', key = 'a_hands', vars = { card.ability.extra.hands } }, colour = G.C.BLUE }, card)
+                    SMODS.calculate_effect(
+                    { message = localize { type = 'variable', key = 'a_hands', vars = { card.ability.extra.hands } }, colour =
+                    G.C.BLUE }, card)
                     card:abs_empty_drink()
                     return true;
                 end
@@ -514,7 +529,9 @@ SMODS.Consumable { -- Meteor Sour
 
         if context.discard and next(SMODS.get_enhancements(context.other_card)) and not card.ability.extra.goal_met and not card.ability.drink_values.filled then
             card.ability.extra.enh_discarded = card.ability.extra.enh_discarded + 1
-            SMODS.calculate_effect( { message = card.ability.extra.enh_discarded .. '/' .. card.ability.extra.goal, colour = G.C.ATTENTION, delay = 0.2 }, card )
+            SMODS.calculate_effect(
+            { message = card.ability.extra.enh_discarded .. '/' .. card.ability.extra.goal, colour = G.C.ATTENTION, delay = 0.2 },
+                card)
             if card.ability.extra.enh_discarded >= card.ability.extra.goal then
                 card.ability.extra.goal_met = true
                 card.ability.extra.enh_discarded = 0
@@ -564,18 +581,47 @@ SMODS.Consumable { -- Cosmospolitan
         else
             key = self.key
         end
-        local team_name = card.ability.extra.current_team.loc and localize{ type = 'name', set = 'PotatoPatch', key = card.ability.extra.current_team.loc } or card.ability.extra.current_team.name
+        local team_name = card.ability.extra.current_team.loc and
+        localize { type = 'name', set = 'PotatoPatch', key = card.ability.extra.current_team.loc } or
+        card.ability.extra.current_team.name
         return { key = key, vars = { team_name, card.ability.extra.planets_used, card.ability.extra.goal, colours = { card.ability.extra.current_team.colour } } }
     end,
     calculate = function(self, card, context)
         if context.setting_blind and card.ability.drink_values.primed and card.ability.drink_values.filled then
-            SMODS.add_card({ key = Wormhole.Absinthe.get_team_card_key(card.ability.extra.current_team.name, 'abs_cosmos') })
-            card:abs_empty_drink()
+            local key = Wormhole.Absinthe.get_team_card_key(card.ability.extra.current_team.name, 'abs_cosmos')
+            local area = G[Wormhole.Absinthe.get_card_area_to_emplace(key)]
+            if area then
+                local buffer = area == G.jokers and 'joker_buffer' or 'consumeable_buffer'
+                if #area.cards + G.GAME[buffer] < area.config.card_limit then
+                    G.GAME[buffer] = G.GAME[buffer] + 1
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            SMODS.add_card({ key = key, area = area })
+                            card:abs_empty_drink()
+                            G.GAME[buffer] = 0
+                            return true;
+                        end
+                    }))
+                end
+            else
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        local _card = SMODS.add_card({ key = key, area = G.play })
+                        _card.cost = 0
+                        if _card.ability.set == 'Voucher' or _card.ability.set == 'Booster' then
+                            G.FUNCS.use_card({config = {ref_table = _card}})
+                        end
+                        card:abs_empty_drink()
+                        return true;
+                    end
+                }))
+            end
         end
 
         if context.using_consumeable and context.consumeable.ability.set == 'Planet' and not card.ability.drink_values.filled and not card.ability.extra.goal_met then
             card.ability.extra.planets_used = card.ability.extra.planets_used + 1
-            SMODS.calculate_effect({ message = card.ability.extra.planets_used .. '/' .. card.ability.extra.goal, colour = G.C.ATTENTION }, card)
+            SMODS.calculate_effect(
+            { message = card.ability.extra.planets_used .. '/' .. card.ability.extra.goal, colour = G.C.ATTENTION }, card)
             if card.ability.extra.planets_used >= card.ability.extra.goal then
                 card.ability.extra.goal_met = true
                 card.ability.extra.planets_used = 0
@@ -627,19 +673,22 @@ SMODS.Consumable { -- Voidka
         else
             key = self.key
         end
-        return { key = key, vars = {
-            card.ability.extra.dollars_req, card.ability.extra.dollars_spent
-        } }
+        return {
+            key = key,
+            vars = {
+                card.ability.extra.dollars_req, card.ability.extra.dollars_spent
+            }
+        }
     end,
     calculate = function(self, card, context)
         if context.destroy_card and context.cardarea == G.play and context.destroying_card -- somehow this successfully only destroys the 1st card??
-        and card.ability.drink_values.filled and card.ability.drink_values.primed and not context.repetition then
+            and card.ability.drink_values.filled and card.ability.drink_values.primed and not context.repetition then
             card:abs_empty_drink()
             return {
                 remove = true,
             }
         end
-        
+
         if context.money_altered and context.amount < 0 and not card.ability.drink_values.filled then
             card.ability.extra.dollars_spent = card.ability.extra.dollars_spent - context.amount
             if card.ability.extra.dollars_spent >= card.ability.extra.dollars_req then
@@ -683,12 +732,12 @@ SMODS.Consumable { -- Big Bang Brandy
         else
             key = self.key
         end
-        return { key = key }  
+        return { key = key }
     end,
     calculate = function(self, card, context)
-        if context.before and card.ability.drink_values.filled 
-        and card.ability.drink_values.primed and not context.repetition 
-        and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+        if context.before and card.ability.drink_values.filled
+            and card.ability.drink_values.primed and not context.repetition
+            and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
             G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
             G.E_MANAGER:add_event(Event({
                 func = (function()
@@ -699,11 +748,11 @@ SMODS.Consumable { -- Big Bang Brandy
                     return true
                 end)
             }))
-            SMODS.calculate_effect( { 
+            SMODS.calculate_effect({
                 message = localize('k_plus_spectral'), colour = G.C.SECONDARY_SET.Spectral }, card)
             card:abs_empty_drink()
         end
-        
+
         if context.skipping_booster and not card.ability.drink_values.filled then
             card:abs_refill_drink()
         end
@@ -747,9 +796,12 @@ SMODS.Consumable { -- John Absinthe
         else
             key = self.key
         end
-        return { key = key, vars = {
-            card.ability.extra.xmult_mod, card.ability.extra.xmult
-        } }
+        return {
+            key = key,
+            vars = {
+                card.ability.extra.xmult_mod, card.ability.extra.xmult
+            }
+        }
     end,
     calculate = function(self, card, context)
         if context.joker_main and card.ability.extra.xmult > 1 then
@@ -757,11 +809,11 @@ SMODS.Consumable { -- John Absinthe
                 xmult = card.ability.extra.xmult
             }
         end
-        
+
         if context.setting_blind and G.consumeables.cards[1] and card.ability.drink_values.filled then
             G.E_MANAGER:add_event(Event({
                 func = function()
-                    local new_drink = SMODS.add_card({set = 'abs_drinks'})
+                    local new_drink = SMODS.add_card({ set = 'abs_drinks' })
                     new_drink:set_edition("e_negative", true)
                     return true
                 end
@@ -769,8 +821,8 @@ SMODS.Consumable { -- John Absinthe
             return { message = localize('k_duplicated_ex') }
         end
 
-        if context.abs_drink_emptied and context.card.edition 
-        and context.card.edition.key == 'e_negative' and card.ability.drink_values.filled then
+        if context.abs_drink_emptied and context.card.edition
+            and context.card.edition.key == 'e_negative' and card.ability.drink_values.filled then
             SMODS.scale_card(card, {
                 ref_table = card.ability.extra,
                 ref_value = "xmult",
@@ -779,8 +831,8 @@ SMODS.Consumable { -- John Absinthe
             card:abs_empty_drink()
         end
 
-        if context.using_consumeable and context.consumeable.config.center.set == 'Spectral' 
-        and not card.ability.drink_values.filled then
+        if context.using_consumeable and context.consumeable.config.center.set == 'Spectral'
+            and not card.ability.drink_values.filled then
             card:abs_refill_drink()
         end
     end,
@@ -795,7 +847,7 @@ SMODS.Consumable { -- John Absinthe
     end]]
 }
 
-SMODS.Consumable { -- Spacewalk Seltzer
+SMODS.Consumable {                -- Spacewalk Seltzer
     set = 'abs_drinks',
     key = 'abs_spacewalk_selzer', -- yes I misspelled this on purpose because of vanilla balatro lmao
     ppu_coder = { 'theAstra' },
