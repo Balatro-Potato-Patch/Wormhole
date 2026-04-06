@@ -54,7 +54,7 @@ SMODS.Joker {
 }
 
 -- Images
-SMODS.current_mod.lfc_custom_image = function(filename)
+local function lfc_custom_image(filename)
     local full_path = (SMODS.current_mod.path .. "assets/lancer_fan_club/" .. filename)
     print("Loading image at " .. full_path)
     local file_data = assert(NFS.newFileData(full_path), ("Failed to create file_data"))
@@ -62,10 +62,11 @@ SMODS.current_mod.lfc_custom_image = function(filename)
     return (assert(love.graphics.newImage(tempimagedata), ("Failed to create return image")))
 end
 
+local image_ref = {}
 for i = 1, 5 do
     local name = "lfc_sm_bg" .. tostring(i)
     --print(name)
-    SMODS.current_mod[name] = SMODS.current_mod.lfc_custom_image(name .. ".png")
+    image_ref[i] = lfc_custom_image(name .. ".png")
 end
 
 -- Shader
@@ -74,12 +75,17 @@ SMODS.Shader {
     path = 'lfc_magical_girl.fs',
 
     send_vars = function(self, sprite, card)
-        local img_array = {}
-        for i = 1, 5 do
-            table.insert(img_array, SMODS.current_mod["lfc_sm_bg" .. tostring(i)])
-        end
         return {
-            imgs = img_array
+            img_bg = image_ref[1],
+            img_bg_details = { image_ref[1]:getWidth(), image_ref[1]:getHeight() },
+            img_bigcircles = image_ref[2],
+            img_bigcircles_details = { image_ref[2]:getWidth(), image_ref[2]:getHeight() },
+            img_smallcircles = image_ref[3],
+            img_smallcircles_details = { image_ref[3]:getWidth(), image_ref[3]:getHeight() },
+            img_bigsparkles = image_ref[4],
+            img_bigsparkles_details = { image_ref[4]:getWidth(), image_ref[4]:getHeight() },
+            img_smallsparkles = image_ref[5],
+            img_smallsparkles_details = { image_ref[5]:getWidth(), image_ref[5]:getHeight() },
         }
     end
 }
@@ -89,9 +95,8 @@ SMODS.DrawStep {
     key = "lfc_magical_girl",
     order = 1,
     func = function(self, layer)
-        if self.config.center_key == "j_wormhole_lfc_magical_girl" then
-            print("DO THE DRAW THING")
-            self.children.center:draw_shader('lfc_magical_girl', nil, self.ARGS.send_to_shader)
+        if self.config.center_key == "j_worm_lfc_magical_girl" then
+            self.children.center:draw_shader('worm_lfc_magical_girl', nil, self.ARGS.send_to_shader)
         end
     end,
     conditions = { vortex = false, facing = 'front' }

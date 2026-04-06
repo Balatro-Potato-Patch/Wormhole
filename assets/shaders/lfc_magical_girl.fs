@@ -11,8 +11,16 @@
 // self.ARGS.send_to_shader[1] = math.min(self.VT.r*3, 1) + (math.sin(G.TIMERS.REAL/28) + 1) + (self.juice and self.juice.r*20 or 0) + self.tilt_var.amt
 // self.ARGS.send_to_shader[2] = G.TIMERS.REAL
 extern PRECISION vec2 lfc_magical_girl;
-extern Image imgs[5];
-//extern PRECISION vec2 depths_dimensions;
+extern Image img_bg;
+extern PRECISION vec2 img_bg_details;
+extern Image img_bigcircles;
+extern PRECISION vec2 img_bigcircles_details;
+extern Image img_smallcircles;
+extern PRECISION vec2 img_smallcircles_details;
+extern Image img_bigsparkles;
+extern PRECISION vec2 img_bigsparkles_details;
+extern Image img_smallsparkles;
+extern PRECISION vec2 img_smallsparkles_details;
 
 extern PRECISION number dissolve;
 extern PRECISION number time;
@@ -27,6 +35,56 @@ extern bool shadow;
 extern PRECISION vec4 burn_colour_1;
 extern PRECISION vec4 burn_colour_2;
 
+number hue(number s, number t, number h)
+{
+	number hs = mod(h, 1.)*6.;
+	if (hs < 1.) return (t-s) * hs + s;
+	if (hs < 3.) return t;
+	if (hs < 4.) return (t-s) * (4.-hs) + s;
+	return s;
+}
+
+vec4 RGB(vec4 c)
+{
+	if (c.y < 0.0001)
+		return vec4(vec3(c.z), c.a);
+
+	number t = (c.z < .5) ? c.y*c.z + c.z : -c.y*c.z + (c.y+c.z);
+	number s = 2.0 * c.z - t;
+	return vec4(hue(s,t,c.x + 1./3.), hue(s,t,c.x), hue(s,t,c.x - 1./3.), c.w);
+}
+
+vec4 HSL(vec4 c)
+{
+	number low = min(c.r, min(c.g, c.b));
+	number high = max(c.r, max(c.g, c.b));
+	number delta = high - low;
+	number sum = high+low;
+
+	vec4 hsl = vec4(.0, .0, .5 * sum, c.a);
+	if (delta == .0)
+		return hsl;
+
+	hsl.y = (hsl.z < .5) ? delta / sum : delta / (2.0 - sum);
+
+	if (high == c.r)
+		hsl.x = (c.g - c.b) / delta;
+	else if (high == c.g)
+		hsl.x = (c.b - c.r) / delta + 2.0;
+	else
+		hsl.x = (c.r - c.g) / delta + 4.0;
+
+	hsl.x = mod(hsl.x / 6., 1.);
+	return hsl;
+}
+
+vec2 rotate(vec2 v, float a) {
+	float s = sin(a);
+	float c = cos(a);
+	mat2 m = mat2(c, s, -s, c);
+	return m * v;
+}
+
 // [Required] 
 // Apply dissolve effect (when card is being "burnt", e.g. when consumable is used)
 vec4 dissolve_mask(vec4 tex, vec2 texture_coords, vec2 uv);
@@ -36,29 +94,37 @@ vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords
 {
 
     // Take pixel color (rgba) from `texture` at `texture_coords`, equivalent of texture2D in GLSL
-    vec4 tex = vec4(0.0);//Texel(texture, texture_coords);
-	vec4 orig_tex = Texel(texture, texture_coords);
+    vec4 tex = Texel(texture, texture_coords);
     // Position of a pixel within the sprite
 	vec2 uv = (((texture_coords)*(image_details)) - texture_details.xy*texture_details.ba)/texture_details.ba;
 
-    vec2 scroll_dir = vec2(-1.0, 1.0);
-    float img_spds[5]; //{1.0, 1.0, 1.0, 1.0, 1.0};
-    img_spds[0] = 1.0;
-    img_spds[1] = 1.0;
-    img_spds[2] = 1.0;
-    img_spds[3] = 1.0;
-    img_spds[4] = 1.0;
-
-    tex = Texel(imgs[0], screen_coords);
-
-    for (int i = 0; i < 4; i++){
-        vec2 tex_coords_img = fract(texture_coords + scroll_dir*img_spds[i]*lfc_magical_girl.y);
-        vec4 depths_tex = Texel(imgs[i], tex_coords_img);
-
-        tex += depths_tex * colour;
+    if (tex.rgb != vec3(0.0) || tex.a == 0.0){
+        return vec4(0.0);
     }
 
-    // required
+    // main background
+    vec2 scroll_dir = normalize(rotate(vec2(1.0, -1.0), lfc_magical_girl.x * 0.001)) * 1.4;
+    vec4 bg_tex = Texel(img_bg, fract(screen_coords/img_bg_details + scroll_dir * lfc_magical_girl.y * 0.25));
+
+    vec4 bg_hsl = HSL(bg_tex);
+    bg_tex = RGB(vec4(bg_hsl.r - lfc_magical_girl.x * 0.1 + 0.2, bg_hsl.gba));
+
+    // background details
+    vec4 bc_tex = Texel(img_bigcircles, fract(screen_coords/img_bigcircles_details + scroll_dir * lfc_magical_girl.y * 0.625));
+    vec4 sc_tex = Texel(img_smallcircles, fract(screen_coords/img_smallcircles_details + scroll_dir * lfc_magical_girl.y * 0.675));
+    vec4 bs_tex = Texel(img_bigsparkles, fract(screen_coords/img_bigsparkles_details + scroll_dir * lfc_magical_girl.y * 0.575));
+    vec4 ss_tex = Texel(img_smallsparkles, fract(screen_coords/img_smallsparkles_details + scroll_dir * lfc_magical_girl.y * 0.825));
+
+    vec3 fx = vec3(0.0);
+
+    fx += bc_tex.rgb * bc_tex.a * 0.075;
+    fx += sc_tex.rgb * sc_tex.a * 0.1;
+    fx += bs_tex.rgb * bs_tex.a * 0.325;
+    fx += ss_tex.rgb * ss_tex.a * 0.25;
+
+    bg_tex += vec4(fx, 1.0);
+    tex += bg_tex;
+
     return dissolve_mask(tex*colour, texture_coords, uv);
 }
 
