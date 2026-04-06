@@ -21,16 +21,17 @@ Wormhole.JR_UTILS.localize_satellite = function(hand)
 end
 
 Wormhole.JR_UTILS.level_up_satellite = function(card, amount)
+  amount = amount or 1
   local hand = card.ability.extra.hand
   update_hand_text(
     { sound = 'button', volume = 0.7, pitch = 0.8, delay = 1.3 },
     {
       handname = Wormhole.JR_UTILS.localize_satellite(hand),
-      level = G.GAME.jr.satellite_hands[hand].level
+      level = G.GAME.jr.satellite_hands[hand].level or 0
     }
   )
-  G.GAME.jr.satellite_hands[hand].level = G.GAME.jr.satellite_hands[hand].level + amount
-  delay(1.3)
+  G.GAME.jr.satellite_hands[hand].level = (G.GAME.jr.satellite_hands[hand].level or 0) + amount
+  --delay(1.3)
 
 
 
@@ -45,7 +46,7 @@ Wormhole.JR_UTILS.level_up_satellite = function(card, amount)
       return true
     end
   }))
-  update_hand_text({ sound = 'xchips', volume = 0.7, pitch = 0.9, delay = 0 }, { level = G.GAME.hands[hand].level })
+  update_hand_text({ sound = 'xchips', volume = 0.7, pitch = 0.9, delay = 0 }, { level = G.GAME.jr.satellite_hands[hand].level })
   delay(1.3)
   update_hand_text(
     { sound = 'xchips', volume = 0.7, pitch = 0.5, delay = 0 },

@@ -21,7 +21,9 @@ return {
   },
   misc = {
     dictionary = {
+      k_worm_jr_satellite = "Satellite",
       b_worm_jr_satellites = "Satellites",
+      b_worm_jr_satellite_cards = "Satellite Cards",
 
 
       -- Satellite names for Run Info
