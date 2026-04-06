@@ -10,8 +10,8 @@ return {
                 text = {"big fat hairy deal"}
             },
             PotatoPatchDev_cosmeggo = {
-                name = "Cosmeggo",
-                text = {"."}
+                name = "cosmeggo",
+                text = {"Formerly Plasma!"}
             },
             PotatoPatchDev_soulware = {
                 name = "soulware",
@@ -49,7 +49,36 @@ return {
 
         },
         Joker = {
-            j_worm_euda_wowsignal = {
+            j_worm_message = {
+                name = {
+                    "The Message",
+                },
+                text = {
+                    {
+                    "{X:red,C:white}X#1#{} Mult",
+                    "{C:green}#2# in #3#{} chance to",
+                    "receive an {C:inactive}answer{}"
+                    },
+                    {
+                    "{C:red}Use with caution.{}"
+                    }
+                }
+            },
+            j_worm_answer = {
+                name = {
+                    "The Answer",
+                },
+                text = {
+                    {
+                    "All {C:attention}Boss Blinds{}",
+                    "are replaced with",
+                    "{C:inactive}The Anomaly{}"
+                    },
+                    {
+                    "{C:inactive}You should have listened...{}",
+                    }
+                }
+            },j_worm_euda_wowsignal = {
                 name = "Wow! Signal",
                 text = {
                     "{C:green}#1# in #2#{} chance to give ",
@@ -126,7 +155,7 @@ return {
                 k_worm_specificcolony_receive_title = "Release from Colony ",
                 worm_euda_pkr_wow = "Wow!",
                 worm_euda_pkr_wow_f = "Wow! Flush",
-                k_worm_rocketscience_research = "Science!"
             }
         },
 }
+
