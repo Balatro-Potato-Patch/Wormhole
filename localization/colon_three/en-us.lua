@@ -208,7 +208,14 @@ return {
                     "{s:0.8}if you do, remove their enhancement then",
                     "{s:0.8}trigger the {C:attention,s:0.8}Clean-Up{s:0.8} effect instead\"",
                 }
-            }
+            },
+            worm_clean_up_reminder = {
+                name = "Clean-up",
+                text = {
+                    "To {C:attention}Clean-up{}, use {C:worm_c3_junkset}Derelict{}",
+                    "cards on {C:attention}Junk Cards{}"
+                }
+            },
         },
         PotatoPatch = {
             PotatoPatchTeam_colon_three = {
