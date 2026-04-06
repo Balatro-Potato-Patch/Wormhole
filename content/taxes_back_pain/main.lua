@@ -118,9 +118,16 @@ SMODS.Joker({
         -- temporary code to test module destruction
         if not modules then modules = self.module_types end
         for _, module in ipairs(modules) do
-            if card.ability.extra.modules[module].durability then
+            if card.ability.extra.modules[module].durability and not card.ability.extra.modules[module].durability_loss_odds then
                 card.ability.extra.modules[module].durability = card.ability.extra.modules[module].durability + change
                 if card.ability.extra.modules[module].durability <= 0 then
+                    if card.ability.extra.modules.core.key == 'c_worm_tbp_salvage_core' and card.ability.extra.modules.core.money_per_destruction then
+                        ease_dollars(card.ability.extra.modules.core.money_per_destruction)
+                        SMODS.calculate_effect({
+                            message = localize('$') .. card.ability.extra.modules.core.money_per_destruction,
+                            colour = G.C.MONEY
+                        }, card)
+                    end
                     card.ability.extra.modules[module] = {}
                     SMODS.calculate_effect({
                         message = localize({type='name_text', set='tbp_module', key=card.ability.extra.modules[module].key}) .. ' lost!',
@@ -151,7 +158,22 @@ SMODS.Joker({
                 end
             end
             if context.after then
-                self:modify_module_durability(card, -1)
+                local stabilizer_protected = false
+                if card.ability.extra.modules.core.protects_other_modules and card.ability.extra.modules.core.durability_protection_odds then
+                    local seed = 'stabilizer_' .. G.GAME.round_resets.ante
+                    if SMODS.pseudorandom_probability(card, seed, 1, card.ability.extra.modules.core.durability_protection_odds, 'stabilizer_protection') then
+                        stabilizer_protected = true
+                        SMODS.calculate_effect({
+                            message = 'Protected!',
+                            colour = G.C.GREEN
+                        }, card)
+                    end
+                end
+                if stabilizer_protected then
+                    self:modify_module_durability(card, -1, {'core'})
+                else
+                    self:modify_module_durability(card, -1)
+                end
             end
             return next(module_calcs) and SMODS.merge_effects(module_calcs)
         end
@@ -203,19 +225,17 @@ Wormhole.tbp.Module = SMODS.Consumable:extend{
     use = function(self, card, area, copier)
 		local spaceship = SMODS.find_card("j_worm_tbp_spaceship")
         if next(spaceship) then
-            spaceship[1].ability.extra.modules[self.slot] = {
-                key = self.key,
-                durability = self.durability,
-                total_durability = self.durability
-            }
-            -- spaceship[1].ability.extra.modules[#spaceship[1].ability.extra.modules+1] = {self.key, self.cooldown}
-            for k, v in pairs(self.config.extra) do
-                spaceship[1].ability.extra.modules[self.slot][k] = v
-            end
-            SMODS.calculate_effect({
-                message = localize({type='name_text', set='tbp_module', key=self.key}) .. ' equipped!',
-                colour = G.C.GREEN
-            }, spaceship[1])
+            local old_module_key = spaceship[1].ability.extra.modules[self.slot].key or nil
+            
+            G.FUNCS.show_module_replace_confirm(
+                old_module_key,
+                self.key,
+                card,
+                self,
+                self.slot,
+                spaceship[1]
+            )
+            return {}
         end
 	end,
 }
@@ -253,6 +273,47 @@ Wormhole.tbp.Module({
 })
 
 Wormhole.tbp.Module({
+	key = "missile_pod",
+    slot = 'weapons',
+    durability = 4,
+	pos = { x = 0, y = 0 },
+	config = {
+		extra = {
+			retriggers = 1
+		},
+	},
+	loc_vars = function(self, info_queue, card)
+		return { vars = { card.ability.extra.retriggers } }
+	end,
+    calculate = function(self, card, context)
+		if not card.retriggers then return end
+		if context.before and not context.blueprint then
+			card.target_joker_id = nil
+			local eligible_jokers = {}
+			for i = 1, #G.jokers.cards do
+				if G.jokers.cards[i].ability.set == 'Joker' and G.jokers.cards[i] ~= context.blueprint_card then
+					table.insert(eligible_jokers, i)
+				end
+			end
+			if #eligible_jokers > 0 then
+				card.target_joker_id = pseudorandom_element(eligible_jokers, pseudoseed('missile_pod'))
+			end
+		end
+        if context.retrigger_joker and context.other_card and card.target_joker_id then
+			for i = 1, #G.jokers.cards do
+				if G.jokers.cards[i] == context.other_card and i == card.target_joker_id then
+					return {
+						message = localize('k_again_ex'),
+						repetitions = card.retriggers,
+						card = context.other_card
+					}
+				end
+			end
+        end
+    end,
+})
+
+Wormhole.tbp.Module({
 	key = "core",
     slot = 'core',
     durability = 3,
@@ -274,8 +335,6 @@ Wormhole.tbp.Module({
     end,
 })
 
-
-
 local booster_module_create_card = function(self, card, i)
     if i == 1 and not next(SMODS.find_card("j_worm_tbp_spaceship")) then
         G.E_MANAGER:add_event(Event({
@@ -296,6 +355,88 @@ local booster_loc_vars = function(self, info_queue, card)
     if not card.fake_card then info_queue[#info_queue+1] = G.P_CENTERS.j_worm_tbp_spaceship end
     return { vars = { card.ability.choose, card.ability.extra } }
 end
+
+Wormhole.tbp.Module({
+	key = "salvage_core",
+    slot = 'core',
+    durability = 5,
+	pos = { x = 0, y = 0 },
+	config = {
+		extra = {
+			money_per_destruction = 8
+		},
+	},
+	loc_vars = function(self, info_queue, card)
+		return { vars = { card.ability.extra.money_per_destruction } }
+	end,
+    calculate = function(self, card, context)
+		return nil
+    end,
+})
+
+Wormhole.tbp.Module({
+	key = "stabilizer",
+    slot = 'core',
+    durability = 5,
+	pos = { x = 0, y = 0 },
+	config = {
+		extra = {
+			durability_protection_odds = 3,
+			protects_other_modules = true
+		},
+	},
+	loc_vars = function(self, info_queue, card)
+		local n, d = SMODS.get_probability_vars(card, 1, card.ability.extra.durability_protection_odds, 'stabilizer_protection')
+		return { vars = { n .. ' in ' .. d } }
+	end,
+    calculate = function(self, card, context)
+		return nil
+    end,
+})
+
+Wormhole.tbp.Module({
+	key = "deflector",
+    slot = 'shields',
+    durability = 5,
+	pos = { x = 0, y = 0 },
+	config = {
+		extra = {
+			blind_reduction = 10,
+			durability_loss_odds = 3,
+			deflector_applied = false,
+		},
+	},
+	loc_vars = function(self, info_queue, card)
+		local n, d = SMODS.get_probability_vars(card, 1, card.ability.extra.durability_loss_odds, 'deflector_durability_loss')
+		return { vars = { card.ability.extra.blind_reduction, n, d } }
+	end,
+    calculate = function(self, card, context)
+        if not card.durability_loss_odds then return end
+        if (context.setting_blind or context.press_play) and not context.blueprint and not self.debuff then
+            if G.GAME.blind and G.GAME.blind.chips and not card.deflector_applied then
+                G.GAME.blind.chips = G.GAME.blind.chips * 0.9
+                G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
+                card.deflector_applied = true
+                if SMODS.pseudorandom_probability(card, 'deflector_durability_loss', 1, card.durability_loss_odds, 'shields_durability_loss') then
+                    card.durability = card.durability - 1
+                    if card.durability <= 0 then
+                        local spaceship = SMODS.find_card("j_worm_tbp_spaceship")
+                        if next(spaceship) then
+                            spaceship[1].ability.extra.modules.shields = {}
+                            SMODS.calculate_effect({
+                                message = localize({type='name_text', set='tbp_module', key='c_worm_tbp_deflector'}) .. ' lost!',
+                                colour = G.C.RED
+                            }, spaceship[1])
+                        end
+                    end
+                end
+            end
+        end
+        if context.end_of_round and not context.blueprint and not context.repetition then
+            card.deflector_applied = false
+        end
+    end,
+})
 
 -- Module boosters
 SMODS.Booster({

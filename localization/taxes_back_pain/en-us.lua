@@ -174,6 +174,21 @@ local descriptions = {
                 '{C:red}+#1#{} Mult'
             }
         },
+        missile_pod = {
+            name = 'Missile Pod',
+            text = {
+                'Retrigger {C:attention}#1#{}',
+                'random {C:attention}Joker'
+            }
+        },
+        missile_pod_equipped = {
+            name = '{C:attention}Weapon',
+            text = {
+                '{s:1.2,V:1}Missile Pod',
+                'Retrigger {C:attention}#1#{}',
+                'random {C:attention}Joker'
+            }
+        },
         core = {
             name = 'Core',
             text = {
@@ -186,6 +201,61 @@ local descriptions = {
                 '{s:1.2,V:1}Core',
                 '{C:blue}+#1#{} Chips when a',
                 '{C:attention}Ace{} is scored'
+            }
+        },
+        salvage_core = {
+            name = 'Salvage Core',
+            text = {
+                'Earn {C:money}$#1#{} when',
+                '{C:attention}any module{}',
+                'is {C:attention}destroyed'
+            }
+        },
+        salvage_core_equipped = {
+            name = '{C:attention}Core',
+            text = {
+                '{s:1.2,V:1}Salvage Core',
+                'Earn {C:money}$#1#{} when',
+                '{C:attention}any module{}',
+                'is {C:attention}destroyed'
+            }
+        },
+        stabilizer = {
+            name = 'Stabilizer',
+            text = {
+                '{C:green}#1#{} chance to prevent',
+                '{C:attention}all other modules{}',
+                'from losing {C:attention}durability',
+                'this round'
+            }
+        },
+        stabilizer_equipped = {
+            name = '{C:attention}Core',
+            text = {
+                '{s:1.2,V:1}Stabilizer',
+                '{C:green}#1#{} chance to prevent',
+                '{C:attention}all other modules{}',
+                'from losing {C:attention}durability',
+                'this round'
+            }
+        },
+        deflector = {
+            name = 'Deflector Shield',
+            text = {
+                'Reduces {C:attention}Blind',
+                'requirement by {C:attention}#1#%',
+                '{C:green}#2# in #3#{} chance',
+                'to lose {C:attention}durability'
+            }
+        },
+        deflector_equipped = {
+            name = '{C:attention}Shield',
+            text = {
+                '{s:1.2,V:1}Deflector Shield',
+                'Reduces {C:attention}Blind',
+                'requirement by {C:attention}#1#%',
+                '{C:green}#2# in #3#{} chance',
+                'to lose {C:attention}durability'
             }
         },
         module_missing = {
