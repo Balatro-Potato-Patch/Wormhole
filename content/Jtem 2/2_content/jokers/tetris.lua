@@ -1411,8 +1411,11 @@ SMODS.Joker {
 }
 
 G.FUNCS.worm_reset_tetris = function(e)
+	---@type balatro.Card
 	local card = e.config.ref_table
 	card.ability.extra.game_state = JtemTGM.ResetPlayerState()
+	card:highlight(false)
+	SMODS.calculate_effect({ message = localize('k_reset') }, card)
 end
 
 local function create_use_button_ui(card)
