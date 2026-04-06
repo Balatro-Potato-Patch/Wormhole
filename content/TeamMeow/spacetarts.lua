@@ -1018,7 +1018,7 @@ function Card:stop_drag(...)
 			end
 		end
 	end
-	if self.ability and self.ability.set == "worm_meow_spacetart" and bool and playerHas then
+	if self.ability and self.ability.set == "worm_meow_Spacetart" and bool and playerHas then
 		local tart = {
 			key = self.ability.extra.tart,
 			config = self.ability.extra.tart_cfg or {},
