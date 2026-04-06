@@ -39,7 +39,7 @@ return {
             },
             PotatoPatchDev_Typ0 = {
                 name = "Typ0",
-                text = {"Hit Game Dev Right Here"}
+                text = {"Hit Game Dev Right Here","{s:0.75,C:default}Sprite By Inky{}"}
             },
             PotatoPatchDev_Jewel = {
                 name = "Jewel",
