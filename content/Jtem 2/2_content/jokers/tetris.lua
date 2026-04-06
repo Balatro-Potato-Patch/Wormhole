@@ -436,6 +436,9 @@ function JtemTGM.ResetPlayerState()
 		next_pieces = next_pieces,
 		current_piece = {},
 		ghost_piece = {},
+		hold_piece = "",
+		just_held_piece = false,
+		irs_held_piece = false,
 
 		board = board,
 		lightup = {},
@@ -488,26 +491,17 @@ function JtemTGM.ChangeState(game, newstate)
 		end
 
 		if game.state == STATE_GO or game.state == STATE_ARE or game.state == STATE_INVISIBLETETRIS then
-			-- change piece
-			game.current_piece = JtemTGM.CreateCurrentPiece(3, -1, game.next_pieces[1], 1)
-			-- IRS
-			if love.keyboard.isDown("z") then
-				JtemTGM.PlaySound("irs")
-				JtemTGM.CheckRotation(game.current_piece, -1, game.board)
+			local old = game.just_held_piece
+			game.just_held_piece = false
+			local res = false
+			if love.keyboard.isDown("a") and not game.irs_held_piece then
+				res = JtemTGM.HoldPiece(game, true)
+				game.irs_held_piece = true
+			else
+				res = JtemTGM.StartNewPiece(game)
 			end
-			if love.keyboard.isDown("x") then
-				JtemTGM.PlaySound("irs")
-				JtemTGM.CheckRotation(game.current_piece, 1, game.board)
-			end
-			table.remove(game.next_pieces, 1)
-			table.insert(game.next_pieces, JtemTGM.GeneratePiece(game.randomizer))
-			JtemTGM.PlaySound("piece_" .. game.next_pieces[1])
-			if not JtemTGM.CheckTopout(game.current_piece, game.board) then
-				newstate = STATE_GAMEOVER
-				game.topped_out = true
-				game.current_piece = {}
-				game.ghost_piece = {}
-			end
+			game.irs_held_piece = false
+			if res then newstate = STATE_GAMEOVER end
 		end
 		game.clears = 0
 		game.soft = game.state == STATE_ARE and 0 or game.soft
@@ -892,6 +886,56 @@ function JtemTGM.CheckRotation(current, inc, board)
 	return true
 end
 
+function JtemTGM.HoldPiece(game, ihs)
+	local sound = ihs and "ihs" or "hold"
+	if game.just_held_piece then return false end
+	JtemTGM.PlaySound(sound)
+	if game.hold_piece == "" then
+		game.just_held_piece = true
+		if ihs then
+			game.hold_piece = game.next_pieces[1]
+			table.remove(game.next_pieces, 1)
+			table.insert(game.next_pieces, JtemTGM.GeneratePiece(game.randomizer))
+		else
+			game.hold_piece = game.current_piece.piece
+		end
+		return JtemTGM.StartNewPiece(game)
+	elseif game.hold_piece ~= "" then
+		game.just_held_piece = true
+		if not ihs then
+			table.insert(game.next_pieces, 1, game.current_piece.piece)
+		end
+		table.insert(game.next_pieces, 1, game.hold_piece)
+		game.hold_piece = ""
+		return JtemTGM.StartNewPiece(game)
+	end
+end
+
+function JtemTGM.StartNewPiece(game)
+	local gameover = false
+	-- change piece
+	game.current_piece = JtemTGM.CreateCurrentPiece(3, -1, game.next_pieces[1], 1)
+	-- IRS
+	if love.keyboard.isDown("z") then
+		JtemTGM.PlaySound("irs")
+		JtemTGM.CheckRotation(game.current_piece, -1, game.board)
+	end
+	if love.keyboard.isDown("x") then
+		JtemTGM.PlaySound("irs")
+		JtemTGM.CheckRotation(game.current_piece, 1, game.board)
+	end
+	table.remove(game.next_pieces, 1)
+	table.insert(game.next_pieces, JtemTGM.GeneratePiece(game.randomizer))
+	JtemTGM.PlaySound("piece_" .. game.next_pieces[1])
+	if not JtemTGM.CheckTopout(game.current_piece, game.board) then
+		gameover = true
+		game.topped_out = true
+		game.current_piece = {}
+		game.ghost_piece = {}
+	end
+	return gameover
+end
+
 function JtemTGM.PlacePiece(current, board, lightup)
 	local piece = JtemTGM.pieces[current.piece][current.rotation]
 	if not piece then return false end
@@ -969,6 +1013,11 @@ function JtemTGM.HandleMove(game)
 	end
 	if love.keyboard.isDown("x") and not game.justPressedRightRot then
 		JtemTGM.CheckRotation(game.current_piece, 1, game.board)
+	end
+	if love.keyboard.isDown("a") then
+		JtemTGM.ChangeState(game, STATE_DROPPING)
+		local res = JtemTGM.HoldPiece(game)
+		if res then JtemTGM.ChangeState(game, STATE_GAMEOVER) end
 	end
 
 	if dir > 0 then
@@ -1080,8 +1129,11 @@ function JtemTGM.HandleGame(game)
 	end
 
 	if game.state == STATE_READY or game.state == STATE_GO then
-		if game.state == STATE_READY and game.state_timer == math.floor(game.start_delay / 2) then
+		if game.state == STATE_READY and game.state_timer == math.floor(game.start_delay * 0.75) then
 			JtemTGM.PlaySound("ready")
+		end
+		if game.state == STATE_READY and game.state_timer == math.floor(game.start_delay * 0.5) then
+			JtemTGM.PlaySound("piece_" .. game.next_pieces[1])
 		end
 		game.state_timer = math.max(0, game.state_timer - 1)
 		if game.state_timer <= 0 then
@@ -1235,7 +1287,7 @@ function JtemTGM.HandleDraw(canvas, game)
 	---@type love.Font
 	local font = SMODS.Fonts["worm_Tarot"].FONT
 	love.graphics.setColor(G.C.WHITE)
-	if game.state == STATE_READY and game.state_timer <= math.floor(game.start_delay / 2) then
+	if game.state == STATE_READY and game.state_timer <= math.floor(game.start_delay * 0.75) then
 		love.graphics.printf({ G.C.WHITE, "READY" }, font, -15, 36, 71, "center")
 	end
 	if game.state == STATE_GO then
@@ -1329,6 +1381,12 @@ function JtemTGM.HandleDraw(canvas, game)
 		if game.state ~= STATE_LOCKING then t = 0 end
 		JtemTGM.DrawPiece(current.piece, current.x, current.y, BLOCK_W, BLOCK_H,
 			current.rotation, t)
+	end
+
+	-- draw hold piece
+	if game.hold_piece and game.hold_piece ~= "" then
+		JtemTGM.DrawPiece(game.hold_piece, 11, 5, BLOCK_W, BLOCK_H,
+			1, 0)
 	end
 
 	-- draw next piece
