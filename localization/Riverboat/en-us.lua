@@ -99,6 +99,15 @@ return {
                     "{C:red}destroy{} a held {C:planet}Planet{} and add",
                     "its {C:chips}Chips{} and {C:mult}Mult{} to the winning hand"
                 }
+            },
+            j_worm_riverboat_fractal = {
+                name = "Fractal",
+                text = {
+                    "{C:green}#1# in #2#{} chance for each",
+                    "played card to become",
+                    "{C:attention}Holographic{} when scored",
+                    "{C:inactive}(Only if it has no edition)"
+                }
             }
         },
         Enhanced = {
