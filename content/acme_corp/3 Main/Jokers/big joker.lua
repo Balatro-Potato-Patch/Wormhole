@@ -12,10 +12,6 @@ SMODS.Joker{
 	atlas = 'ACME_jokers',
 	rarity = 3,
 	cost = 8,
-	in_pool = function(self,wawa,wawa2)
-		allow_duplicates = false
-		return true
-    end,
 	blueprint_compat = false,
 	perishable_compat = true,
 	eternal_compat = true,
