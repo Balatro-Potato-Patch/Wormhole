@@ -8,6 +8,17 @@ Wormhole.LancerFanClub.spacebar_timing_windows = {
     11/60, -- near miss
 }
 
+-- everything here likely needs to be redone from scratch but idk
+local scms = SMODS.score_card
+function SMODS.score_card(card, context, ...)
+    if card.area == G.play or context.cardarea == G.play and not context.end_of_round and #SMODS.find_card("j_worm_lfc_spacebar") > 0 then
+        Wormhole.LancerFanClub.do_spacebar_minigame = true
+    end
+    local ret = scms(card, context, ...)
+    Wormhole.LancerFanClub.do_spacebar_minigame = nil
+    return ret
+end
+
 SMODS.Joker {
     key = "lfc_spacebar",
     --atlas = "lfc_jokers",
@@ -45,6 +56,4 @@ SMODS.Joker {
             }
         end
     end,
-
-    ppu_coder = { "InvalidOS" }
 }
