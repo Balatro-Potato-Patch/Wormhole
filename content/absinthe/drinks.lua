@@ -289,13 +289,14 @@ SMODS.Consumable { -- Supergiant Cider
 SMODS.Consumable { -- Hubble Trouble
     set = 'abs_drinks',
     key = 'abs_hubble_trouble',
-    pos = { x = 4, y = 0 },
+    pos = { x = 0, y = 1 },
     ppu_coder = { 'pi_cubed' },
+    ppu_artist = { 'AstraLuna' },
     ppu_team = { 'absinthe' },
     config = {
         drink_values = {
-            filled_pos = { x = 4, y = 0 },
-            empty_pos = { x = 5, y = 0 },
+            filled_pos = { x = 0, y = 1 },
+            empty_pos = { x = 1, y = 1 },
             filled = true,
             visibly_filled = true,
             primed = false,
