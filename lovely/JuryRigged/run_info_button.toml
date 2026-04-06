@@ -1,0 +1,21 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = '''{
+            label = localize('b_poker_hands'),
+            chosen = true,
+            tab_definition_function = create_UIBox_current_hands,
+        },'''
+match_indent = true
+position = "after"
+payload = '''
+          {
+            label = localize('b_worm_jr_satellites'),
+            tab_definition_function = Wormhole.JR_UTILS.create_UIBox_current_satellites,
+        },
+'''
