@@ -3,7 +3,7 @@ return {
         PotatoPatch = {
             PotatoPatchTeam_riverboat = { name = "Riverboat" },
             PotatoPatchDev_blamperer = { name = "blamperer", text = { "t" } },
-            PotatoPatchDev_fooping = { name = "fooping", text = { "t" } },
+            PotatoPatchDev_fooping = { name = "fooping", text = { "{C:chips}Coder{} and {C:mult}Programer{}" } },
         },
         Joker = {
             j_worm_the_past = {
