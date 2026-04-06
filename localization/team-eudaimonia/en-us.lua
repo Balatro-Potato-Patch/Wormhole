@@ -130,6 +130,30 @@ return {
 					},
                 },
             },
+			j_worm_bitflip = {
+                name = "Cosmic Bitflip",
+                text = {
+                    {
+                        "Gives either {C:chips}#4# Chips{} or",
+                        "{C:mult}#5#-#6# Mult{} depending on",
+                        "if the bit is flipped.",
+                        "{C:green}#1# in #2#{} chance to flip bits"
+                    },
+                    {
+                        "Bit.Flipped() == {C:attention}#3#;{}"
+                    }
+                }
+            }
+        },
+        Planet = {
+            c_worm_bigear = {
+                name = "Big Ear",
+                text = {
+                    "Level up",
+                    "{C:attention}Wow! and Wow! Flush{}",
+                    "By one Level"
+                },
+            }
         },
         Fate = {
             c_worm_crunch = {
@@ -226,6 +250,9 @@ return {
                         "Play a 6, a 3, a Queen, a Jack, and a 5",
                         "with all cards sharing the same suit",
                 },
+			 	worm_pkr_pyramid = {
+                    "[NO_TEXT_DATA_DETECTED]",
+                },
             },
             poker_hands = {
                 worm_pkr_wow = "Wow!",
@@ -238,15 +265,15 @@ return {
                 k_worm_specificcolony_receive_button = "Release Jokers",
                 k_worm_specificcolony_ship_title = "Sending to Colony ",
                 k_worm_specificcolony_receive_title = "Release from Colony ",
+			
                 worm_euda_pkr_wow = "Wow!",
                 worm_euda_pkr_wow_f = "Wow! Flush",
-<<<<<<< arta
+				worm_pkr_pyramid = "pyramid"
+			
                 k_fate = "Fate",
                 b_fate_cards = "Fate Cards",
                 k_avadon_pack = "Avadon Pack",
-=======
                 k_worm_lunarcheese_message = "Cheesy!",
->>>>>>> main
             }
         },
 }
