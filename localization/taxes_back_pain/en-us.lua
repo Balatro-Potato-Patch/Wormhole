@@ -83,34 +83,62 @@ local other_loc_table = {
         Other = {
             p_worm_module_normal_1 = {
                 name = "Module Pack",
-                text={
-                    "Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2#{C:spectral} Module{} cards to", -- TODO: change color to new Module one if changed
-                    "be used immediately",
+                text = {
+                    {
+                        "Choose {C:attention}#1#{} of up to",
+                        "{C:attention}#2#{C:spectral} Module{} cards to", -- TODO: change color to new Module one if changed
+                        "be used immediately",
+                    },
+                    {
+                        "When opened,",
+                        "create a {C:attention}Spaceship{}",
+                        "if none are owned"
+                    }
                 },
             },
             p_worm_module_normal_2 = {
                 name = "Module Pack",
-                text={
-                    "Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2#{C:spectral} Module{} cards to", -- TODO: change color to new Module one if changed
-                    "be used immediately",
+                text = {
+                    {
+                        "Choose {C:attention}#1#{} of up to",
+                        "{C:attention}#2#{C:spectral} Module{} cards to", -- TODO: change color to new Module one if changed
+                        "be used immediately",
+                    },
+                    {
+                        "When opened,",
+                        "create a {C:attention}Spaceship{}",
+                        "if none are owned"
+                    }
                 },
             },
             p_worm_module_jumbo_1 = {
                 name = "Jumbo Module Pack",
-                text={
-                    "Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2#{C:spectral} Module{} cards to", -- TODO: change color to new Module one if changed
-                    "be used immediately",
+                text = {
+                    {
+                        "Choose {C:attention}#1#{} of up to",
+                        "{C:attention}#2#{C:spectral} Module{} cards to", -- TODO: change color to new Module one if changed
+                        "be used immediately",
+                    },
+                    {
+                        "When opened,",
+                        "create a {C:attention}Spaceship{}",
+                        "if none are owned"
+                    }
                 },
             },
             p_worm_module_mega_1 = {
                 name = "Mega Module Pack",
-                text={
-                    "Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2#{C:spectral} Module{} cards to", -- TODO: change color to new Module one if changed
-                    "be used immediately",
+                text = {
+                    {
+                        "Choose {C:attention}#1#{} of up to",
+                        "{C:attention}#2#{C:spectral} Module{} cards to", -- TODO: change color to new Module one if changed
+                        "be used immediately",
+                    },
+                    {
+                        "When opened,",
+                        "create a {C:attention}Spaceship{}",
+                        "if none are owned"
+                    }
                 },
             },
         }

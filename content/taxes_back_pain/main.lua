@@ -91,14 +91,16 @@ SMODS.Joker({
         },
     },
 	loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue+1] = G.P_CENTERS["p_worm_module_normal_1"] -- TODO: Change to poll winner
-        for _, v in ipairs(self.module_types) do
-            if card.ability.extra.modules[v].key then
-                local vars = G.P_CENTERS[card.ability.extra.modules[v].key]:loc_vars({}, {ability = {extra = card.ability.extra.modules[v]}}).vars
-                vars.colours = {darken(Wormhole.tbp.module_colours[v], 0.3)}
-                info_queue[#info_queue+1] = {set = 'tbp_module', key = card.ability.extra.modules[v].key .. '_equipped', vars = vars, module_type = v, module_info = card.ability.extra.modules[v]}
-            else
-                info_queue[#info_queue+1] = {set = 'tbp_module', key = 'c_worm_tbp_module_missing', module_type = v, vars = {colours = {mix_colours(G.ARGS.LOC_COLOURS.inactive, Wormhole.tbp.module_colours[v], 0.5)}}}
+        if not card.fake_card then
+            info_queue[#info_queue + 1] = G.P_CENTERS["p_worm_module_normal_1"] -- TODO: Change to poll winner
+            for _, v in ipairs(self.module_types) do
+                if card.ability.extra.modules[v].key then
+                    local vars = G.P_CENTERS[card.ability.extra.modules[v].key]:loc_vars({}, {ability = {extra = card.ability.extra.modules[v]}}).vars
+                    vars.colours = {darken(Wormhole.tbp.module_colours[v], 0.3)}
+                    info_queue[#info_queue+1] = {set = 'tbp_module', key = card.ability.extra.modules[v].key .. '_equipped', vars = vars, module_type = v, module_info = card.ability.extra.modules[v]}
+                else
+                    info_queue[#info_queue+1] = {set = 'tbp_module', key = 'c_worm_tbp_module_missing', module_type = v, vars = {colours = {mix_colours(G.ARGS.LOC_COLOURS.inactive, Wormhole.tbp.module_colours[v], 0.5)}}}
+                end
             end
         end
         local modules = self:modules_equipped(card)
@@ -272,11 +274,13 @@ Wormhole.tbp.Module({
     end,
 })
 
-local module_create_card = function(self, card, i)
+
+
+local booster_module_create_card = function(self, card, i)
     if i == 1 and not next(SMODS.find_card("j_worm_tbp_spaceship")) then
         G.E_MANAGER:add_event(Event({
             func = function()
-                SMODS.add_card{ key = "j_worm_tbp_spaceship" }                
+                SMODS.add_card { key = "j_worm_tbp_spaceship" }
                 return true
             end
         }))
@@ -288,39 +292,48 @@ local module_create_card = function(self, card, i)
     })
 end
 
+local booster_loc_vars = function(self, info_queue, card)
+    if not card.fake_card then info_queue[#info_queue+1] = G.P_CENTERS.j_worm_tbp_spaceship end
+    return { vars = { card.ability.choose, card.ability.extra } }
+end
+
 -- Module boosters
 SMODS.Booster({
 	key = "module_normal_1",
-	config = { extra = 3, choose = 1 },
+    config = { extra = 3, choose = 1 },
+    loc_vars = booster_loc_vars,
 	group_key = "k_worm_tbp_module",
 	cost = 4,
     kind = "worm_tbp_module",
-	create_card = module_create_card,
+	create_card = booster_module_create_card,
 })
 
 SMODS.Booster({
 	key = "module_normal_2",
 	config = { extra = 3, choose = 1 },
+    loc_vars = booster_loc_vars,
 	group_key = "k_worm_tbp_module",
 	cost = 4,
     kind = "worm_tbp_module",
-	create_card = module_create_card,
+	create_card = booster_module_create_card,
 })
 
 SMODS.Booster({
 	key = "module_jumbo_1",
 	config = { extra = 5, choose = 1 },
+    loc_vars = booster_loc_vars,
 	group_key = "k_worm_tbp_module",
 	cost = 6,
     kind = "worm_tbp_module",
-	create_card = module_create_card,
+	create_card = booster_module_create_card,
 })
 
 SMODS.Booster({
 	key = "module_mega_1",
 	config = { extra = 5, choose = 2 },
+    loc_vars = booster_loc_vars,
 	group_key = "k_worm_tbp_module",
 	cost = 8,
     kind = "worm_tbp_module",
-	create_card = module_create_card,
+	create_card = booster_module_create_card,
 })
