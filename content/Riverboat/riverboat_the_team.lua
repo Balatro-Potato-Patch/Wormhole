@@ -5,13 +5,13 @@ PotatoPatchUtils.Team {
 }
 
 PotatoPatchUtils.Developer {
-    name = "Blamperer",
+    name = "blamperer",
     team = "riverboat",
     loc = true
 }
 
 PotatoPatchUtils.Developer {
-    name = "Fooping",
+    name = "fooping",
     team = "riverboat",
     loc = true
 }
