@@ -1,5 +1,18 @@
+
+
+SMODS.Atlas {
+    key = 'abs_vouchers',
+    path = 'absinthe/abs_vouchers.png',
+    px = 71,
+    py = 95
+}
+
+
 SMODS.Voucher {
     key = 'abs_star_tap',
+    atlas = 'abs_vouchers',
+    pos = {x = 0, y = 0},
+    ppu_artist = { 'nixthatoneartist' },
     ppu_coder = { 'theAstra' },
     ppu_team = { 'absinthe' },
     redeem = function(self, card)
