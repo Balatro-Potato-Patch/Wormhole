@@ -82,7 +82,7 @@ return {
                 name = "Sighting Pack",
                 text = {
                     "Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2#{C:tarot} Alien{} cards to",
+                    "{C:attention}#2#{C:shrug_alien} Alien{} cards to",
                     "be used immediately",
                 },
             },
@@ -90,7 +90,7 @@ return {
                 name = "Sighting Pack",
                 text = {
                     "Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2#{C:tarot} Alien{} cards to",
+                    "{C:attention}#2#{C:shrug_alien} Alien{} cards to",
                     "be used immediately",
                 },
             },
@@ -98,7 +98,7 @@ return {
                 name = "Jumbo Sighting Pack",
                 text = {
                     "Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2#{C:tarot} Alien{} cards to",
+                    "{C:attention}#2#{C:shrug_alien} Alien{} cards to",
                     "be used immediately",
                 },
             },
@@ -106,7 +106,7 @@ return {
                 name = "Mega Sighting Pack",
                 text = {
                     "Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2#{C:tarot} Alien{} cards to",
+                    "{C:attention}#2#{C:shrug_alien} Alien{} cards to",
                     "be used immediately",
                 },
             },
