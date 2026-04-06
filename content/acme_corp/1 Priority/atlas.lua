@@ -18,7 +18,15 @@ SMODS.Atlas {
 	py = 95
 }
 ]]
+
+Atlas_AcmeCredits = SMODS.Atlas {
+	key = 'ACME_credits',
+	path = 'acme_corp/ACME_credits.png',
+	px = 71,
+	py = 95
+}
 Atlas_AcmeBoosters = SMODS.Atlas {
+
 	key = 'ACME_boosters',
 	path = 'acme_corp/ACME_boosters.png',
 	px = 71,
