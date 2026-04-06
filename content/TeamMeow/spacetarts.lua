@@ -553,35 +553,39 @@ SpaceTart {
                         repetitions = 1
                     }
                 else
-                    G.E_MANAGER:add_event(Event({
-                        trigger = 'after',
-                        delay = 0.4,
-                        func = function()
-                            attention_text({
-                                text = localize('k_nope_ex'),
-                                scale = 1.3,
-                                hold = 1.4,
-                                major = card,
-                                backdrop_colour = G.C.SECONDARY_SET.Tarot,
-                                align = 'cm',
-                                offset = { x = 0, y = 0 },
-                                silent = true
-                            })
-                            G.E_MANAGER:add_event(Event({
-                                trigger = 'after',
-                                delay = 0.06 * G.SETTINGS.GAMESPEED,
-                                blockable = false,
-                                blocking = false,
-                                func = function()
-                                    play_sound('tarot2', 0.76, 0.4)
-                                    return true
-                                end
-                            }))
-                            play_sound('tarot2', 1, 0.4)
-                            card:juice_up(0.3, 0.5)
-                            return true
-                        end
-                    }))
+                    return {
+						func = function()
+							G.E_MANAGER:add_event(Event({
+								trigger = 'after',
+								delay = 0.4,
+								func = function()
+									attention_text({
+										text = localize('k_nope_ex'),
+										scale = 1.3,
+										hold = 1.4,
+										major = card,
+										backdrop_colour = G.C.SECONDARY_SET.Tarot,
+										align = 'cm',
+										offset = { x = 0, y = 0 },
+										silent = true
+									})
+									G.E_MANAGER:add_event(Event({
+										trigger = 'after',
+										delay = 0.06 * G.SETTINGS.GAMESPEED,
+										blockable = false,
+										blocking = false,
+										func = function()
+											play_sound('tarot2', 0.76, 0.4)
+											return true
+										end
+									}))
+									play_sound('tarot2', 1, 0.4)
+									card:juice_up(0.3, 0.5)
+									return true
+								end
+							}))
+						end
+					}
                 end
             end
 		end,
