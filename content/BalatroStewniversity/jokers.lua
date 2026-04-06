@@ -90,6 +90,7 @@ SMODS.Joker{ --Impact Crater
 
     loc_vars = function (self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'tag_meteor', set = 'Tag' }
+        info_queue[#info_queue + 1] = G.P_CENTERS.p_celestial_mega_1
         local numerator, denominator = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, 'worm_impact_crater')
         return{
             vars = {localize {type = 'name_text', key = 'tag_meteor', set = 'Tag'}, numerator, denominator}
@@ -109,4 +110,64 @@ SMODS.Joker{ --Impact Crater
             }))
         end
     end
+}
+
+SMODS.Joker{ --Dinosaur Earth
+    key = 'dinosaur_earth',
+    loc_txt = {
+        name = 'Dinosaur Earth',
+        text = {
+            '{C:green}#1# in #2#{} chance for',
+            '{C:attention}-#4#{} Ante and for all',
+            'Dinosaur Earths go',
+            '{C:red,E:2}extinct{} at end of round'
+        }
+    },
+
+    config = {extra = {odds = 6, ante = 1}},
+    rarity = 3,
+    cost = 9,
+    atlas = 'stewjokers',
+    pos = {x=3, y=0},
+    blueprint_compat = false,
+    eternal_compat = false,
+    perishable_compat = true,
+
+    loc_vars = function (self, info_queue, card)
+        local numerator, denominator = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, 'worm_dinosaur_earth')
+        return{
+            vars = {numerator, denominator, card.ability.extra.odds, card.ability.extra.ante}
+        }
+    end,
+
+    calculate = function (self, card, context)
+        if context.end_of_round and context.game_over == false and context.main_eval then
+            if SMODS.pseudorandom_probability(card, 'worm_dinosaur_earth', 1, card.ability.extra.odds) then
+                local dinosaur_earths = SMODS.find_card('j_worm_dinosaur_earth') 
+                ease_ante(-card.ability.extra.ante)
+                G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante or G.GAME.round_resets.ante
+                G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante - card.ability.extra.ante
+                SMODS.destroy_cards(dinosaur_earths, nil, nil, true) --It's functional, but we could smooth the animation out later
+                return{
+                    message = localize('k_extinct_ex')
+                }
+            else return{
+                message = localize('k_safe_ex')
+            }
+            end
+        end
+
+       if context.tag_triggered and context.tag_triggered.key == 'tag_meteor' then
+         local dinosaur_earths = SMODS.find_card('j_worm_dinosaur_earth') 
+                ease_ante(-card.ability.extra.ante)
+                G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante or G.GAME.round_resets.ante
+                G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante - card.ability.extra.ante
+                SMODS.destroy_cards(dinosaur_earths, nil, nil, true) --It's functional, but we could smooth the animation out later
+                return{
+                    message = localize('k_extinct_ex')
+                } 
+        end
+        --TO DO: Make the meteor crashing video play when the dinos go extinct
+
+    end,
 }
