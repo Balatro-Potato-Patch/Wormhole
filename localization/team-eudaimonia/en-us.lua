@@ -268,7 +268,7 @@ return {
 			
                 worm_euda_pkr_wow = "Wow!",
                 worm_euda_pkr_wow_f = "Wow! Flush",
-				worm_pkr_pyramid = "pyramid"
+				worm_pkr_pyramid = "pyramid",
 			
                 k_fate = "Fate",
                 b_fate_cards = "Fate Cards",
