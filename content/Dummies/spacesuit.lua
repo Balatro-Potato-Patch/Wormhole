@@ -23,12 +23,21 @@ end
 function DUMMY_Oxygen_Strings()
 	G.GAME.dummy_oxygen_string_time = DUMMY_FormatMinute(G.GAME.dummy_oxygen_time)
 	if G.GAME.dummy_oxygen_adding then
+		-- Shows Progress
 		local charging = ' '
 		for i = 1, math.min(10, G.GAME.dummy_oxygen_adding_steps) do
 			charging = charging..'+'
 		end
 		G.GAME.dummy_oxygen_string_mult = charging
+	elseif G.GAME.dummy_oxygen_low then
+		-- Challenge Specific:
+		if G.GAME.dummy_oxygen_time % 2 == 0 then
+			G.GAME.dummy_oxygen_string_mult = ' '
+		else
+			G.GAME.dummy_oxygen_string_mult = localize('k_worm_dum_low_oxygen')
+		end
 	else
+		-- Shows Multiplier
 		local calcTime = math.floor(G.GAME.dummy_oxygen_time / 2 + 0.5)
 		local secondTime = calcTime % 60
 		local minuteTime = (calcTime - secondTime) / 60
@@ -134,17 +143,17 @@ function DUMMY_Oxygen_Time_Add(time, steps)
 	end
 end
 
-function DUMMY_Oxygen_Time_Increase(time)
+function DUMMY_Oxygen_Time_Increase(time, steps)
 	if time and time >= 1 then
 		time = math.floor(time)
 		if G.GAME.dummy_oxygen_active then
 			G.GAME.dummy_oxygen_maxtime = G.GAME.dummy_oxygen_maxtime + time
-			DUMMY_Oxygen_Time_Add(time, 10)
+			DUMMY_Oxygen_Time_Add(time, (steps or 10))
 		else -- Setup Variables:
 			G.GAME.dummy_oxygen_time = 0
 			G.GAME.dummy_oxygen_realtime = 0
 			G.GAME.dummy_oxygen_maxtime = time
-			DUMMY_Oxygen_Time_Add(time, 10)
+			DUMMY_Oxygen_Time_Add(time, (steps or 10))
 			-- Activate Mechanic:
 			G.GAME.dummy_oxygen_active = true
 			DUMMY_Oxygen_Strings()

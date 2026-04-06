@@ -62,6 +62,8 @@ SMODS.Consumable {
         }))
         update_hand_text({sound = 'button', volume = 0.7, pitch = 1.1, delay = 0.8}, {mult = 0, chips = 0, handname = '', level = ''})
     end,
+    
+    soul_set = 'Planet',
 
     ppu_team = { "dummies" },
     ppu_coder = { "baltdev" },
