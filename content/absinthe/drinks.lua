@@ -653,6 +653,7 @@ SMODS.Consumable { -- Voidka
     set = 'abs_drinks',
     key = 'abs_voidka',
     ppu_coder = { 'pi_cubed' },
+    ppu_artist = { 'AstraLuna' },
     ppu_team = { 'absinthe' },
     pos = { x = 0, y = 1 },
     config = {
