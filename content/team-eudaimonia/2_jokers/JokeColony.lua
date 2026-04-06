@@ -8,34 +8,34 @@ SMODS.Joker {
     key = "jokecolony",
     atlas = 'jokecolonyatlas',
     pos = { x = 0, y = 0 },
-    rarity = 2,
+    rarity = 3,
     blueprint_compat = true,
-    cost = 8,
+    cost = 10,
     discovered = true,
-    config = {extra={mult = 2}},
+    config = {extra= { mult = 4 }},
     ppu_coder = {'M0xes'},
     ppu_artist = {'LasagnaFelidae'},
     loc_vars = function(self, info_queue, card)
         local pop = 0
         for _, joker in ipairs(G.worm_colony and G.worm_colony.cards or {}) do
-            if joker.ability.worm_colonycitizen == card.ability.colonyid then
+            if joker.ability.worm_colonycitizen == card.ability.extra.colonyid then
                 pop = pop + 1
             end
         end
         return { vars = {card.ability.extra.mult, pop, pop*card.ability.extra.mult} }
     end,
     add_to_deck = function(self, card, from_debuff)
-        if card.ability.colonyid then
+        if card.ability.extra.colonyid then
           for _, joker in ipairs(G.jokers and G.jokers.cards or {}) do
             if joker ~= card and joker.config.center.key == "j_worm_jokecolony"
-            and joker.ability.extra.colonyid == card.ability.colonyid then
+            and joker.ability.extra.colonyid == card.ability.extra.colonyid then
               G.GAME.worm_COLONYID = G.GAME.worm_COLONYID or 0
-              card.ability.colonyid = G.GAME.worm_COLONYID
+              card.ability.extra.colonyid = G.GAME.worm_COLONYID
               G.GAME.worm_COLONYID = G.GAME.worm_COLONYID + 1
               for _, stored_joker in ipairs(G.worm_colony and G.worm_colony.cards or {}) do
                 if stored_joker.ability.worm_colonycitizen == joker.ability.extra.colonyid then
                   local stored_joker_copy = copy_card(stored_joker, nil, nil, nil, nil)
-                  stored_joker_copy.ability.worm_colonycitizen = card.ability.colonyid
+                  stored_joker_copy.ability.worm_colonycitizen = card.ability.extra.colonyid
                   G.worm_colony:emplace(stored_joker_copy)
                 end
               end
@@ -45,7 +45,7 @@ SMODS.Joker {
           return
         end
         G.GAME.worm_COLONYID = G.GAME.worm_COLONYID or 0
-        card.ability.colonyid = G.GAME.worm_COLONYID
+        card.ability.extra.colonyid = G.GAME.worm_COLONYID
         G.GAME.worm_COLONYID = G.GAME.worm_COLONYID + 1
     end,
     remove_from_deck = function(self, card, from_debuff)
@@ -53,7 +53,7 @@ SMODS.Joker {
         return
       end
       for _, joker in ipairs(G.worm_colony and G.worm_colony.cards or {}) do
-          if joker.ability.worm_colonycitizen == card.ability.colonyid then
+          if joker.ability.worm_colonycitizen == card.ability.extra.colonyid then
               if SMODS.is_eternal(joker, card) then
                 joker.area:remove_card(joker)
                 joker:add_to_deck()
@@ -68,7 +68,7 @@ SMODS.Joker {
       if context.joker_main then
         local pop = 0
         for _, joker in ipairs(G.worm_colony and G.worm_colony.cards or {}) do
-            if joker.ability.worm_colonycitizen == card.ability.colonyid then
+            if joker.ability.worm_colonycitizen == card.ability.extra.colonyid then
                 pop = pop + 1
             end
         end
@@ -92,10 +92,10 @@ local function create_leave_colony_view(card)
         }
     )
     for _, joker in ipairs(G.worm_colony and G.worm_colony.cards or {}) do
-        if joker.ability.worm_colonycitizen == card.ability.colonyid then
+        if joker.ability.worm_colonycitizen == card.ability.extra.colonyid then
             local copied_joker = copy_card(joker, nil, nil, nil, nil)
             copied_joker.ability.source_joker = joker
-            copied_joker.ability.worm_colonycitizen = card.ability.colonyid
+            copied_joker.ability.worm_colonycitizen = card.ability.extra.colonyid
             G.specificcolony:emplace(copied_joker)
         end
     end
@@ -103,7 +103,7 @@ local function create_leave_colony_view(card)
         contents = {
             {n=G.UIT.C, config={align = "cm", padding = 0.1}, nodes={
                 {n=G.UIT.R, config={align = "cm"}, nodes={
-                  {n=G.UIT.T, config = {text = localize("k_worm_specificcolony_receive_title") .. card.ability.colonyid, scale = 0.8, colour = G.C.WHITE, shadow = true}}
+                  {n=G.UIT.T, config = {text = localize("k_worm_specificcolony_receive_title") .. card.ability.extra.colonyid, scale = 0.8, colour = G.C.WHITE, shadow = true}}
                 }},
                 {n=G.UIT.R, config={align = "cm", padding = 0.15, r=0.2, colour = G.C.L_BLACK, emboss = 0.05}, nodes={
                     {n=G.UIT.O, config={object = G.specificcolony}},
@@ -137,7 +137,7 @@ local function create_join_colony_view(card)
         if joker.config.center.key ~= "j_worm_jokecolony" then
             local copied_joker = copy_card(joker, nil, nil, nil, nil)
             copied_joker.ability.source_joker = joker
-            copied_joker.ability.worm_colonycitizen = card.ability.colonyid
+            copied_joker.ability.worm_colonycitizen = card.ability.extra.colonyid
             G.specificcolony:emplace(copied_joker)
         end
     end
@@ -145,7 +145,7 @@ local function create_join_colony_view(card)
         contents = {
             {n=G.UIT.C, config={align = "cm", padding = 0.1}, nodes={
                 {n=G.UIT.R, config={align = "cm"}, nodes={
-                  {n=G.UIT.T, config = {text = localize("k_worm_specificcolony_ship_title") .. card.ability.colonyid, scale = 0.8, colour = G.C.WHITE, shadow = true}}
+                  {n=G.UIT.T, config = {text = localize("k_worm_specificcolony_ship_title") .. card.ability.extra.colonyid, scale = 0.8, colour = G.C.WHITE, shadow = true}}
                 }},
                 {n=G.UIT.R, config={align = "cm", padding = 0.15, r=0.2, colour = G.C.L_BLACK, emboss = 0.05}, nodes={
                     {n=G.UIT.O, config={object = G.specificcolony}},
@@ -302,7 +302,7 @@ G.FUNCS.worm_can_leave_jokecolony = function(e)
   local card = e.config.ref_table
   local pop = 0
   for _, joker in ipairs(G.worm_colony and G.worm_colony.cards or {}) do
-      if joker.ability.worm_colonycitizen == card.ability.colonyid then
+      if joker.ability.worm_colonycitizen == card.ability.extra.colonyid then
           pop = pop + 1
       end
   end
@@ -350,6 +350,7 @@ SMODS.DrawStep {
 }
 SMODS.draw_ignore_keys.worm_jokecolony_button = true
 
+local custom_card_areas_ref = SMODS.current_mod.custom_card_areas or function(game) end
 SMODS.current_mod.custom_card_areas = function(game) -- game is the same as G 
   game.worm_colony = CardArea(
         4.75,
@@ -363,6 +364,7 @@ SMODS.current_mod.custom_card_areas = function(game) -- game is the same as G
         }
     )
     game.worm_colony.states.visible = false
+    custom_card_areas_ref(game)
 end
 
 local card_sell_ref = Card.can_sell_card

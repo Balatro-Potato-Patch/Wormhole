@@ -95,6 +95,13 @@ return {
                     "{C:inactive}(Population #2# for {C:red}+#3#{C:inactive} Mult)",
                 },
             },
+            j_worm_darkside = {
+                name = "Dark Side of the Moon",
+                text = {
+                    "{C:spades}#1#{} and {C:clubs}#2#{}",
+                    "are always drawn first",
+                },
+            },
             j_worm_euda_rocket = {
                 name = "Space Shuttle",
                 text = {
