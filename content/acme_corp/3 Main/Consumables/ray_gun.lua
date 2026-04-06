@@ -16,16 +16,41 @@ SMODS.Consumable {
     can_use = function(self, card)
         return card.ability.extra.cards_sold >= card.ability.extra.sold_threshold
     end,
+
     calculate = function(self, card, context)
         if context.selling_card and context.card ~= card then
             card.ability.extra.cards_sold = card.ability.extra.cards_sold + 1
+            card_eval_status_text(card, 'extra', nil, nil, nil,
+                { message = card.ability.extra.cards_sold .. '/' .. card.ability.extra.sold_threshold, colour = G.C
+                .FILTER })
+            card:juice_up(0.3, 0.5)
         end
     end,
+
     use = function(self, card, area, copier)
-        local edition_key = SMODS.poll_edition({
-            key = 'WORMHOLE SEED ' .. G.GAME.round_resets.ante .. G.GAME.ROUND 'AEIJFOIJAWFEAQF',
-            guaranteed = true
-        })
+        local temp_pool = {}
+        for k, v in ipairs(G.jokers.cards) do
+            if not v.edition then table.insert(temp_pool, v) end
+        end
+
+        if #temp_pool > 0 then
+            local target = pseudorandom_element(temp_pool, pseudoseed('wormhole_target'))
+            local edition_key = SMODS.poll_edition({
+                key = 'wormhole_edition' .. G.GAME.round_resets.ante,
+                guaranteed = true
+            })
+
+            G.E_ME_LIST:add(Event({
+                trigger = 'after',
+                delay = 0.4,
+                func = function()
+                    play_sound('tarot1')
+                    target:set_edition(edition_key, true)
+                    target:juice_up(0.5, 0.5)
+                    return true
+                end
+            }))
+        end
     end
 
 
