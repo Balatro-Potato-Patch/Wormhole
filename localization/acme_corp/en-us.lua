@@ -13,7 +13,8 @@ return {
                 text = {
                     "{X:attention,C:white}After{} selling {C:attention}#1#{} cards",
                     "{X:attention,C:white}Use{} to apply a random {C:dark_edition}Edition{}",
-                    "to a random held {C:attention}Joker{}"
+                    "to a random held {C:attention}Joker{}",
+                    "{S:0.8,C:inactive}(Currently {C:attention,S:0.8}#2#{}{S:0.8,C:inactive})"
                 }
             }
         },
