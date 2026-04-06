@@ -18,7 +18,8 @@ function boot_timer(_label, _next, progress)
 	if not wormholeimg then wormholeimg = love.graphics.newImage(love.filesystem.newFileData(b64.decode(wormhole[1]), 'welcometospacejam'), { mipmaps = true, linear = true }) end
 	if wormholeimg then
 		local realw, realh = love.window.getMode()
-		local pbarx, pbary = realw / 2 - 120, realh / 2 + 116
+		local pbarl, pbarh = 320, 30
+		local pbarx, pbary = realw / 2 - 120 - 40, realh / 2 + 116
 		love.graphics.setCanvas()
 		love.graphics.push()
 		love.graphics.setShader()
@@ -26,12 +27,12 @@ function boot_timer(_label, _next, progress)
 		love.graphics.setColor(1, 1, 1, 1)
 		love.graphics.draw(wormholeimg, realw/2 - 320, realh/2 - 180, 0, 1, 1)
 		love.graphics.setColor(0.6, 0.8, 0.9, 1)
-		if progress > 0 then love.graphics.rectangle('fill', pbarx, pbary, progress * 243, 30, 5) end
+		if progress > 0 then love.graphics.rectangle('fill', pbarx, pbary, progress * pbarl, pbarh, 5) end
 		love.graphics.setColor(1, 1, 1, 1)
 		love.graphics.setLineWidth(3)
-		love.graphics.rectangle('line', pbarx, pbary, 243, 30, 5)
-		love.graphics.printf("POTATO PATCH - [PROJECT WORMHOLE]", pbarx - 200, pbary + 40, 640, 'center')
-		love.graphics.printf("" .. _next, pbarx - 200, pbary + 64, 640, 'center')
+		love.graphics.rectangle('line', pbarx, pbary, pbarl, pbarh, 5)
+		love.graphics.printf("POTATO PATCH - [PROJECT WORMHOLE]", pbarx - 160, pbary + 40, 640, 'center')
+		love.graphics.printf("" .. _next, pbarx - 160, pbary + 64, 640, 'center')
 		love.graphics.pop()
 		love.graphics.present()
 
