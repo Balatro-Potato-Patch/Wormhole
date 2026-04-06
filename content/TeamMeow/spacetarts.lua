@@ -380,7 +380,7 @@ end
 local function semi_balance(x, y, alpha)
 	local a = 0.5 * alpha
 	local delta = y - x
-	local t = alpha * delta
+	local t = a * delta
 	return math.floor(x + t), math.floor(y - t)
 end
 
