@@ -89,8 +89,8 @@ return {
                 text = {
                     {
                         "{C:white,X:mult}X#1#{} Mult if played",
-                        "{C:attention}poker hand{} is not",
-                        "your {C:attention}highest-level{} hand"
+                        "{C:attention}poker hand{} is not your",
+                        "{C:attention}highest-level{} hand"
                     }
                 },
             },
@@ -117,10 +117,10 @@ return {
             c_worm_dum_moony = {
                 name = "Moony",
                 text = {
-                    "Select between {C:attention}2{}",
+                    "Select between {C:attention}#1#{}",
                     "random {C:attention}poker hands{},",
                     "upgrade selected",
-                    "hand by {C:attention}#1#{} level"
+                    "hand by {C:attention}#2#{} level"
                 }
             },
         },
@@ -163,6 +163,18 @@ return {
 				}}
 			},
         },
+		Tag = {
+			tag_worm_dum_trinary = {
+				name = "Trinary System",
+				text = {
+                    "Gives either a {C:planet}Planet{},",
+                    "{C:spectral}Spectral{} or {C:tarot}Tarot{} card",
+                    "when {C:attention}Blind{} is selected",
+                    "{C:inactive}(Must have room){}",
+                    "{C:inactive}({C:attention}#1#{C:inactive} uses left){}",
+				}
+			},
+        },
 		Other = {
 			worm_dum_spacesuit_warning = {
 				name = "{s:1.2}Warning{}",
@@ -192,12 +204,24 @@ return {
                 "Select one of the above",
                 "poker hands to upgrade."
             },
+            k_worm_dum_low_oxygen = "Low Oxygen",
         },
 		v_dictionary = {
 			worm_dum_store = "+X#1# Stored",
 			worm_dum_apply = "+X#1# Applied",
             worm_dum_percent = "#1#%",
             worm_dum_xgeneric = "X#1#",
+        },
+		challenge_names = {
+			c_worm_dum_low_oxygen = "Low Oxygen",
+        },
+		v_text = {
+            -- Challenge Descs.
+			ch_c_worm_dum_low_oxygen_1 = { "Start with {C:attention}30{} minutes of {C:spectral}Oxygen{},", },
+			ch_c_worm_dum_low_oxygen_2 = { "{C:spectral}Oxygen{} doesn't affect scoring.", },
+            -- Generic/Misc.
+			ch_c_worm_dum_gold_stake = { "Apply {C:money}Gold Stake{} difficulty" },
+			ch_c_worm_dum_space = { "{s:0.5} ", },
         },
     }
 }
