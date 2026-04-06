@@ -51,8 +51,6 @@ SMODS.Joker {
 			local collected = false
 			if (card.ability.lastUsedConsumables) then
 				for key, _ in pairs(card.ability.lastUsedConsumables) do
-					print('k' .. key)
-					print('v' .. context.consumeable.config.center.key)
 					if key == context.consumeable.config.center.key then
 						collected = true
 					end
@@ -64,7 +62,7 @@ SMODS.Joker {
 				card.ability.lastUsedConsumables[k] = v
 			end
 
-			if not collected then
+			if not collected and context.consumeable.config.center.set == 'Planet' then
 				return {
 					message = localize('k_upgrade_ex'),
 					colour = G.C.CHIPS
@@ -78,7 +76,7 @@ SMODS.Joker {
 			}
 		end
 	end,
-	
+
 	add_to_deck = function(self, card, from_debuff)
 		card.ability.lastUsedConsumables = {}
 		for k, v in pairs(G.GAME.consumeable_usage) do

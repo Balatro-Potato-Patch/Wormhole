@@ -55,5 +55,5 @@ SMODS.Joker{
 				card.ability.extra.activated = false
 			end
 		end
-	end,
+	end
 }
