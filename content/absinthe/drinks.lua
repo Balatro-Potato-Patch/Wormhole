@@ -289,6 +289,7 @@ SMODS.Consumable { -- Supergiant Cider
 SMODS.Consumable { -- Hubble Trouble
     set = 'abs_drinks',
     key = 'abs_hubble_trouble',
+    atlas = 'abs_drinks',
     pos = { x = 0, y = 1 },
     ppu_coder = { 'pi_cubed' },
     ppu_artist = { 'AstraLuna' },
