@@ -6,8 +6,7 @@ SMODS.ConsumableType{
     secondary_colour = G.C.SECONDARY_SET.Tarot, -- THERE IS NO ALIEN COLOR RIGHT NOW
     shop_rate = 0.0,
 }
-SMODS.Atlas{
-    key = 'shrug_alien_cards',
+SMODS.Atlas{ key = 'shrug_alien_cards',
     path = 'TeamShrug/consumables.png',
     px = 71,
     py = 95
@@ -77,9 +76,16 @@ alien_booster{
 
 
 -- TAG
+SMODS.Atlas{
+    key = 'shrug_alien_tag',
+    path = 'TeamShrug/tags.png',
+    px = 34,
+    py = 34
+}
 SMODS.Tag{
     key = "shrug_conspiracy",
     min_ante = 2,
+    atlas = 'shrug_alien_tag',
     pos = {x = 0, y = 0},
     loc_vars = function(self, info_queue, tag)
         info_queue[#info_queue + 1] = G.P_CENTERS.p_worm_shrug_alien_normal_1
@@ -104,7 +110,10 @@ SMODS.Tag{
             tag.triggered = true
             return true
         end
-    end
+    end,
+    ppu_artist = {"randomsongv2"},
+    ppu_coder = {"randomsongv2"},
+    ppu_team = {"shrug"}
 }
 
 -- suit conversion alien funcitons
