@@ -866,7 +866,7 @@ function Card:set_cost()
 			then
 				self.cost = math.max(0, self.cost - card.ability.extra.c_earth.discount)
 			end
-			self.sell_cost = math.max(0, self.sell_cost - card.ability.extra.c_earth.discount)
+			self.sell_cost = math.max(1, math.floor(self.cost / 2)) + (self.ability.extra_value or 0)
 			self.sell_cost_label = self.facing == "back" and "?" or self.sell_cost
 		end
 	end
