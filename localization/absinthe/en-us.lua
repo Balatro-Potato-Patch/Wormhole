@@ -92,7 +92,7 @@ return {
                 }
             },
             c_worm_abs_pina_solada = {
-                name = 'Pina Solada',
+                name = 'Piña Solada',
                 text = {
                     {
                         "When {C:attention}primed{}, {X:mult,C:white}X#1#{} Mult if",
@@ -107,7 +107,7 @@ return {
                 }
             },
             c_worm_abs_pina_solada_empty = {
-                name = 'Pina Solada',
+                name = 'Piña Solada',
                 text = {
                     {
                         "{C:inactive,s:0.8}Currently Empty{}",
