@@ -6,7 +6,7 @@ SMODS.Joker{
 			'Gain {C:chips}+#1# chips{} for',
 			'{C:attention}unique{} {C:planet}planet{} card',
 			'used',
-			'{C:inactive}(Currently {C:chips}+#2#{}){}'
+			'{C:inactive}(Currently {C:chips}+#2#{C:inactive})'
 		},	
 	},
 	atlas = 'ACME_jokers',
