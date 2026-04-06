@@ -27,7 +27,7 @@ SMODS.Joker {
 
 local upgrade_hands_ref = SMODS.upgrade_poker_hands
 SMODS.upgrade_poker_hands = function(args)
-    if (not args.from or args.from.config.center.key ~= "j_worm_event_horizon") and next(SMODS.find_card("j_worm_event_horizon")) then
+    if (not args.from or not args.from.config or not args.from.config.center or args.from.config.center.key ~= "j_worm_event_horizon") and next(SMODS.find_card("j_worm_event_horizon")) then
         for i, v in ipairs(SMODS.find_card("j_worm_event_horizon")) do
             v.ability.extra.levels = v.ability.extra.levels + (args.level_up or 1)
         end
