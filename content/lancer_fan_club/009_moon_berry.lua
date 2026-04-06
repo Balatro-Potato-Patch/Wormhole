@@ -64,8 +64,7 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         local hint1, hint2 = "...", " "
         if card.ability.extra.secret == 1 then
-            hint1 = localize("k_lfc_secret1")
-            hint2 = localize("k_lfc_secret2")
+            hint1, hint2 = localize("k_lfc_secret1"), localize("k_lfc_secret2")
         elseif card.ability.extra.secret == 2 then
             hint1, hint2 = localize("k_lfc_secret3"), localize("k_lfc_secret4")
         end
