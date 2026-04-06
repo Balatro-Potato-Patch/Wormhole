@@ -54,7 +54,11 @@ return {
 					},
 					{
 						"Developer of {C:worm_thunderedge_gradient}Multiverse{} and {C:attention}JROK{}",
+						"{s:0.8,C:inactive}(Multiverse update soon, trust)",
+						"Also developed a bunch of",
+						"really small content mods",
 						"Co-developer of {C:attention}Blind Expander{}",
+						"{C:attention}Stocking Stuffer{} participant",
 					},
 				},
 			},
@@ -115,7 +119,7 @@ return {
 					{
 						"Developer of {C:incognito}Incognito",
 						"Co-Developer of {C:attention}Hyperfixation{},",
-						"{C:attention}Bad Director{}, and {C:attention}Tangent",
+						"{C:attention}Bad Director{}, and {C:attention}Tangents",
 					},
 				},
 			},
