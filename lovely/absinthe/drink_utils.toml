@@ -36,3 +36,104 @@ if card.ability.set ~= 'abs_drinks' then
 end
 '''
 match_indent = true
+
+# Add use buttons to Vouchers and Boosters while in G.consumeables
+[[patches]]
+[patches.pattern]
+target = 'functions/UI_definitions.lua'
+pattern = '''
+if card.ability.consumeable then
+'''
+position = 'before'
+payload = '''
+if card.ability.set == 'Voucher' then
+  return {
+      n=G.UIT.ROOT, config = {padding = 0, colour = G.C.CLEAR}, nodes={
+        {n=G.UIT.C, config={padding = 0.15, align = 'cl'}, nodes={
+          {n=G.UIT.R, config={align = 'cl'}, nodes={
+            sell
+          }},
+          {n=G.UIT.R, config={align = 'cl'}, nodes={
+              {n=G.UIT.C, config={align = "cr"}, nodes={
+              {n=G.UIT.C, config={ref_table = card, align = "cr",maxw = 1.25, padding = 0.1, r=0.08, minw = 1.25, minh = (card.area and card.area.config.type == 'joker') and 0 or 1, hover = true, shadow = true, colour = G.C.UI.BACKGROUND_INACTIVE, one_press = true, button = 'use_card', func = 'can_redeem'}, nodes={
+                {n=G.UIT.B, config = {w=0.1,h=0.6}},
+                {n=G.UIT.T, config={text = localize('b_redeem'),colour = G.C.UI.TEXT_LIGHT, scale = 0.55, shadow = true}}
+              }}
+            }}
+          }},
+        }},
+      }}
+end
+
+if card.ability.set == 'Booster' then
+  return {
+      n=G.UIT.ROOT, config = {padding = 0, colour = G.C.CLEAR}, nodes={
+        {n=G.UIT.C, config={padding = 0.15, align = 'cl'}, nodes={
+          {n=G.UIT.R, config={align = 'cl'}, nodes={
+            sell
+          }},
+          {n=G.UIT.R, config={align = 'cl'}, nodes={
+              {n=G.UIT.C, config={align = "cr"}, nodes={
+              {n=G.UIT.C, config={ref_table = card, align = "cr",maxw = 1.25, padding = 0.1, r=0.08, minw = 1.25, minh = (card.area and card.area.config.type == 'joker') and 0 or 1, hover = true, shadow = true, colour = G.C.UI.BACKGROUND_INACTIVE, one_press = true, button = 'use_card', func = 'can_open'}, nodes={
+                {n=G.UIT.B, config = {w=0.1,h=0.6}},
+                {n=G.UIT.T, config={text = localize('b_open'),colour = G.C.UI.TEXT_LIGHT, scale = 0.55, shadow = true}}
+              }}
+            }}
+          }},
+        }},
+      }}
+end
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''
+if self.ability.consumeable or self.ability.set == 'Joker' or (self.area and self.area == G.pack_cards) then
+'''
+position = 'at'
+payload = '''
+if self.ability.consumeable or self.ability.set == 'Joker' or self.ability.set == 'Voucher' or self.ability.set == 'Booster' or (self.area and self.area == G.pack_cards) then
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = 'functions/button_callbacks.lua'
+pattern = '''
+if card.ability.set == 'Voucher' then 
+  G.CONTROLLER:snap_to({node = G.shop:get_UIE_by_ID('next_round_button')})
+'''
+position = 'at'
+payload = '''
+if card.ability.set == 'Voucher' and card.from_area ~= G.consumeables then 
+  G.CONTROLLER:snap_to({node = G.shop:get_UIE_by_ID('next_round_button')})
+'''
+match_indent = true
+
+# Make weight polling respect vouchers and hidden objects better
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS _ "src/utils/weights.lua"]'''
+pattern = '''
+else
+  add = true
+'''
+position = 'before'
+payload = '''
+elseif v.set == 'Voucher' then 
+  if not G.GAME.used_vouchers[v.key] then
+    add = true
+    if v.requires then
+      for _, vv in pairs(v.requires) do
+        if not G.GAME.used_vouchers[vv] then
+          add = nil
+        end
+      end
+    end
+  end
+elseif v.hidden and not args.allow_legendaries then
+  add = nil
+'''
+match_indent = true

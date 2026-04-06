@@ -583,14 +583,14 @@ SMODS.Consumable { -- Cosmospolitan
         else
             key = self.key
         end
-        local team_name = card.ability.extra.current_team.loc and
-        localize { type = 'name', set = 'PotatoPatch', key = card.ability.extra.current_team.loc } or
-        card.ability.extra.current_team.name
-        return { key = key, vars = { team_name, card.ability.extra.planets_used, card.ability.extra.goal, colours = { card.ability.extra.current_team.colour } } }
+        local team_name = PotatoPatchUtils.Teams[card.ability.extra.current_team].loc and
+        localize { type = 'name', set = 'PotatoPatch', key = PotatoPatchUtils.Teams[card.ability.extra.current_team].loc } or
+        PotatoPatchUtils.Teams[card.ability.extra.current_team].name
+        return { key = key, vars = { team_name, card.ability.extra.planets_used, card.ability.extra.goal, colours = { PotatoPatchUtils.Teams[card.ability.extra.current_team].colour } } }
     end,
     calculate = function(self, card, context)
         if context.setting_blind and card.ability.drink_values.primed and card.ability.drink_values.filled then
-            local key = Wormhole.Absinthe.get_team_card_key(card.ability.extra.current_team.name, 'abs_cosmos')
+            local key = SMODS.poll_object({attributes = { card.ability.extra.current_team }, rarity = false})
             local area = G[Wormhole.Absinthe.get_card_area_to_emplace(key)]
             if area then
                 local buffer = area == G.jokers and 'joker_buffer' or 'consumeable_buffer'
@@ -598,7 +598,10 @@ SMODS.Consumable { -- Cosmospolitan
                     G.GAME[buffer] = G.GAME[buffer] + 1
                     G.E_MANAGER:add_event(Event({
                         func = function()
-                            SMODS.add_card({ key = key, area = area })
+                            local _card = SMODS.add_card({ key = key, area = area })
+                            if _card.ability.set == 'Voucher' or _card.ability.set == 'Booster' then
+                                _card.cost = 0
+                            end
                             card:abs_empty_drink()
                             G.GAME[buffer] = 0
                             return true;
@@ -608,10 +611,9 @@ SMODS.Consumable { -- Cosmospolitan
             else
                 G.E_MANAGER:add_event(Event({
                     func = function()
-                        local _card = SMODS.add_card({ key = key, area = G.play })
-                        _card.cost = 0
+                        local _card = SMODS.add_card({ key = key })
                         if _card.ability.set == 'Voucher' or _card.ability.set == 'Booster' then
-                            G.FUNCS.use_card({config = {ref_table = _card}})
+                            _card.cost = 0
                         end
                         card:abs_empty_drink()
                         return true;
@@ -638,7 +640,7 @@ SMODS.Consumable { -- Cosmospolitan
         end
     end,
     set_ability = function(self, card, initial, delay_sprites)
-        card.ability.extra.current_team = Wormhole.Absinthe.get_random_team()
+        card.ability.extra.current_team = 'worm_' .. Wormhole.Absinthe.get_random_team().name
     end,
     use = function(self, card, area, copier)
         card:abs_toggle_drink_prime()
