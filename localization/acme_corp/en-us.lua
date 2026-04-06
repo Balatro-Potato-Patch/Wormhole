@@ -7,6 +7,9 @@ return {
                     'COME ON AND {C:attention}SLAM',
                     'AND WELCOME TO THE {C:red}JAM'
                 }
+            },
+            c_worm_acme_ray_gun = {
+                name = 'ACME Disintegrator-Inverse-Atron'
             }
         },
         Joker = {

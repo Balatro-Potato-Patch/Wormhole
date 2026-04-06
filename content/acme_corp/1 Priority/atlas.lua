@@ -1,10 +1,10 @@
-SMODS.Atlas {
+Atlas_AcmeJokers = SMODS.Atlas {
 	key = 'ACME_jokers',
 	path = 'acme_corp/ACME_jokers.png',
 	px = 71,
 	py = 95
 }
-SMODS.Atlas {
+Atlas_AcmeGadgets = SMODS.Atlas {
 	key = 'ACME_gadgets',
 	path = 'acme_corp/ACME_gadgets.png',
 	px = 71,
@@ -18,7 +18,7 @@ SMODS.Atlas {
 	py = 95
 }
 ]]
-SMODS.Atlas {
+Atlas_AcmeBoosters = SMODS.Atlas {
 	key = 'ACME_boosters',
 	path = 'acme_corp/ACME_boosters.png',
 	px = 71,
