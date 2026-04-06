@@ -3,6 +3,8 @@ if not Wormhole.COLON_THREE or not Wormhole.COLON_THREE.loaded then return end
 SMODS.Consumable {
     set = "JunkSet",
     key = "starfish_prime",
+    atlas = "ct_derelict",
+    pos = { x = 0, y = 0 },
     config = {
         extra = {
             junk_num = 2,

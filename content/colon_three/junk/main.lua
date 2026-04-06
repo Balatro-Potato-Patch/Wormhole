@@ -4,6 +4,12 @@ Wormhole.COLON_THREE.C.JunkSet = HEX("ff5e25")
 loc_colour()
 G.ARGS.LOC_COLOURS.worm_c3_junkset = Wormhole.COLON_THREE.C.JunkSet 
 
+SMODS.Atlas {
+    path = "colon_three/derelict.png",
+    key = "ct_derelict",
+    px = 71, py = 95
+}
+
 SMODS.ConsumableType {
     key = "JunkSet",
     primary_colour = Wormhole.COLON_THREE.C.JunkSet,
