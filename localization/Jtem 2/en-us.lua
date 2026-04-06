@@ -71,7 +71,9 @@ return {
 			worm_jtem2_solar_system_effect_c_earth = {
 				name = "Earth's ability",
 				text = {
-					"Don't know yet...",
+					"All {C:planet}Planet{} cards and",
+					"{C:planet}Celestial Packs{} in",
+					"the shop cost {C:money}$#1#{} less",
 				},
 			},
 			worm_jtem2_solar_system_effect_c_mars = {
@@ -98,7 +100,7 @@ return {
 				name = "Saturn's ability",
 				text = {
 					"Add #1# {C:attention}Stone{}",
-					"cards to deck",
+					"cards to a deck",
 				},
 			},
 			worm_jtem2_solar_system_effect_c_uranus = {
@@ -110,7 +112,8 @@ return {
 			worm_jtem2_solar_system_effect_c_neptune = {
 				name = "Neptune's ability",
 				text = {
-					"Each {C:diamonds}#1#{} card gives {C:money}$#2#{}:",
+					"Each {C:diamonds}#1#{} card",
+					"gives {C:money}$#2#{}:",
 					"{C:green}#3# in #4#{} when scored",
 					"{C:green}#5# in #6#{} when held in hand",
 				},
@@ -118,13 +121,16 @@ return {
 			worm_jtem2_solar_system_effect_c_pluto = {
 				name = "Pluto's ability",
 				text = {
-					"Don't know yet...",
+					"{C:green}#1# in #2#{} {C:attention}level up{}",
+					"random poker hand",
+					"{C:green}#1# in #2#{} {C:attention}decrease level{}",
+					"of random poker hand",
 				},
 			},
 			worm_jtem2_solar_system_effect_c_eris = {
 				name = "Eris's ability",
 				text = {
-					"Don't know yet...",
+					"{X:chips,C:white}X#1#{}",
 				},
 			},
 		},
@@ -171,6 +177,8 @@ return {
 	misc = {
 		dictionary = {
 			b_worm_jtem_reset = "RESET",
+
+			k_worm_downgrade_ex = "Downgrade!",
 		},
 	},
 }

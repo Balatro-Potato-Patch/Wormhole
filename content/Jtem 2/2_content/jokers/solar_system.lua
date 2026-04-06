@@ -147,7 +147,7 @@ local planets_order = {
 local function get_planet_dims(planet)
 	local center = planet.center or {}
 	local current_angle = (planet.angle or 0)
-		+ G.TIMERS.REAL * 30 * math.sqrt(planet.speedfactor or 1)
+		- G.TIMERS.REAL * 30 * math.sqrt(planet.speedfactor or 1)
 		+ (start_angle % 360)
 	local current_radius = planet.radius * 1.5
 	local x = math.cos(math.rad(current_angle)) * current_radius + (center.dx or 0)
@@ -176,8 +176,8 @@ local function draw_planet_arc(planet, system_uibox, planet_uibox)
 	local current_angle = dims.angle
 	love.graphics.setLineWidth(3 / G.TILESIZE / G.TILESCALE)
 	love.graphics.setColor(1, 1, 1, current_opacity)
-	love.graphics.arc("line", "open", 0, 0, dims.radius, math.rad(current_angle), math.rad(current_angle - 6), 25)
-	current_angle = current_angle - 6
+	love.graphics.arc("line", "open", 0, 0, dims.radius, math.rad(current_angle), math.rad(current_angle + 6), 25)
+	current_angle = current_angle + 6
 
 	local opacity_step = 0.015
 	local angle_step = 2
@@ -192,10 +192,10 @@ local function draw_planet_arc(planet, system_uibox, planet_uibox)
 			0,
 			dims.radius,
 			math.rad(current_angle),
-			math.rad(current_angle - angle_step),
+			math.rad(current_angle + angle_step),
 			25
 		)
-		current_angle = current_angle - angle_step
+		current_angle = current_angle + angle_step
 		current_opacity = current_opacity - opacity_step
 	end
 
@@ -380,6 +380,76 @@ SMODS.Atlas({
 	py = 71,
 })
 
+local planets_loc_vars = {
+	c_mercury = function(card)
+		return {
+			SMODS.signed(card.ability.extra.c_mercury.mult),
+			SMODS.signed(card.ability.extra.c_mercury.chips),
+		}
+	end,
+	c_venus = function(card)
+		return {}
+	end,
+	c_earth = function(card)
+		return { card.ability.extra.c_earth.discount }
+	end,
+	c_ceres = function(card)
+		return {}
+	end,
+	c_mars = function()
+		return { localize({ type = "name_text", key = "j_splash", set = "Joker" }) }
+	end,
+	c_jupiter = function(card)
+		return { card.ability.extra.c_jupiter.xmult }
+	end,
+	c_saturn = function(card)
+		return { card.ability.extra.c_saturn.stones }
+	end,
+	c_uranus = function(card)
+		return {}
+	end,
+	c_neptune = function(card)
+		local neptune_play_n, neptune_play_d = SMODS.get_probability_vars(
+			card,
+			1,
+			card.ability.extra.c_neptune.play_odds,
+			"worm_solar_system_neptune_play"
+		)
+		local neptune_hand_n, neptune_hand_d = SMODS.get_probability_vars(
+			card,
+			1,
+			card.ability.extra.c_neptune.hand_odds,
+			"worm_solar_system_neptune_hand"
+		)
+		return {
+			localize("Diamonds", "suits_singular"),
+			card.ability.extra.c_neptune.money,
+			neptune_play_n,
+			neptune_play_d,
+			neptune_hand_n,
+			neptune_hand_d,
+		}
+	end,
+	c_pluto = function(card)
+		local pluto_levelup_n, pluto_levelup_d = SMODS.get_probability_vars(
+			card,
+			1,
+			card.ability.extra.c_pluto.level_up_odds,
+			"worm_solar_system_pluto_lvlup"
+		)
+		local pluto_leveldown_n, pluto_leveldown_d = SMODS.get_probability_vars(
+			card,
+			1,
+			card.ability.extra.c_pluto.level_down_odds,
+			"worm_solar_system_pluto_lvldown"
+		)
+		return { pluto_levelup_n, pluto_levelup_d, pluto_leveldown_n, pluto_leveldown_d }
+	end,
+	c_eris = function(card)
+		return { card.ability.extra.c_eris.xchips }
+	end,
+}
+
 SMODS.Joker({
 	key = "jtem2_solar_system",
 	attributes = {
@@ -387,6 +457,7 @@ SMODS.Joker({
 		"mult",
 		"chips",
 		"xmult",
+		"xchips",
 		"diamonds",
 		"economy",
 		"generation",
@@ -406,6 +477,9 @@ SMODS.Joker({
 				chips = 50,
 				mult = 12,
 			},
+			c_earth = {
+				discount = 1,
+			},
 			c_jupiter = {
 				xmult = 1.5,
 			},
@@ -417,6 +491,13 @@ SMODS.Joker({
 			c_saturn = {
 				stones = 12,
 			},
+			c_pluto = {
+				level_up_odds = 4,
+				level_down_odds = 4,
+			},
+			c_eris = {
+				xchips = 1.5,
+			},
 		},
 	},
 
@@ -424,48 +505,37 @@ SMODS.Joker({
 	cost = 10,
 
 	loc_vars = function(self, info_queue, card)
-		local neptune_play_n, neptune_play_d = SMODS.get_probability_vars(
-			card,
-			1,
-			card.ability.extra.c_neptune.play_odds,
-			"worm_solar_system_neptune_play"
-		)
-		local neptune_hand_n, neptune_hand_d = SMODS.get_probability_vars(
-			card,
-			1,
-			card.ability.extra.c_neptune.hand_odds,
-			"worm_solar_system_neptune_hand"
-		)
-
-		local vars = {
-			c_mercury = {
-				SMODS.signed(card.ability.extra.c_mercury.mult),
-				SMODS.signed(card.ability.extra.c_mercury.chips),
-			},
-			c_venus = {},
-			c_earth = {},
-			c_ceres = {},
-			c_mars = { localize({ type = "name_text", key = "j_splash", set = "Joker" }) },
-			c_jupiter = { card.ability.extra.c_jupiter.xmult },
-			c_saturn = { card.ability.extra.c_saturn.stones },
-			c_uranus = {},
-			c_neptune = {
-				localize("Diamonds", "suits_singular"),
-				card.ability.extra.c_neptune.money,
-				neptune_play_n,
-				neptune_play_d,
-				neptune_hand_n,
-				neptune_hand_d,
-			},
-			c_pluto = {},
-			c_eris = {},
-		}
 		for _, k in pairs(planets_order) do
 			if card.ability.extra.planets[k] then
 				info_queue[#info_queue + 1] =
-					{ set = "Other", key = "worm_jtem2_solar_system_effect_" .. k, vars = vars[k] }
+					{ set = "Other", key = "worm_jtem2_solar_system_effect_" .. k, vars = planets_loc_vars[k](card) }
 			end
 		end
+	end,
+
+	add_to_deck = function(self, card, from_debuff)
+		G.E_MANAGER:add_event(Event({
+			func = function()
+				for k, v in pairs(G.I.CARD) do
+					if v.set_cost then
+						v:set_cost()
+					end
+				end
+				return true
+			end,
+		}))
+	end,
+	remove_from_deck = function(self, card, from_debuff)
+		G.E_MANAGER:add_event(Event({
+			func = function()
+				for k, v in pairs(G.I.CARD) do
+					if v.set_cost then
+						v:set_cost()
+					end
+				end
+				return true
+			end,
+		}))
 	end,
 
 	calculate = function(self, card, context)
@@ -475,8 +545,8 @@ SMODS.Joker({
 		-- + venus: create tarot if score is on fire
 		---- (hottest planet in solar system)
 		--
-		-- earth: ?
-		--
+		-- + earth: planets & celestial packs cost 1 less
+		---- (that's our home, come on)
 		--
 		-- + mars: create splash when blind is selected
 		---- (all knows there's a lot of water on in right)
@@ -496,11 +566,11 @@ SMODS.Joker({
 		-- + neptune: each played or held in hand diamond 1 in 2 chance to give 1 dollar
 		---- (diamond rains)
 		--
-		-- pluto: ?
+		-- + pluto: 1 in 4 level up random hand, 1 in 4 decrease level
 		---- (so it's planet or dwarf planet?)
 		--
-		-- eris: ?
-		---- (orbit significantly shifted from Sun)
+		-- + eris: x1.5 Chips
+		---- (orbit significantly shifted from Sun, very bright)
 
 		if context.using_consumeable and not context.blueprint and context.consumeable.ability.set == "Planet" then
 			-- I'm not sure that Planet X is a real planet.
@@ -566,6 +636,19 @@ SMODS.Joker({
 					end
 				end
 
+				if context.consumeable.config.center_key == "c_earth" then
+					G.E_MANAGER:add_event(Event({
+						func = function()
+							for k, v in pairs(G.I.CARD) do
+								if v.set_cost then
+									v:set_cost()
+								end
+							end
+							return true
+						end,
+					}))
+				end
+
 				G.E_MANAGER:add_event(Event({
 					blocking = false,
 					func = function()
@@ -601,6 +684,11 @@ SMODS.Joker({
 			if card.ability.extra.planets.c_jupiter then
 				table.insert(effects, {
 					xmult = card.ability.extra.c_jupiter.xmult,
+				})
+			end
+			if card.ability.extra.planets.c_eris then
+				table.insert(effects, {
+					xchips = card.ability.extra.c_eris.xchips,
 				})
 			end
 			return SMODS.merge_effects(effects)
@@ -702,11 +790,87 @@ SMODS.Joker({
 			}))
 			return nil, true
 		end
+
+		if context.before then
+			if card.ability.extra.planets.c_pluto then
+				local _poker_hands = {}
+				for handname, _ in pairs(G.GAME.hands) do
+					if SMODS.is_poker_hand_visible(handname) then
+						_poker_hands[#_poker_hands + 1] = handname
+					end
+				end
+				local effects = {}
+				if
+					SMODS.pseudorandom_probability(
+						card,
+						"worm_solar_system_pluto_lvlup",
+						1,
+						card.ability.extra.c_pluto.level_up_odds
+					)
+				then
+					local pokerhand, key = pseudorandom_element(_poker_hands, "worm_solar_system_pluto_lvlup_hand")
+					if pokerhand then
+						table.remove(_poker_hands, key)
+						table.insert(effects, {
+							message = localize("k_upgrade_ex"),
+							colour = G.C.ORANGE,
+							level_up = 1,
+							level_up_hand = pokerhand,
+						})
+					end
+				end
+				if
+					SMODS.pseudorandom_probability(
+						card,
+						"worm_solar_system_pluto_lvldown",
+						1,
+						card.ability.extra.c_pluto.level_down_odds
+					)
+				then
+					local _down_poker_hands = {}
+					for _, handname in ipairs(_poker_hands) do
+						if G.GAME.hands[handname].level >= 1 then
+							_down_poker_hands[#_down_poker_hands + 1] = handname
+						end
+					end
+					local pokerhand, key =
+						pseudorandom_element(_down_poker_hands, "worm_solar_system_pluto_lvldown_hand")
+					if pokerhand then
+						table.remove(_poker_hands, key)
+						table.insert(effects, {
+							message = localize("k_worm_downgrade_ex"),
+							colour = G.C.RED,
+							level_up = -1,
+							level_up_hand = pokerhand,
+						})
+					end
+				end
+
+				return SMODS.merge_effects(effects or {})
+			end
+		end
 	end,
 
 	ppu_team = { "jtem2" },
 	ppu_coder = { "sleepyg11" },
 })
+
+local card_set_cost_ref = Card.set_cost
+function Card:set_cost()
+	card_set_cost_ref(self)
+	for _, card in ipairs(SMODS.find_card("j_worm_jtem2_solar_system")) do
+		if card.ability.extra.planets.c_earth then
+			if
+				self.ability.set == "Planet"
+				or (self.ability.set == "Booster" and self.config.center.kind == "Celestial")
+			then
+				self.cost = math.max(0, self.cost - card.ability.extra.c_earth.discount)
+			end
+			self.sell_cost = math.max(0, self.sell_cost - card.ability.extra.c_earth.discount)
+			self.sell_cost_label = self.facing == "back" and "?" or self.sell_cost
+		end
+	end
+end
 
 SMODS.draw_ignore_keys.worm_toggle_solar_system_button = true
 SMODS.DrawStep({
