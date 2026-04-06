@@ -172,38 +172,38 @@ local function GtoSpeed(g)
 end
 
 local igs = {
-	[0] = { "9", 125, 10, 20, 40, 50 },
-	[1] = { "8", 80, 10, 20, 30, 40 },
-	[2] = { "7", 80, 10, 20, 30, 40 },
-	[3] = { "6", 50, 10, 15, 30, 40 },
-	[4] = { "5", 45, 10, 15, 20, 40 },
-	[5] = { "4", 45, 5, 15, 20, 30 },
-	[6] = { "4", 45, 5, 10, 20, 30 },
-	[7] = { "3", 40, 5, 10, 15, 30 },
-	[8] = { "3", 40, 5, 10, 15, 30 },
-	[9] = { "2", 40, 5, 10, 15, 30 },
-	[10] = { "2", 40, 2, 12, 13, 30 },
-	[11] = { "2", 40, 2, 12, 13, 30 },
-	[12] = { "1", 30, 2, 12, 13, 30 },
-	[13] = { "1", 30, 2, 12, 13, 30 },
-	[14] = { "1", 30, 2, 12, 13, 30 },
-	[15] = { "S1", 20, 2, 12, 13, 30 },
-	[16] = { "S1", 20, 2, 12, 13, 30 },
-	[17] = { "S1", 20, 2, 12, 13, 30 },
-	[18] = { "S2", 20, 2, 12, 13, 30 },
-	[19] = { "S3", 20, 2, 12, 13, 30 },
-	[20] = { "S4", 15, 2, 12, 13, 30 },
-	[21] = { "S4", 15, 2, 12, 13, 30 },
-	[22] = { "S4", 15, 2, 12, 13, 30 },
-	[23] = { "S5", 15, 2, 12, 13, 30 },
-	[24] = { "S5", 15, 2, 12, 13, 30 },
-	[25] = { "S6", 15, 2, 12, 13, 30 },
-	[26] = { "S6", 15, 2, 12, 13, 30 },
-	[27] = { "S7", 15, 2, 12, 13, 30 },
-	[28] = { "S7", 15, 2, 12, 13, 30 },
-	[29] = { "S8", 15, 2, 12, 13, 30 },
-	[30] = { "S8", 10, 2, 12, 13, 30 },
-	[31] = { "S9", 10, 2, 12, 13, 30 },
+	[0] = { 0, 125, 10, 20, 40, 50 },
+	[1] = { 1, 80, 10, 20, 30, 40 },
+	[2] = { 2, 80, 10, 20, 30, 40 },
+	[3] = { 3, 50, 10, 15, 30, 40 },
+	[4] = { 4, 45, 10, 15, 20, 40 },
+	[5] = { 5, 45, 5, 15, 20, 30 },
+	[6] = { 5, 45, 5, 10, 20, 30 },
+	[7] = { 6, 40, 5, 10, 15, 30 },
+	[8] = { 6, 40, 5, 10, 15, 30 },
+	[9] = { 7, 40, 5, 10, 15, 30 },
+	[10] = { 7, 40, 2, 12, 13, 30 },
+	[11] = { 7, 40, 2, 12, 13, 30 },
+	[12] = { 8, 30, 2, 12, 13, 30 },
+	[13] = { 8, 30, 2, 12, 13, 30 },
+	[14] = { 8, 30, 2, 12, 13, 30 },
+	[15] = { 10, 20, 2, 12, 13, 30 },
+	[16] = { 10, 20, 2, 12, 13, 30 },
+	[17] = { 10, 20, 2, 12, 13, 30 },
+	[18] = { 11, 20, 2, 12, 13, 30 },
+	[19] = { 12, 20, 2, 12, 13, 30 },
+	[20] = { 13, 15, 2, 12, 13, 30 },
+	[21] = { 13, 15, 2, 12, 13, 30 },
+	[22] = { 13, 15, 2, 12, 13, 30 },
+	[23] = { 14, 15, 2, 12, 13, 30 },
+	[24] = { 14, 15, 2, 12, 13, 30 },
+	[25] = { 15, 15, 2, 12, 13, 30 },
+	[26] = { 15, 15, 2, 12, 13, 30 },
+	[27] = { 16, 15, 2, 12, 13, 30 },
+	[28] = { 16, 15, 2, 12, 13, 30 },
+	[29] = { 17, 15, 2, 12, 13, 30 },
+	[30] = { 17, 10, 2, 12, 13, 30 },
+	[31] = { 18, 10, 2, 12, 13, 30 },
 }
 
 function JtemTGM.GetLinePoints(grade, lines)
@@ -395,7 +395,8 @@ function JtemTGM.ResetPlayerState()
 		old_level = 0,      -- Last level
 		score = 0,          -- Current score
 		grade = 0,          -- Current grade
-		visual_grade = "9", -- Visual grade
+		visual_grade = 0,   -- Visual grade
+		visual_grade_anim = 0, -- Anim lmao
 		combo = 0,          -- Current combo
 		time = 0,           -- Current time spent wasting your life on Tetris
 
@@ -575,6 +576,12 @@ function JtemTGM.ChangeState(game, newstate)
 				game.points = 0
 				game.grade = math.min(game.grade + 1, 31)
 				game.point_decay = 0
+			end
+			local grade_vis = igs[game.grade][1]
+			if game.visual_grade ~= grade_vis then
+				game.visual_grade = grade_vis
+				game.visual_grade_anim = 60
+				JtemTGM.PlaySound("grade")
 			end
 			if math.max(0, math.floor(game.old_level / 100)) ~= math.max(0, math.floor(game.level / 100)) then
 				JtemTGM.PlaySound("level_up")
@@ -978,11 +985,19 @@ function JtemTGM.PlaySound(id)
 	play_sound("worm_jtem2_tetris_" .. id, 1.0, 0.5)
 end
 
+function JtemTGM.LoadImage(path)
+	local img = assert(nativefs.newFileData(Wormhole.path .. "/assets/jtem2/" .. path,
+		"Failed to load the goddamn image"))
+	local data = assert(love.image.newImageData(img), "uh oh")
+	return love.graphics.newImage(data)
+end
+
 -- The funny clear animation
-local img = assert(nativefs.newFileData(Wormhole.path .. "/assets/jtem2/tetris_clearanim.png",
-	"Failed to load the goddamn clear anim ping"))
-local clearanim_data = assert(love.image.newImageData(img), "uh oh")
-local clearanim = love.graphics.newImage(clearanim_data)
+local clearanim = JtemTGM.LoadImage("tetris_clearanim.png")
+
+-- The grades
+local grades = JtemTGM.LoadImage("tetris_grades.png")
+
 
 --#endregion
 
@@ -1216,6 +1231,10 @@ function JtemTGM.HandleGame(game)
 		game.time = game.time + G.real_dt
 	end
 
+	if game.visual_grade_anim then
+		game.visual_grade_anim = math.max(0, game.visual_grade_anim - 1)
+	end
+
 	game.olddir = dir
 	game.oldvdir = vdir
 	game.justPressedLeftRot = love.keyboard.isDown("z")
@@ -1272,6 +1291,31 @@ SMODS.Font {
 	squish = 1,
 	DESCSCALE = 1
 }
+
+function JtemTGM.DrawGrade(canvas, grade, anim)
+	love.graphics.push()
+	love.graphics.translate(44, -4)
+	love.graphics.setColor(G.C.WHITE)
+
+	local x = (grade % 5)
+	local y = math.floor(grade / 5)
+
+	love.graphics.setScissor(49, 5, 20, 20)
+
+	love.graphics.draw(grades, -x * 20, -y * 20)
+
+	if anim > 0 then
+		love.graphics.stencil(function() love.graphics.draw(grades, -x * 20, -y * 20) end, "replace", 1)
+		love.graphics.setStencilTest("greater", 0)
+		love.graphics.setColor(adjust_alpha(G.C.WHITE, anim / 60))
+		love.graphics.rectangle("fill", 0, 0, 20, 20)
+		love.graphics.setStencilTest()
+	end
+
+	love.graphics.setScissor()
+
+	love.graphics.pop()
+end
 
 ---@param canvas love.Canvas|table
 ---@param game table
@@ -1385,15 +1429,17 @@ function JtemTGM.HandleDraw(canvas, game)
 
 	-- draw hold piece
 	if game.hold_piece and game.hold_piece ~= "" then
-		JtemTGM.DrawPiece(game.hold_piece, 11, 5, BLOCK_W, BLOCK_H,
+		JtemTGM.DrawPiece(game.hold_piece, 11, 10, BLOCK_W, BLOCK_H,
 			1, 0)
 	end
 
 	-- draw next piece
 	local next = game.next_pieces[1]
 	if next then
-		JtemTGM.DrawPiece(next, 11, 0, BLOCK_W, BLOCK_H, 1, 0)
+		JtemTGM.DrawPiece(next, 11, 5, BLOCK_W, BLOCK_H, 1, 0)
 	end
+
+	JtemTGM.DrawGrade(canvas, game.visual_grade or 0, game.visual_grade_anim or 0)
 
 	love.graphics.pop()
 	love.graphics.setCanvas({ oldcanvas, stencil = true })
