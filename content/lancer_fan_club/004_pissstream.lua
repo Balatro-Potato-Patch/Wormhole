@@ -1,18 +1,8 @@
 Wormhole.LancerFanClub.piss_info = {
-    current = {
-        urine = {
-            value = 50
-        },
-        wasteWater = {
-            value = 50
-        },
-        cleanWater = {
-            value = 50
-        },
-    }
+    urine = 50,
+    waste = 50,
+    water = 50
 }
-local currentvalues = Wormhole.LancerFanClub.piss_info.current
-
 local json = require("json")
 local https = require("SMODS.https")
 local last_piss_ping
@@ -21,12 +11,17 @@ local function process_piss_info(...)
     print(...)
     local ret = ({ ... })
     if ret[1] == 200 then
-        Wormhole.LancerFanClub.piss_info = json.decode(ret[2])
+        local json = json.decode(ret[2]).current
+        Wormhole.LancerFanClub.piss_info = {
+            urine = json.urine.value,
+            waste = json.wasteWater.value,
+            water = json.cleanWater.value
+        }
     end
 end
 
 function Wormhole.LancerFanClub.get_piss()
-    if last_piss_ping and ((G.TIMERS.REAL - last_piss_ping) > 10) then
+    if not last_piss_ping or ((G.TIMERS.REAL - last_piss_ping) > 10) then
         last_piss_ping = G.TIMERS.REAL
         https.asyncRequest("https://api.peeonauts.com/live", process_piss_info)
     end
@@ -68,9 +63,9 @@ SMODS.Joker {
                 card.ability.extra.water,
                 card.ability.extra.shit,
                 card.ability.extra.piss,
-                math.ceil(card.ability.extra.water * currentvalues.cleanWater.value),
-                math.ceil(card.ability.extra.shit * currentvalues.wasteWater.value),
-                math.ceil(card.ability.extra.piss * currentvalues.urine.value)
+                math.ceil(card.ability.extra.water * Wormhole.LancerFanClub.piss_info.water),
+                math.ceil(card.ability.extra.shit * Wormhole.LancerFanClub.piss_info.waste),
+                math.ceil(card.ability.extra.piss * Wormhole.LancerFanClub.piss_info.urine)
             },
         }
     end,
@@ -78,14 +73,14 @@ SMODS.Joker {
     calculate = function(self, card, context)
         if context.joker_main or context.forcetrigger then
             return {
-                mult = math.ceil(card.ability.extra.shit * currentvalues.wasteWater.value),
-                chips = math.ceil(card.ability.extra.water * currentvalues.cleanWater.value)
+                mult = math.ceil(card.ability.extra.shit * Wormhole.LancerFanClub.piss_info.waste),
+                chips = math.ceil(card.ability.extra.water * Wormhole.LancerFanClub.piss_info.water)
             }
         end
     end,
 
     calc_dollar_bonus = function(self, card)
-        return math.ceil(card.ability.extra.piss * currentvalues.urine.value)
+        return math.ceil(card.ability.extra.piss * Wormhole.LancerFanClub.piss_info.urine)
     end,
 
     set_ability = function(self, card, initial, delay_sprites)
@@ -173,9 +168,9 @@ local bar_palettes = {
 local function piss_draw(card)
     love.graphics.clear()
 
-    draw_piss_bar(currentvalues.urine.value/100, 9, 24, 13, 47, bar_palettes.piss)
-    draw_piss_bar(currentvalues.wasteWater.value/100, 29, 24, 13, 47, bar_palettes.waste)
-    draw_piss_bar(currentvalues.cleanWater.value/100, 49, 24, 13, 47, bar_palettes.water)
+    draw_piss_bar(Wormhole.LancerFanClub.piss_info.urine/100, 9, 24, 13, 47, bar_palettes.piss)
+    draw_piss_bar(Wormhole.LancerFanClub.piss_info.waste/100, 29, 24, 13, 47, bar_palettes.waste)
+    draw_piss_bar(Wormhole.LancerFanClub.piss_info.water/100, 49, 24, 13, 47, bar_palettes.water)
 end
 
 SMODS.DrawStep {
