@@ -10,7 +10,12 @@ PotatoPatchUtils.Developer({
 	team = "TheLastResort",
 	pos = {x=0,y=0},
 	atlas = "worm_tlr_foo54",
-	soul_pos = {x=1, y=0}
+	soul_pos = {x=1, y=0},
+	calculate = function(card, context)
+		if context.starting_shop then
+			G.GAME.worm_tlr_hercules_blind = nil
+		end
+	end
 })
 
 PotatoPatchUtils.Developer({

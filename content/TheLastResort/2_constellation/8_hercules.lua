@@ -44,9 +44,36 @@ SMODS.Consumable{
 		return G.STATE == G.STATES.SHOP
 	end,
 	use = function (self, card, area, copier)
-		if self.ability.tier == 4 and not self.ability.blind then
+		if card.ability.tier == 4 and not card.ability.blind then
 			self:reset_blind(card)
 		end
+		G.GAME.worm_tlr_hercules_blind = true
+		G.GAME.worm_tlr_hercules_tier = card.ability.tier
+		stop_use()
+    G.CONTROLLER.locks.toggle_shop = true
+    if G.shop then 
+      SMODS.calculate_context({ending_shop = true})
+      G.E_MANAGER:add_event(Event({
+        trigger = 'immediate',
+        func = function()
+          G.shop.alignment.offset.y = G.ROOM.T.y + 29
+          G.SHOP_SIGN.alignment.offset.y = -15
+          return true
+        end
+      })) 
+      G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = 0.5,
+        func = function()
+          G.shop:remove()
+          G.shop = nil
+          G.SHOP_SIGN:remove()
+          G.SHOP_SIGN = nil
+          G.CONTROLLER.locks.toggle_shop = nil
+          return true
+        end
+      }))
+    end
 		G.E_MANAGER:add_event(Event({
 			trigger = 'immediate',
 			func = function ()
@@ -56,7 +83,7 @@ SMODS.Consumable{
 				local ondeck = {"Small", "Big", "Big", "Boss"}
 				G.GAME.round_resets.blind_tag = nil
 				G.GAME.round_resets.blind = G.P_BLINDS[blind[card.ability.tier]]
-				G.GAME.round_resets.blind_states[ondeck[card.ability.tier]] = 'Current'
+				--G.GAME.round_resets.blind_states[ondeck[card.ability.tier]] = 'Current'
 				delay(0.2)
 				return true
 			end
