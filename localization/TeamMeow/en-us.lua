@@ -135,6 +135,10 @@ return {
 					{
 						"Programmer, Artist, Composer",
 					},
+					{
+						"{C:inactive}yo phone ringing{}",
+						"{C:inactive,s:0.7}PLEASE CLICK ON THIS{}",
+					},
 				},
 			},
 		},

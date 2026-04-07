@@ -37,6 +37,12 @@ if team.name == "meow" then
 		Moveable.stop_hover(self)
 	end
 end
+if type(member.click_func) == "function" then
+	card.click = function(self, ...)
+		member.click_func(self)
+		Moveable.click(self, ...)
+	end
+end
 '''
 match_indent = true
 

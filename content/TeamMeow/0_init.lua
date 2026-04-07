@@ -44,6 +44,10 @@ SMODS.Sound {
 	key = "meowChomp",
 	path = "TeamMeow/chomp.ogg",
 }
+SMODS.Sound {
+	key = "meowSanctuary",
+	path = "TeamMeow/3rdSanctuaryJolyne.ogg",
+}
 PotatoPatchUtils.Team({
 	name = "meow",
 	colour = HEX("F9D0D1"),
@@ -140,7 +144,10 @@ PotatoPatchUtils.Developer({
 	loc = true,
 	team = "meow",
 	atlas = "worm_meowCreditsJolyne",
-	pos = { x = 0, y = 0 }
+	pos = { x = 0, y = 0 },
+	click_func = function (card)
+		play_sound("worm_meowSanctuary")
+	end
 })
 
 SMODS.Attribute({
