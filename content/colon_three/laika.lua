@@ -16,6 +16,7 @@ SMODS.Joker {
     --pos = { x = 0, y = 0 },
     config = { extra = { levels = 0 } },
     rarity = 2,
+    cost = 8,
     attributes = { "space", "hand_type" },
     --ppu_artist = {},
     ppu_coder = { "meta" },

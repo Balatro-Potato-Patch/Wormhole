@@ -53,6 +53,13 @@ return {
                     "{C:green}#2#{} for each card cleaned-up",
                 }
             },
+            j_worm_tesla_in_space = {
+                name = "Tesla in Space",
+                text = {
+                    "When you {C:attention}Clean-up{}, earn {C:gold}$#1#",
+                    "for each card cleaned-up",
+                }
+            },
         },
         Enhanced = {
             m_worm_junk_card = {

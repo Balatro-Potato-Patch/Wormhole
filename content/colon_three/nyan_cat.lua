@@ -6,6 +6,7 @@ SMODS.Joker {
     pos = { x = 0, y = 0 },
     config = { extra = { chips = 0, chips_mod = 15 } },
     rarity = 1,
+    cost = 4,
     attributes = { "space", "suit", "chips", "scaling", "reset" },
     ppu_artist = { "ophelia" },
     ppu_coder = { "notmario" },

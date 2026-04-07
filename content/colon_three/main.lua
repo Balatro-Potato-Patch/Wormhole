@@ -146,6 +146,8 @@ for i, v in pairs({
     "wall_e",
     "nyan_cat",
     "event_horizon",
+    "tesla_in_space",
+    "quantum_tunneling",
 
     "decrepit_deck",
 

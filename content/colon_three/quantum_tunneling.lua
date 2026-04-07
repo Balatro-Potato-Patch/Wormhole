@@ -5,6 +5,7 @@ SMODS.Joker {
     --atlas = "ct_jokers",
     --pos = { x = 0, y = 0 },
     rarity = 2,
+    cost = 6,
     attributes = { "mod_chance", "scaling", },
     --ppu_artist = {},
     ppu_coder = { "nxkoo" },

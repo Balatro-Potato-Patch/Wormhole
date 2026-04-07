@@ -8,6 +8,8 @@ SMODS.Joker {
     attributes = { "space", "hand_type" },
     ppu_coder = { "meta" },
     ppu_team = { ":3" },
+    rarity = 1,
+    cost = 5,
 
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.levels } }
