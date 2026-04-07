@@ -46,12 +46,22 @@ PotatoPatchUtils.Developer({
 WORM_TLR = WORM_TLR or {}
 
 function WORM_TLR.const_info_queue(info_queue, tier)
-	if tier < 3 then
-		info_queue[#info_queue+1] = {set = "Other", key = "worm_tlr_const_info"}
-	elseif tier < 4 then
-		info_queue[#info_queue+1] = {set = "Other", key = "worm_tlr_const_max_level"}
+	if WORM_TLR.has_mask() then
+		if tier < 3 then
+			info_queue[#info_queue+1] = {set = "Other", key = "worm_tlr_const_info_mask"}
+		elseif tier < 4 then
+			info_queue[#info_queue+1] = {set = "Other", key = "worm_tlr_const_info"}
+		else
+			info_queue[#info_queue+1] = {set = "Other", key = "worm_tlr_const_max_real"}
+		end
 	else
-		info_queue[#info_queue+1] = {set = "Other", key = "worm_tlr_const_max_real"}
+		if tier < 3 then
+			info_queue[#info_queue+1] = {set = "Other", key = "worm_tlr_const_info"}
+		elseif tier < 4 then
+			info_queue[#info_queue+1] = {set = "Other", key = "worm_tlr_const_max_level"}
+		else
+			info_queue[#info_queue+1] = {set = "Other", key = "worm_tlr_const_max_real"}
+		end
 	end
 end
 
@@ -82,4 +92,8 @@ function WORM_TLR.particles (self)
 	})
 	G.booster_pack_sparkles.fade_alpha = 1
 	G.booster_pack_sparkles:fade(1, 0)
+end
+
+function WORM_TLR.has_mask ()
+	return next(find_joker("j_worm_tlr_nomaimask"))
 end

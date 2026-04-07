@@ -3,7 +3,7 @@ version = "1.0.0"
 dump_lua = true
 priority = 50
 
-# check for split dance when doing sliced retriggers
+# no this is not the best idea, but its less work
 [[patches]]
 [patches.pattern]
 target = '=[SMODS _ "src/card_draw.lua"]'

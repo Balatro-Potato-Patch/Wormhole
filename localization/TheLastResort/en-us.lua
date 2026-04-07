@@ -242,6 +242,42 @@ local CONSTELLATIONS = {
 			"as 2 {C:dark_edition}Negative{} Shining",
 			"{V:1, s:0.8}Canis Minor{s:0.8} excluded"
 		}
+	},
+	c_worm_tlr_const_hercules_t1 = {
+		name = "Hercules",
+		text = {
+			"Fight an extra",
+			"{C:attention}Small Blind",
+			"{C:inactive}No reward",
+			"{C:inactive}Must be used while in shop"
+		}
+	},
+	c_worm_tlr_const_hercules_t2 = {
+		name = "Hercules",
+		text = {
+			"Fight an extra",
+			"{C:attention}Big Blind",
+			"{C:inactive}No reward",
+			"{C:inactive}Must be used while in shop"
+		}
+	},
+	c_worm_tlr_const_hercules_t3 = {
+		name = "Hercules",
+		text = {
+			"Fight an extra",
+			"{C:attention}Big Blind",
+			"{C:inactive}Must be used while in shop"
+		}
+	},
+	c_worm_tlr_const_hercules_t4 = {
+		name = "Hercules",
+		text = {
+			"Fight an extra",
+			"{C:attention}Boss Blind",
+			"{C:inactive}[Will fight {C:attention}#1#{C:inactive}]",
+			"{C:inactive}Changes at end of round",
+			"{C:inactive}Must be used while in shop"
+		}
 	}
 }
 
@@ -289,6 +325,15 @@ return {
 					'or {C:attention}2{C:worm_tlr_constellation} Constellation{}',
 					'when {C:attention}Blind{} is selected',
 					'{C:inactive}(Must have room){}',
+				}
+			},
+			j_worm_tlr_nomaimask = {
+				name = "Nomai Mask",
+				text = {
+					"{V:1}Constellation{} cards are upgraded",
+					"twice when {C:attention}boss blind",
+					"is defeated",
+					"{C:inactive}And may reach {C:edition}???"
 				}
 			}
 		},
@@ -384,6 +429,14 @@ return {
 				text = {
 					"This card will",
 					"be upgraded when",
+					"defeating boss blind"
+				}
+			},
+			worm_tlr_const_info_mask = {
+				name = "Constellation Info",
+				text = {
+					"This card will",
+					"be upgraded twice when",
 					"defeating boss blind"
 				}
 			},
