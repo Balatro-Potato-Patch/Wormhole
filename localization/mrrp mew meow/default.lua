@@ -100,6 +100,16 @@ descriptions={
 			}
 		},
 	},
+	Stake={
+		worm_cosmic ={
+			name=
+				'Cosmic Stake'
+			, text={
+				"Shop can have {C:attention}Gravity{} Jokers",
+				"{C:inactive,s:0.8}(Halves all hand levels){}"
+			}
+		}
+	}
 	Back={
 		
 	},
