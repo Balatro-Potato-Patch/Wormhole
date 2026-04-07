@@ -113,8 +113,7 @@ function Wormhole.Absinthe.get_random_team()
 end
 
 Wormhole.Absinthe.type_blacklist = {
-    ['Back'] = true,
-    ['Booster'] = true
+    ['Back'] = true
 }
 
 function Wormhole.Absinthe.get_team_card_key(team, seed)
@@ -152,7 +151,7 @@ function Wormhole.Absinthe.get_card_area_to_emplace(key)
     if not area then
         if center.set == 'Joker' then
             area = 'jokers'
-        elseif center.consumeable then
+        elseif center.consumeable or center.set == 'Voucher' or center.set == 'Booster' then
             area = 'consumeables'
         end
     end

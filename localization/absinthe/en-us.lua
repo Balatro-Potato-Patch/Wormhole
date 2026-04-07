@@ -486,15 +486,15 @@ return {
             PotatoPatchDev_theAstra = {
                 name = 'theAstra',
                 text = { {
-                    'Yo, I\'m Astra! I\'m The head of the Potato Patch',
+                    'Yo, I\'m {C:purple,E:2}Astra!{} I\'m {E:1,C:attention}The Head{} of the Potato Patch',
                     'Dev Group and one of the organizers of this event!',
-                    'Aside from that I created most of the backend for',
-                    'the Drinks consumables as well as a few playable',
+                    'Aside from that, I created most of the backend for',
+                    'the {C:abs_drinks}Drinks{} as well as a few playable',
                     'objects here and there',
                 }, {
                     'Thank you so much for checking out our work,',
                     'and keep an eye out for whatever thing',
-                    'we decide to do next!! {f:9,s:0.6}🐟'
+                    'we decide to do {C:attention}next!!{} {f:9,s:0.6}🐟'
                 }
                 }
             },
