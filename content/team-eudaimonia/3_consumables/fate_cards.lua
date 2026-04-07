@@ -8,8 +8,8 @@ SMODS.Atlas({
 
 SMODS.ConsumableType{
     key = "Fate",
-    primary_colour = HEX("41494b"),
-    secondary_colour = HEX("ff004e"),
+    primary_colour = HEX("3e4150"),
+    secondary_colour = HEX("ff5192"),
     collection_rows = {5},
     default = "c_bounce"
 }
@@ -27,7 +27,7 @@ SMODS.Consumable{
     pos = {x=0,y=0},
     set = "Fate",
     ppu_coder = {"iamarta"},
-    ppu_artist = {"iamarta", "cosmeggo"},
+    ppu_artist = {"cosmeggo"},
     ppu_team = {"TeamEudaimonia"},
     use = function(self, card, area, copier)
         local suitOptions = {}
@@ -51,7 +51,7 @@ SMODS.Consumable{
     pos = {x=1,y=0},
     set = "Fate",
     ppu_coder = {"iamarta"},
-    ppu_artist = {"iamarta", "cosmeggo"},
+    ppu_artist = {"cosmeggo"},
     ppu_team = {"TeamEudaimonia"},
     use = function(self, card, area, copier)
         local rankOptions = {}
@@ -75,7 +75,7 @@ SMODS.Consumable{
     pos = {x=2,y=0},
     set = "Fate",
     ppu_coder = {"iamarta"},
-    ppu_artist = {"iamarta", "cosmeggo"},
+    ppu_artist = {"cosmeggo"},
     ppu_team = {"TeamEudaimonia"},
     use = function(self, card, area, copier)
         local tempDeck = {}
@@ -105,7 +105,7 @@ SMODS.Consumable{
     pos = {x=3,y=0},
     set = "Fate",
     ppu_coder = {"iamarta"},
-    ppu_artist = {"iamarta", "cosmeggo"},
+    ppu_artist = {"cosmeggo"},
     ppu_team = {"TeamEudaimonia"},
     use = function(self, card, area, copier)
         local toRemove = math.ceil(#G.deck.cards / 2)
@@ -135,7 +135,7 @@ SMODS.Consumable{
     pos = {x=4,y=0},
     set = "Fate",
     ppu_coder = {"iamarta"},
-    ppu_artist = {"iamarta", "cosmeggo"},
+    ppu_artist = {"cosmeggo"},
     ppu_team = {"TeamEudaimonia"},
     use = function(self, card, area, copier)
         for _, _card in ipairs(G.deck.cards) do
