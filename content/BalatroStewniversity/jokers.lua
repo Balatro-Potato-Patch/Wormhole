@@ -1,9 +1,3 @@
-SMODS.Atlas{
-    key = 'stewjokers',
-    path = 'BalatroStewniversity/Jokers.png',
-    px = 71,
-    py = 95
-}
 
 SMODS.Joker{ --Staged Landing
     key = 'staged_landing',
