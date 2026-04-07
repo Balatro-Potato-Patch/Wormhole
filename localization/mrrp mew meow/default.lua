@@ -109,7 +109,7 @@ descriptions={
 				"{C:inactive,s:0.8}(Halves all hand levels){}"
 			}
 		}
-	}
+	},
 	Back={
 		
 	},
