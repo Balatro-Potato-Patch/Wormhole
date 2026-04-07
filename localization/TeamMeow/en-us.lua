@@ -101,12 +101,14 @@ return {
 				name = "NakuAutumn",
 				text = {
 					{
-						"Programmer, Artist",
+						"Programmer, Artist, Composer",
 					},
 					{
 						"Ex-developer of {C:red}Fool's Gambit{} and {C:purple}Medium{}",
 						"{C:attention}Hot Potato{} and {C:red}Stocking {C:green}Stuffer{} participant",
-						"will i get flamed if i self promote non balatro things here - NA",
+						"{C:inactive,s:0.7}will i get flamed if i self promote non balatro things here",
+						"{C:inactive,s:0.6}..hello? is anyone there? anyone? it's so dark...",
+						"{C:inactive,s:0.5}..where the hell am i??",
 					},
 				},
 			},
@@ -127,14 +129,14 @@ return {
 				name = "Jolyne",
 				text = {
 					{
-						"Programmer, Artist",
+						"Programmer, Artist, Composer",
 					},
 				},
 			},
 		},
 		worm_meow_Zodicat = {
 			c_worm_crimson = {
-				name = { "Crimson", "{s:0.6}Aries & Taurus" },
+				name = { "Purrimson", "{s:0.6}Aries & Taurus" },
 				text = {
 					"{C:attention}Aces{} and {C:attention}2s{} held in",
 					"hand gain {C:chips}+#1#{} Chips",
@@ -142,7 +144,7 @@ return {
 				},
 			},
 			c_worm_lemon = {
-				name = { "Lemon", "{s:0.6}Gemini & Cancer" },
+				name = { "Lemaine", "{s:0.6}Gemini & Cancer" },
 				text = {
 					"{C:attention}3s{} and {C:attention}4s{} held in",
 					"hand gain {C:mult}+#1#{} Mult",
@@ -150,7 +152,7 @@ return {
 				},
 			},
 			c_worm_viridian = {
-				name = { "Viridian", "{s:0.6}Leo & Virgo" },
+				name = { "Furidian", "{s:0.6}Leo & Virgo" },
 				text = {
 					"{C:attention}5s{} and {C:attention}6s{} held in",
 					"hand have a {C:green}#1# in #2#{}",
@@ -159,7 +161,7 @@ return {
 				},
 			},
 			c_worm_clear_sky = {
-				name = { "Clear Sky", "{s:0.6}Libra & Scorpio" },
+				name = { "Clear Thai", "{s:0.6}Libra & Scorpio" },
 				text = {
 					"{C:attention}7s{} and {C:attention}8s{} held in",
 					"hand gain {C:chips}+#1#{} Chips",
@@ -168,7 +170,7 @@ return {
 				},
 			},
 			c_worm_deep_sea = {
-				name = { "Deep Sea", "{s:0.6}Sagittarius & Capricorn" },
+				name = { "Deep Sealine", "{s:0.6}Sagittarius & Capricorn" },
 				text = {
 					"{C:attention}9s{} and {C:attention}10s{} held in",
 					"hand gain {C:mult}+#1#{} Mult",
@@ -177,7 +179,7 @@ return {
 				},
 			},
 			c_worm_blossom = {
-				name = { "Blossom", "{s:0.6}Aquarius, Pisces & Ophiuchus" },
+				name = { "Blosstom", "{s:0.6}Aquarius, Pisces & Ophiuchus" },
 				text = {
 					"{C:attention}Face cards{} held in",
 					"hand gain {X:mult,C:white}X#1#{} Mult",
