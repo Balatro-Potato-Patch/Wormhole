@@ -111,7 +111,7 @@ SMODS.Consumable{
 
 SMODS.DrawStep {
 	key = 'behind_canvas_text',
-	order = -200,
+	order = -25,
 	func = function(self, layer)
 		if self.worm_tlr_canvas_text and (self.config.center.discovered or self.bypass_discovery_center) then
 			for _, sprite in ipairs(self.worm_tlr_canvas_text[1] and self.worm_tlr_canvas_text or {self.worm_tlr_canvas_text}) do
