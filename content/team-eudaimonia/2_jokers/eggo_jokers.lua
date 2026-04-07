@@ -20,7 +20,7 @@ SMODS.Joker {
     rarity = 3,
     blueprint_compat = false,
     cost = 1,
-    config = { extra = { xmult = 4, odds = 1 }, },
+    config = { extra = { xmult = 4, odds = 32 }, },
     discovered = true,
     atlas = 'message',
 
@@ -75,6 +75,9 @@ SMODS.Joker {
     config = { extra = {}, },
     discovered = true,
     atlas = 'answer',
+    set_ability = function(self, card, initial)
+        card:set_eternal(true)
+    end,
     add_to_deck = function(self, card, from_debuff)
         if (G.GAME.round_resets.blind_choices.Boss ~= 'bl_worm_anomaly') then
             G.from_boss_tag = true
