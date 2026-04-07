@@ -71,7 +71,7 @@ SMODS.Joker{
 		text = {
 			"Gains {C:mult}+#1#{} Mult when",
 			"scoring a {C:attention}#2#",
-			"{C:inactive}Rank decreases after scoring",
+			"Rank decreases after scoring",
 			"{C:inactive}(Currently {C:mult}+#3#{C:inactive} Mult)"
 		}
 	},
