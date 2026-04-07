@@ -1,4 +1,39 @@
 Wormhole.tbp = {}
+Wormhole.tbp.config = SMODS.current_mod.config
+
+if Wormhole.tbp.config.swap_buttons == nil then
+    Wormhole.tbp.config.swap_buttons = false
+end
+SMODS.current_mod.config_tab = function()
+    return {
+        n = G.UIT.ROOT,
+        config = {
+            align = "cm",
+            padding = 0.05,
+            colour = G.C.CLEAR,
+        },
+        nodes = {
+            {
+                n = G.UIT.R,
+                config = { align = "cl", padding = 0 },
+                nodes = {
+                    {
+                        n = G.UIT.C,
+                        config = { align = "cl", padding = 0.05 },
+                        nodes = {
+                            create_toggle({
+                                label = "Swap Module Button Layout",
+                                ref_table = Wormhole.tbp.config,
+                                ref_value = "swap_buttons",
+                                info = {"Swaps Yes/No button positions", "in module confirmation dialogs"}
+                            }),
+                        }
+                    }
+                }
+            }
+        }
+    }
+end
 
 PotatoPatchUtils.Team({
     name = 'tbp',
