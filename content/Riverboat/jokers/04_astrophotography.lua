@@ -1,5 +1,5 @@
 SMODS.Joker {
-    key = "riverboat_test",
+    key = "riverboat_astrophoto",
     config = {
         extra = {
             score_mult = 10

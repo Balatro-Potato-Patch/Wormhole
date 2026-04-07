@@ -53,8 +53,8 @@ return {
                     "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)"
                 }
             },
-            j_worm_riverboat_test = {
-                name = "[test joker]",
+            j_worm_riverboat_astrophoto = {
+                name = "Astrophotography",
                 text = {
                     "When a {C:planet}Planet{} card is used,",
                     "add {X:purple,C:white}#1#X{} the product of its",
@@ -132,12 +132,12 @@ return {
             k_disintegrated_ex = "Disintegrated!"
         },
         achievement_names = {
-            riverboat_instaplanet = ""
+            riverboat_instaplanet = "Clear Sky Tonight"
         },
         achievement_descriptions = {
             riverboat_instaplanet = {
                 "Win a round in 0 hands",
-                "using [test joker]"
+                "using Astrophotography"
             }
         }
     }
