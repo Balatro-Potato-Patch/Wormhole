@@ -268,6 +268,24 @@ return {
                 },
             },
         },
+        Voucher = {
+            v_worm_fuel_efficiency = {
+                name = "Fuel Efficiency",
+                text = {
+                    "You may pay {C:attention}Clean-up{} costs by",
+                    "selecting up to {C:attention}one{} fewer card",
+                    "{C:inactive}(Minimum of 1 card)"
+                }
+            },
+            v_worm_the_final_frontier = {
+                name = "The Final Frontier",
+                text = {
+                    "For every {C:attention}#1#{} {C:attention}Junk Cards",
+                    "scored, create a random {C:planet}Planet",
+                    "{C:inactive}(Must have room, currently #2#/#1#)"
+                }
+            },
+        },
         Other = {
 			p_worm_junkset_normal = {
 				name = "Derelict Pack",
