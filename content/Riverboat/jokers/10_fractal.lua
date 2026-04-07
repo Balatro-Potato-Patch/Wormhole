@@ -15,10 +15,7 @@ SMODS.Joker {
     ppu_team = { "riverboat" },
     loc_vars = function(self, info_queue, card)
         return {
-            vars = {
-                G.GAME and G.GAME.probabilities.normal or 1,
-                card.ability.extra.odds
-            }
+            vars = { SMODS.get_probability_vars(card, 1, card.ability.extra.odds, "worm_riverboat_fractal") }
         }
     end,
     calculate = function(self, card, context)
