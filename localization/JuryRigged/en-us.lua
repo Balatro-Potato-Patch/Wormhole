@@ -28,6 +28,21 @@ return {
           }
         }
       },
+      sat_worm_tianwen_4 = {
+        name = "Tianwen 4",
+        text = {
+          {
+            "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
+            "{C:attention}#2#",
+          },
+          {
+            "If played hand",
+            "is a {C:attention}#2#{},",
+            "create {C:attention}#1#{} cop#3# of",
+            "#4#random scoring card#5#"
+          }
+        }
+      },
     },
     PotatoPatch = {
       PotatoPatchTeam_JuryRigged = { name = "JuryRigged" },
@@ -50,16 +65,16 @@ return {
       -- Satellite names for Run Info
       worm_jr_satellites_new_horizon = "New Horizon",
       worm_jr_satellites_messenger = "MESSENGER",
-      worm_jr_sattellites_tianwen_4 = "Tianwen-4",
-      worm_jr_sattellites_venera_9 = "Venera 9",
-      worm_jr_sattellites_galileo = "Galileo",
-      worm_jr_sattellites_cassini_huygens = "Cassini-Huygens",
-      worm_jr_sattellites_sputnik_1 = "Sputnik 1",
-      worm_jr_sattellites_mariner_9 = "Mariner 9",
-      worm_jr_sattellites_voyager_2 = "Voyager 2",
-      worm_jr_sattellites_death_egg = "Death Egg",
-      worm_jr_sattellites_dawn = "Dawn",
-      worm_jr_sattellites_manhole_cover = "Manhole Cover",
+      worm_jr_satellites_tianwen_4 = "Tianwen-4",
+      worm_jr_satellites_venera_9 = "Venera 9",
+      worm_jr_satellites_galileo = "Galileo",
+      worm_jr_satellites_cassini_huygens = "Cassini-Huygens",
+      worm_jr_satellites_sputnik_1 = "Sputnik 1",
+      worm_jr_satellites_mariner_9 = "Mariner 9",
+      worm_jr_satellites_voyager_2 = "Voyager 2",
+      worm_jr_satellites_death_egg = "Death Egg",
+      worm_jr_satellites_dawn = "Dawn",
+      worm_jr_satellites_manhole_cover = "Manhole Cover",
 
       -- Satellite ability descriptions for Run Info
       jr_satellite_descriptions_new_horizon = "This satellite {C:mult}fixes{} your {C:attention}marriage{}"
