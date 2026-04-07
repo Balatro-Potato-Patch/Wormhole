@@ -12,7 +12,9 @@ PotatoPatchUtils.Team({
     name = "thorn", 
     loc = true,
     colour = HEX("5ddaF3"),
+    credit_rows = { 4, 2 }
 })
+
 PotatoPatchUtils.Developer({
     team = "thorn",
     name = "marie",
