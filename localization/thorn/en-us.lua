@@ -68,6 +68,58 @@ return {
                         "Replace this please"
                     },
                 }
+            },
+            Joker = {
+                j_worm_thorn_jimbo = {
+                    name = {"Jimbo",
+                        "{s:0.6}But He Is In SPACE"
+                    },
+                    text = {
+                        "Creates a {C:planet}Planet{} card",
+                        "when a hand is played",
+                        "{C:inactive}I'm {C:red}perishing{C:inactive}, #1#!"
+                    }
+                }
+            },
+            Joker = {
+                j_worm_thorn_jimbo = {
+                    name = {"Jimbo",
+                        "{s:0.6}But He Is In SPACE"
+                    },
+                    text = {
+                        "Creates a {C:planet}Planet{} card",
+                        "when a hand is played",
+                        "{C:inactive}I'm {C:red}perishing{C:inactive}, #1#!"
+                    }
+                },
+                j_worm_thorn_binary = {
+                    name = "Binary Stars",
+                    text = {
+                        "{C:planet}Planet{} cards have a",
+                        "{C:green}#1# in #2#{} chance to",
+                        "level up hand {C:attention}twice{},",
+                        "otherwise level it {C:red}down{}",
+                        "{C:inactive}(Won't go below lvl.1)"
+                    }
+                },
+                j_worm_thorn_derse = {
+                    name = "Derse",
+                    text = {
+                        "Gains {C:white,X:mult}X#1#{} Mult per every",
+                        "percent of {C:spades}Dark Suits{}",
+                        "in deck above {C:attention}#3#%{}",
+                        "{C:inactive}(Currently: {C:white,X:mult}X#2#{}{C:inactive} Mult, {C:attention}#4#%{}{C:inactive})"
+                    }
+                },
+                j_worm_thorn_derse_collection = {
+                    name = "Derse",
+                    text = {
+                        "Gains {C:white,X:mult}X#1#{} Mult per every",
+                        "percent of {C:spades}Dark Suits{}",
+                        "in deck above {C:attention}#3#%{}",
+                        "{C:inactive}(Currently: {C:white,X:mult}X#2#{}{C:inactive} Mult)"
+                    }
+                },
             }
     },
 }
