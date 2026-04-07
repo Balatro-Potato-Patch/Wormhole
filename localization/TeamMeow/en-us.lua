@@ -95,6 +95,10 @@ return {
 					{
 						"Artist",
 					},
+					{
+						"Artist of {C:mult}Ortalab{} and {C:chips}CCC{},",
+						"{C:inactive}i like girls kissing{}",
+					},
 				},
 			},
 			PotatoPatchDev_silverautumn = {

@@ -63,6 +63,9 @@ SMODS.Booster({
             skip_materialize = true
 		})
 	end,
+	ppu_team = { "meow" },
+	ppu_coder = { "revo" },
+	ppu_artist = { "incognito" },
 })
 
 SMODS.Booster({
@@ -107,6 +110,9 @@ SMODS.Booster({
             skip_materialize = true
 		})
 	end,
+	ppu_team = { "meow" },
+	ppu_coder = { "revo" },
+	ppu_artist = { "incognito" },
 })
 
 SMODS.Booster({
@@ -151,6 +157,9 @@ SMODS.Booster({
             skip_materialize = true
 		})
 	end,
+	ppu_team = { "meow" },
+	ppu_coder = { "revo" },
+	ppu_artist = { "incognito" },
 })
 
 SMODS.Booster({
@@ -195,6 +204,9 @@ SMODS.Booster({
             skip_materialize = true
 		})
 	end,
+	ppu_team = { "meow" },
+	ppu_coder = { "revo" },
+	ppu_artist = { "incognito" },
 })
 
 
@@ -236,6 +248,9 @@ SMODS.Booster({
             skip_materialize = true
 		})
 	end,
+	ppu_team = { "meow" },
+	ppu_coder = { "revo" },
+	--ppu_artist = { "incognito" },
 })
 
 SMODS.Booster({
@@ -258,6 +273,9 @@ SMODS.Booster({
             skip_materialize = true
 		})
 	end,
+	ppu_team = { "meow" },
+	ppu_coder = { "revo" },
+	--ppu_artist = { "incognito" },
 })
 
 SMODS.Booster({
@@ -280,6 +298,9 @@ SMODS.Booster({
             skip_materialize = true
 		})
 	end,
+	ppu_team = { "meow" },
+	ppu_coder = { "revo" },
+	--ppu_artist = { "incognito" },
 })
 
 SMODS.Booster({
@@ -302,4 +323,7 @@ SMODS.Booster({
             skip_materialize = true
 		})
 	end,
+	ppu_team = { "meow" },
+	ppu_coder = { "revo" },
+	--ppu_artist = { "incognito" },
 })

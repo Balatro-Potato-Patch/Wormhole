@@ -71,7 +71,7 @@ end
 Wormhole.TEAM_MEOW.tartInfo = {}
 
 --- Register a Spacetart object.\
---- @param args {key:string, foil_pos:{x:integer, y:integer}, tart_pos:{x:integer, y:integer}, loc_vars:(fun(self, info_queue, card, tart_config, boost_count):(table|nil)), config:table, boosted_conds:table, calculates:table}
+--- @param args {key:string, foil_pos:{x:integer, y:integer}, tart_pos:{x:integer, y:integer}, loc_vars:(fun(self, info_queue, card, tart_config, boost_count):(table|nil)), config:table, boosted_conds:table, calculates:table, credits:{artist:table,coder:table}, attributes:table|nil}
 --- \
 --- PARAMS:\
 --- \
@@ -81,11 +81,20 @@ Wormhole.TEAM_MEOW.tartInfo = {}
 --- loc_vars: The `loc_vars` of the consumable and tart object\
 --- config: The config for the tart object\
 --- boosted_conds: An array of functions which indicate how this spacetart is boosted. Can return bool/int values\
---- calculate: An array of functions which indicate how this spacetart is calculated, with the index matching the boost level
+--- calculate: An array of functions which indicate how this spacetart is calculated, with the index matching the boost level\
+--- credits: The additional credits needed for this tart object. Split into `artist` and `coder` as 2 seperate tables\
+--- (Some people are already credited due to work on the art base/code)\
+--- attributes: Attributes.
 function SpaceTart(args)
 	local ex_table = {}
 	ex_table.tart = args.key
 	ex_table.tart_cfg = args.config
+	local artist = args.credits and (args.credits.artist or {}) or {}
+	local coder = args.credits and (args.credits.coder or {}) or {}
+	table.insert(artist, 1, "incognito")
+	table.insert(coder, 1, "thunderedge")
+	table.insert(coder, 1, "silverautumn")
+	table.insert(coder, 1, "corobo")
 	SMODS.Consumable({
 		key = args.key,
 		set = "worm_meow_Spacetart",
@@ -222,6 +231,11 @@ function SpaceTart(args)
 			end
 			desc_nodes.background_colour = res.background_colour
 		end,
+		ppu_team = {"meow"},
+		ppu_artist = artist,
+		ppu_coder = coder,
+		attributes = args.attributes
+
 	})
 	Wormhole.TEAM_MEOW.tartInfo[args.key] = {
 		--boosts = args.boosted_jokers,
@@ -562,6 +576,9 @@ SpaceTart({
 	foil_pos = { x = 2, y = 0 },
 	config = {
 		odds = 5,
+	},
+	credits = {
+		coder = {"incognito"}
 	},
 
 	calculates = {

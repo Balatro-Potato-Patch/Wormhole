@@ -94,6 +94,9 @@ SMODS.Consumable({
 	can_use = function(self, card)
 		return G.hand and #G.hand.cards > 0
 	end,
+	ppu_team = { "meow" },
+	ppu_coder = { "thunderedge" },
+	ppu_artist = { "gappie" },
 })
 
 SMODS.Consumable({
@@ -122,6 +125,9 @@ SMODS.Consumable({
 	can_use = function(self, card)
 		return G.hand and #G.hand.cards > 0
 	end,
+	ppu_team = { "meow" },
+	ppu_coder = { "thunderedge" },
+	ppu_artist = { "gappie" },
 })
 
 SMODS.Consumable({
@@ -157,6 +163,9 @@ SMODS.Consumable({
 	can_use = function(self, card)
 		return G.hand and #G.hand.cards > 0
 	end,
+	ppu_team = { "meow" },
+	ppu_coder = { "thunderedge" },
+	ppu_artist = { "gappie" },
 })
 
 SMODS.Consumable({
@@ -185,6 +194,9 @@ SMODS.Consumable({
 	can_use = function(self, card)
 		return G.hand and #G.hand.cards > 0
 	end,
+	ppu_team = { "meow" },
+	ppu_coder = { "thunderedge" },
+	ppu_artist = { "gappie" },
 })
 
 SMODS.Consumable({
@@ -213,6 +225,9 @@ SMODS.Consumable({
 	can_use = function(self, card)
 		return G.hand and #G.hand.cards > 0
 	end,
+	ppu_team = { "meow" },
+	ppu_coder = { "thunderedge" },
+	ppu_artist = { "gappie" },
 })
 
 SMODS.Consumable({
@@ -241,4 +256,7 @@ SMODS.Consumable({
 	can_use = function(self, card)
 		return G.hand and #G.hand.cards > 0
 	end,
+	ppu_team = { "meow" },
+	ppu_coder = { "thunderedge" },
+	ppu_artist = { "gappie" },
 })
