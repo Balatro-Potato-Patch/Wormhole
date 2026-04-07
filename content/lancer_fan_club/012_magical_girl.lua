@@ -93,10 +93,17 @@ SMODS.Shader {
 -- DrawStep
 SMODS.DrawStep {
     key = "lfc_magical_girl",
-    order = 1,
+    order = 30,
     func = function(self, layer)
         if self.config.center_key == "j_worm_lfc_magical_girl" then
-            self.children.center:draw_shader('worm_lfc_magical_girl', nil, self.ARGS.send_to_shader)
+            --self.children.center:draw_shader('worm_lfc_magical_girl', nil, self.ARGS.send_to_shader)
+            --print(self.config.center)
+            self.config.lfc_decoration = self.config.lfc_decoration or
+                SMODS.create_sprite(self.T.x, self.T.y, self.T.w, self.T.h, G.ASSET_ATLAS[self.config.center.atlas],
+                    self.config.center.pos)
+            self.config.lfc_decoration.role.draw_major = self
+            self.config.lfc_decoration:draw_shader('worm_lfc_magical_girl', nil, self.ARGS.send_to_shader, nil,
+                self.children.center)
         end
     end,
     conditions = { vortex = false, facing = 'front' }

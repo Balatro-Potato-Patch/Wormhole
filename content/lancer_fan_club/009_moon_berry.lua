@@ -39,10 +39,23 @@ SMODS.Sound({
     pitch = 1
 })
 
+
 SMODS.Joker({
     key = "lfc_fw",
     pos = { x = 4, y = 1 },
-    soul_pos = { x = 5, y = 1 },
+    soul_pos = {
+        x = 5,
+        y = 1,
+        draw = function(card, scale_mod, rotate_mod)
+            --print(card.edition and card.edition.shader)
+            -- TODO: make this better for shader compatibility; this might break with custom editions
+            card.children.floating_sprite:draw_shader(
+                card.edition and (card.edition.shader or string.sub(card.edition.key, 3)) or 'dissolve',
+                nil,
+                card.edition and card.ARGS.send_to_shader or nil, nil,
+                card.children.center, scale_mod, rotate_mod)
+        end
+    },
     rarity = 4,
     cost = 20,
     blueprint_compat = true,
@@ -123,3 +136,46 @@ SMODS.Joker({
     end
 
 })
+
+-- Images
+local function lfc_custom_image(filename)
+    local full_path = (SMODS.current_mod.path .. "assets/lancer_fan_club/" .. filename)
+    print("Loading image at " .. full_path)
+    local file_data = assert(NFS.newFileData(full_path), ("Failed to create file_data"))
+    local tempimagedata = assert(love.image.newImageData(file_data), ("Failed to create tempimagedata"))
+    return (assert(love.graphics.newImage(tempimagedata), ("Failed to create return image")))
+end
+
+local moon_berry_wormhole_image = lfc_custom_image("lfc_wormhole_spiral.png")
+
+-- Shader
+SMODS.Shader {
+    key = 'lfc_moon_berry',
+    path = 'lfc_moon_berry.fs',
+
+    send_vars = function(self, sprite, card)
+        return {
+            wormhole_img = moon_berry_wormhole_image,
+            wormhole_img_details = { moon_berry_wormhole_image:getWidth(), moon_berry_wormhole_image:getHeight() },
+        }
+    end
+}
+
+-- DrawStep
+SMODS.DrawStep {
+    key = "lfc_moon_berry",
+    order = 30,
+    func = function(self, layer)
+        if self.config.center_key == "j_worm_lfc_fw" then
+            --self.children.center:draw_shader('worm_lfc_magical_girl', nil, self.ARGS.send_to_shader)
+            --print(self.config.center)
+            self.config.lfc_decoration = self.config.lfc_decoration or
+                SMODS.create_sprite(self.T.x, self.T.y, self.T.w, self.T.h, G.ASSET_ATLAS[self.config.center.atlas],
+                    self.config.center.pos)
+            self.config.lfc_decoration.role.draw_major = self
+            self.config.lfc_decoration:draw_shader('worm_lfc_moon_berry', nil, self.ARGS.send_to_shader, nil,
+                self.children.center)
+        end
+    end,
+    conditions = { vortex = false, facing = 'front' }
+}
