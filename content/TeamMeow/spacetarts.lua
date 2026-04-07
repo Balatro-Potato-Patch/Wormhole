@@ -69,6 +69,19 @@ end
 -- Spacetart creation wrapper
 
 Wormhole.TEAM_MEOW.tartInfo = {}
+
+--- Register a Spacetart object.\
+--- @param args {key:string, foil_pos:{x:integer, y:integer}, tart_pos:{x:integer, y:integer}, loc_vars:(fun(self, info_queue, card, tart_config, boost_count):(table|nil)), config:table, boosted_conds:table, calculates:table}
+--- \
+--- PARAMS:\
+--- \
+--- key: The key of the spacetart, both the consumable and the tart object\
+--- foil_pos: The `pos` of the foil in the atlas "meow_spacetart"\
+--- tart_pos: The `pos` of the tart in the atlas "meow_spacetart"\
+--- loc_vars: The `loc_vars` of the consumable and tart object\
+--- config: The config for the tart object\
+--- boosted_conds: An array of functions which indicate how this spacetart is boosted. Can return bool/int values\
+--- calculate: An array of functions which indicate how this spacetart is calculated, with the index matching the boost level
 function SpaceTart(args)
 	local ex_table = {}
 	ex_table.tart = args.key
@@ -517,10 +530,6 @@ SpaceTart({
 		}
 	end,
 
-	--[[boosted_jokers = {
-		"j_joker",
-	},]]
-
 	boosted_conds = {
 		-- First condition
 		function(card)
@@ -544,7 +553,7 @@ SMODS.current_mod.optional_features = function()
 	return {
 		post_trigger = true,
 		retrigger_joker = true,
-	}
+	} -- oh NO
 end
 
 SpaceTart({
