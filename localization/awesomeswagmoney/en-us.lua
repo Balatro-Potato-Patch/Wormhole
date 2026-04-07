@@ -5,7 +5,17 @@ return {
         Edition={},
         Enhanced={},
         Joker={},
-        Other={},
+        Other={
+            undiscovered_worm_ultrabeast = {
+                name = "Not Discovered",
+                text = {
+                    "Purchase or use",
+                    "this card in an",
+                    "unseeded run to",
+                    "learn what it does",
+                },
+            },
+        },
         Planet={},
         Spectral={},
         Stake={},
@@ -14,23 +24,23 @@ return {
         Voucher={},
         PotatoPatch = {
             PotatoPatchTeam_awesomeswagmoney = { name = "Team Awesomeswagmoney" },
-            PotatoPatchDev_wh_garb = {
+            PotatoPatchDev_worm_garb = {
                 name = "Garb",
                 text = {"TEMP"}
             },
-            PotatoPatchDev_wh_poker = {
+            PotatoPatchDev_worm_poker = {
                 name = "Poker The Poker",
                 text = {"TEMP"}
             },
-            PotatoPatchDev_wh_omega = {
+            PotatoPatchDev_worm_omega = {
                 name = "Omega",
                 text = {"TEMP"}
             },
-            PotatoPatchDev_wh_superb = {
+            PotatoPatchDev_worm_superb = {
                 name = "Superb Thing",
                 text = {"TEMP"}
             },
-            PotatoPatchDev_wh_eris = {
+            PotatoPatchDev_worm_eris = {
                 name = "Eris",
                 text = {"TEMP"}
             },
@@ -42,9 +52,15 @@ return {
         blind_states={},
         challenge_names={},
         collabs={},
-        dictionary={},
+        dictionary={
+            k_worm_ultrabeast = "Ultra Beast",
+            b_worm_ultrabeast_cards = "Ultra Beasts",
+            k_worm_ultrawormhole = "Ultra Wormhole"
+        },
         high_scores={},
-        labels={},
+        labels={
+            worm_ultrabeast = "Ultra Beast"
+        },
         poker_hand_descriptions={},
         poker_hands={},
         quips={},

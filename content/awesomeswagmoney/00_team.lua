@@ -5,31 +5,31 @@ PotatoPatchUtils.Team{
 }
 --extra prefix isnt technically needed but could avoid duplicate register conflicts with other event mods
 PotatoPatchUtils.Developer{
-    name = "wh_garb",
+    name = "worm_garb",
     team = "awesomeswagmoney",
     loc = true,
 }
 
 PotatoPatchUtils.Developer{
-    name = "wh_poker",
+    name = "worm_poker",
     team = "awesomeswagmoney",
     loc = true,
 }
 
 PotatoPatchUtils.Developer{
-    name = "wh_omega",
+    name = "worm_omega",
     team = "awesomeswagmoney",
     loc = true,
 }
 
 PotatoPatchUtils.Developer{
-    name = "wh_superb",
+    name = "worm_superb",
     team = "awesomeswagmoney",
     loc = true,
 }
 
 PotatoPatchUtils.Developer{
-    name = "wh_eris",
+    name = "worm_eris",
     team = "awesomeswagmoney",
     loc = true,
 }
