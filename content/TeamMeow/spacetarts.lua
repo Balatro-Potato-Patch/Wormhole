@@ -102,7 +102,7 @@ function SpaceTart(args)
 				target.key = res.key or target.key
 				if specific_vars.boost_count ~= nil then
 					local boost_c = specific_vars.boost_count or 0
-					
+
 					-- Search for a valid entry
 					local entry_key = nil
 					while boost_c >= 0 do
@@ -111,15 +111,18 @@ function SpaceTart(args)
 							entry_key = boost_key
 							break
 						end
-						
+
 						boost_c = boost_c - 1
 					end
-					
+
 					-- Make more basic, catch-all guesses
 					if not entry_key then
 						local key_guess_one = self.key .. "_boosted"
 						local key_guess_two = self.key .. "_regular"
-						if G.localization.descriptions.worm_meow_Spacetart[key_guess_one] and (specific_vars.boost_count or 0) > 0 then
+						if
+							G.localization.descriptions.worm_meow_Spacetart[key_guess_one]
+							and (specific_vars.boost_count or 0) > 0
+						then
 							entry_key = key_guess_one
 						elseif G.localization.descriptions.worm_meow_Spacetart[key_guess_two] then
 							entry_key = key_guess_two
@@ -127,7 +130,7 @@ function SpaceTart(args)
 							entry_key = self.key
 						end
 					end
-					
+
 					target.key = entry_key
 				end
 				target.set = res.set or target.set
@@ -205,7 +208,7 @@ function SpaceTart(args)
 	})
 	Wormhole.TEAM_MEOW.tartInfo[args.key] = {
 		--boosts = args.boosted_jokers,
-        boosted_conds = args.boosted_conds,
+		boosted_conds = args.boosted_conds,
 		pos = args.foil_pos,
 		funcs = args.calculates,
 	}
@@ -234,12 +237,12 @@ function generate_card_ui(
 		for _, v in ipairs(card.tarts) do
 			if not seen[v.key] then
 				seen[v.key] = true
-                local tab = Wormhole.TEAM_MEOW.tartInfo[v.key]
-				
+				local tab = Wormhole.TEAM_MEOW.tartInfo[v.key]
+
 				local boost_count = 0
 				if type(tab.boosted_conds) == "function" then
 					local v = tab.boosted_conds(card)
-					
+
 					if type(v) == "boolean" and v then
 						boost_count = boost_count + 1
 					elseif type(v) == "number" then
@@ -248,7 +251,7 @@ function generate_card_ui(
 				else
 					for _, boost_test in pairs(tab.boosted_conds) do
 						local v = boost_test(card)
-						
+
 						if type(v) == "boolean" and v then
 							boost_count = boost_count + 1
 						elseif type(v) == "number" then
@@ -256,14 +259,14 @@ function generate_card_ui(
 						end
 					end
 				end
-				
+
 				local amt = nil
 				for k, num in pairs(map) do
 					if k == v.center_key then
 						amt = num
 					end
 				end
-                --[[
+				--[[
 				for _, k in ipairs(tab.boosts) do
 					if k == card.config.center_key then
 						is_boosted = true
@@ -289,11 +292,11 @@ function Card:calculate_joker(context, ...)
 		for _, tart in ipairs(self.tarts) do
 			local entry = Wormhole.TEAM_MEOW.tartInfo[tart.key]
 			local calc_res = nil
-			
+
 			local boost_count = 0
 			if type(entry.boosted_conds) == "function" then
 				local v = entry.boosted_conds(self)
-				
+
 				if type(v) == "boolean" and v then
 					boost_count = boost_count + 1
 				elseif type(v) == "number" then
@@ -302,7 +305,7 @@ function Card:calculate_joker(context, ...)
 			else
 				for _, boost_test in pairs(entry.boosted_conds) do
 					local v = boost_test(self)
-					
+
 					if type(v) == "boolean" and v then
 						boost_count = boost_count + 1
 					elseif type(v) == "number" then
@@ -310,14 +313,14 @@ function Card:calculate_joker(context, ...)
 					end
 				end
 			end
-				
+
 			--[[for _, key in ipairs(entry.boosts) do
 				if key == self.config.center_key then
 					is_boosted = true
 					break
 				end
 			end]]
-			
+
 			local ability_number = math.min(#entry.funcs, boost_count + 1)
 			calc_res = entry.funcs[ability_number](self, tart.config, context, boost_count) or {}
 
@@ -334,7 +337,7 @@ local function has_rainbow(card)
 	local has_green = false
 	local has_blue = false
 	local has_purple = false
-		
+
 	for _, v in ipairs(card.tarts) do
 		if v.key == "stellar_strawberry" then
 			has_red = true
@@ -350,28 +353,30 @@ local function has_rainbow(card)
 			has_purple = true
 		end
 	end
-			
+
 	return has_red and has_orange and has_yellow and has_green and has_blue and has_purple
 end
 
 local function count_green_bonus(card)
 	local green_count = 0
-	
-	if not card.tarts then return 0 end
-	
+
+	if not card.tarts then
+		return 0
+	end
+
 	for _, v in ipairs(card.tarts) do
 		if v.key == "meteor_mint" then
 			green_count = green_count + 1
 		end
 	end
-	
+
 	local bonus
 	if has_rainbow(card) then
 		bonus = green_count * 1.5
 	else
 		bonus = green_count
 	end
-	
+
 	return math.ceil(bonus)
 end
 
@@ -388,32 +393,32 @@ local function super_cool_really_awesome_plasma_effect(card, alpha)
 	alpha = alpha or 1
 
 	local new_chips, new_mult = semi_balance(hand_chips, mult, alpha)
-	
+
 	hand_chips = mod_chips(new_chips)
 	mult = mod_mult(new_mult)
-	
+
 	update_hand_text({ delay = 0 }, { mult = mult, chips = hand_chips })
-	
+
 	-- The vfx and sfx
-	G.E_MANAGER:add_event(Event {
+	G.E_MANAGER:add_event(Event({
 		func = function()
-			play_sound('gong', 0.94, 0.3)
-			play_sound('gong', 0.94 * 1.5, 0.2)
-			play_sound('tarot1', 1.5)
-			
+			play_sound("gong", 0.94, 0.3)
+			play_sound("gong", 0.94 * 1.5, 0.2)
+			play_sound("tarot1", 1.5)
+
 			-- The cool colour
 			ease_colour(G.C.UI_CHIPS, { 0.8, 0.45, 0.85, 1 })
 			ease_colour(G.C.UI_MULT, { 0.8, 0.45, 0.85, 1 })
-			
+
 			SMODS.calculate_effect({
-				message = localize('k_balanced'),
+				message = localize("k_balanced"),
 				colour = { 0.8, 0.45, 0.85, 1 },
-				instant = true
+				instant = true,
 			}, card)
-			
+
 			-- No more cool colours :pensive:
-			G.E_MANAGER:add_event(Event {
-				trigger = 'after',
+			G.E_MANAGER:add_event(Event({
+				trigger = "after",
 				blockable = false,
 				blocking = false,
 				delay = 4.3,
@@ -421,11 +426,11 @@ local function super_cool_really_awesome_plasma_effect(card, alpha)
 					ease_colour(G.C.UI_CHIPS, G.C.BLUE, 2)
 					ease_colour(G.C.UI_MULT, G.C.RED, 2)
 					return true
-				end
-			})
-			
-			G.E_MANAGER:add_event(Event {
-				trigger = 'after',
+				end,
+			}))
+
+			G.E_MANAGER:add_event(Event({
+				trigger = "after",
 				blockable = false,
 				blocking = false,
 				no_delete = true,
@@ -436,26 +441,26 @@ local function super_cool_really_awesome_plasma_effect(card, alpha)
 						G.C.UI_MULT[i] = G.C.RED[i]
 					end
 					return true
-				end
-			})
-			
+				end,
+			}))
+
 			return true
-		end
-	})
-	
+		end,
+	}))
+
 	delay(0.6)
 end
 
-SpaceTart {
+SpaceTart({
 	key = "stellar_strawberry",
 	tart_pos = { x = 1, y = 2 },
 	foil_pos = { x = 1, y = 0 },
 	config = {
 		reg = 5,
 		boosted1 = 10,
-		boosted2 = 1.5
+		boosted2 = 1.5,
 	},
-	
+
 	calculates = {
 		-- Default ability
 		function(card, tart_config, context, boost_count)
@@ -465,29 +470,29 @@ SpaceTart {
 				}
 			end
 		end,
-		
+
 		-- Level 1 boosted ability
 		function(card, tart_config, context, boost_count)
 			if context.joker_main then
 				return {
-					mult = tart_config.boosted1
+					mult = tart_config.boosted1,
 				}
 			end
 		end,
-		
+
 		-- Level 2+ boosted ability
 		function(card, tart_config, context, boost_count)
 			if context.joker_main then
 				return {
-					xmult = tart_config.boosted2
+					xmult = tart_config.boosted2,
 				}
 			end
-		end
+		end,
 	},
-	
+
 	loc_vars = function(self, info_queue, card, tart_config, boost_count)
 		local mult_boost = nil
-		
+
 		local boost_counter = boost_count or 0
 		while boost_counter >= 0 do
 			local boost_probe = tart_config["boosted" .. boost_counter]
@@ -495,306 +500,310 @@ SpaceTart {
 				mult_boost = boost_probe
 				break
 			end
-			
+
 			boost_counter = boost_counter - 1
 		end
-		
+
 		mult_boost = mult_boost or tart_config.reg
-	
+
 		return {
 			vars = { mult_boost },
 		}
 	end,
-	
+
 	--[[boosted_jokers = {
 		"j_joker",
 	},]]
-	
-    boosted_conds = {
+
+	boosted_conds = {
 		-- First condition
-		function (card)
+		function(card)
 			return card.config and card.config.center_key == "j_joker"
 		end,
-		
+
 		-- Second condition
-		function (card)
+		function(card)
 			return G.GAME.blind.boss
 		end,
-		
+
 		-- Rainbow condition
 		has_rainbow,
-		
+
 		-- Green bonus condition
-		count_green_bonus			
-	}
-}
+		count_green_bonus,
+	},
+})
 
 SMODS.current_mod.optional_features = function()
-    return {
-        post_trigger = true,
-        retrigger_joker = true,
-    }
+	return {
+		post_trigger = true,
+		retrigger_joker = true,
+	}
 end
 
-SpaceTart {
+SpaceTart({
 	key = "celestial_cinnamon",
 	tart_pos = { x = 2, y = 2 },
 	foil_pos = { x = 2, y = 0 },
 	config = {
-		odds = 5
+		odds = 5,
 	},
-	
+
 	calculates = {
 		-- Default ability
 		function(card, tart_config, context, boost_count)
-            if context.retrigger_joker_check and context.other_card == card then
-                if SMODS.pseudorandom_probability(card, 'cinnamon', 1, tart_config.odds) then
-                    return {
-                        repetitions = 1
-                    }
-                else
+			if context.retrigger_joker_check and context.other_card == card then
+				if SMODS.pseudorandom_probability(card, "cinnamon", 1, tart_config.odds) then
+					return {
+						repetitions = 1,
+					}
+				else
 					card.worm_meow_cinnamon_noped = true
-                end
-            end
+				end
+			end
 			if context.post_trigger and context.other_card.worm_meow_cinnamon_noped then
 				return {
 					func = function()
 						G.E_MANAGER:add_event(Event({
-							trigger = 'after',
+							trigger = "after",
 							delay = 0.4,
 							func = function()
 								attention_text({
-									text = localize('k_nope_ex'),
+									text = localize("k_nope_ex"),
 									scale = 1.3,
 									hold = 1.4,
 									major = card,
 									backdrop_colour = G.C.SECONDARY_SET.Tarot,
-									align = 'cm',
+									align = "cm",
 									offset = { x = 0, y = 0 },
-									silent = true
+									silent = true,
 								})
 								G.E_MANAGER:add_event(Event({
-									trigger = 'after',
+									trigger = "after",
 									delay = 0.06 * G.SETTINGS.GAMESPEED,
 									blockable = false,
 									blocking = false,
 									func = function()
-										play_sound('tarot2', 0.76, 0.4)
+										play_sound("tarot2", 0.76, 0.4)
 										return true
-									end
+									end,
 								}))
-								play_sound('tarot2', 1, 0.4)
+								play_sound("tarot2", 1, 0.4)
 								card:juice_up(0.3, 0.5)
 								return true
-							end
+							end,
 						}))
 						delay(1)
-					end
+					end,
 				}
 			end
 		end,
 	},
-	
+
 	loc_vars = function(self, info_queue, card, tart_config, boost_count)
-        local numerator, denominator = SMODS.get_probability_vars(card, 1, tart_config.odds)
+		local numerator, denominator = SMODS.get_probability_vars(card, 1, tart_config.odds)
 		return {
 			vars = {
-                numerator,
-                denominator
+				numerator,
+				denominator,
 			},
 		}
 	end,
-	
-    boosted_conds = {
+
+	boosted_conds = {
 		-- First condition
-		function (card)
+		function(card)
 			return card.config and card.config.center_key == "j_joker"
 		end,
-		
+
 		-- Second condition
-		function (card)
+		function(card)
 			return G.GAME.blind.boss
 		end,
-		
+
 		-- Rainbow condition
 		has_rainbow,
-		
-		-- Green bonus condition
-		count_green_bonus
-	}
-}
 
-SpaceTart {
+		-- Green bonus condition
+		count_green_bonus,
+	},
+})
+
+SpaceTart({
 	key = "lunar_lemon",
 	tart_pos = { x = 2, y = 2 },
 	foil_pos = { x = 3, y = 0 },
 	config = {
 		reg = 1,
 		odds = 3,
-		odds_boosted = 2
+		odds_boosted = 2,
 	},
-	
+
 	calculates = {
 		-- Default
-		function (card, tart_config, context, boost_count)
+		function(card, tart_config, context, boost_count)
 			if context.end_of_round and context.main_eval then
-				if SMODS.pseudorandom_probability(card, 'lemon', 1, tart_config.odds) then
+				if SMODS.pseudorandom_probability(card, "lemon", 1, tart_config.odds) then
 					return {
-						dollars = tart_config.reg
+						dollars = tart_config.reg,
 					}
 				else
 					return {
 						func = function()
 							G.E_MANAGER:add_event(Event({
-								trigger = 'after',
+								trigger = "after",
 								delay = 0.4,
 								func = function()
 									attention_text({
-										text = localize('k_nope_ex'),
+										text = localize("k_nope_ex"),
 										scale = 1.3,
 										hold = 1.4,
 										major = card,
 										backdrop_colour = G.C.SECONDARY_SET.Tarot,
-										align = 'cm',
+										align = "cm",
 										offset = { x = 0, y = 0 },
-										silent = true
+										silent = true,
 									})
 									G.E_MANAGER:add_event(Event({
-										trigger = 'after',
+										trigger = "after",
 										delay = 0.06 * G.SETTINGS.GAMESPEED,
 										blockable = false,
 										blocking = false,
 										func = function()
-											play_sound('tarot2', 0.76, 0.4)
+											play_sound("tarot2", 0.76, 0.4)
 											return true
-										end
+										end,
 									}))
-									play_sound('tarot2', 1, 0.4)
+									play_sound("tarot2", 1, 0.4)
 									card:juice_up(0.3, 0.5)
 									return true
-								end
+								end,
 							}))
-						end
+						end,
 					}
 				end
 			end
 		end,
-		
+
 		-- Boosted function
-		function (card, tart_config, context, boost_count)
+		function(card, tart_config, context, boost_count)
 			if context.end_of_round and context.main_eval then
-				if SMODS.pseudorandom_probability(card, 'lemon', 1, tart_config.odds_boosted) then
+				if SMODS.pseudorandom_probability(card, "lemon", 1, tart_config.odds_boosted) then
 					return {
-						dollars = tart_config.reg + boost_count
+						dollars = tart_config.reg + boost_count,
 					}
 				else
 					return {
 						func = function()
 							G.E_MANAGER:add_event(Event({
-								trigger = 'after',
+								trigger = "after",
 								delay = 0.4,
 								func = function()
 									attention_text({
-										text = localize('k_nope_ex'),
+										text = localize("k_nope_ex"),
 										scale = 1.3,
 										hold = 1.4,
 										major = card,
 										backdrop_colour = G.C.SECONDARY_SET.Tarot,
-										align = 'cm',
+										align = "cm",
 										offset = { x = 0, y = 0 },
-										silent = true
+										silent = true,
 									})
 									G.E_MANAGER:add_event(Event({
-										trigger = 'after',
+										trigger = "after",
 										delay = 0.06 * G.SETTINGS.GAMESPEED,
 										blockable = false,
 										blocking = false,
 										func = function()
-											play_sound('tarot2', 0.76, 0.4)
+											play_sound("tarot2", 0.76, 0.4)
 											return true
-										end
+										end,
 									}))
-									play_sound('tarot2', 1, 0.4)
+									play_sound("tarot2", 1, 0.4)
 									card:juice_up(0.3, 0.5)
 									return true
-								end
+								end,
 							}))
-						end
+						end,
 					}
 				end
 			end
-		end
+		end,
 	},
-	
+
 	loc_vars = function(self, info_queue, card, tart_config, boost_count)
-        local numerator, denominator = SMODS.get_probability_vars(card, 1, ((boost_count or 0) > 0) and tart_config.odds_boosted or tart_config.odds)
+		local numerator, denominator = SMODS.get_probability_vars(
+			card,
+			1,
+			((boost_count or 0) > 0) and tart_config.odds_boosted or tart_config.odds
+		)
 		return {
 			vars = {
-                numerator,
-                denominator,
-				tart_config.reg + (boost_count or 0)
-			}
+				numerator,
+				denominator,
+				tart_config.reg + (boost_count or 0),
+			},
 		}
 	end,
-	
+
 	boosted_conds = {
 		-- First condition
-		function (card)
+		function(card)
 			return card.config and card.config.center_key == "j_joker"
 		end,
-		
+
 		-- Second condition
-		function (card)
+		function(card)
 			return G.GAME.blind.boss
 		end,
-		
+
 		-- Rainbow condition
 		has_rainbow,
-		
-		-- Green bonus condition
-		count_green_bonus
-	}
-}
 
-SpaceTart {
+		-- Green bonus condition
+		count_green_bonus,
+	},
+})
+
+SpaceTart({
 	key = "meteor_mint",
 	tart_pos = { x = 1, y = 3 },
 	foil_pos = { x = 1, y = 1 },
 	config = {
-		reg = 1
+		reg = 1,
 	},
-	
+
 	calculates = {
 		-- Default ability
 		function(card, tart_config, context, boost_count)
 			return
 		end,
 	},
-	
+
 	loc_vars = function(self, info_queue, card, tart_config, boost_count)
 		return {
 			vars = {
-				math.max(1, count_green_bonus(card))
+				math.max(1, count_green_bonus(card)),
 			},
 		}
 	end,
-	
-    boosted_conds = {		
-		-- Rainbow condition
-		has_rainbow
-	}
-}
 
-SpaceTart {
+	boosted_conds = {
+		-- Rainbow condition
+		has_rainbow,
+	},
+})
+
+SpaceTart({
 	key = "blueshift_blueberry",
 	tart_pos = { x = 2, y = 3 },
 	foil_pos = { x = 2, y = 1 },
 	config = {
 		reg = 25,
 		boosted1 = 65,
-		boosted2 = 1.5
+		boosted2 = 1.5,
 	},
-	
+
 	calculates = {
 		-- Default ability
 		function(card, tart_config, context, boost_count)
@@ -804,29 +813,29 @@ SpaceTart {
 				}
 			end
 		end,
-		
+
 		-- Level 1 boosted ability
 		function(card, tart_config, context, boost_count)
 			if context.joker_main then
 				return {
-					chips = tart_config.boosted1
+					chips = tart_config.boosted1,
 				}
 			end
 		end,
-		
+
 		-- Level 2+ boosted ability
 		function(card, tart_config, context, boost_count)
 			if context.joker_main then
 				return {
-					xchips = tart_config.boosted2
+					xchips = tart_config.boosted2,
 				}
 			end
-		end
+		end,
 	},
-	
+
 	loc_vars = function(self, info_queue, card, tart_config, boost_count)
 		local chips_boost = nil
-		
+
 		local boost_counter = boost_count or 0
 		while boost_counter >= 0 do
 			local boost_probe = tart_config["boosted" .. boost_counter]
@@ -834,80 +843,83 @@ SpaceTart {
 				chips_boost = boost_probe
 				break
 			end
-			
+
 			boost_counter = boost_counter - 1
 		end
-		
+
 		chips_boost = chips_boost or tart_config.reg
-	
+
 		return {
 			vars = { chips_boost },
 		}
 	end,
-	
-    boosted_conds = {
+
+	boosted_conds = {
 		-- First condition
-		function (card)
+		function(card)
 			return card.config and card.config.center_key == "j_joker"
 		end,
-		
+
 		-- Second condition
-		function (card)
+		function(card)
 			return G.GAME.blind.boss
 		end,
-		
+
 		-- Rainbow condition
 		has_rainbow,
-		
-		-- Green bonus condition
-		count_green_bonus
-	}
-}
 
-SpaceTart {
+		-- Green bonus condition
+		count_green_bonus,
+	},
+})
+
+SpaceTart({
 	key = "black_hole_blackberry",
 	tart_pos = { x = 3, y = 3 },
 	foil_pos = { x = 3, y = 1 },
 	config = {
 		reg = 0.15,
-		boost_increment = 0.05
+		boost_increment = 0.05,
 	},
-	
+
 	calculates = {
 		-- Default ability
 		function(card, tart_config, context, boost_count)
 			if context.joker_main then
-				super_cool_really_awesome_plasma_effect(card, tart_config.reg + boost_count * tart_config.boost_increment)
+				super_cool_really_awesome_plasma_effect(
+					card,
+					tart_config.reg + boost_count * tart_config.boost_increment
+				)
 			end
-		end
+		end,
 	},
-	
+
 	loc_vars = function(self, info_queue, card, tart_config, boost_count)
 		return {
 			vars = {
-				math.ceil(100 * (tart_config.reg + tart_config.boost_increment * (boost_count or 0)) - 0.5)
+				math.ceil(100 * (tart_config.reg + tart_config.boost_increment * (boost_count or 0)) - 0.5),
 			},
 		}
 	end,
-	
-    boosted_conds = {
+
+	boosted_conds = {
 		-- First condition
-		function (card)
+		function(card)
 			return card.config and card.config.center_key == "j_joker"
 		end,
-		
+
 		-- Second condition
-		function (card)
+		function(card)
 			return G.GAME.blind.boss
 		end,
-		
+
 		-- Rainbow condition
 		has_rainbow,
-		
+
 		-- Green bonus condition
-		count_green_bonus
-	}
-}
+		count_green_bonus,
+	},
+})
 
 -- create_tart("stellar_strawberry", { x = 1, y = 2 }, { x = 1, y = 0 }, function(card, context)
 -- 	return { message = "test" }
@@ -1103,7 +1115,7 @@ function Card:stop_drag(...)
 			delay = 0.6,
 			func = function()
 				play_sound("tarot1")
-                colliders[1].card:juice_up(0.5, 0.5)
+				colliders[1].card:juice_up(0.5, 0.5)
 				card_eval_status_text(
 					colliders[1].card,
 					"extra",
@@ -1159,52 +1171,52 @@ end
 
 local old = Card.stop_drag
 function Card:stop_drag(...)
-    local ret = old(self, ...)
-    local bool = false
-    local colliders = {}
-    if G.jokers and G.jokers.cards then
-        for k, v in pairs(G.jokers.cards) do
-            if meow_cards_are_colliding(self, v) and meow_can_apply_foil(v) and v ~= self then
-                bool = true
-                table.insert(colliders, { card = v, dist = meow_get_distance_between_two_cards(v, self) })
-            end
-        end
-    end
-    table.sort(colliders, function(a, b)
-        return a.dist < b.dist
-    end)
-    if self.ability and self.ability.set == "Joker" and bool and self.tarts and #self.tarts > 0 then
-        local tart
-        G.E_MANAGER:add_event(Event({
-            trigger = "after",
-            delay = 0,
-            func = function()
-                tart = table.remove(self.tarts, #self.tarts)
-                table.insert(colliders[1].card.tarts, tart)
-                return true
-            end,
-        }))
-        G.E_MANAGER:add_event(Event({
-            trigger = "after",
-            delay = 0.6,
-            func = function()
-                play_sound("tarot1")
-                colliders[1].card:juice_up(0.5, 0.5)
-                return true
-            end,
-        }))
-        G.E_MANAGER:add_event(Event({
-            trigger = "after",
-            delay = 0.4,
-            func = function()
-                play_sound("tarot2", nil, 0.8)
-                colliders[1].card:juice_up(0.2, 0.5)
-                love.mouse.setCursor()
-                return true
-            end,
-        }))
-    end
-    return ret
+	local ret = old(self, ...)
+	local bool = false
+	local colliders = {}
+	if G.jokers and G.jokers.cards then
+		for k, v in pairs(G.jokers.cards) do
+			if meow_cards_are_colliding(self, v) and meow_can_apply_foil(v) and v ~= self then
+				bool = true
+				table.insert(colliders, { card = v, dist = meow_get_distance_between_two_cards(v, self) })
+			end
+		end
+	end
+	table.sort(colliders, function(a, b)
+		return a.dist < b.dist
+	end)
+	if self.ability and self.ability.set == "Joker" and bool and self.tarts and #self.tarts > 0 then
+		local tart
+		G.E_MANAGER:add_event(Event({
+			trigger = "after",
+			delay = 0,
+			func = function()
+				tart = table.remove(self.tarts, #self.tarts)
+				table.insert(colliders[1].card.tarts, tart)
+				return true
+			end,
+		}))
+		G.E_MANAGER:add_event(Event({
+			trigger = "after",
+			delay = 0.6,
+			func = function()
+				play_sound("tarot1")
+				colliders[1].card:juice_up(0.5, 0.5)
+				return true
+			end,
+		}))
+		G.E_MANAGER:add_event(Event({
+			trigger = "after",
+			delay = 0.4,
+			func = function()
+				play_sound("tarot2", nil, 0.8)
+				colliders[1].card:juice_up(0.2, 0.5)
+				love.mouse.setCursor()
+				return true
+			end,
+		}))
+	end
+	return ret
 end
 
 local old = Game.update
@@ -1232,13 +1244,13 @@ function Game:update(dt, ...)
 end
 local old = Game.update
 function Game:update(dt, ...)
-    local ret = old(self, dt, ...)
-    if G.consumeables and G.consumeables.cards then
-        for k, v in ipairs(G.consumeables.cards) do
-            if v.ability and v.ability.set == "worm_meow_Spacetart" and not G.GAME.shown_tart_poppup then
-                G.GAME.shown_tart_poppup = true
-                Wormhole.TEAM_MEOW.open_spacetart_info_menu()
-            end
-        end
-    end
+	local ret = old(self, dt, ...)
+	if G.consumeables and G.consumeables.cards then
+		for k, v in ipairs(G.consumeables.cards) do
+			if v.ability and v.ability.set == "worm_meow_Spacetart" and not G.GAME.shown_tart_poppup then
+				G.GAME.shown_tart_poppup = true
+				Wormhole.TEAM_MEOW.open_spacetart_info_menu()
+			end
+		end
+	end
 end
