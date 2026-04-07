@@ -1,8 +1,8 @@
 SMODS.Joker {
-    key = 'asteroid_mine',
-    atlas = "mrrp_j",
+    key = 'pallasite',
+    atlas = "mrrp",
     pos = {
-        x = 1,
+        x = 4,
         y = 0
     },
     rarity = 2,

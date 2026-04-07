@@ -1,7 +1,7 @@
 SMODS.Sticker{
     key = "celestial",
-    atlas = "mrrp_sticker",
-    pos = {x = 0, y = 0},
+    atlas = "mrrp",
+    pos = {x = 1, y = 0},
     badge_colour = HEX('487C90'),
     sets = {
         Joker = true

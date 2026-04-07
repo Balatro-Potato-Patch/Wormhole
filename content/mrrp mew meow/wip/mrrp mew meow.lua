@@ -1,12 +1,13 @@
 ----------------------------------------------
 ------------MOD CODE -------------------------
 
+--[[
 SMODS.Atlas { key = "mrrp_j",
 	path = "mrrp mew meow/mrrp-Jokers.png",
 	px = 71, py = 95,
 }
 
---[[SMODS.Joker {
+SMODS.Joker {
 	key = 'NAME',
 	atlas = "mrrp_j", pos = {x=X, y=Y},
 	rarity = R,
@@ -23,7 +24,7 @@ SMODS.Atlas { key = "mrrp_j",
 	calculate = function(self, card, context)
 		
 	end
-}]]
+}
 
 Card.is_3 = Card.is_3 or function(self, bypass_debuff)
 	if self.debuff and not bypass_debuff then return false
@@ -286,7 +287,7 @@ SMODS.Joker {
 		end
 	end
 }
-
+]]
 
 --[[
 SMODS.Joker {

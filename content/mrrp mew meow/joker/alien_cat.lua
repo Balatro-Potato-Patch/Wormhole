@@ -1,8 +1,8 @@
 SMODS.Joker {
     key = 'alien_cat',
-    atlas = "mrrp_j",
+    atlas = "mrrp",
     pos = {
-        x = 2,
+        x = 0,
         y = 0
     },
     rarity = 1,

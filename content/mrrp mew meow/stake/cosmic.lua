@@ -3,9 +3,9 @@ SMODS.Stake{
     atlas = 'mrrp_stake',
     pos = {x = 0, y = 0},
     applied_stakes = { "stake_gold" },
-    sticker_atlas = "mrrp_sticker",
+    sticker_atlas = "mrrp",
     shiny = true,
-    sticker_pos = {x = 1, y = 0},
+    sticker_pos = {x = 2, y = 0},
     colour = HEX('5F718B'),
     prefix_config = {
         applied_stakes = false

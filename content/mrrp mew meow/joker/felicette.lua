@@ -1,9 +1,9 @@
 SMODS.Joker {
     key = 'felicette',
-    atlas = "mrrp_j",
+    atlas = "mrrp",
     pos = {
-        x = 3,
-        y = 0
+        x = 2,
+        y = 1
     },
     rarity = 1,
     cost = 5,

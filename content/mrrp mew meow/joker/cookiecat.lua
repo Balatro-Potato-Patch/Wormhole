@@ -1,9 +1,9 @@
 SMODS.Joker {
     key = 'cookie_cat',
-    atlas = "mrrp_j",
+    atlas = "mrrp",
     pos = {
-        x = 4,
-        y = 0
+        x = 0,
+        y = 1
     },
     rarity = 2,
     cost = 7,

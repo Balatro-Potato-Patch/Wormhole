@@ -1,7 +1,7 @@
 return {
 descriptions={
 	Joker={
-		j_worm_aliencat ={
+		j_worm_alien_cat ={
 			name=
 				"Alien Cat"
 			, text={
@@ -11,16 +11,16 @@ descriptions={
 				"card when scored"
 			}
 		},
-		j_worm_asteroidmine ={
+		j_worm_pallasite ={
 			name=
-				"Asteroid Mine"
+				"Pallasite"
 			, text={
 				"If played {C:attention}poker hand{}",
 				"was upgraded this round,",
 				"cards give {C:money}$#1#{} when scored"
 			}
 		},
-		j_worm_cookiecat ={
+		j_worm_cookie_cat ={
 			name=
 				"Cookie Cat"
 			, text={
@@ -64,8 +64,9 @@ descriptions={
 			name=
 				"Pisces"
 			, text={
-				"If poker hand contains a {C:attention}#1#{},",
-				"destroy it, then create a {C:attention}#2#{}",
+				"If poker hand contains a",
+				"{C:attention}#1#{}, destroy it",
+				"and create a {C:attention}#2#{}",
 				"{C:red}self-destructs{}"
 			}
 		},
@@ -74,8 +75,8 @@ descriptions={
 				"Goldilocks Zone"
 			, text={
 				"If played hand is a {C:attention}#1#{},",
-				"the middle scoring card becomes",
-				"a {C:attention}#2#{} with a {C:attention}#3# Seal{}"
+				"turn the {C:attention}middlemost{} scoring card",
+				"to a {C:attention}#2#{} with a {C:attention}#3# Seal{}"
 			}
 		},
 		j_worm_nasahiring ={
@@ -89,6 +90,7 @@ descriptions={
 		},
 		j_worm_capitalism ={
 			name={
+				"Outer Space,",
 				"The One Place",
 				"Left Uncorrupt",
 				"by Capitalism"
@@ -101,12 +103,13 @@ descriptions={
 		},
 	},
 	Stake={
-		worm_cosmic ={
+		stake_worm_cosmic ={
 			name=
 				'Cosmic Stake'
 			, text={
 				"Shop can have {C:attention}Gravity{} Jokers",
-				"{C:inactive,s:0.8}(Halves all hand levels){}"
+				"{C:inactive,s:0.8}(Halve all poker hand levels when bought){}",
+				"{s:0.8}Applies {C:money,s:0.8}Gold Stake{}"
 			}
 		}
 	},
@@ -118,8 +121,8 @@ descriptions={
 			name=
 				"Celestial"
 			, text={
-				"Halves all {C:attention}poker hand{}",
-				"levels when acquired"
+				"Halve all {C:attention}poker hand{}",
+				"levels when bought"
 			}
 		}
 	},

@@ -25,22 +25,15 @@ Card.is_3 = Card.is_3 or function(self, bypass_debuff)
 end
 
 SMODS.Atlas {
-    key = "mrrp_j",
-    path = "mrrp mew meow/mrrp-Jokers.png",
+    key = "mrrp",
+    path = "mrrp mew meow/mrrp-cards.png",
     px = 71,
     py = 95
 }
 
 SMODS.Atlas {
     key = "mrrp_stake",
-    path = "mrrp mew meow/mrrp-Stakes.png",
+    path = "mrrp mew meow/mrrp-stakes.png",
     px = 29,
     py = 29
-}
-
-SMODS.Atlas {
-    key = "mrrp_sticker",
-    path = "mrrp mew meow/mrrp-Stickers.png",
-    px = 71,
-    py = 95
 }
