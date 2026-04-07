@@ -228,8 +228,8 @@ return {
 				name = "Black Hole Blackberry",
 				text = {
 					"Attached {C:attention}Joker{}",
-					"Balances {C:chips}Chips{} and",
-					"{C:mult}Mult{} score by {X:legendary,C:white}#1#%{}",
+					"balances {C:chips}Chips{} and",
+					"{C:mult}Mult{} by {X:legendary,C:white}#1#%{}",
 				},
 			},
 
