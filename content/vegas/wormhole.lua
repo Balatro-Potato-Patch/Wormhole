@@ -691,6 +691,9 @@ SMODS.Blind{
 		if context.end_of_round then
 			self.config.timing = false
 			self.config.time = 2*60
+			if source then 
+				source:stop()
+			end
 		end
 	end,
 	disable = function(self)
