@@ -45,17 +45,16 @@ Wormhole.JR_UTILS.Satellite {
   pos = { x = 0, y = 0 },
   soul_pos = { x = 0, y = 1, draw = Wormhole.JR_UTILS.draw_satellite_soul },
 
-  jr_calculate = function(self, context,vars)
-    if context.hand_drawn and G.GAME.jr.curr_hand then
-      --print("new_horizon calc")
-      G.GAME.jr.curr_hand = nil
-      SMODS.draw_cards(G.GAME.jr.satellite_hands[vars.hand_type].level)
-      return nil, true
+  jr_calculate = function(self, context, vars)
+    if context.drawing_cards and G.GAME.jr.curr_hand then
+      return {
+        modify = G.GAME.jr.satellite_hands[vars.hand_type].level + (math.max(context.amount, 0))
+      }
     end
   end,
   loc_vars = function(self, info_queue, card)
     local _level = G.GAME.jr and G.GAME.jr.satellite_hands[card.ability.extra.hand_type].level or 0
-    return  {
+    return {
       vars = {
         _level,
         localize(card.ability.extra.hand_type, 'poker_hands'),
@@ -106,11 +105,12 @@ Wormhole.JR_UTILS.Satellite {
   loc_vars = function(self, info_queue, card)
     local _level = G.GAME.jr and G.GAME.jr.satellite_hands[card.ability.extra.hand_type].level or 0
     local num, den = SMODS.get_probability_vars(card, card.ability.extra.num, card.ability.extra.den, "worm_jr_messenger")
-    return  {
+    return {
       vars = {
         _level,
         localize(card.ability.extra.hand_type, 'poker_hands'),
-        num, den,
+        num,
+        den,
         colours = { (_level == 1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, _level)]) }
       }
     }
@@ -140,10 +140,10 @@ Wormhole.JR_UTILS.Satellite {
         card_copied.states.visible = nil
 
         G.E_MANAGER:add_event(Event({
-            func = function()
-                card_copied:start_materialize()
-                return true
-            end
+          func = function()
+            card_copied:start_materialize()
+            return true
+          end
         }))
         SMODS.calculate_effect({
           message = localize('k_copied_ex'),
@@ -156,14 +156,14 @@ Wormhole.JR_UTILS.Satellite {
               end
             }))
           end
-        },_target)
+        }, _target)
       end
       return nil, true
     end
   end,
   loc_vars = function(self, info_queue, card)
     local _level = G.GAME.jr and G.GAME.jr.satellite_hands[card.ability.extra.hand_type].level or 0
-    return  {
+    return {
       vars = {
         _level,
         localize(card.ability.extra.hand_type, 'poker_hands'),
