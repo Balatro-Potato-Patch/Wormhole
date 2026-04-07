@@ -1,5 +1,9 @@
 --contains boosters and SMODS.ConsumableType
 
+SMODS.Atlas({key = "asm_ultrawormhole_sm", path = "ultrawormholesmall.png", px = 83, py = 99, fps = 7, frames = 3, atlas_table = "ANIMATION_ATLAS"}):register()
+SMODS.Atlas({key = "asm_ultrawormhole_bg", path = "ultrawormholebig.png", px = 99, py = 99, fps = 7, frames = 3, atlas_table = "ANIMATION_ATLAS"}):register()
+SMODS.Atlas({key = "asm_ultrawormhole_bgr", path = "ultrawormholebigger.png", px = 102, py = 99, fps = 7, frames = 3, atlas_table = "ANIMATION_ATLAS"}):register()
+
 SMODS.ConsumableType{
     key = "worm_ultrabeast",
     primary_colour = HEX("345678"),
@@ -39,10 +43,10 @@ local wormhole_colour = function (self)
 end
 
 local wormholes = { --im so fucking smart
-    { type = "normal_1", extra = 2, choose = 1, pos = { x = 0, y = 0 }, weight = 0.8, cost = 4 },
-    { type = "normal_2", extra = 2, choose = 1, pos = { x = 0, y = 0 }, weight = 0.8, cost = 4 },
-    { type = "jumbo_1", extra = 4, choose = 1, pos = { x = 0, y = 0 }, weight = 0.8, cost = 6 },
-    { type = "mega_1", extra = 4, choose = 2, pos = { x = 0, y = 0 }, weight = 0.2, cost = 8 },
+    { type = "normal_1", atlas = "worm_asm_ultrawormhole_sm", display_size = { w = 83, h = 99 },  extra = 2, choose = 1, pos = { x = 0, y = 0 }, weight = 0.8, cost = 4 },
+    -- { type = "normal_2", extra = 2, choose = 1, pos = { x = 0, y = 0 }, weight = 0.8, cost = 4 },
+    { type = "jumbo_1", atlas = "worm_asm_ultrawormhole_bg", display_size = { w = 99, h = 99 }, extra = 4, choose = 1, pos = { x = 0, y = 0 }, weight = 0.8, cost = 6 },
+    { type = "mega_1", atlas = "worm_asm_ultrawormhole_bgr", display_size = { w = 102, h = 99 }, extra = 4, choose = 2, pos = { x = 0, y = 0 }, weight = 0.2, cost = 8 },
 }
 
 for _, t in ipairs(wormholes) do
@@ -51,8 +55,11 @@ for _, t in ipairs(wormholes) do
         weight = t.weight,
         kind = "worm_Ultrawormhole",
         cost = t.cost,
-        pos = t.pos,
-        display_size = { w = 91, h = 91 },
+        atlas = t.atlas,
+        animated = true,
+        frames = 3,
+        animation_speed = 7,
+        display_size = t.display_size,
         config = { extra = t.extra, choose = t.choose },
         group_key = "k_worm_ultrawormhole",
         --draw_hand = true,
