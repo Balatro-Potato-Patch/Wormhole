@@ -639,6 +639,9 @@ SMODS.Consumable { -- Cosmospolitan
             end
         end
     end,
+    refill = function(self, card)
+        card.ability.extra.current_team = 'worm_' .. Wormhole.Absinthe.get_random_team().name
+    end,
     set_ability = function(self, card, initial, delay_sprites)
         card.ability.extra.current_team = 'worm_' .. Wormhole.Absinthe.get_random_team().name
     end,
