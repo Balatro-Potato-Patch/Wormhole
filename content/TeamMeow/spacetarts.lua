@@ -91,6 +91,8 @@ function SpaceTart(args)
 	ex_table.tart_cfg = args.config
 	local artist = args.credits and (args.credits.artist or {}) or {}
 	local coder = args.credits and (args.credits.coder or {}) or {}
+	local attributes = args.attributes or {}
+	table.insert(attributes, "cat")
 	table.insert(artist, 1, "incognito")
 	table.insert(coder, 1, "thunderedge")
 	table.insert(coder, 1, "silverautumn")
@@ -234,7 +236,7 @@ function SpaceTart(args)
 		ppu_team = {"meow"},
 		ppu_artist = artist,
 		ppu_coder = coder,
-		attributes = args.attributes
+		attributes = attributes
 
 	})
 	Wormhole.TEAM_MEOW.tartInfo[args.key] = {
