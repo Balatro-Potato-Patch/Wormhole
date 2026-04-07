@@ -66,6 +66,15 @@ return {
             }
         },
 
+        Edition = {
+            e_worm_lfc_starry = {
+                name = "Starry",
+                text = {
+                    "{C:chips}+#1#{} Chips and {C:mult}+#2#{} Mult",
+                    "to played {C:attention}poker hand"
+                },
+            },
+        },
         Joker = {
             j_worm_lfc_meteor_shower = {
                 name = "Meteor Shower",
@@ -227,6 +236,9 @@ return {
             k_lfc_secret2 = "(creates extra copy of Moon Berry, must have room)",
             k_lfc_secret3 = "gotcha, lol",
             k_lfc_secret4 = "wow so secret",
+        },
+        labels = {
+            worm_lfc_starry = "Starry",
         },
         v_dictionary = {
             lfc_dex_blacephalon_us = {
