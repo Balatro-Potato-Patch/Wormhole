@@ -54,7 +54,7 @@ return {
                 }
             },
             j_worm_riverboat_test = {
-                name = "test joker",
+                name = "[test joker]",
                 text = {
                     "When a {C:planet}Planet{} card is used,",
                     "add {X:purple,C:white}#1#X{} the product of its",
@@ -130,6 +130,15 @@ return {
         dictionary = {
             k_revolve_ex = "Revolve!",
             k_disintegrated_ex = "Disintegrated!"
+        },
+        achievement_names = {
+            riverboat_instaplanet = ""
+        },
+        achievement_descriptions = {
+            riverboat_instaplanet = {
+                "Win a round in 0 hands",
+                "using [test joker]"
+            }
         }
     }
 }
