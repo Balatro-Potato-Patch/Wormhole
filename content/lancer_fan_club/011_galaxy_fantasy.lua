@@ -29,9 +29,6 @@ SMODS.Joker {
                     key = card.ability.extra.card_type.key,
                     set = card.ability.extra.card_type.set
                 }) or localize("k_lfc_none"),
-                colours = {
-                    G.C.SECONDARY_SET[card.ability.extra.card_type.set] or G.C.FILTER
-                }
             }
         }
     end,
