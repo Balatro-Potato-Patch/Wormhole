@@ -211,13 +211,15 @@ end
 SMODS.Consumable { -- Supergiant Cider
     set = 'abs_drinks',
     key = 'abs_supergiant_cider',
-    pos = { x = 2, y = 0 },
+    pos = { x = 4, y = 0 },
+    atlas = 'abs_drinks',
     ppu_coder = { 'pi_cubed' },
+    ppu_artist = { 'AstraLuna' },
     ppu_team = { 'absinthe' },
     config = {
         drink_values = {
-            filled_pos = { x = 2, y = 0 },
-            empty_pos = { x = 3, y = 0 },
+            filled_pos = { x = 4, y = 0 },
+            empty_pos = { x = 5, y = 0 },
             filled = true,
             visibly_filled = true,
             primed = false
