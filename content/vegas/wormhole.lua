@@ -225,9 +225,9 @@ SMODS.Joker{
 }
 
 SMODS.Joker{
-	key = "inferior_planet",
+	key = "gravity_assist",
 	loc_txt = {
-		name = "Inferior Planet",
+		name = "Gravity Assist",
 		text = {
 			"{C:green}#1# in #2#{} chance to create an",
 			"{C:attention}inferior{} {C:blue}Planet{} Card",
@@ -237,7 +237,7 @@ SMODS.Joker{
 	},
 	config = { extra = { odds = 2 }},
 	loc_vars = function(self, info_queue, card)
-		local numerator, denominator = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, 'inferiorplanet')
+		local numerator, denominator = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, 'gravityassist')
         return { vars = { numerator, denominator } }
 	end,
 	atlas = "vegas_jokers",
@@ -252,7 +252,7 @@ SMODS.Joker{
 	ppu_coder = {"Jammbo"},
 	ppu_artist = {"Jammbo"},
 	calculate = function(self, card, context)
-		if context.using_consumeable and context.consumeable.ability.set == ("Planet") and SMODS.pseudorandom_probability(card, 'inferiorplanet', 1, card.ability.extra.odds) then
+		if context.using_consumeable and context.consumeable.ability.set == ("Planet") and SMODS.pseudorandom_probability(card, 'gravityassist', 1, card.ability.extra.odds) then
 			local key = context.consumeable.config.center.key
 			local hand_type = nil
 			local order = 0
@@ -269,7 +269,7 @@ SMODS.Joker{
 						hands_lower_equal[#hands_lower_equal + 1] = G.GAME.hands[G.P_CENTER_POOLS.Planet[i].config.hand_type]
 					end
 				end
-				local chosen_hand = pseudorandom_element(hands_lower_equal, 'inferior')
+				local chosen_hand = pseudorandom_element(hands_lower_equal, 'gravityassist')
 				G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
 				G.E_MANAGER:add_event(Event({
 					trigger = 'before',
@@ -383,7 +383,7 @@ SMODS.Joker{
         return { vars = { card.ability.extra.repetitions, card.ability.extra.repetitions_odd }}
     end,
     atlas = "vegas_jokers",
-    pos = {x = 0, y = 4},
+    pos = {x = 4, y = 0},
     rarity = 1,
     cost = 5,
     blueprint_compat = true,
@@ -509,7 +509,7 @@ SMODS.Consumable {
 		name = "Expansion",
 		text = {
 			"Add {C:purple}Negative{} effect to up",
-			"to {C:attention}#1#{}} selected cards in hand"
+			"to {C:attention}#1#{} selected cards in hand"
 		}
 	},
     pos = { x = 4, y = 4 },
