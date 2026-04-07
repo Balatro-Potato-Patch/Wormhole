@@ -130,7 +130,7 @@ SMODS.Joker{
 		name = "Spaghettification",
 		text = {
 			"{C:green}#1# in #2#{} chance to {C:attention}downgrade",
-			"level of played {C:attention} poker hand",
+			"level of played {C:attention}poker hand",
 			"Gains {C:attention}double{} the Mult lost",
 			"{C:inactive}(Currently {C:mult}+#3#{C:inactive} Mult)"
 		}
@@ -497,6 +497,213 @@ SMODS.Blind{
 				level_up_hand(blind, k, true, -1)
 			end
 			update_hand_text({sound = 'button', volume = 0.7, pitch = 1.1, delay = 0}, {mult = 0, chips = 0, handname = '', level = ''})
+		end
+	end
+}
+
+local TIMERTIME = 2*60 --for DynaTextEffect to read, set to HeatDeath.config.time
+
+SMODS.DynaTextEffect {
+    key = "vegas_timer",
+    func = function (self, index, letter)
+		local minutes = math.floor(TIMERTIME/60)
+		local seconds = TIMERTIME - minutes*60
+		if TIMERTIME > 59 then 
+			letter.colour = G.C.WHITE 
+		else
+			letter.colour = G.C.RED
+		end
+		if index == 1 then
+			letter.letter:set(tostring(minutes))
+		elseif index == 3 then
+			letter.letter:set(tostring(math.floor(seconds/10)))
+		elseif index == 4 then
+			letter.letter:set(tostring(seconds%10)) 
+		end
+    end
+}
+
+--Sound Synthesis for Heat Death Blind
+local rate      = 44100 -- samples per second
+local length    = 25  -- 0.03125 seconds
+local soundData = love.sound.newSoundData(math.floor(length*rate), rate, 16, 1)
+for i=0, soundData:getSampleCount() - 1 do
+	soundData:setSample(i, math.random(0, 20000)) -- noise
+end
+local source = love.audio.newSource(soundData)
+local function noise(volume) 
+	source:setVolume(volume or 0.5)
+	source:play() 
+end
+
+--Recursive Event for Heat Death Blind
+local heatdeath_timer 
+heatdeath_timer = function(heatdeath)
+    G.E_MANAGER:add_event(Event {
+        blockable = false,
+        blocking = false,
+        pause_force = true,
+        no_delete = true,
+        trigger = "after",
+        delay = 1,
+        func = function()
+			if heatdeath.config.timing then
+				
+				--stop if Heat Death is rerolled
+				if G.GAME.round_resets.blind_choices.Boss ~= "bl_worm_heatdeath" then
+					TIMERTIME = 2*60
+					heatdeath.config.time = 2*60
+					heatdeath.config.timing = false
+					source:stop()
+					return true
+				end
+				
+				--countdown
+				heatdeath.config.time = heatdeath.config.time - 1
+				TIMERTIME = heatdeath.config.time
+
+				--play a sound
+				if heatdeath.config.time % 2 == 0 then
+					play_sound("worm_vegas_tick")
+				else
+					play_sound("worm_vegas_tock")
+				end
+
+				if heatdeath.config.time == 20 then
+					noise(0.0) --Play noise starting at volume 0
+				elseif heatdeath.config.time < 20 then
+					source:setVolume((20 - heatdeath.config.time) * 0.005) --Increase the volume subtly each second
+				end
+				
+				if heatdeath.config.time == 0 then
+					
+					--lose
+					source:stop()
+
+					G.STATE = G.STATES.GAME_OVER --Slow down the music
+					G.GAME.blind.config.blind = heatdeath --Set this for correct reason for death
+
+					--copied from game.lua Game:update_game_over(dt): display game over screen
+					remove_save()
+
+					if G.GAME.round_resets.ante <= G.GAME.win_ante then
+						if not G.GAME.seeded and not G.GAME.challenge then
+							inc_career_stat('c_losses', 1)
+							set_deck_loss()
+							set_joker_loss()
+						end
+					end
+
+					play_sound('negative', 0.5, 0.7)
+					play_sound('whoosh2', 0.9, 0.7)
+
+					G.SETTINGS.paused = true
+					G.FUNCS.overlay_menu{
+						definition = create_UIBox_game_over(),
+						config = {no_esc = true}
+					}
+					G.ROOM.jiggle = G.ROOM.jiggle + 3
+        
+					if G.GAME.round_resets.ante <= G.GAME.win_ante then --Only add Jimbo to say a quip if the game over happens when the run is lost
+						local Jimbo = nil
+						G.E_MANAGER:add_event(Event({
+							trigger = 'after',
+							delay = 2.5,
+							blocking = false,
+							func = (function()
+								if G.OVERLAY_MENU and G.OVERLAY_MENU:get_UIE_by_ID('jimbo_spot') then 
+									Jimbo = Card_Character({center = G.P_CENTERS.j_space}) --Trying to find space joker here, but doesn't work?
+									local spot = G.OVERLAY_MENU:get_UIE_by_ID('jimbo_spot')
+									spot.config.object:remove()
+									spot.config.object = Jimbo
+									Jimbo.ui_object_updated = true
+									Jimbo:add_speech_bubble('lq_'..math.random(1,10), nil, {quip = true})
+									Jimbo:say_stuff(5)
+									end
+								return true
+							end)
+						}))
+					end
+					--
+
+					--Reset variables for next time Heat Death shows up
+					TIMERTIME = 2*60
+					heatdeath.config.time = 2*60
+					heatdeath.config.timing = false
+
+					return true
+				end
+
+				--repeat
+				heatdeath_timer(heatdeath)
+				return true
+			end
+        end
+    })
+end
+
+SMODS.Sound{
+	key = "vegas_tick",
+	path = "vegas/tick.wav"
+}
+
+SMODS.Sound{
+	key = "vegas_tock",
+	path = "vegas/tock.wav"
+}
+
+SMODS.Blind{
+	key = "heatdeath",
+	loc_txt = {
+		name = "Heat Death",
+		text = {
+			"{E:worm_vegas_timer}#1#:#2#"
+		}
+	},
+	config = {time = 2*60, timing = false},
+	loc_vars = function(self)
+		local minutes = math.floor(self.config.time/60)
+		local seconds = self.config.time - minutes*60
+		
+		if self.config.timing == false then
+			TIMERTIME = self.config.time
+
+			self.config.timing = true
+			heatdeath_timer(self)
+		end
+
+		return { vars = { minutes, string.format("%02d", seconds) }}
+	end,
+	collection_loc_vars = function(self)
+		return { vars = {2, "00"}}
+	end,
+	atlas = "vegas_blinds",
+	pos = {x = 0, y = 1},
+	discovered = true,
+	boss = {min = 1},
+	dollars = 5,
+    mult = 2,
+	boss_colour = HEX("000000"),
+	ppu_team = {"People Found In Vegas"},
+	ppu_coder = {"Ben Roffey"},
+	ppu_artist = {"Ben Roffey"},
+	calculate = function(self, blind, context)
+		if context.end_of_round then
+			self.config.timing = false
+			self.config.time = 2*60
+		end
+	end,
+	disable = function(self)
+		self.config.timing = false
+		if source then 
+			source:stop()
+		end
+	end,
+	defeat = function(self)
+		self.config.timing = false
+		self.config.time = 2*60
+		if source then 
+			source:stop()
 		end
 	end
 }
