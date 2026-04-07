@@ -300,6 +300,15 @@ return {
 				},
 			},
 		},
+		Joker = {
+			j_worm_meow_nyan_cat = {
+				name = "Nyan Cat",
+				text = {
+					"Increases max {C:worm_meow_spacetart}©Spacetart{} limit",
+					"on cards by {C:attention}+#1# "
+				}
+			}
+		},
 		Other = {
 			worm_meow_spacetart_stacks = {
 				text = {

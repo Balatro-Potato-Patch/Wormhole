@@ -973,6 +973,9 @@ SMODS.DrawStep({
 				tartSprite:draw_shader("dissolve", 0, nil, nil, card.children.center, 0, 0, 0, yshift, nil, 0.6)
 				tartSprite:draw_shader("dissolve", nil, nil, nil, card.children.center, 0, 0, 0, yshift)
 				yshift = yshift + yinc
+				if card.meow_tart_count then 
+					card.meow_tart_count.text_offset.y = (100+yshift)
+				end
 			end
 		end
 	end,
@@ -1025,6 +1028,45 @@ SMODS.DrawStep({
 	conditions = { vortex = false, facing = "front" },
 })
 
+
+-- im sorry
+SMODS.DrawStep {
+    key = 'meow_tart_count',
+    order = 45,
+    func = function(self, layer)
+        if self.meow_tart_count and (self.config.center.discovered or self.bypass_discovery_center) then
+            for _, sprite in ipairs(self.meow_tart_count[1] and self.meow_tart_count or {self.meow_tart_count}) do
+                love.graphics.push()
+                love.graphics.origin()
+                sprite.canvas:renderTo(love.graphics.clear, 0, 0, 0, 0)
+				local pre_text = (sprite.ref_table and sprite.ref_table[sprite.ref_value] or sprite.text)
+				local after_text = (sprite.ref_table2 and sprite.ref_table2[sprite.ref_value2] or sprite.text2)
+                local text = love.graphics.newText(sprite.font, {sprite.text_colour or G.C.UI.TEXT_LIGHT, (pre_text .."/" .. after_text )})
+                local scale_fac = math.min((sprite.text_width or sprite.canvasW)/text:getWidth(), (sprite.text_height or sprite.canvasH)/text:getHeight()) * sprite.canvasScale
+                if text then 
+                    local x,y,r,sx,sy,ox,oy = unpack(sprite.text_transform or {
+                            (0 + sprite.text_offset.x) * sprite.canvasScale,
+                            (0 + sprite.text_offset.y) * sprite.canvasScale,
+                            0,
+                            scale_fac, scale_fac,
+							sprite.text_h_align == 'left' and 0 or (sprite.text_h_align == 'right' and text:getWidth() or text:getWidth()/2),
+							sprite.text_v_align == 'top' and 0 or (sprite.text_v_align == 'bottom' and text:getHeight() or text:getHeight()/2)
+                        })
+                    sprite.canvas:renderTo(love.graphics.draw,
+                        text,
+                        x, y, r, sx, sy, ox, oy
+                    )
+                end
+                love.graphics.pop()
+                SMODS.reload_stencil_stack()
+                sprite.role.draw_major = self
+                sprite:draw_shader('dissolve', nil, nil, nil, self.children.center)
+            end
+        end
+    end,
+    conditions = { vortex = false, facing = 'front' },
+}
+
 -- Debug stuff
 
 local old = Card.draw
@@ -1035,6 +1077,29 @@ function Card:draw(...)
 		for k, v in ipairs(G.jokers.cards) do
 			if meow_cards_are_colliding(self, v) and self ~= v then
 				bool = true
+			end
+
+			-- can definitely be reimplemented a hell lot better but it works
+			self.tart_count = #self.tarts
+
+			if self.tart_count==0 and self.meow_tart_count then
+				self.meow_tart_count:remove()
+				self.meow_tart_count = nil
+			end
+
+			if #self.tarts > 0 and not self.meow_tart_count then
+				self.meow_tart_count =  SMODS.CanvasSprite({
+					canvasW = 115,
+					canvasH = 115,
+					text_offset = { x = 82, y = 100},
+					text_width = 45,
+					text_height = 11,
+					ref_table = self,
+					ref_value = "tart_count",
+					ref_table2 = G.GAME,
+					ref_value2 = "max_foil_slots",
+					text_colour = G.C.WHITE,
+				})
 			end
 		end
 	end
@@ -1204,7 +1269,7 @@ function Card:stop_drag(...)
 	return ret
 end
 
-local old = Game.update
+--[[local old = Game.update
 function Game:update(dt, ...)
 	local ret = old(self, dt, ...)
 	local alreadyset = false
@@ -1226,7 +1291,7 @@ function Game:update(dt, ...)
 			end
 		end
 	end
-end
+end]]
 local old = Game.update
 function Game:update(dt, ...)
 	local ret = old(self, dt, ...)
