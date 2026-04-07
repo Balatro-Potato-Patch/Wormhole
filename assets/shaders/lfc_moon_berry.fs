@@ -153,7 +153,7 @@ vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords
     center_uv.y *= image_details.x / image_details.y; // extend it out a bit
 
     // find angles and stuff
-    float pixel_angle = atan(center_uv.x,center_uv.y) / 3.0;
+    float pixel_angle = atan(center_uv.x,center_uv.y) / PI;
     float pixel_distance =  length(center_uv)* 2.0;
     vec2 st = vec2(pixel_angle, pixel_distance);
     vec2 polar = st;
