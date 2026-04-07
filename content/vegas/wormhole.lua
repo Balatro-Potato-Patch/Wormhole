@@ -543,3 +543,25 @@ SMODS.Consumable {
         end
     end
 }
+
+--Deck (Test)
+SMODS.Back {
+	key = "singularity",
+    loc_txt = {
+        name = "Singularity Deck",
+        text = {
+            "Start with {C:chips}Banner{},",
+			"and {C:blue}Planet Merchant{}",
+			"Hands start at level {C:attention}0"
+        }
+    },
+	config = { jokers = { "j_banner" }, vouchers = { "v_planet_merchant" } },
+    atlas = "vegas_jokers",
+    pos = {x = 0, y = 4},
+	discovered = true,
+	unlocked = true,
+	apply = function(self, back)
+		local args = { level_up = -1, instant = true }
+        SMODS.upgrade_poker_hands(args)
+	end
+}
