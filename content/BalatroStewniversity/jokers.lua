@@ -177,6 +177,6 @@ SMODS.Joker{ --Dinosaur Earth
             }
         end
         --TO DO: Make the meteor crashing video play when the dinos go extinct
-
+        --TO DO: make all futer dinos inactive 
     end,
 }
