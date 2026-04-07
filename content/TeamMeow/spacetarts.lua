@@ -43,6 +43,8 @@ SMODS.Atlas({
 	atlas_table = "ANIMATION_ATLAS",
 })
 
+-- Load, save, and initialize tarts
+
 local ref = Card.init
 function Card:init(...)
 	local ret = ref(self, ...)
@@ -63,6 +65,8 @@ function Card:load(cardTable, other_card, ...)
 	self.tarts = cardTable.tarts
 	return st
 end
+
+-- Spacetart creation wrapper
 
 Wormhole.TEAM_MEOW.tartInfo = {}
 function SpaceTart(args)
@@ -241,28 +245,28 @@ function generate_card_ui(
 
 				local boost_count = 0
 				if type(tab.boosted_conds) == "function" then
-					local v = tab.boosted_conds(card)
+					local res = tab.boosted_conds(card)
 
-					if type(v) == "boolean" and v then
+					if type(res) == "boolean" and res then
 						boost_count = boost_count + 1
-					elseif type(v) == "number" then
-						boost_count = boost_count + v
+					elseif type(res) == "number" then
+						boost_count = boost_count + res
 					end
 				else
 					for _, boost_test in pairs(tab.boosted_conds) do
-						local v = boost_test(card)
+						local res = boost_test(card)
 
-						if type(v) == "boolean" and v then
+						if type(res) == "boolean" and res then
 							boost_count = boost_count + 1
-						elseif type(v) == "number" then
-							boost_count = boost_count + v
+						elseif type(res) == "number" then
+							boost_count = boost_count + res
 						end
 					end
 				end
 
 				local amt = nil
-				for k, num in pairs(map) do
-					if k == v.center_key then
+				for key, num in pairs(map) do
+					if key == v.center_key then
 						amt = num
 					end
 				end
@@ -283,6 +287,8 @@ function generate_card_ui(
 	end
 	return ret
 end
+
+-- Hook Joker calcs so tart effects are triggered after Joker effects
 
 local card_joker_calc = Card.calculate_joker
 function Card:calculate_joker(context, ...)
@@ -921,60 +927,7 @@ SpaceTart({
 	},
 })
 
--- create_tart("stellar_strawberry", { x = 1, y = 2 }, { x = 1, y = 0 }, function(card, context)
--- 	return { message = "test" }
--- end, function(card, context)
--- 	if context.joker_main then
--- 		return {
--- 			message = "betterTest",
--- 		}
--- 	end
--- end, "j_joker")
--- create_tart("celestial_cinnamon", { x = 2, y = 2 }, { x = 2, y = 0 }, function(card, context)
--- 	return { message = "test" }
--- end, function(card, context)
--- 	if context.joker_main then
--- 		return {
--- 			message = "betterTest",
--- 		}
--- 	end
--- end, "j_joker")
--- create_tart("lunar_lemon", { x = 3, y = 2 }, { x = 3, y = 0 }, function(card, context)
--- 	return { message = "test" }
--- end, function(card, context)
--- 	if context.joker_main then
--- 		return {
--- 			message = "betterTest",
--- 		}
--- 	end
--- end, "j_joker")
--- create_tart("meteor_mint", { x = 1, y = 3 }, { x = 1, y = 1 }, function(card, context)
--- 	return { message = "test" }
--- end, function(card, context)
--- 	if context.joker_main then
--- 		return {
--- 			message = "betterTest",
--- 		}
--- 	end
--- end, "j_joker")
--- create_tart("blueshift_blueberry", { x = 2, y = 3 }, { x = 2, y = 1 }, function(card, context)
--- 	return { message = "test" }
--- end, function(card, context)
--- 	if context.joker_main then
--- 		return {
--- 			message = "betterTest",
--- 		}
--- 	end
--- end, "j_joker")
--- create_tart("black_hole_blackberry", { x = 3, y = 3 }, { x = 3, y = 1 }, function(card, context)
--- 	return { message = "test" }
--- end, function(card, context)
--- 	if context.joker_main then
--- 		return {
--- 			message = "betterTest",
--- 		}
--- 	end
--- end, "j_joker")
+-- Draw the tarts in order
 
 SMODS.DrawStep({
 	key = "tarts",
@@ -997,6 +950,8 @@ SMODS.DrawStep({
 	end,
 	conditions = { vortex = false, facing = "front" },
 })
+
+-- Draw sparkle over tart when you are about to apply a tart to a Joker
 
 SMODS.DrawStep({
 	key = "sparkle",
@@ -1041,6 +996,8 @@ SMODS.DrawStep({
 	end,
 	conditions = { vortex = false, facing = "front" },
 })
+
+-- Debug stuff
 
 local old = Card.draw
 function Card:draw(...)
