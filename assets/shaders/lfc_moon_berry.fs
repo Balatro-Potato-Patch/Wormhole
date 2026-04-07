@@ -146,6 +146,7 @@ vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords
     //tex.rgb += vec3(79.0, 99.0, 103.0)/255.0;
 
     // wormhole spiral start
+    // THIS IS THE BIG SCARY PART WHERE THE WEIRD LINE AT THE TOP HAPPENS. IT IS BECAUSE THE TEXTURE OF THE SPIRAL THING IS NOT THE SAME AS THE CARD ART AND I DON'T HAVE THE BANDWIDTH TO FIX THAT WEIRD SEAM LINE. THIS IS THE PART YOU'RE CTRL-Fing FOR
     vec2 center_uv = uv;//texture_coords*image_details/wormhole_img_details.xy;
     center_uv -= 0.5;
     // center spiral
