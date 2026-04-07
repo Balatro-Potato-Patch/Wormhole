@@ -5,5 +5,7 @@ SMODS.Joker{
 	cost = 8,
 	loc_vars = function (self, info_queue, card)
 		return {vars = {colours = {SMODS.ConsumableTypes.worm_tlr_constellation.primary_colour}}}
-	end
+	end,
+	ppu_team = {"TheLastResort"},
+	ppu_coder = {"Foo54"}
 }

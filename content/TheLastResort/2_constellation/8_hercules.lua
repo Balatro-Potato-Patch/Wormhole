@@ -95,5 +95,6 @@ SMODS.Consumable{
 				return true
 			end
 		}))
-	end
+	end,
+	ppu_coder = {"Foo54"}
 }

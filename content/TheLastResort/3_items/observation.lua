@@ -59,5 +59,7 @@ SMODS.Consumable{
 			end
 		}))
 		delay(0.5)
-	end
+	end,
+	ppu_team = {"TheLastResort"},
+	ppu_coder = {"Foo54"}
 }

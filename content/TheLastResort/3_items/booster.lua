@@ -25,8 +25,7 @@ SMODS.Booster{
 		}
 	end,
 	ppu_team = {"TheLastResort"},
-	ppu_coder = {"Foo54"},
-	ppu_artists = {"None yet"}
+	ppu_coder = {"Foo54"}
 }
 
 SMODS.Booster{
@@ -56,8 +55,7 @@ SMODS.Booster{
 		}
 	end,
 	ppu_team = {"TheLastResort"},
-	ppu_coder = {"Foo54"},
-	ppu_artists = {"None yet"}
+	ppu_coder = {"Foo54"}
 }
 
 SMODS.Booster{
@@ -87,8 +85,7 @@ SMODS.Booster{
 		}
 	end,
 	ppu_team = {"TheLastResort"},
-	ppu_coder = {"Foo54"},
-	ppu_artists = {"None yet"}
+	ppu_coder = {"Foo54"}
 }
 
 SMODS.Booster{
@@ -118,8 +115,7 @@ SMODS.Booster{
 		}
 	end,
 	ppu_team = {"TheLastResort"},
-	ppu_coder = {"Foo54"},
-	ppu_artists = {"None yet"}
+	ppu_coder = {"Foo54"}
 }
 
 SMODS.Sound{
