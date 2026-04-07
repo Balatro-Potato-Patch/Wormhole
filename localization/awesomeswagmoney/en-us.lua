@@ -15,6 +15,27 @@ return {
                     "learn what it does",
                 },
             },
+            p_worm_wormhole_normal = {
+                name = "Lesser Ultra Wormhole",
+                text = {
+                    "Choose {C:attention}#1#{} of up to",
+                    "{C:attention}#2# {C:worm_ultrabeast}Ultra Beasts",
+                },
+            },
+            p_worm_wormhole_jumbo = {
+                name = "Ultra Wormhole",
+                text = {
+                    "Choose {C:attention}#1#{} of up to",
+                    "{C:attention}#2# {C:worm_ultrabeast}Ultra Beasts",
+                },
+            },
+            p_worm_wormhole_mega = {
+                name = "Greater Ultra Wormhole",
+                text = {
+                    "Choose {C:attention}#1#{} of up to",
+                    "{C:attention}#2# {C:worm_ultrabeast}Ultra Beasts",
+                },
+            }
         },
         Planet={},
         Spectral={},

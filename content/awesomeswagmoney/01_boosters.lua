@@ -38,7 +38,7 @@ local wormhole_colour = function (self)
     ease_background_colour({ new_colour = G.C.SECONDARY_SET.worm_ultrabeast, special_colour = G.C.BLACK, contrast = 2 })
 end
 
-local wormholes = {
+local wormholes = { --im so fucking smart
     { type = "normal_1", extra = 2, choose = 1, pos = { x = 0, y = 0 }, weight = 0.8, cost = 4 },
     { type = "normal_2", extra = 2, choose = 1, pos = { x = 0, y = 0 }, weight = 0.8, cost = 4 },
     { type = "jumbo_1", extra = 4, choose = 1, pos = { x = 0, y = 0 }, weight = 0.8, cost = 6 },
@@ -52,7 +52,19 @@ for _, t in ipairs(wormholes) do
         kind = "worm_Ultrawormhole",
         cost = t.cost,
         pos = t.pos,
+        display_size = { w = 91, h = 91 },
         config = { extra = t.extra, choose = t.choose },
-        group_key = "k_worm_ultrawormhole"
+        group_key = "k_worm_ultrawormhole",
+        --draw_hand = true,
+        loc_vars = function (self, info_queue, card)
+            local cfg = (card and card.ability) or self.config or {}
+            return {
+                vars = { cfg.choose, cfg.extra },
+                key = self.key:sub(1, -3),
+            }
+        end,
+        ease_background_colour = wormhole_colour,
+        particles = wormhole_particles,
+        create_card = wormhole_create_card,
     }
 end
