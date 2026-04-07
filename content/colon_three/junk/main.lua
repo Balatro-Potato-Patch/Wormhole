@@ -123,6 +123,35 @@ SMODS.DrawStep {
     conditions = { vortex = false, facing = 'front' },
 }
 
+SMODS.DrawStep {
+    key = 'worm_c3_junk_card_edition',
+    order = 21,
+    func = function(self, layer)
+        if not (self.config and self.config.center and self.config.center.key == "m_worm_junk_card") then return nil end
+        local edition = self.delay_edition or self.edition
+        if edition then
+            for k, v in pairs(G.P_CENTER_POOLS.Edition) do
+                if edition[v.key:sub(3)] and v.shader then
+                    if type(v.draw) == 'function' then
+                        v:draw(self, layer)
+                    else
+                        if self.children.front then
+                            self.children.front:draw_shader(v.shader, nil, self.ARGS.send_to_shader)
+                        end
+                        if not Wormhole.COLON_THREE.shared_junk_card then
+                            Wormhole.COLON_THREE.shared_junk_card = Sprite(0, 0, G.CARD_W, G.CARD_H, G.ASSET_ATLAS["worm_ct_junk_card"], {x = 0, y = 0})
+                        end
+                        Wormhole.COLON_THREE.shared_junk_card:set_sprite_pos({ x = not not self.children.front and 0 or 1, y = 0 })
+                        Wormhole.COLON_THREE.shared_junk_card.role.draw_major = self
+                        Wormhole.COLON_THREE.shared_junk_card:draw_shader(v.shader, nil, nil, nil, self.children.center)
+                    end
+                end
+            end
+        end
+    end,
+    conditions = { vortex = false, facing = 'front' },
+}
+
 function Wormhole.COLON_THREE.junk_get_highlighted_cards(cards)
     local all_junk_selected = true
     local highlighted = {}
