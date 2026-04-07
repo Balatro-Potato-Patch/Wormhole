@@ -8,6 +8,7 @@ SMODS.Joker {
     cost = 8,
     atlas = "lfc_jokers",
     ppu_coder = { "J8-Bit" },
+    ppu_artist = {"J8-Bit"},
     pos = { x = 2, y = 1 },
     pixel_size = { w = 69, h = 69 },
     display_size = { w = 69, h = 69 },

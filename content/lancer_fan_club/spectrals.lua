@@ -53,7 +53,9 @@ SMODS.Consumable {
             --print("Oooh, secret!")
             card.children.center:set_sprite_pos({ x = 1, y = 0 })
         end
-    end
+    end,
+    ppu_artist = {"J8-Bit"},
+    ppu_coder = {"J8-Bit"},
 }
 
 -- Time Dilation
@@ -81,4 +83,6 @@ SMODS.Consumable {
     can_use = function(self, card)
         return true
     end,
+    ppu_artist = {"J8-Bit"},
+    ppu_coder = {"J8-Bit"},
 }

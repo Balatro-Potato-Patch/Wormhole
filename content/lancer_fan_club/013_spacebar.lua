@@ -56,4 +56,6 @@ SMODS.Joker {
             }
         end
     end,
+
+    ppu_artist = {"J8-Bit"},
 }
