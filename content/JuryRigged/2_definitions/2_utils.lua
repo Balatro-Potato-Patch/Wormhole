@@ -2,7 +2,7 @@ Wormhole.JR_UTILS = {}
 
 Wormhole.JR_UTILS.ENABLED_SATELLITES = {
   ['High Card'] = 'new_horizon',
-  --['Pair'] = 'messenger',
+  ['Pair'] = 'messenger',
   --['Two Pair'] = 'tianwen_4',
   --['Three of a Kind'] = 'venera_9',
   --['Flush'] = 'galileo',

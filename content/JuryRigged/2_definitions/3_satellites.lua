@@ -68,3 +68,52 @@ Wormhole.JR_UTILS.Satellite {
     return {}
   end
 }
+
+Wormhole.JR_UTILS.Satellite {
+  key = 'messenger',
+  name = 'messenger',
+  config = { extra = { hand_type = 'Pair', num = 1, den = 2 }, },
+  pos = { x = 1, y = 0 },
+  soul_pos = { x = 1, y = 1, draw = Wormhole.JR_UTILS.draw_satellite_soul },
+
+  jr_calculate = function(self, context, vars)
+    if context.cardarea == "unscored" and context.individual then
+      if SMODS.pseudorandom_probability(nil, 'worm_jr_messenger', vars.num, vars.den) then
+        if context.other_card.debuff then
+          return {
+            message = localize('k_debuffed'),
+            colour = G.C.RED,
+          }
+        else
+          G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + G.GAME.jr.satellite_hands[vars.hand_type].level
+          return {
+            dollars = G.GAME.jr.satellite_hands[vars.hand_type].level,
+            func = function()
+              G.E_MANAGER:add_event(Event({
+                func = function()
+                  G.GAME.dollar_buffer = 0
+                  return true
+                end
+              }))
+            end,
+          }
+        end
+      end
+    end
+  end,
+  loc_vars = function(self, info_queue, card)
+    local _level = G.GAME.jr and G.GAME.jr.satellite_hands[card.ability.extra.hand_type].level or 0
+    local num, den = SMODS.get_probability_vars(card, card.ability.extra.num, card.ability.extra.den, "tboj_pill")
+    return  {
+      vars = {
+        _level,
+        localize(card.ability.extra.hand_type, 'poker_hands'),
+        num, den,
+        colours = { (_level == 1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, _level)]) }
+      }
+    }
+  end,
+  jr_loc_vars = function(self)
+    return {}
+  end
+}
