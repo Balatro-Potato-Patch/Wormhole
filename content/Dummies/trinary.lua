@@ -14,13 +14,19 @@ SMODS.Tag {
     ppu_coder = { "flowire" },
     unlocked = true,
     discovered = false,
+    min_ante = 2,
 	config = { extra = { uses = 3 } },
     loc_vars = function(self, info_queue, tag)
         return { vars = { tag.ability.uses or tag.config.extra.uses } }
     end,
     apply = function(self, tag, context)
+        -- Bugfix: Tag triggers on Discards for first Hand of round
+        if context.type == 'eval' then
+            tag.ability.used = false --> Can't use "tag.triggered"
+        end
         -- Chopped up copy of "Tag:yep()"
-        if context.type == 'round_start_bonus' then
+        if context.type == 'round_start_bonus' and not tag.ability.used then
+            tag.ability.used = true
             -- Select Type
             local rng = pseudorandom("trinary_system")
             local selected --> Only allows one "Spectral" per Trinary-Tag
@@ -62,8 +68,8 @@ SMODS.Tag {
 			end
             -- Destroy (when out of uses)
             tag.ability.uses = (tag.ability.uses or tag.config.extra.uses) - 1
+            tag.triggered = true --> Set "triggered" for other Events...
             if tag.ability.uses <= 0 then
-                tag.triggered = true
                 G.E_MANAGER:add_event(Event({
                     func = (function()
                         tag.HUD_tag.states.visible = false
@@ -78,7 +84,18 @@ SMODS.Tag {
                         return true
                     end)
                 }))
-            else delay(0.7) end
+            else
+                --delay(0.7)
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'after',
+                    delay = 0.7,
+                    func = function()
+                        -- ...but remove "triggered" again.
+                        tag.triggered = false
+                        return true
+                    end
+                }))
+            end
             return true
         end
     end
