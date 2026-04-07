@@ -8,9 +8,9 @@ the deck (13)
 7 jokers (some bartenders, some other). (20)
 
 Drink names: (approx 4 required)
-Hadra Colida - Pina Colada + Hadron Collider (Wombat Country)
-Cosmospolitan - Cosmopolitan, but with an emphasis on the cosmos (Prof. Renderer)
-Mojitury - Mojito + Mercury. Mojito because it has mint in it, and Axy mentioned something minty for Mercury. (Prof. Renderer / Axyraandas)
+Hadra Colida - Pina Colada + Hadron Collider. Gives the Tipsy edition to one of your cards held in hand. (Wombat Country)
+Cosmospolitan - Cosmopolitan, but with an emphasis on the cosmos. Gives the Drunk edition to one of your cards held in hand. (Prof. Renderer)
+Mojitury - Mojito + Mercury. Mojito because it has mint in it, and Axy mentioned something minty for Mercury. Gives the Very Drunk edition to one of your cards held in hand. (Prof. Renderer / Axyraandas)
 Black Hole Bomb - Gives the Blackout edition on one of your cards held in hand. (Prof. Renderer)
 
 Food names: (approx 3 required)
