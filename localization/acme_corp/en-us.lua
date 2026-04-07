@@ -43,7 +43,7 @@ return {
                 name = 'Legally Distinct ACME Automated Helper',
                 text = {
                     '{X:attention,C:white}Use{} to create a random {C:mult}rare{} Joker',
-                    '{C:inactive}Fixed {C:green}1 in 20{C:inactive} chance to become',
+                    '{C:inactive}Fixed {C:green}1 in 25{C:inactive} chance to become',
                     '{C:Legendary}Legendary{C:inactive} at the end of the shop',
                     '{C:inactive}(Must have room)'
                 }
