@@ -32,7 +32,10 @@ SMODS.Consumable{
     soul_pos = {x=0, y=1, draw = function(self, scale_mod) Wormhole.ACME.ball_function(self, scale_mod) end},
     ppu_coder = {'Youh', 'Opal'},
     ppu_artist = {'RadiationV2'},
-	config = {extra = {aces_scored = 0, aces_required = 7}},
+	config = {
+        active = false,
+        extra = {aces_scored = 0, aces_required = 7}
+    },
     loc_vars = function(self, info_queue, card)
         local aces_left = (card.ability.extra.aces_required - card.ability.extra.aces_scored)
         if aces_left > 1 then
@@ -99,14 +102,28 @@ SMODS.Consumable{
     end,
     calculate = function(self, card, context)
         if context.joker_main then
+            if card.ability.active then
+                return
+            end
+
+            local any_ace_scored = false
             for k, v in ipairs(context.scoring_hand) do
                 if v.base.value == 'Ace' and not SMODS.has_no_rank(v) then
+                    any_ace_scored = true
                     card.ability.extra.aces_scored = card.ability.extra.aces_scored + 1
                 end
             end
             if card.ability.extra.aces_scored >= card.ability.extra.aces_required then
+                card.ability.active = true;
                 return{
-                    message = localize('k_active_ex')
+                    message = localize('k_active_ex'),
+                    colour = G.C.RED
+                }
+            elseif any_ace_scored then
+                local remaining = card.ability.extra.aces_required - card.ability.extra.aces_scored
+                return {
+                    message = remaining .. " " .. localize('k_remaining'),
+                    colour = G.C.ORANGE
                 }
             end
         end

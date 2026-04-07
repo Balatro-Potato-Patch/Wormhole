@@ -20,7 +20,41 @@ return {
             },
             c_worm_acme_ray_gun = {
                 name = 'ACME Disintegrator-Inverse-Atron'
-            }
+            },
+            c_worm_acme_mr_jr = {
+                name = 'Legally Distinct ACME Automated Helper',
+                text = {
+                    '{X:attention,C:white}After{} opening {C:attention}#1# #2#{},',
+                    '{X:attention,C:white}Use{} to create a random {C:mult}rare{} Joker',
+                    '{C:inactive}Fixed {C:green}1 in 25{C:inactive} chance to become',
+                    '{C:Legendary}Legendary{C:inactive} at the end of the shop',
+                    '{C:inactive}(Must have room)'
+                }
+            },
+            c_worm_acme_mr_jr_legendary = {
+                name = 'Legally Distinct ACME Automated Helper',
+                text = {
+                    '{X:attention,C:white}After{} opening {C:attention}#1# #2#{},',
+                    '{X:attention,C:white}Use{} to create a random {C:Legendary}Legendary{} Joker',
+                    '{C:inactive}(Must have room)'
+                }
+            },
+            c_worm_acme_mr_jr_alt = {
+                name = 'Legally Distinct ACME Automated Helper',
+                text = {
+                    '{X:attention,C:white}Use{} to create a random {C:mult}rare{} Joker',
+                    '{C:inactive}Fixed {C:green}1 in 20{C:inactive} chance to become',
+                    '{C:Legendary}Legendary{C:inactive} at the end of the shop',
+                    '{C:inactive}(Must have room)'
+                }
+            },
+            c_worm_acme_mr_jr_legendary_alt = {
+                name = 'Legally Distinct ACME Automated Helper',
+                text = {
+                    '{X:attention,C:white}Use{} to create a random {C:Legendary}Legendary{} Joker',
+                    '{C:inactive}(Must have room)'
+                }
+            },
         },
         Joker = {
 
@@ -79,6 +113,9 @@ return {
             b_acme_gadget_cards = 'Gadget Cards',
             k_aces = 'Aces',
             k_ace = 'Ace',
+            k_boosters = 'Booster Packs',
+            k_booster = 'Booster Pack',
+            k_remaining = 'Remaining'
         },
         labels = {
             acme_gadget = 'Gadget',
