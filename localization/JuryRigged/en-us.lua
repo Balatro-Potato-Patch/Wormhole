@@ -43,6 +43,21 @@ return {
           }
         }
       },
+      sat_worm_galileo = {
+        name = "Galileo",
+        text = {
+          {
+            "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
+            "{C:attention}#2#",
+          },
+          {
+            "If played hand",
+            "is a {C:attention}#2#{},",
+            "retrigger {C:attention}#1#{} card#3#",
+            "at random"
+          }
+        }
+      },
     },
     PotatoPatch = {
       PotatoPatchTeam_JuryRigged = { name = "JuryRigged" },

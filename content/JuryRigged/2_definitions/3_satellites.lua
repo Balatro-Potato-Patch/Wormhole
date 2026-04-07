@@ -38,6 +38,7 @@ Wormhole.JR_UTILS.Satellite = SMODS.Consumable:extend {
 }
 
 
+-- New Horizon
 Wormhole.JR_UTILS.Satellite {
   key = 'new_horizon',
   name = 'new_horizon',
@@ -68,6 +69,7 @@ Wormhole.JR_UTILS.Satellite {
   end
 }
 
+-- MESSENGER
 Wormhole.JR_UTILS.Satellite {
   key = 'messenger',
   name = 'messenger',
@@ -120,6 +122,7 @@ Wormhole.JR_UTILS.Satellite {
   end
 }
 
+-- Tianwen 4
 Wormhole.JR_UTILS.Satellite {
   key = 'tianwen_4',
   name = 'tianwen_4',
@@ -169,6 +172,54 @@ Wormhole.JR_UTILS.Satellite {
         localize(card.ability.extra.hand_type, 'poker_hands'),
         _level <= 1 and 'y' or 'ies',
         _level <= 1 and 'a ' or '',
+        _level <= 1 and '' or 's',
+        colours = { (_level == 1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, _level)]) }
+      }
+    }
+  end,
+  jr_loc_vars = function(self)
+    return {}
+  end
+}
+
+-- Venera 9
+
+-- Galileo
+Wormhole.JR_UTILS.Satellite {
+  key = 'galileo',
+  name = 'galileo',
+  config = { extra = { hand_type = 'Flush' }, },
+  pos = { x = 4, y = 0 },
+  soul_pos = { x = 4, y = 1, draw = Wormhole.JR_UTILS.draw_satellite_soul },
+  jr_calculate = function(self, context, vars)
+    if context.before then
+      G.GAME.jr.galileo_targets = {}
+      for _ = 1, G.GAME.jr.satellite_hands[vars.hand_type].level do
+        local _target = tostring(pseudorandom("worm_jr_galileo", 1, #context.scoring_hand))
+        G.GAME.jr.galileo_targets[_target] = (G.GAME.jr.galileo_targets[_target] or 0) + 1
+      end
+    end
+
+    if context.repetition and context.cardarea == G.play then
+      for i = 1, #context.scoring_hand do
+        if context.scoring_hand[i] == context.other_card then
+          if G.GAME.jr.galileo_targets[tostring(i)] then
+            return {
+              message = localize('k_again_ex'),
+              repetitions = G.GAME.jr.galileo_targets[tostring(i)] or 0,
+              card = context.other_card
+            }
+          else break end
+        end
+      end
+    end
+  end,
+  loc_vars = function(self, info_queue, card)
+    local _level = G.GAME.jr and G.GAME.jr.satellite_hands[card.ability.extra.hand_type].level or 0
+    return {
+      vars = {
+        _level,
+        localize(card.ability.extra.hand_type, 'poker_hands'),
         _level <= 1 and '' or 's',
         colours = { (_level == 1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, _level)]) }
       }

@@ -5,7 +5,7 @@ Wormhole.JR_UTILS.ENABLED_SATELLITES = {
   ['Pair'] = 'messenger',
   ['Two Pair'] = 'tianwen_4',
   --['Three of a Kind'] = 'venera_9',
-  --['Flush'] = 'galileo',
+  ['Flush'] = 'galileo',
   --['Straight'] = 'cassini_huygens',
   --['Full House'] = 'sputnik_1',
   --['Four of a Kind'] = 'mariner_9',
@@ -17,8 +17,9 @@ Wormhole.JR_UTILS.ENABLED_SATELLITES = {
 
 Wormhole.JR_UTILS.reset_game_globals = function(run_start)
   if run_start then
+    G.GAME.jr = { satellite_hands = {} }
     for hand, _ in pairs(Wormhole.JR_UTILS.ENABLED_SATELLITES) do
-      G.GAME.jr.satellite_hands[hand].level = 0
+      G.GAME.jr.satellite_hands[hand] = {level = 0}
     end
   end
 end
