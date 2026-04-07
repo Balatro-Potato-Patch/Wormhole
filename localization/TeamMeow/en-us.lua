@@ -209,7 +209,6 @@ return {
 				text = {
 					"Attached {C:attention}Joker{} has a",
 					"{C:green}#1# in #2#{} chance to {C:attention}retrigger{}",
-					"{C:inactive}(Unimplemented)",
 				},
 			},
 			c_worm_lunar_lemon = {
@@ -223,7 +222,7 @@ return {
 			c_worm_meteor_mint = {
 				name = "Meteor Mint",
 				text = {
-					"{C:attention}Boosts{} other {C:worm_meow_spacetart}Spacetarts{}",
+					"{C:attention}Boosts{} other {C:worm_meow_spacetart}©Spacetart{}",
 					"attached to the applied {C:attention}Joker{}",
 				},
 			},
@@ -261,7 +260,6 @@ return {
 				text = {
 					"{C:green}#1# in #2#{} chance",
 					"to {C:attention}retrigger{}",
-					"{C:inactive}(Unimplemented)",
 				},
 			},
 			c_worm_lunar_lemon_regular = {
@@ -275,7 +273,7 @@ return {
 			c_worm_meteor_mint_regular = {
 				name = " Meteor Mint ",
 				text = {
-					"{C:attention}Boosts{} other {C:worm_meow_spacetart}Spacetarts{}",
+					"{C:attention}Boosts{} other {C:worm_meow_spacetart}©Spacetart{}",
 					"attached to this {C:attention}Joker{}",
 					"{C:inactive}(Total mint boosts on this Joker: #1#)",
 				}
