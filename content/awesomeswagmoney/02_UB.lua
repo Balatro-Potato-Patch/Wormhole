@@ -44,7 +44,7 @@ SMODS.Consumable {
                     trigger = 'after',
                     delay = 0.4,
                     func = function()
-                        card:start_dissolve()
+                        card:start_dissolve({G.C.BLUE})
                         return true
                     end
                 }))
@@ -103,7 +103,7 @@ SMODS.Consumable {
                     trigger = 'after',
                     delay = 0.4,
                     func = function()
-                        card:start_dissolve()
+                        card:start_dissolve({G.C.BLUE})
                         return true
                     end
                 }))
