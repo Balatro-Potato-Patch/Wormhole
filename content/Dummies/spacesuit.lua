@@ -10,9 +10,19 @@ SMODS.Atlas {
 	py = 95
 }
 
-local OXYGEN_INCREASE = 300
-local OXYGEN_REPLENISH = 40
-local VOUCHER_REPLENISH = 5
+local HOOK_start_run = Game.start_run
+function Game:start_run(args)
+    local ret = HOOK_start_run(self, args)
+    DUMMY_Oxygen_UI(self)
+    return ret
+end
+
+local HOOK_update = Game.update
+function Game:update(dt)
+    local ret = HOOK_update(self, dt)
+    DUMMY_Oxygen_Update(dt)
+    return ret
+end
 
 function DUMMY_FormatMinute(time)
 	local secondTime = time % 60
@@ -48,7 +58,7 @@ end
 function DUMMY_Oxygen_Update(dt)
 	-- Simple check if unpaused:
 	if G.GAME.dummy_oxygen_active and not G.GAME.dummy_oxygen_paused and not G.SETTINGS.paused then
-		G.GAME.dummy_oxygen_realtime = G.GAME.dummy_oxygen_realtime + G.real_dt
+		G.GAME.dummy_oxygen_realtime = G.GAME.dummy_oxygen_realtime + G.real_dt --dt
 		if G.GAME.dummy_oxygen_adding then
 			if G.GAME.dummy_oxygen_realtime >= 0.1 then
 				G.GAME.dummy_oxygen_realtime = G.GAME.dummy_oxygen_realtime - 0.1
@@ -201,18 +211,27 @@ function DUMMY_Oxygen_UI(game_obj)
 	}
 end
 
-local HOOK_start_run = Game.start_run
-function Game:start_run(args)
-    local ret = HOOK_start_run(self, args)
-    DUMMY_Oxygen_UI(self)
-    return ret
+local function DUMMY_Voucher_Queue(info_queue, card)
+	info_queue[#info_queue+1] = { key = 'worm_dum_spacesuit_warning', set = 'Other' }
+	if G.GAME.dummy_oxygen_active and card.area == (G.shop_vouchers or {}) then
+		info_queue[#info_queue+1] = { key = 'worm_dum_spacesuit_upgrade', set = 'Other', vars = {
+			DUMMY_FormatMinute(G.GAME.dummy_oxygen_maxtime),
+			DUMMY_FormatMinute(G.GAME.dummy_oxygen_maxtime + card.ability.extra.oxygen_increase),
+			DUMMY_FormatMinute(G.GAME.dummy_oxygen_replenish),
+			DUMMY_FormatMinute(G.GAME.dummy_oxygen_replenish + card.ability.extra.oxygen_replenish),
+		} }
+	end
 end
 
-local HOOK_update = Game.update
-function Game:update(dt)
-    local ret = HOOK_update(self, dt)
-    DUMMY_Oxygen_Update(dt)
-    return ret
+local function DUMMY_Voucher_Redeem(card)
+	G.E_MANAGER:add_event(Event({
+		trigger = 'after',
+		func = function()
+			DUMMY_Oxygen_Time_Increase(card.ability.extra.oxygen_increase)
+			G.GAME.dummy_oxygen_replenish = (G.GAME.dummy_oxygen_replenish or 0) + card.ability.extra.oxygen_replenish
+			return true
+		end
+	}))
 end
 
 SMODS.Voucher {
@@ -222,44 +241,26 @@ SMODS.Voucher {
     ppu_team = { "dummies" },
     ppu_artist = { "vissa", "flowire" },
     ppu_coder = { "flowire" },
-	--config = { extra = { oxygen_increase = 300, oxygen_replenish = 5, } },
+	config = { extra = {
+		oxygen_increase = 240, --> Slightly Higher = *Much* Stronger
+		oxygen_replenish = 40,
+	} },
     loc_vars = function(self, info_queue, card)
-		local replenish = OXYGEN_REPLENISH + VOUCHER_REPLENISH 
-		info_queue[#info_queue+1] = { key = 'worm_dum_spacesuit_warning', set = 'Other' }
-		if G.GAME.dummy_oxygen_active and card.area == (G.shop_vouchers or {}) then
-			replenish = '+'..VOUCHER_REPLENISH
-			info_queue[#info_queue+1] = { key = 'worm_dum_spacesuit_upgrade', set = 'Other', vars = {
-				DUMMY_FormatMinute(G.GAME.dummy_oxygen_maxtime),
-				DUMMY_FormatMinute(G.GAME.dummy_oxygen_maxtime + OXYGEN_INCREASE),
-				DUMMY_FormatMinute(OXYGEN_REPLENISH + VOUCHER_REPLENISH * G.GAME.dummy_oxygen_vouchers),
-				DUMMY_FormatMinute(OXYGEN_REPLENISH + VOUCHER_REPLENISH * (G.GAME.dummy_oxygen_vouchers + 1)),
-			} }
-		end
+		DUMMY_Voucher_Queue(info_queue, card)
         return { vars = {
-			math.floor(OXYGEN_INCREASE / 60),
-			replenish,
+			DUMMY_FormatMinute(card.ability.extra.oxygen_increase),
+			card.ability.extra.oxygen_replenish,
 		} }
     end,
     redeem = function(self, card)
-	    G.E_MANAGER:add_event(Event({
-	    	trigger = 'after',
-	    	func = function()
-				DUMMY_Oxygen_Time_Increase(OXYGEN_INCREASE)
-				G.GAME.dummy_oxygen_vouchers = (G.GAME.dummy_oxygen_vouchers or 0) + 1
-	    		return true
-	    	end
-	    }))
+		DUMMY_Voucher_Redeem(card)
     end,
     calculate = function(self, card, context)
 		if G.GAME.dummy_oxygen_active then
-			-- Stop the Timer when playing a Hand
 			if context.press_play then
 				G.GAME.dummy_oxygen_paused = true --> Pause Timer
-				G.GAME.dummy_oxygen_scoring = true --> Limit Bonus
 			end
-			if context.final_scoring_step and G.GAME.dummy_oxygen_scoring then
-				G.GAME.dummy_oxygen_scoring = false --> Bonus Limited
-				-- Actual Bonus:
+			if context.final_scoring_step then
 				local calcTime = math.floor(G.GAME.dummy_oxygen_time / 2 + 0.5)
 				local secondTime = calcTime % 60
 				local minuteTime = (calcTime - secondTime) / 60
@@ -267,6 +268,7 @@ SMODS.Voucher {
 					-- Custom Message...
 					G.E_MANAGER:add_event(Event({
 						trigger = 'after',
+						--delay = 0.2,
 						func = function()
 							G.deck:juice_up(0.1)
 							play_sound('xblindsize', 1.2, 0.8)
@@ -300,12 +302,36 @@ SMODS.Voucher {
 		end
     end,
 	calc_dollar_bonus = function(self, card)
-		if G.GAME.dummy_oxygen_active and not G.GAME.dummy_oxygen_adding then
-			DUMMY_Oxygen_Time_Add(OXYGEN_REPLENISH + VOUCHER_REPLENISH * G.GAME.dummy_oxygen_vouchers)
+		if G.GAME.dummy_oxygen_active and not G.GAME.dummy_oxygen_adding then --> Duplicate-Safe
+			DUMMY_Oxygen_Time_Add(G.GAME.dummy_oxygen_replenish)
 		end
 	end,
+}
+
+SMODS.Voucher {
+	key = "dum_oxygentank",
+    requires = { 'v_worm_dum_spacesuit' },
+	atlas = "worm_dummies_spacesuit",
+    pos = { x = 1, y = 0 },
+    ppu_team = { "dummies" },
+    ppu_artist = { "flowire", "vissa" },
+    ppu_coder = { "flowire" },
+	config = { extra = {
+		oxygen_increase = 90, --> Slightly Higher = *Much* Stronger
+		oxygen_replenish = -10,
+	} },
+    loc_vars = function(self, info_queue, card)
+		DUMMY_Voucher_Queue(info_queue, card)
+        return { vars = {
+			DUMMY_FormatMinute(card.ability.extra.oxygen_increase),
+			-card.ability.extra.oxygen_replenish,
+		} }
+    end,
+    redeem = function(self, card)
+		DUMMY_Voucher_Redeem(card)
+    end,
     in_pool = function(self, args)
-		return ((G.GAME.dummy_oxygen_vouchers or 0) < 4), { allow_duplicates = true }
+		return ((G.GAME.dummy_oxygen_replenish or 0) > 20), { allow_duplicates = true }
 		--NOTE: "allow_duplicates" doesn't work for Vouchers ("1531zeebee" and below)
 	end,
 }

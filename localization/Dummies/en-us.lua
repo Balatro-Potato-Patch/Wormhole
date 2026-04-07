@@ -162,6 +162,18 @@ return {
                     "{C:inactive,s:0.8}(ex. {C:attention,s:0.8}2:53{C:inactive,s:0.8} -> {X:purple,C:white,s:0.8}X1.27{C:inactive,s:0.8} Mult and Chips){}",
 				}}
 			},
+			v_worm_dum_oxygentank = {
+				name = "Oxygen Tank",
+				text = {{
+                    "{C:attention}Gain{} and {C:attention}Increase{} your",
+                    "maximum amount of",
+                    "{C:spectral}Oxygen{} by {C:attention}#1#{} minutes",
+                }, {
+                    "{u:inactive}Reduce{} the {C:spectral}Oxygen{}",
+                    "gained, after beating",
+                    "a {C:attention}Blind{}, by {C:attention}#2#{} seconds",
+				}}
+			},
         },
 		Tag = {
 			tag_worm_dum_trinary = {
@@ -184,11 +196,11 @@ return {
                 }
 			},
 			worm_dum_spacesuit_upgrade = {
-				name = "Space Suit Upgrade",
+				name = "Oxygen Upgrade",
 				text = {
-                    "Maximum Oxygen: {C:spectral}#1#{} -> {C:spectral}#2#{}",
-                    "Beating a Blind: {C:attention}#3#{} -> {C:attention}#4#{}",
-                    "{C:inactive}The multiplier doesn't change!"
+                    "{C:inactive}Maximum Oxygen:", "{C:spectral}#1#{} -> {C:spectral}#2#{}",
+                    "{s:0.5} ",
+                    "{C:inactive}Replenish Time:", "{C:attention}#3#{} -> {C:attention}#4#{}",
                 }
 			},
         },
@@ -214,14 +226,49 @@ return {
         },
 		challenge_names = {
 			c_worm_dum_low_oxygen = "Low Oxygen",
+			c_worm_dum_buff_spacesuit = "Buff Space Suit",
         },
 		v_text = {
             -- Challenge Descs.
 			ch_c_worm_dum_low_oxygen_1 = { "Start with {C:attention}30{} minutes of {C:spectral}Oxygen{},", },
 			ch_c_worm_dum_low_oxygen_2 = { "{C:spectral}Oxygen{} doesn't affect scoring.", },
+            ch_c_worm_dum_buff_spacesuit_1 = { "Enjoy {C:green,E:1}Pre-Nerfed {C:attention}Space Suit{} stats!", },
+            ch_c_worm_dum_buff_spacesuit_2 = { "{C:inactive}Maximum Oxygen: {C:spectral}05:00{C:inactive} minutes", },
+            ch_c_worm_dum_buff_spacesuit_3 = { "{C:inactive}Replenish Time: {C:attention}01:00{C:inactive} minute", },
             -- Generic/Misc.
 			ch_c_worm_dum_gold_stake = { "Apply {C:money}Gold Stake{} difficulty" },
 			ch_c_worm_dum_space = { "{s:0.5} ", },
+        },
+        --# See "dummies_quips.lua":
+        --# Update the Amount of "EXPECTED" when using the [Generic] method!
+        quips = {
+            -- [Generic] WIN Quips:
+            worm_dummies_win_1 = { "{s:2.0,C:green}W" },
+            worm_dummies_win_2 = { "I knew you", "could do it!" },
+            worm_dummies_win_3 = { "Cuties say '{E:1}what{}'." },
+            worm_dummies_win_4 = { "You're a real", "{C:blue,E:1}Card Shark{}!" },
+            worm_dummies_win_5 = { "I won back all", "my bets, thanks!" },
+            worm_dummies_win_6 = { "Pretty {E:2}and{} Smart!" },
+            worm_dummies_win_7 = { "You're the", "{C:red}3{} to my {C:red}<{}" },
+            worm_dummies_win_8 = { "{s:2.0,C:green}+2" },
+            worm_dummies_win_9 = { "With plays like these,", "I know why the word", '"{E:2}Peak{}" was invented!' },
+            worm_dummies_win_10 = { "{s:2.0}:3" },
+            worm_dummies_win_11 = { "{s:2.0} l_o_l", "{s:2.0}  |Î| ", "{s:1.0}  Absolute", "{s:2.0}Cinema" },
+            -- [Generic] LOSS Quips:
+            worm_dummies_loss_1 = { "{s:2.0,C:red}L" },
+            worm_dummies_loss_2 = { "Yeah, you should", "try a bit more", "than {u:red}that{}. {E:2}Yikes{}!" },
+            worm_dummies_loss_3 = { "   I think you'll have more success", '   searching for {C:red}"Quit"{} over here!', "                   {C:inactive}|", " ", "                   {C:inactive}|", " ", "                   {C:inactive}|", " ", "                   {C:inactive}|", "                   {C:inactive} - - - - - - - - >" },
+            worm_dummies_loss_4 = { "I would've loved to help", "you, it's just not very", "convenient right now." },
+            worm_dummies_loss_5 = { "Aww, dang it!" },
+            worm_dummies_loss_6 = { "{E:2}Quit fooling around." },
+            worm_dummies_loss_7 = { "Are you sure you", "know how to play?" },
+            worm_dummies_loss_8 = { "Maybe ask", "{E:2}CrapGPT", "for help." },
+            worm_dummies_loss_9 = { "I think you", "should play the", "{C:blue}Tutorial{} again." },
+            worm_dummies_loss_10 = { "{s:2.0,C:red}-2" },
+            -- [Custom] Quips:
+            worm_dummies_flowire_1 = { "ERROR" },
+            worm_dummies_flowire_2 = { "nil" },
+            worm_dummies_flowire_3 = { "{s:5.0} " },
         },
     }
 }
