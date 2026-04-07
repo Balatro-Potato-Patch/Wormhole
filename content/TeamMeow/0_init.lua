@@ -48,7 +48,7 @@ PotatoPatchUtils.Team({
 	name = "meow",
 	colour = HEX("F9D0D1"),
 	loc = true,
-	credit_rows = {3,4}
+	credit_rows = {4,3}
 })
 
 local thunderedge_colour = SMODS.Gradient({
