@@ -165,6 +165,8 @@ for i, v in pairs({
     "junk/trash_compactor",
     "junk/ringularity",
     "junk/vouchers",
+
+    "challenges",
 })  do
     assert(SMODS.load_file("content/colon_three/"..v..".lua"))()
 end

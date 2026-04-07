@@ -381,6 +381,14 @@ return {
                 "Adding Junk Cards to other Poker Hands",
                 "increases their base Chips and Mult"
             }
-        }
+        },
+        challenge_names = {
+            c_worm_junk_it_up = "Junk it Up!",
+        },
+        v_text = {
+            ch_c_clear_out_junk = { "If deck contains {C:attention}Junk Cards{} when {C:attention}Boss Blind{}" },
+            ch_c_clear_out_junk_2 = { "is selected, {C:red}lose the game" },
+            ch_c_increase_derelict_rate = { "{C:worm_c3_junkset}Derelict Packs{} are {X:spectral,C:white}X3{} as common" },
+        },
     }
 }
