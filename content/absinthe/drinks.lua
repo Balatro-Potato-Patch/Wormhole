@@ -718,6 +718,7 @@ SMODS.Consumable { -- Big Bang Brandy
     set = 'abs_drinks',
     key = 'abs_big_bang_brandy',
     ppu_coder = { 'pi_cubed' },
+    ppu_artist = { 'pangaea47' },
     ppu_team = { 'absinthe' },
     atlas = 'abs_drinks',
     pos = { x = 4, y = 1 },
