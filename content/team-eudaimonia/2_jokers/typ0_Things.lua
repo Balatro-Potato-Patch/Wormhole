@@ -1,27 +1,27 @@
 SMODS.Atlas {
-    key = 'wowsignalatlas',
+    key = 'euda_wowsignalatlas',
     px = 71,
     py = 95,
     path = 'team-eudaimonia/wowsignal.png',
 }
 
 SMODS.Atlas {
-    key = 'bigearatlas',
+    key = 'euda_bigearatlas',
     px = 71,
     py = 95,
     path = 'team-eudaimonia/bigear.png',
 }
 
 SMODS.Atlas {
-    key = 'bitflipatlas',
+    key = 'euda_bitflipatlas',
     px = 71,
     py = 95,
     path = 'team-eudaimonia/bitflip.png',
 }
 
 SMODS.Joker {
-    key = "wowsignal",
-    atlas = 'wowsignalatlas',
+    key = "euda_wowsignal",
+    atlas = 'euda_wowsignalatlas',
     pos = { x = 0, y = 0 },
     rarity = 1,
     blueprint_compat = true,
@@ -54,7 +54,7 @@ SMODS.Joker {
 
 --ripped from yahimod
 SMODS.PokerHand({
-    key = "pkr_wow",
+    key = "pkr_euda_wow",
     mult = 5,
     chips = 30,
     l_mult = 2,
@@ -110,7 +110,7 @@ SMODS.PokerHand({
 })
 
 SMODS.PokerHand({
-    key = "pkr_wow_f",
+    key = "pkr_euda_wow_f",
     mult = 10,
     chips = 30,
     l_mult = 5,
@@ -163,8 +163,8 @@ SMODS.PokerHand({
 })
 
 SMODS.Joker {
-    key = "bitflip",
-    atlas = 'bitflipatlas',
+    key = "euda_bitflip",
+    atlas = 'euda_bitflipatlas',
     pos = { x = 0, y = 0 },
     rarity = 1,
     blueprint_compat = true,
@@ -233,19 +233,23 @@ function suit_level_up(card, copier, number, poker_hands, message)
 end
 
 SMODS.Consumable {
-    key = "bigear",
+    key = "euda_bigear",
     set = "Planet",
     cost = 3,
-    atlas = "bigearatlas",
+    atlas = "euda_bigearatlas",
     pos = { x = 0, y = 0 },
-    config = { hand_types = {'worm_pkr_wow','worm_pkr_wow_f'} },
+    config = {
+		l_chips = 30,
+		l_mult = 2,
+		l_mult_f = 5,
+		softlock = true
+	},
     ppu_coder = {'Typ0', 'LasagnaFelidae'},
     ppu_artist = {'LasagnaFelidae'},
     hidden = true,
-    config = {softlock = true},
     use = function(self, card, area, copier)
         update_hand_text({ sound = 'button', volume = 0.7, pitch = 0.8, delay = 0.3 },
-            { handname = localize('k_worm_wow_hands'), chips = '...', mult = '...', level = '' })
+            { handname = localize('k_worm_euda_wow_hands'), chips = '...', mult = '...', level = '' })
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             delay = 0.2,
@@ -279,7 +283,8 @@ SMODS.Consumable {
         }))
         update_hand_text({ sound = 'button', volume = 0.7, pitch = 0.9, delay = 0 }, { level = '+1' })
         delay(1.3)
-        SMODS.upgrade_poker_hands({hands = {"euda_pkr_wow","euda_pkr_wow_f"}, instant = true })
+        SMODS.upgrade_poker_hands({hands = {"worm_pkr_euda_wow"}, per_level = {chips = card.ability.l_chips, mult = card.ability.l_mult}, instant = true, from = card})
+		SMODS.upgrade_poker_hands({hands = {"worm_pkr_euda_wow_f"}, per_level = {chips = card.ability.l_chips, mult = card.ability.l_mult_f}, instant = true, from = card})
         update_hand_text({ sound = 'button', volume = 0.7, pitch = 1.1, delay = 0 },
             { mult = 0, chips = 0, handname = '', level = '' })
     end,
@@ -287,3 +292,4 @@ SMODS.Consumable {
         return true
     end,
 }
+ 
