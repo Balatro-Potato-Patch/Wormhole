@@ -238,7 +238,11 @@ SMODS.Consumable {
     cost = 3,
     atlas = "euda_bigearatlas",
     pos = { x = 0, y = 0 },
-    config = {},
+    config = {
+		l_chips = 30,
+		l_mult = 2,
+		l_mult_f = 5,
+	},
     ppu_coder = {'Typ0', 'LasagnaFelidae'},
     ppu_artist = {'LasagnaFelidae'},
     hidden = true,
@@ -279,7 +283,8 @@ SMODS.Consumable {
         }))
         update_hand_text({ sound = 'button', volume = 0.7, pitch = 0.9, delay = 0 }, { level = '+1' })
         delay(1.3)
-        SMODS.upgrade_poker_hands({hands = {"worm_pkr_euda_wow","worm_pkr_euda_wow_f"}, instant = true, from = card})
+        SMODS.upgrade_poker_hands({hands = {"worm_pkr_euda_wow"}, per_level = {chips = card.ability.l_chips, mult = card.ability.l_mult}, instant = true, from = card})
+		SMODS.upgrade_poker_hands({hands = {"worm_pkr_euda_wow_f"}, per_level = {chips = card.ability.l_chips, mult = card.ability.l_mult_f}, instant = true, from = card})
         update_hand_text({ sound = 'button', volume = 0.7, pitch = 1.1, delay = 0 },
             { mult = 0, chips = 0, handname = '', level = '' })
     end,
