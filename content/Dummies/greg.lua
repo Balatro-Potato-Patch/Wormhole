@@ -59,6 +59,7 @@ SMODS.Joker{
     -- unlocked = true,
     -- discovered = true,
     
+    ppu_artist = { "vissa" },
     ppu_coder = { "vissa" },
     ppu_team = { "dummies" },
 
