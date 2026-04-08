@@ -1166,7 +1166,7 @@ local old = love.mousepressed
 function love.mousepressed(x, y, button, ...)
 	local ret = old(x,y,button,...)
     local hoveredcard = G.CONTROLLER.hovering.target
-	if hoveredcard.timer then
+	if hoveredcard and hoveredcard.timer then
 		hoveredcard.timer = 0
 	end
 	return ret
