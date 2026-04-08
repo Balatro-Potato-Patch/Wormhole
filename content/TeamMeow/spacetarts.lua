@@ -233,11 +233,10 @@ function SpaceTart(args)
 			end
 			desc_nodes.background_colour = res.background_colour
 		end,
-		ppu_team = {"meow"},
+		ppu_team = { "meow" },
 		ppu_artist = artist,
 		ppu_coder = coder,
-		attributes = attributes
-
+		attributes = attributes,
 	})
 	Wormhole.TEAM_MEOW.tartInfo[args.key] = {
 		--boosts = args.boosted_jokers,
@@ -245,6 +244,27 @@ function SpaceTart(args)
 		pos = args.foil_pos,
 		funcs = args.calculates,
 	}
+end
+
+-- Gets the closest Joker to the given card, excluding itself
+function Wormhole.TEAM_MEOW.get_closest_joker(card)
+	if not G.jokers then
+		return
+	end
+	local min_dist = math.huge
+	local closest = nil
+	for _, j in ipairs(G.jokers.cards) do
+		if j ~= card then
+			local dist = meow_get_distance_between_two_cards(card, j)
+			if dist < min_dist then
+				closest = j
+				min_dist = dist
+			else
+				break
+			end
+		end
+	end
+	return closest
 end
 
 local gcu = generate_card_ui
@@ -580,7 +600,7 @@ SpaceTart({
 		odds = 5,
 	},
 	credits = {
-		coder = {"incognito"}
+		coder = { "incognito" },
 	},
 
 	calculates = {
@@ -973,9 +993,6 @@ SMODS.DrawStep({
 				tartSprite:draw_shader("dissolve", 0, nil, nil, card.children.center, 0, 0, 0, yshift, nil, 0.6)
 				tartSprite:draw_shader("dissolve", nil, nil, nil, card.children.center, 0, 0, 0, yshift)
 				yshift = yshift + yinc
-				if card.meow_tart_count then 
-					card.meow_tart_count.text_offset.y = (100+yshift)
-				end
 			end
 		end
 	end,
@@ -996,15 +1013,13 @@ SMODS.DrawStep({
 				end
 			end
 		end
-		local playerHas = false
-		if G.consumeables and G.consumeables.cards then
-			for k, v in pairs(G.consumeables.cards) do
-				if v == card then
-					playerHas = true
-				end
-			end
-		end
-		if card.ability.set == "worm_meow_Spacetart" and bool and playerHas then
+		local playerHas = card.area == G.consumeables
+		if
+			card.ability.set == "worm_meow_Spacetart"
+			and bool
+			and playerHas
+			and G.CONTROLLER.dragging.target == card
+		then
 			Wormhole.TEAM_MEOW.sharedSparkleBg = Wormhole.TEAM_MEOW.sharedSparkleBg
 				or AnimatedSprite(0, 0, G.CARD_W, G.CARD_H, G.ANIMATION_ATLAS["worm_meow_sparkleBg"], { x = 0, y = 0 })
 			Wormhole.TEAM_MEOW.sharedSparkleBg.role.draw_major = card
@@ -1028,44 +1043,98 @@ SMODS.DrawStep({
 	conditions = { vortex = false, facing = "front" },
 })
 
+function Wormhole.TEAM_MEOW.create_tart_limit_UIBox(card)
+	return {
+		n = G.UIT.ROOT,
+		config = {
+			r = 0.2,
+			colour = { 0, 0, 0, 0.4 },
+			align = "cm",
+		},
+		nodes = {
+			{
+				n = G.UIT.R,
+				config = {
+					padding = 0.1,
+					align = "cm",
+				},
+				nodes = {
+					{
+						n = G.UIT.T,
+						config = {
+							ref_table = setmetatable({}, {
+								__index = function(_, _)
+									return #card.tarts
+								end,
+							}),
+							ref_value = "tarts",
+							colour = G.C.UI.TEXT_LIGHT,
+							scale = 0.3,
+						},
+					},
+					{
+						n = G.UIT.T,
+						config = {
+							text = "/",
+							colour = G.C.UI.TEXT_LIGHT,
+							scale = 0.3,
+						},
+					},
+					{
+						n = G.UIT.T,
+						config = {
+							ref_table = G.GAME,
+							ref_value = "max_foil_slots",
+							colour = G.C.UI.TEXT_LIGHT,
+							scale = 0.3,
+						},
+					},
+				},
+			},
+		},
+	}
+end
 
--- im sorry
-SMODS.DrawStep {
-    key = 'meow_tart_count',
-    order = 45,
-    func = function(self, layer)
-        if self.meow_tart_count and (self.config.center.discovered or self.bypass_discovery_center) then
-            for _, sprite in ipairs(self.meow_tart_count[1] and self.meow_tart_count or {self.meow_tart_count}) do
-                love.graphics.push()
-                love.graphics.origin()
-                sprite.canvas:renderTo(love.graphics.clear, 0, 0, 0, 0)
-				local pre_text = (sprite.ref_table and sprite.ref_table[sprite.ref_value] or sprite.text)
-				local after_text = (sprite.ref_table2 and sprite.ref_table2[sprite.ref_value2] or sprite.text2)
-                local text = love.graphics.newText(sprite.font, {sprite.text_colour or G.C.UI.TEXT_LIGHT, (pre_text .."/" .. after_text )})
-                local scale_fac = math.min((sprite.text_width or sprite.canvasW)/text:getWidth(), (sprite.text_height or sprite.canvasH)/text:getHeight()) * sprite.canvasScale
-                if text then 
-                    local x,y,r,sx,sy,ox,oy = unpack(sprite.text_transform or {
-                            (0 + sprite.text_offset.x) * sprite.canvasScale,
-                            (0 + sprite.text_offset.y) * sprite.canvasScale,
-                            0,
-                            scale_fac, scale_fac,
-							sprite.text_h_align == 'left' and 0 or (sprite.text_h_align == 'right' and text:getWidth() or text:getWidth()/2),
-							sprite.text_v_align == 'top' and 0 or (sprite.text_v_align == 'bottom' and text:getHeight() or text:getHeight()/2)
-                        })
-                    sprite.canvas:renderTo(love.graphics.draw,
-                        text,
-                        x, y, r, sx, sy, ox, oy
-                    )
-                end
-                love.graphics.pop()
-                SMODS.reload_stencil_stack()
-                sprite.role.draw_major = self
-                sprite:draw_shader('dissolve', nil, nil, nil, self.children.center)
-            end
-        end
-    end,
-    conditions = { vortex = false, facing = 'front' },
-}
+SMODS.draw_ignore_keys["meow_tart_count"] = true
+
+SMODS.DrawStep({
+	key = "meow_tart_count",
+	order = 200,
+	func = function(self, layer)
+		local should_draw = (
+			(#self.tarts > 0 and (self.states.hover.is or G.CONTROLLER.dragging.target == self))
+			or self.meow_force_draw_tart_count
+		)
+		if
+			not self.children.meow_tart_count
+			and (self.config.center.discovered or self.bypass_discovery_center)
+			and should_draw
+		then
+			self.children.meow_tart_count = UIBox({
+				definition = Wormhole.TEAM_MEOW.create_tart_limit_UIBox(self),
+				config = {
+					parent = self,
+					offset = {
+						x = 0,
+						y = (#self.tarts - 1) * 0.2 / 3 + self.T.h / 4,
+					},
+					align = "cm",
+					bond = "Glued",
+				},
+			})
+		end
+		if self.children.meow_tart_count then
+			if should_draw then
+				self.children.meow_tart_count.alignment.offset.y = (#self.tarts - 2) * 0.2 / 3 + self.T.h / 4
+				self.children.meow_tart_count:draw()
+			else
+				self.children.meow_tart_count:remove()
+				self.children.meow_tart_count = nil
+			end
+		end
+	end,
+	conditions = { vortex = false, facing = "front" },
+})
 
 -- Debug stuff
 
@@ -1073,36 +1142,6 @@ local old = Card.draw
 function Card:draw(...)
 	local ret = old(self, ...)
 	local bool = false
-	if G.jokers and G.jokers.cards then
-		for k, v in ipairs(G.jokers.cards) do
-			if meow_cards_are_colliding(self, v) and self ~= v then
-				bool = true
-			end
-
-			-- can definitely be reimplemented a hell lot better but it works
-			self.tart_count = #self.tarts
-
-			if self.tart_count==0 and self.meow_tart_count then
-				self.meow_tart_count:remove()
-				self.meow_tart_count = nil
-			end
-
-			if #self.tarts > 0 and not self.meow_tart_count then
-				self.meow_tart_count =  SMODS.CanvasSprite({
-					canvasW = 115,
-					canvasH = 115,
-					text_offset = { x = 82, y = 100},
-					text_width = 45,
-					text_height = 11,
-					ref_table = self,
-					ref_value = "tart_count",
-					ref_table2 = G.GAME,
-					ref_value2 = "max_foil_slots",
-					text_colour = G.C.WHITE,
-				})
-			end
-		end
-	end
 	local color = bool and HEX("63c74d") or HEX("ff0044")
 	local r, g, b, a = love.graphics.getColor()
 	love.graphics.setColor(color[1], color[2], color[3], 0.25)
@@ -1116,41 +1155,22 @@ function Card:draw(...)
 		)
 	end
 	love.graphics.setColor(r, g, b, a)
+	return ret
 end
 
--- Dragging tarts on jokers
-
+-- Handles both initial tart application and tart transfer
 local old = Card.stop_drag
 function Card:stop_drag(...)
 	local ret = old(self, ...)
-	local bool = false
-	local colliders = {}
-	if G.jokers and G.jokers.cards then
-		for k, v in pairs(G.jokers.cards) do
-			if meow_cards_are_colliding(self, v) and meow_can_apply_foil(v) then
-				bool = true
-				table.insert(colliders, { card = v, dist = meow_get_distance_between_two_cards(v, self) })
-			end
-		end
-	end
-	local playerHas = false
-	if G.consumeables and G.consumeables.cards then
-		for k, v in pairs(G.consumeables.cards) do
-			if v == self then
-				playerHas = true
-			end
-		end
-	end
-	if self.ability and self.ability.set == "worm_meow_Spacetart" and bool and playerHas then
+	local closest = Wormhole.TEAM_MEOW.get_closest_joker(self)
+	local collides = closest and meow_cards_are_colliding(self, closest)
+	if self.ability and self.ability.set == "worm_meow_Spacetart" and collides and self.area == G.consumeables then
 		local tart = {
 			key = self.ability.extra.tart,
 			config = self.ability.extra.tart_cfg or {},
 			center_key = self.config.center_key,
 		}
-		table.sort(colliders, function(a, b)
-			return a.dist < b.dist
-		end)
-		table.insert(colliders[1].card.tarts, tart)
+		table.insert(closest.tarts, tart)
 		G.E_MANAGER:add_event(Event({
 			trigger = "after",
 			delay = 0,
@@ -1165,15 +1185,8 @@ function Card:stop_drag(...)
 			delay = 0.6,
 			func = function()
 				play_sound("tarot1")
-				colliders[1].card:juice_up(0.5, 0.5)
-				card_eval_status_text(
-					colliders[1].card,
-					"extra",
-					nil,
-					nil,
-					nil,
-					{ message = localize("k_worm_meow_ate") }
-				)
+				closest:juice_up(0.5, 0.5)
+				card_eval_status_text(closest, "extra", nil, nil, nil, { message = localize("k_worm_meow_ate") })
 				return true
 			end,
 		}))
@@ -1182,7 +1195,39 @@ function Card:stop_drag(...)
 			delay = 0.4,
 			func = function()
 				play_sound("tarot2", nil, 0.8)
-				colliders[1].card:juice_up(0.2, 0.5)
+				closest:juice_up(0.2, 0.5)
+				love.mouse.setCursor()
+				return true
+			end,
+		}))
+	end
+	-- For tart transfer between jokers
+	if self.ability and self.ability.set == "Joker" and collides and self.tarts and #self.tarts > 0 then
+		local tart
+		G.E_MANAGER:add_event(Event({
+			trigger = "after",
+			delay = 0,
+			func = function()
+				tart = table.remove(self.tarts, #self.tarts)
+				table.insert(closest.tarts, tart)
+				return true
+			end,
+		}))
+		G.E_MANAGER:add_event(Event({
+			trigger = "after",
+			delay = 0.6,
+			func = function()
+				play_sound("tarot1")
+				closest:juice_up(0.5, 0.5)
+				return true
+			end,
+		}))
+		G.E_MANAGER:add_event(Event({
+			trigger = "after",
+			delay = 0.4,
+			func = function()
+				play_sound("tarot2", nil, 0.8)
+				closest:juice_up(0.2, 0.5)
 				love.mouse.setCursor()
 				return true
 			end,
@@ -1195,9 +1240,10 @@ local old = Game.update
 function Game:update(dt, ...)
 	local ret = old(self, dt, ...)
 	local alreadyset = false
+	local dragged = G.CONTROLLER.dragging.target
 	if G.consumeables and G.consumeables.cards and not G.SETTINGS.paused then
 		for k, v in pairs(G.consumeables.cards) do
-			if v.ability and v.ability.set == "worm_meow_Spacetart" then
+			if v.ability and v.ability.set == "worm_meow_Spacetart" and dragged == v then
 				local bool = false
 				if G.jokers and G.jokers.cards then
 					for k, vv in pairs(G.jokers.cards) do
@@ -1214,93 +1260,32 @@ function Game:update(dt, ...)
 				end
 			end
 		end
-	end
-end
-
--- Exchanging tarts
-
-local old = Card.stop_drag
-function Card:stop_drag(...)
-	local ret = old(self, ...)
-	local bool = false
-	local colliders = {}
-	if G.jokers and G.jokers.cards then
-		for k, v in pairs(G.jokers.cards) do
-			if meow_cards_are_colliding(self, v) and meow_can_apply_foil(v) and v ~= self then
-				bool = true
-				table.insert(colliders, { card = v, dist = meow_get_distance_between_two_cards(v, self) })
-			end
-		end
-	end
-	table.sort(colliders, function(a, b)
-		return a.dist < b.dist
-	end)
-	if self.ability and self.ability.set == "Joker" and bool and self.tarts and #self.tarts > 0 then
-		local tart
-		G.E_MANAGER:add_event(Event({
-			trigger = "after",
-			delay = 0,
-			func = function()
-				tart = table.remove(self.tarts, #self.tarts)
-				table.insert(colliders[1].card.tarts, tart)
-				return true
-			end,
-		}))
-		G.E_MANAGER:add_event(Event({
-			trigger = "after",
-			delay = 0.6,
-			func = function()
-				play_sound("tarot1")
-				colliders[1].card:juice_up(0.5, 0.5)
-				return true
-			end,
-		}))
-		G.E_MANAGER:add_event(Event({
-			trigger = "after",
-			delay = 0.4,
-			func = function()
-				play_sound("tarot2", nil, 0.8)
-				colliders[1].card:juice_up(0.2, 0.5)
-				love.mouse.setCursor()
-				return true
-			end,
-		}))
-	end
-	return ret
-end
-
---[[local old = Game.update
-function Game:update(dt, ...)
-	local ret = old(self, dt, ...)
-	local alreadyset = false
-	if G.jokers and G.jokers.cards and not G.SETTINGS.paused then
-		for k, v in pairs(G.jokers.cards) do
-			if v.ability and v.ability.set == "Joker" and v.tarts and #v.tarts > 0 then
-				local bool = false
-				for kk, vv in pairs(G.jokers.cards) do
-					if vv ~= v and meow_cards_are_colliding(v, vv) and meow_can_apply_foil(vv) then
-						bool = true
-					end
-				end
-				if bool then
-					love.mouse.setCursor(Wormhole.TEAM_MEOW.cursor)
-					alreadyset = true
-				elseif not alreadyset then
-					love.mouse.setCursor()
-				end
-			end
-		end
-	end
-end]]
-local old = Game.update
-function Game:update(dt, ...)
-	local ret = old(self, dt, ...)
-	if G.consumeables and G.consumeables.cards then
 		for k, v in ipairs(G.consumeables.cards) do
 			if v.ability and v.ability.set == "worm_meow_Spacetart" and not G.GAME.shown_tart_poppup then
 				G.GAME.shown_tart_poppup = true
 				Wormhole.TEAM_MEOW.open_spacetart_info_menu()
 			end
+		end
+	end
+	if
+		dragged
+		and (
+			(dragged.area == G.jokers and dragged.ability and dragged.ability.set == "Joker" and #dragged.tarts > 0)
+			or (dragged.area == G.consumeables and dragged.ability and dragged.ability.set == "worm_meow_Spacetart")
+		)
+	then
+		local closest = Wormhole.TEAM_MEOW.get_closest_joker(dragged)
+		local collides = meow_cards_are_colliding(closest, dragged)
+		for _, j in ipairs(G.jokers.cards) do
+			if collides and j == closest then
+				j.meow_force_draw_tart_count = true
+			else
+				j.meow_force_draw_tart_count = false
+			end
+		end
+	elseif G.jokers then
+		for _, j in ipairs(G.jokers.cards) do
+			j.meow_force_draw_tart_count = false
 		end
 	end
 end

@@ -28,8 +28,8 @@ return {
 								"simply {C:attention}drag{} the {C:attention}Joker{} onto another one, and the topmost foil will be",
 								"given to the other {C:attention}Joker{}, while also enabling the original {C:attention}Joker{} to",
 								"consume {C:attention}another {C:worm_meow_spacetart}©Spacetart{}."]]
-								"You can drag a {C:attention}foiled Joker{} onto",
-								"other jokers to {C:attention}transfer{} the {C:attention}topmost foil{}!",
+								"You can drag a {C:attention}foiled Joker{} onto the",
+								"consumables area to {C:attention}transfer{} the {C:attention}topmost foil{}!",
 							},
 							{
 								--[["Certain {C:attention}Jokers{} prefer different flavours of {C:worm_meow_spacetart}©Spacetarts{}",

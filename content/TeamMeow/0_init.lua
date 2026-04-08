@@ -8,6 +8,12 @@ function Game:init_game_object(...)
 	return ret
 end
 
+local exit_mods_hook = G.FUNCS.exit_mods
+function G.FUNCS.exit_mods(e, ...)
+	local ret = exit_mods_hook(e, ...)
+	love.mouse.setCursor()
+end
+
 SMODS.Atlas({
 	key = "meowCredits",
 	px = 71,
@@ -52,7 +58,8 @@ PotatoPatchUtils.Team({
 	name = "meow",
 	colour = HEX("F9D0D1"),
 	loc = true,
-	credit_rows = {4,3}
+	credit_rows = {4,3},
+	short_credit = true,
 })
 
 local thunderedge_colour = SMODS.Gradient({
