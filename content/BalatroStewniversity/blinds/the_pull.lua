@@ -3,7 +3,7 @@
 SMODS.Blind {
     key = "pull",
     dollars = 5,
-    mult = 3,
+    mult = 2,
     mult_per_rounds_played = {2, 4, 6},
     name = "The Pull",
     atlas = "stewblinds",
@@ -15,9 +15,8 @@ SMODS.Blind {
 
             if context.setting_blind then
                 G.GAME.blind.worm_original_size = G.GAME.blind.chips
-                print("played rounds this ante: "..tostring(G.GAME.rounds_played_ante))
 
-                local mult = self.mult_per_rounds_played[G.GAME.rounds_played_ante]
+                local mult = self.mult_per_rounds_played[G.GAME.rounds_played_ante] / self.mult
 
                 G.GAME.blind.chips = G.GAME.blind.chips * mult
                 G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
