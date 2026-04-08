@@ -1,12 +1,12 @@
 SMODS.Atlas {
-    key = 'darksideatlas',
+    key = 'euda_darksideatlas',
     px = 71,
     py = 95,
     path = 'team-eudaimonia/wowsignal.png', --Update with actual art
 }
 SMODS.Joker {
-    key = "darkside",
-	atlas = 'darksideatlas',
+    key = "euda_darkside",
+	atlas = 'euda_darksideatlas',
 	pos = { x = 0, y = 0},
 	rarity = 2,
 	cost = 6,
@@ -21,7 +21,7 @@ SMODS.Joker {
 
 local calc_ref = SMODS.current_mod.calculate or function(self, context) return end
 SMODS.current_mod.calculate = function(self, context)
-    if context.drawing_cards and next(SMODS.find_card("j_worm_darkside")) then
+    if context.drawing_cards and next(SMODS.find_card("j_worm_euda_darkside")) then
         local black_cards = 0
         for i = #G.deck.cards, 1, -1 do
             if context.amount <= black_cards then
