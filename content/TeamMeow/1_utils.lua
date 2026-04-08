@@ -17,8 +17,9 @@ end
 --- @param c2 Card
 --- @return boolean
 function meow_cards_are_colliding(c1,c2)
-    local xiscolliding = (c1.T.x <= c2.T.x + c2.T.w) and (c1.T.x + c1.T.w >= c2.T.x)
-    local yiscolliding = (c1.T.y <= c2.T.y + c2.T.h) and (c1.T.y + c1.T.h >= c2.T.y)
+    local c1CenterX, c1CenterY = c1.T.x + c1.T.w / 2, c1.T.y + c1.T.h / 2
+    local xiscolliding = c1CenterX > c2.T.x and c1CenterX < c2.T.x + c2.T.w
+    local yiscolliding = c1CenterY > c2.T.y and c1CenterY < c2.T.y + c2.T.h
     return xiscolliding and yiscolliding
 end
 --- Gets the distance between 2 cards.

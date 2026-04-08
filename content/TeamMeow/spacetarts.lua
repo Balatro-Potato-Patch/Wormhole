@@ -1158,6 +1158,25 @@ function Card:draw(...)
 	return ret
 end
 
+-- Added timer for detecting clicks to prevent accidental unintentional foil exchanges
+
+local old = love.mousepressed
+function love.mousepressed(x, y, button, ...)
+	local ret = old(x,y,button,...)
+    local hoveredcard = G.CONTROLLER.hovering.target
+	if hoveredcard.timer then
+		hoveredcard.timer = 0
+	end
+	return ret
+end
+
+local old = Card.update
+function Card:update(dt, ...)
+	local ret = old(self, dt, ...)
+	self.timer = self.timer and self.timer + dt or dt
+	return ret
+end
+
 -- Handles both initial tart application and tart transfer
 local old = Card.stop_drag
 function Card:stop_drag(...)
@@ -1202,7 +1221,7 @@ function Card:stop_drag(...)
 		}))
 	end
 	-- For tart transfer between jokers
-	if self.ability and self.ability.set == "Joker" and collides and self.tarts and #self.tarts > 0 then
+	if self.ability and self.ability.set == "Joker" and collides and self.tarts and #self.tarts > 0 and self.timer and self.timer > 0.5 then
 		local tart
 		G.E_MANAGER:add_event(Event({
 			trigger = "after",
