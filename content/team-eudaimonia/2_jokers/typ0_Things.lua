@@ -1,19 +1,19 @@
 SMODS.Atlas {
-    key = 'wowsignalatlas',
+    key = 'euda_wowsignalatlas',
     px = 71,
     py = 95,
     path = 'team-eudaimonia/wowsignal.png',
 }
 
 SMODS.Atlas {
-    key = 'bigearatlas',
+    key = 'euda_bigearatlas',
     px = 71,
     py = 95,
     path = 'team-eudaimonia/bigear.png',
 }
 
 SMODS.Atlas {
-    key = 'bitflipatlas',
+    key = 'euda_bitflipatlas',
     px = 71,
     py = 95,
     path = 'team-eudaimonia/bitflip.png',
@@ -21,7 +21,7 @@ SMODS.Atlas {
 
 SMODS.Joker {
     key = "euda_wowsignal",
-    atlas = 'wowsignalatlas',
+    atlas = 'euda_wowsignalatlas',
     pos = { x = 0, y = 0 },
     rarity = 1,
     blueprint_compat = true,
@@ -164,7 +164,7 @@ SMODS.PokerHand({
 
 SMODS.Joker {
     key = "euda_bitflip",
-    atlas = 'bitflipatlas',
+    atlas = 'euda_bitflipatlas',
     pos = { x = 0, y = 0 },
     rarity = 1,
     blueprint_compat = true,
@@ -236,7 +236,7 @@ SMODS.Consumable {
     key = "euda_bigear",
     set = "Planet",
     cost = 3,
-    atlas = "bigearatlas",
+    atlas = "euda_bigearatlas",
     pos = { x = 0, y = 0 },
     config = { hand_types = {'worm_pkr_wow','worm_pkr_wow_f'} },
     ppu_coder = {'Typ0', 'LasagnaFelidae'},
