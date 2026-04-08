@@ -1,10 +1,10 @@
 SMODS.Booster {
-    key = "avadon_normal_1",
+    key = "euda_avadon_normal_1",
     weight = 0.2,
-    kind = "Avadon",
+    kind = "euda_Avadon",
     cost = 4,
     config = { extra = 1, choose = 1 },
-    group_key = "k_avadon_pack",
+    group_key = "k_euda_avadon_pack",
     draw_hand = false,
     loc_vars = function(self, info_queue, card)
         local cfg = (card and card.ability) or self.config
@@ -14,8 +14,8 @@ SMODS.Booster {
         }
     end,
     ease_background_colour = function(self)
-        ease_colour(G.C.DYN_UI.MAIN, G.C.SET.Fate)
-        ease_background_colour({ new_colour = G.C.SET.Fate, special_colour = G.C.SECONDARY_SET.Fate, contrast = 2 })
+        ease_colour(G.C.DYN_UI.MAIN, G.C.SET.euda_Fate)
+        ease_background_colour({ new_colour = G.C.SET.euda_Fate, special_colour = G.C.SECONDARY_SET.euda_Fate, contrast = 2 })
     end,
     particles = function(self)
         G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
@@ -26,7 +26,7 @@ SMODS.Booster {
             speed = 1.1,
             padding = -1,
             attach = G.ROOM_ATTACH,
-            colours = { G.C.SET.Fate, lighten(G.C.SECONDARY_SET.Fate, 0.2) },
+            colours = { G.C.SET.euda_Fate, lighten(G.C.SECONDARY_SET.euda_Fate, 0.2) },
             fill = true
         })
         G.booster_pack_sparkles.fade_alpha = 1
@@ -34,7 +34,7 @@ SMODS.Booster {
     end,
     create_card = function(self, card, i)
         return {
-            set = "Fate",
+            set = "euda_Fate",
             area = G.pack_cards,
             skip_materialize = true,
             soulable = true,
@@ -44,12 +44,12 @@ SMODS.Booster {
 }
 
 SMODS.Booster {
-    key = "avadon_normal_2",
+    key = "euda_avadon_normal_2",
     weight = 0.2,
-    kind = "Avadon",
+    kind = "euda_Avadon",
     cost = 4,
     config = { extra = 1, choose = 1 },
-    group_key = "k_avadon_pack",
+    group_key = "k_euda_avadon_pack",
     draw_hand = false,
     loc_vars = function(self, info_queue, card)
         local cfg = (card and card.ability) or self.config
@@ -59,8 +59,8 @@ SMODS.Booster {
         }
     end,
     ease_background_colour = function(self)
-        ease_colour(G.C.DYN_UI.MAIN, G.C.SET.Fate)
-        ease_background_colour({ new_colour = G.C.SET.Fate, special_colour = G.C.SECONDARY_SET.Fate, contrast = 2 })
+        ease_colour(G.C.DYN_UI.MAIN, G.C.SET.euda_Fate)
+        ease_background_colour({ new_colour = G.C.SET.euda_Fate, special_colour = G.C.SECONDARY_SET.euda_Fate, contrast = 2 })
     end,
     particles = function(self)
         G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
@@ -71,7 +71,7 @@ SMODS.Booster {
             speed = 1.1,
             padding = -1,
             attach = G.ROOM_ATTACH,
-            colours = { G.C.SET.Fate, lighten(G.C.SECONDARY_SET.Fate, 0.2) },
+            colours = { G.C.SET.euda_Fate, lighten(G.C.SECONDARY_SET.euda_Fate, 0.2) },
             fill = true
         })
         G.booster_pack_sparkles.fade_alpha = 1
@@ -79,7 +79,7 @@ SMODS.Booster {
     end,
     create_card = function(self, card, i)
         return {
-            set = "Fate",
+            set = "euda_Fate",
             area = G.pack_cards,
             skip_materialize = true,
             soulable = true,
@@ -89,22 +89,22 @@ SMODS.Booster {
 }
 
 SMODS.Booster {
-    key = "avadon_jumbo",
+    key = "euda_avadon_jumbo",
     weight = 0.2,
-    kind = "Avadon",
+    kind = "euda_Avadon",
     cost = 6,
     config = { extra = 2, choose = 1 },
-    group_key = "k_avadon_pack",
+    group_key = "k_euda_avadon_pack",
     draw_hand = false,
     loc_vars = function(self, info_queue, card)
         local cfg = (card and card.ability) or self.config
         return {
-            vars = { cfg.choose, cfg.extra }
+            vars = { cfg.choose, cfg.extra },
         }
     end,
     ease_background_colour = function(self)
-        ease_colour(G.C.DYN_UI.MAIN, G.C.SET.Fate)
-        ease_background_colour({ new_colour = G.C.SET.Fate, special_colour = G.C.SECONDARY_SET.Fate, contrast = 2 })
+        ease_colour(G.C.DYN_UI.MAIN, G.C.SET.euda_Fate)
+        ease_background_colour({ new_colour = G.C.SET.euda_Fate, special_colour = G.C.SECONDARY_SET.euda_Fate, contrast = 2 })
     end,
     particles = function(self)
         G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
@@ -115,7 +115,7 @@ SMODS.Booster {
             speed = 1.1,
             padding = -1,
             attach = G.ROOM_ATTACH,
-            colours = { G.C.SET.Fate, lighten(G.C.SECONDARY_SET.Fate, 0.2) },
+            colours = { G.C.SET.euda_Fate, lighten(G.C.SECONDARY_SET.euda_Fate, 0.2) },
             fill = true
         })
         G.booster_pack_sparkles.fade_alpha = 1
@@ -123,7 +123,7 @@ SMODS.Booster {
     end,
     create_card = function(self, card, i)
         return {
-            set = "Fate",
+            set = "euda_Fate",
             area = G.pack_cards,
             skip_materialize = true,
             soulable = true,
@@ -133,22 +133,22 @@ SMODS.Booster {
 }
 
 SMODS.Booster {
-    key = "avadon_mega",
+    key = "euda_avadon_mega",
     weight = 0.04,
-    kind = "Avadon",
+    kind = "euda_Avadon",
     cost = 8,
     config = { extra = 2, choose = 2 },
-    group_key = "k_avadon_pack",
+    group_key = "k_euda_avadon_pack",
     draw_hand = false,
     loc_vars = function(self, info_queue, card)
         local cfg = (card and card.ability) or self.config
         return {
-            vars = { cfg.choose, cfg.extra }
+            vars = { cfg.choose, cfg.extra },
         }
     end,
     ease_background_colour = function(self)
-        ease_colour(G.C.DYN_UI.MAIN, G.C.SET.Fate)
-        ease_background_colour({ new_colour = G.C.SET.Fate, special_colour = G.C.SECONDARY_SET.Fate, contrast = 2 })
+        ease_colour(G.C.DYN_UI.MAIN, G.C.SET.euda_Fate)
+        ease_background_colour({ new_colour = G.C.SET.euda_Fate, special_colour = G.C.SECONDARY_SET.euda_Fate, contrast = 2 })
     end,
     particles = function(self)
         G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
@@ -159,7 +159,7 @@ SMODS.Booster {
             speed = 1.1,
             padding = -1,
             attach = G.ROOM_ATTACH,
-            colours = { G.C.SET.Fate, lighten(G.C.SECONDARY_SET.Fate, 0.2) },
+            colours = { G.C.SET.euda_Fate, lighten(G.C.SECONDARY_SET.euda_Fate, 0.2) },
             fill = true
         })
         G.booster_pack_sparkles.fade_alpha = 1
@@ -167,7 +167,7 @@ SMODS.Booster {
     end,
     create_card = function(self, card, i)
         return {
-            set = "Fate",
+            set = "euda_Fate",
             area = G.pack_cards,
             skip_materialize = true,
             soulable = true,
