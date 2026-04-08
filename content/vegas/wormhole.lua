@@ -378,12 +378,10 @@ SMODS.Joker{
     loc_txt = {
         name = "Goldielocks",
         text = {
-            "If the played hand has an",
-			"{C:attention}odd{} number of playing cards,",
-			"retrigger the {C:attention}middle{} card {C:attention}#2#{} times",
-			"If the played hand has an",
-			"{C:attention}even{} number of playing cards,",
-			"retrigger the {C:attention}middle 2{} cards {C:attention}#1#{} time",
+            "Retriggers middle card in",
+			"hand {C:attention}#2#{} times or",
+			"Retriggers both middle cards in",
+			"hand {C:attention}#1#{} time each"
         }
     },
     config = { extra = { repetitions = 1, repetitions_odd = 2 }},
@@ -724,13 +722,15 @@ SMODS.Consumable {
     key = 'expanse',
     set = 'Spectral',
 	loc_txt = {
-		name = "Expansion",
+		name = "Expanse",
 		text = {
 			"Add {C:purple}Negative{} effect to up",
 			"to {C:attention}#1#{} selected cards in hand"
 		}
 	},
-    pos = { x = 4, y = 4 },
+	atlas = "vegas_jokers",
+    pos = { x = 4, y = 3 },
+	pixel_size = { w = 69 },
 	discovered = true,
     config = { max_highlighted = 2 },
 	ppu_team = {"People Found In Vegas"},
