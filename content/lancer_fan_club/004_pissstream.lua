@@ -98,6 +98,7 @@ uniform float fac;
 uniform vec3 palette[4];
 uniform sampler2D bubbles;
 uniform float time;
+uniform bool nobubbles;
 
 vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords ) {
 	float progress = clamp(fac,0.,1.);
@@ -119,12 +120,12 @@ vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords
 	
 	waveB += float(texture_coords.y<(1-progress+waveA+1./dims.y) && !flowEdge)*.75;
 	
-	vec2 bubbleTexCoord = texture_coords*dims/128.;
-	bubbleTexCoord += vec2(waveC+.2,time*progress/11.-floor(time*progress/11.));
-	bubbleTexCoord -= floor(bubbleTexCoord); // Like modulo, but better :3
-	
-	float bubbleTex = texture2D( bubbles, bubbleTexCoord ).x*.5;
-	waveB = clamp(waveB-bubbleTex, 0.,3.);
+    vec2 bubbleTexCoord = texture_coords*dims/128.;
+    bubbleTexCoord += vec2(waveC+.2,time*progress/11.-floor(time*progress/11.));
+    bubbleTexCoord -= floor(bubbleTexCoord); // Like modulo, but better :3
+
+    float bubbleTex = texture2D( bubbles, bubbleTexCoord ).x*.5;
+	waveB = clamp(waveB-(bubbleTex*float(!nobubbles)), 0.,3.);
 	
 	vec3 fac = mix(palette[int(floor(waveB))],palette[int(ceil(waveB))],waveB-floor(waveB));
 	
@@ -136,8 +137,8 @@ local bubblesprite = love.graphics.newImage(love.image.newImageData(SMODS.NFS.ne
     "assets/lancer_fan_club/bubbles.png")))
 shader:send("bubbles", bubblesprite)
 
-local function draw_piss_bar(fac, x, y, w, h, colours, back)
-    local back = back or false
+local function draw_piss_bar(fac, x, y, w, h, colours, nobubbles)
+    local nobubbles = nobubbles or false
     local old_shader = love.graphics.getShader()
 
 
@@ -146,12 +147,7 @@ local function draw_piss_bar(fac, x, y, w, h, colours, back)
     shader:send("fac", fac)
     shader:send("dims", { w, h })
     shader:send("time", G.TIMERS.REAL)
-
-    if back then
-        local c = HEX("4f6367")
-        love.graphics.setColor(c[1], c[2], c[3])
-        love.graphics.rectangle("fill", x, y, w, h)
-    end
+    shader:send("nobubbles", nobubbles)
 
     love.graphics.setShader(shader)
 
@@ -163,7 +159,7 @@ end
 
 local bar_palettes = {
     water = { HEX("ffffff"), HEX("d3f8fe"), HEX("90cdfa"), HEX("5dadfb") },
-    waste = { HEX("f7aa5e"), HEX("e26d42"), HEX("c3543a"), HEX("a4473b") },
+    waste = { HEX("f9b097"), HEX("da7967"), HEX("b1625a"), HEX("86545a") },
     piss = { HEX("fff39a"), HEX("f5d15a"), HEX("eca94e"), HEX("dc8c40") }
 }
 
@@ -171,7 +167,7 @@ local function piss_draw(card)
     love.graphics.clear()
 
     draw_piss_bar(Wormhole.LancerFanClub.piss_info.water / 100, 99, 36, 13, 47, bar_palettes.water)
-    draw_piss_bar(Wormhole.LancerFanClub.piss_info.waste / 100, 29, 36, 13, 47, bar_palettes.waste)
+    draw_piss_bar(Wormhole.LancerFanClub.piss_info.waste / 100, 29, 36, 13, 47, bar_palettes.waste, true)
     draw_piss_bar(Wormhole.LancerFanClub.piss_info.urine / 100, 49, 36, 13, 47, bar_palettes.piss)
 end
 
