@@ -134,7 +134,7 @@ local function create_join_colony_view(card)
         }
     )
     for _, joker in ipairs(G.jokers and G.jokers.cards or {}) do
-        if joker.config.center.key ~= "j_worm_jokecolony" then
+        if joker.config.center.key ~= "j_worm_jokecolony" and not joker.ability.already_shipped then
             local copied_joker = copy_card(joker, nil, nil, nil, nil)
             copied_joker.ability.source_joker = joker
             copied_joker.ability.worm_colonycitizen = card.ability.extra.colonyid
@@ -284,6 +284,7 @@ G.FUNCS.worm_join_colony = function(e)
           og.area:remove_card(og)
           og:remove_from_deck()
           G.worm_colony:emplace(og)
+          og.ability.already_shipped = true
           if joker.ability.eternal then joker.ability.eternal = nil end
           SMODS.destroy_cards(joker)
           break
@@ -393,4 +394,17 @@ function G.UIDEF.use_and_sell_buttons(card)
         table.remove(m.nodes[1].nodes, 1)
     end
     return m
+end
+
+local calc_ref = SMODS.current_mod.calculate or function(self, context) return end
+SMODS.current_mod.calculate = function(self, context)
+    if context.end_of_round and not context.game_over and context.main_eval then
+        for _, joker in ipairs(G.jokers and G.jokers.cards or {}) do
+            joker.ability.already_shipped = nil
+        end
+        for _, joker in ipairs(G.worm_colony and G.worm_colony.cards or {}) do
+            joker.ability.already_shipped = nil
+        end
+    end
+    calc_ref(self, context)
 end
