@@ -166,7 +166,7 @@ local bar_palettes = {
 local function piss_draw(card)
     love.graphics.clear()
 
-    draw_piss_bar(Wormhole.LancerFanClub.piss_info.water / 100, 99, 36, 13, 47, bar_palettes.water)
+    draw_piss_bar(Wormhole.LancerFanClub.piss_info.water / 100, 9, 36, 13, 47, bar_palettes.water)
     draw_piss_bar(Wormhole.LancerFanClub.piss_info.waste / 100, 29, 36, 13, 47, bar_palettes.waste, true)
     draw_piss_bar(Wormhole.LancerFanClub.piss_info.urine / 100, 49, 36, 13, 47, bar_palettes.piss)
 end
