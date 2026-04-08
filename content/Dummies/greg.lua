@@ -31,7 +31,7 @@ SMODS.Sound{
 
 SMODS.Joker{
     key = "dum_greg",
-    attributes = {"destroy_card","enhancements", "alien"},
+    attributes = {"destroy_card","enhancements", "alien", "fish"},
     config = { extra = {  } },
     atlas = 'dum_greg',
     pos = { x = 0, y = 0 },
@@ -39,6 +39,23 @@ SMODS.Joker{
     cost = 6,
     blueprint_compat = false,
     eternal_compat = true,
+
+    wormhole_pos_extra = { x = 0, y = 1 },
+    wormhole_anim = {
+        { x = 0, y = 0, t = 10.0-0.15 },
+        { xrange = { first = 0, last = 4 }, y = 0, t = 0.15 },
+    },
+    wormhole_anim_extra = {
+        { x = 0, y = 1, t = 2.3 }, { x = 1, y = 1, t = 0.075 },
+        { x = 0, y = 1, t = 2.6 }, { x = 1, y = 1, t = 0.075 },
+        { x = 0, y = 1, t = 0.8 }, { x = 1, y = 1, t = 0.075 },
+        { x = 0, y = 1, t = 3.1 }, { x = 1, y = 1, t = 0.075 },
+        { x = 2, y = 1, t = 0.3 }, { x = 3, y = 1, t = 2.0 },
+        { xrange = { first = 2, last = 3 }, y = 1, t = 0.05 },
+        { xrange = { first = 2, last = 3 }, y = 1, t = 0.05 },
+        { xrange = { first = 2, last = 3 }, y = 1, t = 0.05 },
+    },
+
     -- unlocked = true,
     -- discovered = true,
     

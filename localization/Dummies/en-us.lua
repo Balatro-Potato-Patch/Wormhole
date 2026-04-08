@@ -39,12 +39,12 @@ return {
                 },
             },
             j_worm_dum_greg = {
-                name = "Greg The Spitter",
+                name = "Greg The Muncher",
                 text = {
                     {
                         "After a hand is scored",
                         "{C:attention}Eats{} your {C:attention}rightmost played{} card,",
-                        "{C:attention}Enhances{} your {C:attention}leftmost played{} card.",
+                        "{C:attention}Adds edition{} to your {C:attention}leftmost played{} card.",
                         "{C:red}Cannot be sold."
                     }
                 },
