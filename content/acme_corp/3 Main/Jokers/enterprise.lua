@@ -6,7 +6,7 @@ SMODS.Joker {
 	blueprint_compat = true,
 	perishable_compat = true,
 	eternal_compat = true,
-	ppu_coder = {'Basil_Squared'},
+	ppu_coder = {'Youh', 'RadiationV2'},
 	ppu_artist = {'FlameThrowerFIM'},
 	pos = { x = 3, y = 0 },
 	config = {
