@@ -57,6 +57,13 @@ SMODS.Atlas{
 }
 
 SMODS.Atlas{
+	key = "vegas_exoplanets",
+	path = "vegas/exoplanets.png",
+	px = 71,
+	py = 95
+}
+
+SMODS.Atlas{
 	key = "vegas_blinds",
 	path = "vegas/blinds.png",
 	px = 34,
@@ -258,6 +265,7 @@ SMODS.Joker{
 			local order = 0
 			for i = 1, #G.P_CENTER_POOLS.Planet do
 				if key == G.P_CENTER_POOLS.Planet[i].key then
+					if not G.GAME.hands[G.P_CENTER_POOLS.Planet[i].config.hand_type] then return end --exoplanets don't have hand types
 					hand_type = G.GAME.hands[G.P_CENTER_POOLS.Planet[i].config.hand_type]
 					order = hand_type.order
 				end
@@ -265,7 +273,7 @@ SMODS.Joker{
 			local hands_lower_equal = {}
 			if hand_type and hand_type.key ~= 'High Card' then
 				for i = 1, #G.P_CENTER_POOLS.Planet do
-					if G.GAME.hands[G.P_CENTER_POOLS.Planet[i].config.hand_type].order > order then
+					if G.GAME.hands[G.P_CENTER_POOLS.Planet[i].config.hand_type] and G.GAME.hands[G.P_CENTER_POOLS.Planet[i].config.hand_type].order > order then --skip exoplanets
 						hands_lower_equal[#hands_lower_equal + 1] = G.GAME.hands[G.P_CENTER_POOLS.Planet[i].config.hand_type]
 					end
 				end
@@ -751,6 +759,116 @@ SMODS.Consumable {
         if (layer == 'card' or layer == 'both') and card.sprite_facing == 'front' then
             card.children.center:draw_shader('booster', nil, card.ARGS.send_to_shader)
         end
+    end
+}
+
+SMODS.Consumable {
+    key = 'kepler',
+    set = 'Planet',
+	loc_txt = {
+		name = "Kepler-186 f",
+		text = {
+			"Permanently adds {C:white,X:mult}X#1#{} Mult",
+			"to {C:attention}#2#{} selected cards in hand"
+		}
+	},
+	atlas = "vegas_exoplanets",
+	set_badges = function(self, card, badges)
+ 		badges[#badges] = create_badge("Exoplanet", G.C.SECONDARY_SET.Planet, G.C.WHITE, 1 )
+ 	end,
+    pos = { x = 0, y = 0 },
+	discovered = true,
+    config = { xmult = 0.1, max_highlighted = 2 },
+	ppu_team = {"People Found In Vegas"},
+    ppu_coder = {"Ben Roffey"},
+    ppu_artist = {"Ben Roffey"},
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.xmult, card.ability.max_highlighted } }
+    end,
+	select_card = "consumeables",
+	can_use = function(self, card)
+		return G.hand and #G.hand.highlighted > 0 and #G.hand.highlighted <= card.ability.max_highlighted
+    end,
+    use = function(self, card, area, copier)
+        for i = 1, #G.hand.highlighted do
+			G.hand.highlighted[i].ability.perma_x_mult = G.hand.highlighted[i].ability.perma_x_mult or 1
+			G.hand.highlighted[i].ability.perma_x_mult = G.hand.highlighted[i].ability.perma_x_mult + card.ability.xmult
+			G.hand.highlighted[i]:juice_up(0.3, 0.5)
+		end
+    end
+}
+
+SMODS.Consumable {
+    key = 'gj',
+    set = 'Planet',
+	loc_txt = {
+		name = "GJ 504 b",
+		label = "Exoplanet",
+		text = {
+			"Permanently adds {C:mult}+#1#{} Mult",
+			"to {C:attention}#2#{} selected cards in hand"
+		}
+	},
+	atlas = "vegas_exoplanets",
+	set_badges = function(self, card, badges)
+ 		badges[#badges] = create_badge("Exoplanet", G.C.SECONDARY_SET.Planet, G.C.WHITE, 1 )
+ 	end,
+    pos = { x = 1, y = 0 },
+	discovered = true,
+    config = { mult = 1, max_highlighted = 2 },
+	ppu_team = {"People Found In Vegas"},
+    ppu_coder = {"Ben Roffey"},
+    ppu_artist = {"Ben Roffey"},
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.mult, card.ability.max_highlighted } }
+    end,
+	select_card = "consumeables",
+	can_use = function(self, card)
+		return G.hand and #G.hand.highlighted > 0 and #G.hand.highlighted <= card.ability.max_highlighted
+    end,
+    use = function(self, card, area, copier)
+        for i = 1, #G.hand.highlighted do
+			G.hand.highlighted[i].ability.perma_mult = G.hand.highlighted[i].ability.perma_mult or 0
+			G.hand.highlighted[i].ability.perma_mult = G.hand.highlighted[i].ability.perma_mult + card.ability.mult
+			G.hand.highlighted[i]:juice_up(0.3, 0.5)
+		end
+    end
+}
+
+SMODS.Consumable {
+    key = 'wasp',
+    set = 'Planet',
+	loc_txt = {
+		name = "Wasp J1407b",
+		label = "Exoplanet",
+		text = {
+			"Permanently adds {C:chips}+#1#{} Chips",
+			"to {C:attention}#2#{} selected cards in hand"
+		}
+	},
+	atlas = "vegas_exoplanets",
+	set_badges = function(self, card, badges)
+ 		badges[#badges] = create_badge("Exoplanet", G.C.SECONDARY_SET.Planet, G.C.WHITE, 1 )
+ 	end,
+    pos = { x = 2, y = 0 },
+	discovered = true,
+    config = { chips = 10, max_highlighted = 2 },
+	ppu_team = {"People Found In Vegas"},
+    ppu_coder = {"Ben Roffey"},
+    ppu_artist = {"Ben Roffey"},
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.chips, card.ability.max_highlighted } }
+    end,
+	select_card = "consumeables",
+	can_use = function(self, card)
+		return G.hand and #G.hand.highlighted > 0 and #G.hand.highlighted <= card.ability.max_highlighted
+    end,
+    use = function(self, card, area, copier)
+        for i = 1, #G.hand.highlighted do
+			G.hand.highlighted[i].ability.perma_bonus = G.hand.highlighted[i].ability.perma_bonus or 0
+			G.hand.highlighted[i].ability.perma_bonus = G.hand.highlighted[i].ability.perma_bonus + card.ability.chips
+			G.hand.highlighted[i]:juice_up(0.3, 0.5)
+		end
     end
 }
 
