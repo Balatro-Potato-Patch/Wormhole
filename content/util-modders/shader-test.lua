@@ -1,4 +1,4 @@
-util_shader = {
+Wormhole.util_shader = {
     enabled = false,
     transparency = 1.0,
 }
@@ -27,13 +27,13 @@ SMODS.ScreenShader {
     key = "util_test",
     path = "util-modders/test.fs",
     should_apply = function()
-	return util_shader.enabled
+	return Wormhole.util_shader.enabled
     end,
     send_vars = function()
 	return {
 	    screen_scale = G.TILESCALE*G.TILESIZE*G.CANV_SCALE,
 	    time = G.TIMERS.REAL,
-	    transparency = util_shader.transparency,
+	    transparency = Wormhole.util_shader.transparency,
 	    seed = 1,
 	}
     end
