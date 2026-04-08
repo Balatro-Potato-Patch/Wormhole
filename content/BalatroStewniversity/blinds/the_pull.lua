@@ -1,6 +1,4 @@
 
-
-
 -- The Pull
 SMODS.Blind {
     key = "pull",
@@ -30,4 +28,3 @@ SMODS.Blind {
         end
     end
 }
-
