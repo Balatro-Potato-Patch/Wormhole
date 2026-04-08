@@ -49,7 +49,7 @@ return {
 
         },
         Joker = {
-            j_worm_message = {
+            j_worm_euda_message = {
                 name = {
                     "The Message",
                 },
@@ -64,7 +64,7 @@ return {
                     }
                 }
             },
-            j_worm_answer = {
+            j_worm_euda_answer = {
                 name = {
                     "The Answer",
                 },
@@ -87,7 +87,7 @@ return {
                 },
                 
             },
-            j_worm_jokecolony = {
+            j_worm_euda_jokecolony = {
                 name = "Joke Colony",
                 text = {
                     {
@@ -101,14 +101,14 @@ return {
                     }
                 },
             },
-            j_worm_darkside = {
+            j_worm_euda_darkside = {
                 name = "Dark Side of the Moon",
                 text = {
                     "{C:spades}#1#{} and {C:clubs}#2#{}",
                     "are always drawn first",
                 },
             },
-            j_worm_lunarcheese = {
+            j_worm_euda_lunarcheese = {
                 name = "Lunar Cheese",
                 text = {
                     "When sold, debuffs the {C:attention}Joker",
@@ -136,7 +136,7 @@ return {
 					},
                 },
             },
-			j_worm_bitflip = {
+			j_worm_euda_bitflip = {
                 name = "Cosmic Bitflip",
                 text = {
                     {
@@ -152,7 +152,7 @@ return {
             }
         },
         Planet = {
-            c_worm_bigear = {
+            c_worm_euda_bigear = {
                 name = "Big Ear",
                 text = {
                     "Level up",
@@ -249,33 +249,33 @@ return {
     },
     misc = {
             poker_hand_descriptions = {
-                worm_euda_pkr_wow = {
+                worm_pkr_euda_wow = {
                     "Play a 6, a 3, a Queen, a Jack, and a 5",
                 },
-                worm_euda_pkr_wow_f = {
+                worm_pkr_wow_euda_f = {
                         "Play a 6, a 3, a Queen, a Jack, and a 5",
                         "with all cards sharing the same suit",
                 },
-			 	worm_pkr_pyramid = {
+			 	worm_euda_pkr_pyramid = {
                     "[NO_TEXT_DATA_DETECTED]",
                 },
             },
             poker_hands = {
-                worm_euda_pkr_wow = "Wow!",
-                worm_euda_pkr_wow_f = "Wow! Flush",
+                worm_pkr_euda_wow = "Wow!",
+                worm_pkr_euda_wow_f = "Wow! Flush",
             },
             dictionary = {
-                k_worm_jokecolony_ship_button = "SHIP",
-                k_worm_jokecolony_receive_button = "RELEASE",
-                k_worm_specificcolony_ship_button = "Ship Jokers",
-                k_worm_specificcolony_receive_button = "Release Jokers",
-                k_worm_specificcolony_ship_title = "Sending to Colony ",
-                k_worm_specificcolony_receive_title = "Release from Colony ",
+                k_worm_euda_jokecolony_ship_button = "SHIP",
+                k_worm_euda_jokecolony_receive_button = "RELEASE",
+                k_worm_euda_specificcolony_ship_button = "Ship Jokers",
+                k_worm_euda_specificcolony_receive_button = "Release Jokers",
+                k_worm_euda_specificcolony_ship_title = "Sending to Colony ",
+                k_worm_euda_specificcolony_receive_title = "Release from Colony ",
 
                 k_euda_fate = "Fate",
                 b_euda_fate_cards = "Fate Cards",
                 k_euda_avadon_pack = "Avadon Pack",
-                k_worm_lunarcheese_message = "Cheesy!",
+                k_worm_euda_lunarcheese_message = "Cheesy!",
             }
         },
 }
