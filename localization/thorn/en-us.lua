@@ -97,7 +97,7 @@ return {
                     text = {
                         "{C:planet}Planet{} cards have a",
                         "{C:green}#1# in #2#{} chance to",
-                        "level up hand {C:attention}twice{},",
+                        "level up hand {C:attention}extra time{},",
                         "otherwise level it {C:red}down{}",
                         "{C:inactive}(Won't go below lvl.1)"
                     }

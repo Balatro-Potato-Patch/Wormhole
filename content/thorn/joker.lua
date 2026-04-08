@@ -37,7 +37,7 @@ SMODS.Joker {
     atlas = "thorn_cards",
 	pos = { x = 1, y = 0 },
 	cost = 5,
-	blueprint_compat = true,
+	blueprint_compat = false,
 	eternal_compat = false,
 	perishable_compat = true,
     jand_gemini_compat = false,
