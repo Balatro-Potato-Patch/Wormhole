@@ -1,12 +1,12 @@
 SMODS.Atlas {
-    key = 'lunarcheeseatlas',
+    key = 'euda_lunarcheeseatlas',
     px = 71,
     py = 95,
     path = 'team-eudaimonia/LunarCheese.png', --Update with actual art
 }
 SMODS.Joker {
-    key = "lunarcheese",
-    atlas = 'lunarcheeseatlas',
+    key = "euda_lunarcheese",
+    atlas = 'euda_lunarcheeseatlas',
     pos = { x = 0, y = 0 },
     rarity = 2,
     blueprint_compat = false,
@@ -32,7 +32,7 @@ SMODS.Joker {
             other_joker.ability.worm_researched_retriggers = (other_joker.ability.worm_researched_retriggers or 0) + card.ability.extra.retriggers
             SMODS.debuff_card(other_joker, true, "worm_research")
             return {
-                message = localize("k_worm_lunarcheese_message")
+                message = localize("k_worm_euda_lunarcheese_message")
             }
         end
     end
