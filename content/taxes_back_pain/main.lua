@@ -1,9 +1,45 @@
 Wormhole.tbp = {}
+Wormhole.tbp.config = SMODS.current_mod.config
+
+if Wormhole.tbp.config.swap_buttons == nil then
+    Wormhole.tbp.config.swap_buttons = false
+end
+SMODS.current_mod.config_tab = function()
+    return {
+        n = G.UIT.ROOT,
+        config = {
+            align = "cm",
+            padding = 0.05,
+            colour = G.C.CLEAR,
+        },
+        nodes = {
+            {
+                n = G.UIT.R,
+                config = { align = "cl", padding = 0 },
+                nodes = {
+                    {
+                        n = G.UIT.C,
+                        config = { align = "cl", padding = 0.05 },
+                        nodes = {
+                            create_toggle({
+                                label = "Swap Module Button Layout",
+                                ref_table = Wormhole.tbp.config,
+                                ref_value = "swap_buttons",
+                                info = {"Swaps Yes/No button positions", "in module confirmation dialogs"}
+                            }),
+                        }
+                    }
+                }
+            }
+        }
+    }
+end
 
 PotatoPatchUtils.Team({
     name = 'tbp',
     loc = true,
     colour = HEX('99acad'),
+    credit_rows = {4, 3}
 })
 
 PotatoPatchUtils.Developer({
@@ -302,6 +338,8 @@ Wormhole.tbp.Module = SMODS.Consumable:extend{
         'durability'
     },
     set = "tbp_module",
+    atlas = 'centers',
+    pos = {x=1, y=0},
     config = {
 		extra = {},
 	},
@@ -332,6 +370,26 @@ Wormhole.tbp.Module = SMODS.Consumable:extend{
             return {}
         end
 	end,
+    set_ability = function(self, card) -- TODO: remove when art is complete
+        if self.atlas == 'centers' then
+            card.canvas_text = {
+                SMODS.CanvasSprite({
+                    text_colour = G.C.RED,
+                    text = localize('tbp_module_'..self.slot),
+                    text_offset = {x = 36, y = 20},
+                    text_width = 26,
+                    text_height = 20,
+                }),
+                SMODS.CanvasSprite({
+                    text_colour = G.C.BLUE,
+                    text = localize({type = 'name_text', set = 'tbp_module', key = self.key}),
+                    text_offset = {x = 36, y = 60},
+                    text_width = 60,
+                    text_height = 20,
+                })
+            }
+        end
+    end
 }
 
 -- Autmoatically prefix modules with '_tbp_'
@@ -348,7 +406,7 @@ Wormhole.tbp.Module({
 	key = "laser",
     slot = 'weapons',
     durability = 3,
-	pos = { x = 0, y = 0 },
+	-- pos = { x = 0, y = 0 },
 	config = {
 		extra = {
 			mult = 4,
@@ -370,7 +428,7 @@ Wormhole.tbp.Module({
 	key = "missile_pod",
     slot = 'weapons',
     durability = 4,
-	pos = { x = 0, y = 0 },
+	-- pos = { x = 0, y = 0 },
 	config = {
 		extra = {
 			retriggers = 1
@@ -411,7 +469,7 @@ Wormhole.tbp.Module({
 	key = "core",
     slot = 'core',
     durability = 3,
-	pos = { x = 0, y = 0 },
+	-- pos = { x = 0, y = 0 },
 	config = {
 		extra = {
 			chips = 10,
@@ -454,7 +512,7 @@ Wormhole.tbp.Module({
 	key = "salvage_core",
     slot = 'core',
     durability = 5,
-	pos = { x = 0, y = 0 },
+	-- pos = { x = 0, y = 0 },
 	config = {
 		extra = {
 			money_per_destruction = 8
@@ -472,7 +530,7 @@ Wormhole.tbp.Module({
 	key = "stabilizer",
     slot = 'core',
     durability = 5,
-	pos = { x = 0, y = 0 },
+	-- pos = { x = 0, y = 0 },
 	config = {
 		extra = {
 			durability_protection_odds = 3,
@@ -492,7 +550,7 @@ Wormhole.tbp.Module({
 	key = "deflector",
     slot = 'shields',
     durability = 5,
-	pos = { x = 0, y = 0 },
+	-- pos = { x = 0, y = 0 },
 	config = {
 		extra = {
 			blind_reduction = 10,

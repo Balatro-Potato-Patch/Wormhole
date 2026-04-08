@@ -16,16 +16,16 @@ function info_tip_from_rows(desc_nodes, name)
                     {n=G.UIT.R, config={align = "cm", minw = 1.5, minh = 0.4, r = 0.1, padding = 0.05, colour = lighten(col, 0.4)}, nodes={
                         {n=G.UIT.R, config={align = "cm", padding = 0.03}, nodes=t}
                     }},
-                    desc_nodes.module_info and {n=G.UIT.R, config = {align = 'cm', r = 0.1, minw = 0.5, minh = 0.2, colour = durability_col, outline = 1, outline_colour = darken(col, 0.15),
+                    desc_nodes.module_info and {n=G.UIT.R, config = {align = 'cm', r = 0.08, minw = 0.5, minh = 0.15, colour = durability_col, outline = 0.5, outline_colour = darken(col, 0.3),
                         progress_bar = {
-                            max = desc_nodes.module_info.total_durability, ref_table = desc_nodes.module_info, ref_value = 'durability', empty_col = durability_col, filled_col = adjust_alpha(col, 0.8)
+                            max = desc_nodes.module_info.total_durability, ref_table = desc_nodes.module_info, ref_value = 'durability', empty_col = durability_col, filled_col = adjust_alpha(col, 0.5)
                         }
                     }, nodes = {
-                        {n=G.UIT.T, config = {text = desc_nodes.module_info.durability .. ' turns', colour = lighten(col, 0.3), scale = 0.2}}
+                        {n=G.UIT.T, config = {text = desc_nodes.module_info.durability .. ' turns', colour = mix_colours(lighten(col, 0.3), darken(col, 0.3), 0.3), scale = 0.18}}
                     }} or nil
                 }}
             }},
-            
+
         }}
     else
         return tbp_hook_info_tip_from_rows(desc_nodes, name)
@@ -41,12 +41,12 @@ G.FUNCS.show_spaceship_tooltips = function(e)
         e.config.ref_table = nil
     end
 end
-local function parse_colored_text(text, scale)
+local function parse_colored_text(text, scale, default_colour)
     local nodes = {}
-    local current_color = G.C.UI.TEXT_LIGHT
+    local base_colour = default_colour or G.C.UI.TEXT_LIGHT
+    local current_color = base_colour
     local pos = 1
     while pos <= #text do
-        -- Look for color code {C:name}
         local color_start, color_end, color_name = text:find("{C:([^}]+)}", pos)
         if color_start then
             if color_start > pos then
@@ -55,7 +55,7 @@ local function parse_colored_text(text, scale)
                     nodes[#nodes+1] = {n=G.UIT.T, config={text = before_text, scale = scale, colour = current_color}}
                 end
             end
-            current_color = (G.ARGS.LOC_COLOURS and G.ARGS.LOC_COLOURS[color_name]) or G.C[color_name] or G.C.UI.TEXT_LIGHT
+            current_color = (G.ARGS.LOC_COLOURS and G.ARGS.LOC_COLOURS[color_name]) or G.C[color_name] or base_colour
             pos = color_end + 1
         else
             local reset_start, reset_end = text:find("{}", pos)
@@ -66,7 +66,7 @@ local function parse_colored_text(text, scale)
                         nodes[#nodes+1] = {n=G.UIT.T, config={text = before_text, scale = scale, colour = current_color}}
                     end
                 end
-                current_color = G.C.UI.TEXT_LIGHT
+                current_color = base_colour
                 pos = reset_end + 1
             else
                 local remaining = text:sub(pos)
@@ -129,34 +129,36 @@ end
 G.FUNCS.show_module_replace_confirm = function(old_module_key, new_module_key, card, module_def, slot, spaceship)
     local new_name = localize({type='name_text', set='tbp_module', key=new_module_key})
     local is_empty = not old_module_key
-    local old_name, old_durability, old_desc_nodes
+    local slot_colour = Wormhole.tbp.module_colours[slot] or G.C.UI.TEXT_INACTIVE
+    local desc_base_colour = darken(slot_colour, 0.3)
+    local old_name, old_desc_nodes, old_module_info
     if is_empty then
         old_name = "Empty Slot"
-        old_durability = "0/0"
-        old_desc_nodes = {{n=G.UIT.R, config={align = "cm", padding = 0.02}, nodes={
-            {n=G.UIT.T, config={text = "No module equipped", scale = 0.25, colour = G.C.UI.TEXT_INACTIVE}}
+        old_desc_nodes = {{n=G.UIT.R, config={align = "cl", padding = 0.02}, nodes={
+            {n=G.UIT.T, config={text = "No module equipped", scale = 0.35, colour = mix_colours(G.ARGS.LOC_COLOURS.inactive, desc_base_colour, 0.5)}}
         }}}
     else
         old_name = localize({type='name_text', set='tbp_module', key=old_module_key})
-        local old_module_data = spaceship.ability.extra.modules[slot]
-        old_durability = old_module_data.durability .. "/" .. old_module_data.total_durability
-        local old_loc_vars = G.P_CENTERS[old_module_key]:loc_vars({}, {ability = {extra = old_module_data}})
+        old_module_info = spaceship.ability.extra.modules[slot]
+        local old_loc_vars = G.P_CENTERS[old_module_key]:loc_vars({}, {ability = {extra = old_module_info}})
         local old_vars = (old_loc_vars and old_loc_vars.vars) or {}
         local old_desc_table = G.localization.descriptions.tbp_module[old_module_key]
         old_desc_nodes = {}
         if old_desc_table and old_desc_table.text then
             for _, line in ipairs(old_desc_table.text) do
-                -- Replace variables
                 local text = line
                 for j, var in ipairs(old_vars) do
                     text = text:gsub("#" .. j .. "#", tostring(var))
                 end
-                local colored_nodes = parse_colored_text(text, 0.25)
+                local colored_nodes = parse_colored_text(text, 0.2625, desc_base_colour)
                 old_desc_nodes[#old_desc_nodes+1] = {n=G.UIT.R, config={align = "cm", padding = 0.02}, nodes=colored_nodes}
             end
         end
     end
-    local new_durability = module_def.durability .. "/" .. module_def.durability
+    local new_module_info = {
+        durability = module_def.durability,
+        total_durability = module_def.durability,
+    }
     local new_loc_vars = G.P_CENTERS[new_module_key]:loc_vars({}, {ability = {extra = module_def.config.extra}})
     local new_vars = (new_loc_vars and new_loc_vars.vars) or {}
     local new_desc_table = G.localization.descriptions.tbp_module[new_module_key]
@@ -167,7 +169,7 @@ G.FUNCS.show_module_replace_confirm = function(old_module_key, new_module_key, c
             for j, var in ipairs(new_vars) do
                 text = text:gsub("#" .. j .. "#", tostring(var))
             end
-            local colored_nodes = parse_colored_text(text, 0.25)
+            local colored_nodes = parse_colored_text(text, 0.2625, desc_base_colour)
             new_desc_nodes[#new_desc_nodes+1] = {n=G.UIT.R, config={align = "cm", padding = 0.02}, nodes=colored_nodes}
         end
     end
@@ -179,53 +181,84 @@ G.FUNCS.show_module_replace_confirm = function(old_module_key, new_module_key, c
     }
     local dialog_title = is_empty and "Equip Module?" or "Replace Module?"
     local old_label = is_empty and "Empty Slot:" or "Current:"
-    local old_panel_colour = is_empty and G.C.UI.TEXT_INACTIVE or G.C.RED
-    local old_name_colour = is_empty and G.C.UI.TEXT_INACTIVE or G.C.RED
+    local slot_strip_label = ((slot and (slot:sub(1,1):upper() .. slot:sub(2))) or "Module") .. ":"
+    local panel_strip_colour = darken(slot_colour, 0.4)
+    local panel_shell_colour = panel_strip_colour
+    local panel_face_colour = lighten(slot_colour, 0.4)
+    local panel_text_colour = desc_base_colour
+    local inactive_slot_text_colour = mix_colours(G.ARGS.LOC_COLOURS.inactive, desc_base_colour, 0.5)
+    local durability_bar_bg = mix_colours(G.C.BLACK, slot_colour, 0.8)
+    local function make_durability_row(module_info)
+        return {n=G.UIT.R, config={align = 'cm', r = 0.06, w = 2.96, h = 0.3, colour = durability_bar_bg, outline = 0.5, outline_colour = darken(panel_strip_colour, 0.3),
+            progress_bar = {
+                max = module_info.total_durability,
+                ref_table = module_info,
+                ref_value = 'durability',
+                empty_col = durability_bar_bg,
+                filled_col = adjust_alpha(slot_colour, 0.5)
+            }
+        }, nodes = {
+            {n=G.UIT.T, config = {text = module_info.durability .. ' turns', colour = mix_colours(lighten(slot_colour, 0.3), desc_base_colour, 0.3), scale = 0.28}}
+        }}
+    end
+    local old_name_colour = is_empty and inactive_slot_text_colour or panel_text_colour
+    local old_label_colour = is_empty and inactive_slot_text_colour or panel_text_colour
     local old_panel_nodes = {
-        {n=G.UIT.R, config={align = "cm", padding = 0.02}, nodes={
-            {n=G.UIT.T, config={text = old_label .. " ", scale = 0.3, colour = G.C.UI.TEXT_INACTIVE}},
+        {n=G.UIT.R, config={align = "cl", padding = 0.02}, nodes={
+            {n=G.UIT.T, config={text = old_label .. " ", scale = 0.3, colour = old_label_colour}},
             {n=G.UIT.T, config={text = old_name, scale = 0.45, colour = old_name_colour}}
-        }},
-        {n=G.UIT.R, config={align = "cm", padding = 0.02}, nodes={
-            {n=G.UIT.T, config={text = "Info:", scale = 0.28, colour = G.C.UI.TEXT_INACTIVE}}
-        }},
-        {n=G.UIT.R, config={align = "cm", padding = 0.02}, nodes={
-            {n=G.UIT.T, config={text = "Durability: " .. old_durability, scale = 0.28, colour = G.C.UI.TEXT_LIGHT}}
         }}
     }
     for _, desc_row in ipairs(old_desc_nodes) do
         old_panel_nodes[#old_panel_nodes+1] = desc_row
     end
+    if old_module_info then
+        old_panel_nodes[#old_panel_nodes+1] = make_durability_row(old_module_info)
+    else
+        old_panel_nodes[#old_panel_nodes+1] = {n=G.UIT.R, config={align = 'cm', r = 0.06, w = 2.96, h = 0.3, colour = mix_colours(G.C.BLACK, G.C.UI.TEXT_INACTIVE, 0.8), outline = 0.5, outline_colour = mix_colours(panel_strip_colour, G.C.UI.TEXT_INACTIVE, 0.5)}, nodes = {
+            {n=G.UIT.T, config = {text = '0 turns', colour = inactive_slot_text_colour, scale = 0.25}}
+        }}
+    end
     local new_panel_nodes = {
-        {n=G.UIT.R, config={align = "cm", padding = 0.02}, nodes={
-            {n=G.UIT.T, config={text = "New: ", scale = 0.3, colour = G.C.UI.TEXT_INACTIVE}},
-            {n=G.UIT.T, config={text = new_name, scale = 0.45, colour = G.C.GREEN}}
-        }},
-        {n=G.UIT.R, config={align = "cm", padding = 0.02}, nodes={
-            {n=G.UIT.T, config={text = "Info:", scale = 0.28, colour = G.C.UI.TEXT_INACTIVE}}
-        }},
-        {n=G.UIT.R, config={align = "cm", padding = 0.02}, nodes={
-            {n=G.UIT.T, config={text = "Durability: " .. new_durability, scale = 0.28, colour = G.C.UI.TEXT_LIGHT}}
+        {n=G.UIT.R, config={align = "cl", padding = 0.02}, nodes={
+            {n=G.UIT.T, config={text = "New: ", scale = 0.3, colour = panel_text_colour}},
+            {n=G.UIT.T, config={text = new_name, scale = 0.45, colour = panel_text_colour}}
         }}
     }
     for _, desc_row in ipairs(new_desc_nodes) do
         new_panel_nodes[#new_panel_nodes+1] = desc_row
     end
+    new_panel_nodes[#new_panel_nodes+1] = make_durability_row(new_module_info)
     
     local t = {n=G.UIT.ROOT, config={align = "cm", colour = G.C.CLEAR, padding = 0, minh = G.ROOM.T.h, minw = G.ROOM.T.w}, nodes={
         {n=G.UIT.C, config={align = "cm", padding = 0.15, r=0.1, colour = G.C.BLACK, emboss = 0.05}, nodes={
         {n=G.UIT.R, config={align = "cm", padding = 0.05}, nodes={
             {n=G.UIT.T, config={text = dialog_title, scale = 0.45, colour = G.C.UI.TEXT_LIGHT}}
         }},
-        {n=G.UIT.R, config={align = "cm", padding = 0.05}, nodes={
-            {n=G.UIT.C, config={align = "cm", padding = 0.1, r=0.1, colour = mix_colours(old_panel_colour, G.C.BLACK, 0.8)}, nodes=old_panel_nodes},
-            {n=G.UIT.C, config={align = "cm", padding = 0.05}, nodes={
-                {n=G.UIT.T, config={text = "→", scale = 0.5, colour = G.C.UI.TEXT_LIGHT}}
+        {n=G.UIT.R, config={align = "cm", padding = 0.06}, nodes={
+            {n=G.UIT.C, config={align = "cm", w = 3.6, h = 3.75}, nodes={
+                {n=G.UIT.R, config={align = "cm", r=0.1, padding = 0.06, colour = panel_shell_colour, outline = 2, outline_colour = panel_strip_colour}, nodes={
+                    {n=G.UIT.C, config={align = "cm", colour = panel_strip_colour, padding = 0.14}, nodes={
+                        {n=G.UIT.T, config={text = slot_strip_label, scale = 0.24, colour = G.C.UI.TEXT_LIGHT, vert = true}}
+                    }},
+                    {n=G.UIT.C, config={align = "cl", padding = 0.02, colour = panel_face_colour}, nodes={
+                        {n=G.UIT.C, config={align = "cl", r=0.08, padding = 0.02, w = 5.625, colour = panel_face_colour}, nodes=old_panel_nodes}
+                    }}
+                }}
             }},
-            {n=G.UIT.C, config={align = "cm", padding = 0.1, r=0.1, colour = mix_colours(G.C.GREEN, G.C.BLACK, 0.8)}, nodes=new_panel_nodes}
+            {n=G.UIT.C, config={align = "cm", w = 3.6, h = 3.75, padding = 0.27}, nodes={
+                {n=G.UIT.R, config={align = "cm", r=0.1, padding = 0.06, colour = panel_shell_colour, outline = 2, outline_colour = panel_strip_colour}, nodes={
+                    {n=G.UIT.C, config={align = "cm", colour = panel_strip_colour, padding = 0.14}, nodes={
+                        {n=G.UIT.T, config={text = slot_strip_label, scale = 0.24, colour = G.C.UI.TEXT_LIGHT, vert = true}}
+                    }},
+                    {n=G.UIT.C, config={align = "cl", padding = 0.02, colour = panel_face_colour}, nodes={
+                        {n=G.UIT.C, config={align = "cl", r=0.08, padding = 0.02, w = 5.625, colour = panel_face_colour}, nodes=new_panel_nodes}
+                    }}
+                }}
+            }}
         }},
-        {n=G.UIT.R, config={align = "cm", padding = 0.1}, nodes={
-            {n=G.UIT.C, config={align = "cm", padding = 0.05}, nodes={
+        {n=G.UIT.R, config={align = "cm", padding = 0.1}, nodes=(function()
+            local yes_button = {n=G.UIT.C, config={align = "cm", padding = 0.05}, nodes={
                 UIBox_button({
                     label = {"Yes"},
                     button = "module_replace_yes",
@@ -235,8 +268,8 @@ G.FUNCS.show_module_replace_confirm = function(old_module_key, new_module_key, c
                     colour = G.C.GREEN,
                     scale = 0.35
                 })
-            }},
-            {n=G.UIT.C, config={align = "cm", padding = 0.05}, nodes={
+            }}
+            local no_button = {n=G.UIT.C, config={align = "cm", padding = 0.05}, nodes={
                 UIBox_button({
                     label = {"No"},
                     button = "module_replace_no",
@@ -247,7 +280,12 @@ G.FUNCS.show_module_replace_confirm = function(old_module_key, new_module_key, c
                     scale = 0.35
                 })
             }}
-        }}
+            if Wormhole.tbp.config.swap_buttons then
+                return {yes_button, no_button}
+            else
+                return {no_button, yes_button}
+            end
+        end)()}
         }}
     }}
     G.E_MANAGER.queues.module_replace_dialog = G.E_MANAGER.queues.module_replace_dialog or {}
@@ -264,4 +302,21 @@ G.FUNCS.show_module_replace_confirm = function(old_module_key, new_module_key, c
             return true
         end
     }), "module_replace_dialog")
-end  
+end
+
+--Can be enabled later at any time by setting G.GAME.tbp_module_replace_active = true
+--[[
+SMODS.ScreenShader{
+    key = 'tbp_space_warp',
+    path = 'tbp_space_warp.fs',
+    order = 0,
+    should_apply = function(self)
+        return G.GAME and G.GAME.tbp_module_replace_active
+    end,
+    send_vars = function(self)
+        return {
+            time = G.TIMERS and G.TIMERS.REAL or 0
+        }
+    end
+}
+--]]
