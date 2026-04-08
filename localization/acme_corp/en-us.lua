@@ -152,6 +152,7 @@ return {
             k_acme_test_dummy_1 = 'Crash!',
             k_acme_test_dummy_2 = 'Bang!',
             k_acme_test_dummy_3 = 'Wallop!',
+            k_acme_test_dummy_4 = 'Hello.',
         },
         labels = {
             acme_gadget = 'Gadget',
