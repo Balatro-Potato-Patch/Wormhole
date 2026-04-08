@@ -161,22 +161,22 @@ return {
                 },
             }
         },
-        Fate = {
-            c_worm_crunch = {
+        euda_Fate = {
+            c_worm_euda_crunch = {
                 name = {"Big Crunch"},
                 text = {
                     "Sets each card in {C:attention}deck",
                     "to {C:attention}1{} of {C:attention}2{} random {C:attention}suits"
                 }
             },
-            c_worm_freeze = {
+            c_worm_euda_freeze = {
                 name = {"Big Freeze"},
                 text = {
                     "Sets each card in {C:attention}deck",
                     "to {C:attention}1{} of {C:attention}4{} random {C:attention}ranks"
                 }
             },
-            c_worm_rip = {
+            c_worm_euda_rip = {
                 name = {"Big Rip"},
                 text = {
                     "{C:attention}Duplicates{} each card in {C:attention}deck",
@@ -184,7 +184,7 @@ return {
                     "{C:inactive}(Rounded down)"
                 }
             },
-            c_worm_slurp = {
+            c_worm_euda_slurp = {
                 name = {"Big Slurp"},
                 text = {
                     "Randomly {C:attention}destroys{} half",
@@ -192,7 +192,7 @@ return {
                     "{C:inactive}(Rounded up)"
                 }
             },
-            c_worm_bounce = {
+            c_worm_euda_bounce = {
                 name = {"Big Bounce"},
                 text = {
                     "{C:attention}Destroys{} all cards in",
@@ -202,8 +202,8 @@ return {
             }
         },
         Spectral = {
-            c_worm_bang = {
-                name = {"The Big Bang"},
+            c_worm_euda_bang = {
+                name = {"Big Bang"},
                 text = {
                     "{C:attention}Replaces{} all cards in deck",
                     "with {C:attention,E:2}randomized{} ones",
@@ -212,7 +212,7 @@ return {
             }
         },
         Other = {
-            p_worm_avadon_normal = {
+            p_worm_euda_avadon_normal = {
                 name = "Avadon Pack",
                 text = {
                     "Choose {C:attention}#1#{} of up to",
@@ -220,7 +220,7 @@ return {
                     "be used immediately"
                 },
             },
-            p_worm_avadon_jumbo = {
+            p_worm_euda_avadon_jumbo = {
                 name = "Jumbo Avadon Pack",
                 text = {
                     "Choose {C:attention}#1#{} of up to",
@@ -228,7 +228,7 @@ return {
                     "be used immediately"
                 },
             },
-            p_worm_avadon_mega = {
+            p_worm_euda_avadon_mega = {
                 name = "Mega Avadon Pack",
                 text = {
                     "Choose {C:attention}#1#{} of up to",
@@ -236,7 +236,7 @@ return {
                     "be used immediately"
                 },
             },
-            undiscovered_fate = {
+            undiscovered_euda_fate = {
                 name = "Not Discovered",
                 text = {
                     "Purchase or use",
@@ -272,9 +272,9 @@ return {
                 k_worm_specificcolony_ship_title = "Sending to Colony ",
                 k_worm_specificcolony_receive_title = "Release from Colony ",
 
-                k_fate = "Fate",
-                b_fate_cards = "Fate Cards",
-                k_avadon_pack = "Avadon Pack",
+                k_euda_fate = "Fate",
+                b_euda_fate_cards = "Fate Cards",
+                k_euda_avadon_pack = "Avadon Pack",
                 k_worm_lunarcheese_message = "Cheesy!",
             }
         },

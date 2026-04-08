@@ -1,5 +1,5 @@
 SMODS.Atlas({
-    key = "fates",
+    key = "euda_fates",
     path = "team-eudaimonia/fates.png",
     px = 71,
     py = 95,
@@ -7,35 +7,35 @@ SMODS.Atlas({
 })
 
 SMODS.ConsumableType{
-    key = "Fate",
+    key = "euda_Fate",
     primary_colour = HEX("3e4150"),
     secondary_colour = HEX("ff5192"),
     collection_rows = {5},
-    default = "c_bounce"
+    default = "c_euda_bounce"
 }
 
 SMODS.UndiscoveredSprite{
-    key = "Fate",
-    atlas = "fates",
+    key = "euda_Fate",
+    atlas = "euda_fates",
     pos = {x=6,y=0}
 }
 
 -- Crunch
 SMODS.Consumable{
-    key = "crunch",
-    atlas = "fates",
+    key = "euda_crunch",
+    atlas = "euda_fates",
     pos = {x=0,y=0},
-    set = "Fate",
+    set = "euda_Fate",
     ppu_coder = {"iamarta"},
     ppu_artist = {"cosmeggo"},
     ppu_team = {"TeamEudaimonia"},
     use = function(self, card, area, copier)
         local suitOptions = {}
         for i = 1, 2 do
-            suitOptions[i] = pseudorandom_element(SMODS.Suits, "crunch")
+            suitOptions[i] = pseudorandom_element(SMODS.Suits, "euda_crunch")
         end
         for _, _card in ipairs(G.deck.cards) do
-            local suit = pseudorandom_element(suitOptions, "crunch")
+            local suit = pseudorandom_element(suitOptions, "euda_crunch")
             SMODS.change_base(_card, suit.key)
         end
     end,
@@ -46,20 +46,20 @@ SMODS.Consumable{
 
 -- Freeze
 SMODS.Consumable{
-    key = "freeze",
-    atlas = "fates",
+    key = "euda_freeze",
+    atlas = "euda_fates",
     pos = {x=1,y=0},
-    set = "Fate",
+    set = "euda_Fate",
     ppu_coder = {"iamarta"},
     ppu_artist = {"cosmeggo"},
     ppu_team = {"TeamEudaimonia"},
     use = function(self, card, area, copier)
         local rankOptions = {}
         for i = 1, 4 do
-            rankOptions[#rankOptions+1] = pseudorandom_element(SMODS.Ranks, "freeze")
+            rankOptions[#rankOptions+1] = pseudorandom_element(SMODS.Ranks, "euda_freeze")
         end
         for _, _card in ipairs(G.deck.cards) do
-            local rank = pseudorandom_element(rankOptions, "freeze")
+            local rank = pseudorandom_element(rankOptions, "euda_freeze")
             SMODS.change_base(_card, nil, rank.key)
         end
     end,
@@ -70,10 +70,10 @@ SMODS.Consumable{
 
 -- Rip
 SMODS.Consumable{
-    key = "rip",
-    atlas = "fates",
+    key = "euda_rip",
+    atlas = "euda_fates",
     pos = {x=2,y=0},
-    set = "Fate",
+    set = "euda_Fate",
     ppu_coder = {"iamarta"},
     ppu_artist = {"cosmeggo"},
     ppu_team = {"TeamEudaimonia"},
@@ -100,10 +100,10 @@ SMODS.Consumable{
 
 -- Slurp
 SMODS.Consumable{
-    key = "slurp",
-    atlas = "fates",
+    key = "euda_slurp",
+    atlas = "euda_fates",
     pos = {x=3,y=0},
-    set = "Fate",
+    set = "euda_Fate",
     ppu_coder = {"iamarta"},
     ppu_artist = {"cosmeggo"},
     ppu_team = {"TeamEudaimonia"},
@@ -114,7 +114,7 @@ SMODS.Consumable{
         local removed = {}
 
         while removedCount < toRemove do
-            local _card = pseudorandom_element(G.deck.cards, "slurp")
+            local _card = pseudorandom_element(G.deck.cards, "euda_slurp")
 
             if not removed[_card] then
                 removed[_card] = true
@@ -130,10 +130,10 @@ SMODS.Consumable{
 
 -- Bounce
 SMODS.Consumable{
-    key = "bounce",
-    atlas = "fates",
+    key = "euda_bounce",
+    atlas = "euda_fates",
     pos = {x=4,y=0},
-    set = "Fate",
+    set = "euda_Fate",
     ppu_coder = {"iamarta"},
     ppu_artist = {"cosmeggo"},
     ppu_team = {"TeamEudaimonia"},
@@ -164,12 +164,12 @@ SMODS.Consumable{
 
 -- Bang
 SMODS.Consumable{
-    key = "bang",
-    atlas = "fates",
+    key = "euda_bang",
+    atlas = "euda_fates",
     pos = {x=5,y=0},
     set = "Spectral",
     hidden = true,
-    soul_set = "Fate",
+    soul_set = "euda_Fate",
     ppu_coder = {"iamarta"},
     ppu_artist = {"iamarta", "cosmeggo"},
     ppu_team = {"TeamEudaimonia"},
@@ -182,8 +182,8 @@ SMODS.Consumable{
             local _card = SMODS.create_card({
                 set = "Playing Card",
                 skip_materialize = true,
-                edition = SMODS.poll_edition("big_bang", nil, true),
-                seal = SMODS.poll_seal("big_bang", nil, false, nil, "big_bang")
+                edition = SMODS.poll_edition("euda_bang", nil, true),
+                seal = SMODS.poll_seal("euda_bang", nil, false, nil, "euda_bang")
             })
             _card:add_to_deck()
             G.deck.config.card_limit = G.deck.config.card_limit + 1
