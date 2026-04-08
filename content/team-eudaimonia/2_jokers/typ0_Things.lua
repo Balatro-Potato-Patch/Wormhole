@@ -242,11 +242,11 @@ SMODS.Consumable {
 		l_chips = 30,
 		l_mult = 2,
 		l_mult_f = 5,
+		softlock = true
 	},
     ppu_coder = {'Typ0', 'LasagnaFelidae'},
     ppu_artist = {'LasagnaFelidae'},
     hidden = true,
-    config = {softlock = true},
     use = function(self, card, area, copier)
         update_hand_text({ sound = 'button', volume = 0.7, pitch = 0.8, delay = 0.3 },
             { handname = localize('k_worm_euda_wow_hands'), chips = '...', mult = '...', level = '' })
