@@ -4,8 +4,9 @@ return {
             bl_worm_pull = {
                 name = "The Pull",
                 text = {
-                    "Testing",
-                    "test",
+                    "Increases in size",
+                    "per round played",
+                    "this Ante",
                 },
            },
         }
