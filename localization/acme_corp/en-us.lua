@@ -21,6 +21,22 @@ return {
             c_worm_acme_ray_gun = {
                 name = 'ACME Disintegrator-Inverse-Atron'
             },
+            c_worm_acme_jam = {
+                name = 'ACME Spreadable Berry Conserve',
+                text = {
+                    '{X:attention,C:white}After{C:attention} #1# #2#{} trigger in hand,',
+                    '{X:attention,C:white}Use{} to {C:attention}upgrade{} every',
+                    '{E:1,C:legendary}poker hand{} by {C:attention}1 Level'
+                }
+            },
+            c_worm_acme_jam_alt = {
+                name = 'ACME Spreadable Berry Conserve',
+                text = {
+                    '{C:attention}Upgrade{} every',
+                    '{E:1,C:legendary}poker hand',
+                    'by {C:attention}1 Level'
+                }
+            },
             c_worm_acme_trash = {
                 name = 'ACME Accumulated Resources and Detritus',
                 text = {
