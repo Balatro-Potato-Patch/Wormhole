@@ -1,18 +1,12 @@
 
 SMODS.Edition{
     key = 'stellar',
+    -- TODO : use atlas
+    -- atlas = "stewtags",
     shader = false,
     config = {odds = 4},
     in_shop = true,
-    extra_cost = 2,
-    loc_txt = {
-        name = 'Stellar',
-        text = {'{C:green}#1# in #2#{} chance to',
-        'upgrade level of',
-        'played {C:attention}poker hand{}'
-        },
-        label = 'Stellar'
-    },
+    extra_cost = 4,
     weight = 17,
 
     sound = { sound = "foil1", per = 1.2, vol = 0.4 },

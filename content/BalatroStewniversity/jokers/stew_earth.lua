@@ -1,13 +1,6 @@
 
 SMODS.Joker{ --Stew Earth
     key = 'stew_earth',
-    loc_txt = {
-        name = 'Stew Earth',
-        text = {
-            '{E:1}mmmmmmmm stew{}'
-        }
-    },
-
     config = {},
     rarity = 4,
     cost = 42069,
