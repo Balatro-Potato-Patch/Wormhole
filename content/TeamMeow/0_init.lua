@@ -130,7 +130,10 @@ PotatoPatchUtils.Developer({
 	loc = true,
 	team = "meow",
 	atlas = "worm_meowCredits",
-	pos = { x = 0, y = 0 }
+	pos = { x = 0, y = 0 },
+	click_func = function(card)
+		love.system.openURL("https://golden-leaf.itch.io/")
+	end
 })
 
 loc_colour('red')

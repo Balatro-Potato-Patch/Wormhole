@@ -14,7 +14,7 @@ SMODS.ConsumableType({
 	select_card = "consumeables",
 	default = "c_worm_stellar_strawberry",
 	collection_rows = { 3, 3 },
-	shop_rate = 3,
+	shop_rate = 1,
 	text_colour = HEX("fddca0"),
 })
 
@@ -1173,7 +1173,7 @@ end
 local old = Card.update
 function Card:update(dt, ...)
 	local ret = old(self, dt, ...)
-	self.timer = self.timer and self.timer + dt or dt
+	self.timer = self.timer and math.max(self.timer + dt, 2) or dt
 	return ret
 end
 

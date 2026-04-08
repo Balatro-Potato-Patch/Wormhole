@@ -110,8 +110,13 @@ return {
 					{
 						"Ex-developer of {C:red}Fool's Gambit{} and {C:purple}Medium{}",
 						"{C:attention}Hot Potato{} and {C:red}Stocking {C:green}Stuffer{} participant",
+					},
+					{
+						"Click me to open my {C:attention}itch.io{} page!"
+					},
+					{
 						"{C:inactive,s:0.7}will i get flamed if i shill non balatro things here",
-						"{C:inactive,s:0.6}..hello? is anyone there? anyone? it's so dark...",
+						"{C:inactive,s:0.6}..hello? is anyone there? anyone? it's so dark all of a sudden...",
 						"{C:inactive,s:0.5}..where the hell am i??",
 					},
 				},
