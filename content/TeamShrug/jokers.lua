@@ -5,7 +5,6 @@ Wormhole.SHRUG_Joker = SMODS.Joker:extend{
 
 
 -- Atlas
-
 SMODS.Atlas {
     key = "shrug_jokers",
     px = 71,
@@ -31,7 +30,7 @@ Wormhole.SHRUG_Joker {
     perishable_compat = true,
 
     -- Return tag type
-    loc_vars = function(self, info_queue, center)
+    loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = G.P_TAGS.tag_meteor
     end,
 
@@ -68,6 +67,55 @@ Wormhole.SHRUG_Joker {
     ppu_coder = {
         "microwave",
         "randomsongv2"
+    },
+    ppu_team = { "shrug" }
+}
+
+
+
+---OKAY WITH IT---
+------------------
+---OKAY WITH IT---
+
+Wormhole.SHRUG_Joker {
+    key = "shrug_okay_with_it",
+    atlas = "shrug_jokers",
+    pos = { x = 0, y = 0 },
+    rarity = 2,
+    cost = 5,
+    config = { extra = { card_table = {} } },
+    blueprint_compat = false,
+    eternal_compat = true,
+    perishable_compat = true,
+
+    -- Return Enhancement Type
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue+1] = G.P_CENTERS["m_worm_shrug_nebulous"]
+    end,
+
+    -- Calculations
+    calculate = function(self, card, context)
+        if not context.blueprint then
+            if context.before then
+                -- Reset card table
+                card.ability.extra.card_table = {}
+
+            elseif context.individual and context.cardarea == "unscored" and not SMODS.has_enhancement(context.other_card, "m_worm_shrug_nebulous") then
+                -- Add all unscored cards to a table
+                card.ability.extra.card_table[#card.ability.extra.card_table + 1] = context.other_card
+
+            elseif context.after then
+                -- Find effect card and give it the enhancement (TO DO - Give enhancement)
+                local eff_card = pseudorandom_element(card.ability.extra.card_table, "wormhole_shrug_okay_with_it")
+                eff_card:set_ability("m_worm_shrug_nebulous")
+
+            end
+        end
+    end,
+
+    -- Credits
+    ppu_coder = {
+        "microwave",
     },
     ppu_team = { "shrug" }
 }

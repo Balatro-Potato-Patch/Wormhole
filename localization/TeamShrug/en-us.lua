@@ -59,8 +59,6 @@ return {
 
 
 
-
-
         ---JOKERS---
         ------------
         ---JOKERS---
@@ -76,7 +74,24 @@ return {
                     "{C:planet}Planets{} were used this round",
                 }
             },
+
+            -- OKAY WITH IT
+            j_worm_shrug_okay_with_it = {
+                name = "Okay With It",
+                text = {
+                    "Enhance {C:attention}1{} random played",
+                    "and unscored card into a",
+                    "{C:attention}Nebulous Card{} after scoring"
+                }
+            },
         },
+
+
+
+        ---ALIEN SETUP---
+        -----------------
+        ---ALIEN SETUP---
+        
         Other = {
             p_worm_shrug_alien_normal_1 = {
                 name = "Sighting Pack",
@@ -121,6 +136,8 @@ return {
             },
         },
 
+
+
         ---ENHANCEMENTS---
         ------------------
         ---ENHANCEMENTS---
@@ -137,6 +154,8 @@ return {
             },
 
         },
+
+
 
         ---ALIENS---
         ------------
