@@ -363,8 +363,46 @@ SMODS.Joker{
 	ppu_artist = {},
 	calculate = function(self, card, context)
 		if context.discard and G.GAME.current_round.discards_left == 1 and #context.full_hand == 2 and context.other_card then
-            if (context.other_card == context.full_hand[1]) or (context.other_card == context.full_hand[2]) then
+            if (context.other_card == context.full_hand[1]) then
 				context.other_card:set_ability("m_glass", nil, true)
+			end
+			return{
+				message = "It's ice, I promise"
+			}
+        end
+	end
+}
+
+SMODS.Joker{
+	key = "chthonian",
+	loc_txt = {
+		name = "Cthonian Planet",
+		text = {
+			"If {C:attention}first discard{} of",
+			"round is {C:attention}#1#{} card, make",
+			"{C:attention}both{} cards {C:attention}Stone{}"
+		}
+	},
+	config = { extra = { size = 2 }},
+	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue + 1] = G.P_CENTERS.m_stone
+		return { vars = { card.ability.extra.size }}
+	end,
+	atlas = "vegas_jokers",
+	pos = {x = 0, y = 4},
+	rarity = 2,
+	cost = 7,
+	blueprint_compat = true,
+	discovered = true,
+	eternal_compat = true,
+	perishable_compat = true,
+	ppu_team = {"People Found In Vegas"},
+	ppu_coder = {"Jammbo"},
+	ppu_artist = {},
+	calculate = function(self, card, context)
+		if context.discard and G.GAME.current_round.discards_used <= 0 and #context.full_hand == 2 and context.other_card then
+            if (context.other_card == context.full_hand[1]) or (context.other_card == context.full_hand[2]) then
+				context.other_card:set_ability("m_stone", nil, true)
 			end
 			return{
 				message = "It's ice, I promise"
@@ -866,7 +904,7 @@ SMODS.Consumable {
     config = { max_highlighted = 2 },
 	ppu_team = {"People Found In Vegas"},
     ppu_coder = {"Jammbo"},
-    ppu_artist = {},
+    ppu_artist = {"Jammbo"},
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = G.P_CENTERS.e_negative
         return { vars = { card.ability.max_highlighted } }
@@ -1005,9 +1043,9 @@ SMODS.Consumable {
 
 --Deck (Test)
 SMODS.Back {
-	key = "singularity",
+	key = "colonist",
     loc_txt = {
-        name = "Singularity Deck",
+        name = "Colonist Deck",
         text = {
             "Start with {C:chips}Banner{},",
 			"and {C:blue}Planet Merchant{}",
