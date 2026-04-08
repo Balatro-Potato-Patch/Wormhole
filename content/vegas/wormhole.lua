@@ -562,7 +562,7 @@ SMODS.Joker{
 		return { vars = { card.ability.lose, card.ability.gain }}
 	end,
 	atlas = "vegas_jokers",
-	pos = {x = 0, y = 4},
+	pos = {x = 1, y = 1},
 	rarity = 1,
 	cost = 5,
 	blueprint_compat = false,
@@ -571,7 +571,7 @@ SMODS.Joker{
 	perishable_compat = true,
 	ppu_team = {"People Found In Vegas"},
 	ppu_coder = {"Ben Roffey"},
-	ppu_artist = {},
+	ppu_artist = {"Ben Roffey"},
 	calculate = function(self, card, context)
 		if context.setting_blind and not context.blueprint then
 			G.E_MANAGER:add_event(Event{
