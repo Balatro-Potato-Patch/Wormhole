@@ -21,6 +21,21 @@ return {
             c_worm_acme_ray_gun = {
                 name = 'ACME Disintegrator-Inverse-Atron'
             },
+            c_worm_acme_trash = {
+                name = 'ACME Accumulated Resources and Detritus',
+                text = {
+                    '{X:attention,C:white}After{C:attention} #1#{} #2# are discarded,',
+                    '{X:attention,C:white}Use{} to get a random {C:attention}Perishable',
+                    '{C:dark_edition}Negative {C:attention}Food Joker',
+                }
+            },
+            c_worm_acme_trash_alt = {
+                name = 'ACME Accumulated Resources and Detritus',
+                text = {
+                    '{X:attention,C:white}Use{} to get a random {C:attention}Perishable',
+                    '{C:dark_edition}Negative {C:attention}Food Joker',
+                }
+            },
             c_worm_acme_mr_jr = {
                 name = 'Legally Distinct ACME Automated Helper',
                 text = {
@@ -57,7 +72,15 @@ return {
             },
         },
         Joker = {
-
+            j_worm_ACME_enterprise = {
+		        name = "Enterprise Joker",
+		        text = {
+			        '{C:chips}+#1#{} Chips for each',
+			        '{C:attention}unique{} {C:planet}Planet{} card',
+			        'used this run',
+			        '{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)'
+		        },
+	        },
         },
         Other = {
             undiscovered_acme_gadget = {
@@ -115,6 +138,8 @@ return {
             k_ace = 'Ace',
             k_boosters = 'Booster Packs',
             k_booster = 'Booster Pack',
+            k_cards = 'Cards',
+            k_card = 'Card',
             k_remaining = 'Remaining'
         },
         labels = {

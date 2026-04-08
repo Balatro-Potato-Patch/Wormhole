@@ -1,20 +1,13 @@
 SMODS.Joker {
 	key = 'ACME_enterprise',
-	loc_txt = {
-		name = "Enterprise Joker",
-		text = {
-			'Gain {C:chips}+#1# chips{} for',
-			'{C:attention}unique{} {C:planet}planet{} card',
-			'used',
-			'{C:inactive}(Currently {C:chips}+#2#{C:inactive})'
-		},
-	},
 	atlas = 'ACME_jokers',
 	rarity = 1,
 	cost = 4,
 	blueprint_compat = true,
 	perishable_compat = true,
 	eternal_compat = true,
+	ppu_coder = {'Basil_Squared'},
+	ppu_artist = {'FlameThrowerFIM'},
 	pos = { x = 3, y = 0 },
 	config = {
 		extra = {
