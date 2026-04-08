@@ -31,7 +31,7 @@ local meteor_quad = love.graphics.newQuad(0, 0, 1, 1, 1, 1)
 
 local function create_meteor(value)
 	local meteor = {
-		spr = pseudorandom("worm_lfc_meteorsprite", 0, math.ceil(mx / 64)),
+		spr = pseudorandom("worm_lfc_meteorsprite", 0, math.ceil(mx / 64)-1),
 		vel = {
 			x = pseudorandom("worm_lfc_meteor_velx") * 4, -- random float in range 0  to 40
 			y = pseudorandom("worm_lfc_meteor_vely") * 4 + 4, -- random float in range 40 to 80
