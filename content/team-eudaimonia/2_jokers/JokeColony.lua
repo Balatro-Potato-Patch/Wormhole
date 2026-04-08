@@ -81,7 +81,7 @@ SMODS.Joker {
 }
 
 local function create_leave_colony_view(card)
-    G.specificcolony = CardArea(
+    G.worm_euda_specificcolony = CardArea(
         4.75,
         0,
         G.CARD_W * 4.95,
@@ -97,7 +97,7 @@ local function create_leave_colony_view(card)
             local copied_joker = copy_card(joker, nil, nil, nil, nil)
             copied_joker.ability.source_joker = joker
             copied_joker.ability.worm_euda_colonycitizen = card.ability.extra.colonyid
-            G.specificcolony:emplace(copied_joker)
+            G.worm_euda_specificcolony:emplace(copied_joker)
         end
     end
     return create_UIBox_generic_options({
@@ -107,7 +107,7 @@ local function create_leave_colony_view(card)
                   {n=G.UIT.T, config = {text = localize("k_worm_euda_specificcolony_receive_title") .. card.ability.extra.colonyid, scale = 0.8, colour = G.C.WHITE, shadow = true}}
                 }},
                 {n=G.UIT.R, config={align = "cm", padding = 0.15, r=0.2, colour = G.C.L_BLACK, emboss = 0.05}, nodes={
-                    {n=G.UIT.O, config={object = G.specificcolony}},
+                    {n=G.UIT.O, config={object = G.worm_euda_specificcolony}},
                 }},
                 {n=G.UIT.R,config={func = "worm_euda_can_release_colony", button = 'worm_euda_release_colony', align = "cm", minw = 1.3, minh = 1, r=0.15,colour = G.C.MULT,shadow = true}, nodes = {
                     {n=G.UIT.R, config={align = "cm", padding = 0.07}, nodes={
@@ -123,7 +123,7 @@ local function create_leave_colony_view(card)
 end
 
 local function create_join_colony_view(card)
-    G.specificcolony = CardArea(
+    G.worm_euda_specificcolony = CardArea(
         4.75,
         0,
         G.CARD_W * 4.95,
@@ -139,7 +139,7 @@ local function create_join_colony_view(card)
             local copied_joker = copy_card(joker, nil, nil, nil, nil)
             copied_joker.ability.source_joker = joker
             copied_joker.ability.worm_euda_colonycitizen = card.ability.extra.colonyid
-            G.specificcolony:emplace(copied_joker)
+            G.worm_euda_specificcolony:emplace(copied_joker)
         end
     end
     return create_UIBox_generic_options({
@@ -149,7 +149,7 @@ local function create_join_colony_view(card)
                   {n=G.UIT.T, config = {text = localize("k_worm_euda_specificcolony_ship_title") .. card.ability.extra.colonyid, scale = 0.8, colour = G.C.WHITE, shadow = true}}
                 }},
                 {n=G.UIT.R, config={align = "cm", padding = 0.15, r=0.2, colour = G.C.L_BLACK, emboss = 0.05}, nodes={
-                    {n=G.UIT.O, config={object = G.specificcolony}},
+                    {n=G.UIT.O, config={object = G.worm_euda_specificcolony}},
                 }},
                 {n=G.UIT.R,config={func = "worm_euda_can_join_colony", button = 'worm_euda_join_colony', align = "cm", minw = 1.3, minh = 1, r=0.15,colour = G.C.CHIPS,shadow = true}, nodes = {
                     {n=G.UIT.R, config={align = "cm", padding = 0.07}, nodes={
@@ -253,7 +253,7 @@ local function jokecolony_button_ui(card)
 end
 
 G.FUNCS.worm_euda_release_colony = function(e)
-  for  _, joker in ipairs(G.specificcolony.highlighted) do
+  for  _, joker in ipairs(G.worm_euda_specificcolony.highlighted) do
     for _, og in ipairs(G.worm_euda_colony and G.worm_euda_colony.cards or {}) do
         if joker.ability.source_joker == og then
           og.area:remove_card(og)
@@ -269,16 +269,16 @@ end
 
 G.FUNCS.worm_euda_can_release_colony = function(e)
   local tot_slots_used = 0
-  for  _, joker in ipairs(G.specificcolony and G.specificcolony.highlighted or {}) do
+  for  _, joker in ipairs(G.worm_euda_specificcolony and G.worm_euda_specificcolony.highlighted or {}) do
     tot_slots_used = tot_slots_used + 1-joker.ability.card_limit
   end
-  local can_use = (G.jokers.config.card_limit >= tot_slots_used + #G.jokers.cards) and (G.specificcolony and #G.specificcolony.highlighted > 0)
+  local can_use = (G.jokers.config.card_limit >= tot_slots_used + #G.jokers.cards) and (G.worm_euda_specificcolony and #G.worm_euda_specificcolony.highlighted > 0)
   e.config.button = can_use and 'worm_euda_release_colony' or nil
   e.config.colour = can_use and G.C.MULT or G.C.UI.BACKGROUND_INACTIVE
 end
 
 G.FUNCS.worm_euda_join_colony = function(e)
-  for  _, joker in ipairs(G.specificcolony.highlighted) do
+  for  _, joker in ipairs(G.worm_euda_specificcolony.highlighted) do
     for _, og in ipairs(G.jokers and G.jokers.cards or {}) do
         if joker.ability.source_joker == og then
           og.ability.worm_euda_colonycitizen = joker.ability.worm_euda_colonycitizen
@@ -295,7 +295,7 @@ G.FUNCS.worm_euda_join_colony = function(e)
 end
 
 G.FUNCS.worm_euda_can_join_colony = function(e)
-  local can_use = G.specificcolony and #G.specificcolony.highlighted > 0
+  local can_use = G.worm_euda_specificcolony and #G.worm_euda_specificcolony.highlighted > 0
   e.config.button = can_use and 'worm_euda_join_colony' or nil
   e.config.colour = can_use and G.C.CHIPS or G.C.UI.BACKGROUND_INACTIVE
 end
@@ -325,7 +325,7 @@ G.FUNCS.worm_euda_can_join_jokecolony = function(e)
   local card = e.config.ref_table
   local options = 0
   for _, joker in ipairs(G.jokers and G.jokers.cards or {}) do
-      if joker.config.center.key ~= "j_worm_euda_jokecolony" then
+      if joker.config.center.key ~= "j_worm_euda_jokecolony" and not joker.ability.already_shipped then
           options = options + 1
       end
   end
@@ -371,7 +371,7 @@ end
 
 local card_sell_ref = Card.can_sell_card
 function Card:can_sell_card(context)
-  if G.specificcolony and self.area == G.specificcolony then
+  if G.worm_euda_specificcolony and self.area == G.worm_euda_specificcolony then
     return false
   end
   return card_sell_ref(self, context)
@@ -391,7 +391,7 @@ end
 local G_UIDEF_use_and_sell_buttons_ref = G.UIDEF.use_and_sell_buttons
 function G.UIDEF.use_and_sell_buttons(card)
     local m = G_UIDEF_use_and_sell_buttons_ref(card)
-    if card.area and G.specificcolony and card.area == G.specificcolony then
+    if card.area and G.worm_euda_specificcolony and card.area == G.worm_euda_specificcolony then
         table.remove(m.nodes[1].nodes, 1)
     end
     return m
