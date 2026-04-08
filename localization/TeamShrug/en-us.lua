@@ -138,36 +138,40 @@ return {
 
         },
 
+        ---ALIENS---
+        ------------
+        ---ALIENS---
+
         shrug_alien = {
             c_worm_shrug_alien_spades = {
-                name = 'name',
+                name = 'Flatwoods Monster',
                 text = {
-                    'Convert {C:attention}#1#{} random',
-                    'non-spade cards in deck',
+                    'Convert up to {C:attention}#1#{} random',
+                    'non-{C:spades}Spade{} cards in deck',
                     'into {C:spades}Spades{}, lose {C:money}$#2#',
                 }
             },
             c_worm_shrug_alien_hearts = {
-                name = 'name',
+                name = 'E.T.',
                 text = {
-                    'Convert {C:attention}#1#{} random',
-                    'non-heart cards in deck',
+                    'Convert up to {C:attention}#1#{} random',
+                    'non-{C:hearts}Heart{} cards in deck',
                     'into {C:hearts}Hearts{}, lose {C:money}$#2#',
                 }
             },
             c_worm_shrug_alien_clubs = {
-                name = 'name',
+                name = 'Reptoid',
                 text = {
-                    'Convert {C:attention}#1#{} random',
-                    'non-club cards in deck',
+                    'Convert up to {C:attention}#1#{} random',
+                    'non-{C:clubs}Club{} cards in deck',
                     'into {C:clubs}Clubs{}, lose {C:money}$#2#',
                 }
             },
             c_worm_shrug_alien_diamonds = {
-                name = 'name',
+                name = 'Hopkinsville Goblin',
                 text = {
-                    'Convert {C:attention}#1#{} random',
-                    'non-diamond cards in deck',
+                    'Convert up to {C:attention}#1#{} random',
+                    'non-{C:diamonds}Diamond{} cards in deck',
                     'into {C:diamonds}Diamonds{}, lose {C:money}$#2#',
                 }
             },
