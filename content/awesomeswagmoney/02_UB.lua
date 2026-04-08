@@ -112,3 +112,36 @@ SMODS.Consumable {
     end
 }
 
+SMODS.Consumable {
+    key = "xurkitree",
+    set = "worm_ultrabeast",
+    loc_txt = {
+        name = "Xurkitree",
+        text = {
+            "Earn $#1#, then permanently",
+            "increase this amount by $#2#"
+        }
+    },
+    config = { extra_slots_used = 1, extra = { money = 2 }},
+    loc_vars = function (self, info_queue, card)
+        return { vars = { G.GAME.asm_xurkitree or 1, card.ability.extra.money }}
+    end,
+    can_use = function (self, card)
+        return true
+    end,
+    use = function (self, card, area, copier)
+        G.GAME.asm_xurkitree = G.GAME.asm_xurkitree or 1
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.4,
+            func = function()
+                play_sound('timpani')
+                card:juice_up(0.3, 0.5)
+                ease_dollars(G.GAME.asm_xurkitree, true)
+                G.GAME.asm_xurkitree = G.GAME.asm_xurkitree + card.ability.extra.money
+                return true
+            end
+        }))
+        delay(0.6)
+    end
+}
