@@ -118,30 +118,73 @@ SMODS.Consumable {
     loc_txt = {
         name = "Xurkitree",
         text = {
-            "Earn $#1#, then permanently",
-            "increase this amount by $#2#"
+            "Earn {C:money}$#1#{}, then permanently",
+            "increase this amount to" ,
+            "the next {C:spectral}prime{} number"
         }
     },
-    config = { extra_slots_used = 1, extra = { money = 2 }},
+    config = { extra_slots_used = 1 },
     loc_vars = function (self, info_queue, card)
-        return { vars = { G.GAME.asm_xurkitree or 1, card.ability.extra.money }}
+        return { vars = { PRIMES[G.GAME.asm_xurkitree] or 17 }}
     end,
     can_use = function (self, card)
         return true
     end,
     use = function (self, card, area, copier)
-        G.GAME.asm_xurkitree = G.GAME.asm_xurkitree or 1
+        G.GAME.asm_xurkitree = G.GAME.asm_xurkitree or 7
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             delay = 0.4,
             func = function()
                 play_sound('timpani')
                 card:juice_up(0.3, 0.5)
-                ease_dollars(G.GAME.asm_xurkitree, true)
-                G.GAME.asm_xurkitree = G.GAME.asm_xurkitree + card.ability.extra.money
+                ease_dollars(PRIMES[G.GAME.asm_xurkitree], true)
+                G.GAME.asm_xurkitree = G.GAME.asm_xurkitree + 1
                 return true
             end
         }))
         delay(0.6)
+    end
+}
+
+SMODS.Consumable {
+    key = "kartana",
+    set = "worm_ultrabeast",
+    loc_txt = {
+        name = "Kartana",
+        text = {
+            "{C:attention}Slice{} selected card into {C:attention}#1#{} copies",
+            "with their rank reduced by {C:attention}#2#"
+        }
+    },
+    config = { extra_slots_used = 1, extra = { copies = 4, reduction = 2}},
+    loc_vars = function (self, info_queue, card)
+        return { vars = { card.ability.extra.copies, card.ability.extra.reduction }}
+    end,
+    can_use = function (self, card)
+        return G.hand.highlighted[1] and not G.hand.highlighted[2]
+    end,
+    use = function (self, card, area, copier)
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function()
+                local _card = G.hand.highlighted[1]
+                play_sound('slice1', 0.96+math.random()*0.08)
+                for i = 1, card.ability.extra.copies do
+                    local copy = copy_card(_card, nil, nil, G.playing_card)
+                    copy:add_to_deck()
+                    G.deck.config.card_limit = G.deck.config.card_limit + 1
+                    table.insert(G.playing_cards, copy)
+                    G.hand:emplace(copy)
+                    SMODS.modify_rank(copy, -card.ability.extra.reduction)
+                end
+                _card:juice_up(0.3, 0.5)
+                SMODS.destroy_cards(G.hand.highlighted)
+                return true
+            end
+        }))
+        delay(0.6)
+
     end
 }
