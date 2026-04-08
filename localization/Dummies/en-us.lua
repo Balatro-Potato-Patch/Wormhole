@@ -265,6 +265,7 @@ return {
             worm_dummies_loss_8 = { "Maybe ask", "{E:2}CrapGPT", "for help." },
             worm_dummies_loss_9 = { "I think you", "should play the", "{C:blue}Tutorial{} again." },
             worm_dummies_loss_10 = { "{s:2.0,C:red}-2" },
+            worm_dummies_loss_11 = { "Time's up,", "{E:2}buddy{}!" },
             -- [Custom] Quips:
             worm_dummies_flowire_1 = { "ERROR" },
             worm_dummies_flowire_2 = { "nil" },

@@ -1,7 +1,8 @@
 --  ##  SPACE SUIT VOUCHER
---INFO: Uses 2 Hooks
--- - 'start_run(args)'
--- - 'update(dt)'
+--INFO: Uses 2 Hooks & 1 Lovely Patch
+-- - "start_run(args)"
+-- - "update(dt)"
+-- - "defeated_by.toml"
 
 SMODS.Atlas {
 	key = "dummies_spacesuit",
@@ -102,6 +103,7 @@ function DUMMY_Oxygen_Update(dt)
 					G.GAME.dummy_oxygen_string_time = '--:--'
 					G.GAME.dummy_oxygen_string_mult = ''
 					G.GAME.dummy_oxygen_active = false
+					G.GAME.dummy_defeated_by = true
 					-- GAME OVER
 					G.E_MANAGER:add_event(Event({
 						trigger = 'after',
@@ -111,6 +113,7 @@ function DUMMY_Oxygen_Update(dt)
 							-- Getting saved *literally* last second:
 							if G.GAME.dummy_oxygen_adding then
 								G.GAME.dummy_oxygen_active = true
+								G.GAME.dummy_defeated_by = false
 								return true
 							end
 							-- Clear String (in case the run somehow continues)
