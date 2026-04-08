@@ -20,7 +20,7 @@ SMODS.Atlas {
 }
 
 SMODS.Joker {
-    key = "wowsignal",
+    key = "euda_wowsignal",
     atlas = 'wowsignalatlas',
     pos = { x = 0, y = 0 },
     rarity = 1,
@@ -54,7 +54,7 @@ SMODS.Joker {
 
 --ripped from yahimod
 SMODS.PokerHand({
-    key = "pkr_wow",
+    key = "pkr_euda_wow",
     mult = 5,
     chips = 30,
     l_mult = 2,
@@ -110,7 +110,7 @@ SMODS.PokerHand({
 })
 
 SMODS.PokerHand({
-    key = "pkr_wow_f",
+    key = "pkr_euda_wow_f",
     mult = 10,
     chips = 30,
     l_mult = 5,
@@ -163,7 +163,7 @@ SMODS.PokerHand({
 })
 
 SMODS.Joker {
-    key = "bitflip",
+    key = "euda_bitflip",
     atlas = 'bitflipatlas',
     pos = { x = 0, y = 0 },
     rarity = 1,
@@ -233,7 +233,7 @@ function suit_level_up(card, copier, number, poker_hands, message)
 end
 
 SMODS.Consumable {
-    key = "bigear",
+    key = "euda_bigear",
     set = "Planet",
     cost = 3,
     atlas = "bigearatlas",
@@ -279,7 +279,7 @@ SMODS.Consumable {
         }))
         update_hand_text({ sound = 'button', volume = 0.7, pitch = 0.9, delay = 0 }, { level = '+1' })
         delay(1.3)
-        SMODS.upgrade_poker_hands({hands = {"worm_pkr_wow","worm_pkr_wow_f"}, instant = true })
+        SMODS.upgrade_poker_hands({hands = {"worm_pkr_euda_wow","worm_pkr_euda_wow_f"}, instant = true })
         update_hand_text({ sound = 'button', volume = 0.7, pitch = 1.1, delay = 0 },
             { mult = 0, chips = 0, handname = '', level = '' })
     end,
