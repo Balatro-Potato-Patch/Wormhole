@@ -429,6 +429,137 @@ SMODS.Joker{
     end
 }
 
+local space_roulette
+space_roulette = function(card, time, index)
+
+	G.jokers.cards[index]:flip()
+	play_sound("cardSlide1")
+
+	newtime = time * (pseudorandom("vegas") * 0.5 + 1)
+	newindex = index + 1
+	if newindex > #G.jokers.cards then newindex = 1 end
+
+	if newindex ~= index then
+		G.jokers.cards[newindex]:flip()
+		play_sound("cardSlide1")
+	end
+
+	if newtime < 0.5 then
+		G.E_MANAGER:add_event(Event{
+			blockable = false,
+			blocking = false,
+			pause_force = true,
+			no_delete = true,
+			trigger = 'after',
+			delay = newtime,
+			func = function()
+				space_roulette(card, newtime, newindex)
+				return true
+			end
+		})
+		return true
+	end
+
+	if card.facing == "front" then
+		G.E_MANAGER:add_event(Event{
+			trigger = 'after',
+			delay = 0.5,
+			func = function()
+				SMODS.calculate_effect(
+				{ 
+					dollars = card.ability.gain * #G.jokers.cards
+				}, card)
+				return true
+			end
+		})
+	else
+		G.E_MANAGER:add_event(Event{
+			trigger = 'after',
+			delay = 0.5,
+			func = function()
+				SMODS.calculate_effect(
+				{ 
+					message = "Unlucky!",
+					colour = G.C.ATTENTION
+				}, 
+				card)
+				return true
+			end
+		})
+		
+	end
+
+	G.E_MANAGER:add_event(Event{
+		blockable = false,
+		blocking = false,
+		pause_force = true,
+		no_delete = true,
+		trigger = 'after',
+		delay = 1,
+		func = function()
+			for i = 1, #G.jokers.cards do
+				if G.jokers.cards[i].facing == "back" then
+					G.jokers.cards[i]:flip()
+					play_sound("cardSlide1")
+				end
+			end
+			return true
+		end
+	})
+
+	return true
+end
+
+SMODS.Joker{
+	key = "vegas",
+	loc_txt = {
+		name = "Space Vegas",
+		text = {
+			"At the start of the",
+			"round, play {C:attention}space roulette",
+			"If {C:attention}this{} Joker lands face up,",
+			"gain {C:money}$#2#{} for each {C:attention}Joker{}"
+		}
+	},
+	config = { lose = 3, gain = 6},
+	loc_vars = function(self, info_queue, card)
+		return { vars = { card.ability.lose, card.ability.gain }}
+	end,
+	atlas = "vegas_jokers",
+	pos = {x = 0, y = 4},
+	rarity = 1,
+	cost = 5,
+	blueprint_compat = false,
+	discovered = true,
+	eternal_compat = true,
+	perishable_compat = true,
+	ppu_team = {"People Found In Vegas"},
+	ppu_coder = {"Ben Roffey"},
+	ppu_artist = {},
+	calculate = function(self, card, context)
+		if context.setting_blind and not context.blueprint then
+			G.E_MANAGER:add_event(Event{
+				blockable = false,
+				blocking = false,
+				pause_force = true,
+				no_delete = true,
+				trigger = 'after',
+				delay = 1,
+				func = function()
+					if #G.jokers.cards > 1 then
+						for i = 2, #G.jokers.cards do
+							G.jokers.cards[i]:flip()
+						end
+					end
+					space_roulette(card, 0.01, 1)
+					return true
+				end
+			})
+		end
+	end
+}
+
+
 
 --[[
 SMODS.Joker{
