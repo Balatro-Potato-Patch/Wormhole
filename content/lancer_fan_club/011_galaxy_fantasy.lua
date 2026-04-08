@@ -9,6 +9,7 @@ SMODS.Joker {
     rarity = 3,
     cost = 10,
     ppu_coder = { "J8-Bit" },
+    ppu_artist = {"J8-Bit"},
     atlas = "lfc_jokers",
     pos = { x = 3, y = 1 },
     config = { extra = { rounds = 0, total_rounds = 3, card_type = G.P_CENTERS["c_black_hole"] } },
@@ -29,9 +30,6 @@ SMODS.Joker {
                     key = card.ability.extra.card_type.key,
                     set = card.ability.extra.card_type.set
                 }) or localize("k_lfc_none"),
-                colours = {
-                    G.C.SECONDARY_SET[card.ability.extra.card_type.set] or G.C.FILTER
-                }
             }
         }
     end,

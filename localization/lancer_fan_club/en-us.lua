@@ -157,9 +157,9 @@ return {
             j_worm_lfc_galaxy_fantasy = {
                 name = "Galaxy Fantasy",
                 text = {
-                    "After defeating {C:attention}#1#{} Blinds,",
+                    "After {C:attention}#1#{} rounds,",
                     "sell this card to create",
-                    "a copy of {V:1}#3#{}",
+                    "a copy of {C:legendary,E:1}#3#{}",
                     "{C:inactive}(Must have room)",
                     "{C:inactive}(Currently {C:attention}#2#{C:inactive}/#1#)",
                 },

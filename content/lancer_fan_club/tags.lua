@@ -49,6 +49,8 @@ SMODS.Tag {
             tag.triggered = true
             return true
         end
-    end
+    end,
+    ppu_artist = {"J8-Bit"},
+    ppu_coder = {"J8-Bit"},
 
 }

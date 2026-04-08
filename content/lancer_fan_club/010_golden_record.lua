@@ -1,3 +1,16 @@
+-- Shader
+SMODS.Shader {
+    key = 'lfc_golden_record',
+    path = 'lfc_golden_record.fs',
+
+    send_vars = function(sprite, card)
+        return {
+            card_size = (card and { card.config.center.pixel_size.w, card.config.center.pixel_size.h }) or { 71, 95 }
+        }
+    end
+
+}
+
 -- Golden Record
 SMODS.Joker {
     key = "lfc_golden_record",
@@ -8,6 +21,7 @@ SMODS.Joker {
     cost = 8,
     atlas = "lfc_jokers",
     ppu_coder = { "J8-Bit" },
+    ppu_artist = { "J8-Bit" },
     pos = { x = 2, y = 1 },
     pixel_size = { w = 69, h = 69 },
     display_size = { w = 69, h = 69 },
@@ -71,6 +85,11 @@ SMODS.Joker {
             if SMODS.has_enhancement(card, "m_gold") then
                 return true
             end
+        end
+    end,
+    draw = function(self, card, layer)
+        if card.config.center.discovered or card.bypass_discovery_center then
+            card.children.center:draw_shader('worm_lfc_golden_record', nil, card.ARGS.send_to_shader)
         end
     end,
 }
