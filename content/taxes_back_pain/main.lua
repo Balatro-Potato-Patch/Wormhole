@@ -193,6 +193,98 @@ SMODS.Joker({
 	end,
 })
 
+-- Module Functionality
+
+---Changes current module durability and handles tracking of game globals for durability changes
+---@param module_type any
+---@param change any
+---@param abs any
+---@param silent any
+function Wormhole.tbp.change_durability(module_type, change, abs, silent)
+    local ship = SMODS.find_card("j_worm_tbp_spaceship")[1]
+    if ship and ship.ability.extra.modules[module_type] and ship.ability.extra.modules[module_type].durability then
+        ship.ability.extra.modules[module_type].durability = ship.ability.extra.modules[module_type].durability + change
+        if change < 0 then
+            G.GAME.tbp.run.durability_lost.total = G.GAME.tbp.run.durability_lost.total + change
+            G.GAME.tbp.run.durability_lost[module_type] = G.GAME.tbp.run.durability_lost[module_type] and G.GAME.tbp.run.durability_lost[module_type] + 1 or change
+        end
+
+        if ship.ability.extra.modules[module_type].durability <= 0 then
+            Wormhole.tbp.uninstall_module(module_type, "failed", silent)
+        end
+    end
+end
+
+--- Add module to ship and log changes. Trigger effects based on install type
+---@param module Card Module Object.
+---@param card Card Module Consumable card
+---@param install_type string Type of install. Currently only 'Default'
+---@param silent boolean disable notifications, tracking and events
+function Wormhole.tbp.install_module(module, card, install_type, silent)
+    local ship = SMODS.find_card("j_worm_tbp_spaceship")[1]
+    if ship then
+        local old_module_key = ship[1].ability.extra.modules[module.slot].key or nil
+
+        if not silent then
+            G.GAME.tbp.run.modules_installed.total = G.GAME.tbp.run.modules_installed.total + 1
+            G.GAME.tbp.run.modules_installed[module.slot] = G.GAME.tbp.run.modules_installed[module.slot] and G.GAME.tbp.run.modules_installed[self.slot] + 1 or 1
+            G.GAME.tbp.run.last_module_installed = module.key
+        end
+
+        if old_module_key ~= nil then
+            Wormhole.tbp.uninstall_module(module.slot, 'override', silent)
+        end
+
+        G.FUNCS.show_module_replace_confirm(
+            old_module_key,
+            module.key,
+            card,
+            module,
+            module.slot,
+            ship[1]
+        )
+        return {}
+    end
+end
+
+---Remove a module and log the change. Trigger effects based on uninstall type
+---@param module any
+---@param uninstall_type any
+---@param silent any
+function Wormhole.tbp.uninstall_module(module, uninstall_type, silent)
+    local ship = SMODS.find_card("j_worm_tbp_spaceship")[1]
+    local module_key = ship.ability.extra.modules[module].key or nil
+    if ship.ability.extra.modules[module] then
+
+        if not silent then
+            SMODS.calculate_context({wormhome_tbp_module_uninstall = true, card = ship, module = module_key, type = uninstall_type})
+        end
+
+        if uninstall_type == 'failed' then
+            if not silent then
+                G.GAME.tbp.run.modules_failed.total = G.GAME.tbp.run.modules_failed.total + 1
+                G.GAME.tbp.run.modules_failed[module] = G.GAME.tbp.run.modules_failed[module] and G.GAME.tbp.run.modules_failed[module] + 1 or 1
+                G.GAME.tbp.run.last_module_failed = module_key
+            end
+
+            ship.ability.extra.modules[module] = {}
+            
+            if not silent then
+                SMODS.calculate_effect({
+                    message = localize({type='name_text', set='tbp_module', key=ship.ability.extra.modules[module].key}) .. ' lost!',
+                    colour = G.C.RED
+                }, ship)
+            end
+        elseif uninstall_type ~= 'override' then
+
+        end
+        
+
+    else
+        return nil
+    end
+end
+
 SMODS.ConsumableType {
     key = 'tbp_module',
     collection_rows = { 5, 6 },

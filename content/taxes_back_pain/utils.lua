@@ -25,3 +25,33 @@ function Card:tbp_has_module(m)
     end
     return false
 end
+
+-- Game Start
+local tbp_hook_igo = Game.init_game_object
+function Game.init_game_object(self)
+    local ret = tbp_hook_igo(self)
+
+    ret.tbp = {
+        round_reset = {
+
+        },
+        run = {
+            modules_installed = {
+                total = 0,
+                --[type] = 0
+            },
+            modules_failed = {
+                total = 0,
+                --[type] = 0
+            },
+            last_module_installed = nil,
+            last_module_failed = nil,
+            durability_lost = {
+                total = 0,
+                -- [type] = 0
+            },
+        }
+    }
+
+    return ret
+end
