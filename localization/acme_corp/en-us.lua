@@ -80,7 +80,14 @@ return {
 			        'used this run',
 			        '{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)'
 		        },
-	        },
+	        },        
+            j_worm_acme_test_dummy = {
+                name = 'Test Dummy',
+                text = {
+                    '{C:acme_gadget}Gadgets{} become {C:dark_edition}Negative',
+                    'when obtained'
+                }
+            },
         },
         Other = {
             undiscovered_acme_gadget = {
@@ -140,7 +147,11 @@ return {
             k_booster = 'Booster Pack',
             k_cards = 'Cards',
             k_card = 'Card',
-            k_remaining = 'Remaining'
+            k_remaining = 'Remaining',
+
+            k_acme_test_dummy_1 = 'Crash!',
+            k_acme_test_dummy_2 = 'Bang!',
+            k_acme_test_dummy_3 = 'Wallop!',
         },
         labels = {
             acme_gadget = 'Gadget',
