@@ -272,6 +272,7 @@ return {
                 k_worm_euda_specificcolony_ship_title = "Sending to Colony ",
                 k_worm_euda_specificcolony_receive_title = "Release from Colony ",
 
+				k_worm_euda_wow_hands = "Wow! (Flush)",
                 k_euda_fate = "Fate",
                 b_euda_fate_cards = "Fate Cards",
                 k_euda_avadon_pack = "Avadon Pack",
