@@ -15,7 +15,7 @@ return {
             },
             PotatoPatchDev_soulware = {
                 name = "soulware",
-                text = {"."}
+                text = {"wunkuss."}
             },
             PotatoPatchDev_TigerTHawk = {
                 name = "TigerTHawk",
@@ -149,7 +149,14 @@ return {
                         "Bit.Flipped() == {C:attention}#3#;{}"
                     }
                 }
-            }
+            },
+            j_worm_euda_csaber = {
+                name = "Cyalume Saber",
+                text = {
+                    "{C:green}#1# in #2#{} chance to add {C:chips}+60{}",
+                    "Chips to a {C:chips}+Chips{} operation"
+                },
+            },
         },
         Planet = {
             c_worm_euda_bigear = {
