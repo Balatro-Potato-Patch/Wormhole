@@ -438,8 +438,8 @@ return {
             v_worm_abs_on_the_house = {
                 name = 'On The House',
                 text = {
-                    '{C:abs_drinks}Drinks{} in the {C:attention}Shop',
-                    'are {C:money}free'
+                    '{C:abs_drinks}Drinks{} can be used {C:attention}twice',
+                    'before needing to be {C:abs_drinks}Refilled'
                 }
             },
         },
@@ -528,6 +528,7 @@ return {
             k_abs_drinks = 'Drinks',
             k_plus_drink = '+1 Drink',
             k_worm_abs_emptied_ex = 'Emptied!',
+            k_worm_abs_sipped_ex = 'Sipped!',
             k_worm_abs_refilled_ex = 'Refilled!',
             k_worm_abs_top_shelf_pack = 'Top Shelf Pack'
         },

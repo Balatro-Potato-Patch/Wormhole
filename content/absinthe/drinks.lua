@@ -181,15 +181,28 @@ function Card:abs_empty_drink()
             self.config.center:empty(self)
         end
 
-        G.E_MANAGER:add_event(Event({
-            func = function()
-                self.ability.drink_values.visibly_filled = false
-                return true;
-            end
-        }))
+        local can_drink_twice = G.GAME.used_vouchers['v_worm_abs_on_the_house']
 
-        SMODS.calculate_effect({ message = localize('k_worm_abs_emptied_ex'), colour = G.C.SECONDARY_SET.abs_drinks },
+        if can_drink_twice and self.first_drink or not can_drink_twice then
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    self.ability.drink_values.visibly_filled = false
+                    return true;
+                end
+            }))
+        end
+
+        if can_drink_twice and not self.first_drink then
+            self.first_drink = true
+            self.ability.drink_values.filled = true
+            SMODS.calculate_effect({ message = localize('k_worm_abs_sipped_ex'), colour = G.C.SECONDARY_SET.abs_drinks },
             self)
+        else
+            self.first_drink = nil
+            SMODS.calculate_effect({ message = localize('k_worm_abs_emptied_ex'), colour = G.C.SECONDARY_SET.abs_drinks },
+            self)
+        end
+
         SMODS.calculate_context({ abs_drink_emptied = true, card = self })
     end
 end
