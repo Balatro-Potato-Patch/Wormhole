@@ -408,7 +408,9 @@ local function has_rainbow(card)
 			has_purple = true
 		end
 	end
-
+	if has_red and has_orange and has_yellow and has_green and has_blue and has_purple then
+		check_for_unlock({type = "rainbow"})
+	end
 	return has_red and has_orange and has_yellow and has_green and has_blue and has_purple
 end
 

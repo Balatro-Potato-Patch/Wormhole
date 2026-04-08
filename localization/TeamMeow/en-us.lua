@@ -416,5 +416,11 @@ return {
 			worm_meow_zodicat = "Zodicat",
 			worm_meow_spacetart = "Spacetart",
 		},
+		achievement_names = {
+			ach_worm_rainbow = "Rainbow"
+		},
+		achievement_descriptions = {
+			ach_worm_rainbow = "Have every kind of ©Spacetart on a Joker"
+		}
 	},
 }
