@@ -229,6 +229,8 @@ function Wormhole.tbp.install_module(module, card, install_type, silent)
             G.GAME.tbp.run.modules_installed.total = G.GAME.tbp.run.modules_installed.total + 1
             G.GAME.tbp.run.modules_installed[module.slot] = G.GAME.tbp.run.modules_installed[module.slot] and G.GAME.tbp.run.modules_installed[self.slot] + 1 or 1
             G.GAME.tbp.run.last_module_installed = module.key
+
+            SMODS.calculate_context({wormhome_tbp_module_install = true, card = ship, module = module, type = install_type})
         end
 
         if old_module_key ~= nil then
@@ -257,7 +259,7 @@ function Wormhole.tbp.uninstall_module(module, uninstall_type, silent)
     if ship.ability.extra.modules[module] then
 
         if not silent then
-            SMODS.calculate_context({wormhome_tbp_module_uninstall = true, card = ship, module = module_key, type = uninstall_type})
+            SMODS.calculate_context({wormhome_tbp_module_uninstall = true, card = ship, module = module, type = uninstall_type})
         end
 
         if uninstall_type == 'failed' then
