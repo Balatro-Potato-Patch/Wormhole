@@ -87,7 +87,8 @@ SMODS.Joker {
         Wormhole.LancerFanClub.get_piss()
     end,
 
-    ppu_coder = { "InvalidOS", "ellestuff." }
+    ppu_coder = { "InvalidOS", "ellestuff." },
+    ppu_artist = { "J8-Bit" },
 }
 
 -- Elle moment
@@ -128,10 +129,11 @@ vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords
 	vec3 fac = mix(palette[int(floor(waveB))],palette[int(ceil(waveB))],waveB-floor(waveB));
 	
 	if ( texture_coords.y>(1-progress+waveA) ) { return vec4(fac,c.a); } else { discard; }
-}]]) --SMODS.current_mod.path .. "assets/shaders/shader.fs" ) -- Gives me more control than SMODS.Shader
+}]])                                                                    --SMODS.current_mod.path .. "assets/shaders/shader.fs" ) -- Gives me more control than SMODS.Shader
 
-local barsprite = love.graphics.newImage(love.image.newImageData(1,1)) -- Turns out rectangles don't work for uv stuff so i'm doing this
-local bubblesprite = love.graphics.newImage(love.image.newImageData(SMODS.NFS.newFileData(SMODS.current_mod.path .. "assets/lancer_fan_club/bubbles.png")))
+local barsprite = love.graphics.newImage(love.image.newImageData(1, 1)) -- Turns out rectangles don't work for uv stuff so i'm doing this
+local bubblesprite = love.graphics.newImage(love.image.newImageData(SMODS.NFS.newFileData(SMODS.current_mod.path ..
+    "assets/lancer_fan_club/bubbles.png")))
 shader:send("bubbles", bubblesprite)
 
 local function draw_piss_bar(fac, x, y, w, h, colours, back)
@@ -147,13 +149,13 @@ local function draw_piss_bar(fac, x, y, w, h, colours, back)
 
     if back then
         local c = HEX("4f6367")
-        love.graphics.setColor(c[1],c[2],c[3])
+        love.graphics.setColor(c[1], c[2], c[3])
         love.graphics.rectangle("fill", x, y, w, h)
     end
 
     love.graphics.setShader(shader)
 
-    love.graphics.setColor(1,1,1)
+    love.graphics.setColor(1, 1, 1)
     love.graphics.draw(barsprite, x, y, 0, w, h)
 
     love.graphics.setShader(old_shader)
@@ -168,9 +170,9 @@ local bar_palettes = {
 local function piss_draw(card)
     love.graphics.clear()
 
-    draw_piss_bar(Wormhole.LancerFanClub.piss_info.water/100, 99, 24, 13, 47, bar_palettes.water)
-    draw_piss_bar(Wormhole.LancerFanClub.piss_info.waste/100, 29, 24, 13, 47, bar_palettes.waste)
-    draw_piss_bar(Wormhole.LancerFanClub.piss_info.urine/100, 49, 24, 13, 47, bar_palettes.piss)
+    draw_piss_bar(Wormhole.LancerFanClub.piss_info.water / 100, 99, 36, 13, 47, bar_palettes.water)
+    draw_piss_bar(Wormhole.LancerFanClub.piss_info.waste / 100, 29, 36, 13, 47, bar_palettes.waste)
+    draw_piss_bar(Wormhole.LancerFanClub.piss_info.urine / 100, 49, 36, 13, 47, bar_palettes.piss)
 end
 
 SMODS.DrawStep {

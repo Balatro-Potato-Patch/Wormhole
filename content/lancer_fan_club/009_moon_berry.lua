@@ -61,6 +61,7 @@ SMODS.Joker({
     blueprint_compat = true,
     atlas = "lfc_jokers",
     ppu_coder = { "ProdByProto" },
+    ppu_artist = { "ProdByProto", "J8-Bit" },
     config = {
         extra = {
             enhancement = "m_bonus",
