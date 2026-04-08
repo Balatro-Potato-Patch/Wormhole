@@ -36,5 +36,5 @@ SMODS.current_mod.calculate = function(self, context)
             end
         end
     end
-    calc_ref(self, context)
+    return calc_ref(self, context)
 end

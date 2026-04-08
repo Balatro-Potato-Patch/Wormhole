@@ -2,7 +2,7 @@ SMODS.Atlas {
     key = 'lunarcheeseatlas',
     px = 71,
     py = 95,
-    path = 'team-eudaimonia/wowsignal.png', --Update with actual art
+    path = 'team-eudaimonia/LunarCheese.png', --Update with actual art
 }
 SMODS.Joker {
     key = "lunarcheese",
@@ -15,7 +15,7 @@ SMODS.Joker {
     discovered = true,
     config = {extra= {research_length = 3, retriggers = 1} },
     ppu_coder = {'M0xes'},
-    ppu_artist = {'LasagnaFelidae'},
+    ppu_artist = {'Jewel'},
     loc_vars = function(self, info_queue, card)
         return { vars = {card.ability.extra.research_length, card.ability.extra.retriggers} }
     end,
@@ -38,17 +38,21 @@ SMODS.Joker {
     end
 }
 
-local calc_ref = SMODS.current_mod.calculate or function(self, context) return end
+local calc_ref = SMODS.current_mod.calculate or function(self, context) return nil end
 SMODS.current_mod.calculate = function(self, context)
     if context.retrigger_joker_check then
         local joker = context.other_card
+        print(joker.config.center.key)
+        print(joker.ability.worm_researched_retriggers)
         if (joker.ability.worm_researched_retriggers) then
             local other_return = calc_ref(self, context)
             local other_repititions = other_return and other_return.repetitions or 0
+            print("Other " .. other_repititions)
+            local tot_repititions = joker.ability.worm_researched_retriggers + other_repititions
             return {
-                    repetitions = joker.ability.worm_researched_retriggers + other_repititions,
-                    message_card = context.other_card
-                }
+                repetitions = 1,
+                message_card = context.other_card
+            }
         end
     end
     if context.end_of_round and not context.game_over  and context.main_eval then
@@ -62,7 +66,7 @@ SMODS.current_mod.calculate = function(self, context)
             end
         end
     end
-    calc_ref(self, context)
+    return calc_ref(self, context)
 end
 
 SMODS.current_mod.optional_features = function()
