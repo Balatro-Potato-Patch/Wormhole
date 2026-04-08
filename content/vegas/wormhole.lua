@@ -316,7 +316,7 @@ SMODS.Joker{
 		return { vars = { card.ability.extra.dollars }}
 	end,
 	atlas = "vegas_jokers",
-	pos = {x = 0, y = 4},
+	pos = {x = 0, y = 1},
 	rarity = 2,
 	cost = 6,
 	blueprint_compat = true,
@@ -325,7 +325,7 @@ SMODS.Joker{
 	perishable_compat = true,
 	ppu_team = {"People Found In Vegas"},
 	ppu_coder = {"Jammbo"},
-	ppu_artist = {},
+	ppu_artist = {"Ben Roffey"},
 	calculate = function(self, card, context)
 		if context.joker_main and G.GAME.current_round.hands_left == 0 then
             return {
@@ -773,7 +773,7 @@ SMODS.Consumable {
 		}
 	},
 	atlas = "vegas_exoplanets",
-	set_badges = function(self, card, badges)
+	set_card_type_badge = function(self, card, badges)
  		badges[#badges] = create_badge("Exoplanet", G.C.SECONDARY_SET.Planet, G.C.WHITE, 1 )
  	end,
     pos = { x = 0, y = 0 },
@@ -810,7 +810,7 @@ SMODS.Consumable {
 		}
 	},
 	atlas = "vegas_exoplanets",
-	set_badges = function(self, card, badges)
+	set_card_type_badge = function(self, card, badges)
  		badges[#badges] = create_badge("Exoplanet", G.C.SECONDARY_SET.Planet, G.C.WHITE, 1 )
  	end,
     pos = { x = 1, y = 0 },
@@ -847,7 +847,7 @@ SMODS.Consumable {
 		}
 	},
 	atlas = "vegas_exoplanets",
-	set_badges = function(self, card, badges)
+	set_card_type_badge = function(self, card, badges)
  		badges[#badges] = create_badge("Exoplanet", G.C.SECONDARY_SET.Planet, G.C.WHITE, 1 )
  	end,
     pos = { x = 2, y = 0 },
