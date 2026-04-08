@@ -21,6 +21,22 @@ return {
             c_worm_acme_ray_gun = {
                 name = 'ACME Disintegrator-Inverse-Atron'
             },
+            c_worm_acme_jam = {
+                name = 'ACME Spreadable Berry Conserve',
+                text = {
+                    '{X:attention,C:white}After{C:attention} #1# #2#{} trigger in hand,',
+                    '{X:attention,C:white}Use{} to {C:attention}upgrade{} every',
+                    '{E:1,C:legendary}poker hand{} by {C:attention}1 Level'
+                }
+            },
+            c_worm_acme_jam_alt = {
+                name = 'ACME Spreadable Berry Conserve',
+                text = {
+                    '{C:attention}Upgrade{} every',
+                    '{E:1,C:legendary}poker hand',
+                    'by {C:attention}1 Level'
+                }
+            },
             c_worm_acme_trash = {
                 name = 'ACME Accumulated Resources and Detritus',
                 text = {
@@ -80,7 +96,14 @@ return {
 			        'used this run',
 			        '{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)'
 		        },
-	        },
+	        },        
+            j_worm_acme_test_dummy = {
+                name = 'Test Dummy',
+                text = {
+                    '{C:acme_gadget}Gadgets{} become {C:dark_edition}Negative',
+                    'when obtained'
+                }
+            },
         },
         Other = {
             undiscovered_acme_gadget = {
@@ -140,7 +163,12 @@ return {
             k_booster = 'Booster Pack',
             k_cards = 'Cards',
             k_card = 'Card',
-            k_remaining = 'Remaining'
+            k_remaining = 'Remaining',
+
+            k_acme_test_dummy_1 = 'Crash!',
+            k_acme_test_dummy_2 = 'Bang!',
+            k_acme_test_dummy_3 = 'Wallop!',
+            k_acme_test_dummy_4 = 'Hello.',
         },
         labels = {
             acme_gadget = 'Gadget',
