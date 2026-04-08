@@ -1,0 +1,27 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "love.graphics.draw(last_canvas, 0, 0)"
+position = "after"
+payload = '''
+if shader.key == "worm_util_test" and util_el then
+	local scale = G.TILESIZE*G.TILESCALE*G.CANV_SCALE
+	love.graphics.push()
+	-- love.graphics.translate(G.ROOM.T.x * scale, G.ROOM.T.y * scale)
+	util_debug = true
+	G.OVERLAY_TUTORIAL = true
+	util_el:translate_container()
+	util_el:draw()
+	util_debug = false
+	G.OVERLAY_TUTORIAL = false
+	love.graphics.pop()
+end
+'''
+match_indent = true
+times = 1
+

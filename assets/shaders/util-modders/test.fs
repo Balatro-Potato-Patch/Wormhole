@@ -1,6 +1,7 @@
 extern float screen_scale;
 extern float time;
 extern float seed;
+extern float transparency;
 // Gold Noise ©2015 dcerisano@standard3d.com
 // Taken from https://stackoverflow.com/a/28095165
 float PHI = 1.61803398874989484820459;  // Φ = Golden Ratio   
@@ -60,7 +61,7 @@ vec4 shootingStars(vec2 coords, vec4 bg) {
     return bg;
 }
 
-vec4 effect( vec4 color, Image texture, vec2 texture_coords, vec2 screen_coords ) {
+vec4 effect(vec4 color, Image texture, vec2 texture_coords, vec2 screen_coords) {
     // Setup
     vec4 bg = vec4(0.0, 0.0, 0.2, 1.0);
     vec2 coords = vec2(floor(screen_coords.x / screen_scale * 15), floor(screen_coords.y / screen_scale * 15));
@@ -69,5 +70,10 @@ vec4 effect( vec4 color, Image texture, vec2 texture_coords, vec2 screen_coords 
     bg = stars(coords, bg);
     // Shooting stars
     bg = shootingStars(coords, bg);
-    return bg;
+
+    if (transparency == 1.0) {
+	return bg;
+    }
+
+    return mix(Texel(texture, texture_coords), bg, transparency);
 }

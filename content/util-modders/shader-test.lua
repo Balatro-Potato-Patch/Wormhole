@@ -1,5 +1,6 @@
 util_shader = {
     enabled = false,
+    transparency = 1.0,
 }
 
 -- watch um Mods/Wormhole/assets/shaders/util-modders/test.fs
@@ -32,6 +33,7 @@ SMODS.ScreenShader {
 	return {
 	    screen_scale = G.TILESCALE*G.TILESIZE*G.CANV_SCALE,
 	    time = G.TIMERS.REAL,
+	    transparency = util_shader.transparency,
 	    seed = 1,
 	}
     end
