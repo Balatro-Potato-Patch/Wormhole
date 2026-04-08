@@ -352,10 +352,12 @@ return {
                 }
             },
             PotatoPatchDev_ophelia = {
-                name = "Ophelia",
+                name = "ivy",
                 text = {
-                    "I am so interesting",
-                    "Keep looking at this text"
+                    "evil little thing",
+                    " ",
+                    "Jack of no trades",
+                    "Master of None"
                 }
             },
             PotatoPatchDev_notmario = {
