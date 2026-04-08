@@ -284,8 +284,9 @@ local suit_alien = SMODS.Consumable:extend{
 suit_alien{
     key = 'shrug_alien_spades',
     atlas = 'shrug_alien_cards',
-    pos = {x = 0, y = 0},
+    pos = {x = 2, y = 0},
     config = {extra = {suit = 'Spades', convert = 10, pay = 5}},
+    ppu_artist = {"waffle", "microwave"}
 }
 suit_alien{
     key = 'shrug_alien_hearts',
