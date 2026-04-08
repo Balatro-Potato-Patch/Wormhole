@@ -42,12 +42,9 @@ local calc_ref = SMODS.current_mod.calculate or function(self, context) return n
 SMODS.current_mod.calculate = function(self, context)
     if context.retrigger_joker_check then
         local joker = context.other_card
-        print(joker.config.center.key)
-        print(joker.ability.worm_euda_researched_retriggers)
         if (joker.ability.worm_euda_researched_retriggers) then
             local other_return = calc_ref(self, context)
             local other_repititions = other_return and other_return.repetitions or 0
-            print("Other " .. other_repititions)
             local tot_repititions = joker.ability.worm_euda_researched_retriggers + other_repititions
             return {
                 repetitions = 1,
