@@ -1,4 +1,4 @@
-SMODS.Atlas({key = "asm_ubs", path = "ubs.png", px = 89, py = 109, atlas_table = "ASSET_ATLAS"}):register()
+SMODS.Atlas({key = "asm_ubs", path = "awesomeswagmoney/ubs.png", px = 89, py = 109, atlas_table = "ASSET_ATLAS"}):register()
 
 SMODS.Consumable {
     key = 'pheromosa',

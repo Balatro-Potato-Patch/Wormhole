@@ -1,8 +1,8 @@
 --contains boosters and SMODS.ConsumableType
 
-SMODS.Atlas({key = "asm_ultrawormhole_sm", path = "ultrawormholesmall.png", px = 83, py = 99, fps = 7, frames = 3, atlas_table = "ANIMATION_ATLAS"}):register()
-SMODS.Atlas({key = "asm_ultrawormhole_bg", path = "ultrawormholebig.png", px = 99, py = 99, fps = 7, frames = 3, atlas_table = "ANIMATION_ATLAS"}):register()
-SMODS.Atlas({key = "asm_ultrawormhole_bgr", path = "ultrawormholebigger.png", px = 102, py = 99, fps = 7, frames = 3, atlas_table = "ANIMATION_ATLAS"}):register()
+SMODS.Atlas({key = "asm_ultrawormhole_sm", path = "awesomeswagmoney/ultrawormholesmall.png", px = 83, py = 99, fps = 7, frames = 3, atlas_table = "ANIMATION_ATLAS"}):register()
+SMODS.Atlas({key = "asm_ultrawormhole_bg", path = "awesomeswagmoney/ultrawormholebig.png", px = 99, py = 99, fps = 7, frames = 3, atlas_table = "ANIMATION_ATLAS"}):register()
+SMODS.Atlas({key = "asm_ultrawormhole_bgr", path = "awesomeswagmoney/ultrawormholebigger.png", px = 102, py = 99, fps = 7, frames = 3, atlas_table = "ANIMATION_ATLAS"}):register()
 
 SMODS.ConsumableType{
     key = "worm_ultrabeast",
