@@ -90,9 +90,15 @@ return {
             j_worm_jokecolony = {
                 name = "Joke Colony",
                 text = {
+                    {
                     "Store Jokers in a {C:attention}Colony",
                     "Gives {C:mult}+#1#{} Mult per Joker in the {C:attention}Colony",
                     "{C:inactive}(Population #2# for {C:red}+#3#{C:inactive} Mult)",
+                    },
+                    {
+                    "{C:inactive}Jokers can enter a Colony",
+                    "{C:inactive} only once per round"
+                    }
                 },
             },
             j_worm_darkside = {
