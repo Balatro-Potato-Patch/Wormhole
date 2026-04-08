@@ -1,0 +1,44 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+# When dying outside of Blinds, it shows "ERROR, Small Blind" as death reason.
+# This checks if the player died to Oxygen to replace the ERROR reason! :3
+
+# Can also be a "position=before";
+# - Replace final "elseif" with just "else"
+# - Comment in below patch-block.
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "if score == 'defeated_by' then"
+position = "at"
+payload = '''
+if G.GAME.dummy_defeated_by and score == 'defeated_by' then
+    label = localize('k_defeated_by')
+
+    local consequence = {config = G.P_CENTERS.v_worm_dum_spacesuit}
+    consequence.sprite = SMODS.create_sprite(0, 0, 1.5, 2.0, SMODS.get_atlas(consequence.config.atlas), consequence.config.pos)
+    consequence.sprite:define_draw_steps({ {shader = 'dissolve', shadow_height = 0.05}, {shader = 'dissolve'} })
+
+    score_tab = {
+      {n=G.UIT.R, config={align = "cm", minh = 0.6}, nodes={
+        {n=G.UIT.O, config={object = DynaText({string = localize('k_worm_dum_low_oxygen'), colours = {G.C.SECONDARY_SET.Spectral}, shadow = true, float = true, maxw = 2.2, scale = 0.45})}}
+      }},
+      {n=G.UIT.R, config={align = "cm", padding = 0.1}, nodes={
+        {n=G.UIT.O, config={object = consequence.sprite}}
+      }},
+    }
+elseif score == 'defeated_by' then
+'''
+match_indent = true
+
+# [[patches]]
+# [patches.pattern]
+# target = "functions/UI_definitions.lua"
+# pattern = "local label_scale = 0.5"
+# position = "before"
+# payload = "end"
+# match_indent = true
