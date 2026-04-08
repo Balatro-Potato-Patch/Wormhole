@@ -1,3 +1,4 @@
+
 SMODS.Edition{
     key = 'stellar',
     shader = false,

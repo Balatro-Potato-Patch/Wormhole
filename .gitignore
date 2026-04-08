@@ -2,3 +2,5 @@
 .luarc.json
 .lovelyignore
 /.vscode
+*.py
+*.bat
