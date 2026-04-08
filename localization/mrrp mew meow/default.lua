@@ -124,7 +124,26 @@ descriptions={
 				"Halve all {C:attention}poker hand{}",
 				"levels when bought"
 			}
-		}
+		},
+		worm_cookie_cat ={
+			name=
+				"Cookie Cat"
+			, text={
+				"{C:dark_edition,E:1}Oohhhhh!{}",
+				"{E:1}He's a frozen treat with an all new taste!",
+				"{E:1}'Cause he came to this planet from outer space!",
+				"{E:1}A refugee of an interstellar war!",
+				"{E:1}But now he's at your local grocery store!",
+				"{C:dark_edition,E:1}Cookie Cat!{}",
+				"{E:1}He's a pet for your tummy!",
+				"{C:dark_edition,E:1}Cookie Cat!{}",
+				"{E:1}He's super duper yummy!",
+				"{C:dark_edition,E:1}Cookie Cat!{}",
+				"{E:1}He left his family behind!",
+				"{C:dark_edition,E:1}Cookie Caaaaat!{}",
+				"{C:inactive,s:0.8}Now available at Gurgens off Route 109{}"
+			}
+		},
 	},
 },
 misc={
