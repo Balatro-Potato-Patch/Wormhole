@@ -22,6 +22,8 @@ SMODS.Voucher {
 
 SMODS.Voucher {
     key = 'abs_on_the_house',
+    atlas = 'abs_vouchers',
+    pos = {x = 1, y = 0},
     ppu_coder = { 'theAstra' },
     ppu_team = { 'absinthe' },
     requires = {'v_worm_abs_star_tap'}
