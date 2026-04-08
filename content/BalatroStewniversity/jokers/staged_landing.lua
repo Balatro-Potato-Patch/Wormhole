@@ -10,7 +10,7 @@ SMODS.Joker{ --Staged Landing
         }
     },
 
-    config = {extra = {dollars = 5, discards = 3, discards_remaining = 3}},
+    config = {extra = {dollars = 5, discards = 5, discards_remaining = 5}},
     rarity = 1,
     cost = 4,
     atlas = 'stewjokers',

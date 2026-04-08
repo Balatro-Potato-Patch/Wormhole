@@ -8,7 +8,16 @@ return {
                 },
             },
 
+            j_worm_flat_earth = {
+                name = 'Flat Earth',
+                text = {
+                    'This Joker gains {C:chips}+#2#{} Chips',
+                    'for each {C:spades}Spade{} card removed',
+                    '{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips){}'
+                } 
+            }
         },
+
 
         Edition = {
             e_worm_stellar = {
