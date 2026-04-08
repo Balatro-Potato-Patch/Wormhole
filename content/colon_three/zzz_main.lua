@@ -82,7 +82,7 @@ PotatoPatchUtils.Developer {
 
 -- mf credits drawstep for polychrome stars
 SMODS.DrawStep {
-    key = 'edition',
+    key = 'ct_credits_polychrome',
     order = 21,
     func = function(self, layer)
         if (((self.children or {}).center or {}).atlas or {}).name ~= "worm_ct_credits" then
