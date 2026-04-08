@@ -86,6 +86,25 @@ return {
                     '{C:inactive}(Must have room)'
                 }
             },
+            c_worm_acme_wineglass = {
+                name = 'ACME Refill-O-Matic Stemware',
+                text = {
+                    '{X:attention,C:white}After{} a {C:attention}glass card{} is destroyed,',
+                    '{X:attention,C:white}Use{} to create {C:attention}#1#{} permanent',
+                    '{C:attention}glass #2#{} of selected card.',
+                    '{C:inactive}Number increases by 1 whenever',
+                    '{C:inactive}a glass card is destroyed.'
+                }
+            },
+            c_worm_acme_wineglass_alt = {
+                name = 'ACME Refill-O-Matic Stemware',
+                text = {
+                    '{X:attention,C:white}Use{} to create {C:attention}#1#{} permanent',
+                    '{C:attention}glass #2#{} of selected card.',
+                    '{C:inactive}Number increases by 1 whenever',
+                    '{C:inactive}a glass card is destroyed.'
+                }
+            },
         },
         Joker = {
             j_worm_ACME_enterprise = {
@@ -163,6 +182,9 @@ return {
             k_booster = 'Booster Pack',
             k_cards = 'Cards',
             k_card = 'Card',
+            k_copies = 'Copies',
+            k_copy = 'Copy',
+            k_stocked = 'in stock',
             k_remaining = 'Remaining',
 
             k_acme_test_dummy_1 = 'Crash!',
