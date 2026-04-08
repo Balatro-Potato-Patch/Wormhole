@@ -40,7 +40,8 @@ SMODS.Joker {
 
             return {
                 message = localize('k_upgrade_ex'),
-                colour = G.C.SECONDARY_SET.Planet
+                card = context.blueprint and context.blueprint_card or card,
+                message_card = context.blueprint and context.blueprint_card or card
             }
         end
     end

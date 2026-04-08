@@ -13,15 +13,15 @@ SMODS.Joker {
     attributes = {'cat'},
     config = {
         extra = {
-            chips = 0,
-            chips_mod = 14,
+            mult = 0,
+            mult_mod = 3,
             hands = {}
         }
     },
     loc_vars = function(self, info_queue, card)
-        local chips = card.ability.extra.chips
+        local mult = card.ability.extra.mult
         local upgrades = 0
-        local scalar = card.ability.extra.chips_mod
+        local scalar = card.ability.extra.mult_mod
         local indeck = false
         for _, v in pairs(SMODS.get_card_areas('jokers')) do
             if card.area == v then
@@ -35,8 +35,12 @@ SMODS.Joker {
                 end
             end
         end
+        local total = not indeck and upgrades * scalar or mult
         return {
-            vars = {scalar, not indeck and upgrades * scalar or chips}
+            vars = {
+                (scalar < 0 and "-" or "+") .. scalar,
+                (total < 0 and "-" or "+") .. total
+            }
         }
     end,
 
@@ -45,8 +49,8 @@ SMODS.Joker {
             if v.level and v.level > 1 then
                 card.ability.extra.hands[k] = true
                 SMODS.scale_card(card, {
-                    ref_value = "chips",
-                    scalar_value = "chips_mod",
+                    ref_value = "mult",
+                    scalar_value = "mult_mod",
                     no_message = true
                 })
             end
@@ -58,29 +62,32 @@ SMODS.Joker {
             if context.new_level > 1 and not card.ability.extra.hands[context.scoring_name] then
                 card.ability.extra.hands[context.scoring_name] = true
                 SMODS.scale_card(card, {
-                    ref_value = "chips",
-                    scalar_value = "chips_mod",
-                    message_colour = G.C.SECONDARY_SET.Planet
+                    ref_value = "mult",
+                    scalar_value = "mult_mod",
+            --      message_colour = G.C.MULT,
+                    no_message = true,
                 })
             elseif context.new_level <= 1 and card.ability.extra.hands[context.scoring_name] then
                 card.ability.extra.hands[context.scoring_name] = nil
-                local scable = {
-                    ["chips_mod"] = -card.ability.extra.chips_mod
-                }
                 SMODS.scale_card(card, {
-                    ref_value = "chips",
-                    scalar_table = scable,
-                    scalar_value = "chips_mod",
+                    ref_value = "mult",
+                    scalar_value = "mult_mod",
+                    operation = '-',
+            --[[
                     scaling_message = {
                         message = localize("k_downgrade_ex"),
-                        colour = G.C.SECONDARY_SET.Planet
+                        colour = G.C.MULT
                     }
+            ]]
+                    no_message = true,
                 })
             end
         end
-        if context.joker_main and card.ability.extra.chips ~= 0 then
+        if context.joker_main and card.ability.extra.mult ~= 0 then
             return {
-                chips = card.ability.extra.chips
+                mult = card.ability.extra.mult,
+                card = context.blueprint and context.blueprint_card or card,
+                message_card = context.blueprint and context.blueprint_card or card
             }
         end
     end

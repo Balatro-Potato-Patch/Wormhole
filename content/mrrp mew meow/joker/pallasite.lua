@@ -36,7 +36,9 @@ SMODS.Joker {
             card.ability.extra.hands[context.scoring_name] then
             return {
                 dollars = card.ability.extra.money,
-                colour = G.C.MONEY
+                colour = G.C.MONEY,
+                card = context.blueprint and context.blueprint_card or card,
+                message_card = context.blueprint and context.blueprint_card or card
             }
         end
         if (not context.blueprint) and context.end_of_round and context.main_eval and not context.game_over then

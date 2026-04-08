@@ -3,7 +3,7 @@ SMODS.Joker {
 	atlas = "mrrp", pos = {x=4, y=3},
 	rarity = 2,
 	cost = 8,
-	blueprint_compat = false,
+	blueprint_compat = true,
 	eternal_compat = false,
 	perishable_compat = true,
 	
@@ -40,7 +40,7 @@ SMODS.Joker {
 				if _ ~= #books then delay(1) end
 			end
 
-			SMODS.destroy_cards(card)
+			SMODS.destroy_cards(context.blueprint and context.blueprint_card or card)
 		end
 	end
 }

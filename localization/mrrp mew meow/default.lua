@@ -24,7 +24,7 @@ descriptions={
 			name=
 				"Cookie Cat"
 			, text={
-				"{C:planet}+#1#{} {C:attention}temporary{} levels to",
+				"{C:planet}#1#{} {C:attention}temporary{} levels to",
 				"each played {C:attention}poker hand{}",
 				"{C:planet,s:0.8}#2#{s:0.8} level per hand played{}",
 			}
@@ -43,23 +43,11 @@ descriptions={
 			name=
 				"Félicette"
 			, text={
-				"{C:chips}+#1#{} Chips for every",
+				"{C:mult}#1#{} Mult for every",
 				"upgraded {C:attention}poker hand{}",
-				"{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)"
+				"{C:inactive}(Currently {C:mult}#2#{C:inactive} Mult)"
 			}
 		},
-		--[[] ]
-		j_worm_felicette ={
-			name=
-				"Félicette"
-			, text={
-				"This Joker gains {C:chips}+#1#{} Chips",
-				"whenever a {C:attention}poker hand{} is",
-				"upgraded from {C:planet}Level 1{}"
-				"{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)"
-			}
-		}
-		--[[]]
 		j_worm_gofish ={
 			name=
 				"Pisces"
@@ -76,7 +64,7 @@ descriptions={
 			, text={
 				"If played hand is a {C:attention}#1#{},",
 				"turn the {C:attention}middlemost{} scoring card",
-				"to a {C:attention}#2#{} with a {C:attention}#3# Seal{}"
+				"into a {C:attention}#2#{} with a {C:attention}#3# Seal{}"
 			}
 		},
 		j_worm_nasahiring ={
@@ -95,10 +83,10 @@ descriptions={
 				"Left Uncorrupt",
 				"by Capitalism"
 			}, text={
-				"This Joker gains {C:mult}+#1#{} Mult",
+				"This Joker gains {C:mult}#1#{} Mult",
 				"when ending a {C:attention}shop{} with",
 				"no money being spent",
-				"{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult){}"
+				"{C:inactive}(Currently {C:mult}#2#{C:inactive} Mult){}"
 			}
 		},
 	},
@@ -125,7 +113,7 @@ descriptions={
 				"levels when bought"
 			}
 		},
-		worm_cookie_cat ={
+		worm_cookie_cat_song ={
 			name=
 				"Cookie Cat"
 			, text={
@@ -148,13 +136,13 @@ descriptions={
 },
 misc={
 	v_dictionary={
-		a_level_minus = "-#1# Levels"
+		a_level_minus = "-#1# Level"
 	},
 	labels={
 		worm_celestial = "Celestial",
 	},
 	dictionary={
-		k_downgrade_ex = "Downgrade!"
+	--	k_downgrade_ex = "Downgrade!",
 	},
 },
 }

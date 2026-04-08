@@ -18,9 +18,9 @@ SMODS.Joker {
         }
     },
     loc_vars = function(self, info_queue, card)
-    --  info_queue[#info_queue+1] = { key="worm_cookie_cat", set="Other" }
+    --  info_queue[#info_queue+1] = { key="worm_cookie_cat_song", set="Other" }
         return {
-            vars = {card.ability.extra.level,
+            vars = {(card.ability.extra.level < 0 and "-" or "+") .. card.ability.extra.level,
                     (card.ability.extra.level_mod > 0 and "-" or "+") .. card.ability.extra.level_mod}
         }
     end,
@@ -34,7 +34,7 @@ SMODS.Joker {
                     SMODS.upgrade_poker_hands({
                         hands = context.scoring_name,
                         level_up = card.ability.extra.level,
-                        from = card
+                        from = context.blueprint and context.blueprint_card or card
                     })
                 end
             }
@@ -43,8 +43,9 @@ SMODS.Joker {
             SMODS.upgrade_poker_hands({
                 hands = context.scoring_name,
                 level_up = -card.ability.extra.level,
-                from = card
+                from = context.blueprint and context.blueprint_card or card
             })
+            if context.blueprint then return end
             if card.ability.extra.level - card.ability.extra.level_mod <= 0 then
                 SMODS.destroy_cards(card, nil, nil, true)
                 return {
