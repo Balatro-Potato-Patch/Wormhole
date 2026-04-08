@@ -249,7 +249,7 @@ SMODS.Consumable {
     config = {softlock = true},
     use = function(self, card, area, copier)
         update_hand_text({ sound = 'button', volume = 0.7, pitch = 0.8, delay = 0.3 },
-            { handname = localize('k_worm_wow_hands'), chips = '...', mult = '...', level = '' })
+            { handname = localize('k_worm_euda_wow_hands'), chips = '...', mult = '...', level = '' })
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             delay = 0.2,
