@@ -28,5 +28,18 @@ SMODS.Challenge {
                 end
 			end
 		end
+		if context.setting_blind and context.blind.boss and G.GAME.blind.config.blind.boss.showdown then
+            local has_junk = false
+            for k, v in pairs(G.playing_cards) do
+                if SMODS.has_enhancement(v, "m_worm_junk_card") then
+                    has_junk = true
+                    break
+                end
+            end
+            if has_junk then
+                G.TAROT_INTERRUPT = nil
+                G.STATE = G.STATES.GAME_OVER; G.STATE_COMPLETE = false 
+            end
+		end
     end
 }
