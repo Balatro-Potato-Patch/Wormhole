@@ -1275,7 +1275,7 @@ function Game:update(dt, ...)
 		)
 	then
 		local closest = Wormhole.TEAM_MEOW.get_closest_joker(dragged)
-		local collides = meow_cards_are_colliding(closest, dragged)
+		local collides = (closest ~= nil) and meow_cards_are_colliding(closest, dragged)
 		for _, j in ipairs(G.jokers.cards) do
 			if collides and j == closest then
 				j.meow_force_draw_tart_count = true
