@@ -93,22 +93,80 @@ Wormhole.SHRUG_Joker {
         info_queue[#info_queue+1] = G.P_CENTERS["m_worm_shrug_nebulous"]
     end,
 
+    -- Check if a card is in scoring hand
+    is_scored = function(played, context)
+        for _, check in pairs(context.scoring_hand) do
+            if check == played then
+                return true
+            end
+        end
+        return false
+    end,
+
     -- Calculations
     calculate = function(self, card, context)
         if not context.blueprint then
             if context.before then
+
                 -- Reset card table
                 card.ability.extra.card_table = {}
+                local trigger_effect = false
 
-            elseif context.individual and context.cardarea == "unscored" and not SMODS.has_enhancement(context.other_card, "m_worm_shrug_nebulous") then
                 -- Add all unscored cards to a table
-                card.ability.extra.card_table[#card.ability.extra.card_table + 1] = context.other_card
+                for _, played in pairs(context.full_hand) do
+                    if not card.config.center.is_scored(played, context) and not SMODS.has_enhancement(played, "m_worm_shrug_nebulous") then
+                        card.ability.extra.card_table[#card.ability.extra.card_table + 1] = played
+                        trigger_effect = true
+                    end
+                end
 
-            elseif context.after then
-                -- Find effect card and give it the enhancement (TO DO - Give enhancement)
-                local eff_card = pseudorandom_element(card.ability.extra.card_table, "wormhole_shrug_okay_with_it")
-                eff_card:set_ability("m_worm_shrug_nebulous")
+                -- Ensure there is a card to choose
+                if trigger_effect then
 
+                    -- Find card to be given enhancement
+                    local eff_card = pseudorandom_element(card.ability.extra.card_table, "j_worm_shrug_okay_with_it")
+
+                    -- Card Flip Effect
+                    G.E_MANAGER:add_event(Event({
+                        trigger = "after",
+                        delay = 0.4,
+                        func = function()
+                            play_sound("tarot1")
+                            card:juice_up(0.3, 0.5)
+                            return true
+                        end
+                    }))
+                    delay(0.2)
+                    G.E_MANAGER:add_event(Event({
+                        trigger = "after",
+                        delay = 0.15,
+                        func = function()
+                            eff_card:flip()
+                            play_sound("card1")
+                            eff_card:juice_up(0.3, 0.3)
+                            return true
+                        end
+                    }))
+                    delay(0.2)
+                    G.E_MANAGER:add_event(Event({
+                        trigger = "after",
+                        delay = 0.1,
+                        func = function()
+                            eff_card:set_ability("m_worm_shrug_nebulous")
+                            return true
+                        end
+                    }))
+                    G.E_MANAGER:add_event(Event({
+                        trigger = "after",
+                        delay = 0.15,
+                        func = function()
+                            eff_card:flip()
+                            play_sound("tarot2")
+                            eff_card:juice_up(0.3, 0.3)
+                            return true
+                        end
+                    }))
+                end
             end
         end
     end,
