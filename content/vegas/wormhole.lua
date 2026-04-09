@@ -1120,7 +1120,7 @@ SMODS.Back {
     },
 	config = { jokers = { "j_banner" }, vouchers = { "v_planet_merchant" } },
     atlas = "vegas_jokers",
-    pos = {x = 0, y = 4},
+    pos = {x = 3, y = 3},
 	discovered = true,
 	unlocked = true,
 	apply = function(self, back)
