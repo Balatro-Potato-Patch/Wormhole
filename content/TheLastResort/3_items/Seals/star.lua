@@ -24,7 +24,7 @@ SMODS.Seal {
                 func = (function()
                     local const = create_card('worm_tlr_constellation', G.consumeables, nil, nil, nil, nil, nil, 'tlr_star')
                     const.ability.tier = const.ability.tier + 1
-                    WORM_TLR.update_const_sprite(card.config.center, card)
+                    WORM_TLR.update_const_sprite(const.config.center, const)
                     const:add_to_deck()
                     G.consumeables:emplace(const)
                     G.GAME.consumeable_buffer = 0
