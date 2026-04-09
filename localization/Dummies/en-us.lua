@@ -129,6 +129,14 @@ return {
 					},
                 },
             },
+            j_worm_dum_pentapod = {
+                name = "Pentapod",
+                text = {
+                    "Gain {C:chips}+#1#{} Chips per",
+                    "played and scored {C:attention}#2#",
+                    "{C:inactive}(Currently {C:chips}+#3#{C:inactive} Chips)"
+                }
+            }
         },
         Planet = {
             c_worm_dum_moony = {
