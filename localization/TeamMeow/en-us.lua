@@ -278,7 +278,7 @@ return {
 			c_worm_meteor_mint_regular = {
 				name = " Meteor Mint ",
 				text = {
-					"{C:attention}Boosts{} other {C:worm_meow_spacetart}©Spacetart{}",
+					"{C:attention}Boosts{} other {C:worm_meow_spacetart}©Spacetarts{}",
 					"attached to this {C:attention}Joker{}",
 					"{C:inactive}(Total mint boosts on this Joker: #1#)",
 				}
@@ -343,28 +343,28 @@ return {
 				name = "Spacetart Pack",
 				text = {
 					"Choose {C:attention}#1#{} of up to",
-					"{C:attention}#2#{C:worm_meow_spacetart} Spacetart{} Foils",
+					"{C:attention}#2#{C:worm_meow_spacetart} ©Spacetart{} Foils",
 				},
 			},
 			p_worm_spacetart_booster_2 = {
 				name = "Spacetart Pack",
 				text = {
 					"Choose {C:attention}#1#{} of up to",
-					"{C:attention}#2#{C:worm_meow_spacetart} Spacetart{} Foils",
+					"{C:attention}#2#{C:worm_meow_spacetart} ©Spacetart{} Foils",
 				},
 			},
 			p_worm_spacetart_booster_jumbo_1 = {
 				name = "Jumbo Spacetart Pack",
 				text = {
 					"Choose {C:attention}#1#{} of up to",
-					"{C:attention}#2#{C:worm_meow_spacetart} Spacetart{} Foils",
+					"{C:attention}#2#{C:worm_meow_spacetart} ©Spacetart{} Foils",
 				},
 			},
 			p_worm_spacetart_booster_mega_1 = {
 				name = "Mega Spacetart Pack",
 				text = {
 					"Choose {C:attention}#1#{} of up to",
-					"{C:attention}#2#{C:worm_meow_spacetart} Spacetart{} Foils",
+					"{C:attention}#2#{C:worm_meow_spacetart} ©Spacetart{} Foils",
 				},
 			},
 
