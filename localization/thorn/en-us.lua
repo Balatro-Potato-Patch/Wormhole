@@ -69,7 +69,20 @@ return {
                     },
                 }
             },
-            Joker = {
+            Back = {
+                b_worm_thorn_renamelater = {
+                    name = "Unnamed Deck",
+                    text = {
+                        "{C:mult}+1{} discard every round",
+                        "{C:attention}+1{} hand size",
+                        "Upgrade {C:attention}all{} poker hands",
+                        "every {C:attention}#1# {C:inactive}[#2#]{} rounds",
+                        "Each hand type can only",
+                        "be played {C:attention}once{} per Ante",
+                    }
+                }
+            },
+            Joker = { -- why is there two of these?
                 j_worm_thorn_jimbo = {
                     name = {"Jimbo",
                         "{s:0.6}But He Is In SPACE"
