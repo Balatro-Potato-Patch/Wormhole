@@ -374,16 +374,6 @@ return {
 				}
 			}
 		},
-		Spectral = {
-			c_worm_tlr_formation = {
-				name = "Formation",
-				text = {
-					'Add a {C:worm_tlr_constellation}Star Seal{}',
-					'to {C:attention}#1#{} selected',
-					'card in your hand'
-				}
-			}
-		},
 		Voucher = {
 			v_worm_tlr_skywatching = {
 				name = 'Skywatching',

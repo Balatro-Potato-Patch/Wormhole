@@ -22,6 +22,7 @@ PotatoPatchUtils.Developer({
 
 PotatoPatchUtils.Developer({
 	name = "Jogla",
+	colour = HEX("aaaaff"),
 	loc = true,
 	team = "TheLastResort",
 })

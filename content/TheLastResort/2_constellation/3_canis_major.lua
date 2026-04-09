@@ -2,7 +2,7 @@ SMODS.Consumable{
     key = "tlr_const_canis_major",
     set = 'worm_tlr_constellation',
     atlas = "tlr_const",
-    pos = {x=0, y=0},
+    pos = {x=0, y=4},
     ppu_team = {"TheLastResort"},
 	ppu_coder = {"Jogla"},
     ppu_artist = {"Aura2247"},
