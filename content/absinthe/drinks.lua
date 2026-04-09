@@ -1000,16 +1000,19 @@ SMODS.Consumable { -- Nebulager
     end,
     calculate = function(self, card, context)
         if card.ability.drink_values.primed and card.ability.drink_values.filled and context.stay_flipped and context.from_area == G.play and context.to_area == G.discard then
-            card.ability.extra.triggered = true
             return {
                 modify = {to_area = G.hand},
                 func = function()
-                    G.E_MANAGER:add_event(Event({
-                        func = function()
-                            card:abs_empty_drink()
-                            return true;
-                        end
-                    }))
+                    if not card.ability.extra.triggered then
+                        card.ability.extra.triggered = true
+                        G.E_MANAGER:add_event(Event({
+                            func = function()
+                                card.ability.extra.triggered = nil
+                                card:abs_empty_drink()
+                                return true;
+                            end
+                        }))
+                    end
                 end
             }
         end
