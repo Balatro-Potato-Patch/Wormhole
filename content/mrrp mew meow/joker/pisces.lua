@@ -1,8 +1,8 @@
 SMODS.Joker {
 	key = 'gofish',
-	atlas = "mrrp", pos = {x=4, y=3},
 	rarity = 2,
 	cost = 8,
+	atlas = "mrrp", pos = {x=4, y=5},
 	blueprint_compat = true,
 	eternal_compat = false,
 	perishable_compat = true,

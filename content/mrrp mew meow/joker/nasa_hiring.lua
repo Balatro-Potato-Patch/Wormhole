@@ -1,6 +1,6 @@
 SMODS.Joker {
 	key = 'nasahiring',
-	atlas = "mrrp", pos = {x=4, y=3},
+	atlas = "mrrp", pos = {x=4, y=5},
 	rarity = 4,
 	cost = 1,
 	blueprint_compat = true,

@@ -3,8 +3,8 @@ SMODS.Joker {
     key = 'felicette',
     atlas = "mrrp",
     pos = {
-        x = 2,
-        y = 1
+        x = 4,
+        y = 5
     },
     rarity = 1,
     cost = 5,
@@ -91,8 +91,8 @@ SMODS.Joker {
     key = 'felicette',
     atlas = "mrrp",
     pos = {
-        x = 2,
-        y = 1
+        x = 4,
+        y = 5
     },
     rarity = 1,
     cost = 5,

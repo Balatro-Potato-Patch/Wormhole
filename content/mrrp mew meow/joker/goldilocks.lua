@@ -3,7 +3,7 @@ SMODS.Joker {
     atlas = "mrrp",
     pos = {
         x = 4,
-        y = 3
+        y = 5
     },
     rarity = 2,
     cost = 6,

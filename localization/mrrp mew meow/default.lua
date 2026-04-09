@@ -76,6 +76,17 @@ descriptions={
 				"{C:money}#2#{} {C:attention}Space{} Joker",
 			}
 		},
+		j_worm_orrery ={
+			name=
+				"Orrery"
+			, text={
+				"When upgrading level of any",
+				"{C:attention}poker hand{}, create one copy",
+				"between {C:tarot}The Star{}, {C:tarot}The Moon{},",
+				"{C:tarot}The Sun{}, and/or {C:tarot}The World{}",
+				"{C:inactive}(Must have room){}"
+			}
+		},
 		j_worm_capitalism ={
 			name={
 				"Outer Space,",
