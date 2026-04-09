@@ -4,7 +4,12 @@ SMODS.Atlas({
     px = 71,
     py = 95
 })
-
+SMODS.Atlas({
+	key = "meow_booster_zodicat",
+	path = "TeamMeow/zodicat_boosters.png",
+	px = 71,
+	py = 95
+})
 SMODS.Sound({
     key = "spacetart_booster_pack_music",
     path = "TeamMeow/spacetartMus.ogg",
@@ -230,6 +235,7 @@ SMODS.Sound({
 
 SMODS.Booster({
 	key = "zodicat_booster_1",
+	atlas = "meow_booster_zodicat",
 	pos = { x = 0, y = 0 },
 	config = { extra = 3, choose = 1 },
 	group_key = "k_worm_meow_Zodicat_pack",
@@ -250,11 +256,12 @@ SMODS.Booster({
 	end,
 	ppu_team = { "meow" },
 	ppu_coder = { "revo" },
-	--ppu_artist = { "incognito" },
+	ppu_artist = { "silverautumn", "gappie" },
 })
 
 SMODS.Booster({
 	key = "zodicat_booster_2",
+	atlas = "meow_booster_zodicat",
 	pos = { x = 1, y = 0 },
 	config = { extra = 3, choose = 1 },
 	group_key = "k_worm_meow_Zodicat_pack",
@@ -275,11 +282,12 @@ SMODS.Booster({
 	end,
 	ppu_team = { "meow" },
 	ppu_coder = { "revo" },
-	--ppu_artist = { "incognito" },
+	ppu_artist = { "silverautumn", "gappie" },
 })
 
 SMODS.Booster({
 	key = "zodicat_booster_jumbo_1",
+	atlas = "meow_booster_zodicat",
 	pos = { x = 2, y = 0 },
 	config = { extra = 5, choose = 1 },
 	group_key = "k_worm_meow_Zodicat_pack",
@@ -300,11 +308,12 @@ SMODS.Booster({
 	end,
 	ppu_team = { "meow" },
 	ppu_coder = { "revo" },
-	--ppu_artist = { "incognito" },
+	ppu_artist = { "silverautumn", "gappie" },
 })
 
 SMODS.Booster({
 	key = "zodicat_booster_mega_1",
+	atlas = "meow_booster_zodicat",
 	pos = { x = 3, y = 0 },
 	config = { extra = 5, choose = 2 },
 	group_key = "k_worm_meow_Zodicat_pack",
@@ -325,5 +334,5 @@ SMODS.Booster({
 	end,
 	ppu_team = { "meow" },
 	ppu_coder = { "revo" },
-	--ppu_artist = { "incognito" },
+	ppu_artist = { "silverautumn", "gappie" },
 })

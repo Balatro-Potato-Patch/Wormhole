@@ -227,7 +227,7 @@ return {
 			c_worm_meteor_mint = {
 				name = "Meteor Mint",
 				text = {
-					"{C:attention}Boosts{} other {C:worm_meow_spacetart}©Spacetart{}",
+					"{C:attention}Boosts{} other {C:worm_meow_spacetart}©Spacetarts{}",
 					"attached to the applied {C:attention}Joker{}",
 				},
 			},
