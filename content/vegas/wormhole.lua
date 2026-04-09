@@ -604,8 +604,9 @@ SMODS.Joker{
 	loc_txt = {
 		name = "Wormhole",
 		text = {
-			"Creates a {C:purple}Negative Copy{} at the bottom of",
-			"your deck when you use a {C:attention}Consumable{} card"
+			"Adds a {C:purple}Negative{} copy of any",
+			"{C:attention}Consumeable{} to the bottom of",
+			"your {C:attention}deck{} when it is used"
 		}
 	},
 	config = { sets = { "Tarot", "Planet", "Spectral" }},
