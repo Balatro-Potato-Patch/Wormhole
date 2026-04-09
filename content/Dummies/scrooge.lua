@@ -14,19 +14,19 @@ SMODS.Joker {
 	blueprint_compat = true,
 	calculate = function(self, card, context)
 		if context.before and context.poker_hands then
-			local chp = {}
-			for k, v in pairs((G.consumeables or {}).cards) do
-				if v and v.ability.set == 'Planet' and tostring(v.ability.consumeable.hand_type) and not chp[v.ability.consumeable.hand_type] then
-					chp[v.ability.consumeable.hand_type] = true
+			local cph = {}
+			for k, v in pairs(context.poker_hands) do
+				if next(v) then cph[k] = true end
+			end
+			
+			local effects = {}
+			for k, v in ipairs((G.consumeables or {}).cards) do
+				if v and v.ability.set == 'Planet' and tostring(v.ability.consumeable.hand_type) and cph[v.ability.consumeable.hand_type] then
+					table.insert(effects, { dollars = card.ability.extra.money, message_card = v, juice_card = context.blueprint_card or card })
 				end
 			end
 			
-			local pamt = 0
-			for k, v in pairs(context.poker_hands) do
-				if k and v and next(v) and chp[k] then pamt = pamt + 1 end
-			end
-			
-			if pamt > 0 then return { dollars = card.ability.extra.money*pamt } end
+			if next(effects) then return SMODS.merge_effects(effects) end
 		end
 	end,
 	ppu_coder = { "theonegoofali" },

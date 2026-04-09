@@ -18,7 +18,11 @@ return {
             },
             PotatoPatchDev_theonegoofali = {
                 name = 'TheOneGoofAli',
-                text = { "aeiou" }
+                text = {
+					{ "Additionally known under the {C:attention}TOGA{} acronym.", "Very much a nerd about (old) computers." },
+					{ "Previously modded {C:attention}Sonic Robo Blast 2{},", "{C:attention}Sonic Robo Blast 2 Kart{} and", "{C:attention}Dr. Robotnik's Ring Racers{}." },
+					{ "Also responsible for loading screen shenanigans.", "{C:inactive,s:0.9}Originally experimented for TOGA's Stuff" }
+				}
             },
             PotatoPatchDev_baltdev = {
                 name = 'baltdev',
@@ -106,10 +110,23 @@ return {
                 name = "Spaghettification",
                 text = {
 					"If a {C:planet}Planet{} card is held for {C:attention}discarded{}",
-					"poker hand, {C:red}destroy{} it and add",
+					"poker hand, {C:red}destroy{} {C:planet}it{} and add",
 					"{C:attention}per-level{} {C:chips}Chips{} of said poker hand",
 					"to this Joker",
 					"{C:inactive}(Currently {C:chips}#1#{C:inactive} Chips)"
+                },
+            },
+			j_worm_dum_timcurry = {
+                name = "Tim Curry",
+                text = {
+					{
+						"Upgrade a {C:attention}random{} poker hand",
+						"by {C:planet}0.5{} if played hand contains",
+						"a {C:attention}Pair{} of {C:attention}Queens{}",
+					},
+					{
+						"{C:inactive}May react to Space Joker"
+					},
                 },
             },
         },
@@ -186,6 +203,12 @@ return {
                     "{C:inactive}({C:attention}#1#{C:inactive} uses left){}",
 				}
 			},
+			tag_worm_dum_timcurry = {
+				name = "Tim Curry Tag",
+				text = {
+					"Shop has {C:attention}Tim Curry{}?!",
+				},
+			},
         },
 		Other = {
 			worm_dum_spacesuit_warning = {
@@ -217,6 +240,7 @@ return {
                 "poker hands to upgrade."
             },
             k_worm_dum_low_oxygen = "Low Oxygen",
+			worm_tim_curry_space = "SPAAACE!",
         },
 		v_dictionary = {
 			worm_dum_store = "+X#1# Stored",
