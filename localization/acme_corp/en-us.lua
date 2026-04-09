@@ -2,7 +2,7 @@ return {
     descriptions = {
         ACME_Gadget = {
             c_worm_acme_ball = {
-                name = 'Ball',
+                name = 'ACME "Bounce-O-Matic" Spherical Impact Projectile',
                 text = {
                     '{X:attention,C:white}After{} scoring {C:attention}#1# #2#{},',
                     '{X:attention,C:white}Use{} to give a random {C:attention}enhancement',
@@ -19,8 +19,24 @@ return {
                 }
             },
             c_worm_acme_ray_gun = {
-                name = 'ACME Disintegrator-Inverse-Atron'
+                name = 'ACME Disintegrator-Inverse-Atron',
+                text = {
+                    "{X:attention,C:white}After{} selling {C:attention}#1#{} cards",
+                    "{X:attention,C:white}Use{} to apply a random {C:dark_edition}Edition{}",
+                    "to a random held {C:attention}Joker{}",
+                    "{S:0.8,C:inactive}(Currently {C:attention,S:0.8}#2#{}{S:0.8,C:inactive})"
+                }
             },
+            c_worm_acme_ray_gun_alt = {
+                name = 'ACME Disintegrator-Inverse-Atron',
+                text = { "Apply a random {C:dark_edition}Edition{}",
+                    "to a random held {C:attention}Joker{}"
+
+                }
+
+            },
+
+
             c_worm_acme_jam = {
                 name = 'ACME Spreadable Berry Conserve',
                 text = {
@@ -108,14 +124,14 @@ return {
         },
         Joker = {
             j_worm_ACME_enterprise = {
-		        name = "Enterprise Joker",
-		        text = {
-			        '{C:chips}+#1#{} Chips for each',
-			        '{C:attention}unique{} {C:planet}Planet{} card',
-			        'used this run',
-			        '{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)'
-		        },
-	        },        
+                name = "Enterprise Joker",
+                text = {
+                    '{C:chips}+#1#{} Chips for each',
+                    '{C:attention}unique{} {C:planet}Planet{} card',
+                    'used this run',
+                    '{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)'
+                },
+            },
             j_worm_acme_test_dummy = {
                 name = 'Test Dummy',
                 text = {
