@@ -162,9 +162,10 @@ return {
             c_worm_euda_bigear = {
                 name = "Big Ear",
                 text = {
-                    "Level up",
-                    "{C:attention}Wow! and Wow! Flush{}",
-                    "By one Level"
+                    "({V:1}lvl.#1#{}/{V:2}#2#{}) Level up",
+                    "{C:attention}#3#",
+                    "{C:mult}+#4#{}/{C:mult}#5#{} Mult and",
+                    "{C:chips}+#6#{} chips",
                 },
             }
         },
@@ -259,7 +260,7 @@ return {
                 worm_pkr_euda_wow = {
                     "Play a 6, a 3, a Queen, a Jack, and a 5",
                 },
-                worm_pkr_wow_euda_f = {
+                worm_pkr_euda_wow_f = {
                         "Play a 6, a 3, a Queen, a Jack, and a 5",
                         "with all cards sharing the same suit",
                 },
@@ -280,6 +281,8 @@ return {
                 k_worm_euda_specificcolony_receive_title = "Release from Colony ",
 
 				k_worm_euda_wow_hands = "Wow! (Flush)",
+                k_worm_euda_observatory_planet = "Observatory",
+
                 k_euda_fate = "Fate",
                 b_euda_fate_cards = "Fate Cards",
                 k_euda_avadon_pack = "Avadon Pack",

@@ -28,6 +28,7 @@ PotatoPatchUtils.Team({
     name = "TeamEudaimonia",
     colour = HEX('757bc8'),
     loc = true,
+    short_credit = true,
 }) 
 
 PotatoPatchUtils.Developer({
