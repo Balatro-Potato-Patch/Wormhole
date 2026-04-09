@@ -1,4 +1,4 @@
-print"hi mom"
+
 return {
     descriptions = {
 	PotatoPatch = {
