@@ -1,5 +1,5 @@
 SMODS.Joker {
-	key = 'gofish',
+	key = 'go_pisces',
 	rarity = 2,
 	cost = 8,
 	atlas = "mrrp", pos = {x=4, y=5},
@@ -37,7 +37,7 @@ SMODS.Joker {
 						return true
 					end
 				})
-				if _ ~= #books then delay(1) end
+				if _ ~= #books then delay(0.6) end
 			end
 
 			SMODS.destroy_cards(context.blueprint and context.blueprint_card or card)

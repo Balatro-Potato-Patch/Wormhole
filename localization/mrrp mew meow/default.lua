@@ -48,9 +48,9 @@ descriptions={
 				"{C:inactive}(Currently {C:mult}#2#{C:inactive} Mult)"
 			}
 		},
-		j_worm_gofish ={
+		j_worm_go_pisces ={
 			name=
-				"Pisces"
+				"Go Pisces"
 			, text={
 				"If poker hand contains a",
 				"{C:attention}#1#{}, destroy it",
