@@ -742,7 +742,7 @@ SMODS.Consumable {
     atlas = 'ACME_gadgets',
     pos = { x = 7, y = 0 },
     soul_pos = { x = 7, y = 1 },
-    ppu_coder = { 'basil_squared' },
+    ppu_coder = { 'Basil_Squared' },
     ppu_artist = { 'RadiationV2' },
     keep_on_use = function(self, card)
         return true
