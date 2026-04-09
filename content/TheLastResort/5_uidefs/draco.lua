@@ -48,7 +48,7 @@ function G.UIDEF.Wormhole_TLR_draco(args)
             --local area = CardArea(G.CARD_W/2, G.CARD_H/2, G.CARD_W, G.CARD_H, {type = "title"})
 
             local temp_tag = Tag(v, true)
-            local temp_tag_ui = temp_tag:generate_UI()
+            local temp_tag_ui = temp_tag:generate_UI(1.4)
 
             local entry = {n = G.UIT.C, config = {align = 'cm', padding = 0.2}, nodes = {
                 {n = G.UIT.R, config = {align = "cm", minw = G.CARD_W, minh = G.CARD_H, colour = G.C.CLEAR}, nodes = {
@@ -71,7 +71,7 @@ function G.UIDEF.Wormhole_TLR_draco(args)
         if i > (args.selected_page-1)*selected_per_page and i <= args.selected_page*selected_per_page then
             if not v then break end
             local temp_tag = Tag(v, true)
-            local temp_tag_ui = temp_tag:generate_UI()
+            local temp_tag_ui = temp_tag:generate_UI(1.4)
 
             local entry = {n = G.UIT.C, config = {align = 'cm', padding = 0.2}, nodes = {
                 {n = G.UIT.R, config = {align = "cm", minw = G.CARD_W, minh = G.CARD_H, colour = G.C.CLEAR}, nodes = {
