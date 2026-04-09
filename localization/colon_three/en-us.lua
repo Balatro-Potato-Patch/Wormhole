@@ -207,7 +207,7 @@ return {
                     },
                     {
                         "Clean-up {C:attention}#2#{} {f:6}—{} Played hands with",
-                        "{C:attention}Junk Cards{} gain an additional {C:attention}+#3#{}",
+                        "{C:attention}Junk Cards{} gain an additional {X:worm_c3_junkset,C:white}+X#3#{}",
                         "multiplier to {C:chips}Chips{} and {C:mult}Mult{}, then",
                         "destroy {C:attention}#4#{} random {C:attention}cleaned-up cards{}",
                     }
@@ -245,8 +245,8 @@ return {
             },
         },
         Spectral = {
-            c_worm_ringularity = {
-                name = "Ringularity",
+            c_worm_accretion_disk = {
+                name = "Accretion Disk",
                 text = {
                     {
                         "Convert all non-{C:attention}Junk Cards{} in hand",
@@ -256,6 +256,11 @@ return {
                         "ALL current and future {C:attention}Junk Cards{}",
                         "gain {X:mult,C:white}X#1#{} Mult and {C:gold}+$#2#{}",
                     },
+                    {
+                        "Played hands with {C:attention}Junk Cards{}",
+                        "gain an additional {X:worm_c3_junkset,C:white}+X#3#{} multiplier",
+                        "to {C:chips}Chips{} and {C:mult}Mult{}"
+                    }
                 }
             },
         },

@@ -4,13 +4,14 @@ SMODS.Consumable {
     set = "Spectral",
     hidden = true,
     soul_set = "JunkSet",
-    key = "ringularity",
+    key = "accretion_disk",
     atlas = "ct_derelict",
     pos = { x = 4, y = 1 },
     config = {
         extra = {
             xmult_mod = 0.3,
             dollars_mod = 1,
+            increase_xvals = 0.5,
         }
     },
     loc_vars = function(_,info_queue,card)
@@ -19,6 +20,7 @@ SMODS.Consumable {
             vars = {
                 card.ability.extra.xmult_mod,
                 card.ability.extra.dollars_mod,
+                card.ability.extra.increase_xvals,
             }
         }
     end,
@@ -26,6 +28,7 @@ SMODS.Consumable {
         if G.GAME.worm_c3_junk_stats then
             G.GAME.worm_c3_junk_stats.x_mult = G.GAME.worm_c3_junk_stats.x_mult + card.ability.extra.xmult_mod
             G.GAME.worm_c3_junk_stats.money = G.GAME.worm_c3_junk_stats.money + card.ability.extra.dollars_mod
+            G.GAME.worm_c3_junk_stats.x_hand_stats = G.GAME.worm_c3_junk_stats.x_hand_stats + card.ability.extra.increase_xvals
         end
 
         if #G.hand.cards > 0 then
@@ -51,8 +54,10 @@ SMODS.Consumable {
             trigger = 'before',
             delay = 0.4,
             func = function()
+                play_sound("multhit2", 1.4)
                 play_sound("multhit2", 0.7)
                 play_sound("multhit2", 0.35)
+                play_sound("multhit2", 0.175)
                 card:juice_up(0.3, 0.5)
                 return true
             end
@@ -60,5 +65,6 @@ SMODS.Consumable {
     end,
     can_use = function(...) return true end,
     ppu_coder = {"notmario"},
+    ppu_artist = {"notmario"},
     ppu_team = {":3"}
 }

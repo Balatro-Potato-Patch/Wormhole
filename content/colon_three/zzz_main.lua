@@ -163,7 +163,7 @@ for i, v in pairs({
     "junk/starfish_prime",
     "junk/busted_3d_printer",
     "junk/trash_compactor",
-    "junk/ringularity",
+    "junk/accretion_disk",
     "junk/vouchers",
 
     "challenges",
