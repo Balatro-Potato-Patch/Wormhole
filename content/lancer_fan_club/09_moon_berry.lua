@@ -59,6 +59,7 @@ SMODS.Joker({
     rarity = 4,
     cost = 20,
     blueprint_compat = true,
+    demicoloncompat = true,
     atlas = "lfc_jokers",
     ppu_coder = { "ProdByProto" },
     ppu_artist = { "ProdByProto", "J8-Bit" },
@@ -111,7 +112,7 @@ SMODS.Joker({
 
     calculate = function(self, card, context)
         local cae = card.ability.extra
-        if context.individual and context.cardarea == G.play and not context.end_of_round then
+        if (context.individual and context.cardarea == G.play and not context.end_of_round) or context.forcetrigger then
             if SMODS.has_enhancement(context.other_card, "m_bonus") then
                 return {
                     xmult = cae.xmult,

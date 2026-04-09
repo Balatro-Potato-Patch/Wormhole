@@ -1,6 +1,7 @@
 local joker = SMODS.Joker {
 	key = 'lfc_meteor_shower',
 	blueprint_compat = true,
+	demicoloncompat = true,
 	loc_vars = function(self, info_queue, card) return { vars = { card.ability.extra.dollars } } end,
 	config = { extra = { dollars = 3 } },
 	rarity = 2,
@@ -50,7 +51,7 @@ local function create_meteor(value)
 end
 
 joker.calculate = function(self, card, context)
-	if context.individual and not context.end_of_round and context.cardarea == G.play then
+	if (context.individual and not context.end_of_round and context.cardarea == G.play) or context.forcetrigger then
 		G.E_MANAGER:add_event(Event({
 			func = function()
 				create_meteor(card.ability.extra.dollars)
@@ -58,6 +59,7 @@ joker.calculate = function(self, card, context)
 				return true
 			end
 		}))
+		return nil, true -- makes joker-retriggering effects work
 	end
 end
 

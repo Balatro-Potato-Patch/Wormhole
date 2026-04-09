@@ -126,6 +126,13 @@ SMODS.DynaTextEffect {
     end,
 }
 
+--[[
+--  Note: i did code for all the forcetrigger compat stuff,
+--        but it's fairly simple to do and doesn't affect
+--        wormhole on its own, so it's not included in the
+--        code credits
+--      - alexi
+--]]
 PotatoPatchUtils.Developer {
     name = "InvalidOS",
     text_effect = "worm_alexi_text",

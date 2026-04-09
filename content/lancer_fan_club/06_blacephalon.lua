@@ -2,6 +2,7 @@
 SMODS.Joker {
     key = "lfc_blacephalon",
     blueprint_compat = true,
+    demicoloncompat = true,
     perishable_compat = true,
     eternal_compat = true,
     rarity = 2,
@@ -24,7 +25,7 @@ SMODS.Joker {
         }
     end,
     calculate = function(self, card, context)
-        if context.remove_playing_cards and #context.removed > 0 then
+        if (context.remove_playing_cards and #context.removed > 0) or context.forcetrigger then
             G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + card.ability.extra.dollars
             return {
                 dollars = card.ability.extra.dollars * #context.removed,

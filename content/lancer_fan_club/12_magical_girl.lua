@@ -2,6 +2,7 @@
 SMODS.Joker {
     key = "lfc_magical_girl",
     blueprint_compat = true,
+    demicoloncompat = true,
     perishable_compat = false,
     eternal_compat = true,
     rarity = 1,
@@ -40,7 +41,7 @@ SMODS.Joker {
                 })
             end
         end
-        if context.joker_main then
+        if context.joker_main or context.forcetrigger then
             return {
                 chips = card.ability.extra.chips
             }

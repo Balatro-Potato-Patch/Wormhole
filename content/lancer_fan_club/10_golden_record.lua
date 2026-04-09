@@ -15,6 +15,7 @@ SMODS.Shader {
 SMODS.Joker {
     key = "lfc_golden_record",
     blueprint_compat = false,
+    demicoloncompat = true,
     perishable_compat = true,
     eternal_compat = true,
     rarity = 2,
@@ -50,6 +51,26 @@ SMODS.Joker {
         }
     end,
     calculate = function(self, card, context)
+        local function _create_spectral()
+            if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+                G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+                G.E_MANAGER:add_event(Event({
+                    func = (function()
+                        SMODS.add_card {
+                            set = card.ability.extra.card_type,
+                            key_append = 'lfc_golden_record'
+                        }
+                        G.GAME.consumeable_buffer = 0
+                        return true
+                    end)
+                }))
+                return {
+                    message = localize('k_plus_' .. string.lower(card.ability.extra.card_type)),
+                    G.C.SECONDARY_SET[card.ability.extra.card_type] or G.C.FILTER,
+                }
+            end
+        end
+
         if context.discard then
             local do_card_create = false
             if not context.blueprint and SMODS.has_enhancement(context.other_card, card.ability.extra.enhancement) then
@@ -61,24 +82,12 @@ SMODS.Joker {
                 end
             end
             if do_card_create then
-                if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
-                    G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
-                    G.E_MANAGER:add_event(Event({
-                        func = (function()
-                            SMODS.add_card {
-                                set = card.ability.extra.card_type,
-                                key_append = 'lfc_golden_record' -- Optional, useful for manipulating the random seed and checking the source of the creation in `in_pool`.
-                            }
-                            G.GAME.consumeable_buffer = 0
-                            return true
-                        end)
-                    }))
-                    return {
-                        message = localize('k_plus_' .. string.lower(card.ability.extra.card_type)),
-                        G.C.SECONDARY_SET[card.ability.extra.card_type] or G.C.FILTER,
-                    }
-                end
+                return _create_spectral()
             end
+        end
+
+        if context.forcetrigger then
+            return _create_spectral()
         end
     end,
     in_pool = function(self, args)
