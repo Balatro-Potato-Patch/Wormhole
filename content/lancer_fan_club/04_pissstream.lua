@@ -8,7 +8,6 @@ local https = require("SMODS.https")
 local last_piss_ping
 
 local function process_piss_info(...)
-    print(...)
     local ret = ({ ... })
     if ret[1] == 200 then
         local json = json.decode(ret[2]).current
