@@ -4,7 +4,7 @@ SMODS.Joker {
     key = "event_horizon",
     --atlas = "ct_jokers",
     --pos = { x = 0, y = 0 },
-    config = { extra = { levels = 0 } },
+    config = { extra = { levels = 0, rotation = 0 } },
     attributes = { "space", "hand_type" },
     ppu_coder = { "meta" },
     ppu_team = { ":3" },
@@ -24,8 +24,33 @@ SMODS.Joker {
             card.ability.extra.levels = 0
             return nil, true
         end
+    end,
+    update = function(self, card, dt)
+        if card.ability and card.ability.extra and card.ability.extra.levels then
+            local mix_fac = 0.3 ^ dt
+            card.ability.extra.rotation = mix_fac * (card.ability.extra.rotation or 0) + (1 - mix_fac) * card.ability.extra.levels * math.pi * 5 / 4 * 9 / 10
+        end
     end
 }
+-- rotate hook
+local card_draw = Card.draw
+function Card:draw(layer, ...)
+	if self.config and self.config.center.key == "j_worm_event_horizon" then
+		self.VT.r = self.VT.r + self.ability.extra.rotation
+		for k, v in pairs(self.children) do
+			v.VT.r = v.VT.r + self.ability.extra.rotation
+		end
+	end
+
+	card_draw(self, layer, ...)
+
+	if self.config and self.config.center.key == "j_worm_event_horizon" then
+		self.VT.r = self.VT.r - self.ability.extra.rotation
+		for k, v in pairs(self.children) do
+			v.VT.r = v.VT.r - self.ability.extra.rotation
+		end
+	end
+end
 
 local upgrade_hands_ref = SMODS.upgrade_poker_hands
 SMODS.upgrade_poker_hands = function(args)
