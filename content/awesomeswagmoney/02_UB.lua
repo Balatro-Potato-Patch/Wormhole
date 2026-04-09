@@ -64,8 +64,9 @@ SMODS.Consumable {
             "consumes self on activation."
         }
     },
-    -- atlas = '', pos = { x = 1, y = 0 }, -- update this
-
+    atlas = 'worm_asm_ubs', 
+    pos = { x = 2, y = 0 }, 
+    soul_pos = { x = 3, y = 0 }, 
     config = {extra_slots_used = 1, extra = {mult = 53}},
 
     loc_vars = function(self, info_queue, card)
@@ -123,6 +124,9 @@ SMODS.Consumable {
             "the next {C:spectral}prime{} number"
         }
     },
+    atlas = 'worm_asm_ubs', 
+    pos = { x = 2, y = 1 }, 
+    soul_pos = { x = 3, y = 1 }, 
     config = { extra_slots_used = 1 },
     loc_vars = function (self, info_queue, card)
         return { vars = { PRIMES[G.GAME.asm_xurkitree] or 17 }}
@@ -157,6 +161,10 @@ SMODS.Consumable {
             "with their rank reduced by {C:attention}#2#"
         }
     },
+    atlas = 'worm_asm_ubs', 
+    pos = { x = 2, y = 0 }, 
+    soul_pos = { x = 3, y = 0 }, 
+
     config = { extra_slots_used = 1, extra = { copies = 4, reduction = 2}},
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra.copies, card.ability.extra.reduction }}
