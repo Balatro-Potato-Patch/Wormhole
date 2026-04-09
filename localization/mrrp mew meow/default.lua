@@ -81,9 +81,9 @@ descriptions={
 				"Orrery"
 			, text={
 				"When upgrading level of any",
-				"{C:attention}poker hand{}, create one copy",
-				"between {C:tarot}The Star{}, {C:tarot}The Moon{},",
-				"{C:tarot}The Sun{}, and/or {C:tarot}The World{}",
+				"{C:attention}poker hand{}, create copies of",
+				"up to {C:tarot}#1#{}, {C:tarot}#2#{},",
+				"{C:tarot}#3#{}, and/or {C:tarot}#4#{}",
 				"{C:inactive}(Must have room){}"
 			}
 		},
@@ -147,7 +147,8 @@ descriptions={
 },
 misc={
 	v_dictionary={
-		a_level_minus = "-#1# Level"
+		a_level_minus = "-#1# Level",
+		a_plus_tarot = "+#1# Tarot",
 	},
 	labels={
 		worm_celestial = "Celestial",
