@@ -84,6 +84,13 @@ PotatoPatchUtils.Developer({
     loc = true,
 })
 
+SMODS.Atlas {
+    key = 'module_icons',
+    px = 24,
+    py = 15,
+    path = 'taxes_back_pain/icons_no_bg.png'
+}
+
 --- DEBUG PURPOSE ONLY
 --- DON'T FORGET TO REMOVE BEFORE SUBMITTING ---
 
@@ -94,6 +101,8 @@ SMODS.Back{
 }
 
 ---
+
+
 
 -- TODO: add actual module slots and colours here
 Wormhole.tbp.module_colours = {
@@ -218,8 +227,8 @@ SMODS.Joker({
 ---@param change any
 ---@param abs any
 ---@param silent any
-function Wormhole.tbp.change_durability(module_type, change, abs, silent)
-    local ship = SMODS.find_card("j_worm_tbp_spaceship")[1]
+function Wormhole.tbp.change_durability(ship, module_type, change, abs, silent)
+    ship = ship or SMODS.find_card("j_worm_tbp_spaceship")[1]
     if ship and ship.ability.extra.modules[module_type] and ship.ability.extra.modules[module_type].durability then
         local flags = SMODS.calculate_context({ wormhome_tbp_module_change_durability = true, amount = change, module = module_type, card = ship })
         change = flags.modify or change
@@ -231,7 +240,12 @@ function Wormhole.tbp.change_durability(module_type, change, abs, silent)
         end
 
         if ship.ability.extra.modules[module_type].durability <= 0 then
-            Wormhole.tbp.uninstall_module(module_type, "failed", silent)
+            Wormhole.tbp.uninstall_module(ship, module_type, "failed", silent)
+        elseif not silent then
+            SMODS.calculate_effect({
+                message = change .. ' Durability!',
+                colour = G.C.PURPLE
+            }, ship)
         end
     end
 end
@@ -249,8 +263,8 @@ end
 ---@param card Card Module Consumable card
 ---@param install_type string Type of install. Currently only 'Default'
 ---@param silent boolean disable notifications, tracking and events
-function Wormhole.tbp.install_module(module, card, install_type, silent)
-    local ship = SMODS.find_card("j_worm_tbp_spaceship")[1]
+function Wormhole.tbp.install_module(ship, module, card, install_type, silent)
+    ship = ship or SMODS.find_card("j_worm_tbp_spaceship")[1]
     if ship then
         local old_module_key = ship[1].ability.extra.modules[module.slot].key or nil
 
@@ -263,7 +277,7 @@ function Wormhole.tbp.install_module(module, card, install_type, silent)
         end
 
         if old_module_key ~= nil then
-            Wormhole.tbp.uninstall_module(module.slot, 'override', silent)
+            Wormhole.tbp.uninstall_module(ship, module.slot, 'override', silent)
         end
 
         G.FUNCS.show_module_replace_confirm(
@@ -282,8 +296,8 @@ end
 ---@param module any
 ---@param uninstall_type any
 ---@param silent any
-function Wormhole.tbp.uninstall_module(module, uninstall_type, silent)
-    local ship = SMODS.find_card("j_worm_tbp_spaceship")[1]
+function Wormhole.tbp.uninstall_module(ship, module, uninstall_type, silent)
+    ship = ship or SMODS.find_card("j_worm_tbp_spaceship")[1]
     local module_key = ship.ability.extra.modules[module].key or nil
     if ship.ability.extra.modules[module] then
 
@@ -434,7 +448,7 @@ Wormhole.tbp.Module({
     end,
     module_calculate = function (self, module, context, card)
         if context.setting_blind then
-            Wormhole.tbp.change_durability(self.slot, -1)
+            Wormhole.tbp.change_durability(card, self.slot, -1)
             return {
                 xblindsize = 1 - module.percent
             }
@@ -460,7 +474,7 @@ Wormhole.tbp.Module({
     module_calculate = function (self, module, context, card)
         if context.pseudorandom_result and context.result and context.identifier ~= self.key then
             if SMODS.pseudorandom_probability(card, self.key, 1, module.odds) then
-                Wormhole.tbp.change_durability(self.slot, -1)
+                Wormhole.tbp.change_durability(card, self.slot, -1)
             end
             return {
                 dollars = module.money
@@ -484,7 +498,7 @@ Wormhole.tbp.Module({
     module_calculate = function (self, module, context, card)
         if context.setting_blind then -- TODO: Change to activate on install?
             if G.GAME.blind and not G.GAME.blind.disabled and G.GAME.blind.boss then
-                Wormhole.tbp.change_durability(self.slot, -1)
+                Wormhole.tbp.change_durability(card, self.slot, -1)
                 return {
                     message = localize('ph_boss_disabled'),
                     func = function()
@@ -512,7 +526,7 @@ Wormhole.tbp.Module({
     module_calculate = function (self, module, context, card)
         if context.wormhome_tbp_module_change_durability and context.card == card and context.module ~= self.slot then
             if context.amount < 0 then
-                Wormhole.tbp.change_durability(self.slot, -module.depletes)
+                Wormhole.tbp.change_durability(card, self.slot, -module.depletes)
                 return {
                     modify = 0
                 }
@@ -546,7 +560,7 @@ Wormhole.tbp.Module({
             }
         end
         if context.after then
-            Wormhole.tbp.change_durability(self.slot, -1)
+            Wormhole.tbp.change_durability(card, self.slot, -1)
         end
     end
 })
@@ -580,7 +594,7 @@ Wormhole.tbp.Module({
                         return true
                     end
                 }))
-                Wormhole.tbp.change_durability(self.slot, -1)
+                Wormhole.tbp.change_durability(card, self.slot, -1)
             end
         end
     end
@@ -603,7 +617,7 @@ Wormhole.tbp.Module({
     module_calculate = function (self, module, context, card)
         if context.individual and context.cardarea == G.play then
             context.other_card.ability.perma_mult = (context.other_card.ability.perma_mult or 0) + module.perma_mult
-            Wormhole.tbp.change_durability(self.slot, -1)
+            Wormhole.tbp.change_durability(card, self.slot, -1)
             return { message = localize('k_upgrade_ex'), colour = G.C.MULT }
         end
     end
@@ -626,7 +640,7 @@ Wormhole.tbp.Module({
     module_calculate = function(self, module, context, card)
         if context.wormhome_tbp_module_uninstall and context.card == card and context.module ~= self.slot and 
         context.type == 'failed' then
-            Wormhole.tbp.change_durability(self.slot, -1)
+            Wormhole.tbp.change_durability(card, self.slot, -1)
             return {
                 dollars = module.money
             }
