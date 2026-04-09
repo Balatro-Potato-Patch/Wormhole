@@ -194,6 +194,37 @@ return {
                     'into {C:diamonds}Diamonds{}, lose {C:money}$#2#',
                 }
             },
+            c_worm_shrug_alien_martian = {
+                name = "Martian",
+                text = {
+                    "Select up to {C:attention}#1#{} cards,",
+                    "convert selected cards",
+                    "into the {C:attention}leftmost{} card's rank"
+                },
+            },
+            c_worm_shrug_alien_nebulous = {
+                name = "???",
+                text = {
+                    "{C:green}#1# in #2#{} for each card",
+                    "held in hand to be {C:attention}enhanced",
+                    "into {C:attention}Nebulous Card{}"
+                },
+            },
+            c_worm_shrug_alien_destroy = {
+                name = "Zeta Reticulan",
+                text = {
+                    "Select {C:attention}1{} card,",
+                    "{C:red}destroy{} all other",
+                    "cards in hand"
+                },
+            },
+            c_worm_shrug_alien_skyfish = {
+                name = "Skyfish",
+                text = {
+                    "Create a {C:attention}Perishable",
+                    "copy of a random joker",
+                },
+            },
         },
         Tag = {
             tag_worm_shrug_conspiracy = {

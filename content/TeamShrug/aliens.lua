@@ -280,7 +280,7 @@ local suit_alien = SMODS.Consumable:extend{
     ppu_team = {"shrug"}
 }
 -- ALIEN CARDS
--- ATLAS POSITION 0, 0 IS RESERVED FOR UNDISCOVERED SPRITE
+-- Flatwoods Monster
 suit_alien{
     key = 'shrug_alien_spades',
     atlas = 'shrug_alien_cards',
@@ -288,21 +288,204 @@ suit_alien{
     config = {extra = {suit = 'Spades', convert = 10, pay = 5}},
     ppu_artist = {"waffle", "microwave"}
 }
+-- E.T.
 suit_alien{
     key = 'shrug_alien_hearts',
     atlas = 'shrug_alien_cards',
     pos = {x = 0, y = 0},
     config = {extra = {suit = 'Hearts', convert = 10, pay = 5}},
 }
+-- Reptiloid
 suit_alien{
     key = 'shrug_alien_clubs',
     atlas = 'shrug_alien_cards',
     pos = {x = 0, y = 0},
     config = {extra = {suit = 'Clubs', convert = 10, pay = 5}},
 }
+-- Hopkinsville Goblin
 suit_alien{
     key = 'shrug_alien_diamonds',
     atlas = 'shrug_alien_cards',
     pos = {x = 0, y = 0},
     config = {extra = {suit = 'Diamonds', convert = 10, pay = 5}},
+}
+
+-- for martian and ???
+local function flip_multiple(cards)
+    for i, c in ipairs(cards) do
+        local percent = 1.15 - (i - 0.999) / (#cards - 0.998) * 0.3
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.15,
+            func = function()
+                c:flip()
+                play_sound('card1', percent)
+                c:juice_up(0.3, 0.3)
+                return true
+            end
+        }))
+    end
+end
+
+-- Martian
+SMODS.Consumable{
+    key = 'shrug_alien_martian',
+    cost = 4,
+    set = 'shrug_alien',
+    atlas = 'shrug_alien_cards',
+    pos = {x = 1, y = 0},
+    unlocked = true,
+    discovered = true,
+    config = {extra = {selection = 4}},
+    loc_vars = function(self, info_queue, card)
+        return {vars = {card.ability.extra.selection}}
+    end,
+    can_use = function(self, card)
+        return G.hand and #G.hand.highlighted >= 2 and #G.hand.highlighted <= card.ability.extra.selection
+    end,
+    use = function(self, card, area, copier)
+        local rank = G.hand.highlighted[1].config.card.value
+        flip_multiple(G.hand.highlighted)
+        for _, c in ipairs(G.hand.highlighted) do
+            G.E_MANAGER:add_event(Event({
+                trigger = 'immediate',
+                func = function()
+                    SMODS.change_base(c, nil, rank)
+                    return true
+                end
+            }))
+        end
+        delay(0.4)
+        flip_multiple(G.hand.highlighted)
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function()
+                G.hand:unhighlight_all()
+                return true
+            end
+        }))
+    end,
+    ppu_artist = {"waffle", "microwave"},
+    ppu_coder = {"randomsongv2"},
+    ppu_team = {"shrug"}
+}
+
+-- ???
+SMODS.Consumable{
+    key = 'shrug_alien_nebulous',
+    cost = 4,
+    set = 'shrug_alien',
+    atlas = 'shrug_alien_cards',
+    pos = {x = 0, y = 0},
+    unlocked = true,
+    discovered = true,
+    config = {extra = {odds = 2}},
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue+1] = G.P_CENTERS.m_worm_shrug_nebulous
+        return {vars = {G.GAME.probabilities.normal, card.ability.extra.odds}}
+    end,
+    can_use = function(self, card)
+        return G.hand and true
+    end,
+    use = function(self, card, area, copier)
+        flip_multiple(G.hand.cards)
+        for _, c in ipairs(G.hand.cards) do
+            G.E_MANAGER:add_event(Event({
+                trigger = 'immediate',
+                func = function()
+                    if pseudorandom('worm_shrug_alien_nebulous_') < G.GAME.probabilities.normal / card.ability.extra.odds then
+                        c:set_ability('m_worm_shrug_nebulous')
+                    end
+                    return true
+                end
+            }))
+        end
+        flip_multiple(G.hand.cards)
+    end,
+    ppu_coder = {"randomsongv2"},
+    ppu_team = {"shrug"}
+}
+
+-- Zeta Reticulan
+SMODS.Consumable{
+    key = 'shrug_alien_destroy',
+    cost = 4,
+    set = 'shrug_alien',
+    atlas = 'shrug_alien_cards',
+    pos = {x = 0, y = 0},
+    unlocked = true,
+    discovered = true,
+    config = {extra = {}},
+    loc_vars = function(self, info_queue, card)
+    end,
+    can_use = function(self, card)
+        return G.hand and #G.hand.highlighted == 1
+    end,
+    use = function(self, card, area, copier)
+        local to_destroy = {}
+        for _, c in ipairs(G.hand.cards) do
+            if c ~= G.hand.highlighted[1] then
+                to_destroy[#to_destroy + 1] = c
+            end
+        end
+        SMODS.destroy_cards(to_destroy)
+    end,
+    ppu_coder = {"randomsongv2"},
+    ppu_team = {"shrug"}
+}
+
+-- Skyfish
+SMODS.Consumable{
+    key = 'shrug_alien_skyfish',
+    cost = 4,
+    set = 'shrug_alien',
+    atlas = 'shrug_alien_cards',
+    pos = {x = 0, y = 0},
+    unlocked = true,
+    discovered = true,
+    config = {extra = {}},
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = {key = 'perishable', set = 'Other', vars = {5, 5}}
+    end,
+    can_use = function(self, card)
+        return #G.jokers.cards ~= 0 and #G.jokers.cards < G.jokers.config.card_limit
+    end,
+    use = function(self, card, area, copier)
+        local selected = pseudorandom_element(G.jokers.cards, 'worm_shrug_alien_joker_copy')
+        local copied = copy_card(selected)
+        if copied.ability.eternal then copied:remove_sticker('eternal') end
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.4,
+            func = function()
+                card:juice_up(0.3, 0.5)
+                copied:add_to_deck()
+                G.jokers:emplace(copied)
+                attention_text({
+                    text = localize('k_duplicated_ex'),
+                    scale = 1.3,
+                    hold = 1.4,
+                    major = card,
+                    backdrop_colour = G.C.SECONDARY_SET.shrug_alien,
+                    align = (G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK or G.STATE == G.STATES.SMODS_BOOSTER_OPENED) and 'tm' or 'cm',
+                    offset = {x = 0, y = (G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK or G.STATE == G.STATES.SMODS_BOOSTER_OPENED) and -0.2 or 0},
+                    silent = true
+                })
+
+                -- adds perishable even for incompatable cards
+                local perish_compat = copied.config.center.perishable_compat
+                copied.config.center.perishable_compat = true
+                if not copied.ability.perishable then copied:set_perishable() end
+                copied.config.center.perishable_compat = perish_compat
+
+                -- im not sure about resetting perishable state
+                copied.ability.perish_tally = G.GAME.perishable_rounds
+
+                return true
+            end
+        }))
+    end,
+    ppu_coder = {"randomsongv2"},
+    ppu_team = {"shrug"}
 }
