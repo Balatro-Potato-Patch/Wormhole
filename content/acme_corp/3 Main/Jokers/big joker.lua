@@ -16,6 +16,8 @@ SMODS.Joker{
 	perishable_compat = true,
 	eternal_compat = true,
 	pos = {x = 1, y = 0},
+	ppu_coder = {'Youh'},
+	ppu_artist = {'FlameThrowerFIM'},
 	config = {
 		extra = {
 			defaultSize = 0,

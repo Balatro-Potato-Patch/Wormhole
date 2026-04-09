@@ -60,4 +60,5 @@ SMODS.Consumable {
     end
 
 
+    set = 'ACME_Gadget'
 }
