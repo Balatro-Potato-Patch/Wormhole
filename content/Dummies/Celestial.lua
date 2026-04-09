@@ -14,7 +14,7 @@ SMODS.Edition {
     key = 'dum_Celestial',
     shader = shader.key,
     ppu_coder = { 'bagels' },
-    ppu_team = { 'dum' },
+    ppu_team = { 'dummies' },
     weight = 9,
     in_shop = true,
     extra_cost = 2,

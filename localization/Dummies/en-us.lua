@@ -12,7 +12,7 @@ return {
                 name = 'vissa',
                 text = { "glorpalicious" }
             },
-            PotatoPatchDev_bakersdozenbagels = {
+            PotatoPatchDev_bagels = {
                 name = 'BakersDozenBagels',
                 text = { "gwah" }
             },
