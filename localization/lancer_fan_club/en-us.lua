@@ -70,11 +70,9 @@ return {
             j_worm_lfc_meteor_shower = {
                 name = "Meteor Shower",
                 text = {
-                    {
-                        "{C:attention,E:1}Meteors{} fall on screen",
-                        "when cards are scored,",
-                        "giving {C:money}$#1#{} when clicked"
-                    }
+                    "Scored cards cause {C:attention,E:1}meteors{}",
+                    "to fall on screen that",
+                    "give {C:money}#1##2#{} when clicked"
                 }
             },
             j_worm_lfc_pissstream = {

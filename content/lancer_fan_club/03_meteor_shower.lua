@@ -2,7 +2,14 @@ local joker = SMODS.Joker {
 	key = 'lfc_meteor_shower',
 	blueprint_compat = true,
 	demicoloncompat = true,
-	loc_vars = function(self, info_queue, card) return { vars = { card.ability.extra.dollars } } end,
+	loc_vars = function(self, info_queue, card)
+		return {
+			vars = {
+				localize("$"),
+				card.ability.extra.dollars,
+			}
+		}
+	end,
 	config = { extra = { dollars = 3 } },
 	rarity = 2,
 	cost = 6,
