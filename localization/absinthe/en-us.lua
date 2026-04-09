@@ -311,6 +311,36 @@ return {
                     }
                 }
             },
+            c_worm_abs_nebulager = {
+                name = 'Nebulager',
+                text = {
+                    {
+                        "When {C:attention}primed{}, returns",
+                        "played hand to hand",
+                    },
+                    {
+                        "{C:abs_drinks}Refill{} by {C:money}selling",
+                        "{C:attention}any{} #2# Cards",
+                        "{C:inactive,s:0.8}(#1#/#2# cards sold){}",
+                    }
+                }
+            },
+            c_worm_abs_nebulager_empty = {
+                name = 'Nebulager',
+                text = {
+                    {
+                        "{C:inactive,s:0.8}Currently Empty{}",
+                        "{C:abs_drinks}Refill{} by {C:money}selling",
+                        "{C:attention}any{} #2# Cards",
+                        "{C:inactive,s:0.8}(#1#/#2# cards sold){}",
+                    },
+                    {
+                        "{C:inactive,s:0.8}After being Refilled:{}",
+                        "When {C:attention}primed{}, returns",
+                        "played hand to hand",
+                    }
+                }
+            },
         },
         Joker = {
             j_worm_abs_clg = {

@@ -5,7 +5,7 @@ SMODS.ConsumableType {
     default = 'c_worm_abs_hubble_trouble',
     primary_colour = HEX('e3dbc8'),
     secondary_colour = HEX('f5c242'),
-    collection_rows = { 5, 5 },
+    collection_rows = { 5, 6 },
     shop_rate = 0.0
 }
 
@@ -196,11 +196,12 @@ function Card:abs_empty_drink()
             self.first_drink = true
             self.ability.drink_values.filled = true
             SMODS.calculate_effect({ message = localize('k_worm_abs_sipped_ex'), colour = G.C.SECONDARY_SET.abs_drinks },
-            self)
+                self)
         else
             self.first_drink = nil
-            SMODS.calculate_effect({ message = localize('k_worm_abs_emptied_ex'), colour = G.C.SECONDARY_SET.abs_drinks },
-            self)
+            SMODS.calculate_effect(
+                { message = localize('k_worm_abs_emptied_ex'), colour = G.C.SECONDARY_SET.abs_drinks },
+                self)
         end
 
         SMODS.calculate_context({ abs_drink_emptied = true, card = self })
@@ -267,8 +268,11 @@ SMODS.Consumable { -- Supergiant Cider
                 func = function()
                     ease_discard(card.ability.extra.discards)
                     SMODS.calculate_effect(
-                        { message = localize { type = 'variable', key = 'a_discards', vars = { card.ability.extra.discards } }, colour =
-                        G.C.RED, },
+                        {
+                            message = localize { type = 'variable', key = 'a_discards', vars = { card.ability.extra.discards } },
+                            colour =
+                                G.C.RED,
+                        },
                         card)
                     card:abs_empty_drink()
                     return true
@@ -282,8 +286,11 @@ SMODS.Consumable { -- Supergiant Cider
                 func = function()
                     ease_discard(card.ability.extra.discards)
                     SMODS.calculate_effect(
-                        { message = localize { type = 'variable', key = 'a_discards', vars = { card.ability.extra.discards } }, colour =
-                        G.C.RED, },
+                        {
+                            message = localize { type = 'variable', key = 'a_discards', vars = { card.ability.extra.discards } },
+                            colour =
+                                G.C.RED,
+                        },
                         card)
                     card:abs_empty_drink()
                     return true
@@ -536,8 +543,11 @@ SMODS.Consumable { -- Meteor Sour
                 func = function()
                     ease_hands_played(card.ability.extra.hands, true)
                     SMODS.calculate_effect(
-                    { message = localize { type = 'variable', key = 'a_hands', vars = { card.ability.extra.hands } }, colour =
-                    G.C.BLUE }, card)
+                        {
+                            message = localize { type = 'variable', key = 'a_hands', vars = { card.ability.extra.hands } },
+                            colour =
+                                G.C.BLUE
+                        }, card)
                     card:abs_empty_drink()
                     return true;
                 end
@@ -547,7 +557,7 @@ SMODS.Consumable { -- Meteor Sour
         if context.discard and next(SMODS.get_enhancements(context.other_card)) and not card.ability.extra.goal_met and not card.ability.drink_values.filled then
             card.ability.extra.enh_discarded = card.ability.extra.enh_discarded + 1
             SMODS.calculate_effect(
-            { message = card.ability.extra.enh_discarded .. '/' .. card.ability.extra.goal, colour = G.C.ATTENTION, delay = 0.2 },
+                { message = card.ability.extra.enh_discarded .. '/' .. card.ability.extra.goal, colour = G.C.ATTENTION, delay = 0.2 },
                 card)
             if card.ability.extra.enh_discarded >= card.ability.extra.goal then
                 card.ability.extra.goal_met = true
@@ -599,13 +609,13 @@ SMODS.Consumable { -- Cosmospolitan
             key = self.key
         end
         local team_name = PotatoPatchUtils.Teams[card.ability.extra.current_team].loc and
-        localize { type = 'name', set = 'PotatoPatch', key = PotatoPatchUtils.Teams[card.ability.extra.current_team].loc } or
-        PotatoPatchUtils.Teams[card.ability.extra.current_team].name
+            localize { type = 'name', set = 'PotatoPatch', key = PotatoPatchUtils.Teams[card.ability.extra.current_team].loc } or
+            PotatoPatchUtils.Teams[card.ability.extra.current_team].name
         return { key = key, vars = { team_name, card.ability.extra.planets_used, card.ability.extra.goal, colours = { PotatoPatchUtils.Teams[card.ability.extra.current_team].colour } } }
     end,
     calculate = function(self, card, context)
         if context.setting_blind and card.ability.drink_values.primed and card.ability.drink_values.filled then
-            local key = SMODS.poll_object({attributes = { card.ability.extra.current_team }, rarity = false})
+            local key = SMODS.poll_object({ attributes = { card.ability.extra.current_team }, rarity = false })
             local area = G[Wormhole.Absinthe.get_card_area_to_emplace(key)]
             if area then
                 local buffer = area == G.jokers and 'joker_buffer' or 'consumeable_buffer'
@@ -640,7 +650,8 @@ SMODS.Consumable { -- Cosmospolitan
         if context.using_consumeable and context.consumeable.ability.set == 'Planet' and not card.ability.drink_values.filled and not card.ability.extra.goal_met then
             card.ability.extra.planets_used = card.ability.extra.planets_used + 1
             SMODS.calculate_effect(
-            { message = card.ability.extra.planets_used .. '/' .. card.ability.extra.goal, colour = G.C.ATTENTION }, card)
+                { message = card.ability.extra.planets_used .. '/' .. card.ability.extra.goal, colour = G.C.ATTENTION },
+                card)
             if card.ability.extra.planets_used >= card.ability.extra.goal then
                 card.ability.extra.goal_met = true
                 card.ability.extra.planets_used = 0
@@ -968,16 +979,81 @@ SMODS.Consumable { -- Stargarita
         if context.drawing_cards and card.ability.drink_values.filled and card.ability.drink_values.primed and not context.repetition then
             G.E_MANAGER:add_event(Event({
                 func = function()
-                    draw_card(G.deck,G.hand)
-                    draw_card(G.deck,G.hand)
+                    draw_card(G.deck, G.hand)
+                    draw_card(G.deck, G.hand)
                     SMODS.calculate_effect(
-                        { message = localize { type = 'variable', key = 'a_drawn', vars = { card.ability.extra.drawn_cards } }, colour =
-                        G.C.BLUE, },
+                        {
+                            message = localize { type = 'variable', key = 'a_drawn', vars = { card.ability.extra.drawn_cards } },
+                            colour =
+                                G.C.BLUE,
+                        },
                         card)
                     card:abs_empty_drink()
                     return true
                 end
             }))
+        end
+    end,
+    use = function(self, card, area, copier)
+        card:abs_toggle_drink_prime()
+    end,
+    can_use = function(self, card)
+        return card.ability.drink_values.filled
+    end,
+    keep_on_use = function(self, card)
+        return true;
+    end
+}
+
+SMODS.Consumable { -- Nebulager
+    set = 'abs_drinks',
+    key = 'abs_nebulager',
+    ppu_coder = { 'theAstra' },
+    ppu_team = { 'absinthe' },
+    pos = { x = 0, y = 0 },
+    config = {
+        drink_values = {
+            filled_pos = { x = 0, y = 0 },
+            empty_pos = { x = 1, y = 0 },
+            filled = true,
+            visibly_filled = true,
+            primed = false
+        },
+        extra = { current_sold = 0, sold_goal = 2 },
+    },
+    cost = 3,
+    loc_vars = function(self, info_queue, card)
+        local key
+        if not card.ability.drink_values.filled then
+            key = self.key .. '_empty'
+        else
+            key = self.key
+        end
+        return { key = key, vars = { card.ability.extra.current_sold, card.ability.extra.sold_goal } }
+    end,
+    calculate = function(self, card, context)
+        if card.ability.drink_values.primed and card.ability.drink_values.filled and context.stay_flipped and context.from_area == G.play and context.to_area == G.discard then
+            card.ability.extra.triggered = true
+            return {
+                modify = {to_area = G.hand},
+                func = function()
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            card:abs_empty_drink()
+                            return true;
+                        end
+                    }))
+                end
+            }
+        end
+
+        if context.selling_card and not card.ability.drink_values.filled then
+            card.ability.extra.current_sold = card.ability.extra.current_sold + 1
+            SMODS.calculate_effect({ message = card.ability.extra.current_sold .. '/' .. card.ability.extra.sold_goal, colour = G.C.ATTENTION },card)
+            if card.ability.extra.current_sold >= card.ability.extra.sold_goal then
+                card.ability.extra.current_sold = 0
+                card:abs_refill_drink()
+            end
         end
     end,
     use = function(self, card, area, copier)
