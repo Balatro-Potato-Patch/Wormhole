@@ -458,8 +458,8 @@ return {
             },
         },
         Voucher = {
-            v_worm_abs_star_tap = {
-                name = 'Star Tap',
+            v_worm_abs_happy_hour = {
+                name = 'Happy Hour',
                 text = {
                     '{C:abs_drinks}Drinks{} can now',
                     'appear in the {C:attention}Shop'
