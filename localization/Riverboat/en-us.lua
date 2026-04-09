@@ -72,7 +72,7 @@ return {
                 text = {
                     "When a {C:planet}Planet{} card is used,",
                     "add {X:purple,C:white}#1#X{} the product of its",
-                    "{C:chips}Chips{} and {C:mult}Mult to",
+                    "{C:chips}Chips{} and {C:mult}Mult{} to",
                     "{C:purple}Score{} immediately"
                 }
             },
