@@ -161,109 +161,82 @@ local descriptions = {
         },
     },
     tbp_module = {
-        laser = {
-            name = 'Laser',
-            text = {
-                '+#1# Mult'
-            }
-        },
-        laser_equipped = {
-            name = '{C:attention}Weapon',
-            text = {
-                '{s:1.2,V:1}Laser',
-                '{C:red}+#1#{} Mult'
-            }
-        },
-        missile_pod = {
-            name = 'Missile Pod',
-            text = {
-                'Retrigger {C:attention}#1#{}',
-                'random {C:attention}Joker'
-            }
-        },
-        missile_pod_equipped = {
-            name = '{C:attention}Weapon',
-            text = {
-                '{s:1.2,V:1}Missile Pod',
-                'Retrigger {C:attention}#1#{}',
-                'random {C:attention}Joker'
-            }
-        },
-        core = {
-            name = 'Core',
-            text = {
-                '+#1# Chips'
-            }
-        },
-        core_equipped = {
-            name = 'name',
-            text = {
-                '{s:1.2,V:1}Core',
-                '{C:blue}+#1#{} Chips when a',
-                '{C:attention}Ace{} is scored'
-            }
-        },
-        salvage_core = {
-            name = 'Salvage Core',
-            text = {
-                'Earn {C:money}$#1#{} when',
-                '{C:attention}any module{}',
-                'is {C:attention}destroyed'
-            }
-        },
-        salvage_core_equipped = {
-            name = '{C:attention}Core',
-            text = {
-                '{s:1.2,V:1}Salvage Core',
-                'Earn {C:money}$#1#{} when',
-                '{C:attention}any module{}',
-                'is {C:attention}destroyed'
-            }
-        },
-        stabilizer = {
-            name = 'Stabilizer',
-            text = {
-                '{C:green}#1#{} chance to prevent',
-                '{C:attention}all other modules{}',
-                'from losing {C:attention}durability',
-                'this round'
-            }
-        },
-        stabilizer_equipped = {
-            name = '{C:attention}Core',
-            text = {
-                '{s:1.2,V:1}Stabilizer',
-                '{C:green}#1#{} chance to prevent',
-                '{C:attention}all other modules{}',
-                'from losing {C:attention}durability',
-                'this round'
-            }
-        },
-        deflector = {
-            name = 'Deflector Shield',
-            text = {
-                'Reduces {C:attention}Blind',
-                'requirement by {C:attention}#1#%',
-                '{C:green}#2# in #3#{} chance',
-                'to lose {C:attention}durability'
-            }
-        },
-        deflector_equipped = {
-            name = '{C:attention}Shield',
-            text = {
-                '{s:1.2,V:1}Deflector Shield',
-                'Reduces {C:attention}Blind',
-                'requirement by {C:attention}#1#%',
-                '{C:green}#2# in #3#{} chance',
-                'to lose {C:attention}durability'
-            }
-        },
         module_missing = {
             name = 'name',
             text = {
                 '{V:1}EMPTY'
             }
         },
+        -- CORE --
+        -- WEAPON --
+        uncat1 = {
+            name = 'Uncategorized 1',
+            text = {
+                'Retrigger each scored',
+                '{C:attention}Enhanced{} card',
+                'in played hand {C:attention}twice'
+            }
+        },
+        uncat1_equipped = {
+            name = '{C:attention}Uncategorized 1',
+            text = {
+                '{s:1.2,V:1}Uncategorized 1',
+                'Retrigger each scored',
+                '{C:attention}Enhanced{} card',
+                'in played hand {C:attention}twice'
+            }
+        },
+        uncat2 = {
+            name = 'Uncategorized 2',
+            text = {
+                'Create a {C:dark_edition}Negative{}',
+                '{C:planet}Planet{} card for the played hand',
+            }
+        },
+        uncat2_equipped = {
+            name = '{C:attention}Uncategorized 2',
+            text = {
+                '{s:1.2,V:1}Uncategorized 2',
+                'Create a {C:dark_edition}Negative{}',
+                '{C:planet}Planet{} card for the played hand',
+            }
+        },
+        uncat3 = {
+            name = 'Uncategorized 3',
+            text = {
+                "Every played {C:attention}card{}",
+                "permanently gains",
+                "{C:mult}+#1#{} Mult when scored",
+            }
+        },
+        uncat3_equipped = {
+            name = '{C:attention}Uncategorized 3',
+            text = {
+                '{s:1.2,V:1}Uncategorized 3',
+                "Every played {C:attention}card{}",
+                "permanently gains",
+                "{C:mult}+#1#{} Mult when scored",
+            }
+        },
+        uncat4 = {
+            name = 'Uncategorized 4',
+            text = {
+                "Earn {C:money}+$#1#{}",
+                "when a {C:spectral}Module{}", -- TODO: change color to new Module one if changed
+                "is {C:attention}destroyed{}"
+            }
+        },
+        uncat4_equipped = {
+            name = '{C:attention}Uncategorized 4',
+            text = {
+                '{s:1.2,V:1}Uncategorized 4',
+                "Earn {C:money}+$#1#{}",
+                "when a {C:spectral}Module{}", -- TODO: change color to new Module one if changed
+                "is {C:attention}destroyed{}"
+            }
+        },
+        -- UTILITY --
+        -- THRUSTERS --
     }
 }
 
