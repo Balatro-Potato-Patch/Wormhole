@@ -1,0 +1,87 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+# Flip Ante Counting - Specifically Targeting ease_ante function
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = '''function ease_ante(mod)
+    G.E_MANAGER:add_event(Event({
+      trigger = 'immediate',
+      func = function()
+          local ante_UI = G.hand_text_area.ante
+          mod = mod or 0'''
+position = "at"
+payload = '''function ease_ante(mod)
+    G.E_MANAGER:add_event(Event({
+      trigger = 'immediate',
+      func = function()
+          local ante_UI = G.hand_text_area.ante
+          mod = mod or 0
+          if G.GAME.modifiers.reverse_ante and mod > 0 then mod = -mod end'''
+match_indent = true
+
+# Flip Round Counting - Specifically Targeting ease_round function
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = '''function ease_round(mod)
+    G.E_MANAGER:add_event(Event({
+      trigger = 'immediate',
+      func = function()
+          local round_UI = G.hand_text_area.round
+          mod = mod or 0'''
+position = "at"
+payload = '''function ease_round(mod)
+    G.E_MANAGER:add_event(Event({
+      trigger = 'immediate',
+      func = function()
+          local round_UI = G.hand_text_area.round
+          mod = mod or 0
+          if G.GAME.modifiers.reverse_ante and mod > 0 then mod = -mod end'''
+match_indent = true
+
+# Update Game Win condition
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = "if not G.GAME.won and G.GAME.round_resets.ante >= G.GAME.win_ante and G.GAME.blind_on_deck == 'Boss' then"
+position = "at"
+payload = "if not G.GAME.won and ((not G.GAME.modifiers.reverse_ante and G.GAME.round_resets.ante >= G.GAME.win_ante) or (G.GAME.modifiers.reverse_ante and G.GAME.round_resets.ante <= 1)) and G.GAME.blind_on_deck == 'Boss' then"
+match_indent = true
+
+# Fix "Game Over" check so the player doesn't falsely "win" or "lose" prematurely
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "if G.GAME.round_resets.ante <= G.GAME.win_ante then"
+position = "at"
+payload = "if ((not G.GAME.modifiers.reverse_ante and G.GAME.round_resets.ante <= G.GAME.win_ante) or (G.GAME.modifiers.reverse_ante and G.GAME.round_resets.ante > 1)) then"
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "if G.GAME.round_resets.ante <= G.GAME.win_ante then --Only add Jimbo to say a quip if the game over happens when the run is lost"
+position = "at"
+payload = "if ((not G.GAME.modifiers.reverse_ante and G.GAME.round_resets.ante <= G.GAME.win_ante) or (G.GAME.modifiers.reverse_ante and G.GAME.round_resets.ante > 1)) then --Only add Jimbo to say a quip if the game over happens when the run is lost"
+match_indent = true
+
+# Fix Game Over Screen Background Colors
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "local eased_red = copy_table(G.GAME.round_resets.ante <= G.GAME.win_ante and G.C.RED or G.C.BLUE)"
+position = "at"
+payload = "local eased_red = copy_table(((not G.GAME.modifiers.reverse_ante and G.GAME.round_resets.ante <= G.GAME.win_ante) or (G.GAME.modifiers.reverse_ante and G.GAME.round_resets.ante > 1)) and G.C.RED or G.C.BLUE)"
+match_indent = true
+
+# Fix the "/ 8" Win Ante UI string to "/ 1" dynamically
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "{n=G.UIT.T, config={ref_table = G.GAME, ref_value='win_ante', scale = scale, colour = G.C.WHITE, shadow = true}}"
+position = "at"
+payload = "{n=G.UIT.T, config={text = tostring(G.GAME.modifiers.reverse_ante and 1 or G.GAME.win_ante), scale = scale, colour = G.C.WHITE, shadow = true}}"
+match_indent = true
