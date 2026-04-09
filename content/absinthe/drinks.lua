@@ -926,4 +926,69 @@ SMODS.Consumable {                -- Spacewalk Seltzer
     end
 }
 
+SMODS.Consumable { -- Stargarita
+    set = 'abs_drinks',
+    key = 'abs_stargarita',
+    pos = { x = 4, y = 0 },
+    atlas = 'abs_drinks',
+    ppu_coder = { 'base4' },
+    ppu_artist = { '' },
+    ppu_team = { 'absinthe' },
+    config = {
+        drink_values = {
+            filled_pos = { x = 4, y = 0 },
+            empty_pos = { x = 5, y = 0 },
+            filled = true,
+            visibly_filled = true,
+            primed = false
+        },
+        extra = { drawn_cards = 2 },
+    },
+    cost = 3,
+    loc_vars = function(self, info_queue, card)
+        local key
+        if not card.ability.drink_values.filled then
+            key = self.key .. '_empty'
+        else
+            key = self.key
+        end
+        return {
+            key = key,
+            vars = {
+                card.ability.extra.drawn_cards
+            }
+        }
+    end,
+    calculate = function(self, card, context)
+        if context.using_consumeable and not card.ability.drink_values.filled and
+            context.consumeable.config.center.set == 'Tarot' then
+            card:abs_refill_drink()
+        end
+
+        if context.drawing_cards and card.ability.drink_values.filled and card.ability.drink_values.primed and not context.repetition then
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    draw_card(G.deck,G.hand)
+                    draw_card(G.deck,G.hand)
+                    SMODS.calculate_effect(
+                        { message = localize { type = 'variable', key = 'a_drawn', vars = { card.ability.extra.drawn_cards } }, colour =
+                        G.C.BLUE, },
+                        card)
+                    card:abs_empty_drink()
+                    return true
+                end
+            }))
+        end
+    end,
+    use = function(self, card, area, copier)
+        card:abs_toggle_drink_prime()
+    end,
+    can_use = function(self, card)
+        return card.ability.drink_values.filled
+    end,
+    keep_on_use = function(self, card)
+        return true;
+    end
+}
+
 --#endregion

@@ -281,6 +281,36 @@ return {
                     }
                 }
             },
+            c_worm_abs_stargarita = {
+                name = 'Stargarita',
+                text = {
+                    {
+                        "When {C:attention}primed{}, next time",
+                        "cards are drawn, draws {C:attention}#1#{}",
+                        "additional cards, then is {C:abs_drinks}drank{}",
+                    },
+                    {
+                        "{C:abs_drinks}Refill{} by {C:attention}using",
+                        "1 {C:tarot}Tarot Card{}",
+                    }
+                }
+            },
+            c_worm_abs_stargarita_empty = {
+                name = 'Stargarita',
+                text = {
+                    {
+                        "{C:inactive,s:0.8}Currently Empty{}",
+                        "{C:abs_drinks}Refill{} by {C:attention}using",
+                        "1 {C:tarot}Tarot Card{}",
+                    },
+                    {
+                        "{C:inactive,s:0.8}After being Refilled:{}",
+                        "When {C:attention}primed{}, next time",
+                        "cards are drawn, draws {C:attention}#1#{}",
+                        "additional cards, then is {C:abs_drinks}drank{}",
+                    }
+                }
+            },
         },
         Joker = {
             j_worm_abs_clg = {
@@ -534,6 +564,7 @@ return {
         },
         v_dictionary = {
             a_discards = "+#1# Discards",
+            a_drawn = "+#1# Cards",
         },
     }
 }
