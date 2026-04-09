@@ -109,7 +109,7 @@ SMODS.Joker {
 		if context.MDJ_mod_key_and_amount then
             local num, denom = SMODS.get_probability_vars(card, 1, card.ability.extra.chance)
             if not SMODS.pseudorandom_probability(card, 'syndie', num, denom) then
-                
+                return
             end
 			local key = context.MDJ_key
 			local amount = context.MDJ_amount
