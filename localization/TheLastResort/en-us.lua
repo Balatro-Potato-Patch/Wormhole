@@ -245,12 +245,15 @@ local CONSTELLATIONS = {
 	}
 }
 
+<<<<<<< HEAD
 print("CONSTELLATIONS")
 print(CONSTELLATIONS.c_worm_tlr_const_perseus_t1)
 print(CONSTELLATIONS.c_worm_tlr_const_perseus_t2)
 print(CONSTELLATIONS.c_worm_tlr_const_perseus_t3)
 print(CONSTELLATIONS.c_worm_tlr_const_perseus_t4)
 
+=======
+>>>>>>> remotes/origin/foo54
 for key, obj in pairs(CONSTELLATIONS) do
 	local add = "{s:0.7,E:2}" .. constellation_text[string.sub(key, -2)]
 	obj.name = {obj.name, add}
@@ -345,7 +348,11 @@ return {
 					}
 				}
 			},
+<<<<<<< HEAD
 			PotatoPatchDev_Jogla = {
+=======
+			PotatoPatchDev_Jolga = { --- yes this is spelled wrong but I don't want to change all the incorrect references so its staying
+>>>>>>> remotes/origin/foo54
 				name = "{C:blue}Jogla{}",
 				text = {
 					{
