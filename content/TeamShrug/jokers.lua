@@ -80,7 +80,7 @@ Wormhole.SHRUG_Joker {
 Wormhole.SHRUG_Joker {
     key = "shrug_okay_with_it",
     atlas = "shrug_jokers",
-    pos = { x = 0, y = 0 },
+    pos = { x = 1, y = 0 },
     rarity = 2,
     cost = 5,
     config = { extra = { card_table = {} } },
@@ -173,6 +173,9 @@ Wormhole.SHRUG_Joker {
 
     -- Credits
     ppu_coder = {
+        "microwave",
+    },
+    ppu_artist = {
         "microwave",
     },
     ppu_team = { "shrug" }
