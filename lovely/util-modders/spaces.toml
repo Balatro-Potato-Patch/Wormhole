@@ -10,6 +10,7 @@ pattern = "love.graphics.draw(last_canvas, 0, 0)"
 position = "after"
 payload = '''
 if shader.key == "worm_util_space" and Wormhole.util_space_manager.overlay then
+	love.graphics.setCanvas({current_canvas, stencil = true})
 	for k,v in ipairs(Wormhole.util_space_manager.overlay) do
 		love.graphics.push("all")
 		love.graphics.setShader()
