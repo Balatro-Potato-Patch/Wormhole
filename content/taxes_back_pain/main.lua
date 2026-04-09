@@ -186,7 +186,7 @@ SMODS.Joker({
             end
             local module_calcs = {}
             for _, module in ipairs(self.module_types) do -- TODO: add actual module slots here
-                if card.ability.extra.modules[module].key and (G.P_CENTERS[card.ability.extra.modules[v].key] or {}).module_calculate then
+                if card.ability.extra.modules[module].key and (G.P_CENTERS[card.ability.extra.modules[module].key] or {}).module_calculate then
                     local ret = G.P_CENTERS[card.ability.extra.modules[module].key]:module_calculate(card.ability.extra.modules[module], context, card)
                     if ret and next(ret) then
                         module_calcs[#module_calcs + 1] = ret
@@ -407,6 +407,103 @@ end
 -- WEAPONS --
 
 -- UTILITY --
+
+Wormhole.tbp.Module({
+	key = "hardlight",
+    slot = 'shields', -- TODO: Maybe replace this with utility
+    durability = 5,
+	-- pos = { x = 0, y = 0 },
+	config = {
+		extra = {
+			percent = 0.05,
+		},
+    },
+	loc_vars = function(self, info_queue, module, card)
+		return { vars = { module.ability.extra.percent * 100 } }
+    end,
+    module_calculate = function (self, module, context, card)
+        if context.setting_blind then
+            Wormhole.tbp.change_durability(self.slot, -1)
+            return {
+                xblindsize = 1 - module.percent
+            }
+        end
+    end
+})
+
+Wormhole.tbp.Module({
+	key = "quantum",
+    slot = 'shields', -- TODO: Maybe replace this with utility
+    durability = 5,
+	-- pos = { x = 0, y = 0 },
+	config = {
+		extra = {
+			money = 3,
+            odds = 2
+		},
+    },
+    loc_vars = function(self, info_queue, module, card)
+        local numerator, denominator = SMODS.get_probability_vars(card or module, 1, module.ability.extra.odds, self.key)
+		return { vars = { module.ability.extra.money, numerator, denominator } }
+    end,
+    module_calculate = function (self, module, context, card)
+        if context.pseudorandom_result and context.result and context.identifier ~= self.key then
+            if SMODS.pseudorandom_probability(card, self.key, 1, module.odds) then
+                Wormhole.tbp.change_durability(self.slot, -1)
+            end
+            return {
+                dollars = module.money
+            }
+        end
+    end
+})
+
+Wormhole.tbp.Module({
+	key = "interference",
+    slot = 'shields', -- TODO: Maybe replace this with utility
+    durability = 1,
+	-- pos = { x = 0, y = 0 },
+	config = {
+		extra = {
+		},
+    },
+	loc_vars = function(self, info_queue, module, card)
+		return { vars = { } }
+    end,
+    module_calculate = function (self, module, context, card)
+        if context.setting_blind then -- TODO: Change to activate on install?
+            if G.GAME.blind and not G.GAME.blind.disabled and G.GAME.blind.boss then
+                Wormhole.tbp.change_durability(self.slot, -1)
+                return {
+                    message = localize('ph_boss_disabled'),
+                    func = function()
+                        G.GAME.blind:disable()
+                    end
+                }
+            end
+        end
+    end
+})
+
+Wormhole.tbp.Module({
+	key = "redundancy",
+    slot = 'shields', -- TODO: Maybe replace this with utility
+    durability = 5,
+	-- pos = { x = 0, y = 0 },
+	config = {
+        extra = {
+            depletes = 1
+		},
+    },
+	loc_vars = function(self, info_queue, module, card)
+		return { vars = { module.ability.extra.depletes } }
+    end,
+    module_calculate = function (self, module, context, card)
+        if context.setting_blind then
+
+        end
+    end
+})
 
 -- THRUSTERS --
 

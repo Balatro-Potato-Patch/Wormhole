@@ -169,12 +169,88 @@ local descriptions = {
         },
         -- CORE --
         -- WEAPON --
+        -- UTILITY --
+        hardlight = {
+            name = 'Hardlight Barrier',
+            text = {
+                'Reduce {C:attention}Blind{}\'s',
+                'requirement by {C:red}%#1#{}',
+                'when {C:attention}Blind{} is selected',
+                '{s:0.8,C:inactive}(Depletes each Blind)'
+            }
+        },
+        hardlight_equipped = {
+            name = '{C:attention}Hardlight Barrier',
+            text = {
+                '{s:1.2,V:1}Hardlight Barrier',
+                'Reduce {C:attention}Blind{}\'s',
+                'requirement by {C:red}%#1#{}',
+                'when {C:attention}Blind{} is selected',
+                '{s:0.8,C:inactive}(Depletes each Blind)'
+            }
+        },
+        quantum = {
+            name = 'Quantum Computer',
+            text = {
+                'Earn {C:money}+$#1#{} when',
+                'another {C:green}probability{} succeeds',
+                '{s:0.8,C:inactive}({s:0.8,C:green}#2# in #3#{s:0.8,C:inactive} chance',
+                '{s:0.8,C:inactive}to deplete when triggered)'
+            }
+        },
+        quantum_equipped = {
+            name = '{C:attention}Quantum Computer',
+            text = {
+                '{s:1.2,V:1}Quantum Computer',
+                'Earn {C:money}+$#1#{} when',
+                'another {C:green}probability{} succeeds',
+                '{s:0.8,C:inactive}({s:0.8,C:green}#2# in #3#{s:0.8,C:inactive} chance',
+                '{s:0.8,C:inactive}to deplete when triggered)'
+            }
+        },
+        interference = {
+            name = 'Interference Matrix',
+            text = {
+                'Disable selected',
+                '{C:attention}Boss Blind{}',
+                '{s:0.8,C:inactive}(Depletes when triggered)'
+            }
+        },
+        interference_equipped = {
+            name = '{C:attention}Interference Matrix',
+            text = {
+                '{s:1.2,V:1}Interference Matrix',
+                'Disable selected',
+                '{C:attention}Boss Blind{}',
+                '{s:0.8,C:inactive}(Depletes when triggered)'
+            }
+        },
+        redundancy = {
+            name = 'Redundancy Battery',
+            text = {
+                'When a {C:spectral}Module{} would',
+                '{C:attention}deplete{}, this module',
+                'depletes by {C:attention}#1#{} instead',
+            }
+        },
+        redundancy_equipped = {
+            name = '{C:attention}Redundancy Battery',
+            text = {
+                '{s:1.2,V:1}Redundancy Battery',
+                'When a {C:spectral}Module{} would',
+                '{C:attention}deplete{}, this module',
+                'depletes by {C:attention}#1#{} instead',
+            }
+        },
+        -- THRUSTERS --
+        -- UNCATEGORIZED --
         uncat1 = {
             name = 'Uncategorized 1',
             text = {
                 'Retrigger each scored',
                 '{C:attention}Enhanced{} card',
-                'in played hand {C:attention}twice'
+                'in played hand {C:attention}twice',
+                '{s:0.8,C:inactive}(Depletes each hand)'
             }
         },
         uncat1_equipped = {
@@ -183,7 +259,8 @@ local descriptions = {
                 '{s:1.2,V:1}Uncategorized 1',
                 'Retrigger each scored',
                 '{C:attention}Enhanced{} card',
-                'in played hand {C:attention}twice'
+                'in played hand {C:attention}twice',
+                '{s:0.8,C:inactive}(Depletes each hand)'
             }
         },
         uncat2 = {
@@ -191,6 +268,7 @@ local descriptions = {
             text = {
                 'Create a {C:dark_edition}Negative{}',
                 '{C:planet}Planet{} card for the played hand',
+                '{s:0.8,C:inactive}(Depletes each hand)'
             }
         },
         uncat2_equipped = {
@@ -199,6 +277,7 @@ local descriptions = {
                 '{s:1.2,V:1}Uncategorized 2',
                 'Create a {C:dark_edition}Negative{}',
                 '{C:planet}Planet{} card for the played hand',
+                '{s:0.8,C:inactive}(Depletes each hand)'
             }
         },
         uncat3 = {
@@ -207,6 +286,7 @@ local descriptions = {
                 "Every played {C:attention}card{}",
                 "permanently gains",
                 "{C:mult}+#1#{} Mult when scored",
+                '{s:0.8,C:inactive}(Depletes each hand)'
             }
         },
         uncat3_equipped = {
@@ -216,6 +296,7 @@ local descriptions = {
                 "Every played {C:attention}card{}",
                 "permanently gains",
                 "{C:mult}+#1#{} Mult when scored",
+                '{s:0.8,C:inactive}(Depletes for each card scored)'
             }
         },
         uncat4 = {
@@ -223,7 +304,8 @@ local descriptions = {
             text = {
                 "Earn {C:money}+$#1#{}",
                 "when a {C:spectral}Module{}", -- TODO: change color to new Module one if changed
-                "is {C:attention}destroyed{}"
+                "is {C:attention}destroyed{}",
+                '{s:0.8,C:inactive}(Depletes each time it triggers)'
             }
         },
         uncat4_equipped = {
@@ -232,11 +314,10 @@ local descriptions = {
                 '{s:1.2,V:1}Uncategorized 4',
                 "Earn {C:money}+$#1#{}",
                 "when a {C:spectral}Module{}", -- TODO: change color to new Module one if changed
-                "is {C:attention}destroyed{}"
+                "is {C:attention}destroyed{}",
+                '{s:0.8,C:inactive}(Depletes each time it triggers)'
             }
         },
-        -- UTILITY --
-        -- THRUSTERS --
     }
 }
 
