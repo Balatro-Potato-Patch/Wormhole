@@ -119,8 +119,8 @@ return {
             j_worm_euda_cometwild = {
                 name = "Comet Wild",
                 text = {
-                    "Debuffed {C:attention}Wild{} cards still",
-                    "score and give {X:mult,C:white}x#1#{} Mult"
+                    "Debuffed {C:attention}Wild{} cards still score and",
+                    "give {X:mult,C:white}x#1#{} Mult when played"
                 },
             },
             j_worm_euda_rocket = {
