@@ -114,6 +114,33 @@ return {
                     "{C:attention}Holographic{} when scored",
                     "{C:inactive}(Only if it has no edition)"
                 }
+            },
+            j_worm_riverboat_event_horizon = {
+                name = "Event Horizon",
+                text = {
+                    "This Joker gains {X:mult,C:white} X#2# {} Mult",
+                    "if the {C:attention}first hand{} of the round",
+                    "scores more than {C:attention}100%{} of the Blind",
+                    "Resets if score is less",
+                    "{C:inactive}(Currently {X:mult,C:white} X#1# {C:inactive} Mult)"
+                }
+            },
+            j_worm_riverboat_hawking = {
+                name = "Hawking Radiation",
+                text = {
+                    "This Joker gains {X:chips,C:white} X#2# {} Chips",
+                    "whenever a card is {C:attention}destroyed{}",
+                    "{C:inactive}(Currently {X:chips,C:white} X#1# {C:inactive} Chips)"
+                }
+            },
+            j_worm_riverboat_solar_flare = {
+                name = "Solar Flare",
+                text = {
+                    "When a {C:planet}Planet{} or {C:spectral}Spectral{}",
+                    "card is used, the {C:attention}next hand{}",
+                    "gives {X:mult,C:white} X#1# {} Mult",
+                    "{C:inactive}(Currently #2#active)"
+                }
             }
         },
         Enhanced = {
