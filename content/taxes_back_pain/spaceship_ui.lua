@@ -41,45 +41,7 @@ G.FUNCS.show_spaceship_tooltips = function(e)
         e.config.ref_table = nil
     end
 end
-local function parse_colored_text(text, scale, default_colour)
-    local nodes = {}
-    local base_colour = default_colour or G.C.UI.TEXT_LIGHT
-    local current_color = base_colour
-    local pos = 1
-    while pos <= #text do
-        local color_start, color_end, color_name = text:find("{C:([^}]+)}", pos)
-        if color_start then
-            if color_start > pos then
-                local before_text = text:sub(pos, color_start - 1)
-                if before_text ~= "" then
-                    nodes[#nodes+1] = {n=G.UIT.T, config={text = before_text, scale = scale, colour = current_color}}
-                end
-            end
-            current_color = (G.ARGS.LOC_COLOURS and G.ARGS.LOC_COLOURS[color_name]) or G.C[color_name] or base_colour
-            pos = color_end + 1
-        else
-            local reset_start, reset_end = text:find("{}", pos)
-            if reset_start then
-                if reset_start > pos then
-                    local before_text = text:sub(pos, reset_start - 1)
-                    if before_text ~= "" then
-                        nodes[#nodes+1] = {n=G.UIT.T, config={text = before_text, scale = scale, colour = current_color}}
-                    end
-                end
-                current_color = base_colour
-                pos = reset_end + 1
-            else
-                local remaining = text:sub(pos)
-                if remaining ~= "" then
-                    nodes[#nodes+1] = {n=G.UIT.T, config={text = remaining, scale = scale, colour = current_color}}
-                end
-                break
-            end
-        end
-    end
-    
-    return nodes
-end
+
 G.FUNCS.module_replace_yes = function(e)
     local card = e.config.ref_table.card
     local module_def = e.config.ref_table.module_def
@@ -141,17 +103,12 @@ G.FUNCS.show_module_replace_confirm = function(old_module_key, new_module_key, c
         old_name = localize({type='name_text', set='tbp_module', key=old_module_key})
         old_module_info = spaceship.ability.extra.modules[slot]
         local old_loc_vars = G.P_CENTERS[old_module_key]:loc_vars({}, {ability = {extra = old_module_info}})
-        local old_vars = (old_loc_vars and old_loc_vars.vars) or {}
+        old_loc_vars.text_colour = desc_base_colour
         local old_desc_table = G.localization.descriptions.tbp_module[old_module_key]
         old_desc_nodes = {}
         if old_desc_table and old_desc_table.text then
             for _, line in ipairs(old_desc_table.text) do
-                local text = line
-                for j, var in ipairs(old_vars) do
-                    text = text:gsub("#" .. j .. "#", tostring(var))
-                end
-                local colored_nodes = parse_colored_text(text, 0.2625, desc_base_colour)
-                old_desc_nodes[#old_desc_nodes+1] = {n=G.UIT.R, config={align = "cm", padding = 0.02}, nodes=colored_nodes}
+                old_desc_nodes[#old_desc_nodes+1] = {n=G.UIT.R, config={align = "cm", padding = 0.02}, nodes=SMODS.localize_box(loc_parse_string(line), old_loc_vars)}
             end
         end
     end
@@ -160,17 +117,12 @@ G.FUNCS.show_module_replace_confirm = function(old_module_key, new_module_key, c
         total_durability = module_def.durability,
     }
     local new_loc_vars = G.P_CENTERS[new_module_key]:loc_vars({}, {ability = {extra = module_def.config.extra}})
-    local new_vars = (new_loc_vars and new_loc_vars.vars) or {}
+    new_loc_vars.text_colour = desc_base_colour
     local new_desc_table = G.localization.descriptions.tbp_module[new_module_key]
     local new_desc_nodes = {}
     if new_desc_table and new_desc_table.text then
         for _, line in ipairs(new_desc_table.text) do
-            local text = line
-            for j, var in ipairs(new_vars) do
-                text = text:gsub("#" .. j .. "#", tostring(var))
-            end
-            local colored_nodes = parse_colored_text(text, 0.2625, desc_base_colour)
-            new_desc_nodes[#new_desc_nodes+1] = {n=G.UIT.R, config={align = "cm", padding = 0.02}, nodes=colored_nodes}
+            new_desc_nodes[#new_desc_nodes+1] = {n=G.UIT.R, config={align = "cm", padding = 0.02}, nodes=SMODS.localize_box(loc_parse_string(line), new_loc_vars)}
         end
     end
     local dialog_data = {
