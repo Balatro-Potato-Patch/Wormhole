@@ -105,12 +105,20 @@ return {
                     '{C:inactive}a glass card is destroyed.'
                 }
             },
-            c_worm_acme_power_box = {
-                name = 'ACME Power Box',
+            c_worm_acme_bombs = {
+                name = 'ACME Bombs',
                 text = {
-                    '{X:attention,C:white}Use{} to play a {C:attention}wiring minigame{}',
-                    'and earn {X:mult,C:white}X#1#{} Mult',
-                    '{C:inactive}(#2# wires, once per ante)'
+                    '{X:attention,C:white}Use{} to play the {C:attention}bomb minigame{}',
+                    'and destroy {C:attention}5{} selected cards in hand',
+                    '{C:inactive}(Once per ante, {C:red}failure destroys this card{C:inactive})'
+                }
+            },
+            c_worm_acme_bombs_alt = {
+                name = 'ACME Bombs',
+                text = {
+                    '{X:attention,C:white}Use{} with {C:attention}5{} cards selected',
+                    'to {C:red}destroy{} them',
+                    '{C:inactive}(Minigame complete!)'
                 }
             },
         },
@@ -200,8 +208,8 @@ return {
             k_acme_test_dummy_3 = 'Wallop!',
             k_acme_test_dummy_4 = 'Hello.',
 
-            k_acme_wires_complete = 'Wired Up!',
-            k_acme_power_box = 'Fix the Wires!',
+            k_acme_bombs_complete = 'KABOOM!',
+            k_acme_bombs_fail = 'Dud!',
         },
         labels = {
             acme_gadget = 'Gadget',
