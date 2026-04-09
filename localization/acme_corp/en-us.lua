@@ -105,17 +105,25 @@ return {
                     '{C:inactive}a glass card is destroyed.'
                 }
             },
+            c_worm_acme_power_box = {
+                name = 'ACME Power Box',
+                text = {
+                    '{X:attention,C:white}Use{} to play a {C:attention}wiring minigame{}',
+                    'and earn {X:mult,C:white}X#1#{} Mult',
+                    '{C:inactive}(#2# wires, once per ante)'
+                }
+            },
         },
         Joker = {
             j_worm_ACME_enterprise = {
-		        name = "Enterprise Joker",
-		        text = {
-			        '{C:chips}+#1#{} Chips for each',
-			        '{C:attention}unique{} {C:planet}Planet{} card',
-			        'used this run',
-			        '{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)'
-		        },
-	        },        
+                name = "Enterprise Joker",
+                text = {
+                    '{C:chips}+#1#{} Chips for each',
+                    '{C:attention}unique{} {C:planet}Planet{} card',
+                    'used this run',
+                    '{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)'
+                },
+            },
             j_worm_acme_test_dummy = {
                 name = 'Test Dummy',
                 text = {
@@ -191,6 +199,9 @@ return {
             k_acme_test_dummy_2 = 'Bang!',
             k_acme_test_dummy_3 = 'Wallop!',
             k_acme_test_dummy_4 = 'Hello.',
+
+            k_acme_wires_complete = 'Wired Up!',
+            k_acme_power_box = 'Fix the Wires!',
         },
         labels = {
             acme_gadget = 'Gadget',
