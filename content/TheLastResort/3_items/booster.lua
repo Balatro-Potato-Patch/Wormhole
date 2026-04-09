@@ -121,7 +121,6 @@ SMODS.Booster{
 SMODS.Sound{
 	key = "tlr_const_pack_music",
 	path = "TheLastResort/booster.ogg",
-	pitch = 1/0.95,
 	sync = {
 		['music1'] = true,
 		['music2'] = true,
