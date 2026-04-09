@@ -27,6 +27,14 @@ return {
                     "{S:0.8,C:inactive}(Currently {C:attention,S:0.8}#2#{}{S:0.8,C:inactive})"
                 }
             },
+            c_worm_acme_ray_gun_alt = {
+                name = 'ACME Disintegrator-Inverse-Atron',
+                text = { "Apply a random {C:dark_edition}Edition{}",
+                    "to a random held {C:attention}Joker{}"
+
+                }
+
+            },
 
 
             c_worm_acme_jam = {
