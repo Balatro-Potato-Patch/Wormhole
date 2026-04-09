@@ -85,4 +85,5 @@ SMODS.Joker {
 
     ppu_coder = { "InvalidOS" },
     ppu_artist = {"J8-Bit"},
+    ppu_team = { "Lancer Fan Club" },
 }

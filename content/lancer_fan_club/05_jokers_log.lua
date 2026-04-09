@@ -6,6 +6,7 @@ SMODS.Joker({
     blueprint_compat = true,
     atlas = "lfc_jokers",
     ppu_coder = { "ProdByProto" },
+    ppu_team = { "Lancer Fan Club" },
     config = {
         extra = {
             scalar = 2,

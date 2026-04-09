@@ -61,4 +61,5 @@ SMODS.Joker {
     end,
 
     ppu_artist = { "J8-Bit" },
+    ppu_team = { "Lancer Fan Club" },
 }

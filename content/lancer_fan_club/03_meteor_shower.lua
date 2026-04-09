@@ -7,6 +7,7 @@ local joker = SMODS.Joker {
 	cost = 6,
 	ppu_coder = { "ellestuff." },
 	ppu_artist = {"J8-Bit"},
+	ppu_team = { "Lancer Fan Club" },
 	atlas = "lfc_jokers",
 	pos = { x = 1, y = 0 },
 	attributes = { "economy" }

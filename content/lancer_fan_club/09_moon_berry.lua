@@ -62,6 +62,7 @@ SMODS.Joker({
     atlas = "lfc_jokers",
     ppu_coder = { "ProdByProto" },
     ppu_artist = { "ProdByProto", "J8-Bit" },
+    ppu_team = { "Lancer Fan Club" },
     config = {
         extra = {
             enhancement = "m_bonus",

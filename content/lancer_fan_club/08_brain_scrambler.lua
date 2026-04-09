@@ -8,6 +8,7 @@ SMODS.Joker {
     cost = 7,
     atlas = "lfc_jokers",
     ppu_coder = { "J8-Bit" },
+    ppu_team = { "Lancer Fan Club" },
     pos = { x = 1, y = 1 },
     discovered = false,
     config = { extra = { repetitions = 1 } },

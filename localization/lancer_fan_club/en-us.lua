@@ -138,9 +138,8 @@ return {
                     "Brain Scrambler"
                 },
                 text = {
-                    "Retrigger and",
-                    "{C:attention,E:1}shuffle{} all",
-                    "cards played",
+                    "Retrigger and {C:attention,E:1}shuffle",
+                    "all played cards",
                 }
             },
             j_worm_lfc_golden_record = {

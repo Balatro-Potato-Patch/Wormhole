@@ -9,6 +9,7 @@ SMODS.Joker {
     atlas = "lfc_jokers",
     ppu_coder = { "J8-Bit" },
     ppu_artist = {"J8-Bit"},
+    ppu_team = { "Lancer Fan Club" },
     pos = { x = 0, y = 2 },
     discovered = false,
     config = { extra = { chips = 0, chips_inc = 15 } },
