@@ -17,7 +17,7 @@ SMODS.Consumable{
     can_use = function (self, card)
         local current_blind = ""
         for k,v in pairs(G.GAME.round_resets.blind_states) do
-            if v == "Select" then current_blind = k end
+            if v == "Select" or v == "Current" then current_blind = k end
         end
         return current_blind ~= "Boss" or card.ability.tier >= 4
     end,
