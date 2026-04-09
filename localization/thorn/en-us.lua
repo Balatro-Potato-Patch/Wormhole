@@ -77,8 +77,8 @@ return {
                         "{C:attention}+1{} hand size",
                         "Upgrade {C:attention}all{} poker hands",
                         "every {C:attention}#1# {C:inactive}[#2#]{} rounds",
-                        "Each hand type can only",
-                        "be played {C:attention}once{} per Ante",
+                        "{S:1.1,C:red,E:2}Each hand type can only",
+                        "{S:1.1,C:red,E:2}be played once per Ante",
                     }
                 }
             },
