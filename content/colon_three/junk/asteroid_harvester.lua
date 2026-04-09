@@ -30,5 +30,6 @@ SMODS.Consumable {
     },
     can_use = Wormhole.COLON_THREE.junk_can_use(),
     ppu_coder = {"lordruby"},
+    ppu_artist = {"notmario"},
     ppu_team = {":3"}
 }
