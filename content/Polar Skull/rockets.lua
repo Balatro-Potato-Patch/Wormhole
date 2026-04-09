@@ -109,8 +109,10 @@ local function register_rocket(args)
 			if (other_card.ability.set == "polarskull_rocket" or other_card.config.center.key == "c_worm_polarskull_ssdolphin") and other_card.ability.extra.active and not other_card.getting_sliced then
 				-- made it so card.ability.extra.previous_hand is set on every rocket before destroying the old one (for Rocket Science)
 				card.ability.extra.previous_hand = other_card.ability.extra.hand
-				other_card.ability.extra.active = false
-				other_card:start_dissolve()
+				if not G.GAME.polarskull_rockets_stack then
+					other_card.ability.extra.active = false
+					other_card:start_dissolve()
+				end
 				other = true
 			end
 		end

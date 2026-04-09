@@ -28,6 +28,20 @@ return {
 					"currently {C:attention}active{} {C:polarskull_rocket}Rocket{}",
 					"{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)",
 				}
+			},
+			j_worm_polarskull_olimar = {
+				name = "Olimar",
+				text = {
+					{
+						"{C:polarskull_rocket}Rocket{} cards become",
+						"{C:dark_edition}#1#{} when used"
+					},
+					{
+						"Multiple {C:polarskull_rocket}Rocket{} cards",
+						"can be {C:attention}active{} at once and",
+						"may appear multiple times"
+					}
+				}
 			}
 		},
 		polarskull_rocket = {
