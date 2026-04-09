@@ -9,10 +9,9 @@ target = "game.lua"
 pattern = "love.graphics.draw(last_canvas, 0, 0)"
 position = "after"
 payload = '''
-if shader.key == "worm_util_test" and Wormhole.util_els then
-	local scale = G.TILESIZE*G.TILESCALE*G.CANV_SCALE
-	for k,v in ipairs(Wormhole.util_els) do
-		love.graphics.push()
+if shader.key == "worm_util_space" and Wormhole.util_space_manager.overlay then
+	for k,v in ipairs(Wormhole.util_space_manager.overlay) do
+		love.graphics.push("all")
 		love.graphics.setShader()
 		G.OVERLAY_TUTORIAL = true
 		v:translate_container()

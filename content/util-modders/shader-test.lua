@@ -1,9 +1,4 @@
-Wormhole.util_shader = {
-    enabled = false,
-    transparency = 1.0,
-}
-
--- watch um Mods/Wormhole/assets/shaders/util-modders/test.fs
+-- watch um Mods/Wormhole/assets/shaders/util-modders/space.fs
 require"debugplus.watcher".types.um = {
     desc = "This is hella unsupported",
     check = function()
@@ -17,24 +12,9 @@ require"debugplus.watcher".types.um = {
 	if not result then
 	    return print("[Watcher] Error Loading Shader:", shader)
 	end
-	G.SHADERS.worm_util_test = shader
+	G.SHADERS.worm_util_space = shader
 	return true
     end,
 }
 
 
-SMODS.ScreenShader {
-    key = "util_test",
-    path = "util-modders/test.fs",
-    should_apply = function()
-	return Wormhole.util_shader.enabled
-    end,
-    send_vars = function()
-	return {
-	    screen_scale = G.TILESCALE*G.TILESIZE*G.CANV_SCALE,
-	    time = G.TIMERS.REAL,
-	    transparency = Wormhole.util_shader.transparency,
-	    seed = 1,
-	}
-    end
-}
