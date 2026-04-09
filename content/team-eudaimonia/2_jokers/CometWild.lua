@@ -2,7 +2,7 @@ SMODS.Atlas {
     key = 'euda_cometwildatlas',
     px = 71,
     py = 95,
-    path = 'team-eudaimonia/LunarCheese.png', --Update with actual art
+    path = 'team-eudaimonia/CometWild.png', --Update with actual art
 }
 
 SMODS.Joker {
@@ -13,7 +13,7 @@ SMODS.Joker {
     cost = 6,
     discovered = true,
     ppu_coder = {'M0xes'},
-    ppu_artist = {'Jewel'},
+    ppu_artist = {'M0xes'},
     config = { extra= {xmult = 1.5} },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = G.P_CENTERS.m_wild
