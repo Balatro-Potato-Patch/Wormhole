@@ -22,22 +22,56 @@ SMODS.ConsumableType{
             ret.key = _self.key .. "_t" .. _card.ability.tier
 			return ret
 		end
+        local mem_ability = card.set_ability or function() end
+        card.set_ability = function(self, card, initial, delay_sprites)
+            mem_ability(self, card, initial, delay_sprites)
+        end
         local mem_calculate = card.calculate or function() end
         card.calculate = function(_self, _card, context)
             if context.end_of_round and context.main_eval and context.beat_boss then
-                if _card.ability.tier < 3 then
-                    SMODS.scale_card(_card, {
-                        ref_table = _card.ability,
-                        ref_value = "tier",
-                        scalar_table = {1},
-                        scalar_value = 1
-                    })
-                    G.E_MANAGER:add_event(Event({
-                        func = function()
-                            _card.config.center:update_sprites(_card)
-                            return true
-                        end
-                    }))
+                if WORM_TLR.has_mask() then
+                    if _card.ability.tier < 3 then
+                        SMODS.scale_card(_card, {
+                            ref_table = _card.ability,
+                            ref_value = "tier",
+                            scalar_table = {2},
+                            scalar_value = 1
+                        })
+                        G.E_MANAGER:add_event(Event({
+                            func = function()
+                                _card.config.center:update_sprites(_card)
+                                return true
+                            end
+                        }))
+                    elseif _card.ability.tier < 4 then
+                        SMODS.scale_card(_card, {
+                            ref_table = _card.ability,
+                            ref_value = "tier",
+                            scalar_table = {1},
+                            scalar_value = 1
+                        })
+                        G.E_MANAGER:add_event(Event({
+                            func = function()
+                                _card.config.center:update_sprites(_card)
+                                return true
+                            end
+                        }))
+                    end
+                else
+                    if _card.ability.tier < 3 then
+                        SMODS.scale_card(_card, {
+                            ref_table = _card.ability,
+                            ref_value = "tier",
+                            scalar_table = {1},
+                            scalar_value = 1
+                        })
+                        G.E_MANAGER:add_event(Event({
+                            func = function()
+                                _card.config.center:update_sprites(_card)
+                                return true
+                            end
+                        }))
+                    end
                 end
             end
             return mem_calculate(_self, _card, context)
@@ -56,6 +90,7 @@ SMODS.ConsumableType{
         card.use = function(_self, _card, area, copier)
             mem_use(_self, _card, area, copier)
             G.GAME.worm_tlr_last_const_used = _self.key ~= "c_worm_tlr_const_canis_minor" and _self.key or nil
+            G.GAME.worm_tlr_last_const_used_tier = _card.ability.tier
         end
         card.ppu_team = {"TheLastResort"}
     end,

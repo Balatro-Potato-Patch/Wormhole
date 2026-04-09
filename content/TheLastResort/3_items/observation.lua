@@ -3,7 +3,7 @@ SMODS.Consumable{
 	set = "Tarot",
 	pos = {x=0, y=0},
 	can_use = function (self, card)
-		return G.consumeables.cards[1].config.center.set == "worm_tlr_constellation" and G.consumeables.cards[1].ability.tier < 4
+		return G.consumeables.cards[1] and G.consumeables.cards[1].config.center.set == "worm_tlr_constellation" and G.consumeables.cards[1].ability.tier < 4
 	end,
 	loc_vars = function(self, info_queue, card)
 		return {vars = {colours = {SMODS.ConsumableTypes.worm_tlr_constellation.primary_colour}}}
@@ -59,5 +59,7 @@ SMODS.Consumable{
 			end
 		}))
 		delay(0.5)
-	end
+	end,
+	ppu_team = {"TheLastResort"},
+	ppu_coder = {"Foo54"}
 }

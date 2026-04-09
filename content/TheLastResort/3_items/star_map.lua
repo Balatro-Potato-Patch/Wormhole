@@ -1,8 +1,8 @@
 SMODS.Consumable{
 	key = "tlr_starmap",
 	set = "Spectral",
-	atlas = "tlr_misc",
-	pos = {x = 0, y = 0},
+	atlas = "tlr_spectrals",
+	pos = {x = 1, y = 0},
 	can_use = function() return true end,
 	soul_set = "worm_tlr_constellation",
 	select_card = function (self, card, pack)
@@ -106,12 +106,13 @@ SMODS.Consumable{
 		delay(0.5)
 	end,
 	ppu_team = {"TheLastResort"},
-	ppu_coder = {"Foo54"}
+	ppu_coder = {"Foo54"},
+	ppu_artist = {"Foo54"}
 }
 
 SMODS.DrawStep {
 	key = 'behind_canvas_text',
-	order = -200,
+	order = -25,
 	func = function(self, layer)
 		if self.worm_tlr_canvas_text and (self.config.center.discovered or self.bypass_discovery_center) then
 			for _, sprite in ipairs(self.worm_tlr_canvas_text[1] and self.worm_tlr_canvas_text or {self.worm_tlr_canvas_text}) do

@@ -1,0 +1,126 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 50
+
+# hercules shouldn't win you the game
+[[patches]]
+[patches.pattern]
+target = 'functions/state_events.lua'
+pattern = '''if not G.GAME.won and G.GAME.round_resets.ante >= G.GAME.win_ante and G.GAME.blind_on_deck == 'Boss' then'''
+position = 'at'
+payload = '''if not G.GAME.worm_tlr_hercules_blind and not G.GAME.won and G.GAME.round_resets.ante >= G.GAME.win_ante and G.GAME.blind_on_deck == 'Boss' then'''
+match_indent = true
+[[patches]]
+[patches.pattern]
+target = 'functions/state_events.lua'
+pattern = '''if game_won and not G.GAME.win_notified then'''
+position = 'at'
+payload = '''if not G.GAME.worm_tlr_hercules_blind and game_won and not G.GAME.win_notified then'''
+match_indent = true
+
+# don't update end of ante things
+[[patches]]
+[patches.pattern]
+target = 'functions/state_events.lua'
+pattern = '''if G.GAME.blind:get_type() == 'Boss' then'''
+position = 'at'
+payload = '''if not G.GAME.worm_tlr_hercules_blind and G.GAME.blind:get_type() == 'Boss' then'''
+match_indent = true
+[[patches]]
+[patches.pattern]
+target = 'functions/state_events.lua'
+pattern = '''if G.GAME.blind:get_type() == 'Boss' and not G.GAME.seeded and not G.GAME.challenge  then'''
+position = 'at'
+payload = '''if not G.GAME.worm_tlr_hercules_blind and G.GAME.blind:get_type() == 'Boss' and not G.GAME.seeded and not G.GAME.challenge  then'''
+match_indent = true
+
+
+# don't change blind played states
+[[patches]]
+[patches.pattern]
+target = 'functions/state_events.lua'
+pattern = '''if G.GAME.round_resets.blind == G.P_BLINDS.bl_small then
+                            G.GAME.round_resets.blind_states.Small = 'Defeated'
+                        elseif G.GAME.round_resets.blind == G.P_BLINDS.bl_big then
+                            G.GAME.round_resets.blind_states.Big = 'Defeated'
+                        else
+                            G.GAME.current_round.voucher = SMODS.get_next_vouchers()
+                            G.GAME.round_resets.blind_states.Boss = 'Defeated'
+                            for k, v in ipairs(G.playing_cards) do
+                                v.ability.played_this_ante = nil
+                            end
+                        end'''
+position = 'at'
+payload = '''if not G.GAME.worm_tlr_hercules_blind then
+		if G.GAME.round_resets.blind == G.P_BLINDS.bl_small then
+				G.GAME.round_resets.blind_states.Small = 'Defeated'
+		elseif G.GAME.round_resets.blind == G.P_BLINDS.bl_big then
+				G.GAME.round_resets.blind_states.Big = 'Defeated'
+		else
+				G.GAME.current_round.voucher = SMODS.get_next_vouchers()
+				G.GAME.round_resets.blind_states.Boss = 'Defeated'
+				for k, v in ipairs(G.playing_cards) do
+						v.ability.played_this_ante = nil
+				end
+		end
+end'''
+match_indent = true
+
+#prevent rewards on t1-2
+[[patches]]
+[patches.pattern]
+target = 'functions/state_events.lua'
+pattern = '''dollars = dollars + G.GAME.blind.dollars'''
+position = 'at'
+payload = '''if not G.GAME.worm_tlr_hercules_blind or G.GAME.worm_tlr_hercules_tier > 2 then dollars = dollars + G.GAME.blind.dollars end'''
+match_indent = true
+[[patches]]
+[patches.pattern]
+target = 'functions/state_events.lua'
+pattern = '''add_round_eval_row({dollars = G.GAME.blind.dollars, name='blind1', pitch = pitch})'''
+position = 'at'
+payload = '''if not G.GAME.worm_tlr_hercules_blind or G.GAME.worm_tlr_hercules_tier > 2 then add_round_eval_row({dollars = G.GAME.blind.dollars, name='blind1', pitch = pitch}) end'''
+match_indent = true
+[[patches]]
+[patches.pattern]
+target = 'blind.lua'
+pattern = '''self.dollars = blind and blind.dollars or 0'''
+position = 'at'
+payload = '''self.dollars = (not G.GAME.worm_tlr_hercules_blind or G.GAME.worm_tlr_hercules_tier > 2) and (blind and blind.dollars or 0) or 0'''
+match_indent = true
+
+
+
+#remove current text in view round_resets
+[[patches]]
+[patches.pattern]
+target = 'functions/state_events.lua'
+pattern = '''if G.GAME.round_resets.blind == G.P_BLINDS.bl_small then
+                G.GAME.round_resets.blind_states.Small = 'Current'
+                G.GAME.current_boss_streak = 0
+                blhash = 'S'
+            elseif G.GAME.round_resets.blind == G.P_BLINDS.bl_big then
+                G.GAME.round_resets.blind_states.Big = 'Current'
+                G.GAME.current_boss_streak = 0
+                blhash = 'B'
+            else
+                G.GAME.round_resets.blind_states.Boss = 'Current'
+                blhash = 'L'
+            end'''
+position = 'at'
+payload = '''if G.GAME.round_resets.blind == G.P_BLINDS.bl_small then
+		if not G.GAME.worm_tlr_hercules_blind then G.GAME.round_resets.blind_states.Small = 'Current' end
+		G.GAME.current_boss_streak = 0
+		blhash = 'S'
+elseif G.GAME.round_resets.blind == G.P_BLINDS.bl_big then
+		if not G.GAME.worm_tlr_hercules_blind then G.GAME.round_resets.blind_states.Big = 'Current' end
+		G.GAME.current_boss_streak = 0
+		blhash = 'B'
+else
+		if not G.GAME.worm_tlr_hercules_blind then G.GAME.round_resets.blind_states.Boss = 'Current' end
+		blhash = 'L'
+end'''
+match_indent = true
+
+

@@ -273,6 +273,42 @@ local CONSTELLATIONS = {
 			"selected {C:attention}Tags{}"
 		}
 	},
+	c_worm_tlr_const_hercules_t1 = {
+		name = "Hercules",
+		text = {
+			"Fight an extra",
+			"{C:attention}Small Blind",
+			"{C:inactive}No reward",
+			"{C:inactive}Must be used while in shop"
+		}
+	},
+	c_worm_tlr_const_hercules_t2 = {
+		name = "Hercules",
+		text = {
+			"Fight an extra",
+			"{C:attention}Big Blind",
+			"{C:inactive}No reward",
+			"{C:inactive}Must be used while in shop"
+		}
+	},
+	c_worm_tlr_const_hercules_t3 = {
+		name = "Hercules",
+		text = {
+			"Fight an extra",
+			"{C:attention}Big Blind",
+			"{C:inactive}Must be used while in shop"
+		}
+	},
+	c_worm_tlr_const_hercules_t4 = {
+		name = "Hercules",
+		text = {
+			"Fight an extra",
+			"{C:attention}Boss Blind",
+			"{C:inactive}[Will fight {C:attention}#1#{C:inactive}]",
+			"{C:inactive}Changes at end of round",
+			"{C:inactive}Must be used while in shop"
+		}
+	}
 }
 
 
@@ -327,6 +363,15 @@ return {
 					'when {C:attention}Blind{} is selected',
 					'{C:inactive}(Must have room){}',
 				}
+			},
+			j_worm_tlr_nomaimask = {
+				name = "Nomai Mask",
+				text = {
+					"{V:1}Constellation{} cards are upgraded",
+					"twice when {C:attention}boss blind",
+					"is defeated",
+					"{C:inactive}And may reach {C:edition}???"
+				}
 			}
 		},
 		Voucher = {
@@ -352,21 +397,16 @@ return {
 				name = "Foo54",
 				text = {
 					{
-						"hi i'm foo",
-						"yeah i code",
-						"kinda new to this I started in february this year"
+						"This is the first event",
+						"I've participiated in!"
 					},
 					{
 						"I named most of these cards",
-						"and did a lot of setup",
-						"and utility work"
+						"and did a lot of the initial setup,",
+						"utility functions, and a little bit of artwork"
 					},
 					{
-						"Also shoutout to our artists they are cooking"
-					},
-					{
-						"Go play FooBar after you play this",
-						"its got some cool things"
+						"Shoutout to our artists they are cooking"
 					}
 				}
 			},
@@ -421,6 +461,14 @@ return {
 				text = {
 					"This card will",
 					"be upgraded when",
+					"defeating boss blind"
+				}
+			},
+			worm_tlr_const_info_mask = {
+				name = "Constellation Info",
+				text = {
+					"This card will",
+					"be upgraded twice when",
 					"defeating boss blind"
 				}
 			},
