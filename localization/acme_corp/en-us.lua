@@ -26,9 +26,9 @@ return {
                     "to a random held {C:attention}Joker{}",
                     "{S:0.8,C:inactive}(Currently {C:attention,S:0.8}#2#{}{S:0.8,C:inactive})"
                 }
-            }
-                name = 'ACME Disintegrator-Inverse-Atron'
             },
+
+
             c_worm_acme_jam = {
                 name = 'ACME Spreadable Berry Conserve',
                 text = {
@@ -116,14 +116,14 @@ return {
         },
         Joker = {
             j_worm_ACME_enterprise = {
-		        name = "Enterprise Joker",
-		        text = {
-			        '{C:chips}+#1#{} Chips for each',
-			        '{C:attention}unique{} {C:planet}Planet{} card',
-			        'used this run',
-			        '{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)'
-		        },
-	        },        
+                name = "Enterprise Joker",
+                text = {
+                    '{C:chips}+#1#{} Chips for each',
+                    '{C:attention}unique{} {C:planet}Planet{} card',
+                    'used this run',
+                    '{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)'
+                },
+            },
             j_worm_acme_test_dummy = {
                 name = 'Test Dummy',
                 text = {

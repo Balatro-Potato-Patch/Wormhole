@@ -4,8 +4,8 @@ SMODS.Consumable {
     set = 'ACME_Gadget',
     pos = { x = 1, y = 0 },
     soul_pos = { x = 1, y = 1 },
-    ppu_coder = {'Basil_Squared'},
-    ppu_artist = {'RadiationV2'},
+    ppu_coder = { 'Basil_Squared' },
+    ppu_artist = { 'RadiationV2' },
     config = { extra = { cards_sold = 0, sold_threshold = 4 } },
     loc_vars = function(self, info_queue, card)
         return {
@@ -60,5 +60,4 @@ SMODS.Consumable {
     end
 
 
-    set = 'ACME_Gadget'
 }
