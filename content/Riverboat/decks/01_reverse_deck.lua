@@ -1,7 +1,7 @@
 SMODS.Back({
     key = "reverse_deck",
-    atlas = "worm_jokers",
-    pos = { x = 9, y = 1 }, 
+    atlas = "worm_decks",
+    pos = { x = 0, y = 0 },
     name = "Reverse Deck",
     config = { reverse_ante = true },
     loc_txt = {
