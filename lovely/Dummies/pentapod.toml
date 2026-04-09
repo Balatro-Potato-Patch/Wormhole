@@ -1,0 +1,19 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+# Squash or stretch the pentapod's legs in only one direction
+
+[[patches]]
+[patches.pattern]
+target = "functions/misc_functions.lua"
+pattern = "if moveable.VT.r ~= 0 or moveable.juice or rotate then love.graphics.rotate(moveable.VT.r + (rotate or 0)) end"
+position = "after"
+payload = '''
+if Wormhole.dum_pentapod_scale then
+    love.graphics.scale(unpack(Wormhole.dum_pentapod_scale))
+    love.graphics.translate(unpack(Wormhole.dum_pentapod_offset))
+end
+'''
+match_indent = true
