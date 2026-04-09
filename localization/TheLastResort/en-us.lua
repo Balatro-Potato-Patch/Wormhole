@@ -413,7 +413,7 @@ return {
 				}
 			},
 			PotatoPatchDev_Jogla = {
-				name = "{C:blue}Jogla{}",
+				name = "Jogla",
 				text = {
 					{
 						"{C:red}Not{} a wizard",
@@ -437,7 +437,14 @@ return {
 			PotatoPatchDev_Aura2247 = {
 				name = "Aura2247",
 				text = {
-					"fill out pls"
+					{
+						"One of the artists cooking",
+						"art for the mod."
+					},
+					{
+						"Could you have guessed that",
+						"I like hollow knight?"
+					},
 				}
 			},
 			PotatoPatchDev_Quinn = {

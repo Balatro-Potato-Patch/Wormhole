@@ -43,6 +43,7 @@ PotatoPatchUtils.Developer({
 
 PotatoPatchUtils.Developer({
 	name = "Aura2247",
+	colour = HEX("b9dadb"),
 	loc = true,
 	team = "TheLastResort"
 })
