@@ -45,7 +45,7 @@ PotatoPatchUtils.Developer {
 }
 PotatoPatchUtils.Developer {
     name = 'jade',
-    colour = HEX("ffffff"),
+    colour = HEX("74CCA8"),
     loc = true,
     team = 'polar_skull',
     atlas = 'worm_polarskull_credits',

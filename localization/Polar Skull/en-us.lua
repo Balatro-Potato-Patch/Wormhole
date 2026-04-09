@@ -135,7 +135,9 @@ return {
 			PotatoPatchDev_noodlemire = {
 				name = "Noodlemire",
 				text = {
-					"e",
+					"Bowl of Noodles",
+					"Kickstarted the idea of the {C:dark_edition}Rocket{} consumables!",
+					"Also made some art."
 				},
 			},
 			PotatoPatchDev_mariofan = {
@@ -153,13 +155,18 @@ return {
 			PotatoPatchDev_comykel = {
 				name = "Comykel",
 				text = {
-					"e",
+					"{C:attention}Sick pixel artist!{}",
+					"The one who did almost all of the {C:dark_edition}Rockets'{} art!",
+
 				},
 			},
 			PotatoPatchDev_jade = {
 				name = "Jade Penguin",
 				text = {
-					"e",
+					"Pupil of Chartreuse Chamber",
+					"Made the art of Friendly Neighborhood Martian,",
+					"and helped made the ideas of some of the stuff you see here from our team!",
+					"{C:dark_edition}+1{} Joker Slot :)",
 				},
 			},
 		},
