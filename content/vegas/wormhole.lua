@@ -571,7 +571,7 @@ SMODS.Joker{
 	perishable_compat = true,
 	ppu_team = {"People Found In Vegas"},
 	ppu_coder = {"Ben Roffey"},
-	ppu_artist = {"Ben Roffey"},
+	ppu_artist = {"Ben Roffey", "Jammbo"},
 	calculate = function(self, card, context)
 		if context.setting_blind and not context.blueprint then
 			G.E_MANAGER:add_event(Event{
