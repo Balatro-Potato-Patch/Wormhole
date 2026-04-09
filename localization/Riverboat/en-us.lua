@@ -5,6 +5,20 @@ return {
             PotatoPatchDev_blamperer = { name = "blamperer", text = { "t" } },
             PotatoPatchDev_fooping = { name = "fooping", text = { "{X:chips}Programmer{} and {X:purple}Artist{}" } },
         },
+        Back = {
+            b_worm_reverse_deck = {
+                name = "Reverse Deck",
+                text = {
+                    "Start at {C:attention}Ante 8{} and",
+                    "count down to {C:attention}Ante 1{}",
+                    "Start with {C:attention}Antimatter{} and",
+                    "{C:attention}Crystal Ball{} vouchers",
+                    "Start with {C:attention}6{} random Jokers,",
+                    "{C:attention}2{} Tarots, and {C:attention}1{} Spectral",
+                    "{C:inactive}(Hand levels are randomized)"
+                }
+            }
+        },
         Joker = {
             j_worm_the_past = {
                 name = "The Past",
