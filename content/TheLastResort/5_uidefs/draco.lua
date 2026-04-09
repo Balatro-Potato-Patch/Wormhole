@@ -51,8 +51,8 @@ function G.UIDEF.Wormhole_TLR_draco(args)
             local temp_tag_ui = temp_tag:generate_UI()
 
             local entry = {n = G.UIT.C, config = {align = 'cm', padding = 0.2}, nodes = {
-                {n = G.UIT.R, config = {minw = G.CARD_W, minh = G.CARD_H, colour = G.C.CLEAR}, nodes = {
-                    {n = G.UIT.R, config = {align = 'br'}, nodes = {temp_tag_ui}}
+                {n = G.UIT.R, config = {align = "cm", minw = G.CARD_W, minh = G.CARD_H, colour = G.C.CLEAR}, nodes = {
+                    {n = G.UIT.R, config = {align = 'cm'}, nodes = {temp_tag_ui}}
                 }},
                 UIBox_button{
                     label = {localize("k_worm_tlr_add")},
@@ -74,8 +74,8 @@ function G.UIDEF.Wormhole_TLR_draco(args)
             local temp_tag_ui = temp_tag:generate_UI()
 
             local entry = {n = G.UIT.C, config = {align = 'cm', padding = 0.2}, nodes = {
-                {n = G.UIT.R, config = {minw = G.CARD_W, minh = G.CARD_H, colour = G.C.CLEAR}, nodes = {
-                    {n = G.UIT.R, config = {align = 'br'}, nodes = {temp_tag_ui}}
+                {n = G.UIT.R, config = {align = "cm", minw = G.CARD_W, minh = G.CARD_H, colour = G.C.CLEAR}, nodes = {
+                    {n = G.UIT.R, config = {align = 'cm'}, nodes = {temp_tag_ui}}
                 }},
                 UIBox_button{
                     label = {localize("k_worm_tlr_remove")},
