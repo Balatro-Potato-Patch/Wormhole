@@ -81,16 +81,14 @@ SMODS.Joker {
     },
 
     calculate = function(self, card, context)
-        if context.using_consumeable then
-            if context.consumeable.ability.extra.hand ~= context.consumeable.ability.extra.previous_hand then
-                SMODS.scale_card(card, {
-                    ref_table = card.ability.extra,
-                    ref_value = "x_mult",
-                    scalar_value = "xmult_gain",
-                    operation = '+',
-                    message_key = 'a_xmult',
-                })
-            end
+        if context.using_consumeable and context.consumeable.ability.set == "polarskull_rocket" and context.consumeable.ability.extra.hand ~= context.consumeable.ability.extra.previous_hand then
+            SMODS.scale_card(card, {
+                ref_table = card.ability.extra,
+                ref_value = "x_mult",
+                scalar_value = "xmult_gain",
+                operation = '+',
+                message_key = 'a_xmult',
+            })
         end
     end,
 }
