@@ -32,7 +32,7 @@ SMODS.Joker {
     ppu_artist = {'LasagnaFelidae'},
     loc_vars = function(self, info_queue, card)
         local num, denom = SMODS.get_probability_vars(card, card.ability.extra.numerator, card.ability.extra.denominator)
-        return { vars = { num, denom, card.ability.extra.chipsmin, card.ability.extra.chipsmax, card.ability.extra.wowmin, card.ability.extra.wowmax} }
+        return { vars = { num, denom, card.ability.extra.wowmin, card.ability.extra.wowmax, card.ability.extra.chipsmin, card.ability.extra.chipsmax} }
     end,
     calculate = function(self, card, context)
         if context.joker_main then
