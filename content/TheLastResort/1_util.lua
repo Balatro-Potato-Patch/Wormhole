@@ -7,6 +7,7 @@ PotatoPatchUtils.Team{
 PotatoPatchUtils.Developer({
 	name = "Foo54",
 	loc = true,
+	colour = HEX("ff0045"),
 	team = "TheLastResort",
 	pos = {x=0,y=0},
 	atlas = "worm_tlr_foo54",

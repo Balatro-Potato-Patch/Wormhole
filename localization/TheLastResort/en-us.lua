@@ -360,21 +360,16 @@ return {
 				name = "Foo54",
 				text = {
 					{
-						"hi i'm foo",
-						"yeah i code",
-						"kinda new to this I started in february this year"
+						"This is the first event",
+						"I've participiated in!"
 					},
 					{
 						"I named most of these cards",
-						"and did a lot of setup",
-						"and utility work"
+						"and did a lot of the initial setup,",
+						"utility functions, and a little bit of artwork"
 					},
 					{
-						"Also shoutout to our artists they are cooking"
-					},
-					{
-						"Go play FooBar after you play this",
-						"its got some cool things"
+						"Shoutout to our artists they are cooking"
 					}
 				}
 			},

@@ -1,8 +1,8 @@
 SMODS.Consumable{
 	key = "tlr_starmap",
 	set = "Spectral",
-	atlas = "tlr_misc",
-	pos = {x = 0, y = 0},
+	atlas = "tlr_spectrals",
+	pos = {x = 1, y = 0},
 	can_use = function() return true end,
 	soul_set = "worm_tlr_constellation",
 	select_card = function (self, card, pack)
@@ -106,7 +106,8 @@ SMODS.Consumable{
 		delay(0.5)
 	end,
 	ppu_team = {"TheLastResort"},
-	ppu_coder = {"Foo54"}
+	ppu_coder = {"Foo54"},
+	ppu_artist = {"Foo54"}
 }
 
 SMODS.DrawStep {
