@@ -1,15 +1,6 @@
 
 SMODS.Joker{ --Impact Crater
     key = 'impact_crater',
-    loc_txt = {
-        name = 'Impact Crater',
-        text = {
-            '{C:green}#2# in #3#{} chance to create',
-            'a {C:attention,T:tag_meteor}#1#',
-            'at the end of the {C:attention}shop{}'
-        }
-    },
-
     config = {extra = {odds = 2}},
     rarity = 2,
     cost = 6,

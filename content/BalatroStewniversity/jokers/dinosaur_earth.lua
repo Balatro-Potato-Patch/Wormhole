@@ -1,16 +1,6 @@
 
 SMODS.Joker{ --Dinosaur Earth
     key = 'dinosaur_earth',
-    loc_txt = {
-        name = 'Dinosaur Earth',
-        text = {
-            '{C:green}#1# in #2#{} chance for',
-            '{C:attention}-#4#{} Ante and for all',
-            'Dinosaur Earths go',
-            '{C:red,E:2}extinct{} at end of round'
-        }
-    },
-
     config = {extra = {odds = 6, ante = 1}},
     rarity = 3,
     cost = 9,

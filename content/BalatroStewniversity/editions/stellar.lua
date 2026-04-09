@@ -1,8 +1,6 @@
 
 SMODS.Edition{
     key = 'stellar',
-    -- TODO : use atlas
-    -- atlas = "stewtags",
     shader = false,
     config = {odds = 4},
     in_shop = true,
