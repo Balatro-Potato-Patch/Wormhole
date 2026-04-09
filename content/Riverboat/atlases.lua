@@ -12,3 +12,10 @@ SMODS.Atlas {
     px = 71,
     py = 95
 }
+
+SMODS.Atlas {
+    key = "worm_decks",
+    path = "Riverboat/worm_decks.png",
+    px = 71,
+    py = 95
+}
