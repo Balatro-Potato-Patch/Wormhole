@@ -130,7 +130,7 @@ SMODS.Joker({
         if not card.fake_card then
             info_queue[#info_queue + 1] = G.P_CENTERS["p_worm_module_normal_1"] -- TODO: Change to poll winner
             for _, v in ipairs(self.module_types) do
-                if card.ability.extra.modules[v].key then
+                if card.ability.extra.modules[v].key and (G.P_CENTERS[card.ability.extra.modules[v].key] or {}).loc_vars then
                     local vars = G.P_CENTERS[card.ability.extra.modules[v].key]:loc_vars(info_queue, {ability = { extra = card.ability.extra.modules[v] } }, card).vars
                     vars.colours = {darken(Wormhole.tbp.module_colours[v], 0.3)}
                     info_queue[#info_queue+1] = {set = 'tbp_module', key = card.ability.extra.modules[v].key .. '_equipped', vars = vars, module_type = v, module_info = card.ability.extra.modules[v]}
@@ -186,7 +186,7 @@ SMODS.Joker({
             end
             local module_calcs = {}
             for _, module in ipairs(self.module_types) do -- TODO: add actual module slots here
-                if card.ability.extra.modules[module].key then
+                if card.ability.extra.modules[module].key and (G.P_CENTERS[card.ability.extra.modules[v].key] or {}).module_calculate then
                     local ret = G.P_CENTERS[card.ability.extra.modules[module].key]:module_calculate(card.ability.extra.modules[module], context, card)
                     if ret and next(ret) then
                         module_calcs[#module_calcs + 1] = ret
@@ -319,8 +319,8 @@ SMODS.ConsumableType {
 ---@class Wormhole.tbp.Module: SMODS.Consumable
 ---@field module_calculate? fun(self: Wormhole.tbp.Module|table, module: table, context: CalcContext|table, card?: Card|table): table?, boolean?
 ---@field loc_vars? fun(self: Wormhole.tbp.Module|table, info_queue: table, module: table, card?: Card|table): table?
----@field durability? number
----@field slot? 'core'|'weapons'|'shields'|'thrusters'
+---@field durability number
+---@field slot 'core'|'weapons'|'shields'|'thrusters'
 ---@overload fun(self: Wormhole.tbp.Module): Wormhole.tbp.Module
 Wormhole.tbp.Module = setmetatable({}, {
     __call = function(self)
@@ -405,6 +405,12 @@ end
 -- CORES --
 
 -- WEAPONS --
+
+-- UTILITY --
+
+-- THRUSTERS --
+
+-- UNCATEGORIZED --
 
 -- Uncategorized 1
 Wormhole.tbp.Module({
@@ -514,10 +520,6 @@ Wormhole.tbp.Module({
         end
     end
 })
-
--- UTILITY --
-
--- THRUSTERS --
 
 ---- BOOSTERS ----
 
