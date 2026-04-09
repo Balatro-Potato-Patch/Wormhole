@@ -14,9 +14,9 @@ SMODS.Joker {
     cost = 5,
     discovered = false,
     blueprint_compat = true,
-	--ppu_artist = {"placeholder"},
-	ppu_coder = {"cloudzxiii"},
-	ppu_team = {"polar_skull"},
+    --ppu_artist = {"placeholder"},
+    ppu_coder = { "cloudzxiii" },
+    ppu_team = { "polar_skull" },
 
     config = {},
 
@@ -47,6 +47,49 @@ SMODS.Joker {
                     end)
                 }))
                 G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+            end
+        end
+    end,
+}
+
+SMODS.Joker {
+    key = 'polarskull_rocket_science',
+
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = {
+                card.ability.extra.x_mult,
+                card.ability.extra.xmult_gain
+            }
+        }
+    end,
+    rarity = 2,
+    atlas = 'polarskull_jokers',
+    pos = { x = 1, y = 0 },
+    cost = 6,
+    discovered = false,
+    blueprint_compat = true,
+    --ppu_artist = {"placeholder"},
+    ppu_coder = { "cloudzxiii" },
+    ppu_team = { "polar_skull" },
+
+    config = {
+        extra = {
+            x_mult = 1,
+            xmult_gain = 0.2
+        }
+    },
+
+    calculate = function(self, card, context)
+        if context.using_consumeable then
+            if context.consumeable.ability.extra.hand ~= context.consumeable.ability.extra.previous_hand then
+                SMODS.scale_card(card, {
+                    ref_table = card.ability.extra,
+                    ref_value = "x_mult",
+                    scalar_value = "xmult_gain",
+                    operation = '+',
+                    message_key = 'a_xmult',
+                })
             end
         end
     end,

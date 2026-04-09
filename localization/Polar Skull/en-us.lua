@@ -19,6 +19,16 @@ return {
 					"that round",
 				},
 			},
+			j_worm_polarskull_rocket_science = {
+				name = "Rocket Science",
+				text = {
+					"This Joker gains {X:mult,C:white}X#2#{} Mult",
+					"each time you play a {C:polarskull_rocket}Rocket{} card",
+					"for a different hand than the",
+					"currently {C:attention}active{} {C:polarskull_rocket}Rocket{}",
+					"{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)",
+				}
+			}
 		},
 		polarskull_rocket = {
 			c_worm_polarskull_atlasv = {

@@ -28,19 +28,19 @@ local ACTIVE_SOUND_START = 0.500
 local active_sound_timer = ACTIVE_SOUND_START
 
 local fake_hand_network = {
-	["Special: Everything"] = {cards = 5, subhands = {"Flush Five", "Flush House", "Straight Flush"}},
-	["Flush Five"] = {cards = 5, subhands = {"Flush", "Five of a Kind"}},
-	["Flush House"] = {cards = 5, subhands = {"Flush", "Full House"}},
-	["Five of a Kind"] = {cards = 5, subhands = {"Four of a Kind"}},
-	["Straight Flush"] = {cards = 5, subhands = {"Flush", "Straight"}},
-	["Four of a Kind"] = {cards = 4, subhands = {"Three of a Kind"}},
-	["Full House"] = {cards = 5, subhands = {"Three of a Kind", "Two Pair"}},
-	["Flush"] = {cards = 5, subhands = {"High Card"}},
-	["Straight"] = {cards = 5, subhands = {"High Card"}},
-	["Three of a Kind"] = {cards = 3, subhands = {"Pair"}},
-	["Two Pair"] = {cards = 4, subhands = {"Pair"}},
-	["Pair"] = {cards = 2, subhands = {"High Card"}},
-	["High Card"] = {cards = 1, subhands = {}},
+	["Special: Everything"] = { cards = 5, subhands = { "Flush Five", "Flush House", "Straight Flush" } },
+	["Flush Five"] = { cards = 5, subhands = { "Flush", "Five of a Kind" } },
+	["Flush House"] = { cards = 5, subhands = { "Flush", "Full House" } },
+	["Five of a Kind"] = { cards = 5, subhands = { "Four of a Kind" } },
+	["Straight Flush"] = { cards = 5, subhands = { "Flush", "Straight" } },
+	["Four of a Kind"] = { cards = 4, subhands = { "Three of a Kind" } },
+	["Full House"] = { cards = 5, subhands = { "Three of a Kind", "Two Pair" } },
+	["Flush"] = { cards = 5, subhands = { "High Card" } },
+	["Straight"] = { cards = 5, subhands = { "High Card" } },
+	["Three of a Kind"] = { cards = 3, subhands = { "Pair" } },
+	["Two Pair"] = { cards = 4, subhands = { "Pair" } },
+	["Pair"] = { cards = 2, subhands = { "High Card" } },
+	["High Card"] = { cards = 1, subhands = {} },
 }
 
 local function evaluate_fake_hands(scoring_cards, hand_name, fake_hands)
@@ -82,8 +82,8 @@ local function register_rocket(args)
 	args.cost = args.cost or 4
 	args.config.extra.active = false
 	--args.ppu_artist = args.ppu_artist or {"comykel"}
-	args.ppu_coder = args.ppu_coder or {"noodlemire"}
-	args.ppu_team = {"polar_skull"}
+	args.ppu_coder = args.ppu_coder or { "noodlemire" }
+	args.ppu_team = { "polar_skull" }
 	args.loc_vars = args.loc_vars or function(self, info_queue, card)
 		return {
 			vars = {
@@ -107,13 +107,15 @@ local function register_rocket(args)
 		local other = false
 		for _, other_card in ipairs(G.consumeables.cards) do
 			if (other_card.ability.set == "polarskull_rocket" or other_card.config.center.key == "c_worm_polarskull_ssdolphin") and other_card.ability.extra.active and not other_card.getting_sliced then
+				-- made it so card.ability.extra.previous_hand is set on every rocket before destroying the old one (for Rocket Science)
+				card.ability.extra.previous_hand = other_card.ability.extra.hand
 				other_card.ability.extra.active = false
 				other_card:start_dissolve()
 				other = true
 			end
 		end
 		card.ability.extra.active = true
-		SMODS.calculate_effect({message = localize("k_active_ex"), sound = "worm_polarskull_rocketlaunch"}, card)
+		SMODS.calculate_effect({ message = localize("k_active_ex"), sound = "worm_polarskull_rocketlaunch" }, card)
 		if not other then
 			active_sound_timer = ACTIVE_SOUND_START
 		end
@@ -162,11 +164,11 @@ local function register_rocket(args)
 				message = localize({
 					type = "variable",
 					key = "k_polarskull_left",
-					vars = {card.ability.extra.rounds},
+					vars = { card.ability.extra.rounds },
 				}),
 			}
 		elseif context.check_eternal and context.other_card == card then
-			return {no_destroy = true}
+			return { no_destroy = true }
 		end
 	end
 	args.update = args.update or function(self, card, dt)
@@ -183,66 +185,66 @@ end
 
 register_rocket({
 	key = "atlasv",
-	pos = {x = 0, y = 0},
-	config = {extra = {hand = "High Card", rounds = 3}},
+	pos = { x = 0, y = 0 },
+	config = { extra = { hand = "High Card", rounds = 3 } },
 })
 
 register_rocket({
 	key = "vostok1",
-	pos = {x = 1, y = 0},
-	config = {extra = {hand = "Pair", rounds = 3}},
-	ppu_artist = {"comykel"}
+	pos = { x = 1, y = 0 },
+	config = { extra = { hand = "Pair", rounds = 3 } },
+	ppu_artist = { "comykel" }
 })
 
 register_rocket({
 	key = "changzheng5",
-	pos = {x = 2, y = 0},
-	config = {extra = {hand = "Two Pair", rounds = 3}},
+	pos = { x = 2, y = 0 },
+	config = { extra = { hand = "Two Pair", rounds = 3 } },
 })
 
 register_rocket({
 	key = "soyuz1",
-	pos = {x = 3, y = 0},
-	config = {extra = {hand = "Three of a Kind", rounds = 3}},
-	ppu_artist = {"comykel"}
+	pos = { x = 3, y = 0 },
+	config = { extra = { hand = "Three of a Kind", rounds = 3 } },
+	ppu_artist = { "comykel" }
 })
 
 register_rocket({
 	key = "titaniv",
-	pos = {x = 4, y = 0},
-	config = {extra = {hand = "Straight", rounds = 2}},
+	pos = { x = 4, y = 0 },
+	config = { extra = { hand = "Straight", rounds = 2 } },
 })
 
 register_rocket({
 	key = "atlascentaur",
-	pos = {x = 5, y = 0},
-	config = {extra = {hand = "Flush", rounds = 2}},
+	pos = { x = 5, y = 0 },
+	config = { extra = { hand = "Flush", rounds = 2 } },
 })
 
 register_rocket({
 	key = "spaceshuttle",
-	pos = {x = 0, y = 1},
-	config = {extra = {hand = "Full House", rounds = 2}},
-	ppu_artist = {"comykel"}
+	pos = { x = 0, y = 1 },
+	config = { extra = { hand = "Full House", rounds = 2 } },
+	ppu_artist = { "comykel" }
 })
 
 register_rocket({
 	key = "sls",
-	pos = {x = 1, y = 1},
-	config = {extra = {hand = "Four of a Kind", rounds = 1}},
+	pos = { x = 1, y = 1 },
+	config = { extra = { hand = "Four of a Kind", rounds = 1 } },
 })
 
 register_rocket({
 	key = "titanieee",
-	pos = {x = 2, y = 1},
-	config = {extra = {hand = "Straight Flush", rounds = 1}},
+	pos = { x = 2, y = 1 },
+	config = { extra = { hand = "Straight Flush", rounds = 1 } },
 })
 
 register_rocket({
 	key = "saturnv",
-	pos = {x = 3, y = 1},
-	config = {extra = {hand = "Five of a Kind", rounds = 1}},
-	ppu_artist = {"comykel"},
+	pos = { x = 3, y = 1 },
+	config = { extra = { hand = "Five of a Kind", rounds = 1 } },
+	ppu_artist = { "comykel" },
 	in_pool = function(self, args)
 		return G.GAME.hands[self.config.extra.hand].played > 0
 	end,
@@ -250,8 +252,8 @@ register_rocket({
 
 register_rocket({
 	key = "deltaii",
-	pos = {x = 4, y = 1},
-	config = {extra = {hand = "Flush House", rounds = 1}},
+	pos = { x = 4, y = 1 },
+	config = { extra = { hand = "Flush House", rounds = 1 } },
 	in_pool = function(self, args)
 		return G.GAME.hands[self.config.extra.hand].played > 0
 	end,
@@ -259,8 +261,8 @@ register_rocket({
 
 register_rocket({
 	key = "ariane5",
-	pos = {x = 5, y = 1},
-	config = {extra = {hand = "Flush Five", rounds = 1}},
+	pos = { x = 5, y = 1 },
+	config = { extra = { hand = "Flush Five", rounds = 1 } },
 	in_pool = function(self, args)
 		return G.GAME.hands[self.config.extra.hand].played > 0
 	end,
@@ -269,9 +271,9 @@ register_rocket({
 register_rocket({
 	key = "ssdolphin",
 	set = "Spectral",
-	pos = {x = 6, y = 0},
-	config = {extra = {hand = "Special: Everything", rounds = 3}},
-	ppu_artist = {"noodlemire", "jade"},
+	pos = { x = 6, y = 0 },
+	config = { extra = { hand = "Special: Everything", rounds = 3 } },
+	ppu_artist = { "noodlemire", "jade" },
 	hidden = true,
 	soul_set = "polarskull_rocket",
 	draw = function(self, card, layer)
