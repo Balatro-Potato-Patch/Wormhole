@@ -327,7 +327,7 @@ return {
 	descriptions = {
 		Tarot = {
 			c_worm_tlr_observation = {
-				name = "Observation",
+				name = "The Observer",
 				text = {
 					"Upgrades leftmost",
 					"{V:1}Constellation{} card",
@@ -403,7 +403,9 @@ return {
 					{
 						"I named most of these cards",
 						"and did a lot of the initial setup,",
-						"utility functions, and a little bit of artwork"
+						"utility functions, and a little bit of artwork.",
+						"I also composed our booster pack music:",
+						"{C:red,E:1}Distant Stars (ft. Kasane Teto & Adachi Rei)"
 					},
 					{
 						"Shoutout to our artists they are cooking"
