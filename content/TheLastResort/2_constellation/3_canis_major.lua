@@ -5,6 +5,7 @@ SMODS.Consumable{
     pos = {x=0, y=0},
     ppu_team = {"TheLastResort"},
 	ppu_coder = {"Jogla"},
+    ppu_artist = {"Aura2247"},
     config = {
         amounts = {2, 1, 2, 2}
     },

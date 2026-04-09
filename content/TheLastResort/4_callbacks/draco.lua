@@ -1,4 +1,4 @@
-function G.FUNCS.Wormhole_TLR_canis_major(e)
+function G.FUNCS.Wormhole_TLR_draco(e)
 
     local args = e or {}
     if args.config and args.config.ref_table then args = args.config.ref_table end
@@ -13,7 +13,7 @@ function G.FUNCS.Wormhole_TLR_canis_major(e)
 
     --G.SETTINGS.paused = true
     G.FUNCS.overlay_menu{
-        definition = G.UIDEF.Wormhole_TLR_canis_major(e),
+        definition = G.UIDEF.Wormhole_TLR_draco(e),
         config = {
             offset = args.instant and {x = 0, y = 0} or nil,
             no_esc = true
@@ -21,17 +21,21 @@ function G.FUNCS.Wormhole_TLR_canis_major(e)
     }
 end
 
-function G.FUNCS.Wormhole_TLR_canis_major_confirm(e)
+function G.FUNCS.Wormhole_TLR_draco_confirm(e)
     G.FUNCS.exit_overlay_menu()
     --G.SETTINGS.paused = false
-    if not G.consumeables then return end
     local args = e or {}
+    
     if args.config and args.config.ref_table then args = args.config.ref_table end
     for i,v in ipairs(args.selected_keys) do
-        local c = SMODS.add_card{
-            key = v,
-            area = G.consumeables,
-            edition = args.negative and "e_negative" or nil,
-        }
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.4,
+            func = (function()
+                add_tag(Tag(v))
+                play_sound('generic1', 0.9 + math.random()*0.1, 0.8)
+                return true
+            end)
+        }))
     end
 end

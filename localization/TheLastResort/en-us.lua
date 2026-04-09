@@ -234,26 +234,48 @@ local CONSTELLATIONS = {
 		}
 	},
 	c_worm_tlr_const_canis_minor_t4 = {
-	name = "Canis Minor",
-	text = {
+		name = "Canis Minor",
+		text = {
 			"Creates the last",
 			"{V:1}Constellation{} card",
 			"used during this run",
 			"as 2 {C:dark_edition}Negative{} Shining",
 			"{V:1, s:0.8}Canis Minor{s:0.8} excluded"
 		}
-	}
+	},
+	c_worm_tlr_const_draco_t1 = {
+		name = "Draco",
+		text = {
+			"Create current",
+			"blind's {C:attention}Tag{}"
+		}
+	},
+	c_worm_tlr_const_draco_t2 = {
+		name = "Draco",
+		text = {
+			"Create this ante's",
+			"blind's {C:attention}Tags{}"
+		}
+	},
+	c_worm_tlr_const_draco_t3 = {
+		name = "Draco",
+		text = {
+			"Create this ante's",
+			"blind's {C:attention}Tags{} and",
+			"select up to {C:attention}#1#{}",
+			"additional {C:attention}Tag{}"
+		}
+	},
+	c_worm_tlr_const_draco_t4 = {
+		name = "Draco",
+		text = {
+			"Create up to {C:attention}#1#{}",
+			"selected {C:attention}Tags{}"
+		}
+	},
 }
 
-<<<<<<< HEAD
-print("CONSTELLATIONS")
-print(CONSTELLATIONS.c_worm_tlr_const_perseus_t1)
-print(CONSTELLATIONS.c_worm_tlr_const_perseus_t2)
-print(CONSTELLATIONS.c_worm_tlr_const_perseus_t3)
-print(CONSTELLATIONS.c_worm_tlr_const_perseus_t4)
 
-=======
->>>>>>> remotes/origin/foo54
 for key, obj in pairs(CONSTELLATIONS) do
 	local add = "{s:0.7,E:2}" .. constellation_text[string.sub(key, -2)]
 	obj.name = {obj.name, add}
@@ -348,11 +370,7 @@ return {
 					}
 				}
 			},
-<<<<<<< HEAD
 			PotatoPatchDev_Jogla = {
-=======
-			PotatoPatchDev_Jolga = { --- yes this is spelled wrong but I don't want to change all the incorrect references so its staying
->>>>>>> remotes/origin/foo54
 				name = "{C:blue}Jogla{}",
 				text = {
 					{

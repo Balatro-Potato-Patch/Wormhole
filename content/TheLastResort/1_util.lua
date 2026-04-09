@@ -1,7 +1,8 @@
 PotatoPatchUtils.Team{
 	name = "TheLastResort",
 	colour = HEX("ffcc33"),
-	loc = "PotatoPatchTeam_TLR"
+	loc = "PotatoPatchTeam_TLR",
+	credit_rows = {3, 3}
 }
 
 PotatoPatchUtils.Developer({

@@ -1,10 +1,9 @@
-function G.UIDEF.Wormhole_TLR_canis_major(args)
+function G.UIDEF.Wormhole_TLR_draco(args)
     args = args or {}
     if args.config and args.config.ref_table then args = args.config.ref_table end
     args.page = args.page or 1
     args.selected_page = args.selected_page or 1
     args.selected_cards = args.selected_cards or {}
-    args.max_selected = args.max_selected or 2
 
     --local t = SMODS.ConsumableTypes['worm_tlr_constellation']:create_UIBox_your_collection()
     --[[
@@ -36,22 +35,31 @@ function G.UIDEF.Wormhole_TLR_canis_major(args)
         }
     end
 
-    for i, v in ipairs(G.P_CENTER_POOLS['worm_tlr_constellation']) do
+    local sorted_tags = {}
+    for _,v in pairs(G.P_TAGS) do
+        sorted_tags[#sorted_tags+1] = v.key
+    end
+    table.sort(sorted_tags, function (a, b)
+        return G.P_TAGS[a].order < G.P_TAGS[b].order
+    end)
+    for i, v in ipairs(sorted_tags) do
         if i > (args.page-1)*cards_per_page and i <= args.page*cards_per_page then
             if not v then break end
-            local area = CardArea(G.CARD_W/2, G.CARD_H/2, G.CARD_W, G.CARD_H, {type = "title"})
-            local card = Card(0, 0, G.CARD_W, G.CARD_H, G.P_CARDS.empty, v.key)
-            area:emplace(card)
+            --local area = CardArea(G.CARD_W/2, G.CARD_H/2, G.CARD_W, G.CARD_H, {type = "title"})
+
+            local temp_tag = Tag(v, true)
+            local temp_tag_ui = temp_tag:generate_UI()
+
             local entry = {n = G.UIT.C, config = {align = 'cm', padding = 0.2}, nodes = {
                 {n = G.UIT.R, config = {minw = G.CARD_W, minh = G.CARD_H, colour = G.C.CLEAR}, nodes = {
-                    {n = G.UIT.O, config = {object = area}}
+                    {n = G.UIT.R, config = {align = 'br'}, nodes = {temp_tag_ui}}
                 }},
                 UIBox_button{
                     label = {localize("k_worm_tlr_add")},
                     minw = G.CARD_W*0.8,
                     minh = 0.6,
-                    ref_table = reload{add = v.key},
-                    button = #args.selected_cards < args.max_selected and "Wormhole_TLR_canis_major" or "nil",
+                    ref_table = reload{add = v},
+                    button = #args.selected_cards < args.max_selected and "Wormhole_TLR_draco" or "nil",
                     colour = not (#args.selected_cards < args.max_selected) and G.C.GREY or nil
                 }
             }}
@@ -62,20 +70,19 @@ function G.UIDEF.Wormhole_TLR_canis_major(args)
     for i, v in ipairs(args.selected_cards) do
         if i > (args.selected_page-1)*selected_per_page and i <= args.selected_page*selected_per_page then
             if not v then break end
-            local area = CardArea(G.CARD_W/2, G.CARD_H/2, G.CARD_W, G.CARD_H, {type = "title"})
-            local card = Card(0, 0, G.CARD_W, G.CARD_H, G.P_CARDS.empty, v)
-            if not args.instant then card:start_materialize() end
-            area:emplace(card)
+            local temp_tag = Tag(v, true)
+            local temp_tag_ui = temp_tag:generate_UI()
+
             local entry = {n = G.UIT.C, config = {align = 'cm', padding = 0.2}, nodes = {
                 {n = G.UIT.R, config = {minw = G.CARD_W, minh = G.CARD_H, colour = G.C.CLEAR}, nodes = {
-                    {n = G.UIT.O, config = {object = area}}
+                    {n = G.UIT.R, config = {align = 'br'}, nodes = {temp_tag_ui}}
                 }},
                 UIBox_button{
                     label = {localize("k_worm_tlr_remove")},
                     minw = G.CARD_W*0.8,
                     minh = 0.6,
                     ref_table = reload{remove = i},
-                    button = "Wormhole_TLR_canis_major",
+                    button = "Wormhole_TLR_draco",
                 }
             }}
             table.insert(selected_containers, entry)
@@ -121,7 +128,7 @@ function G.UIDEF.Wormhole_TLR_canis_major(args)
                         minw = 0.6,
                         minh = G.CARD_H,
                         ref_table = reload{page = args.page - 1},
-                        button = args.page > 1 and "Wormhole_TLR_canis_major" or 'nil',
+                        button = args.page > 1 and "Wormhole_TLR_draco" or 'nil',
                         colour = args.page <= 1 and G.C.GREY or nil
                     }}},
                     {n = G.UIT.C, nodes = card_containers},
@@ -130,8 +137,8 @@ function G.UIDEF.Wormhole_TLR_canis_major(args)
                         minw = 0.6,
                         minh = G.CARD_H,
                         ref_table = reload{page = args.page + 1},
-                        button = args.page < #G.P_CENTER_POOLS['worm_tlr_constellation']/cards_per_page and "Wormhole_TLR_canis_major" or 'nil',
-                        colour = args.page >= #G.P_CENTER_POOLS['worm_tlr_constellation']/cards_per_page and G.C.GREY or nil
+                        button = args.page < #sorted_tags/cards_per_page and "Wormhole_TLR_draco" or 'nil',
+                        colour = args.page >= #sorted_tags/cards_per_page and G.C.GREY or nil
                     }}}
                 }},
                 {n = G.UIT.R, config = {align = 'cl', padding = 0}, nodes = {
@@ -141,7 +148,7 @@ function G.UIDEF.Wormhole_TLR_canis_major(args)
                             minw = 0.6,
                             minh = G.CARD_H,
                             ref_table = reload{selected_page = args.selected_page - 1},
-                            button = args.selected_page > 1 and "Wormhole_TLR_canis_major" or 'nil',
+                            button = args.selected_page > 1 and "Wormhole_TLR_draco" or 'nil',
                             colour = not (args.selected_page > 1) and G.C.GREY or nil
                         }}},
                         {n = G.UIT.C, config = {minw = 7}, nodes = selected_containers},
@@ -150,7 +157,7 @@ function G.UIDEF.Wormhole_TLR_canis_major(args)
                             minw = 0.6,
                             minh = G.CARD_H,
                             ref_table = reload{selected_page = args.selected_page + 1},
-                            button = args.selected_page < #args.selected_cards/selected_per_page and "Wormhole_TLR_canis_major" or 'nil',
+                            button = args.selected_page < #args.selected_cards/selected_per_page and "Wormhole_TLR_draco" or 'nil',
                             colour = not (args.selected_page < #args.selected_cards/selected_per_page) and G.C.GREY or nil
                         }}}
                     }},
@@ -164,7 +171,7 @@ function G.UIDEF.Wormhole_TLR_canis_major(args)
                             minw = 4,
                             minh = 0.7,
                             ref_table = {selected_keys = args.selected_cards, negative = args.negative},
-                            button = "Wormhole_TLR_canis_major_confirm",
+                            button = "Wormhole_TLR_draco_confirm",
                         }}}
                     }},
                 }},
