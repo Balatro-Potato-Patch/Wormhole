@@ -71,7 +71,8 @@ return {
                 text = {
                     "Creates a {C:planet}Meteor Tag{}",
                     "at {C:attention}end of round{} if no",
-                    "{C:planet}Planets{} were used this round",
+                    "{C:planet}Planet{} cards have been used",
+                    "since last round"
                 }
             },
 
