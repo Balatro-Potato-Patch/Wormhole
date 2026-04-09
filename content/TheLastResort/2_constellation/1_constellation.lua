@@ -93,7 +93,7 @@ SMODS.ConsumableType{
             G.GAME.worm_tlr_last_const_used_tier = _card.ability.tier
         end
         card.ppu_team = {"TheLastResort"}
-    end,
+    end
 }
 
 --[[

@@ -1,8 +1,9 @@
 SMODS.Seal {
     key = 'tlr_star',
-    pos = { x = 0, y = 0 },
+    atlas = 'elr_enhancers',
+    pos = { x = 2, y = 0 },
     badge_colour = SMODS.ConsumableTypes.worm_tlr_constellation.secondary_colour,
-    text_colour = SMODS.ConsumableTypes.worm_tlr_constellation.primary_colour,
+    text_colour = SMODS.ConsumableTypes.worm_tlr_constellation.text_colour,
     config = { extra = { percent = 150 } },
 
     loc_vars = function(self, info_queue, card)
@@ -23,6 +24,7 @@ SMODS.Seal {
                 func = (function()
                     local const = create_card('worm_tlr_constellation', G.consumeables, nil, nil, nil, nil, nil, 'tlr_star')
                     const.ability.tier = const.ability.tier + 1
+                    WORM_TLR.update_const_sprite(card.config.center, card)
                     const:add_to_deck()
                     G.consumeables:emplace(const)
                     G.GAME.consumeable_buffer = 0
