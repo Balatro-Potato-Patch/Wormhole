@@ -221,6 +221,9 @@ SMODS.Joker({
 function Wormhole.tbp.change_durability(module_type, change, abs, silent)
     local ship = SMODS.find_card("j_worm_tbp_spaceship")[1]
     if ship and ship.ability.extra.modules[module_type] and ship.ability.extra.modules[module_type].durability then
+        local flags = SMODS.calculate_context({ wormhome_tbp_module_change_durability = true, amount = change, module = module_type, card = ship })
+        change = flags.modify or change
+        
         ship.ability.extra.modules[module_type].durability = ship.ability.extra.modules[module_type].durability + change
         if change < 0 then
             G.GAME.tbp.run.durability_lost.total = G.GAME.tbp.run.durability_lost.total + change
@@ -231,6 +234,14 @@ function Wormhole.tbp.change_durability(module_type, change, abs, silent)
             Wormhole.tbp.uninstall_module(module_type, "failed", silent)
         end
     end
+end
+
+local smods_update_context_flags_ref = SMODS.update_context_flags
+function SMODS.update_context_flags(context, flags, ...)
+    if flags.modify then
+        if context.wormhome_tbp_module_change_durability then context.amount = flags.modify end
+    end
+    return smods_update_context_flags_ref(context, flags, ...)
 end
 
 --- Add module to ship and log changes. Trigger effects based on install type
@@ -499,8 +510,13 @@ Wormhole.tbp.Module({
 		return { vars = { module.ability.extra.depletes } }
     end,
     module_calculate = function (self, module, context, card)
-        if context.setting_blind then
-
+        if context.wormhome_tbp_module_change_durability and context.card == card and context.module ~= self.slot then
+            if context.amount < 0 then
+                Wormhole.tbp.change_durability(self.slot, -module.depletes)
+                return {
+                    modify = 0
+                }
+            end
         end
     end
 })
