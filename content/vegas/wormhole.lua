@@ -554,12 +554,12 @@ SMODS.Joker{
 			"At the start of the",
 			"round, play {C:attention}space roulette",
 			"If {C:attention}this{} Joker lands face up,",
-			"gain {C:money}$#2#{} for each {C:attention}Joker{}"
+			"gain {C:money}$#1#{} for each {C:attention}Joker{}"
 		}
 	},
-	config = { lose = 3, gain = 6},
+	config = { gain = 6},
 	loc_vars = function(self, info_queue, card)
-		return { vars = { card.ability.lose, card.ability.gain }}
+		return { vars = { card.ability.gain }}
 	end,
 	atlas = "vegas_jokers",
 	pos = {x = 1, y = 1},
@@ -595,7 +595,72 @@ SMODS.Joker{
 	end
 }
 
+local function starts_with(str, start) --string utility function
+   return str:sub(1, #start) == start
+end
 
+SMODS.Joker{
+	key = "wormhole",
+	loc_txt = {
+		name = "Wormhole",
+		text = {
+			"Creates a {C:purple}Negative Copy{} at the bottom of",
+			"your deck when you use a {C:attention}Consumable{} card"
+		}
+	},
+	config = { sets = { "Tarot", "Planet", "Spectral" }},
+	loc_vars = function(self, info_queue, card)
+		return { vars = {  }}
+	end,
+	atlas = "vegas_jokers",
+	pos = {x = 2, y = 1},
+	soul_pos = {x = 3, y = 1},
+	rarity = 4,
+	cost = 20,
+	blueprint_compat = true,
+	discovered = true,
+	eternal_compat = true,
+	perishable_compat = true,
+	ppu_team = {"People Found In Vegas"},
+	ppu_coder = {"Ben Roffey"},
+	ppu_artist = {"Ben Roffey"},
+	calculate = function(self, card, context)
+		if context.using_consumeable then
+			SMODS.add_card({ key = context.consumeable.config.center.key, edition = "e_negative", area = G.deck})
+			for i = 1, #self.config.sets do
+				if context.consumeable.ability.set == self.config.sets[i] then
+					return { message = "Wormhole!", colour = G.C.SECONDARY_SET.Tarot }
+				end
+			end
+			self.config.sets[#self.config.sets + 1] = context.consumeable.ability.set --keeps track of any modded sets
+		end
+		if context.drawing_cards and not context.blueprint then
+			G.E_MANAGER:add_event(Event{
+				trigger = 'after',
+				blockable = true,
+				blocking = false,
+				delay = 2,
+				func = function()
+					local remove = {}
+					for i = 1, #G.hand.cards do
+						for j = 1, #self.config.sets do
+							if G.hand.cards[i].ability and G.hand.cards[i].ability.set and G.hand.cards[i].ability.set == self.config.sets[j] then --if the card is actually a consumable card,
+								SMODS.add_card({ key = G.hand.cards[i].config.center.key, edition = "e_negative", area = G.consumeable}) --create a copy in the consumeable area
+								remove[#remove + 1] = i -- mark the card for removal
+							end
+						end
+					end
+					for i = #remove, 1, -1 do
+						if i < #G.hand.cards then
+							G.hand.cards[remove[i]]:remove() --remove the marked cards from the hand
+						end
+					end
+					return true
+				end
+			})
+		end
+	end
+}
 
 --[[
 SMODS.Joker{
