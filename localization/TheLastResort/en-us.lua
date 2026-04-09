@@ -385,7 +385,7 @@ return {
 			v_worm_tlr_stargazing = {
 				name = 'Stargazing',
 				text = {
-					'Higher tier {C:worm_tlr_constellation}Constellations{}',
+					'Tier {C:attention}2 {C:worm_tlr_constellation}Constellations{}',
             		'may appear in the shop'
 				}
 			}
