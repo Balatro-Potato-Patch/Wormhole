@@ -608,6 +608,13 @@ SMODS.Consumable { -- Cosmospolitan
                             return true;
                         end
                     }))
+                else
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            Wormhole.Absinthe.alert_no_space(card, area, {0.51, 0.28, 0.43, 0.7})
+                            return true;
+                        end
+                    }))
                 end
             else
                 G.E_MANAGER:add_event(Event({

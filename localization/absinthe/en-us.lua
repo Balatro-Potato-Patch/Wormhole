@@ -440,7 +440,7 @@ return {
         Spectral = {
 
             c_worm_abs_absinthe = {
-                name = 'Absinthe (WIP)',
+                name = 'Artemisia Absinthe (WIP)',
                 text = {
                     {
                         "When {C:attention}Blind{} is selected,",
@@ -461,7 +461,7 @@ return {
                 }
             },
             c_worm_abs_absinthe_empty = {
-                name = 'Absinthe (WIP)',
+                name = 'Artemisia Absinthe (WIP)',
                 text = {
                     {
                         "{C:inactive,s:0.8}Currently Empty{}",

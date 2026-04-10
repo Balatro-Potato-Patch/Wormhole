@@ -9,7 +9,7 @@ function Card:sell_card()
             return sell_card_ref(self)
         else
             self.area:remove_from_highlighted(self)
-            alert_no_space(self, G.consumeables)
+            Wormhole.Absinthe.alert_no_space(self, G.consumeables)
         end
     else
         return sell_card_ref(self)
