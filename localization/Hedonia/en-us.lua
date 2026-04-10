@@ -2,10 +2,28 @@
 return {
     descriptions = {
         worm_hedonia_menu={
-            c_worm_template = {
-                name = 'The Sungwon Special',
+            c_worm_hedonia_hadron = {
+                name = 'Hadron Colida',
                 text = {
-                    'It\'s not easy being Dr. Breen'
+                    'Makes a random card in hand tipsy'
+                }
+            },
+            c_worm_hedonia_cosmo = {
+                name = 'Cosmopolitan',
+                text = {
+                    'Makes a random card in hand drunk'
+                }
+            },
+            c_worm_hedonia_mojitury = {
+                name = 'Mojitury',
+                text = {
+                    'Makes a random card in hand very drunk'
+                }
+            },
+            c_worm_hedonia_blackHoleBomb = {
+                name = 'Black Hole Bomb',
+                text = {
+                    'Makes a random card in hand blackout'
                 }
             }
         },
