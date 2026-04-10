@@ -45,11 +45,11 @@ SMODS.Joker({
 				local effects = {}
 				if next(names) then
 					local hand = pseudorandom_element(names, pseudoseed('escapingtooneplacenotcorruptedbycapitalism'))
-					table.insert(effects, { level_up = 0.5, level_up_hand = hand or G.GAME.last_hand_played })
+					table.insert(effects, { level_up = 2, level_up_hand = hand or G.GAME.last_hand_played })
 					if not (context.retrigger_joker or context.blueprint) then
 						for c, s in ipairs(SMODS.find_card('j_space', true)) do
 							local extrahand = pseudorandom_element(names, pseudoseed('escapingtooneplacenotcorruptedbycapitalism'))
-							table.insert(effects, { message = localize('k_again_ex'), message_card = s, extra = { level_up = 0.5, level_up_hand = extrahand or G.GAME.last_hand_played, message_card = s }})
+							table.insert(effects, { message = localize('k_again_ex'), message_card = s, extra = { level_up = 1, level_up_hand = extrahand or G.GAME.last_hand_played, message_card = s }})
 						end
 					end
 					return SMODS.merge_effects(effects)
