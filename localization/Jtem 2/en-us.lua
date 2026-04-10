@@ -87,7 +87,9 @@ return {
 			worm_jtem2_solar_system_effect_c_ceres = {
 				name = "Ceres's ability",
 				text = {
-					"Don't know yet...",
+					"{C:attention}#1#{} counts as {C:attention}#2#{}",
+                    "If share the same suit then",
+                    "counts as {C:attention}#3#{}"
 				},
 			},
 			worm_jtem2_solar_system_effect_c_jupiter = {

@@ -394,7 +394,7 @@ local planets_loc_vars = {
 		return { card.ability.extra.c_earth.discount }
 	end,
 	c_ceres = function(card)
-		return {}
+		return { localize("Two Pair", "poker_hands"), localize("Full House", "poker_hands"), localize("Flush House", "poker_hands") }
 	end,
 	c_mars = function()
 		return { localize({ type = "name_text", key = "j_splash", set = "Joker" }) }
@@ -551,7 +551,7 @@ SMODS.Joker({
 		-- + mars: create splash when blind is selected
 		---- (all knows there's a lot of water on in right)
 		--
-		-- ceres: ?
+		-- ceres: Two Pair counts as Full House, single-suit Two Pair = Flush House
 		---- (dwarf planet in main asteroid belt)
 		--
 		-- + jupiter: X1.5 Mult
@@ -571,6 +571,37 @@ SMODS.Joker({
 		--
 		-- + eris: x1.5 Chips
 		---- (orbit significantly shifted from Sun, very bright)
+
+		if context.evaluate_poker_hand then
+			if card.ability.extra.planets.c_ceres then
+				if context.scoring_name == "Two Pair" then
+					-- yea, calculating flush part manually is so fun!
+					local is_flush = false
+					local hand = context.scoring_hand
+
+					local suits = SMODS.Suit.obj_buffer
+					if #hand >= 4 then
+						for j = 1, #suits do
+							local suit = suits[j]
+							local flush_count = 0
+							for i = 1, #hand do
+								if hand[i]:is_suit(suit, nil, true) then
+									flush_count = flush_count + 1
+								end
+							end
+							if flush_count >= 4 then
+								is_flush = true
+								break
+							end
+						end
+					end
+
+					return {
+						replace_scoring_name = is_flush and "Flush House" or "Full House",
+					}
+				end
+			end
+		end
 
 		if context.using_consumeable and not context.blueprint and context.consumeable.ability.set == "Planet" then
 			-- I'm not sure that Planet X is a real planet.
@@ -869,6 +900,11 @@ function Card:set_cost()
 		end
 	end
 end
+
+-- local old_get_poker_hand_info = G.FUNCS.get_poker_hand_info
+-- function G.FUNCS.get_poker_hand_info(_cards, ...)
+--     local
+-- end
 
 SMODS.draw_ignore_keys.worm_toggle_solar_system_button = true
 SMODS.DrawStep({
