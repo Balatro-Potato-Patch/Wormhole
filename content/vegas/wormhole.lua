@@ -265,18 +265,19 @@ SMODS.Joker{
 			local order = 0
 			for i = 1, #G.P_CENTER_POOLS.Planet do
 				if key == G.P_CENTER_POOLS.Planet[i].key then
-					if not G.GAME.hands[G.P_CENTER_POOLS.Planet[i].config.hand_type] then return end --exoplanets don't have hand types
+					if not G.GAME.hands[G.P_CENTER_POOLS.Planet[i].config.hand_type] then return end --protecting against any modded planet cards with no hand_type
 					hand_type = G.GAME.hands[G.P_CENTER_POOLS.Planet[i].config.hand_type]
 					order = hand_type.order
 				end
 			end
 			local hands_lower_equal = {}
-			if hand_type and hand_type.key ~= 'High Card' then
+			if hand_type then
 				for i = 1, #G.P_CENTER_POOLS.Planet do
-					if G.GAME.hands[G.P_CENTER_POOLS.Planet[i].config.hand_type] and G.GAME.hands[G.P_CENTER_POOLS.Planet[i].config.hand_type].order > order then --skip exoplanets
+					if G.GAME.hands[G.P_CENTER_POOLS.Planet[i].config.hand_type].order > order then
 						hands_lower_equal[#hands_lower_equal + 1] = G.GAME.hands[G.P_CENTER_POOLS.Planet[i].config.hand_type]
 					end
 				end
+				if #hands_lower_equal == 0 then return end --if the used planet was the lowest order, do nothing
 				local chosen_hand = pseudorandom_element(hands_lower_equal, 'gravityassist')
 				G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
 				G.E_MANAGER:add_event(Event({
@@ -533,18 +534,25 @@ space_roulette = function(card, time, index)
 		trigger = 'after',
 		delay = 1,
 		func = function()
+			play = false
 			for i = 1, #G.jokers.cards do
 				if G.jokers.cards[i].facing == "back" then
 					G.jokers.cards[i]:flip()
-					play_sound("cardSlide1")
+					play = true
 				end
 			end
+			if play then play_sound("cardSlide1") end
 			return true
 		end
 	})
 
 	return true
 end
+
+spacerouletteinfo = {
+	key = "SpaceRoulette",
+	set = "Other"
+}
 
 SMODS.Joker{
 	key = "vegas",
@@ -559,6 +567,7 @@ SMODS.Joker{
 	},
 	config = { gain = 6},
 	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue + 1] = spacerouletteinfo
 		return { vars = { card.ability.gain }}
 	end,
 	atlas = "vegas_jokers",
@@ -594,10 +603,6 @@ SMODS.Joker{
 		end
 	end
 }
-
-local function starts_with(str, start) --string utility function
-   return str:sub(1, #start) == start
-end
 
 SMODS.Joker{
 	key = "wormhole",
@@ -997,6 +1002,19 @@ SMODS.Consumable {
     end
 }
 
+SMODS.PokerHand{
+	key = "keplerhand",
+	chips = 4,
+	mult = 1, 
+	l_chips = 0,
+	l_mult = 0,
+	example = {},
+	visible = false,
+	evaluate = function(parts, hand)
+		return false
+	end,
+	loc_txt = {}
+}
 SMODS.Consumable {
     key = 'kepler',
     set = 'Planet',
@@ -1013,7 +1031,7 @@ SMODS.Consumable {
  	end,
     pos = { x = 0, y = 0 },
 	discovered = true,
-    config = { xmult = 0.1, max_highlighted = 2 },
+    config = { xmult = 0.1, max_highlighted = 2, hand_type = "worm_keplerhand"},
 	ppu_team = {"People Found In Vegas"},
     ppu_coder = {"Ben Roffey"},
     ppu_artist = {"Ben Roffey"},
@@ -1026,13 +1044,36 @@ SMODS.Consumable {
     end,
     use = function(self, card, area, copier)
         for i = 1, #G.hand.highlighted do
+			G.E_MANAGER:add_event(Event{
+				trigger = "after",
+				delay = (i - 1) * 0.2,
+				func = function()
+					SMODS.calculate_effect({
+						message = localize('k_upgrade_ex'),
+						colour = G.C.MULT
+					}, G.hand.highlighted[i])
+					return true
+				end
+			})
 			G.hand.highlighted[i].ability.perma_x_mult = G.hand.highlighted[i].ability.perma_x_mult or 1
 			G.hand.highlighted[i].ability.perma_x_mult = G.hand.highlighted[i].ability.perma_x_mult + card.ability.xmult
-			G.hand.highlighted[i]:juice_up(0.3, 0.5)
 		end
     end
 }
 
+SMODS.PokerHand{
+	key = "gjhand",
+	chips = 3,
+	mult = 1, 
+	l_chips = 0,
+	l_mult = 0,
+	example = {},
+	visible = false,
+	evaluate = function(parts, hand)
+		return false
+	end,
+	loc_txt = {}
+}
 SMODS.Consumable {
     key = 'gj',
     set = 'Planet',
@@ -1050,7 +1091,7 @@ SMODS.Consumable {
  	end,
     pos = { x = 1, y = 0 },
 	discovered = true,
-    config = { mult = 1, max_highlighted = 2 },
+    config = { mult = 1, max_highlighted = 2, hand_type = "worm_gjhand"},
 	ppu_team = {"People Found In Vegas"},
     ppu_coder = {"Ben Roffey"},
     ppu_artist = {"Ben Roffey"},
@@ -1063,13 +1104,36 @@ SMODS.Consumable {
     end,
     use = function(self, card, area, copier)
         for i = 1, #G.hand.highlighted do
+			G.E_MANAGER:add_event(Event{
+				trigger = "after",
+				delay = (i - 1) * 0.2,
+				func = function()
+					SMODS.calculate_effect({
+						message = localize('k_upgrade_ex'),
+						colour = G.C.MULT
+					}, G.hand.highlighted[i])
+					return true
+				end
+			})
 			G.hand.highlighted[i].ability.perma_mult = G.hand.highlighted[i].ability.perma_mult or 0
 			G.hand.highlighted[i].ability.perma_mult = G.hand.highlighted[i].ability.perma_mult + card.ability.mult
-			G.hand.highlighted[i]:juice_up(0.3, 0.5)
 		end
     end
 }
 
+SMODS.PokerHand{
+	key = "wasphand",
+	chips = 2,
+	mult = 1, 
+	l_chips = 0,
+	l_mult = 0,
+	example = {},
+	visible = false,
+	evaluate = function(parts, hand)
+		return false
+	end,
+	loc_txt = {}
+}
 SMODS.Consumable {
     key = 'wasp',
     set = 'Planet',
@@ -1087,7 +1151,7 @@ SMODS.Consumable {
  	end,
     pos = { x = 2, y = 0 },
 	discovered = true,
-    config = { chips = 10, max_highlighted = 2 },
+    config = { chips = 10, max_highlighted = 2, hand_type = "worm_wasphand"},
 	ppu_team = {"People Found In Vegas"},
     ppu_coder = {"Ben Roffey"},
     ppu_artist = {"Ben Roffey"},
@@ -1100,9 +1164,19 @@ SMODS.Consumable {
     end,
     use = function(self, card, area, copier)
         for i = 1, #G.hand.highlighted do
+			G.E_MANAGER:add_event(Event{
+				trigger = "after",
+				delay = (i - 1) * 0.2,
+				func = function()
+					SMODS.calculate_effect({
+						message = localize('k_upgrade_ex'),
+						colour = G.C.CHIPS
+					}, G.hand.highlighted[i])
+					return true
+				end
+			})
 			G.hand.highlighted[i].ability.perma_bonus = G.hand.highlighted[i].ability.perma_bonus or 0
 			G.hand.highlighted[i].ability.perma_bonus = G.hand.highlighted[i].ability.perma_bonus + card.ability.chips
-			G.hand.highlighted[i]:juice_up(0.3, 0.5)
 		end
     end
 }
