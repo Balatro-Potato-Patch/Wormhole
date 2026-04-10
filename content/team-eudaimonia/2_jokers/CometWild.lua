@@ -19,21 +19,20 @@ SMODS.Joker {
         info_queue[#info_queue+1] = G.P_CENTERS.m_wild
         return { vars = {card.ability.extra.xmult} }
     end,
-    calculate = function(self, card, context)
-        if context.press_play then
-            for _, playing_card in ipairs(G.hand and G.hand.highlighted or {}) do
-                if SMODS.has_enhancement(playing_card, 'm_wild')
-                and playing_card.debuff then
-                    playing_card:set_debuff(false)
-                    playing_card.ability.worm_euda_was_debuffed = true
-                end
-            end
+    add_to_deck = function(self, card, from_debuff)
+        for _, playing_card in ipairs(G.hand and G.hand.cards or {}) do
+            SMODS.recalc_debuff(playing_card)
         end
+    end,
+    remove_from_deck = function(self, card, from_debuff)
+        for _, playing_card in ipairs(G.hand and G.hand.cards or {}) do
+            SMODS.recalc_debuff(playing_card)
+        end
+    end,
+    calculate = function(self, card, context)
         if context.individual
         and context.cardarea == G.play
-        and SMODS.has_enhancement(context.other_card, 'm_wild')
-        and context.other_card.ability.worm_euda_was_debuffed then
-            context.other_card.ability.worm_euda_was_debuffed = nil
+        and SMODS.has_enhancement(card, 'm_wild') then
             return {
                 xmult = card.ability.extra.xmult
             }
@@ -41,13 +40,11 @@ SMODS.Joker {
     end,
 }
 
-local can_calculate_ref = Card.can_calculate
-function Card:can_calculate()
-    local ret = can_calculate_ref(self)
-    if (next(SMODS.find_card("j_worm_euda_cometwild")))
-    and SMODS.has_enhancement(self, 'm_wild')
-	and self.debuff then
-		return true
+
+local set_debuff_ref = Card.set_debuff
+function Card:set_debuff(val)
+    if SMODS.has_enhancement(self, 'm_wild') and next(SMODS.find_card("j_worm_euda_cometwild")) and val then
+		return set_debuff_ref(self, false)
     end
-    return ret
+    return set_debuff_ref(self, val)
 end
