@@ -68,8 +68,9 @@ SMODS.current_mod.calculate = function(self, context)
     return calc_ref(self, context)
 end
 
+local op_features_ref = SMODS.current_mod.optional_features or function() return {} end
 SMODS.current_mod.optional_features = function()
-    return {
-        retrigger_joker = true,
-    }
+    local other_options = op_features_ref()
+    other_options.retrigger_joker = true
+    return other_options
 end

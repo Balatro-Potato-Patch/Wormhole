@@ -2,18 +2,19 @@ SMODS.Atlas {
     key = 'euda_darksideatlas',
     px = 71,
     py = 95,
-    path = 'team-eudaimonia/wowsignal.png', --Update with actual art
+    path = 'team-eudaimonia/DarkSideOfTheMoon.png', --Update with actual art
 }
 SMODS.Joker {
     key = "euda_darkside",
 	atlas = 'euda_darksideatlas',
 	pos = { x = 0, y = 0},
+    soul_pos = { x=1, y=0},
 	rarity = 2,
 	cost = 6,
 	blueprint_compat = true,
     discovered = true,
     ppu_coder = {'M0xes'},
-    ppu_artist = {'LasagnaFelidae'},
+    ppu_artist = {'M0xes'},
     ppu_team = {"TeamEudaimonia"},
     attributes = {"passive", "space",},
     loc_vars = function(self, info_queue, card)
