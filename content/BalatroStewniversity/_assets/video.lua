@@ -42,7 +42,7 @@ local function init_sprite()
         video_sprite = nil
     end
 
-    video_sprite = Sprite(-2, -2, G.ROOM.T.w+4, G.ROOM.T.h+4, G.ASSET_ATLAS["ui_1"], {x = 0, y = 0})
+    video_sprite = Sprite(-1, -1, G.ROOM.T.w+4, G.ROOM.T.h+4, G.ASSET_ATLAS["ui_1"], {x = 0, y = 0})
     video_sprite.video = video
 end
 
@@ -121,5 +121,10 @@ function Game:draw(...)
         love.graphics.draw(canvas, quad, 0, 0, 0, 1, 1)
 
         love.graphics.pop()
+    elseif canvas then
+        canvas:release()
+        canvas = nil
+        quad:release()
+        quad = nil
     end
 end
