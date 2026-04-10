@@ -1,13 +1,49 @@
 
 SMODS.Joker{ --Stew Earth
     key = 'stew_earth',
-    config = {},
-    rarity = 4,
-    cost = 42069,
+    config = {extra = {Xmult = 1.5, Xmult_up = 0.5, Xmult_down = 0.25}},
+    rarity = 2,
+    cost = 4,
     atlas = 'stewjokers',
     pos = {x=1, y=0},
     blueprint_compat = true,
-    eternal_compat = true,
-    perishable_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
 
+    loc_vars = function (self, info_queue, card)
+        return{
+            vars = {card.ability.extra.Xmult, card.ability.extra.Xmult_up, card.ability.extra.Xmult_down}
+        }
+    end,
+
+    calculate = function (self, card, context)
+        if context.after and not context.blueprint then
+            if SMODS.last_hand_oneshot then
+                card.ability.extra.Xmult = card.ability.extra.Xmult + card.ability.extra.Xmult_up
+                return{
+                    message = localize{type = 'variable', key = 'a_xmult', vars = {card.ability.extra.Xmult_up}},
+                    colour = G.C.RED,
+                }
+                
+            elseif card.ability.extra.Xmult - card.ability.extra.Xmult_down <= 1 then
+                SMODS.destroy_cards(card, nil, nil, true)
+                return{
+                    message = localize('k_eaten_ex'),
+                    colour = G.C.FILTER
+                }
+            else
+                card.ability.extra.Xmult = card.ability.extra.Xmult - card.ability.extra.Xmult_down
+                return{
+                    message = localize{type = 'variable', key = 'a_xmult_minus', vars = {card.ability.extra.Xmult_down}},
+                    colour = G.C.RED,
+                }
+            end
+        end
+
+        if context.joker_main then
+            return{
+                    xmult = card.ability.extra.Xmult
+            }
+        end
+    end
 }

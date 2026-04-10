@@ -1,6 +1,6 @@
 SMODS.Joker{
     key = 'stargazer',
-    config = {extra = {price = 5, scored = 5, scored_remaining = 5}},
+    config = {extra = {price = 5, diamonds_required = 5, diamonds_remaining = 5}},
     rarity = 1,
     cost = 5,
     atlas = 'stewjokers',
@@ -11,24 +11,30 @@ SMODS.Joker{
 
     loc_vars = function (self, info_queue, card)
         return{
-            vars = {card.ability.extra.price, card.ability.extra.scored, card.ability.extra.scored_remaining}
+            vars = {card.ability.extra.price, card.ability.extra.diamonds_required, card.ability.extra.diamonds_remaining}
         }
     end,
 
     calculate = function (self, card, context)
-        if context.individual and context.cardarea == G.play and context.other_card:is_suit('Diamonds')
-            and not context.blueprint then
-            if card.ability.extra.scored_remaining <= 1 then
-                card.ability.extra.scored_remaining = card.ability.extra.scored
+
+        if context.before and not context.blueprint then
+            local diamond_cards = 0
+            for _, scored_card in ipairs(context.scoring_hand) do
+                   if scored_card:is_suit('Diamonds') then
+                    diamond_cards = diamond_cards + 1
+                    
+                   end
+                   
+            end
+            card.ability.extra.diamonds_remaining = card.ability.extra.diamonds_remaining - diamond_cards
+            if card.ability.extra.diamonds_remaining <= 0 then
+                card.ability.extra.diamonds_remaining = card.ability.extra.diamonds_required + card.ability.extra.diamonds_remaining
                 card.ability.extra_value = card.ability.extra_value + card.ability.extra.price
                 card:set_cost()
-                return{ --i tried finding a neat way to have the text pop up on the joker and not the card but im out of ideas
+                return{
                     message = localize('k_val_up'),
                     colour = G.C.MONEY
                 }
-            else
-                card.ability.extra.scored_remaining = card.ability.extra.scored_remaining - 1
-                return nil, true
             end
         end
     end

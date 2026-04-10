@@ -12,3 +12,13 @@ position = 'after'
 payload = '''
 -- wooo'''
 match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = 'functions/state_events.lua'
+match_indent = true
+position = 'at'
+pattern = '''
+SMODS.last_hand_oneshot = SMODS.calculate_round_score() > G.GAME.blind.chips'''
+payload = '''
+    SMODS.last_hand_oneshot = SMODS.calculate_round_score() >= G.GAME.blind.chips'''

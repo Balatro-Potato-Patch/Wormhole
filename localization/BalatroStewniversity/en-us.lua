@@ -4,7 +4,9 @@ return {
             j_worm_stew_earth = {
                 name = "Stew Earth",
                 text = {
-                    "da stewww",
+                    '{X:mult,C:white}X#1#{} Mult, gains {X:mult,C:white}X#2#{} Mult',
+                    ' if score {C:attention}catches fire{},',
+                    'otherwise loses {X:mult,C:white}X#3#{} Mult'
                 },
             },
 
@@ -50,8 +52,8 @@ return {
                 name = 'Stargazer',
                 text = {
                     'This Joker gains {C:money}$#1#{} of',
-                    '{C:attention}sell value{} every',
-                    '{C:attention}#2#{C:inactive} [#3#]{C:diamonds} Diamond{} cards scored'
+                    '{C:attention}sell value{} for every {C:attention}#2#{C:inactive} [#3#]',
+                    'scoring {C:diamonds}Diamond{} cards played'
                 }
             }
 
