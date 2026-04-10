@@ -3,6 +3,8 @@ SMODS.Consumable{
 	key = "tlr_const_hercules",
 	atlas = "tlr_const",
 	pos = {x = 0, y = 6},
+	ppu_coder = {"Foo54"},
+    ppu_artist = {"Aura2247"},
 	config = {
 		blind = nil
 	},
@@ -96,5 +98,4 @@ SMODS.Consumable{
 			end
 		}))
 	end,
-	ppu_coder = {"Foo54"}
 }

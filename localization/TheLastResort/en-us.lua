@@ -465,7 +465,8 @@ return {
 			PotatoPatchDev_Quinn = {
 				name = "Quinn",
 				text = {
-					"fill out pls"
+					"I didn't contribute much I was on vacation",
+					"Hope you like the art tho {C:hearts}<3{}"
 				}
 			},
 		},

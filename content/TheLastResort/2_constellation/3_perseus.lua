@@ -3,6 +3,8 @@ SMODS.Consumable{
 	set = 'worm_tlr_constellation',
 	atlas = "tlr_const",
 	pos = {x=0, y=1},
+	ppu_coder = {"Foo54"},
+    ppu_artist = {"Aura2247"},
 	config = {
 		odds = {4, 3, 2, 1}
 	},
@@ -46,6 +48,4 @@ SMODS.Consumable{
 			}))
 		end
 	end,
-	ppu_artist = {"Quinn"},
-	ppu_coder = {"Foo54"}
 }

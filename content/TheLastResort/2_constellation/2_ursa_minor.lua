@@ -3,7 +3,8 @@ SMODS.Consumable{
     set = 'worm_tlr_constellation',
     atlas = "tlr_const",
     pos = {x=0, y=0},
-
+    ppu_coder = {"Breuhh"},
+    ppu_artist = {"Aura2247"},
     config = {
         fraction = {0.1, 0.15, 0.25, 0.5},
     },
