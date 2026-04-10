@@ -7,11 +7,13 @@ SMODS.Consumable{
 	ppu_coder = {"Jogla"},
     ppu_artist = {"Aura2247"},
     config = {
-        amounts = {2, 1, 2, 2}
+        amounts = {2, 1, 2, 2},
+        choices = {0, 3, 5, 5}
     },
     loc_vars = function (self, info_queue, card)
         return {vars = {
-            card.ability.amounts[card.ability.tier]
+            card.ability.amounts[card.ability.tier],
+            card.ability.choices[card.ability.tier],
         }}
     end,
     can_use = function (self, card)
@@ -32,6 +34,7 @@ SMODS.Consumable{
                 card.ability.amounts[card.ability.tier],
                 G.consumeables.config.temp_limit-G.consumeables.config.card_count+1
             ),
+            max_choices = card.ability.choices[card.ability.tier],
             negative = card.ability.tier == 4}
         end
     end

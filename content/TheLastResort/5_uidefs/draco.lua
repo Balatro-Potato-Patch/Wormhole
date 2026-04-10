@@ -5,11 +5,19 @@ function G.UIDEF.Wormhole_TLR_draco(args)
     args.selected_page = args.selected_page or 1
     args.selected_cards = args.selected_cards or {}
 
-    --local t = SMODS.ConsumableTypes['worm_tlr_constellation']:create_UIBox_your_collection()
-    --[[
-    table.remove(t.nodes[1].nodes[1].nodes,2)
-    temp = t
-    ]]
+    args.max_choices = args.max_choices or 3
+    args.choices = args.choices or {}
+    local pool = {}
+
+    for _, v in ipairs(G.P_CENTER_POOLS["Tag"]) do
+        pool[#pool+1] = v.key
+    end
+
+    for i=1, args.max_choices do
+        local index = pseudorandom("wormhole", 1, #pool)
+        table.insert(args.choices, pool[index])
+        table.remove(pool, index)
+    end
 
     local cards_per_page = 5
     local selected_per_page = 3
@@ -31,18 +39,13 @@ function G.UIDEF.Wormhole_TLR_draco(args)
             add = sub_args.add,
             remove = sub_args.remove,
             max_selected = args.max_selected,
-            negative = args.negative
+            negative = args.negative,
+            max_choices = 0,
+            choices = args.choices
         }
     end
 
-    local sorted_tags = {}
-    for _,v in pairs(G.P_TAGS) do
-        sorted_tags[#sorted_tags+1] = v.key
-    end
-    table.sort(sorted_tags, function (a, b)
-        return G.P_TAGS[a].order < G.P_TAGS[b].order
-    end)
-    for i, v in ipairs(sorted_tags) do
+    for i, v in ipairs(args.choices) do
         if i > (args.page-1)*cards_per_page and i <= args.page*cards_per_page then
             if not v then break end
             --local area = CardArea(G.CARD_W/2, G.CARD_H/2, G.CARD_W, G.CARD_H, {type = "title"})
@@ -137,8 +140,8 @@ function G.UIDEF.Wormhole_TLR_draco(args)
                         minw = 0.6,
                         minh = G.CARD_H,
                         ref_table = reload{page = args.page + 1},
-                        button = args.page < #sorted_tags/cards_per_page and "Wormhole_TLR_draco" or 'nil',
-                        colour = args.page >= #sorted_tags/cards_per_page and G.C.GREY or nil
+                        button = args.page < #args.choices/cards_per_page and "Wormhole_TLR_draco" or 'nil',
+                        colour = args.page >= #args.choices/cards_per_page and G.C.GREY or nil
                     }}}
                 }},
                 {n = G.UIT.R, config = {align = 'cl', padding = 0}, nodes = {

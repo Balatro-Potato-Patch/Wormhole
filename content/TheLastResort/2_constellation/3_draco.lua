@@ -7,11 +7,13 @@ SMODS.Consumable{
 	ppu_coder = {"Jogla"},
     ppu_artist = {"Aura2247"},
 	config = {
-		choices = {0, 0, 1, 3}
+		amounts = {0, 0, 1, 3},
+        choices = {0, 0, 3, 5}
 	},
     loc_vars = function (self, info_queue, card)
         return {vars = {
-            card.ability.choices[card.ability.tier]
+            card.ability.amounts[card.ability.tier],
+            card.ability.choices[card.ability.tier],
         }}
     end,
     can_use = function (self, card)
@@ -51,10 +53,10 @@ SMODS.Consumable{
                 }))
             end
             if card.ability.tier == 3 then
-                G.FUNCS.Wormhole_TLR_draco{max_selected = 1}
+                G.FUNCS.Wormhole_TLR_draco{max_selected = card.ability.amounts[card.ability.tier], max_choices = card.ability.choices[card.ability.tier],}
             end
         elseif card.ability.tier == 4 then
-            G.FUNCS.Wormhole_TLR_draco{max_selected = 3}
+            G.FUNCS.Wormhole_TLR_draco{max_selected = card.ability.amounts[card.ability.tier], max_choices = card.ability.choices[card.ability.tier],}
         end
     end
 }
