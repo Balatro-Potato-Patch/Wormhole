@@ -6,6 +6,15 @@ local video
 local video_sprite
 
 local is_playing = false
+local target_hue = 121/360
+
+
+-- Load Shader
+SMODS.Shader {
+    key = "chromakey",
+    path = "BalatroStewniversity/chromakey.fs"
+}
+
 
 -- Make sure video file is placed in native LOVE2D directory
 -- so we can load it with love.graphics.newVideo
@@ -78,6 +87,9 @@ function ExtinctionEvent.play_video(when_finished)
     return video
 end
 
+local canvas
+local quad
+
 --------------------------------------------
 -- Hook draw to play video over entire screen
 local game_draw = Game.draw
@@ -85,9 +97,29 @@ function Game:draw(...)
     game_draw(self, ...)
 
     if is_playing then
+        --------------------------------------------------------------------------------
+        -- Render video on canvas, then draw canvas to main screen with chromakey shader
+        -- (otherwise shader won't work)
+
+        local width, height = video_sprite.T.w * G.TILESCALE*G.TILESIZE, video_sprite.T.h * G.TILESCALE*G.TILESIZE
+
+        if not canvas then
+            canvas = love.graphics.newCanvas(width, height)
+
+            quad = love.graphics.newQuad( 0, 0, width, height, width, height )
+        end
+
         love.graphics.push()
-        video_sprite:translate_container()
-        video_sprite:draw()
+
+        canvas:renderTo(function ()
+            love.graphics.clear()
+            video_sprite:draw()
+        end)
+
+        G.SHADERS['worm_chromakey']:send("target_hue", target_hue)
+        love.graphics.setShader( G.SHADERS['worm_chromakey'] )
+        love.graphics.draw(canvas, quad, 0, 0, 0, 1, 1)
+
         love.graphics.pop()
     end
 end
