@@ -5,7 +5,7 @@ SMODS.Consumable{
 	config = { extra = { seal = 'worm_tlr_star' }, max_highlighted = 1 },
 
 	loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.max_highlighted } }
+        return { vars = { card.ability.max_highlighted, colours = {SMODS.ConsumableTypes.worm_tlr_constellation.primary_colour}} }
     end,
 	use = function(self, card, area, copier)
 		local conv_card = G.hand.highlighted[1]

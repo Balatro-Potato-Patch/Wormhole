@@ -343,6 +343,14 @@ return {
 					"held to {C:edition}???"
 				}
 			},
+			c_worm_tlr_formation = {
+				name = "Formation",
+				text = {
+					"Add a {V:1}Star Seal{} to",
+					"{C:attention}#1#{} Selected",
+					"card in your hand"
+				}
+			},
 		},
 		Back = {
 			b_worm_tlr_astrologist = {
@@ -416,8 +424,12 @@ return {
 				name = "Jogla",
 				text = {
 					{
+						"UI coding hell",
 						"{C:red}Not{} a wizard",
 						"{C:inactive,s:0.7}...Though I do UI wizardy"
+					},
+					{
+						"{C:tarot}Nomai.{}"
 					},
 				}
 			},
@@ -444,6 +456,9 @@ return {
 					{
 						"Could you have guessed that",
 						"I like hollow knight?"
+					},
+					{
+						"{C:tarot}Nomai.{}"
 					},
 				}
 			},
