@@ -84,7 +84,11 @@ return {
         },
         poker_hand_descriptions={},
         poker_hands={},
-        quips={},
+        quips={
+            worm_kartana_jumpscare = { --reverse jetstream sam jumpscare
+                "?tsal uoy nac gnol woH"
+            }
+        },
         ranks={},
         suits_plural={},
         suits_singular={},
