@@ -292,12 +292,13 @@ suit_alien{
     config = {extra = {suit = 'Spades', convert = 10, pay = 5}},
     ppu_artist = {"waffle", "microwave"}
 }
--- E.T.
+-- Fresno Nightcrawlers
 suit_alien{
     key = 'shrug_alien_hearts',
     atlas = 'shrug_alien_cards',
-    pos = {x = 0, y = 0},
+    pos = {x = 4, y = 0},
     config = {extra = {suit = 'Hearts', convert = 10, pay = 5}},
+    ppu_artist = {"waffle", "microwave"}
 }
 -- Reptiloid
 suit_alien{
