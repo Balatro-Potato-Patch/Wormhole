@@ -603,17 +603,25 @@ SMODS.Joker({
 		if context.evaluate_poker_hand then
 			if card.ability.extra.planets.c_ceres then
 				if context.scoring_name == "Two Pair" then
+					local hand = (context.poker_hands["Two Pair"] or {})[1] or context.scoring_hand
+					local new_hand = is_flush_in_hand(hand, 4) and "Flush House" or "Full House"
+					if not context.poker_hands[new_hand] then
+						context.poker_hands[new_hand] = { hand }
+					end
 					return {
-						replace_scoring_name = is_flush_in_hand(context.scoring_hand, 4) and "Flush House"
-							or "Full House",
+						replace_scoring_name = new_hand,
 					}
 				end
 			end
 			if card.ability.extra.planets.c_eris then
 				if context.scoring_name == "Four of a Kind" then
+					local hand = (context.poker_hands["Four of a Kind"] or {})[1] or context.scoring_hand
+					local new_hand = is_flush_in_hand(hand, 4) and "Flush Five" or "Five of a Kind"
+					if not context.poker_hands[new_hand] then
+						context.poker_hands[new_hand] = { hand }
+					end
 					return {
-						replace_scoring_name = is_flush_in_hand(context.scoring_hand, 4) and "Flush Five"
-							or "Five of a Kind",
+						replace_scoring_name = new_hand,
 					}
 				end
 			end
