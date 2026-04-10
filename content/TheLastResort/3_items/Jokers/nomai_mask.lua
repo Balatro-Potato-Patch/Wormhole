@@ -1,6 +1,7 @@
 SMODS.Joker{
 	key = "tlr_nomaimask",
-  pos = { x = 0, y = 13 },
+	atlas = 'tlr_joker',
+	pos = { x = 1, y = 0 },
 	rarity = 3,
 	cost = 8,
 	loc_vars = function (self, info_queue, card)

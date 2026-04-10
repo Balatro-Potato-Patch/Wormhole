@@ -1,6 +1,6 @@
 SMODS.Joker {
     key = 'tlr_chert',
-    set = 'Joker',
+    atlas = 'tlr_joker',
 	pos = { x = 0, y = 0 },
     rarity = 2,
 	cost = 6,
