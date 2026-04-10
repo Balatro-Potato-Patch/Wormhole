@@ -34,6 +34,8 @@ end,
 --[[ Cyan's edit ]]
 
 SMODS.Joker{
+ppu_team = {'Mrrp Mew Meow :3'},
+ppu_coder = {'Shinku','Cyan'},
 key = "orrery",
 atlas = "mrrp",
 pos = {x = 3, y = 1},

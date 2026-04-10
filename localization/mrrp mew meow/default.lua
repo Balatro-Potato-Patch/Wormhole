@@ -144,6 +144,47 @@ descriptions={
 			}
 		},
 	},
+	PotatoPatch = {
+		['PotatoPatchTeam_Mrrp Mew Meow :3'] = {
+			name = 'Mrrp Meow Meow :3',
+		},
+		PotatoPatchDev_SarcPot = {
+			name = 'SarcPot',
+			text = {
+				{'test'},
+			},
+		},
+		PotatoPatchDev_Shinku = {
+			name = 'Shinku',
+			text = {
+				{'test'},
+			},
+		},
+		PotatoPatchDev_MP = {
+			name = 'MP',
+			text = {
+				{'test'},
+			},
+		},
+		PotatoPatchDev_Aure = {
+			name = 'Aure',
+			text = {
+				{'test'},
+			},
+		},
+		PotatoPatchDev_Minty = {
+			name = 'mys. minty',
+			text = {
+				{'test'},
+			},
+		},
+		PotatoPatchDev_Cyan = {
+			name = 'Cyan',
+			text = {
+				{'test'},
+			},
+		}
+	}
 },
 misc={
 	v_dictionary={
