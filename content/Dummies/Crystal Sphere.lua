@@ -1,6 +1,6 @@
 SMODS.Joker {
     key = "dum_crystalsphere",
-    config = { extra = { odds = 2 } },
+    config = { extra = { odds = 3 } },
     loc_vars = function(self, info_queue, card)
         local num, denom = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, "dum_crystalsphere")
         return { vars = { num, denom } }
