@@ -40,7 +40,7 @@ return {
 				text = {
 					{
 						"{E:1,s:1.2,C:dark_edition}Play Tetris!",
-						"This Joker's XMult is determined by",
+						"{X:mult,C:white}XMult{} is determined by",
 						"{C:attention}current level{} divided by 100 plus one",
 						"{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)",
 					},
@@ -50,6 +50,16 @@ return {
 						"Level {C:attention}increases{} per piece placed",
 						"{C:inactive,s:0.8}(A line clear is required at 99, 199, etc)",
 					},
+				},
+			},
+			j_worm_jtem2_egogeocentrism = {
+				name = "Egogeocentrism",
+				text = {
+					"If played hand is a {C:attention}#1#{}",
+					"{C:green}#3# in #4#{} chance for each",
+					"played {C:attention}#2#{} to create a",
+					"{C:planet}Planet{} card when scored",
+					"{C:inactive}(Must have room){}",
 				},
 			},
 		},
