@@ -410,7 +410,7 @@ local planets_loc_vars = {
 		return { card.ability.extra.c_saturn.stones }
 	end,
 	c_uranus = function(card)
-		return {}
+		return { card.ability.extra.c_uranus.xchips }
 	end,
 	c_neptune = function(card)
 		local neptune_play_n, neptune_play_d = SMODS.get_probability_vars(
@@ -450,9 +450,32 @@ local planets_loc_vars = {
 		return { pluto_levelup_n, pluto_levelup_d, pluto_leveldown_n, pluto_leveldown_d }
 	end,
 	c_eris = function(card)
-		return { card.ability.extra.c_eris.xchips }
+		return {
+			localize("Four of a Kind", "poker_hands"),
+			localize("Five of a Kind", "poker_hands"),
+			localize("Flush Five", "poker_hands"),
+		}
 	end,
 }
+
+local is_flush_in_hand = function(hand, amount)
+	local suits = SMODS.Suit.obj_buffer
+	if #hand >= amount then
+		for j = 1, #suits do
+			local suit = suits[j]
+			local flush_count = 0
+			for i = 1, #hand do
+				if hand[i]:is_suit(suit, nil, true) then
+					flush_count = flush_count + 1
+				end
+			end
+			if flush_count >= amount then
+				return true
+			end
+		end
+	end
+	return false
+end
 
 SMODS.Joker({
 	key = "jtem2_solar_system",
@@ -580,29 +603,17 @@ SMODS.Joker({
 		if context.evaluate_poker_hand then
 			if card.ability.extra.planets.c_ceres then
 				if context.scoring_name == "Two Pair" then
-					-- yea, calculating flush part manually is so fun!
-					local is_flush = false
-					local hand = context.scoring_hand
-
-					local suits = SMODS.Suit.obj_buffer
-					if #hand >= 4 then
-						for j = 1, #suits do
-							local suit = suits[j]
-							local flush_count = 0
-							for i = 1, #hand do
-								if hand[i]:is_suit(suit, nil, true) then
-									flush_count = flush_count + 1
-								end
-							end
-							if flush_count >= 4 then
-								is_flush = true
-								break
-							end
-						end
-					end
-
 					return {
-						replace_scoring_name = is_flush and "Flush House" or "Full House",
+						replace_scoring_name = is_flush_in_hand(context.scoring_hand, 4) and "Flush House"
+							or "Full House",
+					}
+				end
+			end
+			if card.ability.extra.planets.c_eris then
+				if context.scoring_name == "Four of a Kind" then
+					return {
+						replace_scoring_name = is_flush_in_hand(context.scoring_hand, 4) and "Flush Five"
+							or "Five of a Kind",
 					}
 				end
 			end

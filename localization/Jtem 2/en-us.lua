@@ -88,8 +88,8 @@ return {
 				name = "Ceres' ability",
 				text = {
 					"{C:attention}#1#{} counts as {C:attention}#2#{}",
-					"If share the same suit then",
-					"counts as {C:attention}#3#{}",
+					"If cards share the same suit",
+					"then counts as {C:attention}#3#{}",
 				},
 			},
 			worm_jtem2_solar_system_effect_c_jupiter = {
@@ -132,7 +132,10 @@ return {
 			worm_jtem2_solar_system_effect_c_eris = {
 				name = "Eris' ability",
 				text = {
-					"Don't know yet...",
+					"{C:attention}#1#{} counts",
+					"as {C:attention}#2#{}",
+					"If cards share the same suit",
+					"then counts as {C:attention}#3#{}",
 				},
 			},
 		},
