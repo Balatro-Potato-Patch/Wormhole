@@ -42,21 +42,21 @@ local CONSTELLATIONS = {
 	c_worm_tlr_const_canis_major_t2 = {
 		name = "Canis Major",
 		text = {
-			"Create up to {C:attention}#1#{} selected",
-			"{V:1}Constellation{} cards",
+			"Create up to {C:attention}#1#{} out of {C:attention}#2#{}",
+			"selected {V:1}Constellation{} cards",
 		},
 	},
 	c_worm_tlr_const_canis_major_t3 = {
 		name = "Canis Major",
 		text = {
-			"Create up to {C:attention}#1#{} selected",
-			"{V:1}Constellation{} cards",
+			"Create up to {C:attention}#1#{} out of {C:attention}#2#{}",
+			"selected {V:1}Constellation{} cards",
 		},
 	},
 	c_worm_tlr_const_canis_major_t4 = {
 		name = "Canis Major",
 		text = {
-			"Create up to {C:attention}#1#{} selected",
+			"Create up to {C:attention}#1#{} out of {C:attention}#2#{}",
 			"{C:dark_edition}negative {V:1}Constellation{} cards",
 		},
 	},
@@ -263,14 +263,14 @@ local CONSTELLATIONS = {
 			"Create this ante's",
 			"blind's {C:attention}Tags{} and",
 			"select up to {C:attention}#1#{}",
-			"additional {C:attention}Tag{}"
+			"out of {C:attention}#2#{} additional {C:attention}Tag{}"
 		}
 	},
 	c_worm_tlr_const_draco_t4 = {
 		name = "Draco",
 		text = {
 			"Create up to {C:attention}#1#{}",
-			"selected {C:attention}Tags{}"
+			"out of {C:attention}#2#{} selected {C:attention}Tags{}"
 		}
 	},
 	c_worm_tlr_const_hercules_t1 = {

@@ -6,11 +6,19 @@ function G.UIDEF.Wormhole_TLR_canis_major(args)
     args.selected_cards = args.selected_cards or {}
     args.max_selected = args.max_selected or 2
 
-    --local t = SMODS.ConsumableTypes['worm_tlr_constellation']:create_UIBox_your_collection()
-    --[[
-    table.remove(t.nodes[1].nodes[1].nodes,2)
-    temp = t
-    ]]
+    args.max_choices = args.max_choices or 3
+    args.choices = args.choices or {}
+    local pool = {}
+
+    for _, v in ipairs(G.P_CENTER_POOLS["worm_tlr_constellation"]) do
+        pool[#pool+1] = v.key
+    end
+
+    for i=1, args.max_choices do
+        local index = pseudorandom("wormhole", 1, #pool)
+        table.insert(args.choices, pool[index])
+        table.remove(pool, index)
+    end
 
     local cards_per_page = 5
     local selected_per_page = 3
@@ -32,15 +40,17 @@ function G.UIDEF.Wormhole_TLR_canis_major(args)
             add = sub_args.add,
             remove = sub_args.remove,
             max_selected = args.max_selected,
-            negative = args.negative
+            negative = args.negative,
+            max_choices = 0,
+            choices = args.choices
         }
     end
 
-    for i, v in ipairs(G.P_CENTER_POOLS['worm_tlr_constellation']) do
+    for i, v in ipairs(args.choices) do
         if i > (args.page-1)*cards_per_page and i <= args.page*cards_per_page then
             if not v then break end
             local area = CardArea(G.CARD_W/2, G.CARD_H/2, G.CARD_W, G.CARD_H, {type = "title"})
-            local card = Card(0, 0, G.CARD_W, G.CARD_H, G.P_CARDS.empty, G.P_CENTERS[v.key])
+            local card = Card(0, 0, G.CARD_W, G.CARD_H, G.P_CARDS.empty, G.P_CENTERS[v])
             area:emplace(card)
             local entry = {n = G.UIT.C, config = {align = 'cm', padding = 0.2}, nodes = {
                 {n = G.UIT.R, config = {minw = G.CARD_W, minh = G.CARD_H, colour = G.C.CLEAR}, nodes = {
@@ -50,7 +60,7 @@ function G.UIDEF.Wormhole_TLR_canis_major(args)
                     label = {localize("k_worm_tlr_add")},
                     minw = G.CARD_W*0.8,
                     minh = 0.6,
-                    ref_table = reload{add = v.key},
+                    ref_table = reload{add = v},
                     button = #args.selected_cards < args.max_selected and "Wormhole_TLR_canis_major" or "nil",
                     colour = not (#args.selected_cards < args.max_selected) and G.C.GREY or nil
                 }
@@ -130,8 +140,8 @@ function G.UIDEF.Wormhole_TLR_canis_major(args)
                         minw = 0.6,
                         minh = G.CARD_H,
                         ref_table = reload{page = args.page + 1},
-                        button = args.page < #G.P_CENTER_POOLS['worm_tlr_constellation']/cards_per_page and "Wormhole_TLR_canis_major" or 'nil',
-                        colour = args.page >= #G.P_CENTER_POOLS['worm_tlr_constellation']/cards_per_page and G.C.GREY or nil
+                        button = args.page < #args.choices/cards_per_page and "Wormhole_TLR_canis_major" or 'nil',
+                        colour = args.page >= #args.choices/cards_per_page and G.C.GREY or nil
                     }}}
                 }},
                 {n = G.UIT.R, config = {align = 'cl', padding = 0}, nodes = {

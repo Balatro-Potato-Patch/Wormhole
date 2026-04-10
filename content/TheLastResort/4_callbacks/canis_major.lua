@@ -4,6 +4,7 @@ function G.FUNCS.Wormhole_TLR_canis_major(e)
     if args.config and args.config.ref_table then args = args.config.ref_table end
     args.instant = args.instant or false
     args.max_selected = args.max_selected or 2
+
     if args.add and #args.selected_cards < args.max_selected then
         table.insert(args.selected_cards, args.add)
     end
