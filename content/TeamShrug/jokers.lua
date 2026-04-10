@@ -176,7 +176,7 @@ Wormhole.SHRUG_Joker {
         "microwave",
     },
     ppu_artist = {
-        "microwave",
+        "edwardrobinson",
     },
     ppu_team = { "shrug" }
 }
