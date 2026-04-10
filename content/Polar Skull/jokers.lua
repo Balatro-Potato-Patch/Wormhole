@@ -92,3 +92,58 @@ SMODS.Joker {
         end
     end,
 }
+
+--[[
+Seemingly works fine, unsure about the logic for when you have multiple rocket cards at once, currently
+the hand name seems to only count as the last one used, e.g. if you have used a flush then a two pair rocket,
+for cards like the tribe they only recognise the hand as a two pair so doesn't trigger
+--]]
+SMODS.Joker {
+    key = 'polarskull_olimar',
+
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = {
+                localize({ type = 'name_text', key = "e_negative", set = "Edition" })
+            }
+        }
+    end,
+
+    rarity = 4,
+    atlas = 'polarskull_jokers',
+    pos = { x = 1, y = 1 },
+    soul_pos = { x = 2, y = 1 },
+    cost = 20,
+    discovered = false,
+    blueprint_compat = false,
+    --ppu_artist = {"placeholder"},
+    ppu_coder = { "cloudzxiii" },
+    ppu_team = { "polar_skull" },
+
+    config = {},
+
+    add_to_deck = function(self, card, from_debuff)
+        G.GAME.polarskull_rockets_stack = true
+    end,
+    remove_from_deck = function(self, card, from_debuff)
+        if not next(SMODS.find_card("j_worm_polarskull_olimar")) then
+            G.GAME.polarskull_rockets_stack = false
+        end
+    end,
+    calculate = function(self, card, context)
+        if context.using_consumeable and context.consumeable.ability.set == "polarskull_rocket" then
+            context.consumeable:set_edition("e_negative", true)
+        end
+    end,
+}
+
+local smods_showman_ref = SMODS.showman
+function SMODS.showman(card_key)
+    if next(SMODS.find_card('j_worm_polarskull_olimar')) then
+        local center = G.P_CENTERS[card_key]
+        if center and center.set == "polarskull_rocket" then
+            return true
+        end
+    end
+    return smods_showman_ref(card_key)
+end
