@@ -30,6 +30,8 @@ SMODS.Joker {
     config = {extra = {numerator = 1, denominator = 6, chipsmin = 20, chipsmax = 50, wowmin = 2, wowmax = 5}},
     ppu_coder = {'Typ0'},
     ppu_artist = {'LasagnaFelidae'},
+    ppu_team = {"TeamEudaimonia"},
+    attributes = {"chance","xchips", "chips", "space",},
     loc_vars = function(self, info_queue, card)
         local num, denom = SMODS.get_probability_vars(card, card.ability.extra.numerator, card.ability.extra.denominator)
         return { vars = { num, denom, card.ability.extra.wowmin, card.ability.extra.wowmax, card.ability.extra.chipsmin, card.ability.extra.chipsmax} }
@@ -66,7 +68,6 @@ SMODS.PokerHand({
         { 'S_J', true },
         { 'C_5', true } 
     },
-    visible = false,
 
     evaluate = function(parts, hand)
         if #hand >= 3 then
@@ -122,7 +123,6 @@ SMODS.PokerHand({
         { 'H_J', true},
         { 'H_5', true}
     },
-    visible = false,
 
     evaluate = function(parts, hand)
         if #hand >= 5 then
@@ -173,6 +173,8 @@ SMODS.Joker {
     config = {extra = {numerator = 1, denominator = 8, bitflipped = false, chips = 32, multmin = 1, multmax = 16}},
     ppu_coder = {'Typ0'},
     ppu_artist = {'Typ0','Hunter'},
+    ppu_team = {"TeamEudaimonia"},
+    attributes = {"chance","chips", "mult", "space",},
     loc_vars = function(self, info_queue, card)
         local num, denom = SMODS.get_probability_vars(card, card.ability.extra.numerator, card.ability.extra.denominator)
         return { vars = { num, denom, card.ability.extra.bitflipped, card.ability.extra.chips, card.ability.extra.multmin, card.ability.extra.multmax} }
@@ -232,24 +234,47 @@ function suit_level_up(card, copier, number, poker_hands, message)
 	)
 end
 
+
 SMODS.Consumable {
     key = "euda_bigear",
     set = "Planet",
     cost = 3,
+    unlocked = true,
     atlas = "euda_bigearatlas",
     pos = { x = 0, y = 0 },
     config = {
 		l_chips = 30,
 		l_mult = 2,
 		l_mult_f = 5,
-		softlock = true
+        hand_type = { "worm_pkr_euda_wow_f", "worm_pkr_euda_wow" },
 	},
     ppu_coder = {'Typ0', 'LasagnaFelidae'},
     ppu_artist = {'LasagnaFelidae'},
-    hidden = true,
+    ppu_team = {"TeamEudaimonia"},
+    in_pool = function(self,args)
+        for hand_key, hand in pairs(G.GAME.hands) do
+            if (hand_key == "worm_pkr_euda_wow" or hand_key == "worm_pkr_euda_wow_f") and hand.played > 0 then
+                return true
+            end
+        end
+        return false
+    end,
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = {
+                G.GAME.hands["worm_pkr_euda_wow"].level, G.GAME.hands["worm_pkr_euda_wow_f"].level,
+                localize('k_worm_euda_wow_hands'),
+                G.GAME.hands["worm_pkr_euda_wow"].l_mult,
+                G.GAME.hands["worm_pkr_euda_wow_f"].l_mult,
+                G.GAME.hands["worm_pkr_euda_wow_f"].l_chips,
+                colours = { (G.GAME.hands["worm_pkr_euda_wow"].level == 1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, G.GAME.hands["worm_pkr_euda_wow"].level)])
+                ,(G.GAME.hands["worm_pkr_euda_wow_f"].level == 1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, G.GAME.hands["worm_pkr_euda_wow_f"].level)]) }
+            }
+        }
+    end,
     use = function(self, card, area, copier)
         update_hand_text({ sound = 'button', volume = 0.7, pitch = 0.8, delay = 0.3 },
-            { handname = localize('k_worm_euda_wow_hands'), chips = '...', mult = '...', level = '' })
+            { handname = localize('k_worm_euda_wow_hands'), chips = '+30', mult = '+2-5', level = '' })
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             delay = 0.2,
@@ -285,11 +310,15 @@ SMODS.Consumable {
         delay(1.3)
         SMODS.upgrade_poker_hands({hands = {"worm_pkr_euda_wow"}, per_level = {chips = card.ability.l_chips, mult = card.ability.l_mult}, instant = true, from = card})
 		SMODS.upgrade_poker_hands({hands = {"worm_pkr_euda_wow_f"}, per_level = {chips = card.ability.l_chips, mult = card.ability.l_mult_f}, instant = true, from = card})
-        update_hand_text({ sound = 'button', volume = 0.7, pitch = 1.1, delay = 0 },
-            { mult = 0, chips = 0, handname = '', level = '' })
+        update_hand_text({ sound = 'button', volume = 0.7, pitch = 1.1, delay = 0 },{ mult = 0, chips = 0, handname = '', level = '' })
     end,
     can_use = function(self, card)
         return true
+    end,
+    set_card_type_badge = function(self, card, badges)
+        badges[#badges + 1] = create_badge(localize('k_worm_euda_observatory_planet'),
+            get_type_colour(card.config.center or card.config, card), SMODS.ConsumableTypes.Planet.text_colour,
+            1.2)
     end,
 }
  

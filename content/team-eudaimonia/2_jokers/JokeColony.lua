@@ -15,6 +15,8 @@ SMODS.Joker {
     config = {extra= { mult = 4 }},
     ppu_coder = {'M0xes'},
     ppu_artist = {'Jewel'},
+    ppu_team = {"TeamEudaimonia"},
+    attributes = {"joker", "mult", "space",},
     loc_vars = function(self, info_queue, card)
         local pop = 0
         for _, joker in ipairs(G.worm_euda_colony and G.worm_euda_colony.cards or {}) do

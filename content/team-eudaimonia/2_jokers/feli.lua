@@ -38,12 +38,15 @@ SMODS.Joker {
     pronouns = "it_its",
 	blueprint_compat = true,
 	eternal_compat = true,
+	ppu_team = {"TeamEudaimonia"},
+	ppu_artist = {"LasagnaFelidae"},
+	ppu_coder = {"LasagnaFelidae"},
     attributes = {"scaling", "mult", "space"},
 	config = {
-		extra = { mult = 5, mult_mod = 1, count = 0, max_c = 5, ascended = false, set = true},
+		extra = { mult = 5, mult_mod = 5, count = 0, max_c = 5, ascended = false, set = true},
 	},	
 	loc_vars = function(self, info_queue, card)
-		key = self.key
+		local key = self.key
 		if card.ability.extra.ascended == true then
 			key = self.key .. "_a"
 		end
@@ -57,6 +60,13 @@ SMODS.Joker {
 				return {
 					message = localize('k_upgrade_ex'),
 					colour = G.C.GOLD,
+					no_juice = false
+				}
+			elseif context.scoring_hand == mph and card.ability.extra.ascended == true then
+				SMODS.destroy_cards(card)
+				return {
+					message = localize('k_reset'),
+					colour = G.C.RED,
 					no_juice = false
 				}
 			end
