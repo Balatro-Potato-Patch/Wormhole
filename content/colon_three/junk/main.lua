@@ -43,7 +43,8 @@ SMODS.Atlas {
 
 SMODS.Enhancement {
     key = "junk_card",
-    ppu_coder = "lordruby",
+    ppu_coder = {"lordruby"},
+    ppu_artist = { "notmario", "lordruby", "nxkoo", "ophelia", "meta" },
     replace_base_card = true,
     pos = { x = 1, y = 0 },
     no_rank = true,
