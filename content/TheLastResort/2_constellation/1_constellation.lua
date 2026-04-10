@@ -3,7 +3,7 @@ SMODS.ConsumableType{
     secondary_colour = HEX("75008f"),
     primary_colour = HEX("7FB768"),
     text_colour = HEX("aFf7a8"),
-    collection_rows = {5, 2},
+    collection_rows = {5, 5},
     shop_rate = 0,
     select_card = "consumeables",
     default = "c_worm_tlr_const_orion",
@@ -18,7 +18,7 @@ SMODS.ConsumableType{
 			if main_end then ret.main_end = ret.main_end or {main_end} end
             if not ret.vars then ret.vars = {} end
             if not ret.vars.colours then ret.vars.colours = {} end
-            table.insert(ret.vars.colours, 1, SMODS.ConsumableTypes.worm_tlr_constellation.primary_colour)
+            table.insert(ret.vars.colours, 1, SMODS.ConsumableTypes.worm_tlr_constellation.secondary_colour)
             ret.key = _self.key .. "_t" .. _card.ability.tier
 			return ret
 		end

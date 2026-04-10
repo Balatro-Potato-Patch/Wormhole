@@ -1,0 +1,28 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 50
+
+# no this is not the best idea, but its less work
+[[patches]]
+[patches.pattern]
+target = '=[SMODS _ "src/card_draw.lua"]'
+pattern = '''love.graphics.draw(
+        self.canvas,
+        self.sprite,
+        -(other_obj.T.w/2 -other_obj.VT.w/2)*10,
+        0,
+        0,
+        other_obj.VT.w/(other_obj.T.w)/(self.canvasScale),
+        other_obj.VT.h/(other_obj.T.h)/(self.canvasScale)
+    )'''
+position = 'after'
+payload = '''if self.worm_tlr_func then self:worm_tlr_func(other_obj, ms, mr, mx, my) end'''
+match_indent = true
+
+
+
+
+
+
+
