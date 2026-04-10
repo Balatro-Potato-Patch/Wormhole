@@ -36,9 +36,9 @@ return {
 				name = "Launch Pad",
 				text = {
 					"When {C:attention}Boss Blind{} is defeated,",
-					"create the {C:polarskull_rocket}Rocket{} Card",
-					"for final played {C:attention}poker hand{}",
-					"that round",
+					"create the {C:polarskull_rocket}Rocket{} Card for",
+					"final played {C:attention}poker hand{} that round",
+					"{C:inactive}(Must have room)"
 				},
 			},
 			j_worm_polarskull_rocket_science = {
