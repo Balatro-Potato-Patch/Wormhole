@@ -131,16 +131,3 @@ SMODS.Joker {
         end
     end,
 }
-
---[[
-local smods_showman_ref = SMODS.showman
-function SMODS.showman(card_key)
-    if next(SMODS.find_card('j_worm_polarskull_olimar')) then
-        local center = G.P_CENTERS[card_key]
-        if center and center.set == "polarskull_rocket" then
-            return true
-        end
-    end
-    return smods_showman_ref(card_key)
-end
---]]

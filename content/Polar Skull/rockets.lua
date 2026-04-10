@@ -159,28 +159,7 @@ local function register_rocket(args)
 	end
 	args.calculate = args.calculate or function(self, card, context)
 		if not card.ability.extra.active then return end
-		if context.evaluate_poker_hand then
-			--[[if card.ability.extra.hand == "Special: Everything" then
-				cache_bonus_chips = 0
-				cache_bonus_mult = 0
-				for name, hand in pairs(G.GAME.hands) do
-					if name ~= context.scoring_name then
-						cache_bonus_chips = cache_bonus_chips + hand.chips
-						cache_bonus_mult = cache_bonus_mult + hand.mult
-					end
-				end
-			elseif G.GAME.hands[context.scoring_name] then
-				cache_bonus_chips = G.GAME.hands[context.scoring_name].chips
-				cache_bonus_mult = G.GAME.hands[context.scoring_name].mult
-			else
-				cache_bonus_chips = 0
-				cache_bonus_mult = 0
-			end
-			return {
-				replace_scoring_name = context.poker_hands[card.ability.extra.hand] and card.ability.extra.hand or nil,
-				replace_poker_hands = evaluate_fake_hands(context.scoring_hand, card.ability.extra.hand),
-			}--]]
-		elseif context.modify_hand then
+		if context.modify_hand then
 			if cache_bonus_chips > 0 then
 				hand_chips = hand_chips + cache_bonus_chips
 				cache_bonus_chips = 0
