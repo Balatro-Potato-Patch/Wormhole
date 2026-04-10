@@ -245,12 +245,96 @@ local descriptions = {
             }
         },
         -- WEAPON --
+        void = {
+            name = 'Void Raid',
+            text = {
+                'Destroy random cards played',
+                'in {C:attention}first hand{} of round',
+                'and add {C:purple}#1#%{} of the',
+                'required score for each',
+                '{s:0.8,C:inactive}(Depletes for each card destroyed)'
+            }
+        },
+        void_equipped = {
+            name = '{C:attention}Void Raid',
+            text = {
+                '{s:1.2,V:1}Void Raid',
+                'Destroy random cards played',
+                'in {C:attention}first hand{} of round',
+                'and add {C:purple}#1#%{} of the',
+                'required score for each',
+                '{s:0.8,C:inactive}(Depletes for each card destroyed)'
+            }
+        },
+        ballistics = {
+            name = 'Advanced Ballistics',
+            text = {
+                "Every played {C:attention}card{}",
+                "permanently gains",
+                "{C:chips}+#1#{} Chips when scored",
+                '{s:0.8,C:inactive}(Depletes for each card scored)'
+            }
+        },
+        ballistics_equipped = {
+            name = '{C:attention}Advanced Ballistics',
+            text = {
+                '{s:1.2,V:1}Advanced Ballistics',
+                "Every played {C:attention}card{}",
+                "permanently gains",
+                "{C:chips}+#1#{} Chips when scored",
+                '{s:0.8,C:inactive}(Depletes for each card scored)'
+            }
+        },
+        waste = {
+            name = 'Weaponized Waste Disposal',
+            text = {
+                '{C:mult}+#1#{} Mult for every',
+                '{C:spectral}Module{} exhausted', -- TODO: change color to new Module one if changed
+                'this run',
+                '{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult)',
+                '{s:0.8,C:inactive}(Depletes each hand)'
+            }
+        },
+        waste_equipped = {
+            name = '{C:attention}Weaponized Waste Disposal',
+            text = {
+                '{s:1.2,V:1}Weaponized Waste Disposal',
+                '{C:mult}+#1#{} Mult for every',
+                '{C:spectral}Module{} exhausted', -- TODO: change color to new Module one if changed
+                'this run',
+                '{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult)',
+                '{s:0.8,C:inactive}(Depletes each hand)'
+            }
+        },
+        salvo = {
+            name = 'Overcharged Salvo',
+            text = {
+                '{X:mult,C:white}X#1#{} for each',
+                '{C:spectral}Module{} installed',
+                'if scored hand contains',
+                '{C:attention}5{} cards',
+                '{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)',
+                '{s:0.8,C:inactive}(Depletes all Modules when triggered)'
+            }
+        },
+        salvo_equipped = {
+            name = '{C:attention}Overcharged Salvo',
+            text = {
+                '{s:1.2,V:1}Overcharged Salvo',
+                '{X:mult,C:white}X#1#{} for each',
+                '{C:spectral}Module{} installed',
+                'if scored hand contains',
+                '{C:attention}5{} cards',
+                '{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)',
+                '{s:0.8,C:inactive}(Depletes all Modules when triggered)'
+            }
+        },
         -- UTILITY --
         hardlight = {
             name = 'Hardlight Barrier',
             text = {
                 'Reduce {C:attention}Blind{}\'s',
-                'requirement by {C:red}%#1#{}',
+                'requirement by {C:red}#1#%{}',
                 'when {C:attention}Blind{} is selected',
                 '{s:0.8,C:inactive}(Depletes each Blind)'
             }
@@ -260,7 +344,7 @@ local descriptions = {
             text = {
                 '{s:1.2,V:1}Hardlight Barrier',
                 'Reduce {C:attention}Blind{}\'s',
-                'requirement by {C:red}%#1#{}',
+                'requirement by {C:red}#1#%{}',
                 'when {C:attention}Blind{} is selected',
                 '{s:0.8,C:inactive}(Depletes each Blind)'
             }
@@ -362,7 +446,7 @@ local descriptions = {
                 "Every played {C:attention}card{}",
                 "permanently gains",
                 "{C:mult}+#1#{} Mult when scored",
-                '{s:0.8,C:inactive}(Depletes each hand)'
+                '{s:0.8,C:inactive}(Depletes for each card scored)'
             }
         },
         uncat3_equipped = {

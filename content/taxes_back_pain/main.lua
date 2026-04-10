@@ -458,7 +458,7 @@ Wormhole.tbp.Module({
     end,
     module_calculate = function (self, module, context, card)
         if context.wormhome_tbp_module_uninstall and context.card == card and context.module ~= self.slot and context.type == 'failed' then
-            Wormhole.tbp.change_durability(self.slot, -1)
+            Wormhole.tbp.change_durability(card, self.slot, -1)
             return {
                 func = function()
                     local _hand = pseudorandom_element(G.handlist, pseudoseed('tbp_nebula_core'))
@@ -495,8 +495,8 @@ Wormhole.tbp.Module({
                     end
                     if next(used_modules) then
                         local rand_module = pseudorandom_element(used_modules, pseudoseed('tbp_astrophage'))
-                        Wormhole.tbp.change_durability(rand_module, module.amount)
-                        Wormhole.tbp.change_durability(self.slot, -1)
+                        Wormhole.tbp.change_durability(card, rand_module, module.amount)
+                        Wormhole.tbp.change_durability(card, self.slot, -1)
                     end
                 end
             }
@@ -555,8 +555,8 @@ Wormhole.tbp.Module({
                 func = function()
                     local modules = Wormhole.tbp.get_equipped_modules(card)
                     for key, module in pairs(modules) do
-                        if module ~= self.slot and module.durability < module.total_durability then
-                            Wormhole.tbp.change_durability(key, module.amount)
+                        if key ~= self.slot and module.durability < module.total_durability then
+                            Wormhole.tbp.change_durability(card, key, module.amount)
                         end
                     end
                 end
@@ -572,7 +572,7 @@ Wormhole.tbp.Module({
             module.poker_hand = pseudorandom_element(_poker_hands, pseudoseed('tbp_no_core_name1'))
             return {
                 func = function()
-                    Wormhole.tbp.change_durability(self.slot, -1)
+                    Wormhole.tbp.change_durability(card, self.slot, -1)
                 end
             }
         end
@@ -594,13 +594,13 @@ Wormhole.tbp.Module({
     end,
     module_calculate = function (self, module, context, card)
         if context.wormhome_tbp_module_uninstall and context.module ~= self.slot and context.type == 'failed' then
-            Wormhole.tbp.change_durability(self.slot, -1)
+            Wormhole.tbp.change_durability(card, self.slot, -1)
             return {
                 func = function()
                     local modules = Wormhole.tbp.get_equipped_modules(card)
                     for key, module in pairs(modules) do
-                        if module ~= self.slot and module ~= context.card and module.durability < module.total_durability then
-                            Wormhole.tbp.change_durability(key, module.amount)
+                        if key ~= self.slot and module ~= context.card and module.durability < module.total_durability then
+                            Wormhole.tbp.change_durability(card, key, module.amount)
                         end
                     end
                 end
@@ -610,6 +610,118 @@ Wormhole.tbp.Module({
 })
 
 -- WEAPONS --
+
+Wormhole.tbp.Module({
+	key = "void",
+    slot = 'weapons',
+    durability = 20,
+	-- pos = { x = 0, y = 0 },
+	config = {
+		extra = {
+			percent = 0.05,
+		},
+    },
+	loc_vars = function(self, info_queue, module, card)
+		return { vars = { module.ability.extra.percent * 100 } }
+    end,
+    module_calculate = function (self, module, context, card)
+        if context.before and G.GAME.current_round.hands_played == 0 then
+            local destroyed = pseudorandom(self.key.."_amount", 1, #context.full_hand)
+            local hand = SMODS.shallow_copy(context.full_hand)
+            for i = 1, destroyed do
+                local chosen, index = pseudorandom_element(hand, self.key .. "_destroy")
+                SMODS.destroy_cards(chosen)
+                table.remove(hand, index)
+            end
+            Wormhole.tbp.change_durability(card, self.slot, -destroyed)
+            return {
+                score = math.ceil((G.GAME.blind.chips * module.percent) * destroyed)
+            }
+        end
+    end
+})
+
+Wormhole.tbp.Module({
+	key = "ballistics",
+    slot = 'weapons',
+    durability = 25,
+	-- pos = { x = 0, y = 0 },
+	config = {
+		extra = {
+			perma_bonus = 50,
+		},
+    },
+	loc_vars = function(self, info_queue, module, card)
+		return { vars = { module.ability.extra.perma_bonus } }
+    end,
+    module_calculate = function (self, module, context, card)
+        if context.individual and context.cardarea == G.play then
+            context.other_card.ability.perma_bonus = (context.other_card.ability.perma_bonus or 0) + module.perma_bonus
+            Wormhole.tbp.change_durability(card, self.slot, -1)
+            return { message = localize('k_upgrade_ex'), colour = G.C.CHIPS }
+        end
+    end
+})
+
+Wormhole.tbp.Module({
+	key = "waste",
+    slot = 'weapons',
+    durability = 5,
+	-- pos = { x = 0, y = 0 },
+	config = {
+		extra = {
+			mult = 5,
+		},
+    },
+	loc_vars = function(self, info_queue, module, card)
+		return { vars = { module.ability.extra.mult, module.ability.extra.mult * (((G.GAME.tbp or {}).run.modules_failed or {}).total or 0)} }
+    end,
+    module_calculate = function (self, module, context, card)
+        if context.joker_main then
+            Wormhole.tbp.change_durability(card, self.slot, -1)
+            if (G.GAME.tbp.run.modules_failed.total or 0) > 0 then
+                return {
+                    mult = G.GAME.tbp.run.modules_failed.total * module.mult
+                }
+            end
+        end
+    end
+})
+
+Wormhole.tbp.Module({
+	key = "salvo",
+    slot = 'weapons',
+    durability = 4,
+	-- pos = { x = 0, y = 0 },
+	config = {
+		extra = {
+			xmult = 2,
+		},
+    },
+	loc_vars = function(self, info_queue, module, card)
+        local amount = 0
+        if card then
+            for key, _ in pairs(Wormhole.tbp.get_equipped_modules(card)) do
+                amount = amount + 1
+            end
+        end
+		return { vars = { module.ability.extra.xmult, module.ability.extra.xmult ^ amount } }
+    end,
+    module_calculate = function (self, module, context, card)
+        if context.joker_main and #context.scoring_hand == 5 then
+            local amount = 0
+            for key, _ in pairs(Wormhole.tbp.get_equipped_modules(card)) do
+                amount = amount + 1
+                Wormhole.tbp.change_durability(card, key, -1)
+            end
+            if amount > 0 then -- should always be at least 1 but...
+                return {
+                    xmult = module.xmult ^ amount
+                }
+            end
+        end
+    end
+})
 
 -- UTILITY --
 
