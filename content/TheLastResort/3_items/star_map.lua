@@ -12,7 +12,7 @@ SMODS.Consumable{
 	end,
 	hidden = true,
 	loc_vars = function(self, info_queue, card)
-		return {vars = {colours = {SMODS.ConsumableTypes.worm_tlr_constellation.primary_colour}}}
+		return {vars = {colours = {SMODS.ConsumableTypes.worm_tlr_constellation.secondary_colour}}}
 	end,
 	set_sprites = function (self, card, front)
 		card.worm_tlr_canvas_text = SMODS.CanvasSprite{

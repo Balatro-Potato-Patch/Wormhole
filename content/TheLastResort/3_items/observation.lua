@@ -6,7 +6,7 @@ SMODS.Consumable{
 		return G.consumeables.cards[1] and G.consumeables.cards[1].config.center.set == "worm_tlr_constellation" and G.consumeables.cards[1].ability.tier < 4
 	end,
 	loc_vars = function(self, info_queue, card)
-		return {vars = {colours = {SMODS.ConsumableTypes.worm_tlr_constellation.primary_colour}}}
+		return {vars = {colours = {SMODS.ConsumableTypes.worm_tlr_constellation.secondary_colour}}}
 	end,
 	use = function (self, card, area, copier)
 		local _card = G.consumeables.cards[1]
