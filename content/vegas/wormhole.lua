@@ -1013,7 +1013,8 @@ SMODS.PokerHand{
 	evaluate = function(parts, hand)
 		return false
 	end,
-	loc_txt = {}
+	loc_txt = {},
+	no_collection = true
 }
 SMODS.Consumable {
     key = 'kepler',
@@ -1072,7 +1073,8 @@ SMODS.PokerHand{
 	evaluate = function(parts, hand)
 		return false
 	end,
-	loc_txt = {}
+	loc_txt = {},
+	no_collection = true
 }
 SMODS.Consumable {
     key = 'gj',
@@ -1132,7 +1134,8 @@ SMODS.PokerHand{
 	evaluate = function(parts, hand)
 		return false
 	end,
-	loc_txt = {}
+	loc_txt = {},
+	no_collection = true
 }
 SMODS.Consumable {
     key = 'wasp',
