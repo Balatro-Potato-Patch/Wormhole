@@ -10,6 +10,20 @@ return {
 	descriptions = {
 		Back = {},
 		Joker = {
+			j_worm_polarskull_martian = {
+				name = {
+					"F.N.M.",
+					"{s:0.8}Friendly Neighborhood Martian"
+				},
+				text = {
+					"If current {C:attention}Ante{} is beaten by",
+					"only playing a {C:attention}#1#{},",
+					"create {C:attention}#2#{} {C:spectral}Spectral{} cards,",
+					"poker hand changes each {C:attention}Ante{}",
+					"{C:inactive}(Must have room)",
+					"{C:inactive}(Currently: #3#)",
+				},
+			},
 			j_worm_polarskull_launchpad = {
 				name = "Launch Pad",
 				text = {
@@ -204,6 +218,8 @@ return {
 		},
 		v_dictionary = {
 			k_polarskull_left = "#1# left",
+			k_polarskull_martian_inactive = "Inactive",
+			k_polarskull_martian_active = "Active",
 		},
 	},
 }

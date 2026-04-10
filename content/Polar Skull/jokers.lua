@@ -5,6 +5,94 @@ SMODS.Atlas {
     py = 95,
 }
 
+SMODS.Joker({
+    key = "polarskull_martian",
+    rarity = 3,
+    atlas = "polarskull_jokers",
+    pos = { x = 0, y = 0 },
+    cost = 5,
+    discovered = false,
+    blueprint_compat = true,
+    ppu_artist = {"jade"},
+    ppu_coder = { "mariofan" },
+    ppu_team = { "polar_skull" },
+    config = { extra = { poker_hand = "High Card", cards_created = 2, still_successful = true } },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { 
+            localize(card.ability.extra.poker_hand, 'poker_hands'), 
+            card.ability.extra.cards_created,
+            localize {  type = 'variable', key = ((card.ability.extra.still_successful == true and 'k_polarskull_martian_active') or 'k_polarskull_martian_inactive'), vars = { card.ability.extra.still_successful } }
+            } }
+    end,
+
+    calculate = function(self, card, context)
+        if context.before and (context.scoring_name ~= card.ability.extra.poker_hand) and card.ability.extra.still_successful == true and not context.blueprint then
+            card.ability.extra.still_successful = false
+            return {
+                message = localize("k_nope_ex"),
+            }
+        end
+        if context.ante_change and context.ante_end then
+            local cards_made = 0
+            for i = 1, card.ability.extra.cards_created do
+                if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit and card.ability.extra.still_successful then
+                    G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+                    G.E_MANAGER:add_event(Event({
+                        func = (function()
+                            SMODS.add_card {
+                                set = 'Spectral',
+                                key_append = 'FNM' -- Optional, useful for manipulating the random seed and checking the source of the creation in `in_pool`.
+                            }
+                            G.GAME.consumeable_buffer = 0
+                            return true
+                        end)
+                    }))
+                    cards_made = cards_made + 1
+                end
+            end
+            if not context.blueprint then
+                
+            end
+            if cards_made > 0 then
+                SMODS.calculate_effect(
+                        { message = "+" .. cards_made .. " " .. localize('k_spectral'),
+                        colour = G.C.SECONDARY_SET.Spectral},
+                        context.blueprint_card or card)
+            elseif not card.ability.extra.still_successful and not context.blueprint then
+                SMODS.calculate_effect(
+                        { message = localize('k_reset'),
+                        colour = G.C.SECONDARY_SET.Spectral},
+                        card)
+            elseif card.ability.extra.still_successful then
+                SMODS.calculate_effect(
+                        { message = localize('k_no_room_ex'),
+                        colour = G.C.SECONDARY_SET.Spectral},
+                        context.blueprint_card or card)
+            end
+        end
+        if context.ante_change and context.ante_end and not context.blueprint then
+            card.ability.extra.still_successful = true
+            --Taken from Vanilla Remade's to-do list
+            local _poker_hands = {}
+            for handname, _ in pairs(G.GAME.hands) do
+                if SMODS.is_poker_hand_visible(handname) and handname ~= card.ability.extra.poker_hand then
+                    _poker_hands[#_poker_hands + 1] = handname
+                end
+            end
+            card.ability.extra.poker_hand = pseudorandom_element(_poker_hands, "vremade_to_do")
+        end
+    end,
+    set_ability = function(self, card, initial, delay_sprites) --Taken from Vanilla Remade's to-do list
+        local _poker_hands = {}
+        for handname, _ in pairs(G.GAME.hands) do
+            if SMODS.is_poker_hand_visible(handname) and handname ~= card.ability.extra.poker_hand then
+                _poker_hands[#_poker_hands + 1] = handname
+            end
+        end
+        card.ability.extra.poker_hand = pseudorandom_element(_poker_hands, "polarskull_martian")
+    end
+})
+
 SMODS.Joker {
     key = 'polarskull_launchpad',
 
