@@ -24,11 +24,33 @@ SMODS.Joker{
     eternal_compat = true,
     -- unlocked = true,
     -- discovered = true,
-    
+    ppu_artist = { "vissa" },
     ppu_coder = { "vissa" },
     ppu_team = { "dummies" },
 
     pronouns = "he_him",
+
+    wormhole_pos_extra = { x = 1, y = 0 },
+    wormhole_anim_extra = {
+        { x = 1, y = 0, t = 16 },
+        { xrange = { first = 2, last = 4 }, y = 0, t = 0.1 },
+        { xrange = { first = 0, last = 4 }, y = 1, t = 0.1 },
+        { xrange = { first = 2, last = 4 }, y = 0, t = 0.1 },
+        { xrange = { first = 0, last = 4 }, y = 1, t = 0.1 },
+        { xrange = { first = 2, last = 4 }, y = 0, t = 0.1 },
+        { xrange = { first = 0, last = 4 }, y = 1, t = 0.1 },
+        { xrange = { first = 2, last = 4 }, y = 0, t = 0.1 },
+        { xrange = { first = 0, last = 4 }, y = 1, t = 0.1 },
+        { x = 1, y = 0, t = 0.1 },
+        { xrange = { first = 2, last = 4 }, y = 0, t = 0.1 },
+        { xrange = { first = 0, last = 4 }, y = 1, t = 0.1 },
+        { x = 1, y = 0, t = 0.2 },
+        { xrange = { first = 2, last = 4 }, y = 0, t = 0.1 },
+        { xrange = { first = 0, last = 4 }, y = 1, t = 0.1 },
+        { xrange = { first = 2, last = 4 }, y = 0, t = 0.1 },
+        { xrange = { first = 0, last = 4 }, y = 1, t = 0.1 },
+    },
+
 
     calculate = function(self, card, context)
         if context.blueprint then

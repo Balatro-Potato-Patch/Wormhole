@@ -35,7 +35,7 @@ return {
         },
         Joker = {
             j_worm_dum_worm = {
-                name = "Worm The Eater",
+                name = "Mr. Glyst",
                 text = {
                     "All booster packs are {C:attention}free{}.",
                     "{C:red}Eats{} booster packs while",
