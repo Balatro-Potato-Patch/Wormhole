@@ -9,17 +9,18 @@ the deck (13)
 
 Drink names: (approx 4 required)
 Hadra Colida - Pina Colada + Hadron Collider. Gives the Tipsy edition to one of your cards held in hand. (Wombat Country)
-Cosmospolitan - Cosmopolitan, but with an emphasis on the cosmos. Gives the Drunk edition to one of your cards held in hand. (Prof. Renderer)
+[ART DONE] Cosmospolitan - Cosmopolitan, but with an emphasis on the cosmos. Gives the Drunk edition to one of your cards held in hand. (Prof. Renderer)
 Mojitury - Mojito + Mercury. Mojito because it has mint in it, and Axy mentioned something minty for Mercury. Gives the Very Drunk edition to one of your cards held in hand. (Prof. Renderer / Axyraandas)
 Black Hole Bomb - Gives the Blackout edition on one of your cards held in hand. (Prof. Renderer)
 
 Food names: (approx 3 required)
-Jupiter Jawbreakers (Axyraandas)
+[ART DONE] Jupiter Jawbreakers (Axyraandas)
 Saturn's Onion Rings (Axyraandas / Stanza Rorae)
 Little Debbie's Cosmic Brownies (Axyraandas)
+[ART DONE] Space Jam
 
 Bartender ideas: (3-4 required)
-Casino Bartender, makes lucky cards drunk and provides food/drink on lucky card hit
+[ART DONE] Casino Bartender, makes lucky cards drunk and provides food/drink on lucky card hit
 Speed Bartender, provides food/drink with a #G.jokers chance out of max number of joker slots on each joker trigger. Can use SMODS.pseudorandom_probability for this. (Axyraandas)
 Bar/Bat Mitzvah, provides every food and non-alcoholic drink in this modpack after 13/12 played hands, respectively. Or maybe provides a random food (using attributes) every hand after the 13/12 th played hand. (Axyraandas)
 
