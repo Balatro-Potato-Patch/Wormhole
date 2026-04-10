@@ -52,3 +52,10 @@ SMODS.Atlas{
 	px = 34,
 	py = 34
 }
+
+SMODS.Atlas{
+	key = "tlr_deck",
+	path = "TheLastResort/deck.png",
+	px = 71,
+	py = 95
+}
