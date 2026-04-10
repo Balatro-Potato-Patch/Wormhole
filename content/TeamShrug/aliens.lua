@@ -445,7 +445,7 @@ SMODS.Consumable{
     cost = 4,
     set = 'shrug_alien',
     atlas = 'shrug_alien_cards',
-    pos = {x = 0, y = 0},
+    pos = {x = 3, y = 0},
     unlocked = true,
     discovered = true,
     config = {extra = {}},
@@ -491,5 +491,6 @@ SMODS.Consumable{
         }))
     end,
     ppu_coder = {"randomsongv2"},
-    ppu_team = {"shrug"}
+    ppu_team = {"shrug"},
+    ppu_artist = {"waffle", "microwave"}
 }
