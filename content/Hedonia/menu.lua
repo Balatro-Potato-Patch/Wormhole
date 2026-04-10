@@ -3,8 +3,8 @@
 SMODS.ConsumableType {
     key = "worm_hedonia_menu",
     collection_rows = { 4, 3 },
-    primary_colour = HEX("fff56c"), --shoutout cryptid https://github.com/SpectralPack/Cryptid/blob/8e041f1b8b3c2f2c5379dabe55bdfb74d28dc08b/items/code.lua#L4
-    secondary_colour = HEX("33622c")
+    primary_colour = HEX("9b7abb"), --shoutout cryptid https://github.com/SpectralPack/Cryptid/blob/8e041f1b8b3c2f2c5379dabe55bdfb74d28dc08b/items/code.lua#L4
+    secondary_colour = HEX("503a66")
 }
 
 -- PLACEHOLDER ART ATLAS
