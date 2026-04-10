@@ -185,7 +185,7 @@ SMODS.Consumable {
                     G.deck.config.card_limit = G.deck.config.card_limit + 1
                     table.insert(G.playing_cards, copy)
                     G.hand:emplace(copy)
-                    SMODS.modify_rank(copy, -card.ability.extra.reduction)
+                    assert(SMODS.modify_rank(copy, -card.ability.extra.reduction))
                 end
                 _card:juice_up(0.3, 0.5)
                 SMODS.destroy_cards(G.hand.highlighted)
