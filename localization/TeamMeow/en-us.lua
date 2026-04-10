@@ -310,6 +310,15 @@ return {
 					"Increases max {C:worm_meow_spacetart}©Spacetart{} limit",
 					"on cards by {C:attention}+#1# "
 				}
+			},
+			j_worm_meow_cotobo_box = {
+				name = "Schrödinger's Box",
+				text = {
+					"When a {C:attention}Blind{} is selected",
+					"create either a {C:worm_meow_spacetart}@Spacetart{}",
+					"or a {C:worm_meow_zodicat}Zodicat{}",
+					"{C:inactive}(Must have room)"
+				}
 			}
 		},
 		Other = {
