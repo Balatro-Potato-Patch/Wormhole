@@ -8,12 +8,12 @@ SMODS.ConsumableType {
 }
 
 SMODS.Booster {
-    key = "spaces",
+    key = "util_spaces_normal_1",
     kind = 'util_Spaces',
     cost = 4,
     pos = { x = 0, y = 0 },
     config = { extra = 3, choose = 1 },
-    group_key = "k_spaces_pack",
+    group_key = "k_util_spaces",
     loc_vars = function(self, info_queue, card)
 	local cfg = (card and card.ability) or self.config
 	return {
