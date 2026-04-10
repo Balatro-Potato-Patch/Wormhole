@@ -82,18 +82,7 @@ return {
                     }
                 }
             },
-            Joker = { -- why is there two of these?
-                j_worm_thorn_jimbo = {
-                    name = {"Jimbo",
-                        "{s:0.6}But He Is In SPACE"
-                    },
-                    text = {
-                        "Creates a {C:planet}Planet{} card",
-                        "when a hand is played",
-                        "{C:inactive}I'm {C:red}perishing{C:inactive}, #1#!"
-                    }
-                }
-            },
+            -- why is there two of these? | I wish I had a time machine to ask this question to myself. But now there is one!
             Joker = {
                 j_worm_thorn_jimbo = {
                     name = {"Jimbo",
@@ -131,6 +120,15 @@ return {
                         "percent of {C:spades}Dark Suits{}",
                         "in deck above {C:attention}#3#%{}",
                         "{C:inactive}(Currently: {C:white,X:mult}X#2#{}{C:inactive} Mult)"
+                    }
+                },
+                j_worm_thorn_mars_face = {
+                    name = "Face on Mars",
+                    text = {
+                        "If played hand contains",
+                        "a {C:attention}Four of a Kind{},",
+                        "copies unscored {C:attention}face{} cards",
+                        "and draws copies to {C:attention}hand{}"
                     }
                 },
             }

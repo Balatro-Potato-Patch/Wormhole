@@ -15,6 +15,7 @@ SMODS.Joker {
 	eternal_compat = false,
 	perishable_compat = true,
     jand_gemini_compat = false, -- Me making our Jokers compatible with my shit... Hehehehe :Þ
+    attributes = {'space', 'planet'},
     loc_vars = function(self, info_queue, card)
         return { vars = {G.PROFILES[G.SETTINGS.profile].name}}
     end,
@@ -41,6 +42,7 @@ SMODS.Joker {
 	eternal_compat = false,
 	perishable_compat = true,
     jand_gemini_compat = false,
+    attributes = {'space', 'planet', 'chance'},
     config = { extra = { odds = 2, times = 2 } },
     loc_vars = function(self, info_queue, card)
         local numerator, denominator = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, 'thorn_binary')
@@ -84,6 +86,7 @@ SMODS.Joker {
 	eternal_compat = false,
 	perishable_compat = true,
     jand_gemini_compat = true,
+    attributes = {'space', 'xmult', 'spades', 'clubs'},
     config = { extra = { xmult_base = 1, xmult_gain = 0.1, xmult = 1, percentage_floor = 45 } },
     loc_vars = function(self, info_queue, card)
         if card.area.config.type == "Joker" then
@@ -112,6 +115,62 @@ SMODS.Joker {
         end
     end,
     ppu_artist = {"This will get replaced by ERROR"},
+    ppu_coder = {"evgast"},
+    ppu_team = {"thorn"},
+}
+
+SMODS.Joker {
+	key = 'thorn_mars_face',
+	rarity = 2,
+    atlas = "thorn_cards",
+	pos = { x = 3, y = 0 },
+	cost = 6,
+	blueprint_compat = true,
+	eternal_compat = false,
+	perishable_compat = true,
+    jand_gemini_compat = false,
+    attributes = {'space', 'hand_type', 'generation'},
+    config = { extra = {  } },
+    loc_vars = function(self, info_queue, card)
+    end,
+    calculate = function(self, card, context) --Most of this is vremade code for DNA :Þ
+        if context.individual and context.cardarea == "unscored" and next(context.poker_hands["Four of a Kind"]) then
+            if context.other_card:is_face() then
+                G.playing_card = (G.playing_card and G.playing_card + 1) or 1
+                local card_copied = copy_card(context.other_card, nil, nil, G.playing_card)
+                card_copied:add_to_deck()
+                G.deck.config.card_limit = G.deck.config.card_limit + 1
+                table.insert(G.playing_cards, card_copied)
+                G.hand:emplace(card_copied)
+                card_copied.states.visible = nil
+
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        card_copied:start_materialize()
+                        return true
+                    end
+                }))
+                return {
+                    message = localize('k_copied_ex'),
+                    colour = G.C.CHIPS,
+                    func = function()
+                        G.E_MANAGER:add_event(Event({
+                            func = function()
+                                SMODS.calculate_context({ playing_card_added = true, cards = { card_copied } })
+                                return true
+                            end
+                        }))
+                    end
+                }
+            end
+        end
+    end,
+    set_sprites = function(self, card, front)
+        if math.random() > 1/2 then
+            card.children.center:set_sprite_pos({x = 4, y = 0})
+        end
+    end,
+    ppu_artist = {"hatstack"},
     ppu_coder = {"evgast"},
     ppu_team = {"thorn"},
 }
