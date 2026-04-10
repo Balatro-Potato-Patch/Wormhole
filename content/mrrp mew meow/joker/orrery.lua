@@ -2,7 +2,7 @@
 SMODS.Joker{
 key = "orrery",
 atlas = "mrrp",
-pos = {x = 4, y = 5},
+pos = {x = 3, y = 1},
     config = { extra = { tarots = 1 } },
 unlocked = true, 
 discovered = false, 
@@ -36,7 +36,7 @@ end,
 SMODS.Joker{
 key = "orrery",
 atlas = "mrrp",
-pos = {x = 4, y = 5},
+pos = {x = 3, y = 1},
     config = { extra = { tarot = {"c_star", "c_moon", "c_sun", "c_world"} } },
 unlocked = true, 
 discovered = false, 

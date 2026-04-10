@@ -4,7 +4,7 @@ SMODS.Joker {
     atlas = "mrrp",
     pos = {
         x = 4,
-        y = 5
+        y = 1
     },
     rarity = 1,
     cost = 5,
@@ -92,7 +92,7 @@ SMODS.Joker {
     atlas = "mrrp",
     pos = {
         x = 4,
-        y = 5
+        y = 1
     },
     rarity = 1,
     cost = 5,
