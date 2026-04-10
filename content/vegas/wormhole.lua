@@ -705,7 +705,9 @@ SMODS.Blind{
 		name = "White Hole",
 		text = {
 			"Decrease level of all",
-			"poker hands by 1"
+			"poker hands by 1",
+			"{s:0.8}Created by Team {s:0.8,V:1}People Found In Vegas{}",
+			"{s:0.8}Code & Art by {s:0.8,C:chips}Ben Roffey{}"
 		}
 	},
 	atlas = "vegas_blinds",
@@ -718,6 +720,9 @@ SMODS.Blind{
 	ppu_team = {"People Found In Vegas"},
 	ppu_coder = {"Ben Roffey"},
 	ppu_artist = {"Ben Roffey"},
+	loc_vars = function()
+		return { vars = { colours = HEX("73fdff") }}
+	end,
 	calculate = function(self, blind, context)
 		if context.before then
 			update_hand_text({sound = 'button', volume = 0.7, pitch = 0.8, delay = 0.3}, {handname=localize('k_all_hands'),chips = '...', mult = '...', level=''})
@@ -747,7 +752,7 @@ SMODS.Blind{
 	end
 }
 
-local TIMERTIME = 2*60 --for DynaTextEffect to read, set to HeatDeath.config.time
+local TIMERTIME = 2*60 --for DynaTextEffect to read, set to HeatDeath.config.extra.current 
 
 SMODS.DynaTextEffect {
     key = "vegas_timer",
@@ -772,14 +777,72 @@ SMODS.DynaTextEffect {
 --Sound Synthesis for Heat Death Blind
 local rate      = 44100 -- samples per second
 local length    = 25  -- 0.03125 seconds
-local soundData = love.sound.newSoundData(math.floor(length*rate), rate, 16, 1)
+local totalSamples = math.floor(length*rate)
+local soundData = love.sound.newSoundData(totalSamples, rate, 16, 1)
 for i=0, soundData:getSampleCount() - 1 do
-	soundData:setSample(i, math.random(0, 20000)) -- noise
+	frequency = math.random() * 2 - 1 -- noise
+	volume = i / (totalSamples - 1) --volume ramp increasing smoothly from 0 to 1
+	soundData:setSample(i, frequency * volume) 
 end
 local source = love.audio.newSource(soundData)
 local function noise(volume) 
 	source:setVolume(volume or 0.5)
 	source:play() 
+end
+
+local function lose_the_game()
+	
+	G.STATE = G.STATES.GAME_OVER --Slow down the music
+
+	--copied from game.lua Game:update_game_over(dt): display game over screen
+	remove_save()
+
+	if G.GAME.round_resets.ante <= G.GAME.win_ante then
+		if not G.GAME.seeded and not G.GAME.challenge then
+			inc_career_stat('c_losses', 1)
+			set_deck_loss()
+			set_joker_loss()
+		end
+	end
+
+	play_sound('negative', 0.5, 0.7)
+	play_sound('whoosh2', 0.9, 0.7)
+
+	G.SETTINGS.paused = true
+	G.FUNCS.overlay_menu{
+		definition = create_UIBox_game_over(),
+		config = {no_esc = true}
+	}
+	G.ROOM.jiggle = G.ROOM.jiggle + 3
+        
+	if G.GAME.round_resets.ante <= G.GAME.win_ante then --Only add Jimbo to say a quip if the game over happens when the run is lost
+		local Jimbo = nil
+		G.E_MANAGER:add_event(Event({
+			trigger = 'after',
+			delay = 2.5,
+			blocking = false,
+			func = (function()
+				if G.OVERLAY_MENU and G.OVERLAY_MENU:get_UIE_by_ID('jimbo_spot') then 
+					print("is space joker?", G.P_CENTERS.j_space)
+					Jimbo = Card_Character({center = G.P_CENTERS.j_space}) --Trying to find space joker here, but doesn't work?
+					local spot = G.OVERLAY_MENU:get_UIE_by_ID('jimbo_spot')
+					spot.config.object:remove()
+					spot.config.object = Jimbo
+					Jimbo.ui_object_updated = true
+					Jimbo:add_speech_bubble('lq_'..math.random(1,10), nil, {quip = true})
+					Jimbo:say_stuff(5)
+					end
+				return true
+			end)
+		}))
+	end
+	--
+end
+
+local function tags_visible(bool)
+	for i = 1, #G.HUD_tags do
+		G.HUD_tags[i].states.visible = bool
+	end
 end
 
 --Recursive Event for Heat Death Blind
@@ -797,84 +860,100 @@ heatdeath_timer = function(heatdeath)
 				
 				--stop if Heat Death is rerolled
 				if G.GAME.round_resets.blind_choices.Boss ~= "bl_worm_heatdeath" then
-					TIMERTIME = 2*60
-					heatdeath.config.time = 2*60
+					TIMERTIME = heatdeath.config.time
+					heatdeath.config.extra.current = heatdeath.config.time
 					heatdeath.config.timing = false
 					source:stop()
 					return true
 				end
 				
 				--countdown
-				heatdeath.config.time = heatdeath.config.time - 1
-				TIMERTIME = heatdeath.config.time
+				heatdeath.config.extra.current = heatdeath.config.extra.current - 1
+				TIMERTIME = heatdeath.config.extra.current
 
 				--play a sound
-				if heatdeath.config.time % 2 == 0 then
+				if heatdeath.config.extra.current % 2 == 0 then
 					play_sound("worm_vegas_tick")
 				else
 					play_sound("worm_vegas_tock")
 				end
 
-				if heatdeath.config.time == 20 then
-					noise(0.0) --Play noise starting at volume 0
-				elseif heatdeath.config.time < 20 then
-					source:setVolume((20 - heatdeath.config.time) * 0.005) --Increase the volume subtly each second
+				if heatdeath.config.extra.current == 20 then
+					noise(0.1) --Play noise at volume 0.1 (any more and it is too loud! it ramps up from 0, reaching 0.1 after 20 seconds)
+					attention_text({
+						scale = 0.7, text = "0:20", colour = G.C.MULT, maxw = 12, hold = 1, align = 'cm', offset = {x = 0,y = -1},major = G.play
+					})
+				end
+
+				if heatdeath.config.extra.current <= 10 then
+					local minutes = math.floor(heatdeath.config.extra.current/60)
+					local seconds = heatdeath.config.extra.current - minutes*60
+					disp_text = minutes..":".. string.format("%02d", seconds)
+					attention_text({
+						scale = 0.7, text = disp_text, colour = G.C.MULT, maxw = 12, hold = 1, align = 'cm', offset = {x = 0,y = -1},major = G.play
+					})
+					if G.GAME.blind.config.blind.key == "bl_worm_heatdeath" then
+						G.GAME.blind.children.animatedSprite.T.scale = G.GAME.blind.children.animatedSprite.T.scale * 1.5
+					end
+				end
+
+				if heatdeath.config.extra.current == 1 then
+					G.GAME.blind.children.animatedSprite.T.scale = G.GAME.blind.children.animatedSprite.T.scale * 10
 				end
 				
-				if heatdeath.config.time == 0 then
+				if heatdeath.config.extra.current == 0 then ------------ IF TIMER REACHES 0
 					
-					--lose
-					source:stop()
+					source:stop() --stop the noise
+					restoreVolume = G.SETTINGS.SOUND.volume
+					G.SETTINGS.SOUND.volume = 0 -- mute all sounds incl. music
 
-					G.STATE = G.STATES.GAME_OVER --Slow down the music
 					G.GAME.blind.config.blind = heatdeath --Set this for correct reason for death
 
-					--copied from game.lua Game:update_game_over(dt): display game over screen
-					remove_save()
+					G.hand.states.visible = false --make cardareas invisible
+					G.jokers.states.visible = false
+					G.consumeables.states.visible = false
+					G.deck.states.visible = false
+					if G.buttons then G.buttons:remove() end
+					tags_visible(false)
 
-					if G.GAME.round_resets.ante <= G.GAME.win_ante then
-						if not G.GAME.seeded and not G.GAME.challenge then
-							inc_career_stat('c_losses', 1)
-							set_deck_loss()
-							set_joker_loss()
+					G.E_MANAGER:add_event(Event{
+						blockable = false,
+						blocking = false,
+						pause_force = true,
+						no_delete = true,
+						trigger = 'after',
+						delay = 5,
+						func = function()
+							attention_text({
+								scale = 0.7, text = "...", maxw = 12, hold = 2, align = 'cm', offset = {x = 0,y = -1},major = G.play
+							})
+							return true
 						end
-					end
+					})
 
-					play_sound('negative', 0.5, 0.7)
-					play_sound('whoosh2', 0.9, 0.7)
-
-					G.SETTINGS.paused = true
-					G.FUNCS.overlay_menu{
-						definition = create_UIBox_game_over(),
-						config = {no_esc = true}
-					}
-					G.ROOM.jiggle = G.ROOM.jiggle + 3
-        
-					if G.GAME.round_resets.ante <= G.GAME.win_ante then --Only add Jimbo to say a quip if the game over happens when the run is lost
-						local Jimbo = nil
-						G.E_MANAGER:add_event(Event({
-							trigger = 'after',
-							delay = 2.5,
-							blocking = false,
-							func = (function()
-								if G.OVERLAY_MENU and G.OVERLAY_MENU:get_UIE_by_ID('jimbo_spot') then 
-									Jimbo = Card_Character({center = G.P_CENTERS.j_space}) --Trying to find space joker here, but doesn't work?
-									local spot = G.OVERLAY_MENU:get_UIE_by_ID('jimbo_spot')
-									spot.config.object:remove()
-									spot.config.object = Jimbo
-									Jimbo.ui_object_updated = true
-									Jimbo:add_speech_bubble('lq_'..math.random(1,10), nil, {quip = true})
-									Jimbo:say_stuff(5)
-									end
-								return true
-							end)
-						}))
-					end
-					--
+					--display the usual death screen after some time
+					G.E_MANAGER:add_event(Event{
+						blockable = false,
+						blocking = false,
+						pause_force = true,
+						no_delete = true,
+						trigger = 'after',
+						delay = 20,
+						func = function()
+							lose_the_game()
+							G.hand.states.visible = true --restore
+							G.jokers.states.visible = true
+							G.consumeables.states.visible = true
+							G.deck.states.visible = true
+							tags_visible(true)
+							G.SETTINGS.SOUND.volume = restoreVolume --unmute the music for the game over screen
+							return true
+						end
+					})
 
 					--Reset variables for next time Heat Death shows up
-					TIMERTIME = 2*60
-					heatdeath.config.time = 2*60
+					TIMERTIME = heatdeath.config.time
+					heatdeath.config.extra.current = heatdeath.config.time
 					heatdeath.config.timing = false
 
 					return true
@@ -887,6 +966,9 @@ heatdeath_timer = function(heatdeath)
         end
     })
 end
+
+
+
 
 SMODS.Sound{
 	key = "vegas_tick",
@@ -903,25 +985,35 @@ SMODS.Blind{
 	loc_txt = {
 		name = "Heat Death",
 		text = {
-			"{E:worm_vegas_timer}#1#:#2#"
+			"{E:worm_vegas_timer}#1#:#2#",
+			"{s:0.8}Created by Team {s:0.8,V:1}People Found In Vegas{}",
+			"{s:0.8}Code & Art by {s:0.8,C:chips}Ben Roffey{}"
 		}
 	},
-	config = {time = 2*60, timing = false},
+	config = {time = 21, timing = false, extra = {current = 21}},
 	loc_vars = function(self)
-		local minutes = math.floor(self.config.time/60)
-		local seconds = self.config.time - minutes*60
+		local minutes = math.floor(self.config.extra.current/60)
+		local seconds = self.config.extra.current - minutes*60
 		
 		if self.config.timing == false then
-			TIMERTIME = self.config.time
+			TIMERTIME = self.config.extra.current
 
 			self.config.timing = true
 			heatdeath_timer(self)
 		end
 
-		return { vars = { minutes, string.format("%02d", seconds) }}
+		return { vars = { minutes, string.format("%02d", seconds), colours = {HEX("73fdff")} }}
+	end,
+	get_loc_debuff_text = function(self)
+		local minutes = math.floor(self.config.extra.current/60)
+		local seconds = self.config.extra.current - minutes*60
+		disp_text = minutes..":".. string.format("%02d", seconds)
+		return {
+			disp_text
+		}
 	end,
 	collection_loc_vars = function(self)
-		return { vars = {2, "00"}}
+		return { vars = {2, "00", colours = {HEX("73fdff")}}}
 	end,
 	atlas = "vegas_blinds",
 	pos = {x = 0, y = 1},
@@ -936,7 +1028,8 @@ SMODS.Blind{
 	calculate = function(self, blind, context)
 		if context.end_of_round then
 			self.config.timing = false
-			self.config.time = 2*60
+			self.config.extra.current = self.config.time
+			G.GAME.blind.children.animatedSprite.T.scale = 1
 			if source then 
 				source:stop()
 			end
@@ -950,7 +1043,8 @@ SMODS.Blind{
 	end,
 	defeat = function(self)
 		self.config.timing = false
-		self.config.time = 2*60
+		self.config.extra.current = self.config.time
+		G.GAME.blind.children.animatedSprite.T.scale = 1
 		if source then 
 			source:stop()
 		end
