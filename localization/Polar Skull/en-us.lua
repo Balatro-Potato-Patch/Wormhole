@@ -8,7 +8,15 @@ local rocket_text = {
 
 return {
 	descriptions = {
-		Back = {},
+		Back = {
+			b_worm_polarskull_space_station = {
+				name = "Space Station Deck",
+				text = {
+					"Start with {C:attention}Gravitational Slingshot{}",
+					"and {C:polarskull_rocket}Atlas-Centaur{}",
+				},
+			},
+		},
 		Joker = {
 			j_worm_polarskull_martian = {
 				name = {
@@ -156,6 +164,24 @@ return {
 				},
 			},
 		},
+		Voucher = {
+			v_worm_polarskull_gravitational_slingshot = {
+				name = "Gravitational Slingshot",
+				text = {
+					"The current {C:attention}active {C:polarskull_rocket}Rocket{} card",
+					"lasts for {C:attention}+1{} extra round",
+					"each time you play the",
+					"{C:planet}Planet Card{} for the same hand",
+				},
+			},
+			v_worm_polarskull_prepetual_motion_machine = {
+				name = "Prepetual Motion Machine",
+				text = {
+					"{C:attention}Active {C:polarskull_rocket}Rockets{} last {C:attention}indefinitely{}",
+					"until another {C:polarskull_rocket}Rocket{} is used",
+				},
+			},
+		},
 
 		PotatoPatch = {
 			PotatoPatchTeam_polar_skull = {
@@ -184,7 +210,10 @@ return {
 			PotatoPatchDev_rainstar = {
 				name = "Rainstar",
 				text = {
-					"e",
+					"the sun",
+					"technically formulated the team",
+					"made gravitational slingshot, prepetual motion machine vouchers and",
+					"space station deck",
 				},
 			},
 			PotatoPatchDev_comykel = {

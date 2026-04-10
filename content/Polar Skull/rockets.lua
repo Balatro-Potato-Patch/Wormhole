@@ -169,23 +169,37 @@ local function register_rocket(args)
 				cache_bonus_mult = 0
 			end
 		elseif context.end_of_round and context.main_eval then
-			card.ability.extra.rounds = card.ability.extra.rounds - 1
-			if card.ability.extra.rounds <= 0 then
-				cache_bonus_chips = 0
-				cache_bonus_mult = 0
-				card.ability.extra.active = false
-				card:start_dissolve()
+			if G.GAME.used_vouchers["v_worm_polarskull_prepetual_motion_machine"] then
+				return {
+					message = "Nope!"
+				}
+			else
+				card.ability.extra.rounds = card.ability.extra.rounds - 1
+				if card.ability.extra.rounds <= 0 then
+					cache_bonus_chips = 0
+					cache_bonus_mult = 0
+					card.ability.extra.active = false
+					card:start_dissolve()
+				end
+				return {
+					message = localize({
+						type = "variable",
+						key = "k_polarskull_left",
+						vars = {card.ability.extra.rounds},
+					}),
+				}
 			end
-			return {
-				message = localize({
-					type = "variable",
-					key = "k_polarskull_left",
-					vars = { card.ability.extra.rounds },
-				}),
-			}
 		elseif context.check_eternal and context.other_card == card then
 			return { no_destroy = true }
 		end
+        if context.using_consumeable and context.consumeable.config.center.set == "Planet" and G.GAME.used_vouchers["v_worm_polarskull_gravitational_slingshot"] then
+            if card.ability.extra.hand == context.consumeable.ability.hand_type then
+                card.ability.extra.rounds = card.ability.extra.rounds + 1
+				return {
+					message = "+1 Round!"
+				}
+            end
+        end
 	end
 	args.update = args.update or function(self, card, dt)
 		if not card.ability.extra.active then return end
