@@ -22,9 +22,7 @@ SMODS.Joker{
             for _, scored_card in ipairs(context.scoring_hand) do
                    if scored_card:is_suit('Diamonds') then
                     diamond_cards = diamond_cards + 1
-                    
-                   end
-                   
+                end   
             end
             card.ability.extra.diamonds_remaining = card.ability.extra.diamonds_remaining - diamond_cards
             if card.ability.extra.diamonds_remaining <= 0 then

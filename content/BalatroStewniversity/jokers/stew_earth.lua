@@ -46,4 +46,6 @@ SMODS.Joker{ --Stew Earth
             }
         end
     end
+
+    --art by wingy, code by plagger
 }
