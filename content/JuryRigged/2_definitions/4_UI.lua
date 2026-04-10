@@ -1,13 +1,9 @@
 Wormhole.JR_UTILS.create_UIBox_current_hand_row = function(handname, simple)
-  local name = loc_parse_string(G.localization.misc.dictionary
-    ['worm_jr_satellites_' .. Wormhole.JR_UTILS.get_satellite(handname)])
-  local desc = loc_parse_string(G.localization.misc.dictionary
-    ['jr_satellite_descriptions_' .. Wormhole.JR_UTILS.get_satellite(handname)])
-  local args = { text = desc }
+  local key = 'sat_worm_' .. Wormhole.JR_UTILS.get_satellite(handname)
 
   return (not in_collection or SMODS.is_poker_hand_visible(handname)) and
       (not simple and
-        { n = G.UIT.R, config = { align = "cm", padding = 0.05, r = 0.1, colour = darken(G.C.JOKER_GREY, 0.1), emboss = 0.05, hover = true, force_focus = true, on_demand_tooltip = { text = name, filler = { func = create_popup_UIBox_tooltip, args = desc } } }, nodes = {
+        { n = G.UIT.R, config = { align = "cm", padding = 0.05, r = 0.1, colour = darken(G.C.JOKER_GREY, 0.1), emboss = 0.05, hover = true, force_focus = true, detailed_tooltip = G.P_CENTERS[key] }, nodes = {
           { n = G.UIT.C, config = { align = "cl", padding = 0, minw = 5 }, nodes = {
             { n = G.UIT.C, config = { align = "cm", padding = 0.01, r = 0.1, colour = G.C.HAND_LEVELS[math.min(7, G.GAME.jr.satellite_hands[handname].level)], minw = 1.5, outline = 0.8, outline_colour = G.C.WHITE }, nodes = {
               { n = G.UIT.T, config = { text = localize('k_level_prefix') .. G.GAME.jr.satellite_hands[handname].level, scale = 0.5, colour = G.C.UI.TEXT_DARK } }
@@ -16,12 +12,9 @@ Wormhole.JR_UTILS.create_UIBox_current_hand_row = function(handname, simple)
               { n = G.UIT.T, config = { text = ' ' .. localize(handname, 'poker_hands'), scale = 0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true } }
             } }
           } },
-          { n = G.UIT.C, config = { align = "cm", padding = 0.05, colour = G.C.BLACK, r = 0.1 }, nodes = {
-            { n = G.UIT.T, config = { text = ' ' .. "Wormhole.JR_UTILS.localize_satellite(handname)" .. ' ', scale = 0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true } } } },
-          { n = G.UIT.C, config = { align = "cm" }, nodes = {
-            { n = G.UIT.T, config = { text = '  #', scale = 0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true } }
-          } },
-          { n = G.UIT.C, config = { align = "cm", padding = 0.05, colour = G.C.L_BLACK, r = 0.1, minw = 0.9 } }
+          { n = G.UIT.C, config = { align = "cm", padding = 0.05, colour = G.C.BLACK, r = 0.1, minw = 4.5, maxw = 4.5 }, nodes = {
+            { n = G.UIT.T, config = { text = ' ' .. Wormhole.JR_UTILS.localize_satellite(handname) .. ' ', scale = 0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true } } } },
+          { n = G.UIT.C, config = { align = "cm" } },
         } })
       or nil
 end

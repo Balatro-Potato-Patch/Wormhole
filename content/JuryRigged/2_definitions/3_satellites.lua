@@ -59,13 +59,21 @@ Wormhole.JR_UTILS.Satellite {
       vars = {
         _level,
         localize(card.ability.extra.hand_type, 'poker_hands'),
-        _level <= 1 and '' or 's',
+        _level == 1 and '' or 's',
         colours = { (_level == 1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, _level)]) }
       }
     }
   end,
   jr_loc_vars = function(self)
-    return {}
+    local _level = G.GAME.jr and G.GAME.jr.satellite_hands[card.ability.extra.hand_type].level or 0
+    return {
+      vars = {
+        _level,
+        localize(card.ability.extra.hand_type, 'poker_hands'),
+        _level <= 1 and '' or 's',
+        colours = { (_level == 1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, _level)]) }
+      }
+    }
   end
 }
 
@@ -209,7 +217,9 @@ Wormhole.JR_UTILS.Satellite {
               repetitions = G.GAME.jr.galileo_targets[tostring(i)] or 0,
               card = context.other_card
             }
-          else break end
+          else
+            break
+          end
         end
       end
     end
