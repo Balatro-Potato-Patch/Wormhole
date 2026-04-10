@@ -250,3 +250,118 @@ Wormhole.SHRUG_Joker {
     },
     ppu_team = { "shrug" }
 }
+
+
+
+---DARK MATTER---
+-----------------
+---DARK MATTER---
+
+Wormhole.SHRUG_Joker {
+    key = "shrug_dark_matter",
+    atlas = "shrug_jokers",
+    pos = { x = 0, y = 0 },
+    rarity = 3,
+    cost = 7,
+    config = { extra = { scale = 0.1 } },
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = true,
+
+    -- Check if a card is in the current tallied suits
+    check_suit = function(playing_card, suits_used)
+        
+        -- Iterate through the suit types
+        for i, suit_type in pairs(suits_used) do
+            if suit_type == playing_card.base.suit then
+                return {
+                    new_suit = false,
+                    pos = i
+                }
+            end
+        end
+
+        -- New suit type
+        return {
+            new_suit = true,
+            pos = #suits_used + 1
+        }
+
+    end,
+
+    -- Get Xmult amount
+    find_mult = function(card)
+        if G.playing_cards then
+            
+            -- Set up suit tallies
+            local suits_used = { }
+            local suit_tally = { }
+
+            for _, playing_card in ipairs(G.playing_cards) do
+                if not SMODS.has_no_suit(playing_card) then
+
+                    -- Establish proper suit position
+                    local suit_pos = card.config.center.check_suit(playing_card, suits_used)
+
+                    -- Add a new suit to the counter
+                    if suit_pos.new_suit then
+                        suits_used[suit_pos.pos] = playing_card.base.suit
+                        suit_tally[suit_pos.pos] = 0
+                    end
+
+                    -- Tick up tally
+                    suit_tally[suit_pos.pos] = suit_tally[suit_pos.pos] + 1
+                
+                end
+            end
+
+            -- Set up first and second highest suit types
+            local high_type = 0
+            local low_type = 0
+
+            -- Iterate through suits
+            for _, amount in pairs(suit_tally) do
+                if amount > high_type then
+                    low_type = high_type
+                    high_type = amount
+                elseif amount > low_type then
+                    low_type = amount
+                end
+            end
+
+            -- Establish final value
+            local xmult_return = (high_type - low_type) * card.ability.extra.scale
+
+            -- Return final value
+            return 1 + xmult_return
+
+        else
+
+            -- Return 1
+            return 1
+
+        end
+        
+    end,
+
+    -- Return Xmult amount
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.scale, card.config.center.find_mult(card) } }
+    end,
+
+    -- Calculations
+    calculate = function(self, card, context)
+        if context.joker_main then
+            local xmult_return = card.config.center.find_mult(card)
+            return {
+                xmult = xmult_return
+            }
+        end
+    end,
+
+    -- Credits
+    ppu_coder = {
+        "microwave",
+    },
+    ppu_team = { "shrug" }
+}

@@ -96,6 +96,20 @@ return {
                     "{C:inactive}(Must have room){}"
                 }
             },
+
+            -- DARK MATTER
+            j_worm_shrug_dark_matter = {
+                name = "Dark Matter",
+                text = {
+                    "{X:red,C:white}X#1#{} Mult for each",
+                    "card in your {C:attention}full deck{}",
+                    "with your most numerous {C:attention}suit{}",
+                    "{X:red,C:white}-X#1#{} Mult for each",
+                    "card in your {C:attention}full deck{} with your",
+                    "second-most numerous {C:attention}suit{}",
+                    "{C:inactive}(Currently {}{X:red,C:white}X#2#{}{C:inactive} Mult){}"
+                }
+            },
         },
 
 
