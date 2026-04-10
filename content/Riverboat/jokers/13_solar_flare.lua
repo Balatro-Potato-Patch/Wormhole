@@ -9,7 +9,7 @@ SMODS.Joker({
     config = { extra = { x_mult = 3, active = false } },
     ppu_coder = { "fooping" },
     ppu_team = { "riverboat" },
-    attributes = { "xmult", "planets", "spectral" },
+    attributes = { "xmult", "planet", "spectral" },
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.x_mult, (card.ability.extra.active and '' or 'not ') } }
     end,

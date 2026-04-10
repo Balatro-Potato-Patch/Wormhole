@@ -13,6 +13,7 @@ SMODS.Joker {
     blueprint_compat = true,
     ppu_coder = { "fooping" },
     ppu_team = { "riverboat" },
+    attributes = { "editions", "chance" },
     loc_vars = function(self, info_queue, card)
         return {
             vars = { SMODS.get_probability_vars(card, 1, card.ability.extra.odds, "worm_riverboat_fractal") }

@@ -18,9 +18,9 @@ SMODS.Joker({
 
         if paired then
             local exponent = 1 + (bought * 0.1)
-            return { 
-                key = self.key .. '_paired', 
-                vars = { hands, bought, exponent } 
+            return {
+                key = self.key .. '_paired',
+                vars = { hands, bought, exponent }
             }
         end
         return { vars = { number_format(math.max(1, bought)) } }
@@ -39,7 +39,7 @@ SMODS.Joker({
 
             if to_big(x_mult) > to_big(1) then
                 return {
-                    message = localize({type='variable', key='a_xmult', vars={number_format(x_mult)}}),
+                    message = localize({ type = 'variable', key = 'a_xmult', vars = { number_format(x_mult) } }),
                     Xmult_mod = x_mult
                 }
             end

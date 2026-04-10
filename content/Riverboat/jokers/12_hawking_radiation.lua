@@ -24,7 +24,7 @@ SMODS.Joker({
 
         -- Triggered by card destruction
         if (context.remove_playing_cards or context.destroyed_card or context.remove_card) and not context.blueprint then
-            local count = #(context.removed or {1})
+            local count = #(context.removed or { 1 })
             card.ability.extra.x_chips = card.ability.extra.x_chips + (card.ability.extra.gain * count)
             return {
                 message = 'Upgrade!',

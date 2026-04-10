@@ -17,7 +17,7 @@ SMODS.Joker {
     ppu_artist = { "blamperer" },
     ppu_coder = { "blamperer" },
     ppu_team = { "riverboat" },
-    attributes = { "chips", "mult" },
+    attributes = { "chips", "mult", "rank", "three", "seven" },
     loc_vars = function(self, info_queue, card)
         return {
             vars = {
