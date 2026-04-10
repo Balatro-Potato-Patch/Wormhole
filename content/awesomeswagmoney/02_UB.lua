@@ -121,7 +121,7 @@ SMODS.Consumable {
         text = {
             "Earn {C:money}$#1#{}, then permanently",
             "increase this amount to" ,
-            "the next {C:spectral}prime{} number"
+            "the next {C:spectral}prime number{}"
         }
     },
     atlas = 'worm_asm_ubs', 
@@ -192,6 +192,65 @@ SMODS.Consumable {
                 return true
             end
         }))
+        delay(0.6)
+
+    end
+}
+
+SMODS.Sound({key = "asm_clownhonk", path = 'clownhonk.ogg'})
+SMODS.Sound({key = "asm_boom", path = 'explosion.ogg'})
+
+SMODS.Consumable {
+    key = "blacephalon",
+    set = "worm_ultrabeast",
+    loc_txt = {
+        name = "Blacephalon",
+        text = {
+                    "Add {C:dark_edition}Polychrome{} to a",
+                    "random {C:attention}card held in hand{},",
+                    "then destroy all the others"
+        }
+    },
+    atlas = 'worm_asm_ubs', 
+    pos = { x = 0, y = 1 }, 
+    soul_pos = { x = 1, y = 1 }, 
+
+    config = { extra_slots_used = 1 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = {  }}
+    end,
+    can_use = function (self, card)
+        return G.hand
+    end,
+    use = function (self, card, area, copier)
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function()
+                play_sound('worm_asm_boom', 0.96+math.random()*0.08, 0.3)
+                local _card = pseudorandom_element(G.hand.cards,pseudoseed('clown'))
+                _card:set_edition('e_polychrome')
+                for k, v in ipairs(G.hand.cards) do
+                    if v ~= _card then 
+                        v:juice_up(5, 0.5)
+                        delay(0.5/#G.hand.cards)
+                        SMODS.destroy_cards(v, nil, true)
+                    end
+                end
+                return true
+            end
+        }))
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.8,
+            func = function()
+                for i = 1, G.hand.config.card_limit-1 do
+                    draw_card(G.deck,G.hand, 90,'up', true)
+                end
+                return true
+            end
+        }))
+
         delay(0.6)
 
     end
