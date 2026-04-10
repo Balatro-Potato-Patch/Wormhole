@@ -180,3 +180,73 @@ Wormhole.SHRUG_Joker {
     },
     ppu_team = { "shrug" }
 }
+
+
+
+---BINARY SUNSET---
+-------------------
+---BINARY SUNSET---
+
+Wormhole.SHRUG_Joker {
+    key = "shrug_binary_sunset",
+    atlas = "shrug_jokers",
+    pos = { x = 0, y = 0 },
+    rarity = 2,
+    cost = 5,
+    config = { extra = { once = false } },
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = true,
+
+    -- Calculations
+    calculate = function(self, card, context)
+        if context.after and context.scoring_name == "Two Pair" then
+            if card.ability.extra.once and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+                
+                -- Establish extra card space and reset card ability
+                G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+                if not context.blueprint then card.ability.extra.once = false end
+
+                -- Event
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        SMODS.add_card{
+                            set = "shrug_alien"
+                        }
+                        G.GAME.consumeable_buffer = 0
+                        return true
+                    end,
+                }))
+
+                -- Return message
+                return {
+                    message = "+1 Alien",
+                    colour = G.C.SET.shrug_alien
+                }
+
+            elseif not card.ability.extra.once then
+                
+                -- First of 2 hands played
+                if not context.blueprint then card.ability.extra.once = true end
+                return {
+                    message = "1/2",
+                    colour = G.C.SET.shrug_alien
+                }
+            end
+        elseif context.after and card.ability.extra.once then
+            
+            -- Reset for wrong hand played
+            if not context.blueprint then card.ability.extra.once = false end
+            return {
+                message = "Reset!",
+                colour = G.C.SET.shrug_alien
+            }
+        end
+    end,
+
+    -- Credits
+    ppu_coder = {
+        "microwave",
+    },
+    ppu_team = { "shrug" }
+}

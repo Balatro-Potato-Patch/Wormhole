@@ -85,6 +85,17 @@ return {
                     "{C:attention}Nebulous Card{} after scoring"
                 }
             },
+
+            -- BINARY SUNSET
+            j_worm_shrug_binary_sunset = {
+                name = "Binary Sunset",
+                text = {
+                    "If {C:attention}2{} consecutive {C:attention}poker hands{}",
+                    "are both {C:attention}Two Pairs{}, create",
+                    "a random {C:dark_edition}Alien{} card",
+                    "{C:inactive}(Must have room){}"
+                }
+            },
         },
 
 
