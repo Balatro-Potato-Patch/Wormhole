@@ -1,4 +1,6 @@
 SMODS.Joker {
+    ppu_team = {'Mrrp Mew Meow :3'},
+    ppu_coder = {'Cyan'},
 	key = 'nasahiring',
 	atlas = "mrrp", pos = {x=4, y=5},
 	rarity = 4,
