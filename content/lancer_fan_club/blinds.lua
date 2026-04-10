@@ -5,7 +5,7 @@ SMODS.Blind {
 
     dollars = 5,
     boss = {
-        min = 3,
+        min = 4,
     },
     boss_colour = HEX("54b2c0"),
 
