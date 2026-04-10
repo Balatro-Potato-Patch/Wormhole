@@ -47,6 +47,14 @@ SMODS.Atlas {
     path = "lancer_fan_club/spectrals.png"
 }
 
+SMODS.Atlas {
+    key = "lfc_blinds",
+    px = 34,
+    py = 34,
+    path = "lancer_fan_club/blinds.png",
+    atlas_table = "ANIMATION_ATLAS",
+    frames = 21
+}
 
 -- Sounds
 SMODS.Sound {

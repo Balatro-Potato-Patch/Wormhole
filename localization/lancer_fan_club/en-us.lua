@@ -66,6 +66,18 @@ return {
             }
         },
 
+        Blind = {
+            bl_worm_lfc_fleet = {
+                name = "The Fleet",
+                text = {
+                    "After drawing playing",
+                    "cards, destroy a random card",
+                    "held in hand",
+                    "+1 hand size"
+                },
+            },
+        },
+
         Joker = {
             j_worm_lfc_meteor_shower = {
                 name = "Meteor Shower",
