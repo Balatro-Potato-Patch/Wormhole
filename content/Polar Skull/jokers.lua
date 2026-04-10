@@ -161,7 +161,7 @@ SMODS.Joker {
     discovered = false,
     blueprint_compat = true,
     ppu_artist = {"jade"},
-    ppu_coder = { "cloudzxiii" },
+    ppu_coder = { "cloudzxiii", "noodlemire" },
     ppu_team = { "polar_skull" },
 
     config = {
@@ -172,14 +172,28 @@ SMODS.Joker {
     },
 
     calculate = function(self, card, context)
-        if context.using_consumeable and context.consumeable.ability.set == "polarskull_rocket" and context.consumeable.ability.extra.hand ~= context.consumeable.ability.extra.previous_hand then
-            SMODS.scale_card(card, {
-                ref_table = card.ability.extra,
-                ref_value = "x_mult",
-                scalar_value = "xmult_gain",
-                operation = '+',
-                message_key = 'a_xmult',
-            })
+        if context.using_consumeable and context.consumeable.ability.set == "polarskull_rocket" and not context.blueprint then
+			local found = false
+			for _, other_card in ipairs(G.consumeables.cards) do
+				if other_card ~= context.consumeable and other_card.ability.set == "polarskull_rocket" and (other_card.ability.extra.active or other_card.ability.extra.was_activated) then
+					if other_card.ability.extra.hand == context.consumeable.ability.extra.hand then
+						return
+					else
+						found = true
+					end
+				end
+			end
+			if found then
+		        SMODS.scale_card(card, {
+		            ref_table = card.ability.extra,
+		            ref_value = "x_mult",
+		            scalar_value = "xmult_gain",
+		            operation = '+',
+		            message_key = 'a_xmult',
+		        })
+			end
+		elseif context.joker_main then
+			return {x_mult = card.ability.extra.x_mult}
         end
     end,
 }

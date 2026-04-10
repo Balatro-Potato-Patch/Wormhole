@@ -120,12 +120,20 @@ local function register_rocket(args)
 	args.ppu_coder = args.ppu_coder or { "noodlemire" }
 	args.ppu_team = { "polar_skull" }
 	args.loc_vars = args.loc_vars or function(self, info_queue, card)
+		local ppm = G.GAME.used_vouchers["v_worm_polarskull_prepetual_motion_machine"]
+		local key = self.key
+		if key == "c_worm_polarskull_ssdolphin" and ppm then
+			ppm = false
+			key = key.."_ppm"
+			table.insert(info_queue, {key = "v_worm_polarskull_prepetual_motion_machine", set = "Voucher"})
+		end
 		return {
+			key = key,
 			vars = {
 				card.ability.extra.hand,
-				card.ability.extra.rounds,
+				ppm and localize("k_polarskull_unlimited") or card.ability.extra.rounds,
 				localize(card.ability.extra.active and "k_active_ex" or "k_polarskull_inactive"),
-				localize(card.ability.extra.rounds == 1 and "k_polarskull_round_singular" or "k_polarskull_round_plural"),
+				localize(card.ability.extra.rounds == 1 and not ppm and "k_polarskull_round_singular" or "k_polarskull_round_plural"),
 				colours = {
 					card.ability.extra.active and G.C.GREEN or G.C.RED,
 				},
@@ -142,10 +150,9 @@ local function register_rocket(args)
 		local other = false
 		for _, other_card in ipairs(G.consumeables.cards) do
 			if (other_card.ability.set == "polarskull_rocket" or other_card.config.center.key == "c_worm_polarskull_ssdolphin") and other_card.ability.extra.active and not other_card.getting_sliced then
-				-- made it so card.ability.extra.previous_hand is set on every rocket before destroying the old one (for Rocket Science)
-				card.ability.extra.previous_hand = other_card.ability.extra.hand
 				if not G.GAME.polarskull_rockets_stack then
 					other_card.ability.extra.active = false
+					other_card.ability.extra.was_activated = true
 					other_card:start_dissolve()
 				end
 				other = true
@@ -168,37 +175,28 @@ local function register_rocket(args)
 				mult = mult + cache_bonus_mult
 				cache_bonus_mult = 0
 			end
-		elseif context.end_of_round and context.main_eval then
-			if G.GAME.used_vouchers["v_worm_polarskull_prepetual_motion_machine"] then
-				return {
-					message = "Nope!"
-				}
-			else
-				card.ability.extra.rounds = card.ability.extra.rounds - 1
-				if card.ability.extra.rounds <= 0 then
-					cache_bonus_chips = 0
-					cache_bonus_mult = 0
-					card.ability.extra.active = false
-					card:start_dissolve()
-				end
-				return {
-					message = localize({
-						type = "variable",
-						key = "k_polarskull_left",
-						vars = {card.ability.extra.rounds},
-					}),
-				}
+		elseif context.end_of_round and context.main_eval and (not G.GAME.used_vouchers["v_worm_polarskull_prepetual_motion_machine"] or self.key == "c_worm_polarskull_ssdolphin") then
+			card.ability.extra.rounds = card.ability.extra.rounds - 1
+			if card.ability.extra.rounds <= 0 then
+				cache_bonus_chips = 0
+				cache_bonus_mult = 0
+				card.ability.extra.active = false
+				card:start_dissolve()
 			end
+			return {
+				message = localize({
+					type = "variable",
+					key = "k_polarskull_left",
+					vars = {card.ability.extra.rounds},
+				}),
+			}
 		elseif context.check_eternal and context.other_card == card then
 			return { no_destroy = true }
-		end
-        if context.using_consumeable and context.consumeable.config.center.set == "Planet" and G.GAME.used_vouchers["v_worm_polarskull_gravitational_slingshot"] then
-            if card.ability.extra.hand == context.consumeable.ability.hand_type then
-                card.ability.extra.rounds = card.ability.extra.rounds + 1
-				return {
-					message = "+1 Round!"
-				}
-            end
+        elseif context.using_consumeable and context.consumeable.config.center.set == "Planet" and G.GAME.used_vouchers["v_worm_polarskull_gravitational_slingshot"] and not G.GAME.used_vouchers["v_worm_polarskull_prepetual_motion_machine"] and card.ability.extra.hand == context.consumeable.ability.hand_type then
+            card.ability.extra.rounds = card.ability.extra.rounds + 1
+			return {
+				message = localize("k_polarskull_plus_round")
+			}
         end
 	end
 	args.update = args.update or function(self, card, dt)

@@ -10,5 +10,7 @@ SMODS.Back {
     config = { vouchers = { "v_worm_polarskull_gravitational_slingshot" }, consumables = {"c_worm_polarskull_atlascentaur"} },
     atlas = "polarskull_decks",
     pos = { x = 0, y = 0 },
-	ppu_coder = {"rainstar"}
+	ppu_artist = {"noodlemire"},
+	ppu_coder = {"rainstar"},
+    ppu_team = { "polar_skull" },
 }

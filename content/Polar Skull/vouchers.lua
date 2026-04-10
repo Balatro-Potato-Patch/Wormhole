@@ -5,7 +5,6 @@ SMODS.Atlas {
     py = 95,
 }
 
-
 SMODS.Voucher {
     key = "polarskull_gravitational_slingshot",
     atlas = "polarskull_vouchers",
@@ -15,8 +14,9 @@ SMODS.Voucher {
     loc_vars = function(self, info_queue, card)
         return { vars = {  } }
     end,
-	ppu_artist = {"noodlemire"},
-	ppu_coder = {"rainstar"}
+	ppu_artist = {"jade", "noodlemire"},
+	ppu_coder = {"rainstar"},
+    ppu_team = { "polar_skull" },
     -- the code for it is in rockets.lua
 }
 
@@ -29,7 +29,8 @@ SMODS.Voucher {
     loc_vars = function(self, info_queue, card)
         return { vars = {  } }
     end,
-	ppu_artist = {"jade"},
-	ppu_coder = {"rainstar"}
+	ppu_artist = {"jade", "noodlemire"},
+	ppu_coder = {"rainstar"},
+    ppu_team = { "polar_skull" },
     -- the code for it is in rockets.lua
 }

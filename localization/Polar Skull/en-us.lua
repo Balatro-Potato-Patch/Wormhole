@@ -128,6 +128,16 @@ return {
 					"{B:1,C:white}#3#",
 				},
 			},
+			c_worm_polarskull_ssdolphin_ppm = {
+				name = "SS Dolphin",
+				text = {
+					"All played hands contain every",
+					"{C:legendary,E:1}Poker Hand{} for {C:attention}#2#{} #4#,",
+					"combining all base {C:mult}Mult{} and {C:chips}Chips{} values",
+					"{C:inactive}(Not affected by {C:attention}Perpetual Motion Machine{C:inactive})",
+					"{B:1,C:white}#3#",
+				},
+			},
 		},
 		Other = {
 			undiscovered_polarskull_rocket = {
@@ -201,9 +211,10 @@ return {
 			PotatoPatchDev_noodlemire = {
 				name = "Noodlemire",
 				text = {
-					"Bowl of Noodles",
-					"Kickstarted the idea of the {C:polarskull_rocket}Rocket{} consumables!",
-					"Also made some art."
+					"{C:money}Bowl of Noodles",
+					"Lead programmer and idea producer",
+					"behind the {C:polarskull_rocket}Rocket{} Cards!",
+					"Also made some art and bugfixes."
 				},
 			},
 			PotatoPatchDev_mariofan = {
@@ -252,6 +263,8 @@ return {
 			k_polarskull_round_plural = "Rounds",
 			k_polarskull_rocket_pack = "Rocket Pack",
 			k_polarskull_plus_rocket = "+1 Rocket",
+			k_polarskull_plus_round = "+1 Round!",
+			k_polarskull_unlimited = "unlimited",
 		},
 		v_dictionary = {
 			k_polarskull_left = "#1# left",

@@ -9,6 +9,7 @@ PotatoPatchUtils.Team({
     name = "polar_skull",
     colour = HEX("aefffc"),
     loc = true,
+	credit_rows = {3, 3},
 })
 
 PotatoPatchUtils.Developer({
