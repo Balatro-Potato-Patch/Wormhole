@@ -48,6 +48,17 @@ return {
 
 
         },
+        Blind = {
+            bl_worm_euda_anomaly = {
+                name = {
+                    "The Anomaly"
+                },
+                text = {
+                    "Played hands this run",
+                    "add 20% to blind size"
+                }
+            }
+        },
         Joker = {
             j_worm_euda_message = {
                 name = {
@@ -78,7 +89,8 @@ return {
                     "{C:inactive}You should have listened...{}",
                     }
                 }
-            },j_worm_wowsignal = {
+            },
+            j_worm_euda_wowsignal = {
                 name = "Wow! Signal",
                 text = {
                     "{C:green}#1# in #2#{} chance to give ",
