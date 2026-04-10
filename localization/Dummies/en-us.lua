@@ -98,6 +98,17 @@ return {
                     }
                 },
             },
+			j_worm_dum_crystalsphere = {
+                name = "Crystal Sphere",
+                text = {
+                    {
+                        "{C:green}#1# in #2#{} chance to {C:attention}retrigger{}",
+                        "all played and scored",
+                        "cards if played hand",
+                        "contains any {C:attention}face{} cards"
+                    }
+                },
+            },
 			j_worm_dum_scrooge = {
                 name = "DuckTales: The Moon",
                 text = {
