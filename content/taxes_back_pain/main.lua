@@ -1,6 +1,38 @@
 Wormhole.tbp = {}
 Wormhole.tbp.config = SMODS.current_mod.config
 
+function Wormhole.tbp.get_resuited_thruster_suit()
+    if G.GAME and G.GAME.current_round and G.GAME.current_round.tbp_resuited_thruster_suit then
+        return G.GAME.current_round.tbp_resuited_thruster_suit
+    end
+
+    if not Wormhole.tbp.resuited_thruster_preview_suit then
+        Wormhole.tbp.resuited_thruster_preview_suit = pseudorandom_element(
+            {'Spades', 'Hearts', 'Diamonds', 'Clubs'},
+            pseudoseed('tbp_resuited_thruster_preview')
+        )
+    end
+
+    return Wormhole.tbp.resuited_thruster_preview_suit
+end
+
+function Wormhole.tbp.reset_resuited_thruster_suit()
+    local suits = {'Spades', 'Hearts', 'Diamonds', 'Clubs'}
+    local previous_suit = Wormhole.tbp.get_resuited_thruster_suit()
+    if previous_suit then
+        for i = #suits, 1, -1 do
+            if suits[i] == previous_suit then
+                table.remove(suits, i)
+                break
+            end
+        end
+    end
+
+    local next_suit = pseudorandom_element(suits, pseudoseed('tbp_resuited_thruster_' .. G.GAME.round_resets.ante))
+    G.GAME.current_round.tbp_resuited_thruster_suit = next_suit
+    Wormhole.tbp.resuited_thruster_preview_suit = next_suit
+end
+
 if Wormhole.tbp.config.swap_buttons == nil then
     Wormhole.tbp.config.swap_buttons = false
 end
@@ -155,7 +187,8 @@ SMODS.Joker({
             for _, v in ipairs(self.module_types) do
                 if card.ability.extra.modules[v].key and (G.P_CENTERS[card.ability.extra.modules[v].key] or {}).loc_vars then
                     local vars = G.P_CENTERS[card.ability.extra.modules[v].key]:loc_vars(info_queue, {ability = { extra = card.ability.extra.modules[v] } }, card).vars
-                    vars.colours = {darken(Wormhole.tbp.module_colours[v], 0.3)}
+                    vars.colours = vars.colours or {}
+                    table.insert(vars.colours, 1, darken(Wormhole.tbp.module_colours[v], 0.3))
                     info_queue[#info_queue+1] = {set = 'tbp_module', key = card.ability.extra.modules[v].key .. '_equipped', vars = vars, module_type = v, module_info = card.ability.extra.modules[v]}
                 else
                     info_queue[#info_queue+1] = {set = 'tbp_module', key = 'c_worm_tbp_module_missing', module_type = v, vars = {colours = {mix_colours(G.ARGS.LOC_COLOURS.inactive, Wormhole.tbp.module_colours[v], 0.5)}}}
@@ -935,6 +968,137 @@ Wormhole.tbp.Module({
             Wormhole.tbp.change_durability(card, self.slot, -1)
             return {
                 dollars = module.money
+            }
+        end
+    end
+})
+
+-- THRUSTERS --
+
+-- Warp Drive
+Wormhole.tbp.Module({
+	key = "warp_drive",
+    slot = 'thrusters',
+    durability = 5,
+	-- pos = { x = 0, y = 0 },
+	config = {
+		extra = {
+            xmult_gain = 1.5,
+            current_xmult = 1
+        },
+    },
+	loc_vars = function(self, info_queue, module, card)
+		local xmult_gain = module.xmult_gain or (module.ability and module.ability.extra and module.ability.extra.xmult_gain) or 1.5
+		local current_xmult = module.current_xmult or (module.ability and module.ability.extra and module.ability.extra.current_xmult) or 1
+		return { vars = { xmult_gain, current_xmult } }
+    end,
+    module_calculate = function(self, module, context, card)
+        module.xmult_gain = module.xmult_gain or 1.5
+        module.current_xmult = module.current_xmult or 1
+
+        if context.skip_blind then
+            Wormhole.tbp.change_durability(card, self.slot, -1)
+            module.current_xmult = module.current_xmult + module.xmult_gain
+            return {
+                message = localize{type='variable', key='a_xmult', vars={module.current_xmult}},
+                colour = G.C.MULT,
+                card = card
+            }
+        end
+        if context.joker_main and module.current_xmult and module.current_xmult > 1 then
+            return {
+				xmult = module.current_xmult,
+                colour = G.C.MULT,
+                card = card
+            }
+        end
+    end
+})
+
+-- Temporal Jump Thrusters
+Wormhole.tbp.Module({
+	key = "temporal_jump",
+    slot = 'thrusters',
+    durability = 5,
+	-- pos = { x = 0, y = 0 },
+	config = {
+		extra = {
+            tags = 2
+        },
+    },
+	loc_vars = function(self, info_queue, module, card)
+		return { vars = { module.ability.extra.tags } }
+    end,
+    module_calculate = function(self, module, context, card)
+        if context.skip_blind then
+            Wormhole.tbp.change_durability(card, self.slot, -1)
+            return {
+                func = function()
+                    for i = 1, module.tags do
+                        add_tag(Tag(get_next_tag_key('tag_skip')))
+                    end
+                end
+            }
+        end
+    end
+})
+
+-- Hyperlight Rotors
+Wormhole.tbp.Module({
+	key = "hyperlight_rotors",
+    slot = 'thrusters',
+    durability = 10,
+	-- pos = { x = 0, y = 0 },
+	config = {
+		extra = {
+            xmult_per_slot = 1
+        },
+    },
+	loc_vars = function(self, info_queue, module, card)
+		local empty_slots = G.jokers and (G.jokers.config.card_limit - #G.jokers.cards) or 0
+		local current_xmult = 1 + (empty_slots * module.ability.extra.xmult_per_slot)
+		return { vars = { module.ability.extra.xmult_per_slot, current_xmult } }
+    end,
+    module_calculate = function(self, module, context, card)
+        if context.joker_main then
+            local empty_slots = G.jokers and (G.jokers.config.card_limit - #G.jokers.cards) or 0
+            if empty_slots > 0 then
+                return {
+					xmult = 1 + (empty_slots * module.xmult_per_slot),
+                    colour = G.C.MULT,
+                    message = localize{type='variable',key='a_xmult',vars={1 + (empty_slots * module.xmult_per_slot)}},
+                    card = card
+                }
+            end
+        end
+    end
+})
+
+-- Resuited Thruster
+Wormhole.tbp.Module({
+	key = "resuited_thruster",
+    slot = 'thrusters',
+    durability = 25,
+	config = {
+		extra = {
+            chips = 10
+        },
+    },
+	loc_vars = function(self, info_queue, module, card)
+        local suit_name = Wormhole.tbp.get_resuited_thruster_suit()
+		local suit_plural = localize(suit_name, 'suits_plural')
+		local suit_color = G.C.SUITS[suit_name]
+		
+		return { vars = { module.ability.extra.chips, suit_plural, colours = { suit_color } } }
+    end,
+    module_calculate = function(self, module, context, card)
+        local current_suit = Wormhole.tbp.get_resuited_thruster_suit()
+        
+        if context.individual and context.cardarea == G.play and context.other_card:is_suit(current_suit) then
+            Wormhole.tbp.change_durability(card, self.slot, -1)
+            return {
+                chips = module.chips,
+                card = card
             }
         end
     end

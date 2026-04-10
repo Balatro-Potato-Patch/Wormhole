@@ -403,6 +403,76 @@ local descriptions = {
             }
         },
         -- THRUSTERS --
+        warp_drive = {
+            name = 'Warp Drive',
+            text = {
+                'Skip Blind: gain {X:mult,C:white} X#1# {} mult',
+                '{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive})',
+                '{C:inactive,s:0.8}Damaged when skipping a blind'
+            }
+        },
+        warp_drive_equipped = {
+            name = '{C:attention}Warp Drive',
+            text = {
+                '{s:1.2,V:1}Warp Drive{}',
+                'Skip Blind: gain {X:mult,C:white} X#1# {} mult',
+                '{C:inactive,s:0.8}(Currently {X:mult,C:white}X#2#{C:inactive})',
+                '{C:inactive,s:0.8}Depletes when skipping a blind'
+            }
+        },
+        temporal_jump = {
+            name = 'Temporal Jump Thrusters',
+            text = {
+                'Skip Blind: Get {C:attention}#1#{} {C:attention}Skip Tags',
+                '{C:inactive,s:0.8}Damaged when skipping a blind'
+            }
+        },
+        temporal_jump_equipped = {
+            name = '{C:attention}Temporal Jump Thrusters',
+            text = {
+                '{s:1.2,V:1}Temporal Jump Thrusters{}',
+                'Skip Blind: Get {C:attention}#1#{} {C:attention}Skip Tags',
+                '{C:inactive,s:0.8}Depletes when skipping a blind'
+            }
+        },
+        hyperlight_rotors = {
+            name = 'Hyperlight Rotors',
+            text = {
+                'This ship gives {X:mult,C:white} X#1# {C:mult} Mult',
+                'per empty {C:attention}Joker slot',
+                '{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive})',
+                '{C:inactive,s:0.8}Damaged when scoring'
+            }
+        },
+        hyperlight_rotors_equipped = {
+            name = '{C:attention}Hyperlight Rotors',
+            text = {
+                '{s:1.2,V:1}Hyperlight Rotors{}',
+                'This ship gives {X:mult,C:white} X#1# {C:mult} Mult',
+                'per empty {C:attention}Joker slot',
+                '{C:inactive,s:0.8}(Currently {X:mult,C:white}X#2#{C:inactive})',
+                '{C:inactive,s:0.8}Depletes when scoring'
+            }
+        },
+        resuited_thruster = {
+            name = 'Resuited Thruster',
+            text = {
+                'Played {V:1}#2#{} cards',
+                'give {C:chips}+#1#{} Chips',
+                '{C:inactive,s:0.8} Damaged when scoring',
+                '{C:inactive,s:0.8} Suit changes at end of round'
+            }
+        },
+        resuited_thruster_equipped = {
+            name = '{C:attention}Resuited Thruster',
+            text = {
+                '{s:1.2,V:1}Resuited Thruster{}',
+                'Played {V:2}#2#{} cards',
+                'give {C:chips}+#1#{} Chips',
+                '{C:inactive,s:0.8} Depletes when scoring',
+                '{C:inactive,s:0.8} Suit changes at end of round'
+            }
+        },
         -- UNCATEGORIZED --
         uncat1 = {
             name = 'Uncategorized 1',
