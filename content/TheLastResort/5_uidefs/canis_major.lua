@@ -40,7 +40,7 @@ function G.UIDEF.Wormhole_TLR_canis_major(args)
         if i > (args.page-1)*cards_per_page and i <= args.page*cards_per_page then
             if not v then break end
             local area = CardArea(G.CARD_W/2, G.CARD_H/2, G.CARD_W, G.CARD_H, {type = "title"})
-            local card = Card(0, 0, G.CARD_W, G.CARD_H, G.P_CARDS.empty, v.key)
+            local card = Card(0, 0, G.CARD_W, G.CARD_H, G.P_CARDS.empty, G.P_CENTERS[v.key])
             area:emplace(card)
             local entry = {n = G.UIT.C, config = {align = 'cm', padding = 0.2}, nodes = {
                 {n = G.UIT.R, config = {minw = G.CARD_W, minh = G.CARD_H, colour = G.C.CLEAR}, nodes = {
