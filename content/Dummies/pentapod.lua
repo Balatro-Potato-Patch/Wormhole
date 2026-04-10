@@ -15,8 +15,8 @@ local legs_atlas = SMODS.Atlas {
 local function solve_legs(anim, ox, oy)
     local legs = {}
     for _, foot in ipairs(anim.feet_interpolated) do
-        local tip_x = foot.y - oy
-        local tip_y = -foot.x + ox
+        local tip_x = foot.y - oy + 0.5
+        local tip_y = -foot.x + ox - 0.5
 
         local mid_x = tip_x / 2
         local mid_y = tip_y / 2
@@ -69,9 +69,30 @@ function ease(table, key, finish)
     ev:handle {}
 end
 
+function no_moving(card, recurse)
+    if card and
+        card.ability and
+        card.ability.extra and
+        card.ability.extra.anim and
+        card.ability.extra.anim.feet_interpolated then
+        for _, v in ipairs(card.ability.extra.anim.feet_interpolated) do
+            v.moving = false
+        end
+    end
+
+    if not recurse then
+        G.E_MANAGER:add_event(Event {
+            func = function()
+                no_moving(card, true)
+                return true
+            end
+        })
+    end
+end
+
 SMODS.Joker {
     key = 'dum_pentapod',
-    config = { extra = { chips = 0, d_chips = 5, rank = 5 } },
+    config = { extra = { x_mult = 5, cards = 5 } },
     rarity = 3,
     atlas = atlas.key,
     pos = { x = 0, y = 0 },
@@ -82,16 +103,12 @@ SMODS.Joker {
     ppu_team = { "dummies" },
     attributes = {},
     loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.d_chips, card.ability.extra.rank, card.ability.extra.chips } }
+        return { vars = { card.ability.extra.x_mult, card.ability.extra.cards } }
     end,
     calculate = function(self, card, context)
-        if context.individual and context.cardarea == G.play and context.other_card:get_id() == card.ability.extra.rank and not context.blueprint then
-            SMODS.scale_card(card, { ref_table = card.ability.extra, ref_value = "chips", scalar_value = "d_chips" })
-            return {}, true
-        end
-        if context.joker_main then
+        if context.joker_main and #context.scoring_hand == card.ability.extra.cards then
             return {
-                chips = card.ability.extra.chips
+                x_mult = card.ability.extra.x_mult
             }
         end
     end,
@@ -169,6 +186,15 @@ SMODS.Joker {
                 })
             end
         end
+    end,
+    load = function(self, card, card_table, other_card)
+        no_moving(card_table)
+    end,
+    set_sprites = function(self, card, front)
+        no_moving(card)
+    end,
+    set_ability = function(self, card, initial, delay_sprites)
+        no_moving(card)
     end
 }
 

@@ -132,9 +132,8 @@ return {
             j_worm_dum_pentapod = {
                 name = "Pentapod",
                 text = {
-                    "Gain {C:chips}+#1#{} Chips per",
-                    "played and scored {C:attention}#2#",
-                    "{C:inactive}(Currently {C:chips}+#3#{C:inactive} Chips)"
+                    "{X:mult,C:white}X#1#{} Mult if",
+                    "exactly {C:attention}#2#{} cards score"
                 }
             }
         },
