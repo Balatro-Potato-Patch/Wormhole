@@ -39,7 +39,7 @@ SMODS.Joker {
     cost = 6,
     atlas = "dum_carnivore",
     pos = { x = 0, y = 0 },
-    config = { extra = { mult_gain = 4, chips_gain = 13, xmult_gain = 0.2, mult = 0, chips = 0, xmult = 1 } },
+    config = { extra = { mult_gain = 7, chips_gain = 17, xmult_gain = 0.3, mult = 0, chips = 0, xmult = 1 } },
     loc_vars = function(self, info_queue, card)
         return { vars = {
             card.ability.extra.mult_gain, card.ability.extra.chips_gain, card.ability.extra.xmult_gain,

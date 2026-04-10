@@ -101,7 +101,7 @@ SMODS.Joker {
     ppu_coder = { "bagels" },
     ppu_artist = { "bagels" },
     ppu_team = { "dummies" },
-    attributes = {},
+    attributes = {"alien"},
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.x_mult, card.ability.extra.cards } }
     end,
