@@ -61,7 +61,7 @@ return {
 				},
 			},
 			worm_jtem2_solar_system_effect_c_venus = {
-				name = "Venus's ability",
+				name = "Venus' ability",
 				text = {
 					"Create {C:tarot}Tarot{} card ",
 					"if score is on {C:attention}fire{}",
@@ -77,7 +77,7 @@ return {
 				},
 			},
 			worm_jtem2_solar_system_effect_c_mars = {
-				name = "Mars's ability",
+				name = "Mars' ability",
 				text = {
 					"Create {C:attention}#1#{}",
 					"when {C:attention}Blind{} is selected",
@@ -85,7 +85,7 @@ return {
 				},
 			},
 			worm_jtem2_solar_system_effect_c_ceres = {
-				name = "Ceres's ability",
+				name = "Ceres' ability",
 				text = {
 					"{C:attention}#1#{} counts as {C:attention}#2#{}",
 					"If share the same suit then",
@@ -106,7 +106,7 @@ return {
 				},
 			},
 			worm_jtem2_solar_system_effect_c_uranus = {
-				name = "Uranus's ability",
+				name = "Uranus' ability",
 				text = {
 					"{X:chips,C:white}X#1#{}",
 				},
@@ -130,7 +130,7 @@ return {
 				},
 			},
 			worm_jtem2_solar_system_effect_c_eris = {
-				name = "Eris's ability",
+				name = "Eris' ability",
 				text = {
 					"Don't know yet...",
 				},
