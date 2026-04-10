@@ -50,7 +50,8 @@ SMODS.Tag {
             return true
         end
     end,
-    ppu_artist = {"J8-Bit"},
-    ppu_coder = {"J8-Bit"},
+    ppu_artist = { "J8-Bit" },
+    ppu_coder = { "J8-Bit" },
+    ppu_team = { "Lancer Fan Club" },
 
 }

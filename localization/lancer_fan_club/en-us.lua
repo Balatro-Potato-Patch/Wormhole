@@ -202,7 +202,11 @@ return {
                 name = "Time Dilation",
                 text = {
                     "{C:attention}#1#{} Ante,",
-                    "{C:attention}#2#{} Winning Ante",
+                    "{C:attention}#2#{} Winning Ante,",
+                    "{C:red}Destroys{} and {C:red}bans{} a",
+                    "random {C:attention}Joker{} you own",
+                    "{C:inactive,s:0.75}(Banned Jokers no longer",
+                    "{C:inactive,s:0.75}appear in the run)"
                 },
             },
         },
@@ -239,7 +243,7 @@ return {
                 "{s:0.75}opponents' surprise to rob them of their vitality."
             },
             lfc_dex_stakataka_us = {
-                "{s:0.75}From {B:1,C:white,s:0.75}Pokémon Ultra Moon{s:0.75}:",
+                "{s:0.75}From {B:1,C:white,s:0.75}Pokémon Ultra Sun{s:0.75}:",
                 "{s:0.75}It appeared from an {s:0.75,C:dark_edition,E:1}Ultra Wormhole{s:0.75}. Each one",
                 "{s:0.75}appears to be made up of many life-forms",
                 "{s:0.75}stacked one on top of each other."
