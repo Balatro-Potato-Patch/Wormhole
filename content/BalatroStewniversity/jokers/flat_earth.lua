@@ -25,7 +25,8 @@ SMODS.Joker{ --Flat Earth
             if spade_cards > 0 then
                 card.ability.extra.chips = card.ability.extra.chips + spade_cards * card.ability.extra.chips_mod
                 return{
-                    message = localize {type = 'variable', key = 'a_chips', vars = {card.ability.extra.chips}}
+                    message = localize {type = 'variable', key = 'a_chips', vars = {card.ability.extra.chips}},
+                    colour = G.C.CHIPS
                 }
             end
         end
