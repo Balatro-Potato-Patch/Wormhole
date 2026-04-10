@@ -56,7 +56,6 @@ SMODS.Joker{ --Dinosaur Earth
                 message = localize('k_extinct_ex')
             }
         end
-        --TO DO: Make the meteor crashing video play when the dinos go extinct
 
     end,
 }

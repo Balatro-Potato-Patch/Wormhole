@@ -9,13 +9,6 @@ local is_playing = false
 local target_hue = 121/360
 
 
--- Load Shader
-SMODS.Shader {
-    key = "chromakey",
-    path = "BalatroStewniversity/chromakey.fs"
-}
-
-
 -- Make sure video file is placed in native LOVE2D directory
 -- so we can load it with love.graphics.newVideo
 local function cache_video(path, filename)
