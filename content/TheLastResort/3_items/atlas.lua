@@ -45,3 +45,10 @@ SMODS.Atlas{
 	px = 71,
 	py = 95
 }
+
+SMODS.Atlas{
+	key = "tlr_tags",
+	path = "TheLastResort/tag.png",
+	px = 34,
+	py = 34
+}
