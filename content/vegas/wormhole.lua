@@ -337,44 +337,6 @@ SMODS.Joker{
 }
 
 SMODS.Joker{
-	key = "icegiant",
-	loc_txt = {
-		name = "Ice Giant",
-		text = {
-			"If {C:attention}final discard{} of",
-			"round is {C:attention}#1#{} card, make",
-			"the {C:attention}first{} card {C:attention}Glass{}"
-		}
-	},
-	config = { extra = { size = 2 }},
-	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue + 1] = G.P_CENTERS.m_glass
-		return { vars = { card.ability.extra.size }}
-	end,
-	atlas = "vegas_jokers",
-	pos = {x = 0, y = 4},
-	rarity = 2,
-	cost = 7,
-	blueprint_compat = true,
-	discovered = true,
-	eternal_compat = true,
-	perishable_compat = true,
-	ppu_team = {"People Found In Vegas"},
-	ppu_coder = {"Jammbo"},
-	ppu_artist = {},
-	calculate = function(self, card, context)
-		if context.discard and G.GAME.current_round.discards_left == 1 and #context.full_hand == 2 and context.other_card then
-            if (context.other_card == context.full_hand[1]) then
-				context.other_card:set_ability("m_glass", nil, true)
-			end
-			return{
-				message = "It's ice, I promise"
-			}
-        end
-	end
-}
-
-SMODS.Joker{
 	key = "chthonian",
 	loc_txt = {
 		name = "Cthonian Planet",
@@ -665,6 +627,86 @@ SMODS.Joker{
 				end
 			})
 		end
+	end
+}
+
+SMODS.Joker{
+	key = "inthesky",
+	loc_txt = {
+		name = "Diamonds in the Sky",
+		text = {
+			"First {C:attention}#1#{} scored {V:1}Diamond{} card",
+			"in {C:attention}first{} played hand become {C:purple}Negative{}"
+		}
+	},
+	config = { extra = { cards = 2, suit = 'Diamonds' }},
+	loc_vars = function(self, info_queue, card)
+		return { vars = { card.ability.extra.cards, colours = { G.C.SUITS['Diamonds'] } } }
+	end,
+	atlas = "vegas_jokers",
+	pos = {x = 0, y = 4},
+	rarity = 2,
+	cost = 6,
+	blueprint_compat = true,
+	discovered = true,
+	eternal_compat = true,
+	perishable_compat = true,
+	ppu_team = {"People Found In Vegas"},
+	ppu_coder = {"Jammbo"},
+	ppu_artist = {},
+	calculate = function(self, card, context)
+		if context.before and context.main_eval and not context.blueprint and G.GAME.current_round.hands_played == 0 then
+            local amount = 0
+            for _, scored_card in ipairs(context.scoring_hand) do
+                if amount < card.ability.extra.cards then
+					if scored_card:is_suit(card.ability.extra.suit) and not scored_card.edition then
+                    	scored_card:set_edition('e_negative', true)
+						amount = amount + 1
+					end
+                end
+            end
+        end
+	end
+}
+
+SMODS.Joker{
+	key = "observable",
+	loc_txt = {
+		name = "Observable Universe",
+		text = {
+			"{C:purple}Negative{} cards held",
+			"in hand give {X:red,C:white}X#1#{} Mult"
+		}
+	},
+	config = { extra = { xmult = 1.5 }},
+	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue + 1] = G.P_CENTERS['e_negative']
+		return { vars = { card.ability.extra.xmult }}
+	end,
+	atlas = "vegas_jokers",
+	pos = {x = 0, y = 4},
+	rarity = 3,
+	cost = 7,
+	blueprint_compat = true,
+	discovered = true,
+	eternal_compat = true,
+	perishable_compat = true,
+	ppu_team = {"People Found In Vegas"},
+	ppu_coder = {"Jammbo"},
+	ppu_artist = {},
+	calculate = function(self, card, context)
+		if context.individual and context.cardarea == G.hand and not context.end_of_round and context.other_card.edition and context.other_card.edition.negative then
+            if context.other_card.debuff then
+                return {
+                    message = localize('k_debuffed'),
+                    colour = G.C.RED
+                }
+            else
+                return {
+                    xmult = card.ability.extra.xmult
+                }
+            end
+        end
 	end
 }
 
@@ -1153,6 +1195,15 @@ SMODS.Consumable {
 			G.hand.highlighted[i].ability.perma_x_mult = G.hand.highlighted[i].ability.perma_x_mult or 1
 			G.hand.highlighted[i].ability.perma_x_mult = G.hand.highlighted[i].ability.perma_x_mult + card.ability.xmult
 		end
+		G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function()
+                G.hand:unhighlight_all()
+                return true
+            end
+        }))
+        delay(0.5)
     end
 }
 
@@ -1214,6 +1265,15 @@ SMODS.Consumable {
 			G.hand.highlighted[i].ability.perma_mult = G.hand.highlighted[i].ability.perma_mult or 0
 			G.hand.highlighted[i].ability.perma_mult = G.hand.highlighted[i].ability.perma_mult + card.ability.mult
 		end
+		G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function()
+                G.hand:unhighlight_all()
+                return true
+            end
+        }))
+        delay(0.5)
     end
 }
 
@@ -1275,6 +1335,15 @@ SMODS.Consumable {
 			G.hand.highlighted[i].ability.perma_bonus = G.hand.highlighted[i].ability.perma_bonus or 0
 			G.hand.highlighted[i].ability.perma_bonus = G.hand.highlighted[i].ability.perma_bonus + card.ability.chips
 		end
+		G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function()
+                G.hand:unhighlight_all()
+                return true
+            end
+        }))
+        delay(0.5)
     end
 }
 
