@@ -64,8 +64,3 @@ SMODS.Blind {
     ppu_coder = { "InvalidOS" },
     ppu_team = { "Lancer Fan Club" },
 }
-
-local csd = Card.start_dissolve
-function Card:start_dissolve(dissolve_colours, silent, dissolve_time_fac, no_juice)
-    print(silent) return csd(self, dissolve_colours, silent, dissolve_time_fac, no_juice)
-end
