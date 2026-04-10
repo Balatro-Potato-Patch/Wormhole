@@ -58,6 +58,21 @@ return {
           }
         }
       },
+      sat_worm_sputnik_1 = {
+        name = "Sputnik 1",
+        text = {
+          {
+            "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
+            "{C:attention}#2#",
+          },
+          {
+            "If played hand",
+            "is a {C:attention}#2#{},",
+            "last played card gives",
+            "{C:white,X:mult}X#3#{} Mult when scored"
+          }
+        }
+      },
     },
     PotatoPatch = {
       PotatoPatchTeam_JuryRigged = { name = "JuryRigged" },

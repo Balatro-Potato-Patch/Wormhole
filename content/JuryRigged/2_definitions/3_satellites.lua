@@ -229,3 +229,35 @@ Wormhole.JR_UTILS.Satellite {
     return {}
   end
 }
+
+-- Cassini-Huygens
+
+-- Sputnik 1
+Wormhole.JR_UTILS.Satellite {
+  key = 'sputnik_1',
+  name = 'sputnik_1',
+  config = { extra = { hand_type = 'Full House' }, },
+  pos = { x = 6, y = 0 },
+  soul_pos = { x = 6, y = 1, draw = Wormhole.JR_UTILS.draw_satellite_soul },
+  jr_calculate = function(self, context, vars)
+    if context.individual and context.cardarea == G.play and context.other_card == context.scoring_hand[#context.scoring_hand] then
+      return {
+        xmult = 1 + G.GAME.jr.satellite_hands[vars.hand_type].level * 0.25
+      }
+    end
+  end,
+  loc_vars = function(self, info_queue, card)
+    local _level = G.GAME.jr and G.GAME.jr.satellite_hands[card.ability.extra.hand_type].level or 0
+    return {
+      vars = {
+        _level,
+        localize(card.ability.extra.hand_type, 'poker_hands'),
+        1 + 0.25 * _level,
+        colours = { (_level == 1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, _level)]) }
+      }
+    }
+  end,
+  jr_loc_vars = function(self)
+    return {}
+  end
+}
