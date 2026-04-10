@@ -39,7 +39,7 @@ return {
             },
             PotatoPatchDev_Typ0 = {
                 name = "Typ0",
-                text = {"Hit Game Dev Right Here","{s:0.75,C:default}Sprite By Inky{}"}
+                text = {"Hit Game Dev Right Here","{s:0.75}Sprite By Inky{}"}
             },
             PotatoPatchDev_Jewel = {
                 name = "Jewel",
@@ -78,7 +78,7 @@ return {
                     "{C:inactive}You should have listened...{}",
                     }
                 }
-            },j_worm_euda_wowsignal = {
+            },j_worm_wowsignal = {
                 name = "Wow! Signal",
                 text = {
                     "{C:green}#1# in #2#{} chance to give ",
@@ -150,13 +150,27 @@ return {
                     }
                 }
             },
-            j_worm_euda_csaber = {
-                name = "Cyalume Saber",
+            j_worm_evil = {
+                name = "Evil",
                 text = {
-                    "{C:green}#1# in #2#{} chance to add {C:chips}+60{}",
-                    "Chips to a {C:chips}+Chips{} operation"
+                    "{C:white,X:red}X#2#{} Mult",
+                    "At end of {C:attention}ante{},",
+                    "{C:attention}destroy{} a random joker",
+                    "and gain {C:money}5${} {C:attention}sell value{}"
                 },
+                
             },
+            j_worm_LittleLight = {
+                name = "Little Light",
+                text = {
+                   "This Joker Gains {X:mult,C:white}X0.2{} Mult{} per {C:tarot}Death Tarot Card{} Used.",
+                    "Additionally prevents Death if chips scored are ",
+                    "at least {C:attention}25%{} of required chips, then {C:red,E:2}self destructs{}",
+                    "{C:inactive}[Currently {}{C:mult}+#1#{}{C:inactive} Mult]{}"
+                },
+
+            }, 
+
         },
         Planet = {
             c_worm_euda_bigear = {
@@ -254,23 +268,26 @@ return {
                 },
             },
         },
+        Planet = {
+            c_worm_euda_81p = {
+                name = "81P",
+                text = {
+                    "({V:1}lvl.#1#{}) Level up",
+                    "{C:attention}#2#",
+                    "{C:mult}+#3#{} Mult and",
+                    "{C:chips}+#4#{} chips",
+                },
+            },
+        }
     },
     misc = {
             poker_hand_descriptions = {
-                worm_pkr_euda_wow = {
-                    "Play a 6, a 3, a Queen, a Jack, and a 5",
-                },
-                worm_pkr_euda_wow_f = {
-                        "Play a 6, a 3, a Queen, a Jack, and a 5",
-                        "with all cards sharing the same suit",
-                },
-			 	worm_euda_pkr_pyramid = {
-                    "[NO_TEXT_DATA_DETECTED]",
+                worm_pkr_euda_nova = {
+                    "5 cards that are {C:attention}Wild{}",
                 },
             },
             poker_hands = {
-                worm_pkr_euda_wow = "Wow!",
-                worm_pkr_euda_wow_f = "Wow! Flush",
+                worm_pkr_euda_nova = 'Stardust'
             },
             dictionary = {
                 k_worm_euda_jokecolony_ship_button = "SHIP",
@@ -280,14 +297,14 @@ return {
                 k_worm_euda_specificcolony_ship_title = "Sending to Colony ",
                 k_worm_euda_specificcolony_receive_title = "Release from Colony ",
 
-				k_worm_euda_wow_hands = "Wow! (Flush)",
-                k_worm_euda_observatory_planet = "Observatory",
 
-                k_euda_fate = "Fate",
-                b_euda_fate_cards = "Fate Cards",
-                k_euda_avadon_pack = "Avadon Pack",
-                k_worm_euda_lunarcheese_message = "Cheesy!",
+                k_worm_euda_cometplanet = "Comet",
+      
+                k_fate = "Fate",
+                b_fate_cards = "Fate Cards",
+                k_avadon_pack = "Avadon Pack",
+                k_worm_lunarcheese_message = "Cheesy!",
             }
-        },
+        }
 }
 
