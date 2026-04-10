@@ -290,7 +290,7 @@ SMODS.Joker{
 								_planet = v.key
 							end
 						end
-						if _planet then
+						if _planet and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
 							SMODS.add_card({ key = _planet })
 						end
 						G.GAME.consumeable_buffer = 0
