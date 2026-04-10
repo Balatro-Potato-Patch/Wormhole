@@ -157,7 +157,7 @@ return {
 				name = "Noodlemire",
 				text = {
 					"Bowl of Noodles",
-					"Kickstarted the idea of the {C:dark_edition}Rocket{} consumables!",
+					"Kickstarted the idea of the {C:polarskull_rocket}Rocket{} consumables!",
 					"Also made some art."
 				},
 			},
@@ -177,7 +177,7 @@ return {
 				name = "Comykel",
 				text = {
 					"{C:attention}Sick pixel artist!{}",
-					"The one who did almost all of the {C:dark_edition}Rockets'{} art!",
+					"The one who did almost all of the {C:polarskull_rocket}Rockets'{} art!",
 
 				},
 			},
@@ -185,8 +185,8 @@ return {
 				name = "Jade Penguin",
 				text = {
 					"Pupil of Chartreuse Chamber",
-					"Made the art of Friendly Neighborhood Martian,",
-					"and helped made the ideas of some of the stuff you see here from our team!",
+					"Made some of the art, and helped made the ideas of",
+					"some of the stuff you see here from our team!",
 					"{C:dark_edition}+1{} Joker Slot :)",
 				},
 			},
