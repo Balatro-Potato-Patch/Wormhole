@@ -73,6 +73,21 @@ return {
           }
         }
       },
+      sat_worm_mariner_9 = {
+        name = "Mariner 9",
+        text = {
+          {
+            "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
+            "{C:attention}#2#",
+          },
+          {
+            "If played hand is a",
+            "{C:attention}#2#{}, gain {C:money}$#1#{} per card",
+            "of the rank of the {C:attention}#2#",
+            "in your {C:attention}full deck"
+          }
+        }
+      },
     },
     PotatoPatch = {
       PotatoPatchTeam_JuryRigged = { name = "JuryRigged" },

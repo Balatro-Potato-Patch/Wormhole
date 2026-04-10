@@ -261,3 +261,60 @@ Wormhole.JR_UTILS.Satellite {
     return {}
   end
 }
+
+-- Mariner 9
+Wormhole.JR_UTILS.Satellite {
+  key = 'mariner_9',
+  name = 'mariner_9',
+  config = { extra = { hand_type = 'Four of a Kind' }, },
+  pos = { x = 7, y = 0 },
+  soul_pos = { x = 7, y = 1, draw = Wormhole.JR_UTILS.draw_satellite_soul },
+  jr_calculate = function(self, context, vars)
+    if context.before then
+      local ranks = {}
+      local rank
+      for _, v in pairs(context.scoring_hand) do
+        local vrank = v:get_id()
+        ranks[vrank] = (ranks[vrank] or 0) + 1
+        if ranks[vrank] > 1 then
+          rank = vrank
+          break
+        end
+      end
+
+      if not rank then return end -- failsafe
+
+      local rank_count = 0
+      for _, v in pairs(G.playing_cards) do
+        if v:get_id() == rank then rank_count = rank_count + 1 end
+      end
+
+      G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + rank_count * G.GAME.jr.satellite_hands[vars.hand_type].level
+      return {
+        dollars = rank_count * G.GAME.jr.satellite_hands[vars.hand_type].level,
+        func = function()
+          G.E_MANAGER:add_event(Event({
+            func = function()
+              G.GAME.dollar_buffer = 0
+              return true
+            end
+          }))
+        end,
+        card = context.other_card
+      }
+    end
+  end,
+  loc_vars = function(self, info_queue, card)
+    local _level = G.GAME.jr and G.GAME.jr.satellite_hands[card.ability.extra.hand_type].level or 0
+    return {
+      vars = {
+        _level,
+        localize(card.ability.extra.hand_type, 'poker_hands'),
+        colours = { (_level == 1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, _level)]) }
+      }
+    }
+  end,
+  jr_loc_vars = function(self)
+    return {}
+  end
+}
