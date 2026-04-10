@@ -5,18 +5,18 @@ SMODS.Consumable {
     pos = { x = 0, y = 0 },
     wormhole_pos_extra = { x = 0, y = 2 },
     wormhole_anim = {
-        { x = 0,                            y = 0, t = 5   },
+        { x = 0,                            y = 0, t = 5 },
         { xrange = { first = 1, last = 5 }, y = 0, t = 0.1 },
         { x = 0,                            y = 1, t = 0.1 },
-        { x = 1,                            y = 1, t = 1   },
+        { x = 1,                            y = 1, t = 1 },
         { x = 2,                            y = 1, t = 0.1 },
-        { x = 3,                            y = 1, t = 1   },
+        { x = 3,                            y = 1, t = 1 },
         { x = 2,                            y = 1, t = 0.1 },
-        { x = 1,                            y = 1, t = 1   },
+        { x = 1,                            y = 1, t = 1 },
         { xrange = { first = 4, last = 5 }, y = 1, t = 0.1 },
         { xrange = { first = 4, last = 5 }, y = 1, t = 0.1 },
         { xrange = { first = 4, last = 5 }, y = 1, t = 0.1 },
-        { x = 0,                            y = 0, t = 5   },
+        { x = 0,                            y = 0, t = 5 },
     },
     wormhole_anim_extra = {
         { xrange = { first = 0, last = 4 }, y = 2, t = 0.2 }
@@ -37,10 +37,12 @@ SMODS.Consumable {
         end
     end,
     loc_vars = function(self, info_queue, card)
-        return { vars = {
-            card.ability.extra.amount,
-            card.ability.extra.levels
-        } }
+        return {
+            vars = {
+                card.ability.extra.amount,
+                card.ability.extra.levels
+            }
+        }
     end,
     can_use = function(self, card)
         return true
@@ -63,7 +65,8 @@ SMODS.Consumable {
                         hold = 1.4,
                         major = card,
                         backdrop_colour = G.C.SECONDARY_SET.Planet,
-                        align = (G.STATE == G.STATES.PLANET_PACK or G.STATE == G.STATES.SPECTRAL_PACK or G.STATE == G.STATES.SMODS_BOOSTER_OPENED) and 'tm' or 'cm',
+                        align = (G.STATE == G.STATES.PLANET_PACK or G.STATE == G.STATES.SPECTRAL_PACK or G.STATE == G.STATES.SMODS_BOOSTER_OPENED) and
+                        'tm' or 'cm',
                         offset = { x = 0, y = (G.STATE == G.STATES.PLANET_PACK or G.STATE == G.STATES.SPECTRAL_PACK or G.STATE == G.STATES.SMODS_BOOSTER_OPENED) and -0.2 or 0 },
                         silent = true
                     })
@@ -128,7 +131,8 @@ function worm_create_moony_menu(amount)
             func = "worm_moony_can_upgrade_hand",
             ref_table = { selection = selected_hand },
             label = { localize(selected_hand, "poker_hands") },
-            minw = 5, focus_args = { snap_to = true }
+            minw = 5,
+            focus_args = { snap_to = true }
         })
         ui_buttons[#ui_buttons + 1] = uibutton
     end
@@ -153,14 +157,14 @@ G.FUNCS.worm_moony_can_upgrade_hand = function(e) end
 function SEMBY_ranbinary_index(max_amount, intend, seed)
     local s = {}
     local r, n, k, v
-    r = pseudorandom("SEMBY_ranbinary_"..(seed or 'BASE'))
+    r = pseudorandom("SEMBY_ranbinary_" .. (seed or 'BASE'))
     n = intend
     k = max_amount
     for i = 1, max_amount do
         v = n / k
         if v >= r then
             r = r / (n / k)
-            s[#s+1] = i
+            s[#s + 1] = i
             n = n - 1
         else
             r = r - (n / k)
@@ -170,7 +174,7 @@ function SEMBY_ranbinary_index(max_amount, intend, seed)
         if n == 0 then break; end
     end
     if #s ~= intend then
-        print('MISMATCH! "SEMBY_ranbinary_index()" expected '..intend..', got '..#s..'!')
+        print('MISMATCH! "SEMBY_ranbinary_index()" expected ' .. intend .. ', got ' .. #s .. '!')
     end
     return s
 end

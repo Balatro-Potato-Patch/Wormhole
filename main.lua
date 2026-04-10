@@ -7,6 +7,9 @@ if PotatoPatchUtils then
     }
 
     PotatoPatchUtils.load_files(Wormhole.path .. '/content', file_blacklist)
+    if Balatest then
+        PotatoPatchUtils.load_files(Wormhole.path .. '/test', file_blacklist)
+    end
     SMODS.handle_loc_file(Wormhole.path)
     PotatoPatchUtils.LOC.init()
 
