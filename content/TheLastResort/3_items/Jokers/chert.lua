@@ -24,7 +24,7 @@ SMODS.Joker {
                     return true
                 end)
             }))
-            card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_plus_constellation'), colour = SMODS.ConsumableTypes.worm_tlr_constellation.primary_colour})
+            card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_plus_constellation'), colour = SMODS.ConsumableTypes.worm_tlr_constellation.secondary_colour})
         end
     end,
     ppu_team = {"TheLastResort"},

@@ -31,7 +31,7 @@ SMODS.Seal {
                     return true
                 end)
             }))
-            return { message = localize('k_plus_constellation'), colour = SMODS.ConsumableTypes.worm_tlr_constellation.primary_colour }
+            return { message = localize('k_plus_constellation'), colour = SMODS.ConsumableTypes.worm_tlr_constellation.secondary_colour }
 		end
 	end,
 }
