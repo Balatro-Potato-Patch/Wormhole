@@ -261,7 +261,7 @@ return {
                     },
                     {
                         "{C:abs_drinks}Refill{} by {C:red}destroying",
-                        "1 {C:attention}Playing Card{}",
+                        "a {C:attention}playing card{}",
                     }
                 }
             },
@@ -271,7 +271,7 @@ return {
                     {
                         "{C:inactive,s:0.8}Currently Empty{}",
                         "{C:abs_drinks}Refill{} by {C:red}destroying",
-                        "1 {C:attention}Playing Card{}",
+                        "a {C:attention}playing card{}",
                     },
                     {
                         "{C:inactive,s:0.8}After being Refilled:{}",
@@ -286,12 +286,11 @@ return {
                 text = {
                     {
                         "When {C:attention}primed{}, next time",
-                        "cards are drawn, draws {C:attention}#1#{}",
+                        "cards are drawn, draw {C:attention}#1#{}",
                         "additional cards, then is {C:abs_drinks}drank{}",
                     },
                     {
-                        "{C:abs_drinks}Refill{} by {C:attention}using",
-                        "1 {C:tarot}Tarot Card{}",
+                        "{C:abs_drinks}Refill{} by using a {C:tarot}Tarot{} card",
                     }
                 }
             },
@@ -300,13 +299,12 @@ return {
                 text = {
                     {
                         "{C:inactive,s:0.8}Currently Empty{}",
-                        "{C:abs_drinks}Refill{} by {C:attention}using",
-                        "1 {C:tarot}Tarot Card{}",
+                        "{C:abs_drinks}Refill{} by using a {C:tarot}Tarot{} card",
                     },
                     {
                         "{C:inactive,s:0.8}After being Refilled:{}",
                         "When {C:attention}primed{}, next time",
-                        "cards are drawn, draws {C:attention}#1#{}",
+                        "cards are drawn, draw {C:attention}#1#{}",
                         "additional cards, then is {C:abs_drinks}drank{}",
                     }
                 }
@@ -315,13 +313,13 @@ return {
                 name = 'Nebulager',
                 text = {
                     {
-                        "When {C:attention}primed{}, returns",
-                        "played hand to hand",
+                        "When {C:attention}primed{}, next played hand",
+                        "has cards {C:attention}returned{} to {C:attention}hand{}",
+                        "instead of deck, then is {C:abs_drinks}drank{}",
                     },
                     {
-                        "{C:abs_drinks}Refill{} by {C:money}selling",
-                        "{C:attention}any{} #2# Cards",
-                        "{C:inactive,s:0.8}(#1#/#2# cards sold){}",
+                        "{C:abs_drinks}Refill{} by {C:attention}selling #2#{} cards",
+                        "{C:inactive,s:0.8}(#1#/#2#){}",
                     }
                 }
             },
@@ -330,14 +328,14 @@ return {
                 text = {
                     {
                         "{C:inactive,s:0.8}Currently Empty{}",
-                        "{C:abs_drinks}Refill{} by {C:money}selling",
-                        "{C:attention}any{} #2# Cards",
-                        "{C:inactive,s:0.8}(#1#/#2# cards sold){}",
+                        "{C:abs_drinks}Refill{} by {C:attention}selling #2#{} cards",
+                        "{C:inactive,s:0.8}(#1#/#2#){}",
                     },
                     {
                         "{C:inactive,s:0.8}After being Refilled:{}",
-                        "When {C:attention}primed{}, returns",
-                        "played hand to hand",
+                        "When {C:attention}primed{}, next played hand",
+                        "has cards {C:attention}returned{} to {C:attention}hand{}",
+                        "instead of deck, then is {C:abs_drinks}drank{}",
                     }
                 }
             },
