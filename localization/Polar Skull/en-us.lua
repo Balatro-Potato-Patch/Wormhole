@@ -33,14 +33,11 @@ return {
 				name = "Olimar",
 				text = {
 					{
-						"{C:polarskull_rocket}Rocket{} cards become",
-						"{C:dark_edition}#1#{} when used"
+						"{C:polarskull_rocket}Rocket{} cards become {C:dark_edition}#1#{} when used",
+						"Multiple {C:polarskull_rocket}Rocket{} cards can be {C:attention}active{} at once and",
+						"once, and may appear multiple times",
+						"{C:inactive}(Rightmost {C:polarskull_rocket}Rocket{} {C:inactive}card determines hand name)"
 					},
-					{
-						"Multiple {C:polarskull_rocket}Rocket{} cards",
-						"can be {C:attention}active{} at once and",
-						"may appear multiple times"
-					}
 				}
 			}
 		},

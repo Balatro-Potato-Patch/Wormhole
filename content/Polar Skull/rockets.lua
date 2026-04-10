@@ -75,6 +75,41 @@ function update_hand_text(config, vals)
 	return old_update_hand_text(config, vals)
 end
 
+function PotatoPatchUtils.Teams.worm_polar_skull.calculate(self, context)
+	if context.evaluate_poker_hand then
+		cache_bonus_chips = 0
+		cache_bonus_mult = 0
+		local replace_scoring_name = nil
+		local replace_poker_hands = nil
+		local last_rocket = nil	
+		if context.scoring_name == "NULL" then return end
+		for _, card in ipairs(G.consumeables.cards) do
+			if (card.ability.set == "polarskull_rocket" or card.config.center.key == "c_worm_polarskull_ssdolphin") and card.ability.extra.active and not card.getting_sliced then
+				if card.ability.extra.hand == "Special: Everything" then
+					for name, hand in pairs(G.GAME.hands) do
+						if name ~= context.scoring_name then
+							cache_bonus_chips = cache_bonus_chips + hand.chips
+							cache_bonus_mult = cache_bonus_mult + hand.mult
+						end
+					end
+				elseif G.GAME.hands[context.scoring_name] then
+					if last_rocket then
+						cache_bonus_chips = cache_bonus_chips + G.GAME.hands[last_rocket.ability.extra.hand].chips
+						cache_bonus_mult = cache_bonus_mult + G.GAME.hands[last_rocket.ability.extra.hand].mult
+					else
+						cache_bonus_chips = cache_bonus_chips + G.GAME.hands[context.scoring_name].chips
+						cache_bonus_mult = cache_bonus_mult + G.GAME.hands[context.scoring_name].mult
+					end
+					last_rocket = card
+				end
+				replace_scoring_name = context.poker_hands[card.ability.extra.hand] and card.ability.extra.hand or replace_scoring_name
+				replace_poker_hands = evaluate_fake_hands(context.scoring_hand, card.ability.extra.hand, replace_scoring_hands)
+			end
+		end
+		return {replace_scoring_name = replace_scoring_name, replace_poker_hands = replace_poker_hands}
+	end
+end
+
 local function register_rocket(args)
 	args.key = "polarskull_" .. args.key
 	args.set = args.set or "polarskull_rocket"
@@ -125,7 +160,7 @@ local function register_rocket(args)
 	args.calculate = args.calculate or function(self, card, context)
 		if not card.ability.extra.active then return end
 		if context.evaluate_poker_hand then
-			if card.ability.extra.hand == "Special: Everything" then
+			--[[if card.ability.extra.hand == "Special: Everything" then
 				cache_bonus_chips = 0
 				cache_bonus_mult = 0
 				for name, hand in pairs(G.GAME.hands) do
@@ -144,7 +179,7 @@ local function register_rocket(args)
 			return {
 				replace_scoring_name = context.poker_hands[card.ability.extra.hand] and card.ability.extra.hand or nil,
 				replace_poker_hands = evaluate_fake_hands(context.scoring_hand, card.ability.extra.hand),
-			}
+			}--]]
 		elseif context.modify_hand then
 			if cache_bonus_chips > 0 then
 				hand_chips = hand_chips + cache_bonus_chips
@@ -180,6 +215,9 @@ local function register_rocket(args)
 			active_sound_timer = ACTIVE_SOUND_LENGTH
 			play_sound("worm_polarskull_rocketactive", nil, 0.5)
 		end
+	end
+	args.in_pool = args.in_pool or function(self, args)
+		return true, {allow_duplicates = G.GAME.polarskull_rockets_stack}
 	end
 
 	SMODS.Consumable(args)
@@ -221,6 +259,7 @@ register_rocket({
 	key = "atlascentaur",
 	pos = { x = 5, y = 0 },
 	config = { extra = { hand = "Flush", rounds = 2 } },
+	ppu_artist = { "comykel" }
 })
 
 register_rocket({
@@ -234,6 +273,7 @@ register_rocket({
 	key = "sls",
 	pos = { x = 1, y = 1 },
 	config = { extra = { hand = "Four of a Kind", rounds = 1 } },
+	ppu_artist = { "comykel" }
 })
 
 register_rocket({
@@ -248,7 +288,7 @@ register_rocket({
 	config = { extra = { hand = "Five of a Kind", rounds = 1 } },
 	ppu_artist = { "comykel" },
 	in_pool = function(self, args)
-		return G.GAME.hands[self.config.extra.hand].played > 0
+		return G.GAME.hands[self.config.extra.hand].played > 0, {allow_duplicates = G.GAME.polarskull_rockets_stack}
 	end,
 })
 
@@ -257,7 +297,7 @@ register_rocket({
 	pos = { x = 4, y = 1 },
 	config = { extra = { hand = "Flush House", rounds = 1 } },
 	in_pool = function(self, args)
-		return G.GAME.hands[self.config.extra.hand].played > 0
+		return G.GAME.hands[self.config.extra.hand].played > 0, {allow_duplicates = G.GAME.polarskull_rockets_stack}
 	end,
 })
 
@@ -266,7 +306,7 @@ register_rocket({
 	pos = { x = 5, y = 1 },
 	config = { extra = { hand = "Flush Five", rounds = 1 } },
 	in_pool = function(self, args)
-		return G.GAME.hands[self.config.extra.hand].played > 0
+		return G.GAME.hands[self.config.extra.hand].played > 0, {allow_duplicates = G.GAME.polarskull_rockets_stack}
 	end,
 })
 

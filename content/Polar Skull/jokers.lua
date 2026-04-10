@@ -69,7 +69,7 @@ SMODS.Joker {
     cost = 6,
     discovered = false,
     blueprint_compat = true,
-    --ppu_artist = {"placeholder"},
+    ppu_artist = {"jade"},
     ppu_coder = { "cloudzxiii" },
     ppu_team = { "polar_skull" },
 
@@ -93,11 +93,6 @@ SMODS.Joker {
     end,
 }
 
---[[
-Seemingly works fine, unsure about the logic for when you have multiple rocket cards at once, currently
-the hand name seems to only count as the last one used, e.g. if you have used a flush then a two pair rocket,
-for cards like the tribe they only recognise the hand as a two pair so doesn't trigger
---]]
 SMODS.Joker {
     key = 'polarskull_olimar',
 
@@ -137,6 +132,7 @@ SMODS.Joker {
     end,
 }
 
+--[[
 local smods_showman_ref = SMODS.showman
 function SMODS.showman(card_key)
     if next(SMODS.find_card('j_worm_polarskull_olimar')) then
@@ -147,3 +143,4 @@ function SMODS.showman(card_key)
     end
     return smods_showman_ref(card_key)
 end
+--]]
