@@ -3,18 +3,9 @@ ExtinctionEvent = {}
 local video_cache_folder = "modded_video_cache"
 
 local video
-local volume = 1
-
 local video_sprite
+
 local is_playing = false
-
-function ExtinctionEvent.get_video()
-    return video
-end
-
-function ExtinctionEvent.set_video_volume(vol)
-    volume = vol or 0
-end
 
 -- Make sure video file is placed in native LOVE2D directory
 -- so we can load it with love.graphics.newVideo
@@ -26,7 +17,7 @@ local function cache_video(path, filename)
 
     local old_path = path..filename
     local file_info = NFS.getInfo(old_path)
-    assert(file_info, "Cannot load video")
+    assert(file_info, "Cannot load video ("..filename..") from specified path")
 
     if not love.filesystem.getInfo(video_cache_folder) then
         love.filesystem.createDirectory(video_cache_folder)
@@ -36,11 +27,6 @@ local function cache_video(path, filename)
     return new_path
 end
 
-function ExtinctionEvent.init_video()
-    video = love.graphics.newVideo(cache_video(Wormhole.path.."assets/videos/BalatroStewniversity/", "extinction_event.ogv"))
-    return video
-end
-
 local function init_sprite()
     if video_sprite and Object.is(video_sprite, Sprite) then
         video_sprite:remove()
@@ -48,32 +34,40 @@ local function init_sprite()
     end
 
     video_sprite = Sprite(-2, -2, G.ROOM.T.w+4, G.ROOM.T.h+4, G.ASSET_ATLAS["ui_1"], {x = 0, y = 0})
-    video_sprite.video = ExtinctionEvent.init_video()
+    video_sprite.video = video
+end
+
+function ExtinctionEvent.init_video()
+    local path = cache_video(Wormhole.path.."assets/videos/BalatroStewniversity/", "extinction_event.ogv")
+    video = love.graphics.newVideo(path)
+    init_sprite()
+
+    return video
 end
 
 function ExtinctionEvent.play_video(when_finished)
-    if not video then
-        ExtinctionEvent.init_video()
+    if is_playing then
+        return
     end
 
+    ExtinctionEvent.init_video()
     is_playing = true
 
-    G.E_MANAGER:add_event(Event({
-        func = function()
-            video:play()
-            return true
-        end
-    }))
+    video:play()
+
     G.E_MANAGER:add_event(Event({
         blocking = false, blockable = false,
         func = function()
             if video:isPlaying() then
-                video:getSource():setVolume(volume)
+                local new_vol = (G.SETTINGS.SOUND.game_sounds_volume * G.SETTINGS.SOUND.volume / 100) / 100
+                video:getSource():setVolume(new_vol)
                 return
             end
+
             is_playing = false
-            video:pause()
-            video:seek(0)
+            video_sprite:remove()
+            video_sprite = nil
+            video = nil
             if type(when_finished) == "function" then
                 when_finished()
             end
@@ -83,10 +77,6 @@ function ExtinctionEvent.play_video(when_finished)
 
     return video
 end
-
-
--- Make sure to load video on game startup.
-init_sprite()
 
 --------------------------------------------
 -- Hook draw to play video over entire screen

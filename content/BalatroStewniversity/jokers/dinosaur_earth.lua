@@ -23,11 +23,10 @@ SMODS.Joker{ --Dinosaur Earth
         local dinos_extinct = #dinosaur_earths
         ease_ante(-card.ability.extra.ante * dinos_extinct)
 
-        ExtinctionEvent.set_video_volume(G.SETTINGS.SOUND.game_sounds_volume)
-        ExtinctionEvent.play_video()
-
         G.E_MANAGER:add_event(Event {
             func = function()
+                ExtinctionEvent.play_video()
+
                 SMODS.destroy_cards(dinosaur_earths, nil, nil, true)
                 return true
             end
