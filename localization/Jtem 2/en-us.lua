@@ -88,8 +88,8 @@ return {
 				name = "Ceres's ability",
 				text = {
 					"{C:attention}#1#{} counts as {C:attention}#2#{}",
-                    "If share the same suit then",
-                    "counts as {C:attention}#3#{}"
+					"If share the same suit then",
+					"counts as {C:attention}#3#{}",
 				},
 			},
 			worm_jtem2_solar_system_effect_c_jupiter = {
@@ -108,7 +108,7 @@ return {
 			worm_jtem2_solar_system_effect_c_uranus = {
 				name = "Uranus's ability",
 				text = {
-					"Don't know yet...",
+					"{X:chips,C:white}X#1#{}",
 				},
 			},
 			worm_jtem2_solar_system_effect_c_neptune = {
@@ -132,7 +132,7 @@ return {
 			worm_jtem2_solar_system_effect_c_eris = {
 				name = "Eris's ability",
 				text = {
-					"{X:chips,C:white}X#1#{}",
+					"Don't know yet...",
 				},
 			},
 		},

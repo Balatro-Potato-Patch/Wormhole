@@ -394,7 +394,11 @@ local planets_loc_vars = {
 		return { card.ability.extra.c_earth.discount }
 	end,
 	c_ceres = function(card)
-		return { localize("Two Pair", "poker_hands"), localize("Full House", "poker_hands"), localize("Flush House", "poker_hands") }
+		return {
+			localize("Two Pair", "poker_hands"),
+			localize("Full House", "poker_hands"),
+			localize("Flush House", "poker_hands"),
+		}
 	end,
 	c_mars = function()
 		return { localize({ type = "name_text", key = "j_splash", set = "Joker" }) }
@@ -483,20 +487,21 @@ SMODS.Joker({
 			c_jupiter = {
 				xmult = 1.5,
 			},
+
+			c_saturn = {
+				stones = 12,
+			},
+			c_uranus = {
+				xchips = 1.5,
+			},
 			c_neptune = {
 				hand_odds = 4,
 				play_odds = 2,
 				money = 1,
 			},
-			c_saturn = {
-				stones = 12,
-			},
 			c_pluto = {
 				level_up_odds = 4,
 				level_down_odds = 4,
-			},
-			c_eris = {
-				xchips = 1.5,
 			},
 		},
 	},
@@ -717,9 +722,9 @@ SMODS.Joker({
 					xmult = card.ability.extra.c_jupiter.xmult,
 				})
 			end
-			if card.ability.extra.planets.c_eris then
+			if card.ability.extra.planets.c_uranus then
 				table.insert(effects, {
-					xchips = card.ability.extra.c_eris.xchips,
+					xchips = card.ability.extra.c_uranus.xchips,
 				})
 			end
 			return SMODS.merge_effects(effects)
