@@ -71,8 +71,8 @@ return {
                 name = "The Fleet",
                 text = {
                     "After drawing cards,",
-                    "destroy a random card",
-                    "held in hand",
+                    "destroy a random",
+                    "card held in hand",
                     "+1 hand size"
                 },
             },
