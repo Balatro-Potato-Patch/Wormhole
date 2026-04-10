@@ -9,10 +9,10 @@
 	"priority": 0,
 	"badge_colour": "011638",
 	"badge_text_colour": "73fdff",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"dependencies": [
-		"Steamodded (>=1.0.0~BETA-1531zeebee)",
+		"Steamodded (>=1.0.0~BETA-1606b)",
 		"Lovely (>=0.9)",
-		"PotatoPatchUtils (>=1.0.0)"
+		"PotatoPatchUtils (>=1.0.3)"
 	]
 }
