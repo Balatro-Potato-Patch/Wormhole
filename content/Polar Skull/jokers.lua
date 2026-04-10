@@ -21,8 +21,11 @@ SMODS.Joker({
         return { vars = { 
             localize(card.ability.extra.poker_hand, 'poker_hands'), 
             card.ability.extra.cards_created,
-            localize {  type = 'variable', key = ((card.ability.extra.still_successful == true and 'k_polarskull_martian_active') or 'k_polarskull_martian_inactive'), vars = { card.ability.extra.still_successful } }
-            } }
+            localize {  type = 'variable', key = ((card.ability.extra.still_successful == true and 'k_polarskull_martian_active') or 'k_polarskull_martian_inactive'), vars = { card.ability.extra.still_successful } },
+            colours = {
+                card.ability.extra.still_successful and G.C.GREEN or G.C.RED,
+            },
+        } }
     end,
 
     calculate = function(self, card, context)
@@ -185,6 +188,7 @@ SMODS.Joker {
     key = 'polarskull_olimar',
 
     loc_vars = function(self, info_queue, card)
+         info_queue[#info_queue + 1] = { key = 'e_negative_consumable', set = 'Edition', config = { extra = 1 } }
         return {
             vars = {
                 localize({ type = 'name_text', key = "e_negative", set = "Edition" })
@@ -199,7 +203,7 @@ SMODS.Joker {
     cost = 20,
     discovered = false,
     blueprint_compat = false,
-    --ppu_artist = {"placeholder"},
+    ppu_artist = {"mariofan"},
     ppu_coder = { "cloudzxiii" },
     ppu_team = { "polar_skull" },
 

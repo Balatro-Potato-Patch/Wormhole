@@ -12,8 +12,8 @@ return {
 			b_worm_polarskull_space_station = {
 				name = "Space Station Deck",
 				text = {
-					"Start with {C:attention}Gravitational Slingshot{}",
-					"and {C:polarskull_rocket}Atlas-Centaur{}",
+					"Start with {C:attention,T:v_worm_polarskull_gravitational_slingshot}Gravitational Slingshot{}",
+					"and {C:polarskull_rocket,T:c_worm_polarskull_atlascentaur}Atlas-Centaur{}",
 				},
 			},
 		},
@@ -29,7 +29,7 @@ return {
 					"create {C:attention}#2#{} {C:spectral}Spectral{} cards,",
 					"poker hand changes each {C:attention}Ante{}",
 					"{C:inactive}(Must have room)",
-					"{C:inactive}(Currently: #3#)",
+					"{C:inactive}(Currently: {B:1,C:white}#3#{C:inactive})",
 				},
 			},
 			j_worm_polarskull_launchpad = {
@@ -44,10 +44,10 @@ return {
 			j_worm_polarskull_rocket_science = {
 				name = "Rocket Science",
 				text = {
-					"This Joker gains {X:mult,C:white}X#2#{} Mult",
-					"each time you play a {C:polarskull_rocket}Rocket{} card",
-					"for a different hand than the",
-					"currently {C:attention}active{} {C:polarskull_rocket}Rocket{}",
+					"This Joker gains {X:mult,C:white}X#2#{} Mult each",
+					"time you play a {C:polarskull_rocket}Rocket{} card",
+					"for a different hand than",
+					"the currently {C:attention}active{} {C:polarskull_rocket}Rocket{}",
 					"{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)",
 				}
 			},
@@ -55,10 +55,15 @@ return {
 				name = "Olimar",
 				text = {
 					{
-						"{C:polarskull_rocket}Rocket{} cards become {C:dark_edition}#1#{} when used",
-						"Multiple {C:polarskull_rocket}Rocket{} cards can be {C:attention}active{} at once and",
-						"once, and may appear multiple times",
-						"{C:inactive}(Rightmost {C:polarskull_rocket}Rocket{} {C:inactive}card determines hand name)"
+						"{C:polarskull_rocket}Rocket{} cards become",
+						"{C:dark_edition}#1#{} when used",
+					},
+					{
+						"Multiple {C:polarskull_rocket}Rocket{} cards",
+						"can be {C:attention}active{} at once and",
+						"may appear multiple times",
+						"{C:inactive}(Rightmost {C:polarskull_rocket}Rocket{} {C:inactive}card",
+						"{C:inactive}determines hand name)"
 					},
 				}
 			}
@@ -204,7 +209,10 @@ return {
 			PotatoPatchDev_mariofan = {
 				name = "MarioFan597",
 				text = {
-					"e",
+					"{C:red,s:1.5,E:1}Letsa go!",
+					"Helped with various things like",
+					"text formating, brainstorming,",
+					"coding, and art"
 				},
 			},
 			PotatoPatchDev_rainstar = {
