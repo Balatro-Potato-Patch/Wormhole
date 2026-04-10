@@ -14,6 +14,7 @@ SMODS.Joker {
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = true,
+    ppu_artist = { "blamperer" },
     ppu_coder = { "blamperer" },
     ppu_team = { "riverboat" },
     attributes = { "chips", "mult" },
