@@ -1,6 +1,6 @@
 SMODS.Atlas {
   key = "tbp_big_space_atlas",
-  path = "Space.png",
+  path = "taxes_back_pain/space_bg.png",
   px = 800,
   py = 500
 }

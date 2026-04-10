@@ -168,6 +168,82 @@ local descriptions = {
             }
         },
         -- CORE --
+        nebula = {
+            name = "Nebula Core",
+            text = {
+                'When a {C:spectral}Module{} would',
+                '{C:attention}deplete{}, level up',
+                'a random poker hand by {C:attention}#1#{}',
+                '{s:0.8,C:inactive}(Depletes when triggered)'
+            }
+        },
+        nebula_equipped = {
+            name = '{C:attention}Nebula Core',
+            text = {
+                '{s:1.2,V:1}Nebula Core{}',
+                'When a {C:spectral}Module{} would',
+                '{C:attention}deplete{}, level up',
+                'a random poker hand by {C:attention}#1#{}',
+                '{s:0.8,C:inactive}(Depletes when triggered)'
+            }
+        },
+        astrophage = {
+            name = "Astrophage Core",
+            text = {
+                'Using a {C:planet}Planet{} card',
+                'increases the durability of',
+                'a random {C:spectral}Module{} by {C:attention}#1#{}',
+                '{s:0.8,C:inactive}(Depletes when triggered)'
+            }
+        },
+        astrophage_equipped = {
+            name = "Astrophage Core",
+            text = {
+                '{s:1.2,V:1}Astrophage Core{}',
+                'Using a {C:planet}Planet{} card',
+                'increases the durability of',
+                'a random {C:spectral}Module{} by {C:attention}#1#{}',
+                '{s:0.8,C:inactive}(Depletes when triggered)'
+            }
+        },
+        no_core_name1 = {
+            name = "No Name 1 Core",
+            text = {
+                'Playing a {C:attention}#2#{}',
+                'increases the durability of',
+                'other {C:spectral}Modules{} by {C:attention}#1#{}',
+                '{s:0.8,C:inactive}(Depletes when triggered)'
+            }
+        },
+        no_core_name1_equipped = {
+            name = "No Name 1 Core",
+            text = {
+                '{s:1.2,V:1}No Name 1 Core{}',
+                'Playing a {C:attention}#2#{}',
+                'increases the durability of',
+                'each other {C:spectral}Module{} by {C:attention}1{}',
+                '{s:0.8,C:inactive}(Depletes when triggered)'
+            }
+        },
+        black_hole_generator = {
+            name = "Black Hole Generator",
+            text = {
+                'When a {C:spectral}Module{} is',
+                'depleted, increases the durability of',
+                'other {C:spectral}Modules{} by {C:attention}#1#{}',
+                '{s:0.8,C:inactive}(Depletes when triggered)'
+            }
+        },
+        black_hole_generator_equipped = {
+            name = "Black Hole Generator",
+            text = {
+                '{s:1.2,V:1}Black Hole Generator{}',
+                'When a {C:spectral}Module{} is',
+                'depleted, increases the durability of',
+                'other {C:spectral}Modules{} by {C:attention}#1#{}',
+                '{s:0.8,C:inactive}(Depletes when triggered)'
+            }
+        },
         -- WEAPON --
         -- UTILITY --
         hardlight = {

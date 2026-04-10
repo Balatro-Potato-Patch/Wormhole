@@ -17,13 +17,20 @@ function Wormhole.tbp.prefix_loc_table(input, output)
     return output
 end
 
-function Card:tbp_has_module(m)
-    if self and self.config and self.config.center and self.config.center.key == "j_worm_tbp_spaceship" then
-        for k, v in ipairs(self.ability.extra.modules) do
-            if v[1] == m then return true end
+-- Function to get equipped module on a spaceship
+-- card: spaceship
+function Wormhole.tbp.get_equipped_modules(card)
+    local modules = {}
+    if card.ability and card.ability.extra and card.ability.extra.modules then
+        for k, v in pairs(card.ability.extra.modules) do
+            if next(v) then
+                modules[k] = v
+            end
         end
     end
-    return false
+    if next(modules) then
+        return modules
+    end
 end
 
 -- Game Start

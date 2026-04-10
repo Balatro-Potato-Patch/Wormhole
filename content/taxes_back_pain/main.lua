@@ -35,6 +35,13 @@ SMODS.current_mod.config_tab = function()
     }
 end
 
+SMODS.Atlas {
+    key = "tbp_devs",
+    path = "taxes_back_pain/devs.png",
+    px = 71,
+    py = 95
+}
+
 PotatoPatchUtils.Team({
     name = 'tbp',
     loc = true,
@@ -82,13 +89,22 @@ PotatoPatchUtils.Developer({
     name = 'mythie',
     team = 'tbp',
     loc = true,
+    atlas = 'worm_tbp_devs',
+    pos = { x = 0, y = 0},
 })
 
-SMODS.Atlas {
-    key = 'module_icons',
-    px = 24,
-    py = 15,
-    path = 'taxes_back_pain/icons_no_bg.png'
+SMODS.DrawStep{
+    key = 'credit_space',
+    order = 5,
+    func = function(self, layer)
+        if self.children.center.atlas.name == "worm_tbp_devs" then
+            self.children.center:draw_shader("worm_torn", nil, self.ARGS.send_to_shader)
+            if self.children.front and not self:should_hide_front() then
+                self.children.front:draw_shader("worm_torn", nil, self.ARGS.send_to_shader)
+            end
+        end
+    end,
+    conditions = { vortex = false, facing = 'front' },
 }
 
 --- DEBUG PURPOSE ONLY
@@ -97,12 +113,10 @@ SMODS.Atlas {
 SMODS.Back{
     key = "spaceship_deck",
     pos = {x = 0, y = 0},
-    config = {consumables = {}, jokers = {'j_worm_tbp_spaceship'}, consumable_slot = 100},
+    config = {consumables = {'c_worm_tbp_no_core_name1', 'c_worm_tbp_hardlight', 'c_worm_tbp_astrophage',  'c_pluto'}, jokers = {'j_worm_tbp_spaceship'}, consumable_slot = 100},
 }
 
 ---
-
-
 
 -- TODO: add actual module slots and colours here
 Wormhole.tbp.module_colours = {
@@ -428,6 +442,172 @@ end
 ---- MODULES ----
 
 -- CORES --
+
+Wormhole.tbp.Module({
+	key = "nebula",
+    slot = 'core',
+    durability = 5, -- TODO: Durability unspecified, find a proper value for this
+	-- pos = { x = 0, y = 0 },
+	config = {
+		extra = {
+			amount = 1,
+		},
+    },
+	loc_vars = function(self, info_queue, module, card)
+		return { vars = { module.ability.extra.amount } }
+    end,
+    module_calculate = function (self, module, context, card)
+        if context.wormhome_tbp_module_uninstall and context.card == card and context.module ~= self.slot and context.type == 'failed' then
+            Wormhole.tbp.change_durability(self.slot, -1)
+            return {
+                func = function()
+                    local _hand = pseudorandom_element(G.handlist, pseudoseed('tbp_nebula_core'))
+                    SMODS.smart_level_up_hand(card, _hand, nil, module.amount)
+                end
+            }
+        end
+    end
+})
+
+Wormhole.tbp.Module({
+	key = "astrophage",
+    slot = 'core',
+    durability = 5, -- TODO: Durability unspecified, find a proper value for this
+	-- pos = { x = 0, y = 0 },
+	config = {
+		extra = {
+			amount = 1, -- TODO: Amount unspecified, find a proper value for this
+		},
+    },
+	loc_vars = function(self, info_queue, module, card)
+		return { vars = { module.ability.extra.amount } }
+    end,
+    module_calculate = function (self, module, context, card)
+        if context.using_consumeable and context.consumeable and context.consumeable.config.center.set == "Planet" then
+            return {
+                func = function()
+                    local modules = Wormhole.tbp.get_equipped_modules(card)
+                    local used_modules = {}
+                    for key, module in pairs(modules) do
+                        if module ~= self.slot and module.durability < module.total_durability then
+                            used_modules[#used_modules+1] = key
+                        end
+                    end
+                    if next(used_modules) then
+                        local rand_module = pseudorandom_element(used_modules, pseudoseed('tbp_astrophage'))
+                        Wormhole.tbp.change_durability(rand_module, module.amount)
+                        Wormhole.tbp.change_durability(self.slot, -1)
+                    end
+                end
+            }
+        end
+    end
+})
+
+Wormhole.tbp.Module({
+	key = "no_core_name1", -- TODO: Find it a name, don't forget to change pseudoseed and locs
+    slot = 'core',
+    durability = 3,
+	-- pos = { x = 0, y = 0 },
+	config = {
+		extra = {
+			amount = 1,
+            poker_hand = 'High Card'
+		},
+    },
+	loc_vars = function(self, info_queue, module, card)
+		return { vars = { module.ability.extra.amount, localize(module.ability.extra.poker_hand, 'poker_hands') } }
+    end,
+    set_ability = function(self, card, initial, delay_sprites)
+        -- TODO: from og set_ability, to remove when art is added
+        if self.atlas == 'centers' then
+            card.canvas_text = {
+                SMODS.CanvasSprite({
+                    text_colour = G.C.RED,
+                    text = localize('tbp_module_'..self.slot),
+                    text_offset = {x = 36, y = 20},
+                    text_width = 26,
+                    text_height = 20,
+                }),
+                SMODS.CanvasSprite({
+                    text_colour = G.C.BLUE,
+                    text = localize({type = 'name_text', set = 'tbp_module', key = self.key}),
+                    text_offset = {x = 36, y = 60},
+                    text_width = 60,
+                    text_height = 20,
+                })
+            }
+        end
+        ---
+        ---
+        --TODO: Fix poker hand not changing in joker loc
+        local _poker_hands = {}
+        for k, v in pairs(G.GAME.hands) do
+            if v.visible and k ~= card.ability.extra.poker_hand then
+                _poker_hands[#_poker_hands + 1] = k
+            end
+        end
+        card.ability.extra.poker_hand = pseudorandom_element(_poker_hands, pseudoseed((card.area and card.area.config.type == 'title') and 'tbp_false_no_core_name1' or 'tbp_no_core_name1'))
+    end,
+    module_calculate = function (self, module, context, card)
+        if context.before and context.main_eval and context.scoring_name == module.poker_hand then
+            return {
+                func = function()
+                    local modules = Wormhole.tbp.get_equipped_modules(card)
+                    for key, module in pairs(modules) do
+                        if module ~= self.slot and module.durability < module.total_durability then
+                            Wormhole.tbp.change_durability(key, module.amount)
+                        end
+                    end
+                end
+            }
+        end
+        if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then
+            local _poker_hands = {}
+            for k, v in pairs(G.GAME.hands) do
+                if v.visible and k ~= module.poker_hand then
+                    _poker_hands[#_poker_hands + 1] = k
+                end
+            end
+            module.poker_hand = pseudorandom_element(_poker_hands, pseudoseed('tbp_no_core_name1'))
+            return {
+                func = function()
+                    Wormhole.tbp.change_durability(self.slot, -1)
+                end
+            }
+        end
+    end
+})
+
+Wormhole.tbp.Module({
+	key = "black_hole_generator",
+    slot = 'core',
+    durability = 5, -- TODO: Durability unspecified, find a proper value for this
+	-- pos = { x = 0, y = 0 },
+	config = {
+		extra = {
+			amount = 2,
+		},
+    },
+	loc_vars = function(self, info_queue, module, card)
+		return { vars = { module.ability.extra.amount } }
+    end,
+    module_calculate = function (self, module, context, card)
+        if context.wormhome_tbp_module_uninstall and context.module ~= self.slot and context.type == 'failed' then
+            Wormhole.tbp.change_durability(self.slot, -1)
+            return {
+                func = function()
+                    local modules = Wormhole.tbp.get_equipped_modules(card)
+                    for key, module in pairs(modules) do
+                        if module ~= self.slot and module ~= context.card and module.durability < module.total_durability then
+                            Wormhole.tbp.change_durability(key, module.amount)
+                        end
+                    end
+                end
+            }
+        end
+    end
+})
 
 -- WEAPONS --
 
