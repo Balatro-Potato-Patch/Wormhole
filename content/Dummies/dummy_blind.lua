@@ -114,7 +114,7 @@ SMODS.Blind {
     ppu_coder = { "vissa", "flowire" },
     ppu_team = { "dummies" },
     dollars = 0,
-    mult = 3,
+    mult = 4,
     pos = { x = 0, y = 0 },
     boss = { min = 2 },
     boss_colour = HEX("EFC03C"),
