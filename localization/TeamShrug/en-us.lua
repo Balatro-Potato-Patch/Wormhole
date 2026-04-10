@@ -172,7 +172,7 @@ return {
                 }
             },
             c_worm_shrug_alien_hearts = {
-                name = 'E.T.',
+                name = 'Fresno Nightcrawlers',
                 text = {
                     'Convert up to {C:attention}#1#{} random',
                     'non-{C:hearts}Heart{} cards in deck',
@@ -223,7 +223,7 @@ return {
                 name = "Skyfish",
                 text = {
                     "Create a {C:attention}Perishable",
-                    "copy of a random joker",
+                    "copy of a random Joker",
                 },
             },
         },

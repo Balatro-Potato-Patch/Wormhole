@@ -1,9 +1,13 @@
+-- DEFINE COLORS
+G.C.SET.shrug_alien = HEX('C87ED3')
+G.C.SECONDARY_SET.shrug_alien = HEX('C87ED3')
+
 SMODS.ConsumableType{
     key = 'shrug_alien',
-    default = 'c_fool',
+    default = 'c_worm_shrug_alien_martian',
     collection_rows = {4, 4},
-    primary_colour = G.C.SET.Tarot,
-    secondary_colour = G.C.SECONDARY_SET.Tarot, -- THERE IS NO ALIEN COLOR RIGHT NOW
+    primary_colour = G.C.SET.shrug_alien,
+    secondary_colour = G.C.SECONDARY_SET.shrug_alien,
     shop_rate = 0.0,
 }
 SMODS.Atlas{ key = 'shrug_alien_cards',
