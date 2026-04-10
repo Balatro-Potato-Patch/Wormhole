@@ -23,7 +23,8 @@ SMODS.Joker{ --Dinosaur Earth
         local dinos_extinct = #dinosaur_earths
         ease_ante(-card.ability.extra.ante * dinos_extinct)
 
-        -- TODO : Play greenscreen meteor animation 
+        ExtinctionEvent.set_video_volume(G.SETTINGS.SOUND.game_sounds_volume)
+        ExtinctionEvent.play_video()
 
         G.E_MANAGER:add_event(Event {
             func = function()
