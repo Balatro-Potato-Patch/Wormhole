@@ -1,6 +1,7 @@
 SMODS.Consumable{
 	key = "tlr_formation",
 	set = "Spectral",
+    atlas = "tlr_spectrals",
     pos = { x = 0, y = 0 },
 	config = { extra = { seal = 'worm_tlr_star' }, max_highlighted = 1 },
 
