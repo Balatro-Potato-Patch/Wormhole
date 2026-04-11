@@ -128,7 +128,16 @@ descriptions={
 				"hand, retrigger a random",
 				"card in poker hand"
 			}
-		}
+		},
+		j_worm_tanabata = {
+			name = "Tanabata",
+			text = {
+				"If poker hand contains",
+				"a Jack and a Queen,",
+				"create a random Planet",
+				"{C:inactive}(Must have room)"
+			}
+		},
 	},
 	Stake={
 		stake_worm_cosmic ={
