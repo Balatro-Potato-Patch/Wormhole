@@ -319,9 +319,9 @@ return {
 
                 k_worm_euda_cometplanet = "Comet",
       
-                k_fate = "Fate",
-                b_fate_cards = "Fate Cards",
-                k_avadon_pack = "Avadon Pack",
+                k_euda_fate = "Fate",
+                b_euda_fate_cards = "Fate Cards",
+                k_euda_avadon_pack = "Avadon Pack",
                 k_worm_lunarcheese_message = "Cheesy!",
             }
         }
