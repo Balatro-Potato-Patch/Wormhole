@@ -60,5 +60,82 @@ function Game.init_game_object(self)
         }
     }
 
+    self.tbp = {}
+    self.tbp.module_icons = {
+        core = Sprite(0, 0, self.CARD_W, self.CARD_W, 
+            G.ASSET_ATLAS["worm_tbp_icons_cards"], {
+                x=2, 
+                y=0
+            }),
+        weapons = Sprite(0, 0, self.CARD_W, self.CARD_H,
+            G.ASSET_ATLAS["worm_tbp_icons_cards"], {
+                x = 0,
+                y = 0
+            }),
+        thrusters = Sprite(0, 0, self.CARD_W, self.CARD_W,
+            G.ASSET_ATLAS["worm_tbp_icons_cards"], {
+                x = 1,
+                y = 0
+            }),
+        shields = Sprite(0, 0, self.CARD_W, self.CARD_W,
+            G.ASSET_ATLAS["worm_tbp_icons_cards"], {
+                x = 3,
+                y = 0
+            }),
+        undiscovered = Sprite(0, 0, self.CARD_W, self.CARD_W,
+            G.ASSET_ATLAS["worm_tbp_icons_cards"], {
+                x = 5,
+                y = 1
+            }),
+    }
+
+    self.tbp.module_banners = {
+        core = Sprite(0, 0, self.CARD_W, self.CARD_W, 
+            G.ASSET_ATLAS["worm_tbp_module_frame"], {
+                x=1, 
+                y=0
+            }),
+        weapons = Sprite(0, 0, self.CARD_W, self.CARD_H,
+            G.ASSET_ATLAS["worm_tbp_module_frame"], {
+                x = 0,
+                y = 0
+            }),
+        thrusters = Sprite(0, 0, self.CARD_W, self.CARD_W,
+            G.ASSET_ATLAS["worm_tbp_module_frame"], {
+                x = 2,
+                y = 0
+            }),
+        shields = Sprite(0, 0, self.CARD_W, self.CARD_W,
+            G.ASSET_ATLAS["worm_tbp_module_frame"], {
+                x = 3,
+                y = 0
+            }),
+        undiscovered = Sprite(0, 0, self.CARD_W, self.CARD_W,
+            G.ASSET_ATLAS["worm_tbp_module_frame"], {
+                x = 5,
+                y = 0
+            }),
+    }
+
+    self.tbp.module_frames = {
+        base = Sprite(0, 0, self.CARD_W, self.CARD_W, 
+            G.ASSET_ATLAS["worm_tbp_module_frame"], {
+                x=0, 
+                y=1
+            }),
+        undiscovered = Sprite(0, 0, self.CARD_W, self.CARD_H,
+            G.ASSET_ATLAS["worm_tbp_module_frame"], {
+                x = 1,
+                y = 1
+            }),
+        locked = Sprite(0, 0, self.CARD_W, self.CARD_W,
+            G.ASSET_ATLAS["worm_tbp_module_frame"], {
+                x = 2,
+                y = 1
+            }),
+    }
+
+    self.tbp.module_sprites = {}
+
     return ret
 end

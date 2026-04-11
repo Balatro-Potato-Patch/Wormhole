@@ -83,6 +83,49 @@ SMODS.Atlas {
     frames = 64,
 }
 
+SMODS.Atlas {
+    key = "tbp_module_sprite_only",
+    path = "taxes_back_pain/modules_sprite_only.png",
+    px = 71,
+    py = 95
+}
+
+SMODS.Atlas {
+    key = "tbp_module",
+    path = "taxes_back_pain/modules.png",
+    px = 71,
+    py = 95
+}
+
+SMODS.Atlas {
+    key = "tbp_module_frame",
+    path = "taxes_back_pain/separated_module_card.png",
+    px = 71,
+    py = 95
+}
+
+SMODS.Atlas {
+    key = "tbp_boosters",
+    path = "taxes_back_pain/module_boosters.png",
+    px = 71,
+    py = 95
+}
+
+SMODS.Atlas {
+    key = "tbp_icons_cards",
+    path = "taxes_back_pain/icons_cardsized.png",
+    px = 71,
+    py = 95
+}
+
+
+SMODS.Atlas {
+    key = "tbp_icons",
+    path = "taxes_back_pain/icons_no_bg.png",
+    px = 24,
+    py = 15
+}
+
 PotatoPatchUtils.Team({
     name = 'tbp',
     loc = true,
@@ -516,7 +559,9 @@ Wormhole.tbp.Module({
 	key = "nebula",
     slot = 'core',
     durability = 5, -- TODO: Durability unspecified, find a proper value for this
-	-- pos = { x = 0, y = 0 },
+    atlas = "tbp_module_frame",
+	pos = { x = 3, y = 1 },
+    module_pos = { x = 0, y = 1},
 	config = {
 		extra = {
 			amount = 1,
@@ -798,7 +843,8 @@ Wormhole.tbp.Module({
 	key = "hardlight",
     slot = 'shields', -- TODO: Maybe replace this with utility
     durability = 5,
-	-- pos = { x = 0, y = 0 },
+    atlas = "tbp_module",
+	pos = { x = 0, y = 0 },
 	config = {
 		extra = {
 			percent = 0.05,
@@ -1167,6 +1213,8 @@ end
 SMODS.Booster({
 	key = "module_normal_1",
     config = { extra = 3, choose = 1 },
+    atlas = "tbp_boosters",
+    pos = { x = 1, y = 0},
     loc_vars = booster_loc_vars,
 	group_key = "k_worm_tbp_module",
 	cost = 4,
@@ -1177,6 +1225,8 @@ SMODS.Booster({
 SMODS.Booster({
 	key = "module_normal_2",
 	config = { extra = 3, choose = 1 },
+    atlas = "tbp_boosters",
+    pos = { x = 0, y = 0},
     loc_vars = booster_loc_vars,
 	group_key = "k_worm_tbp_module",
 	cost = 4,
@@ -1187,6 +1237,8 @@ SMODS.Booster({
 SMODS.Booster({
 	key = "module_jumbo_1",
 	config = { extra = 5, choose = 1 },
+    atlas = "tbp_boosters",
+    pos = { x = 2, y = 0},
     loc_vars = booster_loc_vars,
 	group_key = "k_worm_tbp_module",
 	cost = 6,
@@ -1197,6 +1249,8 @@ SMODS.Booster({
 SMODS.Booster({
 	key = "module_mega_1",
 	config = { extra = 5, choose = 2 },
+    atlas = "tbp_boosters",
+    pos = { x = 3, y = 0},
     loc_vars = booster_loc_vars,
 	group_key = "k_worm_tbp_module",
 	cost = 8,
