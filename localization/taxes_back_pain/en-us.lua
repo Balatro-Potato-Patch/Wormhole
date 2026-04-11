@@ -527,7 +527,7 @@ local descriptions = {
             text = {
                 "Earn {C:money}+$#1#{}",
                 "when a {C:spectral}Module{}", -- TODO: change color to new Module one if changed
-                "is {C:attention}destroyed{}",
+                "is {C:attention}exhausted{}",
                 '{s:0.8,C:inactive}(Depletes each time it triggers)'
             }
         },
@@ -537,7 +537,7 @@ local descriptions = {
                 '{s:1.2,V:1}Uncategorized 4',
                 "Earn {C:money}+$#1#{}",
                 "when a {C:spectral}Module{}", -- TODO: change color to new Module one if changed
-                "is {C:attention}destroyed{}",
+                "is {C:attention}exhausted{}",
                 '{s:0.8,C:inactive}(Depletes each time it triggers)'
             }
         },
