@@ -1,21 +1,21 @@
 if not Wormhole.COLON_THREE or not Wormhole.COLON_THREE.loaded then return end
 
 SMODS.Joker {
-    key = "wall_e",
-    --atlas = "ct_jokers",
-    --pos = { x = 0, y = 0 },
-    config = { extra = { } },
+    key = "grabberhand",
+    atlas = "ct_jokers",
+    pos = { x = 4, y = 0 },
+    config = { extra = { hands = 0, } },
     rarity = 2,
     cost = 5,
-    attributes = { "space", "passive", },
-    --ppu_artist = {},
+    attributes = { "hands", },
+    ppu_artist = { "notmario" },
     ppu_coder = { "notmario" },
     ppu_team = { ":3" },
 
     loc_vars = function(self, q, card)
         q[#q+1] = { key = "worm_clean_up_reminder", set="Other", specific_vars = { } }
         q[#q+1] = G.P_CENTERS.m_worm_junk_card
-        return { vars = { } }
+        return { vars = { card.ability.extra.hands } }
     end,
     calculate = function(self, card, context)
         if context.worm_c3_cleanup_cost then
@@ -26,6 +26,13 @@ SMODS.Joker {
             for _, cost in ipairs(new_costs) do
                 context.valid_costs[cost] = true
             end
+        end
+        if context.worm_c3_cleanup then
+			card.ability.extra.hands = card.ability.extra.hands + 1
+        end
+        if context.setting_blind and not context.blueprint and card.ability.extra.hands ~= 0 then
+			ease_hands_played(card.ability.extra.hands)
+            card.ability.extra.hands = 0
         end
     end
 }

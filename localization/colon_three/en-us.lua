@@ -18,12 +18,19 @@ return {
                     "{C:inactive}(Currently {C:mult}+#1#{C:inactive})"
                 }
             },
-            j_worm_wall_e = {
-                name = "WALL-E",
+            j_worm_grabberhand = {
+                name = "Grabber Hand",
                 text = {
-                    "You may pay {C:attention}Clean-up{} costs by",
-                    "selecting up to {C:attention}one{} fewer card",
-                    "{C:inactive}(Minimum of 1 card)"
+                    {
+                        "You may pay {C:attention}Clean-up{} costs by",
+                        "selecting up to {C:attention}one{} fewer card",
+                        "{C:inactive}(Minimum of 1 card)"
+                    },
+                    {
+                        "Whenever you {C:attention}Clean-up{}, get an",
+                        "extra {C:blue}hand{} in the next round",
+                        "{C:inactive}(Currently {C:blue}#1#{C:inactive} hands)"
+                    }
                 }
             },
             j_worm_nyan_cat = {

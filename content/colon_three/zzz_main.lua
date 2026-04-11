@@ -143,7 +143,7 @@ Wormhole.COLON_THREE.loaded = true
 for i, v in pairs({
     "laika",
     "dyson_sphere",
-    "wall_e",
+    "grabberhand",
     "nyan_cat",
     "event_horizon",
     "tesla_in_space",
