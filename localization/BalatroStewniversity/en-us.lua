@@ -55,6 +55,17 @@ return {
                     '{C:attention}sell value{} for every {C:attention}#2#{C:inactive} [#3#]',
                     'scoring {C:diamonds}Diamond{} cards played'
                 }
+            },
+
+            j_worm_8_ball_earth = {
+                name = '8 Ball Earth',
+                text = {
+                    '{C:attention}Fill{} consumable slots with random',
+                    '{C:tarot}Tarot{}, {C:planet}Planet{}, or {C:inactive,s:0.8}(rarely){} {C:spectral}Spectral',
+                    'cards if played hand',
+                    'contains a {C:attention}#1#',
+                    '{C:inactive}(Must have room)'
+                }
             }
 
         },
