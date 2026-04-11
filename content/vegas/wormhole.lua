@@ -339,7 +339,7 @@ SMODS.Joker{
 SMODS.Joker{
 	key = "chthonian",
 	loc_txt = {
-		name = "Cthonian Planet",
+		name = "Chthonian Planet",
 		text = {
 			"If {C:attention}first discard{} of",
 			"round is {C:attention}#1#{} card, make",
@@ -361,7 +361,7 @@ SMODS.Joker{
 	perishable_compat = true,
 	ppu_team = {"People Found In Vegas"},
 	ppu_coder = {"Jammbo"},
-	ppu_artist = {},
+	ppu_artist = {"Jammbo"},
 	calculate = function(self, card, context)
 		if context.discard and G.GAME.current_round.discards_used <= 0 and #context.full_hand == 2 and context.other_card then
             if (context.other_card == context.full_hand[1]) or (context.other_card == context.full_hand[2]) then
@@ -1363,7 +1363,9 @@ SMODS.Back {
         text = {
             "Start with {C:chips}Banner{},",
 			"and {C:blue}Planet Merchant{}",
-			"Hands start at level {C:attention}0"
+			"Hands start at level {C:attention}0",
+			"{s:0.8}Created by Team {s:0.8,C:money}People Found In Vegas{}",
+			"{s:0.8}Code & Art by {s:0.8,C:greeb}Jammbo{}"
         }
     },
 	config = { jokers = { "j_banner" }, vouchers = { "v_planet_merchant" } },
