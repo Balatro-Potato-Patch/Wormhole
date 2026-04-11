@@ -10,7 +10,7 @@ SMODS.Atlas({
 -- Sound
 SMODS.Sound {
     key = "euda_notif",
-    path = "notif.ogg"
+    path = "team-eudaimonia/notif.ogg"
 }
 
 -- Message
