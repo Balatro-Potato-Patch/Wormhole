@@ -1365,7 +1365,7 @@ SMODS.Back {
 			"and {C:blue}Planet Merchant{}",
 			"Hands start at level {C:attention}0",
 			"{s:0.8}Created by Team {s:0.8,C:money}People Found In Vegas{}",
-			"{s:0.8}Code & Art by {s:0.8,C:greeb}Jammbo{}"
+			"{s:0.8}Code & Art by {s:0.8,C:green}Jammbo{}"
         }
     },
 	config = { jokers = { "j_banner" }, vouchers = { "v_planet_merchant" } },
