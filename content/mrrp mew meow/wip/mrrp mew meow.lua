@@ -8,6 +8,8 @@ SMODS.Atlas { key = "mrrp_j",
 }
 
 SMODS.Joker {
+	ppu_team = {'Mrrp Mew Meow :3'},
+    ppu_coder = {'someone lolz'},
 	key = 'NAME',
 	atlas = "mrrp",
 	pos = {
