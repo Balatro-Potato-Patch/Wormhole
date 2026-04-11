@@ -1,7 +1,7 @@
 SMODS.Seal {
     key = 'tlr_star',
-    atlas = 'elr_enhancers',
-    pos = { x = 2, y = 0 },
+    atlas = 'tlr_seal',
+    pos = { x = 0, y = 0 },
     badge_colour = SMODS.ConsumableTypes.worm_tlr_constellation.secondary_colour,
     text_colour = SMODS.ConsumableTypes.worm_tlr_constellation.text_colour,
     config = { extra = { percent = 150 } },

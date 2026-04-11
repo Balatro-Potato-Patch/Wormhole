@@ -80,3 +80,10 @@ SMODS.Atlas{
 	px = 71,
 	py = 95
 }
+
+SMODS.Atlas{
+	key = "tlr_seal",
+	path = "TheLastResort/seal.png",
+	px = 71,
+	py = 95
+}
