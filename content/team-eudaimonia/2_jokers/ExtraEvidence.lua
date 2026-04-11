@@ -2,7 +2,7 @@ SMODS.Atlas {
     key = 'euda_extraevidenceatlas',
     px = 71,
     py = 95,
-    path = 'team-eudaimonia/CometWild.png', --Update with actual art
+    path = 'team-eudaimonia/ExtraEvidence.png', --Update with actual art
 }
 
 SMODS.Joker {
@@ -13,7 +13,7 @@ SMODS.Joker {
     cost = 6,
     discovered = true,
     ppu_coder = {'M0xes'},
-    ppu_artist = {'M0xes'},
+    ppu_artist = {'Hunter'},
     calculate = function(self, card, context)
         if context.before then
             for i, playing_card in ipairs(context.scoring_hand) do

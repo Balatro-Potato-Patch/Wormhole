@@ -131,7 +131,7 @@ return {
             j_worm_euda_extraevidence = {
                 name = "Extraterrestrial Evidence",
                 text = {
-                    "Debuffs all but the {C:attention}first{} scoring card",
+                    "Debuffs all scoring cards except the {C:attention}first{} one",
                     "Retrigger the first card for",
                     "every other {C:attention}unique{} rank scored"
                 }
@@ -330,7 +330,7 @@ return {
                 k_euda_fate = "Fate",
                 b_euda_fate_cards = "Fate Cards",
                 k_euda_avadon_pack = "Avadon Pack",
-                k_worm_lunarcheese_message = "Cheesy!",
+                k_worm_euda_lunarcheese_message = "Cheesy!",
             }
         }
 }
