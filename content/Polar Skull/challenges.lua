@@ -3,8 +3,10 @@ SMODS.Challenge {
   button_colour = HEX("83e9f8"),
   rules = {
     custom = {
-      { id = "rocket_paper_scissors" },
-      {id = "polarskull_credits"}
+      {id = "rocket_paper_scissors" },
+      {id = "polarskull_credits_1"},
+      {id = "polarskull_credits_2"},
+      {id = "polarskull_credits_3"}
     },
   },
   deck = { type = "Challenge Deck", },

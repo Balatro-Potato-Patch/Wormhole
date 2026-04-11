@@ -19,6 +19,7 @@ SMODS.ConsumableType({
 	key = "polarskull_rocket",
 	primary_colour = HEX("4f6367"),
 	secondary_colour = HEX("83e9f8"),
+	text_colour = HEX('4f6367'),
 	default = "c_worm_polarskull_atlasv",
 	shop_rate = 2, --Half the default rate of Planet Cards
 })
