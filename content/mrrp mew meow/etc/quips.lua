@@ -5,6 +5,7 @@ SMODS.JimboQuip{
     key = "mrrp_menthol",
     extra = {
         text_key = "menthol",
+        ppu_dev = "worm_Minty",
         materialize_colours = {
             HEX("CA7CA7")
         },
@@ -12,11 +13,6 @@ SMODS.JimboQuip{
     },
     filter = function (self, quip_type)
         local key = "menthol"
-        local center = "j_minty_minty"
-        if not menthol then
-            key = "no_"..key
-            center = "j_lucky_cat"
-        end
 
         if quip_type == "win" then
             key = key.."_win"
@@ -41,8 +37,7 @@ SMODS.JimboQuip{
 
         --print(key)
         self.extra.text_key = key
-        self.extra.center = center
-        return not not G.localization.misc.quips[key]
+        return not not G.localization.misc.quips[key]-- , G.quipdebugtime and {weight=10000} or nil
     end
 }
 
