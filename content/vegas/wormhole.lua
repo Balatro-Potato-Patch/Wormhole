@@ -290,14 +290,14 @@ SMODS.Joker{
 								_planet = v.key
 							end
 						end
-						if _planet and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+						if _planet and #G.consumeables.cards + G.GAME.consumeable_buffer < (G.consumeables.config.card_limit + 1) then
 							SMODS.add_card({ key = _planet })
+							SMODS.calculate_effect({message = localize('k_plus_planet'), colour = G.C.SECONDARY_SET.Planet}, card)
 						end
 						G.GAME.consumeable_buffer = 0
 						return true
 					end
 				}))
-				return { message = localize('k_plus_planet'), colour = G.C.SECONDARY_SET.Planet }
 			end
         end
 	end
@@ -368,7 +368,7 @@ SMODS.Joker{
 				context.other_card:set_ability("m_stone", nil, true)
 			end
 			return{
-				message = "It's ice, I promise"
+				message = "Look! Rocks!"
 			}
         end
 	end
@@ -707,7 +707,15 @@ SMODS.Joker{
                 }
             end
         end
-	end
+	end,
+	in_pool = function(self, args)
+        for _, playing_card in ipairs(G.playing_cards or {}) do
+            if playing_card.edition and playing_card.edition.negative then
+                return true
+            end
+        end
+        return false
+    end
 }
 
 --[[
