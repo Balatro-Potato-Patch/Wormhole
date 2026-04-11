@@ -166,6 +166,22 @@ return {
                     'learn what it does',
                 },
             },
+            p_worm_acme_gadget_normal = {
+                name = "Gadget Pack",
+                text = {
+                    "Choose {C:attention}#1#{} of up to",
+                    "{C:attention}#2#{C:attention} Gadget{} cards to",
+                    "be held in consumable slots",
+                },
+            },
+            p_worm_acme_gadget_mega = {
+                name = "Mega Gadget Pack",
+                text = {
+                    "Choose {C:attention}#1#{} of up to",
+                    "{C:attention}#2#{C:attention} Gadget{} cards to",
+                    "be held in consumable slots",
+                },
+            },
         },
         PotatoPatch = {
             PotatoPatchTeam_ACME = {
