@@ -109,3 +109,21 @@ end
 '''
 match_indent = true
 times = 1
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''
+self.shared_seals = {
+    Gold = Sprite(0, 0, self.CARD_W, self.CARD_H, self.ASSET_ATLAS["centers"], {x = 2,y = 0}),
+    Purple = Sprite(0, 0, self.CARD_W, self.CARD_H, self.ASSET_ATLAS["centers"], {x = 4,y = 4}),
+    Red = Sprite(0, 0, self.CARD_W, self.CARD_H, self.ASSET_ATLAS["centers"], {x = 5,y = 4}),
+    Blue = Sprite(0, 0, self.CARD_W, self.CARD_H, self.ASSET_ATLAS["centers"], {x = 6,y = 4}),
+}
+'''
+position = "after"
+payload = '''
+self.tbp = {}
+self.tbp.module_sprites = {}
+'''
+match_indent = true

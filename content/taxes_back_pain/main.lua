@@ -500,6 +500,11 @@ Wormhole.tbp.Module = SMODS.Consumable:extend{
             end
         end
     end,
+    inject = function(self)
+        SMODS.Consumable.inject(self)
+        G.tbp.module_sprites[self.key] = Sprite(0, 0, G.CARD_W, G.CARD_H,
+            G.ASSET_ATLAS['worm_tbp_module_sprite_only'], self.module_pos or {x=9, y=1})
+    end,
     can_use = function(self, card)
 		return next(SMODS.find_card("j_worm_tbp_spaceship"))
 	end,
@@ -587,6 +592,7 @@ Wormhole.tbp.Module({
 	key = "astrophage",
     slot = 'core',
     durability = 5, -- TODO: Durability unspecified, find a proper value for this
+    atlas = "tbp_module_frame",
 	-- pos = { x = 0, y = 0 },
 	config = {
 		extra = {

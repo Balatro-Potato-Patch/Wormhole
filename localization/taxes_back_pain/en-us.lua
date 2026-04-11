@@ -138,6 +138,17 @@ local other_loc_table = {
                     }
                 },
             },
+
+            -- Undiscovered Modules
+            undiscovered_tbp_module = {
+                name = 'Not Discovered',
+                text = {
+                    'Purchase or use',
+                    'this {C:spectral}Module{} card in an',
+                    'unseeded run to',
+                    'learn what it does'
+                }
+            },
         }
     },
 }

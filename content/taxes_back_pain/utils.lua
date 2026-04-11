@@ -60,7 +60,6 @@ function Game.init_game_object(self)
         }
     }
 
-    self.tbp = {}
     self.tbp.module_icons = {
         core = Sprite(0, 0, self.CARD_W, self.CARD_W, 
             G.ASSET_ATLAS["worm_tbp_icons_cards"], {
@@ -135,7 +134,7 @@ function Game.init_game_object(self)
             }),
     }
 
-    self.tbp.module_sprites = {}
+    -- self.tbp.module_sprites = {}
 
     return ret
 end
