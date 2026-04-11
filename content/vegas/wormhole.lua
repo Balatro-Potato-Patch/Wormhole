@@ -771,7 +771,7 @@ SMODS.Blind{
 	ppu_coder = {"Ben Roffey"},
 	ppu_artist = {"Ben Roffey"},
 	loc_vars = function()
-		return { vars = { colours = HEX("73fdff") }}
+		return { colours = {HEX("73fdff")}, vars = { }}
 	end,
 	calculate = function(self, blind, context)
 		if context.before then
@@ -840,11 +840,18 @@ local function noise(volume)
 	source:play() 
 end
 
-local function lose_the_game()
-	
-	G.STATE = G.STATES.GAME_OVER --Slow down the music
+local function create_space_cutscene()
+    return {
+        n=G.UIT.ROOT, 
+        config={align = 'cm', colour = G.C.CLEAR}, 
+        nodes={
+            {n=G.UIT.O, config={id = 'jimbo_spot', object = Moveable(0,0,G.CARD_W*1.1, G.CARD_H*1.1)}}
+        }
+    }
+end
 
-	--copied from game.lua Game:update_game_over(dt): display game over screen
+local function lose_the_game(quipvalue)
+	--modified from game.lua Game:update_game_over(dt) --- display game over screen
 	remove_save()
 
 	if G.GAME.round_resets.ante <= G.GAME.win_ante then
@@ -866,32 +873,56 @@ local function lose_the_game()
 	G.ROOM.jiggle = G.ROOM.jiggle + 3
         
 	if G.GAME.round_resets.ante <= G.GAME.win_ante then --Only add Jimbo to say a quip if the game over happens when the run is lost
-		local Jimbo = nil
-		G.E_MANAGER:add_event(Event({
-			trigger = 'after',
-			delay = 2.5,
-			blocking = false,
-			func = (function()
-				if G.OVERLAY_MENU and G.OVERLAY_MENU:get_UIE_by_ID('jimbo_spot') then 
-					print("is space joker?", G.P_CENTERS.j_space)
-					Jimbo = Card_Character({center = G.P_CENTERS.j_space}) --Trying to find space joker here, but doesn't work?
-					local spot = G.OVERLAY_MENU:get_UIE_by_ID('jimbo_spot')
-					spot.config.object:remove()
-					spot.config.object = Jimbo
-					Jimbo.ui_object_updated = true
-					Jimbo:add_speech_bubble('lq_'..math.random(1,10), nil, {quip = true})
-					Jimbo:say_stuff(5)
-					end
-				return true
-			end)
-		}))
-	end
+            local Jimbo = nil
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0,
+                blocking = false,
+                func = (function()
+                    if G.OVERLAY_MENU and G.OVERLAY_MENU:get_UIE_by_ID('jimbo_spot') then 
+                        Jimbo = Card_Character({x = 0, y = 5})
+						Jimbo.children.card:set_sprites(G.P_CENTERS.j_space)
+                        local spot = G.OVERLAY_MENU:get_UIE_by_ID('jimbo_spot')
+                        spot.config.object:remove()
+                        spot.config.object = Jimbo
+                        Jimbo.ui_object_updated = true
+                        Jimbo:add_speech_bubble('lq_'..quipvalue, nil, {quip = true})
+						Jimbo.children.speech_bubble.states.visible = true
+                        end
+                    return true
+                end)
+            }))
+        end
 	--
 end
 
 local function tags_visible(bool)
 	for i = 1, #G.HUD_tags do
 		G.HUD_tags[i].states.visible = bool
+	end
+end
+
+local float_in
+float_in = function(Jimbo, times)
+	if not times then return end
+	if not Jimbo then return end
+	if times > 0 then
+		times = times - 1
+		G.E_MANAGER:add_event(Event {
+			blockable = false,
+			blocking = false,
+			pause_force = true,
+			no_delete = true,
+			trigger = "after",
+			delay = 0.01,
+			func = function()
+				Jimbo.T.x = Jimbo.T.x + 0.03
+				Jimbo.T.y = Jimbo.T.y - 0.03
+				Jimbo.T.r = Jimbo.T.r - 0.02
+				float_in(Jimbo, times)
+				return true
+			end
+		})
 	end
 end
 
@@ -929,13 +960,27 @@ heatdeath_timer = function(heatdeath)
 				end
 
 				if heatdeath.config.extra.current == 20 then
-					noise(0.1) --Play noise at volume 0.1 (any more and it is too loud! it ramps up from 0, reaching 0.1 after 20 seconds)
 					attention_text({
 						scale = 0.7, text = "0:20", colour = G.C.MULT, maxw = 12, hold = 1, align = 'cm', offset = {x = 0,y = -1},major = G.play
 					})
 				end
 
-				if heatdeath.config.extra.current <= 10 then
+				if heatdeath.config.extra.current <= 20 then
+					if source:isPlaying() == false then	
+						noise(0.1) --Play noise at volume 0.1 (any more and it is too loud! it ramps up from 0, reaching 0.1 after 20 seconds)
+					end
+					
+				end
+
+				--[[ 
+				if heatdeath.config.extra.current == 15 then
+					print(inspect(G.GAME.blind.children.animatedSprite.T))
+					G.GAME.blind.children.animatedSprite.T.x = G.SETTINGS.WINDOW.DISPLAYS[G.SETTINGS.WINDOW.selected_display].screen_res.w/2
+					G.GAME.blind.children.animatedSprite.T.y = G.SETTINGS.WINDOW.DISPLAYS[G.SETTINGS.WINDOW.selected_display].screen_res.h/2
+				end
+				]]
+
+				if heatdeath.config.extra.current <= 10 and heatdeath.config.extra.current > 0 then
 					local minutes = math.floor(heatdeath.config.extra.current/60)
 					local seconds = heatdeath.config.extra.current - minutes*60
 					disp_text = minutes..":".. string.format("%02d", seconds)
@@ -946,18 +991,20 @@ heatdeath_timer = function(heatdeath)
 						G.GAME.blind.children.animatedSprite.T.scale = G.GAME.blind.children.animatedSprite.T.scale * 1.5
 					end
 				end
-
-				if heatdeath.config.extra.current == 1 then
-					G.GAME.blind.children.animatedSprite.T.scale = G.GAME.blind.children.animatedSprite.T.scale * 10
-				end
 				
 				if heatdeath.config.extra.current == 0 then ------------ IF TIMER REACHES 0
 					
-					source:stop() --stop the noise
-					restoreVolume = G.SETTINGS.SOUND.volume
-					G.SETTINGS.SOUND.volume = 0 -- mute all sounds incl. music
+					heatdeath.config.timing = false
+					heatdeath.config.game_over_override = true
 
-					G.GAME.blind.config.blind = heatdeath --Set this for correct reason for death
+					ease_background_colour({new_colour = G.C.BLACK}) --turn the screen black (in case player was not on the boss blind)
+
+					source:stop() --stop the noise
+					restoreVolume = G.SETTINGS.SOUND.music_volume
+					G.SETTINGS.SOUND.music_volume = 0 -- mute all music
+					G.STATE = G.STATES.GAME_OVER --Slow down the music for game over
+					restoreSFX = G.SETTINGS.SOUND.game_sounds_volume
+					G.SETTINGS.SOUND.game_sounds_volume = 0
 
 					G.hand.states.visible = false --make cardareas invisible
 					G.jokers.states.visible = false
@@ -965,18 +1012,57 @@ heatdeath_timer = function(heatdeath)
 					G.deck.states.visible = false
 					if G.buttons then G.buttons:remove() end
 					tags_visible(false)
+					G.HUD.states.visible = false
+					if G.GAME.blind.config.blind.key ~= "bl_worm_heatdeath" then 
+						G.HUD_blind.states.visible = false
+					end
 
-					G.E_MANAGER:add_event(Event{
+					G.GAME.blind.config.blind = heatdeath --Set this for correct reason for death
+
+					G.FUNCS.overlay_menu{ --Create an overlay menu with a jimbo spot
+						definition = create_space_cutscene(),
+						config = {no_esc = true}
+					}
+					local spot = G.OVERLAY_MENU:get_UIE_by_ID('jimbo_spot')
+					spot.config.object:remove()
+
+					--Add particles in the background?
+					spot.particles = Particles(0, 0, 0, 0, {
+						timer = 0.03,
+						scale = 0.1,
+						speed = 0.1,
+						lifespan = 2,
+						attach = spot,
+						colours = {G.C.WHITE},
+						fill = true
+					})
+					spot.particles.T.x = 0
+					spot.particles.T.y = 0
+					spot.particles.T.w = 20
+					spot.particles.T.h = 10
+
+					Jimbo = Card_Character({y = 15}) --Create a space joker offscreen
+					Jimbo.children.card:set_sprites(G.P_CENTERS.j_space)
+					Jimbo.children.particles:remove()
+
+					--have Space Joker float up 
+					float_in(Jimbo, 1000)
+
+					quipvalue = math.random(1,10)
+
+					G.E_MANAGER:add_event(Event{ --After some more time, have him speak??
 						blockable = false,
 						blocking = false,
 						pause_force = true,
 						no_delete = true,
 						trigger = 'after',
-						delay = 5,
+						delay = 4,
 						func = function()
-							attention_text({
-								scale = 0.7, text = "...", maxw = 12, hold = 2, align = 'cm', offset = {x = 0,y = -1},major = G.play
-							})
+							G.SETTINGS.SOUND.game_sounds_volume = restoreSFX
+							if G.OVERLAY_MENU and G.OVERLAY_MENU:get_UIE_by_ID('jimbo_spot') then 
+								Jimbo:add_speech_bubble('lq_'..quipvalue, nil, {quip = true})
+								Jimbo:say_stuff(5)
+							end
 							return true
 						end
 					})
@@ -988,15 +1074,19 @@ heatdeath_timer = function(heatdeath)
 						pause_force = true,
 						no_delete = true,
 						trigger = 'after',
-						delay = 20,
+						delay = 11,
 						func = function()
-							lose_the_game()
+							Jimbo:remove()
+							lose_the_game(quipvalue) --display menu
 							G.hand.states.visible = true --restore
 							G.jokers.states.visible = true
 							G.consumeables.states.visible = true
 							G.deck.states.visible = true
 							tags_visible(true)
-							G.SETTINGS.SOUND.volume = restoreVolume --unmute the music for the game over screen
+							G.HUD.states.visible = true
+							G.HUD_blind.states.visible = true
+							G.SETTINGS.SOUND.music_volume = restoreVolume --unmute the music for the game over screen
+							heatdeath.config.game_over_override = false
 							return true
 						end
 					})
@@ -1040,12 +1130,12 @@ SMODS.Blind{
 			"{s:0.8}Code & Art by {s:0.8,C:chips}Ben Roffey{}"
 		}
 	},
-	config = {time = 21, timing = false, extra = {current = 21}},
+	config = {time = 21, timing = false, game_over_override = false, extra = {current = 21}},
 	loc_vars = function(self)
 		local minutes = math.floor(self.config.extra.current/60)
 		local seconds = self.config.extra.current - minutes*60
 		
-		if self.config.timing == false then
+		if self.config.timing == false and self.config.game_over_override == false then
 			TIMERTIME = self.config.extra.current
 
 			self.config.timing = true
