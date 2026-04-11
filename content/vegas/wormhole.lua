@@ -653,7 +653,7 @@ SMODS.Joker{
 	perishable_compat = true,
 	ppu_team = {"People Found In Vegas"},
 	ppu_coder = {"Jammbo"},
-	ppu_artist = {},
+	ppu_artist = {"Jammbo"},
 	calculate = function(self, card, context)
 		if context.before and context.main_eval and not context.blueprint and G.GAME.current_round.hands_played == 0 then
             local amount = 0
