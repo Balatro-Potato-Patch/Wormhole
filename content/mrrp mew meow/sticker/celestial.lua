@@ -9,6 +9,7 @@ SMODS.Sticker{
     rate = 0.3,
     calculate = function(self, card, context)
         if context.buying_card and context.buying_self then
+            G.CONTROLLER.locks[card.ID] = true
             -- All of this is from VanillaRemade's Black Hole card by nh6574
             update_hand_text({ sound = 'button', volume = 0.7, pitch = 0.8, delay = 0.3 },
                 { handname = localize('k_all_hands'), chips = '...', mult = '...', level = '' })
@@ -46,6 +47,7 @@ SMODS.Sticker{
             update_hand_text({ sound = 'button', volume = 0.7, pitch = 0.9, delay = 0 }, { level = '÷2' })
             delay(1.3)
             -- end of referenced code
+            G.CONTROLLER.locks[card.ID] = false
             for k, v in pairs(G.GAME.hands) do
                 local reduction = -math.floor(v.level/2)
                 if reduction ~= 0 then
