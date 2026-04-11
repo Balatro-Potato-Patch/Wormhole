@@ -383,7 +383,7 @@ SMODS.Joker{
         return { vars = { card.ability.extra.repetitions, card.ability.extra.repetitions_odd }}
     end,
     atlas = "vegas_jokers",
-    pos = {x = 0, y = 4},
+    pos = {x = 4, y = 0},
     rarity = 1,
     cost = 5,
     blueprint_compat = true,
@@ -420,6 +420,11 @@ SMODS.Joker{
 		end
     end
 }
+
+
+
+
+
 
 --[[
 SMODS.Joker{
@@ -462,7 +467,7 @@ SMODS.Blind{
 		}
 	},
 	atlas = "vegas_blinds",
-	pos = {x = 4, y = 0},
+	pos = {x = 0, y = 0},
 	discovered = true,
 	boss = {showdown = true},
 	dollars = 8,
