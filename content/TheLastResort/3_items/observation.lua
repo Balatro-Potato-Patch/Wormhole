@@ -1,6 +1,7 @@
 SMODS.Consumable{
 	key = "tlr_observation",
 	set = "Tarot",
+	atlas = "tlr_tarot",
 	pos = {x=0, y=0},
 	can_use = function (self, card)
 		return G.consumeables.cards[1] and G.consumeables.cards[1].config.center.set == "worm_tlr_constellation" and G.consumeables.cards[1].ability.tier < 4
@@ -61,5 +62,6 @@ SMODS.Consumable{
 		delay(0.5)
 	end,
 	ppu_team = {"TheLastResort"},
-	ppu_coder = {"Foo54"}
+	ppu_coder = {"Foo54"},
+	ppu_artist = {"Aura2247"},
 }

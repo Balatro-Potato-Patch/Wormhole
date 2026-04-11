@@ -25,6 +25,12 @@ SMODS.Atlas{
 	py = 665
 }
 
+SMODS.Atlas{
+	key = "tlr_tarot",
+	path = "TheLastResort/tarot.png",
+	px = 71,
+	py = 95
+}
 
 SMODS.Atlas{
 	key = "tlr_spectrals",
