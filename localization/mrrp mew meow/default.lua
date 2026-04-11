@@ -225,6 +225,7 @@ misc={
 	},
 	dictionary={
 	--	k_downgrade_ex = "Downgrade!",
+		k_make_a_wish_ex = "Make a wish!"
 	},
 },
 }

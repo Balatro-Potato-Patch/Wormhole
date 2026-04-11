@@ -34,8 +34,9 @@ SMODS.Joker {
                 card.ability.extra.impacts[target] = (card.ability.extra.impacts[target] or 0) + 1
             end
 
-            --Message?
-            return nil, true
+            return {
+                message = localize("k_make_a_wish_ex")
+            }
         end
 
         if context.repetition and context.cardarea == G.play then
