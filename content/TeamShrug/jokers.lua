@@ -190,7 +190,7 @@ Wormhole.SHRUG_Joker {
 Wormhole.SHRUG_Joker {
     key = "shrug_binary_sunset",
     atlas = "shrug_jokers",
-    pos = { x = 0, y = 0 },
+    pos = { x = 2, y = 0 },
     rarity = 2,
     cost = 5,
     config = { extra = { once = false } },
@@ -247,6 +247,9 @@ Wormhole.SHRUG_Joker {
     -- Credits
     ppu_coder = {
         "microwave",
+    },
+    ppu_artist = {
+        "edwardrobinson",
     },
     ppu_team = { "shrug" }
 }
