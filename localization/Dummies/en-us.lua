@@ -133,7 +133,7 @@ return {
                 text = {
 					{
 						"Upgrade a {C:attention}random{} poker hand",
-						"by {C:planet}2{} if played hand contains",
+						"by {C:planet}#1#{} if played hand contains",
 						"a {C:attention}Pair{} of {C:attention}Queens{}",
 					},
 					{

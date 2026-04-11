@@ -18,6 +18,10 @@ SMODS.Atlas({
 
 SMODS.Joker({
 	key = 'dum_timcurry',
+	config = { extra = { ml = 2 } },
+	loc_vars = function(self, info_queue, card)
+		return { vars = { card.ability.extra.ml } }
+	end,
 	unlocked = true,
 	in_pool = function()
 		return not G.GAME.commandandconquer, {allow_duplicates = false}
@@ -48,11 +52,11 @@ SMODS.Joker({
 				local effects = {}
 				if next(names) then
 					local hand = pseudorandom_element(names, pseudoseed('escapingtooneplacenotcorruptedbycapitalism'))
-					table.insert(effects, { level_up = 2, level_up_hand = hand or G.GAME.last_hand_played })
+					table.insert(effects, { level_up = card.ability.extra.ml, level_up_hand = hand or G.GAME.last_hand_played })
 					if not (context.retrigger_joker or context.blueprint) then
 						for c, s in ipairs(SMODS.find_card('j_space', true)) do
 							local extrahand = pseudorandom_element(names, pseudoseed('escapingtooneplacenotcorruptedbycapitalism'))
-							table.insert(effects, { message = localize('k_again_ex'), message_card = s, extra = { level_up = 1, level_up_hand = extrahand or G.GAME.last_hand_played, message_card = s }})
+							table.insert(effects, { message = localize('k_again_ex'), message_card = s, extra = { level_up = card.ability.extra.ml*0.5, level_up_hand = extrahand or G.GAME.last_hand_played, message_card = s }})
 						end
 					end
 					return SMODS.merge_effects(effects)
