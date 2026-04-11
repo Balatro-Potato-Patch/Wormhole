@@ -1,3 +1,10 @@
+SMODS.Atlas({
+    key = 'tbp_module_no_bg',
+    path = 'taxes_back_pain/module_no_bg.png',
+    px = 59,
+    py = 81
+})
+
 function Wormhole.tbp.module_tooltip(desc_nodes, name)
     local col = Wormhole.tbp.module_colours[desc_nodes.tbp_module] -- module colour
     local durability_col = mix_colours(G.C.BLACK, col, 0.8) -- durability bar background
@@ -21,7 +28,12 @@ function Wormhole.tbp.module_tooltip(desc_nodes, name)
                 }, nodes = {
                     {n=G.UIT.T, config = {text = desc_nodes.module_info.durability .. '/' .. desc_nodes.module_info.total_durability, colour = lighten(col, 0.6), scale = 0.28}}
                 }} or nil
-            }}
+            }},
+            desc_nodes.module_info and {n=G.UIT.C, config = {align = 'cm', padding = 0.05, colour = lighten(col, 0.8)}, nodes = {
+                {n=G.UIT.R, config = {align = 'cm', colour = durability_col}, nodes = {
+                    {n=G.UIT.O, config = {outline = 1, outline_colour = darken(col,0.4), object = SMODS.create_sprite(0,0, 0.65*G.CARD_W, 0.65*G.CARD_H, 'worm_tbp_module_no_bg', {x=math.random(1,4)-1,y=math.random(1,2)-1}), align = 'cm'}} -- TODO: fix position to match the actual sprite
+                }}
+            }} or nil
         }},
 
     }}

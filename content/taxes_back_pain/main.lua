@@ -162,10 +162,10 @@ SMODS.Back{
 
 -- TODO: add actual module slots and colours here
 Wormhole.tbp.module_colours = {
-    weapons = G.C.PURPLE,
-    core = G.C.BLUE,
-    thrusters = G.C.GREEN,
-    shields = G.C.YELLOW
+    weapons = HEX('fd5f55'),
+    core = HEX('5559fd'),
+    thrusters = HEX('6dec66'),
+    shields = HEX('edeb65')
 }
 
 SMODS.Joker({
