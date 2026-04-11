@@ -301,6 +301,15 @@ return {
                 }
             },
         },
+        Tag = {
+            tag_worm_derelict = {
+                name = "Derelict Tag",
+                text = {
+                    "Gives a free",
+                    "{C:worm_c3_junkset}Mega Derelict Pack",
+                },
+            },
+        },
         Other = {
 			p_worm_junkset_normal = {
 				name = "Derelict Pack",

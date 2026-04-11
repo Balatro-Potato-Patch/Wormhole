@@ -1,5 +1,7 @@
 if not Wormhole.COLON_THREE or not Wormhole.COLON_THREE.loaded then return end
 
+-- CUT CONTENT But im leaving it in the code
+
 SMODS.Atlas {
     path = "colon_three/vouchers.png",
     key = "ct_vouchers",

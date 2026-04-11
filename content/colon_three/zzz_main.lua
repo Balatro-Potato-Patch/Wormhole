@@ -164,7 +164,8 @@ for i, v in pairs({
     "junk/solar_sail",
     "junk/trash_compactor",
     "junk/accretion_disk",
-    "junk/vouchers",
+    -- "junk/vouchers", -- commented out, do not include in count
+    "junk/tag",
 
     "challenges",
 })  do
