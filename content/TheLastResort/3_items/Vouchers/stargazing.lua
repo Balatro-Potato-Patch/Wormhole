@@ -1,7 +1,9 @@
 SMODS.Voucher {
     key = 'tlr_stargazing',
-	set = 'Voucher',
-	pos = { x = 0, y = 0 },
+	atlas = 'tlr_voucher',
+	pos = { x = 1, y = 0 },
+	ppu_coder = {"Amphiapple"},
+	ppu_artist = {"Foo54"},
 	cost = 10,
 
 	calculate = function(self, card, context)

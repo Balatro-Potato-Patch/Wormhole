@@ -1,7 +1,9 @@
 SMODS.Voucher {
     key = 'tlr_skywatching',
-	set = 'Voucher',
+    atlas = "tlr_voucher",
 	pos = { x = 0, y = 0 },
+    ppu_coder = {"Amphiapple"},
+    ppu_artist = {"Jogla"},
 	cost = 10,
     config = { extra = { rate = 4 } },
 

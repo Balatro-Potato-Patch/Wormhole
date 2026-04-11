@@ -13,7 +13,7 @@ SMODS.ConsumableType{
         local mem_loc_vars = card.loc_vars or function() return {} end
 		card.loc_vars = function(_self, info_queue, _card)
 			local main_end = nil
-            WORM_TLR.const_info_queue(info_queue, _card.ability.tier)
+            WORM_TLR.const_info_queue(info_queue, _card)
 			local ret = mem_loc_vars(_self, info_queue, _card)
 			if main_end then ret.main_end = ret.main_end or {main_end} end
             if not ret.vars then ret.vars = {} end
@@ -89,7 +89,7 @@ SMODS.ConsumableType{
         local mem_use = card.use or function() end
         card.use = function(_self, _card, area, copier)
             mem_use(_self, _card, area, copier)
-            G.GAME.worm_tlr_last_const_used = _self.key ~= "c_worm_tlr_const_canis_minor" and _self.key or nil
+            G.GAME.worm_tlr_last_const_used = _self.key ~= "c_worm_tlr_const_canis_minor" and _self.key or G.GAME.worm_tlr_last_const_used
             G.GAME.worm_tlr_last_const_used_tier = _card.ability.tier
         end
         card.ppu_team = {"TheLastResort"}

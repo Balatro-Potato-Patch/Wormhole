@@ -4,7 +4,7 @@ SMODS.Booster{
 	kind = "worm_tlr_constellation",
 	cost = 4,
 	pos = {x=0, y=0},
-	atlas = "tlr_const",
+	atlas = "tlr_booster",
 	group_key = "k_tlr_const_pack",
 	config = {extra = 3, choose = 1},
 	loc_vars = function(self, info_queue, card)
@@ -25,6 +25,7 @@ SMODS.Booster{
 		}
 	end,
 	ppu_team = {"TheLastResort"},
+	ppu_artist = {"Aura2247"},
 	ppu_coder = {"Foo54"}
 }
 
@@ -34,7 +35,7 @@ SMODS.Booster{
 	kind = "worm_tlr_constellation",
 	cost = 4,
 	pos = {x=1, y=0},
-	atlas = "tlr_const",
+	atlas = "tlr_booster",
 	group_key = "k_tlr_const_pack",
 	config = {extra = 3, choose = 1},
 	loc_vars = function(self, info_queue, card)
@@ -55,6 +56,7 @@ SMODS.Booster{
 		}
 	end,
 	ppu_team = {"TheLastResort"},
+	ppu_artist = {"Aura2247"},
 	ppu_coder = {"Foo54"}
 }
 
@@ -64,7 +66,7 @@ SMODS.Booster{
 	kind = "worm_tlr_constellation",
 	cost = 6,
 	pos = {x=2, y=0},
-	atlas = "tlr_const",
+	atlas = "tlr_booster",
 	group_key = "k_tlr_const_pack",
 	config = {extra = 5, choose = 1},
 	loc_vars = function(self, info_queue, card)
@@ -85,6 +87,7 @@ SMODS.Booster{
 		}
 	end,
 	ppu_team = {"TheLastResort"},
+	ppu_artist = {"Aura2247"},
 	ppu_coder = {"Foo54"}
 }
 
@@ -94,7 +97,7 @@ SMODS.Booster{
 	kind = "worm_tlr_constellation",
 	cost = 8,
 	pos = {x=3, y=0},
-	atlas = "tlr_const",
+	atlas = "tlr_booster",
 	group_key = "k_tlr_const_pack",
 	config = {extra = 5, choose = 2},
 	loc_vars = function(self, info_queue, card)
@@ -115,6 +118,7 @@ SMODS.Booster{
 		}
 	end,
 	ppu_team = {"TheLastResort"},
+	ppu_artist = {"Aura2247"},
 	ppu_coder = {"Foo54"}
 }
 

@@ -25,6 +25,12 @@ SMODS.Atlas{
 	py = 665
 }
 
+SMODS.Atlas{
+	key = "tlr_tarot",
+	path = "TheLastResort/tarot.png",
+	px = 71,
+	py = 95
+}
 
 SMODS.Atlas{
 	key = "tlr_spectrals",
@@ -57,6 +63,27 @@ SMODS.Atlas{
 SMODS.Atlas{
 	key = "tlr_joker",
 	path = "TheLastResort/joker.png",
+	px = 71,
+	py = 95
+}
+
+SMODS.Atlas{
+	key = "tlr_voucher",
+	path = "TheLastResort/voucher.png",
+	px = 71,
+	py = 95
+}
+
+SMODS.Atlas{
+	key = "tlr_booster",
+	path = "TheLastResort/booster.png",
+	px = 71,
+	py = 95
+}
+
+SMODS.Atlas{
+	key = "tlr_seal",
+	path = "TheLastResort/seal.png",
 	px = 71,
 	py = 95
 }
