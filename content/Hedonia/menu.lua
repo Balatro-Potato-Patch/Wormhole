@@ -7,12 +7,11 @@ SMODS.ConsumableType {
     secondary_colour = HEX("503a66")
 }
 
--- PLACEHOLDER ART ATLAS
 SMODS.Atlas {
-    key = "placeholder",
+    key = "menu",
     px = 71,
     py = 95,
-    path = "Hedonia/sungwon.png"
+    path = "Hedonia/menu.png"
 }
 
 SMODS.Atlas {
@@ -25,7 +24,7 @@ SMODS.Atlas {
 SMODS.Consumable {
     key = "hedonia_hadron",
     set = "worm_hedonia_menu",
-    atlas = "placeholder",
+    atlas = "menu",
     pos = {x = 0, y = 0},
     use = function(self, card, area, copier)
         local card_to_drink = pseudorandom_element(G.hand.cards, 'alcohol') --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/spectrals.lua#L26
@@ -36,8 +35,8 @@ SMODS.Consumable {
 SMODS.Consumable {
     key = "hedonia_cosmo",
     set = "worm_hedonia_menu",
-    atlas = "placeholder",
-    pos = {x = 0, y = 0},
+    atlas = "menu",
+    pos = {x = 1, y = 0},
     use = function(self, card, area, copier)
         local card_to_drink = pseudorandom_element(G.hand.cards, 'alcohol') --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/spectrals.lua#L26
         card_to_drink:set_edition(e_worm_hedonia_drunk,true) 
@@ -47,8 +46,8 @@ SMODS.Consumable {
 SMODS.Consumable {
     key = "hedonia_mojitury",
     set = "worm_hedonia_menu",
-    atlas = "placeholder",
-    pos = {x = 0, y = 0},
+    atlas = "menu",
+    pos = {x = 2, y = 0},
     use = function(self, card, area, copier)
         local card_to_drink = pseudorandom_element(G.hand.cards, 'alcohol') --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/spectrals.lua#L26
         card_to_drink:set_edition(e_worm_hedonia_very_drunk,true)
@@ -58,8 +57,8 @@ SMODS.Consumable {
 SMODS.Consumable {
     key = "hedonia_blackHoleBomb",
     set = "worm_hedonia_menu",
-    atlas = "placeholder",
-    pos = {x = 0, y = 0},
+    atlas = "menu",
+    pos = {x = 3, y = 0},
     use = function(self, card, area, copier)
         local card_to_drink = pseudorandom_element(G.hand.cards, 'alcohol') --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/spectrals.lua#L26
         card_to_drink:set_edition(e_worm_hedonia_blackout,true)
