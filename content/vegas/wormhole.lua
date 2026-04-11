@@ -572,12 +572,13 @@ SMODS.Joker{
 		name = "Wormhole",
 		text = {
 			"Adds a {C:dark_edition}Negative{} copy of any",
-			"{C:attention}Consumeable{} to the bottom of",
+			"{C:attention}Consumable{} to the bottom of",
 			"your {C:attention}deck{} when it is used"
 		}
 	},
 	config = { sets = { "Tarot", "Planet", "Spectral" }},
 	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue + 1] = {key = 'e_negative_consumable', set = 'Edition', config = {extra = 1}}
 		return { vars = {  }}
 	end,
 	atlas = "vegas_jokers",
@@ -641,6 +642,7 @@ SMODS.Joker{
 	},
 	config = { extra = { cards = 2, suit = 'Diamonds' }},
 	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue + 1] = {key = 'e_negative_playing_card', set = 'Edition', config = {extra = 1}}
 		return { vars = { card.ability.extra.cards, colours = { G.C.SUITS['Diamonds'] } } }
 	end,
 	atlas = "vegas_jokers",
