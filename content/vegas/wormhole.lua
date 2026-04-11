@@ -726,7 +726,9 @@ SMODS.Joker{
 	loc_txt = {
 		name = "The Big Blip",
 		text = {
-			"At the end of a game save your seed and start another run with prior knowlage of cards to come."
+			"When Blind {C:red}failed{}",
+			"restart your run with",
+			"the same {C:green}Seed{}"
 		}
 	},
 	config = { extra = {  }},
@@ -735,12 +737,12 @@ SMODS.Joker{
 	end,
 	atlas = "vegas_jokers",
 	pos = {x = 1, y = 2},
-	rarity = 1,
-	cost = 15,
+	rarity = 2,
+	cost = 7,
 	blueprint_compat = false,
 	discovered = true,
 	eternal_compat = false,
-	perishable_compat = False,
+	perishable_compat = false,
 	ppu_team = {"People Found In Vegas"},
 	ppu_coder = {"Sn0vvBall"},
 	ppu_artist = {"Sn0vvBall"},
