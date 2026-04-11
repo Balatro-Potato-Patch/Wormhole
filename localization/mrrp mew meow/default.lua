@@ -89,10 +89,9 @@ descriptions={
 		},
 		j_worm_capitalism ={
 			name={
-				"Outer Space,",
-				"The One Place",
-				"Left Uncorrupt",
-				"by Capitalism"
+				"The One Place That",
+				"Hasn't Been Corrupted",
+				"by Capitalism: SPACE!"
 			}, text={
 				"This Joker gains {C:mult}#1#{} Mult",
 				"when ending a {C:attention}shop{} with",
