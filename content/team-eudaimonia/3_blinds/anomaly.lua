@@ -8,7 +8,7 @@ SMODS.Atlas({
 })
 SMODS.Sound {
     key = "euda_music_anomaly",
-    path = "music_anomaly.ogg",
+    path = "team-eudaimonia/music_anomaly.ogg",
     select_music_track = function()
         if G.GAME.blind and G.GAME.blind.config.blind.key == 'bl_worm_euda_anomaly' then
             return true
