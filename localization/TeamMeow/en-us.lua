@@ -321,6 +321,15 @@ return {
 				}
 			}
 		},
+		Tag = {
+			tag_worm_meow_spacetart = {
+				name = "Spacetart Tag",
+				text = {
+					"Gives a free",
+					"{C:worm_meow_spacetart}©Spacetart Pack",
+				}
+			}
+		},
 		Other = {
 			worm_meow_spacetart_stacks = {
 				text = {
