@@ -120,6 +120,14 @@ descriptions={
 				"discarded this round",
 				"{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive})"
 			}
+		},
+		j_worm_meteor_shower = {
+			name = "Meteor Shower",
+			text = {
+				"For each card in poker",
+				"hand, retrigger a random",
+				"card in poker hand"
+			}
 		}
 	},
 	Stake={
