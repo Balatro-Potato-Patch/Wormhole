@@ -829,7 +829,7 @@ SMODS.DynaTextEffect {
 
 --Sound Synthesis for Heat Death Blind
 local rate      = 44100 -- samples per second
-local length    = 25  -- 0.03125 seconds
+local length    = 25  -- seconds
 local totalSamples = math.floor(length*rate)
 local soundData = love.sound.newSoundData(totalSamples, rate, 16, 1)
 for i=0, soundData:getSampleCount() - 1 do
@@ -843,7 +843,7 @@ local function noise(volume)
 	source:play() 
 end
 
-local function create_space_cutscene()
+local function create_space_cutscene() --UI function
     return {
         n=G.UIT.ROOT, 
         config={align = 'cm', colour = G.C.CLEAR}, 
@@ -889,7 +889,7 @@ local function lose_the_game(quipvalue)
                         spot.config.object:remove()
                         spot.config.object = Jimbo
                         Jimbo.ui_object_updated = true
-                        Jimbo:add_speech_bubble('lq_'..quipvalue, nil, {quip = true})
+                        Jimbo:add_speech_bubble('lq_'..quipvalue, nil, {quip = true}) --quip is generated during the cutscene, so copied here
 						Jimbo.children.speech_bubble.states.visible = true
                         end
                     return true
@@ -905,8 +905,8 @@ local function tags_visible(bool)
 	end
 end
 
-local float_in
-float_in = function(Jimbo, times)
+local float_in 
+float_in = function(Jimbo, times) --sends the jimbo spinning across the screen. apologies for abusing the event manager this way!!
 	if not times then return end
 	if not Jimbo then return end
 	if times > 0 then
@@ -926,6 +926,25 @@ float_in = function(Jimbo, times)
 				return true
 			end
 		})
+	end
+end
+
+local adjust_time
+adjust_time = function(heatdeath)
+	local speed = G.SETTINGS.GAMESPEED
+	if speed < heatdeath.config.extra.gamespeed then
+		heatdeath.config.extra.gamespeed = heatdeath.config.extra.gamespeed / 2
+		heatdeath.config.extra.current = math.floor(heatdeath.config.extra.current * heatdeath.config.gamespeed_factor)
+		TIMERTIME = heatdeath.config.extra.current
+		adjust_time(heatdeath)
+		return
+	end
+	if speed > heatdeath.config.extra.gamespeed then
+		heatdeath.config.extra.gamespeed = heatdeath.config.extra.gamespeed * 2
+		heatdeath.config.extra.current = math.floor(heatdeath.config.extra.current / heatdeath.config.gamespeed_factor)
+		TIMERTIME = heatdeath.config.extra.current
+		adjust_time(heatdeath)
+		return
 	end
 end
 
@@ -951,6 +970,8 @@ heatdeath_timer = function(heatdeath)
 					return true
 				end
 				
+				adjust_time(heatdeath) --gamespeed check
+
 				--countdown
 				heatdeath.config.extra.current = heatdeath.config.extra.current - 1
 				TIMERTIME = heatdeath.config.extra.current
@@ -962,20 +983,20 @@ heatdeath_timer = function(heatdeath)
 					play_sound("worm_vegas_tock")
 				end
 
-				if heatdeath.config.extra.current == 20 then
+				if heatdeath.config.extra.current == 20 then --display 20 second warning
 					attention_text({
 						scale = 0.7, text = "0:20", colour = G.C.MULT, maxw = 12, hold = 1, align = 'cm', offset = {x = 0,y = -1},major = G.play
 					})
 				end
 
-				if heatdeath.config.extra.current <= 20 then
+				if heatdeath.config.extra.current <= 20 then --start the noise sound
 					if source:isPlaying() == false then	
 						noise(0.1) --Play noise at volume 0.1 (any more and it is too loud! it ramps up from 0, reaching 0.1 after 20 seconds)
 					end
 					
 				end
 
-				if heatdeath.config.extra.current <= 10 and heatdeath.config.extra.current > 0 then
+				if heatdeath.config.extra.current <= 10 and heatdeath.config.extra.current > 0 then --display a warning every second
 					local minutes = math.floor(heatdeath.config.extra.current/60)
 					local seconds = heatdeath.config.extra.current - minutes*60
 					disp_text = minutes..":".. string.format("%02d", seconds)
@@ -983,23 +1004,26 @@ heatdeath_timer = function(heatdeath)
 						scale = 0.7, text = disp_text, colour = G.C.MULT, maxw = 12, hold = 1, align = 'cm', offset = {x = 0,y = -1},major = G.play
 					})
 					if G.GAME.blind.config.blind.key == "bl_worm_heatdeath" then
-						G.GAME.blind.children.animatedSprite.T.scale = G.GAME.blind.children.animatedSprite.T.scale * 1.5
+						G.GAME.blind.children.animatedSprite.T.scale = G.GAME.blind.children.animatedSprite.T.scale * 1.5 --makes the blind chip bigger, appearing to consume the screen
 					end
 				end
 				
 				if heatdeath.config.extra.current == 0 then ------------ IF TIMER REACHES 0
 					
-					heatdeath.config.timing = false
-					heatdeath.config.game_over_override = true
+					heatdeath.config.timing = false --stop the timer
+					heatdeath.config.game_over_override = true --stops the timer from restarting until after the game over screen is displayed
 
 					ease_background_colour({new_colour = G.C.BLACK}) --turn the screen black (in case player was not on the boss blind)
+					if G.GAME.blind.config.blind.key == "bl_worm_heatdeath" then
+						G.GAME.blind.children.animatedSprite.T.scale = 60 --fully black background if on the boss blind
+					end
 
 					source:stop() --stop the noise
 					restoreVolume = G.SETTINGS.SOUND.music_volume
 					G.SETTINGS.SOUND.music_volume = 0 -- mute all music
 					G.STATE = G.STATES.GAME_OVER --Slow down the music for game over
 					restoreSFX = G.SETTINGS.SOUND.game_sounds_volume
-					G.SETTINGS.SOUND.game_sounds_volume = 0
+					G.SETTINGS.SOUND.game_sounds_volume = 0 --mute all sfx
 
 					G.hand.states.visible = false --make cardareas invisible
 					G.jokers.states.visible = false
@@ -1021,7 +1045,7 @@ heatdeath_timer = function(heatdeath)
 					local spot = G.OVERLAY_MENU:get_UIE_by_ID('jimbo_spot')
 					spot.config.object:remove()
 
-					--Add particles in the background?
+					--Add particles in the background (stars)
 					spot.particles = Particles(0, 0, 0, 0, {
 						timer = 0.03,
 						scale = 0.1,
@@ -1033,19 +1057,19 @@ heatdeath_timer = function(heatdeath)
 					})
 					spot.particles.T.x = 0
 					spot.particles.T.y = 0
-					spot.particles.T.w = 20
+					spot.particles.T.w = 20 --fill the screen
 					spot.particles.T.h = 10
 
 					Jimbo = Card_Character({y = 15}) --Create a space joker offscreen
 					Jimbo.children.card:set_sprites(G.P_CENTERS.j_space)
-					Jimbo.children.particles:remove()
+					Jimbo.children.particles:remove() --default particles are red/orange
 
 					--have Space Joker float up 
 					float_in(Jimbo, 1000)
 
 					quipvalue = math.random(1,10)
 
-					G.E_MANAGER:add_event(Event{ --After some more time, have him speak??
+					G.E_MANAGER:add_event(Event{ --After some more time, space jimbo says a quip
 						blockable = false,
 						blocking = false,
 						pause_force = true,
@@ -1054,10 +1078,8 @@ heatdeath_timer = function(heatdeath)
 						delay = 4,
 						func = function()
 							G.SETTINGS.SOUND.game_sounds_volume = restoreSFX
-							if G.OVERLAY_MENU and G.OVERLAY_MENU:get_UIE_by_ID('jimbo_spot') then 
-								Jimbo:add_speech_bubble('lq_'..quipvalue, nil, {quip = true})
-								Jimbo:say_stuff(5)
-							end
+							Jimbo:add_speech_bubble('lq_'..quipvalue, nil, {quip = true})
+							Jimbo:say_stuff(5)
 							return true
 						end
 					})
@@ -1071,9 +1093,9 @@ heatdeath_timer = function(heatdeath)
 						trigger = 'after',
 						delay = 11,
 						func = function()
-							Jimbo:remove()
-							lose_the_game(quipvalue) --display menu
-							G.hand.states.visible = true --restore
+							Jimbo:remove() --jimbo is off screen now
+							lose_the_game(quipvalue) --display game over menu, spawns a space joker with the same quip
+							G.hand.states.visible = true --restore visibiliy and volume
 							G.jokers.states.visible = true
 							G.consumeables.states.visible = true
 							G.deck.states.visible = true
@@ -1081,7 +1103,7 @@ heatdeath_timer = function(heatdeath)
 							G.HUD.states.visible = true
 							G.HUD_blind.states.visible = true
 							G.SETTINGS.SOUND.music_volume = restoreVolume --unmute the music for the game over screen
-							heatdeath.config.game_over_override = false
+							heatdeath.config.game_over_override = false --reset override 
 							return true
 						end
 					})
@@ -1090,6 +1112,7 @@ heatdeath_timer = function(heatdeath)
 					TIMERTIME = heatdeath.config.time
 					heatdeath.config.extra.current = heatdeath.config.time
 					heatdeath.config.timing = false
+					heatdeath.config.extra.gamespeed = heatdeath.config.base_speed
 
 					return true
 				end
@@ -1101,9 +1124,6 @@ heatdeath_timer = function(heatdeath)
         end
     })
 end
-
-
-
 
 SMODS.Sound{
 	key = "vegas_tick",
@@ -1125,8 +1145,9 @@ SMODS.Blind{
 			"{s:0.8}Code & Art by {s:0.8,C:chips}Ben Roffey{}"
 		}
 	},
-	config = {time = 21, timing = false, game_over_override = false, extra = {current = 21}},
+	config = {time = 2*60, timing = false, game_over_override = false, gamespeed_factor = 1.5, base_speed = 4, extra = {gamespeed = 4, current = 2*60}},
 	loc_vars = function(self)
+		adjust_time(self)
 		local minutes = math.floor(self.config.extra.current/60)
 		local seconds = self.config.extra.current - minutes*60
 		
@@ -1148,7 +1169,10 @@ SMODS.Blind{
 		}
 	end,
 	collection_loc_vars = function(self)
-		return { vars = {2, "00", colours = {HEX("73fdff")}}}
+		adjust_time(self)
+		local minutes = math.floor(self.config.extra.current/60)
+		local seconds = self.config.extra.current - minutes*60
+		return { vars = { minutes, string.format("%02d", seconds), colours = {HEX("73fdff")} }}
 	end,
 	atlas = "vegas_blinds",
 	pos = {x = 0, y = 1},
@@ -1164,6 +1188,7 @@ SMODS.Blind{
 		if context.end_of_round then
 			self.config.timing = false
 			self.config.extra.current = self.config.time
+			self.config.extra.gamespeed = self.config.base_speed
 			G.GAME.blind.children.animatedSprite.T.scale = 1
 			if source then 
 				source:stop()
@@ -1179,6 +1204,7 @@ SMODS.Blind{
 	defeat = function(self)
 		self.config.timing = false
 		self.config.extra.current = self.config.time
+		self.config.extra.gamespeed = self.config.base_speed
 		G.GAME.blind.children.animatedSprite.T.scale = 1
 		if source then 
 			source:stop()
