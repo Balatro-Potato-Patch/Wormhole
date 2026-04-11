@@ -19,19 +19,15 @@ SMODS.Voucher {
     cost = 10,
     discovered = true,
 
-    -- Calculate
+    -- Replace 1/5 booster cards (same odds as Omen Globe)
     calculate = function(self, card, context)
-        -- and pseudorandom("v_worm_shrug_first_contact") > 0.8
-        if context.create_booster_card and context.booster.config.center.kind == "Celestial" then
-            print("replace here!")
-            local pool = SMODS.get_clean_pool("shrug_alien")
+        if context.create_booster_card and context.booster.config.center.kind == "Celestial" and pseudorandom("v_worm_shrug_first_contact") > 0.8 then
             return {
                 booster_create_flags = {
                     set = "shrug_alien",
                     area = G.pack_cards,
                     skip_materialize = true,
                     soulable = true,
-                    key = pool[context.index],
                     key_append =
                     'ar4'
                 }
