@@ -4,8 +4,8 @@ SMODS.Joker {
 	key = 'tanabata',
 	atlas = "mrrp",
 	pos = {
-		x=4,
-		y=5
+		x=0,
+		y=2
 	},
 	rarity = 1,
 	cost = 3,
