@@ -124,7 +124,7 @@ descriptions={
 			}
 		},
 		j_worm_meteor_shower = {
-			name = "Meteor Shower",
+			name = "Perseids",
 			text = {
 				"For each card in poker",
 				"hand, retrigger a random",
