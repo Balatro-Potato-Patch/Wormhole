@@ -2,12 +2,12 @@ if not Wormhole.COLON_THREE or not Wormhole.COLON_THREE.loaded then return end
 
 SMODS.Joker {
     key = "quantum_tunneling",
-    --atlas = "ct_jokers",
-    --pos = { x = 0, y = 0 },
+    atlas = "ct_jokers",
+    pos = { x = 3, y = 0 },
     rarity = 2,
     cost = 6,
     attributes = { "mod_chance", "scaling", },
-    --ppu_artist = {},
+    ppu_artist = { "notmario" },
     ppu_coder = { "nxkoo" },
     ppu_team = { ":3" },
 
