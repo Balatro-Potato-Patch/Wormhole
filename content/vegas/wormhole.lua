@@ -571,7 +571,7 @@ SMODS.Joker{
 	loc_txt = {
 		name = "Wormhole",
 		text = {
-			"Adds a {C:purple}Negative{} copy of any",
+			"Adds a {C:dark_edition}Negative{} copy of any",
 			"{C:attention}Consumeable{} to the bottom of",
 			"your {C:attention}deck{} when it is used"
 		}
@@ -636,7 +636,7 @@ SMODS.Joker{
 		name = "Diamonds in the Sky",
 		text = {
 			"First {C:attention}#1#{} scored {V:1}Diamond{} cards",
-			"in {C:attention}first{} played hand become {C:purple}Negative{}"
+			"in {C:attention}first{} played hand become {C:dark_edition}Negative{}"
 		}
 	},
 	config = { extra = { cards = 2, suit = 'Diamonds' }},
@@ -674,13 +674,13 @@ SMODS.Joker{
 	loc_txt = {
 		name = "Observable Universe",
 		text = {
-			"{C:purple}Negative{} cards held",
+			"{C:dark_edition}Negative{} playing cards held",
 			"in hand give {X:red,C:white}X#1#{} Mult"
 		}
 	},
 	config = { extra = { xmult = 1.5 }},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue + 1] = G.P_CENTERS['e_negative']
+		info_queue[#info_queue + 1] = {key = 'e_negative_playing_card', set = 'Edition', config = {extra = 1}}
 		return { vars = { card.ability.extra.xmult }}
 	end,
 	atlas = "vegas_jokers",
@@ -1219,8 +1219,8 @@ SMODS.Consumable {
 	loc_txt = {
 		name = "Expanse",
 		text = {
-			"Add {C:purple}Negative{} effect to up",
-			"to {C:attention}#1#{} selected cards in hand"
+			"Add {C:dark_edition}Negative{} to up",
+			"to {C:attention}#1#{} selected playing cards"
 		}
 	},
 	atlas = "vegas_jokers",
@@ -1232,7 +1232,7 @@ SMODS.Consumable {
     ppu_coder = {"Jammbo"},
     ppu_artist = {"Jammbo"},
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = G.P_CENTERS.e_negative
+        info_queue[#info_queue + 1] = {key = 'e_negative_playing_card', set = 'Edition', config = {extra = 1}}
         return { vars = { card.ability.max_highlighted } }
     end,
     use = function(self, card, area, copier)
@@ -1316,7 +1316,7 @@ SMODS.Consumable {
 		end
 		G.E_MANAGER:add_event(Event({
             trigger = 'after',
-            delay = 0.2,
+            delay = #G.hand.highlighted * 0.2,
             func = function()
                 G.hand:unhighlight_all()
                 return true
@@ -1386,7 +1386,7 @@ SMODS.Consumable {
 		end
 		G.E_MANAGER:add_event(Event({
             trigger = 'after',
-            delay = 0.2,
+            delay = #G.hand.highlighted * 0.2,
             func = function()
                 G.hand:unhighlight_all()
                 return true
@@ -1456,7 +1456,7 @@ SMODS.Consumable {
 		end
 		G.E_MANAGER:add_event(Event({
             trigger = 'after',
-            delay = 0.2,
+            delay = #G.hand.highlighted * 0.2,
             func = function()
                 G.hand:unhighlight_all()
                 return true
