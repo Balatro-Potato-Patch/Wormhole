@@ -5,6 +5,18 @@ SMODS.Atlas {
     path = 'team-eudaimonia/boosters_ava.png',
 }
 
+SMODS.Sound{
+    key = "euda_music_avadon",
+    path = "music_avadon.ogg",
+    volume = 2.3,
+    select_music_track = function(self)
+        local booster = G.pack_cards and G.pack_cards.cards and SMODS.OPENED_BOOSTER
+        if booster and booster.config.center_key:find('p_worm_euda_avadon') then
+            return true
+        end
+    end
+}
+
 Wormhole.EUDA_Avadon = SMODS.Booster:extend{
     ppu_artist = {"cosmeggo","LasagnaFelidae","iamarta"},
     ppu_team = {"TeamEudaimonia"},
