@@ -9,7 +9,7 @@ SMODS.Atlas { key = "mrrp_j",
 
 SMODS.Joker {
 	key = 'NAME',
-	atlas = "mrrp_j", pos = {x=X, y=Y},
+	atlas = "mrrp", pos = {x=X, y=Y},
 	rarity = R,
 	cost = C,
 	blueprint_compat = true,
