@@ -138,24 +138,6 @@ return {
                 }
             },
         },
-        Back = {
-            p_worm_acme_gadget_normal = {
-                name = "Gadget Pack",
-                text = {
-                    "Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2#{C:spectral} Gadget{} cards to",
-                    "be held in consumable slots",
-                },
-            },
-            p_worm_acme_gadget_mega = {
-                name = "Mega Gadget Pack",
-                text = {
-                    "Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2#{C:spectral} Gadget{} cards to",
-                    "be held in consumable slots",
-                },
-            },
-        },
         Joker = {
             j_worm_ACME_enterprise = {
                 name = "Enterprise Joker",
@@ -182,6 +164,22 @@ return {
                     'this card in an',
                     'unseeded run to',
                     'learn what it does',
+                },
+            },
+            p_worm_acme_gadget_normal = {
+                name = "Gadget Pack",
+                text = {
+                    "Choose {C:attention}#1#{} of up to",
+                    "{C:attention}#2#{C:attention} Gadget{} cards to",
+                    "be held in consumable slots",
+                },
+            },
+            p_worm_acme_gadget_mega = {
+                name = "Mega Gadget Pack",
+                text = {
+                    "Choose {C:attention}#1#{} of up to",
+                    "{C:attention}#2#{C:attention} Gadget{} cards to",
+                    "be held in consumable slots",
                 },
             },
         },
