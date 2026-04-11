@@ -138,6 +138,15 @@ return {
                 }
             },
         },
+        Tag = {
+            tag_worm_acme_gadget = {
+                name = "ACME Supply-Surplus Tag",
+                text = {
+                    "Gives a free",
+                    "{C:attention}Mega Gadget Pack",
+                },
+            }
+        },
         Joker = {
             j_worm_ACME_enterprise = {
                 name = "Enterprise Joker",

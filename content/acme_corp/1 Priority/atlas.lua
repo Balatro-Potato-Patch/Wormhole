@@ -4,6 +4,7 @@ Atlas_AcmeJokers = SMODS.Atlas {
 	px = 71,
 	py = 95
 }
+
 Atlas_AcmeGadgets = SMODS.Atlas {
 	key = 'ACME_gadgets',
 	path = 'acme_corp/ACME_gadgets.png',
@@ -31,4 +32,14 @@ Atlas_AcmeBoosters = SMODS.Atlas {
 	path = 'acme_corp/ACME_boosters.png',
 	px = 71,
 	py = 95
+}
+
+Atlas_AcmeTags = SMODS.Atlas {
+	key = 'ACME_tags',
+	path = 'acme_corp/ACME_tags.png',
+	atlas_table = "ANIMATION_ATLAS",
+	frames = 36,
+	px = 34,
+	py = 34,
+	fps = 15
 }
