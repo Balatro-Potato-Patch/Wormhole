@@ -160,7 +160,7 @@ descriptions={
 	},
 	PotatoPatch = {
 		['PotatoPatchTeam_Mrrp Mew Meow :3'] = {
-			name = 'Mrrp Meow Meow :3',
+			name = 'Mrrp Mew Meow :3',
 		},
 		PotatoPatchDev_SarcPot = {
 			name = 'SarcPot',
