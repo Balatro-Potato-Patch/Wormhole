@@ -114,6 +114,14 @@ descriptions={
 				}
 			}
 		},
+		j_worm_staging = {
+			name = "Staging",
+			text = {
+				"{X:mult,C:white}X#1#{} Mult for each card",
+				"discarded this round",
+				"{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive})"
+			}
+		}
 	},
 	Stake={
 		stake_worm_cosmic ={
