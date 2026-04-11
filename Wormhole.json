@@ -2,7 +2,9 @@
 	"id": "Wormhole",
 	"name": "Wormhole",
 	"display_name": "Wormhole",
-	"author": ["The Potato Patch"],
+	"author": [
+		"The Potato Patch"
+	],
 	"description": "The mod created during MurphyObv's Sealab Joker Jam! ",
 	"prefix": "worm",
 	"main_file": "main.lua",

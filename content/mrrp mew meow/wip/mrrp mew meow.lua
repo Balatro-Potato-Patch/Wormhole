@@ -1,29 +1,45 @@
 ----------------------------------------------
 ------------MOD CODE -------------------------
 
+--[[
 SMODS.Atlas { key = "mrrp_j",
 	path = "mrrp mew meow/mrrp-Jokers.png",
 	px = 71, py = 95,
 }
 
---[[SMODS.Joker {
+SMODS.Joker {
+	ppu_team = {'Mrrp Mew Meow :3'},
+    ppu_coder = {'someone lolz'},
 	key = 'NAME',
-	atlas = "mrrp_j", pos = {x=X, y=Y},
+	atlas = "mrrp",
+	pos = {
+		x=4,
+		y=5
+	},
 	rarity = R,
 	cost = C,
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable_compat = true,
+    attributes = {'space'},
 
-	config = {extra = {money = 40}},
+	config = {
+		extra = {
+			money = 40
+		}
+	},
 	loc_vars = function (self, info_queue, card)
-		return {vars = {card.ability.extra.money}}
+		return {
+			vars = {
+				card.ability.extra.money
+			}
+		}
 	end,
 
 	calculate = function(self, card, context)
 		
 	end
-}]]
+}
 
 Card.is_3 = Card.is_3 or function(self, bypass_debuff)
 	if self.debuff and not bypass_debuff then return false
@@ -286,31 +302,9 @@ SMODS.Joker {
 		end
 	end
 }
+]]
+
 --[[
-SMODS.Joker {
-	key = 'gofish',
-	atlas = "mrrp_j", pos = {x=3, y=0},
-	rarity = 2,
-	cost = 8,
-	blueprint_compat = true,
-	eternal_compat = true,
-	perishable_compat = true,
-
-	config = {extra = {hand = "Four of a Kind", tag = "tag_rare"}},
-	loc_vars = function (self, info_queue, card)
-		return {
-			vars = {
-				localize(card.ability.extra.hand, "poker_hands"),
-				localize({type="name_text", set="Tag", key=card.ability.extra.tag})
-			}
-		}
-	end,
-
-	calculate = function(self, card, context)
-		
-	end
-}
-
 SMODS.Joker {
 	key = 'goldilocks',
 	atlas = "mrrp_j", pos = {x=1, y=0},
@@ -337,31 +331,6 @@ SMODS.Joker {
 }
 
 SMODS.Joker {
-	key = 'nasahiring',
-	atlas = "mrrp_j", pos = {x=3, y=0},
-	rarity = 3,
-	cost = 9,
-	blueprint_compat = true,
-	eternal_compat = true,
-	perishable_compat = true,
-
-	config = {extra = {edition="e_negative", sticker="rental", joker="j_space"}},
-	loc_vars = function (self, info_queue, card)
-		return {
-			vars = {
-				localize({type='name_text', set="Edition", key=card.ability.extra.edition}),
-				localize({type='name_text', set="Other", key=card.ability.extra.sticker}),
-				localize({type='name_text', set="Joker", key=card.ability.extra.joker})
-			}
-		}
-	end,
-
-	calculate = function(self, card, context)
-		
-	end
-}
-
-SMODS.Joker {
 	key = 'capitalism',
 	atlas = "mrrp_j", pos = {x=1, y=0},
 	rarity = 2,
@@ -374,8 +343,8 @@ SMODS.Joker {
 	loc_vars = function (self, info_queue, card)
 		return {
 			vars = {
-				card.ability.extra.mult_mod,
-				card.ability.extra.mult
+				(card.ability.extra.mult_mod < 0 and "-" or "+") .. card.ability.extra.mult_mod,
+				(card.ability.extra.mult < 0 and "-" or "+") .. card.ability.extra.mult
 			}
 		}
 	end,
