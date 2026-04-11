@@ -720,6 +720,39 @@ SMODS.Joker{
     end
 }
 
+
+SMODS.Joker{
+	key = "Big Blip",
+	loc_txt = {
+		name = "The Big Blip",
+		text = {
+			"At the end of a game save your seed and start another run with prior knowlage of cards to come."
+		}
+	},
+	config = { extra = {  }},
+	loc_vars = function(self, info_queue, card)
+		return { vars = {  }}
+	end,
+	atlas = "vegas_jokers",
+	pos = {x = 2, y = 3},
+	rarity = 1,
+	cost = 5,
+	blueprint_compat = false,
+	discovered = true,
+	eternal_compat = false,
+	perishable_compat = False,
+	ppu_team = {"People Found In Vegas"},
+	ppu_coder = {"Sn0vvBa11"},
+	ppu_artist = {"Sn0vvBa11"},
+	calculate = function(self, card, context)
+		local GameSeed = G.GAME.pseudorandom.seed
+		local GameStake = G.GAME.stake
+		local GameChallange = G.GAME.challenge
+		if context.end_of_round and context.game_over and context.main_eval  then
+			G.FUNCS.start_run(e, {stake = GameStake, seed = GameSeed, challenge = GameChallange})
+        end
+	end
+}
 --[[
 SMODS.Joker{
 	key = "template",
