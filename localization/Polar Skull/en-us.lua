@@ -205,7 +205,9 @@ return {
 			PotatoPatchDev_cloudzxiii = {
 				name = "cloudzXIII",
 				text = {
-					"e",
+          "{C:gold,E:1}May your heart be your guiding key",
+          "Helped with brainstorming and",
+          "coding the Jokers for our team!",
 				},
 			},
 			PotatoPatchDev_noodlemire = {
