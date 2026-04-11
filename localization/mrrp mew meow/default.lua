@@ -72,8 +72,10 @@ descriptions={
 				"NASA's Exploration Team"
 			, text={
 				"When {C:attention}Blind{} is selected,",
-				"create a {C:dark_edition}#1#{}",
-				"{C:money}#2#{} {C:attention}Space{} Joker",
+				"create a {C:attention}Space{} Joker",
+				"Created Joker has {C:green}#2# in #3#{}",
+				"chance to be {C:dark_edition}Negative{}",
+				"{C:inactive}(otherwise must have room){}"
 			}
 		},
 		j_worm_orrery ={
@@ -246,5 +248,35 @@ misc={
 		k_make_a_wish_ex = "Make a wish!",
 		k_flaring = "Flaring..."
 	},
+	quips = {
+		worm_mrrp_no_menthol_win = {
+			"Have you tried this",
+			"silly little mod",
+			"called Menthol?"
+		},
+		worm_mrrp_no_menthol_loss = {
+			"I know what your",
+			"build is missing -",
+			"more cats!"
+		},
+		worm_mrrp_menthol_win = {
+			"What a refreshing",
+			"minty taste!"
+		},
+		worm_mrrp_menthol_loss = {
+			"Maybe a bit",
+			"TOO much mint?"
+		},
+		worm_mrrp_sarcpot = {
+			"Playing SarcPot, huh?",
+			"I know what",
+			"you are... >:3"
+		},
+		worm_mrrp_no_sarcpot = {
+			"Are you a girl,",
+			"gay, or indie game",
+			"fan? Play SarcPot!"
+		},
+	}
 },
 }
