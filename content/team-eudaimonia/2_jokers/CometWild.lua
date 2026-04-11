@@ -32,7 +32,7 @@ SMODS.Joker {
     calculate = function(self, card, context)
         if context.individual
         and context.cardarea == G.play
-        and SMODS.has_enhancement(card, 'm_wild') then
+        and SMODS.has_enhancement(context.other_card, 'm_wild') then
             return {
                 xmult = card.ability.extra.xmult
             }
