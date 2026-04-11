@@ -44,7 +44,8 @@ SMODS.JimboQuip{
 SMODS.JimboQuip{ --HEY COPY THIS ONE FOR SUPER BASIC FUNCTIONALITY THANKS
     key = "mrrp_sarcpot",
     extra = {
-        text_key = "sarcpot"
+        text_key = "sarcpot",
+        ppu_dev = "worm_SarcPot"
     },
     filter = function (self, quip_type)
         local key = "sarcpot"
