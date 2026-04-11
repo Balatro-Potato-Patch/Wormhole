@@ -47,8 +47,9 @@ return {
                 text = {
                     {
                         "After a hand is scored",
-                        "{C:attention}Eats{} your {C:attention}rightmost played{} card,",
-                        "{C:attention}Adds edition{} to your {C:attention}leftmost played{} card.",
+                        "{C:red}Eats{} your {C:attention}rightmost played{} card,",
+                        "Adds {C:blue}Celestial {}edition",
+                        "to your {C:attention}leftmost played{} card.",
                         "{C:red}Cannot be sold."
                     }
                 },
@@ -59,10 +60,10 @@ return {
                     {
                         "When {C:attention}Blind{} is selected,",
                         "if Joker to the right is:",
-                        "{X:chips,C:white}Fish{} - eat it and gain {C:chips}+#2#{} Chips",
-                        "{X:grey,C:white}Cat{} - eat it and gain {C:mult}+#1#{} Mult",
-                        "{X:green,C:white}Alien{} - eat it and gain {X:mult,C:white} X#3# {} Mult",
-                        "{C:inactive}(Currently {C:chips}+#5#{C:inactive} Chips, {C:mult}+#4#{C:inactive} Mult, {X:mult,C:white} X#6# {C:inactive} Mult",
+                        "{X:chips,C:white}Fish{} - {C:red}eat{} it and gain {C:chips}+#2#{} Chips",
+                        "{X:grey,C:white}Cat{} - {C:red}eat{} it and gain {C:mult}+#1#{} Mult",
+                        "{X:green,C:white}Alien{} - {C:red}eat{} it and gain {X:mult,C:white} X#3# {} Mult",
+                        "{C:inactive}(Currently {C:chips}+#5#{C:inactive} Chips, {C:mult}+#4#{C:inactive} Mult, {X:mult,C:white} X#6# {C:inactive} Mult)",
                     }
                 },
             },

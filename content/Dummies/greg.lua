@@ -91,7 +91,7 @@ SMODS.Joker{
                 G.E_MANAGER:add_event(Event({
                     trigger = 'after',
                     func = function()
-                        local edition = SMODS.poll_edition { key = "worm_dum_greg", guaranteed = true, no_negative = true }
+                        local edition = "e_worm_dum_Celestial"
                         enhanced_card:set_edition(edition, true, false, false)
                         return true
                     end
@@ -115,8 +115,10 @@ SMODS.Joker{
     end,
 
     loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = G.P_CENTERS.e_worm_dum_Celestial
         return { vars = {  }, key = self.key }
     end
+
 }
 
 
