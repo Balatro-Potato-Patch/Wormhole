@@ -24,7 +24,10 @@ SMODS.Joker({
 	end,
 	rarity = 3,
 	atlas = 'DummiesTCJoker',
-	pos = { x = 0, y = 0 },
+	pos = { x = 2, y = 18 },
+	wormhole_anim = {
+		{ xrange = { first = 0, last = 2 }, yrange = { first = 0, last = 18 }, t = 0.1 }
+	},
 	cost = 8,
 	blueprint_compat = true,
 	calculate = function(self, card, context)
@@ -63,9 +66,10 @@ SMODS.Joker({
 	display_size = { w = 71 * 1.82, h = 95 },
 	pixel_size = { w = 71, h = 95 },
 	ppu_coder = { "theonegoofali" },
-	ppu_artist = { "theonegoofali" },
+	ppu_artist = { "ghostsalt" },
 	ppu_team = { "dummies" },
-	attributes = { "hand_type", "rank", "queen", "joker" }
+	attributes = { "hand_type", "rank", "queen", "joker" },
+	pronouns = "he_him"
 })
 
 SMODS.Tag({
