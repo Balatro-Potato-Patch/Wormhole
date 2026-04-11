@@ -197,7 +197,14 @@ return {
                 },
 
             }, 
-
+            j_worm_euda_roadsidepicnic = {
+                name = "Roadside Picnic",
+                text = {
+                    "{C:green}Rerolls{} cost {C:money}$#1#{} more",
+                    "Shop cards cost {C:money}$#1#{} less",
+                    "Increase both values by 1 per {C:green}reroll"
+                }
+            }
         },
         euda_Fate = {
             c_worm_euda_crunch = {
