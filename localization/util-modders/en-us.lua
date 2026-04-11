@@ -7,7 +7,15 @@ return {
 	    d_wilson = {
 		name = "WilsontheWolf",
 		text = {
-		    "hi"
+		    {
+			"{C:attention}Uncoventional Game Crasher{},",
+			"{C:attention}Resident Corn Lover{} and",
+			"{C:attention}Occasional Fish Poster",
+		    },
+		    {
+			"Also Checkout:",
+			"{C:attention}Metal Pipe Crashing Noise",
+		    },
 		}
 	    },
 	    d_cg = {
