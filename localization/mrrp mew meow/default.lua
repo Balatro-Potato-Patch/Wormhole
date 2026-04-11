@@ -254,10 +254,10 @@ misc={
 			"silly little mod",
 			"called Menthol?"
 		},
-		worm_mrrp_no_menthol_loss = { --todo think of a better one for this
-			"Have you tried this",
-			"silly little mod",
-			"called Menthol?"
+		worm_mrrp_no_menthol_loss = {
+			"I know what your",
+			"build is missing -",
+			"more cats!"
 		},
 		worm_mrrp_menthol_win = {
 			"What a refreshing",
@@ -266,7 +266,17 @@ misc={
 		worm_mrrp_menthol_loss = {
 			"Maybe a bit",
 			"TOO much mint?"
-		}
+		},
+		worm_mrrp_sarcpot = {
+			"Playing SarcPot, huh?",
+			"I know what",
+			"you are... >:3"
+		},
+		worm_mrrp_no_sarcpot = {
+			"Are you a girl,",
+			"gay, or indie game",
+			"fan? Play SarcPot!"
+		},
 	}
 },
 }
