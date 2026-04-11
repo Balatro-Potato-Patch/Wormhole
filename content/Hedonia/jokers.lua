@@ -22,8 +22,8 @@ SMODS.Joker {
         return {vars = {center.ability.extra.items}}
     end,
     calculate = function(self, card, context)
-        if context.individual and context.other_card.lucky_trigger then --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/jokers.lua#L2586
-            SMODS.create_card{set = "worm_hedonia_menu"}
+        if context.individual and context.other_card.lucky_trigger and #G.consumeables.cards < G.consumeables.config.card_limit then --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/jokers.lua#L2586 and https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/jokers.lua#L4472
+            SMODS.add_card({set = "worm_hedonia_menu", area = G.consumeables, key_append = '_casino'}) --https://github.com/Trif3ctal/Lucky-Rabbit/blob/82b67214f7865d37953771fe58e80ba6cd7aee25/content/jokers/sad_clown.lua#L36
         end
     end
 }
