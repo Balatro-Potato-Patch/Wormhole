@@ -50,7 +50,7 @@ payload = '''
 if v.tbp_module then
     tbp_module_info_boxes[#tbp_module_info_boxes+1] = {n=G.UIT.R, config={align = "cl"}, nodes={
         {n=G.UIT.R, config={align = "cm", colour = darken(Wormhole.tbp.module_colours[v.tbp_module], 0.5), padding = 0.05, emboss = 0.1}, nodes={
-            info_tip_from_rows(v, v.name),
+            Wormhole.tbp.module_tooltip(v, v.name),
         }}
     }}
 else
@@ -75,3 +75,25 @@ if next(tbp_module_info_boxes) then
     ret_val.nodes[#ret_val.nodes + 1] = {n=G.UIT.C, config={align = "cm", func = 'show_spaceship_tooltips',object = Moveable(), ref_table = next(tbp_module_info_boxes) and tbp_module_info_boxes or nil}, nodes={}}
 end
 '''
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "love.graphics.draw(last_canvas, 0, 0)"
+position = "after"
+payload = '''
+if shader.key == "worm_tbp_space_warp" then
+    love.graphics.setCanvas({current_canvas, stencil = true})
+    for k, v in ipairs(Wormhole.tbp.shader_draw_stuff) do
+        love.graphics.push("all")
+        love.graphics.setShader()
+        G.OVERLAY_TUTORIAL = true
+        v:translate_container()
+        v:draw()
+        G.OVERLAY_TUTORIAL = nil
+        love.graphics.pop()
+    end
+end
+'''
+match_indent = true
+times = 1

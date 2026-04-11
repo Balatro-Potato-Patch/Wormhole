@@ -1,4 +1,5 @@
 extern number time;
+extern number transparency;
 #define NUM_LAYERS 8.
 #define TAU 6.28318
 #define PI 3.141592
@@ -81,5 +82,7 @@ vec4 effect(vec4 color, Image texture, vec2 texture_coords, vec2 screen_coords) 
         float fade = depth*smoothstep(1., 0.9, depth);
         col += StarLayer(uv*scale+i*453.2-time*0.05+M)*fade;
     }
-    return vec4(col, 1.0);
+
+    return mix(Texel(texture, texture_coords), vec4(col, 1), transparency);
+
 }

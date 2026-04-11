@@ -10,7 +10,7 @@ local other_loc_table = {
             tbp_module_weapons = 'WEAPON',
             tbp_module_core = 'CORE',
             tbp_module_thrusters = 'THRUSTERS',
-            tbp_module_shields = 'SHIELD'
+            tbp_module_shields = 'UTILITY'
         }
     },
     descriptions = {
@@ -19,7 +19,16 @@ local other_loc_table = {
             PotatoPatchDev_eremel = {
                 name = 'Eremel',
                 text = {
-                    'placeholder'
+                    {
+                        'Look at this silly UI I made (:'
+                    },
+                    {
+                        'I help make {C:attention,E:2}SMODS{}!'
+                    },
+                    {
+                        'I also worked on {C:green,E:2}Galdur{},',
+                        '{C:blue,E:2}Malverk{}, {C:red,E:2}Ortalab{} and {C:gold,E:2}Monarchy{}'
+                    }
                 }
             },
             PotatoPatchDev_n = {
@@ -58,22 +67,6 @@ local other_loc_table = {
                     'placeholder'
                 }
             },
-        },
-        Joker = {
-            j_worm_spaceship = {
-                name = "Spaceship",
-                text = {
-                    "Does {C:attention}awesome{} stuff!"
-                }
-            }
-        },
-        module = {
-            c_worm_laser = {
-                name = "Laser",
-                text = {
-                    "{C:mult}+#1#{} Mult"
-                }
-            }
         },
         Back = {
             b_worm_spaceship_deck = {

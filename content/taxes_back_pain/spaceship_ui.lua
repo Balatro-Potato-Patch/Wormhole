@@ -1,36 +1,33 @@
-local tbp_hook_info_tip_from_rows = info_tip_from_rows
-function info_tip_from_rows(desc_nodes, name)
-    if desc_nodes.tbp_module then
-        local col = Wormhole.tbp.module_colours[desc_nodes.tbp_module]
-        local durability_col = mix_colours(G.C.BLACK, col, 0.8)
-        local t = {}
-        for k, v in ipairs(desc_nodes) do
-            t[#t+1] = {n=G.UIT.R, config={align = "cm"}, nodes=v}
-        end
-        return {n=G.UIT.C, nodes = {
-            {n=G.UIT.R, config = {align = 'cm', colour = col}, nodes = {
-                {n=G.UIT.C, config = {align = 'cm', colour = darken(col, 0.4), padding = 0.1}, nodes = {
-                    {n=G.UIT.T, config={text = localize('tbp_module_'..desc_nodes.tbp_module), scale = 0.32, colour = G.C.UI.TEXT_LIGHT, vert = true}}
-                }},
-                {n=G.UIT.C, config = {align = 'cm', padding = 0.05, colour = lighten(col, 0.4)}, nodes = {
-                    {n=G.UIT.R, config={align = "cm", minw = 1.5, minh = 0.4, r = 0.1, padding = 0.05, colour = lighten(col, 0.4)}, nodes={
-                        {n=G.UIT.R, config={align = "cm", padding = 0.03}, nodes=t}
-                    }},
-                    desc_nodes.module_info and {n=G.UIT.R, config = {align = 'cm', r = 0.08, minw = 0.5, minh = 0.15, colour = durability_col, outline = 0.5, outline_colour = darken(col, 0.3),
-                        progress_bar = {
-                            max = desc_nodes.module_info.total_durability, ref_table = desc_nodes.module_info, ref_value = 'durability', empty_col = durability_col, filled_col = adjust_alpha(col, 0.5)
-                        }
-                    }, nodes = {
-                        {n=G.UIT.T, config = {text = desc_nodes.module_info.durability .. ' turns', colour = mix_colours(lighten(col, 0.3), darken(col, 0.3), 0.3), scale = 0.18}}
-                    }} or nil
-                }}
-            }},
-
-        }}
-    else
-        return tbp_hook_info_tip_from_rows(desc_nodes, name)
+function Wormhole.tbp.module_tooltip(desc_nodes, name)
+    local col = Wormhole.tbp.module_colours[desc_nodes.tbp_module] -- module colour
+    local durability_col = mix_colours(G.C.BLACK, col, 0.8) -- durability bar background
+    local t = {}
+    for k, v in ipairs(desc_nodes) do
+        t[#t+1] = {n=G.UIT.R, config={align = "cm"}, nodes=v}
     end
+    return {n=G.UIT.C, nodes = {
+        {n=G.UIT.R, config = {align = 'cm', colour = col}, nodes = {
+            {n=G.UIT.C, config = {align = 'cm', colour = darken(col, 0.4), padding = 0.1}, nodes = {
+                {n=G.UIT.T, config={text = localize('tbp_module_'..desc_nodes.tbp_module), scale = 0.32, colour = G.C.UI.TEXT_LIGHT, vert = true}}
+            }},
+            {n=G.UIT.C, config = {align = 'cm', padding = 0.05, colour = lighten(col, 0.8)}, nodes = {
+                {n=G.UIT.R, config={align = "cm", minw = 1.5, minh = 0.4, r = 0.1, padding = 0.05, colour = lighten(col, 0.8)}, nodes={
+                    {n=G.UIT.R, config={align = "cm", padding = 0.03}, nodes=t}
+                }},
+                desc_nodes.module_info and {n=G.UIT.R, config = {align = 'cm', r = 0.08, minw = 0.5, minh = 0.15, colour = durability_col, outline = 0.5, outline_colour = darken(col, 0.3),
+                    progress_bar = {
+                        max = desc_nodes.module_info.total_durability, ref_table = desc_nodes.module_info, ref_value = 'durability', empty_col = durability_col, filled_col = adjust_alpha(col, 0.5)
+                    }
+                }, nodes = {
+                    {n=G.UIT.T, config = {text = desc_nodes.module_info.durability .. '/' .. desc_nodes.module_info.total_durability, colour = lighten(col, 0.6), scale = 0.28}}
+                }} or nil
+            }}
+        }},
+
+    }}
 end
+
+Wormhole.tbp.shader_draw_stuff = {}
 
 G.FUNCS.show_spaceship_tooltips = function(e)
     if e.config.ref_table then 
@@ -42,9 +39,21 @@ G.FUNCS.show_spaceship_tooltips = function(e)
     end
 end
 
+local function spaceship_ease(mod)
+    G.E_MANAGER:add_event(Event({
+        trigger = 'ease',
+        ref_table = G.GAME,
+        ref_value = 'tbp_module_replace_active',
+        ease_to = G.GAME.tbp_module_replace_active + mod,
+        delay =  2,
+        func = (function(t) return t end)
+    }))
+end
+
 G.FUNCS.module_replace_yes = function(e)
     local card = e.config.ref_table.card
     local module_def = e.config.ref_table.module_def
+    spaceship_ease(-1)
     local slot = e.config.ref_table.slot
     local spaceship = e.config.ref_table.spaceship
     spaceship.ability.extra.modules[slot] = {
@@ -68,6 +77,7 @@ G.FUNCS.module_replace_yes = function(e)
 end
 G.FUNCS.module_replace_no = function(e)
     local module_def = e.config.ref_table.module_def
+    spaceship_ease(-1)
     G.E_MANAGER:add_event(Event({
         trigger = 'after',
         delay = 0.1,
@@ -242,7 +252,10 @@ G.FUNCS.show_module_replace_confirm = function(old_module_key, new_module_key, c
     }}
     G.E_MANAGER.queues.module_replace_dialog = G.E_MANAGER.queues.module_replace_dialog or {}
     
+    G.GAME.tbp_module_replace_active = 0
+    spaceship_ease(1)
     G.E_MANAGER:add_event(Event({
+        trigger = 'after', delay = 1.5,
         func = function()
             G.GAME.module_replace_overlay = UIBox{
                 definition = t,
@@ -251,24 +264,25 @@ G.FUNCS.show_module_replace_confirm = function(old_module_key, new_module_key, c
             G.GAME.module_replace_overlay:align_to_major()
             G.GAME.module_replace_overlay.config.major = nil
             G.GAME.module_replace_overlay:set_role{role_type = 'Major'}
+            table.insert(Wormhole.tbp.shader_draw_stuff, G.GAME.module_replace_overlay)
             return true
         end
     }), "module_replace_dialog")
 end
 
 --Can be enabled later at any time by setting G.GAME.tbp_module_replace_active = true
---[[
+
 SMODS.ScreenShader{
     key = 'tbp_space_warp',
     path = 'tbp_space_warp.fs',
-    order = 0,
+    order = -1,
     should_apply = function(self)
-        return G.GAME and G.GAME.tbp_module_replace_active
+        return G.GAME and G.GAME.tbp_module_replace_active and G.GAME.tbp_module_replace_active > 0
     end,
     send_vars = function(self)
         return {
-            time = G.TIMERS and G.TIMERS.REAL or 0
+            time = G.TIMERS and G.TIMERS.REAL or 0,
+            transparency = G.GAME.tbp_module_replace_active
         }
     end
 }
---]]

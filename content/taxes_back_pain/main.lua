@@ -78,13 +78,23 @@ PotatoPatchUtils.Team({
     name = 'tbp',
     loc = true,
     colour = HEX('99acad'),
-    credit_rows = {4, 3}
+    credit_rows = {4, 3},
+    short_credit = true
+
+})
+
+SMODS.Gradient({
+    key = 'eremel',
+    colours = {
+        HEX('a756f9'), HEX('4ee8d3'), HEX('a756f9'), HEX('e8c81b')
+    },
 })
 
 PotatoPatchUtils.Developer({
     name = 'eremel',
     team = 'tbp',
     loc = true,
+    colour = SMODS.Gradients.worm_eremel
 })
 
 PotatoPatchUtils.Developer({
@@ -169,7 +179,7 @@ SMODS.Joker({
 	eternal_compat = false,
 	perishable_compat = false,
     ppu_team = {'tbp'},
-    module_types = {'core', 'weapons', 'shields', 'thrusters'}, -- TODO: add actual module slots here
+    module_types = {'core', 'weapons', 'thrusters', 'shields'}, -- TODO: add actual module slots here
     config = {
         card_limit = 1,
         extra = {
@@ -260,6 +270,8 @@ SMODS.Joker({
                     return true
                 end
             }))
+        else
+            table.insert(Wormhole.tbp.shader_draw_stuff, card) 
         end
 	end,
 	in_pool = function(self, args)
