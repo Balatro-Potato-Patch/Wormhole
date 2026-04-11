@@ -726,7 +726,7 @@ SMODS.Joker{
 	loc_txt = {
 		name = "The Big Blip",
 		text = {
-			"At the end of a game save your seed and start another run with prior knowlage of cards to come."
+			"At the end of a game save your seed and start another run with prior knowlage of cards to come.(Sell if you dont want this effect)."
 		}
 	},
 	config = { extra = {  }},
@@ -734,7 +734,7 @@ SMODS.Joker{
 		return { vars = {  }}
 	end,
 	atlas = "vegas_jokers",
-	pos = {x = 2, y = 3},
+	pos = {x = 1, y = 2},
 	rarity = 1,
 	cost = 5,
 	blueprint_compat = false,
