@@ -19,6 +19,13 @@ SMODS.Atlas {
     path = 'team-eudaimonia/bitflip.png',
 }
 
+SMODS.Atlas {
+    key = 'evilatlas',
+    px = 71,
+    py = 95,
+    path = 'team-eudaimonia/evil.png',
+}
+
 SMODS.Joker {
     key = "euda_wowsignal",
     atlas = 'euda_wowsignalatlas',
@@ -30,9 +37,11 @@ SMODS.Joker {
     config = {extra = {numerator = 1, denominator = 6, chipsmin = 20, chipsmax = 50, wowmin = 2, wowmax = 5}},
     ppu_coder = {'Typ0'},
     ppu_artist = {'LasagnaFelidae'},
+    ppu_team = {"TeamEudaimonia"},
+    attributes = {"chance","xchips", "chips", "space",},
     loc_vars = function(self, info_queue, card)
         local num, denom = SMODS.get_probability_vars(card, card.ability.extra.numerator, card.ability.extra.denominator)
-        return { vars = { num, denom, card.ability.extra.chipsmin, card.ability.extra.chipsmax, card.ability.extra.wowmin, card.ability.extra.wowmax} }
+        return { vars = { num, denom, card.ability.extra.wowmin, card.ability.extra.wowmax, card.ability.extra.chipsmin, card.ability.extra.chipsmax} }
     end,
     calculate = function(self, card, context)
         if context.joker_main then
@@ -52,115 +61,7 @@ SMODS.Joker {
 }
 
 
---ripped from yahimod
-SMODS.PokerHand({
-    key = "pkr_euda_wow",
-    mult = 5,
-    chips = 30,
-    l_mult = 2,
-    l_chips = 30,
-    example = {
-        { 'H_6', true }, 
-        { 'D_3', true },
-        { 'H_Q', true }, 
-        { 'S_J', true },
-        { 'C_5', true } 
-    },
-    visible = false,
 
-    evaluate = function(parts, hand)
-        if #hand >= 3 then
-            local _has6 = false
-            local _has3 = false
-            local _has5 = false
-            local _hasQ = false
-            local _hasJ = false
-            local eligible_cards = {}
-            local other_hands = next(parts._flush) or next(parts._straight) or next(parts._all_pairs)
-
-            for i, card in ipairs(hand) do
-                if card:get_id() == 6 and _has6 == false then
-                    _has6 = true
-                    eligible_cards[#eligible_cards + 1] = card
-                elseif card:get_id() == 3 and _has3 == false then
-                    _has3 = true
-                    eligible_cards[#eligible_cards + 1] = card
-                elseif card:get_id() == 5 and _has5 == false then
-                    _has5 = true
-                    eligible_cards[#eligible_cards + 1] = card
-                elseif card:get_id() == 12 and _hasQ == false then
-                    _hasQ = true
-                    eligible_cards[#eligible_cards + 1] = card
-                elseif card:get_id() == 11 and _hasJ == false then
-                    _hasJ = true
-                    eligible_cards[#eligible_cards + 1] = card
-                end
-            end
-
-
-            if _has6 and _has3 and _has5 and _hasQ and _hasJ and not other_hands then
-                return{eligible_cards}
-            end
-        end
-
-
-    end,
-
-
-})
-
-SMODS.PokerHand({
-    key = "pkr_euda_wow_f",
-    mult = 10,
-    chips = 30,
-    l_mult = 5,
-    l_chips = 30,
-    example = {
-        { 'H_6', true},
-        { 'H_3', true},
-        { 'H_Q', true},
-        { 'H_J', true},
-        { 'H_5', true}
-    },
-    visible = false,
-
-    evaluate = function(parts, hand)
-        if #hand >= 5 then
-            local _has6 = false
-            local _has3 = false
-            local _has5 = false
-            local _hasQ = false
-            local _hasJ = false
-            local eligible_cards = {}
-            local other_hands =next(parts._straight) or next(parts._all_pairs)
-
-            if not next(parts._flush) then return end
-            for i, card in ipairs(hand) do
-                if card:get_id() == 6 and _has6 == false then
-                    _has6 = true
-                    eligible_cards[#eligible_cards + 1] = card
-                elseif card:get_id() == 3 and _has3 == false then
-                    _has3 = true
-                    eligible_cards[#eligible_cards + 1] = card
-                elseif card:get_id() == 5 and _has5 == false then
-                    _has5 = true
-                    eligible_cards[#eligible_cards + 1] = card
-                elseif card:get_id() == 11 and _hasJ == false then
-                    _hasJ = true
-                    eligible_cards[#eligible_cards + 1] = card
-                elseif card:get_id() == 12 and _hasQ == false then
-                    _hasQ = true
-                    eligible_cards[#eligible_cards + 1] = card
-                end
-            end
-
-
-            if _has3 and _has5 and _has6 and _hasJ and _hasQ and not other_hands then
-                return{eligible_cards, SMODS.merge_lists(parts._flush)}
-            end
-        end
-    end,
-})
 
 SMODS.Joker {
     key = "euda_bitflip",
@@ -173,6 +74,8 @@ SMODS.Joker {
     config = {extra = {numerator = 1, denominator = 8, bitflipped = false, chips = 32, multmin = 1, multmax = 16}},
     ppu_coder = {'Typ0'},
     ppu_artist = {'Typ0','Hunter'},
+    ppu_team = {"TeamEudaimonia"},
+    attributes = {"chance","chips", "mult", "space",},
     loc_vars = function(self, info_queue, card)
         local num, denom = SMODS.get_probability_vars(card, card.ability.extra.numerator, card.ability.extra.denominator)
         return { vars = { num, denom, card.ability.extra.bitflipped, card.ability.extra.chips, card.ability.extra.multmin, card.ability.extra.multmax} }
@@ -232,64 +135,152 @@ function suit_level_up(card, copier, number, poker_hands, message)
 	)
 end
 
-SMODS.Consumable {
-    key = "euda_bigear",
-    set = "Planet",
-    cost = 3,
-    atlas = "euda_bigearatlas",
+
+
+SMODS.Joker {
+    key = "evil",
+    blueprint_compat = true,
+    perishable_compat = false,
+    rarity = 3,
+    cost = 5,
+    atlas = "evilatlas",
     pos = { x = 0, y = 0 },
-    config = {
-		l_chips = 30,
-		l_mult = 2,
-		l_mult_f = 5,
-		softlock = true
-	},
-    ppu_coder = {'Typ0', 'LasagnaFelidae'},
-    ppu_artist = {'LasagnaFelidae'},
-    hidden = true,
-    use = function(self, card, area, copier)
-        update_hand_text({ sound = 'button', volume = 0.7, pitch = 0.8, delay = 0.3 },
-            { handname = localize('k_worm_euda_wow_hands'), chips = '...', mult = '...', level = '' })
-        G.E_MANAGER:add_event(Event({
-            trigger = 'after',
-            delay = 0.2,
-            func = function()
-                play_sound('tarot1')
-                card:juice_up(0.8, 0.5)
-                G.TAROT_INTERRUPT_PULSE = true
-                return true
-            end
-        }))
-        update_hand_text({ delay = 0 }, { mult = '+', StatusText = true })
-        G.E_MANAGER:add_event(Event({
-            trigger = 'after',
-            delay = 0.9,
-            func = function()
-                play_sound('tarot1')
-                card:juice_up(0.8, 0.5)
-                return true
-            end
-        }))
-        update_hand_text({ delay = 0 }, { chips = '+', StatusText = true })
-        G.E_MANAGER:add_event(Event({
-            trigger = 'after',
-            delay = 0.9,
-            func = function()
-                play_sound('tarot1')
-                card:juice_up(0.8, 0.5)
-                G.TAROT_INTERRUPT_PULSE = nil
-                return true
-            end
-        }))
-        update_hand_text({ sound = 'button', volume = 0.7, pitch = 0.9, delay = 0 }, { level = '+1' })
-        delay(1.3)
-        SMODS.upgrade_poker_hands({hands = {"worm_pkr_euda_wow"}, per_level = {chips = card.ability.l_chips, mult = card.ability.l_mult}, instant = true, from = card})
-		SMODS.upgrade_poker_hands({hands = {"worm_pkr_euda_wow_f"}, per_level = {chips = card.ability.l_chips, mult = card.ability.l_mult_f}, instant = true, from = card})
-        update_hand_text({ sound = 'button', volume = 0.7, pitch = 1.1, delay = 0 },
-            { mult = 0, chips = 0, handname = '', level = '' })
+    config = { extra = { xmult_gain = 6, xmult = 3 } },
+    ppu_coder = {'Typ0'},
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.xmult_gain, card.ability.extra.xmult } }
     end,
-    can_use = function(self, card)
-        return true
+    calculate = function(self, card, context)
+        if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint  then
+            if context.beat_boss then
+                local destructable_jokers = {}
+                for i = 1, #G.jokers.cards do
+                    if G.jokers.cards[i] ~= card and not SMODS.is_eternal(G.jokers.cards[i], card) and not G.jokers.cards[i].getting_sliced then
+                        destructable_jokers[#destructable_jokers + 1] =
+                            G.jokers.cards[i]
+                    end
+                end
+                local joker_to_destroy = pseudorandom_element(destructable_jokers, 'vremade_madness')
+
+                if joker_to_destroy then
+                    joker_to_destroy.getting_sliced = true
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            (context.blueprint_card or card):juice_up(0.8, 0.8)
+                            joker_to_destroy:start_dissolve({ G.C.RED }, nil, 1.6)
+                            return true
+                        end
+                    }))
+                end
+                -- See note about SMODS Scaling Manipulation on the wiki
+                card.ability.extra_value = card.ability.extra_value + card.ability.extra.xmult_gain
+                card:set_cost()
+                return {
+                    message = localize('k_val_up'),
+                    colour = G.C.MONEY
+                }
+            end
+        end
+        if context.joker_main then
+            return {
+                xmult = card.ability.extra.xmult
+            }
+        end
     end,
 }
- 
+
+SMODS.Joker {
+    key = "LittleLight",
+    blueprint_compat = false,
+    eternal_compat = false,
+    rarity = 3,
+    cost = 5,
+    pos = { x = 3, y = 4 },
+    config = { extra = { deaths_used = 0, xmult = 1, xmult_gain = 0.2} }, --deaths used is useless so
+    ppu_coder = {'Typ0'},
+    ppu_artist = {'TigerTHawk'},
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.xmult, card.ability.extra.xmult_gain } }
+    end,
+    calculate = function(self, card, context)
+        if context.end_of_round and context.game_over and context.main_eval then
+            if G.GAME.chips / G.GAME.blind.chips >= 0.25 then -- See note about Talisman compatibility on the wiki
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        G.hand_text_area.blind_chips:juice_up()
+                        G.hand_text_area.game_chips:juice_up()
+                        play_sound('tarot1')
+                        SMODS.destroy_cards(card, nil, true)
+                        return true
+                    end
+                }))
+                return {
+                    message = localize('k_saved_ex'),
+                    saved = 'ph_mr_bones',
+                    colour = G.C.RED
+                }
+            end
+        end
+        if context.using_consumeable and context.consumeable.config.center.key == 'c_death' then
+            card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.xmult_gain 
+        end
+
+        if context.joker_main then 
+            return {
+                xmult = card.ability.extra.xmult
+            }
+        end
+    end,
+   
+
+}
+
+
+SMODS.Consumable {
+    key = "euda_81p",
+    set = "Planet",
+    cost = 3,
+    pos = { x = 9, y = 2 },
+    config = { hand_type = 'worm_pkr_euda_nova', softlock = true },
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = {
+                G.GAME.hands[card.ability.hand_type].level,
+                localize(card.ability.hand_type, 'poker_hands'),
+                G.GAME.hands[card.ability.hand_type].l_mult,
+                G.GAME.hands[card.ability.hand_type].l_chips,
+                colours = { (G.GAME.hands[card.ability.hand_type].level == 1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, G.GAME.hands[card.ability.hand_type].level)]) }
+            }
+        }
+    end,
+    set_card_type_badge = function(self, card, badges)
+        badges[#badges + 1] = create_badge(localize('k_worm_euda_cometplanet'),
+        get_type_colour(card.config.center or card.config, card), SMODS.ConsumableTypes.Planet.text_colour, 1.2)
+    end
+}
+
+--ripped from yahimod
+SMODS.PokerHand({
+	key = "pkr_euda_nova",
+	visible = false,
+	chips = 100,
+	mult = 10,
+	l_chips = 50,
+	l_mult = 1,
+	example = {
+		{ "S_A", true, enhancement = "m_wild" },
+		{ "H_K", true, enhancement = "m_wild" },
+		{ "C_3", true, enhancement = "m_wild" },
+		{ "D_4", true, enhancement = "m_wild" },
+		{ "S_9", true, enhancement = "m_wild" },
+	},
+	evaluate = function(parts, hand)
+        local wilds = {}
+        for i, card in ipairs(hand) do
+            if card.config.center and card.config.center.key == "m_wild" then
+                wilds[#wilds + 1] = card
+            end
+        end
+        return #wilds >= 5 and { wilds } or {}
+    end,
+})

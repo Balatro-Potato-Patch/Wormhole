@@ -15,7 +15,9 @@ SMODS.Joker {
     discovered = true,
     config = {extra= {research_length = 3, retriggers = 1} },
     ppu_coder = {'M0xes'},
+    ppu_team = {"TeamEudaimonia"},
     ppu_artist = {'Jewel'},
+    attributes = {"debuff", "retrigger", "space",},
     loc_vars = function(self, info_queue, card)
         return { vars = {card.ability.extra.research_length, card.ability.extra.retriggers} }
     end,
@@ -66,8 +68,9 @@ SMODS.current_mod.calculate = function(self, context)
     return calc_ref(self, context)
 end
 
+local op_features_ref = SMODS.current_mod.optional_features or function() return {} end
 SMODS.current_mod.optional_features = function()
-    return {
-        retrigger_joker = true,
-    }
+    local other_options = op_features_ref()
+    other_options.retrigger_joker = true
+    return other_options
 end

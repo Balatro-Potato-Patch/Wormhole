@@ -106,11 +106,14 @@ SMODS.Joker {
 				chips = card.ability.extra.add
 			}
 		end
-        local num, denom = SMODS.get_probability_vars(card, 1, card.ability.extra.chance)
-		if context.MDJ_mod_key_and_amount and SMODS.pseudorandom_probability(card, 'syndie', num, denom) then
+		if context.MDJ_mod_key_and_amount then
+            local num, denom = SMODS.get_probability_vars(card, 1, card.ability.extra.chance)
+            if not SMODS.pseudorandom_probability(card, 'syndie', num, denom) then
+                return
+            end
 			local key = context.MDJ_key
 			local amount = context.MDJ_amount
-			if context.demicolon_racism then
+			if not context.demicolon_racism then
 				local operation = syndiejournal.chipmodkeys[key]
 				local op_number = syndiejournal.keystonumbers[operation]
 				if operation and op_number == -1 then
