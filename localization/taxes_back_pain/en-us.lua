@@ -164,7 +164,7 @@ local descriptions = {
         nebula = {
             name = "Nebula Core",
             text = {
-                'When a {C:spectral}Module{} {C:attention}exhaust{},',
+                'When a {C:spectral}Module{} is {C:attention}exhausted{},',
                 'level up a random',
                 'poker hand by {C:attention}#1#{}',
                 '{s:0.8,C:inactive}(Depletes when triggered)'
@@ -174,7 +174,7 @@ local descriptions = {
             name = '{C:attention}Nebula Core',
             text = {
                 '{s:1.2,V:1}Nebula Core{}',
-                'When a {C:spectral}Module{} {C:attention}exhaust{}',
+                'When a {C:spectral}Module{} is {C:attention}exhausted{}',
                 'level up a random',
                 'poker hand by {C:attention}#1#{}',
                 '{s:0.8,C:inactive}(Depletes when triggered)'
@@ -221,7 +221,7 @@ local descriptions = {
         black_hole_generator = {
             name = "Black Hole Generator",
             text = {
-                'When a {C:spectral}Module{} {C:attention}exhaust{},',
+                'When a {C:spectral}Module{} is {C:attention}exhausted{},',
                 'increases the durability of',
                 'other {C:spectral}Modules{} by {C:attention}#1#{}',
                 '{s:0.8,C:inactive}(Depletes when triggered)'
@@ -231,7 +231,7 @@ local descriptions = {
             name = "Black Hole Generator",
             text = {
                 '{s:1.2,V:1}Black Hole Generator{}',
-                'When a {C:spectral}Module{} would {C:attention}exhaust{}',
+                'When a {C:spectral}Module{} is {C:attention}exhausted{}',
                 'increases the durability of',
                 'other {C:spectral}Modules{} by {C:attention}#1#{}',
                 '{s:0.8,C:inactive}(Depletes when triggered)'
@@ -431,7 +431,7 @@ local descriptions = {
         hyperlight_rotors = {
             name = 'Hyperlight Rotors',
             text = {
-                'This ship gives {X:mult,C:white} X#1# {C:mult} Mult',
+                'Gives {X:mult,C:white} X#1# {C:mult} Mult',
                 'per empty {C:attention}Joker slot',
                 '{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive})',
                 '{C:inactive,s:0.8}Damaged when scoring'
@@ -441,7 +441,7 @@ local descriptions = {
             name = '{C:attention}Hyperlight Rotors',
             text = {
                 '{s:1.2,V:1}Hyperlight Rotors{}',
-                'This ship gives {X:mult,C:white} X#1# {C:mult} Mult',
+                'Gives {X:mult,C:white} X#1# {C:mult} Mult',
                 'per empty {C:attention}Joker slot',
                 '{C:inactive,s:0.8}(Currently {X:mult,C:white}X#2#{C:inactive})',
                 '{C:inactive,s:0.8}Depletes when scoring'
