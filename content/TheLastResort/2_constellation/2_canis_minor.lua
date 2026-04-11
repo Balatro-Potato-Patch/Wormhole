@@ -14,7 +14,7 @@ SMODS.Consumable{
     use = function(self,card,area,copier)
         local newcard = SMODS.create_card({key = G.GAME.worm_tlr_last_const_used})
         if card.ability.tier >= 3 then newcard:set_edition("e_Negative") end
-        newcard.ability.tier = card.ability.tiers[card.ability.tier]
-        WORM_TLR.update_const_sprite(newcard.ability.center, newcard)
+        newcard.ability.tier = G.GAME.worm_tlr_last_const_used_tier
+        WORM_TLR.update_const_sprite(newcard.config.center, newcard)
     end
 }
