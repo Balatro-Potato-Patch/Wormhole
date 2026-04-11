@@ -273,5 +273,12 @@ return {
 			k_polarskull_martian_inactive = "Inactive",
 			k_polarskull_martian_active = "Active",
 		},
+    v_text = {
+      ch_c_rocket_paper_scissors = { "All {C:attention}Boss Blinds{} are {C:attention}The Mouth{} or {C:attention}The Eye{}" },
+      ch_c_polarskull_credits = {"{C:inactive,s:0.9}Made by Team {C:polarskull_rocket,s:0.9}Polar Skull{}{C:inactive,s:0.9}, coded by {C:gold,s:0.9}cloudzXIII{}"}
+    },
+		challenge_names = {
+			c_worm_rocket_paper_scissors = "Rocket Paper Scissors",
+		},
 	},
 }
