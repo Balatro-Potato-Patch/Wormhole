@@ -66,7 +66,7 @@ SMODS.Joker({
 	display_size = { w = 71 * 1.82, h = 95 },
 	pixel_size = { w = 71, h = 95 },
 	ppu_coder = { "theonegoofali" },
-	ppu_artist = { "ghostsalt" },
+	ppu_artist = { "theonegoofali", "ghostsalt" },
 	ppu_team = { "dummies" },
 	attributes = { "hand_type", "rank", "queen", "joker" },
 	pronouns = "he_him"
