@@ -73,7 +73,7 @@ calculate = function(self, card, context)
             G.E_MANAGER:add_event(Event({
                 func = function()
                     --  this identifies if there is enough space to make any cards.
-                    --  G.GAME.consumeables_buffer is not needed here since it is calculated at the moment of creation.
+                    --  G.GAME.consumeable_buffer is not needed here since it is calculated at the moment of creation.
                     if #G.consumeables.cards < G.consumeables.config.card_limit then
 
                     --  this compiles which sets (and therefore pools) the cards belong to, by indices for convenience.
