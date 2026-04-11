@@ -48,8 +48,8 @@ return {
                 }
             },
 
-            j_worm_stargazer = {
-                name = 'Stargazer',
+            j_worm_stardust_joker = {
+                name = 'Stardust Joker',
                 text = {
                     'This Joker gains {C:money}$#1#{} of',
                     '{C:attention}sell value{} for every {C:attention}#2#{C:inactive} [#3#]',
@@ -65,6 +65,15 @@ return {
                     'cards if played hand',
                     'contains a {C:attention}#1#',
                     '{C:inactive}(Must have room)'
+                }
+            },
+
+            j_worm_stargazer = {
+                name = 'Stargazer',
+                text = {
+                    'Gives {X:mult,C:white}X#1#{} Mult for each',
+                    '{C:planet}Planet{} or {C:attention}Star{} card held',
+                    '{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)'
                 }
             }
 

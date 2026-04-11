@@ -25,3 +25,9 @@ SMODS.Atlas{
 }
 
 
+SMODS.Atlas{
+    key = 'stewconsumables',
+    path = 'BalatroStewniversity/Consumables.png',
+    px = 71,
+    py = 95
+}

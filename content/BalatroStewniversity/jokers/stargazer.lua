@@ -1,39 +1,44 @@
 SMODS.Joker{
     key = 'stargazer',
-    config = {extra = {price = 5, diamonds_required = 5, diamonds_remaining = 5}},
-    rarity = 1,
-    cost = 5,
+    config = {extra = {xmult = 1}},
+    rarity = 2,
+    cost = 6,
     atlas = 'stewjokers',
     pos = {x=2, y=1},
-    blueprint_compat = false,
+    blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = true,
-
+    
     loc_vars = function (self, info_queue, card)
+       info_queue[#info_queue+1] = G.P_CENTERS.c_star
+            local planet_count = 0
+            local star_count = #SMODS.find_card('c_star')
+            if G.consumeables then
+            for _, planets in ipairs(G.consumeables.cards) do
+                if planets.ability.set == 'Planet' then
+                    planet_count = planet_count + 1
+                end
+            end
+            end 
+            
         return{
-            vars = {card.ability.extra.price, card.ability.extra.diamonds_required, card.ability.extra.diamonds_remaining}
+            vars = {card.ability.extra.xmult, 
+                    1 + card.ability.extra.xmult * (planet_count + star_count)}
         }
     end,
-
     calculate = function (self, card, context)
-
-        if context.before and not context.blueprint then
-            local diamond_cards = 0
-            for _, scored_card in ipairs(context.scoring_hand) do
-                   if scored_card:is_suit('Diamonds') then
-                    diamond_cards = diamond_cards + 1
-                end   
+        if context.joker_main then
+            local star_count = #SMODS.find_card('c_star')
+            local planet_count = 0
+            for _, planets in ipairs(G.consumeables.cards) do
+                if planets.ability.set == 'Planet' then
+                    planet_count = planet_count + 1
+                end
             end
-            card.ability.extra.diamonds_remaining = card.ability.extra.diamonds_remaining - diamond_cards
-            if card.ability.extra.diamonds_remaining <= 0 then
-                card.ability.extra.diamonds_remaining = card.ability.extra.diamonds_required + card.ability.extra.diamonds_remaining
-                card.ability.extra_value = card.ability.extra_value + card.ability.extra.price
-                card:set_cost()
-                return{
-                    message = localize('k_val_up'),
-                    colour = G.C.MONEY
-                }
-            end
+            return{
+                xmult = 1 + card.ability.extra.xmult * (planet_count + star_count)
+            }
         end
     end
+
 }
