@@ -114,6 +114,34 @@ return {
 
 
 
+        ---JOKERS---
+        ------------
+        ---JOKERS---
+        
+        Voucher = {
+
+            -- FIRST CONTACT
+            v_worm_shrug_first_contact = {
+                name = "First Contact",
+                text = {
+                    "{C:dark_edition}Alien{} cards may",
+                    "appear in any of",
+                    "the {C:attention}Planet Packs{}"
+                }
+            },
+
+            -- FIRST CONTACT
+            v_worm_shrug_trade_network = {
+                name = "Trade Network",
+                text = {
+                    "{C:dark_edition}Alien{} cards may",
+                    "appear in the shop"
+                }
+            },
+        },
+
+
+
         ---ALIEN SETUP---
         -----------------
         ---ALIEN SETUP---
