@@ -644,7 +644,7 @@ SMODS.Joker{
 		return { vars = { card.ability.extra.cards, colours = { G.C.SUITS['Diamonds'] } } }
 	end,
 	atlas = "vegas_jokers",
-	pos = {x = 0, y = 4},
+	pos = {x = 0, y = 2},
 	rarity = 2,
 	cost = 6,
 	blueprint_compat = true,
