@@ -10,7 +10,7 @@ local other_loc_table = {
             tbp_module_weapons = 'WEAPON',
             tbp_module_core = 'CORE',
             tbp_module_thrusters = 'THRUSTERS',
-            tbp_module_shields = 'UTILITY'
+            tbp_module_utility = 'UTILITY'
         }
     },
     descriptions = {
@@ -175,9 +175,9 @@ local descriptions = {
         nebula = {
             name = "Nebula Core",
             text = {
-                'When a {C:spectral}Module{} would',
-                '{C:attention}deplete{}, level up',
-                'a random poker hand by {C:attention}#1#{}',
+                'When a {C:spectral}Module{} is {C:attention}exhausted{},',
+                'level up a random',
+                'poker hand by {C:attention}#1#{}',
                 '{s:0.8,C:inactive}(Depletes when triggered)'
             }
         },
@@ -185,9 +185,9 @@ local descriptions = {
             name = '{C:attention}Nebula Core',
             text = {
                 '{s:1.2,V:1}Nebula Core{}',
-                'When a {C:spectral}Module{} would',
-                '{C:attention}deplete{}, level up',
-                'a random poker hand by {C:attention}#1#{}',
+                'When a {C:spectral}Module{} is {C:attention}exhausted{}',
+                'level up a random',
+                'poker hand by {C:attention}#1#{}',
                 '{s:0.8,C:inactive}(Depletes when triggered)'
             }
         },
@@ -210,8 +210,8 @@ local descriptions = {
                 '{s:0.8,C:inactive}(Depletes when triggered)'
             }
         },
-        no_core_name1 = {
-            name = "No Name 1 Core",
+        dellinger = {
+            name = "Dellinger Core",
             text = {
                 'Playing a {C:attention}#2#{}',
                 'increases the durability of',
@@ -219,10 +219,10 @@ local descriptions = {
                 '{s:0.8,C:inactive}(Depletes when triggered)'
             }
         },
-        no_core_name1_equipped = {
-            name = "No Name 1 Core",
+        dellinger_equipped = {
+            name = "Dellinger Core",
             text = {
-                '{s:1.2,V:1}No Name 1 Core{}',
+                '{s:1.2,V:1}Dellinger Core{}',
                 'Playing a {C:attention}#2#{}',
                 'increases the durability of',
                 'each other {C:spectral}Module{} by {C:attention}1{}',
@@ -232,8 +232,8 @@ local descriptions = {
         black_hole_generator = {
             name = "Black Hole Generator",
             text = {
-                'When a {C:spectral}Module{} is',
-                'depleted, increases the durability of',
+                'When a {C:spectral}Module{} is {C:attention}exhausted{},',
+                'increases the durability of',
                 'other {C:spectral}Modules{} by {C:attention}#1#{}',
                 '{s:0.8,C:inactive}(Depletes when triggered)'
             }
@@ -242,8 +242,8 @@ local descriptions = {
             name = "Black Hole Generator",
             text = {
                 '{s:1.2,V:1}Black Hole Generator{}',
-                'When a {C:spectral}Module{} is',
-                'depleted, increases the durability of',
+                'When a {C:spectral}Module{} is {C:attention}exhausted{}',
+                'increases the durability of',
                 'other {C:spectral}Modules{} by {C:attention}#1#{}',
                 '{s:0.8,C:inactive}(Depletes when triggered)'
             }
@@ -313,11 +313,11 @@ local descriptions = {
         salvo = {
             name = 'Overcharged Salvo',
             text = {
-                '{X:mult,C:white}X#1#{} for each',
+                '{X:mult,C:white} X#1# {} for each',
                 '{C:spectral}Module{} installed',
                 'if scored hand contains',
                 '{C:attention}5{} cards',
-                '{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)',
+                '{C:inactive}(Currently {X:mult,C:white} X#2# {C:inactive} Mult)',
                 '{s:0.8,C:inactive}(Depletes all Modules when triggered)'
             }
         },
@@ -325,11 +325,11 @@ local descriptions = {
             name = '{C:attention}Overcharged Salvo',
             text = {
                 '{s:1.2,V:1}Overcharged Salvo',
-                '{X:mult,C:white}X#1#{} for each',
+                '{X:mult,C:white} X#1# {} for each',
                 '{C:spectral}Module{} installed',
                 'if scored hand contains',
                 '{C:attention}5{} cards',
-                '{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)',
+                '{C:inactive}(Currently {X:mult,C:white} X#2# {C:inactive} Mult)',
                 '{s:0.8,C:inactive}(Depletes all Modules when triggered)'
             }
         },
@@ -410,25 +410,25 @@ local descriptions = {
         warp_drive = {
             name = 'Warp Drive',
             text = {
-                'Skip Blind: gain {X:mult,C:white} X#1# {} mult',
+                'Skip Blind: gain {X:mult,C:white} X#1# {} Mult',
                 '{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive})',
-                '{C:inactive,s:0.8}Damaged when skipping a blind'
+                '{C:inactive,s:0.8}(Depletes when skipping a blind)'
             }
         },
         warp_drive_equipped = {
             name = '{C:attention}Warp Drive',
             text = {
                 '{s:1.2,V:1}Warp Drive{}',
-                'Skip Blind: gain {X:mult,C:white} X#1# {} mult',
-                '{C:inactive,s:0.8}(Currently {X:mult,C:white}X#2#{C:inactive})',
-                '{C:inactive,s:0.8}Depletes when skipping a blind'
+                'Skip Blind: gain {X:mult,C:white} X#1# {} Mult',
+                '{C:inactive,s:0.8}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)',
+                '{C:inactive,s:0.8}(Depletes when skipping a blind)'
             }
         },
         temporal_jump = {
             name = 'Temporal Jump Thrusters',
             text = {
                 'Skip Blind: Get {C:attention}#1#{} {C:attention}Skip Tags',
-                '{C:inactive,s:0.8}Damaged when skipping a blind'
+                '{C:inactive,s:0.8}(Depletes when skipping a blind)'
             }
         },
         temporal_jump_equipped = {
@@ -436,122 +436,122 @@ local descriptions = {
             text = {
                 '{s:1.2,V:1}Temporal Jump Thrusters{}',
                 'Skip Blind: Get {C:attention}#1#{} {C:attention}Skip Tags',
-                '{C:inactive,s:0.8}Depletes when skipping a blind'
+                '{C:inactive,s:0.8}(Depletes when skipping a blind)'
             }
         },
-        hyperlight_rotors = {
-            name = 'Hyperlight Rotors',
+        repeater = {
+            name = 'Repeater Engine',
             text = {
-                'This ship gives {X:mult,C:white} X#1# {C:mult} Mult',
-                'per empty {C:attention}Joker slot',
-                '{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive})',
-                '{C:inactive,s:0.8}Damaged when scoring'
+                'Retrigger each scored',
+                '{C:attention}Enhanced{} card',
+                'in played hand {C:attention}twice',
+                '{s:0.8,C:inactive}(Depletes each hand)'
             }
         },
-        hyperlight_rotors_equipped = {
-            name = '{C:attention}Hyperlight Rotors',
+        repeater_equipped = {
+            name = '{C:attention}Repeater Engine',
             text = {
-                '{s:1.2,V:1}Hyperlight Rotors{}',
-                'This ship gives {X:mult,C:white} X#1# {C:mult} Mult',
-                'per empty {C:attention}Joker slot',
-                '{C:inactive,s:0.8}(Currently {X:mult,C:white}X#2#{C:inactive})',
-                '{C:inactive,s:0.8}Depletes when scoring'
+                '{s:1.2,V:1}Repeater Engine',
+                'Retrigger each scored',
+                '{C:attention}Enhanced{} card',
+                'in played hand {C:attention}twice',
+                '{s:0.8,C:inactive}(Depletes each hand)'
             }
         },
-        resuited_thruster = {
-            name = 'Resuited Thruster',
+        antimatter = {
+            name = 'Anti-Matter Thrusters',
             text = {
-                'Played {V:1}#2#{} cards',
-                'give {C:chips}+#1#{} Chips',
-                '{C:inactive,s:0.8} Damaged when scoring',
-                '{C:inactive,s:0.8} Suit changes at end of round'
+                'Create a {C:dark_edition}Negative{}',
+                '{C:planet}Planet{} card for the played hand',
+                '{s:0.8,C:inactive}(Depletes each hand)'
             }
         },
-        resuited_thruster_equipped = {
-            name = '{C:attention}Resuited Thruster',
+        antimatter_equipped = {
+            name = '{C:attention}Anti-Matter Thrusters',
             text = {
-                '{s:1.2,V:1}Resuited Thruster{}',
-                'Played {V:2}#2#{} cards',
-                'give {C:chips}+#1#{} Chips',
-                '{C:inactive,s:0.8} Depletes when scoring',
-                '{C:inactive,s:0.8} Suit changes at end of round'
+                '{s:1.2,V:1}Anti-Matter Thrusters',
+                'Create a {C:dark_edition}Negative{}',
+                '{C:planet}Planet{} card for the played hand',
+                '{s:0.8,C:inactive}(Depletes each hand)'
             }
         },
+        -- hyperlight_rotors = {
+        --     name = 'Hyperlight Rotors',
+        --     text = {
+        --         'Gives {X:mult,C:white} X#1# {C:mult} Mult',
+        --         'per empty {C:attention}Joker slot',
+        --         '{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive})',
+        --         '{C:inactive,s:0.8}Damaged when scoring'
+        --     }
+        -- },
+        -- hyperlight_rotors_equipped = {
+        --     name = '{C:attention}Hyperlight Rotors',
+        --     text = {
+        --         '{s:1.2,V:1}Hyperlight Rotors{}',
+        --         'Gives {X:mult,C:white} X#1# {C:mult} Mult',
+        --         'per empty {C:attention}Joker slot',
+        --         '{C:inactive,s:0.8}(Currently {X:mult,C:white}X#2#{C:inactive})',
+        --         '{C:inactive,s:0.8}Depletes when scoring'
+        --     }
+        -- },
+        -- resuited_thruster = {
+        --     name = 'Resuited Thruster',
+        --     text = {
+        --         'Played {V:1}#2#{} cards',
+        --         'give {C:chips}+#1#{} Chips',
+        --         '{C:inactive,s:0.8} Damaged when scoring',
+        --         '{C:inactive,s:0.8} Suit changes at end of round'
+        --     }
+        -- },
+        -- resuited_thruster_equipped = {
+        --     name = '{C:attention}Resuited Thruster',
+        --     text = {
+        --         '{s:1.2,V:1}Resuited Thruster{}',
+        --         'Played {V:2}#2#{} cards',
+        --         'give {C:chips}+#1#{} Chips',
+        --         '{C:inactive,s:0.8} Depletes when scoring',
+        --         '{C:inactive,s:0.8} Suit changes at end of round'
+        --     }
+        -- },
         -- UNCATEGORIZED --
-        uncat1 = {
-            name = 'Uncategorized 1',
-            text = {
-                'Retrigger each scored',
-                '{C:attention}Enhanced{} card',
-                'in played hand {C:attention}twice',
-                '{s:0.8,C:inactive}(Depletes each hand)'
-            }
-        },
-        uncat1_equipped = {
-            name = '{C:attention}Uncategorized 1',
-            text = {
-                '{s:1.2,V:1}Uncategorized 1',
-                'Retrigger each scored',
-                '{C:attention}Enhanced{} card',
-                'in played hand {C:attention}twice',
-                '{s:0.8,C:inactive}(Depletes each hand)'
-            }
-        },
-        uncat2 = {
-            name = 'Uncategorized 2',
-            text = {
-                'Create a {C:dark_edition}Negative{}',
-                '{C:planet}Planet{} card for the played hand',
-                '{s:0.8,C:inactive}(Depletes each hand)'
-            }
-        },
-        uncat2_equipped = {
-            name = '{C:attention}Uncategorized 2',
-            text = {
-                '{s:1.2,V:1}Uncategorized 2',
-                'Create a {C:dark_edition}Negative{}',
-                '{C:planet}Planet{} card for the played hand',
-                '{s:0.8,C:inactive}(Depletes each hand)'
-            }
-        },
-        uncat3 = {
-            name = 'Uncategorized 3',
-            text = {
-                "Every played {C:attention}card{}",
-                "permanently gains",
-                "{C:mult}+#1#{} Mult when scored",
-                '{s:0.8,C:inactive}(Depletes for each card scored)'
-            }
-        },
-        uncat3_equipped = {
-            name = '{C:attention}Uncategorized 3',
-            text = {
-                '{s:1.2,V:1}Uncategorized 3',
-                "Every played {C:attention}card{}",
-                "permanently gains",
-                "{C:mult}+#1#{} Mult when scored",
-                '{s:0.8,C:inactive}(Depletes for each card scored)'
-            }
-        },
-        uncat4 = {
-            name = 'Uncategorized 4',
-            text = {
-                "Earn {C:money}+$#1#{}",
-                "when a {C:spectral}Module{}", -- TODO: change color to new Module one if changed
-                "is {C:attention}destroyed{}",
-                '{s:0.8,C:inactive}(Depletes each time it triggers)'
-            }
-        },
-        uncat4_equipped = {
-            name = '{C:attention}Uncategorized 4',
-            text = {
-                '{s:1.2,V:1}Uncategorized 4',
-                "Earn {C:money}+$#1#{}",
-                "when a {C:spectral}Module{}", -- TODO: change color to new Module one if changed
-                "is {C:attention}destroyed{}",
-                '{s:0.8,C:inactive}(Depletes each time it triggers)'
-            }
-        },
+        -- uncat3 = {
+        --     name = 'Uncategorized 3',
+        --     text = {
+        --         "Every played {C:attention}card{}",
+        --         "permanently gains",
+        --         "{C:mult}+#1#{} Mult when scored",
+        --         '{s:0.8,C:inactive}(Depletes for each card scored)'
+        --     }
+        -- },
+        -- uncat3_equipped = {
+        --     name = '{C:attention}Uncategorized 3',
+        --     text = {
+        --         '{s:1.2,V:1}Uncategorized 3',
+        --         "Every played {C:attention}card{}",
+        --         "permanently gains",
+        --         "{C:mult}+#1#{} Mult when scored",
+        --         '{s:0.8,C:inactive}(Depletes for each card scored)'
+        --     }
+        -- },
+        -- uncat4 = {
+        --     name = 'Uncategorized 4',
+        --     text = {
+        --         "Earn {C:money}+$#1#{}",
+        --         "when a {C:spectral}Module{}",
+        --         "is {C:attention}exhausted{}",
+        --         '{s:0.8,C:inactive}(Depletes each time it triggers)'
+        --     }
+        -- },
+        -- uncat4_equipped = {
+        --     name = '{C:attention}Uncategorized 4',
+        --     text = {
+        --         '{s:1.2,V:1}Uncategorized 4',
+        --         "Earn {C:money}+$#1#{}",
+        --         "when a {C:spectral}Module{}",
+        --         "is {C:attention}exhausted{}",
+        --         '{s:0.8,C:inactive}(Depletes each time it triggers)'
+        --     }
+        -- },
     }
 }
 

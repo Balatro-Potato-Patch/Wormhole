@@ -232,7 +232,7 @@ Wormhole.tbp.module_colours = {
     weapons = HEX('fd5f55'),
     core = HEX('5559fd'),
     thrusters = HEX('6dec66'),
-    shields = HEX('edeb65')
+    utility = HEX('edeb65')
 }
 
 SMODS.Joker({
@@ -246,21 +246,21 @@ SMODS.Joker({
 	eternal_compat = false,
 	perishable_compat = false,
     ppu_team = {'tbp'},
-    module_types = {'core', 'weapons', 'thrusters', 'shields'}, -- TODO: add actual module slots here
+    module_types = {'core', 'weapons', 'thrusters', 'utility'}, -- TODO: add actual module slots here
     config = {
-        card_limit = 1,
+        extra_slots_used = -1,
         extra = {
             modules = { -- TODO: add actual module slots here
                 core = {},
                 weapons = {},
                 thrusters = {},
-                shields = {}
+                utility = {}
             }
         },
     },
 	loc_vars = function(self, info_queue, card)
         if not card.fake_card then
-            info_queue[#info_queue + 1] = G.P_CENTERS["p_worm_module_normal_1"] -- TODO: Change to poll winner
+            info_queue[#info_queue + 1] = G.P_CENTERS["p_worm_module_jumbo_1"]
             for _, v in ipairs(self.module_types) do
                 if card.ability.extra.modules[v].key and (G.P_CENTERS[card.ability.extra.modules[v].key] or {}).loc_vars then
                     local vars = G.P_CENTERS[card.ability.extra.modules[v].key]:loc_vars(info_queue, {ability = { extra = card.ability.extra.modules[v] } }, card).vars
@@ -276,7 +276,7 @@ SMODS.Joker({
         return {
             vars = {
                 colours = {modules and G.ARGS.LOC_COLOURS.inactive or G.C.UI.TEXT_DARK, modules and mix_colours(G.ARGS.LOC_COLOURS.inactive, G.ARGS.LOC_COLOURS.attention, 0.65) or G.ARGS.LOC_COLOURS.attention},
-                localize{type = 'name_text', set = 'Other', key = 'p_worm_module_normal_1'} -- TODO: Change to poll winner
+                localize{type = 'name_text', set = 'Other', key = 'p_worm_module_jumbo_1'}
             }
         }
     end,
@@ -333,6 +333,9 @@ SMODS.Joker({
 		if next(SMODS.find_card("j_worm_tbp_spaceship")) then
             G.E_MANAGER:add_event(Event({
                 func = function()
+                    if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+                        SMODS.add_card{ set = "tbp_module" }
+                    end
                     card:remove()
                     return true
                 end
@@ -471,7 +474,7 @@ SMODS.ConsumableType {
 ---@field module_calculate? fun(self: Wormhole.tbp.Module|table, module: table, context: CalcContext|table, card?: Card|table): table?, boolean?
 ---@field loc_vars? fun(self: Wormhole.tbp.Module|table, info_queue: table, module: table, card?: Card|table): table?
 ---@field durability number
----@field slot 'core'|'weapons'|'shields'|'thrusters'
+---@field slot 'core'|'weapons'|'utility'|'thrusters'
 ---@overload fun(self: Wormhole.tbp.Module): Wormhole.tbp.Module
 Wormhole.tbp.Module = setmetatable({}, {
     __call = function(self)
@@ -479,6 +482,11 @@ Wormhole.tbp.Module = setmetatable({}, {
     end
 })
 
+for _, key in ipairs({'core', 'weapons', 'thrusters', 'utility'}) do
+    SMODS.Attribute {
+        key = "worm_tbp_"..key,
+    }
+end
 
 Wormhole.tbp.Module = SMODS.Consumable:extend{
     required_params = {
@@ -496,7 +504,9 @@ Wormhole.tbp.Module = SMODS.Consumable:extend{
     pre_inject_class = function(self, func)
         for _, obj in pairs(self.obj_table) do
             if obj.set == 'tbp_module' then
-                obj.ppu_team = obj.ppu_team or {'tbp'}
+                obj.ppu_team = obj.ppu_team or { 'tbp' }
+                obj.attributes = obj.attributes or {}
+                if obj.slot then table.insert(obj.attributes, "worm_tbp_".. obj.slot) end
             end
         end
     end,
@@ -625,7 +635,7 @@ Wormhole.tbp.Module({
 })
 
 Wormhole.tbp.Module({
-	key = "no_core_name1", -- TODO: Find it a name, don't forget to change pseudoseed and locs
+	key = "dellinger",
     slot = 'core',
     durability = 3,
 	-- pos = { x = 0, y = 0 },
@@ -667,7 +677,7 @@ Wormhole.tbp.Module({
                 _poker_hands[#_poker_hands + 1] = k
             end
         end
-        card.ability.extra.poker_hand = pseudorandom_element(_poker_hands, pseudoseed((card.area and card.area.config.type == 'title') and 'tbp_false_no_core_name1' or 'tbp_no_core_name1'))
+        card.ability.extra.poker_hand = pseudorandom_element(_poker_hands, pseudoseed((card.area and card.area.config.type == 'title') and 'tbp_false_dellinger' or 'tbp_dellinger'))
     end,
     module_calculate = function (self, module, context, card)
         if context.before and context.main_eval and context.scoring_name == module.poker_hand then
@@ -689,7 +699,7 @@ Wormhole.tbp.Module({
                     _poker_hands[#_poker_hands + 1] = k
                 end
             end
-            module.poker_hand = pseudorandom_element(_poker_hands, pseudoseed('tbp_no_core_name1'))
+            module.poker_hand = pseudorandom_element(_poker_hands, pseudoseed('tbp_dellinger'))
             return {
                 func = function()
                     Wormhole.tbp.change_durability(card, self.slot, -1)
@@ -847,7 +857,7 @@ Wormhole.tbp.Module({
 
 Wormhole.tbp.Module({
 	key = "hardlight",
-    slot = 'shields', -- TODO: Maybe replace this with utility
+    slot = 'utility', 
     durability = 5,
     atlas = "tbp_module",
 	pos = { x = 0, y = 0 },
@@ -871,7 +881,7 @@ Wormhole.tbp.Module({
 
 Wormhole.tbp.Module({
 	key = "quantum",
-    slot = 'shields', -- TODO: Maybe replace this with utility
+    slot = 'utility', 
     durability = 5,
 	-- pos = { x = 0, y = 0 },
 	config = {
@@ -898,7 +908,7 @@ Wormhole.tbp.Module({
 
 Wormhole.tbp.Module({
 	key = "interference",
-    slot = 'shields', -- TODO: Maybe replace this with utility
+    slot = 'utility', 
     durability = 1,
 	-- pos = { x = 0, y = 0 },
 	config = {
@@ -925,7 +935,7 @@ Wormhole.tbp.Module({
 
 Wormhole.tbp.Module({
 	key = "redundancy",
-    slot = 'shields', -- TODO: Maybe replace this with utility
+    slot = 'utility', 
     durability = 5,
 	-- pos = { x = 0, y = 0 },
 	config = {
@@ -950,118 +960,6 @@ Wormhole.tbp.Module({
 
 -- THRUSTERS --
 
--- UNCATEGORIZED --
-
--- Uncategorized 1
-Wormhole.tbp.Module({
-	key = "uncat1", -- TODO: Replace name
-    slot = 'weapons',
-    durability = 10,
-	-- pos = { x = 0, y = 0 },
-	config = {
-		extra = {
-			repetitions = 2,
-		},
-    },
-	loc_vars = function(self, info_queue, module, card)
-		return { vars = { module.ability.extra.repetitions } }
-    end,
-    module_calculate = function (self, module, context, card)
-        if context.repetition and context.cardarea == G.play and next(SMODS.get_enhancements(context.other_card)) then
-            return {
-                repetitions = module.repetitions
-            }
-        end
-        if context.after then
-            Wormhole.tbp.change_durability(card, self.slot, -1)
-        end
-    end
-})
-
--- Uncategorized 2
-Wormhole.tbp.Module({
-	key = "uncat2", -- TODO: Replace name
-    slot = 'weapons',
-    durability = 4,
-	-- pos = { x = 0, y = 0 },
-	config = {
-		extra = {},
-    },
-	loc_vars = function(self, info_queue, module, card)
-		return { vars = {} }
-    end,
-    module_calculate = function (self, module, context, card)
-        if context.after then
-            local planet
-            for _, center in pairs(G.P_CENTER_POOLS.Planet) do
-                if center.config.hand_type == context.scoring_name then
-                    planet = center.key
-                    if planet then break end
-                end
-            end
-
-            if planet then
-                G.E_MANAGER:add_event(Event({
-                    func = function()
-                        SMODS.add_card{key = planet, edition = 'e_negative'}              
-                        return true
-                    end
-                }))
-                Wormhole.tbp.change_durability(card, self.slot, -1)
-            end
-        end
-    end
-})
-
--- Uncategorized 3
-Wormhole.tbp.Module({
-	key = "uncat3", -- TODO: Replace name
-    slot = 'weapons',
-    durability = 100,
-	-- pos = { x = 0, y = 0 },
-	config = {
-        extra = {
-            perma_mult = 1
-        },
-    },
-	loc_vars = function(self, info_queue, module, card)
-		return { vars = { module.ability.extra.perma_mult } }
-    end,
-    module_calculate = function (self, module, context, card)
-        if context.individual and context.cardarea == G.play then
-            context.other_card.ability.perma_mult = (context.other_card.ability.perma_mult or 0) + module.perma_mult
-            Wormhole.tbp.change_durability(card, self.slot, -1)
-            return { message = localize('k_upgrade_ex'), colour = G.C.MULT }
-        end
-    end
-})
-
--- Uncategorized 4
-Wormhole.tbp.Module({
-	key = "uncat4", -- TODO: Replace name
-    slot = 'shields',
-    durability = 4,
-	-- pos = { x = 0, y = 0 },
-	config = {
-		extra = {
-            money = 3
-        },
-    },
-	loc_vars = function(self, info_queue, module, card)
-		return { vars = { module.ability.extra.money } }
-    end,
-    module_calculate = function(self, module, context, card)
-        if context.wormhome_tbp_module_uninstall and context.card == card and context.module ~= self.slot and 
-        context.type == 'failed' then
-            Wormhole.tbp.change_durability(card, self.slot, -1)
-            return {
-                dollars = module.money
-            }
-        end
-    end
-})
-
--- THRUSTERS --
 
 -- Warp Drive
 Wormhole.tbp.Module({
@@ -1131,83 +1029,221 @@ Wormhole.tbp.Module({
     end
 })
 
--- Hyperlight Rotors
+-- Repeater Engine
 Wormhole.tbp.Module({
-	key = "hyperlight_rotors",
+	key = "repeater",
     slot = 'thrusters',
     durability = 10,
 	-- pos = { x = 0, y = 0 },
 	config = {
 		extra = {
-            xmult_per_slot = 1
-        },
+			repetitions = 2,
+		},
     },
 	loc_vars = function(self, info_queue, module, card)
-		local empty_slots = G.jokers and (G.jokers.config.card_limit - #G.jokers.cards) or 0
-		local current_xmult = 1 + (empty_slots * module.ability.extra.xmult_per_slot)
-		return { vars = { module.ability.extra.xmult_per_slot, current_xmult } }
+		return { vars = { module.ability.extra.repetitions } }
     end,
-    module_calculate = function(self, module, context, card)
-        if context.joker_main then
-            local empty_slots = G.jokers and (G.jokers.config.card_limit - #G.jokers.cards) or 0
-            if empty_slots > 0 then
-                return {
-					xmult = 1 + (empty_slots * module.xmult_per_slot),
-                    colour = G.C.MULT,
-                    message = localize{type='variable',key='a_xmult',vars={1 + (empty_slots * module.xmult_per_slot)}},
-                    card = card
-                }
+    module_calculate = function (self, module, context, card)
+        if context.repetition and context.cardarea == G.play and next(SMODS.get_enhancements(context.other_card)) then
+            return {
+                repetitions = module.repetitions
+            }
+        end
+        if context.after then
+            Wormhole.tbp.change_durability(card, self.slot, -1)
+        end
+    end
+})
+
+-- Anti-Matter Thrusters
+Wormhole.tbp.Module({
+	key = "antimatter",
+    slot = 'thrusters',
+    durability = 4,
+	-- pos = { x = 0, y = 0 },
+	config = {
+		extra = {},
+    },
+	loc_vars = function(self, info_queue, module, card)
+		return { vars = {} }
+    end,
+    module_calculate = function (self, module, context, card)
+        if context.after then
+            local planet
+            for _, center in pairs(G.P_CENTER_POOLS.Planet) do
+                if center.config.hand_type == context.scoring_name then
+                    planet = center.key
+                    if planet then break end
+                end
+            end
+
+            if planet then
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        SMODS.add_card{key = planet, edition = 'e_negative'}              
+                        return true
+                    end
+                }))
+                Wormhole.tbp.change_durability(card, self.slot, -1)
             end
         end
     end
 })
 
--- Resuited Thruster
-Wormhole.tbp.Module({
-	key = "resuited_thruster",
-    slot = 'thrusters',
-    durability = 25,
-	config = {
-		extra = {
-            chips = 10
-        },
-    },
-	loc_vars = function(self, info_queue, module, card)
-        local suit_name = Wormhole.tbp.get_resuited_thruster_suit()
-		local suit_plural = localize(suit_name, 'suits_plural')
-		local suit_color = G.C.SUITS[suit_name]
+-- -- Hyperlight Rotors
+-- Wormhole.tbp.Module({
+-- 	key = "hyperlight_rotors",
+--     slot = 'thrusters',
+--     durability = 10,
+-- 	-- pos = { x = 0, y = 0 },
+-- 	config = {
+-- 		extra = {
+--             xmult_per_slot = 1
+--         },
+--     },
+-- 	loc_vars = function(self, info_queue, module, card)
+-- 		local empty_slots = G.jokers and (G.jokers.config.card_limit - #G.jokers.cards) or 0
+-- 		local current_xmult = 1 + (empty_slots * module.ability.extra.xmult_per_slot)
+-- 		return { vars = { module.ability.extra.xmult_per_slot, current_xmult } }
+--     end,
+--     module_calculate = function(self, module, context, card)
+--         if context.joker_main then
+--             local empty_slots = G.jokers and (G.jokers.config.card_limit - #G.jokers.cards) or 0
+--             if empty_slots > 0 then
+--                 return {
+-- 					xmult = 1 + (empty_slots * module.xmult_per_slot),
+--                     colour = G.C.MULT,
+--                     message = localize{type='variable',key='a_xmult',vars={1 + (empty_slots * module.xmult_per_slot)}},
+--                     card = card
+--                 }
+--             end
+--         end
+--     end
+-- })
+
+-- -- Resuited Thruster
+-- Wormhole.tbp.Module({
+-- 	key = "resuited_thruster",
+--     slot = 'thrusters',
+--     durability = 25,
+-- 	config = {
+-- 		extra = {
+--             chips = 10
+--         },
+--     },
+-- 	loc_vars = function(self, info_queue, module, card)
+--         local suit_name = Wormhole.tbp.get_resuited_thruster_suit()
+-- 		local suit_plural = localize(suit_name, 'suits_plural')
+-- 		local suit_color = G.C.SUITS[suit_name]
 		
-		return { vars = { module.ability.extra.chips, suit_plural, colours = { suit_color } } }
-    end,
-    module_calculate = function(self, module, context, card)
-        local current_suit = Wormhole.tbp.get_resuited_thruster_suit()
+-- 		return { vars = { module.ability.extra.chips, suit_plural, colours = { suit_color } } }
+--     end,
+--     module_calculate = function(self, module, context, card)
+--         local current_suit = Wormhole.tbp.get_resuited_thruster_suit()
         
-        if context.individual and context.cardarea == G.play and context.other_card:is_suit(current_suit) then
-            Wormhole.tbp.change_durability(card, self.slot, -1)
-            return {
-                chips = module.chips,
-                card = card
-            }
-        end
-    end
-})
+--         if context.individual and context.cardarea == G.play and context.other_card:is_suit(current_suit) then
+--             Wormhole.tbp.change_durability(card, self.slot, -1)
+--             return {
+--                 chips = module.chips,
+--                 card = card
+--             }
+--         end
+--     end
+-- })
+
+-- UNCATEGORIZED --
+
+-- -- Uncategorized 3
+-- Wormhole.tbp.Module({
+-- 	key = "uncat3", 
+--     slot = 'weapons',
+--     durability = 100,
+-- 	-- pos = { x = 0, y = 0 },
+-- 	config = {
+--         extra = {
+--             perma_mult = 1
+--         },
+--     },
+-- 	loc_vars = function(self, info_queue, module, card)
+-- 		return { vars = { module.ability.extra.perma_mult } }
+--     end,
+--     module_calculate = function (self, module, context, card)
+--         if context.individual and context.cardarea == G.play then
+--             context.other_card.ability.perma_mult = (context.other_card.ability.perma_mult or 0) + module.perma_mult
+--             Wormhole.tbp.change_durability(card, self.slot, -1)
+--             return { message = localize('k_upgrade_ex'), colour = G.C.MULT }
+--         end
+--     end
+-- })
+
+-- -- Uncategorized 4
+-- Wormhole.tbp.Module({
+-- 	key = "uncat4", 
+--     slot = 'utility',
+--     durability = 4,
+-- 	-- pos = { x = 0, y = 0 },
+-- 	config = {
+-- 		extra = {
+--             money = 3
+--         },
+--     },
+-- 	loc_vars = function(self, info_queue, module, card)
+-- 		return { vars = { module.ability.extra.money } }
+--     end,
+--     module_calculate = function(self, module, context, card)
+--         if context.wormhome_tbp_module_uninstall and context.card == card and context.module ~= self.slot and 
+--         context.type == 'failed' then
+--             Wormhole.tbp.change_durability(card, self.slot, -1)
+--             return {
+--                 dollars = module.money
+--             }
+--         end
+--     end
+-- })
 
 ---- BOOSTERS ----
 
-local booster_module_create_card = function(self, card, i)
-    if i == 1 and not next(SMODS.find_card("j_worm_tbp_spaceship")) then
-        G.E_MANAGER:add_event(Event({
-            func = function()
-                SMODS.add_card { key = "j_worm_tbp_spaceship" }
-                return true
+local booster_module_create_card = function(self, booster, i)
+    booster.ability.tbp_current_modules = booster.ability.tbp_current_modules or {
+        core = true,
+        weapons = true,
+        thrusters = true,
+        utility = true
+    }
+    if i == 1 then
+        if not next(SMODS.find_card("j_worm_tbp_spaceship")) then
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    SMODS.add_card { key = "j_worm_tbp_spaceship" }
+                    return true
+                end
+            }))
+        else
+            local ship = SMODS.find_card("j_worm_tbp_spaceship")[1]
+            local equipped = Wormhole.tbp.get_equipped_modules(ship)
+            for mtype, _ in pairs(equipped or {}) do
+                booster.ability.tbp_current_modules[mtype] = nil
             end
-        }))
+        end
     end
-    return SMODS.create_card({
+    
+    local attributes = {}
+    for mtype, _ in pairs(booster.ability.tbp_current_modules) do
+        attributes[#attributes + 1] = "worm_tbp_" .. mtype
+    end
+    attributes = #attributes > 0 and #attributes < 4 and attributes or nil
+
+    local created_card = SMODS.create_card({
         set = "tbp_module",
         skip_materialize = true,
-        key_append = "worm_tbp_module_booster"
+        key_append = "worm_tbp_module_booster",
+        attributes = attributes,
+        union = true
     })
+
+    if created_card.config.center.slot then booster.ability.tbp_current_modules[created_card.config.center.slot] = nil end
+
+    return created_card
 end
 
 local booster_loc_vars = function(self, info_queue, card)

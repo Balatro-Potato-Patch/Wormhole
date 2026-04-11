@@ -76,7 +76,7 @@ function Game.init_game_object(self)
                 x = 1,
                 y = 0
             }),
-        shields = Sprite(0, 0, self.CARD_W, self.CARD_W,
+        utility = Sprite(0, 0, self.CARD_W, self.CARD_W,
             G.ASSET_ATLAS["worm_tbp_icons_cards"], {
                 x = 3,
                 y = 0
@@ -104,7 +104,7 @@ function Game.init_game_object(self)
                 x = 2,
                 y = 0
             }),
-        shields = Sprite(0, 0, self.CARD_W, self.CARD_W,
+        utility = Sprite(0, 0, self.CARD_W, self.CARD_W,
             G.ASSET_ATLAS["worm_tbp_module_frame"], {
                 x = 3,
                 y = 0
