@@ -19,6 +19,18 @@ elseif _c.set == 'tbp_module' then
     desc_nodes.module_info = _c.module_info
 '''
 
+# small ship thing
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "self.discard = CardArea("
+position = "before"
+match_indent = true
+payload = '''
+self.worm_tbp_sprites = self.worm_tbp_sprites or {}
+G.worm_tbp_sprites['small_ship'] = SMODS.create_sprite(0,0,G.CARD_W,G.CARD_H,"worm_tbp_small_ship", {x=0,y=0})
+'''
+
 # Add module info_boxes
 [[patches]]
 [patches.pattern]

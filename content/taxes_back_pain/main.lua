@@ -74,6 +74,15 @@ SMODS.Atlas {
     py = 95
 }
 
+SMODS.Atlas {
+    key = "tbp_small_ship",
+    atlas_table = 'ANIMATION_ATLAS',
+    path = "taxes_back_pain/small_ship.png",
+    px = 121,
+    py = 95,
+    frames = 64,
+}
+
 PotatoPatchUtils.Team({
     name = 'tbp',
     loc = true,
@@ -143,6 +152,21 @@ SMODS.DrawStep{
             self.children.center:draw_shader("worm_torn", nil, self.ARGS.send_to_shader)
             if self.children.front and not self:should_hide_front() then
                 self.children.front:draw_shader("worm_torn", nil, self.ARGS.send_to_shader)
+            end
+        end
+    end,
+    conditions = { vortex = false, facing = 'front' },
+}
+
+SMODS.DrawStep{
+    key = 'small_ship',
+    order = 21,
+    func = function(self, layer)
+        if not SMODS.find_card("j_worm_tbp_spaceship")[1] then
+            if self.config.center.kind == "worm_tbp_module" and G.worm_tbp_sprites then
+                G.worm_tbp_sprites['small_ship'].role.draw_major = self
+                -- Current offset may look werid sometimes
+                G.worm_tbp_sprites['small_ship']:draw_shader('dissolve', nil, nil, nil, self.children.center, nil, nil, -0.9) 
             end
         end
     end,
