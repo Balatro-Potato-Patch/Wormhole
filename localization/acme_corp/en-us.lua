@@ -53,6 +53,23 @@ return {
                     'by {C:attention}1 Level'
                 }
             },
+            c_worm_acme_hammer = {
+                name = 'ACME Sure-Hit Anvil Cracker',
+                text = {
+                    '{X:attention,C:white}After{} using {C:tarot}Strength',
+                    '{X:attention,C:white}Use{} to {C:attention}flatten{} the',
+                    'rank of {C:attention}#1#{} selected {C:attention}Cards',
+                    'to the {C:attention}lowest{} selected Rank'
+                }
+            },
+            c_worm_acme_hammer_alt = {
+                name = 'ACME Sure-Hit Anvil Cracker',
+                text = {
+                    '{C:attention}Flatten{} the rank',
+                    'of {C:attention}#1#{} selected {C:attention}Cards',
+                    'to the {C:attention}lowest{} selected Rank'
+                }
+            },
             c_worm_acme_trash = {
                 name = 'ACME Accumulated Resources and Detritus',
                 text = {
