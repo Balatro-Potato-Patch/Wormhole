@@ -1,7 +1,7 @@
 local menthol = not not next(SMODS.find_mod("Menthol"))
 
 SMODS.JimboQuip{
-    key = "mrrp_"..(menthol and "" or "no_").."menthol",
+    key = "mrrp_menthol",
     extra = {
         text_key = "menthol",
         materialize_colours = {
@@ -11,8 +11,10 @@ SMODS.JimboQuip{
     },
     filter = function (self, quip_type)
         local key = "menthol"
+        local center = "j_minty_minty"
         if not menthol then
             key = "no_"..key
+            center = "j_lucky_cat"
         end
 
         if quip_type == "win" then
@@ -36,8 +38,9 @@ SMODS.JimboQuip{
 
         key = "worm_mrrp_"..key
 
-        --print(key)
+        print(key)
         self.extra.text_key = key
-        return not not G.localization.misc.quips[key]
+        self.extra.center = center
+        return not not G.localization.misc.quips[key], G.testdebuglol and {weight=10000} or nil
     end
 }
