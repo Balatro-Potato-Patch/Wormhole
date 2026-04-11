@@ -1,15 +1,37 @@
--- PLACEHOLDER ART ATLAS
 SMODS.Atlas {
-    key = "placeholder",
+    key = "joker",
     px = 71,
     py = 95,
-    path = "Hedonia/sungwon.png"
+    path = "Hedonia/jokers.png"
+}
+
+SMODS.Joker {
+    key = "hedonia_casino",
+    atlas = "joker",
+    pos = {x = 0, y = 0},
+    rarity = 3,
+    cost = 6,
+    blueprint_compat = false,
+    pools = {
+        Bartender = true
+    },
+    config = { extra = {
+        items = 1
+    }},
+    loc_vars = function(self,info_queue,center)
+        return {vars = {center.ability.extra.items}}
+    end,
+    calculate = function(self, card, context)
+        if context.individual and context.other_card.lucky_trigger then --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/jokers.lua#L2586
+            SMODS.create_card{set = "worm_hedonia_menu"}
+        end
+    end
 }
 
 SMODS.Joker {
     key = "hedonia_trash",
-    atlas = "placeholder",
-    pos = {x = 0, y = 0},
+    atlas = "joker",
+    pos = {x = 0, y = 1},
     rarity = 3,
     cost = 6,
     blueprint_compat = false,
@@ -19,10 +41,10 @@ SMODS.Joker {
     loc_vars = function(self,info_queue,center)
         return {vars = {center.ability.extra.copied}}
     end,
-    calculate = function(self, card, context)
+    calculate = function(self, card, context) --used a lot of pinkprint for this https://github.com/EremelMods/Ortalab/blob/main/objects/jokers/pinkprint.lua
         if context.joker_type_destroyed or context.selling_card then
-            if context.card.ability_UIBox_table.card_type == 'Joker' then
-                card.ability.extra.copied[#card.ability.extra.copied+1] = context.card
+            if context.card.ability.set == 'Joker' then
+                card.ability.extra.copied[#card.ability.extra.copied+1] = context.card.ability
             end
         end
         if context.joker_main then
@@ -33,6 +55,7 @@ SMODS.Joker {
         --when scoring
             --for each item in list
                 --trigger blueprint func
+        --when end of round
             --empty list
     end
 }
