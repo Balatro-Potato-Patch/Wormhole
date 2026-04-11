@@ -635,7 +635,7 @@ SMODS.Joker{
 	loc_txt = {
 		name = "Diamonds in the Sky",
 		text = {
-			"First {C:attention}#1#{} scored {V:1}Diamond{} card",
+			"First {C:attention}#1#{} scored {V:1}Diamond{} cards",
 			"in {C:attention}first{} played hand become {C:purple}Negative{}"
 		}
 	},
@@ -756,7 +756,7 @@ SMODS.Blind{
 		text = {
 			"Decrease level of all",
 			"poker hands by 1",
-			"{s:0.8}Created by Team {s:0.8,V:1}People Found In Vegas{}",
+			"{s:0.8}Created by team {s:0.8,V:1}People Found In Vegas{}",
 			"{s:0.8}Code & Art by {s:0.8,C:chips}Ben Roffey{}"
 		}
 	},
@@ -771,7 +771,10 @@ SMODS.Blind{
 	ppu_coder = {"Ben Roffey"},
 	ppu_artist = {"Ben Roffey"},
 	loc_vars = function()
-		return { colours = {HEX("73fdff")}, vars = { }}
+		return { vars = {colours = {HEX("73fdff")}}}
+	end,
+	collection_loc_vars = function(self)
+		return { vars = {colours = {HEX("73fdff")}}}
 	end,
 	calculate = function(self, blind, context)
 		if context.before then
@@ -972,14 +975,6 @@ heatdeath_timer = function(heatdeath)
 					
 				end
 
-				--[[ 
-				if heatdeath.config.extra.current == 15 then
-					print(inspect(G.GAME.blind.children.animatedSprite.T))
-					G.GAME.blind.children.animatedSprite.T.x = G.SETTINGS.WINDOW.DISPLAYS[G.SETTINGS.WINDOW.selected_display].screen_res.w/2
-					G.GAME.blind.children.animatedSprite.T.y = G.SETTINGS.WINDOW.DISPLAYS[G.SETTINGS.WINDOW.selected_display].screen_res.h/2
-				end
-				]]
-
 				if heatdeath.config.extra.current <= 10 and heatdeath.config.extra.current > 0 then
 					local minutes = math.floor(heatdeath.config.extra.current/60)
 					local seconds = heatdeath.config.extra.current - minutes*60
@@ -1126,7 +1121,7 @@ SMODS.Blind{
 		name = "Heat Death",
 		text = {
 			"{E:worm_vegas_timer}#1#:#2#",
-			"{s:0.8}Created by Team {s:0.8,V:1}People Found In Vegas{}",
+			"{s:0.8}Created by team {s:0.8,V:1}People Found In Vegas{}",
 			"{s:0.8}Code & Art by {s:0.8,C:chips}Ben Roffey{}"
 		}
 	},
@@ -1454,7 +1449,7 @@ SMODS.Back {
             "Start with {C:chips}Banner{},",
 			"and {C:blue}Planet Merchant{}",
 			"Hands start at level {C:attention}0",
-			"{s:0.8}Created by Team {s:0.8,C:money}People Found In Vegas{}",
+			"{s:0.8}Created by team {s:0.8,C:money}People Found In Vegas{}",
 			"{s:0.8}Code & Art by {s:0.8,C:green}Jammbo{}"
         }
     },
