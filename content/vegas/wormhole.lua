@@ -726,7 +726,7 @@ SMODS.Joker{
 	loc_txt = {
 		name = "The Big Blip",
 		text = {
-			"At the end of a game save your seed and start another run with prior knowlage of cards to come.(Sell if you dont want this effect)."
+			"At the end of a game save your seed and start another run with prior knowlage of cards to come."
 		}
 	},
 	config = { extra = {  }},
@@ -736,14 +736,14 @@ SMODS.Joker{
 	atlas = "vegas_jokers",
 	pos = {x = 1, y = 2},
 	rarity = 1,
-	cost = 5,
+	cost = 15,
 	blueprint_compat = false,
 	discovered = true,
 	eternal_compat = false,
 	perishable_compat = False,
 	ppu_team = {"People Found In Vegas"},
-	ppu_coder = {"Sn0vvBa11"},
-	ppu_artist = {"Sn0vvBa11"},
+	ppu_coder = {"Sn0vvBall"},
+	ppu_artist = {"Sn0vvBall"},
 	calculate = function(self, card, context)
 		local GameSeed = G.GAME.pseudorandom.seed
 		local GameStake = G.GAME.stake
@@ -753,6 +753,44 @@ SMODS.Joker{
         end
 	end
 }
+
+SMODS.Joker{
+	key = "BigBang",
+	loc_txt = {
+		name = "BigBang ",
+		text = {
+			"Sell {X:red,C:white}X#1#{} more jokers too store enough compacted energy to create a legendary joker"
+		}
+	},
+	config = { extra = {JokerCount = 0, JokerNeed = 20}},
+	loc_vars = function(self, info_queue, card)
+		return { vars = {card.ability.extra.JokerNeed}}
+	end,
+	atlas = "vegas_jokers",
+	pos = {x = 2, y = 2},
+	rarity = 1,
+	cost = 5,
+	blueprint_compat = true,
+	discovered = true,
+	eternal_compat = true,
+	perishable_compat = true,
+	ppu_team = {"People Found In Vegas"},
+	ppu_coder = {"Sn0vvBall"},
+	ppu_artist = {"Sn0vvBall"},
+	calculate = function(self, card, context)
+		if context.selling_card and context.card == 'Joker' then
+			card.ability.extra.JokerCount = card.ability.extra.JokerCount + 1
+			if card.ability.extra.JokerCount == 15 then
+				SMODS.add_card({ set = 'Joker', legendary = true })
+                check_for_unlock { type = 'spawn_legendary' }
+                card:juice_up(0.3, 0.5) 
+			end
+		card.ability.extra.JokerNeed = 15 - card.ability.extra.JokerCount
+		end
+	end
+}
+
+
 --[[
 SMODS.Joker{
 	key = "template",
