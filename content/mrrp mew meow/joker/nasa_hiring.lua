@@ -15,32 +15,38 @@ SMODS.Joker {
         "joker"
     },
 
-	config = {extra = {edition="e_negative", sticker="rental"}},
+	config = {
+        extra = {
+            edition="e_negative",
+            odds = 20
+        }
+    },
 	loc_vars = function (self, info_queue, card)
+        local luck, odds = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, "worm_mrrp_nasa", false)
         if not (card.edition and card.edition.negative) then
             info_queue[#info_queue+1] = G.P_CENTERS.e_negative
-        end
-        if not (card.ability and card.ability.rental) then
-            info_queue[#info_queue+1] = { set = "Other", key = "rental", specific_vars = { G.GAME.rental_rate or 3 } }
         end
 		return {
 			vars = {
 				localize({type='name_text', set="Edition", key=card.ability.extra.edition}),
-				localize({type='name_text', set="Other", key=card.ability.extra.sticker}),
+                luck, odds
 			}
 		}
 	end,
 
 	calculate = function(self, card, context)
 		if context.setting_blind then
-            SMODS.add_card{
-                attributes = {"space"},
-                edition = card.ability.extra.edition,
-                stickers = {
-                    card.ability.extra.sticker
-                },
-                force_stickers = true
-            }
+            local negative = SMODS.pseudorandom_probability(card, "worm_mrrp_nasa", 1, card.ability.extra.odds)
+            if negative or #G.jokers.cards + (G.GAME.joker_buffer or 0) < G.jokers.config.card_limit then
+                SMODS.add_card{
+                    attributes = {"space"},
+                    edition = card.ability.extra.edition,
+                    stickers = {
+                        card.ability.extra.sticker
+                    },
+                    force_stickers = true
+                }
+            end
         end
 	end
 }

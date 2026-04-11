@@ -28,7 +28,7 @@ SMODS.Joker {
 	end,
 
 	calculate = function(self, card, context)
-		if context.before and #G.consumeables.cards + (G.consumeable_buffer or 0) < G.consumeables.config.card_limit then
+		if context.before and #G.consumeables.cards + (G.GAME.consumeable_buffer or 0) < G.consumeables.config.card_limit then
             local jack, queen
             for i,v in ipairs(context.scoring_hand) do
                 if v:get_id() == SMODS.Ranks.Jack.id then jack = true end
@@ -40,10 +40,10 @@ SMODS.Joker {
                 return {
                     message = localize("k_plus_planet"),
                     func = function ()
-                        G.consumeable_buffer = (G.consumeable_buffer or 0) + 1
+                        G.GAME.consumeable_buffer = (G.GAME.consumeable_buffer or 0) + 1
                         G.E_MANAGER:add_event(Event{
                             func = function ()
-                                G.consumeable_buffer = G.consumeable_buffer - 1
+                                G.GAME.consumeable_buffer = G.GAME.consumeable_buffer - 1
                                 SMODS.add_card{
                                     set = "Planet"
                                 }

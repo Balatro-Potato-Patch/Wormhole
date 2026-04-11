@@ -72,8 +72,10 @@ descriptions={
 				"NASA's Exploration Team"
 			, text={
 				"When {C:attention}Blind{} is selected,",
-				"create a {C:dark_edition}#1#{}",
-				"{C:money}#2#{} {C:attention}Space{} Joker",
+				"create a {C:attention}Space{} Joker",
+				"Created Joker has {C:green}#2# in #3#{}",
+				"chance to be {C:dark_edition}Negative{}",
+				"{C:inactive}(otherwise must have room){}"
 			}
 		},
 		j_worm_orrery ={
