@@ -138,6 +138,15 @@ descriptions={
 				"{C:inactive}(Must have room)"
 			}
 		},
+		j_worm_cats_eye_nebula = {
+			name = "Cat's Eye Nebula",
+			text = {
+				"{C:chips}+#1#{} Chips",
+				"{C:chips}-#2#{} for each card scored",
+				"Upon expiration, level up",
+				"all hands by {C:attention}#3#{}"
+			}
+		}
 	},
 	Stake={
 		stake_worm_cosmic ={
@@ -234,7 +243,8 @@ misc={
 	},
 	dictionary={
 	--	k_downgrade_ex = "Downgrade!",
-		k_make_a_wish_ex = "Make a wish!"
+		k_make_a_wish_ex = "Make a wish!",
+		k_flaring = "Flaring..."
 	},
 },
 }
