@@ -35,9 +35,9 @@ SMODS.Joker {
     end,
     remove_from_deck = function (self, card, from_debuff)
         local amt = card.ability.immutable.slots
-        G.jokers:change_size(amt)
-        G.consumeables:change_size(amt)
-        G.hand:change_size(amt)
+        G.jokers:change_size(-amt)
+        G.consumeables:change_size(-amt)
+        G.hand:change_size(-amt)
 
         card.ability.immutable.slots = nil
     end,
