@@ -37,7 +37,10 @@ return {
                 }
             },
             j_worm_event_horizon = {
-                name = "Event Horizon",
+                name = {
+                    "Event Horizon",
+                    "{s:0.5}(Reach for the Sun and Burn! Burn! Burn!)"
+                },
                 text = {
                     "This Joker interrupts all",
                     "hand {C:attention}level-ups{} and redirects",

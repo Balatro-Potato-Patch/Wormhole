@@ -2,11 +2,12 @@ if not Wormhole.COLON_THREE or not Wormhole.COLON_THREE.loaded then return end
 
 SMODS.Joker {
     key = "event_horizon",
-    --atlas = "ct_jokers",
-    --pos = { x = 0, y = 0 },
+    atlas = "ct_jokers",
+    pos = { x = 2, y = 0 },
     config = { extra = { levels = 0, rotation = 0 } },
     attributes = { "space", "hand_type" },
     ppu_coder = { "meta" },
+    ppu_artist = { "notmario" },
     ppu_team = { ":3" },
     rarity = 1,
     cost = 5,
