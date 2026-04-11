@@ -128,18 +128,18 @@ return {
                     "It {C:attention}permanently{} gains a retrigger"
                 },
             },
-            j_worm_euda_extraterr = {
-                name = "",
+            j_worm_euda_extraevidence = {
+                name = "Extraterrestrial Evidence",
                 text = {
-                    "Debuffs all but the first scoring card",
+                    "Debuffs all but the {C:attention}first{} scoring card",
                     "Retrigger the first card for",
-                    "every other unique rank scored"
+                    "every other {C:attention}unique{} rank scored"
                 }
             },
             j_worm_euda_cometwild = {
                 name = "Comet Wild",
                 text = {
-                    "{C:attention}Wild{} cards can't debuff and",
+                    "{C:attention}Wild{} cards can't be debuffed and",
                     "give {X:mult,C:white}x#1#{} Mult when scored"
                 },
             },
