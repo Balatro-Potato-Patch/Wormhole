@@ -114,9 +114,9 @@ return {
 
 
 
-        ---JOKERS---
-        ------------
-        ---JOKERS---
+        ---VOUCHERS---
+        --------------
+        ---VOUCHERS---
         
         Voucher = {
 
