@@ -9,16 +9,28 @@ SMODS.Atlas { key = "mrrp_j",
 
 SMODS.Joker {
 	key = 'NAME',
-	atlas = "mrrp", pos = {x=X, y=Y},
+	atlas = "mrrp",
+	pos = {
+		x=4,
+		y=5
+	},
 	rarity = R,
 	cost = C,
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable_compat = true,
 
-	config = {extra = {money = 40}},
+	config = {
+		extra = {
+			money = 40
+		}
+	},
 	loc_vars = function (self, info_queue, card)
-		return {vars = {card.ability.extra.money}}
+		return {
+			vars = {
+				card.ability.extra.money
+			}
+		}
 	end,
 
 	calculate = function(self, card, context)
