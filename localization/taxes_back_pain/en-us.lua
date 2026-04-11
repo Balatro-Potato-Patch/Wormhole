@@ -10,7 +10,7 @@ local other_loc_table = {
             tbp_module_weapons = 'WEAPON',
             tbp_module_core = 'CORE',
             tbp_module_thrusters = 'THRUSTERS',
-            tbp_module_shields = 'UTILITY'
+            tbp_module_utility = 'UTILITY'
         }
     },
     descriptions = {

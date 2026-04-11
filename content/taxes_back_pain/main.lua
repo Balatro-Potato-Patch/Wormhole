@@ -232,7 +232,7 @@ Wormhole.tbp.module_colours = {
     weapons = HEX('fd5f55'),
     core = HEX('5559fd'),
     thrusters = HEX('6dec66'),
-    shields = HEX('edeb65')
+    utility = HEX('edeb65')
 }
 
 SMODS.Joker({
@@ -246,21 +246,21 @@ SMODS.Joker({
 	eternal_compat = false,
 	perishable_compat = false,
     ppu_team = {'tbp'},
-    module_types = {'core', 'weapons', 'thrusters', 'shields'}, -- TODO: add actual module slots here
+    module_types = {'core', 'weapons', 'thrusters', 'utility'}, -- TODO: add actual module slots here
     config = {
-        card_limit = 1,
+        extra_slots_used = -1,
         extra = {
             modules = { -- TODO: add actual module slots here
                 core = {},
                 weapons = {},
                 thrusters = {},
-                shields = {}
+                utility = {}
             }
         },
     },
 	loc_vars = function(self, info_queue, card)
         if not card.fake_card then
-            info_queue[#info_queue + 1] = G.P_CENTERS["p_worm_module_normal_1"] -- TODO: Change to poll winner
+            info_queue[#info_queue + 1] = G.P_CENTERS["p_worm_module_jumbo_1"]
             for _, v in ipairs(self.module_types) do
                 if card.ability.extra.modules[v].key and (G.P_CENTERS[card.ability.extra.modules[v].key] or {}).loc_vars then
                     local vars = G.P_CENTERS[card.ability.extra.modules[v].key]:loc_vars(info_queue, {ability = { extra = card.ability.extra.modules[v] } }, card).vars
@@ -276,7 +276,7 @@ SMODS.Joker({
         return {
             vars = {
                 colours = {modules and G.ARGS.LOC_COLOURS.inactive or G.C.UI.TEXT_DARK, modules and mix_colours(G.ARGS.LOC_COLOURS.inactive, G.ARGS.LOC_COLOURS.attention, 0.65) or G.ARGS.LOC_COLOURS.attention},
-                localize{type = 'name_text', set = 'Other', key = 'p_worm_module_normal_1'} -- TODO: Change to poll winner
+                localize{type = 'name_text', set = 'Other', key = 'p_worm_module_jumbo_1'}
             }
         }
     end,
@@ -333,6 +333,9 @@ SMODS.Joker({
 		if next(SMODS.find_card("j_worm_tbp_spaceship")) then
             G.E_MANAGER:add_event(Event({
                 func = function()
+                    if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+                        SMODS.add_card{ set = "tbp_module" }
+                    end
                     card:remove()
                     return true
                 end
@@ -471,7 +474,7 @@ SMODS.ConsumableType {
 ---@field module_calculate? fun(self: Wormhole.tbp.Module|table, module: table, context: CalcContext|table, card?: Card|table): table?, boolean?
 ---@field loc_vars? fun(self: Wormhole.tbp.Module|table, info_queue: table, module: table, card?: Card|table): table?
 ---@field durability number
----@field slot 'core'|'weapons'|'shields'|'thrusters'
+---@field slot 'core'|'weapons'|'utility'|'thrusters'
 ---@overload fun(self: Wormhole.tbp.Module): Wormhole.tbp.Module
 Wormhole.tbp.Module = setmetatable({}, {
     __call = function(self)
@@ -479,6 +482,11 @@ Wormhole.tbp.Module = setmetatable({}, {
     end
 })
 
+for _, key in ipairs({'core', 'weapons', 'thrusters', 'utility'}) do
+    SMODS.Attribute {
+        key = "worm_tbp_"..key,
+    }
+end
 
 Wormhole.tbp.Module = SMODS.Consumable:extend{
     required_params = {
@@ -496,7 +504,9 @@ Wormhole.tbp.Module = SMODS.Consumable:extend{
     pre_inject_class = function(self, func)
         for _, obj in pairs(self.obj_table) do
             if obj.set == 'tbp_module' then
-                obj.ppu_team = obj.ppu_team or {'tbp'}
+                obj.ppu_team = obj.ppu_team or { 'tbp' }
+                obj.attributes = obj.attributes or {}
+                if obj.slot then table.insert(obj.attributes, "worm_tbp_".. obj.slot) end
             end
         end
     end,
@@ -841,7 +851,7 @@ Wormhole.tbp.Module({
 
 Wormhole.tbp.Module({
 	key = "hardlight",
-    slot = 'shields', -- TODO: Maybe replace this with utility
+    slot = 'utility', 
     durability = 5,
     atlas = "tbp_module",
 	pos = { x = 0, y = 0 },
@@ -865,7 +875,7 @@ Wormhole.tbp.Module({
 
 Wormhole.tbp.Module({
 	key = "quantum",
-    slot = 'shields', -- TODO: Maybe replace this with utility
+    slot = 'utility', 
     durability = 5,
 	-- pos = { x = 0, y = 0 },
 	config = {
@@ -892,7 +902,7 @@ Wormhole.tbp.Module({
 
 Wormhole.tbp.Module({
 	key = "interference",
-    slot = 'shields', -- TODO: Maybe replace this with utility
+    slot = 'utility', 
     durability = 1,
 	-- pos = { x = 0, y = 0 },
 	config = {
@@ -919,7 +929,7 @@ Wormhole.tbp.Module({
 
 Wormhole.tbp.Module({
 	key = "redundancy",
-    slot = 'shields', -- TODO: Maybe replace this with utility
+    slot = 'utility', 
     durability = 5,
 	-- pos = { x = 0, y = 0 },
 	config = {
@@ -1163,7 +1173,7 @@ Wormhole.tbp.Module({
 -- -- Uncategorized 4
 -- Wormhole.tbp.Module({
 -- 	key = "uncat4", 
---     slot = 'shields',
+--     slot = 'utility',
 --     durability = 4,
 -- 	-- pos = { x = 0, y = 0 },
 -- 	config = {
@@ -1187,20 +1197,47 @@ Wormhole.tbp.Module({
 
 ---- BOOSTERS ----
 
-local booster_module_create_card = function(self, card, i)
-    if i == 1 and not next(SMODS.find_card("j_worm_tbp_spaceship")) then
-        G.E_MANAGER:add_event(Event({
-            func = function()
-                SMODS.add_card { key = "j_worm_tbp_spaceship" }
-                return true
+local booster_module_create_card = function(self, booster, i)
+    booster.ability.tbp_current_modules = booster.ability.tbp_current_modules or {
+        core = true,
+        weapons = true,
+        thrusters = true,
+        utility = true
+    }
+    if i == 1 then
+        if not next(SMODS.find_card("j_worm_tbp_spaceship")) then
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    SMODS.add_card { key = "j_worm_tbp_spaceship" }
+                    return true
+                end
+            }))
+        else
+            local ship = SMODS.find_card("j_worm_tbp_spaceship")[1]
+            local equipped = Wormhole.tbp.get_equipped_modules(ship)
+            for mtype, _ in pairs(equipped or {}) do
+                booster.ability.tbp_current_modules[mtype] = nil
             end
-        }))
+        end
     end
-    return SMODS.create_card({
+    
+    local attributes = {}
+    for mtype, _ in pairs(booster.ability.tbp_current_modules) do
+        attributes[#attributes + 1] = "worm_tbp_" .. mtype
+    end
+    attributes = #attributes > 0 and #attributes < 4 and attributes or nil
+
+    local created_card = SMODS.create_card({
         set = "tbp_module",
         skip_materialize = true,
-        key_append = "worm_tbp_module_booster"
+        key_append = "worm_tbp_module_booster",
+        attributes = attributes,
+        union = true
     })
+
+    if created_card.config.center.slot then booster.ability.tbp_current_modules[created_card.config.center.slot] = nil end
+
+    return created_card
 end
 
 local booster_loc_vars = function(self, info_queue, card)
