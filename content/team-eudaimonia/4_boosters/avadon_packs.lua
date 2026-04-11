@@ -7,7 +7,7 @@ SMODS.Atlas {
 
 SMODS.Sound{
     key = "euda_music_avadon",
-    path = "music_avadon.ogg",
+    path = "team-eudaimonia/music_avadon.ogg",
     volume = 2.3,
     select_music_track = function(self)
         local booster = G.pack_cards and G.pack_cards.cards and SMODS.OPENED_BOOSTER

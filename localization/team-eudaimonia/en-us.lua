@@ -143,26 +143,6 @@ return {
                     "give {X:mult,C:white}x#1#{} Mult when scored"
                 },
             },
-            j_worm_euda_rocket = {
-                name = "Space Shuttle",
-                text = {
-                    "{C:red}+#1#{} Mult?",
-                    "{C:inactive}(Blast off in: #3#)"
-                },
-            },
-			j_worm_euda_rocket_a = {
-                name = "Space Shuttle",
-                text = {
-					{
-                    "{C:red}+#1#{} Mult",
-					},
-					{
-					"Increase Mult by {C:red}#2#{}",
-					"if the {C:attention}scored hand{} isn't",
-					"the most played {C:attention}poker hand"
-					},
-                },
-            },
 			j_worm_euda_bitflip = {
                 name = "Cosmic Bitflip",
                 text = {
