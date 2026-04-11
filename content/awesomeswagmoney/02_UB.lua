@@ -170,7 +170,7 @@ SMODS.Consumable {
         return { vars = { card.ability.extra.copies, card.ability.extra.reduction }}
     end,
     can_use = function (self, card)
-        return G.hand.highlighted[1] and not G.hand.highlighted[2]
+        return #G.hand.highlighted == 1
     end,
     use = function (self, card, area, copier)
         G.E_MANAGER:add_event(Event({
