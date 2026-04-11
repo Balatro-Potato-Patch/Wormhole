@@ -199,17 +199,6 @@ return {
             }, 
 
         },
-        Planet = {
-            c_worm_euda_bigear = {
-                name = "Big Ear",
-                text = {
-                    "({V:1}lvl.#1#{}/{V:2}#2#{}) Level up",
-                    "{C:attention}#3#",
-                    "{C:mult}+#4#{}/{C:mult}#5#{} Mult and",
-                    "{C:chips}+#6#{} chips",
-                },
-            }
-        },
         euda_Fate = {
             c_worm_euda_crunch = {
                 name = {"Big Crunch"},
