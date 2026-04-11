@@ -7,6 +7,42 @@ PotatoPatchUtils.Developer({team="BalatrosAPalindrome",name="IzzyWizz"})
 PotatoPatchUtils.Developer({team="BalatrosAPalindrome",name="Knightingale0"})
 
 
+-- sendDebugMessage("MOD LOADED")
+
+-- SMODS.Consumable {
+--     key = 'bap_test',
+--     set = 'Tarot',
+--     loc_txt = {
+--         name = 'Test',
+--         text = {'Works'}
+--     },
+--     pos = {x=0,y=0}
+-- }
+
+-- G.E_MANAGER:add_event(Event({
+--     trigger = 'after',
+--     delay = 0.1,
+--     func = function()
+--         sendDebugMessage("POST INIT CENTER:", tostring(G.P_CENTERS["c_bap_test"]))
+--         return true
+--     end
+-- }))
+
+-- G.E_MANAGER:add_event(Event({
+--     trigger = 'after',
+--     delay = 0.5,
+--     func = function()
+--         for k, v in pairs(G.P_CENTERS) do
+--             if string.find(k, "bap") then
+--                 sendDebugMessage("FOUND CENTER:", k)
+--             end
+--         end
+--         return true
+--     end
+-- }))
+
+
+
 SMODS.Atlas {
 	-- Key for code to find it with
 	key = "Palindrome",
@@ -18,31 +54,7 @@ SMODS.Atlas {
 	py = 95
 }
 
--- Nothing planet card
-SMODS.Consumable {
-    key = "nothing",
-    loc_txt = {
-		name = 'Nothing',
-		text = {
-			"UNFINISHED",
-		}
-	},
-    set = "Planet",
-    cost = 3,
-    pos = { x = 0, y = 0 },
-    config = { anim_time = 0 },
-    can_use = function(self, card) return true end,
-    keep_on_use = function(self, card) return true end,
-    use = function(self, card, area, copier)
-		SMODS.add_card({ area = G.consumeables, key = 'bap_abyss' })
-
-	end,
-    update = function(self, card, dt)
-        self.config.anim_time = self.config.anim_time + dt
-        self.pos.x = math.sin(self.config.anim_time) * 0.5 + 0.5
-		self.pos.y = math.cos(self.config.anim_time) * 0.5 + 0.5
-    end
-}
+sendDebugMessage("before enhancement")
 
 SMODS.Enhancement {
     key = 'bap_void',
@@ -56,64 +68,116 @@ SMODS.Enhancement {
     atlas = 'Palindrome',
     pos = { x = 1, y = 0 },
     config = { bonus = -25, h_chips = -25 },
-	always_scores = true,
+	--always_scores = true,
 	loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.bonus, card.ability.h_chips } }
+        local ability = card and card.ability or self.config
+    	return { vars = { ability.bonus, ability.h_chips } }
     end,
-	set_ability = function(self, card, initial, delay_sprites) end
+	--set_ability = function(self, card, initial, delay_sprites) end
 }
+
+
+sendDebugMessage("before abyss")
 
 -- The Abyss
 SMODS.Consumable {
-    key = 'bap_abyss',
+	key = 'bap_abyss',
 	loc_txt = {
-        name = 'The Abyss',
+		name = 'The Abyss',
 		text = {
 			"Gives {C:money}$#1#{} and",
 			"creates {C:attention}#2#{} random {C:attention}Void cards{}",
 		}
-    },
-    set = 'Tarot',
+	},
+	set = 'Tarot',
 	atlas = 'Palindrome',
-    pos = { x = 2, y = 0 },
-    config = { extra = { money = 10, cards = 5 } },
-    loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.money, card.ability.extra.cards } }
-    end,
-    use = function(self, card, area, copier)
+	pos = { x = 2, y = 0 },
+	config = { extra = { money = 10, cards = 5 } },
+	loc_vars = function(self, info_queue, card)
+		return { vars = { card.ability.extra.money, card.ability.extra.cards } }
+	end,
+	use = function(self, card, area, copier)
 		-- give money
 		G.E_MANAGER:add_event(Event({
-            trigger = 'after',
-            delay = 0.4,
-            func = function()
-                play_sound('timpani')
-                card:juice_up(0.3, 0.5)
-                ease_dollars(card.ability.extra.money, true)
-                return true
-            end
-        }))
+			trigger = 'after',
+			delay = 0.4,
+			func = function()
+				play_sound('timpani')
+				card:juice_up(0.3, 0.5)
+				ease_dollars(card.ability.extra.money, true)
+				return true
+			end
+		}))
 
 		--add cards
-        G.E_MANAGER:add_event(Event({
-            trigger = 'after',
-            delay = 0.7,
-            func = function()
-                local cards = {}
-                for i = 1, card.ability.extra.cards do
-                    local _rank = pseudorandom_element(SMODS.Ranks, 'abyss_create').card_key
-                    cards[i] = SMODS.add_card { area = G.hand, set = "Base", rank = _rank }
-                end
-                SMODS.calculate_context({ playing_card_added = true, cards = cards })
-                return true
-            end
-        }))
+		G.E_MANAGER:add_event(Event({
+			trigger = 'after',
+			delay = 0.7,
+			func = function()
+				local cards = {}
+				for i = 1, card.ability.extra.cards do
+					local _rank = pseudorandom_element(SMODS.Ranks, 'abyss_create').card_key
+					local _suit = pseudorandom_element(SMODS.Suits, 'abyss_create').key
 
-        delay(0.3)
-    end,
-    can_use = function(self, card)
-        return G.hand and true
+					cards[i] = SMODS.add_card({
+						area = G.hand,
+						suit = _suit,
+						rank = _rank,
+						enhancement = "m_worm_bap_void"
+					})
+				end
+				SMODS.calculate_context({ playing_card_added = true, cards = cards })
+				return true
+			end
+		}))
+
+		delay(0.3)
+	end,
+	can_use = function(self, card)
+		return G.hand and true
+	end
+}
+
+
+sendDebugMessage("Registered Abyss:", G.P_CENTERS["c_worm_bap_abyss"])
+
+-- Nothing planet card
+SMODS.Consumable {
+    key = "bap_nothing",
+    loc_txt = {
+		name = 'Nothing',
+		text = {
+			"UNFINISHED",
+		}
+	},
+    set = 'Tarot',
+    cost = 3,
+    pos = { x = 0, y = 0 },
+    config = { anim_time = 0 },
+    can_use = function(self, card) return true end,
+    keep_on_use = function(self, card) return true end,
+    use = function(self, card, area, copier)
+		G.E_MANAGER:add_event(Event({
+			trigger = 'after',
+			delay = 0.1,
+			func = function()
+				if #G.consumeables.cards < G.consumeables.config.card_limit then
+					SMODS.add_card({
+						area = G.consumeables,
+						key = "c_worm_bap_abyss"
+					})
+				end
+				return true
+			end
+		}))
+	end,
+    update = function(self, card, dt)
+        card.ability.anim_time = (card.ability.anim_time or 0) + dt
+        self.pos.x = math.sin(card.ability.anim_time) * 0.5 + 0.5
+		self.pos.y = math.cos(card.ability.anim_time) * 0.5 + 0.5
     end
 }
+
 
 SMODS.Joker {
 	key = 'perkeo2',
