@@ -159,7 +159,9 @@ return {
 					{
 					"Increase Mult by {C:red}#2#{}",
 					"if the {C:attention}scored hand{} isn't",
-					"the most played {C:attention}poker hand"
+					"the most played {C:attention}poker hand",
+					"otherwise, the {C:attention}Joker{} gets",
+					"{C:red}destroyed{}",
 					},
                 },
             },
