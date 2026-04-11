@@ -342,7 +342,7 @@ SMODS.Joker{
 		name = "Chthonian Planet",
 		text = {
 			"If {C:attention}first discard{} of",
-			"round is {C:attention}#1#{} card, make",
+			"round is {C:attention}#1#{} cards, make",
 			"{C:attention}both{} cards {C:attention}Stone{}"
 		}
 	},
