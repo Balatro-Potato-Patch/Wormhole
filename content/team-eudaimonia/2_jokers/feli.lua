@@ -44,7 +44,13 @@ SMODS.Joker {
     attributes = {"scaling", "mult", "space"},
 	config = {
 		extra = { mult = 5, mult_mod = 5, count = 0, max_c = 5, ascended = false, set = true},
-	},	
+	},
+	set_sprites = function(self, card, front)
+        if card.ability and card.ability.extra and card.ability.extra.ascended then
+			card.children.center:set_sprite_pos({x=0, y=2})
+			card.children.floating_sprite:set_sprite_pos({ x = 0, y = 3})
+		end
+    end,	
 	loc_vars = function(self, info_queue, card)
 		local key = self.key
 		if card.ability.extra.ascended == true then
@@ -77,6 +83,8 @@ SMODS.Joker {
 			elseif card.ability.extra.ascended == false and card.ability.extra.count >= card.ability.extra.max_c then
 				play_sound('worm_euda_blastoff', 1)
 				card.ability.extra.ascended = true
+				card.children.center:set_sprite_pos({x=0, y=2})
+				card.children.floating_sprite:set_sprite_pos({ x = 0, y = 3})
 				card.ability.extra.mult = 10
                 return {
 					message = "Blast Off!",
