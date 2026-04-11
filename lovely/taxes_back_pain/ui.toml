@@ -62,7 +62,7 @@ payload = '''
 if v.tbp_module then
     tbp_module_info_boxes[#tbp_module_info_boxes+1] = {n=G.UIT.R, config={align = "cl"}, nodes={
         {n=G.UIT.R, config={align = "cm", colour = darken(Wormhole.tbp.module_colours[v.tbp_module], 0.5), padding = 0.05, emboss = 0.1}, nodes={
-            Wormhole.tbp.module_tooltip(v, v.name),
+            Wormhole.tbp.module_tooltip(v),
         }}
     }}
 else

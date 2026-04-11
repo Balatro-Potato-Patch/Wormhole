@@ -10,7 +10,8 @@ local other_loc_table = {
             tbp_module_weapons = 'WEAPON',
             tbp_module_core = 'CORE',
             tbp_module_thrusters = 'THRUSTERS',
-            tbp_module_utility = 'UTILITY'
+            tbp_module_utility = 'UTILITY',
+            tbp_undisc_module = 'Undiscovered Module'
         }
     },
     descriptions = {
@@ -181,29 +182,9 @@ local descriptions = {
                 '{s:0.8,C:inactive}(Depletes when triggered)'
             }
         },
-        nebula_equipped = {
-            name = '{C:attention}Nebula Core',
-            text = {
-                '{s:1.2,V:1}Nebula Core{}',
-                'When a {C:spectral}Module{} is {C:attention}exhausted{}',
-                'level up a random',
-                'poker hand by {C:attention}#1#{}',
-                '{s:0.8,C:inactive}(Depletes when triggered)'
-            }
-        },
         astrophage = {
             name = "Astrophage Core",
             text = {
-                'Using a {C:planet}Planet{} card',
-                'increases the durability of',
-                'a random {C:spectral}Module{} by {C:attention}#1#{}',
-                '{s:0.8,C:inactive}(Depletes when triggered)'
-            }
-        },
-        astrophage_equipped = {
-            name = "Astrophage Core",
-            text = {
-                '{s:1.2,V:1}Astrophage Core{}',
                 'Using a {C:planet}Planet{} card',
                 'increases the durability of',
                 'a random {C:spectral}Module{} by {C:attention}#1#{}',
@@ -219,16 +200,6 @@ local descriptions = {
                 '{s:0.8,C:inactive}(Depletes when triggered)'
             }
         },
-        dellinger_equipped = {
-            name = "Dellinger Core",
-            text = {
-                '{s:1.2,V:1}Dellinger Core{}',
-                'Playing a {C:attention}#2#{}',
-                'increases the durability of',
-                'each other {C:spectral}Module{} by {C:attention}1{}',
-                '{s:0.8,C:inactive}(Depletes when triggered)'
-            }
-        },
         black_hole_generator = {
             name = "Black Hole Generator",
             text = {
@@ -238,31 +209,10 @@ local descriptions = {
                 '{s:0.8,C:inactive}(Depletes when triggered)'
             }
         },
-        black_hole_generator_equipped = {
-            name = "Black Hole Generator",
-            text = {
-                '{s:1.2,V:1}Black Hole Generator{}',
-                'When a {C:spectral}Module{} is {C:attention}exhausted{}',
-                'increases the durability of',
-                'other {C:spectral}Modules{} by {C:attention}#1#{}',
-                '{s:0.8,C:inactive}(Depletes when triggered)'
-            }
-        },
         -- WEAPON --
         void = {
-            name = 'Void Raid',
+            name = 'Void Ray',
             text = {
-                'Destroy random cards played',
-                'in {C:attention}first hand{} of round',
-                'and add {C:purple}#1#%{} of the',
-                'required score for each',
-                '{s:0.8,C:inactive}(Depletes for each card destroyed)'
-            }
-        },
-        void_equipped = {
-            name = '{C:attention}Void Raid',
-            text = {
-                '{s:1.2,V:1}Void Raid',
                 'Destroy random cards played',
                 'in {C:attention}first hand{} of round',
                 'and add {C:purple}#1#%{} of the',
@@ -279,33 +229,11 @@ local descriptions = {
                 '{s:0.8,C:inactive}(Depletes for each card scored)'
             }
         },
-        ballistics_equipped = {
-            name = '{C:attention}Advanced Ballistics',
-            text = {
-                '{s:1.2,V:1}Advanced Ballistics',
-                "Every played {C:attention}card{}",
-                "permanently gains",
-                "{C:chips}+#1#{} Chips when scored",
-                '{s:0.8,C:inactive}(Depletes for each card scored)'
-            }
-        },
         waste = {
             name = 'Weaponized Waste Disposal',
             text = {
                 '{C:mult}+#1#{} Mult for every',
-                '{C:spectral}Module{} exhausted', -- TODO: change color to new Module one if changed
-                'this run',
-                '{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult)',
-                '{s:0.8,C:inactive}(Depletes each hand)'
-            }
-        },
-        waste_equipped = {
-            name = '{C:attention}Weaponized Waste Disposal',
-            text = {
-                '{s:1.2,V:1}Weaponized Waste Disposal',
-                '{C:mult}+#1#{} Mult for every',
-                '{C:spectral}Module{} exhausted', -- TODO: change color to new Module one if changed
-                'this run',
+                '{C:spectral}Module{} exhausted this run', -- TODO: change color to new Module one if changed
                 '{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult)',
                 '{s:0.8,C:inactive}(Depletes each hand)'
             }
@@ -313,22 +241,9 @@ local descriptions = {
         salvo = {
             name = 'Overcharged Salvo',
             text = {
-                '{X:mult,C:white} X#1# {} for each',
-                '{C:spectral}Module{} installed',
-                'if scored hand contains',
-                '{C:attention}5{} cards',
-                '{C:inactive}(Currently {X:mult,C:white} X#2# {C:inactive} Mult)',
-                '{s:0.8,C:inactive}(Depletes all Modules when triggered)'
-            }
-        },
-        salvo_equipped = {
-            name = '{C:attention}Overcharged Salvo',
-            text = {
-                '{s:1.2,V:1}Overcharged Salvo',
-                '{X:mult,C:white} X#1# {} for each',
-                '{C:spectral}Module{} installed',
-                'if scored hand contains',
-                '{C:attention}5{} cards',
+                'Gains {X:mult,C:white}X#1#{} Mult for each',
+                '{C:spectral}Module{} installed if scored hand',
+                'contains {C:attention}5{} cards',
                 '{C:inactive}(Currently {X:mult,C:white} X#2# {C:inactive} Mult)',
                 '{s:0.8,C:inactive}(Depletes all Modules when triggered)'
             }
@@ -343,47 +258,18 @@ local descriptions = {
                 '{s:0.8,C:inactive}(Depletes each Blind)'
             }
         },
-        hardlight_equipped = {
-            name = '{C:attention}Hardlight Barrier',
-            text = {
-                '{s:1.2,V:1}Hardlight Barrier',
-                'Reduce {C:attention}Blind{}\'s',
-                'requirement by {C:red}#1#%{}',
-                'when {C:attention}Blind{} is selected',
-                '{s:0.8,C:inactive}(Depletes each Blind)'
-            }
-        },
         quantum = {
             name = 'Quantum Computer',
             text = {
-                'Earn {C:money}+$#1#{} when',
+                'Gain {C:money}$#1#{} when',
                 'another {C:green}probability{} succeeds',
-                '{s:0.8,C:inactive}({s:0.8,C:green}#2# in #3#{s:0.8,C:inactive} chance',
-                '{s:0.8,C:inactive}to deplete when triggered)'
-            }
-        },
-        quantum_equipped = {
-            name = '{C:attention}Quantum Computer',
-            text = {
-                '{s:1.2,V:1}Quantum Computer',
-                'Earn {C:money}+$#1#{} when',
-                'another {C:green}probability{} succeeds',
-                '{s:0.8,C:inactive}({s:0.8,C:green}#2# in #3#{s:0.8,C:inactive} chance',
-                '{s:0.8,C:inactive}to deplete when triggered)'
+                '{s:0.8,C:inactive}({s:0.8,C:green}#2# in #3#{s:0.8,C:inactive} chance to deplete',
+                '{s:0.8,C:inactive}when triggered)'
             }
         },
         interference = {
             name = 'Interference Matrix',
             text = {
-                'Disable selected',
-                '{C:attention}Boss Blind{}',
-                '{s:0.8,C:inactive}(Depletes when triggered)'
-            }
-        },
-        interference_equipped = {
-            name = '{C:attention}Interference Matrix',
-            text = {
-                '{s:1.2,V:1}Interference Matrix',
                 'Disable selected',
                 '{C:attention}Boss Blind{}',
                 '{s:0.8,C:inactive}(Depletes when triggered)'
@@ -397,45 +283,21 @@ local descriptions = {
                 'depletes by {C:attention}#1#{} instead',
             }
         },
-        redundancy_equipped = {
-            name = '{C:attention}Redundancy Battery',
-            text = {
-                '{s:1.2,V:1}Redundancy Battery',
-                'When a {C:spectral}Module{} would',
-                '{C:attention}deplete{}, this module',
-                'depletes by {C:attention}#1#{} instead',
-            }
-        },
         -- THRUSTERS --
         warp_drive = {
             name = 'Warp Drive',
             text = {
-                'Skip Blind: gain {X:mult,C:white} X#1# {} Mult',
+                'Gain {X:mult,C:white}X#1#{} Mult',
+                'when skipping a {C:attention}Blind',
                 '{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive})',
                 '{C:inactive,s:0.8}(Depletes when skipping a blind)'
             }
         },
-        warp_drive_equipped = {
-            name = '{C:attention}Warp Drive',
-            text = {
-                '{s:1.2,V:1}Warp Drive{}',
-                'Skip Blind: gain {X:mult,C:white} X#1# {} Mult',
-                '{C:inactive,s:0.8}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)',
-                '{C:inactive,s:0.8}(Depletes when skipping a blind)'
-            }
-        },
         temporal_jump = {
-            name = 'Temporal Jump Thrusters',
+            name = 'Temporal Jump Jets',
             text = {
-                'Skip Blind: Get {C:attention}#1#{} {C:attention}Skip Tags',
-                '{C:inactive,s:0.8}(Depletes when skipping a blind)'
-            }
-        },
-        temporal_jump_equipped = {
-            name = '{C:attention}Temporal Jump Thrusters',
-            text = {
-                '{s:1.2,V:1}Temporal Jump Thrusters{}',
-                'Skip Blind: Get {C:attention}#1#{} {C:attention}Skip Tags',
+                'Get {C:attention}#1#{} random {C:attention}Tags',
+                'when skipping a {C:attention}Blind',
                 '{C:inactive,s:0.8}(Depletes when skipping a blind)'
             }
         },
@@ -448,28 +310,9 @@ local descriptions = {
                 '{s:0.8,C:inactive}(Depletes each hand)'
             }
         },
-        repeater_equipped = {
-            name = '{C:attention}Repeater Engine',
-            text = {
-                '{s:1.2,V:1}Repeater Engine',
-                'Retrigger each scored',
-                '{C:attention}Enhanced{} card',
-                'in played hand {C:attention}twice',
-                '{s:0.8,C:inactive}(Depletes each hand)'
-            }
-        },
         antimatter = {
             name = 'Anti-Matter Thrusters',
             text = {
-                'Create a {C:dark_edition}Negative{}',
-                '{C:planet}Planet{} card for the played hand',
-                '{s:0.8,C:inactive}(Depletes each hand)'
-            }
-        },
-        antimatter_equipped = {
-            name = '{C:attention}Anti-Matter Thrusters',
-            text = {
-                '{s:1.2,V:1}Anti-Matter Thrusters',
                 'Create a {C:dark_edition}Negative{}',
                 '{C:planet}Planet{} card for the played hand',
                 '{s:0.8,C:inactive}(Depletes each hand)'

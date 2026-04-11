@@ -5,23 +5,29 @@ SMODS.Atlas({
     py = 81
 })
 
-function Wormhole.tbp.module_tooltip(desc_nodes, name)
+function Wormhole.tbp.module_tooltip(desc_nodes)
     local col = Wormhole.tbp.module_colours[desc_nodes.tbp_module] -- module colour
     local durability_col = mix_colours(G.C.BLACK, col, 0.8) -- durability bar background
+    local discovered = desc_nodes.module_info and G.P_CENTERS[desc_nodes.module_info.key].discovered
     local t = {}
+    if desc_nodes.module_info then
+        t[#t+1] = {n=G.UIT.R, config={align = "cm"}, nodes={
+            {n=G.UIT.T, config={text= discovered and localize({type='name_text', set = 'tbp_module', key = desc_nodes.module_info.key}) or localize('tbp_undisc_module'), scale = 0.384, colour = darken(discovered and col or G.C.JOKER_GREY, 0.3)}}}
+        }
+    end
     for k, v in ipairs(desc_nodes) do
         t[#t+1] = {n=G.UIT.R, config={align = "cm"}, nodes=v}
     end
-    return {n=G.UIT.C, nodes = {
+    return {n=G.UIT.R, nodes = {
         {n=G.UIT.R, config = {align = 'cm', colour = col}, nodes = {
             {n=G.UIT.C, config = {align = 'cm', colour = darken(col, 0.4), padding = 0.1}, nodes = {
                 {n=G.UIT.T, config={text = localize('tbp_module_'..desc_nodes.tbp_module), scale = 0.32, colour = G.C.UI.TEXT_LIGHT, vert = true}}
             }},
-            {n=G.UIT.C, config = {align = 'cm', padding = 0.05, colour = lighten(col, 0.8)}, nodes = {
-                {n=G.UIT.R, config={align = "cm", minw = 1.5, minh = 0.4, r = 0.1, padding = 0.05, colour = lighten(col, 0.8)}, nodes={
+            {n=G.UIT.C, config = {align = 'cm', padding = 0.05, colour = lighten(discovered and col or G.C.JOKER_GREY, 0.8)}, nodes = {
+                {n=G.UIT.R, config={align = "cm", minw = 1.5, minh = 0.4, r = 0.1, padding = 0.05, colour = lighten(discovered and col or G.C.JOKER_GREY, 0.8)}, nodes={
                     {n=G.UIT.R, config={align = "cm", padding = 0.03}, nodes=t}
                 }},
-                desc_nodes.module_info and {n=G.UIT.R, config = {align = 'cm', r = 0.08, minw = 0.5, minh = 0.15, colour = durability_col, outline = 0.5, outline_colour = darken(col, 0.3),
+                desc_nodes.module_info and discovered and {n=G.UIT.R, config = {align = 'cm', r = 0.08, minw = 0.5, minh = 0.15, colour = durability_col, outline = 0.5, outline_colour = darken(col, 0.3),
                     progress_bar = {
                         max = desc_nodes.module_info.total_durability, ref_table = desc_nodes.module_info, ref_value = 'durability', empty_col = durability_col, filled_col = adjust_alpha(col, 0.5)
                     }
@@ -29,13 +35,12 @@ function Wormhole.tbp.module_tooltip(desc_nodes, name)
                     {n=G.UIT.T, config = {text = desc_nodes.module_info.durability .. '/' .. desc_nodes.module_info.total_durability, colour = lighten(col, 0.6), scale = 0.28}}
                 }} or nil
             }},
-            desc_nodes.module_info and {n=G.UIT.C, config = {align = 'cm', padding = 0.05, colour = lighten(col, 0.8)}, nodes = {
+            desc_nodes.module_info and not desc_nodes.block_image and {n=G.UIT.C, config = {align = 'cm', padding = 0.05, colour = lighten(col, 0.8)}, nodes = {
                 {n=G.UIT.R, config = {align = 'cm', colour = durability_col}, nodes = {
                     {n=G.UIT.O, config = {outline = 1, outline_colour = darken(col,0.4), object = SMODS.create_sprite(0,0, 0.65*G.CARD_W, 0.65*G.CARD_H, 'worm_tbp_module_no_bg', {x=math.random(1,4)-1,y=math.random(1,2)-1}), align = 'cm'}} -- TODO: fix position to match the actual sprite
                 }}
             }} or nil
         }},
-
     }}
 end
 
@@ -299,3 +304,99 @@ SMODS.ScreenShader{
         }
     end
 }
+
+-- Module Card tooltips
+
+local override_tooltip = G.UIDEF.card_h_popup
+function G.UIDEF.card_h_popup(card)
+    if card.config.center and card.config.center.set == 'tbp_module' then 
+        local AUT = card.ability_UIBox_table
+        AUT.main.tbp_module = card.config.center.slot
+        AUT.main.block_image = true
+        AUT.main.module_info = {
+            key = card.config.center.key,
+            durability = card.config.center.durability,
+            total_durability = card.config.center.durability,
+        }
+
+        local info_boxes = {}
+        if AUT.info then
+            for k, v in ipairs(AUT.info) do
+                info_boxes[#info_boxes+1] =
+                    {n=G.UIT.R, config={align = "cm"}, nodes={
+                        {n=G.UIT.R, config={align = "cm", colour = lighten(G.C.JOKER_GREY, 0.5), r = 0.1, padding = 0.05, emboss = 0.05}, nodes={
+                            info_tip_from_rows(v, v.name),
+                        }}
+                    }}
+            end
+            local cols
+            if #info_boxes <= 3 then
+                cols = 1
+            elseif #info_boxes <= 10 then
+                cols = 2
+            elseif #info_boxes <= 24 then
+                cols = 3
+            else
+                cols = 4
+            end
+            local nodes_per_col = math.ceil(#info_boxes/cols)
+            local info_cols = {}
+            for i = 0, cols-1 do
+                local col = {}
+                for j = 1, nodes_per_col do
+                    local info_box = info_boxes[i*nodes_per_col+j]
+                    if info_box then
+                        table.insert(col, info_box)
+                    else break end
+                end
+                table.insert(info_cols, {n=G.UIT.C, config = {align="cm"}, nodes = col})
+            end
+            info_boxes = {{n=G.UIT.R, config = {align="cm", padding = 0.05, card_pos = card.T.x }, nodes = info_cols}}
+        end
+
+        local badges = {}
+        if AUT.badges then
+            for k, v in ipairs(AUT.badges) do
+                if v:sub(v:len()-14) == '_SMODS_INTERNAL' then
+                    if v:sub(1, 9) == 'negative_' then v = 'negative' else v = v:sub(1, v:find('_', v:find('_')+1)-1) end
+                end
+                badges[#badges + 1] = create_badge(localize(v, "labels"), get_badge_colour(v), SMODS.get_badge_text_colour(v))
+            end
+        end
+        SMODS.create_mod_badges(card.config.center, badges)
+        badges.mod_set = nil
+        if card.config.center and card.config.center.ppu_team then
+            local str = PotatoPatchUtils.CREDITS.generate_string(card.config.center.ppu_team, 'ppu_team_credit', card.config.center.mod.prefix)
+            if str then
+                table.insert(badges, str)
+            end
+        end
+        if card.config.center and card.config.center.ppu_artist then
+            local str = PotatoPatchUtils.CREDITS.generate_string(card.config.center.ppu_artist, 'ppu_art_credit', card.config.center.mod.prefix)
+            if str then
+                table.insert(badges, str)
+            end
+        end
+
+        -- print(card.ability_UIBox_table.main)
+        return {n=G.UIT.C, config = {align='cm', colour = G.C.CLEAR, padding = 0.05}, nodes = {
+            {n=G.UIT.R, config = {align = 'cm', func = 'show_infotip',object = Moveable(),ref_table = next(info_boxes) and info_boxes or nil}, nodes = {
+                {n=G.UIT.C, config = {align = 'cm', padding = 0.05, emboss = 0.1, colour = darken(Wormhole.tbp.module_colours[card.config.center.slot], 0.5)}, nodes = {
+                    Wormhole.tbp.module_tooltip(AUT.main),
+                }}
+            }},
+            badges[1] and {n=G.UIT.R, config = {align = 'cm'}, nodes = {
+                {n=G.UIT.R, config = {align = 'cm', padding = 0.05, emboss = 0.1, colour = darken(Wormhole.tbp.module_colours[card.config.center.slot], 0.5)}, nodes = {
+                    {n=G.UIT.C, config = {align = 'cm', padding = 0.1, colour = G.C.L_BLACK}, nodes = badges}}
+                }
+            }} or nil
+        }}
+    end
+    return override_tooltip(card)
+end
+
+local localize_hook = localize
+function localize(args, misc_cat)
+    if args.type == 'name' and (args.set == 'tbp_module' or args.key == 'undiscovered_tbp_module') then return end
+    return localize_hook(args, misc_cat)
+end

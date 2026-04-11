@@ -222,7 +222,7 @@ SMODS.DrawStep{
 SMODS.Back{
     key = "spaceship_deck",
     pos = {x = 0, y = 0},
-    config = {consumables = {'c_worm_tbp_no_core_name1', 'c_worm_tbp_hardlight', 'c_worm_tbp_astrophage',  'c_pluto'}, jokers = {'j_worm_tbp_spaceship'}, consumable_slot = 100},
+    config = {consumables = {'c_worm_tbp_hardlight', 'c_worm_tbp_astrophage',  'c_pluto'}, jokers = {'j_worm_tbp_spaceship'}, consumable_slot = 100},
 }
 
 ---
@@ -246,7 +246,8 @@ SMODS.Joker({
 	eternal_compat = false,
 	perishable_compat = false,
     ppu_team = {'tbp'},
-    module_types = {'core', 'weapons', 'thrusters', 'utility'}, -- TODO: add actual module slots here
+    ppu_artist = {'mythie'},
+    module_types = {'core', 'weapons', 'utility', 'thrusters'}, -- TODO: add actual module slots here
     config = {
         extra_slots_used = -1,
         extra = {
@@ -266,7 +267,7 @@ SMODS.Joker({
                     local vars = G.P_CENTERS[card.ability.extra.modules[v].key]:loc_vars(info_queue, {ability = { extra = card.ability.extra.modules[v] } }, card).vars
                     vars.colours = vars.colours or {}
                     table.insert(vars.colours, 1, darken(Wormhole.tbp.module_colours[v], 0.3))
-                    info_queue[#info_queue+1] = {set = 'tbp_module', key = card.ability.extra.modules[v].key .. '_equipped', vars = vars, module_type = v, module_info = card.ability.extra.modules[v]}
+                    info_queue[#info_queue+1] = {set = 'tbp_module', key = card.ability.extra.modules[v].key, vars = vars, module_type = v, module_info = card.ability.extra.modules[v]}
                 else
                     info_queue[#info_queue+1] = {set = 'tbp_module', key = 'c_worm_tbp_module_missing', module_type = v, vars = {colours = {mix_colours(G.ARGS.LOC_COLOURS.inactive, Wormhole.tbp.module_colours[v], 0.5)}}}
                 end
@@ -645,6 +646,7 @@ Wormhole.tbp.Module({
             poker_hand = 'High Card'
 		},
     },
+    ppu_artist = {'mythie'},
 	loc_vars = function(self, info_queue, module, card)
 		return { vars = { module.ability.extra.amount, localize(module.ability.extra.poker_hand, 'poker_hands') } }
     end,
