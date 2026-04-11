@@ -142,5 +142,6 @@ SMODS.Joker {
 
     ppu_team = {"dummies"},
     ppu_coder = {"vissa"},
+    ppu_artist = {"vissa"},
     pronouns = "it_its"
 }
