@@ -276,6 +276,7 @@ G.FUNCS.show_module_replace_confirm = function(old_module_key, new_module_key, c
             G.GAME.module_replace_overlay:align_to_major()
             G.GAME.module_replace_overlay.config.major = nil
             G.GAME.module_replace_overlay:set_role{role_type = 'Major'}
+            G.GAME.module_replace_overlay.states.drag.can = true
             table.insert(Wormhole.tbp.shader_draw_stuff, G.GAME.module_replace_overlay)
             return true
         end
