@@ -18,6 +18,7 @@ SMODS.Consumable{
             G.from_boss_tag = true
             G.FUNCS.reroll_boss()
         else
+            G.GAME.worm_tlr_orion_original_blind = G.GAME.round_resets.blind_choices.Boss or "bl_small"
             G.FUNCS.Wormhole_TLR_orion{
                 rerolls_left = card.ability.rerolls[card.ability.tier],
                 allow = {

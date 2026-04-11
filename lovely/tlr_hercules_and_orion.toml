@@ -3,13 +3,14 @@ version = "1.0.0"
 dump_lua = true
 priority = 50
 
-# hercules shouldn't win you the game
+# hercules shouldn't win you the game - hercules
+# fighting the wrong blind should win you the game - orion 
 [[patches]]
 [patches.pattern]
 target = 'functions/state_events.lua'
 pattern = '''if not G.GAME.won and G.GAME.round_resets.ante >= G.GAME.win_ante and G.GAME.blind_on_deck == 'Boss' then'''
 position = 'at'
-payload = '''if not G.GAME.worm_tlr_hercules_blind and not G.GAME.won and G.GAME.round_resets.ante >= G.GAME.win_ante and G.GAME.blind_on_deck == 'Boss' then'''
+payload = '''if not G.GAME.worm_tlr_hercules_blind and not G.GAME.won and G.GAME.round_resets.ante >= G.GAME.win_ante and (G.GAME.blind_on_deck == 'Boss' or (G.P_BLINDS[G.GAME.worm_tlr_orion_original_blind] or {}).boss == "Boss") then'''
 match_indent = true
 [[patches]]
 [patches.pattern]
@@ -19,24 +20,27 @@ position = 'at'
 payload = '''if not G.GAME.worm_tlr_hercules_blind and game_won and not G.GAME.win_notified then'''
 match_indent = true
 
-# don't update end of ante things
+# don't update end of ante things - hercules
+# do update end of ante things - orion
 [[patches]]
 [patches.pattern]
 target = 'functions/state_events.lua'
 pattern = '''if G.GAME.blind:get_type() == 'Boss' then'''
 position = 'at'
-payload = '''if not G.GAME.worm_tlr_hercules_blind and G.GAME.blind:get_type() == 'Boss' then'''
+payload = '''if not G.GAME.worm_tlr_hercules_blind and (G.GAME.blind:get_type() == 'Boss' or G.P_BLINDS[G.GAME.worm_tlr_orion_original_blind].boss) then'''
 match_indent = true
 [[patches]]
 [patches.pattern]
 target = 'functions/state_events.lua'
 pattern = '''if G.GAME.blind:get_type() == 'Boss' and not G.GAME.seeded and not G.GAME.challenge  then'''
 position = 'at'
-payload = '''if not G.GAME.worm_tlr_hercules_blind and G.GAME.blind:get_type() == 'Boss' and not G.GAME.seeded and not G.GAME.challenge  then'''
+payload = '''if not G.GAME.worm_tlr_hercules_blind and (G.GAME.blind:get_type() == 'Boss' or (G.P_BLINDS[G.GAME.worm_tlr_orion_original_blind] or {}).boss) and not G.GAME.seeded and not G.GAME.challenge  then'''
 match_indent = true
 
 
-# don't change blind played states
+# don't change blind played states - hercules
+# this is purely cosmetic, and will also be changed before they have a chance to see - orion
+# nvm this isn't purely cosmetic it actually handles resetting the blinds :sob:
 [[patches]]
 [patches.pattern]
 target = 'functions/state_events.lua'
@@ -53,6 +57,14 @@ pattern = '''if G.GAME.round_resets.blind == G.P_BLINDS.bl_small then
                         end'''
 position = 'at'
 payload = '''if not G.GAME.worm_tlr_hercules_blind then
+        if (G.P_BLINDS[G.GAME.worm_tlr_orion_original_blind] or {}).boss then
+            G.GAME.current_round.voucher = SMODS.get_next_vouchers()
+            G.GAME.round_resets.blind_states.Boss = 'Defeated'
+            for k, v in ipairs(G.playing_cards) do
+                v.ability.played_this_ante = nil
+            end
+            G.GAME.worm_tlr_orion_original_blind = "bl_small"
+        end
 		if G.GAME.round_resets.blind == G.P_BLINDS.bl_small then
 				G.GAME.round_resets.blind_states.Small = 'Defeated'
 		elseif G.GAME.round_resets.blind == G.P_BLINDS.bl_big then
