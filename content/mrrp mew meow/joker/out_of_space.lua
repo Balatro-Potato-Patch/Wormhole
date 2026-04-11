@@ -20,10 +20,12 @@ SMODS.Joker {
         }
     },
 	loc_vars = function (self, info_queue, card)
+        local slots = card.ability.immutable.slots or card.ability.extra.slots
+        local size = card.ability.extra.size
 		return {
             vars = {
-                card.ability.immutable.slots or card.ability.extra.slots,
-                card.ability.extra.size,
+                (slots >= 0 and "+" or "-") .. slots,
+                (size < 0 and "-" or "") .. size,
             }
         }
 	end,
