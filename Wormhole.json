@@ -2,17 +2,17 @@
 	"id": "Wormhole",
 	"name": "Wormhole",
 	"display_name": "Wormhole",
-	"author": ["The Potato Patch"],
+	"author": [ "The Potato Patch" ],
 	"description": "The mod created during MurphyObv's Sealab Joker Jam! ",
 	"prefix": "worm",
 	"main_file": "main.lua",
 	"priority": 0,
 	"badge_colour": "011638",
 	"badge_text_colour": "73fdff",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"dependencies": [
-		"Steamodded (>=1.0.0~BETA-1531zeebee)",
+		"Steamodded (>=1.0.0~BETA-1606b)",
 		"Lovely (>=0.9)",
-		"PotatoPatchUtils (>=1.0.0)"
+		"PotatoPatchUtils (>=1.0.3)"
 	]
 }
