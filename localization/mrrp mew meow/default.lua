@@ -100,6 +100,20 @@ descriptions={
 				"{C:inactive}(Currently {C:mult}#2#{C:inactive} Mult){}"
 			}
 		},
+		j_worm_out_of_space = {
+			name = "Out of Space",
+			text = {
+				{
+					"{C:attention}+#1#{} to Joker slots,",
+					"consumeable slots, and hand size",
+				},
+				{
+					"{X:attention}X#2#{} Blind size for",
+					"each empty Joker and",
+					"consumeable slot"
+				}
+			}
+		},
 	},
 	Stake={
 		stake_worm_cosmic ={
