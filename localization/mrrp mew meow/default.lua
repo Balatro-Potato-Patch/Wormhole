@@ -248,5 +248,25 @@ misc={
 		k_make_a_wish_ex = "Make a wish!",
 		k_flaring = "Flaring..."
 	},
+	quips = {
+		worm_mrrp_no_menthol_win = {
+			"Have you tried this",
+			"silly little mod",
+			"called Menthol?"
+		},
+		worm_mrrp_no_menthol_loss = {
+			"Have you tried this",
+			"silly little mod",
+			"called Menthol?"
+		},
+		worm_mrrp_menthol_win = {
+			"What a refreshing",
+			"minty taste!"
+		},
+		worm_mrrp_menthol_loss = {
+			"Maybe a bit",
+			"TOO much mint?"
+		}
+	}
 },
 }
