@@ -254,7 +254,7 @@ misc={
 			"silly little mod",
 			"called Menthol?"
 		},
-		worm_mrrp_no_menthol_loss = {
+		worm_mrrp_no_menthol_loss = { --todo think of a better one for this
 			"Have you tried this",
 			"silly little mod",
 			"called Menthol?"
