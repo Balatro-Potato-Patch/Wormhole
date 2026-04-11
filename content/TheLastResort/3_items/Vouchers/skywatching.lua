@@ -1,6 +1,6 @@
 SMODS.Voucher {
     key = 'tlr_skywatching',
-	set = 'Voucher',
+    atlas = "tlr_voucher",
 	pos = { x = 0, y = 0 },
 	cost = 10,
     config = { extra = { rate = 4 } },

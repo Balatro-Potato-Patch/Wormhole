@@ -60,3 +60,10 @@ SMODS.Atlas{
 	px = 71,
 	py = 95
 }
+
+SMODS.Atlas{
+	key = "tlr_voucher",
+	path = "TheLastResort/voucher.png",
+	px = 71,
+	py = 95
+}
