@@ -352,7 +352,7 @@ SMODS.Joker{
 		return { vars = { card.ability.extra.size }}
 	end,
 	atlas = "vegas_jokers",
-	pos = {x = 0, y = 4},
+	pos = {x = 4, y = 1},
 	rarity = 1,
 	cost = 6,
 	blueprint_compat = true,
