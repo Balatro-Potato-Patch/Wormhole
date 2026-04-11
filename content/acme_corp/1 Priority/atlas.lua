@@ -4,7 +4,12 @@ Atlas_AcmeJokers = SMODS.Atlas {
 	px = 71,
 	py = 95
 }
-
+Atlas_AcmeVouchers = SMODS.Atlas { 
+	key = 'ACME_vouchers',
+	path = 'acme_corp/ACME_vouchers.png',
+	px=71,
+	py=95
+}
 Atlas_AcmeGadgets = SMODS.Atlas {
 	key = 'ACME_gadgets',
 	path = 'acme_corp/ACME_gadgets.png',
