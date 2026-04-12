@@ -73,8 +73,9 @@ local other_loc_table = {
             b_worm_spaceship_deck = {
                 name = "Spaceship Deck",
                 text = {
-                    "Start with ship and laser",
-                    "(DEBUG PURPOSES)"
+                    "Start with a {T:j_worm_tbp_spaceship,C:attention}#1#{}",
+                    "which always spawns a {C:spectral}Module{}",
+                    "pack at the start of {T:p_worm_module_jumbo_1,C:attention}shop{}"
                 },
             },
         },
@@ -162,6 +163,13 @@ local descriptions = {
                 '{V:1}Adds a {V:2}#1#',
                 '{V:1}to the shop when',
                 '{V:1}no modules are equipped'
+            }
+        },
+        spaceship_back = {
+            name = 'Spaceship',
+            text = {
+                '{V:1}Adds a {V:2}#1#',
+                '{V:1}to the shop'
             }
         },
     },

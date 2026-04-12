@@ -252,13 +252,16 @@ SMODS.DrawStep{
     conditions = { vortex = false, facing = 'front' },
 }
 
---- DEBUG PURPOSE ONLY
---- DON'T FORGET TO REMOVE BEFORE SUBMITTING ---
-
 SMODS.Back{
     key = "spaceship_deck",
     pos = {x = 0, y = 0},
-    config = {consumables = {'c_worm_tbp_hardlight', 'c_worm_tbp_astrophage',  'c_pluto'}, jokers = {'j_worm_tbp_spaceship'}, consumable_slot = 100},
+    config = {jokers = {'j_worm_tbp_spaceship'} },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { localize { type = 'name_text', key = "j_worm_tbp_spaceship", set = 'Joker' } } }
+    end,
+    apply = function(self, back)
+        G.GAME.starting_params.tbp_booster_always_spawn = true
+    end,
 }
 
 ---
@@ -307,8 +310,13 @@ SMODS.Joker({
                 end
             end
         end
+        local key = self.key
+        if G.GAME.selected_back and G.GAME.selected_back.effect.center.key == "b_worm_spaceship_deck" then
+            key = self.key .. "_back"
+        end
         local modules = self:modules_equipped(card)
         return {
+            key = key,
             vars = {
                 colours = {modules and G.ARGS.LOC_COLOURS.inactive or G.C.UI.TEXT_DARK, modules and mix_colours(G.ARGS.LOC_COLOURS.inactive, G.ARGS.LOC_COLOURS.attention, 0.65) or G.ARGS.LOC_COLOURS.attention},
                 localize{type = 'name_text', set = 'Other', key = 'p_worm_module_jumbo_1'}
@@ -343,7 +351,7 @@ SMODS.Joker({
     end,
 	calculate = function(self, card, context)
 		if not context.blueprint then
-            if context.starting_shop and not self:modules_equipped(card) then
+            if context.starting_shop and (not self:modules_equipped(card) or G.GAME.starting_params.tbp_booster_always_spawn) then
                 G.E_MANAGER:add_event(Event({
                     func = function()
                         card:juice_up(0.3, 0.5)
