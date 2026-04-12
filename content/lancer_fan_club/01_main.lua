@@ -56,6 +56,13 @@ SMODS.Atlas {
     frames = 21
 }
 
+SMODS.Atlas {
+    key = "lfc_spacebar",
+    px = 95,
+    py = 23,
+    path = "lancer_fan_club/spacebar.png"
+}
+
 -- Sounds
 SMODS.Sound {
     key = "lfc_explosion",
