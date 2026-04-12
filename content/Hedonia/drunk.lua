@@ -2,7 +2,7 @@
 
 local function drunk_level_chance(card, probability_numerator, probaility_denominator, next_edition, seed)
     if SMODS.pseudorandom_probability(card, seed or "hedonia_drunk", probability_numerator, probaility_denominator) then
-        card:set_edition(next_edition, true) --TODO add timer call so the return text happens at the same time
+            card:set_edition(next_edition, true) --TODO add timer call so the return text happens at the same time
         return true
     end
     return false
@@ -20,6 +20,7 @@ local function drunk_change_rank(card, rank_range, msg_increase, msg_decrease)
 end
 
 local function drunk_behaviour(self, card, context)
+--     print(context)
     if context.main_scoring and context.cardarea == G.hand then
         if drunk_level_chance(card, self.config.extra.sober_base, self.config.extra.sober_chance, self.config.extra.edition_soberer) then
             return { message = "Sobered Up!" }
@@ -27,13 +28,10 @@ local function drunk_behaviour(self, card, context)
     end
 
     if context.main_scoring and context.cardarea == G.play then
-        return { message = drunk_change_rank(card, self.config.extra.rank_range, self.config.extra.msg_increase, self.config.extra.msg_decrease)}
-    end
-
-    if context.destroy_card and context.cardarea == G.play then -- level here so we don't double trigger
         if drunk_level_chance(card, self.config.extra.drunker_base, self.config.extra.drunker_chance, self.config.extra.edition_drunker) then
-            return { message = "Kept Going!" }
+            return { message = drunk_change_rank(card, self.config.extra.rank_range, self.config.extra.msg_increase, self.config.extra.msg_decrease)}
         end
+        
     end
 end
 
@@ -217,17 +215,16 @@ SMODS.Edition {
                 return { message = "Sobered up!" }
             end
         end
-        if context.destroy_card and context.cardarea == G.play then
+        if context.destroy_card and context.cardarea == G.play and context.destroy_card == card then -- from glass https://github.com/nh6574/VanillaRemade/blob/main/src/enhancements.lua
             if SMODS.pseudorandom_probability(card, "hedonia_blackout",self.config.extra.destroy_base, self.config.extra.destroy_chance) then
-                return { message = "Banned for life...",
-                remove = true
+                return {
+                remove = true,
+                message = "Banned for life..." 
                 }
             end
         end
     end
 }
-
-
 
 SMODS.Shader {
     key = "hedonia_shader_drunk",
