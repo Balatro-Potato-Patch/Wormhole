@@ -14,7 +14,7 @@ Mojitury - Mojito + Mercury. Mojito because it has mint in it, and Axy mentioned
 Black Hole Bomb - Gives the Blackout edition on one of your cards held in hand. (Prof. Renderer)
 
 Food names: (approx 3 required)
-[ART DONE] Jupiter Jawbreakers (Axyraandas) - 1 random card in hand gains 100 bonus chips
+[ART DONE] Jupiter Jawbreakers (Axyraandas) - 1 random card in hand gains 50 bonus chips
 Saturn's Onion Rings (Axyraandas / Stanza Rorae) - all cards in hand sober up
 Little Debbie's Cosmic Brownies (Axyraandas) - changes 2 selected cards to the same rank
 [ART DONE] Space Jam - changes 2 selected cards to the same suit
