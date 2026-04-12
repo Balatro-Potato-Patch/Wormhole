@@ -288,7 +288,7 @@ SMODS.Joker({
 
             if card.ability.extra.last_hand == current_hand then
 
-                local gain = 5
+                local gain = 10
 
                 if #G.jokers.cards >= G.jokers.config.card_limit then
                     gain = gain * 2
