@@ -280,6 +280,9 @@ return {
                 "{s:0.75}Obtain this {C:attention,s:0.75}Joker{s:0.75} to",
                 "{s:0.75}unlock its {C:dark_edition,s:0.75}Pokédex entry{s:0.75}!",
             },
+        },
+        labels = {
+            worm_lfc_meteor_seal = "Meteor Seal"
         }
     }
 }
