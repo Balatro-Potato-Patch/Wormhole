@@ -16,7 +16,7 @@ local other_loc_table = {
     },
     descriptions = {
         PotatoPatch = {
-            PotatoPatchTeam_tbp = {name = 'Taxes and Back Pain'},
+            PotatoPatchTeam_tbp = { name = 'Taxes and Back Pain' },
             PotatoPatchDev_eremel = {
                 name = 'Eremel',
                 text = {
@@ -35,7 +35,25 @@ local other_loc_table = {
             PotatoPatchDev_n = {
                 name = 'N\'',
                 text = {
-                    'placeholder'
+                    {
+                        "i coded"
+                    },
+                    {
+                        "{C:inactive}[Excerpt from Electronic Gaming Monthly Issue 15 interview (1990)]{}",
+                        "{C:attention}\"So, we had this idea, right?",
+                        "{C:attention}What if... just what if... we made a spaceship for",
+                        "{C:attention}the space event! Everyone thought we were out of our minds! (laughs)\"{}",
+                        " ",
+                        "{C:blue}\"Interesting. And was there any other idea",
+                        "{C:blue}you had in mind at the time?\"{}",
+                        " ",
+                        "{C:attention}\"No.\"{}"
+                    },
+                    {
+                        "Also worked on:",
+                        "{C:green}JokerDisplay{}, {C:hearts}JoyousSpring",
+                        "{C:purple}N's Repertorium{}, {C:blue}VanillaRemade"
+                    }
                 }
             },
             PotatoPatchDev_sdm = {

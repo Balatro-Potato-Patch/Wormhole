@@ -189,6 +189,7 @@ PotatoPatchUtils.Developer({
     name = 'n',
     team = 'tbp',
     loc = true,
+    colour = HEX("F4A6C7")
 })
 
 PotatoPatchUtils.Developer({
