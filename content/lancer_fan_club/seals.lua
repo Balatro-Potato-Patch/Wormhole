@@ -17,7 +17,7 @@ SMODS.Seal {
     pos = {x=3,y=2},
     calculate = function (self, card, context)
         if context.main_scoring then
-            G.E_MANAGER.add_event(Event({func = function ()
+            G.E_MANAGER:add_event(Event({func = function ()
                 Wormhole.LancerFanClub.create_meteor(card.ability.seal.extra.dollars)
             return true end}))
         end
