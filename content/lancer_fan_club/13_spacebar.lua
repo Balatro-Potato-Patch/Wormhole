@@ -62,4 +62,6 @@ SMODS.Joker {
 
     ppu_artist = { "J8-Bit" },
     ppu_team = { "Lancer Fan Club" },
+    
+    update = function(self, card, dt) if not Wormhole.LFC_Util.card_obscured(card) then card.children.center:set_sprite_pos({x = love.keyboard.isDown("space")and 2 or 1, y = 2}) end end
 }

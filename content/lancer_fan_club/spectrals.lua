@@ -5,7 +5,7 @@ SMODS.Consumable {
     atlas = "lfc_spectrals",
     pos = { x = 0, y = 0 },
     cost = 4,
-    config = { extra = { destroy = { min = 1, max = 3 }, tags = 2 } },
+    config = { extra = { destroy = { min = 1, max = 3 }, tags = 2, altspr = false } },
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.destroy.min, card.ability.extra.destroy.max, card.ability.extra.tags } }
     end,
@@ -47,18 +47,12 @@ SMODS.Consumable {
     can_use = function(self, card)
         return G.hand and #G.hand.cards > 1
     end,
-    set_sprites = function(self, card, front)
-        local secret = pseudorandom("lfc_dark_matter_secret", 1, 5) <= 1
-        if secret then
-            --print("Oooh, secret!")
-            card.children.center:set_sprite_pos({ x = 1, y = 0 })
-        end
-    end,
+    set_ability = function(self, card, initial, delay_sprites) card.ability.extra.altspr = pseudorandom("lfc_dark_matter_secret", 1, 5) <= 1 end,
+    update = function(self, card, dt) if not Wormhole.LFC_Util.card_obscured(card) then card.children.center:set_sprite_pos({x = card.ability.extra.altspr and 1 or 0, y = 0}) end end,
     ppu_artist = { "J8-Bit" },
     ppu_coder = { "J8-Bit" },
     ppu_team = { "Lancer Fan Club" },
 }
-
 -- Time Dilation
 SMODS.Consumable {
     key = 'lfc_time_dilation',
