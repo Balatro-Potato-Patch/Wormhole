@@ -9,7 +9,7 @@ SMODS.Atlas {
 
 
 SMODS.Voucher {
-    key = 'abs_star_tap',
+    key = 'abs_happy_hour',
     atlas = 'abs_vouchers',
     pos = {x = 0, y = 0},
     ppu_artist = { 'nixthatoneartist' },
@@ -22,12 +22,10 @@ SMODS.Voucher {
 
 SMODS.Voucher {
     key = 'abs_on_the_house',
+    atlas = 'abs_vouchers',
+    pos = {x = 1, y = 0},
+    ppu_artist = { 'pangaea47' },
     ppu_coder = { 'theAstra' },
     ppu_team = { 'absinthe' },
-    requires = {'v_worm_abs_star_tap'},
-    calculate = function(self, card, context)
-        if context.modify_shop_card and context.card.ability.set == 'abs_drinks' then
-            context.card.cost = 0
-        end
-    end
+    requires = {'v_worm_abs_happy_hour'}
 }

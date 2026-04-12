@@ -159,4 +159,26 @@ function Wormhole.Absinthe.get_card_area_to_emplace(key)
     return area
 end
 
+-- "No Space!" alert but with support for custom 'cover' colours
+function Wormhole.Absinthe.alert_no_space(card, area, colour)
+  colour = colour or adjust_alpha(G.C.BLACK, 0.7)
+    G.CONTROLLER.locks.no_space = true
+  attention_text({
+      scale = 0.9, text = localize('k_no_space_ex'), hold = 0.9, align = 'cm',
+      cover = area, cover_padding = 0.1, cover_colour = colour
+  })
+  card:juice_up(0.3, 0.2)
+  for i = 1, #area.cards do
+    area.cards[i]:juice_up(0.15)
+  end
+  G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.06*G.SETTINGS.GAMESPEED, blockable = false, blocking = false, func = function()
+    play_sound('tarot2', 0.76, 0.4);return true end}))
+    play_sound('tarot2', 1, 0.4)
+
+    G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.5*G.SETTINGS.GAMESPEED, blockable = false, blocking = false,
+    func = function()
+      G.CONTROLLER.locks.no_space = nil
+    return true end}))
+end
+
 --#endregion

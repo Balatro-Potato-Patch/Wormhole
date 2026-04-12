@@ -1,5 +1,8 @@
 Wormhole = SMODS.current_mod
 
+-- Reset Game Globals func to hook
+function Wormhole.reset_game_globals(run_start) end
+
 if PotatoPatchUtils then
     local file_blacklist = {
         -- Format entries as `['filename.txt'] = true`

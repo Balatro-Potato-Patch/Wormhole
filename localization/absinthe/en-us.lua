@@ -261,7 +261,7 @@ return {
                     },
                     {
                         "{C:abs_drinks}Refill{} by {C:red}destroying",
-                        "1 {C:attention}Playing Card{}",
+                        "a {C:attention}playing card{}",
                     }
                 }
             },
@@ -271,13 +271,71 @@ return {
                     {
                         "{C:inactive,s:0.8}Currently Empty{}",
                         "{C:abs_drinks}Refill{} by {C:red}destroying",
-                        "1 {C:attention}Playing Card{}",
+                        "a {C:attention}playing card{}",
                     },
                     {
                         "{C:inactive,s:0.8}After being Refilled:{}",
                         "When {C:attention}primed{}, {C:attention}retriggers",
                         "each played card {C:attention}#1#{} time,",
                         "then is {C:abs_drinks}drank{}",
+                    }
+                }
+            },
+            c_worm_abs_stargarita = {
+                name = 'Stargarita',
+                text = {
+                    {
+                        "When {C:attention}primed{}, next time",
+                        "cards are drawn, draw {C:attention}#1#{}",
+                        "additional cards, then is {C:abs_drinks}drank{}",
+                    },
+                    {
+                        "{C:abs_drinks}Refill{} by using a {C:tarot}Tarot{} card",
+                    }
+                }
+            },
+            c_worm_abs_stargarita_empty = {
+                name = 'Stargarita',
+                text = {
+                    {
+                        "{C:inactive,s:0.8}Currently Empty{}",
+                        "{C:abs_drinks}Refill{} by using a {C:tarot}Tarot{} card",
+                    },
+                    {
+                        "{C:inactive,s:0.8}After being Refilled:{}",
+                        "When {C:attention}primed{}, next time",
+                        "cards are drawn, draw {C:attention}#1#{}",
+                        "additional cards, then is {C:abs_drinks}drank{}",
+                    }
+                }
+            },
+            c_worm_abs_nebulager = {
+                name = 'Nebulager',
+                text = {
+                    {
+                        "When {C:attention}primed{}, next played hand",
+                        "has cards {C:attention}returned{} to {C:attention}hand{}",
+                        "instead of deck, then is {C:abs_drinks}drank{}",
+                    },
+                    {
+                        "{C:abs_drinks}Refill{} by {C:attention}selling #2#{} cards",
+                        "{C:inactive,s:0.8}(#1#/#2#){}",
+                    }
+                }
+            },
+            c_worm_abs_nebulager_empty = {
+                name = 'Nebulager',
+                text = {
+                    {
+                        "{C:inactive,s:0.8}Currently Empty{}",
+                        "{C:abs_drinks}Refill{} by {C:attention}selling #2#{} cards",
+                        "{C:inactive,s:0.8}(#1#/#2#){}",
+                    },
+                    {
+                        "{C:inactive,s:0.8}After being Refilled:{}",
+                        "When {C:attention}primed{}, next played hand",
+                        "has cards {C:attention}returned{} to {C:attention}hand{}",
+                        "instead of deck, then is {C:abs_drinks}drank{}",
                     }
                 }
             },
@@ -382,7 +440,7 @@ return {
         Spectral = {
 
             c_worm_abs_absinthe = {
-                name = 'Absinthe (WIP)',
+                name = 'Artemisia Absinthe (WIP)',
                 text = {
                     {
                         "When {C:attention}Blind{} is selected,",
@@ -403,7 +461,7 @@ return {
                 }
             },
             c_worm_abs_absinthe_empty = {
-                name = 'Absinthe (WIP)',
+                name = 'Artemisia Absinthe (WIP)',
                 text = {
                     {
                         "{C:inactive,s:0.8}Currently Empty{}",
@@ -428,8 +486,8 @@ return {
             },
         },
         Voucher = {
-            v_worm_abs_star_tap = {
-                name = 'Star Tap',
+            v_worm_abs_happy_hour = {
+                name = 'Happy Hour',
                 text = {
                     '{C:abs_drinks}Drinks{} can now',
                     'appear in the {C:attention}Shop'
@@ -438,8 +496,8 @@ return {
             v_worm_abs_on_the_house = {
                 name = 'On The House',
                 text = {
-                    '{C:abs_drinks}Drinks{} in the {C:attention}Shop',
-                    'are {C:money}free'
+                    '{C:abs_drinks}Drinks{} can be used {C:attention}twice',
+                    'before needing to be {C:abs_drinks}Refilled'
                 }
             },
         },
@@ -528,11 +586,13 @@ return {
             k_abs_drinks = 'Drinks',
             k_plus_drink = '+1 Drink',
             k_worm_abs_emptied_ex = 'Emptied!',
+            k_worm_abs_sipped_ex = 'Sipped!',
             k_worm_abs_refilled_ex = 'Refilled!',
             k_worm_abs_top_shelf_pack = 'Top Shelf Pack'
         },
         v_dictionary = {
             a_discards = "+#1# Discards",
+            a_drawn = "+#1# Cards",
         },
     }
 }
