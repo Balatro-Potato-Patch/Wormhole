@@ -1,37 +1,36 @@
 SMODS.Joker{ --Flat Earth
     key = 'flat_earth',
-    config = {extra = {chips = 0, chips_mod = 30,}},
+    config = {extra = {chips = 0, chips_mod = 2,}},
     rarity = 1,
-    cost = 4,
+    cost = 5,
     atlas = 'stewjokers',
     pos = {x=1, y=1},
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = false,
 
+    update_chips = function (self, card)
+        local non_spades = 0
+        for _, card in pairs(G.playing_cards) do
+            if not card:is_suit("Spades") then
+                non_spades = non_spades + 1
+            end
+        end
+        card.ability.extra.chips = non_spades * card.ability.extra.chips_mod
+
+    end,
+
     loc_vars = function (self, info_queue, card)
-        return{
+        self:update_chips(card)
+
+        return {
             vars = {card.ability.extra.chips, card.ability.extra.chips_mod}
         }
     end,
 
     calculate = function (self, card, context)
-        if context.remove_playing_cards and not context.blueprint then
-            local spade_cards = 0
-            for _, removed_card in ipairs(context.removed) do
-                if removed_card:is_suit('Spades') then spade_cards = spade_cards + 1
-                end
-            end
-            if spade_cards > 0 then
-                card.ability.extra.chips = card.ability.extra.chips + spade_cards * card.ability.extra.chips_mod
-                return{
-                    message = localize {type = 'variable', key = 'a_chips', vars = {card.ability.extra.chips}},
-                    colour = G.C.CHIPS
-                }
-            end
-        end
-        --TO DO: make it so it updates when spades are suit changed out of
         if context.joker_main then
+            self:update_chips(card)
             return {
                 chips = card.ability.extra.chips
             }

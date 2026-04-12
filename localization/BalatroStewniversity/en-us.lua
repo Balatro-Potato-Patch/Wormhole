@@ -13,9 +13,10 @@ return {
             j_worm_flat_earth = {
                 name = 'Flat Earth',
                 text = {
-                    'This Joker gains {C:chips}+#2#{} Chips',
-                    'for each {C:spades}Spade{} card removed',
-                    '{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips){}'
+                    "{C:chips}+#1#{} Chips for each",
+                    "non-{C:spades}Spade{} card",
+                    "in your full deck",
+                    "{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)",
                 } 
             },
 
