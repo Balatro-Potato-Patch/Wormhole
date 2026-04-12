@@ -849,7 +849,9 @@ SMODS.Joker{
 					end
 				}))
 				delay(0.6)
-				SMODS.calculate_effect({message = "Bazinga!", card})
+				return {
+					message = "Bazinga!"
+				}
 			end
 		card.ability.extra.JokerNeed = 15 - card.ability.extra.JokerCount
 		end
