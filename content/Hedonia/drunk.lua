@@ -22,7 +22,7 @@ end
 local function drunk_behaviour(self, card, context)
     if context.main_scoring and context.cardarea == G.hand then
         if drunk_level_chance(card, self.config.extra.sober_base, self.config.extra.sober_chance, self.config.extra.edition_soberer) then
-            return { message = "Sobered up" }
+            return { message = "Sobered Up!" }
         end
     end
 
@@ -42,7 +42,7 @@ SMODS.Edition {
     key = "hedonia_tipsy",
     shader = "hedonia_shader_drunk", -- TODO actually write the shader
     -- shader = false,
-    loc_txt = { name = 'Tipsy', text = { 'This is example text' }, label = 'Tipsy' },
+    loc_txt = { name = 'Tipsy', text = { '{C:green}#1# in #2#{} chance', 'to sober up', '{C:green}#3# in #4#{} chance', 'to get drunker', 'Cards played have a random rank', '{s:0.8}{C:inactive}(max variance: #5#)'}, label = 'Tipsy' },
     in_shop = false,            -- TODO discuss adding to shop if a bartender is owned as a hidden mechanic, see in_pool()
     extra_cost = -1,
     disable_base_shader = true, -- shader will modify card shape when implimented so this should be true
@@ -67,7 +67,7 @@ SMODS.Edition {
             self.config.extra.sober_chance)
         local drunker_base, drunker_chance = SMODS.get_probability_vars(card, self.config.extra.drunker_base,
             self.config.extra.drunker_chance)
-        return { vars = { sober_base, sober_chance, self.config.extra.rank_range, drunker_base, drunker_chance } }
+        return { vars = { sober_base, sober_chance, drunker_base, drunker_chance, self.config.extra.rank_range } }
     end,
 
     calculate = function(self, card, context)
@@ -79,7 +79,7 @@ SMODS.Edition {
     key = "hedonia_drunk",
     shader = "hedonia_shader_drunk", -- TODO actually write the shader
     -- shader = false,
-    loc_txt = { name = 'Drunk', text = { 'This is example text' }, label = 'Drunk' },
+    loc_txt = { name = 'Drunk', text = { '{C:green}#1# in #2#{} chance', 'to sober up', '{C:green}#3# in #4#{} chance', 'to get drunker', 'Cards played have a random rank', '{s:0.8}{C:inactive}(max variance: #5#)'}, label = 'Drunk' },
     in_shop = false,            -- TODO discuss adding to shop if a bartender is owned as a hidden mechanic, see in_pool()
     extra_cost = -1,
     disable_base_shader = true, -- shader will modify card shape when implimented so this should be true
@@ -104,7 +104,7 @@ SMODS.Edition {
             self.config.extra.sober_chance)
         local drunker_base, drunker_chance = SMODS.get_probability_vars(card, self.config.extra.drunker_base,
             self.config.extra.drunker_chance)
-        return { vars = { sober_base, sober_chance, self.config.extra.rank_range, drunker_base, drunker_chance } }
+        return { vars = { sober_base, sober_chance, drunker_base, drunker_chance, self.config.extra.rank_range } }
     end,
 
     calculate = function(self, card, context)
@@ -119,7 +119,7 @@ SMODS.Edition {
     key = "hedonia_very_drunk",
     shader = "hedonia_shader_drunk", -- TODO actually write the shader
     -- shader = false,
-    loc_txt = { name = 'Very Drunk', text = { 'This is example text' }, label = 'Very Drunk' },
+    loc_txt = { name = 'Very Drunk', text = {'{C:green}#1# in #2#{} chance', 'to sober up', '{C:green}#3# in #4#{} chance', 'to get drunker', 'Cards played have a random rank', '{s:0.8}{C:inactive}(max variance: #5#)'}, label = 'Very Drunk' },
     in_shop = false,            -- TODO discuss adding to shop if a bartender is owned as a hidden mechanic, see in_pool()
     extra_cost = -1,
     disable_base_shader = true, -- shader will modify card shape when implimented so this should be true
@@ -143,7 +143,7 @@ SMODS.Edition {
             self.config.extra.sober_chance)
         local drunker_base, drunker_chance = SMODS.get_probability_vars(card, self.config.extra.drunker_base,
             self.config.extra.drunker_chance)
-        return { vars = { sober_base, sober_chance, self.config.extra.rank_range, drunker_base, drunker_chance } }
+        return { vars = { sober_base, sober_chance, drunker_base, drunker_chance, self.config.extra.rank_range } }
     end,
 
     calculate = function(self, card, context)
@@ -155,7 +155,7 @@ SMODS.Edition {
     key = "hedonia_blackout",
     shader = "hedonia_shader_drunk",
     -- shader = false,
-    loc_txt = { name = 'Blackout', text = { 'This is example text' }, label = 'Blackout' },
+    loc_txt = { name = 'Blackout', text = {'{C:green}#1# in #2#{} chance', 'to sober up', '{C:green}#3# in #4#{} chance', 'to {C:red,E:2}self destruct{}' }, label = 'Blackout' },
     in_shop = false,            -- TODO discuss adding to shop if a bartender is owned as a hidden mechanic, see in_pool()
     extra_cost = -1,
     disable_base_shader = true, -- shader will modify card shape when implimented so this should be true
@@ -174,7 +174,7 @@ SMODS.Edition {
             self.config.extra.sober_chance)
         local destroy_base, destroy_chance = SMODS.get_probability_vars(card, self.config.extra.destroy_base,
             self.config.extra.destroy_chance)
-        return { vars = { sober_base, sober_chance, self.config.extra.rank_range, destroy_base, destroy_chance } }
+        return { vars = { sober_base, sober_chance, destroy_base, destroy_chance } }
     end,
 
     calculate = function(self, card, context)
