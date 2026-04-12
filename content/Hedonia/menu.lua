@@ -95,6 +95,11 @@ SMODS.Consumable {
     use = function(self, card, area, copier)
         local card_to_bonus = pseudorandom_element(G.hand.cards, 'alcohol') --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/spectrals.lua#L26
         card_to_bonus.ability.perma_bonus = (card_to_bonus.ability.perma_bonus or 0) + card.ability.extra.bonus --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/jokers.lua#L1442
+        G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
+            play_sound('timpani')
+            card_to_bonus:juice_up(0.3, 0.5)
+            return true end }))
+        delay(0.6)
         return {
             card = card_to_bonus,
             message = 'Upgrade!'
@@ -156,13 +161,13 @@ SMODS.Consumable {
         return {vars = {center.ability.extra.cards}}
     end,
     use = function(self, card, area, copier)
-        local rank = pseudorandom_element(SMODS.Ranks, 'debbie') --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/spectrals.lua#L415
-        for i = 1, #G.hand.highlighted do --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/tarots.lua#L695
-            SMODS.modify_rank(G.hand.highlighted[i], rank)
+        local rank = pseudorandom_element(SMODS.Ranks, 'debbie').key
+        for i = 1, #G.hand.highlighted do
+            SMODS.change_base(G.hand.highlighted[i], nil, rank)
         end
     end,
     can_use = function(self, card)
-        return #G.hand.highlighted == 2
+        return G.hand and #G.hand.highlighted == card.ability.extra.cards
     end
 }
 
@@ -178,13 +183,13 @@ SMODS.Consumable {
         return {vars = {center.ability.extra.cards}}
     end,
     use = function(self, card, area, copier)
-        local suit = pseudorandom_element(SMODS.Suits, 'space_jam')
+        local suit = pseudorandom_element(SMODS.Suits, 'space_jam').key
         for i = 1, #G.hand.highlighted do
-            SMODS.modify_suit(G.hand.highlighted[i], suit)
+            SMODS.change_base(G.hand.highlighted[i], suit)
         end
     end,
     can_use = function(self, card)
-        return #G.hand.highlighted == 2
+        return G.hand and #G.hand.highlighted == card.ability.extra.cards
     end
 }
 
