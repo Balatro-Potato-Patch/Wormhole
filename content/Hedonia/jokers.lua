@@ -22,17 +22,26 @@ SMODS.Joker {
         return {vars = {center.ability.extra.items}}
     end,
     calculate = function(self, card, context)
-        --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/jokers.lua#L2586 and https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/jokers.lua#L4472
-        if context.individual and context.other_card.lucky_trigger and #G.consumeables.cards < G.consumeables.config.card_limit then
-            --https://github.com/Trif3ctal/Lucky-Rabbit/blob/82b67214f7865d37953771fe58e80ba6cd7aee25/content/jokers/sad_clown.lua#L36
-            G.E_MANAGER:add_event(Event({
-                func = function()
-                    play_sound('timpani')
-                    SMODS.add_card({set = "worm_hedonia_menu", area = G.consumeables, key_append = '_casino'})
-                    G.GAME.consumeable_buffer = 0
-                    return true
-                end
-            }))
+        --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/jokers.lua#L2586
+        if context.individual and context.cardarea == G.play and SMODS.has_enhancement(context.other_card, 'm_lucky') then
+            -- add drunk if lucky card not drunk
+            local edition = SMODS.poll_edition({guaranteed = true, options = {{name = "e_worm_hedonia_drunk", weight = 1}}})
+            if not context.other_card.edition or (context.other_card.edition and not context.other_card.edition == edition) then
+                context.other_card:set_edition(edition, true, true)
+            end
+            -- spawn menu item if lucky card triggered
+            --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/jokers.lua#L608
+            if context.other_card.lucky_trigger and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+                G.GAME.consumeable_buffer = (G.GAME.consumeable_buffer or 0) + 1
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        play_sound('timpani')
+                        SMODS.add_card({set = "worm_hedonia_menu", area = G.consumeables, key_append = '_casino'})
+                        G.GAME.consumeable_buffer = 0
+                        return true
+                    end
+                }))
+            end
         end
     end
 }
@@ -66,5 +75,11 @@ SMODS.Joker {
                 --trigger blueprint func
         --when end of round
             --empty list
+    end,
+    add_to_deck = function()
+        G.jokers:change_size(-1)
+    end,
+    remove_from_deck = function()
+        G.jokers:change_size(1)
     end
 }

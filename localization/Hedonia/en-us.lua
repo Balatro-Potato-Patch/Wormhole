@@ -5,9 +5,9 @@ return {
             j_worm_hedonia_casino = {
                 name = 'Casino Bartender',
                 text = {
+                    'Add Drunk to Lucky Cards',
                     'Creates Menu Items',
                     'when Lucky Card triggers',
-                    'Add Drunk to Lucky Cards'
                 }
             },
             j_worm_hedonia_trash = {
