@@ -2,7 +2,7 @@
 
 SMODS.ConsumableType {
     key = "worm_hedonia_menu",
-    collection_rows = { 4, 3 },
+    collection_rows = { 4, 4 },
     primary_colour = HEX("9b7abb"), --shoutout cryptid https://github.com/SpectralPack/Cryptid/blob/8e041f1b8b3c2f2c5379dabe55bdfb74d28dc08b/items/code.lua#L4
     secondary_colour = HEX("503a66")
 }
@@ -92,13 +92,19 @@ SMODS.Consumable {
             if SMODS.has_enhancement(v, 'worm_hedonia_tipsy') then --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/jokers.lua#L791
                 card:set_edition(nil, true)
             elseif SMODS.has_enhancement(v, 'worm_hedonia_drunk') then
-                card:set_edition('worm_hedonia_tipsy', true)
+                local edition = SMODS.poll_edition({guaranteed = true, options = {{name = "e_worm_hedonia_tipsy", weight = 1}}})
+                card:set_edition(edition, true)
             elseif SMODS.has_enhancement(v, 'worm_hedonia_very_drunk') then
-                card:set_edition('worm_hedonia_drunk', true)
+                local edition = SMODS.poll_edition({guaranteed = true, options = {{name = "e_worm_hedonia_drunk", weight = 1}}})
+                card:set_edition(edition, true)
             elseif SMODS.has_enhancement(v, 'worm_hedonia_blackout') then
-                card:set_edition('worm_hedonia_very_drunk', true)
+                local edition = SMODS.poll_edition({guaranteed = true, options = {{name = "e_worm_hedonia_very_drunk", weight = 1}}})
+                card:set_edition(edition, true)
             end
         end
+    end,
+    can_use = function(self, card)
+        return G.hand and G.hand.cards
     end
 }
 
