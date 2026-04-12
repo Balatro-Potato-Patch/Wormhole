@@ -88,23 +88,36 @@ SMODS.Consumable {
     atlas = "menu",
     pos = {x = 1, y = 1},
     use = function(self, card, area, copier)
-        for i, v in G.hand.cards do
-            if SMODS.has_enhancement(v, 'worm_hedonia_tipsy') then --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/jokers.lua#L791
-                card:set_edition(nil, true)
-            elseif SMODS.has_enhancement(v, 'worm_hedonia_drunk') then
+        for i, v in pairs(G.hand.cards) do
+            local is_drunk = v.edition and v.edition.key
+            if is_drunk == 'e_worm_hedonia_tipsy' then --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/jokers.lua#L791
+                v:set_edition(nil, true)
+            elseif is_drunk == 'e_worm_hedonia_drunk' then
                 local edition = SMODS.poll_edition({guaranteed = true, options = {{name = "e_worm_hedonia_tipsy", weight = 1}}})
-                card:set_edition(edition, true)
-            elseif SMODS.has_enhancement(v, 'worm_hedonia_very_drunk') then
+                v:set_edition(edition, true)
+            elseif is_drunk == 'e_worm_hedonia_very_drunk' then
                 local edition = SMODS.poll_edition({guaranteed = true, options = {{name = "e_worm_hedonia_drunk", weight = 1}}})
-                card:set_edition(edition, true)
-            elseif SMODS.has_enhancement(v, 'worm_hedonia_blackout') then
+                v:set_edition(edition, true)
+            elseif is_drunk == 'e_worm_hedonia_blackout' then
                 local edition = SMODS.poll_edition({guaranteed = true, options = {{name = "e_worm_hedonia_very_drunk", weight = 1}}})
-                card:set_edition(edition, true)
+                v:set_edition(edition, true)
             end
         end
     end,
     can_use = function(self, card)
-        return G.hand and G.hand.cards
+        local has_drunk = false
+        if G.hand and G.hand.cards then
+            for i,v in pairs(G.hand.cards) do
+                if has_drunk == true then break end
+                has_drunk = v.edition and (
+                    v.edition.key == 'e_worm_hedonia_tipsy' or
+                    v.edition.key == 'e_worm_hedonia_drunk' or
+                    v.edition.key == 'e_worm_hedonia_very_drunk' or
+                    v.edition.key == 'e_worm_hedonia_blackout'
+                )
+            end
+        end
+        return has_drunk
     end
 }
 
