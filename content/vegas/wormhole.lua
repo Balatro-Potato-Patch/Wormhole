@@ -751,7 +751,7 @@ SMODS.Joker{
 		local GameSeeded = G.GAME.seeded -- Store whether or not this run was seeded
 		local GameStake = G.GAME.stake
 		local GameChallange = G.GAME.challenge
-		if context.end_of_round and context.game_over and context.main_eval then
+		if context.end_of_round and context.game_over and context.main_eval and not next(SMODS.find_card('j_mr_bones')) then
 			--instead of calling G.FUNCS.start_run(e, args), just do what it does and set the seed after run creation
 			G.SETTINGS.paused = true 
 			G.E_MANAGER:clear_queue() 
