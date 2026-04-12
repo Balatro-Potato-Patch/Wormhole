@@ -8,5 +8,6 @@ SMODS.Joker{
 		return {vars = {colours = {SMODS.ConsumableTypes.worm_tlr_constellation.secondary_colour}}}
 	end,
 	ppu_team = {"TheLastResort"},
-	ppu_coder = {"Foo54"}
+	ppu_coder = {"Foo54"},
+	ppu_artist = {"Aura2247"}
 }

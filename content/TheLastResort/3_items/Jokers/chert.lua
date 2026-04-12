@@ -28,5 +28,6 @@ SMODS.Joker {
         end
     end,
     ppu_team = {"TheLastResort"},
-	ppu_coder = {"Amphiapple"}
+	ppu_coder = {"Amphiapple"},
+    ppu_artist = {"Aura2247"}
 }

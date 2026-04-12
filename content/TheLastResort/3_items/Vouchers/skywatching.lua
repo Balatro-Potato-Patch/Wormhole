@@ -4,6 +4,7 @@ SMODS.Voucher {
 	pos = { x = 0, y = 0 },
     ppu_coder = {"Amphiapple"},
     ppu_artist = {"Jogla"},
+    ppu_team = {"TheLastResort"},
 	cost = 10,
     config = { extra = { rate = 4 } },
 

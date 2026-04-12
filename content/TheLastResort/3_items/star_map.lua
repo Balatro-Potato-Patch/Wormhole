@@ -39,7 +39,7 @@ SMODS.Consumable{
 				love.graphics.scale(1/scale)
 				love.graphics.translate((x) / 10, (y) / 10)
 				love.graphics.translate(-img:getWidth() / 2, -img:getHeight() / 2)
-				love.graphics.draw(img, 0, 0)
+				love.graphics.draw(img, 0, 0, 0, 0.8, 0.8) -- arbitrary scaling values
 				love.graphics.setShader(shader)
 				love.graphics.pop()
 				love.graphics.pop()
