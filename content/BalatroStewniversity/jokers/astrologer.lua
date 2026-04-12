@@ -4,7 +4,7 @@ SMODS.Joker {
     ppu_artist = { "pending" },
     ppu_coder = { "stupxd" },
 
-    key = 'astrologer',
+    key = 'stew_astrologer',
     rarity = "Common",
     cost = 4,
     atlas = 'stewjokers',

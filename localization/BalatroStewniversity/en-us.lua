@@ -1,7 +1,7 @@
 return {
     descriptions = {
         Joker = {
-            j_worm_stew_earth = {
+            j_worm_stew_stew_earth = {
                 name = "Stew Earth",
                 text = {
                     '{X:mult,C:white}X#1#{} Mult, gains {X:mult,C:white}X#2#{} Mult',
@@ -10,7 +10,7 @@ return {
                 },
             },
 
-            j_worm_flat_earth = {
+            j_worm_stew_flat_earth = {
                 name = 'Flat Earth',
                 text = {
                     "{C:chips}+#2#{} Chips for each",
@@ -20,7 +20,7 @@ return {
                 } 
             },
 
-            j_worm_dinosaur_earth = {
+            j_worm_stew_dinosaur_earth = {
                 name = 'Dinosaur Earth',
                 text = {
                     '{C:green}#1# in #2#{} chance for',
@@ -30,7 +30,7 @@ return {
                 }
             },
 
-            j_worm_impact_crater = {
+            j_worm_stew_impact_crater = {
                 name = 'Impact Crater',
                 text = {
                     '{C:green}#2# in #3#{} chance to create',
@@ -39,7 +39,7 @@ return {
                     }
             },
 
-            j_worm_staged_landing = {
+            j_worm_stew_staged_landing = {
                 name = 'Staged Landing',
                 text = {
                     'This Joker gains {C:mult}+#2#{} Mult',
@@ -49,7 +49,7 @@ return {
                 }
             },
 
-            j_worm_stardust = {
+            j_worm_stew_stardust = {
                 name = 'Stardust',
                 text = {
                     'This Joker gains {C:money}$#1#{} of',
@@ -58,7 +58,7 @@ return {
                 }
             },
 
-            j_worm_8_ball_earth = {
+            j_worm_stew_8_ball_earth = {
                 name = '8 Ball Earth',
                 text = {
                     '{C:attention}Fill{} consumable slots with random',
@@ -69,7 +69,7 @@ return {
                 }
             },
 
-            j_worm_stargazer = {
+            j_worm_stew_stargazer = {
                 name = 'Stargazer',
                 text = {
                     'Gives {X:mult,C:white}X#1#{} Mult for each',
@@ -78,7 +78,7 @@ return {
                 }
             },
 
-            j_worm_geocentrism = {
+            j_worm_stew_geocentrism = {
                 name = 'Geocentrism',
                 text = {
                     "Played cards with",
@@ -87,7 +87,7 @@ return {
                 }
             },
 
-            j_worm_astrologer = {
+            j_worm_stew_astrologer = {
                 name = 'Astrologer',
                 text = {
                     "Creates a random {C:planet}Planet{}",
@@ -96,7 +96,7 @@ return {
                 }
             },
 
-            j_worm_cheese_moon = {
+            j_worm_stew_cheese_moon = {
                 name = 'Cheese Moon',
                 text = {
                     '{C:green}#2# in #3#{} chance to destroy',
@@ -108,7 +108,7 @@ return {
         },
 
         Tarot = {
-            c_worm_orbit = {
+            c_worm_stew_orbit = {
                 name = "The Orbit",
                 text = {
                     "Earn {C:money}$#1#{} per",
@@ -120,7 +120,7 @@ return {
         },
 
         Spectral = {
-            c_worm_solar_flare = {
+            c_worm_stew_solar_flare = {
                 name = "Solar Flare",
                 text = {
                     "{C:attention}Debuff{} all cards in hand",
@@ -132,7 +132,7 @@ return {
 
 
         Edition = {
-            e_worm_stellar = {
+            e_worm_stew_stellar = {
                 name = "Stellar",
                 text = {
                     "{C:green}#1# in #2#{} chance to",
@@ -143,7 +143,7 @@ return {
         },
 
         Tag = {
-            tag_worm_stellar = {
+            tag_worm_stew_stellar = {
                 name = "Stellar Tag",
                 text = {
                     "Shop has a free",
@@ -153,7 +153,7 @@ return {
         },
 
         Blind = {
-            bl_worm_pull = {
+            bl_worm_stew_pull = {
                 name = "The Pull",
                 text = {
                     "Increases in size",

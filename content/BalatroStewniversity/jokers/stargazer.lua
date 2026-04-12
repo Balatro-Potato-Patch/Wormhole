@@ -4,7 +4,7 @@ SMODS.Joker {
     ppu_artist = { "dottykitty" },
     ppu_coder = { "PLagger" },
 
-    key = 'stargazer',
+    key = 'stew_stargazer',
     config = {extra = {xmult = 1}},
     rarity = 2,
     cost = 6,

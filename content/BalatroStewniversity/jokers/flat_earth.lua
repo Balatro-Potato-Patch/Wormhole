@@ -4,7 +4,7 @@ SMODS.Joker {
     ppu_artist = { "PLagger" },
     ppu_coder = { "PLagger" },
 
-    key = 'flat_earth',
+    key = 'stew_flat_earth',
     config = {extra = {chips = 78, chips_mod = 2,}},
     rarity = 1,
     cost = 5,

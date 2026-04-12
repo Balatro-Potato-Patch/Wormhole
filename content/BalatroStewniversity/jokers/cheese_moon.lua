@@ -4,7 +4,7 @@ SMODS.Joker {
     ppu_artist = { "dottykitty" },
     ppu_coder = { "PLagger" },
 
-    key = 'cheese_moon',
+    key = 'stew_cheese_moon',
     config = {extra = {hands_left = 8, odds = 2}},
     rarity = 2,
     cost = 6,

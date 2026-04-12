@@ -1,7 +1,7 @@
 
 
 SMODS.Shader {
-    key = "chromakey",
+    key = "stew_chromakey",
     path = "BalatroStewniversity/chromakey.fs"
 }
 

@@ -5,7 +5,7 @@ SMODS.Joker {
     ppu_artist = { "Wingcap" },
     ppu_coder = { "PLagger" },
 
-    key = 'impact_crater',
+    key = 'stew_impact_crater',
     config = {extra = {odds = 2}},
     rarity = 2,
     cost = 6,

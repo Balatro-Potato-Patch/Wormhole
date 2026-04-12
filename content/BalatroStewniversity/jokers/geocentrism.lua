@@ -5,7 +5,7 @@ SMODS.Joker {
     ppu_artist = { "Wingcap" },
     ppu_coder = { "stupxd" },
 
-    key = 'geocentrism',
+    key = 'stew_geocentrism',
     config = {extra = {Xmult = 1.25}},
     rarity = "Common",
     cost = 5,

@@ -5,7 +5,7 @@ SMODS.Consumable {
     ppu_artist = { "dottykitty" },
     ppu_coder = { "stupxd" },
 
-    key = 'orbit',
+    key = 'stew_orbit',
     set = 'Tarot',
     atlas = "stewconsumables",
     pos = { x = 0, y = 0 },

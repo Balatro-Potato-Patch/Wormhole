@@ -5,7 +5,7 @@ SMODS.Joker {
     ppu_artist = { "Wingcap" },
     ppu_coder = { "PLagger" },
 
-    key = 'stew_earth',
+    key = 'stew_stew_earth', -- haha
     config = {extra = {Xmult = 1.5, Xmult_up = 0.5, Xmult_down = 0.25}},
     rarity = 2,
     cost = 4,

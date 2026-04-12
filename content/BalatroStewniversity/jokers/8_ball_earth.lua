@@ -4,7 +4,7 @@ SMODS.Joker{
     ppu_artist = { "Wingcap" },
     ppu_coder = { "PLagger" },
 
-    key = '8_ball_earth',
+    key = 'stew_8_ball_earth',
     config = {extra = {poker_hand = 'Full House'}},
     rarity = 2,
     cost = 6,

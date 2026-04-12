@@ -5,7 +5,7 @@ SMODS.Blind {
     ppu_artist = { "tuzzo" },
     ppu_coder = { "stupxd" },
 
-    key = "pull",
+    key = "stew_pull",
     dollars = 5,
     mult = 2,
     mult_per_rounds_played = {2, 4, 6},

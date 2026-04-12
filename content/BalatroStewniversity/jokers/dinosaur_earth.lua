@@ -5,7 +5,7 @@ SMODS.Joker {
     ppu_artist = { "dottykitty" },
     ppu_coder = { "PLagger", "stupxd" },
 
-    key = 'dinosaur_earth',
+    key = 'stew_dinosaur_earth',
     config = {extra = {odds = 6, ante = 1}},
     rarity = 3,
     cost = 9,

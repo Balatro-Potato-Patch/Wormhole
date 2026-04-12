@@ -4,7 +4,7 @@ SMODS.Joker {
     ppu_artist = { "dottykitty" },
     ppu_coder = { "PLagger" },
 
-    key = 'staged_landing',
+    key = 'stew_staged_landing',
     config = {extra = {mult = 0, mult_mod = 4}},
     rarity = 1,
     cost = 4,

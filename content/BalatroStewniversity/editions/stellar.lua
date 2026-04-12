@@ -5,7 +5,7 @@ SMODS.Edition {
     ppu_artist = { "stupxd" },
     ppu_coder = { "PLagger" },
 
-    key = 'stellar',
+    key = 'stew_stellar',
     shader = false,
     config = {odds = 4},
     in_shop = true,

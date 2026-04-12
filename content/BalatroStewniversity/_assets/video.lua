@@ -109,8 +109,8 @@ function Game:draw(...)
             video_sprite:draw()
         end)
 
-        G.SHADERS['worm_chromakey']:send("target_hue", target_hue)
-        love.graphics.setShader( G.SHADERS['worm_chromakey'] )
+        G.SHADERS['worm_stew_chromakey']:send("target_hue", target_hue)
+        love.graphics.setShader( G.SHADERS['worm_stew_chromakey'] )
         love.graphics.draw(canvas, quad, 0, 0, 0, 1, 1)
 
         love.graphics.pop()

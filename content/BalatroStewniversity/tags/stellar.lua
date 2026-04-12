@@ -5,7 +5,7 @@ SMODS.Tag {
     ppu_artist = { "pending" },
     ppu_coder = { "stupxd" },
 
-    key = "stellar",
+    key = "stew_stellar",
     pos = { x = 0, y = 0 },
     loc_vars = function(self, info_queue, tag)
         info_queue[#info_queue + 1] = G.P_CENTERS.e_worm_stellar

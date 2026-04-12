@@ -18,7 +18,7 @@ SMODS.Consumable {
     ppu_artist = { "dottykitty" },
     ppu_coder = { "stupxd" },
 
-    key = 'solar_flare',
+    key = 'stew_solar_flare',
     set = 'Spectral',
     atlas = "stewconsumables",
     pos = { x = 1, y = 0 },
