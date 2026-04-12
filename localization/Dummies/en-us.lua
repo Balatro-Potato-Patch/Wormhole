@@ -79,9 +79,9 @@ return {
                 },
             },
             j_worm_dum_garlicbread = {
-                name = { "Garlic Bread that", "went to Space" },
+                name = { "{C:worm_dum_garlicbread}Garlic Bread{} that", "went to {C:planet}Space{}" },
                 text = {
-                    "{C:attention}All{} poker hands are {C:attention}upgraded{}",
+                    "Upgrade {C:attention}all{} poker hands",
                     "after using {C:attention}#2#{} {C:planet}Planet{} cards",
                     "{C:inactive}(Currently {C:attention}#1#{C:inactive}){}"
                 },
@@ -122,7 +122,7 @@ return {
                 },
             },
 			j_worm_dum_scrooge = {
-                name = "DuckTales: The Moon",
+                name = "{C:worm_dum_scrooge}DuckTales{}: {C:planet}The Moon{}",
                 text = {
                     "Earn {C:money}#1#{} for {C:attention}every{} poker hand",
                     "in played hand when holding their",
@@ -130,7 +130,7 @@ return {
                 },
             },
             j_worm_dum_spaghet = {
-                name = "Spaghettification",
+                name = "{C:worm_dum_spaghet}Spaghettification",
                 text = {
 					"If a {C:planet}Planet{} card is held for {C:attention}discarded{}",
 					"poker hand, {C:red}destroy{} {C:planet}it{} and add",
@@ -140,7 +140,7 @@ return {
                 },
             },
 			j_worm_dum_timcurry = {
-                name = "Tim Curry",
+                name = "{C:worm_dum_timcurry}Tim Curry{}",
                 text = {
 					{
 						"Upgrade a {C:attention}random{} poker hand",
