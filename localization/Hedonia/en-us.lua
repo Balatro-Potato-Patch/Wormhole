@@ -5,17 +5,17 @@ return {
             j_worm_hedonia_casino = {
                 name = 'Casino Bartender',
                 text = {
-                    'meow',
-                    'meow meow',
-                    'meowww'
+                    'Creates Menu Items',
+                    'when Lucky Card triggers',
+                    'Add Drunk to Lucky Cards'
                 }
             },
             j_worm_hedonia_trash = {
                 name = 'Trash Compactor',
                 text = {
-                    'meow',
-                    'meow meow',
-                    'meowww'
+                    '-1 Joker slot',
+                    'Gain effects of all',
+                    'sold Jokers until end of round'
                 }                
             }
         },
