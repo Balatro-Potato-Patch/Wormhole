@@ -94,7 +94,6 @@ SMODS.Tag({
 			card.states.visible = false
 			tag:yep("+", G.C.RED, function()
 				card:start_materialize()
-				card.ability.couponed = true
 				card:set_cost()
 				return true
 			end)
