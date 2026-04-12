@@ -382,7 +382,7 @@ SMODS.Consumable{
     cost = 4,
     set = 'shrug_alien',
     atlas = 'shrug_alien_cards',
-    pos = {x = 0, y = 0},
+    pos = {x = 5, y = 0},
     unlocked = true,
     discovered = true,
     config = {extra = {odds = 2}},
@@ -409,7 +409,8 @@ SMODS.Consumable{
         flip_multiple(G.hand.cards)
     end,
     ppu_coder = {"randomsongv2"},
-    ppu_team = {"shrug"}
+    ppu_team = {"shrug"},
+    ppu_artist = {"waffle", "microwave"}
 }
 
 -- Zeta Reticulan
