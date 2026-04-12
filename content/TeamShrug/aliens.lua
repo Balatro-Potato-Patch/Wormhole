@@ -43,7 +43,8 @@ local alien_booster = SMODS.Booster:extend{
         return false
     end,
     ppu_coder = {"randomsongv2"},
-    ppu_team = {"shrug"}
+    ppu_team = {"shrug"},
+    ppu_artist = {"waffle"}
 }
 alien_booster{
     key = "shrug_alien_normal_1",
