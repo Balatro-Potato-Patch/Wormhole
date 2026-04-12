@@ -1,6 +1,6 @@
 -- Ulala
 SMODS.Joker({
-    key = 'ulala',
+    key = 'riverboat_ulala',
     atlas = 'worm_jokers',
     pos = { x = 2, y = 0 },
     rarity = 2, -- Uncommon

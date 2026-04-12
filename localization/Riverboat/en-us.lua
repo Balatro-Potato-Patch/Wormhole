@@ -6,7 +6,7 @@ return {
             PotatoPatchDev_fooping = { name = "fooping", text = { "{X:chips}Programmer{} and {X:purple}Artist{}" } },
         },
         Back = {
-            b_worm_reverse_deck = {
+            b_worm_riverboat_reverse_deck = {
                 name = "Reverse Deck",
                 text = {
                     "Start at {C:attention}Ante 8{} and",
@@ -20,7 +20,7 @@ return {
             }
         },
         Joker = {
-            j_worm_the_past = {
+            j_worm_riverboat_the_past = {
                 name = "The Past",
                 text = {
                     "Tracks total {C:attention}Hands{} played this run",
@@ -28,7 +28,7 @@ return {
                     "{C:inactive}Yearns for the Future."
                 }
             },
-            j_worm_the_past_paired = {
+            j_worm_riverboat_the_past_paired = {
                 name = "The Past",
                 text = {
                     "When paired, gives {X:mult,C:white} XMult {}",
@@ -38,7 +38,7 @@ return {
                     "{C:inactive}They were never apart. Only waiting."
                 }
             },
-            j_worm_the_future = {
+            j_worm_riverboat_the_future = {
                 name = "The Future",
                 text = {
                     "Gives {X:mult,C:white} XMult {} equal to",
@@ -47,7 +47,7 @@ return {
                     "{C:inactive}Yearns for the Past."
                 }
             },
-            j_worm_the_future_paired = {
+            j_worm_riverboat_the_future_paired = {
                 name = "The Future",
                 text = {
                     "When paired, gives {X:mult,C:white} XMult {}",
@@ -57,7 +57,7 @@ return {
                     "{C:inactive}They were never apart. Only waiting."
                 }
             },
-            j_worm_ulala = {
+            j_worm_riverboat_ulala = {
                 name = "Ulala",
                 text = {
                     "Gains {C:mult}+#2#{} Mult if played hand",

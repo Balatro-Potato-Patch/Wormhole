@@ -1,6 +1,6 @@
 -- The Future
 SMODS.Joker({
-    key = 'the_future',
+    key = 'riverboat_the_future',
     atlas = 'worm_jokers',
     pos = { x = 1, y = 0 },
     rarity = 'worm_cosmic',

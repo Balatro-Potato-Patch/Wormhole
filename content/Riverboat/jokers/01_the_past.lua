@@ -1,6 +1,6 @@
 -- The Past
 SMODS.Joker({
-    key = 'the_past',
+    key = 'riverboat_the_past',
     atlas = 'worm_jokers',
     pos = { x = 0, y = 0 },
     rarity = 'worm_cosmic',

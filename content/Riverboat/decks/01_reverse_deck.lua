@@ -1,5 +1,5 @@
 SMODS.Back({
-    key = "reverse_deck",
+    key = "riverboat_reverse_deck",
     atlas = "worm_decks",
     pos = { x = 0, y = 0 },
     name = "Reverse Deck",
