@@ -1,6 +1,6 @@
 SMODS.Joker{ --Flat Earth
     key = 'flat_earth',
-    config = {extra = {chips = 0, chips_mod = 2,}},
+    config = {extra = {chips = 78, chips_mod = 2,}},
     rarity = 1,
     cost = 5,
     atlas = 'stewjokers',
@@ -10,19 +10,20 @@ SMODS.Joker{ --Flat Earth
     perishable_compat = true,
 
     update_chips = function (self, card)
+        if G.playing_cards then
         local non_spades = 0
         for _, card in pairs(G.playing_cards) do
             if not card:is_suit("Spades") then
                 non_spades = non_spades + 1
             end
         end
-        card.ability.extra.chips = non_spades * card.ability.extra.chips_mod
-
+            card.ability.extra.chips = non_spades * card.ability.extra.chips_mod
+        end
     end,
 
     loc_vars = function (self, info_queue, card)
-        self:update_chips(card)
 
+        self:update_chips(card)
         return {
             vars = {card.ability.extra.chips, card.ability.extra.chips_mod}
         }

@@ -13,10 +13,10 @@ return {
             j_worm_flat_earth = {
                 name = 'Flat Earth',
                 text = {
-                    "{C:chips}+#1#{} Chips for each",
+                    "{C:chips}+#2#{} Chips for each",
                     "non-{C:spades}Spade{} card",
-                    "in your full deck",
-                    "{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)",
+                    "in your {C:attention}full deck{}",
+                    "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips)",
                 } 
             },
 
@@ -96,6 +96,15 @@ return {
                 }
             },
 
+            j_worm_cheese_moon = {
+                name = 'Cheese Moon',
+                text = {
+                    '{C:green}#2# in #3#{} chance to destroy',
+                    'the {C:attention}last{} card used in scoring',
+                    'for the next {C:attention}#1#{} hands'
+                }
+            }
+
         },
 
         Tarot = {
@@ -105,6 +114,7 @@ return {
                     "Earn {C:money}$#1#{} per",
                     "poker hand {C:attention}level{} above {C:attention}1{}",
                     "{C:inactive}(Max of {C:money}$#2#{C:inactive})",
+                    '{C:inactive}(Currently {C:money}$#3#{C:inactive})'
                 },
            },
         },
