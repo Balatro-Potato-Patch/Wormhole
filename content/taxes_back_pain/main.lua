@@ -227,7 +227,6 @@ SMODS.Back{
 
 ---
 
--- TODO: add actual module slots and colours here
 Wormhole.tbp.module_colours = {
     weapons = HEX('fd5f55'),
     core = HEX('5559fd'),
@@ -247,11 +246,11 @@ SMODS.Joker({
 	perishable_compat = false,
     ppu_team = {'tbp'},
     ppu_artist = {'mythie'},
-    module_types = {'core', 'weapons', 'utility', 'thrusters'}, -- TODO: add actual module slots here
+    module_types = {'core', 'weapons', 'utility', 'thrusters'}, 
     config = {
         extra_slots_used = -1,
         extra = {
-            modules = { -- TODO: add actual module slots here
+            modules = {
                 core = {},
                 weapons = {},
                 thrusters = {},
@@ -319,7 +318,7 @@ SMODS.Joker({
                 }))
             end
             local module_calcs = {}
-            for _, module in ipairs(self.module_types) do -- TODO: add actual module slots here
+            for _, module in ipairs(self.module_types) do
                 if card.ability.extra.modules[module].key and (G.P_CENTERS[card.ability.extra.modules[module].key] or {}).module_calculate then
                     local ret = G.P_CENTERS[card.ability.extra.modules[module].key]:module_calculate(card.ability.extra.modules[module], context, card)
                     if ret and next(ret) then
