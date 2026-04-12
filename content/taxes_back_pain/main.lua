@@ -230,8 +230,8 @@ SMODS.Back{
 Wormhole.tbp.module_colours = {
     weapons = HEX('fd5f55'),
     core = HEX('5559fd'),
-    thrusters = HEX('6dec66'),
-    utility = HEX('edeb65')
+    thrusters = HEX('06b48b'),
+    utility = HEX('db4bda')
 }
 
 SMODS.Joker({
@@ -240,13 +240,12 @@ SMODS.Joker({
 	cost = 1,
 	unlocked = true,
 	discovered = false,
-    --no_collection = true, -- TODO: Does it have to show up in collection?
 	blueprint_compat = false,
 	eternal_compat = false,
 	perishable_compat = false,
     ppu_team = {'tbp'},
     ppu_artist = {'mythie'},
-    module_types = {'core', 'weapons', 'utility', 'thrusters'}, 
+    module_types = {'core', 'weapons', 'utility', 'thrusters'},
     config = {
         extra_slots_used = -1,
         extra = {
