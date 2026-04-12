@@ -590,6 +590,65 @@ function Wormhole.TEAM_MEOW.nyarlathotep_exchange_menu_UIdef(card)
 												{
 													n = G.UIT.T,
 													config = {
+														text = localize("k_worm_meow_money"),
+														scale = 0.4,
+														colour = G.C.UI.TEXT_LIGHT,
+													},
+												},
+											},
+										},
+										{
+											n = G.UIT.R,
+											config = {
+												align = "cm",
+												colour = lighten(G.C.BLACK, 0.1),
+												r = 0.1,
+												padding = 0.1,
+											},
+											nodes = {
+												{
+													n = G.UIT.O,
+													config = {
+														object = DynaText({
+															string = {
+																{
+																	ref_table = G.GAME,
+																	ref_value = "dollars",
+																	prefix = localize("$"),
+																},
+															},
+															scale_function = function()
+																return scale_number(G.GAME.dollars, 0.7, 99999, 1000000)
+															end,
+															colours = { G.C.MONEY },
+															font = G.LANGUAGES["en-us"].font,
+															shadow = true,
+															spacing = 2,
+															bump = true,
+															scale = 0.7,
+														}),
+														id = "dollar_text_UI",
+													},
+												},
+											},
+										},
+									},
+								},
+								{
+									n = G.UIT.C,
+									config = { minw = 0.1 },
+								},
+								{
+									n = G.UIT.C,
+									config = { align = "cm", padding = 0.1, colour = G.C.BLACK, emboss = 0.05, r = 0.1 },
+									nodes = {
+										{
+											n = G.UIT.R,
+											config = { align = "cm" },
+											nodes = {
+												{
+													n = G.UIT.T,
+													config = {
 														text = localize("k_worm_meow_sanity"),
 														scale = 0.4,
 														colour = G.C.UI.TEXT_LIGHT,
@@ -621,7 +680,6 @@ function Wormhole.TEAM_MEOW.nyarlathotep_exchange_menu_UIdef(card)
 																	1000000
 																)
 															end,
-															maxw = 1.35,
 															colours = { G.C.PURPLE },
 															font = G.LANGUAGES["en-us"].font,
 															shadow = true,
@@ -650,7 +708,7 @@ function Wormhole.TEAM_MEOW.nyarlathotep_exchange_menu_UIdef(card)
 												{
 													n = G.UIT.T,
 													config = {
-														text = localize("k_worm_meow_money"),
+														text = localize("k_worm_meow_blind_size_mult"),
 														scale = 0.4,
 														colour = G.C.UI.TEXT_LIGHT,
 													},
@@ -672,23 +730,33 @@ function Wormhole.TEAM_MEOW.nyarlathotep_exchange_menu_UIdef(card)
 														object = DynaText({
 															string = {
 																{
-																	ref_table = G.GAME,
-																	ref_value = "dollars",
-																	prefix = localize("$"),
+																	ref_table = setmetatable({}, {
+																		__index = function(_, _)
+																			return math.pow(
+																				1.25,
+																				G.GAME.meow_sanity_lost
+																			)
+																		end,
+																	}),
+																	ref_value = "meow_sanity_lost",
+																	prefix = "X",
 																},
 															},
 															scale_function = function()
-																return scale_number(G.GAME.dollars, 0.7, 99999, 1000000)
+																return scale_number(
+																	math.pow(1.25, G.GAME.meow_sanity_lost),
+																	0.7,
+																	99999,
+																	1000000
+																)
 															end,
-															maxw = 1.35,
-															colours = { G.C.MONEY },
+															colours = { G.C.PURPLE },
 															font = G.LANGUAGES["en-us"].font,
 															shadow = true,
-															spacing = 2,
 															bump = true,
+															spacing = 2,
 															scale = 0.7,
 														}),
-														id = "dollar_text_UI",
 													},
 												},
 											},
