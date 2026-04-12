@@ -227,7 +227,7 @@ return {
 			c_worm_meteor_mint = {
 				name = "Meteor Mint",
 				text = {
-					"{C:attention}Boosts{} other {C:worm_meow_spacetart}©Spacetart{}",
+					"{C:attention}Boosts{} other {C:worm_meow_spacetart}©Spacetarts{}",
 					"attached to the applied {C:attention}Joker{}",
 				},
 			},
@@ -278,7 +278,7 @@ return {
 			c_worm_meteor_mint_regular = {
 				name = " Meteor Mint ",
 				text = {
-					"{C:attention}Boosts{} other {C:worm_meow_spacetart}©Spacetart{}",
+					"{C:attention}Boosts{} other {C:worm_meow_spacetart}©Spacetarts{}",
 					"attached to this {C:attention}Joker{}",
 					"{C:inactive}(Total mint boosts on this Joker: #1#)",
 				},
@@ -330,6 +330,24 @@ return {
 					},
 				},
 			},
+			j_worm_meow_cotobo_box = {
+				name = "Schrödinger's Box",
+				text = {
+					"When a {C:attention}Blind{} is selected",
+					"create either a {C:worm_meow_spacetart}@Spacetart{}",
+					"or a {C:worm_meow_zodicat}Zodicat{}",
+					"{C:inactive}(Must have room)"
+				}
+			}
+		},
+		Tag = {
+			tag_worm_meow_spacetart = {
+				name = "Spacetart Tag",
+				text = {
+					"Gives a free",
+					"{C:worm_meow_spacetart}©Spacetart Pack",
+				}
+			}
 		},
 		Other = {
 			worm_meow_nyarlathotep_xmult = {
@@ -406,28 +424,28 @@ return {
 				name = "Spacetart Pack",
 				text = {
 					"Choose {C:attention}#1#{} of up to",
-					"{C:attention}#2#{C:worm_meow_spacetart} Spacetart{} Foils",
+					"{C:attention}#2#{C:worm_meow_spacetart} ©Spacetart{} Foils",
 				},
 			},
 			p_worm_spacetart_booster_2 = {
 				name = "Spacetart Pack",
 				text = {
 					"Choose {C:attention}#1#{} of up to",
-					"{C:attention}#2#{C:worm_meow_spacetart} Spacetart{} Foils",
+					"{C:attention}#2#{C:worm_meow_spacetart} ©Spacetart{} Foils",
 				},
 			},
 			p_worm_spacetart_booster_jumbo_1 = {
 				name = "Jumbo Spacetart Pack",
 				text = {
 					"Choose {C:attention}#1#{} of up to",
-					"{C:attention}#2#{C:worm_meow_spacetart} Spacetart{} Foils",
+					"{C:attention}#2#{C:worm_meow_spacetart} ©Spacetart{} Foils",
 				},
 			},
 			p_worm_spacetart_booster_mega_1 = {
 				name = "Mega Spacetart Pack",
 				text = {
 					"Choose {C:attention}#1#{} of up to",
-					"{C:attention}#2#{C:worm_meow_spacetart} Spacetart{} Foils",
+					"{C:attention}#2#{C:worm_meow_spacetart} ©Spacetart{} Foils",
 				},
 			},
 

@@ -27,3 +27,24 @@ SMODS.Joker({
         G.GAME.max_foil_slots = G.GAME.max_foil_slots - cae.max_foil
     end
 })
+
+SMODS.Joker({
+	key = "meow_cotobo_box",
+	rarity = 2,
+    atlas = "meow_jokers",
+    blueprint_compat = false,
+    loc_vars = function(self,info_queue,card)
+    end,
+    calculate = function(self,card,context)
+        if context.setting_blind then
+            local card_set = pseudorandom_element({"worm_meow_Zodicat", "worm_meow_Spacetart"})
+            if G.consumeables.config.card_limit>#G.consumeables.cards then
+                SMODS.add_card{
+                    set = card_set
+                }
+            else
+                card_eval_status_text(self, 'extra', nil, nil, nil, {message = localize('k_no_room_ex')})
+            end
+        end
+    end
+})

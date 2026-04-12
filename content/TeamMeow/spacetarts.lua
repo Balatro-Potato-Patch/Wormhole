@@ -1185,7 +1185,7 @@ function Card:stop_drag(...)
 	local ret = old(self, ...)
 	local closest = Wormhole.TEAM_MEOW.get_closest_joker(self)
 	local collides = closest and meow_cards_are_colliding(self, closest)
-	if self.ability and self.ability.set == "worm_meow_Spacetart" and collides and self.area == G.consumeables then
+	if self.ability and self.ability.set == "worm_meow_Spacetart" and collides and self.area == G.consumeables and meow_can_apply_foil(collides) then
 		local tart = {
 			key = self.ability.extra.tart,
 			config = self.ability.extra.tart_cfg or {},
@@ -1223,7 +1223,7 @@ function Card:stop_drag(...)
 		}))
 	end
 	-- For tart transfer between jokers
-	if self.ability and self.ability.set == "Joker" and collides and self.tarts and #self.tarts > 0 and self.timer and self.timer > 0.5 then
+	if self.ability and self.ability.set == "Joker" and collides and self.tarts and #self.tarts > 0 and self.timer and self.timer > 0.5 and meow_can_apply_foil(collides) then
 		local tart
 		G.E_MANAGER:add_event(Event({
 			trigger = "after",
