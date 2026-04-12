@@ -9,7 +9,7 @@ Wormhole.JR_UTILS.ENABLED_SATELLITES = {
   --['Straight'] = 'cassini_huygens',
   ['Full House'] = 'sputnik_1',
   ['Four of a Kind'] = 'mariner_9',
-  --['Straight Flush'] = 'voyager_2';
+  ['Straight Flush'] = 'voyager_2';
   --['Five of a Kind'] = 'death_egg',
   --['Flush House'] = 'dawn',
   ['Flush Five'] = 'manhole_cover',
@@ -101,12 +101,14 @@ Wormhole.JR_UTILS.draw_satellite_soul = function(card, scale_mod, rotate_mod)
 end
 
 Wormhole.JR_UTILS.update_transponder = function()
-  local count = 0
-  for k, v in pairs(G.GAME.jr.satellite_hands) do
-    if v.level > 0 then
-      count = count + 1
+  if G.GAME and G.GAME.jr and G.GAME.jr.satellite_hands then
+    local count = 0
+    for k, v in pairs(G.GAME.jr.satellite_hands) do
+      if v.level > 0 then
+        count = count + 1
+      end
     end
-  end
 
-  G.GAME.jr.transponder_ct = count
+    G.GAME.jr.transponder_ct = count
+  end
 end

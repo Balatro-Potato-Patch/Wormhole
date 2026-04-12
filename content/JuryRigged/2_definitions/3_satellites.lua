@@ -283,6 +283,37 @@ Wormhole.JR_UTILS.Satellite {
   end
 }
 
+-- Voyager 2
+Wormhole.JR_UTILS.Satellite {
+  key = 'voyager_2',
+  name = 'voyager_2',
+  config = { extra = { hand_type = 'Straight Flush', xmult = 0.2 }, },
+  pos = { x = 8, y = 0 },
+  soul_pos = { x = 8, y = 1, draw = Wormhole.JR_UTILS.draw_satellite_soul },
+  jr_calculate = function(self, context, vars)
+    if context.before then
+      for _, v in pairs(context.scoring_hand) do
+        v.ability.perma_x_mult = (v.ability.perma_x_mult or 1) + vars.xmult * G.GAME.jr.satellite_hands[vars.hand_type].level
+        SMODS.calculate_effect({message = localize('k_upgrade_ex')},v)
+      end
+    end
+  end,
+  loc_vars = function(self, info_queue, card)
+    local _level = G.GAME.jr and G.GAME.jr.satellite_hands[card.ability.extra.hand_type].level or 0
+    return {
+      vars = {
+        _level,
+        localize(card.ability.extra.hand_type, 'poker_hands'),
+        1 + card.ability.extra.xmult * _level,
+        colours = { (_level == 1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, _level)]) }
+      }
+    }
+  end,
+  jr_loc_vars = function(self)
+    return {}
+  end
+}
+
 -- Manhole Cover
 Wormhole.JR_UTILS.Satellite {
   key = 'manhole_cover',

@@ -20,7 +20,7 @@ SMODS.Joker {
 
   loc_vars = function(self, info_queue, card)
     Wormhole.JR_UTILS.update_transponder()
-    local xmult = 1 + (G.GAME.jr.transponder_ct * card.ability.extra.a_xmult)
+    local xmult = 1 + ((G.GAME.jr and G.GAME.jr.transponder_ct or 0) * card.ability.extra.a_xmult)
 
     return {
       vars = {
