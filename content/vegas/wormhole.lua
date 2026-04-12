@@ -720,6 +720,25 @@ SMODS.Joker{
     end
 }
 
+--Shader for Blip by Ben Roffey
+--See CRTshutoff.fs
+local CRT_shutoff
+CRT_shutoff = SMODS.ScreenShader{
+	key = "CRTshutoff",
+	path = "CRTshutoff.fs",
+	order = 10,
+	startTime = -2.0,
+	apply = false,
+	send_vars = function(self)
+		return{
+			startTime = self.startTime,
+			time = G.TIMERS.REAL
+		}
+	end,
+	should_apply = function(self)
+		return self.apply
+	end
+}
 
 SMODS.Joker{
 	key = "Big Blip",
@@ -744,7 +763,7 @@ SMODS.Joker{
 	eternal_compat = false,
 	perishable_compat = false,
 	ppu_team = {"People Found In Vegas"},
-	ppu_coder = {"Sn0vvBall"},
+	ppu_coder = {"Sn0vvBall", "Ben Roffey"},
 	ppu_artist = {"Sn0vvBall"},
 	calculate = function(self, card, context)
 		local GameSeed = G.GAME.pseudorandom.seed
@@ -753,6 +772,8 @@ SMODS.Joker{
 		local GameChallange = G.GAME.challenge
 		if context.end_of_round and context.game_over and context.main_eval and not next(SMODS.find_card('j_mr_bones')) then
 			--instead of calling G.FUNCS.start_run(e, args), just do what it does and set the seed after run creation
+			CRT_shutoff.startTime = G.TIMERS.REAL
+			CRT_shutoff.apply = true
 			G.SETTINGS.paused = true 
 			G.E_MANAGER:clear_queue() 
 			G.FUNCS.wipe_on() 
@@ -773,6 +794,16 @@ SMODS.Joker{
 			end
 			}))
 			G.FUNCS.wipe_off()
+			G.E_MANAGER:add_event(Event({
+			trigger = 'after',
+			delay = 2,
+			blocking = false,
+			no_delete = true,
+			func = function()
+				CRT_shutoff.apply = false
+				return true
+			end
+			}))
         end
 	end
 }
@@ -1598,15 +1629,3 @@ SMODS.Back {
 	end
 }
 
---Shader (currently doesn't work)
---[[
-SMODS.ScreenShader{
-	key = "CRTshutoff",
-	path = "CRTshutoff.fs",
-	order = 10,
-	send_vars = function(self)
-		return{
-			G.TIMERS.REAL % 1 --cycles the effect for debug
-		}
-	end
-}]]
