@@ -89,6 +89,28 @@ return {
 
         },
 
+        Tarot = {
+            c_worm_orbit = {
+                name = "The Orbit",
+                text = {
+                    "Earn {C:money}$#1#{} per",
+                    "poker hand {C:attention}level{} above {C:attention}1{}",
+                    "{C:inactive}(Max of {C:money}$#2#{C:inactive})",
+                },
+           },
+        },
+
+        Spectral = {
+            c_worm_solar_flare = {
+                name = "Solar Flare",
+                text = {
+                    "{C:attention}Debuff{} all cards in hand",
+                    "Level up a random poker hand",
+                    "for {C:attention}each{} card debuffed",
+                },
+           },
+        },
+
 
         Edition = {
             e_worm_stellar = {
@@ -120,7 +142,7 @@ return {
                     "this Ante",
                 },
            },
-        }
+        },
     },
     misc = {
         dictionary = {
