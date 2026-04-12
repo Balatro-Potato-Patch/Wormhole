@@ -5,7 +5,7 @@ SMODS.Consumable{
     pos = {x=0, y=2},
     config = {rerolls = {0, 0, 1, 2}},
     ppu_team = {"TheLastResort"},
-	ppu_coder = {"Jogla"},
+	ppu_coder = {"Jogla", "Foo54"},
     ppu_artist = {"Aura2247"},
     loc_vars = function (self, info_queue, card)
         return {vars = {card.ability.rerolls[card.ability.tier]}}
@@ -30,3 +30,5 @@ SMODS.Consumable{
         end
     end
 }
+
+-- TODO: fix issues with saving and leaving (most likely will require patching)
