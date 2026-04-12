@@ -87,3 +87,10 @@ SMODS.Atlas{
 	px = 71,
 	py = 95
 }
+
+SMODS.Atlas{
+	key = "tlr_one_neuron_duo",
+	path = "TheLastResort/one_neuron_duo.png",
+	px = 71,
+	py = 95
+}

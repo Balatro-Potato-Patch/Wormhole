@@ -25,6 +25,8 @@ PotatoPatchUtils.Developer({
 	colour = HEX("aaaaff"),
 	loc = true,
 	team = "TheLastResort",
+	atlas = 'worm_tlr_one_neuron_duo',
+	pos = {x=1, y = 0}
 })
 
 PotatoPatchUtils.Developer({
@@ -45,7 +47,9 @@ PotatoPatchUtils.Developer({
 	name = "Aura2247",
 	colour = HEX("b9dadb"),
 	loc = true,
-	team = "TheLastResort"
+	team = "TheLastResort",
+	atlas = 'worm_tlr_one_neuron_duo',
+	pos = {x=0, y = 0}
 })
 
 PotatoPatchUtils.Developer({
