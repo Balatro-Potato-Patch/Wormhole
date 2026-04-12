@@ -12,14 +12,15 @@ SMODS.Seal {
 	--ppu_artist = {"J8-Bit"},
 	ppu_team = { "Lancer Fan Club" },
 	attributes = { "economy" },
-    atlas = "lfc_jokers",
-    pos = {x=3,y=2},
+    atlas = "lfc_seals",
+    pos = {x=0,y=0},
     calculate = function (self, card, context)
         if context.main_scoring then
             G.E_MANAGER:add_event(Event({func = function ()
                 Wormhole.LancerFanClub.create_meteor(card.ability.seal.extra.dollars,1)
             return true end}))
         end
-    end
+    end,
+	badge_colour = G.ARGS.LOC_COLOURS.lfc_meteor
     -- Still needs a few things but someone else can do that
 }

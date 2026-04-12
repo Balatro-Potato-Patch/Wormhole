@@ -48,6 +48,13 @@ SMODS.Atlas {
 }
 
 SMODS.Atlas {
+    key = "lfc_seals",
+    px = 65,
+    py = 95,
+    path = "lancer_fan_club/seals.png"
+}
+
+SMODS.Atlas {
     key = "lfc_blinds",
     px = 34,
     py = 34,
@@ -73,6 +80,7 @@ SMODS.Sound {
 loc_colour('red')
 G.ARGS.LOC_COLOURS.lfc_pkmn_us = HEX('E95B2B')
 G.ARGS.LOC_COLOURS.lfc_pkmn_um = HEX('226DB5')
+G.ARGS.LOC_COLOURS.lfc_meteor  = HEX('a97a51')
 
 -- Developers
 PotatoPatchUtils.Developer {

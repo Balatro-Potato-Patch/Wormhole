@@ -244,6 +244,14 @@ return {
                     "{C:inactive,s:0.75}appear in the run)"
                 },
             },
+            c_worm_lfc_wish = {
+                name="Wish",
+                text={
+                    "Add a {C:lfc_meteor}Meteor Seal{}",
+                    "to {C:attention}1{} selected",
+                    "card in your hand",
+                },
+            }
         },
         Tag = {
             tag_worm_lfc_laser = {
