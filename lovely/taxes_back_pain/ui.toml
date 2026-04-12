@@ -88,6 +88,20 @@ if next(tbp_module_info_boxes) then
 end
 '''
 
+# Flag info_queue on spaceship
+[[patches]]
+[patches.pattern]
+target = 'functions/UI_definitions.lua'
+match_indent = true
+position = 'after'
+pattern = '''
+info_boxes = {{n=G.UIT.R, config = {align="cm", padding = 0.05, card_pos = card.T.x }, nodes = info_cols}}
+'''
+payload = '''
+if card.config.center_key == 'j_worm_tbp_spaceship' then info_boxes[1].config.tbp_spaceship = true end
+'''
+
+
 [[patches]]
 [patches.pattern]
 target = "game.lua"

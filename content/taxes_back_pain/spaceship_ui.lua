@@ -400,3 +400,17 @@ function localize(args, misc_cat)
     if args.type == 'name' and (args.set == 'tbp_module' or args.key == 'undiscovered_tbp_module') then return end
     return localize_hook(args, misc_cat)
 end
+
+local show_infotip_hook = G.FUNCS.show_infotip
+G.FUNCS.show_infotip = function(e)
+    if e.config.ref_table and e.config.ref_table[1].config.tbp_spaceship then
+        e.children.info = UIBox{
+            definition = {n=G.UIT.ROOT, config = {align = 'cm', colour = G.C.CLEAR, padding = 0.02}, nodes=e.config.ref_table},
+            config = {offset = {x=-0.03,y=0}, align = 'cl', parent = e}
+        }
+        e.children.info:align_to_major()
+        e.config.ref_table = nil
+    else
+        show_infotip_hook(e)
+    end
+end
