@@ -64,7 +64,7 @@ return {
                 }
             },
             j_worm_tesla_in_space = {
-                name = "Tesla in Space",
+                name = "Joker in Space",
                 text = {
                     "When you {C:attention}Clean-up{}, earn {C:gold}$#1#",
                     "for each card cleaned-up",
