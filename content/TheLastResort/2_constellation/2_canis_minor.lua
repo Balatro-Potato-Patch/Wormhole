@@ -17,6 +17,20 @@ SMODS.Consumable{
 
         -- info_queue[#info_queue+1] = G.GAME.worm_tlr_last_const_used and G.P_CENTERS[G.GAME.worm_tlr_last_const_used] or nil
 
+       if G.GAME.worm_tlr_last_const_used and G.GAME.worm_tlr_last_const_used ~= "c_worm_tlr_const_canis_minor" then
+        local max_tier = math.min(G.GAME.worm_tlr_last_const_used_tier, card.ability.tiers[card.ability.tier])
+        local obj = G.P_CENTERS[G.GAME.worm_tlr_last_const_used]
+        local config = copy_table(obj.config)
+        config.tier = max_tier
+        local loc_vars = obj:loc_vars({}, setmetatable({ability = config}, {
+            __index = function(t, k)
+                return obj[k]
+            end
+        })).vars
+        info_queue[#info_queue+1] = {set = "worm_tlr_constellation", key = G.GAME.worm_tlr_last_const_used .. "_t" .. max_tier, vars = loc_vars}
+        print(info_queue)
+       end
+
         return {
             main_end = {
                 {

@@ -27,7 +27,7 @@ match_indent = true
 target = 'functions/state_events.lua'
 pattern = '''if G.GAME.blind:get_type() == 'Boss' then'''
 position = 'at'
-payload = '''if not G.GAME.worm_tlr_hercules_blind and (G.GAME.blind:get_type() == 'Boss' or G.P_BLINDS[G.GAME.worm_tlr_orion_original_blind].boss) then'''
+payload = '''if not G.GAME.worm_tlr_hercules_blind and (G.GAME.blind:get_type() == 'Boss' or (G.P_BLINDS[G.GAME.worm_tlr_orion_original_blind] or {}).boss) then'''
 match_indent = true
 [[patches]]
 [patches.pattern]

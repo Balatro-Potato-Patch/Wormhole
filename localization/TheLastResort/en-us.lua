@@ -310,6 +310,7 @@ local CONSTELLATIONS = {
 		}
 	}
 }
+local ORIGINAL_CONSTELLATIONS = copy_table(CONSTELLATIONS)
 
 
 for key, obj in pairs(CONSTELLATIONS) do
@@ -317,11 +318,79 @@ for key, obj in pairs(CONSTELLATIONS) do
 	obj.name = {obj.name, add}
 end
 
-print("CONSTELLATIONS")
-print(CONSTELLATIONS.c_worm_tlr_const_perseus_t1)
-print(CONSTELLATIONS.c_worm_tlr_const_perseus_t2)
-print(CONSTELLATIONS.c_worm_tlr_const_perseus_t3)
-print(CONSTELLATIONS.c_worm_tlr_const_perseus_t4)
+local Other = {
+	worm_tlr_star_seal = {
+		name = 'Star Seal',
+		text = {
+			'Create a tier {C:attention}2{}',
+			'{C:worm_tlr_constellation}Constellation{} when scored',
+			'if chips scored exceeds',
+			'{C:attention}#1#%{} of required chips',
+			'{C:inactive}(Must have room)'
+		}
+	},
+	worm_tlr_const_info = {
+		name = "Constellation Info",
+		text = {
+			"This card will",
+			"be upgraded when",
+			"defeating boss blind"
+		}
+	},
+	worm_tlr_const_info_mask = {
+		name = "Constellation Info",
+		text = {
+			"This card will",
+			"be upgraded twice when",
+			"defeating boss blind"
+		}
+	},
+	worm_tlr_const_max_level = {
+		name = "Maxed out",
+		text = {
+			"The card cannot",
+			"be upgraded any further",
+			"{C:inactive,s:0.8}(At least by normal means)"
+		}
+	},
+	worm_tlr_const_max_real = {
+		name = "Beyond",
+		text = {
+			"The card cannot",
+			"be upgraded any further"
+		}
+	},
+	undiscovered_worm_tlr_constellation = {
+		name = "Not Discovered",
+		text={
+			"Purchase or use",
+			"this card in an",
+			"unseeded run to",
+			"learn what it does"
+		},
+	},
+	p_worm_tlr_const_normal = {
+		name = "Constellation Pack",
+		text = {
+			"Choose {C:attention}#1#{} of up to",
+			"{C:attention}#2#{V:1} Constellation{} cards to take",
+		}
+	},
+	p_worm_tlr_const_jumbo = {
+		name = "Jumbo Constellation Pack",
+		text = {
+			"Choose {C:attention}#1#{} of up to",
+			"{C:attention}#2#{V:1} Constellation{} cards to take",
+		}
+	},
+	p_worm_tlr_const_mega = {
+		name = "Mega Constellation Pack",
+		text = {
+			"Choose {C:attention}#1#{} of up to",
+			"{C:attention}#2#{V:1} Constellation{} cards to take",
+		}
+	},
+}
 
 return {
 	descriptions = {
@@ -470,79 +539,7 @@ return {
 				}
 			},
 		},
-		Other = {
-			worm_tlr_star_seal = {
-				name = 'Star Seal',
-				text = {
-					'Create a tier {C:attention}2{}',
-					'{C:worm_tlr_constellation}Constellation{} when scored',
-					'if chips scored exceeds',
-					'{C:attention}#1#%{} of required chips',
-					'{C:inactive}(Must have room)'
-				}
-			},
-			worm_tlr_const_info = {
-				name = "Constellation Info",
-				text = {
-					"This card will",
-					"be upgraded when",
-					"defeating boss blind"
-				}
-			},
-			worm_tlr_const_info_mask = {
-				name = "Constellation Info",
-				text = {
-					"This card will",
-					"be upgraded twice when",
-					"defeating boss blind"
-				}
-			},
-			worm_tlr_const_max_level = {
-				name = "Maxed out",
-				text = {
-					"The card cannot",
-					"be upgraded any further",
-					"{C:inactive,s:0.8}(At least by normal means)"
-				}
-			},
-			worm_tlr_const_max_real = {
-				name = "Beyond",
-				text = {
-					"The card cannot",
-					"be upgraded any further"
-				}
-			},
-			undiscovered_worm_tlr_constellation = {
-				name = "Not Discovered",
-				text={
-					"Purchase or use",
-					"this card in an",
-					"unseeded run to",
-					"learn what it does"
-				},
-			},
-			p_worm_tlr_const_normal = {
-				name = "Constellation Pack",
-				text = {
-					"Choose {C:attention}#1#{} of up to",
-					"{C:attention}#2#{V:1} Constellation{} cards to take",
-				}
-			},
-			p_worm_tlr_const_jumbo = {
-				name = "Jumbo Constellation Pack",
-				text = {
-					"Choose {C:attention}#1#{} of up to",
-					"{C:attention}#2#{V:1} Constellation{} cards to take",
-				}
-			},
-			p_worm_tlr_const_mega = {
-				name = "Mega Constellation Pack",
-				text = {
-					"Choose {C:attention}#1#{} of up to",
-					"{C:attention}#2#{V:1} Constellation{} cards to take",
-				}
-			},
-		},
+		Other = Other,
 		Tag = {
 			tag_worm_tlr_const = {
 				name = "Stellar Tag",

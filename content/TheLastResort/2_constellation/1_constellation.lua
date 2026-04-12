@@ -15,7 +15,7 @@ SMODS.ConsumableType{
 			local main_end = nil
             WORM_TLR.const_info_queue(info_queue, _card)
 			local ret = mem_loc_vars(_self, info_queue, _card)
-			if main_end then ret.main_end = ret.main_end or {main_end} end
+			if ret.main_end then main_end = ret.main_end end
             if not ret.vars then ret.vars = {} end
             if not ret.vars.colours then ret.vars.colours = {} end
             table.insert(ret.vars.colours, 1, SMODS.ConsumableTypes.worm_tlr_constellation.secondary_colour)
