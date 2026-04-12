@@ -1,5 +1,10 @@
 
-SMODS.Edition{
+SMODS.Edition {
+
+    ppu_team = { "Balatro Stewniversity" },
+    ppu_artist = { "stupxd" },
+    ppu_coder = { "PLagger" },
+
     key = 'stellar',
     shader = false,
     config = {odds = 4},
@@ -21,10 +26,4 @@ SMODS.Edition{
         end
     end
 
-    --[[ placeholder credits until i actually figure out how to do it with the code
-        credits:
-        art: n/a
-        code: PLagger
-        team: Balatro Stewniversity
-    ]]
 }

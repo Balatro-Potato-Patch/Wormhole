@@ -1,4 +1,9 @@
 SMODS.Joker {
+
+    ppu_team = { "Balatro Stewniversity" },
+    ppu_artist = { "pending" },
+    ppu_coder = { "stupxd" },
+
     key = 'astrologer',
     rarity = "Common",
     cost = 4,

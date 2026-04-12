@@ -49,7 +49,7 @@ return {
                 }
             },
 
-            j_worm_stardust_joker = {
+            j_worm_stardust = {
                 name = 'Stardust',
                 text = {
                     'This Joker gains {C:money}$#1#{} of',
@@ -162,6 +162,55 @@ return {
                 },
            },
         },
+
+        PotatoPatch = {
+            stew = {
+                name = "Balatro Stewniversity"
+            },
+            stupxd = {
+                name = "stupxd",
+                text = {
+                    "Play Balatro, I heard",
+                    "it's a great game.",
+                }
+            },
+            PLagger = {
+                name = "PLagger",
+                text = {
+                    "womp womp",
+                }
+            },
+            dottykitty = {
+                name = "dottykitty",
+                text = {
+                    "womp womp",
+                }
+            },
+            Wingcap = {
+                name = "Wingcap",
+                text = {
+                    "womp womp",
+                }
+            },
+            tuzzo = {
+                name = "tuzzo",
+                text = {
+                    "womp womp",
+                }
+            },
+            HonuKane = {
+                name = "HonuKane",
+                text = {
+                    "womp womp",
+                }
+            },
+            harmonywoods = {
+                name = "harmonywoods",
+                text = {
+                    "womp womp",
+                }
+            },
+        },
     },
     misc = {
         dictionary = {
@@ -170,5 +219,5 @@ return {
         labels = {
             worm_stellar = 'Stellar'
         }
-    }
+    },
 }

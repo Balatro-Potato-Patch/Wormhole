@@ -13,6 +13,11 @@ function Card:load(cardTable, other_card)
 end
 
 SMODS.Consumable {
+
+    ppu_team = { "Balatro Stewniversity" },
+    ppu_artist = { "dottykitty" },
+    ppu_coder = { "stupxd" },
+
     key = 'solar_flare',
     set = 'Spectral',
     atlas = "stewconsumables",

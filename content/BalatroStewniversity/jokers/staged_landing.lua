@@ -1,4 +1,9 @@
-SMODS.Joker{ --Staged Landing
+SMODS.Joker {
+
+    ppu_team = { "Balatro Stewniversity" },
+    ppu_artist = { "dottykitty" },
+    ppu_coder = { "PLagger" },
+
     key = 'staged_landing',
     config = {extra = {mult = 0, mult_mod = 4}},
     rarity = 1,

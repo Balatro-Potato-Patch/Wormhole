@@ -1,4 +1,9 @@
-SMODS.Joker{ --8 Ball Earth
+SMODS.Joker{
+
+    ppu_team = { "Balatro Stewniversity" },
+    ppu_artist = { "Wingcap" },
+    ppu_coder = { "PLagger" },
+
     key = '8_ball_earth',
     config = {extra = {poker_hand = 'Full House'}},
     rarity = 2,

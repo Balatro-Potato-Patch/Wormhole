@@ -1,6 +1,10 @@
 
--- The Pull
 SMODS.Blind {
+
+    ppu_team = { "Balatro Stewniversity" },
+    ppu_artist = { "tuzzo" },
+    ppu_coder = { "stupxd" },
+
     key = "pull",
     dollars = 5,
     mult = 2,

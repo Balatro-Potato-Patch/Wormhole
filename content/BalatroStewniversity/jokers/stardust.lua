@@ -1,5 +1,10 @@
-SMODS.Joker{
-    key = 'stardust_joker',
+SMODS.Joker {
+
+    ppu_team = { "Balatro Stewniversity" },
+    ppu_artist = { "dottykitty" },
+    ppu_coder = { "PLagger" },
+
+    key = 'stardust',
     config = {extra = {price = 5, diamonds_required = 5, diamonds_remaining = 5}},
     rarity = 1,
     cost = 5,

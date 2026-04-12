@@ -1,5 +1,10 @@
 
-SMODS.Joker{ --Stew Earth
+SMODS.Joker {
+
+    ppu_team = { "Balatro Stewniversity" },
+    ppu_artist = { "Wingcap" },
+    ppu_coder = { "PLagger" },
+
     key = 'stew_earth',
     config = {extra = {Xmult = 1.5, Xmult_up = 0.5, Xmult_down = 0.25}},
     rarity = 2,

@@ -1,5 +1,10 @@
 
 SMODS.Tag {
+
+    ppu_team = { "Balatro Stewniversity" },
+    ppu_artist = { "pending" },
+    ppu_coder = { "stupxd" },
+
     key = "stellar",
     pos = { x = 0, y = 0 },
     loc_vars = function(self, info_queue, tag)

@@ -1,5 +1,10 @@
 
 SMODS.Consumable {
+
+    ppu_team = { "Balatro Stewniversity" },
+    ppu_artist = { "dottykitty" },
+    ppu_coder = { "stupxd" },
+
     key = 'orbit',
     set = 'Tarot',
     atlas = "stewconsumables",

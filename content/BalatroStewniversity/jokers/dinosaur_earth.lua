@@ -1,5 +1,10 @@
 
-SMODS.Joker{ --Dinosaur Earth
+SMODS.Joker {
+
+    ppu_team = { "Balatro Stewniversity" },
+    ppu_artist = { "dottykitty" },
+    ppu_coder = { "PLagger", "stupxd" },
+
     key = 'dinosaur_earth',
     config = {extra = {odds = 6, ante = 1}},
     rarity = 3,
@@ -9,7 +14,6 @@ SMODS.Joker{ --Dinosaur Earth
     blueprint_compat = false,
     eternal_compat = false,
     perishable_compat = true,
-
     loc_vars = function (self, info_queue, card)
         local numerator, denominator = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, 'worm_dinosaur_earth')
         return {

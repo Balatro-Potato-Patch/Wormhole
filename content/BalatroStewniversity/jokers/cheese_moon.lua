@@ -1,4 +1,9 @@
-SMODS.Joker{
+SMODS.Joker {
+
+    ppu_team = { "Balatro Stewniversity" },
+    ppu_artist = { "dottykitty" },
+    ppu_coder = { "PLagger" },
+
     key = 'cheese_moon',
     config = {extra = {hands_left = 8, odds = 2}},
     rarity = 2,

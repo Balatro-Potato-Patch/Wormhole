@@ -1,5 +1,10 @@
 
-SMODS.Joker{ --Staged Landing
+SMODS.Joker {
+
+    ppu_team = { "Balatro Stewniversity" },
+    ppu_artist = { "Wingcap" },
+    ppu_coder = { "stupxd" },
+
     key = 'geocentrism',
     config = {extra = {Xmult = 1.25}},
     rarity = "Common",

@@ -1,5 +1,10 @@
 
-SMODS.Joker{ --Impact Crater
+SMODS.Joker {
+
+    ppu_team = { "Balatro Stewniversity" },
+    ppu_artist = { "Wingcap" },
+    ppu_coder = { "PLagger" },
+
     key = 'impact_crater',
     config = {extra = {odds = 2}},
     rarity = 2,
@@ -9,7 +14,6 @@ SMODS.Joker{ --Impact Crater
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = true,
-
     loc_vars = function (self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'tag_meteor', set = 'Tag' }
         info_queue[#info_queue + 1] = G.P_CENTERS.p_celestial_mega_1

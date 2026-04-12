@@ -1,4 +1,9 @@
-SMODS.Joker{ --Flat Earth
+SMODS.Joker {
+
+    ppu_team = { "Balatro Stewniversity" },
+    ppu_artist = { "PLagger" },
+    ppu_coder = { "PLagger" },
+
     key = 'flat_earth',
     config = {extra = {chips = 78, chips_mod = 2,}},
     rarity = 1,
