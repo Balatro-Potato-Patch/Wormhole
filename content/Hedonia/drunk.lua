@@ -178,7 +178,7 @@ SMODS.Edition {
 
 SMODS.Edition {
     key = "hedonia_blackout",
-    shader = "hedonia_shader_drunk",
+    shader = "hedonia_shader_blackout",
     -- shader = false,
     loc_txt = { name = 'Blackout', text = {'{C:green}#1# in #2#{} chance', 'to sober up', '{C:green}#3# in #4#{} chance', 'to {C:red,E:2}self destruct{}' }, label = 'Blackout' },
     in_shop = false,            -- TODO discuss adding to shop if a bartender is owned as a hidden mechanic, see in_pool()
@@ -187,7 +187,7 @@ SMODS.Edition {
         ["Drunk"] = true
     },
     disable_base_shader = true, -- shader will modify card shape when implimented so this should be true
-
+    always_scores = true,
     on_apply = function(card)
         card.edition.drunk_wobble_strength = 20.0
     end,
@@ -231,10 +231,20 @@ SMODS.Edition {
 
 SMODS.Shader {
     key = "hedonia_shader_drunk",
-    path = "Hedonia/drunk.fs", -- TODO write the shader
+    path = "Hedonia/drunk.fs",
     send_vars = function(sprite, card)
         return {
             wobble_strength = card.edition.drunk_wobble_strength,
+            time = love.timer.getTime(),
+        }
+    end,
+}
+
+SMODS.Shader {
+    key = "hedonia_shader_blackout",
+    path = "Hedonia/blackout.fs",
+    send_vars = function(sprite, card)
+        return {
             time = love.timer.getTime(),
         }
     end,
