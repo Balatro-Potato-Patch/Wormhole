@@ -47,6 +47,31 @@ return {
                     'Add Blackout to a',
                     'random card held in hand'
                 }
+            },
+            c_worm_hedonia_jawbreaker = {
+                name = 'Jupiter Jawbreakers',
+                text = {
+                    'Add {C:chips}#1#{} bonus chips to a',
+                    'random card held in hand'
+                }
+            },
+            c_worm_hedonia_rings = {
+                name = 'Saturn\'s Onion Rings',
+                text = {
+                    'all cards in hand sober up'
+                }
+            },
+            c_worm_hedonia_debbie = {
+                name = 'Cosmic Brownies',
+                text = {
+                    'changes {C:attention}#1#{} selected cards to the same rank'
+                }
+            },
+            c_worm_hedonia_jam = {
+                name = 'Space Jam',
+                text = {
+                    'changes {C:attention}#1#{} selected cards to the same suit'
+                }
             }
         },
         Other = {
