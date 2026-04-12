@@ -5,14 +5,14 @@ Wormhole.JR_UTILS.ENABLED_SATELLITES = {
   ['Pair'] = 'messenger',
   ['Two Pair'] = 'tianwen_4',
   --['Three of a Kind'] = 'venera_9',
-  ['Flush'] = 'galileo',
+  --['Flush'] = 'galileo',
   --['Straight'] = 'cassini_huygens',
   ['Full House'] = 'sputnik_1',
   ['Four of a Kind'] = 'mariner_9',
   --['Straight Flush'] = 'voyager_2';
-  --['Five of a Kind'] = '',
+  --['Five of a Kind'] = 'death_egg',
   --['Flush House'] = 'dawn',
-  --['Flush Five'] = '',
+  ['Flush Five'] = 'manhole_cover',
 }
 
 Wormhole.JR_UTILS.reset_game_globals = function(run_start)

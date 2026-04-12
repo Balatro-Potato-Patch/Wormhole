@@ -43,21 +43,6 @@ return {
           }
         }
       },
-      sat_worm_galileo = {
-        name = "Galileo",
-        text = {
-          {
-            "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
-            "{C:attention}#2#",
-          },
-          {
-            "If played hand",
-            "is a {C:attention}#2#{},",
-            "retrigger {C:attention}#1#{} card#3#",
-            "at random"
-          }
-        }
-      },
       sat_worm_sputnik_1 = {
         name = "Sputnik 1",
         text = {
@@ -85,6 +70,21 @@ return {
             "{C:attention}#2#{}, gain {C:money}$#1#{} per card",
             "of the rank of the {C:attention}#2#",
             "in your {C:attention}full deck"
+          }
+        }
+      },
+      sat_worm_manhole_cover = {
+        name = "Manhole Cover",
+        text = {
+          {
+            "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
+            "{C:attention}#2#",
+          },
+          {
+            "If played hand",
+            "is a {C:attention}#2#{},",
+            "retrigger {C:attention}#1#{} card#3#",
+            "at random"
           }
         }
       },

@@ -193,52 +193,6 @@ Wormhole.JR_UTILS.Satellite {
 -- Venera 9
 
 -- Galileo
-Wormhole.JR_UTILS.Satellite {
-  key = 'galileo',
-  name = 'galileo',
-  config = { extra = { hand_type = 'Flush' }, },
-  pos = { x = 4, y = 0 },
-  soul_pos = { x = 4, y = 1, draw = Wormhole.JR_UTILS.draw_satellite_soul },
-  jr_calculate = function(self, context, vars)
-    if context.before then
-      G.GAME.jr.galileo_targets = {}
-      for _ = 1, G.GAME.jr.satellite_hands[vars.hand_type].level do
-        local _target = tostring(pseudorandom("worm_jr_galileo", 1, #context.scoring_hand))
-        G.GAME.jr.galileo_targets[_target] = (G.GAME.jr.galileo_targets[_target] or 0) + 1
-      end
-    end
-
-    if context.repetition and context.cardarea == G.play then
-      for i = 1, #context.scoring_hand do
-        if context.scoring_hand[i] == context.other_card then
-          if G.GAME.jr.galileo_targets[tostring(i)] then
-            return {
-              message = localize('k_again_ex'),
-              repetitions = G.GAME.jr.galileo_targets[tostring(i)] or 0,
-              card = context.other_card
-            }
-          else
-            break
-          end
-        end
-      end
-    end
-  end,
-  loc_vars = function(self, info_queue, card)
-    local _level = G.GAME.jr and G.GAME.jr.satellite_hands[card.ability.extra.hand_type].level or 0
-    return {
-      vars = {
-        _level,
-        localize(card.ability.extra.hand_type, 'poker_hands'),
-        _level <= 1 and '' or 's',
-        colours = { (_level == 1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, _level)]) }
-      }
-    }
-  end,
-  jr_loc_vars = function(self)
-    return {}
-  end
-}
 
 -- Cassini-Huygens
 
@@ -320,6 +274,54 @@ Wormhole.JR_UTILS.Satellite {
       vars = {
         _level,
         localize(card.ability.extra.hand_type, 'poker_hands'),
+        colours = { (_level == 1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, _level)]) }
+      }
+    }
+  end,
+  jr_loc_vars = function(self)
+    return {}
+  end
+}
+
+-- Manhole Cover
+Wormhole.JR_UTILS.Satellite {
+  key = 'manhole_cover',
+  name = 'manhole_cover',
+  config = { extra = { hand_type = 'Flush Five' }, },
+  pos = { x = 11, y = 0 },
+  soul_pos = { x = 11, y = 1, draw = Wormhole.JR_UTILS.draw_satellite_soul },
+  jr_calculate = function(self, context, vars)
+    if context.before then
+      G.GAME.jr.manhole_cover_targets = {}
+      for _ = 1, G.GAME.jr.satellite_hands[vars.hand_type].level do
+        local _target = tostring(pseudorandom("worm_jr_manhole_cover", 1, #context.scoring_hand))
+        G.GAME.jr.manhole_cover_targets[_target] = (G.GAME.jr.manhole_cover_targets[_target] or 0) + 1
+      end
+    end
+
+    if context.repetition and context.cardarea == G.play then
+      for i = 1, #context.scoring_hand do
+        if context.scoring_hand[i] == context.other_card then
+          if G.GAME.jr.manhole_cover_targets[tostring(i)] then
+            return {
+              message = localize('k_again_ex'),
+              repetitions = G.GAME.jr.manhole_cover_targets[tostring(i)] or 0,
+              card = context.other_card
+            }
+          else
+            break
+          end
+        end
+      end
+    end
+  end,
+  loc_vars = function(self, info_queue, card)
+    local _level = G.GAME.jr and G.GAME.jr.satellite_hands[card.ability.extra.hand_type].level or 0
+    return {
+      vars = {
+        _level,
+        localize(card.ability.extra.hand_type, 'poker_hands'),
+        _level <= 1 and '' or 's',
         colours = { (_level == 1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, _level)]) }
       }
     }
