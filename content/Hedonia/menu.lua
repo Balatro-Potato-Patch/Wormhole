@@ -71,10 +71,17 @@ SMODS.Booster {
     cost = 4,
     atlas = "booster_placeholder",
     pos = { x = 0, y = 0 },
-    config = { extra = 3, choose = 1 },
+    config = { extra = {numerator = 1, denominator = 3, name = "Menu Pack"} },
     draw_hand = true,
     create_card = function(self, card)
         return {set = "worm_hedonia_menu", area = G.pack_cards, skip_materialize = true}
+    end,
+    loc_vars = function(self, info_queue, card)
+        local num, denom = SMODS.get_probability_vars(card, card.ability.extra.numerator, card.ability.extra.denominator)
+        return {
+            vars = {num, denom, card.ability.extra.name},
+            key = "p_worm_hedonia_menu"
+        }
     end
 }
 
@@ -84,10 +91,17 @@ SMODS.Booster {
     cost = 4,
     atlas = "booster_placeholder",
     pos = { x = 1, y = 0 },
-    config = { extra = 3, choose = 1 },
+    config = { extra = {numerator = 1, denominator = 3, name = "Menu Pack"} },
     draw_hand = true,
     create_card = function(self, card)
         return {set = "worm_hedonia_menu", area = G.pack_cards, skip_materialize = true}
+    end,
+    loc_vars = function(self, info_queue, card)
+        local num, denom = SMODS.get_probability_vars(card, card.ability.extra.numerator, card.ability.extra.denominator)
+        return {
+            vars = {num, denom, card.ability.extra.name},
+            key = "p_worm_hedonia_menu"
+        }
     end
 }
 
@@ -97,10 +111,17 @@ SMODS.Booster {
     cost = 4,
     atlas = "booster_placeholder",
     pos = { x = 2, y = 0 },
-    config = { extra = 3, choose = 1 },
+    config = { extra = {numerator = 1, denominator = 3, name = "Menu Pack"} },
     draw_hand = true,
     create_card = function(self, card)
         return {set = "worm_hedonia_menu", area = G.pack_cards, skip_materialize = true}
+    end,
+    loc_vars = function(self, info_queue, card)
+        local num, denom = SMODS.get_probability_vars(card, card.ability.extra.numerator, card.ability.extra.denominator)
+        return {
+            vars = {num, denom, card.ability.extra.name},
+            key = "p_worm_hedonia_menu"
+        }
     end
 }
 
@@ -110,10 +131,17 @@ SMODS.Booster {
     cost = 4,
     atlas = "booster_placeholder",
     pos = { x = 3, y = 0 },
-    config = { extra = 3, choose = 1 },
+    config = { extra = {numerator = 1, denominator = 3, name = "Menu Pack"} },
     draw_hand = true,
     create_card = function(self, card)
         return {set = "worm_hedonia_menu", area = G.pack_cards, skip_materialize = true}
+    end,
+    loc_vars = function(self, info_queue, card)
+        local num, denom = SMODS.get_probability_vars(card, card.ability.extra.numerator, card.ability.extra.denominator)
+        return {
+            vars = {num, denom, card.ability.extra.name},
+            key = "p_worm_hedonia_menu"
+        }
     end
 }
 
@@ -123,10 +151,17 @@ SMODS.Booster {
     cost = 6,
     atlas = "booster_placeholder",
     pos = { x = 0, y = 1 },
-    config = { extra = 4, choose = 1 },
+    config = { extra = {numerator = 1, denominator = 4, name = "Jumbo Menu Pack"} },
     draw_hand = true,
     create_card = function(self, card)
         return {set = "worm_hedonia_menu", area = G.pack_cards, skip_materialize = true}
+    end,
+    loc_vars = function(self, info_queue, card)
+        local num, denom = SMODS.get_probability_vars(card, card.ability.extra.numerator, card.ability.extra.denominator)
+        return {
+            vars = {num, denom, card.ability.extra.name},
+            key = "p_worm_hedonia_menu"
+        }
     end
 }
 
@@ -136,10 +171,17 @@ SMODS.Booster {
     cost = 6,
     atlas = "booster_placeholder",
     pos = { x = 1, y = 1 },
-    config = { extra = 4, choose = 1 },
+    config = { extra = {numerator = 1, denominator = 4, name = "Jumbo Menu Pack"} },
     draw_hand = true,
     create_card = function(self, card)
         return {set = "worm_hedonia_menu", area = G.pack_cards, skip_materialize = true}
+    end,
+    loc_vars = function(self, info_queue, card)
+        local num, denom = SMODS.get_probability_vars(card, card.ability.extra.numerator, card.ability.extra.denominator)
+        return {
+            vars = {num, denom, card.ability.extra.name},
+            key = "p_worm_hedonia_menu"
+        }
     end
 }
 
@@ -149,10 +191,17 @@ SMODS.Booster {
     cost = 8,
     atlas = "booster_placeholder",
     pos = { x = 2, y = 1 },
-    config = { extra = 4, choose = 2 },
+    config = { extra = {numerator = 2, denominator = 4, name = "Mega Menu Pack"} },
     draw_hand = true,
     create_card = function(self, card)
         return {set = "worm_hedonia_menu", area = G.pack_cards, skip_materialize = true}
+    end,
+    loc_vars = function(self, info_queue, card)
+        local num, denom = SMODS.get_probability_vars(card, card.ability.extra.numerator, card.ability.extra.denominator)
+        return {
+            vars = {num, denom, card.ability.extra.name},
+            key = "p_worm_hedonia_menu"
+        }
     end
 }
 
@@ -162,9 +211,16 @@ SMODS.Booster {
     cost = 8,
     atlas = "booster_placeholder",
     pos = { x = 3, y = 1 },
-    config = { extra = 4, choose = 2 },
+    config = { extra = {numerator = 2, denominator = 4, name = "Mega Menu Pack"} },
     draw_hand = true,
     create_card = function(self, card)
         return {set = "worm_hedonia_menu", area = G.pack_cards, skip_materialize = true}
+    end,
+    loc_vars = function(self, info_queue, card)
+        local num, denom = SMODS.get_probability_vars(card, card.ability.extra.numerator, card.ability.extra.denominator)
+        return {
+            vars = {num, denom, card.ability.extra.name},
+            key = "p_worm_hedonia_menu"
+        }
     end
 }
