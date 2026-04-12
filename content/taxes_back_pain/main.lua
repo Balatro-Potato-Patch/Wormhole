@@ -178,6 +178,13 @@ SMODS.Gradient({
     },
 })
 
+SMODS.Gradient({
+    key = 'sdm',
+    colours = {
+        HEX('EDC001'), HEX('FF6E00'), HEX('D30000'), HEX('FF6E00')
+    },
+})
+
 PotatoPatchUtils.Developer({
     name = 'eremel',
     team = 'tbp',
@@ -195,6 +202,7 @@ PotatoPatchUtils.Developer({
     name = 'sdm',
     team = 'tbp',
     loc = true,
+    colour = SMODS.Gradients.worm_sdm
 })
 
 PotatoPatchUtils.Developer({

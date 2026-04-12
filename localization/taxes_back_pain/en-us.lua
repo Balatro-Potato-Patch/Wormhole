@@ -41,7 +41,14 @@ local other_loc_table = {
             PotatoPatchDev_sdm = {
                 name = 'SDM_0',
                 text = {
-                    'placeholder'
+                    {
+                        'I am WAY too underqualified',
+                        'to be on this awesome team'
+                    },
+                    {
+                        'Some of my mods include {C:attention,E:2}SDM_0\'s Stuff{},',
+                        '{C:money,E:2}Joker Evolution{} and {C:red,E:2}Make-A-Tro{}'
+                    }
                 }
             },
             PotatoPatchDev_dilly = {
