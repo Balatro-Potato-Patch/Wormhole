@@ -21,6 +21,9 @@ Wormhole.JR_UTILS.reset_game_globals = function(run_start)
     for hand, _ in pairs(Wormhole.JR_UTILS.ENABLED_SATELLITES) do
       G.GAME.jr.satellite_hands[hand] = { level = 0 }
     end
+
+    -- Counter for satellites above lvl 0
+    G.GAME.jr.transponder_ct = 0
   end
 end
 

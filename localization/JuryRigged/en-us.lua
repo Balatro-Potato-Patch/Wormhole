@@ -105,6 +105,16 @@ return {
         }
       },
     },
+    Joker = {
+      j_worm_jr_transponder = {
+        name = "Transponder",
+        text = {
+          "Gains {X:mult,C:white}X#1#{} Mult for",
+          "every {C:attention}Satellite{} above 0",
+          "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)",
+        }
+      },
+    },
     PotatoPatch = {
       PotatoPatchTeam_JuryRigged = { name = "JuryRigged" },
       PotatoPatchDev_DowFrin = { name = "DowFrin", text = { { "Hopefully i {C:red}remember{} to change this after im done testing lol" }, { "oh also we have multi box support" } } },
