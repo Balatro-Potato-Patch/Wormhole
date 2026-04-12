@@ -9,7 +9,7 @@ SMODS.Joker {
   rarity = 2,
   pos = { x = 0, y = 0 },
   atlas = "worm_jr_jokers",
-  cost = 7,
+  cost = 6,
   blueprint_compat = true,
   eternal_compat = true,
   perishable_compat = true,
@@ -53,14 +53,28 @@ SMODS.Joker {
   end
 }
 
+SMODS.Joker {
+  key = "jr_nasa",
+  config = {},
+  rarity = 2,
+  -- TODO: give sprite
+  pos = { x = 0, y = 0 },
+  cost = 6,
+  blueprint_compat = true,
+  eternal_compat = true,
+  perishable_compat = true,
 
-Wormhole.JR_UTILS.update_transponder = function()
-  local count = 0
-  for k, v in pairs(G.GAME.jr.satellite_hands) do
-    if v.level > 0 then
-      count = count + 1
+  calculate = function(self, card, context)
+    if context.blueprint then return end
+
+    if context.end_of_round and context.main_eval and G.GAME.blind.boss then
+      SMODS.add_card { key = "sat_worm_" .. Wormhole.JR_UTILS.get_satellite(G.GAME.jr.curr_hand), area = G.consumeables }
+
+      return {
+        message = localize('worm_jr_plus_satellite'),
+        -- For some reason our pink looks extremely bright when used as the background for a message so we use legendary here since it looks similar enough
+        colour = G.C.RARITY.Legendary
+      }
     end
   end
-
-  G.GAME.jr.transponder_ct = count
-end
+}

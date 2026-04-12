@@ -114,6 +114,14 @@ return {
           "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)",
         }
       },
+      j_worm_jr_nasa = {
+        name = "NASA",
+        text = {
+          "After defeating a {C:attention}Boss Blind{}, create the",
+          "corresponding {C:worm_jr_satellite}Satellite{} card",
+          "for your {C:attention}last played hand",
+        }
+      },
     },
     PotatoPatch = {
       PotatoPatchTeam_JuryRigged = { name = "JuryRigged" },
@@ -147,8 +155,7 @@ return {
       worm_jr_satellites_dawn = "Dawn",
       worm_jr_satellites_manhole_cover = "Manhole Cover",
 
-      -- Satellite ability descriptions for Run Info
-      jr_satellite_descriptions_new_horizon = "This satellite {C:mult}fixes{} your {C:attention}marriage{}"
+      worm_jr_plus_satellite = "+1 Satellite",
     }
   }
 }

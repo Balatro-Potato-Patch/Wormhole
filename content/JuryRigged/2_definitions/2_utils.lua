@@ -99,3 +99,14 @@ Wormhole.JR_UTILS.draw_satellite_soul = function(card, scale_mod, rotate_mod)
   spr:draw_shader('dissolve', nil, nil, nil,
     card.children.center, scale_mod * .75, rotate_mod * math.sin(0.1 * G.TIMERS.REAL + 5) * 10)
 end
+
+Wormhole.JR_UTILS.update_transponder = function()
+  local count = 0
+  for k, v in pairs(G.GAME.jr.satellite_hands) do
+    if v.level > 0 then
+      count = count + 1
+    end
+  end
+
+  G.GAME.jr.transponder_ct = count
+end
