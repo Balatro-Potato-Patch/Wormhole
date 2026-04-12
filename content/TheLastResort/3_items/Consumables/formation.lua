@@ -36,5 +36,6 @@ SMODS.Consumable{
         }))
 	end,
 	ppu_team = {"TheLastResort"},
-	ppu_coder = {"Amphiapple"}
+	ppu_coder = {"Amphiapple"},
+    ppu_artist = {"Foo54", "Aura2247"},
 }

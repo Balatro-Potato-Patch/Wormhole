@@ -107,7 +107,7 @@ SMODS.Consumable{
 	end,
 	ppu_team = {"TheLastResort"},
 	ppu_coder = {"Foo54"},
-	ppu_artist = {"Foo54"}
+	ppu_artist = {"Foo54", "Aura2247"}
 }
 
 SMODS.DrawStep {
