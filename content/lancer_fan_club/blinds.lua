@@ -81,7 +81,7 @@ function Game:start_run(...)
             bond = 'Strong',
             offset = {x=0,y=0}
         })
-        G.ARGS.eigengrau_alpha = 1
+        G.ARGS.eigengrau_alpha = 0
         G.LFC_EIGENGRAU_BG:define_draw_steps({{
             shader = 'worm_lfc_eigengrau_bg',
             send = {

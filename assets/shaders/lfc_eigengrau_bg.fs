@@ -52,6 +52,10 @@ vec4 HSL(vec4 c)
 
 vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords )
 {
+    if (alpha == 0.) {
+        return vec4(0,0,0,0);
+    }
+
     vec4 tex = colour;
     vec2 uv = screen_coords/love_ScreenSize.xy*2;
 
