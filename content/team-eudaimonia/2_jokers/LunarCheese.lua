@@ -49,7 +49,7 @@ SMODS.current_mod.calculate = function(self, context)
             local other_repititions = other_return and other_return.repetitions or 0
             local tot_repititions = joker.ability.worm_euda_researched_retriggers + other_repititions
             return {
-                repetitions = 1,
+                repetitions = tot_repititions,
                 message_card = context.other_card
             }
         end
@@ -62,6 +62,7 @@ SMODS.current_mod.calculate = function(self, context)
                     joker.ability.worm_euda_researchprogress = nil
                     SMODS.debuff_card(joker, nil, "worm_euda_research")
                 end
+                SMODS.calculate_effect({message = tostring(joker.ability.worm_euda_researchprogress or 0)}, joker)
             end
         end
     end

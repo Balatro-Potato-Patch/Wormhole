@@ -38,7 +38,7 @@ SMODS.Joker {
                 if stored_joker.ability.worm_euda_colonycitizen == joker.ability.extra.colonyid then
                   local stored_joker_copy = copy_card(stored_joker, nil, nil, nil, nil)
                   stored_joker_copy.ability.worm_euda_colonycitizen = card.ability.extra.colonyid
-                  stored_joker_copy.ability.already_shipped = nil
+                  stored_joker_copy.ability.worm_euda_already_shipped = nil
                   G.worm_euda_colony:emplace(stored_joker_copy)
                 end
               end
@@ -137,7 +137,7 @@ local function create_join_colony_view(card)
         }
     )
     for _, joker in ipairs(G.jokers and G.jokers.cards or {}) do
-        if joker.config.center.key ~= "j_worm_euda_jokecolony" and not joker.ability.already_shipped then
+        if joker.config.center.key ~= "j_worm_euda_jokecolony" and not joker.ability.worm_euda_already_shipped then
             local copied_joker = copy_card(joker, nil, nil, nil, nil)
             copied_joker.ability.source_joker = joker
             copied_joker.ability.worm_euda_colonycitizen = card.ability.extra.colonyid
@@ -287,7 +287,7 @@ G.FUNCS.worm_euda_join_colony = function(e)
           og.area:remove_card(og)
           og:remove_from_deck()
           G.worm_euda_colony:emplace(og)
-          og.ability.already_shipped = true
+          og.ability.worm_euda_already_shipped = true
           if joker.ability.eternal then joker.ability.eternal = nil end
           SMODS.destroy_cards(joker)
           break
@@ -327,7 +327,7 @@ G.FUNCS.worm_euda_can_join_jokecolony = function(e)
   local card = e.config.ref_table
   local options = 0
   for _, joker in ipairs(G.jokers and G.jokers.cards or {}) do
-      if joker.config.center.key ~= "j_worm_euda_jokecolony" and not joker.ability.already_shipped then
+      if joker.config.center.key ~= "j_worm_euda_jokecolony" and not joker.ability.worm_euda_already_shipped then
           options = options + 1
       end
   end
@@ -403,10 +403,10 @@ local calc_ref = SMODS.current_mod.calculate or function(self, context) return e
 SMODS.current_mod.calculate = function(self, context)
     if context.end_of_round and not context.game_over and context.main_eval then
         for _, joker in ipairs(G.jokers and G.jokers.cards or {}) do
-            joker.ability.already_shipped = nil
+            joker.ability.worm_euda_already_shipped = nil
         end
         for _, joker in ipairs(G.worm_euda_colony and G.worm_euda_colony.cards or {}) do
-            joker.ability.already_shipped = nil
+            joker.ability.worm_euda_already_shipped = nil
         end
     end
     return calc_ref(self, context)

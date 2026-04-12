@@ -128,31 +128,19 @@ return {
                     "It {C:attention}permanently{} gains a retrigger"
                 },
             },
+            j_worm_euda_extraevidence = {
+                name = "Extraterrestrial Evidence",
+                text = {
+                    "Debuffs all scoring cards except the {C:attention}first{} one",
+                    "Retrigger the first card for",
+                    "every other {C:attention}unique{} rank scored"
+                }
+            },
             j_worm_euda_cometwild = {
                 name = "Comet Wild",
                 text = {
-                    "Debuffed {C:attention}Wild{} cards still score and",
-                    "give {X:mult,C:white}x#1#{} Mult when played"
-                },
-            },
-            j_worm_euda_rocket = {
-                name = "Space Shuttle",
-                text = {
-                    "{C:red}+#1#{} Mult?",
-                    "{C:inactive}(Blast off in: #3#)"
-                },
-            },
-			j_worm_euda_rocket_a = {
-                name = "Space Shuttle",
-                text = {
-					{
-                    "{C:red}+#1#{} Mult",
-					},
-					{
-					"Increase Mult by {C:red}#2#{}",
-					"if the {C:attention}scored hand{} isn't",
-					"the most played {C:attention}poker hand"
-					},
+                    "{C:attention}Wild{} cards can't be debuffed and",
+                    "give {X:mult,C:white}x#1#{} Mult when scored"
                 },
             },
 			j_worm_euda_bitflip = {
@@ -189,17 +177,13 @@ return {
                 },
 
             }, 
-
-        },
-        Planet = {
-            c_worm_euda_bigear = {
-                name = "Big Ear",
+            j_worm_euda_roadsidepicnic = {
+                name = "Roadside Picnic",
                 text = {
-                    "({V:1}lvl.#1#{}/{V:2}#2#{}) Level up",
-                    "{C:attention}#3#",
-                    "{C:mult}+#4#{}/{C:mult}#5#{} Mult and",
-                    "{C:chips}+#6#{} chips",
-                },
+                    "{C:green}Rerolls{} cost {C:money}$#1#{} more",
+                    "Shop cards cost {C:money}$#1#{} less",
+                    "Increase both values by 1 per {C:green}reroll"
+                }
             }
         },
         euda_Fate = {
@@ -253,6 +237,26 @@ return {
             }
         },
         Other = {
+            worm_euda_jokecolony_alreadyshipped = {
+                name = "Joke Colony",
+                text = {
+                    "{C:inactive}Was shipped",
+                    "{C:inactive}this round"
+                }
+            },
+            worm_euda_lunarcheese_disabled = {
+                name = "Lunar Cheese",
+                text = {
+                    "Debuffed for",
+                    "#1# more rounds"
+                }
+            },
+            worm_euda_lunarcheese_bonus_retriggers = {
+                name = "Lunar Cheese",
+                text = {
+                    "Has #1# retriggers"
+                }
+            },
             p_worm_euda_avadon_normal = {
                 name = "Avadon Pack",
                 text = {
@@ -322,7 +326,7 @@ return {
                 k_euda_fate = "Fate",
                 b_euda_fate_cards = "Fate Cards",
                 k_euda_avadon_pack = "Avadon Pack",
-                k_worm_lunarcheese_message = "Cheesy!",
+                k_worm_euda_lunarcheese_message = "Cheesy!",
             }
         }
 }
