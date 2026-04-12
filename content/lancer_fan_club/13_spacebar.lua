@@ -12,24 +12,34 @@ local window = 0.08 -- Timing window in seconds
 Wormhole.LancerFanClub.spacebar = {
 	active = false,
 	enqueue = function(self, card)
-		card:juice_up()
-		self.active = true
-		self.pre_timer = 1  -- Timer for before the minigame
-		self.timer = len    -- Timer for the minigame itself
-		self.canvas = love.graphics.newCanvas(w+15,12)
-		self.card = card
+		G.E_MANAGER:add_event(Event({func = function()
+			card:juice_up()
+			self.active = true
+			self.pre_timer = 1  -- Timer for before the minigame
+			self.timer = len    -- Timer for the minigame itself
+			self.canvas = love.graphics.newCanvas(w+15,12)
+			self.card = card
+			self.hits = 0
+			self.timingoffset = nil
 
-		local t = {}
-		for i = 1, count, 1 do
-			t[(pseudorandom("lfc_spacebar_hit")+i-1)/count*len] = true -- Makes them spawn in random positions within sections, so they're spread out
-		end
-		self.hitmarkers = t
-		print(t)
+			local t = {}
+			for i = 1, count, 1 do
+				t[(pseudorandom("lfc_spacebar_hit")+i-1)/count*len] = true -- Makes them spawn in random positions within sections, so they're spread out
+			end
+			self.hitmarkers = t
+
+			card.ability.extra.xmult = 1
+		return true end}))
 
 		G.E_MANAGER:add_event(Event({func = function() return not self.active end}))
 		
 		G.E_MANAGER:add_event(Event({func = function()
-			card:juice_up()
+			card.ability.extra.xmult = card.ability.extra.xmult_mod*self.hits+1
+			SMODS.calculate_effect({
+				-- referenced utdr code for this since it's based off shitty early cryptid code so it used shit like mult_mod and had to add messages separately
+				message = localize{type = 'variable', key = 'a_xmult', vars = {card.ability.extra.xmult}},
+				colour = G.C.RED
+			},card)
 		return true end}))
 	end
 }
@@ -38,43 +48,34 @@ SMODS.Joker {
 	key = "lfc_spacebar",
 	atlas = "lfc_spacebar",
 	pos = { x = 0, y = 0 },
-	--pixel_size = { w = 95, h = 23 },
 	display_size = { w = 95, h = 23 },
 
 	rarity = 3,
 	cost = 8,
-	blueprint_compat = true,
+	blueprint_compat = false,
 	demicoloncompat = false,
 
-	config = {
-		extra = {
-			max_xmult_mod = 0.2,
-		}
-	},
+	config = { extra = { xmult_mod = 0.5, xmult = 1 } },
 	attributes = {
 		"xmult",
 		"space", -- literally!
 	},
-
 	loc_vars = function(self, info_queue, card)
-		return {
-			vars = {
-				card.ability.extra.max_xmult_mod
-			}
-		}
+		return { vars = { card.ability.extra.xmult_mod } }
 	end,
 
 	calculate = function(self, card, context)
 		if context.worm_lfc_on_play_press then
 			Wormhole.LancerFanClub.spacebar:enqueue(card)
 		end
-		--[[if context.individual and context.cardarea == G.play then
-			context.other_card.ability.perma_x_mult = (context.other_card.ability.perma_x_mult or 1) + card.ability.extra.max_xmult_mod
-			return { 
-				message = localize('k_upgrade_ex'),
-				colour = G.C.MULT
+		if context.joker_main and card.ability.extra.xmult ~= 1 then
+			return {
+				xmult = card.ability.extra.xmult
 			}
-		end]]
+		end
+        if context.after then
+            card.ability.extra.xmult = 1
+        end
 	end,
 
 	ppu_artist = { "J8-Bit" },
@@ -91,8 +92,15 @@ function love.update(dt)
 
 	local space = Wormhole.LancerFanClub.spacebar
 	if space.active then
+		local check_thing = space.pre_timer
 		targettimer = space.pre_timer>0 and "pre_timer" or "timer"
 		space[targettimer] = space[targettimer] - dt
+
+		if targettimer == "pre_timer" then
+			for k, _ in pairs(space.hitmarkers) do
+				if (1-space.pre_timer>k/len) and not (1-check_thing>k/len) then play_sound("paper1",2,8) end
+			end
+		end
 
 		-- End when timer runs out
 		if space.timer<0 then
@@ -121,6 +129,7 @@ function love.keypressed( key, scancode, isrepeat )
 			space.hitmarkers[ht] = false
 			space.card:juice_up()
 			space.timingoffset = t-ht
+			space.hits = space.hits+1
 			play_sound("paper1",1,8)
 		else
 			play_sound("paper1",2,8)
@@ -177,9 +186,9 @@ function love.draw()
 		love.graphics.setCanvas(c)
 		local x, y = love.graphics.getDimensions()
 		local w,h = space.canvas:getDimensions()
-		love.graphics.draw(space.canvas,x/2,y/2,0,2,2,w/2,h/2)
+		love.graphics.draw(space.canvas,x/2,y/5*2,0,2,2,w/2,h/2)
 		if space.timingoffset then
-			love.graphics.printf(math.floor(space.timingoffset*1000).."ms",x/2-88,y/2+12,200,"center")
+			love.graphics.print(math.floor(space.timingoffset*1000).."ms",x/2-w+28,y/5*2+10)
 		end
 	end
 end

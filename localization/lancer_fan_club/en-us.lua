@@ -206,6 +206,21 @@ return {
                     "gains a new {C:attention}Enhancement{}",
                     "{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)"
                 }
+            },
+            j_worm_lfc_spacebar = {
+                name = "Spacebar",
+                text = {
+                    {
+                        "Play a {C:attention}Timing minigame",
+                        "before scoring and give {C:white,X:mult}X#1#",
+                        "for each successful hit"
+                    },
+                    {
+                        "Hit {C:attention}Space{} at the",
+                        "right time to gain {C:white,X:mult}XMult{},",
+                        "Resets after scoring"
+                    }
+                }
             }
         },
         Spectral = {
