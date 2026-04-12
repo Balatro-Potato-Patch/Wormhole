@@ -487,6 +487,27 @@ function Wormhole.TEAM_MEOW.generate_exchanges_UIdef(card)
 	}
 end
 
+function G.FUNCS.meow_can_appease(e)
+	local card = e.config.ref_table
+	if #card.tarts > 0 and G.GAME.meow_sanity_lost > 0 then
+		e.config.button = "meow_appease"
+		e.config.colour = G.C.PURPLE
+	else
+		e.config.button = nil
+		e.config.colour = G.C.UI.BACKGROUND_INACTIVE
+	end
+end
+
+function G.FUNCS.meow_appease(e)
+	local card = e.config.ref_table
+	play_sound("worm_meowChomp", 1 + 0.5 * (math.random() - 0.5), 0.6)
+	local count = math.min(G.GAME.meow_sanity_lost, #card.tarts)
+	G.GAME.meow_sanity_lost = G.GAME.meow_sanity_lost - count
+	for _ = 1, count do
+		table.remove(card.tarts)
+	end
+end
+
 function Wormhole.TEAM_MEOW.nyarlathotep_exchange_menu_UIdef(card)
 	local rows = {
 		{
@@ -541,6 +562,61 @@ function Wormhole.TEAM_MEOW.nyarlathotep_exchange_menu_UIdef(card)
 										{
 											n = G.UIT.T,
 											config = { text = "$5", colour = G.C.UI.TEXT_LIGHT, scale = 0.7 },
+										},
+									},
+								},
+							},
+						},
+						{
+							n = G.UIT.R,
+							config = { minh = 0.1 },
+						},
+						{
+							n = G.UIT.R,
+							config = {
+								align = "cm",
+								minw = 2,
+								minh = 1.5,
+								colour = G.C.PURPLE,
+								ref_table = card,
+								r = 0.1,
+								hover = true,
+								shadow = true,
+								emboss = 0.05,
+								padding = 0.05,
+								func = "meow_can_appease",
+								button = "meow_appease",
+							},
+							nodes = {
+								{
+									n = G.UIT.R,
+									config = {
+										align = "cm",
+									},
+									nodes = {
+										{
+											n = G.UIT.T,
+											config = {
+												text = localize("k_worm_meow_appease1"),
+												colour = G.C.UI.TEXT_LIGHT,
+												scale = 0.375,
+											},
+										},
+									},
+								},
+								{
+									n = G.UIT.R,
+									config = {
+										align = "cm",
+									},
+									nodes = {
+										{
+											n = G.UIT.T,
+											config = {
+												text = localize("k_worm_meow_appease2"),
+												colour = G.C.UI.TEXT_LIGHT,
+												scale = 0.4,
+											},
 										},
 									},
 								},
