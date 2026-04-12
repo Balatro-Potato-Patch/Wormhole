@@ -311,11 +311,11 @@ return {
 					"on cards by {C:attention}+#1# ",
 				},
 			},
-			j_worm_nyarlathotep = {
+			j_worm_meow_nyarlathotep = {
 				name = "Nya-rlathotep",
 				text = {},
 			},
-			j_worm_nyarlathotep_blank = {
+			j_worm_meow_nyarlathotep_blank = {
 				name = "Nya-rlathotep",
 				text = {
 					{
@@ -401,7 +401,12 @@ return {
 					"Cards held in hand give",
 				},
 			},
-			exc_worm_void = {
+			exc_worm_meow_sanity_cost = {
+				text = {
+					"Lose {C:purple}#1#{} Sanity",
+				},
+			},
+			exc_worm_meow_void = {
 				name = "Void",
 				text = {
 					"Nyarlathotep gains {C:red}+#1#{}",
@@ -508,10 +513,12 @@ return {
 			k_worm_meow_spacetart_pack = "Spacetart Pack",
 			k_worm_meow_Zodicat_pack = "Zodicat Pack",
 			k_worm_meow_ate = "Ate!",
-			k_meow_eldritch = "Eldritch",
-			k_meow_encounter = "Encounter",
-			k_meow_sanity = "Sanity Lost:",
-			k_meow_money = "Current Money:",
+			k_worm_meow_eldritch = "Eldritch",
+			k_worm_meow_encounter = "Encounter",
+			k_worm_meow_sanity = "Sanity Lost:",
+			k_worm_meow_money = "Current Money:",
+			k_worm_meow_exchange = "Exchange",
+			k_worm_meow_exchanged = "Exchanged",
 		},
 		labels = {
 			worm_meow_zodicat = "Zodicat",

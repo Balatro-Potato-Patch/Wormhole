@@ -64,7 +64,7 @@ local function build_nyarlathotep_entries(all_entries, max_cols, no_commas)
 end
 
 SMODS.Joker({
-	key = "nyarlathotep",
+	key = "meow_nyarlathotep",
 	-- sprite and pos tbd
 	config = {
 		extra = {
@@ -79,8 +79,7 @@ SMODS.Joker({
 	blueprint_compat = false,
 	eternal_compat = true,
 	perishable_compat = false,
-	calc_dollar_bonus = function(self, card)
-	end,
+	calc_dollar_bonus = function(self, card) end,
 	can_use = function(self, card)
 		return true
 	end,
@@ -153,7 +152,7 @@ SMODS.Joker({
 		end
 		if not seen then
 			return {
-				key = "j_worm_nyarlathotep_blank",
+				key = "j_worm_meow_nyarlathotep_blank",
 			}
 		end
 		return {
@@ -217,7 +216,7 @@ Wormhole.TEAM_MEOW.nyarlathotep_exchanges = {}
 ---@param args NyarlathotepExchangeArgs
 ---@return NyarlathotepExchange
 local function nyarlathotep_exchange(args)
-	local final_key = "exc_" .. SMODS.current_mod.prefix .. "_" .. args.key
+	local final_key = "exc_" .. SMODS.current_mod.prefix .. "_meow_" .. args.key
 	local ex = {
 		key = final_key,
 		cost = args.cost or 1,
@@ -235,23 +234,29 @@ local function nyarlathotep_exchange(args)
 	return ex
 end
 
-local function generate_exchange_item_ui(card, key)
+local function generate_exchange_item_ui(card, option)
 	local desc_nodes = {}
-	local ex_prototype = Wormhole.TEAM_MEOW.nyarlathotep_exchanges[key]
+	local cost_nodes = {}
+	local ex_prototype = Wormhole.TEAM_MEOW.nyarlathotep_exchanges[option.key]
 	local loc_res = ex_prototype:loc_vars(card) or {}
-	local name_nodes = localize({ type = "name", key = key, set = "Other", vars = loc_res.vars or {} })
-	localize({ type = "other", key = key, nodes = desc_nodes, vars = loc_res.vars or {} })
+	local name_nodes = localize({ type = "name", key = option.key, set = "Other", vars = loc_res.vars or {} })
+	localize({ type = "other", key = option.key, nodes = desc_nodes, vars = loc_res.vars or {} })
+	localize({ type = "other", key = "exc_worm_meow_sanity_cost", nodes = cost_nodes, vars = { ex_prototype.cost } })
 	local desc = {}
 	for _, v in ipairs(desc_nodes) do
 		desc[#desc + 1] = { n = G.UIT.R, config = { align = "cm" }, nodes = v }
 	end
-	return {
-		n = G.UIT.C,
+	local cost = {}
+	for _, v in ipairs(cost_nodes) do
+		cost[#cost + 1] = { n = G.UIT.R, config = { align = "cm" }, nodes = v }
+	end
+	local infobox = {
+		n = G.UIT.R,
 		config = {
 			align = "cm",
 			colour = lighten(G.C.JOKER_GREY, 0.5),
-			r = 0.1,
-			emboss = 0.05,
+			r = 0.12,
+			emboss = 0.07,
 			padding = 0.05,
 		},
 		nodes = {
@@ -281,10 +286,90 @@ local function generate_exchange_item_ui(card, key)
 						},
 						nodes = { { n = G.UIT.R, config = { align = "cm", padding = 0.03 }, nodes = desc } },
 					},
+					{
+						n = G.UIT.R,
+						config = {
+							align = "cm",
+							r = 0.1,
+							padding = 0.05,
+							emboss = 0.05,
+							colour = G.C.WHITE,
+						},
+						nodes = { { n = G.UIT.R, config = { align = "cm", padding = 0.03 }, nodes = cost } },
+					},
 				},
 			},
 		},
 	}
+	exchanged_table = {
+		localize("k_worm_meow_exchange"),
+		localize("k_worm_meow_exchanged"),
+	}
+	return {
+		n = G.UIT.C,
+		config = { padding = 0.1, align = "cm" },
+		nodes = {
+			infobox,
+			{
+				n = G.UIT.R,
+				config = {
+					r = 0.1,
+					padding = 0.1,
+					hover = true,
+					shadow = true,
+					align = "cm",
+					colour = G.C.ORANGE,
+					ref_table = card,
+					button = "worm_meow_exchange_reward",
+					exchange_option = option,
+					func = "worm_meow_can_exchange_reward",
+				},
+				nodes = {
+					{
+						n = G.UIT.T,
+						config = {
+							ref_table = setmetatable({}, {
+								__index = function(_, _)
+									return exchanged_table[option.is_exchanged and 2 or 1]
+								end,
+							}),
+							ref_value = "is_exchanged",
+							scale = 0.4,
+							colour = G.C.UI.TEXT_LIGHT,
+						},
+					},
+				},
+			},
+		},
+	}
+end
+
+function G.FUNCS.worm_meow_exchange_reward(e)
+	local card = e.config.ref_table
+	local exchange = Wormhole.TEAM_MEOW.nyarlathotep_exchanges[e.config.exchange_option.key]
+	if exchange.misc then
+		card.ability.extra.misc[#card.ability.extra.misc + 1] = exchange.key
+	end
+	exchange:reward(card)
+	G.GAME.meow_sanity_lost = G.GAME.meow_sanity_lost + exchange.cost
+	e.config.exchange_option.is_exchanged = true
+	local element = G.OVERLAY_MENU:get_UIE_by_ID("meow_exchanges")
+	element.config.object:remove()
+	element.config.object = UIBox({
+		definition = Wormhole.TEAM_MEOW.generate_exchanges_UIdef(card),
+		config = { type = "cm", parent = element },
+	})
+	element.UIBox:recalculate()
+end
+
+function G.FUNCS.worm_meow_can_exchange_reward(e)
+	if e.config.exchange_option.is_exchanged then
+		e.config.colour = G.C.UI.BACKGROUND_INACTIVE
+		e.config.button = nil
+	else
+		e.config.colour = G.C.ORANGE
+		e.config.button = "worm_meow_exchange_reward"
+	end
 end
 
 local default = nyarlathotep_exchange({
@@ -319,10 +404,10 @@ function Wormhole.TEAM_MEOW.generate_exchange_pool(card, seed)
 	end
 	for i = 1, 3 do
 		if #pool == 0 then
-			results[#results + 1] = default.key
+			results[#results + 1] = { key = default.key, exchanged = false }
 		else
 			local index = pseudorandom(seed .. i, 1, #pool)
-			results[#results + 1] = table.remove(pool, index)
+			results[#results + 1] = { key = table.remove(pool, index), exchanged = false }
 		end
 	end
 	return results
@@ -375,7 +460,7 @@ function G.FUNCS.worm_meow_reroll_exchanges(e)
 end
 
 function G.FUNCS.worm_meow_can_reroll_exchanges(e)
-	if G.GAME.dollars > G.GAME.bankrupt_at then
+	if G.GAME.dollars >= G.GAME.bankrupt_at + 5 then
 		e.config.button = "worm_meow_reroll_exchanges"
 		e.config.colour = G.C.GREEN
 	else
@@ -391,11 +476,11 @@ function Wormhole.TEAM_MEOW.generate_exchanges_UIdef(card)
 	end
 	return {
 		n = G.UIT.ROOT,
-		config = { colour = G.C.BLACK, padding = 0.05, r = 0.1 },
+		config = { colour = G.C.BLACK, padding = 0.1, r = 0.1 },
 		nodes = {
 			{
 				n = G.UIT.R,
-				config = { padding = 0.1, align = "cm", },
+				config = { padding = 0.1, align = "cm" },
 				nodes = exchanges,
 			},
 		},
@@ -410,26 +495,54 @@ function Wormhole.TEAM_MEOW.nyarlathotep_exchange_menu_UIdef(card)
 			nodes = {
 				{
 					n = G.UIT.C,
-					config = { align = "cm" },
+					config = {
+						align = "cm",
+					},
 					nodes = {
 						{
 							n = G.UIT.R,
 							config = {
+								align = "cm",
 								minw = 2,
 								minh = 1.5,
 								colour = G.C.GREEN,
 								ref_table = card,
 								r = 0.1,
 								hover = true,
+								shadow = true,
 								emboss = 0.05,
-								align = "cm",
+								padding = 0.05,
 								func = "worm_meow_can_reroll_exchanges",
 								button = "worm_meow_reroll_exchanges",
 							},
 							nodes = {
 								{
-									n = G.UIT.T,
-									config = { text = "Reroll", colour = G.C.UI.TEXT_LIGHT, scale = 0.5 },
+									n = G.UIT.R,
+									config = {
+										align = "cm",
+									},
+									nodes = {
+										{
+											n = G.UIT.T,
+											config = {
+												text = localize("k_reroll"),
+												colour = G.C.UI.TEXT_LIGHT,
+												scale = 0.4,
+											},
+										},
+									},
+								},
+								{
+									n = G.UIT.R,
+									config = {
+										align = "cm",
+									},
+									nodes = {
+										{
+											n = G.UIT.T,
+											config = { text = "$5", colour = G.C.UI.TEXT_LIGHT, scale = 0.7 },
+										},
+									},
 								},
 							},
 						},
@@ -460,7 +573,7 @@ function Wormhole.TEAM_MEOW.nyarlathotep_exchange_menu_UIdef(card)
 			nodes = {
 				{
 					n = G.UIT.C,
-					config = { align = "cm" },
+					config = { align = "cm", padding = 0.1, colour = G.C.BLACK, emboss = 0.05, r = 0.1 },
 					nodes = {
 						{
 							n = G.UIT.R,
@@ -469,8 +582,8 @@ function Wormhole.TEAM_MEOW.nyarlathotep_exchange_menu_UIdef(card)
 								{
 									n = G.UIT.T,
 									config = {
-										text = localize("k_meow_sanity"),
-										scale = 0.7,
+										text = localize("k_worm_meow_sanity"),
+										scale = 0.4,
 										colour = G.C.UI.TEXT_LIGHT,
 									},
 								},
@@ -478,15 +591,26 @@ function Wormhole.TEAM_MEOW.nyarlathotep_exchange_menu_UIdef(card)
 						},
 						{
 							n = G.UIT.R,
-							config = { align = "cm" },
+							config = { align = "cm", colour = lighten(G.C.BLACK, 0.1), r = 0.1, padding = 0.1 },
 							nodes = {
 								{
-									n = G.UIT.T,
+									n = G.UIT.O,
 									config = {
-										ref_table = G.GAME,
-										ref_value = "meow_sanity_lost",
-										scale = 0.5,
-										colour = G.C.PURPLE,
+										object = DynaText({
+											string = {
+												{ ref_table = G.GAME, ref_value = "meow_sanity_lost" },
+											},
+											scale_function = function()
+												return scale_number(G.GAME.meow_sanity_lost, 0.7, 99999, 1000000)
+											end,
+											maxw = 1.35,
+											colours = { G.C.PURPLE },
+											font = G.LANGUAGES["en-us"].font,
+											shadow = true,
+											rotate = true,
+											spacing = 2,
+											scale = 0.7,
+										}),
 									},
 								},
 							},
@@ -495,7 +619,7 @@ function Wormhole.TEAM_MEOW.nyarlathotep_exchange_menu_UIdef(card)
 				},
 				{
 					n = G.UIT.C,
-					config = { align = "cm" },
+					config = { align = "cm", padding = 0.1, colour = G.C.BLACK, emboss = 0.05, r = 0.1 },
 					nodes = {
 						{
 							n = G.UIT.R,
@@ -504,8 +628,8 @@ function Wormhole.TEAM_MEOW.nyarlathotep_exchange_menu_UIdef(card)
 								{
 									n = G.UIT.T,
 									config = {
-										text = localize("k_meow_money"),
-										scale = 0.7,
+										text = localize("k_worm_meow_money"),
+										scale = 0.4,
 										colour = G.C.UI.TEXT_LIGHT,
 									},
 								},
@@ -513,23 +637,27 @@ function Wormhole.TEAM_MEOW.nyarlathotep_exchange_menu_UIdef(card)
 						},
 						{
 							n = G.UIT.R,
-							config = { align = "cm" },
+							config = { align = "cm", colour = lighten(G.C.BLACK, 0.1), r = 0.1, padding = 0.1 },
 							nodes = {
 								{
-									n = G.UIT.T,
+									n = G.UIT.O,
 									config = {
-										text = "$",
-										scale = 0.5,
-										colour = G.C.MONEY,
-									},
-								},
-								{
-									n = G.UIT.T,
-									config = {
-										ref_table = G.GAME,
-										ref_value = "dollars",
-										scale = 0.5,
-										colour = G.C.MONEY,
+										object = DynaText({
+											string = {
+												{ ref_table = G.GAME, ref_value = "dollars", prefix = localize("$") },
+											},
+											scale_function = function()
+												return scale_number(G.GAME.dollars, 0.7, 99999, 1000000)
+											end,
+											maxw = 1.35,
+											colours = { G.C.MONEY },
+											font = G.LANGUAGES["en-us"].font,
+											shadow = true,
+											spacing = 2,
+											bump = true,
+											scale = 0.7,
+										}),
+										id = "dollar_text_UI",
 									},
 								},
 							},
@@ -601,7 +729,7 @@ local highlight_hook = Card.highlight
 function Card:highlight(is_highlighted, ...)
 	local ret = highlight_hook(self, is_highlighted, ...)
 	local obj = self.config.center
-	if self.area == G.jokers and is_highlighted and obj.key == "j_worm_nyarlathotep" then
+	if self.area == G.jokers and is_highlighted and obj.key == "j_worm_meow_nyarlathotep" then
 		---@type UIBox
 		self.children.meow_nyarlathotep_menu_button = UIBox({
 			definition = Wormhole.TEAM_MEOW.create_nyarlathotep_menu_button(self),
@@ -649,7 +777,7 @@ Wormhole.TEAM_MEOW.create_nyarlathotep_menu_button = function(card)
 							{
 								n = G.UIT.T,
 								config = {
-									text = localize("k_meow_eldritch"),
+									text = localize("k_worm_meow_eldritch"),
 									scale = 0.3,
 									colour = G.C.UI.TEXT_LIGHT,
 								},
@@ -663,7 +791,7 @@ Wormhole.TEAM_MEOW.create_nyarlathotep_menu_button = function(card)
 							{
 								n = G.UIT.T,
 								config = {
-									text = localize("k_meow_encounter"),
+									text = localize("k_worm_meow_encounter"),
 									scale = 0.3,
 									colour = G.C.UI.TEXT_LIGHT,
 								},
