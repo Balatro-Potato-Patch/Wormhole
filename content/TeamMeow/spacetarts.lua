@@ -66,9 +66,29 @@ function Card:load(cardTable, other_card, ...)
 	return st
 end
 
--- Spacetart creation wrapper
+local function catelite(card)
+    local pos
+    local ret = 0
+    if G.jokers and G.jokers.cards then
+        for k,v in ipairs(G.jokers.cards) do
+            if v == card then
+                pos = k
+            end
+        end
+        local cad1, cad2 = G.jokers.cards[pos - 1], G.jokers.cards[pos + 1]
+        if cad1 and cad1.config and cad1.config.center_key == "j_worm_meow_catelite" then
+            ret = ret + (cad1.ability.extra.level or 0)
+        end
+        if cad2 and cad2.config and cad2.config.center_key == "j_worm_meow_catelite" then
+            ret = ret + (cad2.ability.extra.level or 0)
+        end
+        return ret
+    end
+end
 
 Wormhole.TEAM_MEOW.tartInfo = {}
+
+-- Spacetart creation wrapper
 
 --- Register a Spacetart object.\
 --- @param args {key:string, foil_pos:{x:integer, y:integer}, tart_pos:{x:integer, y:integer}, loc_vars:(fun(self, info_queue, card, tart_config, boost_count):(table|nil)), config:table, boosted_conds:table, calculates:table, credits:{artist:table,coder:table}, attributes:table|nil}
@@ -97,6 +117,7 @@ local function SpaceTart(args)
 	table.insert(coder, 1, "thunderedge")
 	table.insert(coder, 1, "silverautumn")
 	table.insert(coder, 1, "corobo")
+	table.insert(args.boosted_conds, catelite)
 	SMODS.Consumable({
 		key = args.key,
 		set = "worm_meow_Spacetart",
@@ -514,8 +535,8 @@ SpaceTart({
 	foil_pos = { x = 1, y = 0 },
 	config = {
 		reg = 5,
-		boosted1 = 10,
-		boosted2 = 1.5,
+		boosted = 10,
+		boostinc = 2.5
 	},
 
 	calculates = {
@@ -532,19 +553,11 @@ SpaceTart({
 		function(card, tart_config, context, boost_count)
 			if context.joker_main then
 				return {
-					mult = tart_config.boosted1,
+					mult = tart_config.boosted + (boost_count-1) * tart_config.boostinc,
 				}
 			end
 		end,
 
-		-- Level 2+ boosted ability
-		function(card, tart_config, context, boost_count)
-			if context.joker_main then
-				return {
-					xmult = tart_config.boosted2,
-				}
-			end
-		end,
 	},
 
 	loc_vars = function(self, info_queue, card, tart_config, boost_count)
@@ -571,12 +584,7 @@ SpaceTart({
 	boosted_conds = {
 		-- First condition
 		function(card)
-			return card.config and card.config.center_key == "j_joker"
-		end,
-
-		-- Second condition
-		function(card)
-			return G.GAME.blind.boss
+			return card:has_attribute("mult")
 		end,
 
 		-- Rainbow condition
@@ -669,12 +677,7 @@ SpaceTart({
 	boosted_conds = {
 		-- First condition
 		function(card)
-			return card.config and card.config.center_key == "j_joker"
-		end,
-
-		-- Second condition
-		function(card)
-			return G.GAME.blind.boss
+			return card.config and card.config.center_key == "j_worm_meow_nyan_cat"
 		end,
 
 		-- Rainbow condition
@@ -805,12 +808,7 @@ SpaceTart({
 	boosted_conds = {
 		-- First condition
 		function(card)
-			return card.config and card.config.center_key == "j_joker"
-		end,
-
-		-- Second condition
-		function(card)
-			return G.GAME.blind.boss
+			return card.config and card.config.center_key == "j_worm_meow_golden_tart"
 		end,
 
 		-- Rainbow condition
@@ -847,6 +845,9 @@ SpaceTart({
 	boosted_conds = {
 		-- Rainbow condition
 		has_rainbow,
+		function(card)
+			return card.config and card.config.center_key == "j_worm_meow_catelite"
+		end,
 	},
 })
 
@@ -913,12 +914,7 @@ SpaceTart({
 	boosted_conds = {
 		-- First condition
 		function(card)
-			return card.config and card.config.center_key == "j_joker"
-		end,
-
-		-- Second condition
-		function(card)
-			return G.GAME.blind.boss
+			return card.config and card.config.center_key == "j_worm_meow_cotobo_box"
 		end,
 
 		-- Rainbow condition
@@ -962,11 +958,6 @@ SpaceTart({
 		-- First condition
 		function(card)
 			return card.config and card.config.center_key == "j_joker"
-		end,
-
-		-- Second condition
-		function(card)
-			return G.GAME.blind.boss
 		end,
 
 		-- Rainbow condition
@@ -1185,7 +1176,7 @@ function Card:stop_drag(...)
 	local ret = old(self, ...)
 	local closest = Wormhole.TEAM_MEOW.get_closest_joker(self)
 	local collides = closest and meow_cards_are_colliding(self, closest)
-	if self.ability and self.ability.set == "worm_meow_Spacetart" and collides and self.area == G.consumeables and meow_can_apply_foil(collides) then
+	if self.ability and self.ability.set == "worm_meow_Spacetart" and collides and self.area == G.consumeables and meow_can_apply_foil(closest) then
 		local tart = {
 			key = self.ability.extra.tart,
 			config = self.ability.extra.tart_cfg or {},
@@ -1223,7 +1214,7 @@ function Card:stop_drag(...)
 		}))
 	end
 	-- For tart transfer between jokers
-	if self.ability and self.ability.set == "Joker" and collides and self.tarts and #self.tarts > 0 and self.timer and self.timer > 0.5 and meow_can_apply_foil(collides) then
+	if self.ability and self.ability.set == "Joker" and collides and self.tarts and #self.tarts > 0 and self.timer and self.timer > 0.5 and meow_can_apply_foil(closest) then
 		local tart
 		G.E_MANAGER:add_event(Event({
 			trigger = "after",
