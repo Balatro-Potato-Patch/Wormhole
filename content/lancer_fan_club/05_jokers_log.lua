@@ -7,6 +7,9 @@ SMODS.Joker({
     demicoloncompat = true,
     atlas = "lfc_jokers",
     ppu_coder = { "ProdByProto" },
+    ppu_artist = { "J8-Bit" },
+    pixel_size = { w = 71, h = 68 },
+    display_size = { w = 71, h = 68 },
     ppu_team = { "Lancer Fan Club" },
     config = {
         extra = {
