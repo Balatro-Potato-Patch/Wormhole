@@ -117,7 +117,7 @@ SMODS.Joker({
 				"xchips",
 				"mult",
 				"xmult",
-				"money",
+				"dollars",
 			}) do
 				if cae.individual[entry] then
 					entries[#entries + 1] = { vars = { cae.individual[entry] }, key = entry }
@@ -133,7 +133,7 @@ SMODS.Joker({
 				"xchips",
 				"mult",
 				"xmult",
-				"money",
+				"dollars",
 			}) do
 				if cae.held_in_hand[entry] then
 					entries[#entries + 1] = { vars = { cae.individual[entry] }, key = entry }
@@ -144,7 +144,8 @@ SMODS.Joker({
 		if next(cae.misc) then
 			seen = true
 			local entries = {}
-			for _, entry in ipairs(cae.misc) do
+			for _, key in ipairs(cae.misc) do
+				local entry = Wormhole.TEAM_MEOW.nyarlathotep_exchanges[key]
 				local vars = entry.loc_vars and entry:loc_vars(card) or {}
 				entries[#entries + 1] = {
 					vars = vars,
@@ -162,6 +163,25 @@ SMODS.Joker({
 			main_end = main_end,
 		}
 	end,
+	calculate = function(self, card, context)
+		local cae = card.ability.extra
+		local rets = {}
+		if context.joker_main then
+			rets[#rets + 1] = cae.joker_main
+		end
+		if context.individual and context.cardarea == G.play then
+			rets[#rets + 1] = cae.individual
+		end
+		if context.individual and context.cardarea == G.hand then
+			rets[#rets + 1] = cae.held_in_hand
+		end
+		if next(cae.misc) then
+			for _, entry in ipairs(cae.misc) do
+			end
+			rets[#rets + 1] = {}
+		end
+		return SMODS.merge_effects(rets)
+	end,
 })
 
 ---@class NyarlathotepExchange
@@ -171,6 +191,8 @@ SMODS.Joker({
 ---@field in_pool fun(self: NyarlathotepExchange, card: Card): boolean?
 ---@field config table
 ---@field loc_vars fun(self: NyarlathotepExchange, card: Card): table
+---@field calculate fun(self: NyarlathotepExchange, card: Card, context: CalcContext): table?
+---@field misc? boolean
 
 ---@class NyarlathotepExchangeArgs
 ---@field key string
@@ -179,38 +201,100 @@ SMODS.Joker({
 ---@field in_pool? fun(self: NyarlathotepExchange, card: Card): boolean?
 ---@field config? table
 ---@field loc_vars? fun(self: NyarlathotepExchange, card: Card): table?
+---@field calculate? fun(self: NyarlathotepExchange, card: Card, context: CalcContext): table?
+---@field misc? boolean
 
 ---@type NyarlathotepExchange[]
+Wormhole.TEAM_MEOW.nyarlathotep_exchanges_list = {}
+---@type table<string, NyarlathotepExchange>
 Wormhole.TEAM_MEOW.nyarlathotep_exchanges = {}
 
 ---@param args NyarlathotepExchangeArgs
 ---@return NyarlathotepExchange
 function nyarlathotep_exchange(args)
+	local final_key = "exc_" .. SMODS.current_mod.prefix .. "_" .. args.key
 	local ex = {
-		key = "exc_" .. SMODS.current_mod.prefix .. "_" .. args.key,
+		key = final_key,
 		cost = args.cost or 1,
 		reward = args.reward or function(self, card) end,
 		in_pool = args.in_pool or function(self, card)
 			return true
 		end,
 		config = args.config or {},
+		calculate = args.calculate or function(self, card, context) end,
+		misc = args.misc,
 	}
-	Wormhole.TEAM_MEOW.nyarlathotep_exchanges[#Wormhole.TEAM_MEOW.nyarlathotep_exchanges + 1] = ex
+	Wormhole.TEAM_MEOW.nyarlathotep_exchanges_list[#Wormhole.TEAM_MEOW.nyarlathotep_exchanges_list + 1] = ex
+	Wormhole.TEAM_MEOW.nyarlathotep_exchanges[final_key] = ex
 	return ex
 end
 
+function generate_exchange_item_ui(card, key)
+	local desc_nodes = {}
+	local ex_prototype = Wormhole.TEAM_MEOW.nyarlathotep_exchanges[key]
+	local loc_res = ex_prototype:loc_vars(card) or {}
+	local name_nodes = localize({ type = "name", key = key, set = "Other", vars = loc_res.vars or {} })
+	localize({ type = "descriptions", key = key, set = "Other", nodes = desc_nodes, vars = loc_res.vars or {} })
+	return {
+		n = G.UIT.C,
+		config = {
+			align = "cm",
+			colour = lighten(G.C.JOKER_GREY, 0.5),
+			r = 0.1,
+			emboss = 0.05,
+			padding = 0.05,
+		},
+		nodes = {
+			{
+				n = G.UIT.C,
+				config = {
+					align = "cm",
+					emboss = 0.05,
+					r = 0.1,
+					minw = 2.5,
+					padding = 0.05,
+					colour = lighten(G.C.BLACK, 0.2),
+				},
+				nodes = {
+					{
+						n = G.UIT.R,
+						config = { padding = 0.05 },
+						nodes = name_nodes,
+					},
+					{
+						n = G.UIT.R,
+						config = {
+							align = "cl",
+							r = 0.1,
+							padding = 0.05,
+							emboss = 0.05,
+							colour = G.C.WHITE,
+						},
+						nodes = { { n = G.UIT.R, config = { align = "cm", padding = 0.03 }, nodes = desc_nodes } },
+					},
+				},
+			},
+		},
+	}
+end
+
 local default = nyarlathotep_exchange({
-	key = "greed",
-	cost = 2,
-	config = { money = 2 },
+	key = "void",
+	cost = 1,
+	config = { mult = 10, xchips = 0.5 },
 	reward = function(self, card)
-		card.ability.extra.end_of_round.money = (card.ability.extra.end_of_round.money or 0) + self.config.money
+		local cae = card.ability.extra
+		cae.joker_main.mult = (cae.joker_main.mult or 0) + self.config.mult
+		cae.joker_main.xchips = (cae.joker_main.xchips or 0) + self.config.xchips
 	end,
 	loc_vars = function(self, card)
+		local cae = card.ability.extra
 		return {
 			vars = {
-				self.config.money,
-				card.ability.extra.end_of_round.money or 0,
+				self.config.mult,
+				self.config.xchips,
+				cae.joker_main.mult or 0,
+				cae.joker_main.xchips or 0,
 			},
 		}
 	end,
@@ -219,14 +303,14 @@ local default = nyarlathotep_exchange({
 function Wormhole.TEAM_MEOW.generate_exchange_pool(card, seed)
 	local results = {}
 	local pool = {}
-	for _, exchange in ipairs(Wormhole.TEAM_MEOW.nyarlathotep_exchanges) do
+	for _, exchange in ipairs(Wormhole.TEAM_MEOW.nyarlathotep_exchanges_list) do
 		if exchange:in_pool(card) then
 			pool[#pool + 1] = exchange
 		end
 	end
 	for i = 1, 3 do
 		if #pool == 0 then
-			results[#results + 1] = default
+			results[#results + 1] = copy_table(default)
 		else
 			local index = pseudorandom(seed .. i, 1, #pool)
 			results[#results + 1] = table.remove(pool, index)
@@ -237,21 +321,194 @@ end
 
 function G.FUNCS.worm_meow_can_start_eldritch_encounter(e)
 	local card = e.config.ref_table
-	local obj = card.config.center
-	local locked = (G.play and #G.play.cards > 0)
-		or G.CONTROLLER.locked
-		or (G.GAME.STOP_USE and G.GAME.STOP_USE > 0)
-			and not (G.STATE ~= G.STATES.HAND_PLAYED and G.STATE ~= G.STATES.DRAW_TO_HAND and G.STATE ~= G.STATES.PLAY_TAROT)
+	local locked = card:can_use_consumeable()
 	if not locked and not card.debuff then
-		e.config.colour = G.C.GREEN
+		e.config.colour = G.C.PURPLE
+		e.config.button = "open_nyarlathotep_menu"
 	else
 		e.config.colour = G.C.UI.BACKGROUND_INACTIVE
+		e.config.button = nil
 	end
 end
 
 function G.FUNCS.open_nyarlathotep_menu(e)
 	G.SETTINGS.paused = true
-	G.FUNCS.overlay_menu({})
+	Wormhole.TEAM_MEOW.in_nyarlathotep_exchange = true
+	G.FUNCS.overlay_menu({
+		definition = Wormhole.TEAM_MEOW.nyarlathotep_exchange_menu_UIdef(e.config.ref_table),
+		config = {},
+	})
 end
 
-function Wormhole.TEAM_MEOW.nyarlathotep_exchange_menu_UIdef() end
+local exit_overlay_menu_hook = G.FUNCS.exit_overlay_menu
+function G.FUNCS.exit_overlay_menu(...)
+	Wormhole.TEAM_MEOW.in_nyarlathotep_exchange = false
+	return exit_overlay_menu_hook(...)
+end
+
+function Wormhole.TEAM_MEOW.nyarlathotep_exchange_menu_UIdef(card)
+	local rows = {
+		{
+			n = G.UIT.R,
+			config = {
+				id = "overlay_menu_back_button",
+				align = "cm",
+				minw = 2.5,
+				padding = 0.1,
+				r = 0.1,
+				hover = true,
+				colour = G.C.ORANGE,
+				button = "exit_overlay_menu",
+				shadow = true,
+				focus_args = { nav = "wide", button = "b" },
+			},
+			nodes = {
+				{
+					n = G.UIT.R,
+					config = { align = "cm", padding = 0, no_fill = true },
+					nodes = {
+						{
+							n = G.UIT.T,
+							config = {
+								text = localize("b_back"),
+								scale = 0.5,
+								colour = G.C.UI.TEXT_LIGHT,
+								shadow = true,
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+	return {
+		n = G.UIT.ROOT,
+		config = {
+			align = "cm",
+			minw = G.ROOM.T.w * 5,
+			minh = G.ROOM.T.h * 5,
+			padding = 0.1,
+			r = 0.1,
+			colour = { G.C.GREY[1], G.C.GREY[2], G.C.GREY[3], 0.7 },
+		},
+		nodes = {
+			{
+				n = G.UIT.R,
+				config = { r = 0.1, colour = G.C.JOKER_GREY, padding = 0.05, align = "cm" },
+				nodes = {
+					{
+						n = G.UIT.C,
+						config = { colour = G.C.L_BLACK, r = 0.1, padding = 0.2, align = "cm" },
+						nodes = rows,
+					},
+				},
+			},
+		},
+	}
+end
+
+local highlight_hook = Card.highlight
+function Card:highlight(is_highlighted, ...)
+	local ret = highlight_hook(self, is_highlighted, ...)
+	local obj = self.config.center
+	if self.area == G.jokers and is_highlighted and obj.key == "j_worm_nyarlathotep" then
+		---@type UIBox
+		self.children.mul_joker_use_button = Wormhole.TEAM_MEOW.create_nyarlathotep_menu_button(self)
+	end
+	return ret
+end
+
+local buttons_hook = SMODS.DrawSteps["tags_buttons"].func
+SMODS.DrawSteps["tags_buttons"].func = function(card, layer)
+	buttons_hook(card, layer)
+	if card.children.meow_nyarlathotep_menu_button and card.highlighted then
+		card.children.meow_nyarlathotep_menu_button:draw()
+	end
+end
+
+Wormhole.TEAM_MEOW.create_nyarlathotep_menu_button = function(card)
+	return {
+		n = G.UIT.ROOT,
+		config = { colour = G.C.CLEAR, align = "cm" },
+		nodes = {
+			{
+				n = G.UIT.C,
+				config = {
+					r = 0.08,
+					align = "cl",
+					padding = 0.1,
+					hover = true,
+					shadow = true,
+					colour = G.C.UI.BACKGROUND_INACTIVE,
+					minw = 1.63,
+					func = "worm_meow_can_start_eldritch_encounter",
+					ref_table = card,
+				},
+				nodes = {
+					{
+						n = G.UIT.R,
+						config = { align = "cm" },
+						nodes = {
+							{
+								n = G.UIT.T,
+								config = {
+									text = localize("k_meow_eldritch"),
+									scale = 0.3,
+									colour = G.C.UI.TEXT_LIGHT,
+								},
+							},
+						},
+					},
+					{
+						n = G.UIT.R,
+						config = { align = "cm" },
+						nodes = {
+							{
+								n = G.UIT.T,
+								config = {
+									text = localize("k_meow_encounter"),
+									scale = 0.3,
+									colour = G.C.UI.TEXT_LIGHT,
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+end
+
+SMODS.Sound({
+	key = "nyarlathotep_ambience_music",
+	path = "nyarlathotep_ambience.ogg",
+	volume = 0.9,
+	pitch = 1,
+	sync = setmetatable({}, {
+		__index = function(_, _)
+			return true
+		end,
+	}),
+	select_music_track = function(self)
+		if Wormhole.TEAM_MEOW.in_nyarlathotep_exchange then
+			return 666
+		end
+	end,
+})
+
+SMODS.Sound({
+	key = "nyarlathotep_insanity_music",
+	path = "nyarlathotep_insanity.ogg",
+	volume = 0.6,
+	pitch = 1,
+	sync = setmetatable({}, {
+		__index = function(_, _)
+			return true
+		end,
+	}),
+	select_music_track = function(self)
+		if (G.GAME.meow_sanity_lost or 0) > 10 then
+			return 666
+		end
+	end,
+})

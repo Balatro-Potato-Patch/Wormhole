@@ -352,7 +352,7 @@ return {
 					"{C:chips}+#1#{} Chips",
 				},
 			},
-			worm_meow_nyarlathotep_money = {
+			worm_meow_nyarlathotep_dollars = {
 				text = {
 					"{C:money}$#1#{}",
 				},
@@ -365,6 +365,15 @@ return {
 			worm_meow_held_in_hand = {
 				text = {
 					"Cards held in hand give",
+				},
+			},
+			exc_worm_void = {
+				name = "Void",
+				text = {
+					"Nyarlathotep gains {C:red}+#1#{}",
+					"Mult and {X:chips,C:white}X#2#{} Chips",
+					"{C:inactive}(Currently {C:red}+#3#{C:inactive} Mult",
+					"{C:inactive}and {X:chips,C:white}X#4#{C:inactive} Chips)"
 				},
 			},
 			worm_meow_spacetart_stacks = {
@@ -465,6 +474,8 @@ return {
 			k_worm_meow_spacetart_pack = "Spacetart Pack",
 			k_worm_meow_Zodicat_pack = "Zodicat Pack",
 			k_worm_meow_ate = "Ate!",
+			k_meow_eldritch = "Eldritch",
+			k_meow_encounter = "Encounter"
 		},
 		labels = {
 			worm_meow_zodicat = "Zodicat",
