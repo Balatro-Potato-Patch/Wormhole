@@ -24,6 +24,13 @@ return {
                     '+#1# mult',
                     'for every Tipsy, Drunk, Very Drunk, or Blackout card held in hand'
                 }
+            },
+            j_worm_hedonia_happy_hour = {
+                name = 'Happy Hour',
+                text = {
+                    'Menu consumables cost',
+                    '$#1# less'
+                }
             }
         },
         worm_hedonia_menu={

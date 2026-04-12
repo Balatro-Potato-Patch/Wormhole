@@ -13,7 +13,7 @@ SMODS.Joker {
     cost = 6,
     blueprint_compat = false,
     pools = {
-        Bartender = true
+        ["Bartender"] = true
     },
     config = { extra = {
         items = 1
@@ -101,9 +101,6 @@ SMODS.Joker {
     rarity = 3,
     cost = 6,
     blueprint_compat = false,
-    pools = {
-        Bartender = true
-    },
     config = { extra = {
         mult = 10
     }},
@@ -139,33 +136,16 @@ SMODS.Joker {
     rarity = 3,
     cost = 6,
     blueprint_compat = false,
-    pools = {
-        Bartender = true
-    },
     config = { extra = {
-        mult = 10
+        discount = 2
     }},
     loc_vars = function(self,info_queue,center)
         return {vars = {center.ability.extra.mult}}
     end,
-    calculate = function(self, card, context)
-        if context.joker_main then
-            local counter = 0
-            for i,v in pairs(G.hand.cards) do
-                if v.edition and (
-                    v.edition.key == 'e_worm_hedonia_tipsy' or
-                    v.edition.key == 'e_worm_hedonia_drunk' or
-                    v.edition.key == 'e_worm_hedonia_very_drunk' or
-                    v.edition.key == 'e_worm_hedonia_blackout'
-                ) then
-                    counter = counter + 1
-                end
-            end
-            if counter > 0 then 
-                return {
-                    mult = card.ability.extra.mult * counter
-                }
-            end
-        end
+    add_to_deck = function(self, card, from_debuff)
+    end,
+    load = function(self, card, from_debuff)
+    end,
+    remove_from_deck = function(self, card, from_debuff)
     end
 }
