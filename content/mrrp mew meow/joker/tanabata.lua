@@ -16,13 +16,16 @@ SMODS.Joker {
 
 	config = {
 		extra = {
-			
+			rank1 = "Jack",
+            rank2 = "Queen",
 		}
 	},
 	loc_vars = function (self, info_queue, card)
 		return {
 			vars = {
-				
+				localize(card.ability.extra.rank1, "ranks"),
+                localize(card.ability.extra.rank2, "ranks"),
+                localize("planet", "labels"),
 			}
 		}
 	end,
@@ -31,8 +34,8 @@ SMODS.Joker {
 		if context.before and #G.consumeables.cards + (G.GAME.consumeable_buffer or 0) < G.consumeables.config.card_limit then
             local jack, queen
             for i,v in ipairs(context.scoring_hand) do
-                if v:get_id() == SMODS.Ranks.Jack.id then jack = true end
-                if v:get_id() == SMODS.Ranks.Queen.id then queen = true end
+                if v:get_id() == SMODS.Ranks[card.ability.extra.rank1].id then jack = true end
+                if v:get_id() == SMODS.Ranks[card.ability.extra.rank2].id then queen = true end
                 if jack and queen then break end
             end
 

@@ -105,20 +105,21 @@ descriptions={
 			name = "Out of Space",
 			text = {
 				{
-					"{C:attention}+#1#{} to Joker slots,",
-					"consumeable slots, and hand size",
+					"{C:dark_edition}#1#{} Joker slot",
+					"{C:dark_edition}#1#{} consumable slot",
+					"{C:dark_edition}#1#{} hand size",
 				},
 				{
-					"{X:attention}X#2#{} Blind size for",
-					"each empty Joker and",
-					"consumeable slot"
+					"{C:red}X#2#{} Blind size per",
+					"empty Joker slot and",
+					"empty consumeable slot"
 				}
 			}
 		},
 		j_worm_staging = {
 			name = "Staging",
 			text = {
-				"{X:mult,C:white}X#1#{} Mult for each card",
+				"{X:mult,C:white}X#1#{} Mult per {C:attention}card{}",
 				"discarded this round",
 				"{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive})"
 			}
@@ -126,27 +127,27 @@ descriptions={
 		j_worm_meteor_shower = {
 			name = "Perseids",
 			text = {
-				"For each card in poker",
-				"hand, retrigger a random",
-				"card in poker hand"
+				"Each {C:attention}card{} in poker hand",
+				"retriggers a random",
+				"card in poker hand",
 			}
 		},
 		j_worm_tanabata = {
 			name = "Tanabata",
 			text = {
-				"If poker hand contains",
-				"a Jack and a Queen,",
-				"create a random Planet",
+				"If poker hand contains a",
+				"{C:attention}#1#{} and a {C:attention}#2#{}, create",
+				"a random {C:planet}#3#{} card",
 				"{C:inactive}(Must have room)"
 			}
 		},
 		j_worm_cats_eye_nebula = {
 			name = "Cat's Eye Nebula",
 			text = {
-				"{C:chips}+#1#{} Chips",
-				"{C:chips}-#2#{} for each card scored",
-				"Upon expiration, level up",
-				"all hands by {C:attention}#3#{}"
+				"{C:chips}#1#{} Chips",
+				"{C:chips}#2#{} per {C:attention}card{} scored",
+				"Upon collapse, upgrade all",
+				"{C:attention}poker hand{} levels by {C:attention}#3#{}"
 			}
 		}
 	},

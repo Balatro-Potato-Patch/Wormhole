@@ -24,10 +24,12 @@ SMODS.Joker {
 		}
 	},
 	loc_vars = function (self, info_queue, card)
+        local chips = card.ability.extra.chips
+        local fall = card.ability.extra.fall
 		return {
 			vars = {
-				card.ability.extra.chips,
-				card.ability.extra.fall,
+				(chips >= 0 and "+" or "-") .. chips,
+				(fall >= 0 and "-" or "+") .. fall,
 				card.ability.extra.levels,
 			}
 		}
@@ -60,6 +62,7 @@ SMODS.Joker {
 
         if context.after and card.ability.extra.chips <= 0 and not context.blueprint and not card.getting_sliced then
             card.getting_sliced = true
+            local sign = card.ability.extra.levels >= 0 and "+" or "-"
             G.E_MANAGER:add_event(Event{
                 func = function ()
                     update_hand_text({ sound = 'button', volume = 0.7, pitch = 0.8, delay = 0.3 },
@@ -74,7 +77,7 @@ SMODS.Joker {
                             return true
                         end
                     }))
-                    update_hand_text({ delay = 0 }, { mult = '+', StatusText = true })
+                    update_hand_text({ delay = 0 }, { mult = sign, StatusText = true })
                     G.E_MANAGER:add_event(Event({
                         trigger = 'after',
                         delay = 0.9,
@@ -84,7 +87,7 @@ SMODS.Joker {
                             return true
                         end
                     }))
-                    update_hand_text({ delay = 0 }, { chips = '+', StatusText = true })
+                    update_hand_text({ delay = 0 }, { chips = sign, StatusText = true })
                     G.E_MANAGER:add_event(Event({
                         trigger = 'after',
                         delay = 0.9,
@@ -95,13 +98,13 @@ SMODS.Joker {
                             return true
                         end
                     }))
-                    update_hand_text({ sound = 'button', volume = 0.7, pitch = 0.9, delay = 0 }, { level = '+'..card.ability.extra.levels })
+                    update_hand_text({ sound = 'button', volume = 0.7, pitch = 0.9, delay = 0 }, { level = sign..math.abs(card.ability.extra.levels) })
                     delay(1.3)
                     SMODS.upgrade_poker_hands({ instant = true, level_up = card.ability.extra.levels })
                     update_hand_text({ sound = 'button', volume = 0.7, pitch = 1.1, delay = 0 },
                         { mult = 0, chips = 0, handname = '', level = '' })
 
-                    SMODS.destroy_cards(card)
+                    SMODS.destroy_cards(card, nil, nil, true)
                     return true
                 end
             })
