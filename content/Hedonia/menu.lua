@@ -28,10 +28,11 @@ SMODS.Consumable {
     pos = {x = 0, y = 0},
     use = function(self, card, area, copier)
         local card_to_drink = pseudorandom_element(G.hand.cards, 'alcohol') --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/spectrals.lua#L26
-        card_to_drink:set_edition(e_worm_hedonia_tipsy,true)
+        local edition = SMODS.poll_edition({guaranteed = true, options = {{name = "e_worm_hedonia_tipsy", weight = 1}}})
+        card_to_drink:set_edition(edition,true)
     end,
     can_use = function(self, card)
-        return G.hand and #G.hand.cards > 1
+        return G.hand and G.hand.cards
     end
 }
 
@@ -42,10 +43,11 @@ SMODS.Consumable {
     pos = {x = 1, y = 0},
     use = function(self, card, area, copier)
         local card_to_drink = pseudorandom_element(G.hand.cards, 'alcohol') --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/spectrals.lua#L26
-        card_to_drink:set_edition(e_worm_hedonia_drunk,true) 
+        local edition = SMODS.poll_edition({guaranteed = true, options = {{name = "e_worm_hedonia_drunk", weight = 1}}})
+        card_to_drink:set_edition(edition,true) 
     end,
     can_use = function(self, card)
-        return G.hand and #G.hand.cards > 1
+        return G.hand and G.hand.cards
     end
 }
 
@@ -56,10 +58,11 @@ SMODS.Consumable {
     pos = {x = 2, y = 0},
     use = function(self, card, area, copier)
         local card_to_drink = pseudorandom_element(G.hand.cards, 'alcohol') --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/spectrals.lua#L26
-        card_to_drink:set_edition(e_worm_hedonia_very_drunk,true)
+        local edition = SMODS.poll_edition({guaranteed = true, options = {{name = "e_worm_hedonia_very_drunk", weight = 1}}})
+        card_to_drink:set_edition(edition,true) 
     end,
     can_use = function(self, card)
-        return G.hand and #G.hand.cards > 1
+        return G.hand and G.hand.cards
     end
 }
 
@@ -70,10 +73,11 @@ SMODS.Consumable {
     pos = {x = 3, y = 0},
     use = function(self, card, area, copier)
         local card_to_drink = pseudorandom_element(G.hand.cards, 'alcohol') --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/spectrals.lua#L26
-        card_to_drink:set_edition(e_worm_hedonia_blackout,true)
+        local edition = SMODS.poll_edition({guaranteed = true, options = {{name = "e_worm_hedonia_blackout", weight = 1}}})
+        card_to_drink:set_edition(edition,true) 
     end,
     can_use = function(self, card)
-        return G.hand and #G.hand.cards > 1
+        return G.hand and G.hand.cards
     end
 }
 
@@ -90,10 +94,14 @@ SMODS.Consumable {
     end,
     use = function(self, card, area, copier)
         local card_to_bonus = pseudorandom_element(G.hand.cards, 'alcohol') --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/spectrals.lua#L26
-        card_to_bonus.ability.perma_chips = (card_to_bonus.ability.perma_chips or 0) + card.ability.extra.bonus --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/jokers.lua#L1442
+        card_to_bonus.ability.perma_bonus = (card_to_bonus.ability.perma_bonus or 0) + card.ability.extra.bonus --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/jokers.lua#L1442
+        return {
+            card = card_to_bonus,
+            message = 'Upgrade!'
+        }
     end,
     can_use = function(self, card)
-        return G.hand and #G.hand.cards > 1
+        return G.hand and G.hand.cards
     end
 }
 
@@ -121,7 +129,7 @@ SMODS.Consumable {
     end,
     can_use = function(self, card)
         local has_drunk = false
-        if G.hand and #G.hand.cards > 0 then
+        if G.hand and G.hand.cards then
             for i,v in pairs(G.hand.cards) do
                 if has_drunk == true then break end
                 has_drunk = v.edition and (
@@ -154,7 +162,7 @@ SMODS.Consumable {
         end
     end,
     can_use = function(self, card)
-        return G.hand and #G.hand.highlighted == card.ability.extra.cards
+        return #G.hand.highlighted == 2
     end
 }
 
@@ -176,7 +184,7 @@ SMODS.Consumable {
         end
     end,
     can_use = function(self, card)
-        return G.hand and #G.hand.highlighted == card.ability.extra.cards
+        return #G.hand.highlighted == 2
     end
 }
 
