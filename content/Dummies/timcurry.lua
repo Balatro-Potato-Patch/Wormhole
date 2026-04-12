@@ -102,4 +102,7 @@ SMODS.Tag({
 			return card
 		end
 	end,
+	ppu_coder = { "theonegoofali" },
+	ppu_artist = { "theonegoofali" },
+	ppu_team = { "dummies" },
 })
