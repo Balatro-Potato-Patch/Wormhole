@@ -11,6 +11,18 @@ SMODS.Joker {
     calculate = function (self, card, context)
         if context.using_consumeable and not context.blueprint and context.consumeable.ability.set == 'Tarot'
             and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+            
+            -- Fuckass vanilla consumables 
+            local actual_consumable_buffer = G.GAME.consumeable_buffer
+            if context.consumeable.ability.name == 'The Fool' and G.GAME.last_tarot_planet ~= 'c_fool' then
+                actual_consumable_buffer = actual_consumable_buffer + 1
+            end
+            if context.consumeable.ability.name == 'The Emperor' or context.consumeable.ability.name == 'The High Priestess' then
+                actual_consumable_buffer = actual_consumable_buffer + 2
+            end
+            if #G.consumeables.cards + actual_consumable_buffer >= G.consumeables.config.card_limit then
+                return
+            end
 
             G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
             G.E_MANAGER:add_event(Event({
