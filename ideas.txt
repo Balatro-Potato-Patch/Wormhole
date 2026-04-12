@@ -28,4 +28,4 @@ Bar/Bat Mitzvah, provides every food and non-alcoholic drink in this modpack aft
 Non-Bartender Joker Ideas:
 Trash Compactor, -1 joker slot, gains the effect of all jokers sold until end of round. (including during shopping)
 Drunken Patron - gives +10 mult (maybe x1.25 mult?) for every tipsy, drunk, very drunk, or blackout card in hand
-Happy Hour - Menu consumables cost $2 less
+Happy Hour - Menu consumables cost $2 less (voucher pair?)
