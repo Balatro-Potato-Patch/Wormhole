@@ -17,6 +17,13 @@ return {
                     'Gain effects of all',
                     'sold Jokers until end of round'
                 }                
+            },
+            j_worm_hedonia_patron = {
+                name = 'Drunken Patron',
+                text = {
+                    '+#1# mult',
+                    'for every Tipsy, Drunk, Very Drunk, or Blackout card held in hand'
+                }
             }
         },
         worm_hedonia_menu={

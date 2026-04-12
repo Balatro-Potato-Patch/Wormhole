@@ -46,14 +46,19 @@ SMODS.Edition {
     in_shop = false,            -- TODO discuss adding to shop if a bartender is owned as a hidden mechanic, see in_pool()
     extra_cost = -1,
     pools = {
-        Drunk = true
+        ["Drunk"] = true
     },
     disable_base_shader = true, -- shader will modify card shape when implimented so this should be true
 
     on_apply = function(card)
         card.edition.drunk_wobble_strength = 0.6
     end,
-
+    on_remove = function(card)
+        card.edition.drunk_wobble_strength = nil
+    end,
+    on_load = function(card)
+        card.edition.drunk_wobble_strength = 0.6
+    end,
     config = { extra = { 
             sober_base = 1, -- sober_base in sober_chance chance to sober up  (when held in hand)
             sober_chance = 2,
@@ -86,14 +91,19 @@ SMODS.Edition {
     in_shop = false,            -- TODO discuss adding to shop if a bartender is owned as a hidden mechanic, see in_pool()
     extra_cost = -1,
     pools = {
-        Drunk = true
+        ["Drunk"] = true
     },
     disable_base_shader = true, -- shader will modify card shape when implimented so this should be true
 
     on_apply = function(card)
         card.edition.drunk_wobble_strength = 1.0
     end,
-
+    on_remove = function(card)
+        card.edition.drunk_wobble_strength = nil
+    end,
+    on_load = function(card)
+        card.edition.drunk_wobble_strength = 1.0
+    end,
     config = { extra = { 
             sober_base = 1, -- sober_base in sober_chance chance to sober up  (when held in hand)
             sober_chance = 4,
@@ -129,11 +139,17 @@ SMODS.Edition {
     in_shop = false,            -- TODO discuss adding to shop if a bartender is owned as a hidden mechanic, see in_pool()
     extra_cost = -1,
     pools = {
-        Drunk = true
+        ["Drunk"] = true
     },
     disable_base_shader = true, -- shader will modify card shape when implimented so this should be true
 
     on_apply = function(card)
+        card.edition.drunk_wobble_strength = 1.5
+    end,
+    on_remove = function(card)
+        card.edition.drunk_wobble_strength = nil
+    end,
+    on_load = function(card)
         card.edition.drunk_wobble_strength = 1.5
     end,
     config = { extra = { 
@@ -168,11 +184,17 @@ SMODS.Edition {
     in_shop = false,            -- TODO discuss adding to shop if a bartender is owned as a hidden mechanic, see in_pool()
     extra_cost = -1,
     pools = {
-        Drunk = true
+        ["Drunk"] = true
     },
     disable_base_shader = true, -- shader will modify card shape when implimented so this should be true
 
     on_apply = function(card)
+        card.edition.drunk_wobble_strength = 20.0
+    end,
+    on_remove = function(card)
+        card.edition.drunk_wobble_strength = nil
+    end,
+    on_load = function(card)
         card.edition.drunk_wobble_strength = 20.0
     end,
     config = { extra = { 

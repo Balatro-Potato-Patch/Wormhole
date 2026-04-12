@@ -93,3 +93,79 @@ SMODS.Joker {
         G.jokers:change_size(1)
     end
 }
+
+SMODS.Joker {
+    key = "hedonia_patron",
+    atlas = "joker",
+    pos = {x = 1, y = 1},
+    rarity = 3,
+    cost = 6,
+    blueprint_compat = false,
+    pools = {
+        Bartender = true
+    },
+    config = { extra = {
+        mult = 10
+    }},
+    loc_vars = function(self,info_queue,center)
+        return {vars = {center.ability.extra.mult}}
+    end,
+    calculate = function(self, card, context)
+        if context.joker_main then
+            local counter = 0
+            for i,v in pairs(G.hand.cards) do
+                if v.edition and (
+                    v.edition.key == 'e_worm_hedonia_tipsy' or
+                    v.edition.key == 'e_worm_hedonia_drunk' or
+                    v.edition.key == 'e_worm_hedonia_very_drunk' or
+                    v.edition.key == 'e_worm_hedonia_blackout'
+                ) then
+                    counter = counter + 1
+                end
+            end
+            if counter > 0 then 
+                return {
+                    mult = card.ability.extra.mult * counter
+                }
+            end
+        end
+    end
+}
+
+SMODS.Joker {
+    key = "hedonia_happy_hour",
+    atlas = "joker",
+    pos = {x = 2, y = 1},
+    rarity = 3,
+    cost = 6,
+    blueprint_compat = false,
+    pools = {
+        Bartender = true
+    },
+    config = { extra = {
+        mult = 10
+    }},
+    loc_vars = function(self,info_queue,center)
+        return {vars = {center.ability.extra.mult}}
+    end,
+    calculate = function(self, card, context)
+        if context.joker_main then
+            local counter = 0
+            for i,v in pairs(G.hand.cards) do
+                if v.edition and (
+                    v.edition.key == 'e_worm_hedonia_tipsy' or
+                    v.edition.key == 'e_worm_hedonia_drunk' or
+                    v.edition.key == 'e_worm_hedonia_very_drunk' or
+                    v.edition.key == 'e_worm_hedonia_blackout'
+                ) then
+                    counter = counter + 1
+                end
+            end
+            if counter > 0 then 
+                return {
+                    mult = card.ability.extra.mult * counter
+                }
+            end
+        end
+    end
+}
