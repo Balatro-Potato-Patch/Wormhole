@@ -89,6 +89,15 @@ return {
         }
       },
     },
+    Voucher = {
+      v_worm_jr_launch_pad = {
+        name = 'Launch pad',
+        text = {
+          "Adds {C:attention}#1#{} {C:worm_jr_satellite}Satellite{} card",
+          "to opened {C:Planet}Celestial{} packs"
+        }
+      },
+    },
     PotatoPatch = {
       PotatoPatchTeam_JuryRigged = { name = "JuryRigged" },
       PotatoPatchDev_DowFrin = { name = "DowFrin", text = { { "Hopefully i {C:red}remember{} to change this after im done testing lol" }, { "oh also we have multi box support" } } },
