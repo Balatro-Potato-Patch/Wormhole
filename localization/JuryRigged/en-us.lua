@@ -97,6 +97,13 @@ return {
           "to opened {C:Planet}Celestial{} packs"
         }
       },
+      v_worm_jr_flyby = {
+        name = 'Fly-By',
+        text = {
+          "{C:worm_jr_satellite}Satellite{} cards create a {C:dark_edition}Negative{} {C:planet}Planet{} card",
+          "for their {C:attention}corresponding hand type{} when used"
+        }
+      },
     },
     PotatoPatch = {
       PotatoPatchTeam_JuryRigged = { name = "JuryRigged" },

@@ -19,7 +19,7 @@ Wormhole.JR_UTILS.reset_game_globals = function(run_start)
   if run_start then
     G.GAME.jr = { satellite_hands = {} }
     for hand, _ in pairs(Wormhole.JR_UTILS.ENABLED_SATELLITES) do
-      G.GAME.jr.satellite_hands[hand] = {level = 0}
+      G.GAME.jr.satellite_hands[hand] = { level = 0 }
     end
   end
 end
@@ -70,7 +70,8 @@ Wormhole.JR_UTILS.level_up_satellite = function(card, amount)
       return true
     end
   }))
-  update_hand_text({ sound = 'xchips', volume = 0.7, pitch = 0.9, delay = 0 }, { level = G.GAME.jr.satellite_hands[hand].level })
+  update_hand_text({ sound = 'xchips', volume = 0.7, pitch = 0.9, delay = 0 },
+    { level = G.GAME.jr.satellite_hands[hand].level })
   delay(1.3)
   update_hand_text(
     { sound = 'xchips', volume = 0.7, pitch = 0.5, delay = 0 },
