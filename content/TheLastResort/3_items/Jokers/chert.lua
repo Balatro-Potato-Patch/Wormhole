@@ -5,6 +5,7 @@ SMODS.Joker {
     rarity = 2,
 	cost = 6,
     blueprint_compat = true,
+    perishable_compat = true,
 
     calculate = function(self, card, context)
         if context.setting_blind and not card.getting_sliced and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
