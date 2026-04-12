@@ -65,6 +65,81 @@ SMODS.Consumable {
     end
 }
 
+SMODS.Consumable {
+    key = "hedonia_jawbreaker",
+    set = "worm_hedonia_menu",
+    atlas = "menu",
+    pos = {x = 0, y = 1},
+    config = { extra = {
+        bonus = 50
+    }},
+    loc_vars = function(self,info_queue,center)
+        return {vars = {center.ability.extra.bonus}}
+    end,
+    use = function(self, card, area, copier)
+        local card_to_bonus = pseudorandom_element(G.hand.cards, 'alcohol') --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/spectrals.lua#L26
+        card_to_bonus.ability.perma_chips = (card_to_bonus.ability.perma_chips or 0) + card.ability.extra.bonus --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/jokers.lua#L1442
+    end
+}
+
+SMODS.Consumable {
+    key = "hedonia_rings",
+    set = "worm_hedonia_menu",
+    atlas = "menu",
+    pos = {x = 1, y = 1},
+    use = function(self, card, area, copier)
+        for i, v in G.hand.cards do
+            if SMODS.has_enhancement(v, 'worm_hedonia_tipsy') then --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/jokers.lua#L791
+                card:set_edition(nil, true)
+            elseif SMODS.has_enhancement(v, 'worm_hedonia_drunk') then
+                card:set_edition('worm_hedonia_tipsy', true)
+            elseif SMODS.has_enhancement(v, 'worm_hedonia_very_drunk') then
+                card:set_edition('worm_hedonia_drunk', true)
+            elseif SMODS.has_enhancement(v, 'worm_hedonia_blackout') then
+                card:set_edition('worm_hedonia_very_drunk', true)
+            end
+        end
+    end
+}
+
+SMODS.Consumable {
+    key = "hedonia_debbie",
+    set = "worm_hedonia_menu",
+    atlas = "menu",
+    pos = {x = 2, y = 1},
+    config = { extra = {
+        cards = 2
+    }},
+    loc_vars = function(self,info_queue,center)
+        return {vars = {center.ability.extra.cards}}
+    end,
+    use = function(self, card, area, copier)
+        local rank = pseudorandom_element(SMODS.Ranks, 'debbie') --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/spectrals.lua#L415
+        for i = 1, #G.hand.highlighted do --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/tarots.lua#L695
+            SMODS.modify_rank(G.hand.highlighted[i], rank)
+        end
+    end
+}
+
+SMODS.Consumable {
+    key = "hedonia_jam",
+    set = "worm_hedonia_menu",
+    atlas = "menu",
+    pos = {x = 3, y = 1},
+    config = { extra = {
+        cards = 2
+    }},
+    loc_vars = function(self,info_queue,center)
+        return {vars = {center.ability.extra.cards}}
+    end,
+    use = function(self, card, area, copier)
+        local suit = pseudorandom_element(SMODS.Suits, 'space_jam')
+        for i = 1, #G.hand.highlighted do
+            SMODS.modify_suit(G.hand.highlighted[i], suit)
+        end
+    end
+}
+
 SMODS.Booster {
     key = "hedonia_menu_normal_1",
     kind = "hedonia_menu",
