@@ -61,12 +61,13 @@ SMODS.Joker {
     end,
     calculate = function(self, card, context) --used a lot of pinkprint for this https://github.com/EremelMods/Ortalab/blob/main/objects/jokers/pinkprint.lua
         if context.selling_card and context.card.ability.set == 'Joker' then
-            card.ability.extra.copied.insert(a, context.card)
+            -- table.insert(self.ability.extra.copied, context.card.)
             print(#card.ability.extra.copied)
-            end
+        end
         if context.joker_main then
             print(#card.ability.extra.copied)
             for i = 1, #card.ability.extra.copied do
+                SMODS.blueprint_effect(self.ability.extra.copied[i], card, context)
                 print(i)
             end
         end
