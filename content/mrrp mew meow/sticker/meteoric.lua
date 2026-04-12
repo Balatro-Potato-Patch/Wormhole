@@ -1,5 +1,5 @@
 SMODS.Sticker{
-    key = "celestial",
+    key = "meteoric",
     atlas = "mrrp",
     pos = {x = 1, y = 0},
     badge_colour = HEX('487C90'),

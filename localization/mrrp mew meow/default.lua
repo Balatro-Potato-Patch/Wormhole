@@ -67,15 +67,15 @@ descriptions={
 				"into a {C:attention}#2#{} with a {C:attention}#3# Seal{}"
 			}
 		},
-		j_worm_nasahiring ={
+		j_worm_nyasa ={
 			name=
-				"NASA's Exploration Team"
+				"NYASA Exploration Team"
 			, text={
 				"When {C:attention}Blind{} is selected,",
-				"create a {C:attention}Space{} Joker",
-				"Created Joker has {C:green}#2# in #3#{}",
-				"chance to be {C:dark_edition}Negative{}",
-				"{C:inactive}(otherwise must have room){}"
+				"create a {C:planet}Space{} {C:attention}Joker{}",
+				"{C:green}#2# in #3#{} chance to",
+				"create it {C:dark_edition}Negative{}",
+				"{C:inactive}(Must have room otherwise){}"
 			}
 		},
 		j_worm_orrery ={
@@ -124,7 +124,7 @@ descriptions={
 				"{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive})"
 			}
 		},
-		j_worm_meteor_shower = {
+		j_worm_perseids = {
 			name = "Perseids",
 			text = {
 				"Each {C:attention}card{} in poker hand",
@@ -156,7 +156,7 @@ descriptions={
 			name=
 				'Cosmic Stake'
 			, text={
-				"Shop can have {C:attention}Gravity{} Jokers",
+				"Shop can have {C:attention}Meteoric{} Jokers",
 				"{C:inactive,s:0.8}(Halve all poker hand levels when bought){}",
 				"{s:0.8}Applies {C:money,s:0.8}Gold Stake{}"
 			}
@@ -166,9 +166,9 @@ descriptions={
 		
 	},
 	Other={
-		worm_celestial ={
+		worm_meteoric ={
 			name=
-				"Celestial"
+				"Meteoric"
 			, text={
 				"Halve all {C:attention}poker hand{}",
 				"levels when bought"
@@ -242,7 +242,7 @@ misc={
 		a_plus_tarot = "+#1# Tarot",
 	},
 	labels={
-		worm_celestial = "Celestial",
+		worm_meteoric = "Meteoric",
 	},
 	dictionary={
 	--	k_downgrade_ex = "Downgrade!",

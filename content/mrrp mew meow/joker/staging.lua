@@ -2,7 +2,7 @@ SMODS.Joker {
 	ppu_team = {'Mrrp Mew Meow :3'},
     ppu_coder = {'Minty'},
 	key = 'staging',
-	atlas = "mrrp", pos = {x=4, y=5},
+	atlas = "mrrp", pos = {x=3, y=2},
 	rarity = 2,
 	cost = 5,
 	blueprint_compat = true,
