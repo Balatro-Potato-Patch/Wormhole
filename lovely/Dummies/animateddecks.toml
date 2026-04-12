@@ -32,13 +32,3 @@ payload = '''
 self.children.back:set_sprite_pos(G.P_CENTERS[self.wormhole_origin_deck_key or "b_red"].pos)
 '''
 match_indent = true
-
-[[patches]]
-[patches.pattern]
-target = '=[SMODS _ "src/card_draw.lua"]'
-pattern = "if self.area and self.area.config.type == 'deck' then"
-position = "before"
-payload = '''
-self.children.back:set_sprite_pos(G.P_CENTERS[self.wormhole_origin_deck_key or "b_red"].pos)
-'''
-match_indent = true
