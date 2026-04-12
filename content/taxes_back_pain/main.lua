@@ -381,7 +381,10 @@ SMODS.Joker({
 	end,
 	in_pool = function(self, args)
 		return false
-	end,
+    end,
+    set_card_type_badge = function (self, card, badges)
+        -- TODO: Do we give it a custom badge?
+    end
 })
 
 ---- Module Functionality ----
