@@ -214,9 +214,17 @@ return {
                 name = 'ACME Corporation',
             },
             PotatoPatchDev_RadiationV2 = {
-                name = "RadiationV2",
+                name = "ACME Radiation Plushie",
                 text = {
-                    { "It's" },
+                    {
+                        "This was my {C:attention}first contribution{} to a",
+                        "a full public Balatro content mod!",
+                        "Thanks to {C:legendary}Astra{} and the {C:attention}ACME{} team",
+                        "for putting up with the barrage of {C:mult}yaps,",
+                        "{C:mult}questions{} and {C:mult}reworks{} I brought upon.",
+                        "I think we made something special.",
+                        "{C:inactive}Also, yeah, I'm the GD guy, iykyk :)"
+                    },
                 },
             },
             PotatoPatchDev_FlameThrowerFIM = {
