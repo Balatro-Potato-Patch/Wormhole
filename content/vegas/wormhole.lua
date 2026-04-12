@@ -728,11 +728,15 @@ CRT_shutoff = SMODS.ScreenShader{
 	path = "CRTshutoff.fs",
 	order = 10,
 	startTime = -2.0,
+	apply = false,
 	send_vars = function(self)
 		return{
 			startTime = self.startTime,
 			time = G.TIMERS.REAL
 		}
+	end,
+	should_apply = function(self)
+		return self.apply
 	end
 }
 
@@ -769,6 +773,7 @@ SMODS.Joker{
 		if context.end_of_round and context.game_over and context.main_eval then
 			--instead of calling G.FUNCS.start_run(e, args), just do what it does and set the seed after run creation
 			CRT_shutoff.startTime = G.TIMERS.REAL
+			CRT_shutoff.apply = true
 			G.SETTINGS.paused = true 
 			G.E_MANAGER:clear_queue() 
 			G.FUNCS.wipe_on() 
@@ -789,6 +794,16 @@ SMODS.Joker{
 			end
 			}))
 			G.FUNCS.wipe_off()
+			G.E_MANAGER:add_event(Event({
+			trigger = 'after',
+			delay = 2,
+			blocking = false,
+			no_delete = true,
+			func = function()
+				CRT_shutoff.apply = false
+				return true
+			end
+			}))
         end
 	end
 }
