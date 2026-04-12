@@ -11,3 +11,10 @@ SMODS.Atlas {
     px = 71,
     py = 95
 }
+
+SMODS.Atlas {
+    key = "DummiesDecks",
+    path = "Dummies/WormholeDecks.png",
+    px = 71,
+    py = 95
+}

@@ -1,0 +1,44 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "self.children.back.states.hover = self.states.hover"
+position = "before"
+payload = '''
+self.wormhole_origin_deck_key = self.playing_card and G.GAME[self.back].name or 'b_red'
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '=[SMODS _ "src/overrides.lua"]'
+pattern = "self.children.back.states.hover = self.states.hover"
+position = "before"
+payload = '''
+self.wormhole_origin_deck_key = self.playing_card and G.GAME[self.back].name or 'b_red'
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "local overlay = G.C.WHITE"
+position = "before"
+payload = '''
+self.children.back:set_sprite_pos(G.P_CENTERS[self.wormhole_origin_deck_key or "b_red"].pos)
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '=[SMODS _ "src/card_draw.lua"]'
+pattern = "if self.area and self.area.config.type == 'deck' then"
+position = "before"
+payload = '''
+self.children.back:set_sprite_pos(G.P_CENTERS[self.wormhole_origin_deck_key or "b_red"].pos)
+'''
+match_indent = true

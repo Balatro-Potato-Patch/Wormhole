@@ -20,6 +20,98 @@ function Sprite:wormhole_set_atlas(atlas)
 end
 
 SMODS.DrawStep {
+  key = 'back_extra',
+  order = 1,
+  func = function(self)
+    local deck_thing = G.P_CENTERS[self.wormhole_origin_deck_key or ((G.GAME.viewed_back or G.GAME.selected_back) and (G.GAME.viewed_back or G.GAME.selected_back).name) or "b_red"]
+    if not deck_thing then return end
+    if not self.wormhole_back_extra and deck_thing.wormhole_pos_extra then
+      self.wormhole_back_extra = {}
+      local wpe = deck_thing.wormhole_pos_extra
+      if wpe.x and wpe.y then
+        local atlas = G.ASSET_ATLAS[wpe.atlas or deck_thing.atlas]
+        self.wormhole_back_extra.extra = Sprite(0, 0, atlas.px, atlas.py, atlas, { x = wpe.x, y = wpe.y })
+      else
+        for k, v in pairs(wpe) do
+          local atlas = G.ASSET_ATLAS[v and v.atlas or deck_thing.atlas]
+          self.wormhole_back_extra[k] = Sprite(0, 0, atlas.px, atlas.py, atlas, { x = v.x or 0, y = v.y or 0 })
+        end
+      end
+    end
+
+    if self.wormhole_back_extra then
+      local wpe = deck_thing.wormhole_pos_extra
+      if not wpe then return end
+      if wpe.x and wpe.y then
+        wpe = { extra = deck_thing.wormhole_pos_extra }
+      end
+
+      local order = deck_thing.wormhole_pos_extra_order
+      if not order then
+        order = {}
+        for k, v in pairs(wpe) do
+          order[#order + 1] = k
+        end
+      end
+      for _, vv in ipairs(order) do
+        local k = vv
+        local v = wpe[vv]
+
+        local overlay = G.C.WHITE
+        if self.area and self.area.config.type == 'deck' and self.rank > 3 then
+          self.back_overlay = self.back_overlay or {}
+          self.back_overlay[1] = 0.5 + ((#self.area.cards - self.rank) % 7) / 50
+          self.back_overlay[2] = 0.5 + ((#self.area.cards - self.rank) % 7) / 50
+          self.back_overlay[3] = 0.5 + ((#self.area.cards - self.rank) % 7) / 50
+          self.back_overlay[4] = 1
+          overlay = self.back_overlay
+        end
+
+        self.wormhole_back_extra[k]:set_sprite_pos(v)
+        self.wormhole_back_extra[k].role.draw_major = self
+
+        if self.area and self.area.config.type == 'deck' then
+          local self_two = self.wormhole_back_extra[k]
+          if not self_two.states.visible then return end
+          if self_two.draw_steps then
+            for k, v in ipairs(self_two.draw_steps) do
+              self_two:draw_shader(v.shader, v.shadow_height, v.send, v.no_tilt, v.other_obj, v.ms, v.mr, v.mx, v.my, not not v.send)
+            end
+          else
+            if not self_two.states.visible then return end
+            if self_two.sprite_pos.x ~= self_two.sprite_pos_copy.x or self_two.sprite_pos.y ~= self_two.sprite_pos_copy.y then
+              self_two:set_sprite_pos(self_two.sprite_pos)
+            end
+            prep_draw(self.children.back, 1, 0, { x = 0, y = 0 }, true)
+            love.graphics.scale(1 / (self.children.back.scale_mag or self.children.back.VT.scale))
+            love.graphics.setColor(overlay or G.BRUTE_OVERLAY or G.C.WHITE)
+            love.graphics.draw(
+              self_two.atlas.image,
+              self_two.sprite,
+              -(self.children.back.T.w / 2 - self.children.back.VT.w / 2) * 10,
+              0,
+              0,
+              self.children.back.VT.w / (self.children.back.T.w),
+              self.children.back.VT.h / (self.children.back.T.h)
+            )
+            love.graphics.pop()
+            add_to_drawhash(self_two)
+            self_two:draw_boundingrect()
+            if self_two.shader_tab then love.graphics.setShader() end
+          end
+
+          add_to_drawhash(self_two)
+          self_two:draw_boundingrect()
+        else
+          self.wormhole_back_extra[k]:draw_shader('dissolve', nil, nil, nil, self.children.back)
+        end
+      end
+    end
+  end,
+  conditions = { vortex = false, facing = 'back' },
+}
+
+SMODS.DrawStep {
   key = 'extra',
   order = 21,
   func = function(self, layer)
@@ -33,21 +125,21 @@ SMODS.DrawStep {
         return n
       end
 
-      local ccfpe = self.config.center.wormhole_pos_extra
-      if ccfpe.x and ccfpe.y then
-        self.wormhole_pos_extra = { extra = copy(ccfpe) }
+      local ccwpe = self.config.center.wormhole_pos_extra
+      if ccwpe.x and ccwpe.y then
+        self.wormhole_pos_extra = { extra = copy(ccwpe) }
       else
-        self.wormhole_pos_extra = copy(ccfpe)
+        self.wormhole_pos_extra = copy(ccwpe)
       end
     end
     if not self.wormhole_extra and self.wormhole_pos_extra then
       self.wormhole_extra = {}
-      local fpe = self.wormhole_pos_extra
-      if fpe.x and fpe.y then
-        local atlas = G.ASSET_ATLAS[fpe.atlas or self.config.center.atlas]
-        self.wormhole_extra.extra = Sprite(0, 0, atlas.px, atlas.py, atlas, { x = fpe.x, y = fpe.y })
+      local wpe = self.wormhole_pos_extra
+      if wpe.x and wpe.y then
+        local atlas = G.ASSET_ATLAS[wpe.atlas or self.config.center.atlas]
+        self.wormhole_extra.extra = Sprite(0, 0, atlas.px, atlas.py, atlas, { x = wpe.x, y = wpe.y })
       else
-        for k, v in pairs(fpe) do
+        for k, v in pairs(wpe) do
           local atlas = G.ASSET_ATLAS[v and v.atlas or self.config.center.atlas]
           self.wormhole_extra[k] = Sprite(0, 0, atlas.px, atlas.py, atlas, { x = v.x or 0, y = v.y or 0 })
         end
@@ -56,9 +148,9 @@ SMODS.DrawStep {
 
     if self.wormhole_extra then
       if self.config.center.discovered or (self.params and self.params.bypass_discovery_center) then
-        local fpe = self.wormhole_pos_extra
-        if fpe.x and fpe.y then
-          fpe = { extra = self.wormhole_pos_extra }
+        local wpe = self.wormhole_pos_extra
+        if wpe.x and wpe.y then
+          wpe = { extra = self.wormhole_pos_extra }
         end
 
         local wiggle_offset_x = self.wormhole_wiggle_offset_x or 0
@@ -67,13 +159,13 @@ SMODS.DrawStep {
         local order = self.config.center.wormhole_pos_extra_order
         if not order then
           order = {}
-          for k, v in pairs(fpe) do
+          for k, v in pairs(wpe) do
             order[#order + 1] = k
           end
         end
         for _, vv in ipairs(order) do
           local k = vv
-          local v = fpe[vv]
+          local v = wpe[vv]
 
           self.wormhole_extra[k]:set_sprite_pos(v)
           self.wormhole_extra[k].role.draw_major = self
@@ -134,6 +226,13 @@ function Game:update(dt)
     if ccc and (ccc.wormhole_anim or ccc.wormhole_anim_extra or ccc.wormhole_anim_states or ccc.wormhole_anim_extra_states) and (ccc.discovered or v.bypass_discovery_center) then
       handle_wormhole_anim(v, dt)
       handle_wormhole_anim_extra(v, dt)
+    end
+  end
+
+  for k, v in pairs(G.P_CENTER_POOLS.Back) do
+    if v and (v.wormhole_anim or v.wormhole_anim_extra) and v.unlocked then
+      handle_wormhole_anim_back(v, dt)
+      handle_wormhole_anim_back_extra(v, dt)
     end
   end
 
@@ -320,7 +419,7 @@ function handle_wormhole_anim_extra(v, dt)
         end
         if not v.wormhole_pos_extra then v.wormhole_pos_extra = {} end
         if not v.wormhole_pos_extra[k] then v.wormhole_pos_extra[k] = {} end
-        
+
         if v.config.center.wormhole_extra_wiggle and v.wormhole_prev_extra_ix[k] ~= ix then
           math.randomseed(os.time() + math.floor(os.clock() * 1000000)) -- Lua is one of the languages of all time
           local rand_x = (math.random() * 0.015) - (0.015 / 2)
@@ -335,6 +434,65 @@ function handle_wormhole_anim_extra(v, dt)
         if layer[ix].atlas then
           v.wormhole_pos_extra[k].atlas = layer[ix].atlas
         end
+      end
+    end
+  end
+end
+
+function handle_wormhole_anim_back(v, dt)
+  if v.wormhole_anim then
+    v.wormhole_anim = format_wormhole_anim(v.wormhole_anim)
+    if not v.wormhole_anim_t then v.wormhole_anim_t = 0 end
+    v.wormhole_anim_t = v.wormhole_anim_t + dt
+    if v.wormhole_anim_t >= v.wormhole_anim.length then v.wormhole_anim = wormhole_generate_randomness(v.wormhole_anim) end
+    v.wormhole_anim_t = v.wormhole_anim_t % v.wormhole_anim.length
+    local ix = 0
+    local t_tally = 0
+    for _, frame in ipairs(v.wormhole_anim) do
+      ix = ix + 1
+      t_tally = t_tally + frame.t
+      if t_tally > v.wormhole_anim_t then break end
+    end
+    v.pos = { x = v.wormhole_anim[ix].x, y = v.wormhole_anim[ix].y }
+    if v.wormhole_anim[ix].atlas then v.atlas = v.wormhole_anim[ix].atlas end
+  end
+end
+
+function handle_wormhole_anim_back_extra(v, dt)
+  if v.wormhole_anim_extra then
+    if not next(v.wormhole_anim_extra) then
+      return
+    elseif v.wormhole_anim_extra[1] and not v.wormhole_anim_extra[1][1] then
+      v.wormhole_anim_extra = { extra = v.wormhole_anim_extra }
+    end
+
+    for k, layer in pairs(v.wormhole_anim_extra) do
+      v.wormhole_anim_extra[k] = format_wormhole_anim(layer)
+      layer = v.wormhole_anim_extra[k]
+
+      if not v.wormhole_anim_extra_t then v.wormhole_anim_extra_t = {} end
+      if not v.wormhole_anim_extra_t[k] then
+        v.wormhole_anim_extra_t[k] = 0
+      end
+      v.wormhole_anim_extra_t[k] = v.wormhole_anim_extra_t[k] + dt
+
+      if v.wormhole_anim_extra_t[k] >= layer.length then v.wormhole_anim_extra[k] = wormhole_generate_randomness(v.wormhole_anim_extra[k]) end
+      v.wormhole_anim_extra_t[k] = v.wormhole_anim_extra_t[k] % layer.length
+
+      local ix = 0
+      local t_tally = 0
+      for _, frame in ipairs(layer) do
+        ix = ix + 1
+        t_tally = t_tally + frame.t
+        if t_tally > v.wormhole_anim_extra_t[k] then break end
+      end
+      if not v.wormhole_pos_extra then v.wormhole_pos_extra = {} end
+      if not v.wormhole_pos_extra[k] then v.wormhole_pos_extra[k] = {} end
+
+      v.wormhole_pos_extra[k].x = layer[ix].x
+      v.wormhole_pos_extra[k].y = layer[ix].y
+      if layer[ix].atlas then
+        v.wormhole_pos_extra[k].atlas = layer[ix].atlas
       end
     end
   end

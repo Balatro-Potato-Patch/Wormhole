@@ -33,6 +33,14 @@ return {
                 text = { "Tastes like a", "{C:red}Strawberry{}!" }
             },
         },
+        Back = {
+            b_worm_dum_starstudded = {
+                name = "Star-Studded Deck",
+                text = {
+                    "blah"
+                }
+            }
+        },
         Joker = {
             j_worm_dum_worm = {
                 name = "Mr. Glyst",
