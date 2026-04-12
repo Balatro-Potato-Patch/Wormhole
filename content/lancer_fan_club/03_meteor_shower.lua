@@ -38,7 +38,7 @@ end
 local meteors = {}
 local meteor_quad = love.graphics.newQuad(0, 0, 1, 1, 1, 1)
 
-local function create_meteor(value)
+function Wormhole.LancerFanClub.create_meteor(value)
 	local meteor = {
 		spr = pseudorandom("worm_lfc_meteorsprite", 0, math.ceil(mx / 64)-1),
 		vel = {
@@ -61,7 +61,7 @@ joker.calculate = function(self, card, context)
 	if (context.individual and not context.end_of_round and context.cardarea == G.play) or context.forcetrigger then
 		G.E_MANAGER:add_event(Event({
 			func = function()
-				create_meteor(card.ability.extra.dollars)
+				Wormhole.LancerFanClub.create_meteor(card.ability.extra.dollars)
 				card:juice_up(0.4,0.4)
 				return true
 			end
