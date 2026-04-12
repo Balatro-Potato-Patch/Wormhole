@@ -9,12 +9,14 @@ SMODS.Joker({
 	key = "meow_nyan_cat",
 	rarity = 2,
     atlas = "meow_jokers",
+    cost = 6,
     blueprint_compat = false,
     config = {
         extra = {
             max_foil = 3
         }
     },
+    attributes = { "cat", "space", "spacetart" },
     loc_vars = function(self,info_queue,card)
         return{vars={card.ability.extra.max_foil}}
     end,
@@ -25,7 +27,10 @@ SMODS.Joker({
     remove_from_deck = function(self,card,from_debuff)
         local cae = card.ability.extra
         G.GAME.max_foil_slots = G.GAME.max_foil_slots - cae.max_foil
-    end
+    end,
+    ppu_team = {"meow"},
+	ppu_coder = { "revo" },
+	ppu_artist = { "incognito" },
 })
 
 SMODS.Joker({
@@ -33,6 +38,8 @@ SMODS.Joker({
 	rarity = 2,
     atlas = "meow_jokers",
     blueprint_compat = false,
+    cost = 5,
+    attributes = { "cat", "generation" },
     loc_vars = function(self,info_queue,card)
     end,
     calculate = function(self,card,context)
@@ -46,5 +53,48 @@ SMODS.Joker({
                 card_eval_status_text(self, 'extra', nil, nil, nil, {message = localize('k_no_room_ex')})
             end
         end
-    end
+    end,
+    ppu_team = {"meow"},
+	ppu_coder = { "revo" },
+})
+
+SMODS.Joker({
+	key = "meow_catelite",
+    rarity = 3,
+    config = {
+        extra = {
+            level = 1
+        }
+    },
+    cost = 7,
+    attributes = {"cat", "space", "spacetart"},
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.level } }
+    end,
+    blueprint_compat = false,
+    ppu_team = {"meow"},
+	ppu_coder = { "silverautumn" },
+})
+SMODS.Joker({
+	key = "meow_golden_tart",
+    rarity = 2,
+    cost = 4,
+    loc_vars = function(self, info_queue, card)
+        return { vars = { #card.tarts } }
+    end,
+    blueprint_compat = false,
+    attributes = {"cat", "scaling", "economy", "space", "spacetart"},
+    calculate = function(self, card, context)
+        if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint and #card.tarts > 0 then
+            -- See note about SMODS Scaling Manipulation on the wiki
+            card.ability.extra_value = card.ability.extra_value + #card.tarts
+            card:set_cost()
+            return {
+                message = localize('k_val_up'),
+                colour = G.C.MONEY
+            }
+        end
+    end,
+    ppu_team = {"meow"},
+	ppu_coder = { "silverautumn" },
 })

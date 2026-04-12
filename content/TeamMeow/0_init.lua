@@ -164,3 +164,7 @@ SMODS.Attribute({
 	key = "cat",
 	keys = {"j_lucky_cat"}
 })
+SMODS.Attribute({
+	key = "spacetart",
+	alias = {"tart"}
+})

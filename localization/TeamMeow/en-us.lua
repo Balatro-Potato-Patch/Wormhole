@@ -319,7 +319,23 @@ return {
 					"or a {C:worm_meow_zodicat}Zodicat{}",
 					"{C:inactive}(Must have room)"
 				}
-			}
+			},
+			j_worm_meow_catelite = {
+				name = "Catelite",
+				text = {
+					"Boost adjacent cards'",
+					"{C:worm_meow_spacetart}@Spacetart{} by {C:attention}#1# level"
+				}
+			},
+			j_worm_meow_golden_tart = {
+				name = "Golden Tart",
+				text = {
+					"Gains {C:gold}1${} of {C:attention}sell value",
+					"per round",
+					"per {C:worm_meow_spacetart}@Spacetart {C:attention}attached",
+					"{C:inactive}(Currently +{C:gold}#1#${C:inactive})"
+				}
+			},
 		},
 		Tag = {
 			tag_worm_meow_spacetart = {
