@@ -7,6 +7,207 @@ end
 
 JtemTGM = {}
 
+--#region Minor utilities
+
+function JtemTGM.IsActionPressed(action)
+	local a = Wormhole.config.jtem2_tetris_controls[action]
+	if not a then return false end
+	return love.keyboard.isScancodeDown(a)
+end
+
+JtemTGM.UI = {}
+function JtemTGM.UI.LocalizeKeybind(key)
+	if not key then
+		key = "None"
+	end
+	-- Backwards compatibility
+	if key == "[" then
+		key = "Left Bracket"
+	elseif key == "]" then
+		key = "Right Bracket"
+	end
+	local result = G.localization.misc.handy_keybinds[key] or key
+	return result
+end
+
+function JtemTGM.UI.UpdateBindButtonText(text)
+	if not JtemTGM.UI.bind_button then return end
+	local button_text = JtemTGM.UI.bind_button.children[1].children[1]
+	button_text.config.text_drawable = nil
+	button_text.config.text = text
+	button_text:update_text()
+	button_text.UIBox:recalculate()
+end
+
+function JtemTGM.UI.InitBind(button)
+	button.config.button = nil
+	JtemTGM.UI.bind_button = button
+	JtemTGM.UI.bind_key = button.config.ref_table.key
+	JtemTGM.UI.UpdateBindButtonText("[ " .. "WAITING" .. " ]")
+end
+
+local old_keypressed = love.keypressed
+function love.keypressed(key, scancode, isrepeat)
+	if old_keypressed then
+		old_keypressed(key, scancode, isrepeat)
+	end
+	if not JtemTGM.UI.bind_button then return end
+	JtemTGM.UI.CompleteBind(scancode)
+end
+
+local non_safe_keys_table = {
+	["Left Mouse"] = true,
+	["Right Mouse"] = true,
+	["(Left)"] = true,
+	["(Right)"] = true,
+	["(Up)"] = true,
+	["(Down)"] = true,
+	["(X)"] = true,
+	["(Y)"] = true,
+	["(A)"] = true,
+	["(B)"] = true,
+}
+
+function JtemTGM.UI.CompleteBind(key)
+	if key == "escape" then return JtemTGM.UI.CancelBind() end
+	if non_safe_keys_table[key] then return JtemTGM.UI.CancelBind() end
+
+	Wormhole.config.jtem2_tetris_controls[JtemTGM.UI.bind_key] = key
+	JtemTGM.UI.UpdateBindButtonText(JtemTGM.UI.LocalizeKeybind(key) or "None")
+	if JtemTGM.UI.bind_button then
+		JtemTGM.UI.bind_button.config.button = "jtem2_tetris_start_bind"
+		JtemTGM.UI.bind_button.config.ref_table.bind = key
+	end
+	JtemTGM.UI.bind_button = nil
+	JtemTGM.UI.bind_key = nil
+end
+
+function JtemTGM.UI.CancelBind()
+	if not JtemTGM.UI.bind_button then return end
+	JtemTGM.UI.UpdateBindButtonText(JtemTGM.UI.LocalizeKeybind(JtemTGM.UI.bind_key) or "None")
+	if JtemTGM.UI.bind_button then
+		JtemTGM.UI.bind_button.config.button = "jtem2_tetris_start_bind"
+	end
+	JtemTGM.UI.bind_button = nil
+	JtemTGM.UI.bind_key = nil
+end
+
+function G.FUNCS.jtem2_tetris_start_bind(e)
+	JtemTGM.UI.InitBind(e)
+end
+
+function JtemTGM.UI.CreateKeybindUI(key, bind)
+	return {
+		n = G.UIT.R,
+		config = {
+			align = "cm",
+			padding = 0.01,
+		},
+		nodes = {
+			{
+				n = G.UIT.C,
+				config = { align = "c", minw = 4, maxw = 4 },
+				nodes = {
+					{
+						n = G.UIT.T,
+						config = {
+							text = key,
+							colour = G.C.WHITE,
+							scale = 0.3
+						}
+					}
+				}
+			},
+			{
+				n = G.UIT.C,
+				config = { align = "cm", minw = 0.75 }
+			},
+			UIBox_button({
+				label = { JtemTGM.UI.LocalizeKeybind(Wormhole.config.jtem2_tetris_controls[bind]) or "None" },
+				col = true,
+				colour = G.C.CHIPS,
+				scale = 0.3,
+				minw = 2.75,
+				maxw = 2.75,
+				minh = 0.4,
+				maxh = 0.4,
+				ref_table = {
+					key = key,
+					bind = bind,
+				},
+				focus_args = { nav = "wide" },
+				button = "jtem2_tetris_start_bind"
+			})
+		}
+	}
+end
+
+function JtemTGM.UI.CreateSection(text)
+	return {
+		n = G.UIT.R,
+		config = { align = "cm", padding = 0.075 },
+		nodes = {
+			{
+				n = G.UIT.T,
+				config = {
+					text = text,
+					colour = G.C.WHITE,
+					scale = 0.35,
+					align = "cm",
+				},
+			},
+		},
+	}
+end
+
+-- This should be moved somewhere else if possible....
+-- Annoyingly, Potato Patch credits will override this, so extend from potato patch instead
+local prev_extra_tabs = PotatoPatchUtils.CREDITS.register_page
+PotatoPatchUtils.CREDITS.register_page = function(mod)
+	local t = prev_extra_tabs and prev_extra_tabs(mod)() or {}
+	local tt = { t }
+	table.insert(tt, {
+		label = "Keybinds",
+		tab_definition_function = function()
+			return {
+				n = G.UIT.ROOT,
+				config = {
+					r = 0.1,
+					padding = 0.2,
+					colour = G.C.BLACK,
+					align = "cm",
+				},
+				nodes = {
+					{
+						n = G.UIT.C,
+						config = {
+							align = "cm",
+							padding = 0.05,
+						},
+						nodes = {
+							JtemTGM.UI.CreateSection("Tetris - Piece movement"),
+							JtemTGM.UI.CreateKeybindUI("Move piece left", "move_left"),
+							JtemTGM.UI.CreateKeybindUI("Move piece right", "move_right"),
+							JtemTGM.UI.CreateKeybindUI("Move piece down", "move_down"),
+							JtemTGM.UI.CreateKeybindUI("Sonic drop", "sonic_drop"),
+							JtemTGM.UI.CreateSection("Tetris - Piece manipulation"),
+							JtemTGM.UI.CreateKeybindUI("Rotate piece left", "rotate_left"),
+							JtemTGM.UI.CreateKeybindUI("Rotate piece right", "rotate_right"),
+							JtemTGM.UI.CreateKeybindUI("Hold piece", "hold"),
+						}
+					}
+				}
+			}
+		end
+	})
+
+	return function()
+		return tt
+	end
+end
+
+--#endregion
+
 -- Pieces, arranged in a 2d array
 -- Indexed by rotation number 1-4
 -- For simplicity, rotation is calculated later
@@ -497,7 +698,7 @@ function JtemTGM.ChangeState(game, newstate)
 			local old = game.just_held_piece
 			game.just_held_piece = false
 			local res = false
-			if love.keyboard.isDown("a") and not game.irs_held_piece then
+			if JtemTGM.IsActionPressed("hold") and not game.irs_held_piece then
 				res = JtemTGM.HoldPiece(game, true)
 				game.irs_held_piece = true
 			else
@@ -925,11 +1126,11 @@ function JtemTGM.StartNewPiece(game)
 	-- change piece
 	game.current_piece = JtemTGM.CreateCurrentPiece(3, -1, game.next_pieces[1], 1)
 	-- IRS
-	if love.keyboard.isDown("z") then
+	if JtemTGM.IsActionPressed("rotate_left") then
 		JtemTGM.PlaySound("irs")
 		JtemTGM.CheckRotation(game.current_piece, -1, game.board)
 	end
-	if love.keyboard.isDown("x") then
+	if JtemTGM.IsActionPressed("rotate_right") then
 		JtemTGM.PlaySound("irs")
 		JtemTGM.CheckRotation(game.current_piece, 1, game.board)
 	end
@@ -1008,11 +1209,11 @@ JtemTGM.grades_graph = grades
 function JtemTGM.GetDirectionalInput()
 	-- Unfortunately for now I'll hardcode the keybinds
 	-- I don't want to deal with controllers right now.
-	local left = love.keyboard.isDown("left") and -1 or 0
-	local right = love.keyboard.isDown("right") and 1 or 0
+	local left = JtemTGM.IsActionPressed("move_left") and -1 or 0
+	local right = JtemTGM.IsActionPressed("move_right") and 1 or 0
 	local dir = left + right
-	local up = love.keyboard.isDown("up") and -1 or 0
-	local down = love.keyboard.isDown("down") and 1 or 0
+	local up = JtemTGM.IsActionPressed("sonic_drop") and -1 or 0
+	local down = JtemTGM.IsActionPressed("move_down") and 1 or 0
 	local vdir = up + down
 
 	return dir, vdir
@@ -1025,13 +1226,13 @@ function JtemTGM.HandleMove(game)
 	local dir, vdir = JtemTGM.GetDirectionalInput()
 
 	-- Annoyingly, Love2D has no concept of dedicated "just" pressed buttons, so do that myself
-	if love.keyboard.isDown("z") and not game.justPressedLeftRot then
+	if JtemTGM.IsActionPressed("rotate_left") and not game.justPressedLeftRot then
 		JtemTGM.CheckRotation(game.current_piece, -1, game.board)
 	end
-	if love.keyboard.isDown("x") and not game.justPressedRightRot then
+	if JtemTGM.IsActionPressed("rotate_right") and not game.justPressedRightRot then
 		JtemTGM.CheckRotation(game.current_piece, 1, game.board)
 	end
-	if love.keyboard.isDown("a") then
+	if JtemTGM.IsActionPressed("hold") then
 		JtemTGM.ChangeState(game, STATE_DROPPING)
 		local res = JtemTGM.HoldPiece(game)
 		if res then JtemTGM.ChangeState(game, STATE_GAMEOVER) end
@@ -1223,7 +1424,7 @@ function JtemTGM.HandleGame(game)
 			JtemTGM.PlaySound("grade")
 		end
 		if game.state_timer >= 90 then
-			if love.keyboard.isDown("z") or love.keyboard.isDown("x") then
+			if JtemTGM.IsActionPressed("rotate_left") or JtemTGM.IsActionPressed("rotate_right") then
 				game.please_reset = true
 			end
 		end
@@ -1239,8 +1440,8 @@ function JtemTGM.HandleGame(game)
 
 	game.olddir = dir
 	game.oldvdir = vdir
-	game.justPressedLeftRot = love.keyboard.isDown("z")
-	game.justPressedRightRot = love.keyboard.isDown("x")
+	game.justPressedLeftRot = JtemTGM.IsActionPressed("rotate_left")
+	game.justPressedRightRot = JtemTGM.IsActionPressed("rotate_right")
 end
 
 JtemTGM.targetTPS = 1.0 / 60
@@ -1326,6 +1527,7 @@ end
 ---@param canvas love.Canvas|table
 ---@param game table
 function JtemTGM.HandleDraw(canvas, game)
+	if not game.board then return end
 	local oldcanvas = love.graphics.getCanvas()
 	love.graphics.push()
 	love.graphics.origin()
@@ -1514,17 +1716,17 @@ SMODS.Joker {
 	end,
 
 	set_sprites = function(self, card, front)
-        if card.ability then
-            card.children.jtem2_tetris_canvas = SMODS.CanvasSprite { canvasScale = 1 }
-            card.children.jtem2_tetris_canvas.role.draw_major = card
-            card.children.jtem2_tetris_canvas.states.hover.can = false
-            card.children.jtem2_tetris_canvas.states.click.can = false
-            if card.ability.extra.game_state then
-                card.ability.extra.game_state.grade_quad = love.graphics.newQuad(0, 0, 20, 20,
-                    JtemTGM.grades_graph:getWidth(),
-                    JtemTGM.grades_graph:getHeight())
-            end
-        end
+		card.children.jtem2_tetris_canvas = SMODS.CanvasSprite { canvasScale = 1 }
+		card.children.jtem2_tetris_canvas.role.draw_major = card
+		card.children.jtem2_tetris_canvas.states.hover.can = false
+		card.children.jtem2_tetris_canvas.states.click.can = false
+		if card.ability then
+			if card.ability.extra.game_state then
+				card.ability.extra.game_state.grade_quad = love.graphics.newQuad(0, 0, 20, 20,
+					JtemTGM.grades_graph:getWidth(),
+					JtemTGM.grades_graph:getHeight())
+			end
+		end
 	end,
 
 	add_to_deck = function(self, card, from_debuff)
