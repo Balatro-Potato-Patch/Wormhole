@@ -41,10 +41,12 @@ SMODS.Joker {
 					ranks_used[playing_card.base.value] = true
 					repeats = repeats + 1
 				end
-            end 
-            return {
-                repetitions = repeats
-            }
+            end
+            if repeats > 0 then
+                return {
+                    repetitions = repeats
+                }
+            end
         end
         if context.after then
             for i, playing_card in ipairs(context.scoring_hand) do

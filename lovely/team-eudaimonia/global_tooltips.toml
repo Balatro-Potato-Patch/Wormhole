@@ -1,0 +1,24 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = 'for _, v in ipairs(info_queue) do'
+position = "before"
+payload = '''
+if card and card.ability then
+    if card.ability.worm_euda_already_shipped then
+        info_queue[#info_queue+1] = { set = "Other", key = "worm_euda_jokecolony_alreadyshipped" }
+    end
+    if card.ability.worm_euda_researchprogress then
+        info_queue[#info_queue+1] = { set = "Other", key = "worm_euda_lunarcheese_disabled", vars={card.ability.worm_euda_researchprogress}}
+    end
+    if card.ability.worm_euda_researched_retriggers then
+        info_queue[#info_queue+1] = { set = "Other", key = "worm_euda_lunarcheese_bonus_retriggers", vars={card.ability.worm_euda_researched_retriggers}}
+    end
+end
+'''
+match_indent = true

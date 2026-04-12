@@ -237,6 +237,26 @@ return {
             }
         },
         Other = {
+            worm_euda_jokecolony_alreadyshipped = {
+                name = "Joke Colony",
+                text = {
+                    "{C:inactive}Was shipped",
+                    "{C:inactive}this round"
+                }
+            },
+            worm_euda_lunarcheese_disabled = {
+                name = "Lunar Cheese",
+                text = {
+                    "Debuffed for",
+                    "#1# more rounds"
+                }
+            },
+            worm_euda_lunarcheese_bonus_retriggers = {
+                name = "Lunar Cheese",
+                text = {
+                    "Has #1# retriggers"
+                }
+            },
             p_worm_euda_avadon_normal = {
                 name = "Avadon Pack",
                 text = {
