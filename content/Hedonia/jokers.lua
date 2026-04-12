@@ -140,12 +140,39 @@ SMODS.Joker {
         discount = 2
     }},
     loc_vars = function(self,info_queue,center)
-        return {vars = {center.ability.extra.mult}}
+        return {vars = {center.ability.extra.discount}}
     end,
     add_to_deck = function(self, card, from_debuff)
-    end,
-    load = function(self, card, from_debuff)
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                for k, v in pairs(G.I.CARD) do
+                    if v.set_cost then v:set_cost() end
+                end
+                return true
+            end
+        }))
     end,
     remove_from_deck = function(self, card, from_debuff)
-    end
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                for k, v in pairs(G.I.CARD) do
+                    if v.set_cost then v:set_cost() end
+                end
+                return true
+            end
+        }))
+    end,
 }
+
+local card_set_cost_ref = Card.set_cost
+function Card:set_cost()
+    card_set_cost_ref(self)
+    local hedonia_happy_hour = SMODS.find_card("j_worm_hedonia_happy_hour")
+    if next(hedonia_happy_hour) and self.ability.set == 'worm_hedonia_menu' or self.config.center.kind == 'hedonia_menu' then
+        for _,v in pairs(hedonia_happy_hour) do
+            self.cost = math.max(0, self.cost - v.ability.extra.discount)
+        end
+        self.sell_cost = math.max(1, math.floor(self.cost / 2)) + (self.ability.extra_value or 0)
+        self.sell_cost_label = self.facing == 'back' and '?' or self.sell_cost
+    end
+end
