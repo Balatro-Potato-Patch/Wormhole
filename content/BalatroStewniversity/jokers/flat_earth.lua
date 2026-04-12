@@ -7,7 +7,7 @@ SMODS.Joker{ --Flat Earth
     pos = {x=1, y=1},
     blueprint_compat = true,
     eternal_compat = true,
-    perishable_compat = false,
+    perishable_compat = true,
 
     update_chips = function (self, card)
         local non_spades = 0
