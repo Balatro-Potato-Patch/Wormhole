@@ -76,6 +76,14 @@ return {
                     "+1 hand size"
                 },
             },
+            bl_worm_lfc_eigengrau = {
+                name = "Eigengrau Emptiness",
+                text = {
+                    "Each modified card drawn",
+                    "has a #1# in #2# chance",
+                    "of turning to stone."
+                },
+            }
         },
 
         Joker = {
