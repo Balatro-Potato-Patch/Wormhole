@@ -6,7 +6,13 @@ return {
             -- Team-Members:
             PotatoPatchDev_ghostsalt = {
                 name = 'GhostSalt',
-                text = { ":3" }
+                text = {
+                    { "Hiya! :3" },
+                    { "Made: Moony, Gleebleglorp, Crystal Sphere", "and Star-Studded Deck" },
+                    { "Additional art: Garlic Bread that", "went to Space, Tim Curry" },
+                    { "I also animated some of", "the things we made ^u^" },
+                    { "Have fun with the mod!! :D" }
+                }
             },
             PotatoPatchDev_vissa = {
                 name = 'vissa',
