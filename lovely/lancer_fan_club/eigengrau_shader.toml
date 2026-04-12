@@ -1,0 +1,34 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = -1
+
+# Make Eigengrau Emptiness BG draw itself
+# Game:draw
+[[patches]]
+[patches.pattern]
+target = 'game.lua'
+pattern = '''if not G.debug_UI_toggle then'''
+position = "before"
+payload = '''
+if G.LFC_EIGENGRAU_BG then
+    if not G.debug_background_toggle then
+        love.graphics.push()
+        G.LFC_EIGENGRAU_BG:translate_container()
+        G.LFC_EIGENGRAU_BG:draw()
+        love.graphics.pop()
+    end
+end
+
+'''
+match_indent = true
+
+# Remove Eigengrau Emptiness BG whenever G.SPLASH_BACK is removed
+# Game:main_menu, Game:demo_cta, Game:sandbox
+[[patches]]
+[patches.pattern]
+target = 'game.lua'
+pattern = '''if G.SPLASH_BACK then G.SPLASH_BACK:remove(); G.SPLASH_BACK = nil end'''
+position = "after"
+payload = '''if G.LFC_EIGENGRAU_BG then G.LFC_EIGENGRAU_BG:remove(); G.LFC_EIGENGRAU_BG = nil end'''
+match_indent = true

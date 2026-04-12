@@ -64,3 +64,33 @@ SMODS.Blind {
     ppu_coder = { "InvalidOS" },
     ppu_team = { "Lancer Fan Club" },
 }
+
+SMODS.Shader {
+    key = "lfc_eigengrau_bg",
+    path = "lfc_eigengrau_bg.fs"
+}
+
+local gsr = Game.start_run
+function Game:start_run(...)
+    local ret = gsr(self, ...)
+    if not G.LFC_EIGENGRAU_BG then
+        G.LFC_EIGENGRAU_BG = Sprite(-30, -6, G.ROOM.T.w+60, G.ROOM.T.h+12, G.ASSET_ATLAS["ui_1"], {x = 2, y = 0})
+        G.LFC_EIGENGRAU_BG:set_alignment({
+            major = G.SPLASH_BACK,
+            type = 'cm',
+            bond = 'Strong',
+            offset = {x=0,y=0}
+        })
+        G.ARGS.eigengrau_alpha = 1
+        G.LFC_EIGENGRAU_BG:define_draw_steps({{
+            shader = 'worm_lfc_eigengrau_bg',
+            send = {
+                {name = 'time', ref_table = G.TIMERS, ref_value = 'REAL_SHADER'},
+                {name = 'alpha', ref_table = G.ARGS, ref_value = 'eigengrau_alpha'},
+                -- add other shader args here
+            }
+        }})
+    end
+
+    return ret
+end

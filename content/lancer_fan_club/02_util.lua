@@ -89,3 +89,13 @@ Wormhole.LFC_Util.generate_pokedex_entry_ui = function(center, info_queue, card,
         end
     end
 end
+
+function Wormhole.LFC_Util.ease_eigengrau_bg_alpha(target)
+    G.E_MANAGER:add_event(Event({
+        trigger = "ease",
+        ref_table = G.ARGS,
+        ref_value = "eigengrau_alpha",
+        ease_to = target,
+        delay = 2,
+    }))
+end
