@@ -45,6 +45,9 @@ SMODS.Edition {
     loc_txt = { name = 'Tipsy', text = { '{C:green}#1# in #2#{} chance', 'to sober up', '{C:green}#3# in #4#{} chance', 'to get drunker', 'Cards played have a random rank', '{s:0.8}{C:inactive}(max variance: #5#)'}, label = 'Tipsy' },
     in_shop = false,            -- TODO discuss adding to shop if a bartender is owned as a hidden mechanic, see in_pool()
     extra_cost = -1,
+    pools = {
+        Drunk = true
+    },
     disable_base_shader = true, -- shader will modify card shape when implimented so this should be true
 
     on_apply = function(card)
@@ -82,6 +85,9 @@ SMODS.Edition {
     loc_txt = { name = 'Drunk', text = { '{C:green}#1# in #2#{} chance', 'to sober up', '{C:green}#3# in #4#{} chance', 'to get drunker', 'Cards played have a random rank', '{s:0.8}{C:inactive}(max variance: #5#)'}, label = 'Drunk' },
     in_shop = false,            -- TODO discuss adding to shop if a bartender is owned as a hidden mechanic, see in_pool()
     extra_cost = -1,
+    pools = {
+        Drunk = true
+    },
     disable_base_shader = true, -- shader will modify card shape when implimented so this should be true
 
     on_apply = function(card)
@@ -122,6 +128,9 @@ SMODS.Edition {
     loc_txt = { name = 'Very Drunk', text = {'{C:green}#1# in #2#{} chance', 'to sober up', '{C:green}#3# in #4#{} chance', 'to get drunker', 'Cards played have a random rank', '{s:0.8}{C:inactive}(max variance: #5#)'}, label = 'Very Drunk' },
     in_shop = false,            -- TODO discuss adding to shop if a bartender is owned as a hidden mechanic, see in_pool()
     extra_cost = -1,
+    pools = {
+        Drunk = true
+    },
     disable_base_shader = true, -- shader will modify card shape when implimented so this should be true
 
     on_apply = function(card)
@@ -158,6 +167,9 @@ SMODS.Edition {
     loc_txt = { name = 'Blackout', text = {'{C:green}#1# in #2#{} chance', 'to sober up', '{C:green}#3# in #4#{} chance', 'to {C:red,E:2}self destruct{}' }, label = 'Blackout' },
     in_shop = false,            -- TODO discuss adding to shop if a bartender is owned as a hidden mechanic, see in_pool()
     extra_cost = -1,
+    pools = {
+        Drunk = true
+    },
     disable_base_shader = true, -- shader will modify card shape when implimented so this should be true
 
     on_apply = function(card)
