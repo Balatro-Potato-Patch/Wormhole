@@ -604,6 +604,7 @@ function Wormhole.TEAM_MEOW.nyarlathotep_exchange_menu_UIdef(card)
 												colour = lighten(G.C.BLACK, 0.1),
 												r = 0.1,
 												padding = 0.1,
+												minh = 0.8,
 											},
 											nodes = {
 												{
@@ -617,9 +618,6 @@ function Wormhole.TEAM_MEOW.nyarlathotep_exchange_menu_UIdef(card)
 																	prefix = localize("$"),
 																},
 															},
-															scale_function = function()
-																return scale_number(G.GAME.dollars, 0.7, 99999, 1000000)
-															end,
 															colours = { G.C.MONEY },
 															font = G.LANGUAGES["en-us"].font,
 															shadow = true,
@@ -663,6 +661,7 @@ function Wormhole.TEAM_MEOW.nyarlathotep_exchange_menu_UIdef(card)
 												colour = lighten(G.C.BLACK, 0.1),
 												r = 0.1,
 												padding = 0.1,
+												minh = 0.8,
 											},
 											nodes = {
 												{
@@ -672,14 +671,6 @@ function Wormhole.TEAM_MEOW.nyarlathotep_exchange_menu_UIdef(card)
 															string = {
 																{ ref_table = G.GAME, ref_value = "meow_sanity_lost" },
 															},
-															scale_function = function()
-																return scale_number(
-																	G.GAME.meow_sanity_lost,
-																	0.7,
-																	99999,
-																	1000000
-																)
-															end,
 															colours = { G.C.PURPLE },
 															font = G.LANGUAGES["en-us"].font,
 															shadow = true,
@@ -722,6 +713,7 @@ function Wormhole.TEAM_MEOW.nyarlathotep_exchange_menu_UIdef(card)
 												colour = lighten(G.C.BLACK, 0.1),
 												r = 0.1,
 												padding = 0.1,
+												minh = 0.8,
 											},
 											nodes = {
 												{
@@ -742,15 +734,7 @@ function Wormhole.TEAM_MEOW.nyarlathotep_exchange_menu_UIdef(card)
 																	prefix = "X",
 																},
 															},
-															scale_function = function()
-																return scale_number(
-																	math.pow(1.25, G.GAME.meow_sanity_lost),
-																	0.7,
-																	99999,
-																	1000000
-																)
-															end,
-															colours = { G.C.PURPLE },
+															colours = { G.C.ORANGE },
 															font = G.LANGUAGES["en-us"].font,
 															shadow = true,
 															bump = true,
