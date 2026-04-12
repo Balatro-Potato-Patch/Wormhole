@@ -255,3 +255,41 @@ SMODS.Consumable {
 
     end
 }
+
+SMODS.Consumable {
+    key = "celesteela",
+    set = "worm_ultrabeast",
+    loc_txt = {
+        name = "Celesteela",
+        text = {
+            "Earn {C:attention}+2{} hand size, then",
+            "permanently increase this amount to" ,
+            "the next {C:spectral}prime number{}"
+        }
+    },
+    atlas = 'worm_asm_ubs', 
+    pos = { x = 2, y = 1 }, 
+    soul_pos = { x = 3, y = 1 }, 
+    config = { extra_slots_used = 1 },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { PRIMES[G.GAME.asm_celesteela] or 2 }}
+    end,
+    can_use = function (self, card)
+        return true
+    end,
+    use = function (self, card, area, copier)
+        G.GAME.asm_celesteela = G.GAME.asm_celesteela or 1
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.4,
+            func = function()
+                play_sound('timpani')
+                card:juice_up(0.3, 0.5)
+                G.GAME.round_resets.temp_handsize = G.GAME.round_resets.temp_handsize + PRIMES[G.GAME.asm_celesteela]
+                G.GAME.asm_celesteela = G.GAME.asm_celesteela + 1
+                return true
+            end
+        }))
+        delay(0.6)
+    end
+}

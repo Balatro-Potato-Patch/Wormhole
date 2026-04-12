@@ -3,6 +3,7 @@ function Wormhole.reset_game_globals(run_start)
     reset_ref(run_start)
     if run_start then
         G.GAME.asm_xurkitree = 7
+        G.GAME.asm_celesteela = 1
     end
 end
 
