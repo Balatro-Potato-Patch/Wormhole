@@ -37,7 +37,10 @@ return {
             b_worm_dum_starstudded = {
                 name = "Star-Studded Deck",
                 text = {
-                    "blah"
+                    "{C:red}-1{} {C:attention}Joker slot{}, gain",
+                    "{C:attention}+2{} slots once {C:attention}9{} unique",
+                    "{C:planet}Planet{} cards have",
+                    "been used this run"
                 }
             }
         },
@@ -284,6 +287,7 @@ return {
             worm_dum_apply = "+X#1# Applied",
             worm_dum_percent = "#1#%",
             worm_dum_xgeneric = "X#1#",
+            worm_dum_a_joker_slots = '+#1# Joker slots'
         },
         challenge_names = {
             c_worm_dum_low_oxygen = "Low Oxygen",
