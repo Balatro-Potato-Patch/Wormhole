@@ -519,6 +519,7 @@ return {
 			k_worm_meow_money = "Current Money:",
 			k_worm_meow_exchange = "Exchange",
 			k_worm_meow_exchanged = "Exchanged",
+			k_worm_meow_sanity_blind_mult = "When Blind is selected, each point of Sanity lost multiplies Blind Size by X1.25",
 		},
 		labels = {
 			worm_meow_zodicat = "Zodicat",

@@ -569,95 +569,144 @@ function Wormhole.TEAM_MEOW.nyarlathotep_exchange_menu_UIdef(card)
 		},
 		{
 			n = G.UIT.R,
-			config = { align = "cm", padding = 0.1, r = 0.1 },
+			config = { align = "cm" },
 			nodes = {
 				{
 					n = G.UIT.C,
-					config = { align = "cm", padding = 0.1, colour = G.C.BLACK, emboss = 0.05, r = 0.1 },
+					config = { padding = 0.1, align = "cm" },
 					nodes = {
 						{
 							n = G.UIT.R,
 							config = { align = "cm" },
 							nodes = {
 								{
+									n = G.UIT.C,
+									config = { align = "cm", padding = 0.1, colour = G.C.BLACK, emboss = 0.05, r = 0.1 },
+									nodes = {
+										{
+											n = G.UIT.R,
+											config = { align = "cm" },
+											nodes = {
+												{
+													n = G.UIT.T,
+													config = {
+														text = localize("k_worm_meow_sanity"),
+														scale = 0.4,
+														colour = G.C.UI.TEXT_LIGHT,
+													},
+												},
+											},
+										},
+										{
+											n = G.UIT.R,
+											config = {
+												align = "cm",
+												colour = lighten(G.C.BLACK, 0.1),
+												r = 0.1,
+												padding = 0.1,
+											},
+											nodes = {
+												{
+													n = G.UIT.O,
+													config = {
+														object = DynaText({
+															string = {
+																{ ref_table = G.GAME, ref_value = "meow_sanity_lost" },
+															},
+															scale_function = function()
+																return scale_number(
+																	G.GAME.meow_sanity_lost,
+																	0.7,
+																	99999,
+																	1000000
+																)
+															end,
+															maxw = 1.35,
+															colours = { G.C.PURPLE },
+															font = G.LANGUAGES["en-us"].font,
+															shadow = true,
+															rotate = true,
+															spacing = 2,
+															scale = 0.7,
+														}),
+													},
+												},
+											},
+										},
+									},
+								},
+								{
+									n = G.UIT.C,
+									config = { minw = 0.1 },
+								},
+								{
+									n = G.UIT.C,
+									config = { align = "cm", padding = 0.1, colour = G.C.BLACK, emboss = 0.05, r = 0.1 },
+									nodes = {
+										{
+											n = G.UIT.R,
+											config = { align = "cm" },
+											nodes = {
+												{
+													n = G.UIT.T,
+													config = {
+														text = localize("k_worm_meow_money"),
+														scale = 0.4,
+														colour = G.C.UI.TEXT_LIGHT,
+													},
+												},
+											},
+										},
+										{
+											n = G.UIT.R,
+											config = {
+												align = "cm",
+												colour = lighten(G.C.BLACK, 0.1),
+												r = 0.1,
+												padding = 0.1,
+											},
+											nodes = {
+												{
+													n = G.UIT.O,
+													config = {
+														object = DynaText({
+															string = {
+																{
+																	ref_table = G.GAME,
+																	ref_value = "dollars",
+																	prefix = localize("$"),
+																},
+															},
+															scale_function = function()
+																return scale_number(G.GAME.dollars, 0.7, 99999, 1000000)
+															end,
+															maxw = 1.35,
+															colours = { G.C.MONEY },
+															font = G.LANGUAGES["en-us"].font,
+															shadow = true,
+															spacing = 2,
+															bump = true,
+															scale = 0.7,
+														}),
+														id = "dollar_text_UI",
+													},
+												},
+											},
+										},
+									},
+								},
+							},
+						},
+						{
+							n = G.UIT.R,
+							config = { align = "cm", padding = 0.1 },
+							nodes = {
+								{
 									n = G.UIT.T,
 									config = {
-										text = localize("k_worm_meow_sanity"),
+										text = localize("k_worm_meow_sanity_blind_mult"),
 										scale = 0.4,
 										colour = G.C.UI.TEXT_LIGHT,
-									},
-								},
-							},
-						},
-						{
-							n = G.UIT.R,
-							config = { align = "cm", colour = lighten(G.C.BLACK, 0.1), r = 0.1, padding = 0.1 },
-							nodes = {
-								{
-									n = G.UIT.O,
-									config = {
-										object = DynaText({
-											string = {
-												{ ref_table = G.GAME, ref_value = "meow_sanity_lost" },
-											},
-											scale_function = function()
-												return scale_number(G.GAME.meow_sanity_lost, 0.7, 99999, 1000000)
-											end,
-											maxw = 1.35,
-											colours = { G.C.PURPLE },
-											font = G.LANGUAGES["en-us"].font,
-											shadow = true,
-											rotate = true,
-											spacing = 2,
-											scale = 0.7,
-										}),
-									},
-								},
-							},
-						},
-					},
-				},
-				{
-					n = G.UIT.C,
-					config = { align = "cm", padding = 0.1, colour = G.C.BLACK, emboss = 0.05, r = 0.1 },
-					nodes = {
-						{
-							n = G.UIT.R,
-							config = { align = "cm" },
-							nodes = {
-								{
-									n = G.UIT.T,
-									config = {
-										text = localize("k_worm_meow_money"),
-										scale = 0.4,
-										colour = G.C.UI.TEXT_LIGHT,
-									},
-								},
-							},
-						},
-						{
-							n = G.UIT.R,
-							config = { align = "cm", colour = lighten(G.C.BLACK, 0.1), r = 0.1, padding = 0.1 },
-							nodes = {
-								{
-									n = G.UIT.O,
-									config = {
-										object = DynaText({
-											string = {
-												{ ref_table = G.GAME, ref_value = "dollars", prefix = localize("$") },
-											},
-											scale_function = function()
-												return scale_number(G.GAME.dollars, 0.7, 99999, 1000000)
-											end,
-											maxw = 1.35,
-											colours = { G.C.MONEY },
-											font = G.LANGUAGES["en-us"].font,
-											shadow = true,
-											spacing = 2,
-											bump = true,
-											scale = 0.7,
-										}),
-										id = "dollar_text_UI",
 									},
 								},
 							},
