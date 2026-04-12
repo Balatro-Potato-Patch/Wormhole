@@ -8,6 +8,7 @@ SMODS.Joker {
     cost = 7,
     atlas = "lfc_jokers",
     ppu_coder = { "J8-Bit" },
+    ppu_artist = { "J8-Bit" },
     ppu_team = { "Lancer Fan Club" },
     pos = { x = 1, y = 1 },
     discovered = false,
@@ -31,7 +32,8 @@ SMODS.Joker {
                     G.E_MANAGER:add_event(Event({
                         trigger = 'after',
                         func = function()
-                            G.play:shuffle('worm_lfc_scrambler' .. G.GAME.round_resets.ante .. G.GAME.round .. G.GAME.current_round.hands_left)
+                            G.play:shuffle('worm_lfc_scrambler' ..
+                            G.GAME.round_resets.ante .. G.GAME.round .. G.GAME.current_round.hands_left)
                             return true
                         end
                     }))

@@ -54,8 +54,9 @@ SMODS.Consumable {
             card.children.center:set_sprite_pos({ x = 1, y = 0 })
         end
     end,
-    ppu_artist = {"J8-Bit"},
-    ppu_coder = {"J8-Bit"},
+    ppu_artist = { "J8-Bit" },
+    ppu_coder = { "J8-Bit" },
+    ppu_team = { "Lancer Fan Club" },
 }
 
 -- Time Dilation
@@ -75,14 +76,43 @@ SMODS.Consumable {
         }
     end,
     use = function(self, card, area, copier)
+        -- Ante Stuff
         ease_ante(card.ability.extra.ante_inc)
         G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante or G.GAME.round_resets.ante
         G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante + card.ability.extra.ante_inc
         G.GAME.win_ante = G.GAME.win_ante + card.ability.extra.win_ante_inc
+        -- Joker banning
+        local target = pseudorandom_element(G.jokers.cards, "lfc_time_dilation")
+        if target ~= nil then
+            local cards_to_destroy = {}
+            for index, joker in ipairs(G.jokers.cards) do
+                if joker.config.center.key == target.config.center.key then
+                    table.insert(cards_to_destroy, joker)
+                end
+            end
+            G.GAME.banned_keys[target.config.center_key] = true
+            for index, joker in ipairs(cards_to_destroy) do
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        joker:juice_up(.4, .4)
+                        joker:start_dissolve()
+                        return true
+                    end
+                }))
+
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        SMODS.destroy_cards(joker, nil, nil, true)
+                        return true
+                    end
+                }))
+            end
+        end
     end,
     can_use = function(self, card)
-        return true
+        return G.jokers and #G.jokers.cards > 0
     end,
-    ppu_artist = {"J8-Bit"},
-    ppu_coder = {"J8-Bit"},
+    ppu_artist = { "J8-Bit" },
+    ppu_coder = { "J8-Bit" },
+    ppu_team = { "Lancer Fan Club" },
 }
