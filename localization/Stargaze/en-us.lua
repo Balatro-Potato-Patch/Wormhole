@@ -58,7 +58,7 @@ return {
             j_worm_journalist = {
                 name = "Journalist Stryfe",
                 text = {
-                "Gains {C:chips}+5{} chips if you repeat a hand",
+                "Gains {C:chips}+10{} chips if you repeat a hand",
                 "in a round, doubled if all joker slots are full",
                 "{C:inactive}(Currently: {C:chips}+#1#{} {C:inactive}Chips){}"
                 },
