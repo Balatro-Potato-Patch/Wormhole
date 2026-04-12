@@ -4,7 +4,9 @@
 	- 
 ]]
 
-local w = 200
+local w = 200 	-- Width of bar
+local len = 2 	-- Duration of minigame
+local count = 5 -- Amount of hits
 
 Wormhole.LancerFanClub.spacebar = {
 	active = false,
@@ -12,8 +14,17 @@ Wormhole.LancerFanClub.spacebar = {
 		card:juice_up()
 		self.active = true
 		self.pre_timer = 1  -- Timer for before the minigame
-		self.timer = 1      -- Timer for the minigame itself
+		self.timer = len    -- Timer for the minigame itself
 		self.canvas = love.graphics.newCanvas(w+15,12)
+		self.card = card
+
+		local t = {}
+		for i = 1, count, 1 do
+			t[(pseudorandom("lfc_spacebar_hit")+i-1)/count*len] = true
+		end
+		self.hitmarkers = t
+		print(t)
+
 		G.E_MANAGER:add_event(Event({func = function() return not self.active end}))
 		
 		G.E_MANAGER:add_event(Event({func = function()
@@ -53,16 +64,20 @@ SMODS.Joker {
 	end,
 
 	calculate = function(self, card, context)
-		if context.individual and context.cardarea == G.play then
+		if context.worm_lfc_on_play_press then
+			Wormhole.LancerFanClub.spacebar:enqueue(card)
+		end
+		--[[if context.individual and context.cardarea == G.play then
 			context.other_card.ability.perma_x_mult = (context.other_card.ability.perma_x_mult or 1) + card.ability.extra.max_xmult_mod
 			return { 
 				message = localize('k_upgrade_ex'),
 				colour = G.C.MULT
 			}
-		end
+		end]]
 	end,
 
 	ppu_artist = { "J8-Bit" },
+	ppu_coder = { "ellestuff." },
 	ppu_team = { "Lancer Fan Club" },
 	
 	update = function(self, card, dt) if not Wormhole.LFC_Util.card_obscured(card) then card.children.center:set_sprite_pos({x = 0, y = love.keyboard.isDown("space")and 1 or 0}) end end
@@ -82,13 +97,19 @@ function love.update(dt)
 		if space.timer<0 then
 			space.active = false
 			space.canvas = nil
-			return
 		end
+	end
+end
 
-		-- Do the gameplay stuff
-		if targettimer == "timer" then
-			
-		end
+if not love.keypressed then function love.keypressed(key, scancode, isrepeat) end end
+local keypressed_hook = love.keypressed
+function love.keypressed( key, scancode, isrepeat )
+	-- Do the gameplay stuff
+	local space = Wormhole.LancerFanClub.spacebar
+	if space.active and space.pre_timer<0 and key == "space" then
+		print(len-space.timer)
+	else
+		keypressed_hook(key, scancode, isrepeat)
 	end
 end
 
@@ -120,14 +141,35 @@ function love.draw()
 
 		quad:setViewport(16,3, 3, 8, sx, sy)
 		love.graphics.draw(spr,quad,12+w,2)
-		
+	
+		quad:setViewport(24,2, 3, 10, sx, sy)
+		for k, v in pairs(space.hitmarkers) do
+			if v and (space.pre_timer<0 or 1-space.pre_timer>k/len) then
+				love.graphics.draw(spr,quad,12+k*w/len,1)
+			end
+		end
+
+		quad:setViewport(20,1, 3, 12, sx, sy)
+		if targettimer == "timer" then
+			love.graphics.draw(spr,quad,12+(len-space.timer)*w/len,0)
+		end
+
 		quad:setViewport(1,1, 12, 12, sx, sy)
 		love.graphics.draw(spr,quad,0,0)
 
 		love.graphics.setCanvas(c)
 		local x, y = love.graphics.getDimensions()
-		x, y = x/2, y/2
 		local w,h = space.canvas:getDimensions()
-		love.graphics.draw(space.canvas,x,y,0,2,2,w/2,h/2)
+		love.graphics.draw(space.canvas,x/2,y/2,0,2,2,w/2,h/2)
+		if space.timingoffset then
+			love.graphics.printf(space.timingoffset.."ms",x/2,y/2+20,nil,"center")
+		end
 	end
+end
+
+-- Just copypasted this from my Tenna code lol
+local hook = G.FUNCS.play_cards_from_highlighted
+G.FUNCS.play_cards_from_highlighted = function(e)
+	SMODS.calculate_context { worm_lfc_on_play_press = true }
+	hook(e)
 end
