@@ -24,5 +24,8 @@ Bartender ideas: (3-4 required)
 Speed Bartender, provides food/drink with a #G.jokers chance out of max number of joker slots on each joker trigger. Can use SMODS.pseudorandom_probability for this. (Axyraandas)
 Bar/Bat Mitzvah, provides every food and non-alcoholic drink in this modpack after 13/12 played hands, respectively. Or maybe provides a random food (using attributes) every hand after the 13/12 th played hand. (Axyraandas)
 
+
 Non-Bartender Joker Ideas:
 Trash Compactor, -1 joker slot, gains the effect of all jokers sold until end of round. (including during shopping)
+Drunken Patron - gives +10 mult (maybe x1.25 mult?) for every tipsy, drunk, very drunk, or blackout card in hand
+Happy Hour - Menu consumables cost $2 less
