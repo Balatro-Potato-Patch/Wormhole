@@ -509,7 +509,9 @@ return {
 			k_worm_meow_Zodicat_pack = "Zodicat Pack",
 			k_worm_meow_ate = "Ate!",
 			k_meow_eldritch = "Eldritch",
-			k_meow_encounter = "Encounter"
+			k_meow_encounter = "Encounter",
+			k_meow_sanity = "Sanity Lost:",
+			k_meow_money = "Current Money:",
 		},
 		labels = {
 			worm_meow_zodicat = "Zodicat",
