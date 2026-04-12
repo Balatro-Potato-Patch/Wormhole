@@ -28,7 +28,6 @@ SMODS.Consumable{
             end
         })).vars
         info_queue[#info_queue+1] = {set = "worm_tlr_constellation", key = G.GAME.worm_tlr_last_const_used .. "_t" .. max_tier, vars = loc_vars}
-        print(info_queue)
        end
 
         return {
