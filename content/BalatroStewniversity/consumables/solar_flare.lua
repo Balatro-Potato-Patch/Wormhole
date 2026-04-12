@@ -1,12 +1,15 @@
 
-local card_can_calculate = Card.can_calculate
-function Card:can_calculate(ignore_debuff, ignore_sliced)
-    if self.solar_flare_debuff then
-        self.debuff = true
-        return false
-    else
-        return card_can_calculate(self, ignore_debuff, ignore_sliced)
-    end
+local card_save = Card.save
+function Card:save()
+    local t = card_save(self)
+    t.actually_permanent_debuff = self.actually_permanent_debuff
+    return t
+end
+
+local card_load = Card.load
+function Card:load(cardTable, other_card)
+    self.actually_permanent_debuff = cardTable.actually_permanent_debuff
+    card_load(self, cardTable, other_card)
 end
 
 SMODS.Consumable {
@@ -14,12 +17,8 @@ SMODS.Consumable {
     set = 'Spectral',
     atlas = "stewconsumables",
     pos = { x = 1, y = 0 },
-    -- config = { extra = { destroy = 5, dollars = 20 } },
-    -- loc_vars = function(self, info_queue, card)
-    --     return { vars = { card.ability.extra.destroy, card.ability.extra.dollars } }
-    -- end,
     use = function(self, card, area, copier)
-        
+
         local used_card = copier or card
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
@@ -51,8 +50,7 @@ SMODS.Consumable {
 
             G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.2, func = function()
                 card:juice_up(0.8, 0.5)
-                card.debuff = true
-                card.solar_flare_debuff = true
+                card.actually_permanent_debuff = true
                 return true
             end }))
 

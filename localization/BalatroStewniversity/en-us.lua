@@ -50,7 +50,7 @@ return {
             },
 
             j_worm_stardust_joker = {
-                name = 'Stardust Joker',
+                name = 'Stardust',
                 text = {
                     'This Joker gains {C:money}$#1#{} of',
                     '{C:attention}sell value{} for every {C:attention}#2#{C:inactive} [#3#]',
@@ -84,6 +84,15 @@ return {
                     "Played cards with",
                     "{C:hearts}Heart{} suit give",
                     "{X:mult,C:white} X#1# {} Mult when scored",
+                }
+            },
+
+            j_worm_astrologer = {
+                name = 'Astrologer',
+                text = {
+                    "Creates a random {C:planet}Planet{}",
+                    "when a {C:tarot}Tarot{} card is used",
+                    "{C:inactive}(Must have room)",
                 }
             },
 

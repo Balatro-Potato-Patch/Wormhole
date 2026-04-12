@@ -3,16 +3,17 @@ version = "1.0.0"
 dump_lua = true
 priority = 0
 
-
+# Patch in perma debuff for solar flare
 [[patches]]
 [patches.pattern]
-target = 'game.lua'
-pattern = '''djtsd;krtj'''
+target = 'card.lua'
+pattern = '''if self.ability and self.ability.perma_debuff then self.debuff = true end'''
 position = 'after'
 payload = '''
--- wooo'''
+if self.actually_permanent_debuff then self.debuff = true end'''
 match_indent = true
 
+# Fix exact hand oneshot not counting as oneshot
 [[patches]]
 [patches.pattern]
 target = 'functions/state_events.lua'
