@@ -4,7 +4,7 @@ SMODS.Joker{
     rarity = 1,
     cost = 5,
     atlas = 'stewjokers',
-    pos = {x=3, y=1},
+    pos = {x=4, y=1},
     blueprint_compat = false,
     eternal_compat = true,
     perishable_compat = true,
