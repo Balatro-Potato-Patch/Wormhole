@@ -75,7 +75,16 @@ return {
                     '{C:planet}Planet{} or {C:attention}Star{} card held',
                     '{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)'
                 }
-            }
+            },
+
+            j_worm_geocentrism = {
+                name = 'Geocentrism',
+                text = {
+                    "Played cards with",
+                    "{C:hearts}Heart{} suit give",
+                    "{X:mult,C:white} X#1# {} Mult when scored",
+                }
+            },
 
         },
 

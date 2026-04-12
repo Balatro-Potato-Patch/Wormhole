@@ -23,7 +23,7 @@ SMODS.Joker{ --8 Ball Earth
                 if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
                     G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
                     
-                    local type_created = pseudorandom_element(consumable_types)
+                    local type_created = pseudorandom_element(consumable_types, "worm_8_ball_type")
                     
                     if type_created == 'Tarot' then
                     G.E_MANAGER:add_event(Event({
