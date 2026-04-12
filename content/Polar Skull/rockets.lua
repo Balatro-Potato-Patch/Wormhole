@@ -117,7 +117,7 @@ local function register_rocket(args)
 	args.atlas = "polarskull_rockets"
 	args.cost = args.cost or 4
 	args.config.extra.active = false
-	--args.ppu_artist = args.ppu_artist or {"comykel"}
+	args.ppu_artist = args.ppu_artist or {"comykel"}
 	args.ppu_coder = args.ppu_coder or { "noodlemire" }
 	args.ppu_team = { "polar_skull" }
 	args.loc_vars = args.loc_vars or function(self, info_queue, card)
@@ -225,11 +225,10 @@ register_rocket({
 	key = "vostok1",
 	pos = { x = 1, y = 0 },
 	config = { extra = { hand = "Pair", rounds = 3 } },
-	ppu_artist = { "comykel" }
 })
 
 register_rocket({
-	key = "changzheng5",
+	key = "longmarch5",
 	pos = { x = 2, y = 0 },
 	config = { extra = { hand = "Two Pair", rounds = 3 } },
 })
@@ -238,7 +237,6 @@ register_rocket({
 	key = "soyuz1",
 	pos = { x = 3, y = 0 },
 	config = { extra = { hand = "Three of a Kind", rounds = 3 } },
-	ppu_artist = { "comykel" }
 })
 
 register_rocket({
@@ -251,21 +249,18 @@ register_rocket({
 	key = "atlascentaur",
 	pos = { x = 5, y = 0 },
 	config = { extra = { hand = "Flush", rounds = 2 } },
-	ppu_artist = { "comykel" }
 })
 
 register_rocket({
 	key = "spaceshuttle",
 	pos = { x = 0, y = 1 },
 	config = { extra = { hand = "Full House", rounds = 2 } },
-	ppu_artist = { "comykel" }
 })
 
 register_rocket({
 	key = "sls",
 	pos = { x = 1, y = 1 },
 	config = { extra = { hand = "Four of a Kind", rounds = 1 } },
-	ppu_artist = { "comykel" }
 })
 
 register_rocket({
@@ -278,7 +273,6 @@ register_rocket({
 	key = "saturnv",
 	pos = { x = 3, y = 1 },
 	config = { extra = { hand = "Five of a Kind", rounds = 1 } },
-	ppu_artist = { "comykel" },
 	in_pool = function(self, args)
 		return G.GAME.hands[self.config.extra.hand].played > 0, {allow_duplicates = G.GAME.polarskull_rockets_stack}
 	end,

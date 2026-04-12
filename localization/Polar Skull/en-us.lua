@@ -77,8 +77,8 @@ return {
 				name = "Vostok 1",
 				text = rocket_text,
 			},
-			c_worm_polarskull_changzheng5 = {
-				name = "Changzheng 5",
+			c_worm_polarskull_longmarch5 = {
+				name = "Long March 5",
 				text = rocket_text,
 			},
 			c_worm_polarskull_soyuz1 = {
