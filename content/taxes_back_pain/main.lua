@@ -33,6 +33,42 @@ function Wormhole.tbp.reset_resuited_thruster_suit()
     Wormhole.tbp.resuited_thruster_preview_suit = next_suit
 end
 
+function Wormhole.tbp.get_dellinger_pokerhand()
+    if G.GAME and G.GAME.current_round and G.GAME.current_round.tbp_dellinger_pokerhand then
+        return G.GAME.current_round.tbp_dellinger_pokerhand
+    end
+
+    local _poker_hands = {}
+    for k, v in pairs(G.GAME.hands or { "High Card" }) do
+        if SMODS.is_poker_hand_visible(k) and k ~= G.GAME.current_round.tbp_dellinger_pokerhand then
+            _poker_hands[#_poker_hands + 1] = k
+        end
+    end
+
+    local ret, _ = pseudorandom_element(_poker_hands, 'tbp_dellinger')
+
+    return ret
+end
+
+function Wormhole.tbp.reset_dellinger_pokerhand()
+    local _poker_hands = {}
+    for k, v in pairs(G.GAME.hands) do
+        if SMODS.is_poker_hand_visible(k) and k ~= G.GAME.current_round.tbp_dellinger_pokerhand then
+            _poker_hands[#_poker_hands + 1] = k
+        end
+    end
+    G.GAME.current_round.tbp_dellinger_pokerhand, _ = pseudorandom_element(_poker_hands, 'tbp_dellinger')
+end
+
+local reset_game_globals_ref = Wormhole.reset_game_globals
+function Wormhole.reset_game_globals(run_start)
+    if Wormhole.tbp then
+        --Wormhole.tbp.reset_resuited_thruster_suit()
+        Wormhole.tbp.reset_dellinger_pokerhand()
+    end
+    return reset_game_globals_ref(run_start)
+end
+
 if Wormhole.tbp.config.swap_buttons == nil then
     Wormhole.tbp.config.swap_buttons = false
 end
@@ -634,53 +670,22 @@ Wormhole.tbp.Module({
 })
 
 Wormhole.tbp.Module({
-	key = "dellinger",
+    key = "dellinger",
     slot = 'core',
     durability = 3,
-	-- pos = { x = 0, y = 0 },
-	config = {
-		extra = {
-			amount = 1,
+    -- pos = { x = 0, y = 0 },
+    config = {
+        extra = {
+            amount = 1,
             poker_hand = 'High Card'
-		},
+        },
     },
-    ppu_artist = {'mythie'},
-	loc_vars = function(self, info_queue, module, card)
-		return { vars = { module.ability.extra.amount, localize(module.ability.extra.poker_hand, 'poker_hands') } }
+    ppu_artist = { 'mythie' },
+    loc_vars = function(self, info_queue, module, card)
+        return { vars = { module.ability.extra.amount, localize(Wormhole.tbp.get_dellinger_pokerhand() or "High Card", 'poker_hands') } }
     end,
-    set_ability = function(self, card, initial, delay_sprites)
-        -- TODO: from og set_ability, to remove when art is added
-        if self.atlas == 'centers' then
-            card.canvas_text = {
-                SMODS.CanvasSprite({
-                    text_colour = G.C.RED,
-                    text = localize('tbp_module_'..self.slot),
-                    text_offset = {x = 36, y = 20},
-                    text_width = 26,
-                    text_height = 20,
-                }),
-                SMODS.CanvasSprite({
-                    text_colour = G.C.BLUE,
-                    text = localize({type = 'name_text', set = 'tbp_module', key = self.key}),
-                    text_offset = {x = 36, y = 60},
-                    text_width = 60,
-                    text_height = 20,
-                })
-            }
-        end
-        ---
-        ---
-        --TODO: Fix poker hand not changing in joker loc
-        local _poker_hands = {}
-        for k, v in pairs(G.GAME.hands) do
-            if v.visible and k ~= card.ability.extra.poker_hand then
-                _poker_hands[#_poker_hands + 1] = k
-            end
-        end
-        card.ability.extra.poker_hand = pseudorandom_element(_poker_hands, pseudoseed((card.area and card.area.config.type == 'title') and 'tbp_false_dellinger' or 'tbp_dellinger'))
-    end,
-    module_calculate = function (self, module, context, card)
-        if context.before and context.main_eval and context.scoring_name == module.poker_hand then
+    module_calculate = function(self, module, context, card)
+        if context.before and context.main_eval and context.scoring_name == Wormhole.tbp.get_dellinger_pokerhand() then
             return {
                 func = function()
                     local modules = Wormhole.tbp.get_equipped_modules(card)
@@ -693,18 +698,7 @@ Wormhole.tbp.Module({
             }
         end
         if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then
-            local _poker_hands = {}
-            for k, v in pairs(G.GAME.hands) do
-                if v.visible and k ~= module.poker_hand then
-                    _poker_hands[#_poker_hands + 1] = k
-                end
-            end
-            module.poker_hand = pseudorandom_element(_poker_hands, pseudoseed('tbp_dellinger'))
-            return {
-                func = function()
-                    Wormhole.tbp.change_durability(card, self.slot, -1)
-                end
-            }
+            Wormhole.tbp.change_durability(card, self.slot, -1)
         end
     end
 })

@@ -2,9 +2,6 @@ Wormhole = SMODS.current_mod
 
 -- Reset Game Globals func to hook
 function Wormhole.reset_game_globals(run_start) 
-    if Wormhole.tbp and Wormhole.tbp.reset_resuited_thruster_suit then
-        Wormhole.tbp.reset_resuited_thruster_suit()
-    end
 end
 
 if PotatoPatchUtils then
