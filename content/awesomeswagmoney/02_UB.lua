@@ -262,7 +262,7 @@ SMODS.Consumable {
     loc_txt = {
         name = "Celesteela",
         text = {
-            "Earn {C:attention}+2{} hand size, then",
+            "Earn {C:attention}+#1#{} hand size, then",
             "permanently increase this amount to" ,
             "the next {C:spectral}prime number{}"
         }
@@ -285,6 +285,7 @@ SMODS.Consumable {
             func = function()
                 play_sound('timpani')
                 card:juice_up(0.3, 0.5)
+                G.hand:change_size(PRIMES[G.GAME.asm_celesteela])
                 G.GAME.round_resets.temp_handsize = G.GAME.round_resets.temp_handsize + PRIMES[G.GAME.asm_celesteela]
                 G.GAME.asm_celesteela = G.GAME.asm_celesteela + 1
                 return true
