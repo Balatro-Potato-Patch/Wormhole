@@ -60,15 +60,24 @@ SMODS.Joker {
         return {vars = {center.ability.extra.copied}}
     end,
     calculate = function(self, card, context) --used a lot of pinkprint for this https://github.com/EremelMods/Ortalab/blob/main/objects/jokers/pinkprint.lua
-        if context.joker_type_destroyed or context.selling_card then
-            if context.card.ability.set == 'Joker' then
-                card.ability.extra.copied[#card.ability.extra.copied+1] = context.card.ability
+        if context.selling_card and context.card.ability.set == 'Joker' then
+            card.ability.extra.copied.insert(a, context.card)
+            print(#card.ability.extra.copied)
+            end
+        if context.joker_main then
+            print(#card.ability.extra.copied)
+            for i = 1, #card.ability.extra.copied do
+                print(i)
             end
         end
-        if context.joker_main then
-            for i = 1, #card.ability.extra.copied do
-                SMODS.blueprint_effect(card, card.ability.extra.copied[i], context)
+        if context.end_of_round and context.game_over == false then
+            local length = #card.ability.extra.copied
+            for i = 1, length do
+               card.ability.extra.copied.remove()
             end
+            return {
+                message = "Clear!"
+            }
         end
         --when scoring
             --for each item in list
