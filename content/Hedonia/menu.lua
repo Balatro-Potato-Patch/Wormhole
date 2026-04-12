@@ -29,6 +29,9 @@ SMODS.Consumable {
     use = function(self, card, area, copier)
         local card_to_drink = pseudorandom_element(G.hand.cards, 'alcohol') --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/spectrals.lua#L26
         card_to_drink:set_edition(e_worm_hedonia_tipsy,true)
+    end,
+    can_use = function(self, card)
+        return G.hand and #G.hand.cards > 1
     end
 }
 
@@ -40,6 +43,9 @@ SMODS.Consumable {
     use = function(self, card, area, copier)
         local card_to_drink = pseudorandom_element(G.hand.cards, 'alcohol') --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/spectrals.lua#L26
         card_to_drink:set_edition(e_worm_hedonia_drunk,true) 
+    end,
+    can_use = function(self, card)
+        return G.hand and #G.hand.cards > 1
     end
 }
 
@@ -51,6 +57,9 @@ SMODS.Consumable {
     use = function(self, card, area, copier)
         local card_to_drink = pseudorandom_element(G.hand.cards, 'alcohol') --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/spectrals.lua#L26
         card_to_drink:set_edition(e_worm_hedonia_very_drunk,true)
+    end,
+    can_use = function(self, card)
+        return G.hand and #G.hand.cards > 1
     end
 }
 
@@ -62,6 +71,9 @@ SMODS.Consumable {
     use = function(self, card, area, copier)
         local card_to_drink = pseudorandom_element(G.hand.cards, 'alcohol') --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/spectrals.lua#L26
         card_to_drink:set_edition(e_worm_hedonia_blackout,true)
+    end,
+    can_use = function(self, card)
+        return G.hand and #G.hand.cards > 1
     end
 }
 
@@ -79,6 +91,9 @@ SMODS.Consumable {
     use = function(self, card, area, copier)
         local card_to_bonus = pseudorandom_element(G.hand.cards, 'alcohol') --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/spectrals.lua#L26
         card_to_bonus.ability.perma_chips = (card_to_bonus.ability.perma_chips or 0) + card.ability.extra.bonus --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/jokers.lua#L1442
+    end,
+    can_use = function(self, card)
+        return G.hand and #G.hand.cards > 1
     end
 }
 
@@ -106,7 +121,7 @@ SMODS.Consumable {
     end,
     can_use = function(self, card)
         local has_drunk = false
-        if G.hand and G.hand.cards then
+        if G.hand and #G.hand.cards > 0 then
             for i,v in pairs(G.hand.cards) do
                 if has_drunk == true then break end
                 has_drunk = v.edition and (
@@ -137,6 +152,9 @@ SMODS.Consumable {
         for i = 1, #G.hand.highlighted do --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/tarots.lua#L695
             SMODS.modify_rank(G.hand.highlighted[i], rank)
         end
+    end,
+    can_use = function(self, card)
+        return G.hand and #G.hand.highlighted == card.ability.extra.cards
     end
 }
 
@@ -156,6 +174,9 @@ SMODS.Consumable {
         for i = 1, #G.hand.highlighted do
             SMODS.modify_suit(G.hand.highlighted[i], suit)
         end
+    end,
+    can_use = function(self, card)
+        return G.hand and #G.hand.highlighted == card.ability.extra.cards
     end
 }
 
