@@ -4,7 +4,7 @@ SMODS.Joker {
     atlas = "mrrp",
     pos = {
         x = 4,
-        y = 5
+        y = 1
     },
     rarity = 1,
     cost = 5,
@@ -88,11 +88,13 @@ SMODS.Joker {
 }
 --[[ Simple version ]]
 SMODS.Joker {
+    ppu_team = {'Mrrp Mew Meow :3'},
+    ppu_coder = {'Cyan'},
     key = 'felicette',
     atlas = "mrrp",
     pos = {
         x = 4,
-        y = 5
+        y = 1
     },
     rarity = 1,
     cost = 5,

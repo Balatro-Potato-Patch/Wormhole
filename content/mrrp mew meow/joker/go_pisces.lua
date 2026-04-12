@@ -1,8 +1,10 @@
 SMODS.Joker {
+	ppu_team = {'Mrrp Mew Meow :3'},
+    ppu_coder = {'Minty'},
 	key = 'go_pisces',
 	rarity = 2,
 	cost = 8,
-	atlas = "mrrp", pos = {x=4, y=5},
+	atlas = "mrrp", pos = {x=4, y=2},
 	blueprint_compat = true,
 	eternal_compat = false,
 	perishable_compat = true,

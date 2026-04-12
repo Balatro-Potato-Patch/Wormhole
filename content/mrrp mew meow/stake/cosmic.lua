@@ -11,7 +11,7 @@ SMODS.Stake{
         applied_stakes = false
     },
 	modifiers = function()
-		G.GAME.modifiers.enable_worm_celestial = true
+		G.GAME.modifiers.enable_worm_meteoric = true
 	end,
 
 }

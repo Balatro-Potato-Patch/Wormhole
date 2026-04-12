@@ -67,13 +67,15 @@ descriptions={
 				"into a {C:attention}#2#{} with a {C:attention}#3# Seal{}"
 			}
 		},
-		j_worm_nasahiring ={
+		j_worm_nyasa ={
 			name=
-				"NASA's Exploration Team"
+				"NYASA Exploration Team"
 			, text={
 				"When {C:attention}Blind{} is selected,",
-				"create a {C:dark_edition}#1#{}",
-				"{C:money}#2#{} {C:attention}Space{} Joker",
+				"create a {C:planet}Space{} {C:attention}Joker{}",
+				"{C:green}#2# in #3#{} chance to",
+				"create it {C:dark_edition}Negative{}",
+				"{C:inactive}(Must have room otherwise){}"
 			}
 		},
 		j_worm_orrery ={
@@ -89,10 +91,9 @@ descriptions={
 		},
 		j_worm_capitalism ={
 			name={
-				"Outer Space,",
-				"The One Place",
-				"Left Uncorrupt",
-				"by Capitalism"
+				"The One Place That",
+				"Hasn't Been Corrupted",
+				"by Capitalism: SPACE!"
 			}, text={
 				"This Joker gains {C:mult}#1#{} Mult",
 				"when ending a {C:attention}shop{} with",
@@ -100,13 +101,62 @@ descriptions={
 				"{C:inactive}(Currently {C:mult}#2#{C:inactive} Mult){}"
 			}
 		},
+		j_worm_out_of_space = {
+			name = "Out of Space",
+			text = {
+				{
+					"{C:dark_edition}#1#{} Joker slot",
+					"{C:dark_edition}#1#{} consumable slot",
+					"{C:dark_edition}#1#{} hand size",
+				},
+				{
+					"{C:red}X#2#{} Blind size per",
+					"empty Joker slot and",
+					"empty consumeable slot"
+				}
+			}
+		},
+		j_worm_staging = {
+			name = "Staging",
+			text = {
+				"{X:mult,C:white}X#1#{} Mult per {C:attention}card{}",
+				"discarded this round",
+				"{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive})"
+			}
+		},
+		j_worm_perseids = {
+			name = "Perseids",
+			text = {
+				"Each {C:attention}card{} in poker hand",
+				"retriggers a random",
+				"card in poker hand",
+			}
+		},
+		j_worm_tanabata = {
+			name = "Tanabata",
+			text = {
+				"If poker hand contains a",
+				"{C:attention}#1#{} and a {C:attention}#2#{}, create",
+				"a random {C:planet}#3#{} card",
+				"{C:inactive}(Must have room)"
+			}
+		},
+		j_worm_cats_eye_nebula = {
+			name = "Cat's Eye Nebula",
+			text = {
+				"{C:chips}#1#{} Chips",
+				"{C:chips}#2#{} per {C:attention}card{} scored",
+				"Upon collapse, upgrade all",
+				"{C:attention}poker hand{} levels by {C:attention}#3#{}"
+			}
+		}
 	},
 	Stake={
 		stake_worm_cosmic ={
 			name=
 				'Cosmic Stake'
 			, text={
-				"Shop can have {C:attention}Gravity{} Jokers",
+				"Shop can have {C:attention}Meteoric{} Jokers",
 				"{C:inactive,s:0.8}(Halve all poker hand levels when bought){}",
 				"{s:0.8}Applies {C:money,s:0.8}Gold Stake{}"
 			}
@@ -116,9 +166,9 @@ descriptions={
 		
 	},
 	Other={
-		worm_celestial ={
+		worm_meteoric ={
 			name=
-				"Celestial"
+				"Meteoric"
 			, text={
 				"Halve all {C:attention}poker hand{}",
 				"levels when bought"
@@ -144,6 +194,47 @@ descriptions={
 			}
 		},
 	},
+	PotatoPatch = {
+		['PotatoPatchTeam_Mrrp Mew Meow :3'] = {
+			name = 'Mrrp Mew Meow :3',
+		},
+		PotatoPatchDev_SarcPot = {
+			name = 'SarcPot',
+			text = {
+				{'test'},
+			},
+		},
+		PotatoPatchDev_Shinku = {
+			name = 'Shinku',
+			text = {
+				{'test'},
+			},
+		},
+		PotatoPatchDev_MP = {
+			name = 'MP',
+			text = {
+				{'test'},
+			},
+		},
+		PotatoPatchDev_Aure = {
+			name = 'Aure',
+			text = {
+				{'test'},
+			},
+		},
+		PotatoPatchDev_Minty = {
+			name = 'mys. minty',
+			text = {
+				{'test'},
+			},
+		},
+		PotatoPatchDev_Cyan = {
+			name = 'Cyan',
+			text = {
+				{'test'},
+			},
+		}
+	}
 },
 misc={
 	v_dictionary={
@@ -151,10 +242,42 @@ misc={
 		a_plus_tarot = "+#1# Tarot",
 	},
 	labels={
-		worm_celestial = "Celestial",
+		worm_meteoric = "Meteoric",
 	},
 	dictionary={
 	--	k_downgrade_ex = "Downgrade!",
+		k_make_a_wish_ex = "Make a wish!",
+		k_flaring = "Flaring..."
 	},
+	quips = {
+		worm_mrrp_no_menthol_win = {
+			"Have you tried this",
+			"silly little mod",
+			"called Menthol?"
+		},
+		worm_mrrp_no_menthol_loss = {
+			"I know what your",
+			"build is missing -",
+			"more cats!"
+		},
+		worm_mrrp_menthol_win = {
+			"What a refreshing",
+			"minty taste!"
+		},
+		worm_mrrp_menthol_loss = {
+			"Maybe a bit",
+			"TOO much mint?"
+		},
+		worm_mrrp_sarcpot = {
+			"Playing SarcPot, huh?",
+			"I know what",
+			"you are... >:3"
+		},
+		worm_mrrp_no_sarcpot = {
+			"Are you a girl,",
+			"gay, or indie game",
+			"fan? Play SarcPot!"
+		},
+	}
 },
 }
