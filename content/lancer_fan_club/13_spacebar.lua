@@ -4,9 +4,10 @@
 	- 
 ]]
 
-local w = 200 	-- Width of bar
-local len = 2 	-- Duration of minigame
-local count = 5 -- Amount of hits
+local w = 200 		-- Width of bar
+local len = 2 		-- Duration of minigame
+local count = 5 	-- Amount of hits
+local window = 0.08 -- Timing window in seconds
 
 Wormhole.LancerFanClub.spacebar = {
 	active = false,
@@ -20,7 +21,7 @@ Wormhole.LancerFanClub.spacebar = {
 
 		local t = {}
 		for i = 1, count, 1 do
-			t[(pseudorandom("lfc_spacebar_hit")+i-1)/count*len] = true
+			t[(pseudorandom("lfc_spacebar_hit")+i-1)/count*len] = true -- Makes them spawn in random positions within sections, so they're spread out
 		end
 		self.hitmarkers = t
 		print(t)
@@ -107,7 +108,23 @@ function love.keypressed( key, scancode, isrepeat )
 	-- Do the gameplay stuff
 	local space = Wormhole.LancerFanClub.spacebar
 	if space.active and space.pre_timer<0 and key == "space" then
-		print(len-space.timer)
+		local t = len-space.timer
+		local ht = nil
+		-- Get nearest hitmarker
+		for k, v in pairs(space.hitmarkers) do
+			if v and (not ht or math.abs(t-k)<math.abs(t-ht)) then
+				ht = k
+			end
+		end
+
+		if ht and math.abs(t-ht)<window then
+			space.hitmarkers[ht] = false
+			space.card:juice_up()
+			space.timingoffset = t-ht
+			play_sound("paper1",1,8)
+		else
+			play_sound("paper1",2,8)
+		end
 	else
 		keypressed_hook(key, scancode, isrepeat)
 	end
@@ -162,7 +179,7 @@ function love.draw()
 		local w,h = space.canvas:getDimensions()
 		love.graphics.draw(space.canvas,x/2,y/2,0,2,2,w/2,h/2)
 		if space.timingoffset then
-			love.graphics.printf(space.timingoffset.."ms",x/2,y/2+20,nil,"center")
+			love.graphics.printf(math.floor(space.timingoffset*1000).."ms",x/2-88,y/2+12,200,"center")
 		end
 	end
 end
