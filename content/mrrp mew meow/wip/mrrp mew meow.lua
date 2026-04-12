@@ -353,6 +353,33 @@ SMODS.Joker {
 		
 	end
 }
+
+SMODS.Joker {
+	key = "tanabata",
+	atlas = "mrrp_j", pos = {x=3, y=0}
+	rarity = 1,
+	cost = 5,
+	blueprint_compat = true,
+	eternal_compat = true,
+	perishable_compat = true,
+	calculate = function(self, card, context)
+		if context.joker_main and not context.before and not context.after and not (context.blueprint_card or card).getting_sliced then
+			local jacks = 0
+			local queens = 0
+			for i = 1, #context.scoring_hand do
+				if context.scoring_hand[i]:get_id() == 12 then queens = queens + 1 end
+				if context.scoring_hand[i]:get_id() == 11 then jacks = jacks + 1 end
+			end
+			if kings >= 1 and queens >= 1 then
+				SMODS.create_card('Planet',G.consumeables, nil, nil, nil, nil, nil, 'tanabata', function(new_card)
+					play_sound("polychrome1",2,0.5)
+					card:juice_up(0.3, 0.5)
+				end)
+				return {}
+			end
+		end
+	end
+}) ; Code ported from Prism's Happily Ever After and modified
 --]]
 ----------------------------------------------
 ------------MOD CODE END----------------------
