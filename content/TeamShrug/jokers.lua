@@ -128,8 +128,6 @@ Wormhole.SHRUG_Joker {
 
                     -- Card Flip Effect
                     G.E_MANAGER:add_event(Event({
-                        trigger = "after",
-                        delay = 0.4,
                         func = function()
                             play_sound("tarot1")
                             card:juice_up(0.3, 0.5)
@@ -166,6 +164,7 @@ Wormhole.SHRUG_Joker {
                             return true
                         end
                     }))
+                    delay(1)
                 end
             end
         end

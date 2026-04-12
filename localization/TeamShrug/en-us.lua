@@ -82,7 +82,7 @@ return {
                 text = {
                     "Enhance {C:attention}1{} random played",
                     "and unscored card into a",
-                    "{C:attention}Nebulous Card{} after scoring"
+                    "{C:attention}Nebulous Card{} before scoring"
                 }
             },
 
