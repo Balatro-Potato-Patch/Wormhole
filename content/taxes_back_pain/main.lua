@@ -313,7 +313,7 @@ SMODS.Joker({
                 G.E_MANAGER:add_event(Event({
                     func = function()
                         card:juice_up(0.3, 0.5)
-                        SMODS.add_booster_to_shop("p_worm_module_normal_" .. (math.random(1,2)))
+                        SMODS.add_booster_to_shop("p_worm_module_jumbo_1")
                     return true
                     end
                 }))
