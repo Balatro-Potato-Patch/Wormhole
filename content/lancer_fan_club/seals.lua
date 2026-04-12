@@ -3,14 +3,13 @@ SMODS.Seal {
 	loc_vars = function(self, info_queue, card)
 		return {
 			vars = {
-				localize("$"),
 				card.ability.seal.extra.dollars,
 			}
 		}
 	end,
 	config = { extra = { dollars = 5 } },
 	ppu_coder = { "ellestuff." },
-	ppu_artist = {"J8-Bit"},
+	--ppu_artist = {"J8-Bit"},
 	ppu_team = { "Lancer Fan Club" },
 	attributes = { "economy" },
     atlas = "lfc_jokers",
@@ -18,7 +17,7 @@ SMODS.Seal {
     calculate = function (self, card, context)
         if context.main_scoring then
             G.E_MANAGER:add_event(Event({func = function ()
-                Wormhole.LancerFanClub.create_meteor(card.ability.seal.extra.dollars)
+                Wormhole.LancerFanClub.create_meteor(card.ability.seal.extra.dollars,1)
             return true end}))
         end
     end

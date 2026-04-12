@@ -231,6 +231,16 @@ return {
                 },
             },
         },
+        Other = {
+            worm_lfc_meteor_seal = {
+                name = "Meteor Seal",
+                text = {
+                    "Creates a {C:attention}clickable",
+                    "falling meteor that",
+                    "gives {C:money}$#1#{} on hit"
+                }
+            }
+        }
     },
     misc = {
         dictionary = {

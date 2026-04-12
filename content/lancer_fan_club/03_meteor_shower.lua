@@ -38,9 +38,12 @@ end
 local meteors = {}
 local meteor_quad = love.graphics.newQuad(0, 0, 1, 1, 1, 1)
 
-function Wormhole.LancerFanClub.create_meteor(value)
+function Wormhole.LancerFanClub.create_meteor(value,spry)
 	local meteor = {
-		spr = pseudorandom("worm_lfc_meteorsprite", 0, math.ceil(mx / 64)-1),
+		spr = {
+			x = pseudorandom("worm_lfc_meteorsprite", 0, math.ceil(mx / 64)-1),
+			y = spry or 0
+		},
 		vel = {
 			x = pseudorandom("worm_lfc_meteor_velx") * 4, -- random float in range 0  to 40
 			y = pseudorandom("worm_lfc_meteor_vely") * 4 + 4, -- random float in range 40 to 80
@@ -121,7 +124,7 @@ function love.draw()
 			meteor_quad:setViewport(f * 71, 0, 71, 100, ex, ey) -- Reposition quad to use the correct frame
 			love.graphics.draw(explosion_sprite, meteor_quad, v.pos.x, v.pos.y, 0, 2, 2, 35, 55)
 		else
-			meteor_quad:setViewport(v.spr * 64, 0, 64, 64, mx, my) -- Reposition quad to use the correct frame
+			meteor_quad:setViewport(v.spr.x * 64, v.spr.y * 64, 64, 64, mx, my) -- Reposition quad to use the correct frame
 			love.graphics.draw(meteor_sprite, meteor_quad, v.pos.x, v.pos.y, v.pos.rot, 2, 2, 32, 32)
 		end
 	end
