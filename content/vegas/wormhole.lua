@@ -748,10 +748,31 @@ SMODS.Joker{
 	ppu_artist = {"Sn0vvBall"},
 	calculate = function(self, card, context)
 		local GameSeed = G.GAME.pseudorandom.seed
+		local GameSeeded = G.GAME.seeded -- Store whether or not this run was seeded
 		local GameStake = G.GAME.stake
 		local GameChallange = G.GAME.challenge
-		if context.end_of_round and context.game_over and context.main_eval  then
-			G.FUNCS.start_run(e, {stake = GameStake, seed = GameSeed, challenge = GameChallange})
+		if context.end_of_round and context.game_over and context.main_eval then
+			--instead of calling G.FUNCS.start_run(e, args), just do what it does and set the seed after run creation
+			G.SETTINGS.paused = true 
+			G.E_MANAGER:clear_queue() 
+			G.FUNCS.wipe_on() 
+			G.E_MANAGER:add_event(Event({
+			no_delete = true,
+			func = function()
+				G:delete_run()
+				return true
+			end
+			}))
+			G.E_MANAGER:add_event(Event({
+			trigger = 'immediate',
+			no_delete = true,
+			func = function()
+				G:start_run({stake = GameStake, seed = GameSeed, challenge = GameChallange})
+				G.GAME.seeded = GameSeeded -- Set the new run to the same value as earlier
+				return true
+			end
+			}))
+			G.FUNCS.wipe_off()
         end
 	end
 }
@@ -1576,3 +1597,16 @@ SMODS.Back {
         SMODS.upgrade_poker_hands(args)
 	end
 }
+
+--Shader (currently doesn't work)
+--[[
+SMODS.ScreenShader{
+	key = "CRTshutoff",
+	path = "CRTshutoff.fs",
+	order = 10,
+	send_vars = function(self)
+		return{
+			G.TIMERS.REAL % 1 --cycles the effect for debug
+		}
+	end
+}]]
