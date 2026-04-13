@@ -332,35 +332,35 @@ misc={
 			"If you like these",
 			"lines there's more",
 			"where that came from!"
-		}
+		},
 		worm_mrrp_no_index = {
 			"The Will of the City",
 			"calls you to",
 			"The Index."
-		}
+		},
 		worm_mrrp_index = {
 			"How 'bout I throw in",
 			"another Prescript to",
 			"play another round",
 			"for you!"
-		}
+		},
 
 	--	CYAN
 		worm_mrrp_win = {
 			"CAT GANG",
 			"FOREVER!",
 			"RAAAGHHH"
-		}
+		},
 		worm_mrrp_no_steady_lose = {
 			"Augh! If only",
 			"you had held a",
 			"{C:mrrp_cyan,E:2}Steady Hand{}...",
-		}
+		},
 		worm_mrrp_no_steady_win = {
 			"Keep vanilla+",
 			"fun going with",
 			"{C:mrrp_cyan,E:2}Steady Hand{}!",
-		}
+		},
 
 	}
 },
