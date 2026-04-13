@@ -181,6 +181,37 @@ SMODS.Consumable {
     end
 }
 
+
+-- Flush Five
+SMODS.PokerHand {
+    key = "bap_void",
+    visible = true,
+    mult = 7,
+    chips = 200,
+    l_mult = 2,
+    l_chips = 25,
+	loc_txt={ description = {
+		"5 cards with the void enhancement",
+	},
+	name = "Void"
+	},
+    example = {
+        { 'S_A', true, enhancement="m_worm_bap_void" },
+        { 'D_Q', true, enhancement="m_worm_bap_void" },
+        { 'D_9', true, enhancement="m_worm_bap_void" },
+        { 'C_4', true, enhancement="m_worm_bap_void" },
+        { 'D_3', true, enhancement="m_worm_bap_void" }
+    },
+    evaluate = function(parts, hand)
+		if #hand ~= 5 then return {} end
+		for i = 1, #hand do
+			if not SMODS.has_enhancement(hand[i], "m_worm_bap_void") then return {} end
+		end
+
+        return { hand }
+    end
+}
+
 -- Nothing planet card
 SMODS.Consumable {
     key = "bap_nothing",
