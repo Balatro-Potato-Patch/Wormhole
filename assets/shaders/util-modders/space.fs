@@ -6,6 +6,7 @@ extern float transparency;
 extern vec3 nebula_color1;
 extern vec3 nebula_color2;
 extern vec3 nebula_color3;
+extern bool shooting;
 
 // Gold Noise ©2015 dcerisano@standard3d.com
 // Taken from https://stackoverflow.com/a/28095165
@@ -207,7 +208,9 @@ vec4 effect(vec4 color, Image texture, vec2 texture_coords, vec2 screen_coords) 
     bg = stars(coords, bg, nebula_density);
 
     // Shooting stars
-    bg = shootingStars(coords, bg);
+    if (shooting) {
+        bg = shootingStars(coords, bg);
+    }
 
     if (transparency == 1.0) {
         return bg;

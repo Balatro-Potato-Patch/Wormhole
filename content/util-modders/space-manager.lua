@@ -56,6 +56,7 @@ function manager:run(dt)
     if not self.active and self.target then
         self.curr = self.target
         self.seed = self.target.ability.seed
+        self.conf = self.target.ability.space_conf
         self:recalc_overlay()
         self:run(dt) -- That's two frames per frame
     end
@@ -91,11 +92,16 @@ SMODS.ScreenShader {
         return manager.active
     end,
     send_vars = function()
+        local conf = manager.conf
         return {
             screen_scale = G.TILESCALE*G.TILESIZE*G.CANV_SCALE,
             time = G.TIMERS.REAL,
             transparency = manager.transparency,
             seed = manager.seed,
+            nebula_color1 = conf.nebula1,
+            nebula_color2 = conf.nebula2,
+            nebula_color3 = conf.nebula3,
+            shooting = conf.shooting,
         }
     end
 }

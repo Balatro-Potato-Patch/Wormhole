@@ -38,22 +38,6 @@ SMODS.Atlas {
     py = 95
 }
 
--- SMODS.DrawStep {
---     key = "util_spaces_space",
---     order = 45,
---     func = function(card, layer)
--- 	local conf = card.util_space_conf
--- 	if conf then
--- 	    love.graphics.push()
--- 	    love.graphics.origin()
--- 	    conf.cs.canvas:renderTo(love.graphics.clear, 0, 0, 0, 1.0)
--- 	    love.graphics.pop()
--- 	    conf.cs:draw_shader('dissolve', nil, nil, nil, card.children.center)
--- 	end
---     end,
---     conditions = { facing = "front" },
--- }
-test = 3
 local function newDrawSelf(self, overlay)
     local canvas = self.canvas
     love.graphics.push("all")
@@ -67,11 +51,15 @@ local function newDrawSelf(self, overlay)
     love.graphics.clear(0, 0, 0, 0)
 
     local shader = G.SHADERS.worm_util_space
-    shader:send("screen_scale", G.TILESCALE*G.TILESIZE*scale/test)
+    local conf = self.parent.ability.space_conf
+    shader:send("screen_scale", G.TILESCALE*G.TILESIZE*scale/3)
     shader:send("time", G.TIMERS.REAL)
-    shader:send("transparency", G.TIMERS.REAL)
     shader:send("transparency", 1)
-    shader:send("seed", 1)
+    shader:send("seed", conf.seed)
+    shader:send("nebula_color1", conf.nebula1)
+    shader:send("nebula_color2", conf.nebula2)
+    shader:send("nebula_color3", conf.nebula3)
+    shader:send("shooting", conf.shooting)
     love.graphics.setShader(shader)
     love.graphics.rectangle("fill", 2 * scale, 2 * scale, (s.atlas.px - 4) * scale, (s.atlas.py - 4) * scale)
     love.graphics.setShader()
@@ -88,23 +76,48 @@ local function newDrawSelf(self, overlay)
     return self:ds_ref(overlay)
 end
 
+local options = { "shooting", "nebula", "nebula", "nebula", "miss", "miss" }
+local function calcCard(self, card)
+    local seed = card.ability.seed
+    local opts = copy_table(options)
+    local conf = {
+	seed = seed,
+	nebula1 = G.C.CLEAR,
+	nebula2 = G.C.CLEAR,
+	nebula3 = G.C.CLEAR,
+	shooting = false,
+    }
+    local nebula = 1
+    pseudoshuffle(opts, seed)
+
+    for i = 1, self.space_conf.options do
+	local opt = opts[i]
+	if opt == "shooting" then
+	    conf.shooting = true
+	elseif opt == "nebula" then
+	    conf["nebula" .. nebula] = G.C.RED -- TODO: Placeholder
+	    nebula = nebula + 1
+	end
+    end
+    return conf
+end
+
 SMODS.Consumable {
     key = 'util_spaces_basic',
     set = 'util_Spaces',
     atlas = "util_spaces",
     pos = { x = 0, y = 0 },
+    space_conf = {
+	options = 2,
+    },
     set_ability = function(self, card, initial, delay_sprites)
 	card.ability.seed = pseudorandom("worm_util_spaces_seed")
+	card.ability.space_conf = calcCard(self, card)
 	local cs = SMODS.CanvasSprite {}
-	card.util_space_conf = {
-	    cs = cs,
-	}
 	cs.center_ref = card.children.center
 	card.children.center = cs
 	card.children.center:set_role({major = card, role_type = 'Glued', draw_major = card})
 	cs.ds_ref = cs.draw_self
 	cs.draw_self = newDrawSelf
-
-	-- card.children.center:set_role({major = card, role_type = 'Glued', draw_major = card})
     end,
 }
