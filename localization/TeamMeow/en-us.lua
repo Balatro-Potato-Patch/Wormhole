@@ -254,12 +254,6 @@ return {
 					"{C:mult}+#1#{} Mult",
 				},
 			},
-			c_worm_stellar_strawberry_boosted2 = {
-				name = " Stellar Strawberry ",
-				text = {
-					"{X:red,C:white}X#1#{} Mult",
-				},
-			},
 			c_worm_celestial_cinnamon_regular = {
 				name = " Celestial Cinnamon ",
 				text = {
@@ -287,12 +281,6 @@ return {
 				name = " Blueshift Blueberry ",
 				text = {
 					"{C:chips}+#1#{} Chips",
-				},
-			},
-			c_worm_blueshift_blueberry_boosted2 = {
-				name = " Blueshift Blueberry ",
-				text = {
-					"{X:blue,C:white}X#1#{} Chips",
 				},
 			},
 			c_worm_black_hole_blackberry_regular = {
