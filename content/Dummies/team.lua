@@ -140,3 +140,19 @@ PotatoPatchUtils.Developer {
     pos = { x = 5, y = 0},
     loc = true,
 }
+
+-- Member SFX click funnies
+local cardclickref = Card.click
+function Card:click()
+	if self and self.ppu_member and self.ppu_member.dum_sfx_click then
+		if type(self.ppu_member.dum_sfx_click) == 'string' and SMODS.Sounds[self.ppu_member.dum_sfx_click] then
+			play_sound(self.ppu_member.dum_sfx_click)
+		elseif type(self.ppu_member.dum_sfx_click) == 'table' then
+			local dum_sfx = self.ppu_member.dum_sfx_click[math.random(1, #self.ppu_member.dum_sfx_click)]
+			if SMODS.Sounds[dum_sfx] then play_sound(dum_sfx) end
+		elseif type(self.ppu_member.dum_sfx_click) == 'function' then
+			self.ppu_member.dum_sfx_click(self)
+		end
+	end
+	return cardclickref(self)
+end
