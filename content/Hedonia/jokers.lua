@@ -130,6 +130,32 @@ SMODS.Joker {
 }
 
 SMODS.Joker {
+    key = "hedonia_speed",
+    atlas = "joker",
+    pos = {x = 1, y = 0},
+    rarity = 2,
+    cost = 5,
+    blueprint_compat = false,
+    pools = {
+        ["Bartender"] = true
+    },
+    calculate = function(self,card,context)
+        if context.joker_main and pseudorandom('speed') < #G.jokers.cards / G.jokers.config.card_limit and 
+        #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+                G.GAME.consumeable_buffer = (G.GAME.consumeable_buffer or 0) + 1
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        play_sound('timpani')
+                        SMODS.add_card({set = "worm_hedonia_menu", area = G.consumeables, key_append = '_casino'})
+                        G.GAME.consumeable_buffer = 0
+                        return true
+                    end
+                }))
+        end
+    end
+}
+
+SMODS.Joker {
     key = "hedonia_happy_hour",
     atlas = "joker",
     pos = {x = 2, y = 1},
