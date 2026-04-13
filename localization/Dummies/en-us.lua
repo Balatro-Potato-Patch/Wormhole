@@ -36,7 +36,11 @@ return {
             },
             PotatoPatchDev_flowire = {
                 name = 'Flowire',
-                text = { "Tastes like a", "{C:red}Strawberry{}!" }
+                text = {
+                    { "Awwooo!~ :3" },
+                    { "I hope your day", "is as wonderful", "as you are! {C:red}<3" },
+                    { "This {C:attention}critter{}", "tastes like a", "{C:red}Strawberry{}!" },
+                }
             },
         },
         Back = {
@@ -60,36 +64,41 @@ return {
                 },
             },
             j_worm_dum_greg = {
-                name = "Greg The Muncher",
+                name = "Greg the Muncher",
                 text = {
-                    {
-                        "After a hand is scored",
-                        "{C:red}Eats{} your {C:attention}rightmost played{} card,",
-                        "Adds {C:blue}Celestial {}edition",
-                        "to your {C:attention}leftmost played{} card.",
-                        "{C:red}Cannot be sold."
-                    }
+                    "{C:red}Eats{} the {C:attention}rightmost{} card and",
+                    "adds {C:blue}Celestial{} to the {C:attention}leftmost{}",
+                    "card after a hand has scored",
+                    "{C:red}Can't be sold",
                 },
             },
             j_worm_dum_carnivore = {
                 name = "Moku the Carnivore",
-                text = {
-                    {
-                        "When {C:attention}Blind{} is selected,",
-                        "if Joker to the right is:",
-                        "{X:chips,C:white}Fish{} - {C:red}eat{} it and gain {C:chips}+#2#{} Chips",
-                        "{X:grey,C:white}Cat{} - {C:red}eat{} it and gain {C:mult}+#1#{} Mult",
-                        "{X:green,C:white}Alien{} - {C:red}eat{} it and gain {X:mult,C:white} X#3# {} Mult",
-                        "{C:inactive}(Currently {C:chips}+#5#{C:inactive} Chips, {C:mult}+#4#{C:inactive} Mult, {X:mult,C:white} X#6# {C:inactive} Mult)",
-                    }
-                },
+                text = { {
+                    "When {C:attention}Blind{} is selected and the",
+                    "{C:attention}Joker{} to the right is a {X:chips,C:white}Fish{},",
+                    "a {X:grey,C:white}Cat{} or an {X:green,C:white}Alien{}, {C:red}Eat{} it and",
+                    "gain {C:chips}+#2#{} Chips, {C:mult}+#1#{} Mult or",
+                    "{X:mult,C:white}X#3#{} Mult respectively",
+                }, {
+                    "{C:inactive}Currently {C:chips}+#5#{C:inactive} Chips,",
+                    "{C:mult}+#4#{C:inactive} Mult and {X:mult,C:white}X#6#{C:inactive} Mult"
+                } },
+                --text = {
+                --    "When {C:attention}Blind{} is selected,",
+                --    "if Joker to the right is:",
+                --    "{X:chips,C:white}Fish{} - {C:red}eat{} it and gain {C:chips}+#2#{} Chips",
+                --    "{X:grey,C:white}Cat{} - {C:red}eat{} it and gain {C:mult}+#1#{} Mult",
+                --    "{X:green,C:white}Alien{} - {C:red}eat{} it and gain {X:mult,C:white} X#3# {} Mult",
+                --    "{C:inactive}(Currently {C:chips}+#5#{C:inactive} Chips, {C:mult}+#4#{C:inactive} Mult, {X:mult,C:white} X#6# {C:inactive} Mult)",
+                --},
             },
             j_worm_dum_garlicbread = {
                 name = { "{C:worm_dum_garlicbread}Garlic Bread{} that", "went to {C:planet}Space{}" },
                 text = {
                     "Upgrade {C:attention}all{} poker hands",
                     "after using {C:attention}#2#{} {C:planet}Planet{} cards",
-                    "{C:inactive}(Currently {C:attention}#1#{C:inactive}){}"
+                    "{C:inactive}(Currently {C:attention}#1#{C:inactive}/#2#){}"
                 },
             },
             j_worm_dum_farfromhome = {
@@ -97,7 +106,7 @@ return {
                 text = { {
                     "Store {X:chips,C:white}X#1#{} Chips when",
                     "a {C:planet}Planet{} card is used",
-                    "{C:inactive}(Stored: {X:chips,C:white}X#2#{C:inactive} Chips){}"
+                    "{C:inactive}(Stored {X:chips,C:white}X#2#{C:inactive} Chips){}"
                 }, {
                     "Using {C:planet}Earth{} applies",
                     "all stored Chips,",
@@ -107,24 +116,20 @@ return {
                 } },
             },
             j_worm_dum_gleebleglorp = {
-                name = "Gleebleglorp",
+                name = "Gleebleglorp", -- <3
                 text = {
-                    {
-                        "{C:white,X:mult}X#1#{} Mult if played",
-                        "{C:attention}poker hand{} is not your",
-                        "{C:attention}highest-level{} hand"
-                    }
+                    "{C:white,X:mult}X#1#{} Mult if played",
+                    "{C:attention}poker hand{} is not your",
+                    "{C:attention}highest-level{} hand"
                 },
             },
 			j_worm_dum_crystalsphere = {
                 name = "Crystal Sphere",
                 text = {
-                    {
-                        "{C:green}#1# in #2#{} chance to {C:attention}retrigger{}",
-                        "all played and scored",
-                        "cards if played hand",
-                        "contains any {C:attention}face{} cards"
-                    }
+                    "{C:green}#1# in #2#{} chance to",
+                    "{C:attention}retrigger{} all scoring", --> scoring/played
+                    "cards if played hand",
+                    "contains a {C:attention}face{} card"
                 },
             },
 			j_worm_dum_scrooge = {
@@ -138,31 +143,29 @@ return {
             j_worm_dum_spaghet = {
                 name = "{C:worm_dum_spaghet}Spaghettification",
                 text = {
-					"If a {C:planet}Planet{} card is held for {C:attention}discarded{}",
-					"poker hand, {C:red}destroy{} {C:planet}it{} and add",
-					"{C:attention}per-level{} {C:chips}Chips{} of said poker hand",
-					"to this Joker",
-					"{C:inactive}(Currently {C:chips}#1#{C:inactive} Chips)"
+                    "If a {C:planet}Planet{} card is held",
+                    "for {C:attention}discarded{} poker hand,",
+                    "{C:red}destroy{} the {C:planet}Planet{} card and",
+                    "gain the {C:attention}per-level{} {C:chips}Chips{}",
+                    "{C:inactive}(Currently {C:chips}#1#{C:inactive} Chips)",
                 },
             },
 			j_worm_dum_timcurry = {
                 name = "{C:worm_dum_timcurry}Tim Curry{}",
-                text = {
-					{
-						"Upgrade a {C:attention}random{} poker hand",
-						"by {C:planet}#1#{} if played hand contains",
-						"a {C:attention}Pair{} of {C:attention}Queens{}",
-					},
-					{
-						"{C:inactive}May react to Space Joker"
-					},
-                },
+                text = { {
+					"Upgrade a {C:attention}random{} poker hand",
+					"by {C:planet}#1#{} if played hand contains",
+					"a {C:attention}Pair{} of {C:attention}Queens{}",
+				}, {
+					"{C:inactive}May react to Space Joker"
+				} },
             },
             j_worm_dum_pentapod = {
                 name = "Pentapod",
                 text = {
                     "{X:mult,C:white}X#1#{} Mult if",
-                    "exactly {C:attention}#2#{} cards score"
+                    "scoring exactly",
+                    "{C:attention}#2#{} cards"
                 }
             }
         },
@@ -182,8 +185,8 @@ return {
                 name = "Pulsar",
                 text = {
                     "{C:attention}Doubles{} the per-level",
-                    "Chips/Mult of {C:attention}#1#{}",
-                    "and sets its level to 1"
+                    "Chips & Mult of {C:attention}#1#{}",
+                    "and set its level to {C:attention}1"
                 }
             }
         },
@@ -191,7 +194,7 @@ return {
             bl_worm_dum_dummy_blind = {
                 name = "Test Flight",
                 text = {
-                    "You cannot lose to this blind.",
+                    "You can't lose to this blind.",
                     "Earn {C:attention}rewards{} based",
                     "on how well you score.",
                     "{s:0.8,C:worm_dum_brown}Let's see if you can",
@@ -242,7 +245,7 @@ return {
 			tag_worm_dum_timcurry = {
 				name = "Tim Curry Tag",
 				text = {
-					"Shop has {C:attention}Tim Curry{}?!",
+					"Shop has {C:worm_dum_timcurry}Tim Curry{}?!",
 				},
 			},
         },
@@ -268,13 +271,17 @@ return {
                 name = 'Celestial',
                 text = {
                     "{C:green}#1# in #2#{} chance to",
-                    "upgrade a {C:attention}random{} Poker Hand",
-                    "when using a {C:planet}Planet{} Card"
+                    "upgrade a {C:attention}random{}",
+                    "Poker Hand when",
+                    "using a {C:planet}Planet{} Card"
                 }
-            }
+            },
         }
     },
     misc = {
+        labels = {
+            worm_dum_Celestial = 'Celestial',
+        },
         dictionary = {
             k_worm_dum_worm_free = "Free packs!",
             k_worm_dum_worm_eat = "Gulp!",
@@ -287,13 +294,14 @@ return {
             },
             k_worm_dum_low_oxygen = "Low Oxygen",
 			worm_tim_curry_space = "SPAAACE!",
+            k_worm_dum_tasty = "Tasty!",
         },
         v_dictionary = {
             worm_dum_store = "+X#1# Stored",
             worm_dum_apply = "+X#1# Applied",
             worm_dum_percent = "#1#%",
             worm_dum_xgeneric = "X#1#",
-            worm_dum_a_joker_slots = '+#1# Joker slots'
+            worm_dum_a_joker_slots = '+#1# Joker slots',
         },
         challenge_names = {
             c_worm_dum_low_oxygen = "Low Oxygen",
@@ -340,10 +348,7 @@ return {
             -- [Custom] Quips:
             worm_dummies_flowire_1 = { "ERROR" },
             worm_dummies_flowire_2 = { "nil" },
-            worm_dummies_flowire_3 = { "{s:5.0} " },
-        },
-        labels = {
-            worm_dum_Celestial = 'Celestial'
+            worm_dummies_flowire_3 = { "{s:2.5}  " },
         }
     }
 }

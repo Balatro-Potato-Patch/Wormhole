@@ -33,7 +33,10 @@ SMODS.Joker {
 			if not context.blueprint then
 				if card.ability.extra.pc < card.ability.extra.pcm then
 					card.ability.extra.pc = (card.ability.extra.pc or 0) + 1
-					SMODS.calculate_effect({ message = tostring(card.ability.extra.pc) }, card)
+					SMODS.calculate_effect({ message =
+						card.ability.extra.pc < card.ability.extra.pcm and tostring(card.ability.extra.pc)..'/'..tostring(card.ability.extra.pcm)
+						or localize('k_worm_dum_tasty')
+					}, card)
 				end
 			end
 
