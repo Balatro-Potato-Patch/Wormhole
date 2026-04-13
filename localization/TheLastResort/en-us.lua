@@ -513,7 +513,6 @@ return {
 				name = "Amphiapple",
 				text = {
 					{
-						--"{C:green}OKEN STRATE{}"
 						"im not going to add to the mountain of lies anymore.",
 						"most things you know about me are fake.",
 						"ive faked most of my runs from both this and other acc",
@@ -521,8 +520,7 @@ return {
 						"i usually spend an hour-2 hours (and lie about the times it take me)",
 						"on these runs by setting tower speed at 1.1x",
 						"(rate changer mod)(some runs being more and some runs less)",
-						"which makes it virtually indistinguishable for",
-						"the human eye but noticeable when replayed.",
+						"which makes it virtually indistinguishable for the human eye but noticeable when replayed.",
 						'I did it to be able to just do multiple "hard" runs per week',
 						"so people would realize im one of the best.",
 						"my hardest legit run is axis of wizards on quad which",
@@ -532,7 +530,8 @@ return {
 						"(i know its not a good excuse to cheat).",
 						"I already had plans to quit the game after v44 cause i already had lost interest.",
 						"sorry to all the people whom ive disappointed.",
-						"im leaving all bloons related servers and dont dm me i wont respond."
+						"im leaving all bloons related servers and dont dm me i wont respond.",
+						"-Slender, 2024"
 					},
 				}
 			},
