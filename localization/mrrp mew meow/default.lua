@@ -209,17 +209,17 @@ descriptions={
 			name = 'SarcPot',
 			text = {
 				{
-					"Hey, i'm SarcasticPotato (aka. Sarc)"
+					"Hey, i'm {C:attention}SarcasticPotato{} (aka. {C:attention}Sarc{})"
 				},
 				{
-					"I did most of the art for our portion",
-					"of the mod and helped design and",
-					"concept a lot of the Jokers as well."
+					"I did most of the {C:attention}art{} for our portion",
+					"of the mod and helped {C:attention}design{} and",
+					"{C:attention}concept{} a lot of the Jokers as well."
 				},
 				{
 					"Maybe not the best idea to have",
 					"the slowest dev (and artist)",
-					"participate in a modjam but hey."
+					"participate in a modjam but {C:attention}hey{}."
 				},
 			},
 		},
@@ -263,7 +263,7 @@ descriptions={
 			name = 'Cyan',
 			text = {
 				{
-					"It's me, neurotic catboy {C:mrrp_cyan,E:2}Cyan{}!",
+					"{C:mrrp_cyan,E:2}CyanSoCalico{}, neurotic catboy! :3",
 				},
 				{
 					"I was recruited as an {C:mrrp_cyan}artist{} but",
