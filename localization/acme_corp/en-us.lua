@@ -181,6 +181,16 @@ return {
                     'when obtained'
                 }
             },
+	    j_worm_acme_gas_station = {
+		name = 'Interplanetary Gas Station',
+		text = {
+			'On scoring, played',
+			'hand {C:red}loses{} a level',
+			'{C:attention}Gain #1#{} random {C:planet}hand level{}',
+			'and {X:mult,C:white}X#2#{} Mult',
+			'{C:inactive}(Currently {X:mult,C:white}#3#{C:inactive} Mult)'
+		}
+	    },
         },
         Other = {
             undiscovered_acme_gadget = {
