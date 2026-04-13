@@ -162,7 +162,15 @@ descriptions={
 		}
 	},
 	Back={
-		
+		b_worm_mrrp_doppler = {
+			name = 'Doppler Deck',
+			text = {
+				"{C:planet}Planet{} cards give",
+				"{C:blue}#1#{} additional level,",
+				"but {C:red}#2#{} level to your",
+				"{C:attention}most played{} poker hand",
+			}
+		}
 	},
 	Other={
 		worm_meteoric ={
