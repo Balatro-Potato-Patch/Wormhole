@@ -61,6 +61,24 @@ return {
 					"{C:inactive}(Must have room){}",
 				},
 			},
+			j_worm_jtem2_operation_plumbbob = {
+				name = "Operation Plumbbob",
+				text = {
+					"Destroy {C:attention}all{} played cards",
+					"if you have a {C:planet}Planet Card{}",
+					"destroys a random {C:planet}Planet Card{} if successful",
+				},
+			},
+			j_worm_jtem2_stair = {
+				name = "Stair",
+				text = {
+					"This Joker gains {C:white,X:mult} X#1#{} Mult",
+					"if consecutive {C:attention}Straight",
+					"from either end {C:inactive}(#2# and #3#){} of your last one",
+					"{C:inactive}(Example: Next valid hand for [{C:attention}A{} 2 3 4 {C:attention}5{C:inactive}]",
+					"{C:inactive}is [{C:attention}6{} 7 8 9 {C:attention}10{C:inactive}] or [{C:attention}K{} Q J 10 {C:attention}9{C:inactive}])",
+				},
+			},
 		},
 		Tarot = {
 			c_worm_jtem2_shadow = {

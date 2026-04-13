@@ -5,6 +5,47 @@ local function hsl2rgb(h,s,l,al)
     return {f(0),f(8),f(4),al};
 end
 
+-- stole ts from my own mod i cba to write the event thing
+WORM_JTEM.simple_event_add = function (func, delay, queue, config)
+    config = config or {}
+    G.E_MANAGER:add_event(Event{
+        trigger = config.trigger or 'after',
+        delay = delay or 0.1,
+        func = func,
+        blocking = config.blocking,
+        blockable = config.blockable,
+    }, queue, config.front)
+end
+
+function WORM_JTEM.filter_table(tbl, predicate, ordered_in, ordered_out) 
+    if not tbl or not predicate then return {} end
+    if #tbl == 0 and ordered_in then return {} end
+    local table_out = {}
+    if ordered_in then
+        for k,v in ipairs(tbl) do
+            if predicate(v, k) then
+                if ordered_out then
+                    table.insert(table_out,v)
+                else
+                    table_out[k] = v
+                end
+            end
+        end
+    else
+        for k,v in pairs(tbl)  do
+            if predicate(v, k) then
+                if ordered_out then
+                    table.insert(table_out,v)
+                else
+                    table_out[k] = v
+                end
+            end
+        end 
+    end
+    return table_out
+end
+
+
 SMODS.DynaTextEffect {
     key = "jtem2_obfuscate",
     func = function (dynatext, index, letter)
