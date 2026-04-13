@@ -16,6 +16,13 @@ SMODS.Atlas {
     py = 95
 }
 
+SMODS.Atlas {
+    key = 'abs_boosters',
+    path = 'absinthe/abs_boosters.png',
+    px = 71,
+    py = 95
+}
+
 SMODS.Sound({
 	key = "abs_refill",
 	path = "absinthe/refill.ogg",
@@ -29,8 +36,9 @@ SMODS.Booster {
     key = "abs_top_shelf_normal_1",
     kind = "abs_drinks",
     group_key = "k_worm_abs_top_shelf_pack",
+    atlas = "abs_boosters",
     pos = {
-        x = 2,
+        x = 0,
         y = 0
     },
     config = {
@@ -38,6 +46,7 @@ SMODS.Booster {
         choose = 1
     },
     ppu_coder = { 'theAstra' },
+    ppu_artist = { 'AnneBean' },
     ppu_team = { 'absinthe' },
     cost = 5,
     weight = 0.96,
@@ -57,8 +66,9 @@ SMODS.Booster {
     key = "abs_top_shelf_normal_2",
     kind = "abs_drinks",
     group_key = "k_worm_abs_top_shelf_pack",
+    atlas = "abs_boosters",
     pos = {
-        x = 2,
+        x = 1,
         y = 0
     },
     config = {
@@ -66,6 +76,7 @@ SMODS.Booster {
         choose = 1
     },
     ppu_coder = { 'theAstra' },
+    ppu_artist = { 'AnneBean' },
     ppu_team = { 'absinthe' },
     cost = 5,
     weight = 0.96,
