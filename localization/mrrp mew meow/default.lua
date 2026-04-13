@@ -226,7 +226,14 @@ descriptions={
 		PotatoPatchDev_Shinku = {
 			name = 'Shinku',
 			text = {
-				{'test'},
+				{
+					"Hi. I'm Shinku."
+				},
+				{
+					"I worked on/created",
+					"mods like {C:hearts}Ortalab{}",
+					"and {C:attention}Parallel Update{}."
+				}
 			},
 		},
 		PotatoPatchDev_MP = {
