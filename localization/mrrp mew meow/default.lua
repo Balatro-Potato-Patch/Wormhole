@@ -242,7 +242,9 @@ descriptions={
 		PotatoPatchDev_Minty = {
 			name = 'mys. minty',
 			text = {
-				{'test'},
+				{"hey there everynyan my name's Minty :3"},
+				{"i like to nya"},
+				{"nyaaaaaa~ :3 :3 :3"},
 			},
 		},
 		PotatoPatchDev_Cyan = {
