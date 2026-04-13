@@ -37,7 +37,15 @@ return {
                 text = {
                     'creates a menu item during scoring',
                     'based on how many jokers you have',
-                    '{C:inactive} currently {C:green}#1# in #2#{}{C:inactive} chance{}'
+                    '{C:inactive} currently {C:green}#1# in #2#{C:inactive} chance{}'
+                }
+            },
+            j_worm_hedonia_bar_mitzvah = {
+                name = 'Bar Mitzvah',
+                text = {
+                    'creates a menu item',
+                    'after {C:attention}#1#{} played hands',
+                    '{C:inactive} currently {C:attention}#2#{C:inactive} hands left{}'
                 }
             }
         },
@@ -89,14 +97,14 @@ return {
                 name = 'Cosmic Brownies',
                 text = {
                     'Converts {C:attention}#1#{} selected cards',
-                    'to the same rank'
+                    'to the same random rank'
                 }
             },
             c_worm_hedonia_jam = {
                 name = 'Space Jam',
                 text = {
                     'Converts {C:attention}#1#{} selected cards',
-                    'to the same suit'
+                    'to the same random suit'
                 }
             }
         },
