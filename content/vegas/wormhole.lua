@@ -686,7 +686,7 @@ SMODS.Joker{
 		return { vars = { card.ability.extra.xmult }}
 	end,
 	atlas = "vegas_jokers",
-	pos = {x = 0, y = 4},
+	pos = {x = 3, y = 2},
 	rarity = 3,
 	cost = 7,
 	blueprint_compat = true,
@@ -695,7 +695,7 @@ SMODS.Joker{
 	perishable_compat = true,
 	ppu_team = {"People Found In Vegas"},
 	ppu_coder = {"Jammbo"},
-	ppu_artist = {},
+	ppu_artist = {"Ben Roffey"},
 	calculate = function(self, card, context)
 		if context.individual and context.cardarea == G.hand and not context.end_of_round and context.other_card.edition and context.other_card.edition.negative then
             if context.other_card.debuff then
