@@ -7,7 +7,7 @@ SMODS.Joker {
     rarity = 2,
     cost = 6,
     attributes = { "mod_chance", "scaling", },
-    ppu_artist = { "notmario" },
+    ppu_artist = { "lordruby" },
     ppu_coder = { "nxkoo" },
     ppu_team = { ":3" },
 
