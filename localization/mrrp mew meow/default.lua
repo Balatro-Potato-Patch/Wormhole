@@ -5,10 +5,9 @@ descriptions={
 			name=
 				"Alien Cat"
 			, text={
-				"{C:green}#1# in #2#{} chance for",
-				"each played {C:attention}#3#{} to",
-				"create a {C:planet}#4#{}",
-				"card when scored"
+				"{C:green}#1# in #2#{} chance for each",
+				"played {C:attention}#3#{} to create a",
+				"{C:planet}#4#{} card when scored"
 			}
 		},
 		j_worm_pallasite ={
@@ -73,8 +72,8 @@ descriptions={
 			, text={
 				"When {C:attention}Blind{} is selected,",
 				"create a {C:planet}Space{} {C:attention}Joker{}",
-				"{C:green}#2# in #3#{} chance to",
-				"create it {C:dark_edition}Negative{}",
+				"{C:green}#2# in #3#{} chance that",
+				"the Joker is {C:dark_edition}Negative{}",
 				"{C:inactive}(Must have room otherwise){}"
 			}
 		},
@@ -93,7 +92,7 @@ descriptions={
 			name={
 				"The One Place That",
 				"Hasn't Been Corrupted",
-				"by Capitalism: SPACE!"
+				"by Capitalism: {C:edition}SPACE{}!"
 			}, text={
 				"This Joker gains {C:mult}#1#{} Mult",
 				"when ending a {C:attention}shop{} with",
