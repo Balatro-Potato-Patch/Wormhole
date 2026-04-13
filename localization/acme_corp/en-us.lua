@@ -236,7 +236,15 @@ return {
             PotatoPatchDev_Opal = {
                 name = "Opal",
                 text = {
-                    { "On" },
+                    {
+                        "This has been quite a fun event!",
+                        "I feel {C:attention}incredibly lucky{} to have had",
+                        "such a fantastic team once again."
+                    },
+                    {
+                        "{C:inactive,s:0.8}And I'm no shill, but I hear",
+                        "{E:1,s:0.8,C:tarot}Opalstuff{C:inactive,s:0.8} has some cool stuff :3"
+                    },
                 },
             },
             PotatoPatchDev_Youh = {
