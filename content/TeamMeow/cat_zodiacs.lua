@@ -8,6 +8,13 @@ SMODS.ConsumableType({
 	text_colour = G.C.UI.TEXT_DARK,
 })
 
+SMODS.Atlas({
+	key = "cat_zodiacs",
+	px = 71,
+	py = 95,
+	path = "TeamMeow/cat_zodiacs.png",
+})
+
 ---Basically a way to handle effect animations for Zodicats
 ---@param card Card
 ---@param condition fun(p_card: Card): boolean?
@@ -94,6 +101,8 @@ SMODS.Consumable({
 	can_use = function(self, card)
 		return G.hand and #G.hand.cards > 0
 	end,
+	atlas = "cat_zodiacs",
+	pos = { x = 0, y = 0 },
 	ppu_team = { "meow" },
 	ppu_coder = { "thunderedge" },
 	ppu_artist = { "gappie" },
@@ -125,6 +134,8 @@ SMODS.Consumable({
 	can_use = function(self, card)
 		return G.hand and #G.hand.cards > 0
 	end,
+	atlas = "cat_zodiacs",
+	pos = { x = 1, y = 0 },
 	ppu_team = { "meow" },
 	ppu_coder = { "thunderedge" },
 	ppu_artist = { "gappie" },
@@ -163,6 +174,8 @@ SMODS.Consumable({
 	can_use = function(self, card)
 		return G.hand and #G.hand.cards > 0
 	end,
+	atlas = "cat_zodiacs",
+	pos = { x = 2, y = 0 },
 	ppu_team = { "meow" },
 	ppu_coder = { "thunderedge" },
 	ppu_artist = { "gappie" },
@@ -194,6 +207,8 @@ SMODS.Consumable({
 	can_use = function(self, card)
 		return G.hand and #G.hand.cards > 0
 	end,
+	atlas = "cat_zodiacs",
+	pos = { x = 0, y = 1 },
 	ppu_team = { "meow" },
 	ppu_coder = { "thunderedge" },
 	ppu_artist = { "gappie" },
@@ -225,6 +240,8 @@ SMODS.Consumable({
 	can_use = function(self, card)
 		return G.hand and #G.hand.cards > 0
 	end,
+	atlas = "cat_zodiacs",
+	pos = { x = 1, y = 1 },
 	ppu_team = { "meow" },
 	ppu_coder = { "thunderedge" },
 	ppu_artist = { "gappie" },
@@ -256,6 +273,8 @@ SMODS.Consumable({
 	can_use = function(self, card)
 		return G.hand and #G.hand.cards > 0
 	end,
+	atlas = "cat_zodiacs",
+	pos = { x = 2, y = 1 },
 	ppu_team = { "meow" },
 	ppu_coder = { "thunderedge" },
 	ppu_artist = { "gappie" },

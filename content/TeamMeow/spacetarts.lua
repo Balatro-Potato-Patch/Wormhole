@@ -105,7 +105,7 @@ Wormhole.TEAM_MEOW.tartInfo = {}
 --- credits: The additional credits needed for this tart object. Split into `artist` and `coder` as 2 seperate tables\
 --- (Some people are already credited due to work on the art base/code)\
 --- attributes: Attributes.
-function SpaceTart(args)
+local function SpaceTart(args)
 	local ex_table = {}
 	ex_table.tart = args.key
 	ex_table.tart_cfg = args.config

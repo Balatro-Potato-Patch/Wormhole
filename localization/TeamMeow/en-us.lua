@@ -112,7 +112,7 @@ return {
 						"{C:attention}Hot Potato{} and {C:red}Stocking {C:green}Stuffer{} participant",
 					},
 					{
-						"Click me to open my {C:attention}itch.io{} page!"
+						"Click me to open my {C:attention}itch.io{} page!",
 					},
 					{
 						"{C:inactive,s:0.7}will i get flamed if i shill non balatro things here",
@@ -267,7 +267,7 @@ return {
 					"{C:green}#1# in #2#{} chance",
 					"to earn {C:money}$#3#{} at",
 					"end of round",
-				}
+				},
 			},
 			c_worm_meteor_mint_regular = {
 				name = " Meteor Mint ",
@@ -275,7 +275,7 @@ return {
 					"{C:attention}Boosts{} other {C:worm_meow_spacetart}©Spacetarts{}",
 					"attached to this {C:attention}Joker{}",
 					"{C:inactive}(Total mint boosts on this Joker: #1#)",
-				}
+				},
 			},
 			c_worm_blueshift_blueberry_regular = {
 				name = " Blueshift Blueberry ",
@@ -296,8 +296,27 @@ return {
 				name = "Nyan Cat",
 				text = {
 					"Increases max {C:worm_meow_spacetart}©Spacetart{} limit",
-					"on cards by {C:attention}+#1# "
-				}
+					"on cards by {C:attention}+#1# ",
+				},
+			},
+			j_worm_meow_nyarlathotep = {
+				name = "Nya-rlathotep",
+				text = {},
+			},
+			j_worm_meow_nyarlathotep_blank = {
+				name = "Nya-rlathotep",
+				text = {
+					{
+						"Make deals with an",
+						"{C:attention}Outer God{} at the",
+						"cost of your {C:purple,E:1}sanity",
+					},
+					{
+						"{C:inactive,s:0.8}(Click this Joker to reveal",
+						"{C:inactive,s:0.8}a button that will let you",
+						"{C:inactive,s:0.8}initiate an eldritch encounter)",
+					},
+				},
 			},
 			j_worm_meow_cotobo_box = {
 				name = "Schrödinger's Box",
@@ -335,6 +354,61 @@ return {
 			}
 		},
 		Other = {
+			worm_meow_nyarlathotep_xmult = {
+				text = {
+					"{X:mult,C:white}X#1#{} Mult",
+				},
+			},
+			worm_meow_nyarlathotep_xchips = {
+				text = {
+					"{X:chips,C:white}X#1#{} Chips",
+				},
+			},
+			worm_meow_nyarlathotep_mult = {
+				text = {
+					"{C:mult}+#1#{} Mult",
+				},
+			},
+			worm_meow_nyarlathotep_chips = {
+				text = {
+					"{C:chips}+#1#{} Chips",
+				},
+			},
+			worm_meow_nyarlathotep_dollars = {
+				text = {
+					"{C:money}$#1#{}",
+				},
+			},
+			worm_meow_on_score = {
+				text = {
+					"Scored cards give",
+				},
+			},
+			worm_meow_held_in_hand = {
+				text = {
+					"Cards held in hand give",
+				},
+			},
+			exc_worm_meow_sanity_cost = {
+				text = {
+					"Lose {C:purple}#1#{} Sanity",
+				},
+			},
+			exc_worm_meow_void = {
+				name = "Void",
+				text = {
+					"{C:attention}Nya-rlathotep{} gains {C:red}+#1#{}",
+					"Mult and {X:chips,C:white}X#2#{} Chips",
+					"{C:inactive}(Currently {C:red}+#3#{C:inactive} Mult",
+					"{C:inactive}and {X:chips,C:white}X#4#{C:inactive} Chips)"
+				},
+			},
+			exc_worm_meow_greed = {
+				name = "Greed",
+				text = {
+					"Earn {C:money}$#1#",
+				},
+			},
 			worm_meow_spacetart_stacks = {
 				text = {
 					"{C:inactive,s:0.8}(Boost level: {C:attention,s:0.8}#2#{C:inactive,s:0.8})",
@@ -422,6 +496,26 @@ return {
 					"be used immediately",
 				},
 			},
+			worm_meow_appease_tooltip = {
+				name = "Appeasing Nya-rlathotep",
+				text = {
+					"If {C:attention}Nya-rlathotep{} has",
+					"any {C:worm_meow_spacetart}©Spacetarts{} on it,",
+					"you can sacrifice those",
+					"{C:worm_meow_spacetart}©Spacetarts{} to recover",
+					"any lost Sanity",
+				}
+			},
+			worm_meow_reroll_tooltip = {
+				name = "Rerolling Exchanges",
+				text = {
+					"The cost of rerolling",
+					"the exchanges that",
+					"{C:attention}Nya-rlathotep{} offers",
+					"does not increase",
+					"when rerolling",
+				}
+			},
 		},
 	},
 	misc = {
@@ -433,16 +527,26 @@ return {
 			k_worm_meow_spacetart_pack = "Spacetart Pack",
 			k_worm_meow_Zodicat_pack = "Zodicat Pack",
 			k_worm_meow_ate = "Ate!",
+			k_worm_meow_eldritch = "Eldritch",
+			k_worm_meow_encounter = "Encounter",
+			k_worm_meow_sanity = "Sanity Lost",
+			k_worm_meow_money = "Current Money",
+			k_worm_meow_blind_size_mult = "Blind Size Multiplier",
+			k_worm_meow_exchange = "Exchange",
+			k_worm_meow_exchanged = "Exchanged",
+			k_worm_meow_sanity_blind_mult = "When Blind is selected, each point of Sanity lost multiplies Blind Size by X1.25",
+			k_worm_meow_appease1 = "Appease",
+			k_worm_meow_appease2 = "Nya-rlathotep",
 		},
 		labels = {
 			worm_meow_zodicat = "Zodicat",
 			worm_meow_spacetart = "Spacetart",
 		},
 		achievement_names = {
-			ach_worm_rainbow = "Rainbow"
+			ach_worm_rainbow = "Rainbow",
 		},
 		achievement_descriptions = {
-			ach_worm_rainbow = "Have every kind of ©Spacetart on a Joker"
-		}
+			ach_worm_rainbow = "Have every kind of ©Spacetart on a Joker",
+		},
 	},
 }
