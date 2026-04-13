@@ -159,27 +159,27 @@ SMODS.Blind{
                 if card.worm_lfc_cardmod > 0 and SMODS.pseudorandom_probability(self,"turn to stone (electric lights orchestra reference)",1,2,"lfc_cardmod_check") then
                     card:set_ability('m_stone', nil, true)
                     G.E_MANAGER:add_event(Event({
-                    trigger = 'immediate',
-                    func = (function()
-                        SMODS.juice_up_blind()
-                        G.E_MANAGER:add_event(Event({
-                            func = function()
-                                card:juice_up()
-                                return true
-                            end
-                        }))
-                        G.E_MANAGER:add_event(Event({
-                            trigger = 'after',
-                            delay = 0.06 * G.SETTINGS.GAMESPEED,
-                            blockable = false,
-                            blocking = false,
-                            func = function()
-                                play_sound('tarot2', 0.76, 0.4); return true
-                            end
-                        }))
-                        play_sound('tarot2', 1, 0.4)
-                        return true
-                    end)
+                        trigger = 'immediate',
+                        func = (function()
+                            SMODS.juice_up_blind()
+                            G.E_MANAGER:add_event(Event({
+                                func = function()
+                                    card:juice_up()
+                                    return true
+                                end
+                            }))
+                            G.E_MANAGER:add_event(Event({
+                                trigger = 'after',
+                                delay = 0.06 * G.SETTINGS.GAMESPEED,
+                                blockable = false,
+                                blocking = false,
+                                func = function()
+                                    play_sound('tarot2', 0.76, 0.4); return true
+                                end
+                            }))
+                            play_sound('tarot2', 1, 0.4)
+                            return true
+                        end)
                     }))
                 end
             end

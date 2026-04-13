@@ -133,6 +133,41 @@ SMODS.Joker({
             return {
                 func = function()
                     play_sound("worm_lfc_berry_ante", 1, 0.6)
+                    G.E_MANAGER:add_event(Event({
+                        trigger = 'after',
+                        delay = 0.01585,
+                        blockable = false,
+                        blocking = false,
+                        pause_force = true,
+                        func = function()
+                            card:juice_up(0.2)
+                            for i=1, 10 do
+                                G.E_MANAGER:add_event(Event({
+                                    trigger = 'after',
+                                    delay = 0.0635 * i,
+                                    blockable = false,
+                                    blocking = false,
+                                    pause_force = true,
+                                    func = function()
+                                        card:juice_up(0.3)
+                                        return true
+                                    end
+                                }))
+                            end
+                            G.E_MANAGER:add_event(Event({
+                                trigger = 'after',
+                                delay = 0.635,
+                                blockable = false,
+                                blocking = false,
+                                pause_force = true,
+                                func = function()
+                                    card:juice_up(0.6)
+                                    return true
+                                end
+                            }))
+                            return true
+                        end
+                    }))
                 end
             }
         end
