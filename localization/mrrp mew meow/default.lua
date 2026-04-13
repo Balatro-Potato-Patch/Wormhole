@@ -269,14 +269,18 @@ descriptions={
 		PotatoPatchDev_Minty = {
 			name = 'mys. minty',
 			text = {
-				{"hey there everynyan my name's Minty :3"},
 				{
-						"i like to nya",
-						"nyaaaaaa~ :3 :3 :3"
+					"hey there everynyan my name's {C:mrrp_green,E:1}Minty{} :3",
+					"you may know me from silly little mods",
+					"like {C:mrrp_pink,E:2}Menthol{} or {C:mrrp_pink,E:2}Bibliography{}"
 				},
 				{
-						"i did some code because it's fun",
-						"and I'm good at it :3c",
+					"i did some {C:mrrp_blue}code{} because it's fun",
+					"and I'm good at it :3c",
+				},
+				{
+					"and i like to nya",
+					"{C:mrrp_pink}nyaaaaaa~ {C:mrrp_cyan}:3 {C:mrrp_green}:3 {C:mrrp_orange}:3"
 				},
 			},
 		},

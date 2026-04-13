@@ -16,7 +16,7 @@ SMODS.Joker {
     attributes = {'cat', 'food'},
     config = {
         extra = {
-            level = 6,
+            level = 3,
             level_mod = 1
         }
     },
@@ -48,7 +48,8 @@ SMODS.Joker {
                 level_up = -card.ability.extra.level,
                 from = context.blueprint and context.blueprint_card or card
             })
-            if context.blueprint then return end
+        end
+        if context.end_of_round and context.main_eval then
             if card.ability.extra.level - card.ability.extra.level_mod <= 0 then
                 SMODS.destroy_cards(card, nil, nil, true)
                 return {
