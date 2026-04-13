@@ -460,6 +460,7 @@ nyarlathotep_exchange({
         ease_ante(-self.config.antes)
         G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante or G.GAME.round_resets.ante
 		G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante - self.config.antes
+		G.GAME.meow_remembrance_exchanged = true
 	end,
 	loc_vars = function(self, card)
 		return {
@@ -469,6 +470,9 @@ nyarlathotep_exchange({
 			},
 		}
 	end,
+	in_pool = function()
+		return not G.GAME.meow_remembrance_exchanged
+	end
 })
 
 function Wormhole.TEAM_MEOW.generate_exchange_pool(card, seed)
