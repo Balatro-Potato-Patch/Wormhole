@@ -65,7 +65,6 @@ end
 
 SMODS.Joker({
 	key = "meow_nyarlathotep",
-	-- sprite and pos tbd
 	config = {
 		extra = {
 			individual = {},
@@ -76,10 +75,13 @@ SMODS.Joker({
 		},
 	},
 	rarity = 3,
+    atlas = "meow_jokers",
+	pos = {x = 1,y = 0},
+	cost = 8,
+    attributes = { "cat", "space", "spacetart", "xblindsize", "mult", "xchips", "economy", "scaling" },
 	blueprint_compat = false,
 	eternal_compat = true,
 	perishable_compat = false,
-	attributes = { "economy", "xchips", "mult" },
 	calc_dollar_bonus = function(self, card) end,
 	can_use = function(self, card)
 		return true
@@ -189,7 +191,7 @@ SMODS.Joker({
 	end,
 	ppu_team = { "meow" },
 	ppu_coder = { "thunderedge" },
-	-- ppu_artist = {},
+	ppu_artist = { "silverautumn" },
 })
 
 ---@class NyarlathotepExchange
