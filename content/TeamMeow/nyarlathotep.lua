@@ -196,9 +196,9 @@ SMODS.Joker({
 ---@field key string
 ---@field cost integer
 ---@field reward fun(self: NyarlathotepExchange, card: Card): nil
----@field in_pool fun(self: NyarlathotepExchange, card: Card): boolean?
+---@field in_pool fun(self: NyarlathotepExchange, card: Card, amt: number?): boolean?
 ---@field config table
----@field loc_vars fun(self: NyarlathotepExchange, card: Card): table
+---@field loc_vars fun(self: NyarlathotepExchange, card: Card, amt: number?): table
 ---@field calculate fun(self: NyarlathotepExchange, card: Card, context: CalcContext, amt: number?): table?
 ---@field misc? boolean
 
@@ -454,7 +454,16 @@ function Wormhole.TEAM_MEOW.generate_exchange_pool(card, seed)
 	local results = {}
 	local pool = {}
 	for _, exchange in ipairs(Wormhole.TEAM_MEOW.nyarlathotep_exchanges_list) do
-		if exchange:in_pool(card) then
+		local amt = nil
+		if next(card.ability.extra.misc) then
+			for _, power in ipairs(card.ability.extra.misc) do
+				if power.key == exchange.key then
+					amt = power.amt
+					break
+				end
+			end
+		end
+		if exchange:in_pool(card, amt) then
 			pool[#pool + 1] = exchange.key
 		end
 	end
