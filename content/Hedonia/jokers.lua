@@ -139,6 +139,17 @@ SMODS.Joker {
     pools = {
         ["Bartender"] = true
     },
+    loc_vars = function(self,info_queue,center)
+        local num, denom
+        if G.jokers ~= nil then
+            num = #G.jokers.cards
+            denom = G.jokers.config.card_limit
+        else
+            num = 1
+            denom = 5
+        end
+        return {vars = {num, denom}}
+    end,
     calculate = function(self,card,context)
         if context.joker_main and pseudorandom('speed') < #G.jokers.cards / G.jokers.config.card_limit and 
         #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
