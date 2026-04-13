@@ -409,6 +409,13 @@ return {
 					"Earn {C:money}$#1#",
 				},
 			},
+			exc_worm_meow_remembrance = {
+				name = "Remembrance",
+				text = {
+					"Go back",
+					"{C:attention}#1# Ante#2#",
+				},
+			},
 			worm_meow_spacetart_stacks = {
 				text = {
 					"{C:inactive,s:0.8}(Boost level: {C:attention,s:0.8}#2#{C:inactive,s:0.8})",
@@ -537,6 +544,7 @@ return {
 			k_worm_meow_sanity_blind_mult = "When Blind is selected, each point of Sanity lost multiplies Blind Size by X1.25",
 			k_worm_meow_appease1 = "Appease",
 			k_worm_meow_appease2 = "Nya-rlathotep",
+			k_worm_meow_plural = "s",
 		},
 		labels = {
 			worm_meow_zodicat = "Zodicat",
