@@ -157,11 +157,55 @@ SMODS.Joker {
                 G.E_MANAGER:add_event(Event({
                     func = function()
                         play_sound('timpani')
-                        SMODS.add_card({set = "worm_hedonia_menu", area = G.consumeables, key_append = '_casino'})
+                        SMODS.add_card({set = "worm_hedonia_menu", area = G.consumeables, key_append = 'speed'})
                         G.GAME.consumeable_buffer = 0
                         return true
                     end
                 }))
+        end
+    end
+}
+
+SMODS.Joker {
+    key = "hedonia_bar_mitzvah",
+    atlas = "joker",
+    pos = {x = 2, y = 0},
+    rarity = 1,
+    cost = 4,
+    blueprint_compat = false,
+    pools = {
+        ["Bartender"] = true
+    },
+    config = { extra = {
+        current = 0,
+        threshold = 13
+    }},
+    loc_vars = function(self,info_queue,center)
+        return {vars = {center.ability.extra.threshold, center.ability.extra.threshold - center.ability.extra.current}}
+    end,
+    calculate = function(self,card,context)
+        if context.joker_main then
+            if card.ability.extra.current == card.ability.extra.threshold then
+                local empty_slots = G.consumeables.config.card_limit - (#G.consumeables.cards)
+                if empty_slots > 0 then
+                    for i=1,empty_slots do
+                        G.E_MANAGER:add_event(Event({
+                            func = function()
+                                play_sound('timpani')
+                                SMODS.add_card({set = "worm_hedonia_menu", area = G.consumeables, key_append = 'bar_mitzvah'})
+                                G.GAME.consumeable_buffer = 0
+                                return true
+                            end
+                        }))
+                    end
+                    card.ability.extra.current = 0
+                end
+            else
+                card.ability.extra.current = card.ability.extra.current + 1
+                return {
+                    message = 'Upgrade!'
+                }
+            end
         end
     end
 }
