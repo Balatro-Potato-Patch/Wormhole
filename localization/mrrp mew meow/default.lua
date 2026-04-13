@@ -232,7 +232,15 @@ descriptions={
 		PotatoPatchDev_MP = {
 			name = 'MP',
 			text = {
-				{'test'},
+				{
+					"Hey-hey. MP here."
+				},
+				{
+					"This was my first jam, and I had a LOT of Joker concepts for this. Oh, and I made some code too!"
+				},
+				{
+					"Buru-nyuu~"
+				},
 			},
 		},
 		PotatoPatchDev_Aure = {
