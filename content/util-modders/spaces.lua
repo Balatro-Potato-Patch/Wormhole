@@ -14,6 +14,7 @@ SMODS.Booster {
     pos = { x = 0, y = 0 },
     config = { extra = 3, choose = 1 },
     group_key = "k_util_spaces",
+    select_card = "consumeables",
     loc_vars = function(self, info_queue, card)
 	local cfg = (card and card.ability) or self.config
 	return {

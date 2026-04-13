@@ -7,10 +7,14 @@ Wormhole.util_space_manager = manager
 function manager:update(dt)
     -- Manage State
     if G.STAGE ~= G.STAGES.RUN then
-        self.active = false
-        if self.last_state then -- TODO: UselesS?
+        if self.active then
             self:reset()
         end
+        return
+    end
+
+    if self.active and (G.OVERLAY_MENU or G.screenwipe) then
+        self:reset()
         return
     end
 
@@ -18,7 +22,7 @@ function manager:update(dt)
         local hovered = G.CONTROLLER.hovering.target
         if hovered ~= self.last_hovered then
             self.last_hovered = hovered
-            if hovered and Card.is(hovered, Card) and hovered.ability.set == "util_Spaces" and not hovered.area.config.collection then
+            if hovered and Card.is(hovered, Card) and hovered.ability.set == "util_Spaces" and hovered.area == G.pack_cards then
                 self.target = hovered
             else
                 self.target = nil
@@ -63,7 +67,20 @@ function manager:run(dt)
 end
 
 function manager:reset()
-    -- TODO: Me, also hook delete run or whatever to call me
+    self.active = false
+    self.transparency = 0
+    self.last_hovered = nil
+    self.target = nil
+    self.curr = nil
+    self.seed = nil
+    self.conf = nil
+    self.overlay = nil
+end
+
+local game_delete_run = Game.delete_run
+function Game:delete_run()
+    game_delete_run(self)
+    manager:reset()
 end
 
 function manager:recalc_overlay()
