@@ -54,7 +54,7 @@ descriptions={
 				"If poker hand contains a",
 				"{C:attention}#1#{}, destroy it",
 				"and create a {C:attention}#2#{}",
-				"{C:red}self-destructs{}"
+				"{S:1.1,C:red,E:2}self-destructs{}"
 			}
 		},
 		j_worm_mrrp_goldilocks ={
@@ -109,7 +109,7 @@ descriptions={
 					"{C:dark_edition}#1#{} hand size",
 				},
 				{
-					"{C:red}X#2#{} Blind size per",
+					"{X:blind,C:white}X#2#{} Blind size per",
 					"empty {C:attention}Joker{} slot and",
 					"empty {C:attention}consumeable{} slot"
 				}
@@ -251,7 +251,7 @@ misc={
 		a_plus_tarot = "+#1# Tarot",
 	},
 	labels={
-		worm_meteoric = "Meteoric",
+		worm_mrrp_meteoric = "Meteoric",
 	},
 	dictionary={
 	--	k_downgrade_ex = "Downgrade!",

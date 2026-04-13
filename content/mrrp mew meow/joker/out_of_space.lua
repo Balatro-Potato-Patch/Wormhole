@@ -25,7 +25,7 @@ SMODS.Joker {
 		return {
             vars = {
                 (slots >= 0 and "+" or "") .. slots,
-                (size >= 0 and "+" or "") .. size,
+                size,
             }
         }
 	end,
