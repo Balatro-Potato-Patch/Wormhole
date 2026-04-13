@@ -360,7 +360,11 @@ return {
             PotatoPatchDev_lordruby = {
                 name = "lord.ruby",
                 text = {
-                    ":3"
+                    "And an angel came down to me. it put its hand",
+                    "on my shoulder. Softer than the finest fabrics",
+                    "I have ever felt; and the angel spoke out to me",
+                    '"OMG it\'s the {C:worm_ruby}creator{} of {C:worm_entropy,E:1}Entropy{}, I\'m such a big fan"',
+                    "in its pretty, {C:worm_entropy,E:1}gay{} little voice."
                 }
             },
             PotatoPatchDev_nxkoo = {
@@ -387,7 +391,13 @@ return {
             PotatoPatchDev_notmario = {
                 name = "notmario",
                 text = {
-                    "this {C:spectral}hexes{} me"
+                    {
+                        "this {C:spectral}hexes{} me"
+                    },
+                    {
+                        "{f:worm_emoji}🙂{} Hello I am John Balatro",
+                        "Please play Numbergem"
+                    }
                 }
             },
         }
