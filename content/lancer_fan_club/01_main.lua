@@ -89,8 +89,8 @@ PotatoPatchUtils.Developer {
     loc = "PotatoPatchDev_ProdByProto",
     team = "Lancer Fan Club",
     atlas = "worm_lfc_devs",
-    pos = { x = 0, y = 0 },
-    soul_pos = { x = 0, y = 1 },
+    pos = { x = 6, y = 1 },
+    soul_pos = { x = 7, y = 1 },
     calculate = function(self, context)
         if context.card_added then
             if context.card.ability.set == "Joker" then
@@ -114,19 +114,40 @@ PotatoPatchUtils.Developer({
     loc = "PotatoPatchDev_ellestuff",
     team = "Lancer Fan Club",
     atlas = "worm_lfc_devs",
-    pos = { x = 1, y = 0 },
-    soul_pos = { x = 1, y = 1 }
+    pos = { x = 2, y = 1 },
+    soul_pos = { x = 3, y = 1 }
 })
 
 -- J8-Bit
+local j8_text_colors = {
+    HEX("F1641F"),
+    HEX("F1641F"),
+    HEX("8306C1"),
+    HEX("8306C1"),
+}
+
+SMODS.DynaTextEffect {
+    key = "j8_text",
+    func = function(dynatext, index, letter)
+        local s = #j8_text_colors
+        local o = index * 0.1
+        local t = G.TIMERS.REAL + o
+        --print(tostring(index) .. ": " .. tostring(idx + 1) .. " " .. tostring(next_idx + 1) .. " " .. tostring(t) .. " " .. tostring(t / s))
+        letter.colour = mix_colours(j8_text_colors[(math.floor(t) % s) + 1],
+            j8_text_colors[((math.floor(t) + 1) % s) + 1], t % 1.0)
+        letter.offset.y = math.abs(math.cos(G.TIMERS.REAL * 4.0 + index * 0.1)) * 16
+    end,
+}
+
 PotatoPatchUtils.Developer({
     name = "J8-Bit",
-    colour = HEX('FDB157'),
+    --colour = HEX('F1641F'),
+    text_effect = "worm_j8_text",
     loc = "PotatoPatchDev_j8bit",
     team = "Lancer Fan Club",
     atlas = "worm_lfc_devs",
-    pos = { x = 2, y = 0 },
-    soul_pos = { x = 2, y = 1 }
+    pos = { x = 0, y = 1 },
+    soul_pos = { x = 1, y = 1 }
 
 })
 
@@ -162,6 +183,6 @@ PotatoPatchUtils.Developer {
     loc = "PotatoPatchDev_alexi",
     team = "Lancer Fan Club",
     atlas = "worm_lfc_devs",
-    pos = { x = 3, y = 0 },
-    soul_pos = { x = 3, y = 1 }
+    pos = { x = 4, y = 1 },
+    soul_pos = { x = 5, y = 1 }
 }
