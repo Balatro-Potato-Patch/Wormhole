@@ -162,9 +162,13 @@ SMODS.Joker{
 	calculate = function(self, card, context)
 		if context.before then
 			if pseudorandom('spaghettification') < G.GAME.probabilities.normal/card.ability.extra.odds then
-				if G.GAME.hands[context.scoring_name].level > -1 then
+				if G.GAME.hands[context.scoring_name].level > 1 then
 					local startingMult = G.GAME.hands[context.scoring_name].mult
-					level_up_hand(card, context.scoring_name, nil, -1)
+					if context.blueprint then
+						level_up_hand(context.blueprint_card, context.scoring_name, nil, -1)
+					else
+						level_up_hand(card, context.scoring_name, nil, -1)
+					end
 					local endingMult = G.GAME.hands[context.scoring_name].mult
 					if endingMult < startingMult then
 						card.ability.extra.current = card.ability.extra.current + (startingMult - endingMult) * 2
@@ -237,13 +241,14 @@ SMODS.Joker{
 		name = "Gravity Assist",
 		text = {
 			"{C:green}#1# in #2#{} chance to create an",
-			"{C:attention}inferior{} {C:blue}Planet{} Card",
-			"when a {C:blue}Planet{} Card is used",
+			"{C:attention}inferior{} {C:planet}Planet{} Card",
+			"when a {C:planet}Planet{} Card is used",
 			"{C:inactive}(Must have room)"
 		}
 	},
 	config = { extra = { odds = 2 }},
 	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue + 1] = {key = "Inferior", set = "Other"}
 		local numerator, denominator = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, 'gravityassist')
         return { vars = { numerator, denominator } }
 	end,
@@ -355,7 +360,7 @@ SMODS.Joker{
 	pos = {x = 4, y = 1},
 	rarity = 1,
 	cost = 6,
-	blueprint_compat = true,
+	blueprint_compat = false,
 	discovered = true,
 	eternal_compat = true,
 	perishable_compat = true,
@@ -364,11 +369,17 @@ SMODS.Joker{
 	ppu_artist = {"Jammbo"},
 	calculate = function(self, card, context)
 		if context.discard and G.GAME.current_round.discards_used <= 0 and #context.full_hand == 2 and context.other_card then
-            if (context.other_card == context.full_hand[1]) or (context.other_card == context.full_hand[2]) then
-				context.other_card:set_ability("m_stone", nil, true)
-			end
+			G.E_MANAGER:add_event(Event{
+				trigger = 'after',
+				delay = 0.2,
+				func = function()
+					context.other_card:set_ability("m_stone", nil, false)
+					context.other_card:juice_up()
+					return true
+				end
+			})
 			return{
-				message = "Look! Rocks!"
+				message = "Look! Rocks!",
 			}
         end
 	end
@@ -566,6 +577,11 @@ SMODS.Joker{
 	end
 }
 
+local move_consumeables
+move_consumeables = function()
+
+end
+
 SMODS.Joker{
 	key = "wormhole",
 	loc_txt = {
@@ -598,10 +614,17 @@ SMODS.Joker{
 			SMODS.add_card({ key = context.consumeable.config.center.key, edition = "e_negative", area = G.deck})
 			for i = 1, #self.config.sets do
 				if context.consumeable.ability.set == self.config.sets[i] then
-					return { message = "Wormhole!", colour = G.C.SECONDARY_SET.Tarot }
+					return { 
+						message = "Wormhole!", 
+						colour = G.C.SECONDARY_SET.Tarot
+					}
 				end
 			end
-			self.config.sets[#self.config.sets + 1] = context.consumeable.ability.set --keeps track of any modded sets
+			self.config.sets[#self.config.sets + 1] = context.consumeable.ability.set --keeps track of any modded sets for drawing cards
+			return { 
+				message = "Wormhole!", 
+				colour = G.C.SECONDARY_SET.Tarot
+			}
 		end
 		if context.drawing_cards and not context.blueprint then
 			G.E_MANAGER:add_event(Event{
@@ -609,6 +632,29 @@ SMODS.Joker{
 				blockable = true,
 				blocking = false,
 				delay = 2,
+				func = function()
+					local remove = {}
+					for i = 1, #G.hand.cards do
+						for j = 1, #self.config.sets do
+							if G.hand.cards[i].ability and G.hand.cards[i].ability.set and G.hand.cards[i].ability.set == self.config.sets[j] then --if the card is actually a consumable card,
+								SMODS.add_card({ key = G.hand.cards[i].config.center.key, edition = "e_negative", area = G.consumeable}) --create a copy in the consumeable area
+								remove[#remove + 1] = i -- mark the card for removal
+							end
+						end
+					end
+					for i = #remove, 1, -1 do
+						if i < #G.hand.cards then
+							G.hand.cards[remove[i]]:remove() --remove the marked cards from the hand
+						end
+					end
+					return true
+				end
+			})
+			G.E_MANAGER:add_event(Event{ --do it again after 5 seconds just to be safe (the player could have massive hand size)
+				trigger = 'after',
+				blockable = true,
+				blocking = false,
+				delay = 5,
 				func = function()
 					local remove = {}
 					for i = 1, #G.hand.cards do
@@ -649,7 +695,7 @@ SMODS.Joker{
 	pos = {x = 0, y = 2},
 	rarity = 2,
 	cost = 6,
-	blueprint_compat = true,
+	blueprint_compat = false,
 	discovered = true,
 	eternal_compat = true,
 	perishable_compat = true,
@@ -859,37 +905,6 @@ SMODS.Joker{
 	end
 }
 
-
---[[
-SMODS.Joker{
-	key = "template",
-	loc_txt = {
-		name = "Template",
-		text = {
-			"Description"
-		}
-	},
-	config = { extra = {  }},
-	loc_vars = function(self, info_queue, card)
-		return { vars = {  }}
-	end,
-	atlas = "vegas_jokers",
-	pos = {x = 0, y = 0},
-	rarity = 1,
-	cost = 5,
-	blueprint_compat = true,
-	discovered = true,
-	eternal_compat = true,
-	perishable_compat = true,
-	ppu_team = {"People Found In Vegas"},
-	ppu_coder = {},
-	ppu_artist = {},
-	calculate = function(self, card, context)
-		
-	end
-}
-]]
-
 --Blinds
 SMODS.Blind{
 	key = "whitehole",
@@ -912,6 +927,11 @@ SMODS.Blind{
 	ppu_team = {"People Found In Vegas"},
 	ppu_coder = {"Ben Roffey"},
 	ppu_artist = {"Ben Roffey"},
+	get_loc_debuff_text = function(self)
+		return {
+			"Decrease level of all poker hands by 1"
+		}
+	end,
 	loc_vars = function()
 		return { vars = {colours = {HEX("73fdff")}}}
 	end,
@@ -1395,6 +1415,16 @@ SMODS.Consumable {
 					G.hand.highlighted[2]:set_edition("e_negative", true)
 					card:juice_up(0.3, 0.5)
 				end
+				
+				G.E_MANAGER:add_event(Event({
+					trigger = 'after',
+					delay = 0.5,
+					func = function()
+						G.hand:unhighlight_all()
+						return true
+					end
+				}))
+							
                 return true
             end
         }))
@@ -1449,29 +1479,32 @@ SMODS.Consumable {
     end,
     use = function(self, card, area, copier)
         for i = 1, #G.hand.highlighted do
+			G.hand.highlighted[i].ability.perma_x_mult = G.hand.highlighted[i].ability.perma_x_mult or 1
+			G.hand.highlighted[i].ability.perma_x_mult = G.hand.highlighted[i].ability.perma_x_mult + card.ability.xmult
 			G.E_MANAGER:add_event(Event{
 				trigger = "after",
 				delay = (i - 1) * 0.2,
 				func = function()
 					SMODS.calculate_effect({
 						message = localize('k_upgrade_ex'),
-						colour = G.C.MULT
+						colour = G.C.MULT,
+						func = function()
+							if i == #G.hand.highlighted then
+								G.E_MANAGER:add_event(Event({
+									trigger = 'after',
+									delay = 0.5,
+									func = function()
+										G.hand:unhighlight_all()
+										return true
+									end
+								}))
+							end
+						end
 					}, G.hand.highlighted[i])
 					return true
 				end
 			})
-			G.hand.highlighted[i].ability.perma_x_mult = G.hand.highlighted[i].ability.perma_x_mult or 1
-			G.hand.highlighted[i].ability.perma_x_mult = G.hand.highlighted[i].ability.perma_x_mult + card.ability.xmult
 		end
-		G.E_MANAGER:add_event(Event({
-            trigger = 'after',
-            delay = #G.hand.highlighted * 0.2,
-            func = function()
-                G.hand:unhighlight_all()
-                return true
-            end
-        }))
-        delay(0.5)
     end
 }
 
@@ -1519,29 +1552,32 @@ SMODS.Consumable {
     end,
     use = function(self, card, area, copier)
         for i = 1, #G.hand.highlighted do
+			G.hand.highlighted[i].ability.perma_mult = G.hand.highlighted[i].ability.perma_mult or 0
+			G.hand.highlighted[i].ability.perma_mult = G.hand.highlighted[i].ability.perma_mult + card.ability.mult
 			G.E_MANAGER:add_event(Event{
 				trigger = "after",
 				delay = (i - 1) * 0.2,
 				func = function()
 					SMODS.calculate_effect({
 						message = localize('k_upgrade_ex'),
-						colour = G.C.MULT
+						colour = G.C.MULT,
+						func = function()
+							if i == #G.hand.highlighted then
+								G.E_MANAGER:add_event(Event({
+									trigger = 'after',
+									delay = 0.5,
+									func = function()
+										G.hand:unhighlight_all()
+										return true
+									end
+								}))
+							end
+						end
 					}, G.hand.highlighted[i])
 					return true
 				end
 			})
-			G.hand.highlighted[i].ability.perma_mult = G.hand.highlighted[i].ability.perma_mult or 0
-			G.hand.highlighted[i].ability.perma_mult = G.hand.highlighted[i].ability.perma_mult + card.ability.mult
 		end
-		G.E_MANAGER:add_event(Event({
-            trigger = 'after',
-            delay = #G.hand.highlighted * 0.2,
-            func = function()
-                G.hand:unhighlight_all()
-                return true
-            end
-        }))
-        delay(0.5)
     end
 }
 
@@ -1589,29 +1625,32 @@ SMODS.Consumable {
     end,
     use = function(self, card, area, copier)
         for i = 1, #G.hand.highlighted do
+			G.hand.highlighted[i].ability.perma_bonus = G.hand.highlighted[i].ability.perma_bonus or 0
+			G.hand.highlighted[i].ability.perma_bonus = G.hand.highlighted[i].ability.perma_bonus + card.ability.chips
 			G.E_MANAGER:add_event(Event{
 				trigger = "after",
 				delay = (i - 1) * 0.2,
 				func = function()
 					SMODS.calculate_effect({
 						message = localize('k_upgrade_ex'),
-						colour = G.C.CHIPS
+						colour = G.C.CHIPS,
+						func = function()
+							if i == #G.hand.highlighted then
+								G.E_MANAGER:add_event(Event({
+									trigger = 'after',
+									delay = 0.5,
+									func = function()
+										G.hand:unhighlight_all()
+										return true
+									end
+								}))
+							end
+						end
 					}, G.hand.highlighted[i])
 					return true
 				end
 			})
-			G.hand.highlighted[i].ability.perma_bonus = G.hand.highlighted[i].ability.perma_bonus or 0
-			G.hand.highlighted[i].ability.perma_bonus = G.hand.highlighted[i].ability.perma_bonus + card.ability.chips
 		end
-		G.E_MANAGER:add_event(Event({
-            trigger = 'after',
-            delay = #G.hand.highlighted * 0.2,
-            func = function()
-                G.hand:unhighlight_all()
-                return true
-            end
-        }))
-        delay(0.5)
     end
 }
 
