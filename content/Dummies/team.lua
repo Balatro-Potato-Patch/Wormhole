@@ -46,7 +46,9 @@ PotatoPatchUtils.Developer {
     pos = { x = 2, y = 0 },
     loc = true,
 }
+
 -- TheOneGoofAli
+local sfx_toga_thing = {}
 PotatoPatchUtils.Developer {
     name = "theonegoofali",
     colour = HEX("FD9712"),
@@ -90,6 +92,7 @@ PotatoPatchUtils.Developer {
 			if context.card.config.center.key == 'j_space' and (context.modify_shop_card or context.modify_booster_card or context.card_added) then
 				local tc = SMODS.find_card('j_worm_dum_timcurry', true)
 				if tc and tc[1] then
+					if context.card_added then check_for_unlock({ tim = tc, space = { context.card } }) end
 					G.hellocommander = true
 					return {
 						message = localize('worm_tim_curry_space'),
@@ -126,8 +129,16 @@ PotatoPatchUtils.Developer {
 				end
 			end
 		end
-	end
+	end,
+	dum_sfx_click = sfx_toga_thing,
+	dum_sfx_volume = 0.35
 }
+for _, v in ipairs({ "chimes", "chord", "comedy", "dialog-error", "dialog-question", "dialog-warning", "ding", "Indigo", "Laugh", "Wild-Eep" }) do
+	local k = string.lower(v)
+	SMODS.Sound({ key = "dum_"..k, path = "Dummies/TOGAClick/worm_dum_"..v..".ogg" })
+	table.insert(sfx_toga_thing, "worm_dum_"..k)
+end
+
 -- baltdev
 PotatoPatchUtils.Developer {
     name = "baltdev",
@@ -150,37 +161,41 @@ PotatoPatchUtils.Developer {
 -- Member SFX click funnies
 local cardclickref = Card.click
 function Card:click()
-	if self and self.ppu_member and self.ppu_member.dum_sfx_click then
-		local pitch = 1
-		if type(self.ppu_member.dum_sfx_pitch) == "table" then
-			if self.ppu_member.dum_sfx_pitch.lower_bound and type(self.ppu_member.dum_sfx_pitch.lower_bound) == "number"
-			and self.ppu_member.dum_sfx_pitch.upper_bound and type(self.ppu_member.dum_sfx_pitch.upper_bound) == "number" then
-				math.randomseed(os.time() + math.floor(os.clock() * 1000000))
-				pitch = self.ppu_member.dum_sfx_pitch.lower_bound + (math.random() * (self.ppu_member.dum_sfx_pitch.upper_bound - self.ppu_member.dum_sfx_pitch.lower_bound))
+	if self and self.ppu_member then
+		if self.ppu_member.dum_sfx_click then
+			local pitch = 1
+			if type(self.ppu_member.dum_sfx_pitch) == "table" then
+				if self.ppu_member.dum_sfx_pitch.lower_bound and type(self.ppu_member.dum_sfx_pitch.lower_bound) == "number"
+				and self.ppu_member.dum_sfx_pitch.upper_bound and type(self.ppu_member.dum_sfx_pitch.upper_bound) == "number" then
+					math.randomseed(os.time() + math.floor(os.clock() * 1000000))
+					pitch = self.ppu_member.dum_sfx_pitch.lower_bound + (math.random() * (self.ppu_member.dum_sfx_pitch.upper_bound - self.ppu_member.dum_sfx_pitch.lower_bound))
+				end
+			elseif type(self.ppu_member.dum_sfx_pitch) == "number" then
+				pitch = self.ppu_member.dum_sfx_pitch
 			end
-		elseif type(self.ppu_member.dum_sfx_pitch) == "number" then
-			pitch = self.ppu_member.dum_sfx_pitch
-		end
 
-		local volume = 1
-		if type(self.ppu_member.dum_sfx_volume) == "table" then
-			if self.ppu_member.dum_sfx_volume.lower_bound and type(self.ppu_member.dum_sfx_volume.lower_bound) == "number"
-			and self.ppu_member.dum_sfx_volume.upper_bound and type(self.ppu_member.dum_sfx_volume.upper_bound) == "number" then
-				math.randomseed(os.time() + math.floor(os.clock() * 1000000))
-				volume = self.ppu_member.dum_sfx_volume.lower_bound + (math.random() * (self.ppu_member.dum_sfx_volume.upper_bound - self.ppu_member.dum_sfx_volume.lower_bound))
+			local volume = 1
+			if type(self.ppu_member.dum_sfx_volume) == "table" then
+				if self.ppu_member.dum_sfx_volume.lower_bound and type(self.ppu_member.dum_sfx_volume.lower_bound) == "number"
+				and self.ppu_member.dum_sfx_volume.upper_bound and type(self.ppu_member.dum_sfx_volume.upper_bound) == "number" then
+					math.randomseed(os.time() + math.floor(os.clock() * 1000000))
+					volume = self.ppu_member.dum_sfx_volume.lower_bound + (math.random() * (self.ppu_member.dum_sfx_volume.upper_bound - self.ppu_member.dum_sfx_volume.lower_bound))
+				end
+			elseif type(self.ppu_member.dum_sfx_volume) == "number" then
+				volume = self.ppu_member.dum_sfx_volume
 			end
-		elseif type(self.ppu_member.dum_sfx_volume) == "number" then
-			volume = self.ppu_member.dum_sfx_volume
-		end
 
-		if type(self.ppu_member.dum_sfx_click) == 'string' and SMODS.Sounds[self.ppu_member.dum_sfx_click] then
-			play_sound(self.ppu_member.dum_sfx_click, pitch, volume)
-		elseif type(self.ppu_member.dum_sfx_click) == 'table' then
-			local dum_sfx = self.ppu_member.dum_sfx_click[math.random(1, #self.ppu_member.dum_sfx_click)]
-			if SMODS.Sounds[dum_sfx] then play_sound(dum_sfx, pitch, volume) end
-		elseif type(self.ppu_member.dum_sfx_click) == 'function' then
-			self.ppu_member.dum_sfx_click(self)
+			if type(self.ppu_member.dum_sfx_click) == 'string' and SMODS.Sounds[self.ppu_member.dum_sfx_click] then
+				play_sound(self.ppu_member.dum_sfx_click, pitch, volume)
+			elseif type(self.ppu_member.dum_sfx_click) == 'table' and next(self.ppu_member.dum_sfx_click) then
+				local dum_sfx = self.ppu_member.dum_sfx_click[math.random(1, #self.ppu_member.dum_sfx_click)]
+				if SMODS.Sounds[dum_sfx] then play_sound(dum_sfx, pitch, volume) end
+			elseif type(self.ppu_member.dum_sfx_click) == 'function' then
+				self.ppu_member.dum_sfx_click(self, pitch, volume)
+			end
 		end
+		G.worm_clickcredits = (G.worm_clickcredits or 0) + 1
+		check_for_unlock({ type = 'dum_clickyclick' })
 	end
 	return cardclickref(self)
 end

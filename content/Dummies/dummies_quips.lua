@@ -64,3 +64,37 @@ SMODS.JimboQuip({
 		end
 	end
 })
+
+SMODS.Sound({ key = "dum_bummer", path = "Dummies/worm_dum_bummer.ogg" })
+SMODS.Sound({ key = "dum_tada95special", path = "Dummies/worm_dum_tada95special.ogg" })
+
+SMODS.JimboQuip({
+	key = 'dum_toga_loss',
+	extra = {
+		ppu_dev = 'worm_theonegoofali',
+		times = 1,
+		pitch = 1,
+		sound = "worm_dum_bummer",
+		juice = {0.5, 0.5},
+	},
+	type = 'loss'
+})
+
+SMODS.JimboQuip({
+	key = 'dum_toga_win',
+	extra = {
+		ppu_dev = 'worm_theonegoofali',
+		times = 1,
+		pitch = 1,
+		sound = "worm_dum_tada95special",
+		juice = {0.5, 0.5},
+	},
+	type = 'win'
+})
+
+-- Itsy hook to prevent speech bubble.
+local cardcharaddspeechbubbleref = Card_Character.add_speech_bubble
+function Card_Character:add_speech_bubble(text_key, align, loc_vars, quip_args)
+	if quip_args and quip_args.ppu_dev and quip_args.ppu_dev == 'worm_theonegoofali' then return end
+	cardcharaddspeechbubbleref(self, text_key, align, loc_vars, quip_args)
+end

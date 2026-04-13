@@ -356,6 +356,15 @@ return {
             worm_dummies_timcurry_lose_normal = { "{C:hearts}Such a shame..." },
             worm_dummies_timcurry_lose_full = { "Awww... you made it all this way", "just to fail at the end.", "{E:1,C:hearts}Such a shame..." },
         },
+		achievement_names = {
+			ach_worm_dum_timcurry = 'SPAAAAACE!',
+			ach_worm_dum_seriouscredit = 'Dedicated Crediting',
+		},
+		achievement_descriptions = {
+			ach_worm_dum_timcurry = 'Find Space Joker whilst holding Tim Curry',
+			ach_worm_dum_timcurry_hidden = "One place that hasn't been corrupted by capitalism...",
+			ach_worm_dum_seriouscredit = 'Click on anyone in Team Credits... a lot...',
+		},
         labels = {
             worm_dum_Celestial = 'Celestial'
         }
