@@ -983,12 +983,14 @@ SMODS.Consumable { -- Nebulager
     set = 'abs_drinks',
     key = 'abs_nebulager',
     ppu_coder = { 'theAstra' },
+    ppu_artist = { 'nixthatoneartist' },
     ppu_team = { 'absinthe' },
-    pos = { x = 0, y = 0 },
+    pos = { x = 2, y = 3 },
+    atlas = 'abs_drinks',
     config = {
         drink_values = {
-            filled_pos = { x = 0, y = 0 },
-            empty_pos = { x = 1, y = 0 },
+            filled_pos = { x = 2, y = 3 },
+            empty_pos = { x = 3, y = 3 },
             filled = true,
             visibly_filled = true,
             primed = false
