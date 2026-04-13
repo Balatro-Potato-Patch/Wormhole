@@ -31,6 +31,14 @@ return {
                 text = {
                     'Menu Items cost {C:money}$#1#{} less'
                 }
+            },
+            j_worm_hedonia_speed = {
+                name = 'Speed Bartender',
+                text = {
+                    'creates a menu item during scoring',
+                    'based on how many jokers you have',
+                    '{C:inactive} currently {C:green}#1# in #2#{}{C:inactive} chance{}'
+                }
             }
         },
         worm_hedonia_menu={
