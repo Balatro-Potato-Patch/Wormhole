@@ -40,7 +40,9 @@ PotatoPatchUtils.Developer({
 PotatoPatchUtils.Developer({
 	name = "Amphiapple",
 	loc = true,
-	team = "TheLastResort"
+	team = "TheLastResort",
+	pos = { x=0, y=0 },
+	atlas = "worm_tlr_amphi"
 })
 
 PotatoPatchUtils.Developer({
