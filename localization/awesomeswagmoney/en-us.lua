@@ -55,7 +55,7 @@ return {
             },
             PotatoPatchDev_worm_poker = {
                 name = "Poker The Poker",
-                text = {"TEMP"}
+                text = {":chud:"}
             },
             PotatoPatchDev_worm_omega = {name = "Omega", text = {"TEMP"}},
             PotatoPatchDev_worm_superb = {
