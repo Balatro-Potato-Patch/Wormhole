@@ -3,13 +3,6 @@ SMODS.Atlas({key = "asm_ubs", path = "awesomeswagmoney/ubs.png", px = 89, py = 1
 SMODS.Consumable {
     key = 'pheromosa',
     set = 'worm_ultrabeast',
-    loc_txt = {
-        name = 'Pheromosa',
-        text = {
-            "Activate to gain {C:chips}+#1#{} chips", "on your next hand,",
-            "consumes self on activation."
-        }
-    },
     atlas = 'worm_asm_ubs', 
     pos = { x = 0, y = 0 }, 
     soul_pos = { x = 1, y = 0 }, 
@@ -57,13 +50,6 @@ SMODS.Sound({key = "asm_buzz", path = 'buzz.ogg'})
 SMODS.Consumable {
     key = 'buzzwole',
     set = 'worm_ultrabeast',
-    loc_txt = {
-        name = 'Buzzwole',
-        text = {
-            "Activate to gain {C:mult}+#1#{} mult", "on your next hand,",
-            "consumes self on activation."
-        }
-    },
     atlas = 'worm_asm_ubs', 
     pos = { x = 2, y = 0 }, 
     soul_pos = { x = 3, y = 0 }, 
@@ -116,14 +102,6 @@ SMODS.Consumable {
 SMODS.Consumable {
     key = "xurkitree",
     set = "worm_ultrabeast",
-    loc_txt = {
-        name = "Xurkitree",
-        text = {
-            "Earn {C:money}$#1#{}, then permanently",
-            "increase this amount to" ,
-            "the next {C:spectral}prime number{}"
-        }
-    },
     atlas = 'worm_asm_ubs', 
     pos = { x = 2, y = 1 }, 
     soul_pos = { x = 3, y = 1 }, 
@@ -154,17 +132,9 @@ SMODS.Consumable {
 SMODS.Consumable {
     key = "kartana",
     set = "worm_ultrabeast",
-    loc_txt = {
-        name = "Kartana",
-        text = {
-            "{C:attention}Slice{} selected card into {C:attention}#1#{} copies",
-            "with their rank reduced by {C:attention}#2#"
-        }
-    },
     atlas = 'worm_asm_ubs', 
     pos = { x = 2, y = 0 }, 
     soul_pos = { x = 3, y = 0 }, 
-
     config = { extra_slots_used = 1, extra = { copies = 4, reduction = 2}},
     loc_vars = function (self, info_queue, card)
         return { vars = { card.ability.extra.copies, card.ability.extra.reduction }}
@@ -203,14 +173,6 @@ SMODS.Sound({key = "asm_boom", path = 'explosion.ogg'})
 SMODS.Consumable {
     key = "blacephalon",
     set = "worm_ultrabeast",
-    loc_txt = {
-        name = "Blacephalon",
-        text = {
-                    "Add {C:dark_edition}Polychrome{} to a",
-                    "random {C:attention}card held in hand{},",
-                    "then destroy all the others"
-        }
-    },
     atlas = 'worm_asm_ubs', 
     pos = { x = 0, y = 1 }, 
     soul_pos = { x = 1, y = 1 }, 
@@ -259,14 +221,6 @@ SMODS.Consumable {
 SMODS.Consumable {
     key = "celesteela",
     set = "worm_ultrabeast",
-    loc_txt = {
-        name = "Celesteela",
-        text = {
-            "Earn {C:attention}+#1#{} hand size, then",
-            "permanently increase this amount to" ,
-            "the next {C:spectral}prime number{}"
-        }
-    },
     atlas = 'worm_asm_ubs', 
     pos = { x = 2, y = 1 }, 
     soul_pos = { x = 3, y = 1 }, 
@@ -293,4 +247,56 @@ SMODS.Consumable {
         }))
         delay(0.6)
     end
+}
+
+SMODS.Consumable {
+    key = 'guzzlord',
+    set = 'worm_ultrabeast',
+    atlas = 'worm_asm_ubs',
+    pos = { x = 2, y = 0 },
+    soul_pos = { x = 3, y = 0 },
+    config = { extra = { destroy = 5, levels = 3 } },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.destroy, card.ability.extra.levels } }
+    end,
+    use = function(self, card, area, copier)
+        local destroyed_cards = {}
+        local temp_hand = {}
+
+        for _, playing_card in ipairs(G.hand.cards) do temp_hand[#temp_hand + 1] = playing_card end
+        table.sort(temp_hand,
+            function(a, b)
+                return not a.playing_card or not b.playing_card or a.playing_card < b.playing_card
+            end
+        )
+
+        pseudoshuffle(temp_hand, 'asm_guzzlord')
+
+        for i = 1, card.ability.extra.destroy do destroyed_cards[#destroyed_cards + 1] = temp_hand[i] end
+
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.4,
+            func = function()
+                play_sound('tarot1')
+                card:juice_up(0.3, 0.5)
+                return true
+            end
+        }))
+        SMODS.destroy_cards(destroyed_cards)
+        delay(0.5)
+        local hand, played = "High Card", -1
+        for k, t in pairs(G.GAME.hands) do
+            if t.played > played then
+                hand = k
+                played = t.played
+            end
+        end
+        SMODS.upgrade_poker_hands{ level_up = card.ability.extra.levels, hands = hand, from = card, }
+
+        delay(0.3)
+    end,
+    can_use = function(self, card)
+        return G.hand and #G.hand.cards > 0
+    end,
 }

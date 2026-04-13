@@ -63,6 +63,61 @@ return {
                 text = {"TEMP"}
             },
             PotatoPatchDev_worm_eris = {name = "Eris", text = {"TEMP"}}
+        },
+        worm_ultrabeast = {
+            c_worm_pheromosa = {
+                    name = 'Pheromosa',
+                    text = {
+                        "Activate to gain {C:chips}+#1#{} chips", "on your next hand,",
+                        "consumes self on activation."
+                    }
+            },
+            c_worm_buzzwole = {
+                name = 'Buzzwole',
+                text = {
+                    "Activate to gain {C:mult}+#1#{} mult", "on your next hand,",
+                    "consumes self on activation."
+                }
+            },
+            c_worm_xurkitree = {
+                name = "Xurkitree",
+                text = {
+                    "Earn {C:money}$#1#{}, then permanently",
+                    "increase this amount to",
+                    "the next {C:spectral}prime number{}"
+                }
+            },
+            c_worm_kartana = {
+                name = "Kartana",
+                text = {
+                    "{C:attention}Slice{} selected card into {C:attention}#1#{} copies",
+                    "with their rank reduced by {C:attention}#2#"
+                }
+            },
+            c_worm_blacephalon = {
+                name = "Blacephalon",
+                text = {
+                    "Add {C:dark_edition}Polychrome{} to a",
+                    "random {C:attention}card held in hand{},",
+                    "then destroy all the others"
+                }
+            },
+            c_worm_celesteela = {
+                name = "Celesteela",
+                text = {
+                    "Earn {C:attention}+#1#{} hand size, then",
+                    "permanently increase this amount to",
+                    "the next {C:spectral}prime number{}"
+                }
+            },
+            c_worm_guzzlord = {
+                name = "Guzzlord",
+                text = {
+                    "Destroys {C:attention}#1#{} random cards",
+                    "in hand, levels up most",
+                    "played poker hand by {C:attention}#2#"
+                }
+            }
         }
     },
     misc = {
