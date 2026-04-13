@@ -96,6 +96,7 @@ SMODS.Booster {
     key = "abs_top_shelf_jumbo_1",
     kind = "abs_drinks",
     group_key = "k_worm_abs_top_shelf_pack",
+    atlas = "abs_boosters",
     pos = {
         x = 2,
         y = 0
@@ -105,6 +106,7 @@ SMODS.Booster {
         choose = 1
     },
     ppu_coder = { 'theAstra' },
+    ppu_artist = { 'AnneBean' },
     ppu_team = { 'absinthe' },
     cost = 7,
     weight = 0.48,
