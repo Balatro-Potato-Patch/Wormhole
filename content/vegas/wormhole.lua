@@ -1072,7 +1072,7 @@ float_in = function(Jimbo, times) --sends the jimbo spinning across the screen. 
 end
 
 local adjust_time
-adjust_time = function(heatdeath)
+adjust_time = function(heatdeath) --heatdeath timer gets scaled based on your game speed.
 	local speed = G.SETTINGS.GAMESPEED
 	if speed < heatdeath.config.extra.gamespeed then
 		heatdeath.config.extra.gamespeed = heatdeath.config.extra.gamespeed / 2
@@ -1090,7 +1090,7 @@ adjust_time = function(heatdeath)
 	end
 end
 
-local reset_hd
+local reset_hd --reset heatdeath
 reset_hd = function(heatdeath)
 	heatdeath.config.timing = false
 	heatdeath.config.extra.current = heatdeath.config.time
@@ -1165,9 +1165,9 @@ heatdeath_timer = function(heatdeath)
 						local eval = G.jokers.cards[i]:calculate_joker({end_of_round = true, game_over = true, main_eval = true})
 						if eval then
 							if eval.saved then
-								card_eval_status_text(G.jokers.cards[i], 'jokers', nil, nil, nil, eval)
-								reset_hd(heatdeath)	--reset heatdeath
-								return				--dont do anything else
+								card_eval_status_text(G.jokers.cards[i], 'jokers', nil, nil, nil, eval) --display "Saved!" message
+								reset_hd(heatdeath)	--reset heatdeath (the timer is still blocked out by the scaled blind chip)
+								return true			--dont do anything else
 							end
 						end
 					end
@@ -1306,7 +1306,7 @@ SMODS.Blind{
 			"{s:0.8}Code & Art by {s:0.8,C:chips}Ben Roffey{}"
 		}
 	},
-	config = {time = 2*20, timing = false, gamespeed_factor = 1.5, game_over_override = false, base_speed = 4, extra = {gamespeed = 4, current = 2*20}},
+	config = {time = 2*60, timing = false, gamespeed_factor = 1.5, game_over_override = false, base_speed = 4, extra = {gamespeed = 4, current = 2*60}},
 	loc_vars = function(self)
 		adjust_time(self)
 		local minutes = math.floor(self.config.extra.current/60)
