@@ -13,6 +13,12 @@ SMODS.Consumable{
     can_use = function (self, card)
         return G.STATE == G.STATES.BLIND_SELECT
     end,
+    load = function (self, card, card_table, other_card)
+        if G.STATE == G.STATES.PLAY_TAROT and card.area == nil then
+            G.STATE = G.STATES.BLIND_SELECT
+            card:start_dissolve()
+        end
+    end,
     use = function (self, card, area, copier)
         if card.ability.tier == 1 then
             G.from_boss_tag = true
