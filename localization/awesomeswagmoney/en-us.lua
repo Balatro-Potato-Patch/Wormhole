@@ -57,7 +57,7 @@ return {
                 name = "Poker The Poker",
                 text = {":chud:"}
             },
-            PotatoPatchDev_worm_omega = {name = "Omega", text = {
+            PotatoPatchDev_worm_omega = {name = "Omegaflowey18", text = {
                 {
                     "Artist, resident joker shipper",
                     "Artist for Hot Potato, BU Language Mod, and guest artist on Garbshit",
