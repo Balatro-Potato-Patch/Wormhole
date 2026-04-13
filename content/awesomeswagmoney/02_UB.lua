@@ -436,6 +436,34 @@ SMODS.Consumable {
     end
 }
 
+SMODS.Consumable {
+    key = 'poipole',
+    set = 'worm_ultrabeast',
+    atlas = 'worm_asm_ubs',
+    pos = {x = 2, y = 0},
+    soul_pos = {x = 3, y = 0},
+    config = {extra_slots_used = 1 },
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = {}
+        }
+    end,
+    use = function(self, card, area, copier)
+            local eligible_card = pseudorandom_element(G.jokers.cards, 'popo')
+            local playing = pseudorandom_element(G.hand.cards, 'popo')
+            eligible_card:set_eternal(true)
+            for i=1, 4 do
+                playing = pseudorandom_element(G.hand.cards, 'popo')
+                playing:set_edition('e_holo', true)
+            end
+            play_sound('cancel', 0.3)
+            check_for_unlock({ type = 'have_edition' })
+    end, -- that was easy
+    can_use = function(self, card)
+        return (#G.jokers.cards > 0) and G.hand
+    end
+}
+
 SMODS.Joker{
     key = 'necrozma', 
     loc_txt = { 

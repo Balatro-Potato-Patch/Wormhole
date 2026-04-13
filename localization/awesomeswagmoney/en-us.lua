@@ -152,6 +152,14 @@ return {
                     "Turn a random Joker",
                     "{C:dark_edition}Eternal{} and {C:dark_edition}Polychrome{}",
                 }
+            },
+            c_worm_poipole = {
+                name = "Poipole",
+                text = {
+                    "Turn a random Joker {C:dark_edition}Eternal{},",
+                    "then turn {C:attention}3{} random cards",
+                    "held in hand {C:dark_edition}Holographic{}",
+                }
             }
         }
     },
