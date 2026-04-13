@@ -593,5 +593,15 @@ return {
             a_discards = "+#1# Discards",
             a_drawn = "+#1# Cards",
         },
+        quips = {
+            worm_lq_abs_astra = {
+                "Your neon lights burned",
+                "out in the dead of night!"
+            },
+            worm_wq_abs_astra = {
+                "Take it from me, you know",
+                "how to navigate Outer Space!"
+            }
+        }
     }
 }
