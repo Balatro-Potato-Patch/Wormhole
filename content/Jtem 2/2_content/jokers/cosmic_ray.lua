@@ -15,6 +15,10 @@ SMODS.Joker({
 	rarity = 2,
 	cost = 8,
 
+	blueprint_compat = true,
+	eternal_compat = true,
+	rental_compat = true,
+
 	atlas = "jtem2_cosmic_ray",
 	pos = { x = 0, y = 0 },
 

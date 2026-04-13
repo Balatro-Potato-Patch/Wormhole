@@ -15,6 +15,10 @@ SMODS.Joker({
 	rarity = 2,
 	cost = 7,
 
+	blueprint_compat = true,
+	eternal_compat = true,
+	rental_compat = true,
+
 	atlas = "jtem2_egogeocentrism",
 	pos = { x = 0, y = 0 },
 

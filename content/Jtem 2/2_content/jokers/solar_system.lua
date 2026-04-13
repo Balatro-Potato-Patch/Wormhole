@@ -495,6 +495,8 @@ SMODS.Joker({
 	},
 
 	blueprint_compat = true,
+	eternal_compat = false,
+	rental_compat = true,
 
 	config = {
 		extra = {

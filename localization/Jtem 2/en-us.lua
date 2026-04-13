@@ -65,11 +65,30 @@ return {
 				name = "Operation Plumbbob",
 				text = {
 					"Destroy {C:attention}all{} played cards",
-					"if you have a {C:planet}Planet Card{}",
-					"destroys a random {C:planet}Planet Card{} if successful",
+					"if you have a {C:planet}Planet{} card",
+					"Destroys a random {C:planet}Planet{}",
+					"card if successful",
 				},
 			},
 			j_worm_jtem2_stair = {
+				name = "Astral Stair",
+				text = {
+					"Gives {C:mult}Mult{} equal to {C:mult}Mult{}",
+					"of {C:attention}most played{} poker hand",
+					"Changes to {C:chips}Chips{} at the end of round",
+					"{C:inactive}(Currently {C:mult}#1#{C:inactive} Mult from {C:attention}#2#{C:inactive}){}",
+				},
+			},
+			j_worm_jtem2_stair_chips = {
+				name = "Astral Stair",
+				text = {
+					"Gives {C:chips}Chips{} equal to {C:chips}Chips{}",
+					"of {C:attention}most played{} poker hand",
+					"Changes to {C:mult}Mult{} at the end of round",
+					"{C:inactive}(Currently {C:chips}#1#{C:inactive} Chips from {C:attention}#2#{C:inactive}){}",
+				},
+			},
+			j_worm_jtem2__stair = {
 				name = "Stair",
 				text = {
 					"This Joker gains {C:white,X:mult} X#1#{} Mult",
@@ -86,9 +105,9 @@ return {
 				text = {
 					"{C:attention}Steals{} the levels of a",
 					"{C:attention}random{} poker hand and applies",
-					"it to your {C:attention}most played{} hand"
-				}
-			}
+					"it to your {C:attention}most played{} hand",
+				},
+			},
 		},
 		Other = {
 			worm_jtem2_solar_system_effect_c_mercury = {
@@ -181,7 +200,7 @@ return {
 			PotatoPatchDev_aikoyori = {
 				name = "Aikoyori",
 				text = {
-					{ 
+					{
 						"{s:3.2,E:worm_jtem2_rainbow_wiggle}Hello!{}",
 						"This is {E:worm_jtem2_rainbow_wiggle,C:white}Aikoyori{} from {E:worm_jtem2_rainbow_wiggle,C:white}Shenanigans",
 						"Back at it with {C:worm_jtem2_teamcolor}Jtem{C:worm_jtem2_teamcolor,E:worm_jtem2_exponent}2{}after {C:attention,E:worm_jtem2_snaking}Hot Potato{} was not enough",
@@ -229,9 +248,9 @@ return {
 			PotatoPatchDev_missingnumber = {
 				name = "missingnumber",
 				text = {
-					{ 
-						"\"Remember to drive responsibly, and definitely",
-						"don\'t drive on the highway at 190 miles per hour!\"",
+					{
+						'"Remember to drive responsibly, and definitely',
+						"don't drive on the highway at 190 miles per hour!\"",
 						"{s:0.8}- Yi Xi totally said this",
 						"",
 						"artist for {C:red,E:worm_jtem2_shrivel}Finity{} and {C:purple,E:worm_jtem2_snaking}0 ERROR",
@@ -246,6 +265,9 @@ return {
 			b_worm_jtem_reset = "RESET",
 
 			k_worm_downgrade_ex = "Downgrade!",
+
+			k_worm_mult_ex = "Mult!",
+			k_worm_chips_ex = "Chips!",
 		},
 		-- Mostly taken from Handy
 		jtem2_keybinds = {
