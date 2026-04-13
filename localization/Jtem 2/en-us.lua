@@ -163,7 +163,10 @@ return {
 			PotatoPatchDev_aikoyori = {
 				name = "Aikoyori",
 				text = {
-					{ "box numero 1" },
+					{ 
+						"{s:5.2,E:worm_jtem2_rainbow_wiggle}Hello!{}",
+						"This is {E:worm_jtem2_rainbow_wiggle,C:white}Aikoyori{} from {E:worm_jtem2_rainbow_wiggle,C:white}Shenanigans"
+					},
 				},
 			},
 			PotatoPatchDev_sleepyg11 = {
@@ -193,7 +196,10 @@ return {
 			PotatoPatchDev_missingnumber = {
 				name = "missingnumber",
 				text = {
-					{ "box numero 1" },
+					{ 
+						"Remember to drive responsibly, and definitely",
+						"don't drive on the highway at 190 miles per hour!" 
+					},
 				},
 			},
 		},

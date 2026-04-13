@@ -34,6 +34,7 @@ SMODS.Consumable {
 	set = 'Tarot',
 	ppu_team = { "jtem2" },
 	ppu_coder = { "haya" },
+	ppu_artist = { "Aikoyori" },
 
 	atlas = "jtem2_shadow",
 	pos = { x = 0, y = 0 },
