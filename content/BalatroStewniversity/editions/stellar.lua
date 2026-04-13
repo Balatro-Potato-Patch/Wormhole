@@ -29,6 +29,9 @@ SMODS.Edition {
     on_apply = function (card)
         -- Randomize star field
         card.edition.stellar_seed = pseudorandom('worm_stellar_seed') * 0.1
+        if card.config.center.key == 'j_space' then
+            check_for_unlock({type = 'stew_spaced_joker'})
+        end
     end,
 
 }

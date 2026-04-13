@@ -15,17 +15,41 @@ SMODS.Joker {
     eternal_compat = false,
     perishable_compat = true,
     loc_vars = function (self, info_queue, card)
-        local numerator, denominator = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, 'worm_dinosaur_earth')
+        local main_end = {}
+        if card.area and card.area == G.jokers and G.GAME.mass_extinction_event == true then
+            main_end = {{ --work in progress
+                n = G.UIT.C,
+                config = { align = 'bm', minh = 0.4},
+                nodes = {
+                    {
+                        n =  G.UIT.C,
+                        config = {ref_table = card, align = 'm', color = mix_colours(G.C.RED, G.C.JOKER_GREY, 0.8), r = 0.05, padding = 0.06},
+                        nodes = {
+                            {n = G.UIT.T, config = {text = 'Inactive'}, colour = G.C.UI.TEXT_LIGHT, scale = 0.32 * 0.8 }
+                        },
+                    }
+                }
+            }}
+        end
+        
+        local numerator, denominator = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, 'worm_stew_dinosaur_earth')
+
         return {
-            vars = {numerator, denominator, card.ability.extra.odds, card.ability.extra.ante}
+            vars = {numerator, denominator, card.ability.extra.odds, card.ability.extra.ante, main_end = main_end}
         }
     end,
 
     mass_extinction = function (self, card)
         G.GAME.mass_extinction_event = true
-        local dinosaur_earths = SMODS.find_card('j_worm_dinosaur_earth')
+        local dinosaur_earths = SMODS.find_card('j_worm_stew_dinosaur_earth')
         local dinos_extinct = #dinosaur_earths
         ease_ante(-card.ability.extra.ante * dinos_extinct)
+
+        --check if player manipulated odds to force extinction event
+        local numerator, denominator = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, 'worm_stew_dinosaur_earth') 
+        if numerator >= denominator then
+            check_for_unlock({type = 'stew_extinction_event'})
+        end
 
         G.E_MANAGER:add_event(Event {
             func = function()
@@ -43,7 +67,7 @@ SMODS.Joker {
         end
 
         if not context.blueprint and context.end_of_round and context.game_over == false and context.main_eval then
-            if SMODS.pseudorandom_probability(card, 'worm_dinosaur_earth', 1, card.ability.extra.odds) then
+            if SMODS.pseudorandom_probability(card, 'worm_stew_dinosaur_earth', 1, card.ability.extra.odds) then
                 self:mass_extinction(card)
                 return{
                     message = localize('k_extinct_ex')
@@ -56,6 +80,7 @@ SMODS.Joker {
 
         if not context.blueprint and context.tag_triggered and context.tag_triggered.key == 'tag_meteor' then
             self:mass_extinction(card)
+            check_for_unlock({type = 'stew_extinction_event'})
             return {
                 message = localize('k_extinct_ex')
             }

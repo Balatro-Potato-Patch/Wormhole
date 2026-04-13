@@ -28,12 +28,12 @@ SMODS.Joker{
                 if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
                     G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
                     
-                    local type_created = pseudorandom_element(consumable_types, "worm_8_ball_type")
+                    local type_created = pseudorandom_element(consumable_types, "worm_stew_8_ball_type")
                     
                     if type_created == 'Tarot' then
                     G.E_MANAGER:add_event(Event({
                         func = function ()
-                        SMODS.add_card({set = 'Tarot', key_append = 'worm_8_ball_earth'})
+                        SMODS.add_card({set = 'Tarot', key_append = 'worm_stew_8_ball_earth'})
                         card:juice_up(0.3, 0.5)
                         G.GAME.consumeable_buffer = 0
                         return true
@@ -43,7 +43,7 @@ SMODS.Joker{
                     elseif type_created == 'Planet' then
                         G.E_MANAGER:add_event(Event({
                         func = function ()
-                        SMODS.add_card({set = 'Planet', key_append = 'worm_8_ball_earth'})
+                        SMODS.add_card({set = 'Planet', key_append = 'worm_stew_8_ball_earth'})
                         card:juice_up(0.3, 0.5)
                         G.GAME.consumeable_buffer = 0
                         return true
@@ -54,7 +54,7 @@ SMODS.Joker{
                     elseif type_created == 'Spectral' then
                         G.E_MANAGER:add_event(Event({
                         func = function ()
-                        SMODS.add_card({set = 'Spectral', key_append = 'worm_8_ball_earth'})
+                        SMODS.add_card({set = 'Spectral', key_append = 'worm_stew_8_ball_earth'})
                         card:juice_up(0.3, 0.5)
                         G.GAME.consumeable_buffer = 0
                         return true

@@ -219,6 +219,16 @@ return {
         },
         labels = {
             worm_stew_stellar = 'Stellar'
+        },
+        achievement_names = {
+            ach_worm_stew_spaced_joker = 'Spaced Joker',
+            ach_worm_stew_extinction_event = 'Extinction Event'
+        },
+        achievement_descriptions = {
+            ach_worm_stew_spaced_joker = 'Have a Space Joker with the Stellar edition',
+            ach_worm_stew_extinction_event = 'Force an extinction event'
         }
+        
+
     },
 }

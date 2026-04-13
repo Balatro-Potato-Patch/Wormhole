@@ -19,7 +19,7 @@ SMODS.Tag {
                 context.card.temp_edition = true
                 tag:yep('+', G.C.DARK_EDITION, function()
                     context.card.temp_edition = nil
-                    context.card:set_edition("e_worm_stellar", true)
+                    context.card:set_edition("e_worm_stew_stellar", true)
                     context.card.ability.couponed = true
                     context.card:set_cost()
                     G.CONTROLLER.locks[lock] = nil

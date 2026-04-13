@@ -17,14 +17,14 @@ SMODS.Joker {
     loc_vars = function (self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'tag_meteor', set = 'Tag' }
         info_queue[#info_queue + 1] = G.P_CENTERS.p_celestial_mega_1
-        local numerator, denominator = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, 'worm_impact_crater')
+        local numerator, denominator = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, 'worm_stew_impact_crater')
         return{
             vars = {localize {type = 'name_text', key = 'tag_meteor', set = 'Tag'}, numerator, denominator}
         }
     end,
 
     calculate = function (self, card, context)
-        if context.ending_shop and SMODS.pseudorandom_probability(card, 'worm_impact_crater', 1, card.ability.extra.odds) then
+        if context.ending_shop and SMODS.pseudorandom_probability(card, 'worm_stew_impact_crater', 1, card.ability.extra.odds) then
             card:juice_up() --maybe we can add more flair to creating the tag?
             G.E_MANAGER:add_event(Event({
                 func = function()

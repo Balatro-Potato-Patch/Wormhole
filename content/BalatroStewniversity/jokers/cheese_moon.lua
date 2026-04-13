@@ -15,7 +15,7 @@ SMODS.Joker {
     perishable_compat = false,
 
     loc_vars = function (self, info_queue, card)
-        local numerator, denominator = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, 'worm_cheese_moon')
+        local numerator, denominator = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, 'worm_stew_cheese_moon')
         return{
             vars = {card.ability.extra.hands_left, numerator, denominator}
         }      
@@ -25,7 +25,7 @@ SMODS.Joker {
 
         if context.destroy_card then 
             if context.cardarea == G.play and context.destroy_card == context.scoring_hand[#context.scoring_hand] and
-            SMODS.pseudorandom_probability(card, 'worm_cheese_moon', 1, card.ability.extra.odds) then
+            SMODS.pseudorandom_probability(card, 'worm_stew_cheese_moon', 1, card.ability.extra.odds) then
                 return{
                     remove = true,
                     delay = 0.4
