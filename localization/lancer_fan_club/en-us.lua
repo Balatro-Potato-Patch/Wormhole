@@ -221,6 +221,14 @@ return {
                         "Resets after scoring"
                     }
                 }
+            },
+            j_worm_lfc_astronaut_food = {
+                name = "Astronaut Food",
+                text = {
+                    "The next {C:attention}#1#{} hands gain",
+                    "an additional {C:chips}+#2#{} Chips",
+                    "and {C:mult}+#3#{} when {C:attention}levelling up"
+                },
             }
         },
         Spectral = {
