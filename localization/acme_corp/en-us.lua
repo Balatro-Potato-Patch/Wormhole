@@ -276,6 +276,7 @@ return {
             k_copy = 'Copy',
             k_stocked = 'in stock',
             k_remaining = 'Remaining',
+            k_worm_gadget_pack = 'Gadget Pack',
 
             k_acme_test_dummy_1 = 'Crash!',
             k_acme_test_dummy_2 = 'Bang!',
