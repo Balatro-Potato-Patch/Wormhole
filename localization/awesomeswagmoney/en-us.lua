@@ -71,7 +71,18 @@ return {
                 name = "Superb Thing",
                 text = {"TEMP"}
             },
-            PotatoPatchDev_worm_eris = {name = "Eris", text = {"TEMP"}}
+            PotatoPatchDev_worm_eris = {name = "Eris", text = {
+                {
+                    "Mod dev for {C:spectral}Spectrallib{} and {C:spectral}Cryptid{},",
+                    "and my solo-dev mod {C:planet}Hypernova{}.",
+                    "You might also have seen me",
+                    "in previous {C:attention}Potato Patch{} events"
+                },
+                {
+                    "I fucking love the hit videogame",
+                    "{C:attention}Risk of Rain 2{}, and also {C:worm_ultrabeast}Nihilego"
+                }
+            }}
         },
         worm_ultrabeast = {
             c_worm_pheromosa = {
