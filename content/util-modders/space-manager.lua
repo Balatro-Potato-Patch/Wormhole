@@ -94,7 +94,7 @@ SMODS.ScreenShader {
     send_vars = function()
         local conf = manager.conf
         return {
-            screen_scale = G.TILESCALE*G.TILESIZE*G.CANV_SCALE,
+            screen_scale = G.TILESCALE*G.TILESIZE*G.CANV_SCALE / 15,
             time = G.TIMERS.REAL,
             transparency = manager.transparency,
             seed = manager.seed,

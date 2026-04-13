@@ -39,44 +39,55 @@ SMODS.Atlas {
 }
 
 local function newDrawSelf(self, overlay)
-    local canvas = self.canvas
-    love.graphics.push("all")
+    if self.FRAME.DRAW < G.FRAMES.DRAW and not G.OVERLAY_TUTORIAL then
+	self.FRAME.DRAW = G.FRAMES.DRAW
+	local canvas = self.canvas
+	love.graphics.push("all")
 
-    love.graphics.reset()
-    love.graphics.setCanvas(canvas)
-    local s = self.center_ref
-    local width = canvas:getWidth()
-    local scale = width/s.atlas.px
+	love.graphics.reset()
+	love.graphics.setCanvas(canvas)
+	local s = self.center_ref
+	local width = canvas:getWidth()
+	local scale = width/s.atlas.px
 
-    love.graphics.clear(0, 0, 0, 0)
+	love.graphics.clear(0, 0, 0, 0)
 
-    local shader = G.SHADERS.worm_util_space
-    local conf = self.parent.ability.space_conf
-    shader:send("screen_scale", G.TILESCALE*G.TILESIZE*scale/3)
-    shader:send("time", G.TIMERS.REAL)
-    shader:send("transparency", 1)
-    shader:send("seed", conf.seed)
-    shader:send("nebula_color1", conf.nebula1)
-    shader:send("nebula_color2", conf.nebula2)
-    shader:send("nebula_color3", conf.nebula3)
-    shader:send("shooting", conf.shooting)
-    love.graphics.setShader(shader)
-    love.graphics.rectangle("fill", 2 * scale, 2 * scale, (s.atlas.px - 4) * scale, (s.atlas.py - 4) * scale)
-    love.graphics.setShader()
+	local shader = G.SHADERS.worm_util_space
+	local conf = self.parent.ability.space_conf
+	shader:send("screen_scale", scale / .75)
+	shader:send("time", G.TIMERS.REAL)
+	shader:send("transparency", 1)
+	shader:send("seed", conf.seed)
+	shader:send("nebula_color1", conf.nebula1)
+	shader:send("nebula_color2", conf.nebula2)
+	shader:send("nebula_color3", conf.nebula3)
+	shader:send("shooting", conf.shooting)
+	love.graphics.setShader(shader)
+	love.graphics.rectangle("fill", 2 * scale, 2 * scale, (s.atlas.px - 4) * scale, (s.atlas.py - 4) * scale)
+	love.graphics.setShader()
 
-    love.graphics.draw(
-	s.atlas.image,
-	s.sprite,
-	0,0,
-	0,
-	scale,
-	scale
-    )
-    love.graphics.pop()
+	love.graphics.draw(
+	    s.atlas.image,
+	    s.sprite,
+	    0,0,
+	    0,
+	    scale,
+	    scale
+	)
+	love.graphics.pop()
+    end
     return self:ds_ref(overlay)
 end
 
 local options = { "shooting", "nebula", "nebula", "nebula", "miss", "miss" }
+local nebulaColors = {
+    G.C.SECONDARY_SET.Spectral,
+    G.C.YELLOW,
+    G.C.CHANCE,
+    G.C.BOOSTER,
+    G.C.SET.Default,
+    G.C.ETERNAL,
+}
 local function calcCard(self, card)
     local seed = card.ability.seed
     local opts = copy_table(options)
@@ -95,7 +106,7 @@ local function calcCard(self, card)
 	if opt == "shooting" then
 	    conf.shooting = true
 	elseif opt == "nebula" then
-	    conf["nebula" .. nebula] = G.C.RED -- TODO: Placeholder
+	    conf["nebula" .. nebula] = pseudorandom_element(nebulaColors, seed + nebula)
 	    nebula = nebula + 1
 	end
     end
@@ -113,7 +124,9 @@ SMODS.Consumable {
     set_ability = function(self, card, initial, delay_sprites)
 	card.ability.seed = pseudorandom("worm_util_spaces_seed")
 	card.ability.space_conf = calcCard(self, card)
-	local cs = SMODS.CanvasSprite {}
+	local cs = SMODS.CanvasSprite {
+	    canvasScale = 2,
+	}
 	cs.center_ref = card.children.center
 	card.children.center = cs
 	card.children.center:set_role({major = card, role_type = 'Glued', draw_major = card})

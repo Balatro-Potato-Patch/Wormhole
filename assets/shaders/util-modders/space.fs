@@ -200,7 +200,7 @@ vec4 shootingStars(vec2 coords, vec4 bg) {
 
 vec4 effect(vec4 color, Image texture, vec2 texture_coords, vec2 screen_coords) {
     // Setup
-    vec2 coords = vec2(floor(screen_coords.x / screen_scale * 15), floor(screen_coords.y / screen_scale * 15));
+    vec2 coords = vec2(floor(screen_coords.x / screen_scale), floor(screen_coords.y / screen_scale));
     vec4 bg = nebula(coords);
     float nebula_density = (bg.r + bg.g + bg.b) / 3.0;
 
