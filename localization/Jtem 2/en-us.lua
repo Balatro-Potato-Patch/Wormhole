@@ -164,8 +164,23 @@ return {
 				name = "Aikoyori",
 				text = {
 					{ 
-						"{s:5.2,E:worm_jtem2_rainbow_wiggle}Hello!{}",
-						"This is {E:worm_jtem2_rainbow_wiggle,C:white}Aikoyori{} from {E:worm_jtem2_rainbow_wiggle,C:white}Shenanigans"
+						"{s:3.2,E:worm_jtem2_rainbow_wiggle}Hello!{}",
+						"This is {E:worm_jtem2_rainbow_wiggle,C:white}Aikoyori{} from {E:worm_jtem2_rainbow_wiggle,C:white}Shenanigans",
+						"Back at it with {C:worm_jtem2_teamcolor}Jtem{C:worm_jtem2_teamcolor,E:worm_jtem2_exponent}2{}after {C:attention,E:worm_jtem2_snaking}Hot Potato{} was not enough",
+						"With 20 objects limit, we struggled to not break the rules",
+						"{s:0.8,C:inactive}mainly because i was too scared to add anything",
+						"but I think we cooked.",
+						"",
+						"In what essentially is {C:attention,E:worm_jtem2_snaking}Hot Potato{C:attention,E:worm_jtem2_exponent}2{}",
+						"I reduced my role as programmer and worked on",
+						"the {C:attention}these credits sprites{} you're looking at!",
+						"{s:0.8,C:inactive}And a few other stuff I didn't really keep track of...",
+						"That's all from me! See you next time!",
+						"{s:1.5,E:worm_jtem2_rainbow_wiggle}OH AND PLAY MY MOD AIKOYORI'S SHENANIGANS{}",
+						"",
+						"A word from our sponsor, {C:attention}my dog:",
+						"woof",
+						"- my dog",
 					},
 				},
 			},
@@ -197,8 +212,12 @@ return {
 				name = "missingnumber",
 				text = {
 					{ 
-						"Remember to drive responsibly, and definitely",
-						"don't drive on the highway at 190 miles per hour!" 
+						"\"Remember to drive responsibly, and definitely",
+						"don\'t drive on the highway at 190 miles per hour!\"",
+						"{s:0.8}- Yi Xi totally said this",
+						"",
+						"artist for {C:red,E:worm_jtem2_shrivel}Finity{} and {C:purple,E:worm_jtem2_snaking}0 ERROR",
+						"{}listen to my music pls",
 					},
 				},
 			},
