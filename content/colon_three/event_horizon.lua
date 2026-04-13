@@ -2,18 +2,18 @@ if not Wormhole.COLON_THREE or not Wormhole.COLON_THREE.loaded then return end
 
 SMODS.Joker {
     key = "ct_event_horizon",
-    atlas = "ct_jokers",
+    atlas = "ct_event_horizon",
     pos = { x = 2, y = 0 },
     config = { extra = { levels = 0, rotation = 0 } },
     attributes = { "space", "hand_type" },
     ppu_coder = { "meta" },
-    ppu_artist = { "notmario" },
+    ppu_artist = { "notmario", "lordruby" },
     ppu_team = { ":3" },
     rarity = 1,
     cost = 5,
 
     loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.levels } }
+        return { vars = { card.ability.extra.levels }, name_key = card.area ~= G.jokers and "j_worm_ct_event_horizon_fake" or nil }
     end,
     calculate = function(self, card, context)
         if context.before and card.ability.extra.levels ~= 0 then
@@ -31,7 +31,12 @@ SMODS.Joker {
             local mix_fac = 0.3 ^ dt
             card.ability.extra.rotation = mix_fac * (card.ability.extra.rotation or 0) + (1 - mix_fac) * card.ability.extra.levels * math.pi * 5 / 4 * 9 / 10
         end
-    end
+        if card.area == G.jokers then
+            card.children.center.dont_animate = false
+        else
+            card.children.center.dont_animate = true
+        end
+    end,
 }
 -- rotate hook
 local card_draw = Card.draw

@@ -55,6 +55,9 @@ return {
                     "{C:inactive}(Currently {C:attention}#1#{C:inactive} levels stored){}"
                 }
             },
+            j_worm_ct_event_horizon_fake = {
+                name = "The Witless"
+            },
             j_worm_ct_quantum_tunneling = {
                 name = "Quantum Tunnelling",
                 text = {
