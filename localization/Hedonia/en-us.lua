@@ -13,23 +13,23 @@ return {
             j_worm_hedonia_trash = {
                 name = 'Trash Compactor',
                 text = {
-                    '-1 Joker slot',
+                    '{C:attention}-1{} {E:2}Joker{} slot',
                     'Gain effects of all',
-                    'sold Jokers until end of round'
+                    'sold {E:2}Jokers{} until end of round'
                 }                
             },
             j_worm_hedonia_patron = {
                 name = 'Drunken Patron',
                 text = {
-                    '+#1# mult',
-                    'for every Tipsy, Drunk, Very Drunk, or Blackout card held in hand'
+                    '{C:mult}+#1#{} Mult for every',
+                    'Tipsy, Drunk, Very Drunk,',
+                    'or Blackout card held in hand'
                 }
             },
             j_worm_hedonia_happy_hour = {
                 name = 'Happy Hour',
                 text = {
-                    'Menu consumables cost',
-                    '$#1# less'
+                    'Menu Items cost {C:money}$#1#{} less'
                 }
             }
         },
@@ -65,26 +65,30 @@ return {
             c_worm_hedonia_jawbreaker = {
                 name = 'Jupiter Jawbreakers',
                 text = {
-                    'Add {C:chips}#1#{} bonus chips to a',
+                    'Add {C:chips}#1#{} bonus Chips to a',
                     'random card held in hand'
                 }
             },
             c_worm_hedonia_rings = {
                 name = 'Saturn\'s Onion Rings',
                 text = {
-                    'all cards in hand sober up'
+                    'All cards held in',
+                    'hand sober up',
+                    '{s:0.8}{C:inactive}(must be drunk)'
                 }
             },
             c_worm_hedonia_debbie = {
                 name = 'Cosmic Brownies',
                 text = {
-                    'changes {C:attention}#1#{} selected cards to the same rank'
+                    'Converts {C:attention}#1#{} selected cards',
+                    'to the same rank'
                 }
             },
             c_worm_hedonia_jam = {
                 name = 'Space Jam',
                 text = {
-                    'changes {C:attention}#1#{} selected cards to the same suit'
+                    'Converts {C:attention}#1#{} selected cards',
+                    'to the same suit'
                 }
             }
         },
