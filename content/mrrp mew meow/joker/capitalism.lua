@@ -2,7 +2,7 @@ SMODS.Joker {
 	ppu_team = {'Mrrp Mew Meow :3'},
     --ppu_artist = {'SarcPot'},
     ppu_coder = {'Aure'},
-	key = 'capitalism',
+	key = 'mrrp_capitalism',
 	atlas = "mrrp",
     pos = {
         x=4,

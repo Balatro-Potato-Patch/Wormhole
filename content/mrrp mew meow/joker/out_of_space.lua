@@ -1,7 +1,7 @@
 SMODS.Joker {
 	ppu_team = {'Mrrp Mew Meow :3'},
     ppu_coder = {'Minty'},
-	key = 'out_of_space',
+	key = 'mrrp_out_of_space',
 	atlas = "mrrp", pos = {x=4, y=5},
 	rarity = 2,
 	cost = 6,
@@ -24,8 +24,8 @@ SMODS.Joker {
         local size = card.ability.extra.size
 		return {
             vars = {
-                (slots >= 0 and "+" or "-") .. slots,
-                (size < 0 and "-" or "") .. size,
+                (slots >= 0 and "+" or "") .. slots,
+                (size >= 0 and "+" or "") .. size,
             }
         }
 	end,

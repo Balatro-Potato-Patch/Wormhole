@@ -90,7 +90,7 @@ SMODS.Joker {
 SMODS.Joker {
     ppu_team = {'Mrrp Mew Meow :3'},
     ppu_coder = {'Cyan'},
-    key = 'felicette',
+    key = 'mrrp_felicette',
     atlas = "mrrp",
     pos = {
         x = 4,

@@ -2,7 +2,7 @@ SMODS.Joker {
     ppu_team = {'Mrrp Mew Meow :3'},
     ppu_artist = {'Shinku'},
     ppu_coder = {'Cyan'},
-    key = 'alien_cat',
+    key = 'mrrp_alien_cat',
     atlas = "mrrp",
     pos = {
         x = 0,
@@ -21,7 +21,7 @@ SMODS.Joker {
         }
     },
     loc_vars = function(self, info_queue, card)
-        local numerator, denominator = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, 'worm_aliencat')
+        local numerator, denominator = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, 'worm_mrrp_aliencat')
         return {
             vars = {numerator, denominator, localize(card.ability.extra.rank, "ranks"), localize("planet", "labels")}
         }
@@ -42,7 +42,7 @@ SMODS.Joker {
             end
             if is_rank(context.other_card, card.ability.extra.rank) then
                 for i = 1, is_rank(context.other_card, card.ability.extra.rank) do
-                    if SMODS.pseudorandom_probability(card, 'worm_aliencat_' .. i, 1, card.ability.extra.odds) and
+                    if SMODS.pseudorandom_probability(card, 'worm_mrrp_aliencat_' .. i, 1, card.ability.extra.odds) and
                         #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
                         G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
                         G.E_MANAGER:add_event(Event({

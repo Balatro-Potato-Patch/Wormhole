@@ -1,7 +1,7 @@
 return {
 descriptions={
 	Joker={
-		j_worm_alien_cat ={
+		j_worm_mrrp_alien_cat ={
 			name=
 				"Alien Cat"
 			, text={
@@ -10,7 +10,7 @@ descriptions={
 				"{C:planet}#4#{} card when scored"
 			}
 		},
-		j_worm_pallasite ={
+		j_worm_mrrp_pallasite ={
 			name=
 				"Pallasite"
 			, text={
@@ -19,7 +19,7 @@ descriptions={
 				"cards give {C:money}$#1#{} when scored"
 			}
 		},
-		j_worm_cookie_cat ={
+		j_worm_mrrp_cookie_cat ={
 			name=
 				"Cookie Cat"
 			, text={
@@ -28,7 +28,7 @@ descriptions={
 				"{C:planet,s:0.8}#2#{s:0.8} level per hand played{}",
 			}
 		},
-		j_worm_countdown ={
+		j_worm_mrrp_countdown ={
 			name=
 				"Countdown to Launch"
 			, text={
@@ -38,7 +38,7 @@ descriptions={
 			}
 		},
 		--[[]]
-		j_worm_felicette ={
+		j_worm_mrrp_felicette ={
 			name=
 				"Félicette"
 			, text={
@@ -47,7 +47,7 @@ descriptions={
 				"{C:inactive}(Currently {C:mult}#2#{C:inactive} Mult)"
 			}
 		},
-		j_worm_go_pisces ={
+		j_worm_mrrp_go_pisces ={
 			name=
 				"Go Pisces"
 			, text={
@@ -57,7 +57,7 @@ descriptions={
 				"{C:red}self-destructs{}"
 			}
 		},
-		j_worm_goldilocks ={
+		j_worm_mrrp_goldilocks ={
 			name=
 				"Goldilocks Zone"
 			, text={
@@ -66,7 +66,7 @@ descriptions={
 				"into a {C:attention}#2#{} with a {C:attention}#3# Seal{}"
 			}
 		},
-		j_worm_nyasa ={
+		j_worm_mrrp_nyasa ={
 			name=
 				"NYASA Exploration Team"
 			, text={
@@ -77,7 +77,7 @@ descriptions={
 				"{C:inactive}(Must have room otherwise){}"
 			}
 		},
-		j_worm_orrery ={
+		j_worm_mrrp_orrery ={
 			name=
 				"Orrery"
 			, text={
@@ -88,7 +88,7 @@ descriptions={
 				"{C:inactive}(Must have room){}"
 			}
 		},
-		j_worm_capitalism ={
+		j_worm_mrrp_capitalism ={
 			name={
 				"The One Place That",
 				"Hasn't Been Corrupted",
@@ -100,7 +100,7 @@ descriptions={
 				"{C:inactive}(Currently {C:mult}#2#{C:inactive} Mult){}"
 			}
 		},
-		j_worm_out_of_space = {
+		j_worm_mrrp_out_of_space = {
 			name = "Out of Space",
 			text = {
 				{
@@ -115,7 +115,7 @@ descriptions={
 				}
 			}
 		},
-		j_worm_staging = {
+		j_worm_mrrp_staging = {
 			name = "Staging",
 			text = {
 				"{X:mult,C:white}X#1#{} Mult per {C:attention}card{}",
@@ -123,7 +123,7 @@ descriptions={
 				"{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive})"
 			}
 		},
-		j_worm_perseids = {
+		j_worm_mrrp_perseids = {
 			name = "Perseids",
 			text = {
 				"Each {C:attention}card{} in poker hand",
@@ -131,7 +131,7 @@ descriptions={
 				"card in poker hand",
 			}
 		},
-		j_worm_tanabata = {
+		j_worm_mrrp_tanabata = {
 			name = "Tanabata",
 			text = {
 				"If poker hand contains a",
@@ -140,7 +140,7 @@ descriptions={
 				"{C:inactive}(Must have room)"
 			}
 		},
-		j_worm_cats_eye_nebula = {
+		j_worm_mrrp_cats_eye_nebula = {
 			name = "Cat's Eye Nebula",
 			text = {
 				"{C:chips}#1#{} Chips",
@@ -151,7 +151,7 @@ descriptions={
 		}
 	},
 	Stake={
-		stake_worm_cosmic ={
+		stake_worm_mrrp_cosmic ={
 			name=
 				'Cosmic Stake'
 			, text={
@@ -173,7 +173,7 @@ descriptions={
 		}
 	},
 	Other={
-		worm_meteoric ={
+		worm_mrrp_meteoric ={
 			name=
 				"Meteoric"
 			, text={
@@ -181,7 +181,7 @@ descriptions={
 				"levels when bought"
 			}
 		},
-		worm_cookie_cat_song ={
+		worm_mrrp_cookie_cat_song ={
 			name=
 				"Cookie Cat"
 			, text={
@@ -226,7 +226,9 @@ descriptions={
 		PotatoPatchDev_Aure = {
 			name = 'Aure',
 			text = {
-				{'test'},
+				{
+					"Hi, I'm {E:1,C:mrrp_green}Aure{} aka Mr. SMODS."
+				},
 			},
 		},
 		PotatoPatchDev_Minty = {

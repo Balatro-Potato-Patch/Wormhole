@@ -36,7 +36,7 @@ end,
 SMODS.Joker{
 ppu_team = {'Mrrp Mew Meow :3'},
 ppu_coder = {'Shinku','Cyan'},
-key = "orrery",
+key = "mrrp_orrery",
 atlas = "mrrp",
 pos = {x = 3, y = 1},
     config = { extra = { tarot = {"c_star", "c_moon", "c_sun", "c_world"} } },

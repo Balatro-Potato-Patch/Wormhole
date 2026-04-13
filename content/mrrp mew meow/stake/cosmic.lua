@@ -1,5 +1,5 @@
 SMODS.Stake{
-    key = 'cosmic',
+    key = 'mrrp_cosmic',
     atlas = 'mrrp_stake',
     pos = {x = 0, y = 0},
     applied_stakes = { "stake_gold" },
