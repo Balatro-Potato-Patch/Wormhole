@@ -208,7 +208,19 @@ descriptions={
 		PotatoPatchDev_SarcPot = {
 			name = 'SarcPot',
 			text = {
-				{'test'},
+				{
+					"Hey, i'm SarcasticPotato (aka. Sarc)"
+				},
+				{
+					"I did most of the art for our portion",
+					"of the mod and helped design and",
+					"concept a lot of the Jokers as well."
+				},
+				{
+					"Maybe not the best idea to have",
+					"the slowest dev (and artist)",
+					"participate in a modjam but hey."
+				},
 			},
 		},
 		PotatoPatchDev_Shinku = {
@@ -250,7 +262,20 @@ descriptions={
 		PotatoPatchDev_Cyan = {
 			name = 'Cyan',
 			text = {
-				{'test'},
+				{
+					"It's me, neurotic catboy {C:mrrp_cyan,E:2}Cyan{}!",
+				},
+				{
+					"I was recruited as an {C:mrrp_cyan}artist{} but",
+					"also ended up doing a lot of the",
+					"code, concepts, and coordination!",
+				},
+				{
+					"I'm so honored that I was given",
+					"a chance as the new kit in town",
+					"by all of the people I admire ;w;",
+					"{C:mrrp_pink,E:1}Best first anything-jam ever <3{}"
+				},
 			},
 		}
 	}
@@ -269,6 +294,8 @@ misc={
 		k_flaring = "Flaring..."
 	},
 	quips = {
+
+	--	MINTY
 		worm_mrrp_no_menthol_win = {
 			"Have you tried this",
 			"silly little mod",
@@ -287,6 +314,8 @@ misc={
 			"Maybe a bit",
 			"TOO much mint?"
 		},
+
+	--	SARC
 		worm_mrrp_sarcpot = {
 			"Playing SarcPot, huh?",
 			"I know what",
@@ -297,6 +326,42 @@ misc={
 			"gay, or indie game",
 			"fan? Play SarcPot!"
 		},
+
+	--	MP
+		worm_mrrp_wtmjq = {
+			"If you like these",
+			"lines there's more",
+			"where that came from!"
+		}
+		worm_mrrp_no_index = {
+			"The Will of the City",
+			"calls you to",
+			"The Index."
+		}
+		worm_mrrp_index = {
+			"How 'bout I throw in",
+			"another Prescript to",
+			"play another round",
+			"for you!"
+		}
+
+	--	CYAN
+		worm_mrrp_win = {
+			"CAT GANG",
+			"FOREVER!",
+			"RAAAGHHH"
+		}
+		worm_mrrp_no_steady_lose = {
+			"Augh! If only",
+			"you had held a",
+			"{C:mrrp_cyan,E:2}Steady Hand{}...",
+		}
+		worm_mrrp_no_steady_win = {
+			"Keep vanilla+",
+			"fun going with",
+			"{C:mrrp_cyan,E:2}Steady Hand{}!",
+		}
+
 	}
 },
 }

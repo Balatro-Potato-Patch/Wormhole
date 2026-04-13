@@ -3,7 +3,7 @@ local colours = {
     mrrp_orange = HEX('C47C47'),
     mrrp_blue = HEX('7994C1'),
     mrrp_green = HEX('82A356'),
-    mrrp_cyan = HEX('64A29C'),
+    mrrp_cyan = HEX('7AC7AC'),
 }
 loc_colour()
 for k,v in pairs(colours) do
