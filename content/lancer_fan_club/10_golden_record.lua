@@ -28,7 +28,7 @@ SMODS.Joker {
     pixel_size = { w = 69, h = 69 },
     display_size = { w = 69, h = 69 },
     discovered = false,
-    config = { extra = { enhancement = "m_gold", card_type = "Spectral", discards = 5, discards_remaining = 5 } },
+    config = { extra = { enhancement = "m_gold", card_type = "Spectral", discards = 15, discards_remaining = 15 } },
     attributes = {
         "enhancements",
         "discards",
