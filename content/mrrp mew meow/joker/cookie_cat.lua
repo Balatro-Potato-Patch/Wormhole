@@ -23,7 +23,7 @@ SMODS.Joker {
     loc_vars = function(self, info_queue, card)
     --  info_queue[#info_queue+1] = { key="worm_mrrp_cookie_cat_song", set="Other" }
         return {
-            vars = {(card.ability.extra.level < 0 and "-" or "+") .. card.ability.extra.level,
+            vars = {SMODS.signed(card.ability.extra.level),
                     (card.ability.extra.level_mod > 0 and "-" or "+") .. card.ability.extra.level_mod}
         }
     end,

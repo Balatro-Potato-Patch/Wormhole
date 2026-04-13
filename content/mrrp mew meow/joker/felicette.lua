@@ -118,8 +118,8 @@ SMODS.Joker {
         local total = scalar * upgrades
         return {
             vars = {
-                (scalar < 0 and "-" or "+") .. scalar,
-                (total < 0 and "-" or "+") .. total
+                SMODS.signed(scalar),
+                SMODS.signed(total)
             }
         }
     end,

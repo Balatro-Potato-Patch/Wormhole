@@ -28,7 +28,7 @@ SMODS.Joker {
         local fall = card.ability.extra.fall
 		return {
 			vars = {
-				(chips >= 0 and "+" or "-") .. chips,
+				SMODS.signed(chips),
 				(fall >= 0 and "-" or "+") .. fall,
 				card.ability.extra.levels,
 			}
