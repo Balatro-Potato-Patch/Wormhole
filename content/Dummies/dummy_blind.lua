@@ -11,6 +11,7 @@ loc_colour()
 G.ARGS.LOC_COLOURS.worm_dum_brown = HEX('DB9D51')
 
 local function DummyAnnounce(message, Yoffset, scale)
+    -- Announce Custom Message
 	G.E_MANAGER:add_event(Event({
 		trigger = 'after',
 		func = function()
@@ -22,22 +23,57 @@ local function DummyAnnounce(message, Yoffset, scale)
 			return true
 		end
 	}))
+    -- Wiggle Blind-Sprite (Corrected Timing)
+	G.E_MANAGER:add_event(Event({
+		trigger = 'after',
+		func = function()
+            -- START: Wiggle Blind-Sprite
+			play_sound('tarot2', 1, 0.4)
+			G.GAME.blind.children.animatedSprite:juice_up(0.3)
+            -- Update Reward-Text
+            local reward_len = string.len((G.GAME.current_round.dollars_to_be_earned or ''))
+            if reward_len < 7 then
+                G.GAME.current_round.dollars_to_be_earned = (G.GAME.current_round.dollars_to_be_earned or '')..'$'
+            elseif reward_len == 7 then
+                G.GAME.current_round.dollars_to_be_earned = (G.GAME.current_round.dollars_to_be_earned or '')..'+'
+            end
+			return true
+		end
+	}))
+    -- Wiggle Blind-Sprite (Corrected Timing)
+	G.E_MANAGER:add_event(Event({
+		trigger = 'after',
+		delay = 0.06*G.SETTINGS.GAMESPEED,
+		func = function()
+            -- END: Wiggle Blind-Sprite
+			play_sound('tarot2', 0.76, 0.4)
+			return true
+		end
+	}))
+    delay(0.2)
 end
 
 local function DummyCalculateLevel(coefficient, animate)
-    if coefficient then
-        local next_coefficient, offset, limiter;
-        ::dummy_repeat:: -- Get next Coefficient to beat:
-        next_coefficient = ((G.GAME.dum_dummy_level or -1) + 1) * 0.25 + 0.5
-        limiter = (limiter or 25) - 1
-        -- Limiter for reaching REALLY high scores:
-        if limiter == 0 then
-            -- Force "next_coefficient" to (near) maximum:
-            next_coefficient = coefficient - (coefficient % 0.25)
-            G.GAME.dum_dummy_level = next_coefficient / 0.25 - 3
-            offset = offset + 1
-            -- Bonus Sound for reaching the Limiter:
-            if animate then
+    coefficient = math.min(100, (coefficient or 0)) --> Level 398 ×0.25+0.5 = 100  -->  10.000%
+    if coefficient and coefficient >= 0.5 then
+        local ret_level = coefficient >= 1.0 and math.floor(coefficient / 0.25 - 2) or 1
+        if animate and ret_level > (G.GAME.dum_dummy_level or -1) then
+            local next_step, completed; local offset = 1.0
+            -- Main Animation
+            for i = 1, 25 do
+                next_step = ((G.GAME.dum_dummy_level or -1) + i) * 0.25 + 0.5
+                if coefficient >= next_step then
+                    offset = (offset + 1.0) % 5
+                    DummyAnnounce(next_step*100, -offset, 1.0)
+                else
+                    completed = true
+                    break;
+                end
+            end
+            -- Overflow Bonus; Bigger Text and Sound
+            if not completed then
+                next_step = coefficient - (coefficient % 0.25)
+                offset = (offset + 1.0) % 5
 	            G.E_MANAGER:add_event(Event({
 	            	trigger = 'after',
 	            	func = function()
@@ -45,52 +81,13 @@ local function DummyCalculateLevel(coefficient, animate)
 	            		return true
 	            	end
 	            }))
+                DummyAnnounce(next_step*100, -offset, 2.0)
             end
-            --> Will do one more Loop after "capping"
         end
-        -- Looping Calc.
-        if coefficient >= next_coefficient then
-            offset = ((offset or 1.0) + 1.0) % 5 -- Text offset
-            -- Update Level
-            G.GAME.dum_dummy_level = (G.GAME.dum_dummy_level or 0) + 1
-            -- Animate, Announce & Update Reward-Text
-            if animate then
-                -- Announce Percentage
-                DummyAnnounce(next_coefficient*100, -offset, (limiter <= 0 and 2.0 or 1.0))
-                -- Wiggle Blind-Sprite (Corrected Timing)
-	            G.E_MANAGER:add_event(Event({
-	            	trigger = 'after',
-	            	func = function()
-                        -- START: Wiggle Blind-Sprite
-	            		play_sound('tarot2', 1, 0.4)
-	            		G.GAME.blind.children.animatedSprite:juice_up(0.3)
-                        -- Update Reward-Text
-                        local reward_len = string.len((G.GAME.current_round.dollars_to_be_earned or ''))
-                        if reward_len < 7 then
-                            G.GAME.current_round.dollars_to_be_earned = (G.GAME.current_round.dollars_to_be_earned or '')..'$'
-                        elseif reward_len == 7 then
-                            G.GAME.current_round.dollars_to_be_earned = (G.GAME.current_round.dollars_to_be_earned or '')..'+'
-                        end
-	            		return true
-	            	end
-	            }))
-                -- Wiggle Blind-Sprite (Corrected Timing)
-	            G.E_MANAGER:add_event(Event({
-	            	trigger = 'after',
-	            	delay = 0.06*G.SETTINGS.GAMESPEED,
-	            	func = function()
-                        -- END: Wiggle Blind-Sprite
-	            		play_sound('tarot2', 0.76, 0.4)
-	            		return true
-	            	end
-	            }))
-                delay(0.2)
-            end
-            goto dummy_repeat -- #WeLoveGoto >:3c
-        end
+        G.GAME.dum_dummy_level = ret_level
+        return ret_level
     end
-    -- If Blind wasn't beaten, not even 50%, return "-1"
-    return (G.GAME.dum_dummy_level or -1)
+    return -1 --> Blind wasn't beaten, not even 50%
 end
 
 local function DummyAddRewardTag(tag_id)
@@ -122,7 +119,7 @@ SMODS.Blind {
     calc_dollar_bonus = function (self, blind)
         -- Level Math: X ×0.25+0.5
         local coefficient = G.GAME.chips / blind.chips
-        local reward_level = DummyCalculateLevel(coefficient, false) --> Validates final level
+        local reward_level = DummyCalculateLevel(coefficient, false) --> Validates final level, level is capped!
         G.GAME.dum_dummy_level = nil
         --print("Coefficient: "..coefficient)
         --print("Reward-Level: "..reward_level)
@@ -136,6 +133,17 @@ SMODS.Blind {
             if reward_level >= 13 then DummyAddRewardTag('tag_ethereal') end -- 375%+
             if reward_level >= 11 then DummyAddRewardTag('tag_charm') end -- 325%+
             if reward_level >= 9 then DummyAddRewardTag('tag_meteor') end -- 275%+
+            -- You did it!
+            if reward_level >= 398 then -- 10.000% / Max.
+	            G.E_MANAGER:add_event(Event({
+	            	trigger = 'after',
+	            	func = function()
+                        SMODS.add_card({ key = 'j_ticket', edition = 'e_negative' })
+	            		return true
+	            	end
+	            }))
+                -- TODO: Achievement
+            end 
             -- Money-Cap
             return math.min(100, reward_level * 2 - 1)
         else return -5 end --> Penalty for not reaching 50%
