@@ -23,6 +23,9 @@ PotatoPatchUtils.Developer{
 }
 
 PotatoPatchUtils.Developer{
+    atlas = 'worm_asm_credits', 
+    pos = { x = 0, y = 1 }, 
+    soul_pos = { x = 1, y = 1 }, 
     name = "worm_omega",
     team = "awesomeswagmoney",
     loc = true,

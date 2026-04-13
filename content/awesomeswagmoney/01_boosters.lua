@@ -1,8 +1,15 @@
 --contains boosters and SMODS.ConsumableType
 
-SMODS.Atlas({key = "asm_ultrawormhole_sm", path = "awesomeswagmoney/ultrawormholesmall.png", px = 83, py = 99, fps = 7, frames = 3, atlas_table = "ANIMATION_ATLAS"}):register()
-SMODS.Atlas({key = "asm_ultrawormhole_bg", path = "awesomeswagmoney/ultrawormholebig.png", px = 99, py = 99, fps = 7, frames = 3, atlas_table = "ANIMATION_ATLAS"}):register()
-SMODS.Atlas({key = "asm_ultrawormhole_bgr", path = "awesomeswagmoney/ultrawormholebigger.png", px = 102, py = 99, fps = 7, frames = 3, atlas_table = "ANIMATION_ATLAS"}):register()
+SMODS.Atlas({key = "asm_ultrawormhole_sm", path = "awesomeswagmoney/ultrawormholesmall.png", px = 95, py = 99, fps = 7, frames = 3, atlas_table = "ANIMATION_ATLAS"}):register()
+SMODS.Atlas({key = "asm_ultrawormhole_bg", path = "awesomeswagmoney/ultrawormholebig.png", px = 95, py = 99, fps = 7, frames = 3, atlas_table = "ANIMATION_ATLAS"}):register()
+SMODS.Atlas({key = "asm_ultrawormhole_bgr", path = "awesomeswagmoney/ultrawormholebigger.png", px = 95, py = 99, fps = 7, frames = 3, atlas_table = "ANIMATION_ATLAS"}):register()
+SMODS.Atlas({
+    key = "asm_ubtag",
+    path = "awesomeswagmoney/tag.png",
+    px = 34,
+    py = 34,
+    atlas_table = "ASSET_ATLAS"
+}):register()
 
 SMODS.ConsumableType{
     key = "worm_ultrabeast",
@@ -74,3 +81,44 @@ for _, t in ipairs(wormholes) do
         create_card = wormhole_create_card,
     }
 end
+
+return {
+    SMODS.Tag {
+        key = 'ub',
+        loc_txt = {
+          name = 'Ultra Wormhole Tag',
+          text = {
+            "Gives a free",
+            "{C:worm_ultrabeast}Greater Ultra Wormhole"
+        }
+        },
+        atlas = 'asm_ubtag', 
+        pos = { x = 0, y = 0 },
+        in_pool = function()
+		    return (G.GAME.round_resets.ante > 1)
+	    end,
+        apply = function(self, tag, context)
+              if context.type == "new_blind_choice" then
+                  tag:yep("+", G.C.ATTENTION, function()
+                      local key = "p_worm_wormhole_mega_1"
+                      local card = Card(
+                          G.play.T.x + G.play.T.w / 2 - G.CARD_W * 1.27 / 2,
+                          G.play.T.y + G.play.T.h / 2 - G.CARD_H * 1.27 / 2,
+                          G.CARD_W * 1.27,
+                          G.CARD_H * 1.27,
+                          G.P_CARDS.empty,
+                          G.P_CENTERS[key],
+                          { bypass_discovery_center = true, bypass_discovery_ui = true }
+                      )
+                      card.cost = 0
+                      card.from_tag = true
+                      G.FUNCS.use_card({ config = { ref_table = card } })
+                      card:start_materialize()
+                      return true
+                  end)
+                  tag.triggered = true
+                  return true
+              end
+          end,
+      },
+    }

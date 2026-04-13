@@ -142,7 +142,7 @@ SMODS.Consumable {
     config = {extra_slots_used = 1, extra = {copies = 4, reduction = 2}},
     loc_vars = function(self, info_queue, card)
         return {
-            vars = {card.ability.extra.copies, card.ability.extra.reduction}
+            vars = {card.ability.extra.copies-1, card.ability.extra.reduction}
         }
     end,
     can_use = function(self, card) return #G.hand.highlighted == 1 end,
@@ -224,8 +224,8 @@ SMODS.Consumable {
     key = "celesteela",
     set = "worm_ultrabeast",
     atlas = 'worm_asm_ubs',
-    pos = {x = 2, y = 1},
-    soul_pos = {x = 3, y = 1},
+    pos = {x = 2, y = 0},
+    soul_pos = {x = 3, y = 0},
     config = {extra_slots_used = 1},
     loc_vars = function(self, info_queue, card)
         return {vars = {PRIMES[G.GAME.asm_celesteela] or 2}}
@@ -434,4 +434,49 @@ SMODS.Consumable {
     can_use = function(self, card)
         return next(SMODS.Edition:get_edition_cards(G.jokers, true))
     end
+}
+
+SMODS.Joker{
+    key = 'necrozma', 
+    loc_txt = { 
+        name = 'Necrozma',
+        text = {
+          "Create a free",
+          "{C:attention}#1#{}",
+          "every round"
+        },
+    },
+    atlas = 'worm_asm_ubs', 
+    rarity = 4, 
+    cost = 5,
+    unlocked = true, 
+    discovered = true, 
+    blueprint_compat = true, 
+    eternal_compat = true, 
+    perishable_compat = false, 
+    pos = {x = 2, y = 3},
+    soul_pos = {x = 3, y = 3},
+    config = { 
+      extra = {
+        tag = "tag_worm_ub"
+      }
+    },
+    loc_vars = function(self,info_queue,card)
+        return {vars = {localize{type = 'name_text', set = 'Tag', key = card.ability.extra.tag}}}
+    end,
+    set_ability = function(self, card)
+      card:set_edition('e_negative', true, true)
+    end,
+    calculate = function(self, card, context)
+    if context.end_of_round and context.main_eval then
+              add_tag(Tag(card.ability.extra.tag))
+              play_sound('generic1', 0.9 + math.random()*0.1, 0.8)
+              play_sound('holo1', 1.2 + math.random()*0.1, 0.4)
+              return {
+                  card = card,
+                  message = 'WORMHOLE!',
+                  colour = G.C.DARK_EDITION
+              }
+    end
+  end
 }

@@ -110,7 +110,8 @@ return {
             c_worm_kartana = {
                 name = "Kartana",
                 text = {
-                    "{C:attention}Slice{} selected card into {C:attention}#1#{} copies",
+                    "{C:attention}Slice{} selected card",
+                    "to create {C:attention}#1#{} additional copies",
                     "with their rank reduced by {C:attention}#2#"
                 }
             },
@@ -125,8 +126,8 @@ return {
             c_worm_celesteela = {
                 name = "Celesteela",
                 text = {
-                    "Earn {C:attention}+#1#{} hand size, then",
-                    "permanently increase this amount to",
+                    "Earn {C:attention}+#1#{} hand size for one round, then",
+                    "permanently increase the amount gained to",
                     "the next {C:spectral}prime number{}"
                 }
             },
