@@ -772,8 +772,8 @@ SMODS.Joker{
 		local GameChallange = G.GAME.challenge
 		if context.end_of_round and context.game_over and context.main_eval and not next(SMODS.find_card('j_mr_bones')) then
 			--instead of calling G.FUNCS.start_run(e, args), just do what it does and set the seed after run creation
-			CRT_shutoff.startTime = G.TIMERS.REAL
-			CRT_shutoff.apply = true
+			CRT_shutoff.startTime = G.TIMERS.REAL	--activate the shutoff shader
+			CRT_shutoff.apply = true				--activate the shutoff shader
 			G.SETTINGS.paused = true 
 			G.E_MANAGER:clear_queue() 
 			G.FUNCS.wipe_on() 
@@ -800,10 +800,11 @@ SMODS.Joker{
 			blocking = false,
 			no_delete = true,
 			func = function()
-				CRT_shutoff.apply = false
+				CRT_shutoff.apply = false --after 2 seconds, effect is complete, so turn off the shader
 				return true
 			end
 			}))
+			return { saved = true } --return saved for interacting with heat death
         end
 	end
 }
@@ -1089,6 +1090,17 @@ adjust_time = function(heatdeath)
 	end
 end
 
+local reset_hd
+reset_hd = function(heatdeath)
+	heatdeath.config.timing = false
+	heatdeath.config.extra.current = heatdeath.config.time
+	heatdeath.config.extra.gamespeed = heatdeath.config.base_speed
+	if G.GAME.blind.config.blind.key ~= "bl_worm_heatdeath" then G.GAME.blind.children.animatedSprite.T.scale = 1 end
+	if source:isPlaying() then 
+		source:stop()
+	end
+end
+
 --Recursive Event for Heat Death Blind
 local heatdeath_timer 
 heatdeath_timer = function(heatdeath)
@@ -1104,10 +1116,7 @@ heatdeath_timer = function(heatdeath)
 				
 				--stop if Heat Death is rerolled
 				if G.GAME.round_resets.blind_choices.Boss ~= "bl_worm_heatdeath" then
-					TIMERTIME = heatdeath.config.time
-					heatdeath.config.extra.current = heatdeath.config.time
-					heatdeath.config.timing = false
-					source:stop()
+					reset_hd(heatdeath)
 					return true
 				end
 				
@@ -1151,8 +1160,20 @@ heatdeath_timer = function(heatdeath)
 				
 				if heatdeath.config.extra.current == 0 then ------------ IF TIMER REACHES 0
 					
+					--see if any jokers would save the run
+					for i = 1, #G.jokers.cards do
+						local eval = G.jokers.cards[i]:calculate_joker({end_of_round = true, game_over = true, main_eval = true})
+						if eval then
+							if eval.saved then
+								card_eval_status_text(G.jokers.cards[i], 'jokers', nil, nil, nil, eval)
+								reset_hd(heatdeath)	--reset heatdeath
+								return				--dont do anything else
+							end
+						end
+					end
+
 					heatdeath.config.timing = false --stop the timer
-					heatdeath.config.game_over_override = true --stops the timer from restarting until after the game over screen is displayed
+					heatdeath.config.game_over_override = true --prevents the timer being restarted on game_over screen (I think it calls loc_vars)
 
 					ease_background_colour({new_colour = G.C.BLACK}) --turn the screen black (in case player was not on the boss blind)
 					if G.GAME.blind.config.blind.key == "bl_worm_heatdeath" then
@@ -1244,24 +1265,23 @@ heatdeath_timer = function(heatdeath)
 							G.HUD.states.visible = true
 							G.HUD_blind.states.visible = true
 							G.SETTINGS.SOUND.music_volume = restoreVolume --unmute the music for the game over screen
-							heatdeath.config.game_over_override = false --reset override 
+							heatdeath.config.game_over_override = false
 							return true
 						end
 					})
 
 					--Reset variables for next time Heat Death shows up
-					TIMERTIME = heatdeath.config.time
-					heatdeath.config.extra.current = heatdeath.config.time
-					heatdeath.config.timing = false
-					heatdeath.config.extra.gamespeed = heatdeath.config.base_speed
+					reset_hd(heatdeath)
 
 					return true
 				end
 
 				--repeat
 				heatdeath_timer(heatdeath)
-				return true
+				return true				
 			end
+			if source:isPlaying() then source:stop() end --failsafe for noise
+			return true --heatdeath has stopped counting, so end this event cycle
         end
     })
 end
@@ -1286,7 +1306,7 @@ SMODS.Blind{
 			"{s:0.8}Code & Art by {s:0.8,C:chips}Ben Roffey{}"
 		}
 	},
-	config = {time = 2*60, timing = false, game_over_override = false, gamespeed_factor = 1.5, base_speed = 4, extra = {gamespeed = 4, current = 2*60}},
+	config = {time = 2*20, timing = false, gamespeed_factor = 1.5, game_over_override = false, base_speed = 4, extra = {gamespeed = 4, current = 2*20}},
 	loc_vars = function(self)
 		adjust_time(self)
 		local minutes = math.floor(self.config.extra.current/60)
@@ -1327,13 +1347,7 @@ SMODS.Blind{
 	ppu_artist = {"Ben Roffey"},
 	calculate = function(self, blind, context)
 		if context.end_of_round then
-			self.config.timing = false
-			self.config.extra.current = self.config.time
-			self.config.extra.gamespeed = self.config.base_speed
-			G.GAME.blind.children.animatedSprite.T.scale = 1
-			if source then 
-				source:stop()
-			end
+			reset_hd(self)
 		end
 	end,
 	disable = function(self)
@@ -1343,13 +1357,7 @@ SMODS.Blind{
 		end
 	end,
 	defeat = function(self)
-		self.config.timing = false
-		self.config.extra.current = self.config.time
-		self.config.extra.gamespeed = self.config.base_speed
-		G.GAME.blind.children.animatedSprite.T.scale = 1
-		if source then 
-			source:stop()
-		end
+		reset_hd(self)
 	end
 }
 

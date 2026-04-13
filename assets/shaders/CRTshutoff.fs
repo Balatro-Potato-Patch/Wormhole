@@ -32,7 +32,7 @@ vec4 effect( vec4 colour, Image tex, vec2 texture_coords, vec2 screen_coords )
     vec2 shrinkSpeed = vec2(2.5, 4);    //How quickly the screen shrinks, x and y
     float shrinkBrightnessRate = 1.0;   //A multiplier for progress to make the screen brighter
     float minScale = 0.001;             //The minimum scale of x and y, leaving a bar on the screen
-    vec2 expandSpeed = vec2(3, 3);      //How quickly the screen expands, x and y
+    vec2 expandSpeed = vec2(4, 4);      //How quickly the screen expands, x and y
     float expandBrightnessRate = 1.2;   //A multiplier for progress to dim the screen back to usual colours
 
     float y_scale = 1; //amount to shrink along y
@@ -40,7 +40,7 @@ vec4 effect( vec4 colour, Image tex, vec2 texture_coords, vec2 screen_coords )
         y_scale = max(minScale, 1.0 - progress * shrinkSpeed.y); 
     }
     else{
-        y_scale = min(1, 0.0 + (progress - 0.8) * expandSpeed.y); 
+        y_scale = min(1, 0.0 + (progress - 1.2) * expandSpeed.y); 
     }
     uv.y = (uv.y - 0.5) / y_scale + 0.5;
 
@@ -49,7 +49,7 @@ vec4 effect( vec4 colour, Image tex, vec2 texture_coords, vec2 screen_coords )
         x_scale = max(minScale, 2 - progress * shrinkSpeed.x);
     }
     if (progress > 1.2) {
-        x_scale = min(1, (progress - 0.8) * expandSpeed.x);
+        x_scale = min(1, (progress - 1.2) * expandSpeed.x);
     }
 
     if (y_scale == minScale && x_scale == minScale) {
