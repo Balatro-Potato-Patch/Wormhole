@@ -1,5 +1,24 @@
 Wormhole.COLON_THREE = {C = {}}
 
+Wormhole.COLON_THREE.entropy = SMODS.Gradient {
+    key = "entropy",
+    colours = {
+        G.C.RED,
+        G.C.ORANGE,
+        G.C.GREEN,
+        G.C.BLUE,
+        G.C.PURPLE,
+    }
+}
+
+Wormhole.COLON_THREE.ruby = SMODS.Gradient {
+    key = "ruby",
+    colours = {
+        HEX("FF0000"),
+        HEX("F61E8E")
+    }
+}
+
 SMODS.Atlas {
     path = "colon_three/jokers.png",
     key = "ct_jokers",
@@ -23,13 +42,7 @@ PotatoPatchUtils.Developer{
     name = "lordruby",
     loc = true,
     team = ":3",
-    colour = SMODS.Gradient{
-        key = "colon_three_ruby_gradient",
-        colours = {
-            HEX("FF0000"),
-            HEX("f61e8e")
-        }
-    },
+    colour = Wormhole.COLON_THREE.ruby,
     atlas = "worm_ct_credits",
     pos = {x=0,y=0}
 }
