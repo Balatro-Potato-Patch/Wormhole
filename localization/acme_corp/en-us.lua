@@ -224,7 +224,7 @@ return {
                 name = 'ACME Corporation',
             },
             PotatoPatchDev_RadiationV2 = {
-                name = "ACME Radiation Plushie",
+                name = "RadiationV2",
                 text = {
                     {
                         "This was my {C:attention}first contribution{} to a",
