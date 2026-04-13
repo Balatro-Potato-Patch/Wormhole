@@ -57,7 +57,16 @@ return {
                 name = "Poker The Poker",
                 text = {":chud:"}
             },
-            PotatoPatchDev_worm_omega = {name = "Omega", text = {"TEMP"}},
+            PotatoPatchDev_worm_omega = {name = "Omega", text = {
+                {
+                    "Artist, resident joker shipper",
+                    "Artist for Hot Potato, BU Language Mod, and guest artist on Garbshit",
+                    "If you see Perkeo kissing Triboulet anywhere, it's probably my fault",
+                },
+                {
+                    "I fucking love Blacephalon"
+                }
+            }},
             PotatoPatchDev_worm_superb = {
                 name = "Superb Thing",
                 text = {"TEMP"}
