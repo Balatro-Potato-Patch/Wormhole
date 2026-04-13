@@ -539,7 +539,7 @@ SpaceTart({
 		boostinc = 2.5
 	},
 	credits = {
-		coder = { "Corobo" },
+		coder = { "corobo" },
 	},
 
 	calculates = {
@@ -814,7 +814,7 @@ SpaceTart({
 		reg = 1,
 	},
 	credits = {
-		coder = { "Corobo" },
+		coder = { "corobo" },
 	},
 
 	calculates = {
@@ -852,7 +852,7 @@ SpaceTart({
 		boostinc = 30
 	},
 	credits = {
-		coder = { "Corobo" },
+		coder = { "corobo" },
 	},
 
 	calculates = {
@@ -869,7 +869,7 @@ SpaceTart({
 		function(card, tart_config, context, boost_count)
 			if context.joker_main then
 				return {
-					mult = tart_config.boosted + (boost_count - 1) * tart_config.boostinc,
+					chips = tart_config.boosted + (boost_count - 1) * tart_config.boostinc,
 				}
 			end
 		end
@@ -904,7 +904,7 @@ SpaceTart({
 		boost_increment = 0.05,
 	},
 	credits = {
-		coder = { "Corobo" },
+		coder = { "corobo" },
 	},
 
 	calculates = {
