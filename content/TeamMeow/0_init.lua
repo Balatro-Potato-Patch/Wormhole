@@ -81,7 +81,7 @@ PotatoPatchUtils.Developer({
 	calculate = function(self, context)
 		if context.setting_blind and G.GAME.meow_sanity_lost then
 			return {
-				x_blind_size = math.pow(1.25, G.GAME.meow_sanity_lost),
+				x_blind_size = 1.25 ^ G.GAME.meow_sanity_lost,
 			}
 		end
 	end,
