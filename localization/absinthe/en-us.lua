@@ -622,7 +622,15 @@ return {
             worm_wq_abs_astra = {
                 "Take it from me, you know",
                 "how to navigate Outer Space!"
-            }
+            },
+            worm_lq_abs_nix = {
+                "You took the moon,",
+                "but couldn't take the sun..."
+            },
+            worm_wq_abs_nix = {
+                "A win on the rocks.",
+                "You sure shook up that one!"
+            },
         }
     }
 }

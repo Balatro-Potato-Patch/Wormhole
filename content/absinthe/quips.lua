@@ -3,16 +3,32 @@ SMODS.JimboQuip {
     key = 'lq_abs_astra',
     type = 'loss',
     extra = { ppu_dev = 'worm_theAstra' },
-    filter = function(self, type)
-        return true, {weight = 100}
-    end
 }
 
 SMODS.JimboQuip {
     key = 'wq_abs_astra',
     type = 'win',
     extra = { ppu_dev = 'worm_theAstra' },
-    filter = function(self, type)
-        return true, {weight = 100}
-    end
+}
+
+-- Gabby Quips
+
+-- [i was gonna have a custom text sound but it didnt sound that good tbh so i went against it LMAO]
+
+SMODS.JimboQuip {
+    key = 'lq_abs_nix',
+    type = 'loss',
+    extra = { 
+        ppu_dev = 'worm_nixthatoneartist', 
+        times = 10,
+    },
+}
+
+SMODS.JimboQuip {
+    key = 'wq_abs_nix',
+    type = 'win',
+    extra = { 
+        ppu_dev = 'worm_nixthatoneartist',
+        times = 11,
+     },
 }
