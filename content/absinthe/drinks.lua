@@ -16,6 +16,11 @@ SMODS.Atlas {
     py = 95
 }
 
+SMODS.Sound({
+	key = "abs_refill",
+	path = "absinthe/refill.ogg",
+})
+
 SMODS.Attribute {
     key = 'drinks'
 }
@@ -166,7 +171,7 @@ function Card:abs_refill_drink()
             end
         }))
 
-        SMODS.calculate_effect({ message = localize('k_worm_abs_refilled_ex'), colour = G.C.SECONDARY_SET.abs_drinks, sound = self.ability.drink_values.refill_sound }, self)
+        SMODS.calculate_effect({ message = localize('k_worm_abs_refilled_ex'), colour = G.C.SECONDARY_SET.abs_drinks, sound = 'worm_abs_refill', per = 1 }, self)
         SMODS.calculate_context({ abs_drink_refilled = true, card = self })
     end
 end

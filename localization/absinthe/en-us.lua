@@ -575,7 +575,28 @@ return {
                     '{s:0.75}jame'
                 }
                 }
-            }
+            },
+            PotatoPatchDev_pi_cubed = {
+                name = 'pi_cubed',
+                text = { {
+                    "Hey y'all! I'm {C:red}pi_cubed{}, and thanks for playing {E:1,C:edition}Wormhole{}!",
+                    "I hope you got to play around with {C:absinthe,E:1}absinthe{}'s fancy drinks!",
+                    "I had a blast spitballing ideas for effects,",
+                    "and helping to program our {C:abs_drinks}Drinks{} and {C:attention}Jokers{}!",
+                    "{s:0.8}please use {C:attention,s:0.8}Glass Storm{s:0.8} that one was really tricky to make look clean",
+                }, {
+                    "This dream team was an absolute joy to work with,",
+                    "and I couldn't have possibly asked for a better one!",
+                    "They are friendly, creative, artistically talented,",
+                    "and have a keen eye for good game design!",
+                    "I'd love to work on something together in the future!",
+                }, {
+                    "{s:0.8}If you are reading this, you are legally obligated",
+                    "{s:0.8}to download and play {C:attention,s:0.8}Maximus{s:0.8}, {C:attention,s:0.8}Blindside{s:0.8},",
+                    "{s:0.8}the {C:attention,s:0.8}Collage{s:0.8} Modpack, and {C:attention,s:0.8}Suikalatro{s:0.8}.",
+                }
+                }
+            },
         }
     },
     misc = {
