@@ -41,24 +41,24 @@ G.E_MANAGER:add_event(Event({
 	end,
 }))
 for i = 1, 3 do
-	SMODS.Sound {
-		key = "meowMeow"..i,
-		path = "TeamMeow/meow"..i..".ogg",
-	}
+	SMODS.Sound({
+		key = "meowMeow" .. i,
+		path = "TeamMeow/meow" .. i .. ".ogg",
+	})
 end
-SMODS.Sound {
+SMODS.Sound({
 	key = "meowChomp",
 	path = "TeamMeow/chomp.ogg",
-}
-SMODS.Sound {
+})
+SMODS.Sound({
 	key = "meowSanctuary",
 	path = "TeamMeow/3rdSanctuaryJolyne.ogg",
-}
+})
 PotatoPatchUtils.Team({
 	name = "meow",
 	colour = HEX("F9D0D1"),
 	loc = true,
-	credit_rows = {4,3},
+	credit_rows = { 4, 4 },
 	short_credit = true,
 })
 
@@ -81,10 +81,10 @@ PotatoPatchUtils.Developer({
 	calculate = function(self, context)
 		if context.setting_blind and G.GAME.meow_sanity_lost then
 			return {
-				x_blind_size = math.pow(1.25, G.GAME.meow_sanity_lost)
+				x_blind_size = math.pow(1.25, G.GAME.meow_sanity_lost),
 			}
 		end
-	end
+	end,
 })
 
 PotatoPatchUtils.Developer({
@@ -93,7 +93,7 @@ PotatoPatchUtils.Developer({
 	loc = true,
 	team = "meow",
 	atlas = "worm_meowCredits",
-	pos = {x = 3, y = 0}
+	pos = { x = 3, y = 0 },
 })
 
 local revo_colour = SMODS.Gradient({
@@ -110,7 +110,7 @@ PotatoPatchUtils.Developer({
 	loc = true,
 	team = "meow",
 	atlas = "worm_meowCredits",
-	pos = { x = 2, y = 0 }
+	pos = { x = 2, y = 0 },
 })
 
 PotatoPatchUtils.Developer({
@@ -119,7 +119,7 @@ PotatoPatchUtils.Developer({
 	loc = true,
 	team = "meow",
 	atlas = "worm_meowCredits",
-	pos = { x = 5, y = 0 }
+	pos = { x = 5, y = 0 },
 })
 
 local silverautumn_colour = SMODS.Gradient({
@@ -140,11 +140,11 @@ PotatoPatchUtils.Developer({
 	pos = { x = 0, y = 0 },
 	click_func = function(card)
 		love.system.openURL("https://golden-leaf.itch.io/")
-	end
+	end,
 })
 
-loc_colour('red')
-G.ARGS.LOC_COLOURS['incognito'] = HEX("D0D0D0")
+loc_colour("red")
+G.ARGS.LOC_COLOURS["incognito"] = HEX("D0D0D0")
 
 PotatoPatchUtils.Developer({
 	name = "incognito",
@@ -152,7 +152,7 @@ PotatoPatchUtils.Developer({
 	loc = true,
 	team = "meow",
 	atlas = "worm_meowCredits",
-	pos = { x = 1, y = 0 }
+	pos = { x = 1, y = 0 },
 })
 
 PotatoPatchUtils.Developer({
@@ -162,16 +162,16 @@ PotatoPatchUtils.Developer({
 	team = "meow",
 	atlas = "worm_meowCreditsJolyne",
 	pos = { x = 0, y = 0 },
-	click_func = function (card)
+	click_func = function(card)
 		play_sound("worm_meowSanctuary")
-	end
+	end,
 })
 
 SMODS.Attribute({
 	key = "cat",
-	keys = {"j_lucky_cat"}
+	keys = { "j_lucky_cat" },
 })
 SMODS.Attribute({
 	key = "spacetart",
-	alias = {"tart"}
+	alias = { "tart" },
 })
