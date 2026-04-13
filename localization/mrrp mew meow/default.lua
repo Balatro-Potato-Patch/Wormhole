@@ -227,8 +227,16 @@ descriptions={
 			name = 'Aure',
 			text = {
 				{
-					"Hi, I'm {E:1,C:mrrp_green}Aure{} aka Mr. SMODS."
+					"Hi, I'm {E:2,C:mrrp_green}Aure{} aka {E:2,C:mrrp_green}Mr. SMODS."
 				},
+				{
+					"I had {E:2,C:mrrp_blue}some{} of the ideas",
+					"and did {E:2,C:mrrp_blue}some{} of the code",
+					"for this team.",
+				},
+				{
+					"{s:0.8,C:mrrp_blue}fishing jame when{}"
+				}
 			},
 		},
 		PotatoPatchDev_Minty = {
