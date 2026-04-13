@@ -188,7 +188,7 @@ return {
 			'hand {C:red}loses{} a level',
 			'{C:attention}Gain #1#{} random {C:planet}hand level{}',
 			'and {X:mult,C:white}X#2#{} Mult',
-			'{C:inactive}(Currently {X:mult,C:white}#3#{C:inactive} Mult)'
+			'{C:inactive}(Currently {X:mult,C:white}X#3#{C:inactive} Mult)'
 		}
 	    },
         },
