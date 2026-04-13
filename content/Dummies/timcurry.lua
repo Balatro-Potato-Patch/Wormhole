@@ -1,19 +1,21 @@
 -- SPAAACE!
 
-SMODS.Sound({key = "dum_timcurryspace", path = "Dummies/sfx_tim_curry.ogg"})
+for k, v in ipairs({ "space", "anothervictory", "commander", "excellentjob", "excellentwork", "goodluckgentlemen", "niceworkcomrade", "suchashame", "suchashamefull", "treachery"}) do
+	SMODS.Sound({ key = "dum_timcurry_"..v, path = "Dummies/TimCurry/"..v..".ogg" })
+end
 
 SMODS.Atlas({
-    key = "DummiesTCTag",
-    path = "Dummies/timcurrytag.png",
-    px = 34,
-    py = 34
+	key = "DummiesTCTag",
+	path = "Dummies/timcurrytag.png",
+	px = 34,
+	py = 34
 })
 
 SMODS.Atlas({
-    key = "DummiesTCJoker",
-    path = "Dummies/timcurryjoker.png",
-    px = 129,
-    py = 95
+	key = "DummiesTCJoker",
+	path = "Dummies/timcurryjoker.png",
+	px = 129,
+	py = 95
 })
 
 SMODS.Joker({
@@ -105,3 +107,9 @@ SMODS.Tag({
 	ppu_artist = { "theonegoofali" },
 	ppu_team = { "dummies" },
 })
+
+local ccasbref = Card_Character.add_speech_bubble
+function Card_Character:add_speech_bubble(text_key, align, loc_vars, quip_args)
+	if self.config.args.center == 'j_worm_dum_timcurry' then aeiou = self; self.wormhole_pos_extra = { x = 2, y = 18 } end
+	ccasbref(self, text_key, align, loc_vars, quip_args)
+end

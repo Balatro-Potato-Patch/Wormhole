@@ -341,6 +341,12 @@ return {
             worm_dummies_flowire_1 = { "ERROR" },
             worm_dummies_flowire_2 = { "nil" },
             worm_dummies_flowire_3 = { "{s:5.0} " },
+            worm_dummies_timcurry_win_1 = { "Another victory, commander..." },
+            worm_dummies_timcurry_win_2 = { "{C:attention,s:1.5}Yes!{}", "Excellent job." },
+            worm_dummies_timcurry_win_3 = { "Excellent work, commander..." },
+            worm_dummies_timcurry_win_4 = { "Nice work, comrade." },
+            worm_dummies_timcurry_lose_normal = { "{C:hearts}Such a shame..." },
+            worm_dummies_timcurry_lose_full = { "Awww... you made it all this way", "just to fail at the end.", "{E:1,C:hearts}Such a shame..." },
         },
         labels = {
             worm_dum_Celestial = 'Celestial'

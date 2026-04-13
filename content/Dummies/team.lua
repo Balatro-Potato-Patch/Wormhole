@@ -47,18 +47,23 @@ PotatoPatchUtils.Developer {
     pos = { x = 3, y = 0 },
     loc = true,
 	calculate = function(self, context)
-		if (context.modify_shop_card or context.modify_booster_card or context.card_added) and context.card and context.card.config and context.card.config.center
-		and context.card.config.center.key and context.card.config.center.key == 'j_space' and not (context.retrigger_joker or context.blueprint) then
-			if G.hellocommander then return end
-			
+		if context.end_of_round and context.main_eval then G.goodluckgentlemen = false end
+		
+		if G.hellocommander then return end
+		
+		local context = context
+		
+		if context.first_hand_drawn and (G.GAME.blind and G.GAME.blind.boss and G.GAME.blind.in_blind) and not G.goodluckgentlemen then
+			G.goodluckgentlemen = true
 			local tc = SMODS.find_card('j_worm_dum_timcurry', true)
 			if tc and tc[1] then
 				G.hellocommander = true
 				return {
-					message = localize('worm_tim_curry_space'),
+					message = '!',
 					message_card = tc[1] or G.deck,
-					sound = "worm_dum_timcurryspace",
+					sound = "worm_dum_timcurry_goodluckgentlemen",
 					pitch = 1,
+					volume = 0.85,
 					extra = {
 						func = function()
 							G.E_MANAGER:add_event(Event({
@@ -70,6 +75,47 @@ PotatoPatchUtils.Developer {
 						end
 					}
 				}
+			end
+		end
+		
+		if context.card and context.card.config and context.card.config.center and context.card.config.center.key and not (context.retrigger_joker or context.blueprint) then
+			if context.card.config.center.key == 'j_space' and (context.modify_shop_card or context.modify_booster_card or context.card_added) then
+				local tc = SMODS.find_card('j_worm_dum_timcurry', true)
+				if tc and tc[1] then
+					G.hellocommander = true
+					return {
+						message = localize('worm_tim_curry_space'),
+						message_card = tc[1] or G.deck,
+						sound = "worm_dum_timcurry_space",
+						pitch = 1,
+						volume = 0.85,
+						extra = {
+							func = function()
+								G.E_MANAGER:add_event(Event({
+									func = function()
+										G.hellocommander = false
+										return true
+									end
+								}))
+							end
+						}
+					}
+				end
+			elseif context.card.config.center.key == 'j_worm_dum_timcurry' then
+				if context.card_added or context.joker_type_destroyed or context.selling_card then
+					G.hellocommander = true
+					return {
+						func = function()
+							G.E_MANAGER:add_event(Event({
+								func = function()
+									play_sound(context.card_added and 'worm_dum_timcurry_commander' or 'worm_dum_timcurry_treachery', 1, 0.85)
+									G.hellocommander = false
+									return true
+								end
+							}))
+						end
+					}
+				end
 			end
 		end
 	end
