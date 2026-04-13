@@ -9,7 +9,7 @@ SMODS.Tag {
     atlas = 'stewtags',
     pos = { x = 0, y = 0 },
     loc_vars = function(self, info_queue, tag)
-        info_queue[#info_queue + 1] = G.P_CENTERS.e_worm_stellar
+        info_queue[#info_queue + 1] = G.P_CENTERS.e_worm_stew_stellar
     end,
     apply = function(self, tag, context)
         if context.type == 'store_joker_modify' then
