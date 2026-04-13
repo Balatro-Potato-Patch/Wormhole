@@ -111,8 +111,8 @@ descriptions={
 				},
 				{
 					"{C:red}X#2#{} Blind size per",
-					"empty Joker slot and",
-					"empty consumeable slot"
+					"empty {C:attention}Joker{} slot and",
+					"empty {C:attention}consumeable{} slot"
 				}
 			}
 		},
