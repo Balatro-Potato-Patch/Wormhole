@@ -5,6 +5,7 @@ PotatoPatchUtils.Team({
 	colour = HEX("ff4267"),
 	loc = true,
 	calculate = function(self, context) end,
+	credit_rows = { 4, 3 },
 })
 PotatoPatchUtils.Developer({
 	name = "aikoyori",
@@ -29,7 +30,7 @@ PotatoPatchUtils.Developer({
 })
 PotatoPatchUtils.Developer({
 	name = "haya",
-	colour = HEX("515aa8"),
+	colour = HEX("8772d6"),
 	team = "jtem2",
 	loc = true,
 	-- pos = { x = 1, y = 0 },
