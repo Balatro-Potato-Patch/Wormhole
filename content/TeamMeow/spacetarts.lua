@@ -538,6 +538,9 @@ SpaceTart({
 		boosted = 10,
 		boostinc = 2.5
 	},
+	credits = {
+		coder = { "Corobo" },
+	},
 
 	calculates = {
 		-- Default ability
@@ -553,31 +556,15 @@ SpaceTart({
 		function(card, tart_config, context, boost_count)
 			if context.joker_main then
 				return {
-					mult = tart_config.boosted + (boost_count-1) * tart_config.boostinc,
+					mult = tart_config.boosted + (boost_count - 1) * tart_config.boostinc,
 				}
 			end
 		end,
-
 	},
 
 	loc_vars = function(self, info_queue, card, tart_config, boost_count)
-		local mult_boost = nil
-
-		local boost_counter = boost_count or 0
-		while boost_counter >= 0 do
-			local boost_probe = tart_config["boosted" .. boost_counter]
-			if boost_probe then
-				mult_boost = boost_probe
-				break
-			end
-
-			boost_counter = boost_counter - 1
-		end
-
-		mult_boost = mult_boost or tart_config.reg
-
 		return {
-			vars = { mult_boost },
+			vars = { (boost_count or 0 >= 1) and (tart_config.boosted + (boost_count - 1) * tart_config.boostinc) or (tart_config.reg) },
 		}
 	end,
 
@@ -826,6 +813,9 @@ SpaceTart({
 	config = {
 		reg = 1,
 	},
+	credits = {
+		coder = { "Corobo" },
+	},
 
 	calculates = {
 		-- Default ability
@@ -845,6 +835,7 @@ SpaceTart({
 	boosted_conds = {
 		-- Rainbow condition
 		has_rainbow,
+		
 		function(card)
 			return card.config and card.config.center_key == "j_worm_meow_catelite"
 		end,
@@ -857,8 +848,11 @@ SpaceTart({
 	foil_pos = { x = 2, y = 1 },
 	config = {
 		reg = 25,
-		boosted1 = 65,
-		boosted2 = 1.5,
+		boosted = 65,
+		boostinc = 30
+	},
+	credits = {
+		coder = { "Corobo" },
 	},
 
 	calculates = {
@@ -875,39 +869,15 @@ SpaceTart({
 		function(card, tart_config, context, boost_count)
 			if context.joker_main then
 				return {
-					chips = tart_config.boosted1,
+					mult = tart_config.boosted + (boost_count - 1) * tart_config.boostinc,
 				}
 			end
-		end,
-
-		-- Level 2+ boosted ability
-		function(card, tart_config, context, boost_count)
-			if context.joker_main then
-				return {
-					xchips = tart_config.boosted2,
-				}
-			end
-		end,
+		end
 	},
 
 	loc_vars = function(self, info_queue, card, tart_config, boost_count)
-		local chips_boost = nil
-
-		local boost_counter = boost_count or 0
-		while boost_counter >= 0 do
-			local boost_probe = tart_config["boosted" .. boost_counter]
-			if boost_probe then
-				chips_boost = boost_probe
-				break
-			end
-
-			boost_counter = boost_counter - 1
-		end
-
-		chips_boost = chips_boost or tart_config.reg
-
 		return {
-			vars = { chips_boost },
+			vars = { (boost_count or 0 >= 1) and (tart_config.boosted + (boost_count - 1) * tart_config.boostinc) or tart_config.reg },
 		}
 	end,
 
@@ -932,6 +902,9 @@ SpaceTart({
 	config = {
 		reg = 0.15,
 		boost_increment = 0.05,
+	},
+	credits = {
+		coder = { "Corobo" },
 	},
 
 	calculates = {
