@@ -64,6 +64,9 @@ PotatoPatchUtils.Developer {
     atlas = "worm_ct_credits",
     pos = { x = 2, y = 0 }
 }
+-- stupid that i have to do this
+loc_colour()
+G.ARGS.LOC_COLOURS.pure_black = HEX("000000ff")
 
 PotatoPatchUtils.Developer {
     name = "notmario",

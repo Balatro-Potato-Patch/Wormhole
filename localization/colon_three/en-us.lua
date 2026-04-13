@@ -378,10 +378,10 @@ return {
             PotatoPatchDev_ophelia = {
                 name = "ivy",
                 text = {
-                    "evil little thing",
-                    " ",
-                    "Jack of no trades",
-                    "Master of None"
+                    "mysterious puppygirl who {X:pure_black,C:pure_black}nothing",
+                    "i did some art!",
+                    "Find me at",
+                    "https://{X:pure_black,C:pure_black}aaaaaaa{}.com/{X:pure_black,C:pure_black}meowmeow{}"
                 }
             },
             PotatoPatchDev_notmario = {
