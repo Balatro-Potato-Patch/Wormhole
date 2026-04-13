@@ -79,6 +79,7 @@ SMODS.Joker({
 	blueprint_compat = false,
 	eternal_compat = true,
 	perishable_compat = false,
+	attributes = { "economy", "xchips", "mult" },
 	calc_dollar_bonus = function(self, card) end,
 	can_use = function(self, card)
 		return true
@@ -298,7 +299,7 @@ local function generate_exchange_item_ui(card, option)
 							padding = 0.05,
 							emboss = 0.05,
 							colour = G.C.WHITE,
-							minw = 2.4
+							minw = 2.4,
 						},
 						nodes = { { n = G.UIT.R, config = { align = "cm", padding = 0.03 }, nodes = cost } },
 					},
