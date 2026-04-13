@@ -7,6 +7,9 @@ SMODS.Joker { -- :3
             multi = 1
         }
     },
+    atlas = 'VVjokers',
+    pos = {x = 4, y = 1},
+    soul_pos = {x = 5, y = 1},
     blueprint_compat = true,
     loc_vars = function(self, info_queue, card)
         local planets_used = 0
