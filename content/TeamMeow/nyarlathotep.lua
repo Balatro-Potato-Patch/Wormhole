@@ -286,6 +286,7 @@ local function generate_exchange_item_ui(card, option)
 							padding = 0.05,
 							emboss = 0.05,
 							colour = G.C.WHITE,
+							minw = 2.4,
 						},
 						nodes = { { n = G.UIT.R, config = { align = "cm", padding = 0.03 }, nodes = desc } },
 					},
@@ -297,6 +298,7 @@ local function generate_exchange_item_ui(card, option)
 							padding = 0.05,
 							emboss = 0.05,
 							colour = G.C.WHITE,
+							minw = 2.4
 						},
 						nodes = { { n = G.UIT.R, config = { align = "cm", padding = 0.03 }, nodes = cost } },
 					},
