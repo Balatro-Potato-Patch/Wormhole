@@ -321,7 +321,7 @@ return {
 					{
 						"Make deals with an",
 						"{C:attention}Outer God{} at the",
-						"cost of your {C:red,E:1}sanity",
+						"cost of your {C:purple,E:1}sanity",
 					},
 					{
 						"{C:inactive,s:0.8}(Click this Joker to reveal",
@@ -409,7 +409,7 @@ return {
 			exc_worm_meow_void = {
 				name = "Void",
 				text = {
-					"Nyarlathotep gains {C:red}+#1#{}",
+					"{C:attention}Nya-rlathotep{} gains {C:red}+#1#{}",
 					"Mult and {X:chips,C:white}X#2#{} Chips",
 					"{C:inactive}(Currently {C:red}+#3#{C:inactive} Mult",
 					"{C:inactive}and {X:chips,C:white}X#4#{C:inactive} Chips)"
@@ -502,6 +502,26 @@ return {
 					"be used immediately",
 				},
 			},
+			worm_meow_appease_tooltip = {
+				name = "Appeasing Nya-rlathotep",
+				text = {
+					"If {C:attention}Nya-rlathotep{} has",
+					"any {C:worm_meow_spacetart}©Spacetarts{} on it,",
+					"you can sacrifice those",
+					"{C:worm_meow_spacetart}©Spacetarts{} to recover",
+					"any lost Sanity",
+				}
+			},
+			worm_meow_reroll_tooltip = {
+				name = "Rerolling Exchanges",
+				text = {
+					"The cost of rerolling",
+					"the exchanges that",
+					"{C:attention}Nya-rlathotep{} offers",
+					"does not increase",
+					"when rerolling",
+				}
+			},
 		},
 	},
 	misc = {
@@ -521,8 +541,8 @@ return {
 			k_worm_meow_exchange = "Exchange",
 			k_worm_meow_exchanged = "Exchanged",
 			k_worm_meow_sanity_blind_mult = "When Blind is selected, each point of Sanity lost multiplies Blind Size by X1.25",
-			k_worm_meow_appease1 = "Appease the",
-			k_worm_meow_appease2 = "Outer Gods",
+			k_worm_meow_appease1 = "Appease",
+			k_worm_meow_appease2 = "Nya-rlathotep",
 		},
 		labels = {
 			worm_meow_zodicat = "Zodicat",

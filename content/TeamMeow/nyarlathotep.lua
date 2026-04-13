@@ -186,6 +186,9 @@ SMODS.Joker({
 				Wormhole.TEAM_MEOW.generate_exchange_pool(card, "nyarlathotep_exchanges")
 		end
 	end,
+	ppu_team = { "meow" },
+	ppu_coder = { "thunderedge" },
+	-- ppu_artist = {},
 })
 
 ---@class NyarlathotepExchange
@@ -535,6 +538,10 @@ function Wormhole.TEAM_MEOW.nyarlathotep_exchange_menu_UIdef(card)
 								padding = 0.05,
 								func = "worm_meow_can_reroll_exchanges",
 								button = "worm_meow_reroll_exchanges",
+								detailed_tooltip = {
+									set = "Other",
+									key = "worm_meow_reroll_tooltip",
+								},
 							},
 							nodes = {
 								{
@@ -586,6 +593,10 @@ function Wormhole.TEAM_MEOW.nyarlathotep_exchange_menu_UIdef(card)
 								padding = 0.05,
 								func = "meow_can_appease",
 								button = "meow_appease",
+								detailed_tooltip = {
+									set = "Other",
+									key = "worm_meow_appease_tooltip",
+								},
 							},
 							nodes = {
 								{
@@ -599,7 +610,7 @@ function Wormhole.TEAM_MEOW.nyarlathotep_exchange_menu_UIdef(card)
 											config = {
 												text = localize("k_worm_meow_appease1"),
 												colour = G.C.UI.TEXT_LIGHT,
-												scale = 0.375,
+												scale = 0.5,
 											},
 										},
 									},
@@ -615,7 +626,7 @@ function Wormhole.TEAM_MEOW.nyarlathotep_exchange_menu_UIdef(card)
 											config = {
 												text = localize("k_worm_meow_appease2"),
 												colour = G.C.UI.TEXT_LIGHT,
-												scale = 0.4,
+												scale = 0.325,
 											},
 										},
 									},
