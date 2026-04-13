@@ -28,6 +28,10 @@ local function is_rock(card)
 	return card and card.worm_was_quantum_rock or (card.config.center and card.config.center.key == rock.key)
 end
 local function emplace_and_shuffle_in_area(card, area)
+	if not area.cards then
+		card:remove()
+		return
+	end
 	local new_index = pseudorandom("worm_quantum_rock" .. os.time(), 1, #area.cards + 1)
 	table.insert(area.cards, new_index, card)
 	if card.facing == "back" and area.config.type ~= "discard" and area.config.type ~= "deck" then
@@ -40,6 +44,10 @@ local function emplace_and_shuffle_in_area(card, area)
 	card:hard_set_T()
 end
 local function shuffle_in_area(card, area)
+	if not area.cards then
+		card:remove()
+		return
+	end
 	for index, _card in ipairs(area.cards) do
 		if _card == card then
 			table.remove(area.cards, index)
@@ -125,7 +133,9 @@ local function spawn_new_rock(protect, whitelist)
 		simple_create(G.shop_booster)
 	elseif target == "shop_vouchers" and G.shop_vouchers then
 		simple_create(G.shop_vouchers, true)
-		G.shop_vouchers.config.card_limit = #G.shop_vouchers.cards
+		if G.shop_vouchers.cards then
+			G.shop_vouchers.config.card_limit = #G.shop_vouchers.cards
+		end
 	elseif target == "title" and G.title_top then
 		simple_create(G.title_top, 2)
 	end
