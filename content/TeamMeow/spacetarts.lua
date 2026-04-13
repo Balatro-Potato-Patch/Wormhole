@@ -930,7 +930,7 @@ SpaceTart({
 	boosted_conds = {
 		-- First condition
 		function(card)
-			return card.config and card.config.center_key == "j_joker"
+			return card.config and card.config.center_key == "j_worm_meow_nyarlathotep"
 		end,
 
 		-- Rainbow condition
