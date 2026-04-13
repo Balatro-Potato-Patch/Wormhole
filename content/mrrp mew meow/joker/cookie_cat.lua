@@ -2,7 +2,7 @@ SMODS.Joker {
     ppu_team = {'Mrrp Mew Meow :3'},
     ppu_artist = {'SarcPot'},
     ppu_coder = {'Cyan'},
-    key = 'cookie_cat',
+    key = 'mrrp_cookie_cat',
     atlas = "mrrp",
     pos = {
         x = 0,
@@ -21,7 +21,7 @@ SMODS.Joker {
         }
     },
     loc_vars = function(self, info_queue, card)
-    --  info_queue[#info_queue+1] = { key="worm_cookie_cat_song", set="Other" }
+    --  info_queue[#info_queue+1] = { key="worm_mrrp_cookie_cat_song", set="Other" }
         return {
             vars = {(card.ability.extra.level < 0 and "-" or "+") .. card.ability.extra.level,
                     (card.ability.extra.level_mod > 0 and "-" or "+") .. card.ability.extra.level_mod}

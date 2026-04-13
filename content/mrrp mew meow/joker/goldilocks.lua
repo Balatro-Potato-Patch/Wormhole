@@ -1,7 +1,7 @@
 SMODS.Joker {
     ppu_team = {'Mrrp Mew Meow :3'},
     ppu_coder = {'SarcPot'},
-    key = 'goldilocks',
+    key = 'mrrp_goldilocks',
     atlas = "mrrp",
     pos = {
         x = 2,
