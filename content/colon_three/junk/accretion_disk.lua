@@ -4,7 +4,7 @@ SMODS.Consumable {
     set = "Spectral",
     hidden = true,
     soul_set = "JunkSet",
-    key = "accretion_disk",
+    key = "ct_accretion_disk",
     atlas = "ct_derelict",
     pos = { x = 4, y = 1 },
     config = {
@@ -15,7 +15,7 @@ SMODS.Consumable {
         }
     },
     loc_vars = function(_,info_queue,card)
-        info_queue[#info_queue+1] = G.P_CENTERS.m_worm_junk_card
+        info_queue[#info_queue+1] = G.P_CENTERS.m_worm_ct_junk_card
         return {
             vars = {
                 card.ability.extra.xmult_mod,
@@ -34,7 +34,7 @@ SMODS.Consumable {
         if #G.hand.cards > 0 then
             local nonjunks = {}
             for _, _card in ipairs(G.hand.cards) do
-                if not SMODS.has_enhancement(_card, "m_worm_junk_card") then
+                if not SMODS.has_enhancement(_card, "m_worm_ct_junk_card") then
                     nonjunks[#nonjunks + 1] = _card
                 end
             end
@@ -42,7 +42,7 @@ SMODS.Consumable {
             for _, playing_card in ipairs(nonjunks) do
                 G.E_MANAGER:add_event(Event({
                     func = function()
-                        playing_card:set_ability("m_worm_junk_card")
+                        playing_card:set_ability("m_worm_ct_junk_card")
                         return true
                     end
                 }))

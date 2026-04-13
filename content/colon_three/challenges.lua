@@ -4,7 +4,7 @@ Wormhole.optional_features = (Wormhole.optional_features or {})
 Wormhole.optional_features.object_weights = true
 
 SMODS.Challenge {
-    key = "junk_it_up",
+    key = "ct_junk_it_up",
     rules = {
         custom = {
             { id = 'clear_out_junk' },

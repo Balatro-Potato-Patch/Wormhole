@@ -1,7 +1,7 @@
 if not Wormhole.COLON_THREE or not Wormhole.COLON_THREE.loaded then return end
 
 SMODS.Joker {
-    key = "event_horizon",
+    key = "ct_event_horizon",
     atlas = "ct_jokers",
     pos = { x = 2, y = 0 },
     config = { extra = { levels = 0, rotation = 0 } },
@@ -36,7 +36,7 @@ SMODS.Joker {
 -- rotate hook
 local card_draw = Card.draw
 function Card:draw(layer, ...)
-	if self.config and self.config.center.key == "j_worm_event_horizon" then
+	if self.config and self.config.center.key == "j_worm_ct_event_horizon" then
 		self.VT.r = self.VT.r + self.ability.extra.rotation
 		for k, v in pairs(self.children) do
 			v.VT.r = v.VT.r + self.ability.extra.rotation
@@ -45,7 +45,7 @@ function Card:draw(layer, ...)
 
 	card_draw(self, layer, ...)
 
-	if self.config and self.config.center.key == "j_worm_event_horizon" then
+	if self.config and self.config.center.key == "j_worm_ct_event_horizon" then
 		self.VT.r = self.VT.r - self.ability.extra.rotation
 		for k, v in pairs(self.children) do
 			v.VT.r = v.VT.r - self.ability.extra.rotation
@@ -55,8 +55,8 @@ end
 
 local upgrade_hands_ref = SMODS.upgrade_poker_hands
 SMODS.upgrade_poker_hands = function(args)
-    if (not args.from or not args.from.config or not args.from.config.center or args.from.config.center.key ~= "j_worm_event_horizon") and next(SMODS.find_card("j_worm_event_horizon")) then
-        for i, v in ipairs(SMODS.find_card("j_worm_event_horizon")) do
+    if (not args.from or not args.from.config or not args.from.config.center or args.from.config.center.key ~= "j_worm_ct_event_horizon") and next(SMODS.find_card("j_worm_event_horizon")) then
+        for i, v in ipairs(SMODS.find_card("j_worm_ct_event_horizon")) do
             v.ability.extra.levels = v.ability.extra.levels + (args.level_up or 1)
         end
     else

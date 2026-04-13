@@ -2,7 +2,7 @@ if not Wormhole.COLON_THREE or not Wormhole.COLON_THREE.loaded then return end
 
 SMODS.Consumable {
     set = "JunkSet",
-    key = "abandoned_wrench",
+    key = "ct_abandoned_wrench",
     atlas = "ct_derelict",
     pos = { x = 1, y = 0 },
     config = {
@@ -13,7 +13,7 @@ SMODS.Consumable {
         }
     },
     loc_vars = function(_,info_queue,card)
-        info_queue[#info_queue+1] = G.P_CENTERS.m_worm_junk_card
+        info_queue[#info_queue+1] = G.P_CENTERS.m_worm_ct_junk_card
         info_queue[#info_queue+1] = { key = "worm_clean_up_keyword", set="Other", specific_vars = { card.ability.extra.cleanup_num } }
         return {
             vars = {

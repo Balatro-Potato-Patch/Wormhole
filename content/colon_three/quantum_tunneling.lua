@@ -1,7 +1,7 @@
 if not Wormhole.COLON_THREE or not Wormhole.COLON_THREE.loaded then return end
 
 SMODS.Joker {
-    key = "quantum_tunneling",
+    key = "ct_quantum_tunneling",
     atlas = "ct_jokers",
     pos = { x = 3, y = 0 },
     rarity = 2,

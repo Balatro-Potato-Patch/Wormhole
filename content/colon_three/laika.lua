@@ -11,7 +11,7 @@ local function has_attribute (card, key)
 end
 
 SMODS.Joker {
-    key = "laika",
+    key = "ct_laika",
     atlas = "ct_jokers",
     pos = { x = 6, y = 0 },
     config = { extra = { levels = 0 } },

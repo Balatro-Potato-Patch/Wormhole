@@ -1,7 +1,7 @@
 if not Wormhole.COLON_THREE or not Wormhole.COLON_THREE.loaded then return end
 
 SMODS.Joker {
-    key = "grabberhand",
+    key = "ct_grabberhand",
     atlas = "ct_jokers",
     pos = { x = 4, y = 0 },
     config = { extra = { hands = 0, } },

@@ -6,7 +6,7 @@ PotatoPatchUtils.Developers.worm_meta.calculate = function(self, context)
         local junks = false
         local non_junks = false
         for i, v in ipairs(context.full_hand) do
-            if SMODS.has_enhancement(v, "m_worm_junk_card") then
+            if SMODS.has_enhancement(v, "m_worm_ct_junk_card") then
                 junks = true
                 if non_junks then break end
             else
@@ -28,7 +28,7 @@ PotatoPatchUtils.Developers.worm_meta.calculate = function(self, context)
     if context.before then
         local junks = false
         for i, v in ipairs(context.full_hand) do
-            if SMODS.has_enhancement(v, "m_worm_junk_card") then
+            if SMODS.has_enhancement(v, "m_worm_ct_junk_card") then
                 junks = true
                 break
             end
@@ -46,7 +46,7 @@ if Spectrallib and Spectrallib.ascend then
         local cards = G.STATE == G.STATES.SELECTING_HAND and G.hand.highlighted or G.play.cards
         local junks = 0
         for i, v in pairs(cards) do
-            if v.config.center.key == "m_worm_junk_card" then junks = junks + 1 end
+            if v.config.center.key == "m_worm_ct_junk_card" then junks = junks + 1 end
         end
         G.GAME.worm_c3_junk_stats.x_hand_stats = G.GAME.worm_c3_junk_stats.x_hand_stats or 1.5
         local junk_hands_mult = G.GAME.worm_c3_junk_stats.x_hand_stats ^ junks
@@ -68,7 +68,7 @@ else
         if text and G.GAME.hands[text] then
             local junks = 0
             for i, v in pairs(self.highlighted) do
-                if v.config.center.key == "m_worm_junk_card" then junks = junks + 1 end
+                if v.config.center.key == "m_worm_ct_junk_card" then junks = junks + 1 end
             end
             G.GAME.worm_c3_junk_stats.x_hand_stats = G.GAME.worm_c3_junk_stats.x_hand_stats or 1.5
             local junk_hands_mult = G.GAME.worm_c3_junk_stats.x_hand_stats ^ junks
@@ -133,8 +133,8 @@ function create_UIBox_junk_hands_tip(handname)
             {'S_A', true},
             {'D_A', true},
             {'D_Q', false},
-            {'S_A', true, true, enhancement = "m_worm_junk_card"},
-            {'S_A', true, true, enhancement = "m_worm_junk_card"},
+            {'S_A', true, true, enhancement = "m_worm_ct_junk_card"},
+            {'S_A', true, true, enhancement = "m_worm_ct_junk_card"},
         }) do
         local card = Card(0,0, 0.5*G.CARD_W, 0.5*G.CARD_H, G.P_CARDS[v[1]], G.P_CENTERS[v.enhancement or 'c_base'])
         if v[3] then card:juice_up(0.6, 0.4) elseif v[2] then card:juice_up(0.3, 0.2) end

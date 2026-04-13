@@ -7,7 +7,7 @@ SMODS.Atlas {
 }
 
 SMODS.Back {
-    key = "decrepit_deck",
+    key = "ct_decrepit_deck",
     atlas = "ct_deck",
     pos = { x = 0, y = 0 },
     unlocked = true,
@@ -19,7 +19,7 @@ SMODS.Back {
             func = function()
                 for k, v in pairs(G.playing_cards) do
                     if v:is_face() then
-                        v:set_ability("m_worm_junk_card")
+                        v:set_ability("m_worm_ct_junk_card")
                     end
                 end
                 return true

@@ -1,7 +1,7 @@
 return {
     descriptions = {
         Joker = {
-            j_worm_laika = {
+            j_worm_ct_laika = {
                 name = "Laika",
                 text = {
                     "Every {C:attention}space-themed{}",
@@ -9,7 +9,7 @@ return {
                     "temporary level"
                 }
             },
-            j_worm_dyson_sphere = {
+            j_worm_ct_dyson_sphere = {
                 name = "Dyson Sphere",
                 text = {
                     "Whenever you {C:attention}Clean-up{}, this",
@@ -18,7 +18,7 @@ return {
                     "{C:inactive}(Currently {C:mult}+#1#{C:inactive})"
                 }
             },
-            j_worm_grabberhand = {
+            j_worm_ct_grabberhand = {
                 name = "Grabber Hand",
                 text = {
                     {
@@ -33,7 +33,7 @@ return {
                     }
                 }
             },
-            j_worm_nyan_cat = {
+            j_worm_ct_nyan_cat = {
                 name = "Nyan Cat",
                 text = {
                     "This Joker gains {C:chips}+#1#{} Chips",
@@ -43,7 +43,7 @@ return {
                     "{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)",
                 }
             },
-            j_worm_event_horizon = {
+            j_worm_ct_event_horizon = {
                 name = {
                     "Event Horizon",
                     "{s:0.5}(Reach for the Sun and Burn! Burn! Burn!)"
@@ -55,7 +55,7 @@ return {
                     "{C:inactive}(Currently {C:attention}#1#{C:inactive} levels stored){}"
                 }
             },
-            j_worm_quantum_tunneling = {
+            j_worm_ct_quantum_tunneling = {
                 name = "Quantum Tunnelling",
                 text = {
                     "{C:green}#1#{} to all {C:attention}listed{} {C:green,E:1,S:1.1}probabilities{}",
@@ -63,7 +63,7 @@ return {
                     "{C:green}#2#{} for each card cleaned-up",
                 }
             },
-            j_worm_tesla_in_space = {
+            j_worm_ct_tesla_in_space = {
                 name = "Joker in Space",
                 text = {
                     "When you {C:attention}Clean-up{}, earn {C:gold}$#1#",
@@ -72,7 +72,7 @@ return {
             },
         },
         Enhanced = {
-            m_worm_junk_card = {
+            m_worm_ct_junk_card = {
                 name = "Junk",
                 text = {
                     {
@@ -87,7 +87,7 @@ return {
                 }
             },
             -- i lowkey hate this but whatever
-            m_worm_junk_card_mult = {
+            m_worm_ct_junk_card_mult = {
                 name = "Junk",
                 text = {
                     {
@@ -102,7 +102,7 @@ return {
                     }
                 }
             },
-            m_worm_junk_card_ringularity = {
+            m_worm_ct_junk_card_ringularity = {
                 name = "Junk",
                 text = {
                     {
@@ -118,7 +118,7 @@ return {
                     }
                 }
             },
-            m_worm_junk_card_mult_ringularity = {
+            m_worm_ct_junk_card_mult_ringularity = {
                 name = "Junk",
                 text = {
                     {
@@ -137,7 +137,7 @@ return {
             },
         },
         JunkSet = {
-            c_worm_asteroid_harvester = {
+            c_worm_ct_asteroid_harvester = {
                 name = "Asteroid Harvester",
                 text = {
                     {
@@ -150,7 +150,7 @@ return {
                     }
                 }
             },
-            c_worm_solar_sail = {
+            c_worm_ct_solar_sail = {
                 name = "Solar Sail",
                 text = {
                     {
@@ -164,7 +164,7 @@ return {
                     }
                 }
             },
-            c_worm_abandoned_wrench = {
+            c_worm_ct_abandoned_wrench = {
                 name = "Abandoned Wrench",
                 text = {
                     {
@@ -178,7 +178,7 @@ return {
                     }
                 }
             },
-            c_worm_lost_pliers = {
+            c_worm_ct_lost_pliers = {
                 name = "Lost Pliers",
                 text = {
                     {
@@ -192,7 +192,7 @@ return {
                     }
                 }
             },
-            c_worm_manhole_cover = {
+            c_worm_ct_manhole_cover = {
                 name = "Manhole Cover",
                 text = {
                     {
@@ -207,7 +207,7 @@ return {
                     }
                 }
             },
-            c_worm_starfish_prime = {
+            c_worm_ct_starfish_prime = {
                 name = "Starfish Prime",
                 text = {
                     {
@@ -223,7 +223,7 @@ return {
                     }
                 }
             },
-            c_worm_busted_3d_printer = {
+            c_worm_ct_busted_3d_printer = {
                 name = "Busted 3D Printer",
                 text = {
                     {
@@ -237,7 +237,7 @@ return {
                     }
                 }
             },
-            c_worm_trash_compactor = {
+            c_worm_ct_trash_compactor = {
                 name = "Trash Compactor",
                 text = {
                     {
@@ -255,7 +255,7 @@ return {
             },
         },
         Spectral = {
-            c_worm_accretion_disk = {
+            c_worm_ct_accretion_disk = {
                 name = "Accretion Disk",
                 text = {
                     {
@@ -275,34 +275,34 @@ return {
             },
         },
         Back = {
-            b_worm_decrepit_deck = {
+            b_worm_ct_decrepit_deck = {
                 name = "Decrepit Deck",
                 text = {
                     "Start run with each {C:attention}face",
-                    "{C:attention}card{} as a {C:attention,T:m_worm_junk_card}Junk Card",
+                    "{C:attention}card{} as a {C:attention,T:m_worm_ct_junk_card}Junk Card",
                 },
             },
         },
-        Voucher = {
-            v_worm_fuel_efficiency = {
-                name = "Fuel Efficiency",
-                text = {
-                    "You may pay {C:attention}Clean-up{} costs by",
-                    "selecting up to {C:attention}one{} fewer card",
-                    "{C:inactive}(Minimum of 1 card)"
-                }
-            },
-            v_worm_the_final_frontier = {
-                name = "The Final Frontier",
-                text = {
-                    "For every {C:attention}#1#{} {C:attention}Junk Cards",
-                    "scored, create a random {C:planet}Planet",
-                    "{C:inactive}(Must have room, currently #2#/#1#)"
-                }
-            },
-        },
+        -- Voucher = {
+        --     v_worm_fuel_efficiency = {
+        --         name = "Fuel Efficiency",
+        --         text = {
+        --             "You may pay {C:attention}Clean-up{} costs by",
+        --             "selecting up to {C:attention}one{} fewer card",
+        --             "{C:inactive}(Minimum of 1 card)"
+        --         }
+        --     },
+        --     v_worm_the_final_frontier = {
+        --         name = "The Final Frontier",
+        --         text = {
+        --             "For every {C:attention}#1#{} {C:attention}Junk Cards",
+        --             "scored, create a random {C:planet}Planet",
+        --             "{C:inactive}(Must have room, currently #2#/#1#)"
+        --         }
+        --     },
+        -- },
         Tag = {
-            tag_worm_derelict = {
+            tag_worm_ct_derelict = {
                 name = "Derelict Tag",
                 text = {
                     "Gives a free",
@@ -311,7 +311,7 @@ return {
             },
         },
         Other = {
-			p_worm_junkset_normal = {
+			p_worm_ct_junkset_normal = {
 				name = "Derelict Pack",
 				text = {
 					"Choose {C:attention}#1#{} of up to",
@@ -319,7 +319,7 @@ return {
 					"be used immediately",
 				},
 			},
-			p_worm_junkset_jumbo = {
+			p_worm_ct_junkset_jumbo = {
 				name = "Jumbo Derelict Pack",
 				text = {
 					"Choose {C:attention}#1#{} of up to",
@@ -327,7 +327,7 @@ return {
 					"be used immediately",
 				},
 			},
-			p_worm_junkset_mega = {
+			p_worm_ct_junkset_mega = {
 				name = "Mega Derelict Pack",
 				text = {
 					"Choose {C:attention}#1#{} of up to",
@@ -409,7 +409,7 @@ return {
             }
         },
         challenge_names = {
-            c_worm_junk_it_up = "Junk it Up!",
+            c_worm_ct_junk_it_up = "Junk it Up!",
         },
         v_text = {
             ch_c_clear_out_junk = { "If deck contains {C:attention}Junk Cards{} when {C:attention}Final Boss Blind{}" },

@@ -16,7 +16,7 @@ SMODS.ConsumableType {
     secondary_colour = Wormhole.COLON_THREE.C.JunkSet,
     collection_rows = { 4, 4 },
     shop_rate = 0.0,
-    default = "c_worm_asteroid_harvester"
+    default = "c_worm_ct_asteroid_harvester"
 }
 
 local start_run = Game.start_run
@@ -42,7 +42,7 @@ SMODS.Atlas {
 }
 
 SMODS.Enhancement {
-    key = "junk_card",
+    key = "ct_junk_card",
     ppu_coder = {"lordruby"},
     ppu_artist = { "notmario", "lordruby", "nxkoo", "ophelia", "meta" },
     replace_base_card = true,
@@ -60,7 +60,7 @@ SMODS.Enhancement {
             key_append = key_append.."_ringularity"
         end
         return {
-            key = (key_append ~= "") and "m_worm_junk_card"..key_append or nil,
+            key = (key_append ~= "") and "m_worm_ct_junk_card"..key_append or nil,
             vars = {
                 ((G.GAME.worm_c3_junk_stats or {}).chips or 1) * card.ability.extra.junk_mult,
                 ((G.GAME.worm_c3_junk_stats or {}).mult or 0) * card.ability.extra.junk_mult,
@@ -105,7 +105,7 @@ SMODS.DrawStep {
     key = 'worm_c3_junk_card',
     order = 1,
     func = function(self, layer)
-        if not (self.config and self.config.center and self.config.center.key == "m_worm_junk_card") then return nil end
+        if not (self.config and self.config.center and self.config.center.key == "m_worm_ct_junk_card") then return nil end
         --Draw the main part of the card
         if self.children.front then
             if (self.edition and self.edition.negative and (not self.delay_edition or self.delay_edition.negative)) then
@@ -128,7 +128,7 @@ SMODS.DrawStep {
     key = 'worm_c3_junk_card_edition',
     order = 21,
     func = function(self, layer)
-        if not (self.config and self.config.center and self.config.center.key == "m_worm_junk_card") then return nil end
+        if not (self.config and self.config.center and self.config.center.key == "m_worm_ct_junk_card") then return nil end
         local edition = self.delay_edition or self.edition
         if edition then
             for k, v in pairs(G.P_CENTER_POOLS.Edition) do
@@ -159,7 +159,7 @@ function Wormhole.COLON_THREE.junk_get_highlighted_cards(cards)
     for i, v in pairs(cards) do
         if v.highlighted then
             table.insert(highlighted, v) --t[#t+1] is marginally faster perf-wise, but this is cleaner
-            if v.config.center.key ~= "m_worm_junk_card" then all_junk_selected = false end
+            if v.config.center.key ~= "m_worm_ct_junk_card" then all_junk_selected = false end
         end
     end
     return highlighted, all_junk_selected
@@ -186,7 +186,7 @@ function Wormhole.COLON_THREE.junk_can_use(func)
         local cleanup_num = card.ability.extra.cleanup_num or 1
         local junk = 0
         for i, v in pairs(G.hand.highlighted) do
-            if v.config.center.key == "m_worm_junk_card" then junk = junk + 1 end
+            if v.config.center.key == "m_worm_ct_junk_card" then junk = junk + 1 end
         end
 
         local cleanup_vals = { [cleanup_num] = true }
@@ -244,7 +244,7 @@ function Wormhole.COLON_THREE.junk_use(config)
                         end
                         playing_card.stay_junk = nil
                     else
-                        playing_card:set_ability("m_worm_junk_card")
+                        playing_card:set_ability("m_worm_ct_junk_card")
                     end
                     return true
                 end

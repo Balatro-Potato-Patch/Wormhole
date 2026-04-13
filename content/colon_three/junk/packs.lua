@@ -15,7 +15,7 @@ for _, booster_type in ipairs({
 }) do
 	for i = 1, booster_type[3] do
 		SMODS.Booster({
-			key = "junkset_" .. booster_type[1] .. "_" .. i,
+			key = "ct_junkset_" .. booster_type[1] .. "_" .. i,
 			kind = "JunkSet",
 			atlas = "worm_junk_packs",
 			pos = { x = booster_type[4] + (i - 1), y = booster_type[5] },
