@@ -391,7 +391,13 @@ return {
             PotatoPatchDev_notmario = {
                 name = "notmario",
                 text = {
-                    "this {C:spectral}hexes{} me"
+                    {
+                        "this {C:spectral}hexes{} me"
+                    },
+                    {
+                        "{f:worm_emoji}🙂{} Hello I am John Balatro",
+                        "Please play Numbergem"
+                    }
                 }
             },
         }

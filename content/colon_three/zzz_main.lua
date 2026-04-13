@@ -38,6 +38,46 @@ SMODS.Atlas {
     px = 71, py = 95
 }
 
+SMODS.Font {
+	key = "emoji",
+	path = "NotoEmoji-Bold.ttf",
+}
+
+PotatoPatchUtils.Developer {
+    name = "notmario",
+    loc = true,
+    team = ":3",
+    colour = SMODS.Gradient {
+        key = "colon_three_notmario_gradient",
+        colours = {
+            HEX("c34242"),
+            HEX("ff6868")
+        }
+    },
+    atlas = "worm_ct_credits",
+    pos = { x = 3, y = 0 }
+}
+
+-- mf credits drawstep for polychrome stars
+SMODS.DrawStep {
+    key = 'ct_credits_polychrome',
+    order = 21,
+    func = function(self, layer)
+        if (((self.children or {}).center or {}).atlas or {}).name ~= "worm_ct_credits" then
+            return nil
+        end
+        if self.children.center.sprite_pos.x ~= 3 then return nil end
+        self.children.center:set_sprite_pos({ x = 3, y = 1 })
+        self.children.center:draw_shader("polychrome", nil, self.ARGS.send_to_shader)
+        self.children.center:draw_shader("polychrome", nil, self.ARGS.send_to_shader)
+        self.children.center:draw_shader("polychrome", nil, self.ARGS.send_to_shader)
+        self.children.center:draw_shader("polychrome", nil, self.ARGS.send_to_shader)
+        self.children.center:draw_shader("polychrome", nil, self.ARGS.send_to_shader)
+        self.children.center:set_sprite_pos({ x = 3, y = 0 })
+    end,
+    conditions = { vortex = false, facing = 'front' },
+}
+
 PotatoPatchUtils.Developer{
     name = "lordruby",
     loc = true,
@@ -76,41 +116,6 @@ PotatoPatchUtils.Developer {
     },
     atlas = "worm_ct_credits",
     pos = { x = 2, y = 0 }
-}
-
-PotatoPatchUtils.Developer {
-    name = "notmario",
-    loc = true,
-    team = ":3",
-    colour = SMODS.Gradient {
-        key = "colon_three_notmario_gradient",
-        colours = {
-            HEX("c34242"),
-            HEX("ff6868")
-        }
-    },
-    atlas = "worm_ct_credits",
-    pos = { x = 3, y = 0 }
-}
-
--- mf credits drawstep for polychrome stars
-SMODS.DrawStep {
-    key = 'ct_credits_polychrome',
-    order = 21,
-    func = function(self, layer)
-        if (((self.children or {}).center or {}).atlas or {}).name ~= "worm_ct_credits" then
-            return nil
-        end
-        if self.children.center.sprite_pos.x ~= 3 then return nil end
-        self.children.center:set_sprite_pos({ x = 3, y = 1 })
-        self.children.center:draw_shader("polychrome", nil, self.ARGS.send_to_shader)
-        self.children.center:draw_shader("polychrome", nil, self.ARGS.send_to_shader)
-        self.children.center:draw_shader("polychrome", nil, self.ARGS.send_to_shader)
-        self.children.center:draw_shader("polychrome", nil, self.ARGS.send_to_shader)
-        self.children.center:draw_shader("polychrome", nil, self.ARGS.send_to_shader)
-        self.children.center:set_sprite_pos({ x = 3, y = 0 })
-    end,
-    conditions = { vortex = false, facing = 'front' },
 }
 
 PotatoPatchUtils.Developer{ -- im sorry
