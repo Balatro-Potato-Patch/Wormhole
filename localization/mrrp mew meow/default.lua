@@ -255,8 +255,14 @@ descriptions={
 			name = 'mys. minty',
 			text = {
 				{"hey there everynyan my name's Minty :3"},
-				{"i like to nya"},
-				{"nyaaaaaa~ :3 :3 :3"},
+				{
+						"i like to nya",
+						"nyaaaaaa~ :3 :3 :3"
+				},
+				{
+						"i did some code because it's fun",
+						"and I'm good at it :3c",
+				},
 			},
 		},
 		PotatoPatchDev_Cyan = {
