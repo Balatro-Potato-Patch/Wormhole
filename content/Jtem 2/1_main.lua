@@ -1,19 +1,33 @@
 WORM_JTEM = {}
 
+SMODS.Atlas({
+	key = "jtem2_creds",
+	path = "Jtem 2/jteminspace.png",
+	px = 71,
+	py = 95,
+})
+
+SMODS.Gradient{
+	key = "jtem2_rainbow",
+	cycle = 1,
+	colours = { HEX("FFB0B2"), HEX("FFD7B0"), HEX("FFFAB0"), HEX("BFFFB0"), HEX("B0FFED"), HEX("B0E7FF"), HEX("B0B0FF"), HEX("E0B0FF")}
+}
+
+
 PotatoPatchUtils.Team({
 	name = "jtem2",
 	colour = HEX("ff4267"),
 	loc = true,
 	calculate = function(self, context) end,
-	credit_rows = { 4, 3 },
+	credit_rows = { 3, 3 },
 })
 PotatoPatchUtils.Developer({
 	name = "aikoyori",
-	colour = G.C.ORANGE,
+	colour = G.C.GREEN,
 	team = "jtem2",
 	loc = true,
-	-- pos = { x = 1, y = 0 },
-	-- atlas = "atlas_key",
+	pos = { x = 0, y = 0 },
+	atlas = "worm_jtem2_creds",
 })
 PotatoPatchUtils.Developer({
 	name = "sleepyg11",
@@ -25,16 +39,16 @@ PotatoPatchUtils.Developer({
 			WORM_JTEM.quantum_rock.calculate(context)
 		end
 	end,
-	-- pos = { x = 1, y = 0 },
-	-- atlas = "atlas_key",
+	pos = { x = 1, y = 0 },
+	atlas = "worm_jtem2_creds",
 })
 PotatoPatchUtils.Developer({
 	name = "haya",
 	colour = HEX("8772d6"),
 	team = "jtem2",
 	loc = true,
-	-- pos = { x = 1, y = 0 },
-	-- atlas = "atlas_key",
+	pos = { x = 2, y = 0 },
+	atlas = "worm_jtem2_creds",
 })
 PotatoPatchUtils.Developer({
 	name = "lexi",
@@ -49,22 +63,23 @@ PotatoPatchUtils.Developer({
 	}),
 	team = "jtem2",
 	loc = true,
-	-- pos = { x = 1, y = 0 },
-	-- atlas = "atlas_key",
+	pos = { x = 0, y = 1 },
+	atlas = "worm_jtem2_creds",
 })
+PotatoPatchUtils.Developer({
+	name = "missingnumber",
+	colour = SMODS.Gradients["worm_jtem2_rainbow"],
+	team = "jtem2",
+	loc = true,
+	pos = { x = 1, y = 1 },
+	atlas = "worm_jtem2_creds",
+})
+
 PotatoPatchUtils.Developer({
 	name = "ari",
 	colour = G.C.ORANGE,
 	team = "jtem2",
 	loc = true,
-	-- pos = { x = 1, y = 0 },
-	-- atlas = "atlas_key",
-})
-PotatoPatchUtils.Developer({
-	name = "missingnumber",
-	colour = G.C.ORANGE,
-	team = "jtem2",
-	loc = true,
-	-- pos = { x = 1, y = 0 },
-	-- atlas = "atlas_key",
+	pos = { x = 2, y = 1 },
+	atlas = "worm_jtem2_creds",
 })

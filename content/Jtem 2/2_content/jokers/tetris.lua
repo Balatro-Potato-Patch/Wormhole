@@ -26,7 +26,7 @@ function JtemTGM.UI.LocalizeKeybind(key)
 	elseif key == "]" then
 		key = "Right Bracket"
 	end
-	local result = G.localization.misc.handy_keybinds[key] or key
+	local result = (G.localization.misc.handy_keybinds or {})[key] or key
 	return result
 end
 
