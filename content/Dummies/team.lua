@@ -2,6 +2,8 @@
 PotatoPatchUtils.Team({
     name = "dummies",
     colour = HEX("FFFF00"),
+    credit_rows = { 3, 3 },
+    short_credit = true,
     loc = true,
 })
 -- Members (In Join-Order)
