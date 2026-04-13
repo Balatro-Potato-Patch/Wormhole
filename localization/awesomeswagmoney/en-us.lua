@@ -137,6 +137,20 @@ return {
                     "in hand, levels up most",
                     "played poker hand by {C:attention}#2#"
                 }
+            },
+            c_worm_stakataka = {
+                name = "Stakataka",
+                text = {
+                    "Turn {C:attention}#1#{} selected cards",
+                    "into {C:dark_edition}Polychrome{} {C:attention}Stone{} cards",
+                }
+            },
+            c_worm_naganadel = {
+                name = "Naganadel",
+                text = {
+                    "Turn a random Joker",
+                    "{C:dark_edition}Eternal{} and {C:dark_edition}Polychrome{}",
+                }
             }
         }
     },

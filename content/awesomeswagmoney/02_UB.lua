@@ -1,11 +1,17 @@
-SMODS.Atlas({key = "asm_ubs", path = "awesomeswagmoney/ubs.png", px = 89, py = 109, atlas_table = "ASSET_ATLAS"}):register()
+SMODS.Atlas({
+    key = "asm_ubs",
+    path = "awesomeswagmoney/ubs.png",
+    px = 89,
+    py = 109,
+    atlas_table = "ASSET_ATLAS"
+}):register()
 
 SMODS.Consumable {
     key = 'pheromosa',
     set = 'worm_ultrabeast',
-    atlas = 'worm_asm_ubs', 
-    pos = { x = 0, y = 0 }, 
-    soul_pos = { x = 1, y = 0 }, 
+    atlas = 'worm_asm_ubs',
+    pos = {x = 0, y = 0},
+    soul_pos = {x = 1, y = 0},
     config = {extra_slots_used = 1, extra = {chips = 251}},
 
     loc_vars = function(self, info_queue, card)
@@ -50,9 +56,9 @@ SMODS.Sound({key = "asm_buzz", path = 'buzz.ogg'})
 SMODS.Consumable {
     key = 'buzzwole',
     set = 'worm_ultrabeast',
-    atlas = 'worm_asm_ubs', 
-    pos = { x = 2, y = 0 }, 
-    soul_pos = { x = 3, y = 0 }, 
+    atlas = 'worm_asm_ubs',
+    pos = {x = 0, y = 2},
+    soul_pos = {x = 1, y = 2},
     config = {extra_slots_used = 1, extra = {mult = 53}},
 
     loc_vars = function(self, info_queue, card)
@@ -102,17 +108,15 @@ SMODS.Consumable {
 SMODS.Consumable {
     key = "xurkitree",
     set = "worm_ultrabeast",
-    atlas = 'worm_asm_ubs', 
-    pos = { x = 2, y = 1 }, 
-    soul_pos = { x = 3, y = 1 }, 
-    config = { extra_slots_used = 1 },
-    loc_vars = function (self, info_queue, card)
-        return { vars = { PRIMES[G.GAME.asm_xurkitree] or 17 }}
+    atlas = 'worm_asm_ubs',
+    pos = {x = 2, y = 1},
+    soul_pos = {x = 3, y = 1},
+    config = {extra_slots_used = 1},
+    loc_vars = function(self, info_queue, card)
+        return {vars = {PRIMES[G.GAME.asm_xurkitree] or 17}}
     end,
-    can_use = function (self, card)
-        return true
-    end,
-    use = function (self, card, area, copier)
+    can_use = function(self, card) return true end,
+    use = function(self, card, area, copier)
         G.GAME.asm_xurkitree = G.GAME.asm_xurkitree or 7
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
@@ -132,30 +136,31 @@ SMODS.Consumable {
 SMODS.Consumable {
     key = "kartana",
     set = "worm_ultrabeast",
-    atlas = 'worm_asm_ubs', 
-    pos = { x = 2, y = 0 }, 
-    soul_pos = { x = 3, y = 0 }, 
-    config = { extra_slots_used = 1, extra = { copies = 4, reduction = 2}},
-    loc_vars = function (self, info_queue, card)
-        return { vars = { card.ability.extra.copies, card.ability.extra.reduction }}
+    atlas = 'worm_asm_ubs',
+    pos = {x = 2, y = 0},
+    soul_pos = {x = 3, y = 0},
+    config = {extra_slots_used = 1, extra = {copies = 4, reduction = 2}},
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = {card.ability.extra.copies, card.ability.extra.reduction}
+        }
     end,
-    can_use = function (self, card)
-        return #G.hand.highlighted == 1
-    end,
-    use = function (self, card, area, copier)
+    can_use = function(self, card) return #G.hand.highlighted == 1 end,
+    use = function(self, card, area, copier)
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             delay = 0.2,
             func = function()
                 local _card = G.hand.highlighted[1]
-                play_sound('slice1', 0.96+math.random()*0.08)
+                play_sound('slice1', 0.96 + math.random() * 0.08)
                 for i = 1, card.ability.extra.copies do
                     local copy = copy_card(_card, nil, nil, G.playing_card)
                     copy:add_to_deck()
                     G.deck.config.card_limit = G.deck.config.card_limit + 1
                     table.insert(G.playing_cards, copy)
                     G.hand:emplace(copy)
-                    assert(SMODS.modify_rank(copy, -card.ability.extra.reduction))
+                    assert(
+                        SMODS.modify_rank(copy, -card.ability.extra.reduction))
                 end
                 _card:juice_up(0.3, 0.5)
                 SMODS.destroy_cards(G.hand.highlighted)
@@ -173,29 +178,26 @@ SMODS.Sound({key = "asm_boom", path = 'explosion.ogg'})
 SMODS.Consumable {
     key = "blacephalon",
     set = "worm_ultrabeast",
-    atlas = 'worm_asm_ubs', 
-    pos = { x = 0, y = 1 }, 
-    soul_pos = { x = 1, y = 1 }, 
+    atlas = 'worm_asm_ubs',
+    pos = {x = 0, y = 1},
+    soul_pos = {x = 1, y = 1},
 
-    config = { extra_slots_used = 1 },
-    loc_vars = function (self, info_queue, card)
-        return { vars = {  }}
-    end,
-    can_use = function (self, card)
-        return G.hand
-    end,
-    use = function (self, card, area, copier)
+    config = {extra_slots_used = 1},
+    loc_vars = function(self, info_queue, card) return {vars = {}} end,
+    can_use = function(self, card) return G.hand end,
+    use = function(self, card, area, copier)
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             delay = 0.2,
             func = function()
-                play_sound('worm_asm_boom', 0.96+math.random()*0.08, 0.3)
-                local _card = pseudorandom_element(G.hand.cards,pseudoseed('clown'))
+                play_sound('worm_asm_boom', 0.96 + math.random() * 0.08, 0.3)
+                local _card = pseudorandom_element(G.hand.cards,
+                                                   pseudoseed('clown'))
                 _card:set_edition('e_polychrome')
                 for k, v in ipairs(G.hand.cards) do
-                    if v ~= _card then 
+                    if v ~= _card then
                         v:juice_up(5, 0.5)
-                        delay(0.5/#G.hand.cards)
+                        delay(0.5 / #G.hand.cards)
                         SMODS.destroy_cards(v, nil, true)
                     end
                 end
@@ -206,8 +208,8 @@ SMODS.Consumable {
             trigger = 'after',
             delay = 0.8,
             func = function()
-                for i = 1, G.hand.config.card_limit-1 do
-                    draw_card(G.deck,G.hand, 90,'up', true)
+                for i = 1, G.hand.config.card_limit - 1 do
+                    draw_card(G.deck, G.hand, 90, 'up', true)
                 end
                 return true
             end
@@ -221,17 +223,15 @@ SMODS.Consumable {
 SMODS.Consumable {
     key = "celesteela",
     set = "worm_ultrabeast",
-    atlas = 'worm_asm_ubs', 
-    pos = { x = 2, y = 1 }, 
-    soul_pos = { x = 3, y = 1 }, 
-    config = { extra_slots_used = 1 },
-    loc_vars = function (self, info_queue, card)
-        return { vars = { PRIMES[G.GAME.asm_celesteela] or 2 }}
+    atlas = 'worm_asm_ubs',
+    pos = {x = 2, y = 1},
+    soul_pos = {x = 3, y = 1},
+    config = {extra_slots_used = 1},
+    loc_vars = function(self, info_queue, card)
+        return {vars = {PRIMES[G.GAME.asm_celesteela] or 2}}
     end,
-    can_use = function (self, card)
-        return true
-    end,
-    use = function (self, card, area, copier)
+    can_use = function(self, card) return true end,
+    use = function(self, card, area, copier)
         G.GAME.asm_celesteela = G.GAME.asm_celesteela or 1
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
@@ -240,7 +240,9 @@ SMODS.Consumable {
                 play_sound('timpani')
                 card:juice_up(0.3, 0.5)
                 G.hand:change_size(PRIMES[G.GAME.asm_celesteela])
-                G.GAME.round_resets.temp_handsize = (G.GAME.round_resets.temp_handsize or 0) + PRIMES[G.GAME.asm_celesteela]
+                G.GAME.round_resets.temp_handsize =
+                    (G.GAME.round_resets.temp_handsize or 0) +
+                        PRIMES[G.GAME.asm_celesteela]
                 G.GAME.asm_celesteela = G.GAME.asm_celesteela + 1
                 return true
             end
@@ -249,30 +251,136 @@ SMODS.Consumable {
     end
 }
 
+function conversionTarot(hand, newcenter)
+    for i = 1, #hand do
+        local percent = 1.15 - (i - 0.999) / (#hand - 0.998) * 0.3
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.15,
+            func = function()
+                hand[i]:flip();
+                play_sound('card1', percent);
+                hand[i]:juice_up(0.3, 0.3);
+                return true
+            end
+        }))
+    end
+    delay(0.2)
+
+    -- Handle the conversion
+    for i = 1, #hand do
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.1,
+            func = function()
+                hand[i]:set_ability(G.P_CENTERS[newcenter])
+                return true
+            end
+        }))
+    end
+
+    for i = 1, #hand do
+        local percent = 0.85 + (i - 0.999) / (#hand - 0.998) * 0.3
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.15,
+            func = function()
+                hand[i]:flip();
+                play_sound('tarot2', percent, 0.6);
+                hand[i]:juice_up(0.3, 0.3);
+                return true
+            end
+        }))
+    end
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = 0.2,
+        func = function()
+            G.hand:unhighlight_all();
+            return true
+        end
+    }))
+    delay(0.5)
+end
+
+SMODS.Consumable {
+    key = 'stakataka',
+    set = 'worm_ultrabeast',
+    atlas = 'worm_asm_ubs',
+    pos = {x = 2, y = 0},
+    soul_pos = {x = 3, y = 0},
+    config = {extra_slots_used = 1, max_highlighted = 3, mod_conv = 'm_stone'},
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = G.P_CENTERS[card.ability.mod_conv]
+        info_queue[#info_queue + 1] = G.P_CENTERS['e_polychrome']
+        return {
+            vars = {
+                card.ability.max_highlighted,
+                localize {
+                    type = 'name_text',
+                    set = 'Enhanced',
+                    key = card.ability.mod_conv
+                }
+            }
+        }
+    end,
+    can_use = function(self, card)
+        if #G.hand.highlighted > 0 and #G.hand.highlighted <
+            card.ability.max_highlighted + 1 then
+            return true
+        else
+            return false
+        end
+    end,
+
+    use = function(self, card)
+        for k, v in pairs(G.hand.highlighted) do
+            v:set_edition('e_polychrome')
+        end
+
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.4,
+            func = function()
+                play_sound('tarot1')
+                card:juice_up(0.3, 0.5)
+                return true
+            end
+        }))
+        conversionTarot(G.hand.highlighted, card.ability.mod_conv)
+        delay(0.6)
+
+        return true
+    end
+}
+
 SMODS.Consumable {
     key = 'guzzlord',
     set = 'worm_ultrabeast',
     atlas = 'worm_asm_ubs',
-    pos = { x = 2, y = 0 },
-    soul_pos = { x = 3, y = 0 },
-    config = { extra = { destroy = 5, levels = 3 } },
+    pos = {x = 0, y = 3},
+    soul_pos = {x = 1, y = 3},
+    config = {extra_slots_used = 1, extra = {destroy = 5, levels = 3}},
     loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.destroy, card.ability.extra.levels } }
+        return {vars = {card.ability.extra.destroy, card.ability.extra.levels}}
     end,
     use = function(self, card, area, copier)
         local destroyed_cards = {}
         local temp_hand = {}
 
-        for _, playing_card in ipairs(G.hand.cards) do temp_hand[#temp_hand + 1] = playing_card end
-        table.sort(temp_hand,
-            function(a, b)
-                return not a.playing_card or not b.playing_card or a.playing_card < b.playing_card
-            end
-        )
+        for _, playing_card in ipairs(G.hand.cards) do
+            temp_hand[#temp_hand + 1] = playing_card
+        end
+        table.sort(temp_hand, function(a, b)
+            return not a.playing_card or not b.playing_card or a.playing_card <
+                       b.playing_card
+        end)
 
         pseudoshuffle(temp_hand, 'asm_guzzlord')
 
-        for i = 1, card.ability.extra.destroy do destroyed_cards[#destroyed_cards + 1] = temp_hand[i] end
+        for i = 1, card.ability.extra.destroy do
+            destroyed_cards[#destroyed_cards + 1] = temp_hand[i]
+        end
 
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
@@ -292,11 +400,38 @@ SMODS.Consumable {
                 played = t.played
             end
         end
-        SMODS.upgrade_poker_hands{ level_up = card.ability.extra.levels, hands = hand, from = card, }
+        SMODS.upgrade_poker_hands {
+            level_up = card.ability.extra.levels,
+            hands = hand,
+            from = card
+        }
 
         delay(0.3)
     end,
-    can_use = function(self, card)
-        return G.hand and #G.hand.cards > 0
+    can_use = function(self, card) return G.hand and #G.hand.cards > 0 end
+}
+
+SMODS.Consumable {
+    key = 'naganadel',
+    set = 'worm_ultrabeast',
+    atlas = 'worm_asm_ubs',
+    pos = {x = 2, y = 0},
+    soul_pos = {x = 3, y = 0},
+    config = {extra_slots_used = 1 },
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = {}
+        }
     end,
+    use = function(self, card, area, copier)
+            local editionless_jokers = SMODS.Edition:get_edition_cards(G.jokers, true)
+            local eligible_card = pseudorandom_element(editionless_jokers, 'naganada')
+            eligible_card:set_edition('e_polychrome', true)
+            eligible_card:set_eternal(true)
+            play_sound('cancel', 0.3)
+            check_for_unlock({ type = 'have_edition' })
+    end, -- that was easy
+    can_use = function(self, card)
+        return next(SMODS.Edition:get_edition_cards(G.jokers, true))
+    end
 }
