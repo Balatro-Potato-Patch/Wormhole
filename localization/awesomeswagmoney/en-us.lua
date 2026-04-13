@@ -160,6 +160,14 @@ return {
                     "then turn {C:attention}3{} random cards",
                     "held in hand {C:dark_edition}Holographic{}",
                 }
+            },
+            c_worm_nihilego = {
+                name = "Nihilego",
+                text = {
+                    "{X:mult,C:white} X#1# {} Mult for the next {C:attention}2{} rounds,",
+                    "forces {C:attention}1{} card to {C:red}always be",
+                    "{C:red}selected{} while active"
+                }
             }
         }
     },
