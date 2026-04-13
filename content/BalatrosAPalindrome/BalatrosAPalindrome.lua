@@ -54,7 +54,7 @@ SMODS.Atlas {
 	py = 95
 }
 
-sendDebugMessage("before enhancement")
+--sendDebugMessage("before enhancement")
 
 SMODS.Enhancement {
     key = 'bap_void',
@@ -62,7 +62,7 @@ SMODS.Enhancement {
         name = 'Void',
 		text = {
 			"{C:chips}#1#{} chips when",
-			"{C:attention}played{} or {C:attention}held{}"
+			"{C:attention}held{} or {C:attention}scored{}"
 		}
     },
     atlas = 'Palindrome',
@@ -80,7 +80,7 @@ SMODS.Enhancement {
 }
 
 
-sendDebugMessage("before abyss")
+--sendDebugMessage("before abyss")
 
 -- The Abyss
 SMODS.Consumable {
@@ -95,7 +95,7 @@ SMODS.Consumable {
 	set = 'Tarot',
 	atlas = 'Palindrome',
 	pos = { x = 2, y = 0 },
-	config = { extra = { money = 10, cards = 5 } },
+	config = { extra = { money = 15, cards = 5 } },
 	loc_vars = function(self, info_queue, card)
 		return { vars = { card.ability.extra.money, card.ability.extra.cards } }
 	end,
@@ -142,13 +142,13 @@ SMODS.Consumable {
 }
 
 
-sendDebugMessage("Registered Abyss:", G.P_CENTERS["c_worm_bap_abyss"])
+--sendDebugMessage("Registered Abyss:", G.P_CENTERS["c_worm_bap_abyss"])
 
--- Nothing planet card
+-- Debug tarot
 SMODS.Consumable {
-    key = "bap_nothing",
+    key = "bap_debug",
     loc_txt = {
-		name = 'Nothing',
+		name = 'Debug',
 		text = {
 			"UNFINISHED",
 		}
@@ -178,5 +178,126 @@ SMODS.Consumable {
         card.ability.anim_time = (card.ability.anim_time or 0) + dt
         self.pos.x = math.sin(card.ability.anim_time) * 0.5 + 0.5
 		self.pos.y = math.cos(card.ability.anim_time) * 0.5 + 0.5
+    end
+}
+
+-- Nothing planet card
+SMODS.Consumable {
+    key = "bap_nothing",
+    loc_txt = {
+		name = 'Nothing',
+		text = {
+			"Does nothing (real)",
+		}
+	},
+    set = 'Planet',
+    cost = 3,
+	atlas = 'Palindrome',
+    pos = { x = 0, y = 0 },
+    config = { anim_time = 0 },
+    can_use = function(self, card) return true end,
+    use = function(self, card, area, copier)
+		G.E_MANAGER:add_event(Event({
+			trigger = 'after',
+			delay = 0.4,
+			func = function()
+				return true
+			end
+		}))
+	end
+}
+
+
+
+
+-- Milky Way
+SMODS.Joker {
+    key = "bap_milky_way",
+    blueprint_compat = true,
+    eternal_compat = false,
+    rarity = 2,
+    cost = 5,
+	atlas = 'Palindrome',
+    pos = { x = 1, y = 1 },
+    config = { extra = { hands_left = 10 } },
+	loc_txt = {
+		name = 'Milky Way',
+		text = {
+			"Creates a random {C:planet}Planet{} card",
+			"at end of round",
+        	"{C:inactive}({C:attention}#1#{C:inactive} remaining)",
+			"{C:inactive}(Must have room)",
+		}
+	},
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.hands_left } }
+    end,
+    calculate = function(self, card, context)
+        if context.after then
+			G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.4,
+                func = function()
+                    if G.consumeables.config.card_limit > #G.consumeables.cards then
+                        play_sound('timpani')
+                        SMODS.add_card({ set = 'Planet' })
+                        card:juice_up(0.3, 0.5)
+                    end
+                    return true
+                end
+            }))
+
+			if context.blueprint then return end
+
+            if card.ability.extra.hands_left - 1 <= 0 then
+                SMODS.destroy_cards(card, nil, nil, true)
+				G.GAME.pool_flags.bap_milky_drank = true;
+                return {
+                    message = "Drank!",
+                    colour = G.C.FILTER
+                }
+            else
+                card.ability.extra.hands_left = card.ability.extra.hands_left - 1
+                return {
+                    message = card.ability.extra.hands_left .. '',
+                    colour = G.C.FILTER
+                }
+            end
+        end
+    end,
+    in_pool = function(self, args) -- equivalent to `no_pool_flag = 'vremade_gros_michel_extinct'`
+        return not G.GAME.pool_flags.bap_milky_drank
+    end
+}
+
+-- Andromeda
+SMODS.Joker {
+    key = "bap_andromeda",
+    blueprint_compat = true,
+    eternal_compat = false,
+    rarity = 2,
+    cost = 6,
+	atlas = 'Palindrome',
+    pos = { x = 1, y = 2 },
+    config = {  },
+	loc_txt = {
+		name = 'Andromeda',
+		text = {
+			"UNFINISHED",
+		}
+	},
+    loc_vars = function(self, info_queue, card)
+        return { vars = {} }
+    end,
+    calculate = function(self, card, context)
+        if context.after then
+			return {
+				message = "this joker doesn't do anything yet",
+				colour = G.C.FILTER
+			}
+		end
+    end,
+    in_pool = function(self, args) -- equivalent to `yes_pool_flag = 'vremade_gros_michel_extinct'`
+        return G.GAME.pool_flags.bap_milky_drank
     end
 }
