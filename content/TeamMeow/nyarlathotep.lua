@@ -140,9 +140,9 @@ SMODS.Joker({
 		if next(cae.misc) then
 			seen = true
 			local entries = {}
-			for _, key in ipairs(cae.misc) do
-				local entry = Wormhole.TEAM_MEOW.nyarlathotep_exchanges[key]
-				local vars = entry.loc_vars and entry:loc_vars(card) or {}
+			for _, power in ipairs(cae.misc) do
+				local entry = Wormhole.TEAM_MEOW.nyarlathotep_exchanges[power.key]
+				local vars = entry.loc_vars and entry:loc_vars(card, power.amt) or {}
 				entries[#entries + 1] = {
 					vars = vars,
 					key = entry.key,
@@ -172,9 +172,9 @@ SMODS.Joker({
 			rets[#rets + 1] = cae.held_in_hand
 		end
 		if next(cae.misc) then
-			for _, key in ipairs(cae.misc) do
-				local entry = Wormhole.TEAM_MEOW.nyarlathotep_exchanges[key]
-				rets[#rets + 1] = entry:calculate(card, context) or {}
+			for _, power in ipairs(cae.misc) do
+				local entry = Wormhole.TEAM_MEOW.nyarlathotep_exchanges[power.key]
+				rets[#rets + 1] = entry:calculate(card, context, power.amt) or {}
 			end
 		end
 		return SMODS.merge_effects(rets)
@@ -198,17 +198,17 @@ SMODS.Joker({
 ---@field in_pool fun(self: NyarlathotepExchange, card: Card): boolean?
 ---@field config table
 ---@field loc_vars fun(self: NyarlathotepExchange, card: Card): table
----@field calculate fun(self: NyarlathotepExchange, card: Card, context: CalcContext): table?
+---@field calculate fun(self: NyarlathotepExchange, card: Card, context: CalcContext, amt: number?): table?
 ---@field misc? boolean
 
 ---@class NyarlathotepExchangeArgs
 ---@field key string
 ---@field cost? integer
 ---@field reward? fun(self: NyarlathotepExchange, card: Card): nil
----@field in_pool? fun(self: NyarlathotepExchange, card: Card): boolean?
+---@field in_pool? fun(self: NyarlathotepExchange, card: Card, amt: number?): boolean?
 ---@field config? table
----@field loc_vars? fun(self: NyarlathotepExchange, card: Card): table?
----@field calculate? fun(self: NyarlathotepExchange, card: Card, context: CalcContext): table?
+---@field loc_vars? fun(self: NyarlathotepExchange, card: Card, amt: number?): table?
+---@field calculate? fun(self: NyarlathotepExchange, card: Card, context: CalcContext, amt: number): table?
 ---@field misc? boolean
 
 ---@type NyarlathotepExchange[]
@@ -351,7 +351,16 @@ function G.FUNCS.worm_meow_exchange_reward(e)
 	local card = e.config.ref_table
 	local exchange = Wormhole.TEAM_MEOW.nyarlathotep_exchanges[e.config.exchange_option.key]
 	if exchange.misc then
-		card.ability.extra.misc[#card.ability.extra.misc + 1] = exchange.key
+		local found = false
+		for _, power in ipairs(exchange.misc) do
+			if power.key == e.config.exchange_option.key then
+				power.amt = power.amt + 1
+				found = true
+			end
+		end
+		if not found then
+			card.ability.extra.misc[#card.ability.extra.misc + 1] = { key = exchange.key, amt = 1 }
+		end
 	end
 	exchange:reward(card)
 	G.GAME.meow_sanity_lost = G.GAME.meow_sanity_lost + exchange.cost
@@ -375,6 +384,31 @@ function G.FUNCS.worm_meow_can_exchange_reward(e)
 	end
 end
 
+--[[
+To make an exchange for Nyarlathotep:
+
+Check NyarlathotepExchangeArgs above for the parameters.
+If you define a calc function, it will not trigger unless you set
+misc = true within the exchange. Its loc entry should be put under
+descriptions.Other["exc_mod prefix_meow_your key here"].
+loc_vars does not support info_queue - in order to display info
+about a particular center object, use {T:center_key} within the
+localization entry. Exchange options also don't support scaling
+the option itself.
+
+reward is called when the exchange button is pressed. card represents
+Nyarlathotep, which allows you to modify Nyarlathotep's values.
+The following functionality is handled by Nyarlathotep, and you don't
+need to make a calc function for these effects:
+joker_main - chips, xchips, mult, xmult
+held_in_hand - dollars, chips, xchips, mult, xmult
+individual (when card is scored) - dollars, chips, xchips, mult, xmult
+See below for examples.
+
+amt is only passed into calculate and loc_vars if misc is truthy.
+amt is for stacking purposes and to prevent duplicate loc entries.
+]]
+
 local default = nyarlathotep_exchange({
 	key = "void",
 	cost = 1,
@@ -392,6 +426,22 @@ local default = nyarlathotep_exchange({
 				self.config.xchips,
 				cae.joker_main.mult or 0,
 				cae.joker_main.xchips or 1,
+			},
+		}
+	end,
+})
+
+nyarlathotep_exchange({
+	key = "greed",
+	cost = 1,
+	config = { money = 30 },
+	reward = function(self, card)
+		ease_dollars(self.config.money)
+	end,
+	loc_vars = function(self, card)
+		return {
+			vars = {
+				self.config.money,
 			},
 		}
 	end,
