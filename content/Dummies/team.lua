@@ -13,6 +13,9 @@ SMODS.Atlas {
     px = 71,
     py = 95
 }
+
+SMODS.Sound({ key = "dum_ghostclicked", path = "Dummies/worm_dum_ghostclicked.ogg" })
+
 -- GhostSalt
 PotatoPatchUtils.Developer {
     name = "ghostsalt",
@@ -21,6 +24,9 @@ PotatoPatchUtils.Developer {
     atlas = "worm_dummies_team",
     pos = { x = 0, y = 0 },
     loc = true,
+	dum_sfx_click = "worm_dum_ghostclicked",
+	dum_sfx_pitch = { lower_bound = 0.95, upper_bound = 1.1 },
+	dum_sfx_volume = 0.8
 }
 -- vissa
 PotatoPatchUtils.Developer {
@@ -145,11 +151,33 @@ PotatoPatchUtils.Developer {
 local cardclickref = Card.click
 function Card:click()
 	if self and self.ppu_member and self.ppu_member.dum_sfx_click then
+		local pitch = 1
+		if type(self.ppu_member.dum_sfx_pitch) == "table" then
+			if self.ppu_member.dum_sfx_pitch.lower_bound and type(self.ppu_member.dum_sfx_pitch.lower_bound) == "number"
+			and self.ppu_member.dum_sfx_pitch.upper_bound and type(self.ppu_member.dum_sfx_pitch.upper_bound) == "number" then
+				math.randomseed(os.time() + math.floor(os.clock() * 1000000))
+				pitch = self.ppu_member.dum_sfx_pitch.lower_bound + (math.random() * (self.ppu_member.dum_sfx_pitch.upper_bound - self.ppu_member.dum_sfx_pitch.lower_bound))
+			end
+		elseif type(self.ppu_member.dum_sfx_pitch) == "number" then
+			pitch = self.ppu_member.dum_sfx_pitch
+		end
+
+		local volume = 1
+		if type(self.ppu_member.dum_sfx_volume) == "table" then
+			if self.ppu_member.dum_sfx_volume.lower_bound and type(self.ppu_member.dum_sfx_volume.lower_bound) == "number"
+			and self.ppu_member.dum_sfx_volume.upper_bound and type(self.ppu_member.dum_sfx_volume.upper_bound) == "number" then
+				math.randomseed(os.time() + math.floor(os.clock() * 1000000))
+				volume = self.ppu_member.dum_sfx_volume.lower_bound + (math.random() * (self.ppu_member.dum_sfx_volume.upper_bound - self.ppu_member.dum_sfx_volume.lower_bound))
+			end
+		elseif type(self.ppu_member.dum_sfx_volume) == "number" then
+			volume = self.ppu_member.dum_sfx_volume
+		end
+
 		if type(self.ppu_member.dum_sfx_click) == 'string' and SMODS.Sounds[self.ppu_member.dum_sfx_click] then
-			play_sound(self.ppu_member.dum_sfx_click)
+			play_sound(self.ppu_member.dum_sfx_click, pitch, volume)
 		elseif type(self.ppu_member.dum_sfx_click) == 'table' then
 			local dum_sfx = self.ppu_member.dum_sfx_click[math.random(1, #self.ppu_member.dum_sfx_click)]
-			if SMODS.Sounds[dum_sfx] then play_sound(dum_sfx) end
+			if SMODS.Sounds[dum_sfx] then play_sound(dum_sfx, pitch, volume) end
 		elseif type(self.ppu_member.dum_sfx_click) == 'function' then
 			self.ppu_member.dum_sfx_click(self)
 		end
