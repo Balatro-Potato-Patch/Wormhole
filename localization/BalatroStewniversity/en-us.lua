@@ -110,6 +110,17 @@ return {
                     'the {C:attention}last{} card used in scoring',
                     'for the next {C:attention}#1#{} hands'
                 }
+            },
+
+            j_worm_stew_chicken_egg = {
+                name = 'Paradox Earth',
+                text = {
+                    '{C:chips}+Chips{} equal to double the',
+                    'amount of {C:chips}Chips{} when triggered',
+                },
+                alt_text = {
+                    "{X:chips,C:white}X#1#{} Chips"
+                }
             }
 
         },
