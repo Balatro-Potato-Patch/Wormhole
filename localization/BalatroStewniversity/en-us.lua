@@ -127,6 +127,27 @@ return {
                 }
             },
 
+            j_worm_stew_capitalism = {
+                name = 'Uncorrupted Joker',
+                text = {
+                    "{C:chips}+#2#{} Chips for every {C:money}$#3#{}",
+                    "below the interest cap",
+                    "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips)",
+                    " ",
+                    "{s:0.8,C:inactive}\"I am escaping to the",
+                    "{s:0.8,C:inactive}one place that hasn't",
+                    "{s:0.8,C:inactive}been corrupted by capitalism!\"",
+                }
+            },
+
+            j_worm_stew_sputnik = {
+                name = 'Sputnik Earth',
+                text = {
+                    "{C:mult}+#1#{} Mult for every {C:money}${} below {C:money}$#2#{}",
+                    "{C:inactive}(Currently {C:mult}+#3#{C:inactive} Mult)"
+                }
+            },
+
         },
 
         Tarot = {
