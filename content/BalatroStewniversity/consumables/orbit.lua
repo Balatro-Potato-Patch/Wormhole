@@ -17,7 +17,7 @@ SMODS.Consumable {
                 total_levels = total_levels + values.level - 1
             end
         end
-        return { vars = { card.ability.extra.per_level, card.ability.extra.max, (total_levels * card.ability.extra.per_level) } }
+        return { vars = { card.ability.extra.per_level, card.ability.extra.max, math.max(0, math.min(total_levels * card.ability.extra.per_level, card.ability.extra.max)) } }
     end,
     use = function(self, card, area, copier)
         local total_levels = 0

@@ -8,7 +8,7 @@ PotatoPatchUtils.Team {
 
 PotatoPatchUtils.Developer {
   name = 'PLagger',
-  colour = HEX('ffffff'),
+  colour = HEX('943A48'),
   loc = "PLagger",
   team = 'Balatro Stewniversity'
 }
@@ -29,7 +29,7 @@ PotatoPatchUtils.Developer {
 
 PotatoPatchUtils.Developer {
   name = 'Wingcap',
-  colour = HEX('ffffff'),
+  colour = HEX('ff0000'),
   loc = "Wingcap",
   team = 'Balatro Stewniversity'
 }

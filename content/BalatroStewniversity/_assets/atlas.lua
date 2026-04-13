@@ -8,13 +8,13 @@ SMODS.Atlas{
     frames = 21
 }
 
--- TODO : Stellar tag
--- SMODS.Atlas{
---     key = 'stewtags',
---     path = 'BalatroStewniversity/Tags.png',
---     px = 34,
---     py = 34,
--- }
+
+SMODS.Atlas{
+    key = 'stewtags',
+    path = 'BalatroStewniversity/Tags.png',
+    px = 34,
+    py = 34,
+}
 
 
 SMODS.Atlas{

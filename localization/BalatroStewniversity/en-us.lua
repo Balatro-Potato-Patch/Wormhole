@@ -146,8 +146,9 @@ return {
             tag_worm_stew_stellar = {
                 name = "Stellar Tag",
                 text = {
-                    "Shop has a free",
-                    "{C:dark_edition}Stellar Joker",
+                    "Next base edition shop",
+                    "Joker is free and",
+                    "becomes {C:dark_edition}Stellar",
                 },
            },
         },

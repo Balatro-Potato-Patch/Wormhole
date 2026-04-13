@@ -2,10 +2,11 @@
 SMODS.Tag {
 
     ppu_team = { "Balatro Stewniversity" },
-    ppu_artist = { "pending" },
+    ppu_artist = { "PLagger" },
     ppu_coder = { "stupxd" },
 
     key = "stew_stellar",
+    atlas = 'stewtags',
     pos = { x = 0, y = 0 },
     loc_vars = function(self, info_queue, tag)
         info_queue[#info_queue + 1] = G.P_CENTERS.e_worm_stellar
@@ -30,6 +31,6 @@ SMODS.Tag {
         end
     end,
     in_pool = function(self, args)
-        return G.P_CENTERS["e_worm_stellar"].discovered
+        return G.P_CENTERS["e_worm_stew_stellar"].discovered
     end
 }
