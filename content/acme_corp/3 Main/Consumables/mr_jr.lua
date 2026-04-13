@@ -60,7 +60,7 @@ SMODS.Consumable{
 
         end
         if context.ending_shop then
-            if SMODS.get_probability_vars(card, 1, 25, 'acme_mr_jr' .. G.GAME.round_resets.ante) and
+            if math.random(1, 25) == 1 and
             card.ability.extra.rarity == 'rare' then
                 card.ability.extra.rarity = 'legendary'
                 card:juice_up(0.5, 0.5)
