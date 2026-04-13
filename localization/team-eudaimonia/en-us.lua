@@ -136,11 +136,19 @@ return {
                     "every other {C:attention}unique{} rank scored"
                 }
             },
+            j_worm_euda_ton618 = {
+                name = "Ton 618",
+                text = {
+                    "If at least two {C:attention}Enhanced{} cards",
+                    "are scored, {X:mult,C:white}X#1#{} Mult and destroy",
+                    "the scored {C:attention}Enhanced{} cards"
+                },
+            },
             j_worm_euda_cometwild = {
                 name = "Comet Wild",
                 text = {
                     "{C:attention}Wild{} cards can't be debuffed and",
-                    "give {X:mult,C:white}x#1#{} Mult when scored"
+                    "give {X:mult,C:white}X#1#{} Mult when scored"
                 },
             },
 			j_worm_euda_bitflip = {
