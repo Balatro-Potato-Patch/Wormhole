@@ -26,6 +26,7 @@ Atlas_AcmeCredits = SMODS.Atlas {
 	px = 71,
 	py = 95
 }
+
 Atlas_AcmeBoosters = SMODS.Atlas {
 
 	key = 'ACME_boosters',
@@ -42,4 +43,14 @@ Atlas_AcmeTags = SMODS.Atlas {
 	px = 34,
 	py = 34,
 	fps = 15
+}
+
+Atlas_AcmeRadi = SMODS.Atlas {
+	key = 'ACME_radi',
+	path = 'acme_corp/ACME_radi.png',
+	atlas_table = "ANIMATION_ATLAS",
+	frames = 58,
+	px = 71,
+	py = 95,
+	fps = 4
 }
