@@ -392,8 +392,6 @@ SMODS.Joker({
                     return true
                 end
             }))
-        else
-            table.insert(Wormhole.tbp.shader_draw_stuff, card) 
         end
 	end,
 	in_pool = function(self, args)
@@ -464,14 +462,7 @@ function Wormhole.tbp.install_module(ship, module, card, install_type, silent)
             Wormhole.tbp.uninstall_module(ship, module.slot, 'override', silent)
         end
 
-        G.FUNCS.show_module_replace_confirm(
-            old_module_key,
-            module.key,
-            card,
-            module,
-            module.slot,
-            ship[1]
-        )
+        G.FUNCS.show_module_replace_confirm(card, ship[1])
         return {}
     end
 end
@@ -575,17 +566,8 @@ Wormhole.tbp.Module = SMODS.Consumable:extend{
 	end,
     use = function(self, card, area, copier)
 		local spaceship = SMODS.find_card("j_worm_tbp_spaceship")
-        if next(spaceship) then
-            local old_module_key = spaceship[1].ability.extra.modules[self.slot].key or nil
-            
-            G.FUNCS.show_module_replace_confirm(
-                old_module_key,
-                self.key,
-                card,
-                self,
-                self.slot,
-                spaceship[1]
-            )
+        if next(spaceship) then         
+            G.FUNCS.show_module_replace_confirm(card, spaceship[1])
             return {}
         end
 	end,

@@ -11,7 +11,12 @@ local other_loc_table = {
             tbp_module_core = 'CORE',
             tbp_module_thrusters = 'THRUSTERS',
             tbp_module_utility = 'UTILITY',
-            tbp_undisc_module = 'Undiscovered Module'
+            tbp_undisc_module = 'Undiscovered Module',
+            tbp_module_equip = 'Equip',
+            tbp_module_store = 'Store',
+            tbp_new_module = 'New Module',
+            tbp_old_module = 'Currently Equipped',
+            tbp_equipped = ' equipped!'
         }
     },
     descriptions = {
@@ -21,7 +26,8 @@ local other_loc_table = {
                 name = 'Eremel',
                 text = {
                     {
-                        'Look at this silly UI I made (:'
+                        'Look at this {C:worm_eremel}silly UI{} I made (:',
+                        '{C:inactive,s:0.6}I did some backend stuff too'
                     },
                     {
                         'I help make {C:attention,E:2}SMODS{}!'

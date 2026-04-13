@@ -68,39 +68,39 @@ local function spaceship_ease(mod)
 end
 
 G.FUNCS.module_replace_yes = function(e)
-    local card = e.config.ref_table.card
-    local module_def = e.config.ref_table.module_def
+    local module_def = e.config.ref_table.module_info
     spaceship_ease(-1)
-    local slot = e.config.ref_table.slot
+    local slot = e.config.ref_table.module_slot
     local spaceship = e.config.ref_table.spaceship
     spaceship.ability.extra.modules[slot] = {
         key = module_def.key,
         durability = module_def.durability,
         total_durability = module_def.durability,
-        durability_loss_odds = module_def.config.extra.durability_loss_odds
     }
-    for k, v in pairs(module_def.config.extra) do
+    for k, v in pairs(G.P_CENTERS[module_def.key].config.extra) do
         spaceship.ability.extra.modules[slot][k] = v
     end
-    SMODS.calculate_effect({
-        message = localize({type='name_text', set='tbp_module', key=module_def.key}) .. ' equipped!',
-        colour = G.C.GREEN
-    }, spaceship)
-    card:start_dissolve()
+
     if G.GAME.module_replace_overlay then
         G.GAME.module_replace_overlay:remove()
         G.GAME.module_replace_overlay = nil
     end
+    
+    SMODS.calculate_effect({
+        message = localize({type='name_text', set='tbp_module', key=module_def.key}) .. localize('tbp_equipped'),
+        colour = Wormhole.tbp.module_colours[slot],
+        delay = 2
+    }, spaceship)
 end
 G.FUNCS.module_replace_no = function(e)
-    local module_def = e.config.ref_table.module_def
+    local module_key = e.config.ref_table.key
     spaceship_ease(-1)
     G.E_MANAGER:add_event(Event({
         trigger = 'after',
         delay = 0.1,
         func = function()
             if G.consumeables and #G.consumeables.cards < G.consumeables.config.card_limit then
-                local new_card = create_card('tbp_module', G.consumeables, nil, nil, nil, nil, module_def.key)
+                local new_card = create_card('tbp_module', G.consumeables, nil, nil, nil, nil, module_key)
                 new_card:add_to_deck()
                 G.consumeables:emplace(new_card)
                 new_card:juice_up(0.3, 0.5)
@@ -115,156 +115,79 @@ G.FUNCS.module_replace_no = function(e)
     end
 end
 
-G.FUNCS.show_module_replace_confirm = function(old_module_key, new_module_key, card, module_def, slot, spaceship)
-    local new_name = localize({type='name_text', set='tbp_module', key=new_module_key})
-    local is_empty = not old_module_key
-    local slot_colour = Wormhole.tbp.module_colours[slot] or G.C.UI.TEXT_INACTIVE
-    local desc_base_colour = darken(slot_colour, 0.3)
-    local old_name, old_desc_nodes, old_module_info
-    if is_empty then
-        old_name = "Empty Slot"
-        old_desc_nodes = {{n=G.UIT.R, config={align = "cl", padding = 0.02}, nodes={
-            {n=G.UIT.T, config={text = "No module equipped", scale = 0.35, colour = mix_colours(G.ARGS.LOC_COLOURS.inactive, desc_base_colour, 0.5)}}
-        }}}
-    else
-        old_name = localize({type='name_text', set='tbp_module', key=old_module_key})
-        old_module_info = spaceship.ability.extra.modules[slot]
-        local old_loc_vars = G.P_CENTERS[old_module_key]:loc_vars({}, {ability = {extra = old_module_info}})
-        old_loc_vars.text_colour = desc_base_colour
-        local old_desc_table = G.localization.descriptions.tbp_module[old_module_key]
-        old_desc_nodes = {}
-        if old_desc_table and old_desc_table.text then
-            for _, line in ipairs(old_desc_table.text) do
-                old_desc_nodes[#old_desc_nodes+1] = {n=G.UIT.R, config={align = "cm", padding = 0.02}, nodes=SMODS.localize_box(loc_parse_string(line), old_loc_vars)}
-            end
-        end
-    end
-    local new_module_info = {
-        durability = module_def.durability,
-        total_durability = module_def.durability,
-    }
-    local new_loc_vars = G.P_CENTERS[new_module_key]:loc_vars({}, {ability = {extra = module_def.config.extra}})
-    new_loc_vars.text_colour = desc_base_colour
-    local new_desc_table = G.localization.descriptions.tbp_module[new_module_key]
-    local new_desc_nodes = {}
-    if new_desc_table and new_desc_table.text then
-        for _, line in ipairs(new_desc_table.text) do
-            new_desc_nodes[#new_desc_nodes+1] = {n=G.UIT.R, config={align = "cm", padding = 0.02}, nodes=SMODS.localize_box(loc_parse_string(line), new_loc_vars)}
-        end
-    end
-    local dialog_data = {
-        card = card,
-        module_def = module_def,
-        slot = slot,
-        spaceship = spaceship
-    }
-    local dialog_title = is_empty and "Equip Module?" or "Replace Module?"
-    local old_label = is_empty and "Empty Slot:" or "Current:"
-    local slot_strip_label = ((slot and (slot:sub(1,1):upper() .. slot:sub(2))) or "Module") .. ":"
-    local panel_strip_colour = darken(slot_colour, 0.4)
-    local panel_shell_colour = panel_strip_colour
-    local panel_face_colour = lighten(slot_colour, 0.4)
-    local panel_text_colour = desc_base_colour
-    local inactive_slot_text_colour = mix_colours(G.ARGS.LOC_COLOURS.inactive, desc_base_colour, 0.5)
-    local durability_bar_bg = mix_colours(G.C.BLACK, slot_colour, 0.8)
-    local function make_durability_row(module_info)
-        return {n=G.UIT.R, config={align = 'cm', r = 0.06, w = 2.96, h = 0.3, colour = durability_bar_bg, outline = 0.5, outline_colour = darken(panel_strip_colour, 0.3),
-            progress_bar = {
-                max = module_info.total_durability,
-                ref_table = module_info,
-                ref_value = 'durability',
-                empty_col = durability_bar_bg,
-                filled_col = adjust_alpha(slot_colour, 0.5)
-            }
-        }, nodes = {
-            {n=G.UIT.T, config = {text = module_info.durability .. ' turns', colour = mix_colours(lighten(slot_colour, 0.3), desc_base_colour, 0.3), scale = 0.28}}
-        }}
-    end
-    local old_name_colour = is_empty and inactive_slot_text_colour or panel_text_colour
-    local old_label_colour = is_empty and inactive_slot_text_colour or panel_text_colour
-    local old_panel_nodes = {
-        {n=G.UIT.R, config={align = "cl", padding = 0.02}, nodes={
-            {n=G.UIT.T, config={text = old_label .. " ", scale = 0.3, colour = old_label_colour}},
-            {n=G.UIT.T, config={text = old_name, scale = 0.45, colour = old_name_colour}}
-        }}
-    }
-    for _, desc_row in ipairs(old_desc_nodes) do
-        old_panel_nodes[#old_panel_nodes+1] = desc_row
-    end
-    if old_module_info then
-        old_panel_nodes[#old_panel_nodes+1] = make_durability_row(old_module_info)
-    else
-        old_panel_nodes[#old_panel_nodes+1] = {n=G.UIT.R, config={align = 'cm', r = 0.06, w = 2.96, h = 0.3, colour = mix_colours(G.C.BLACK, G.C.UI.TEXT_INACTIVE, 0.8), outline = 0.5, outline_colour = mix_colours(panel_strip_colour, G.C.UI.TEXT_INACTIVE, 0.5)}, nodes = {
-            {n=G.UIT.T, config = {text = '0 turns', colour = inactive_slot_text_colour, scale = 0.25}}
-        }}
-    end
-    local new_panel_nodes = {
-        {n=G.UIT.R, config={align = "cl", padding = 0.02}, nodes={
-            {n=G.UIT.T, config={text = "New: ", scale = 0.3, colour = panel_text_colour}},
-            {n=G.UIT.T, config={text = new_name, scale = 0.45, colour = panel_text_colour}}
-        }}
-    }
-    for _, desc_row in ipairs(new_desc_nodes) do
-        new_panel_nodes[#new_panel_nodes+1] = desc_row
-    end
-    new_panel_nodes[#new_panel_nodes+1] = make_durability_row(new_module_info)
+G.FUNCS.show_module_replace_confirm = function(card, spaceship)
+    Wormhole.tbp.shader_draw_stuff = {spaceship}
+    local target_slot = card.config.center.slot
+    local current_module = spaceship.ability.extra.modules[target_slot]
     
-    local t = {n=G.UIT.ROOT, config={align = "cm", colour = G.C.CLEAR, padding = 0, minh = G.ROOM.T.h, minw = G.ROOM.T.w}, nodes={
-        {n=G.UIT.C, config={align = "cm", padding = 0.15, r=0.1, colour = G.C.BLACK, emboss = 0.05}, nodes={
-        {n=G.UIT.R, config={align = "cm", padding = 0.05}, nodes={
-            {n=G.UIT.T, config={text = dialog_title, scale = 0.45, colour = G.C.UI.TEXT_LIGHT}}
-        }},
-        {n=G.UIT.R, config={align = "cm", padding = 0.06}, nodes={
-            {n=G.UIT.C, config={align = "cm", w = 3.6, h = 3.75}, nodes={
-                {n=G.UIT.R, config={align = "cm", r=0.1, padding = 0.06, colour = panel_shell_colour, outline = 2, outline_colour = panel_strip_colour}, nodes={
-                    {n=G.UIT.C, config={align = "cm", colour = panel_strip_colour, padding = 0.14}, nodes={
-                        {n=G.UIT.T, config={text = slot_strip_label, scale = 0.24, colour = G.C.UI.TEXT_LIGHT, vert = true}}
+    local slot_colour = Wormhole.tbp.module_colours[target_slot]
+    local title_colour = darken(slot_colour, 0.3)
+    
+    local AUT = card.ability_UIBox_table
+    AUT.main.block_image = nil
+
+    local vars = {colours = {mix_colours(G.ARGS.LOC_COLOURS.inactive, Wormhole.tbp.module_colours[target_slot], 0.5)}}
+    if current_module.key and (G.P_CENTERS[current_module.key] or {}).loc_vars then
+        vars = G.P_CENTERS[current_module.key]:loc_vars({}, {ability = { extra = current_module } }, card).vars
+        vars.colours = vars.colours or {}
+        table.insert(vars.colours, 1, title_colour)
+    end
+    generate_card_ui({set = 'tbp_module', key = current_module.key or 'c_worm_tbp_module_missing', vars = vars, module_type = target_slot, module_info = next(current_module) and current_module}, AUT)
+    
+
+    local t = {n=G.UIT.R, config={align = "cm", colour = title_colour, padding = 0.05, emboss = 0.1}, nodes={
+        {n=G.UIT.C, config={align = "cm", colour = mix_colours(lighten(slot_colour, 0.8), G.C.BLACK, 0.6)}, nodes={
+            {n=G.UIT.R, config={align = "cm", padding = 0.15, colour = darken(slot_colour, 0.4)}, nodes={
+                {n=G.UIT.T, config={text = localize('tbp_module_equip')..' '..localize('tbp_new_module'), scale = 0.45, colour = G.C.WHITE}}
+            }},
+            {n=G.UIT.R, config={align = "cm", padding = 0.06}, nodes={
+                {n=G.UIT.C, config = {align = 'tr', padding = 0.05, minw = 3.5}, nodes = {
+                    {n=G.UIT.R, config = {align = 'cm', padding = 0.05}, nodes ={
+                        {n=G.UIT.T, config = {text = localize('tbp_old_module'), scale = 0.3, colour = title_colour, underline = title_colour}}
                     }},
-                    {n=G.UIT.C, config={align = "cl", padding = 0.02, colour = panel_face_colour}, nodes={
-                        {n=G.UIT.C, config={align = "cl", r=0.08, padding = 0.02, w = 5.625, colour = panel_face_colour}, nodes=old_panel_nodes}
+                    {n=G.UIT.R, config = {align = 'cm', padding = 0.05, emboss = 0.1, colour = darken(Wormhole.tbp.module_colours[card.config.center.slot], 0.5)}, nodes = {
+                        Wormhole.tbp.module_tooltip(AUT.info[1]),
+                    }}
+                }},
+                {n=G.UIT.C, config = {minw = 1}},
+                {n=G.UIT.C, config = {align = 'tm', padding = 0.05, minw = 3.5}, nodes = {
+                    {n=G.UIT.R, config = {align = 'cm', padding = 0.05}, nodes ={
+                        {n=G.UIT.T, config = {text = localize('tbp_new_module'), scale = 0.3, colour = title_colour, underline = title_colour}}
+                    }},
+                    {n=G.UIT.R, config = {align = 'cm', padding = 0.05, emboss = 0.1, colour = darken(Wormhole.tbp.module_colours[card.config.center.slot], 0.5)}, nodes = {
+                        Wormhole.tbp.module_tooltip(AUT.main),
                     }}
                 }}
             }},
-            {n=G.UIT.C, config={align = "cm", w = 3.6, h = 3.75, padding = 0.27}, nodes={
-                {n=G.UIT.R, config={align = "cm", r=0.1, padding = 0.06, colour = panel_shell_colour, outline = 2, outline_colour = panel_strip_colour}, nodes={
-                    {n=G.UIT.C, config={align = "cm", colour = panel_strip_colour, padding = 0.14}, nodes={
-                        {n=G.UIT.T, config={text = slot_strip_label, scale = 0.24, colour = G.C.UI.TEXT_LIGHT, vert = true}}
-                    }},
-                    {n=G.UIT.C, config={align = "cl", padding = 0.02, colour = panel_face_colour}, nodes={
-                        {n=G.UIT.C, config={align = "cl", r=0.08, padding = 0.02, w = 5.625, colour = panel_face_colour}, nodes=new_panel_nodes}
-                    }}
+            {n=G.UIT.R, config={align = "cm", padding = 0.2}, nodes={
+                {n=G.UIT.C, config={align = "cm", padding = 0.05}, nodes={
+                    UIBox_button({
+                        label = {localize('tbp_module_equip')},
+                        button = "module_replace_yes",
+                        ref_table = {
+                            module_info = AUT.main.module_info,
+                            module_slot = target_slot,
+                            spaceship = spaceship
+                        },
+                        w = 1.3,
+                        h = 0.5,
+                        colour = G.C.RED,
+                        scale = 0.45
+                    })
+                }},
+                {n=G.UIT.C, config={align = "cm", padding = 0.05}, nodes={
+                    UIBox_button({
+                        label = {localize('tbp_module_store')},
+                        button = "module_replace_no",
+                        func = 'module_can_store',
+                        ref_table = {key = card.config.center_key},
+                        w = 1.3,
+                        h = 0.5,
+                        colour = G.C.RED,
+                        scale = 0.45
+                    })
                 }}
             }}
-        }},
-        {n=G.UIT.R, config={align = "cm", padding = 0.1}, nodes=(function()
-            local yes_button = {n=G.UIT.C, config={align = "cm", padding = 0.05}, nodes={
-                UIBox_button({
-                    label = {"Yes"},
-                    button = "module_replace_yes",
-                    ref_table = dialog_data,
-                    w = 1.3,
-                    h = 0.5,
-                    colour = G.C.GREEN,
-                    scale = 0.35
-                })
-            }}
-            local no_button = {n=G.UIT.C, config={align = "cm", padding = 0.05}, nodes={
-                UIBox_button({
-                    label = {"No"},
-                    button = "module_replace_no",
-                    ref_table = dialog_data,
-                    w = 1.3,
-                    h = 0.5,
-                    colour = G.C.RED,
-                    scale = 0.35
-                })
-            }}
-            if Wormhole.tbp.config.swap_buttons then
-                return {yes_button, no_button}
-            else
-                return {no_button, yes_button}
-            end
-        end)()}
         }}
     }}
     G.E_MANAGER.queues.module_replace_dialog = G.E_MANAGER.queues.module_replace_dialog or {}
@@ -282,10 +205,21 @@ G.FUNCS.show_module_replace_confirm = function(old_module_key, new_module_key, c
             G.GAME.module_replace_overlay.config.major = nil
             G.GAME.module_replace_overlay:set_role{role_type = 'Major'}
             G.GAME.module_replace_overlay.states.drag.can = true
-            table.insert(Wormhole.tbp.shader_draw_stuff, G.GAME.module_replace_overlay)
             return true
         end
     }), "module_replace_dialog")
+end
+
+G.FUNCS.module_can_store = function(e)
+    if #G.consumeables.cards < G.consumeables.config.card_limit then
+        e.config.button = 'module_replace_no'
+        e.config.colour = G.C.RED
+        e.config.hover = true
+    else
+        e.config.button = nil
+        e.config.colour = G.C.L_BLACK
+        e.config.hover = false
+    end
 end
 
 --Can be enabled later at any time by setting G.GAME.tbp_module_replace_active = true
@@ -378,7 +312,6 @@ function G.UIDEF.card_h_popup(card)
             end
         end
 
-        -- print(card.ability_UIBox_table.main)
         return {n=G.UIT.C, config = {align='cm', colour = G.C.CLEAR, padding = 0.05}, nodes = {
             {n=G.UIT.R, config = {align = 'cm', func = 'show_infotip',object = Moveable(),ref_table = next(info_boxes) and info_boxes or nil}, nodes = {
                 {n=G.UIT.C, config = {align = 'cm', padding = 0.05, emboss = 0.1, colour = darken(Wormhole.tbp.module_colours[card.config.center.slot], 0.5)}, nodes = {

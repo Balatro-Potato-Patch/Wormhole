@@ -119,6 +119,15 @@ if shader.key == "worm_tbp_space_warp" then
         G.OVERLAY_TUTORIAL = nil
         love.graphics.pop()
     end
+    if G.GAME.module_replace_overlay then
+        love.graphics.push("all")
+        love.graphics.setShader()
+        G.OVERLAY_TUTORIAL = true
+        G.GAME.module_replace_overlay:translate_container()
+        G.GAME.module_replace_overlay:draw()
+        G.OVERLAY_TUTORIAL = nil
+        love.graphics.pop()
+    end
 end
 '''
 match_indent = true
