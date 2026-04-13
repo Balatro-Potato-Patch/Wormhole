@@ -174,3 +174,35 @@ SMODS.Joker {
     ppu_coder = {"evgast"},
     ppu_team = {"thorn"},
 }
+
+SMODS.Joker {
+	key = 'thorn_prospit',
+	rarity = 2,
+    atlas = "thorn_cards",
+	pos = { x = 5, y = 0 },
+	cost = 5,
+	blueprint_compat = true,
+	eternal_compat = true,
+	perishable_compat = false,
+    jand_gemini_compat = true,
+    config = { extra = { chips = 0 } },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.chips } }
+    end,
+    calculate = function(self, card, context)
+        if context.joker_main then
+            local percentage = ((suit_count("dark")/#G.playing_cards)*100)
+            if percentage >= card.ability.extra.percentage_floor then
+                card.ability.extra.xmult = card.ability.extra.xmult_base + ((percentage - card.ability.extra.percentage_floor) * card.ability.extra.xmult_gain)
+            else
+                card.ability.extra.xmult = card.ability.extra.xmult_base
+            end
+            return {
+                xmult = card.ability.extra.xmult
+            }
+        end
+    end,
+    ppu_artist = {"This will get replaced by ERROR"},
+    ppu_coder = {"Sophie"},
+    ppu_team = {"thorn"},
+}

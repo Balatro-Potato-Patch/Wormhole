@@ -131,6 +131,20 @@ return {
                         "and draws copies to {C:attention}hand{}"
                     }
                 },
+                j_worm_thorn_prospit = {
+                    name = "Prospit",
+                    text = {
+                        {
+                            "This Joker gains {C:chips}Chips{}",
+                            "when a {C:hearts}Light Suit{} is scored,",
+                            "equal to the {C:attention}rank{} of the scored card",
+                            "{C:inactive}(Currently {C:chips}+#1#{}{C:inactive} Chips)"
+                        },
+                        {
+                            "{C:hearts}Light Suits{} are drawn face down",
+                        }
+                    }
+                },
             }
     },
 }
