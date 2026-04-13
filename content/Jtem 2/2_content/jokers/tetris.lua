@@ -92,6 +92,12 @@ function JtemTGM.UI.CancelBind()
 	JtemTGM.UI.bind_key = nil
 end
 
+local old_eom = G.FUNCS.exit_overlay_menu
+function G.FUNCS.exit_overlay_menu(...)
+	JtemTGM.UI.CancelBind()
+	return old_eom(...)
+end
+
 function G.FUNCS.jtem2_tetris_start_bind(e)
 	JtemTGM.UI.InitBind(e)
 end
@@ -166,6 +172,8 @@ local prev_extra_tabs = PotatoPatchUtils.CREDITS.register_page
 PotatoPatchUtils.CREDITS.register_page = function(mod)
 	local t = prev_extra_tabs and prev_extra_tabs(mod)() or {}
 	local tt = { t }
+	-- Prevent other Potato Patch mods from adding the keybinds menu LMAO
+	if (mod ~= Wormhole) then return tt end
 	table.insert(tt, {
 		label = "Keybinds",
 		tab_definition_function = function()

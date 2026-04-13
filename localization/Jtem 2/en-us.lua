@@ -62,6 +62,16 @@ return {
 				},
 			},
 		},
+		Tarot = {
+			c_worm_jtem2_shadow = {
+				name = "The Shadow",
+				text = {
+					"{C:attention}Steals{} the levels of a",
+					"{C:attention}random{} poker hand and applies",
+					"it to your {C:attention}most played{} hand"
+				}
+			}
+		},
 		Other = {
 			worm_jtem2_solar_system_effect_c_mercury = {
 				name = "Mercury's ability",
