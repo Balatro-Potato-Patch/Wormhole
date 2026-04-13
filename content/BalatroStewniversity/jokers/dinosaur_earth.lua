@@ -15,27 +15,12 @@ SMODS.Joker {
     eternal_compat = false,
     perishable_compat = true,
     loc_vars = function (self, info_queue, card)
-        local main_end = {}
-        if card.area and card.area == G.jokers and G.GAME.mass_extinction_event == true then
-            main_end = {{ --work in progress
-                n = G.UIT.C,
-                config = { align = 'bm', minh = 0.4},
-                nodes = {
-                    {
-                        n =  G.UIT.C,
-                        config = {ref_table = card, align = 'm', color = mix_colours(G.C.RED, G.C.JOKER_GREY, 0.8), r = 0.05, padding = 0.06},
-                        nodes = {
-                            {n = G.UIT.T, config = {text = 'Inactive'}, colour = G.C.UI.TEXT_LIGHT, scale = 0.32 * 0.8 }
-                        },
-                    }
-                }
-            }}
-        end
-        
+    
         local numerator, denominator = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, 'worm_stew_dinosaur_earth')
 
         return {
-            vars = {numerator, denominator, card.ability.extra.odds, card.ability.extra.ante, main_end = main_end}
+            vars = {numerator, denominator, card.ability.extra.odds, card.ability.extra.ante},
+            key = G.GAME.mass_extinction_event and 'j_worm_stew_dinosaur_earth_alt' or nil
         }
     end,
 

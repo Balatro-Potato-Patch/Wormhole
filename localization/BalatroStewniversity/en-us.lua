@@ -30,6 +30,13 @@ return {
                 }
             },
 
+            j_worm_stew_dinosaur_earth_alt = {
+                name = 'Dinosaur Earth',
+                text = {
+                    '{s:2,E:1,C:red}Extinct!'
+                }
+            },
+
             j_worm_stew_impact_crater = {
                 name = 'Impact Crater',
                 text = {
@@ -215,7 +222,8 @@ return {
     },
     misc = {
         dictionary = {
-            k_worm_texttexttext = "Flavor Text Example"
+            k_worm_texttexttext = "Flavor Text Example",
+            k_worm_stew_dinos_extinct = 'Extinct'
         },
         labels = {
             worm_stew_stellar = 'Stellar'
