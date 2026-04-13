@@ -217,7 +217,7 @@ return {
             k_worm_texttexttext = "Flavor Text Example"
         },
         labels = {
-            worm_stellar = 'Stellar'
+            worm_stew_stellar = 'Stellar'
         }
     },
 }

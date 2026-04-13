@@ -6,7 +6,7 @@ SMODS.Edition {
     ppu_coder = { "PLagger" },
 
     key = 'stew_stellar',
-    shader = false,
+    shader = "stew_stellar",
     config = {odds = 4},
     in_shop = true,
     extra_cost = 4,
@@ -24,6 +24,11 @@ SMODS.Edition {
                 message = localize('k_level_up_ex')
             }
         end
-    end
+    end,
+
+    on_apply = function (card)
+        -- Randomize star field
+        card.edition.stellar_seed = pseudorandom('worm_stellar_seed') * 0.1
+    end,
 
 }
