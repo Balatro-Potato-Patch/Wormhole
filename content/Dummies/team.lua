@@ -15,6 +15,7 @@ SMODS.Atlas {
 }
 
 SMODS.Sound({ key = "dum_ghostclicked", path = "Dummies/worm_dum_ghostclicked.ogg" })
+SMODS.Sound({ key = "dum_flowireclicked", path = "Dummies/worm_dum_flowireclicked.ogg" })
 
 -- GhostSalt
 PotatoPatchUtils.Developer {
@@ -145,6 +146,9 @@ PotatoPatchUtils.Developer {
     atlas = "worm_dummies_team",
     pos = { x = 5, y = 0},
     loc = true,
+	dum_sfx_click = "worm_dum_flowireclicked",
+	dum_sfx_pitch = { lower_bound = 0.95, upper_bound = 1.1 },
+	dum_sfx_volume = 1.0
 }
 
 -- Member SFX click funnies

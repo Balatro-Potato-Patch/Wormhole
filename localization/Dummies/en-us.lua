@@ -147,7 +147,7 @@ return {
                     "for {C:attention}discarded{} poker hand,",
                     "{C:red}destroy{} the {C:planet}Planet{} card and",
                     "gain the {C:attention}per-level{} {C:chips}Chips{}",
-                    "{C:inactive}(Currently {C:chips}#1#{C:inactive} Chips)",
+                    "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips)",
                 },
             },
 			j_worm_dum_timcurry = {
@@ -358,9 +358,6 @@ return {
             worm_dummies_timcurry_win_4 = { "Nice work, comrade." },
             worm_dummies_timcurry_lose_normal = { "{C:hearts}Such a shame..." },
             worm_dummies_timcurry_lose_full = { "Awww... you made it all this way", "just to fail at the end.", "{E:1,C:hearts}Such a shame..." },
-        },
-        labels = {
-            worm_dum_Celestial = 'Celestial'
         }
     }
 }
