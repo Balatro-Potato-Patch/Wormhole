@@ -75,10 +75,10 @@ SMODS.Joker({
 		},
 	},
 	rarity = 3,
-    atlas = "meow_jokers",
-	pos = {x = 1,y = 0},
+	atlas = "meow_jokers",
+	pos = { x = 1, y = 0 },
 	cost = 8,
-    attributes = { "cat", "space", "spacetart", "xblindsize", "mult", "xchips", "economy", "scaling" },
+	attributes = { "cat", "space", "spacetart", "xblindsize", "mult", "xchips", "economy", "scaling" },
 	blueprint_compat = false,
 	eternal_compat = true,
 	perishable_compat = false,
@@ -457,8 +457,8 @@ nyarlathotep_exchange({
 	cost = 2,
 	config = { antes = 1 },
 	reward = function(self, card)
-        ease_ante(-self.config.antes)
-        G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante or G.GAME.round_resets.ante
+		ease_ante(-self.config.antes)
+		G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante or G.GAME.round_resets.ante
 		G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante - self.config.antes
 		G.GAME.meow_remembrance_exchanged = true
 	end,
@@ -470,9 +470,9 @@ nyarlathotep_exchange({
 			},
 		}
 	end,
-	in_pool = function()
+	in_pool = function(self, card, amt)
 		return not G.GAME.meow_remembrance_exchanged
-	end
+	end,
 })
 
 function Wormhole.TEAM_MEOW.generate_exchange_pool(card, seed)
