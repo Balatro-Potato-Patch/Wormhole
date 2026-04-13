@@ -563,8 +563,7 @@ return {
                     '{s:0.75}(One could say I {C:edition,E:1,s:0.6}nixist...{}{s:0.6})',
                 }, {
                     '{s:0.6}i could squeak on about how technically this is my public debut Balatrowise cuz my own mod is taking a while but i digress{}',
-                    'All of my contributions were on the art side of things, especially in regards to Joker art,', -- i might tap into voucher/pack art :drool:
-                    'so I do hope everything looks spic and span in that regard!',
+                    'All of my contributions were art-related, for the most part. >:>',
                     'MASSIVE props to the entire team for being awesome, talented, and supportive as heck.',
                     'It was a {C:white,E:1}blast{} to participate in, and I\'d be wrong if I said I wasn\'t lucky to be here!',
                     -- may adjust if i end up contributing more to programming but i wasnt thinking so LOL
