@@ -11,7 +11,7 @@ return {
                 }
             },
             c_worm_acme_ball_alt = {
-                name = 'Ball',
+                name = 'ACME "Bounce-O-Matic" Spherical Impact Projectile',
                 text = {
                     'Give a random {C:attention}enhancement',
                     'to all {C:attention}unenhanced Face Cards',
@@ -83,6 +83,23 @@ return {
                 text = {
                     '{X:attention,C:white}Use{} to get a random {C:attention}Perishable',
                     '{C:dark_edition}Negative {C:attention}Food Joker',
+                }
+            },
+            c_worm_acme_brush = {
+                name = 'ACME Instant Tunnel Apparatus',
+                text = {
+                    '{X:attention,C:white}After{} scoring a Hand containing {C:attention}#3#{} Suits,',
+                    '{X:attention,C:white}Use{} for a {C:green}#1# in #2# chance{} to turn',
+                    'each card {C:attention}held in hand',
+                    "to {C:attention}1{} selected Card's {C:attention}Suit"
+                }
+            },
+            c_worm_acme_brush_alt = {
+                name = 'ACME Instant Tunnel Apparatus',
+                text = {
+                    '{X:attention,C:white}Use{} for a {C:green}#1# in #2# chance{} to turn',
+                    'each card {C:attention}held in hand',
+                    "to {C:attention}1{} selected Card's {C:attention}Suit"
                 }
             },
             c_worm_acme_mr_jr = {
