@@ -77,8 +77,8 @@ return {
                         "{C:attention}+1{} hand size",
                         "Upgrade {C:attention}all{} poker hands",
                         "every {C:attention}#1# {C:inactive}[#2#]{} rounds",
-                        "{S:1.1,C:red,E:2}Each hand type can only",
-                        "{S:1.1,C:red,E:2}be played once per Ante",
+                        "{s:0.78,C:red,E:2}Each hand type can only",
+                        "{s:0.78,C:red,E:2}be played once per Ante",
                     }
                 }
             },
@@ -105,7 +105,7 @@ return {
                     }
                 },
                 j_worm_thorn_derse = {
-                    name = "Derse",
+                    name = "Derse Joker",
                     text = {
                         "Gains {C:white,X:mult}X#1#{} Mult per every",
                         "percent of {C:spades}Dark Suits{}",
@@ -114,7 +114,7 @@ return {
                     }
                 },
                 j_worm_thorn_derse_collection = {
-                    name = "Derse",
+                    name = "Derse Joker",
                     text = {
                         "Gains {C:white,X:mult}X#1#{} Mult per every",
                         "percent of {C:spades}Dark Suits{}",
@@ -132,7 +132,7 @@ return {
                     }
                 },
                 j_worm_thorn_prospit = {
-                    name = "Prospit",
+                    name = "Prospit Joker",
                     text = {
                         {
                             "This Joker gains {C:chips}Chips{}",
@@ -143,6 +143,38 @@ return {
                         {
                             "{C:hearts}Light Suits{} are drawn face down",
                         }
+                    }
+                },
+                j_worm_thorn_piss = {
+                    name = "My super laser piss!",
+                    text = {
+                        "Scored {C:clubs}#1#{} become {C:diamonds}#2#{}",
+                        "and gain {C:blue}+#3#{} Chips when scored"
+                    }
+                },
+                thorn_piss_rant = {
+                    name = "",
+                    text = {
+                        "I've come to make an {C:attention}announcement{}, {X:red}Shadow{} {X:red}the",
+                        "{X:red}Hedgehog{} is a {C:red}bitch ass motherfucker{} he {C:diamonds}pissed{}",
+                        "on my {C:red}fucking{} {C:attention}wife{} That's right, he took his",
+                        "{C:blue}hedgehog{} {C:red}fucking{} quill-y {C:attention}dick{} out and he {C:diamonds}pissed",
+                        "on my {C:red}fucking{} {c:attention}wife{} and he said his {C:attention}dick{} was",
+                        "{C:attention}THIS BIG{} and I said 'That's {C:clubs}disgusting{}.' so I'm",
+                        "making a call-out post on my {C:blue}Twitter dot com{}.",
+                        "{X:red}Shadow{} {X:red}the{} {X:red}Hedgehog{} you got a {s:0.6}small{} {C:attention}dick{}, it's",
+                        "the size of this {C:attention}walnut{} except way {s:0.6}smaller,",
+                        "and guess what? Here's what my {s:0.8}dong{} looks like.",
+                        "That's right baby, all points, no quills, no",
+                        "pillows, look at that it looks like two {C:attention}balls{} and",
+                        "a {s:0.8}bong!{} He {C:red}fucked{} my {C:attention}wife{}, so guess what? I'm gonna",
+                        "fuck the {C:planet}Earth{}! That's right, this is what you get!",
+                        "My super laser {C:attention}piss{}! Except I'm not gonna {C:attention}piss{} on the",
+                        "{C:planet}Earth{}. I'm gonna go higher. I'm {C:attention}pissing{} on {C:purple}The Moon{}!",
+                        "How do you like that {C:legendary}Obama{}? I PISSED ON {C:purple}The Moon{} YOU",
+                        "{c:red}IDIOT!{} You have {C:attention}23 hours{} until the {C:diamonds}piss droplets{}",
+                        "hit the {C:red}fucking{} {C:planet}Earth{}, now get out of my",
+                        "{C:red}fucking{} sight before I {C:diamonds}piss{} on you too"
                     }
                 },
             }

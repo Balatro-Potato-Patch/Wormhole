@@ -43,8 +43,8 @@ PotatoPatchUtils.Developer({
     name = "evgast",
     colour = G.C.PURPLE,
     loc = true,
-    atlas = 'Joker',
-    pos = {x = 0, y = 0},
+    atlas = 'worm_TeamCredits',
+    pos = {x = 4, y = 0},
 })
 PotatoPatchUtils.Developer({
     team = "thorn",

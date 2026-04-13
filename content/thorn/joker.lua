@@ -119,6 +119,38 @@ SMODS.Joker {
     ppu_team = {"thorn"},
 }
 
+SMODS.Joker { --Moved here for the sake of them being close on atlas
+	key = 'thorn_prospit',
+	rarity = 2,
+    atlas = "thorn_cards",
+	pos = { x = 1, y = 1 },
+	cost = 5,
+	blueprint_compat = true,
+	eternal_compat = true,
+	perishable_compat = false,
+    jand_gemini_compat = false,
+    config = { extra = { chips = 0 } },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.chips } }
+    end,
+    calculate = function(self, card, context)
+        if context.joker_main then
+            local percentage = ((suit_count("dark")/#G.playing_cards)*100)
+            if percentage >= card.ability.extra.percentage_floor then
+                card.ability.extra.xmult = card.ability.extra.xmult_base + ((percentage - card.ability.extra.percentage_floor) * card.ability.extra.xmult_gain)
+            else
+                card.ability.extra.xmult = card.ability.extra.xmult_base
+            end
+            return {
+                xmult = card.ability.extra.xmult
+            }
+        end
+    end,
+    ppu_artist = {"hatstack"},
+    ppu_coder = {"sophie"},
+    ppu_team = {"thorn"},
+}
+
 SMODS.Joker {
 	key = 'thorn_mars_face',
 	rarity = 2,
@@ -176,33 +208,50 @@ SMODS.Joker {
 }
 
 SMODS.Joker {
-	key = 'thorn_prospit',
+	key = 'thorn_piss',
 	rarity = 2,
     atlas = "thorn_cards",
-	pos = { x = 5, y = 0 },
-	cost = 5,
+	pos = { x = 0, y = 1 },
+	cost = 6,
 	blueprint_compat = true,
-	eternal_compat = true,
-	perishable_compat = false,
-    jand_gemini_compat = true,
-    config = { extra = { chips = 0 } },
+	eternal_compat = false,
+	perishable_compat = true,
+    jand_gemini_compat = false,
+    attributes = {"space", "clubs"}, --I'm not sure of this should have 'diamonds' attribute because of the way SMODS wiki describes these
+    config = { extra = { suit_old = "Clubs", suit_new = "Diamonds", chips = 20 } },
     loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.chips } }
+        local loc = {}
+	    local quip = {}
+	    localize{type = "descriptions", key = "thorn_piss_rant", set = "Joker", default_col = G.C.UI.TEXT_DARK, nodes = loc, vars = {}, scale = 0.7}
+	    quip = {transparent_multiline_text(loc)}
+        return { vars = { localize(card.ability.extra.suit_old, 'suits_plural'), localize(card.ability.extra.suit_old, 'suits_plural'), card.ability.extra.chips }, main_end = {
+            {n=G.UIT.C, config = {align = "cm", minh = 1, minw = 5, r = 0.3, padding = 0.07, colour = G.C.JOKER_GREY, shadow = true}, nodes={
+				{n=G.UIT.R, config={align = "cm" , r = 0.2, padding = 0.1, colour = G.C.WHITE}, nodes=
+					quip
+				}
+			}},
+        } }
     end,
     calculate = function(self, card, context)
-        if context.joker_main then
-            local percentage = ((suit_count("dark")/#G.playing_cards)*100)
-            if percentage >= card.ability.extra.percentage_floor then
-                card.ability.extra.xmult = card.ability.extra.xmult_base + ((percentage - card.ability.extra.percentage_floor) * card.ability.extra.xmult_gain)
-            else
-                card.ability.extra.xmult = card.ability.extra.xmult_base
-            end
+        if context.individual and context.cardarea == G.play then
+            local Card = context.other_card
             return {
-                xmult = card.ability.extra.xmult
+                func = function()
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            if Card:is_suit(card.ability.extra.suit_old) then --Check for suit happens here because of retriggers
+                                Card:juice_up()
+                                SMODS.change_base(Card, card.ability.extra.suit_new)
+                                Card.ability.perma_bonus = (Card.ability.perma_bonus or 0) + card.ability.extra.chips
+                            end
+                            return true
+                        end
+                    }))
+                end
             }
         end
     end,
-    ppu_artist = {"This will get replaced by ERROR"},
-    ppu_coder = {"Sophie"},
+    ppu_artist = {"hatstack"},
+    ppu_coder = {"evgast"},
     ppu_team = {"thorn"},
 }
