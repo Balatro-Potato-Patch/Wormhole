@@ -117,11 +117,15 @@ return {
                 text = {
                     '{C:chips}+Chips{} equal to double the',
                     'amount of {C:chips}Chips{} when triggered',
-                },
-                alt_text = {
+                }
+            },
+
+            j_worm_stew_chicken_egg_alt = {
+                name = 'Paradox Earth',
+                text = {
                     "{X:chips,C:white}X#1#{} Chips"
                 }
-            }
+            },
 
         },
 

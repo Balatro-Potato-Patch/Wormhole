@@ -6,7 +6,7 @@ SMODS.Joker {
     ppu_coder = { "stupxd" },
 
     key = 'stew_chicken_egg',
-    config = {extra = { Xchips = 3 }},
+    config = {extra = { Xchips = 3, chicken = false }},
     rarity = "Common",
     cost = 4,
     atlas = 'stewjokers',
@@ -17,36 +17,30 @@ SMODS.Joker {
     loc_vars = function (self, info_queue, card)
         return {
             vars = { card.ability.extra.Xchips },
+            key = not card.ability.extra.chicken and 'j_worm_stew_chicken_egg_alt' or nil
         }
     end,
 
-    update_sprite = function (self, card)
-        if card.ability.chicken then
-            card.children.center:set_sprite_pos({ x=1, y=2 })
-        else
-            card.children.center:set_sprite_pos({ x=0, y=2 })
+    in_pool = function(self, args)
+        return G.GAME.mass_extinction_event
+    end,
+
+    draw = function(self, card, layer)
+        if (layer == 'card' or layer == 'both') then
+            if card.ability.extra.chicken then
+                card.children.center:set_sprite_pos({ x=1, y=2 })
+            else
+                card.children.center:set_sprite_pos({ x=0, y=2 })
+            end
         end
     end,
 
-    -- happens when a card is created or loaded
-    set_sprites = function (self, card, front)
-
-        card.ability.chicken = card.ability.chicken or true
-        self:update_sprite(card)
-
-    end,
-
-    -- end round -> swap sprite, swap description
-
-    -- load -> set correct sprite & description
-
     calculate = function (self, card, context)
-        if context.main_eval then
-            card.ability.chicken = not card.ability.chicken
-            self:update_sprite(card)
+        if context.joker_main then
+            card.ability.extra.chicken = not card.ability.extra.chicken
 
             return {
-                Xchips = card.ability.extra.Xchips
+                xchips = card.ability.extra.Xchips
             }
         end
     end,

@@ -19,4 +19,4 @@ SMODS.Joker{ --Sputnik
     end
 
 }
-local thunk = (G.GAME.interest_cap or 25) - math.floor((G.GAME.dollars or 0) / 5) 
+-- local thunk = (G.GAME.interest_cap or 25) - math.floor((G.GAME.dollars or 0) / 5) 
