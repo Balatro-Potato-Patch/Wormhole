@@ -75,32 +75,16 @@ SMODS.Challenge {
 		G.E_MANAGER:add_event(Event({
 			trigger = 'after',
 			func = function()
-				DUMMY_Oxygen_Time_Increase(1800, 30)
+				DUMMY_Oxygen_Time_Increase(1200, 30)
 				return true
 			end
 		}))
 	end,
-    calculate = function(self, context)
-		if G.GAME.dummy_oxygen_active then
-		    if context.press_play then
-		    	G.GAME.dummy_oxygen_paused = true --> Pause Timer
-		    end
-		    if context.after then
-	        	G.E_MANAGER:add_event(Event({
-	        		trigger = 'after',
-	        		func = function()
-		    			G.GAME.dummy_oxygen_paused = false --> Continue Timer
-	        			return true
-	        		end
-	        	}))
-		    end
-        end
-    end,
 	button_colour = G.C.SECONDARY_SET.Spectral
 }
 
 SMODS.Challenge {
-    key = 'dum_buff_spacesuit', -- Buff Space Suit
+    key = 'dum_buff_spacesuit',
     rules = {
         custom = {
             { id = 'worm_dum_buff_spacesuit_1' },

@@ -315,7 +315,7 @@ return {
         },
         v_text = {
             -- Challenge Descs.
-            ch_c_worm_dum_low_oxygen_1 = { "Start with {C:attention}30{} minutes of {C:spectral}Oxygen{},", },
+            ch_c_worm_dum_low_oxygen_1 = { "Start with {C:attention}20{} minutes of {C:spectral}Oxygen{},", },
             ch_c_worm_dum_low_oxygen_2 = { "{C:spectral}Oxygen{} doesn't affect scoring.", },
             ch_c_worm_dum_buff_spacesuit_1 = { "Enjoy {C:green,E:1}Pre-Nerfed {C:attention}Space Suit{} stats!", },
             ch_c_worm_dum_buff_spacesuit_2 = { "{C:inactive}Maximum Oxygen: {C:spectral}05:00{C:inactive} minutes", },
