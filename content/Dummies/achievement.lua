@@ -11,7 +11,7 @@ SMODS.Achievement({
 	key = 'dum_seriouscredit',
 	bypass_all_unlocked = true,
 	unlock_condition = function(self, args)
-		return args and args.type == 'dum_clickyclick' and (G.worm_clickcredits or 0) >= 1000
+		return args and args.type == 'dum_clickyclick' and args.amt >= 1000
 	end,
 })
 

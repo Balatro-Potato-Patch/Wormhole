@@ -163,7 +163,7 @@ PotatoPatchUtils.Developer {
 }
 
 -- Member SFX click funnies
-local cardclickref = Card.click
+local cardclickref, clickcount = Card.click, 0
 function Card:click()
 	if self and self.ppu_member then
 		if self.ppu_member.dum_sfx_click then
@@ -198,8 +198,8 @@ function Card:click()
 				self.ppu_member.dum_sfx_click(self, pitch, volume)
 			end
 		end
-		G.worm_clickcredits = (G.worm_clickcredits or 0) + 1
-		check_for_unlock({ type = 'dum_clickyclick' })
+		clickcount = (clickcount or 0) + 1
+		check_for_unlock({ type = 'dum_clickyclick', amt = clickcount })
 	end
 	return cardclickref(self)
 end
