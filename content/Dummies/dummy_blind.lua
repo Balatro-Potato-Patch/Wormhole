@@ -142,8 +142,7 @@ SMODS.Blind {
 	            		return true
 	            	end
 	            }))
-                G.dum_dummy_level = 398
-		        check_for_unlock({ type = 'dum_hyperlight' }) --> Grants Achievement.
+		        check_for_unlock({ type = 'dum_hyperlight', level = reward_level }) --> Grants Achievement.
             end 
             -- Money-Cap
             return math.min(100, reward_level * 2 - 1)
