@@ -45,13 +45,24 @@ return {
                 name = "J8-Bit",
                 text = {
                     {
-                        "Just happy to be here!",
-                        "{s:0.8,C:inactive}(temp description)"
+                        "{s:1.5}So... {C:purple,s:1.5}chunks{s:1.5}, huh?"
+                    },
+                    {
+                        "{s:0.9}I made most of the artwork,",
+                        "{s:0.9}the shader effects for",
+                        "{C:legendary,s:0.9}Moon Berry{s:0.9}, {C:uncommon,s:0.9}Golden Record{s:0.9},",
+                        "{s:0.9}and {s:0.9,C:common}Magical Girl{s:0.9},",
+                        "{s:0.9}and a good chunk of the",
+                        "{s:0.9}programming/design work"
                     },
                     {
                         "If you're interested in",
                         "more of my stuff:",
-                        "{s:0.8,C:inactive}(add socials later)"
+                        "{s:0.8,X:lfc_bluesky,C:white}Bluesky{s:0.8} @j8-bit.bsky.social",
+                        "{s:0.8,X:lfc_youtube,C:white}YouTube{s:0.8} @j8-bitforager842",
+                        "{s:0.8,X:lfc_tumblr,C:white}Tumblr{s:0.8} @aforager",
+                        "{s:0.8}Play the {s:0.8,C:attention}Forager Nonessentials{s:0.8} mod!",
+                        "{s:0.8}Play CalvinChess on {s:0.8,X:lfc_steam,C:white}Steam{s:0.8}!",
                     }
                 }
             },
