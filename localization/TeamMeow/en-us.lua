@@ -377,12 +377,12 @@ return {
 					"{C:money}$#1#{}",
 				},
 			},
-			worm_meow_on_score = {
+			worm_meow_nyarlathotep_on_score = {
 				text = {
 					"Scored cards give",
 				},
 			},
-			worm_meow_held_in_hand = {
+			worm_meow_nyarlathotep_held_in_hand = {
 				text = {
 					"Cards held in hand give",
 				},
