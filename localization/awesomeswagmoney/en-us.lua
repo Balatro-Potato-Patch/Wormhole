@@ -41,7 +41,14 @@ return {
             }
         },
         Planet = {},
-        Spectral = {},
+        Spectral = {
+            c_worm_ultramegaopolis = {
+                name = "Ultramegaopolis",
+                text = {
+                    "Releases {C:worm_necrozma_r,E:1}UB-BLACK"
+                }
+            }
+        },
         Stake = {},
         Tag = {
             tag_worm_ub = {
@@ -193,10 +200,14 @@ return {
         dictionary = {
             k_worm_ultrabeast = "Ultra Beast",
             b_worm_ultrabeast_cards = "Ultra Beasts",
-            k_worm_ultrawormhole = "Ultra Wormhole"
+            k_worm_ultrawormhole = "Ultra Wormhole",
+            k_worm_necrozma_r = "UB-BLACK",
         },
         high_scores = {},
-        labels = {worm_ultrabeast = "Ultra Beast"},
+        labels = {
+            worm_ultrabeast = "Ultra Beast",
+            k_worm_necrozma_r = "UB-BLACK",
+        },
         poker_hand_descriptions = {},
         poker_hands = {},
         quips = {

@@ -12,6 +12,7 @@ SMODS.Consumable {
     atlas = 'worm_asm_ubs',
     pos = {x = 2, y = 2},
     soul_pos = {x = 3, y = 2},
+    display_size = {w = 89, h = 109},
     config = {extra_slots_used = 1, extra = {Xmult = 3, counter = 2}},
 
     loc_vars = function(self, info_queue, card)
@@ -82,6 +83,7 @@ SMODS.Consumable {
     atlas = 'worm_asm_ubs',
     pos = {x = 0, y = 2},
     soul_pos = {x = 1, y = 2},
+    display_size = {w = 89, h = 109},
     config = {extra_slots_used = 1, extra = {mult = 53}},
 
     loc_vars = function(self, info_queue, card)
@@ -137,6 +139,7 @@ SMODS.Consumable {
     atlas = 'worm_asm_ubs',
     pos = {x = 0, y = 0},
     soul_pos = {x = 1, y = 0},
+    display_size = {w = 89, h = 109},
     config = {extra_slots_used = 1, extra = {chips = 251}},
 
     loc_vars = function(self, info_queue, card)
@@ -186,6 +189,7 @@ SMODS.Consumable {
     atlas = 'worm_asm_ubs',
     pos = {x = 2, y = 1},
     soul_pos = {x = 3, y = 1},
+    display_size = {w = 89, h = 109},
     config = {extra_slots_used = 1},
     loc_vars = function(self, info_queue, card)
         return {vars = {PRIMES[G.GAME.asm_xurkitree] or 17}}
@@ -215,8 +219,9 @@ SMODS.Consumable {
     key = "celesteela",
     set = "worm_ultrabeast",
     atlas = 'worm_asm_ubs',
-    pos = {x = 2, y = 0},
-    soul_pos = {x = 3, y = 0},
+    pos = {x = 0, y = 4},
+    soul_pos = {x = 1, y = 4},
+    display_size = {w = 89, h = 109},
     config = {extra_slots_used = 1},
     loc_vars = function(self, info_queue, card)
         return {vars = {PRIMES[G.GAME.asm_celesteela] or 2}}
@@ -303,6 +308,7 @@ SMODS.Consumable {
     atlas = 'worm_asm_ubs',
     pos = {x = 2, y = 0},
     soul_pos = {x = 3, y = 0},
+    display_size = { w = 89, h = 109 },
     config = {extra_slots_used = 1, extra = {copies = 4, reduction = 2}},
     loc_vars = function(self, info_queue, card)
         return {
@@ -345,6 +351,7 @@ SMODS.Consumable {
     atlas = 'worm_asm_ubs',
     pos = {x = 0, y = 3},
     soul_pos = {x = 1, y = 3},
+    display_size = { w = 89, h = 109 },
     config = {extra_slots_used = 1, extra = {destroy = 5, levels = 3}},
     loc_vars = function(self, info_queue, card)
         return {vars = {card.ability.extra.destroy, card.ability.extra.levels}}
@@ -405,6 +412,7 @@ SMODS.Consumable {
     atlas = 'worm_asm_ubs',
     pos = {x = 2, y = 0},
     soul_pos = {x = 3, y = 0},
+    display_size = { w = 89, h = 109 },
     config = {extra_slots_used = 1},
     loc_vars = function(self, info_queue, card) return {vars = {}} end,
     use = function(self, card, area, copier)
@@ -428,8 +436,9 @@ SMODS.Consumable {
     key = 'naganadel',
     set = 'worm_ultrabeast',
     atlas = 'worm_asm_ubs',
-    pos = {x = 2, y = 0},
-    soul_pos = {x = 3, y = 0},
+    pos = {x = 2, y = 4},
+    soul_pos = {x = 3, y = 4},
+    display_size = {w = 89, h = 109},
     config = {extra_slots_used = 1},
     loc_vars = function(self, info_queue, card) return {vars = {}} end,
     use = function(self, card, area, copier)
@@ -445,7 +454,7 @@ SMODS.Consumable {
     can_use = function(self, card)
         return next(SMODS.Edition:get_edition_cards(G.jokers, true))
     end,
-    --ppu_artist = {},
+    ppu_artist = {"worm_omega"},
     ppu_coder = {"worm_garb"},
     ppu_team = {"awesomeswagmoney"},
 }
@@ -454,8 +463,9 @@ SMODS.Consumable {
     key = 'stakataka',
     set = 'worm_ultrabeast',
     atlas = 'worm_asm_ubs',
-    pos = {x = 2, y = 0},
-    soul_pos = {x = 3, y = 0},
+    pos = {x = 0, y = 6},
+    soul_pos = {x = 1, y = 6},
+    display_size = {w = 89, h = 109},
     config = {extra_slots_used = 1, max_highlighted = 3, mod_conv = 'm_stone'},
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = G.P_CENTERS[card.ability.mod_conv]
@@ -491,7 +501,7 @@ SMODS.Consumable {
 
         return true
     end,
-    --ppu_artist = {""},
+    ppu_artist = {"worm_omega"},
     ppu_coder = {"worm_garb"},
     ppu_team = {"awesomeswagmoney"},
 }
@@ -505,7 +515,7 @@ SMODS.Consumable {
     atlas = 'worm_asm_ubs',
     pos = {x = 0, y = 1},
     soul_pos = {x = 1, y = 1},
-
+    display_size = { w = 89, h = 109 },
     config = {extra_slots_used = 1},
     loc_vars = function(self, info_queue, card) return {vars = {}} end,
     can_use = function(self, card) return G.hand and #G.hand.cards > 0 end,
@@ -547,10 +557,43 @@ SMODS.Consumable {
     ppu_team = {"awesomeswagmoney"},
 }
 
+SMODS.Consumable{
+    key = "ultramegaopolis",
+    set = "Spectral",
+    atlas = "worm_asm_ubs",
+    pos = { x = 2, y = 6 },
+    display_size = { w = 89, h = 109 },
+    hidden = true,
+    soul_set = "worm_ultrabeast",
+    use = function(self, card, area, copier)
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.4,
+            func = function()
+                play_sound('timpani')
+                SMODS.add_card({ set = 'Joker', rarity = "worm_necrozma_r", key = "j_worm_necrozma" })
+                card:juice_up(0.3, 0.5)
+                return true
+            end
+        }))
+        delay(0.6)
+    end,
+    can_use = function(self, card)
+        return G.jokers and #G.jokers.cards < G.jokers.config.card_limit
+    end,
+    ppu_artist = {"worm_omega"},
+    ppu_coder = {"worm_eris"},
+    ppu_team = {"awesomeswagmoney"},
+}
+
+SMODS.Rarity{
+    key = "necrozma_r",
+    badge_colour = HEX("000000"),
+}
 SMODS.Joker {
     key = 'necrozma',
     atlas = 'worm_asm_ubs',
-    rarity = 4,
+    rarity = "worm_necrozma_r",
     cost = 20,
     unlocked = true,
     discovered = false,
@@ -559,6 +602,7 @@ SMODS.Joker {
     perishable_compat = false,
     pos = {x = 2, y = 3},
     soul_pos = {x = 3, y = 3},
+    display_size = {w = 89, h = 109},
     config = {extra = {tag = "tag_worm_ub"}},
     loc_vars = function(self, info_queue, card)
         return {
