@@ -18,6 +18,14 @@ Wormhole.LancerFanClub = PotatoPatchUtils.Team {
     end
 }
 
+local ctcp = PotatoPatchUtils.CREDITS.create_team_credit_page
+function PotatoPatchUtils.CREDITS.create_team_credit_page(team, ...)
+    if team == Wormhole.LancerFanClub then
+        play_sound("worm_lfc_splat")
+    end
+    return ctcp(team, ...)
+end
+
 -- Atlases
 SMODS.Atlas {
     key = "lfc_devs",
@@ -88,6 +96,16 @@ SMODS.Atlas {
 SMODS.Sound {
     key = "lfc_explosion",
     path = "lfc_explosion.ogg"
+}
+
+SMODS.Sound {
+    key = "lfc_spacebar",
+    path = "lfc_spacebar.ogg"
+}
+
+SMODS.Sound {
+    key = "lfc_splat",
+    path = "lfc_splat.wav"
 }
 
 -- Colors

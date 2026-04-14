@@ -72,7 +72,6 @@ local suph = SMODS.upgrade_poker_hands
 function SMODS.upgrade_poker_hands(args, ...)
 	suph(args, ...)
 	if args.from and ((not args.hands) or #args.hands > 1) and Wormhole.LancerFanClub.levels_all_hands[args.from.config.center.key] then
-		print("bhole")
 		for _, card in ipairs(SMODS.find_card("j_worm_lfc_astronaut_food")) do
 			local count = math.min(args.level_up or 0, card.ability.extra.remaining)
 			if card.ability.extra.remaining <= count then

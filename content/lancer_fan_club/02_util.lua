@@ -48,7 +48,7 @@ Wormhole.LFC_Util.create_random_tag = function(rng_key)
     }))
 end
 
--- copied from Entropy's Entropy.generate_void_invert_uibox, which i also wrote most of -alexi
+-- modified from Entropy's Entropy.generate_void_invert_uibox, which i also wrote most of -alexi
 Wormhole.LFC_Util.generate_pokedex_entry_ui = function(center, info_queue, card, desc_nodes, specific_vars, full_UI_table)
     SMODS.Center.generate_ui(center, info_queue, card, desc_nodes, specific_vars, full_UI_table)
     if center.generate_extra_ui then
