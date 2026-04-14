@@ -60,7 +60,7 @@ SMODS.Joker {
   pos = { x = 1, y = 0 },
   atlas = "worm_jr_jokers",
   cost = 6,
-  blueprint_compat = true,
+  blueprint_compat = false,
   eternal_compat = true,
   perishable_compat = true,
 
@@ -68,13 +68,84 @@ SMODS.Joker {
     if context.blueprint then return end
 
     if context.end_of_round and context.main_eval and G.GAME.blind.boss then
-      SMODS.add_card { key = "sat_worm_" .. Wormhole.JR_UTILS.get_satellite(G.GAME.jr.curr_hand), area = G.consumeables }
-
       return {
         message = localize('worm_jr_plus_satellite'),
         -- For some reason our pink looks extremely bright when used as the background for a message so we use legendary here since it looks similar enough
-        colour = G.C.RARITY.Legendary
+        colour = G.C.RARITY.Legendary,
+        func = function()
+          G.E_MANAGER:add_event(Event {
+            func = function()
+              SMODS.add_card { key = "sat_worm_" .. Wormhole.JR_UTILS.get_satellite(G.GAME.jr.curr_hand), area = G.consumeables }
+
+              return true
+            end
+          })
+        end
       }
+    end
+  end
+}
+
+SMODS.Joker {
+  key = "jr_deep_space_probe",
+  config = { extra = {
+    counter = 0,
+    req = 4,
+  }
+  },
+  rarity = 2,
+  pos = { x = 2, y = 0 },
+  soul_pos = { x = 2, y = 1, draw = function(card, scale_mod, rotate_mod)
+    local spr = card.children.floating_sprite
+    local soul = card.config.center.soul_pos
+    local x, y = 0.35, 0.35
+    spr:set_sprite_pos(soul)
+
+    spr:draw_shader(
+      'dissolve', 0, nil, nil,
+      card.children.center,
+      scale_mod * .75, rotate_mod * .75,
+      spr.role.offset.x - x,
+      spr.role.offset.y + 0.1 * math.sin(1.8 * G.TIMERS.REAL) + y,
+      nil, 0.3)
+    spr:draw_shader('dissolve', nil, nil, nil,
+      card.children.center, scale_mod * .75, rotate_mod * .75, spr.role.offset.x - x,
+      spr.role.offset.y + 0.1 * math.sin(1.8 * G.TIMERS.REAL) + y)
+  end
+  },
+  atlas = "worm_jr_jokers",
+  cost = 8,
+  blueprint_compat = true,
+  eternal_compat = true,
+  perishable_compat = true,
+
+  loc_vars = function(self, info_queue, card)
+    return {
+      vars = {
+        card.ability.extra.counter,
+        card.ability.extra.req
+      }
+    }
+  end,
+
+  calculate = function(self, card, context)
+    if context.new_level and not context.blueprint and (context.new_level > context.old_level) then
+      card.ability.extra.counter = card.ability.extra.counter + 1
+
+      if card.ability.extra.counter == card.ability.extra.req then
+        card.ability.extra.counter = 0
+        return {
+          message = localize('worm_jr_plus_satellite'),
+          func = function()
+            G.E_MANAGER:add_event(Event {
+              func = function()
+                SMODS.add_card { set = "worm_jr_satellite", area = G.consumeables }
+                return true
+              end
+            })
+          end
+        }
+      end
     end
   end
 }
