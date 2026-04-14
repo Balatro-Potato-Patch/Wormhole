@@ -97,7 +97,7 @@ return {
             j_worm_lfc_meteor_shower = {
                 name = "Meteor Shower",
                 text = {
-                    "Scored cards cause {C:attention,E:1}meteors{}",
+                    "Scored cards cause {C:lfc_meteor}meteors",
                     "to fall on screen that",
                     "give {C:money}#1##2#{} when clicked"
                 }
@@ -282,7 +282,7 @@ return {
                 name = "Meteor Seal",
                 text = {
                     "Creates a {C:attention}clickable",
-                    "falling meteor that",
+                    "falling {C:lfc_meteor}meteor{} that",
                     "gives {C:money}$#1#{} on hit"
                 }
             }
