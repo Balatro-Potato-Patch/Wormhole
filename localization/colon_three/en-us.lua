@@ -379,7 +379,16 @@ return {
             PotatoPatchDev_meta = {
                 name = "Meta",
                 text = {
-                    "waow :3"
+                    { "wruff wruff :3" },
+                    {
+                        "did some code and a little",
+                        "bit of art, as well as a good",
+                        "amount of conceptual work"
+                    },
+                    {
+                        "still hard at work",
+                        "on Quintessence"
+                    }
                 }
             },
             PotatoPatchDev_ophelia = {
