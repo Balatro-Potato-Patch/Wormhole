@@ -18,3 +18,10 @@ if PotatoPatchUtils then
     -- Reset Game Globals func to hook
     function Wormhole.reset_game_globals(run_start) end
 end
+
+SMODS.Atlas {
+  key = "modicon",
+  path = "modicon.png",
+  px = 34,
+  py = 34
+}

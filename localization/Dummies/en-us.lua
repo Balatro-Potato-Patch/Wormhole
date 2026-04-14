@@ -1,4 +1,4 @@
-return {
+return {    -- yo it's GHOSTSALT here look at me TYPING before i SUBMIT THIS THING because i wanna leave one more MARK on this MOD before i SUBMIT THIS THING
     descriptions = {
         PotatoPatch = {
             PotatoPatchTeam_dummies = { name = 'Dummies' },
@@ -7,7 +7,7 @@ return {
                 text = {
                     { "Hiya! :3" },
                     { "Made: Moony, Gleebleglorp, Crystal Sphere", "and Star-Studded Deck" },
-                    { "Additional art: Garlic Bread that", "went to Space, Tim Curry" },
+                    { "Additional art: Garlic Bread that", "went to Space, Tim Curry,", "Mouthwash and TOGA's card below" },
                     { "I also animated some of", "the things we made ^u^" },
                     { "Have fun with the mod!! :D" }
                 }
