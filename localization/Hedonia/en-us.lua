@@ -128,8 +128,8 @@ return {
                 }
             }
         },
-        Potato_Patch = {
-            PotatoPatchTeam_hedonia = {
+        PotatoPatch = {
+            PotatoPatchTeam_Hedonia = {
                 name = "Hedonia"
             },
             PotatoPatchDev_alxndr = {
