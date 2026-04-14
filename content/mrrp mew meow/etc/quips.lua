@@ -1,6 +1,6 @@
 local menthol = not not next(SMODS.find_mod("Menthol"))
 local sarcpot = not not next(SMODS.find_mod("sarcpot"))
-local wtmjq -- = not not next(SMODS.find_mod("wtmjq")) --id?
+local wtmjq = not not next(SMODS.find_mod("Too Many Jimbo Quips"))
 local index = not not next(SMODS.find_mod("Index"))
 local steady = not not next(SMODS.find_mod("steady"))
 
