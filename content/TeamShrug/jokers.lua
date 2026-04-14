@@ -262,7 +262,8 @@ Wormhole.SHRUG_Joker {
 Wormhole.SHRUG_Joker {
     key = "shrug_dark_matter",
     atlas = "shrug_jokers",
-    pos = { x = 0, y = 0 },
+    pos = { x = 3, y = 0 },
+    soul_pos = { x = 4, y = 0 },
     rarity = 3,
     cost = 7,
     config = { extra = { scale = 0.1 } },
@@ -363,6 +364,9 @@ Wormhole.SHRUG_Joker {
 
     -- Credits
     ppu_coder = {
+        "microwave",
+    },
+    ppu_artist = {
         "microwave",
     },
     ppu_team = { "shrug" }
