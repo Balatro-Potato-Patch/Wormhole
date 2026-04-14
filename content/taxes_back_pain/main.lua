@@ -192,6 +192,14 @@ SMODS.Gradient({
     },
 })
 
+SMODS.Gradient({
+    key = "ice",
+    colours = { 
+        HEX("ff992f"), HEX("a445db")
+    },
+    cycle = 2.5,
+})
+
 PotatoPatchUtils.Developer({
     name = 'eremel',
     team = 'tbp',
@@ -231,6 +239,7 @@ PotatoPatchUtils.Developer({
     name = 'ice',
     team = 'tbp',
     loc = true,
+    colour = SMODS.Gradients.worm_ice,
     atlas = 'worm_tbp_devs',
     pos = { x = 3, y = 1 },
 })

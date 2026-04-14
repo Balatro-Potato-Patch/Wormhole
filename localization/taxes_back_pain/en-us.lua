@@ -84,7 +84,17 @@ local other_loc_table = {
             PotatoPatchDev_ice = {
                 name = 'Ice',
                 text = {
-                    'placeholder'
+                    {
+                        'I thought I was going to be doing',
+                        "some programming or art",
+                        "but my team was so talented",
+                        "that I was mostly an ideas guy"
+                    },
+
+                    {
+                        "I made {C:attention}Glue For Modpacks{},",
+                        "{C:mult}Blockbuster{} & {C:worm_ice,E:2}Balatro Goes Kino"
+                    }
                 }
             },
             PotatoPatchDev_rsnow = {
