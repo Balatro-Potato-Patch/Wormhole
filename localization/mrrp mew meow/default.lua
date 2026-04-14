@@ -351,6 +351,25 @@ misc={
 			"Maybe a bit",
 			"TOO much mint?"
 		},
+		worm_mrrp_biblio_win = {
+			"Catch those clowns!"
+		},
+		worm_mrrp_biblio_loss = {
+			"Well, next",
+			"time try catching",
+			"MORE clowns."
+		},
+		worm_mrrp_no_biblio_win = {
+			"I've got a whole",
+			"Bibliography of",
+			"cool jokers like this!"
+		},
+		worm_mrrp_no_biblio_loss = {
+			"Dang, maybe those",
+			"cards should be",
+			"put through some",
+			"kind of crucible..."
+		},
 
 	--	SARC
 		worm_mrrp_sarcpot = {
