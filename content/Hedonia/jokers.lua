@@ -18,6 +18,9 @@ SMODS.Joker {
     config = { extra = {
         items = 1
     }},
+    ppu_artist = {'qunumeru'},
+    ppu_coder = {'axyraandas', 'professorrenderer'},
+    ppu_team = {'Hedonia'},
     loc_vars = function(self,info_queue,center)
         return {vars = {center.ability.extra.items}}
     end,
@@ -63,6 +66,9 @@ SMODS.Joker {
     loc_vars = function(self,info_queue,center)
         return {vars = {center.ability.extra.threshold, center.ability.extra.threshold - center.ability.extra.current}}
     end,
+    ppu_artist = {},
+    ppu_coder = {'wombatcountry'},
+    ppu_team = {'Hedonia'},
     calculate = function(self,card,context)
         if context.joker_main then
             if card.ability.extra.current == card.ability.extra.threshold then
@@ -100,6 +106,9 @@ SMODS.Joker {
     pools = {
         ["Bartender"] = true
     },
+    ppu_artist = {},
+    ppu_coder = {'wombatcountry', 'axyraandas'},
+    ppu_team = {'Hedonia'},
     loc_vars = function(self,info_queue,center)
         local num, denom
         if G.jokers ~= nil then
@@ -137,6 +146,9 @@ SMODS.Joker {
     config = { extra = {
         chips = 0
     }},
+    ppu_artist = {},
+    ppu_coder = {'wombatcountry', 'axyraandas'},
+    ppu_team = {'Hedonia'},
     loc_vars = function(self,info_queue,center)
         return {vars = {center.ability.extra.chips}}
     end,
@@ -181,6 +193,9 @@ SMODS.Joker {
     loc_vars = function(self,info_queue,center)
         return {vars = {center.ability.extra.mult}}
     end,
+    ppu_artist = {'hellboydante'},
+    ppu_coder = {'axyraandas'},
+    ppu_team = {'Hedonia'},
     calculate = function(self, card, context)
         if context.joker_main then
             local counter = 0
@@ -213,6 +228,9 @@ SMODS.Joker {
     config = { extra = {
         discount = 2
     }},
+    ppu_artist = {'hellboydante'},
+    ppu_coder = {'professorrenderer'},
+    ppu_team = {'Hedonia'},
     loc_vars = function(self,info_queue,center)
         return {vars = {center.ability.extra.discount}}
     end,

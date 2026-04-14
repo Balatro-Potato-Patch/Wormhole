@@ -26,6 +26,9 @@ SMODS.Consumable {
     set = "worm_hedonia_menu",
     atlas = "menu",
     pos = {x = 0, y = 0},
+    ppu_artist = {},
+    ppu_coder = {'wombatcountry', 'professorrenderer'},
+    ppu_team = {'Hedonia'},
     use = function(self, card, area, copier)
         local card_to_drink = pseudorandom_element(G.hand.cards, 'alcohol') --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/spectrals.lua#L26
         local edition = SMODS.poll_edition({guaranteed = true, options = {{name = "e_worm_hedonia_tipsy", weight = 1}}})
@@ -41,6 +44,9 @@ SMODS.Consumable {
     set = "worm_hedonia_menu",
     atlas = "menu",
     pos = {x = 1, y = 0},
+    ppu_artist = {'hellboydante'},
+    ppu_coder = {'wombatcountry', 'professorrenderer'},
+    ppu_team = {'Hedonia'},
     use = function(self, card, area, copier)
         local card_to_drink = pseudorandom_element(G.hand.cards, 'alcohol') --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/spectrals.lua#L26
         local edition = SMODS.poll_edition({guaranteed = true, options = {{name = "e_worm_hedonia_drunk", weight = 1}}})
@@ -56,6 +62,9 @@ SMODS.Consumable {
     set = "worm_hedonia_menu",
     atlas = "menu",
     pos = {x = 2, y = 0},
+    ppu_artist = {},
+    ppu_coder = {'wombatcountry', 'professorrenderer'},
+    ppu_team = {'Hedonia'},
     use = function(self, card, area, copier)
         local card_to_drink = pseudorandom_element(G.hand.cards, 'alcohol') --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/spectrals.lua#L26
         local edition = SMODS.poll_edition({guaranteed = true, options = {{name = "e_worm_hedonia_very_drunk", weight = 1}}})
@@ -71,6 +80,9 @@ SMODS.Consumable {
     set = "worm_hedonia_menu",
     atlas = "menu",
     pos = {x = 3, y = 0},
+    ppu_artist = {},
+    ppu_coder = {'wombatcountry', 'professorrenderer'},
+    ppu_team = {'Hedonia'},
     use = function(self, card, area, copier)
         local card_to_drink = pseudorandom_element(G.hand.cards, 'alcohol') --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/spectrals.lua#L26
         local edition = SMODS.poll_edition({guaranteed = true, options = {{name = "e_worm_hedonia_blackout", weight = 1}}})
@@ -92,6 +104,9 @@ SMODS.Consumable {
     loc_vars = function(self,info_queue,center)
         return {vars = {center.ability.extra.bonus}}
     end,
+    ppu_artist = {'hellboydante'},
+    ppu_coder = {'wombatcountry', 'axyraandas'},
+    ppu_team = {'Hedonia'},
     use = function(self, card, area, copier)
         local card_to_bonus = pseudorandom_element(G.hand.cards, 'alcohol') --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/spectrals.lua#L26
         card_to_bonus.ability.perma_bonus = (card_to_bonus.ability.perma_bonus or 0) + card.ability.extra.bonus --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/jokers.lua#L1442
@@ -115,6 +130,9 @@ SMODS.Consumable {
     set = "worm_hedonia_menu",
     atlas = "menu",
     pos = {x = 1, y = 1},
+    ppu_artist = {'qunumeru'},
+    ppu_coder = {'wombatcountry', 'axyraandas'},
+    ppu_team = {'Hedonia'},
     use = function(self, card, area, copier)
         for i, v in pairs(G.hand.cards) do
             local is_drunk = v.edition and v.edition.key
@@ -160,6 +178,9 @@ SMODS.Consumable {
     loc_vars = function(self,info_queue,center)
         return {vars = {center.ability.extra.cards}}
     end,
+    ppu_artist = {'hellboydante'},
+    ppu_coder = {'wombatcountry', 'axyraandas'},
+    ppu_team = {'Hedonia'},
     use = function(self, card, area, copier)
         local rank = pseudorandom_element(SMODS.Ranks, 'debbie').key
         for i = 1, #G.hand.highlighted do
@@ -182,6 +203,9 @@ SMODS.Consumable {
     loc_vars = function(self,info_queue,center)
         return {vars = {center.ability.extra.cards}}
     end,
+    ppu_artist = {'qunumeru'},
+    ppu_coder = {'wombatcountry', 'axyraandas'},
+    ppu_team = {'Hedonia'},
     use = function(self, card, area, copier)
         local suit = pseudorandom_element(SMODS.Suits, 'space_jam').key
         for i = 1, #G.hand.highlighted do
@@ -201,6 +225,9 @@ SMODS.Booster {
     pos = { x = 0, y = 0 },
     config = { extra = 3, choose = 1, name = "Menu Pack" },
     draw_hand = true,
+    ppu_artist = {'hellboydante','qunumeru'},
+    ppu_coder = {'wombatcountry'},
+    ppu_team = {'Hedonia'},
     create_card = function(self, card)
         return {set = "worm_hedonia_menu", area = G.pack_cards, skip_materialize = true}
     end,
@@ -220,6 +247,9 @@ SMODS.Booster {
     pos = { x = 1, y = 0 },
     config = { extra = 3, choose = 1, name = "Menu Pack" },
     draw_hand = true,
+    ppu_artist = {'hellboydante','qunumeru'},
+    ppu_coder = {'wombatcountry'},
+    ppu_team = {'Hedonia'},
     create_card = function(self, card)
         return {set = "worm_hedonia_menu", area = G.pack_cards, skip_materialize = true}
     end,
@@ -239,6 +269,9 @@ SMODS.Booster {
     pos = { x = 2, y = 0 },
     config = { extra = 3, choose = 1, name = "Menu Pack" },
     draw_hand = true,
+    ppu_artist = {'hellboydante','qunumeru'},
+    ppu_coder = {'wombatcountry'},
+    ppu_team = {'Hedonia'},
     create_card = function(self, card)
         return {set = "worm_hedonia_menu", area = G.pack_cards, skip_materialize = true}
     end,
@@ -258,6 +291,9 @@ SMODS.Booster {
     pos = { x = 3, y = 0 },
     config = { extra = 3, choose = 1, name = "Menu Pack" },
     draw_hand = true,
+    ppu_artist = {'hellboydante','qunumeru'},
+    ppu_coder = {'wombatcountry'},
+    ppu_team = {'Hedonia'},
     create_card = function(self, card)
         return {set = "worm_hedonia_menu", area = G.pack_cards, skip_materialize = true}
     end,
@@ -277,6 +313,9 @@ SMODS.Booster {
     pos = { x = 0, y = 1 },
     config = { extra = 4, choose = 1, name = "Jumbo Menu Pack" },
     draw_hand = true,
+    ppu_artist = {'hellboydante','qunumeru'},
+    ppu_coder = {'wombatcountry'},
+    ppu_team = {'Hedonia'},
     create_card = function(self, card)
         return {set = "worm_hedonia_menu", area = G.pack_cards, skip_materialize = true}
     end,
@@ -296,6 +335,9 @@ SMODS.Booster {
     pos = { x = 1, y = 1 },
     config = { extra = 4, choose = 1, name = "Jumbo Menu Pack" },
     draw_hand = true,
+    ppu_artist = {'hellboydante','qunumeru'},
+    ppu_coder = {'wombatcountry'},
+    ppu_team = {'Hedonia'},
     create_card = function(self, card)
         return {set = "worm_hedonia_menu", area = G.pack_cards, skip_materialize = true}
     end,
@@ -315,6 +357,9 @@ SMODS.Booster {
     pos = { x = 2, y = 1 },
     config = { extra = 4, choose = 2, name = "Mega Menu Pack" },
     draw_hand = true,
+    ppu_artist = {'hellboydante','qunumeru'},
+    ppu_coder = {'wombatcountry'},
+    ppu_team = {'Hedonia'},
     create_card = function(self, card)
         return {set = "worm_hedonia_menu", area = G.pack_cards, skip_materialize = true}
     end,
@@ -334,6 +379,9 @@ SMODS.Booster {
     pos = { x = 3, y = 1 },
     config = { extra = 4, choose = 2, name = "Mega Menu Pack" },
     draw_hand = true,
+    ppu_artist = {'hellboydante','qunumeru'},
+    ppu_coder = {'wombatcountry'},
+    ppu_team = {'Hedonia'},
     create_card = function(self, card)
         return {set = "worm_hedonia_menu", area = G.pack_cards, skip_materialize = true}
     end,

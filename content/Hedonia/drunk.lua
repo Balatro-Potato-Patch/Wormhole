@@ -46,6 +46,8 @@ SMODS.Edition {
     pools = {
         ["Drunk"] = true
     },
+    ppu_coder = {'alxndr', 'axyraandas'},
+    ppu_team = {'Hedonia'},
     disable_base_shader = true, -- shader will modify card shape when implimented so this should be true
 
     on_apply = function(card)
@@ -91,6 +93,8 @@ SMODS.Edition {
     pools = {
         ["Drunk"] = true
     },
+    ppu_coder = {'alxndr', 'axyraandas'},
+    ppu_team = {'Hedonia'},
     disable_base_shader = true, -- shader will modify card shape when implimented so this should be true
 
     on_apply = function(card)
@@ -139,6 +143,8 @@ SMODS.Edition {
     pools = {
         ["Drunk"] = true
     },
+    ppu_coder = {'alxndr', 'axyraandas'},
+    ppu_team = {'Hedonia'},
     disable_base_shader = true, -- shader will modify card shape when implimented so this should be true
 
     on_apply = function(card)
@@ -184,6 +190,8 @@ SMODS.Edition {
     pools = {
         ["Drunk"] = true
     },
+    ppu_coder = {'alxndr', 'axyraandas'},
+    ppu_team = {'Hedonia'},
     disable_base_shader = true, -- shader will modify card shape when implimented so this should be true
     always_scores = true,
     on_apply = function(card)
