@@ -612,7 +612,6 @@ return {
                     "With my creative passion reinvigorated, I hope I get to work with everyone here again in the future!",
                 }, {
                     "Be kind to yourself, you deserve it <3",
-                    "{f:9,s:0.6}💜"
                 }
                 }
             },

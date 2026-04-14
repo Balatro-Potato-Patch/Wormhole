@@ -61,9 +61,11 @@ PotatoPatchUtils.Developer {
 PotatoPatchUtils.Developer {
     name = 'AnneBean',
     team = 'absinthe',
+    colour = HEX('ae65ff'),
     atlas = 'worm_abs_credits',
     pos = { x = 2, y = 2 },
-    soul_pos = { x = 3, y = 2 }
+    soul_pos = { x = 3, y = 2 },
+    loc = true
 }
 
 PotatoPatchUtils.Developer {
