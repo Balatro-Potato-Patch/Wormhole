@@ -50,6 +50,7 @@ PotatoPatchUtils.Team({
 	calculate = function(self, context) end,
 	credit_rows = { 3, 3 },
 })
+
 PotatoPatchUtils.Developer({
 	name = "aikoyori",
 	colour = G.C.GREEN,
@@ -95,7 +96,6 @@ PotatoPatchUtils.Developer({
 	pos = { x = 1, y = 1 },
 	atlas = "worm_jtem2_creds",
 })
-
 PotatoPatchUtils.Developer({
 	name = "ari",
 	colour = G.C.ORANGE,
