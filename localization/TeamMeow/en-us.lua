@@ -417,13 +417,6 @@ return {
 					"Earn {C:money}$#1#",
 				},
 			},
-			exc_worm_meow_silence = {
-				name = "Silence",
-				text = {
-					"Debuff the {C:attention}rightmost{} Joker",
-					"That Joker becomes {C:attention}Eternal{}"
-				},
-			},
 			exc_worm_meow_remembrance = {
 				name = "Remembrance",
 				text = {
@@ -463,6 +456,21 @@ return {
 					"devotion, {C:attention}Nya-rlathotep{} is",
 					"willing to part with {C:money}$#1#{}."
 				}
+			},
+			exc_worm_meow_silence = {
+				name = "Silence",
+				text = {
+					"Debuff the {C:attention}rightmost{} Joker",
+					"That Joker becomes {C:attention}Eternal{}"
+				},
+			},
+			exc_worm_meow_silhouette = {
+				name = "Silhouette",
+				text = {
+					"{C:attention}Flip{} a random Joker",
+					"{C:attention}Nya-rlathotep{} gains {X:chips,C:white}X#1#{} Chips",
+					"{C:inactive}(Currently {X:chips,C:white}X#2#{C:inactive} Chips)",
+				},
 			},
 			worm_meow_spacetart_stacks = {
 				text = {

@@ -2,7 +2,8 @@ local function build_nyarlathotep_entries(all_entries, max_cols, no_commas)
 	max_cols = max_cols or 3
 	local entries_to_organize = {}
 	for _, e in ipairs(all_entries) do
-		local loc_target = G.localization.descriptions.Other[e.no_auto_key and e.key or ("worm_meow_nyarlathotep_" .. e.key)].text_parsed
+		local loc_target = G.localization.descriptions.Other
+			[e.no_auto_key and e.key or ("worm_meow_nyarlathotep_" .. e.key)].text_parsed
 		for _, row in ipairs(loc_target) do
 			entries_to_organize[#entries_to_organize + 1] = {
 				n = G.UIT.C,
@@ -474,28 +475,6 @@ nyarlathotep_exchange({
 })
 
 nyarlathotep_exchange({
-	key = "silence",
-	cost = -2,
-	config = {},
-	reward = function(self, card)
-		if G.jokers.cards[#G.jokers.cards].config.center.key == 'j_worm_meow_nyarlathotep' then
-			G.jokers.cards[#G.jokers.cards - 1]:juice_up(0.8, 0.8)
-			G.jokers.cards[#G.jokers.cards - 1]:add_sticker('eternal', true)
-			SMODS.debuff_card(G.jokers.cards[#G.jokers.cards - 1], true, 'meow_nyarlathotep_silence')
-		else
-			G.jokers.cards[#G.jokers.cards]:juice_up(0.8, 0.8)
-			G.jokers.cards[#G.jokers.cards]:add_sticker('eternal', true)
-			SMODS.debuff_card(G.jokers.cards[#G.jokers.cards], true, 'meow_nyarlathotep_silence')
-		end
-	end,
-	loc_vars = function(self, card)
-	end,
-	in_pool = function(self, card, amt)
-		return G.GAME.meow_sanity_lost > 0 and #G.jokers.cards > 1
-	end,
-})
-
-nyarlathotep_exchange({
 	key = "remembrance",
 	cost = 2,
 	config = { antes = 1 },
@@ -595,6 +574,75 @@ nyarlathotep_exchange({
 	end,
 	in_pool = function(self, card, amt)
 		return G.GAME.meow_sanity_lost > 0
+	end,
+})
+
+nyarlathotep_exchange({
+	key = "silence",
+	cost = -2,
+	config = {},
+	reward = function(self, card)
+		if G.jokers.cards[#G.jokers.cards].config.center.key == 'j_worm_meow_nyarlathotep' then
+			G.jokers.cards[#G.jokers.cards - 1]:juice_up(0.8, 0.8)
+			G.jokers.cards[#G.jokers.cards - 1]:add_sticker('eternal', true)
+			SMODS.debuff_card(G.jokers.cards[#G.jokers.cards - 1], true, 'meow_nyarlathotep_silence')
+		else
+			G.jokers.cards[#G.jokers.cards]:juice_up(0.8, 0.8)
+			G.jokers.cards[#G.jokers.cards]:add_sticker('eternal', true)
+			SMODS.debuff_card(G.jokers.cards[#G.jokers.cards], true, 'meow_nyarlathotep_silence')
+		end
+	end,
+	loc_vars = function(self, card)
+	end,
+	in_pool = function(self, card, amt)
+		return G.GAME.meow_sanity_lost > 0 and #G.jokers.cards > 1
+	end,
+})
+
+nyarlathotep_exchange({
+	key = "silhouette",
+	cost = 3,
+	config = { xchips = 2 },
+	reward = function(self, card)
+		local cae = card.ability.extra
+		cae.joker_main.xchips = (cae.joker_main.xchips or 1) + self.config.xchips
+		G.E_MANAGER:add_event(Event({
+			func = function()
+				play_sound('tarot1')
+				local candidates = {}
+				for _, j in ipairs(G.jokers.cards) do
+					if j.config.center.key ~= 'j_worm_meow_nyarlathotep' then
+						table.insert(candidates, j)
+					end
+				end
+				local jokertoflip = #candidates > 0 and
+					pseudorandom_element(candidates, pseudoseed("meow_nyarlathotep")) or nil
+				if jokertoflip then
+					G.E_MANAGER:add_event(Event({
+						trigger = 'after',
+						delay = 0.3,
+						blockable = false,
+						func = function()
+							jokertoflip:flip()
+							return true
+						end
+					}))
+				end
+				return true
+			end
+		}))
+	end,
+	loc_vars = function(self, card)
+		local cae = card.ability.extra
+		return {
+			vars = {
+				self.config.xchips,
+				cae.joker_main.xchips or 1,
+			},
+		}
+	end,
+	in_pool = function(self, card, amt)
+		return #G.jokers.cards > 1
 	end,
 })
 
