@@ -35,7 +35,7 @@ return {
                         "and Spacebar lol"
                     },
                     {
-                        "also did the shader stuff",
+                        "also did the shader stuff for",
                         "Urination Station and these Credits!"
                     }
                 }
