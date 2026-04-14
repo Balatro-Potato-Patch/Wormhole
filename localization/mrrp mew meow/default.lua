@@ -32,9 +32,10 @@ descriptions={
 			name=
 				"Countdown to Launch"
 			, text={
-				"Upgrade level of played",
-				"{C:attention}poker hand{} if it contains",
-				"a {C:attention}#1#{} and no {C:attention}face{} cards"
+				"Upgrade level of first played",
+				"{C:attention}poker hand{} of round",
+				"if it contains a {C:attention}#1#{}",
+				"and no scoring {C:attention}face{} cards",
 			}
 		},
 		--[[]]
