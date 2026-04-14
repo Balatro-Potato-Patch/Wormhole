@@ -120,6 +120,27 @@ SMODS.Atlas {
 }
 
 SMODS.Atlas {
+    key = "tbp_launchdeck",
+    path = "taxes_back_pain/launchdeck.png",
+    px = 71,
+    py = 95
+}
+
+SMODS.Atlas {
+    key = "tbp_ship",
+    path = "taxes_back_pain/spaceship_joker.png",
+    px = 71,
+    py = 95
+}
+
+SMODS.Atlas {
+    key = "tbp_ship_soul",
+    path = "taxes_back_pain/spaceship.png",
+    px = 75,
+    py = 95
+}
+
+SMODS.Atlas {
     key = "tbp_module_sprite_only",
     path = "taxes_back_pain/modules_sprite_only_2.png",
     px = 71,
@@ -291,6 +312,7 @@ SMODS.DrawStep{
 
 SMODS.Back{
     key = "spaceship_deck",
+    atlas = "worm_tbp_launchdeck",
     pos = {x = 0, y = 0},
     config = {jokers = {'j_worm_tbp_spaceship'} },
     loc_vars = function(self, info_queue, card)
@@ -312,6 +334,8 @@ Wormhole.tbp.module_colours = {
 
 SMODS.Joker({
 	key = "tbp_spaceship",
+    atlas = "tbp_ship",
+    pos = {x=1, y=0},
 	rarity = 4, -- TODO: Does it need its own rarity?
 	cost = 1,
 	unlocked = true,

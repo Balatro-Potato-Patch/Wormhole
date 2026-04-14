@@ -7,7 +7,7 @@ SMODS.DrawStep{
         if card.config.center.discovered and (card.config.center.atlas == 'centers' or card.config.center.atlas == 'worm_tbp_module') then
             return
         end
-        if card and card.config.center.set == 'tbp_module' then
+        if card and (card.config.center.set == 'tbp_module' or card.config.center.atlas == 'worm_tbp_ship') then
             local _shader = "worm_torn"
             if card.edition and card.edition.negative then
                 _shader = "worm_torn_neg"
@@ -105,4 +105,21 @@ SMODS.UndiscoveredSprite {
     key = "tbp_module",
     atlas = "worm_tbp_module_frame",
     pos = {x = 3, y = 1} 
+}
+
+-- Spaceship Drawsteps
+SMODS.DrawStep{
+    key = 'tbp_spaceship',
+    order = 30,
+    func = function(card, layer)
+        if card and card.config.center.atlas == 'worm_tbp_ship' then
+            if G.tbp and G.tbp.spaceship then
+                G.tbp.spaceship.role.draw_major = card 
+                G.tbp.spaceship:draw_shader('dissolve',0, nil, nil, card.children.center, nil, nil, nil, nil, nil, 0.6)
+                G.tbp.spaceship:draw_shader('dissolve', nil, nil, nil, card.children.center)
+                -- (_shader, _shadow_height, _send, _no_tilt, other_obj, ms, mr, mx, my, custom_shader, tilt_shadow)
+            end 
+        end
+    end,
+    conditions = { vortex = false, facing = 'front' },
 }

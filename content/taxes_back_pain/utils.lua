@@ -134,6 +134,12 @@ function Game.init_game_object(self)
             }),
     }
 
+    self.tbp.spaceship = Sprite(0, 0, self.CARD_W, self.CARD_W, 
+            G.ASSET_ATLAS["worm_tbp_ship_soul"], {
+                x=4, 
+                y=0
+            })
+
     -- self.tbp.module_sprites = {}
 
     return ret
