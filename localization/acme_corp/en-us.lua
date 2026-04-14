@@ -11,7 +11,7 @@ return {
                 }
             },
             c_worm_acme_ball_alt = {
-                name = 'Ball',
+                name = 'ACME "Bounce-O-Matic" Spherical Impact Projectile',
                 text = {
                     'Give a random {C:attention}enhancement',
                     'to all {C:attention}unenhanced Face Cards',
@@ -83,6 +83,23 @@ return {
                 text = {
                     '{X:attention,C:white}Use{} to get a random {C:attention}Perishable',
                     '{C:dark_edition}Negative {C:attention}Food Joker',
+                }
+            },
+            c_worm_acme_brush = {
+                name = 'ACME Instant Tunnel Apparatus',
+                text = {
+                    '{X:attention,C:white}After{} scoring a Hand containing {C:attention}#3#{} Suits,',
+                    '{X:attention,C:white}Use{} for a {C:green}#1# in #2# chance{} to turn',
+                    'each card {C:attention}held in hand',
+                    "to {C:attention}1{} selected Card's {C:attention}Suit"
+                }
+            },
+            c_worm_acme_brush_alt = {
+                name = 'ACME Instant Tunnel Apparatus',
+                text = {
+                    '{X:attention,C:white}Use{} for a {C:green}#1# in #2# chance{} to turn',
+                    'each card {C:attention}held in hand',
+                    "to {C:attention}1{} selected Card's {C:attention}Suit"
                 }
             },
             c_worm_acme_mr_jr = {
@@ -284,7 +301,15 @@ return {
             PotatoPatchDev_Opal = {
                 name = "Opal",
                 text = {
-                    { "On" },
+                    {
+                        "This has been quite a fun event!",
+                        "I feel {C:attention}incredibly lucky{} to have had",
+                        "such a fantastic team once again."
+                    },
+                    {
+                        "{C:inactive,s:0.8}And I'm no shill, but I hear",
+                        "{E:1,s:0.8,C:tarot}Opalstuff{C:inactive,s:0.8} has some cool stuff :3"
+                    },
                 },
             },
             PotatoPatchDev_Youh = {
@@ -316,6 +341,7 @@ return {
             k_copy = 'Copy',
             k_stocked = 'in stock',
             k_remaining = 'Remaining',
+            k_worm_gadget_pack = 'Gadget Pack',
 
             k_acme_test_dummy_1 = 'Crash!',
             k_acme_test_dummy_2 = 'Bang!',
