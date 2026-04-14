@@ -920,6 +920,7 @@ SMODS.Joker({
 
 	ppu_team = { "jtem2" },
 	ppu_coder = { "sleepyg11" },
+	ppu_artist = { "aikoyori" },
 })
 
 local card_set_cost_ref = Card.set_cost

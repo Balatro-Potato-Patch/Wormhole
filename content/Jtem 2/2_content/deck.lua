@@ -1,6 +1,18 @@
+SMODS.Atlas({
+	key = "jtem2_black_hole_deck",
+	path = "Jtem 2/decks/black_hole_deck.png",
+	px = 71,
+	py = 95,
+})
+
+
 SMODS.Back({
-	key = "jtem2_deck",
+	key = "jtem2_black_hole_deck",
+	atlas = "jtem2_black_hole_deck",
+	ppu_team = { "jtem2" },
+	ppu_artist = { "aikoyori" },
 	calculate = function(self, back, context)
+		-- todo: rework this so that it does something with the seal
 		if context.end_of_round and context.main_eval and context.beat_boss and not context.game_over then
 			update_hand_text(
 				{ sound = "button", volume = 0.7, pitch = 0.8, delay = 0.3 },
@@ -43,10 +55,4 @@ SMODS.Back({
 			)
 		end
 	end,
-	loc_txt = { -- temp so galdur doesnt kill itself
-		name = "bgfwdf",
-		text = {
-			"burger",
-		},
-	},
 })
