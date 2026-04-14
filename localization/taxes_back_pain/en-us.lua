@@ -199,6 +199,14 @@ local other_loc_table = {
                     'learn what it does'
                 }
             },
+        },
+        Tag = {
+            tag_worm_tbp_rocketry = {
+                name = "Rocketry Tag",
+                text = {
+                    "Gives a free {C:spectral}Mega Module Pack"
+                }
+            }
         }
     },
 }
