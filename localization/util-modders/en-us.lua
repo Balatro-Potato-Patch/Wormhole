@@ -76,7 +76,8 @@ return {
     misc = {
 	dictionary = {
 	    b_util_spaces_cards = "Space Pods",
-	    k_util_spaces = "Space Pod Pack",
+	    k_util_spaces = "Space Pod",
+	    k_util_spaces_group = "Space Pod Pack",
 	    k_depleted = "Depleted!",
 	},
     }

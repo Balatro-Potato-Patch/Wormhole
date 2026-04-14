@@ -13,7 +13,7 @@ SMODS.Booster {
     cost = 4,
     pos = { x = 0, y = 0 },
     config = { extra = 3, choose = 1 },
-    group_key = "k_util_spaces",
+    group_key = "k_util_spaces_group",
     select_card = "consumeables",
     loc_vars = function(self, info_queue, card)
 	local cfg = (card and card.ability) or self.config
@@ -163,7 +163,7 @@ SMODS.Consumable {
     set_sprites = setSprites,
     set_ability = initSpace,
     calculate = function(self, card, context)
-	if context.joker_main and next(context.poker_hands[card.ability.extra.poker_hand]) then
+	if context.joker_main and context.scoring_name == card.ability.extra.poker_hand then
 	    local depleted
 	    card.ability.extra.rounds = card.ability.extra.rounds - 1
 	    if card.ability.extra.rounds == 0 then

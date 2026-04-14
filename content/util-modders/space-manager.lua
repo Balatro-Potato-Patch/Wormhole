@@ -1,6 +1,8 @@
 local manager = {
     active = false,
+    bg_active = false,
     transparency = 0.0,
+    bg_transparency = 0,
 }
 Wormhole.util_space_manager = manager
 
@@ -15,7 +17,6 @@ function manager:update(dt)
 
     if self.active and (G.OVERLAY_MENU or G.screenwipe) then
         self:reset()
-        return
     end
 
     if G.STATE == G.STATES.SMODS_BOOSTER_OPENED then
@@ -29,13 +30,20 @@ function manager:update(dt)
             end
             self:recalc_overlay()
         end
-    elseif self.last_hovered or self.target then
-        self.last_hovered = nil
-        self.target = nil
-        self:recalc_overlay()
+    else
+        if self.last_hovered or self.target then
+            self.last_hovered = nil
+            self.target = nil
+            self:recalc_overlay()
+        end
+        local hand = G.GAME.current_round.current_hand.handname
+        if hand ~= self.handname then
+            self.targetHand = hand
+        end
     end
 
     self:run(dt)
+    self:run_bg(dt)
 end
 
 function manager:run(dt)
@@ -66,15 +74,124 @@ function manager:run(dt)
     end
 end
 
+function manager:run_bg(dt)
+    local target = 1.0
+    local rate = 3
+
+    -- if self.targetHand and self.handname and self.targetHand ~= self.handname then
+    --     rate = 3
+    -- end
+
+    if self.targetHand ~= self.handname or not self.targetHand then
+        target = 0.0
+    end
+
+    if self.bg_transparency ~= target then
+        local dir = target > self.bg_transparency and 1 or -1
+        self.bg_transparency = math.max(math.min(self.bg_transparency + dir * (rate * dt), 1.0), 0.0)
+    end
+
+    self.bg_active = self.bg_transparency ~= 0.0
+
+    if not self.bg_active and self.targetHand then
+        self.handname = self.targetHand
+        self.bg_conf = self:calc_bg()
+        if self.bg_conf then
+            self:run_bg(dt) -- That's two frames per frame
+        else
+            self.bg_transparency = 0
+            self.bg_active = false
+            self.handname = nil
+        end
+    end
+end
+
+function manager:calc_bg()
+    if not self.handname then return end
+    local conf = {
+        seed = 0,
+        nebula1 = G.C.CLEAR,
+        nebula2 = G.C.CLEAR,
+        nebula3 = G.C.CLEAR,
+        shooting = false,
+    }
+    local some = false
+    for _, c in ipairs((G.consumeables or {}).cards or {}) do
+        local cc = type(c.ability.extra) == "table" and c.ability.extra.space_conf
+        local hand = c.ability.extra.poker_hand
+        if cc and hand == self.handname then
+            some = true
+            conf.seed = conf.seed + cc.seed
+            if cc.shooting then conf.shooting = true end
+            for i = 1, 3 do
+                local n = cc["nebula" .. i]
+                if n and n ~= G.C.CLEAR then
+                    local on = conf["nebula" .. i]
+                    if on == G.C.CLEAR then
+                        conf["nebula" .. i] = n
+                    else
+                        conf["nebula" .. i] = mix_colours(n, on, .5)
+                    end
+                else
+                    break
+                end
+            end
+        end
+    end
+    if not some then return end
+    return conf
+end
+
+function manager:draw_background()
+    if not self.bg_active then return end
+
+    local shader = G.SHADERS.worm_util_space
+    local conf = self.bg_conf
+
+    if not conf then return sendWarnMessage("BG Shader active but no conf??", "SpaceManager") end
+    shader:send("screen_scale", G.TILESCALE*G.TILESIZE*G.CANV_SCALE / 15)
+    shader:send("time", G.TIMERS.REAL)
+    shader:send("transparency", self.bg_transparency)
+    shader:send("seed", conf.seed)
+    shader:send("nebula_color1", conf.nebula1)
+    shader:send("nebula_color2", conf.nebula2)
+    shader:send("nebula_color3", conf.nebula3)
+    shader:send("shooting", conf.shooting)
+    if self.bg_transparency == 1 then
+        local w, h = love.graphics.getDimensions()
+        love.graphics.setShader(shader)
+        love.graphics.rectangle("fill", 0, 0, w, h)
+        love.graphics.setShader()
+    else
+        love.graphics.push("all")
+        local canvas = love.graphics.getCanvas()
+        local tempCanvas = love.graphics.newCanvas(canvas:getWidth(), canvas:getHeight())
+        love.graphics.reset()
+        love.graphics.setCanvas(tempCanvas)
+        love.graphics.setShader(shader)
+        love.graphics.draw(canvas, 0, 0)
+        love.graphics.setShader()
+        love.graphics.setCanvas(canvas)
+        love.graphics.draw(tempCanvas, 0, 0)
+        love.graphics.pop()
+    end
+
+end
+
 function manager:reset()
     self.active = false
+    self.bg_active = false
     self.transparency = 0
+    self.bg_transparency = 0
     self.last_hovered = nil
     self.target = nil
     self.curr = nil
     self.seed = nil
     self.conf = nil
     self.overlay = nil
+    self.handname = nil
+    self.targtHand = nil
+    self.bg_conf = nil
 end
 
 local game_delete_run = Game.delete_run
