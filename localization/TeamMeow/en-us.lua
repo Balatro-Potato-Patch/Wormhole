@@ -322,7 +322,7 @@ return {
 				name = "Schrödinger's Box",
 				text = {
 					"When a {C:attention}Blind{} is selected",
-					"create either a {C:worm_meow_spacetart}@Spacetart{}",
+					"create either a {C:worm_meow_spacetart}©Spacetart{}",
 					"or a {C:worm_meow_zodicat}Zodicat{}",
 					"{C:inactive}(Must have room)"
 				}
@@ -331,7 +331,7 @@ return {
 				name = "Catelite",
 				text = {
 					"Boost adjacent cards'",
-					"{C:worm_meow_spacetart}@Spacetart{} by {C:attention}#1# level"
+					"{C:worm_meow_spacetart}©Spacetart{} by {C:attention}#1# level"
 				}
 			},
 			j_worm_meow_feli = {
