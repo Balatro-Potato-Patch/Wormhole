@@ -27,16 +27,15 @@ return {
                 name = "ellestuff.",
                 text = {
                     {
-                        "Hey, I did the things",
-                        "that draw directly",
-                        "on the screen."
+                        "full of love.draw",
+                        "and love.update hooks"
                     },
                     {
-                        "That's Meteors",
-                        "and Spacebar btw."
+                        "i made the Meteors",
+                        "and Spacebar lol"
                     },
                     {
-                        "I also did the shader",
+                        "also did the shader",
                         "and CanvasSprite for",
                         "Urination Station.."
                     }
@@ -220,7 +219,7 @@ return {
                 name = "Spacebar",
                 text = {
                     {
-                        "Play a {C:attention}Timing minigame",
+                        "Play a {C:attention}Timing Minigame",
                         "before scoring and give {C:white,X:mult}X#1#",
                         "for each successful hit"
                     },
