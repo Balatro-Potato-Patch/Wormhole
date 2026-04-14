@@ -828,12 +828,14 @@ SMODS.Consumable { -- John Absinthe
     soul_set = 'abs_drinks',
     key = 'abs_absinthe',
     ppu_coder = { 'pi_cubed' },
+    ppu_artist = { 'pangaea47' },
     ppu_team = { 'absinthe' },
-    pos = { x = 4, y = 1 },
+    pos = { x = 4, y = 3 },
+    atlas = "abs_drinks",
     config = {
         drink_values = {
-            filled_pos = { x = 4, y = 1 },
-            empty_pos = { x = 5, y = 1 },
+            filled_pos = { x = 4, y = 3 },
+            empty_pos = { x = 5, y = 3 },
             filled = true,
             visibly_filled = true,
             primed = false,
