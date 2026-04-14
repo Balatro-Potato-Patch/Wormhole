@@ -95,6 +95,8 @@ SMODS.Joker {
     cost = 4,
     discovered = false,
     config = { extra = { chance = 6, add = 60 }, },
+    ppu_team = {"TeamEudaimonia"},
+    ppu_coder = {'soulware'},
     pronouns = "he_him",
     loc_vars = function(self, info_queue, card)
         local num, denom = SMODS.get_probability_vars(card, 1, card.ability.extra.chance)

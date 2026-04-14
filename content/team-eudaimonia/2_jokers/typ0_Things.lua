@@ -146,6 +146,7 @@ SMODS.Joker {
     atlas = "evilatlas",
     pos = { x = 0, y = 0 },
     config = { extra = { xmult_gain = 6, xmult = 3 } },
+    ppu_team = {"TeamEudaimonia"},
     ppu_coder = {'Typ0'},
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.xmult_gain, card.ability.extra.xmult } }
@@ -199,6 +200,7 @@ SMODS.Joker {
     config = { extra = { deaths_used = 0, xmult = 1, xmult_gain = 0.2} }, --deaths used is useless so
     ppu_coder = {'Typ0'},
     ppu_artist = {'TigerTHawk'},
+    ppu_team = {"TeamEudaimonia"},
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.xmult, card.ability.extra.xmult_gain } }
     end,
@@ -240,6 +242,9 @@ SMODS.Consumable {
     key = "euda_81p",
     set = "Planet",
     cost = 3,
+    ppu_coder = {'Typ0', 'M0xes'},
+    ppu_artist = {'LasagnaFelidae'},
+    ppu_team = {"TeamEudaimonia"},
     pos = { x = 9, y = 2 },
     config = { hand_type = 'worm_pkr_euda_nova', softlock = true },
     loc_vars = function(self, info_queue, card)
