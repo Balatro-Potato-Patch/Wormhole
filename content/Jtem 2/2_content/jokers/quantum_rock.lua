@@ -61,7 +61,7 @@ local function shuffle_in_area(card, area)
 end
 local function roll_new_rock_target()
 	local result
-	if not WORM_JTEM.quantum_rock.enabled or pseudorandom("worm_quantum_rock" .. os.time()) < 0.90 then
+	if not WORM_JTEM.quantum_rock.enabled or pseudorandom("worm_quantum_rock" .. os.time()) < 0.95 then
 		result = nil
 	else
 		local targets = {
@@ -74,6 +74,7 @@ local function roll_new_rock_target()
 			"shop_jokers",
 			"shop_boosters",
 			"shop_vouchers",
+			"title",
 		}
 		result = pseudorandom_element(targets, "worm_quantum_rock" .. os.time())
 	end
@@ -91,7 +92,7 @@ local function spawn_new_rock(protect, whitelist)
 	end
 	local function simple_create(area, real_emplace)
 		if not area or not area.cards then
-			return
+			return false
 		end
 		local card = Card(area.T.x + area.T.w / 2 - G.CARD_W / 2, area.T.y, G.CARD_W, G.CARD_H, G.P_CARDS["C_J"], rock)
 		if real_emplace == true then
@@ -117,14 +118,15 @@ local function spawn_new_rock(protect, whitelist)
 				end,
 			}))
 		end
+		return true
 	end
 	if target == "hand" and G.hand and G.STATE == G.STATES.SELECTING_HAND then
 		simple_create(G.hand, true)
 	elseif target == "play" and G.play and G.STATE == G.STATES.HAND_PLAYED then
 		simple_create(G.play)
-	elseif target == "jokers" and G.jokers then
+	elseif target == "jokers" and G.jokers and G.OVERLAY_MENU then
 		simple_create(G.jokers)
-	elseif target == "consumeables" and G.consumeables then
+	elseif target == "consumeables" and G.consumeables and G.OVERLAY_MENU then
 		simple_create(G.consumeables)
 	elseif target == "booster_pack" and G.pack_cards then
 		simple_create(G.pack_cards)
@@ -133,8 +135,7 @@ local function spawn_new_rock(protect, whitelist)
 	elseif target == "shop_boosters" and G.shop_booster then
 		simple_create(G.shop_booster)
 	elseif target == "shop_vouchers" and G.shop_vouchers then
-		simple_create(G.shop_vouchers, true)
-		if G.shop_vouchers.cards then
+		if simple_create(G.shop_vouchers, true) and G.shop_vouchers.cards then
 			G.shop_vouchers.config.card_limit = #G.shop_vouchers.cards
 		end
 	elseif target == "title" and G.title_top then
@@ -306,7 +307,7 @@ function Card:init(...)
 			end
 			G.worm_quantum_rock = self
 		else
-			if G.worm_quantum_rock ~= self then
+			if G.worm_quantum_rock ~= self and not (self.area and self.area.config.collection) then
 				destroy_rock(true)
 			end
 		end
@@ -422,7 +423,7 @@ local function calculate_rock(context)
 			}))
 		end
 	elseif target == "shop_jokers" or target == "shop_vouchers" or target == "shop_boosters" then
-		if context.starting_shop then
+		if context.starting_shop and not is_present then
 			spawn_new_rock()
 		end
 	end
