@@ -150,6 +150,18 @@ descriptions={
 			}
 		}
 	},
+	Tarot = {
+		c_worm_mrrp_reentry = {
+			name = "Reentry",
+			text = {
+				"Remove enhancements,",
+				"seals, and editions from",
+				"selected playing cards,",
+				"then gain {C:money}#1#{} per",
+				"modification removed"
+			}
+		}
+	},
 	Stake={
 		stake_worm_mrrp_cosmic ={
 			name=
@@ -353,7 +365,7 @@ misc={
 		},
 
 	--	MP
-		worm_mrrp_wtmjq = {
+		worm_mrrp_no_wtmjq = {
 			"If you like these",
 			"lines there's more",
 			"where that came from!"
@@ -371,7 +383,7 @@ misc={
 		},
 
 	--	CYAN
-		worm_mrrp_win = {
+		worm_mrrp_cyan_win = {
 			"CAT GANG",
 			"FOREVER!",
 			"RAAAGHHH"
