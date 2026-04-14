@@ -236,16 +236,16 @@ return {
                     'when obtained'
                 }
             },
-	    j_worm_acme_gas_station = {
-		name = 'Interplanetary Gas Station',
-		text = {
-			'On scoring, played',
-			'hand {C:red}loses{} a level',
-			'{C:attention}Gain #1#{} random {C:planet}hand level{}',
-			'and {X:mult,C:white}X#2#{} Mult',
-			'{C:inactive}(Currently {X:mult,C:white}X#3#{C:inactive} Mult)'
-		}
-	    },
+            j_worm_acme_gas_station = {
+                name = 'Interplanetary Gas Station',
+                text = {
+                    'On scoring, played',
+                    'hand {C:red}loses{} a level',
+                    '{C:attention}Gain #1#{} random {C:planet}hand level{}',
+                    'and {X:mult,C:white}X#2#{} Mult',
+                    '{C:inactive}(Currently {X:mult,C:white}X#3#{C:inactive} Mult)'
+                }
+            },
         },
         Other = {
             undiscovered_acme_gadget = {
@@ -322,7 +322,17 @@ return {
             PotatoPatchDev_Basil_Squared = {
                 name = "Basil_Squared",
                 text = {
-                    { "Fuji" },
+                    { "This isn't my first rodeo, in fact I was invited to {C:attention}Hot Potato{}!",
+                        "{C:inactive,S:0.8}(Go team :)!)",
+                        "However, this is the first one where I {C:attention}truly{} gave it my all!",
+                        "I hope you enjoy the various {C:red}evil{} effects ive prepared for some of our portion.",
+                        "and I am {C:attention} more than happy{} to work with such an amazing team at {C:attention}ACME{}"
+                    },
+                    {
+                        "{C:inactive,S:0.8}Also, if we're shilling then",
+                        "{C:dark_edition}Charcuterie{} is worth checking out! :)))))",
+                        "Love you guys , and hooray for {C:tarot}Wormhole{}!"
+                    }
                 },
             }
         }
