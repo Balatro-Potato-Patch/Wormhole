@@ -105,7 +105,7 @@ SMODS.Edition {
     weight = 0,
     extra_cost = 5,
 	never_scores = true,
-    sound = { sound = "negative", per = 1.5, vol = 0.4 },
+    sound = { sound = "negative", per = 1.5, vol = 0.1 },
     loc_vars = function(self, info_queue, card)
 		return { vars = { card.edition.chips } }
     end,
@@ -124,8 +124,7 @@ SMODS.Edition {
 	calculate = function(self, card, context)
         if context.main_scoring and context.cardarea == G.hand then
             return {
-				chips = math.abs(card.edition.chips),
-				sign = -1
+				chips = card.edition.chips
 			}
         end
     end
@@ -141,7 +140,7 @@ SMODS.Consumable {
 		name = 'The Abyss',
 		text = {
 			"Gives {C:money}$#1#{} and",
-			"creates {C:attention}#2#{} random {C:attention}Void cards{}",
+			"creates {C:attention}#2#{} random {T:e_worm_bap_void}Void cards{}",
 		}
 	},
 	set = 'Tarot',
@@ -197,56 +196,56 @@ SMODS.Consumable {
 
 --sendDebugMessage("Registered Abyss:", G.P_CENTERS["c_worm_bap_abyss"])
 
--- Debug tarot
-SMODS.Consumable {
-    key = "bap_debug",
-    loc_txt = {
-		name = 'Debug',
-		text = {
-			"UNFINISHED",
-		}
-	},
-    set = 'Tarot',
-    cost = 3,
-    pos = { x = 0, y = 0 },
-    config = { anim_time = 0 },
-    can_use = function(self, card) return true end,
-    keep_on_use = function(self, card) return true end,
-    use = function(self, card, area, copier)
-		G.E_MANAGER:add_event(Event({
-			trigger = 'after',
-			delay = 0.1,
-			func = function()
-				if #G.consumeables.cards < G.consumeables.config.card_limit then
-					SMODS.add_card({
-						area = G.consumeables,
-						key = "c_worm_bap_abyss"
-					})
-				end
-				return true
-			end
-		}))
-	end,
-    update = function(self, card, dt)
-        card.ability.anim_time = (card.ability.anim_time or 0) + dt
-        self.pos.x = math.sin(card.ability.anim_time) * 0.5 + 0.5
-		self.pos.y = math.cos(card.ability.anim_time) * 0.5 + 0.5
-    end
-}
+-- -- Debug tarot
+-- SMODS.Consumable {
+--     key = "bap_debug",
+--     loc_txt = {
+-- 		name = 'Debug',
+-- 		text = {
+-- 			"UNFINISHED",
+-- 		}
+-- 	},
+--     set = 'Tarot',
+--     cost = 3,
+--     pos = { x = 0, y = 0 },
+--     config = { anim_time = 0 },
+--     can_use = function(self, card) return true end,
+--     keep_on_use = function(self, card) return true end,
+--     use = function(self, card, area, copier)
+-- 		G.E_MANAGER:add_event(Event({
+-- 			trigger = 'after',
+-- 			delay = 0.1,
+-- 			func = function()
+-- 				if #G.consumeables.cards < G.consumeables.config.card_limit then
+-- 					SMODS.add_card({
+-- 						area = G.consumeables,
+-- 						key = "c_worm_bap_abyss"
+-- 					})
+-- 				end
+-- 				return true
+-- 			end
+-- 		}))
+-- 	end,
+--     update = function(self, card, dt)
+--         card.ability.anim_time = (card.ability.anim_time or 0) + dt
+--         self.pos.x = math.sin(card.ability.anim_time) * 0.5 + 0.5
+-- 		self.pos.y = math.cos(card.ability.anim_time) * 0.5 + 0.5
+--     end
+-- }
 
 
--- Flush Five
+-- Void hand
 SMODS.PokerHand {
     key = "bap_void",
-    visible = true,
+    visible = false,
     mult = 7,
     chips = 200,
     l_mult = 2,
     l_chips = 25,
 	loc_txt={ description = {
-		"5 cards with the void enhancement",
+		"5 cards with the void edition",
 	},
-	name = "Void"
+	name = "Void Hand"
 	},
     example = {
         { 'S_A', true, edition="e_worm_bap_void" },
@@ -256,10 +255,14 @@ SMODS.PokerHand {
         { 'D_3', true, edition="e_worm_bap_void" }
     },
     evaluate = function(parts, hand)
-		if #hand ~= 5 then return {} end
-		for i = 1, #hand do
-			if not hand.edition then return {} end
-			if hand[i].edition.key ~= "e_worm_bap_void" then return {} end
+		if #hand ~= 5 then
+			return {}
+		end
+
+		for _, card in ipairs(hand) do
+			if not card.edition or card.edition.key ~= 'e_worm_bap_void' then
+				return {}
+			end
 		end
 
         return { hand }
@@ -269,18 +272,58 @@ SMODS.PokerHand {
 -- Nothing planet card
 SMODS.Consumable {
     key = "bap_nothing",
-    loc_txt = {
-		name = 'Nothing',
-		text = {
-			"Does nothing (real)",
-		}
-	},
+    -- loc_txt = {
+	-- 	name = 'Nothing',
+	-- 	text = {
+	-- 		"Does nothing (real)",
+	-- 	}
+	-- },
     set = 'Planet',
     cost = 3,
 	atlas = 'Palindrome',
     pos = { x = 0, y = 0 },
-    config = { anim_time = 0, hand_type = "worm_bap_void" },
-    can_use = function(self, card) return true end,
+    config = { hand_type = "worm_bap_void" },
+	loc_txt = {
+		name = 'Nothing',
+		text = {
+			"({V:1}lvl.#1#{}) Level up",
+			"{C:attention}#2#",
+			"{C:mult}+#3#{} Mult and",
+			"{C:chips}+#4#{} chips",
+		},
+	},
+	loc_vars = function(self, info_queue, card)
+		if not SMODS.is_poker_hand_visible("worm_bap_void") then
+			return {
+				vars = {
+					"0",
+					"Nothing??",
+					"0",
+					"0",
+					colours = {G.C.UI.TEXT_DARK}
+				}
+			}
+		end
+
+        return {
+            vars = {
+                G.GAME.hands[card.ability.hand_type or 'High Card'].level,
+                "Void Hand",
+                G.GAME.hands[card.ability.hand_type or 'High Card'].l_mult,
+                G.GAME.hands[card.ability.hand_type or 'High Card'].l_chips,
+                colours = { (G.GAME.hands[card.ability.hand_type or 'High Card'].level == 1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, G.GAME.hands[card.ability.hand_type or 'High Card'].level)]) }
+            }
+        }
+    end,
+    can_use = function(self, card)
+		if not SMODS.is_poker_hand_visible("worm_bap_void") then
+			card.ability.hand_type = ""
+		else
+			card.ability.hand_type = "worm_bap_void"
+		end
+		return SMODS.is_poker_hand_visible("worm_bap_void")
+
+	end,
     -- use = function(self, card, area, copier)
 	-- 	G.E_MANAGER:add_event(Event({
 	-- 		trigger = 'after',
