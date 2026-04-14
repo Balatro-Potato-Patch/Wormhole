@@ -87,7 +87,6 @@ function Game:start_run(...)
             send = {
                 {name = 'time', ref_table = G.TIMERS, ref_value = 'REAL_SHADER'},
                 {name = 'alpha', ref_table = G.ARGS, ref_value = 'eigengrau_alpha'},
-                -- add other shader args here
             }
         }})
     end
