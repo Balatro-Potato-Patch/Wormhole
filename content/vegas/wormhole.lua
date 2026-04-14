@@ -768,7 +768,7 @@ SMODS.Joker{
     end
 }
 
---Shader for Blip by Ben Roffey
+--Shader for Big Bounce by Ben Roffey
 --See CRTshutoff.fs
 local CRT_shutoff
 CRT_shutoff = SMODS.ScreenShader{
@@ -789,9 +789,9 @@ CRT_shutoff = SMODS.ScreenShader{
 }
 
 SMODS.Joker{
-	key = "Big Blip",
+	key = "Big Bounce",
 	loc_txt = {
-		name = "The Big Blip",
+		name = "The Big Bounce",
 		text = {
 			"When Blind {C:red}failed{}",
 			"restart your run with",
@@ -803,7 +803,7 @@ SMODS.Joker{
 		return { vars = {  }}
 	end,
 	atlas = "vegas_jokers",
-	pos = {x = 1, y = 2},
+	pos = {x = 4, y = 2}, --change x = 1 for original artwork by Sn0vvBall
 	rarity = 2,
 	cost = 7,
 	blueprint_compat = false,
@@ -812,7 +812,7 @@ SMODS.Joker{
 	perishable_compat = false,
 	ppu_team = {"People Found In Vegas"},
 	ppu_coder = {"Sn0vvBall", "Ben Roffey"},
-	ppu_artist = {"Sn0vvBall"},
+	ppu_artist = {"Sn0vvBall", "Ben Roffey"},
 	calculate = function(self, card, context)
 		local GameSeed = G.GAME.pseudorandom.seed
 		local GameSeeded = G.GAME.seeded -- Store whether or not this run was seeded
