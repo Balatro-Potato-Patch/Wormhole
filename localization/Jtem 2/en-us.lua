@@ -113,6 +113,33 @@ return {
 					},
 				},
 			},
+			j_worm_jtem2_eclipse = {
+				name = "Eclipse",
+				text = {
+					{
+						"{X:purple,C:white,s:0.9}usable{}",
+						"Cause an {C:attention,E:worm_jtem2_snaking}Eclipse{} {C:inactive}(Solar or Lunar){}",
+						" by using respective {C:tarot}Tarots{} and {C:planet}Planets{} in order",
+						"Use {C:tarot}Sun{}, {C:tarot}Moon{}, {C:planet}Earth{} for {C:red}Solar{} Eclipse",
+						"Use {C:tarot}Sun{}, {C:planet}Earth{}, {C:tarot}Moon{} for {C:blue}Lunar{} Eclipse",
+						"{C:inactive}(Currently {V:1}#1#{C:inactive})",
+					},
+					{
+						"If used during {C:red}Solar{} Eclipse",
+						"if {C:red}Discards{} is an {C:attention}odd number{}",
+						"turns {C:attention}all cards in hand{} to {C:hearts}Hearts",
+						"if {C:red}Discards{} is an {C:attention}even number{}",
+						"turns {C:attention}all cards in hand{} to {C:diamonds}Diamonds",
+					},
+					{
+						"If used during {C:blue}Lunar{} Eclipse",
+						"if {C:blue}Hands{} is an {C:attention}odd number{}",
+						"turns {C:attention}all cards in hand{} to {C:clubs}Clubs",
+						"if {C:blue}Hands{} is an {C:attention}even number{}",
+						"turns {C:attention}all cards in hand{} to {C:spades}Spades",
+					},
+				},
+			},
 		},
 		Tarot = {
 			c_worm_jtem2_shadow = {
@@ -295,6 +322,9 @@ return {
 
 			k_worm_mult_ex = "Mult!",
 			k_worm_chips_ex = "Chips!",
+
+			k_worm_jtem2_eclipse_solar = "Solar",
+			k_worm_jtem2_eclipse_lunar = "Lunar",
 		},
 		-- Mostly taken from Handy
 		jtem2_keybinds = {

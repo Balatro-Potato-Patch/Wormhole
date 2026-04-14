@@ -2,6 +2,15 @@
 
 local start_angle = os.time()
 
+SMODS.Atlas({
+	key = "jtem2_artificial_sun",
+	path = "Jtem 2/jokers/artificial_sun.png",
+	px = 71,
+	py = 95,
+})
+
+
+
 local planets = {
 	c_mercury = {
 		speedfactor = 1 / 0.241,
@@ -479,6 +488,7 @@ end
 
 SMODS.Joker({
 	key = "jtem2_solar_system",
+	atlas = "jtem2_artificial_sun",
 	attributes = {
 		"space",
 		"mult",
