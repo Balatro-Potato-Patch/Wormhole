@@ -199,6 +199,14 @@ return {
           "for your {C:attention}last played hand",
         }
       },
+      j_worm_jr_deep_space_probe = {
+        name = "Deep Space Probe",
+        text = {
+          "Every {C:attention}#2#{} level increases for poker hands,",
+          "create a {C:worm_jr_satellite}Satellite{} Card",
+          "{C:inactive}(Currently {C:attention}#1#{C:inactive}/{C:inactive}#2#)",
+        }
+      },
     },
     Other = {
       p_worm_jr_orbital_normal = {
