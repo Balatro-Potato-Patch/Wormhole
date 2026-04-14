@@ -14,3 +14,11 @@ SMODS.Achievement({
 		return args and args.type == 'dum_clickyclick' and (G.worm_clickcredits or 0) >= 1000
 	end,
 })
+
+SMODS.Achievement({
+	key = 'dum_unstoppable',
+	bypass_all_unlocked = true,
+	unlock_condition = function(self, args)
+		return args and args.type == 'dum_hyperlight' and (G.dum_dummy_level or 0) >= 398
+	end,
+})

@@ -362,11 +362,13 @@ return {
 		achievement_names = {
 			ach_worm_dum_timcurry = 'SPAAAAACE!',
 			ach_worm_dum_seriouscredit = 'Dedicated Crediting',
+			ach_worm_dum_unstoppable = 'Unstoppable Force',
 		},
 		achievement_descriptions = {
 			ach_worm_dum_timcurry = 'Find Space Joker whilst holding Tim Curry',
 			ach_worm_dum_timcurry_hidden = "One place that hasn't been corrupted by capitalism...",
 			ach_worm_dum_seriouscredit = 'Click on anyone in Team Credits... a lot...',
+			ach_worm_dum_unstoppable = 'Reach 10,000% and truly beat the Test Flight!',
 		}
     }
 }
