@@ -214,6 +214,15 @@ SMODS.Gradient({
 })
 
 SMODS.Gradient({
+    key = 'dilly',
+    colours = {
+        HEX('00FF7F'), HEX('8A2BE2')
+    },
+    cycle = 12,
+    interpolation = 'trig'
+})
+
+SMODS.Gradient({
     key = "ice",
     colours = { 
         HEX("ff992f"), HEX("a445db")
@@ -252,6 +261,7 @@ PotatoPatchUtils.Developer({
     name = 'dilly',
     team = 'tbp',
     loc = true,
+    colour = SMODS.Gradients.worm_dilly,
     atlas = 'worm_tbp_devs',
     pos = { x = 2, y = 1 },
 })

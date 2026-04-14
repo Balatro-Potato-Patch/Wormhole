@@ -78,7 +78,16 @@ local other_loc_table = {
             PotatoPatchDev_dilly = {
                 name = 'DillyTheDillster',
                 text = {
-                    'placeholder'
+                    {
+                        'I joined this event specifically for this team',
+                        "I did the original framework for the module dialog, as well",
+                        "as the shader for it among other things! I love these guys",
+                        "and I beg you to check out each of their mods, they're all fantastic!"
+                    },
+                    {
+                        'I also work on {C:worm_dilly}Dilatro{} primarily, soon to be released',
+                        "Featuring 3D blinds and more!"
+                    }
                 }
             },
             PotatoPatchDev_ice = {
