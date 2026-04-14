@@ -146,17 +146,14 @@ vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords
     //tex.rgb += vec3(79.0, 99.0, 103.0)/255.0;
 
     // wormhole spiral start
-    // THIS IS THE BIG SCARY PART WHERE THE WEIRD LINE AT THE TOP HAPPENS. IT IS BECAUSE THE TEXTURE OF THE SPIRAL THING IS NOT THE SAME AS THE CARD ART AND I DON'T HAVE THE BANDWIDTH TO FIX THAT WEIRD SEAM LINE. THIS IS THE PART YOU'RE CTRL-Fing FOR
-    vec2 center_uv = uv;//texture_coords*image_details/wormhole_img_details.xy;
-    center_uv -= 0.5;
+    vec2 center_uv = uv-.5;//texture_coords*image_details/wormhole_img_details.xy;
     // center spiral
     center_uv.y *= image_details.x / image_details.y; // extend it out a bit
 
     // find angles and stuff
     float pixel_angle = atan(center_uv.x,center_uv.y) / PI;
     float pixel_distance =  length(center_uv)* 2.0;
-    vec2 st = vec2(pixel_angle, pixel_distance);
-    vec2 polar = st;
+    vec2 polar = vec2(pixel_angle, pixel_distance);
     polar += lfc_moon_berry.y * vec2(-0.5, 1.0);
 
     // vortex

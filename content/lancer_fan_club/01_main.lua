@@ -233,7 +233,8 @@ SMODS.Shader {
         local w,h = love.graphics.getDimensions()
         local mx,my = love.mouse.getPosition()
         return {
-            mouse_pos = {mx,my}
+            mouse_pos = {mx,my},
+            t = G.TIMERS.REAL
         }
     end
 }
