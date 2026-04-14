@@ -12,11 +12,11 @@ SMODS.Consumable{
         return{ vars = {n, d, card.ability.extra.suits_required}, key = card.ability.extra.active and self.key..'_alt' or nil}
     end,
     use = function(self, card, area, copier)
-        if SMODS.pseudorandom_probability(card, 'acme_brush', 1, card.ability.extra.odds) then
-            local new_suit = SMODS.Suits[G.hand.highlighted[1].base.suit].card_key
-            local _cards = G.hand.cards
-            for i = 1, #_cards do
-                if _cards[i] ~= G.hand.highlighted[1] then
+        local new_suit = SMODS.Suits[G.hand.highlighted[1].base.suit].card_key
+        local _cards = G.hand.cards
+        for i = 1, #_cards do
+            _cards[i].ability.acme_temp_brush = SMODS.pseudorandom_probability(card, 'acme_brush', 1, card.ability.extra.odds)
+            if _cards[i] ~= G.hand.highlighted[1] and _cards[i].ability.acme_temp_brush then
                 local percent = 1.15 - (i - 0.999) / (#_cards - 0.998) * 0.3
                 G.E_MANAGER:add_event(Event({
                     trigger = 'after',
@@ -26,42 +26,37 @@ SMODS.Consumable{
                         play_sound('card1', percent)
                     return true end
                 }))
-                end
             end
-            G.E_MANAGER:add_event(Event({
-                trigger = 'before',
-                delay = 0.8,
-                func = function()
-                    for i = 1, #_cards do
-                        if _cards[i] ~= G.hand.highlighted[1] then
-                        local new_val = SMODS.Ranks[_cards[i].base.value].card_key
-                        local new_card = G.P_CARDS[new_suit..'_'..new_val]
-                        _cards[i]:set_base(new_card)
-                        G.GAME.blind:debuff_card(_cards[i])
-                        _cards[i]:juice_up(0.3, 0.3)
-                        end
+        end
+        G.E_MANAGER:add_event(Event({
+            trigger = 'before',
+            delay = 0.8,
+            func = function()
+                for i = 1, #_cards do
+                    if _cards[i] ~= G.hand.highlighted[1] and _cards[i].ability.acme_temp_brush then
+                    local new_val = SMODS.Ranks[_cards[i].base.value].card_key
+                    local new_card = G.P_CARDS[new_suit..'_'..new_val]
+                    _cards[i]:set_base(new_card)
+                    G.GAME.blind:debuff_card(_cards[i])
+                    _cards[i]:juice_up(0.3, 0.3)
                     end
+                end
+            return true end
+        }))
+        for i = 1, #_cards do
+            if _cards[i] ~= G.hand.highlighted[1] and _cards[i].ability.acme_temp_brush then
+            local percent = 0.85 + (i - 0.999) / (#_cards - 0.998) * 0.3
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.15,
+                func = function()
+                    _cards[i]:flip()
+                    play_sound('tarot2', percent, 0.6)
+                    _cards[i]:juice_up(0.3, 0.3)
+                    _cards[i].ability.acme_temp_brush = nil
                 return true end
             }))
-            for i = 1, #_cards do
-                if _cards[i] ~= G.hand.highlighted[1] then
-                local percent = 0.85 + (i - 0.999) / (#_cards - 0.998) * 0.3
-                G.E_MANAGER:add_event(Event({
-                    trigger = 'after',
-                    delay = 0.15,
-                    func = function()
-                        _cards[i]:flip()
-                        play_sound('tarot2', percent, 0.6)
-                        _cards[i]:juice_up(0.3, 0.3)
-                    return true end
-                }))
-                end
             end
-        else
-            return{
-                message = localize('k_nope_ex'),
-                colour = G.C.FILTER,
-            }
         end
     end,
     calculate = function(self, card, context)
