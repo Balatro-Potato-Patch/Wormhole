@@ -75,7 +75,7 @@ SMODS.Consumable {
     ppu_team = {"awesomeswagmoney"},
 }
 
-SMODS.Sound({key = "asm_buzz", path = 'buzz.ogg'})
+SMODS.Sound({key = "asm_buzz", path = 'awesomeswagmoney/buzz.ogg'})
 SMODS.Consumable {
     key = 'buzzwole',
     set = 'worm_ultrabeast',
@@ -496,8 +496,8 @@ SMODS.Consumable {
     ppu_team = {"awesomeswagmoney"},
 }
 
-SMODS.Sound({key = "asm_clownhonk", path = 'clownhonk.ogg'})
-SMODS.Sound({key = "asm_boom", path = 'explosion.ogg'})
+SMODS.Sound({key = "asm_clownhonk", path = 'awesomeswagmoney/clownhonk.ogg'})
+SMODS.Sound({key = "asm_boom", path = 'awesomeswagmoney/explosion.ogg'})
 
 SMODS.Consumable {
     key = "blacephalon",
