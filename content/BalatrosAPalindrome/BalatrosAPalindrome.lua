@@ -22,7 +22,7 @@ SMODS.Atlas {
 }
 
 
-PotatoPatchUtils.Team({name="BalatrosAPalindrome", colour=G.C.BLUE})
+PotatoPatchUtils.Team({name="BalatrosAPalindrome", colour=G.C.BLUE, short_credit=true})
 PotatoPatchUtils.Developer({team="BalatrosAPalindrome",name="Nogardagem",loc=true,atlas='worm_Palindrome',pos={x=1,y=1}})
 PotatoPatchUtils.Developer({team="BalatrosAPalindrome",name="NerdyBread42",atlas='worm_Palindrome',pos={x=0,y=2}})
 PotatoPatchUtils.Developer({team="BalatrosAPalindrome",name="IzzyWizz",atlas='worm_Palindrome',pos={x=0,y=2}})
@@ -87,7 +87,7 @@ SMODS.Edition {
 SMODS.Consumable {
 	ppu_artist = {"Nogardagem"},
 	ppu_coder = {"Nogardagem"},
-	ppu_team = "BalatrosApalindrome",
+	ppu_team = {"BalatrosAPalindrome"},
 	key = 'bap_abyss',
 	loc_txt = {
 		name = 'The Abyss',
@@ -226,7 +226,7 @@ SMODS.PokerHand {
 SMODS.Consumable {
 	ppu_artist = {"Nogardagem"},
 	ppu_coder = {"Nogardagem"},
-	ppu_team = "BalatrosApalindrome",
+	ppu_team = {"BalatrosAPalindrome"},
     key = "bap_nothing",
     -- loc_txt = {
 	-- 	name = 'Nothing',
@@ -298,7 +298,7 @@ SMODS.Consumable {
 SMODS.Joker {
 	ppu_artist = {"Nogardagem"},
 	ppu_coder = {"Nogardagem"},
-	ppu_team = "BalatrosApalindrome",
+	ppu_team = {"BalatrosAPalindrome"},
     key = "bap_milky_way",
     blueprint_compat = true,
     eternal_compat = false,
@@ -361,7 +361,7 @@ SMODS.Joker {
 SMODS.Joker {
 	ppu_artist = {"Nogardagem"},
 	ppu_coder = {"Knightingale0"},
-	ppu_team = "BalatrosApalindrome",
+	ppu_team = {"BalatrosAPalindrome"},
     key = "bap_andromeda",
     blueprint_compat = true,
     eternal_compat = false,
@@ -412,7 +412,7 @@ SMODS.Joker {
 SMODS.Joker {
 	ppu_artist = {"Nogardagem"},
 	ppu_coder = {"Knightingale0"},
-	ppu_team = "BalatrosApalindrome",
+	ppu_team = {"BalatrosAPalindrome"},
 	key = "bap_solar_panel",
     blueprint_compat = true,
     eternal_compat = false,
@@ -475,7 +475,7 @@ for duplicate = 0, 20 do
 	SMODS.Joker {
 		ppu_artist = {"Nogardagem"},
 		ppu_coder = {"Nogardagem"},
-		ppu_team = "BalatrosApalindrome",
+		ppu_team = {"BalatrosAPalindrome"},
 		key = "bap_space_worm"..duplicate,
 		blueprint_compat = true,
 		rarity = 3,
