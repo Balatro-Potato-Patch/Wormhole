@@ -4,6 +4,7 @@ return {
             PotatoPatchTeam_lancer_fan_club = { name = "Lancer Fan Club" },
 
             PotatoPatchDev_ProdByProto = {
+                --name = "{IMG:lfc_proot_EarL,s:0.525}a{} ProdByProto {IMG:lfc_proot_EarR,s:0.525}a{}", failed image attempt
                 name = "ProdByProto",
                 text = {
                     {
