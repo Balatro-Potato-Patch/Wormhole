@@ -25,11 +25,18 @@ return {
                 name = "ellestuff.",
                 text = {
                     {
-                        "hey.",
-                        "did i do things?"
+                        "Hey, I did the things",
+                        "that draw directly",
+                        "on the screen."
                     },
                     {
-                        "good question,,",
+                        "That's Meteors",
+                        "and Spacebar btw."
+                    },
+                    {
+                        "I also did the shader",
+                        "and CanvasSprite for",
+                        "Urination Station.."
                     }
                 }
             },
