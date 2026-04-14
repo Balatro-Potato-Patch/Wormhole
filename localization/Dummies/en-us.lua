@@ -172,7 +172,16 @@ return {
                     "scoring exactly",
                     "{C:attention}#2#{} cards"
                 }
-            }
+            },
+            j_worm_dum_mouthwash = {
+                name = "Mouthwash",
+                text = {
+                    "When Blind is selected,",
+                    "{C:attention}downgrade{} a random poker hand,",
+                    "then gain {X:mult,C:white} X#1# {} Mult",
+                    "{C:inactive}(Currently {X:mult,C:white} X#2# {C:inactive} Mult)",
+                },
+            },
         },
         Planet = {
             c_worm_dum_moony = {
