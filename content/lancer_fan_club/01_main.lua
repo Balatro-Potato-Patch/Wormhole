@@ -304,3 +304,4 @@ SMODS.DrawSteps.ppu_floating_sprite.func = function(card, layer)
         ppu_floating_sprite_hook(card, layer)
     end
 end
+
