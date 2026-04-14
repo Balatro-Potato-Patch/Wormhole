@@ -25,6 +25,7 @@ SMODS.Joker({
 		extra = {
 			req = 15,
 			used = 0,
+			gain = 1,
 			slots = 0,
 		},
 	},
@@ -33,7 +34,8 @@ SMODS.Joker({
 			vars = {
 				card.ability.extra.req,
 				card.ability.extra.used,
-				card.ability.extra.slots,
+				SMODS.signed(card.ability.extra.gain),
+				(card.ability.extra.slots < 0 and "-" or "+")..card.ability.extra.slots,
 			},
 		}
 	end,
@@ -41,8 +43,8 @@ SMODS.Joker({
 		if context.using_consumeable then
 			card.ability.extra.used = card.ability.extra.used + 1
 			if card.ability.extra.used >= card.ability.extra.req then
-				G.consumeables.config.card_limit = G.consumeables.config.card_limit + 1
-				card.ability.extra.slots = card.ability.extra.slots + 1
+				G.consumeables.config.card_limit = G.consumeables.config.card_limit + card.ability.extra.gain
+				card.ability.extra.slots = card.ability.extra.slots + card.ability.extra.gain
 				card.ability.extra.used = 0
 			end
 		end

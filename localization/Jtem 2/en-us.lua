@@ -102,9 +102,9 @@ return {
 				name = "Lumistratos",
 				text = {
 					{
-						"Every #1# {C:inactive}[#2#]{C:attention} Consumables{} used",
-						"gain {C:attention}+1 {}consumable slot",
-						"{C:inactive}(Currently +#3# consumable slots)",
+						"This Joker gains {C:attention}#3#{} consumable slot",
+						"for every {C:attention}#1#{} {C:inactive}[#2#]{C:attention} Consumables{} used",
+						"{C:inactive}(Currently {C:attention}#4#{C:inactive} consumable slots)",
 					},
 					{
 						"{C:inactive,E:1}Great Lady of Space,",
