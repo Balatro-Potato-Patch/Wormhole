@@ -53,6 +53,23 @@ return {
                     'by {C:attention}1 Level'
                 }
             },
+            c_worm_acme_hammer = {
+                name = 'ACME Sure-Hit Anvil Cracker',
+                text = {
+                    '{X:attention,C:white}After{} using {C:tarot}Strength',
+                    '{X:attention,C:white}Use{} to {C:attention}flatten{} the',
+                    'rank of {C:attention}#1#{} selected {C:attention}Cards',
+                    'to the {C:attention}lowest{} selected Rank'
+                }
+            },
+            c_worm_acme_hammer_alt = {
+                name = 'ACME Sure-Hit Anvil Cracker',
+                text = {
+                    '{C:attention}Flatten{} the rank',
+                    'of {C:attention}#1#{} selected {C:attention}Cards',
+                    'to the {C:attention}lowest{} selected Rank'
+                }
+            },
             c_worm_acme_trash = {
                 name = 'ACME Accumulated Resources and Detritus',
                 text = {
@@ -137,6 +154,24 @@ return {
                     '{C:inactive}(Minigame complete!)'
                 }
             },
+            c_worm_acme_printer = {
+                name = 'ACME Counterfeiter 3000',
+                text = {
+                    '{X:attention,C:white}After{} scoring {C:attention}blind requirement{}',
+                    'in a single hand,',
+                    '{X:attention,C:white}Use{} to gain {C:money}$5{} per digit in your',
+                    '{C:attention}max score{} this run',
+                    '{C:inactive}(Currently {C:attention}#1#{C:inactive} digits)'
+                }
+            },
+            c_worm_acme_printer_alt = {
+                name = 'ACME Counterfeiter 3000',
+                text = {
+                    '{X:attention,C:white}Use{} to gain {C:money}$5{} per digit in your',
+                    '{C:attention}max score{} this run',
+                    '{C:inactive}(Currently {C:attention}#1#{C:inactive} digits)'
+                }
+            },
         },
         Tag = {
             tag_worm_acme_gadget = {
@@ -184,6 +219,16 @@ return {
                     'when obtained'
                 }
             },
+	    j_worm_acme_gas_station = {
+		name = 'Interplanetary Gas Station',
+		text = {
+			'On scoring, played',
+			'hand {C:red}loses{} a level',
+			'{C:attention}Gain #1#{} random {C:planet}hand level{}',
+			'and {X:mult,C:white}X#2#{} Mult',
+			'{C:inactive}(Currently {X:mult,C:white}X#3#{C:inactive} Mult)'
+		}
+	    },
         },
         Other = {
             undiscovered_acme_gadget = {
@@ -219,7 +264,15 @@ return {
             PotatoPatchDev_RadiationV2 = {
                 name = "RadiationV2",
                 text = {
-                    { "It's" },
+                    {
+                        "This was my {C:attention}first contribution{} to a",
+                        "a full public Balatro content mod!",
+                        "Thanks to {C:legendary}Astra{} and the {C:attention}ACME{} team",
+                        "for putting up with the barrage of {C:mult}yaps,",
+                        "{C:mult}questions{} and {C:mult}reworks{} I brought upon.",
+                        "I think we made something special.",
+                        "{C:inactive}Also, yeah, I'm the GD guy, iykyk :)"
+                    },
                 },
             },
             PotatoPatchDev_FlameThrowerFIM = {
