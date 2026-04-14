@@ -309,7 +309,7 @@ SMODS.Consumable {
     pos = {x = 2, y = 0},
     soul_pos = {x = 3, y = 0},
     display_size = { w = 89, h = 109 },
-    config = {extra_slots_used = 1, extra = {copies = 4, reduction = 2}},
+    config = {extra_slots_used = 1, extra = {copies = 3, reduction = 2}},
     loc_vars = function(self, info_queue, card)
         return {
             vars = {card.ability.extra.copies - 1, card.ability.extra.reduction}
