@@ -24,7 +24,7 @@ SMODS.Joker {
         local size = card.ability.extra.size
 		return {
             vars = {
-                SMODS.signed(slots),
+                Wormhole.mrrp_signed(slots),
                 size,
             }
         }

@@ -6,8 +6,8 @@ SMODS.Joker {
 	key = 'mrrp_cats_eye_nebula',
 	atlas = "mrrp",
 	pos = {
-		x=4,
-		y=5
+		x=1,
+		y=3
 	},
 	rarity = 2,
 	cost = 3,
@@ -28,8 +28,8 @@ SMODS.Joker {
         local fall = card.ability.extra.fall
 		return {
 			vars = {
-				SMODS.signed(chips),
-				(fall >= 0 and "-" or "+") .. fall,
+				Wormhole.mrrp_signed(chips),
+				Wormhole.mrrp_signed(fall, true),
 				card.ability.extra.levels,
 			}
 		}

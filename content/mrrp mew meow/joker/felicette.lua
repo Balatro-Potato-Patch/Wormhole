@@ -118,8 +118,8 @@ SMODS.Joker {
         local total = scalar * upgrades
         return {
             vars = {
-                SMODS.signed(scalar),
-                SMODS.signed(total)
+                Wormhole.mrrp_signed(scalar),
+                Wormhole.mrrp_signed(total)
             }
         }
     end,

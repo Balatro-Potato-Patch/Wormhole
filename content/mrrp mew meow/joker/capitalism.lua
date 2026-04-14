@@ -23,8 +23,8 @@ SMODS.Joker {
 	loc_vars = function (self, info_queue, card)
 		return {
 			vars = {
-				SMODS.signed(card.ability.extra.mult_mod),
-				SMODS.signed(card.ability.extra.mult)
+				Wormhole.mrrp_signed(card.ability.extra.mult_mod),
+				Wormhole.mrrp_signed(card.ability.extra.mult)
 			}
 		}
 	end,
