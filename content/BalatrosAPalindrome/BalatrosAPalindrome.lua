@@ -54,29 +54,81 @@ SMODS.Atlas {
 	py = 95
 }
 
---sendDebugMessage("before enhancement")
 
-SMODS.Enhancement {
-    key = 'bap_void',
-    loc_txt = {
-        name = 'Void',
-		text = {
-			"{C:chips}#1#{} chips when",
-			"{C:attention}held{} or {C:attention}scored{}"
-		}
-    },
-    atlas = 'Palindrome',
-    pos = { x = 1, y = 0 },
-    config = { bonus = -25, h_chips = -25 },
-	--always_scores = true,
-	loc_vars = function(self, info_queue, card)
-        local ability = card and card.ability or self.config
-    	return { vars = { ability.bonus, ability.h_chips } }
+-- OLD ENHANCEMENT
+-- SMODS.Enhancement {
+--     key = 'bap_void',
+--     loc_txt = {
+--         name = 'Void',
+-- 		text = {
+-- 			"{C:chips}#1#{} chips when",
+-- 			"{C:attention}held{} or {C:attention}scored{}"
+-- 		}
+--     },
+--     atlas = 'Palindrome',
+--     pos = { x = 1, y = 0 },
+--     config = { bonus = -25, h_chips = -25 },
+-- 	--always_scores = true,
+-- 	loc_vars = function(self, info_queue, card)
+--         local ability = card and card.ability or self.config
+--     	return { vars = { ability.bonus, ability.h_chips } }
+--     end,
+-- 	-- update= function(self, card, dt)
+-- 	-- 	self.edition = "e_negative"
+-- 	-- end
+-- 	--set_ability = function(self, card, initial, delay_sprites) end
+-- }
+
+SMODS.Shader {
+    key = 'bap_shader_void',
+    path = 'bap_shader_void.fs',
+    -- card can be nil if sprite.role.major is not Card
+    send_vars = function (sprite, card)
+        return {
+            lines_offset = card and card.edition.example_gold_seed or 0
+        }
     end,
-	-- update= function(self, card, dt)
-	-- 	self.edition = "e_negative"
-	-- end
-	--set_ability = function(self, card, initial, delay_sprites) end
+}
+SMODS.Edition {
+    key = 'bap_void',
+    shader = 'worm_bap_shader_void',
+	loc_txt = {
+		name = 'Void',
+		label = 'Void',
+		text = {
+			"{C:chips}#1#{} chips when {C:attention}held{}",
+			"Never scores"
+		}
+	},
+    config = { chips = -25 },
+    in_shop = false,
+    weight = 0,
+    extra_cost = 5,
+	never_scores = true,
+    sound = { sound = "negative", per = 1.5, vol = 0.4 },
+    loc_vars = function(self, info_queue, card)
+		return { vars = { card.edition.chips } }
+    end,
+    get_weight = function(self)
+        return self.weight
+    end,
+    draw = function(self, card, layer)
+        if (layer == 'card' or layer == 'both') and card.sprite_facing == 'front' and (card.config.center.discovered or card.bypass_discovery_center) then
+            card.children.center:draw_shader('worm_bap_shader_void', nil, card.ARGS.send_to_shader)
+            if card.children.front then
+                card.children.front:draw_shader('worm_bap_shader_void', nil, card.ARGS.send_to_shader)
+            end
+            --card.children.center:draw_shader('negative_shine', nil, card.ARGS.send_to_shader)
+        end
+    end,
+	calculate = function(self, card, context)
+        if context.main_scoring and context.cardarea == G.hand then
+            return {
+				chips = math.abs(card.edition.chips),
+				sign = -1
+			}
+        end
+    end
 }
 
 
@@ -123,10 +175,11 @@ SMODS.Consumable {
 					local _suit = pseudorandom_element(SMODS.Suits, 'abyss_create').key
 
 					cards[i] = SMODS.add_card({
-						area = G.hand,
+						--area = G.hand,
 						suit = _suit,
 						rank = _rank,
-						enhancement = "m_worm_bap_void"
+						--enhancement = "m_worm_bap_void",
+						edition = "e_worm_bap_void"
 					})
 				end
 				SMODS.calculate_context({ playing_card_added = true, cards = cards })
@@ -137,7 +190,7 @@ SMODS.Consumable {
 		delay(0.3)
 	end,
 	can_use = function(self, card)
-		return G.hand and true
+		return G.hand and #G.hand.cards > 1
 	end
 }
 
@@ -196,16 +249,17 @@ SMODS.PokerHand {
 	name = "Void"
 	},
     example = {
-        { 'S_A', true, enhancement="m_worm_bap_void" },
-        { 'D_Q', true, enhancement="m_worm_bap_void" },
-        { 'D_9', true, enhancement="m_worm_bap_void" },
-        { 'C_4', true, enhancement="m_worm_bap_void" },
-        { 'D_3', true, enhancement="m_worm_bap_void" }
+        { 'S_A', true, edition="e_worm_bap_void" },
+        { 'D_Q', true, edition="e_worm_bap_void" },
+        { 'D_9', true, edition="e_worm_bap_void" },
+        { 'C_4', true, edition="e_worm_bap_void" },
+        { 'D_3', true, edition="e_worm_bap_void" }
     },
     evaluate = function(parts, hand)
 		if #hand ~= 5 then return {} end
 		for i = 1, #hand do
-			if not SMODS.has_enhancement(hand[i], "m_worm_bap_void") then return {} end
+			if not hand.edition then return {} end
+			if hand[i].edition.key ~= "e_worm_bap_void" then return {} end
 		end
 
         return { hand }
@@ -225,7 +279,7 @@ SMODS.Consumable {
     cost = 3,
 	atlas = 'Palindrome',
     pos = { x = 0, y = 0 },
-    config = { anim_time = 0, hand_type = "bap_void" },
+    config = { anim_time = 0, hand_type = "worm_bap_void" },
     can_use = function(self, card) return true end,
     -- use = function(self, card, area, copier)
 	-- 	G.E_MANAGER:add_event(Event({
