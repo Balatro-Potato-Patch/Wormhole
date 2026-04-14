@@ -114,6 +114,9 @@ SMODS.Sound {
             return 1.7e307
         end
     end,
+    sync = {
+        ["lfc_music_eigengrau"] = "yes"
+    }
 }
 
 -- TODO: ADD PROPER SPRITE

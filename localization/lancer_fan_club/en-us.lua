@@ -5,6 +5,7 @@ return {
 
             PotatoPatchDev_ProdByProto = {
                 --name = "{IMG:lfc_proot_EarL,s:0.525}a{} ProdByProto {IMG:lfc_proot_EarR,s:0.525}a{}", failed image attempt
+                --name = "#1#ProdByProto#2#", failed loc_vars test
                 name = "ProdByProto",
                 text = {
                     {
@@ -26,11 +27,18 @@ return {
                 name = "ellestuff.",
                 text = {
                     {
-                        "hey.",
-                        "did i do things?"
+                        "Hey, I did the things",
+                        "that draw directly",
+                        "on the screen."
                     },
                     {
-                        "good question,,",
+                        "That's Meteors",
+                        "and Spacebar btw."
+                    },
+                    {
+                        "I also did the shader",
+                        "and CanvasSprite for",
+                        "Urination Station.."
                     }
                 }
             },
