@@ -1,8 +1,7 @@
-No Programming Done (2):
-- [ ] Bar/Bat Mitzvah
+No Programming Done (1):
 - [ ] Space Bar Deck (starts with one random bartender joker)
 
-Implimented (untested) (18):
+Implimented (untested) (19):
 - [X] Black Hole Bomb
 - [X] [ART DONE] Cosmospolitan
 - [X] Mojitury
@@ -17,4 +16,5 @@ Implimented (untested) (18):
 - [X] Happy Hour
 - [X] [ART DONE] Casino Bartender, makes lucky cards drunk and provides food/drink on lucky card hit
 - [X] Speed Bartender
+- [X] Bar/Bat Mitzvah
 - [X] [ART DONE] Tipsy, Drunk, Very Drunk and Blackout (4 objects)
