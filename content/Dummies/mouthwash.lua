@@ -1,21 +1,14 @@
 if not to_big then to_big = function(val) return val end end
 
-SMODS.Atlas({
-	key = "MouthwashJoker",
-	path = "Dummies/mouthwash.png",
-	px = 71,
-	py = 95
-})
-
 SMODS.Joker({
-	key = 'dum_mouthwash',
-	config = { extra = { xmult_gain = 0.15, xmult = 1 } },
-	unlocked = true,
-	rarity = 3,
-	atlas = 'MouthwashJoker',
-	pos = { x = 0, y = 0 },
-	cost = 6,
-	blueprint_compat = true,
+    key = 'dum_mouthwash',
+    config = { extra = { xmult_gain = 0.15, xmult = 1 } },
+    unlocked = true,
+    rarity = 3,
+    atlas = 'DummiesJokers',
+    pos = { x = 8, y = 1 },
+    cost = 8,
+    blueprint_compat = true,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.xmult_gain, card.ability.extra.xmult } }
     end,
@@ -32,11 +25,11 @@ SMODS.Joker({
             local hand_to_delevel = pseudorandom_element(hands_to_delevel, 'dum_mouthwash')
             level_up_hand(card, hand_to_delevel, false, -1)
             SMODS.scale_card(card, {
-				ref_table = card.ability.extra,
-				ref_value = "xmult",
-				scalar_table = card.ability.extra,
-				scalar_value = "xmult_gain"
-			})
+                ref_table = card.ability.extra,
+                ref_value = "xmult",
+                scalar_table = card.ability.extra,
+                scalar_value = "xmult_gain"
+            })
             return { message = localize { type = 'variable', key = 'a_xmult', vars = { card.ability.extra.xmult } } }
         end
         if context.joker_main then
@@ -45,8 +38,9 @@ SMODS.Joker({
             }
         end
     end,
-	ppu_coder = { "baltdev" },
-	--ppu_artist = { "ghostsalt" },
-	ppu_team = { "dummies" },
-	pronouns = "they_them"
+    pixel_size = { w = 45, h = 95 },
+    ppu_coder = { "baltdev" },
+    ppu_artist = { "ghostsalt" },
+    ppu_team = { "dummies" },
+    pronouns = "they_them"
 })
