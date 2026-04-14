@@ -311,6 +311,7 @@ suit_alien{
     atlas = 'shrug_alien_cards',
     pos = {x = 0, y = 0},
     config = {extra = {suit = 'Diamonds', convert = 6}},
+    ppu_artist = {"waffle", "microwave"}
 }
 
 -- for martian and ???
