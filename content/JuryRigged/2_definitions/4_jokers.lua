@@ -50,7 +50,10 @@ SMODS.Joker {
         xmult = xmult
       }
     end
-  end
+  end,
+  ppu_coder = { 'DowFrin' },
+  ppu_artist = { 'Inky' },
+  ppu_team = { 'JuryRigged' },
 }
 
 SMODS.Joker {
@@ -83,7 +86,10 @@ SMODS.Joker {
         end
       }
     end
-  end
+  end,
+  ppu_coder = { 'DowFrin' },
+  ppu_artist = { 'DoggFly' },
+  ppu_team = { 'JuryRigged' },
 }
 
 SMODS.Joker {
@@ -147,5 +153,8 @@ SMODS.Joker {
         }
       end
     end
-  end
+  end,
+  ppu_coder = { 'DowFrin' },
+  ppu_artist = { 'AbelSketch' },
+  ppu_team = { 'JuryRigged' },
 }

@@ -173,7 +173,7 @@ return {
         name = 'Launch pad',
         text = {
           "Adds {C:attention}#1#{} {C:worm_jr_satellite}Satellite{} card",
-          "to opened {C:Planet}Celestial{} packs"
+          "to opened {C:planet}Celestial{} packs"
         }
       },
       v_worm_jr_flyby = {
@@ -181,6 +181,17 @@ return {
         text = {
           "{C:worm_jr_satellite}Satellite{} cards create a {C:dark_edition}Negative{} {C:planet}Planet{} card",
           "for their {C:attention}corresponding hand type{} when used"
+        }
+      },
+    },
+    Back = {
+      b_worm_jr_colonist = {
+        name = "Colonist Deck",
+        text = {
+          "{C:worm_jr_satellite}Satellites{} cards may",
+          "appear in the shop,",
+          "start run with the",
+          "{C:worm_jr_satellite,T:v_worm_jr_launch_pad}Launch Pad{} voucher"
         }
       },
     },

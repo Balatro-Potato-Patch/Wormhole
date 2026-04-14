@@ -14,7 +14,6 @@ Wormhole.JR_UTILS.Satellite = SMODS.Consumable:extend {
   discovered = false,
   cost = 4,
   ppu_coder = { 'DowFrin', 'Maelmc' },
-  ppu_artist = { 'DoggFly', 'Inky' },
   ppu_team = { 'JuryRigged' },
   atlas = 'worm_jr_Satellites',
 
@@ -62,6 +61,7 @@ Wormhole.JR_UTILS.Satellite {
       }
     }
   end,
+  ppu_artist = { 'DoggFly', 'Inky' },
 }
 
 -- MESSENGER
@@ -111,6 +111,7 @@ Wormhole.JR_UTILS.Satellite {
       }
     }
   end,
+  ppu_artist = { 'DoggFly', 'Inky' },
 }
 
 -- Tianwen 4
@@ -167,6 +168,7 @@ Wormhole.JR_UTILS.Satellite {
       }
     }
   end,
+  ppu_artist = { 'DoggFly', 'Inky' },
 }
 
 -- Venera 9
@@ -234,9 +236,7 @@ Wormhole.JR_UTILS.Satellite {
       }
     }
   end,
-  jr_loc_vars = function(self)
-    return {}
-  end
+  ppu_artist = { 'DoggFly', 'Inky' },
 }
 
 -- Cassini-Huygens
@@ -291,9 +291,7 @@ Wormhole.JR_UTILS.Satellite {
       }
     }
   end,
-  jr_loc_vars = function(self)
-    return {}
-  end
+  ppu_artist = { 'DoggFly', 'Inky'},
 }
 
 -- Galileo
@@ -355,9 +353,7 @@ Wormhole.JR_UTILS.Satellite {
       }
     }
   end,
-  jr_loc_vars = function(self)
-    return {}
-  end
+  ppu_artist = { 'AbelSketch', 'Inky' },
 }
 
 -- Sputnik 1
@@ -404,9 +400,7 @@ Wormhole.JR_UTILS.Satellite {
       }
     }
   end,
-  jr_loc_vars = function(self)
-    return {}
-  end
+  ppu_artist = { 'DoggFly', 'Inky' },
 }
 
 
@@ -462,6 +456,7 @@ Wormhole.JR_UTILS.Satellite {
       }
     }
   end,
+  ppu_artist = { 'DoggFly', 'Inky' },
 }
 
 -- Voyager 2
@@ -491,6 +486,7 @@ Wormhole.JR_UTILS.Satellite {
       }
     }
   end,
+  ppu_artist = { 'DoggFly', 'Inky' },
 }
 
 -- Dawn
@@ -519,6 +515,7 @@ Wormhole.JR_UTILS.Satellite {
       }
     }
   end,
+  ppu_artist = { 'DoggFly', 'Inky' },
 }
 
 -- Manhole Cover
@@ -564,4 +561,5 @@ Wormhole.JR_UTILS.Satellite {
       }
     }
   end,
+  ppu_artist = { 'AbelSketch', 'DoggFly', 'Inky' },
 }

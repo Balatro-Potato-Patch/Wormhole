@@ -21,6 +21,8 @@ Wormhole.JR_UTILS.SatelliteBooster = SMODS.Booster:extend {
     ease_colour(G.C.DYN_UI.MAIN, G.C.SET.worm_jr_satellite)
     ease_background_colour { new_colour = G.C.SET.worm_jr_satellite, special_colour = G.C.BLACK, contrast = 2 }
   end,
+  ppu_coder = { 'DowFrin' },
+  ppu_team = { 'JuryRigged' },
 }
 
 -- Normal
@@ -35,6 +37,7 @@ Wormhole.JR_UTILS.SatelliteBooster {
   weight = 1,
   cost = 4,
   discovered = false,
+  ppu_artist = { 'DoggFly', 'Inky' },
 }
 
 Wormhole.JR_UTILS.SatelliteBooster {
@@ -48,6 +51,7 @@ Wormhole.JR_UTILS.SatelliteBooster {
   weight = 1,
   cost = 4,
   discovered = false,
+  ppu_artist = { 'DoggFly', 'Inky' },
 }
 
 -- Jumbo
@@ -62,6 +66,7 @@ Wormhole.JR_UTILS.SatelliteBooster {
   weight = 1,
   cost = 4,
   discovered = false,
+  ppu_artist = { 'DoggFly' },
 }
 
 -- Mega
@@ -76,4 +81,5 @@ Wormhole.JR_UTILS.SatelliteBooster {
   weight = 0.25,
   cost = 4,
   discovered = false,
+  ppu_artist = { 'DoggFly', 'Inky' },
 }

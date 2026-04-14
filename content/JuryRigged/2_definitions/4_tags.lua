@@ -30,5 +30,8 @@ SMODS.Tag {
       tag.triggered = true
       return true
     end
-  end
+  end,
+  ppu_coder = { 'DowFrin' },
+  ppu_artist = { 'Inky' },
+  ppu_team = { 'JuryRigged' },
 }

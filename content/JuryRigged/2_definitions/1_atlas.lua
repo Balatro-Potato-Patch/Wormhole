@@ -39,3 +39,10 @@ SMODS.Atlas {
   py = 34,
   path = 'JuryRigged/Tags.png'
 }
+
+SMODS.Atlas {
+  key = 'jr_Backs',
+  px = 71,
+  py = 95,
+  path = 'JuryRigged/Backs.png'
+}

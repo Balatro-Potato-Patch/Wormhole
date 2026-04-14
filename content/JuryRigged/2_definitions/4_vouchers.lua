@@ -43,7 +43,10 @@ SMODS.Voucher {
         card.ability.extra.cards_added
       }
     }
-  end
+  end,
+  ppu_coder = { 'DowFrin' },
+  ppu_artist = { 'Blanthos' },
+  ppu_team = { 'JuryRigged' },
 }
 
 SMODS.Voucher {
@@ -82,4 +85,7 @@ SMODS.Voucher {
       }))
     end
   end,
+  ppu_coder = { 'DowFrin' },
+  ppu_artist = { 'Blanthos' },
+  ppu_team = { 'JuryRigged' },
 }
