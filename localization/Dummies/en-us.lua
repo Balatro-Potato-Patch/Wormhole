@@ -1,9 +1,7 @@
 return {
     descriptions = {
         PotatoPatch = {
-            -- Team-Name:
             PotatoPatchTeam_dummies = { name = 'Dummies' },
-            -- Team-Members:
             PotatoPatchDev_ghostsalt = {
                 name = 'GhostSalt',
                 text = {
@@ -29,10 +27,9 @@ return {
             PotatoPatchDev_theonegoofali = {
                 name = 'TheOneGoofAli',
                 text = {
-					{ "Additionally known under the {C:attention}TOGA{} acronym." },
-					{ "Very much interested in (old) computers.", "{C:inactive}And older versions of Windows too." },
-					{ "Previously modded {C:attention}Sonic Robo Blast 2{},", "{C:attention}Sonic Robo Blast 2 Kart{} and", "{C:attention}Dr. Robotnik's Ring Racers{}." },
-					{ "Also responsible for loading screen shenanigans.", "{C:inactive}Originally experimented for TOGA's Stuff" }
+					{ "Additionally known under the {C:attention}TOGA{} acronym.", "Very much interested in (old) computers.", "{C:inactive}And older versions of Windows too." },
+					{ "Previously modded {C:attention}Sonic Robo Blast 2{},", "{C:attention}Sonic Robo Blast 2 Kart{} and {C:attention}Dr. Robotnik's Ring Racers{}." },
+					{ "Responsible for appearance of {C:edition}the SMODS cat{} on loading screen since", "{C:attention}BETA-1201a{}, as well as the {C:legendary}custom{} loading screen for this mod.", "{C:inactive}Originally experimented for TOGA's Stuff{}", "{C:inactive,s:0.9}(https://github.com/TheOneGoofAli/TOGAPackBalatro){}" }
 				}
             },
             PotatoPatchDev_baltdev = {
@@ -89,14 +86,6 @@ return {
                     "{C:inactive}Currently {C:chips}+#5#{C:inactive} Chips,",
                     "{C:mult}+#4#{C:inactive} Mult and {X:mult,C:white}X#6#{C:inactive} Mult"
                 } },
-                --text = {
-                --    "When {C:attention}Blind{} is selected,",
-                --    "if Joker to the right is:",
-                --    "{X:chips,C:white}Fish{} - {C:red}eat{} it and gain {C:chips}+#2#{} Chips",
-                --    "{X:grey,C:white}Cat{} - {C:red}eat{} it and gain {C:mult}+#1#{} Mult",
-                --    "{X:green,C:white}Alien{} - {C:red}eat{} it and gain {X:mult,C:white} X#3# {} Mult",
-                --    "{C:inactive}(Currently {C:chips}+#5#{C:inactive} Chips, {C:mult}+#4#{C:inactive} Mult, {X:mult,C:white} X#6# {C:inactive} Mult)",
-                --},
             },
             j_worm_dum_garlicbread = {
                 name = { "{C:worm_dum_garlicbread}Garlic Bread{} that", "went to {C:planet}Space{}" },
@@ -132,7 +121,7 @@ return {
                 name = "Crystal Sphere",
                 text = {
                     "{C:green}#1# in #2#{} chance to",
-                    "{C:attention}retrigger{} all scoring", --> scoring/played
+                    "{C:attention}retrigger{} all scoring",
                     "cards if played hand",
                     "contains a {C:attention}face{} card"
                 },
@@ -324,7 +313,6 @@ return {
             c_worm_dum_all_star_champion = "All Star Champion",
         },
         v_text = {
-            -- Challenge Descs.
             ch_c_worm_dum_low_oxygen_1 = { "Start with {C:attention}20{} minutes of {C:spectral}Oxygen{},", },
             ch_c_worm_dum_low_oxygen_2 = { "{C:spectral}Oxygen{} doesn't affect scoring.", },
             ch_c_worm_dum_buff_spacesuit_1 = { "Enjoy {C:green,E:1}Pre-Nerfed {C:attention}Space Suit{} stats!", },
@@ -332,14 +320,10 @@ return {
             ch_c_worm_dum_buff_spacesuit_3 = { "{C:inactive}Replenish Time: {C:attention}01:00{C:inactive} minute", },
             ch_c_worm_dum_all_star_champion_1 = { "{C:attention,E:2}Trinary{C:planet} Planet{} cards", },
             ch_c_worm_dum_all_star_champion_2 = { "{C:attention}+4{} Winning Ante", },
-            -- Generic/Misc.
             ch_c_worm_dum_gold_stake = { "Apply {C:money}Gold Stake{} difficulty" },
             ch_c_worm_dum_space = { "{s:0.5} ", },
         },
-        --# See "dummies_quips.lua":
-        --# Update the Amount of "EXPECTED" when using the [Generic] method!
         quips = {
-            -- [Generic] WIN Quips:
             worm_dummies_win_1 = { "{s:2.0,C:green}W" },
             worm_dummies_win_2 = { "I knew you", "could do it!" },
             worm_dummies_win_3 = { "Cuties say '{E:1}what{}'." },
@@ -351,7 +335,6 @@ return {
             worm_dummies_win_9 = { "With plays like these,", "I know why the word", '"{E:2}Peak{}" was invented!' },
             worm_dummies_win_10 = { "{s:2.0}:3" },
             worm_dummies_win_11 = { "{s:2.0} l_o_l", "{s:2.0}  |Î| ", "{s:1.0}  Absolute", "{s:2.0}Cinema" },
-            -- [Generic] LOSS Quips:
             worm_dummies_loss_1 = { "{s:2.0,C:red}L" },
             worm_dummies_loss_2 = { "Yeah, you should", "try a bit more", "than {u:red}that{}. {E:2}Yikes{}!" },
             worm_dummies_loss_3 = { "   I think you'll have more success", '   searching for {C:red}"Quit"{} over here!', "                   {C:inactive}|", " ", "                   {C:inactive}|", " ", "                   {C:inactive}|", " ", "                   {C:inactive}|", "                   {C:inactive} - - - - - - - - >" },
@@ -363,7 +346,6 @@ return {
             worm_dummies_loss_9 = { "I think you", "should play the", "{C:blue}Tutorial{} again." },
             worm_dummies_loss_10 = { "{s:2.0,C:red}-2" },
             worm_dummies_loss_11 = { "Time's up,", "{E:2}buddy{}!" },
-            -- [Custom] Quips:
             worm_dummies_flowire_1 = { "ERROR" },
             worm_dummies_flowire_2 = { "nil" },
             worm_dummies_flowire_3 = { "{s:2.5} " },
