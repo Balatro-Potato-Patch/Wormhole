@@ -47,6 +47,7 @@ SMODS.Joker {
                     },
                     force_stickers = true
                 }
+                return nil, true
             end
         end
 	end

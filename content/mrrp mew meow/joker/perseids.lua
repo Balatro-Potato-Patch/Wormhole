@@ -55,7 +55,6 @@ SMODS.Joker {
 
         if context.after then
             card.ability.extra.impacts = {}
-            return nil
         end
 	end
 }

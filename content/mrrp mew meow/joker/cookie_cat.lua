@@ -48,6 +48,7 @@ SMODS.Joker {
                 level_up = -card.ability.extra.level,
                 from = context.blueprint and context.blueprint_card or card
             })
+            return nil, true
         end
         if context.end_of_round and context.main_eval then
             if card.ability.extra.level - card.ability.extra.level_mod <= 0 then
@@ -63,6 +64,7 @@ SMODS.Joker {
                     message_key = "a_level_minus",
                     message_colour = G.C.SECONDARY_SET.Planet
                 })
+                return nil, true
             end
         end
     end

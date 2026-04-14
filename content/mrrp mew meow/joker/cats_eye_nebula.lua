@@ -109,6 +109,7 @@ SMODS.Joker {
                     return true
                 end
             })
+            return { no_retrigger = true }
         end
 	end
 }

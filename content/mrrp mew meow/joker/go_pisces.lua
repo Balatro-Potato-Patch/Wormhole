@@ -44,6 +44,7 @@ SMODS.Joker {
 			end
 
 			SMODS.destroy_cards(context.blueprint and context.blueprint_card or card)
+			return { no_retrigger = true }
 		end
 	end
 }
