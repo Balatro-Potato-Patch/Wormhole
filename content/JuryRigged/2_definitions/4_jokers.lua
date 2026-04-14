@@ -158,3 +158,41 @@ SMODS.Joker {
   ppu_artist = { 'AbelSketch' },
   ppu_team = { 'JuryRigged' },
 }
+
+-- Crash Course
+SMODS.Joker {
+  key = "jr_crash_course",
+  config = {
+    extra = {}
+  },
+  rarity = 3,
+  pos = { x = 3, y = 0 },
+  atlas = "worm_jr_jokers",
+  cost = 7,
+  blueprint_compat = true,
+  eternal_compat = true,
+  perishable_compat = true,
+
+    calculate = function(self, card, context)
+    if context.other_consumeable and context.other_consumeable.ability.set == 'Planet' and context.other_consumeable.ability.consumeable.hand_type == context.scoring_name then
+      if context.other_consumeable.ability.consumeable.hand_type and context.scoring_name == context.other_consumeable.ability.consumeable.hand_type then
+        return {
+        message = localize('worm_jr_plus_satellite'),
+        colour = G.C.RARITY.Legendary,
+        func = function()
+          G.E_MANAGER:add_event(Event {
+            func = function()
+              SMODS.add_card { key = "sat_worm_" .. Wormhole.JR_UTILS.get_satellite(G.GAME.jr.curr_hand), area = G.consumeables }
+
+              return true
+            end
+          })
+        end
+      }
+    end
+  end
+  end,
+  ppu_coder = { 'NinjaBanana' },
+  ppu_artist = { 'Inky' },
+  ppu_team = { 'JuryRigged' },
+}
