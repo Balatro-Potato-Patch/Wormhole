@@ -123,10 +123,10 @@ SMODS.Tag{
 }
 
 -- suit conversion alien funcitons
-local function reset_suit_conv_cardarea()
+local function reset_suit_conv_cardarea(offset)
     --row 1
     G.worm_shrug_alien_suit_conv = CardArea(
-        G.CARD_W * 0.495 * 5.5, -- x coordinate
+        G.CARD_W * 0.495 * (5.5 + offset), -- x coordinate
         G.CARD_H * 0.95 + 0.5, -- y coordinate
         G.CARD_W * 4.95 / 5 * 0.75, -- width
         G.CARD_H * 0.95, -- height
@@ -138,7 +138,7 @@ local function reset_suit_conv_cardarea()
     )
     --row 2
     G.worm_shrug_alien_suit_conv2 = CardArea(
-        G.CARD_W * 0.495 * 5.5,
+        G.CARD_W * 0.495 * (5.5 + offset),
         G.CARD_H * 0.95 * 2 + 0.25,
         G.CARD_W * 4.95 / 5 * 0.75,
         G.CARD_H * 0.95,
@@ -208,8 +208,8 @@ local function draw_card_back(from, to, percent, card, no_ui)
       }))
 end
 local function alien_suit_convert(suit, amount)
-    amount = math.min(amount, 10) -- amount is intended to be 10 or lower, otherwise animation breaks
-    reset_suit_conv_cardarea()
+    local line_size = amount >= 3 and math.max(math.ceil(amount / 2), 3) or amount
+    reset_suit_conv_cardarea((5 - line_size) / 2)
     local _cards = {}
     for _, c in ipairs(G.playing_cards) do
         if c.config.card.suit ~= suit then
@@ -230,7 +230,7 @@ local function alien_suit_convert(suit, amount)
         end
     end
     for i, c in ipairs(cards) do
-        if i <= 5 and i <= amount then
+        if i <= line_size and i <= amount then
              add_to_suit_conv(c, G.worm_shrug_alien_suit_conv, i * 100 / amount)
         elseif i <= amount then
              add_to_suit_conv(c, G.worm_shrug_alien_suit_conv2, i * 100 / amount)
@@ -252,7 +252,7 @@ local function alien_suit_convert(suit, amount)
                 draw_card_back(G.worm_shrug_alien_suit_conv, areas[i], i*100/amount, c, no_uis[i])
             end
             for i, c in ipairs(G.worm_shrug_alien_suit_conv2.cards) do
-                draw_card_back(G.worm_shrug_alien_suit_conv2, areas[i + 5], (i + 5)*100/amount, c, no_uis[i + 5])
+                draw_card_back(G.worm_shrug_alien_suit_conv2, areas[i + line_size], (i + line_size)*100/amount, c, no_uis[i + line_size])
             end
             return true
         end
@@ -263,8 +263,7 @@ local suit_alien = SMODS.Consumable:extend{
     loc_vars = function(self, info_queue, card)
         return {
             vars = {
-                math.min(card.ability.consumeable.extra.convert, 10),
-                card.ability.consumeable.extra.pay,
+                card.ability.consumeable.extra.convert
             }
         }
     end,
@@ -273,8 +272,6 @@ local suit_alien = SMODS.Consumable:extend{
     end,
     use = function(self, card, area, copier)
         card:juice_up(0.3, 0.5)
-        ease_dollars(-card.ability.consumeable.extra.pay)
-        delay(0.6)
         alien_suit_convert(card.ability.consumeable.extra.suit, card.ability.consumeable.extra.convert)
     end,
     unlocked = true,
@@ -290,7 +287,7 @@ suit_alien{
     key = 'shrug_alien_spades',
     atlas = 'shrug_alien_cards',
     pos = {x = 2, y = 0},
-    config = {extra = {suit = 'Spades', convert = 10, pay = 5}},
+    config = {extra = {suit = 'Spades', convert = 6}},
     ppu_artist = {"waffle", "microwave"}
 }
 -- Fresno Nightcrawlers
@@ -298,7 +295,7 @@ suit_alien{
     key = 'shrug_alien_hearts',
     atlas = 'shrug_alien_cards',
     pos = {x = 4, y = 0},
-    config = {extra = {suit = 'Hearts', convert = 10, pay = 5}},
+    config = {extra = {suit = 'Hearts', convert = 6}},
     ppu_artist = {"waffle", "microwave"}
 }
 -- Reptiloid
@@ -306,14 +303,14 @@ suit_alien{
     key = 'shrug_alien_clubs',
     atlas = 'shrug_alien_cards',
     pos = {x = 0, y = 0},
-    config = {extra = {suit = 'Clubs', convert = 10, pay = 5}},
+    config = {extra = {suit = 'Clubs', convert = 6}},
 }
 -- Hopkinsville Goblin
 suit_alien{
     key = 'shrug_alien_diamonds',
     atlas = 'shrug_alien_cards',
     pos = {x = 0, y = 0},
-    config = {extra = {suit = 'Diamonds', convert = 10, pay = 5}},
+    config = {extra = {suit = 'Diamonds', convert = 6}},
 }
 
 -- for martian and ???
