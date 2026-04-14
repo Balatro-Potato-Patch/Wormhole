@@ -487,542 +487,96 @@ SMODS.Joker {
 }
 
 
--- Space Worm
-SMODS.Joker {
-    key = "bap_space_worm",
-    blueprint_compat = true,
-    rarity = 3,
-    cost = 7,
-	atlas = 'Palindrome',
-    pos = { x = 0, y = 2 },
-    config = { extra = { x_mult = 1.0, inc_mult = 0.25 } },
-	loc_txt = {
-		name = 'Space Worm',
-		text = {
-			"When {C:attention}Blind{} is selected,",
-			"{C:attention}destroy{} Joker from {V:1,V:2}Wormhole{}",
-			"to the right and gain {X:mult,C:white} X#1# {} Mult",
-			"{C:inactive}(Currently {X:mult,C:white} X#2# {C:inactive} Mult)",
-		}
-	},
-    loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.inc_mult, card.ability.extra.x_mult, colours={Wormhole.badge_colour, Wormhole.badge_text_colour} } }
-    end,
-    calculate = function(self, card, context)
-        if context.setting_blind and not context.blueprint then
-            local my_pos = nil
-            for i = 1, #G.jokers.cards do
-                if G.jokers.cards[i] == card then
-                    my_pos = i
-                    break
-                end
-            end
-            if my_pos and G.jokers.cards[my_pos + 1] and string.find(G.jokers.cards[my_pos + 1].key,"worm") and not SMODS.is_eternal(G.jokers.cards[my_pos + 1], card) and not G.jokers.cards[my_pos + 1].getting_sliced then
-                local sliced_card = G.jokers.cards[my_pos + 1]
-                sliced_card.getting_sliced = true -- Make sure to do this on destruction effects
-                G.GAME.joker_buffer = G.GAME.joker_buffer - 1
-                G.E_MANAGER:add_event(Event({
-                    func = function()
-                        G.GAME.joker_buffer = 0
-                        -- See note about SMODS Scaling Manipulation on the wiki
-                        card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.inc_mult
-                        card:juice_up(0.8, 0.8)
-                        sliced_card:start_dissolve({ HEX("57ecab") }, nil, 1.6)
-                        play_sound('slice1', 0.96 + math.random() * 0.08)
-                        return true
-                    end
-                }))
-                return {
-                    message = localize { type = 'variable', key = 'a_mult', vars = { card.ability.extra.x_mult + card.ability.extra.inc_mult } },
-                    colour = G.C.RED,
-                    no_juice = true
-                }
-            end
-        end
-        if context.joker_main then
-            return {
-                x_mult = card.ability.extra.x_mult
-            }
-        end
-    end
-}
+local function print_table(t, depth)
+	if depth > 3 then return end
 
--- Space Worm
-SMODS.Joker {
-    key = "bap_space_worm_h",
-    blueprint_compat = true,
-    rarity = 3,
-    cost = 7,
-	atlas = 'Palindrome',
-    pos = { x = 0, y = 2 },
-    config = { extra = { x_mult = 1.0, inc_mult = 0.25 } },
-	loc_txt = {
-		name = 'Space Worm',
-		text = {
-			"Destroys jokers from {V:1}Wormhole{}",
-			"to the right to",
-        	"gain x#1# Mult",
-			"{C:inactive}(Currently {C:mult}x#1#{C:inactive} Mult)",
-		}
-	},
-    loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.inc_mult, card.ability.extra.x_mult, colours={Wormhole.badge_colour} } }
-    end,
-    calculate = function(self, card, context)
-        if context.setting_blind and not context.blueprint then
-            local my_pos = nil
-            for i = 1, #G.jokers.cards do
-                if G.jokers.cards[i] == card then
-                    my_pos = i
-                    break
-                end
-            end
-            if my_pos and G.jokers.cards[my_pos + 1] and string.find(G.jokers.cards[my_pos + 1].key,"worm") and not SMODS.is_eternal(G.jokers.cards[my_pos + 1], card) and not G.jokers.cards[my_pos + 1].getting_sliced then
-                local sliced_card = G.jokers.cards[my_pos + 1]
-                sliced_card.getting_sliced = true -- Make sure to do this on destruction effects
-                G.GAME.joker_buffer = G.GAME.joker_buffer - 1
-                G.E_MANAGER:add_event(Event({
-                    func = function()
-                        G.GAME.joker_buffer = 0
-                        -- See note about SMODS Scaling Manipulation on the wiki
-                        card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.inc_mult
-                        card:juice_up(0.8, 0.8)
-                        sliced_card:start_dissolve({ HEX("57ecab") }, nil, 1.6)
-                        play_sound('slice1', 0.96 + math.random() * 0.08)
-                        return true
-                    end
-                }))
-                return {
-                    message = localize { type = 'variable', key = 'a_mult', vars = { card.ability.extra.x_mult + card.ability.extra.inc_mult } },
-                    colour = G.C.RED,
-                    no_juice = true
-                }
-            end
-        end
-        if context.joker_main then
-            return {
-                x_mult = card.ability.extra.x_mult
-            }
-        end
-    end
-}
+	local depth_buffer = ''
+	for i=1,depth do
+		depth_buffer = depth_buffer .. '  '
+	end
+	for key, value in pairs(t) do
+		if type(value) == "table" then
+			print(depth_buffer .. tostring(key) .. ' :')
+			print_table(value, depth + 1)
+		else
+			print(depth_buffer .. tostring(key) .. ' : ' .. tostring(value))
+		end
+	end
+end
 
--- Space Worm
-SMODS.Joker {
-    key = "bap_space_worm_g",
-    blueprint_compat = true,
-    rarity = 3,
-    cost = 7,
-	atlas = 'Palindrome',
-    pos = { x = 0, y = 2 },
-    config = { extra = { x_mult = 1.0, inc_mult = 0.25 } },
-	loc_txt = {
-		name = 'Space Worm',
-		text = {
-			"Destroys jokers from {V:1}Wormhole{}",
-			"to the right to",
-        	"gain x#1# Mult",
-			"{C:inactive}(Currently {C:mult}x#1#{C:inactive} Mult)",
-		}
-	},
-    loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.inc_mult, card.ability.extra.x_mult, colours={Wormhole.badge_colour} } }
-    end,
-    calculate = function(self, card, context)
-        if context.setting_blind and not context.blueprint then
-            local my_pos = nil
-            for i = 1, #G.jokers.cards do
-                if G.jokers.cards[i] == card then
-                    my_pos = i
-                    break
-                end
-            end
-            if my_pos and G.jokers.cards[my_pos + 1] and string.find(G.jokers.cards[my_pos + 1].key,"worm") and not SMODS.is_eternal(G.jokers.cards[my_pos + 1], card) and not G.jokers.cards[my_pos + 1].getting_sliced then
-                local sliced_card = G.jokers.cards[my_pos + 1]
-                sliced_card.getting_sliced = true -- Make sure to do this on destruction effects
-                G.GAME.joker_buffer = G.GAME.joker_buffer - 1
-                G.E_MANAGER:add_event(Event({
-                    func = function()
-                        G.GAME.joker_buffer = 0
-                        -- See note about SMODS Scaling Manipulation on the wiki
-                        card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.inc_mult
-                        card:juice_up(0.8, 0.8)
-                        sliced_card:start_dissolve({ HEX("57ecab") }, nil, 1.6)
-                        play_sound('slice1', 0.96 + math.random() * 0.08)
-                        return true
-                    end
-                }))
-                return {
-                    message = localize { type = 'variable', key = 'a_mult', vars = { card.ability.extra.x_mult + card.ability.extra.inc_mult } },
-                    colour = G.C.RED,
-                    no_juice = true
-                }
-            end
-        end
-        if context.joker_main then
-            return {
-                x_mult = card.ability.extra.x_mult
-            }
-        end
-    end
-}
+for duplicate = 0, 20 do
 
--- Space Worm
-SMODS.Joker {
-    key = "bap_space_worm_f",
-    blueprint_compat = true,
-    rarity = 3,
-    cost = 7,
-	atlas = 'Palindrome',
-    pos = { x = 0, y = 2 },
-    config = { extra = { x_mult = 1.0, inc_mult = 0.25 } },
-	loc_txt = {
-		name = 'Space Worm',
-		text = {
-			"Destroys jokers from {V:1}Wormhole{}",
-			"to the right to",
-        	"gain x#1# Mult",
-			"{C:inactive}(Currently {C:mult}x#1#{C:inactive} Mult)",
-		}
-	},
-    loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.inc_mult, card.ability.extra.x_mult, colours={Wormhole.badge_colour} } }
-    end,
-    calculate = function(self, card, context)
-        if context.setting_blind and not context.blueprint then
-            local my_pos = nil
-            for i = 1, #G.jokers.cards do
-                if G.jokers.cards[i] == card then
-                    my_pos = i
-                    break
-                end
-            end
-            if my_pos and G.jokers.cards[my_pos + 1] and string.find(G.jokers.cards[my_pos + 1].key,"worm") and not SMODS.is_eternal(G.jokers.cards[my_pos + 1], card) and not G.jokers.cards[my_pos + 1].getting_sliced then
-                local sliced_card = G.jokers.cards[my_pos + 1]
-                sliced_card.getting_sliced = true -- Make sure to do this on destruction effects
-                G.GAME.joker_buffer = G.GAME.joker_buffer - 1
-                G.E_MANAGER:add_event(Event({
-                    func = function()
-                        G.GAME.joker_buffer = 0
-                        -- See note about SMODS Scaling Manipulation on the wiki
-                        card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.inc_mult
-                        card:juice_up(0.8, 0.8)
-                        sliced_card:start_dissolve({ HEX("57ecab") }, nil, 1.6)
-                        play_sound('slice1', 0.96 + math.random() * 0.08)
-                        return true
-                    end
-                }))
-                return {
-                    message = localize { type = 'variable', key = 'a_mult', vars = { card.ability.extra.x_mult + card.ability.extra.inc_mult } },
-                    colour = G.C.RED,
-                    no_juice = true
-                }
-            end
-        end
-        if context.joker_main then
-            return {
-                x_mult = card.ability.extra.x_mult
-            }
-        end
-    end
-}
+	-- Space Worm
+	SMODS.Joker {
+		key = "bap_space_worm"..duplicate,
+		blueprint_compat = true,
+		rarity = 3,
+		cost = 1,
+		atlas = 'Palindrome',
+		pos = { x = 0, y = 2 },
+		config = { extra = { x_mult = 1.0, inc_mult = 0.25 } },
+		loc_txt = {
+			name = 'Space Worm'.." "..duplicate,
+			text = {
+				"When {C:attention}Blind{} is selected,",
+				"{C:attention}destroy{} Joker from {V:1,V:2}Wormhole{}",
+				"to the right and gain {X:mult,C:white} X#1# {} Mult",
+				"{C:inactive}(Currently {X:mult,C:white} X#2# {C:inactive} Mult)",
+			}
+		},
+		loc_vars = function(self, info_queue, card)
+			return { vars = { card.ability.extra.inc_mult, card.ability.extra.x_mult, colours={Wormhole.badge_colour, Wormhole.badge_text_colour} } }
+		end,
+		calculate = function(self, card, context)
+			
 
--- Space Worm
-SMODS.Joker {
-    key = "bap_space_worm_e",
-    blueprint_compat = true,
-    rarity = 3,
-    cost = 7,
-	atlas = 'Palindrome',
-    pos = { x = 0, y = 2 },
-    config = { extra = { x_mult = 1.0, inc_mult = 0.25 } },
-	loc_txt = {
-		name = 'Space Worm',
-		text = {
-			"Destroys jokers from {V:1}Wormhole{}",
-			"to the right to",
-        	"gain x#1# Mult",
-			"{C:inactive}(Currently {C:mult}x#1#{C:inactive} Mult)",
-		}
-	},
-    loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.inc_mult, card.ability.extra.x_mult, colours={Wormhole.badge_colour} } }
-    end,
-    calculate = function(self, card, context)
-        if context.setting_blind and not context.blueprint then
-            local my_pos = nil
-            for i = 1, #G.jokers.cards do
-                if G.jokers.cards[i] == card then
-                    my_pos = i
-                    break
-                end
-            end
-            if my_pos and G.jokers.cards[my_pos + 1] and string.find(G.jokers.cards[my_pos + 1].key,"worm") and not SMODS.is_eternal(G.jokers.cards[my_pos + 1], card) and not G.jokers.cards[my_pos + 1].getting_sliced then
-                local sliced_card = G.jokers.cards[my_pos + 1]
-                sliced_card.getting_sliced = true -- Make sure to do this on destruction effects
-                G.GAME.joker_buffer = G.GAME.joker_buffer - 1
-                G.E_MANAGER:add_event(Event({
-                    func = function()
-                        G.GAME.joker_buffer = 0
-                        -- See note about SMODS Scaling Manipulation on the wiki
-                        card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.inc_mult
-                        card:juice_up(0.8, 0.8)
-                        sliced_card:start_dissolve({ HEX("57ecab") }, nil, 1.6)
-                        play_sound('slice1', 0.96 + math.random() * 0.08)
-                        return true
-                    end
-                }))
-                return {
-                    message = localize { type = 'variable', key = 'a_mult', vars = { card.ability.extra.x_mult + card.ability.extra.inc_mult } },
-                    colour = G.C.RED,
-                    no_juice = true
-                }
-            end
-        end
-        if context.joker_main then
-            return {
-                x_mult = card.ability.extra.x_mult
-            }
-        end
-    end
-}
+			if context.setting_blind and not context.blueprint then
+				local my_pos = nil
+				for i = 1, #G.jokers.cards do
+					if G.jokers.cards[i] == card then
+						my_pos = i
+						break
+					end
+				end
 
--- Space Worm
-SMODS.Joker {
-    key = "bap_space_worm_d",
-    blueprint_compat = true,
-    rarity = 3,
-    cost = 7,
-	atlas = 'Palindrome',
-    pos = { x = 0, y = 2 },
-    config = { extra = { x_mult = 1.0, inc_mult = 0.25 } },
-	loc_txt = {
-		name = 'Space Worm',
-		text = {
-			"Destroys jokers from {V:1}Wormhole{}",
-			"to the right to",
-        	"gain x#1# Mult",
-			"{C:inactive}(Currently {C:mult}x#1#{C:inactive} Mult)",
-		}
-	},
-    loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.inc_mult, card.ability.extra.x_mult, colours={Wormhole.badge_colour} } }
-    end,
-    calculate = function(self, card, context)
-        if context.setting_blind and not context.blueprint then
-            local my_pos = nil
-            for i = 1, #G.jokers.cards do
-                if G.jokers.cards[i] == card then
-                    my_pos = i
-                    break
-                end
-            end
-            if my_pos and G.jokers.cards[my_pos + 1] and string.find(G.jokers.cards[my_pos + 1].key,"worm") and not SMODS.is_eternal(G.jokers.cards[my_pos + 1], card) and not G.jokers.cards[my_pos + 1].getting_sliced then
-                local sliced_card = G.jokers.cards[my_pos + 1]
-                sliced_card.getting_sliced = true -- Make sure to do this on destruction effects
-                G.GAME.joker_buffer = G.GAME.joker_buffer - 1
-                G.E_MANAGER:add_event(Event({
-                    func = function()
-                        G.GAME.joker_buffer = 0
-                        -- See note about SMODS Scaling Manipulation on the wiki
-                        card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.inc_mult
-                        card:juice_up(0.8, 0.8)
-                        sliced_card:start_dissolve({ HEX("57ecab") }, nil, 1.6)
-                        play_sound('slice1', 0.96 + math.random() * 0.08)
-                        return true
-                    end
-                }))
-                return {
-                    message = localize { type = 'variable', key = 'a_mult', vars = { card.ability.extra.x_mult + card.ability.extra.inc_mult } },
-                    colour = G.C.RED,
-                    no_juice = true
-                }
-            end
-        end
-        if context.joker_main then
-            return {
-                x_mult = card.ability.extra.x_mult
-            }
-        end
-    end
-}
+				-- if G.jokers.cards[my_pos + 1] then
+				-- 	print_table(G.jokers.cards[my_pos + 1], 0)
+				-- end
 
--- Space Worm
-SMODS.Joker {
-    key = "bap_space_worm_c",
-    blueprint_compat = true,
-    rarity = 3,
-    cost = 7,
-	atlas = 'Palindrome',
-    pos = { x = 0, y = 2 },
-    config = { extra = { x_mult = 1.0, inc_mult = 0.25 } },
-	loc_txt = {
-		name = 'Space Worm',
-		text = {
-			"Destroys jokers from {V:1}Wormhole{}",
-			"to the right to",
-        	"gain x#1# Mult",
-			"{C:inactive}(Currently {C:mult}x#1#{C:inactive} Mult)",
-		}
-	},
-    loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.inc_mult, card.ability.extra.x_mult, colours={Wormhole.badge_colour} } }
-    end,
-    calculate = function(self, card, context)
-        if context.setting_blind and not context.blueprint then
-            local my_pos = nil
-            for i = 1, #G.jokers.cards do
-                if G.jokers.cards[i] == card then
-                    my_pos = i
-                    break
-                end
-            end
-            if my_pos and G.jokers.cards[my_pos + 1] and string.find(G.jokers.cards[my_pos + 1].key,"worm") and not SMODS.is_eternal(G.jokers.cards[my_pos + 1], card) and not G.jokers.cards[my_pos + 1].getting_sliced then
-                local sliced_card = G.jokers.cards[my_pos + 1]
-                sliced_card.getting_sliced = true -- Make sure to do this on destruction effects
-                G.GAME.joker_buffer = G.GAME.joker_buffer - 1
-                G.E_MANAGER:add_event(Event({
-                    func = function()
-                        G.GAME.joker_buffer = 0
-                        -- See note about SMODS Scaling Manipulation on the wiki
-                        card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.inc_mult
-                        card:juice_up(0.8, 0.8)
-                        sliced_card:start_dissolve({ HEX("57ecab") }, nil, 1.6)
-                        play_sound('slice1', 0.96 + math.random() * 0.08)
-                        return true
-                    end
-                }))
-                return {
-                    message = localize { type = 'variable', key = 'a_mult', vars = { card.ability.extra.x_mult + card.ability.extra.inc_mult } },
-                    colour = G.C.RED,
-                    no_juice = true
-                }
-            end
-        end
-        if context.joker_main then
-            return {
-                x_mult = card.ability.extra.x_mult
-            }
-        end
-    end
-}
 
--- Space Worm
-SMODS.Joker {
-    key = "bap_space_worm_b",
-    blueprint_compat = true,
-    rarity = 3,
-    cost = 7,
-	atlas = 'Palindrome',
-    pos = { x = 0, y = 2 },
-    config = { extra = { x_mult = 1.0, inc_mult = 0.25 } },
-	loc_txt = {
-		name = 'Space Worm',
-		text = {
-			"Destroys jokers from {V:1}Wormhole{}",
-			"to the right to",
-        	"gain x#1# Mult",
-			"{C:inactive}(Currently {C:mult}x#1#{C:inactive} Mult)",
-		}
-	},
-    loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.inc_mult, card.ability.extra.x_mult, colours={Wormhole.badge_colour} } }
-    end,
-    calculate = function(self, card, context)
-        if context.setting_blind and not context.blueprint then
-            local my_pos = nil
-            for i = 1, #G.jokers.cards do
-                if G.jokers.cards[i] == card then
-                    my_pos = i
-                    break
-                end
-            end
-            if my_pos and G.jokers.cards[my_pos + 1] and string.find(G.jokers.cards[my_pos + 1].key,"worm") and not SMODS.is_eternal(G.jokers.cards[my_pos + 1], card) and not G.jokers.cards[my_pos + 1].getting_sliced then
-                local sliced_card = G.jokers.cards[my_pos + 1]
-                sliced_card.getting_sliced = true -- Make sure to do this on destruction effects
-                G.GAME.joker_buffer = G.GAME.joker_buffer - 1
-                G.E_MANAGER:add_event(Event({
-                    func = function()
-                        G.GAME.joker_buffer = 0
-                        -- See note about SMODS Scaling Manipulation on the wiki
-                        card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.inc_mult
-                        card:juice_up(0.8, 0.8)
-                        sliced_card:start_dissolve({ HEX("57ecab") }, nil, 1.6)
-                        play_sound('slice1', 0.96 + math.random() * 0.08)
-                        return true
-                    end
-                }))
-                return {
-                    message = localize { type = 'variable', key = 'a_mult', vars = { card.ability.extra.x_mult + card.ability.extra.inc_mult } },
-                    colour = G.C.RED,
-                    no_juice = true
-                }
-            end
-        end
-        if context.joker_main then
-            return {
-                x_mult = card.ability.extra.x_mult
-            }
-        end
-    end
-}
+				if my_pos and G.jokers.cards[my_pos + 1] and string.find(G.jokers.cards[my_pos + 1].config.center_key,"worm") and not SMODS.is_eternal(G.jokers.cards[my_pos + 1], card) and not G.jokers.cards[my_pos + 1].getting_sliced then
+					local sliced_card = G.jokers.cards[my_pos + 1]
+					sliced_card.getting_sliced = true -- Make sure to do this on destruction effects
+					G.GAME.joker_buffer = G.GAME.joker_buffer - 1
+					G.E_MANAGER:add_event(Event({
+						func = function()
+							G.GAME.joker_buffer = 0
+							-- See note about SMODS Scaling Manipulation on the wiki
+							card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.inc_mult
+							card:juice_up(0.8, 0.8)
+							sliced_card:start_dissolve({ HEX("57ecab") }, nil, 1.6)
+							play_sound('slice1', 0.96 + math.random() * 0.08)
+							return true
+						end
+					}))
+					return {
+						message = localize { type = 'variable', key = 'a_mult', vars = { card.ability.extra.x_mult + card.ability.extra.inc_mult } },
+						colour = G.C.RED,
+						no_juice = true
+					}
+				else if my_pos and G.jokers.cards[my_pos + 1] then
+						return {
+							message = { G.jokers.cards[my_pos + 1].config.center_key }
+						}
+					end
+				end
+			end
+			if context.joker_main then
+				return {
+					x_mult = card.ability.extra.x_mult
+				}
+			end
+		end
+	}
 
--- Space Worm
-SMODS.Joker {
-    key = "bap_space_worm_a",
-    blueprint_compat = true,
-    rarity = 3,
-    cost = 7,
-	atlas = 'Palindrome',
-    pos = { x = 0, y = 2 },
-    config = { extra = { x_mult = 1.0, inc_mult = 0.25 } },
-	loc_txt = {
-		name = 'Space Worm',
-		text = {
-			"Destroys jokers from {V:1}Wormhole{}",
-			"to the right to",
-        	"gain x#1# Mult",
-			"{C:inactive}(Currently {C:mult}x#1#{C:inactive} Mult)",
-		}
-	},
-    loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.inc_mult, card.ability.extra.x_mult, colours={Wormhole.badge_colour} } }
-    end,
-    calculate = function(self, card, context)
-        if context.setting_blind and not context.blueprint then
-            local my_pos = nil
-            for i = 1, #G.jokers.cards do
-                if G.jokers.cards[i] == card then
-                    my_pos = i
-                    break
-                end
-            end
-            if my_pos and G.jokers.cards[my_pos + 1] and string.find(G.jokers.cards[my_pos + 1].key,"worm") and not SMODS.is_eternal(G.jokers.cards[my_pos + 1], card) and not G.jokers.cards[my_pos + 1].getting_sliced then
-                local sliced_card = G.jokers.cards[my_pos + 1]
-                sliced_card.getting_sliced = true -- Make sure to do this on destruction effects
-                G.GAME.joker_buffer = G.GAME.joker_buffer - 1
-                G.E_MANAGER:add_event(Event({
-                    func = function()
-                        G.GAME.joker_buffer = 0
-                        -- See note about SMODS Scaling Manipulation on the wiki
-                        card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.inc_mult
-                        card:juice_up(0.8, 0.8)
-                        sliced_card:start_dissolve({ HEX("57ecab") }, nil, 1.6)
-                        play_sound('slice1', 0.96 + math.random() * 0.08)
-                        return true
-                    end
-                }))
-                return {
-                    message = localize { type = 'variable', key = 'a_mult', vars = { card.ability.extra.x_mult + card.ability.extra.inc_mult } },
-                    colour = G.C.RED,
-                    no_juice = true
-                }
-            end
-        end
-        if context.joker_main then
-            return {
-                x_mult = card.ability.extra.x_mult
-            }
-        end
-    end
-}
+end
