@@ -2,13 +2,13 @@ if not Wormhole.COLON_THREE or not Wormhole.COLON_THREE.loaded then return end
 
 SMODS.Joker {
     key = "ct_nyan_cat",
-    atlas = "ct_jokers",
+    atlas = "ct_nyan_cat",
     pos = { x = 0, y = 0 },
     config = { extra = { chips = 0, chips_mod = 15 } },
     rarity = 1,
     cost = 4,
     attributes = { "space", "suit", "chips", "scaling", "reset" },
-    ppu_artist = { "ophelia" },
+    ppu_artist = { "ophelia", "meta" },
     ppu_coder = { "notmario" },
     ppu_team = { ":3" },
 

@@ -26,6 +26,15 @@ SMODS.Atlas {
 }
 
 SMODS.Atlas {
+    path = "colon_three/nyan_cat.png",
+    key = "ct_nyan_cat",
+    px = 71, py = 95,
+    frames = 2,
+    atlas_table = "ANIMATION_ATLAS",
+    fps = 4
+}
+
+SMODS.Atlas {
     path = "colon_three/disintegration_loop.png",
     key = "ct_event_horizon",
     px = 71, py = 95,
