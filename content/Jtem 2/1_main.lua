@@ -7,23 +7,41 @@ SMODS.Atlas({
 	py = 95,
 })
 
-SMODS.Gradient{
+SMODS.Gradient({
 	key = "jtem2_rainbow",
 	cycle = 1,
-	colours = { HEX("FFB0B2"), HEX("FFD7B0"), HEX("FFFAB0"), HEX("BFFFB0"), HEX("B0FFED"), HEX("B0E7FF"), HEX("B0B0FF"), HEX("E0B0FF")}
-}
+	colours = {
+		HEX("FFB0B2"),
+		HEX("FFD7B0"),
+		HEX("FFFAB0"),
+		HEX("BFFFB0"),
+		HEX("B0FFED"),
+		HEX("B0E7FF"),
+		HEX("B0B0FF"),
+		HEX("E0B0FF"),
+	},
+})
 
 -- why is smods.color not a thing even tho it's easy to hook for colours variables
 -- the weather was fucking shit okay give me a break
-SMODS.Gradient{
+SMODS.Gradient({
 	key = "jtem2_teamcolor",
 	cycle = 1,
-	colours = { 
+	colours = {
 		HEX("ff4267"),
 		HEX("ff4267"),
-	}
-}
+	},
+})
 
+SMODS.Gradient({
+	key = "jtem2_lexi",
+	colours = {
+		HEX("ff75c9"),
+		G.C.WHITE,
+		G.C.ORANGE,
+	},
+	cycle = 2,
+})
 
 PotatoPatchUtils.Team({
 	name = "jtem2",
@@ -63,15 +81,7 @@ PotatoPatchUtils.Developer({
 })
 PotatoPatchUtils.Developer({
 	name = "lexi",
-	colour = SMODS.Gradient({
-		key = "jtem2_lexi_color",
-		colours = {
-			HEX("ff75c9"),
-			G.C.WHITE,
-			G.C.ORANGE,
-		},
-		cycle = 2,
-	}),
+	colour = SMODS.Gradients["worm_jtem2_lexi"],
 	team = "jtem2",
 	loc = true,
 	pos = { x = 0, y = 1 },

@@ -98,6 +98,21 @@ return {
 					"{C:inactive}is [{C:attention}6{} 7 8 9 {C:attention}10{C:inactive}] or [{C:attention}K{} Q J 10 {C:attention}9{C:inactive}])",
 				},
 			},
+			j_worm_jtem2_lumichan = {
+				name = "Lumistratos",
+				text = {
+					{
+						"Every #1# {C:inactive}[#2#]{C:attention} Consumables{} used",
+						"gain {C:attention}+1 {}consumable slot",
+						"{C:inactive}(Currently +#3# consumable slots)",
+					},
+					{
+						"{C:inactive,E:1}Great Lady of Space,",
+						"{C:inactive,E:1}a refined individual",
+						"{C:inactive,E:1}who rules over the void.",
+					},
+				},
+			},
 		},
 		Tarot = {
 			c_worm_jtem2_shadow = {
