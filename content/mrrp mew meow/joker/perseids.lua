@@ -1,5 +1,6 @@
 SMODS.Joker {
 	ppu_team = {'Mrrp Mew Meow :3'},
+	ppu_artist = {'SarcPot'},
     ppu_coder = {'Minty'},
 	key = 'mrrp_perseids',
 	atlas = "mrrp",
@@ -54,7 +55,6 @@ SMODS.Joker {
 
         if context.after then
             card.ability.extra.impacts = {}
-            return nil
         end
 	end
 }

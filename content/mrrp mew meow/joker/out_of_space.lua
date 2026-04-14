@@ -1,50 +1,42 @@
 SMODS.Joker {
 	ppu_team = {'Mrrp Mew Meow :3'},
+    ppu_artist = {'Cyan'},
     ppu_coder = {'Minty'},
 	key = 'mrrp_out_of_space',
-	atlas = "mrrp", pos = {x=4, y=5},
-	rarity = 2,
-	cost = 6,
+	atlas = "mrrp", pos = {x=3, y=3},
+	rarity = 3,
+	cost = 8,
 	blueprint_compat = false,
 	eternal_compat = true,
 	perishable_compat = true,
-    attributes = {'cat', 'space'},
+    attributes = {'cat', 'space','joker_slot'},
 
 	config = {
+        card_limit = 1,
         extra = {
-            slots = 1,
             size = 1.25,
         },
-        immutable = {
-            slots = nil --Set when acquiring card to avoid desyncing from value manip shenanigans
-        }
     },
 	loc_vars = function (self, info_queue, card)
-        local slots = card.ability.immutable.slots or card.ability.extra.slots
+        local slots = card.ability.card_limit
         local size = card.ability.extra.size
 		return {
             vars = {
-                SMODS.signed(slots),
+                Wormhole.mrrp_signed(slots),
                 size,
             }
         }
 	end,
 
     add_to_deck = function (self, card, from_debuff)
-        local amt = card.ability.extra.slots
-        G.jokers:change_size(amt)
+        local amt = card.ability.card_limit
         G.consumeables:change_size(amt)
         G.hand:change_size(amt)
-
-        card.ability.immutable.slots = amt
     end,
     remove_from_deck = function (self, card, from_debuff)
-        local amt = card.ability.immutable.slots
-        G.jokers:change_size(-amt)
+        local amt = card.ability.card_limit
         G.consumeables:change_size(-amt)
         G.hand:change_size(-amt)
-
-        card.ability.immutable.slots = nil
     end,
 
 	calculate = function(self, card, context)

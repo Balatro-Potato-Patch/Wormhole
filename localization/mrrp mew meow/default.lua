@@ -32,9 +32,10 @@ descriptions={
 			name=
 				"Countdown to Launch"
 			, text={
-				"Upgrade level of played",
-				"{C:attention}poker hand{} if it contains",
-				"a {C:attention}#1#{} and no {C:attention}face{} cards"
+				"Upgrade level of first played",
+				"{C:attention}poker hand{} of round",
+				"if it contains a {C:attention}#1#{}",
+				"and no scoring {C:attention}face{} cards",
 			}
 		},
 		--[[]]
@@ -239,12 +240,12 @@ descriptions={
 			name = 'Shinku',
 			text = {
 				{
-					"Hi. I'm Shinku."
+					"Hi. I'm {C:mrrp_pink}Shinku{}."
 				},
 				{
 					"I worked on/created",
 					"mods like {C:hearts}Ortalab{}",
-					"and {C:attention}Parallel Update{}."
+					"and {C:mrrp_pink}Parallel Update{}."
 				}
 			},
 		},
@@ -252,13 +253,15 @@ descriptions={
 			name = 'MP',
 			text = {
 				{
-					"Hey-hey. MP here."
+					"Hey-hey. {C:mrrp_blue}MP{} here."
 				},
 				{
-					"This was my first jam, and I had a LOT of Joker concepts for this. Oh, and I made some code too!"
+					"This was my first jam, and I had",
+					"a LOT of Joker concepts for this.",
+					"Oh, and I made some code too!"
 				},
 				{
-					"Buru-nyuu~"
+					"{C:mrrp_blue}Buru-nyuu~{}"
 				},
 			},
 		},
@@ -313,6 +316,9 @@ descriptions={
 					"by all of the people I admire ;w;",
 					"{C:mrrp_pink,E:1}Best first anything-jam ever <3{}"
 				},
+				{
+					"Look out for {C:mrrp_cyan,E:1}Steady Hand{}!"
+				}
 			},
 		}
 	}

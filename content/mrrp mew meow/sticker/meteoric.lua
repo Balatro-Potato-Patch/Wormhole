@@ -1,4 +1,7 @@
 SMODS.Sticker{
+    ppu_team = {'Mrrp Mew Meow :3'},
+    ppu_artist = {'Shinku'},
+    ppu_coder = {'Shinku','Cyan','Minty'},
     key = "mrrp_meteoric",
     atlas = "mrrp",
     pos = {x = 1, y = 0},

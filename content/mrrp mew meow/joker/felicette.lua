@@ -89,6 +89,7 @@ SMODS.Joker {
 --[[ Simple version ]]
 SMODS.Joker {
     ppu_team = {'Mrrp Mew Meow :3'},
+    ppu_artist = {'Cyan'},
     ppu_coder = {'Cyan'},
     key = 'mrrp_felicette',
     atlas = "mrrp",
@@ -118,8 +119,8 @@ SMODS.Joker {
         local total = scalar * upgrades
         return {
             vars = {
-                SMODS.signed(scalar),
-                SMODS.signed(total)
+                Wormhole.mrrp_signed(scalar),
+                Wormhole.mrrp_signed(total)
             }
         }
     end,

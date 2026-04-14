@@ -1,12 +1,12 @@
 SMODS.Joker {
 	ppu_team = {'Mrrp Mew Meow :3'},
-    --ppu_artist = {'SarcPot'},
+    ppu_artist = {'SarcPot'},
     ppu_coder = {'Aure'},
 	key = 'mrrp_capitalism',
 	atlas = "mrrp",
     pos = {
-        x=4,
-        y=5
+        x=2,
+        y=3
     },
 	rarity = 2,
 	cost = 7,
@@ -23,8 +23,8 @@ SMODS.Joker {
 	loc_vars = function (self, info_queue, card)
 		return {
 			vars = {
-				SMODS.signed(card.ability.extra.mult_mod),
-				SMODS.signed(card.ability.extra.mult)
+				Wormhole.mrrp_signed(card.ability.extra.mult_mod),
+				Wormhole.mrrp_signed(card.ability.extra.mult)
 			}
 		}
 	end,

@@ -32,6 +32,7 @@ SMODS.Back {
             if most_played then
                 level_up_hand(from, most_played, nil, back.effect.config.level_down)
             end
+            return nil, true
         end
     end
 }

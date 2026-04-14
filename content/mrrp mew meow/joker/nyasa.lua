@@ -1,10 +1,11 @@
 SMODS.Joker {
     ppu_team = {'Mrrp Mew Meow :3'},
+    ppu_artist = {'SarcPot'},
     ppu_coder = {'Minty'},
 	key = 'mrrp_nyasa',
 	atlas = "mrrp", pos = {x=0, y=3},
-	rarity = 4,
-	cost = 1,
+	rarity = 3,
+	cost = 9,
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable_compat = true,
@@ -46,6 +47,7 @@ SMODS.Joker {
                     },
                     force_stickers = true
                 }
+                return nil, true
             end
         end
 	end

@@ -35,6 +35,7 @@ end,
 
 SMODS.Joker{
 ppu_team = {'Mrrp Mew Meow :3'},
+ppu_artist = {"SarcPot"},
 ppu_coder = {'Shinku','Cyan'},
 key = "mrrp_orrery",
 atlas = "mrrp",
@@ -171,6 +172,8 @@ calculate = function(self, card, context)
                     return true
                 end
             }))
+            -- this isn't perfect since it allows a post-trigger when nothing actually happened
+            return nil, true
         end
     end
 end,

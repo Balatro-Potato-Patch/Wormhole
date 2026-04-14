@@ -24,6 +24,21 @@ Card.is_3 = Card.is_3 or function(self, bypass_debuff)
     end
 end
 
+Wormhole.mrrp_signed = function(val, invert, signlesszero)
+    local sign = ""
+    if not val then
+        return
+    end
+    if val > 0 then
+        sign = invert and "-" or "+"
+    elseif val < 0 then
+        sign = invert and "+" or "-"
+    elseif val == 0 and not signlesszero then
+        sign = invert and "-" or "+"
+    end
+    return sign .. math.abs(val)
+end
+
 SMODS.Atlas {
     key = "mrrp",
     path = "mrrp mew meow/mrrp-cards.png",

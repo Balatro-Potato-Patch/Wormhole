@@ -1,4 +1,7 @@
 SMODS.Consumable {
+    ppu_team = {'Mrrp Mew Meow :3'},
+    ppu_artist = {'Cyan'},
+    ppu_coder = {'Minty'},
     key = "mrrp_reentry",
     set = "Tarot",
     atlas = "mrrp",

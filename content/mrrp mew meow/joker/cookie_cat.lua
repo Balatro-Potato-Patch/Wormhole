@@ -23,8 +23,8 @@ SMODS.Joker {
     loc_vars = function(self, info_queue, card)
     --  info_queue[#info_queue+1] = { key="worm_mrrp_cookie_cat_song", set="Other" }
         return {
-            vars = {SMODS.signed(card.ability.extra.level),
-                    (card.ability.extra.level_mod > 0 and "-" or "+") .. card.ability.extra.level_mod}
+            vars = {Wormhole.mrrp_signed(card.ability.extra.level),
+                    Wormhole.mrrp_signed(card.ability.extra.level_mod, true)}
         }
     end,
 
@@ -48,6 +48,7 @@ SMODS.Joker {
                 level_up = -card.ability.extra.level,
                 from = context.blueprint and context.blueprint_card or card
             })
+            return nil, true
         end
         if context.end_of_round and context.main_eval then
             if card.ability.extra.level - card.ability.extra.level_mod <= 0 then
@@ -63,6 +64,7 @@ SMODS.Joker {
                     message_key = "a_level_minus",
                     message_colour = G.C.SECONDARY_SET.Planet
                 })
+                return nil, true
             end
         end
     end

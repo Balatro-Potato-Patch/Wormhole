@@ -41,9 +41,11 @@ SMODS.Joker {
                 end
             end
             if is_rank(context.other_card, card.ability.extra.rank) then
+                local triggered
                 for i = 1, is_rank(context.other_card, card.ability.extra.rank) do
                     if SMODS.pseudorandom_probability(card, 'worm_mrrp_aliencat_' .. i, 1, card.ability.extra.odds) and
                         #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+                        triggered = true
                         G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
                         G.E_MANAGER:add_event(Event({
                             func = function()
@@ -61,6 +63,7 @@ SMODS.Joker {
                         }, context.blueprint and context.blueprint_card or card)
                     end
                 end
+                return nil, triggered
             end
         end
     end

@@ -1,5 +1,6 @@
 SMODS.Joker {
 	ppu_team = {'Mrrp Mew Meow :3'},
+	ppu_artist = {'Cyan'},
     ppu_coder = {'Minty'},
 	key = 'mrrp_go_pisces',
 	rarity = 2,
@@ -43,6 +44,7 @@ SMODS.Joker {
 			end
 
 			SMODS.destroy_cards(context.blueprint and context.blueprint_card or card)
+			return { no_retrigger = true }
 		end
 	end
 }
