@@ -81,7 +81,7 @@ function Game:start_run(...)
             bond = 'Strong',
             offset = {x=0,y=0}
         })
-        G.ARGS.eigengrau_alpha = SMODS.is_active_blind("bl_worm_lfc_eigengrau", true) and 1 or 0
+        G.ARGS.eigengrau_alpha = 0
         G.LFC_EIGENGRAU_BG:define_draw_steps({{
             shader = 'worm_lfc_eigengrau_bg',
             send = {
@@ -89,6 +89,8 @@ function Game:start_run(...)
                 {name = 'alpha', ref_table = G.ARGS, ref_value = 'eigengrau_alpha'},
             }
         }})
+    else
+        G.ARGS.eigengrau_alpha = SMODS.is_active_blind("bl_worm_lfc_eigengrau", true) and 1 or 0
     end
 
     return ret
