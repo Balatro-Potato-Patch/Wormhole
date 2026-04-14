@@ -58,9 +58,9 @@ end
 
 function DUMMY_Oxygen_Update(dt)
 	-- Simple check if unpaused:
-	if G.GAME.dummy_oxygen_active and not G.GAME.dummy_oxygen_paused and not G.SETTINGS.paused then
-		G.GAME.dummy_oxygen_realtime = G.GAME.dummy_oxygen_realtime + G.real_dt --dt
+	if G.GAME.dummy_oxygen_active and not G.SETTINGS.paused then
 		if G.GAME.dummy_oxygen_adding then
+			G.GAME.dummy_oxygen_realtime = G.GAME.dummy_oxygen_realtime + G.real_dt --dt
 			if G.GAME.dummy_oxygen_realtime >= 0.1 then
 				G.GAME.dummy_oxygen_realtime = G.GAME.dummy_oxygen_realtime - 0.1
 				-- Add Time:
@@ -83,7 +83,8 @@ function DUMMY_Oxygen_Update(dt)
 				end
 				DUMMY_Oxygen_Strings()
 			end
-		else -- decreasing:
+		elseif (G.GAME.STOP_USE or 0) == 0 then
+			G.GAME.dummy_oxygen_realtime = G.GAME.dummy_oxygen_realtime + G.real_dt --dt
 			if G.GAME.dummy_oxygen_realtime >= 1.0 then
 				G.GAME.dummy_oxygen_realtime = G.GAME.dummy_oxygen_realtime - 1.0
 				-- Decrease Time:
@@ -259,48 +260,34 @@ SMODS.Voucher {
 		DUMMY_Voucher_Redeem(card)
     end,
     calculate = function(self, card, context)
-		if G.GAME.dummy_oxygen_active then
-			if context.press_play then
-				G.GAME.dummy_oxygen_paused = true --> Pause Timer
-			end
-			if context.final_scoring_step then
-				local calcTime = math.floor(G.GAME.dummy_oxygen_time / 2 + 0.5)
-				local secondTime = calcTime % 60
-				local minuteTime = (calcTime - secondTime) / 60
-				if minuteTime >= 1.0 then
-					-- Custom Message...
-					G.E_MANAGER:add_event(Event({
-						trigger = 'after',
-						--delay = 0.2,
-						func = function()
-							G.deck:juice_up(0.1)
-							play_sound('xblindsize', 1.2, 0.8)
-							attention_text({
-								text = localize{ type = 'variable', key = 'worm_dum_xgeneric',
-									vars = { string.format("%01d.%02d", minuteTime, secondTime) }
-								}, backdrop_colour = G.C.PURPLE, scale = 1.2, hold = 1.2,
-								major = G.deck, align = 'mb', offset = { x = 0, y = -4.13 }
-							})
-							return true
-						end
-					}))
-					-- ...normal Message(s) are too high.
-					local multiplier = minuteTime + math.floor(secondTime) / 100
-					return {
-						xmult = multiplier,
-						xchips = multiplier,
-						remove_default_message = true
-					}
-				end
-			end
-			if context.after then
-	    		G.E_MANAGER:add_event(Event({
-	    			trigger = 'after',
-	    			func = function()
-						G.GAME.dummy_oxygen_paused = false --> Continue Timer
-	    				return true
-	    			end
-	    		}))
+		if G.GAME.dummy_oxygen_active and context.final_scoring_step then
+			local calcTime = math.floor(G.GAME.dummy_oxygen_time / 2 + 0.5)
+			local secondTime = calcTime % 60
+			local minuteTime = (calcTime - secondTime) / 60
+			if minuteTime >= 1.0 then
+				-- Custom Message...
+				G.E_MANAGER:add_event(Event({
+					trigger = 'after',
+					--delay = 0.2,
+					func = function()
+						G.deck:juice_up(0.1)
+						play_sound('xblindsize', 1.2, 0.8)
+						attention_text({
+							text = localize{ type = 'variable', key = 'worm_dum_xgeneric',
+								vars = { string.format("%01d.%02d", minuteTime, secondTime) }
+							}, backdrop_colour = G.C.PURPLE, scale = 1.2, hold = 1.2,
+							major = G.deck, align = 'mb', offset = { x = 0, y = -4.13 }
+						})
+						return true
+					end
+				}))
+				-- ...normal Message(s) are too high.
+				local multiplier = minuteTime + math.floor(secondTime) / 100
+				return {
+					xmult = multiplier,
+					xchips = multiplier,
+					remove_default_message = true
+				}
 			end
 		end
     end,
@@ -333,8 +320,4 @@ SMODS.Voucher {
     redeem = function(self, card)
 		DUMMY_Voucher_Redeem(card)
     end,
-    in_pool = function(self, args)
-		return ((G.GAME.dummy_oxygen_replenish or 0) > 20), { allow_duplicates = true }
-		--NOTE: "allow_duplicates" doesn't work for Vouchers ("1531zeebee" and below)
-	end,
 }
