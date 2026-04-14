@@ -429,3 +429,64 @@ SMODS.Joker {
         return G.GAME.pool_flags.bap_milky_drank
     end
 }
+
+
+-- Space Worm
+SMODS.Joker {
+    key = "bap_space_worm",
+    blueprint_compat = true,
+    rarity = 3,
+    cost = 7,
+	atlas = 'Palindrome',
+    pos = { x = 0, y = 2 },
+    config = { extra = { x_mult = 1.0, inc_mult = 0.25 } },
+	loc_txt = {
+		name = 'Space Worm',
+		text = {
+			"Destroys jokers from {V:1}Wormhole{}",
+			"to the right to",
+        	"gain x#1# Mult",
+			"{C:inactive}(Currently {C:mult}x#1#{C:inactive} Mult)",
+		}
+	},
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.inc_mult, card.ability.extra.x_mult, colours={Wormhole.badge_colour} } }
+    end,
+    calculate = function(self, card, context)
+        if context.setting_blind and not context.blueprint then
+            local my_pos = nil
+            for i = 1, #G.jokers.cards do
+                if G.jokers.cards[i] == card then
+                    my_pos = i
+                    break
+                end
+            end
+            if my_pos and G.jokers.cards[my_pos + 1] and string.find(G.jokers.cards[my_pos + 1].key,"worm") and not SMODS.is_eternal(G.jokers.cards[my_pos + 1], card) and not G.jokers.cards[my_pos + 1].getting_sliced then
+                local sliced_card = G.jokers.cards[my_pos + 1]
+                sliced_card.getting_sliced = true -- Make sure to do this on destruction effects
+                G.GAME.joker_buffer = G.GAME.joker_buffer - 1
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        G.GAME.joker_buffer = 0
+                        -- See note about SMODS Scaling Manipulation on the wiki
+                        card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.inc_mult
+                        card:juice_up(0.8, 0.8)
+                        sliced_card:start_dissolve({ HEX("57ecab") }, nil, 1.6)
+                        play_sound('slice1', 0.96 + math.random() * 0.08)
+                        return true
+                    end
+                }))
+                return {
+                    message = localize { type = 'variable', key = 'a_mult', vars = { card.ability.extra.x_mult + card.ability.extra.inc_mult } },
+                    colour = G.C.RED,
+                    no_juice = true
+                }
+            end
+        end
+        if context.joker_main then
+            return {
+                x_mult = card.ability.extra.x_mult
+            }
+        end
+    end
+}
