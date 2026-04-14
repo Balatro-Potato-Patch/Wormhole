@@ -8,9 +8,13 @@ SMODS.DrawStep{
             return
         end
         if card and card.config.center.set == 'tbp_module' then
-            card.children.center:draw_shader("worm_torn", nil, card.ARGS.send_to_shader)
+            local _shader = "worm_torn"
+            if card.edition and card.edition.negative then
+                _shader = "worm_torn_neg"
+            end
+            card.children.center:draw_shader(_shader, nil, card.ARGS.send_to_shader)
             if card.children.front and not card:should_hide_front() then
-                card.children.front:draw_shader("worm_torn", card, self.ARGS.send_to_shader)
+                card.children.front:draw_shader(_shader, card, self.ARGS.send_to_shader)
             end
         end
     end,
@@ -28,9 +32,13 @@ SMODS.DrawStep{
         if card and card.config.center.set == 'tbp_module' then
             if G.tbp and G.tbp.module_frames then
                 local state = card.config.center.discovered and "base" or 'undiscovered'
+                if card.edition and card.edition.negative then
+                    state = "negative"
+                end
                 G.tbp.module_frames[state].role.draw_major = card 
                 G.tbp.module_frames[state]:draw_shader('dissolve', nil, nil, nil, card.children.center)
-                -- (_shader, _shadow_height, _send, _no_tilt, other_obj, ms, mr, mx, my, custom_shader, tilt_shadow)
+            -- (_shader, _shadow_height, _send, _no_tilt, other_obj, ms, mr, mx, my, custom_shader, tilt_shadow)
+                
             end 
         end
     end,

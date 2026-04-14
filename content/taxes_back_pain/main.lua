@@ -121,7 +121,7 @@ SMODS.Atlas {
 
 SMODS.Atlas {
     key = "tbp_module_sprite_only",
-    path = "taxes_back_pain/modules_sprite_only.png",
+    path = "taxes_back_pain/modules_sprite_only_2.png",
     px = 71,
     py = 95
 }
@@ -641,7 +641,7 @@ Wormhole.tbp.Module({
     durability = 5, -- TODO: Durability unspecified, find a proper value for this
     atlas = "tbp_module_frame",
 	pos = { x = 3, y = 1 },
-    module_pos = { x = 0, y = 1},
+    -- module_pos = { x = 0, y = 1},
 	config = {
 		extra = {
 			amount = 1,
@@ -668,7 +668,7 @@ Wormhole.tbp.Module({
     slot = 'core',
     durability = 5, -- TODO: Durability unspecified, find a proper value for this
     atlas = "tbp_module_frame",
-	-- pos = { x = 0, y = 0 },
+	pos = { x = 3, y = 1 },
 	config = {
 		extra = {
 			amount = 1, -- TODO: Amount unspecified, find a proper value for this
@@ -737,7 +737,9 @@ Wormhole.tbp.Module({
 	key = "black_hole_generator",
     slot = 'core',
     durability = 5, -- TODO: Durability unspecified, find a proper value for this
-	-- pos = { x = 0, y = 0 },
+    atlas = "tbp_module_frame",
+	pos = { x = 3, y = 1 },
+    module_pos = { x = 0, y = 1},
 	config = {
 		extra = {
 			amount = 2,
@@ -769,7 +771,9 @@ Wormhole.tbp.Module({
 	key = "void",
     slot = 'weapons',
     durability = 20,
-	-- pos = { x = 0, y = 0 },
+    atlas = "tbp_module_frame",
+	pos = { x = 3, y = 1 },
+    module_pos = { x = 2, y = 1},
 	config = {
 		extra = {
 			percent = 0.05,
@@ -821,7 +825,9 @@ Wormhole.tbp.Module({
 	key = "waste",
     slot = 'weapons',
     durability = 5,
-	-- pos = { x = 0, y = 0 },
+    atlas = "tbp_module_frame",
+	pos = { x = 3, y = 1 },
+    module_pos = { x = 3, y = 0},
 	config = {
 		extra = {
 			mult = 5,
@@ -883,8 +889,9 @@ Wormhole.tbp.Module({
 	key = "hardlight",
     slot = 'utility', 
     durability = 5,
-    atlas = "tbp_module",
-	pos = { x = 0, y = 0 },
+    atlas = "tbp_module_frame",
+	pos = { x = 3, y = 1 },
+    module_pos = { x = 0, y = 0},
 	config = {
 		extra = {
 			percent = 0.05,
@@ -907,7 +914,9 @@ Wormhole.tbp.Module({
 	key = "quantum",
     slot = 'utility', 
     durability = 5,
-	-- pos = { x = 0, y = 0 },
+    atlas = "tbp_module_frame",
+	pos = { x = 3, y = 1 },
+    module_pos = { x = 1, y = 1},
 	config = {
 		extra = {
 			money = 3,
@@ -934,7 +943,9 @@ Wormhole.tbp.Module({
 	key = "interference",
     slot = 'utility', 
     durability = 1,
-	-- pos = { x = 0, y = 0 },
+    atlas = "tbp_module_frame",
+	pos = { x = 3, y = 1 },
+    module_pos = { x = 3, y = 1},
 	config = {
 		extra = {
 		},
@@ -961,7 +972,9 @@ Wormhole.tbp.Module({
 	key = "redundancy",
     slot = 'utility', 
     durability = 5,
-	-- pos = { x = 0, y = 0 },
+    atlas = "tbp_module_frame",
+	pos = { x = 3, y = 1 },
+    module_pos = { x = 4, y = 0},
 	config = {
         extra = {
             depletes = 1
@@ -990,7 +1003,9 @@ Wormhole.tbp.Module({
 	key = "warp_drive",
     slot = 'thrusters',
     durability = 5,
-	-- pos = { x = 0, y = 0 },
+    atlas = "tbp_module_frame",
+	pos = { x = 3, y = 1 },
+    module_pos = { x = 1, y = 1},
 	config = {
 		extra = {
             xmult_gain = 1.5,
@@ -1084,7 +1099,9 @@ Wormhole.tbp.Module({
 	key = "antimatter",
     slot = 'thrusters',
     durability = 4,
-	-- pos = { x = 0, y = 0 },
+    atlas = "tbp_module_frame",
+	pos = { x = 3, y = 1 },
+    module_pos = { x = 2, y = 0},
 	config = {
 		extra = {},
     },

@@ -119,17 +119,17 @@ function Game.init_game_object(self)
     self.tbp.module_frames = {
         base = Sprite(0, 0, self.CARD_W, self.CARD_W, 
             G.ASSET_ATLAS["worm_tbp_module_frame"], {
-                x=0, 
+                x=1, 
                 y=1
             }),
         undiscovered = Sprite(0, 0, self.CARD_W, self.CARD_H,
             G.ASSET_ATLAS["worm_tbp_module_frame"], {
                 x = 1,
-                y = 1
+                y = 2
             }),
-        locked = Sprite(0, 0, self.CARD_W, self.CARD_W,
+        negative = Sprite(0, 0, self.CARD_W, self.CARD_W,
             G.ASSET_ATLAS["worm_tbp_module_frame"], {
-                x = 2,
+                x = 0,
                 y = 1
             }),
     }
