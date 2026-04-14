@@ -12,7 +12,7 @@ SMODS.Voucher {
     key = 'ACME_voucher_2',
     atlas = Atlas_AcmeVouchers.key,
     requires = { 'v_worm_ACME_voucher_1' },
-    pos = { x = 0, y = 0 },
+    pos = { x = 1, y = 0 },
     config = { extra = {} },
     loc_vars = function(self, info_queue, card)
         return { vars = { G.GAME and G.GAME.probabilities.normal or 1, 3 } }
