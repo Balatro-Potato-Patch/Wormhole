@@ -57,8 +57,8 @@ SMODS.Joker {
   key = "jr_nasa",
   config = {},
   rarity = 2,
-  -- TODO: give sprite
-  pos = { x = 0, y = 0 },
+  pos = { x = 1, y = 0 },
+  atlas = "worm_jr_jokers",
   cost = 6,
   blueprint_compat = true,
   eternal_compat = true,
