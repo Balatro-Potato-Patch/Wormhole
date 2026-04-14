@@ -231,10 +231,9 @@ return {
 			PotatoPatchDev_rainstar = {
 				name = "Rainstar",
 				text = {
-					"the sun",
-					"technically formulated the team",
-					"made gravitational slingshot, prepetual motion machine vouchers and",
-					"space station deck",
+					"{C:money}The sun.",
+					"Formulated the team.",
+					"Coded 2 vouchers and a deck."
 				},
 			},
 			PotatoPatchDev_comykel = {
