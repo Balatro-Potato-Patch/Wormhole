@@ -9,12 +9,12 @@ SMODS.Joker {
     cost = 4,
     atlas = 'stewjokers',
     pos = {x=0, y=0},
-    blueprint_compat = false,
+    blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = true,
 
     calculate = function (self, card, context)
-        if context.using_consumeable and not context.blueprint and context.consumeable.ability.set == 'Tarot'
+        if context.using_consumeable and context.consumeable.ability.set == 'Tarot'
             and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
             
             -- Fuckass vanilla consumables 

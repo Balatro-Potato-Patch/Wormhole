@@ -133,7 +133,7 @@ return {
                     "{C:chips}+#2#{} Chips for every {C:money}$#3#{}",
                     "below the interest cap",
                     "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips)",
-                    " ",
+                    " {s:0.8,C:inactive}-------",
                     "{s:0.8,C:inactive}\"I am escaping to the",
                     "{s:0.8,C:inactive}one place that hasn't",
                     "{s:0.8,C:inactive}been corrupted by capitalism!\"",
@@ -221,7 +221,10 @@ return {
             PLagger = {
                 name = "PLagger",
                 text = {
-                    "womp womp",
+                    "I did most Joker code",
+                    'for our team! Shout out to',
+                    'the biggest mother frogger and the',
+                    'cheesiest pear I know'
                 }
             },
             dottykitty = {
@@ -266,11 +269,13 @@ return {
         },
         achievement_names = {
             ach_worm_stew_spaced_joker = 'Spaced Joker',
-            ach_worm_stew_extinction_event = 'Extinction Event'
+            ach_worm_stew_extinction_event = 'Extinction Event',
+            ach_worm_stew_true_communist = 'True Communist'
         },
         achievement_descriptions = {
             ach_worm_stew_spaced_joker = 'Have a Space Joker with the Stellar edition',
-            ach_worm_stew_extinction_event = 'Force an extinction event'
+            ach_worm_stew_extinction_event = 'Force an extinction event',
+            ach_worm_stew_true_communist = 'Have Uncorrupted Joker give +750 or more Chips'
         }
         
 

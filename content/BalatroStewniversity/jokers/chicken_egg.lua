@@ -37,8 +37,9 @@ SMODS.Joker {
 
     calculate = function (self, card, context)
         if context.joker_main then
+            if not context.blueprint then
             card.ability.extra.chicken = not card.ability.extra.chicken
-
+            end
             return {
                 xchips = card.ability.extra.Xchips
             }

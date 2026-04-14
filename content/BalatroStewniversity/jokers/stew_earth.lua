@@ -26,7 +26,7 @@ SMODS.Joker {
             if SMODS.last_hand_oneshot then
                 card.ability.extra.Xmult = card.ability.extra.Xmult + card.ability.extra.Xmult_up
                 return{
-                    message = localize{type = 'variable', key = 'a_xmult', vars = {card.ability.extra.Xmult_up}},
+                    message = (localize{type = 'variable', key = 'a_xmult', vars = {card.ability.extra.Xmult_up}} .. ' Gained'),
                     colour = G.C.RED,
                 }
                 

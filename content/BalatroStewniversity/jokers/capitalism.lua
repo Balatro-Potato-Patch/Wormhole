@@ -21,6 +21,9 @@ SMODS.Joker {
 
     loc_vars = function (self, info_queue, card)
         self:update_chips(card)
+        if card.ability.extra.chips >= 750 then
+           check_for_unlock({type = 'stew_true_communist'})
+        end
         return{
             vars = {card.ability.extra.chips, card.ability.extra.chips_mod, card.ability.extra.interest}
         }
