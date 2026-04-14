@@ -176,8 +176,8 @@ return {
                 name = "Mouthwash",
                 text = {
                     "When Blind is selected,",
-                    "gain {X:mult,C:white} X#1# {} Mult",
-                    "and {C:attention}downgrade{} a random poker hand",
+                    "{C:attention}downgrade{} a random poker hand,",
+                    "then gain {X:mult,C:white} X#1# {} Mult",
                     "{C:inactive}(Currently {X:mult,C:white} X#2# {C:inactive} Mult)",
                 },
             },
