@@ -911,8 +911,8 @@ SMODS.Blind{
 	loc_txt = {
 		name = "White Hole",
 		text = {
-			"Decrease level of all",
-			"poker hands by 1",
+			"Decrease level of {C:red}all{}",
+			"poker hands by 1 when played",
 			"{s:0.8}Created by team {s:0.8,V:1}People Found In Vegas{}",
 			"{s:0.8}Code & Art by {s:0.8,C:chips}Ben Roffey{}"
 		}
@@ -929,7 +929,7 @@ SMODS.Blind{
 	ppu_artist = {"Ben Roffey"},
 	get_loc_debuff_text = function(self)
 		return {
-			"Decrease level of all poker hands by 1"
+			"Decrease level of all poker hands by 1 when played"
 		}
 	end,
 	loc_vars = function()
@@ -1192,6 +1192,7 @@ heatdeath_timer = function(heatdeath)
 						end
 					end
 
+					G.SETTINGS.paused = true --stop any events
 					heatdeath.config.timing = false --stop the timer
 					heatdeath.config.game_over_override = true --prevents the timer being restarted on game_over screen (I think it calls loc_vars)
 
@@ -1211,11 +1212,20 @@ heatdeath_timer = function(heatdeath)
 					G.jokers.states.visible = false
 					G.consumeables.states.visible = false
 					G.deck.states.visible = false
+					G.play.states.visible = false
 					if G.buttons then G.buttons:remove() end
 					tags_visible(false)
 					G.HUD.states.visible = false
 					if G.GAME.blind.config.blind.key ~= "bl_worm_heatdeath" then 
 						G.HUD_blind.states.visible = false
+					end
+					if G.blind_prompt_box then
+						G.blind_prompt_box.states.visible = false
+					end
+					if G.blind_select_opts then
+						G.blind_select_opts.small.states.visible = false
+						G.blind_select_opts.big.states.visible = false
+						G.blind_select_opts.boss.states.visible = false
 					end
 
 					G.GAME.blind.config.blind = heatdeath --Set this for correct reason for death
@@ -1281,9 +1291,18 @@ heatdeath_timer = function(heatdeath)
 							G.jokers.states.visible = true
 							G.consumeables.states.visible = true
 							G.deck.states.visible = true
+							G.play.states.visible = true
 							tags_visible(true)
 							G.HUD.states.visible = true
 							G.HUD_blind.states.visible = true
+							if G.blind_prompt_box then
+								G.blind_prompt_box.states.visible = true
+							end
+							if G.blind_select_opts then
+								G.blind_select_opts.small.states.visible = true
+								G.blind_select_opts.big.states.visible = true
+								G.blind_select_opts.boss.states.visible = true
+							end
 							G.SETTINGS.SOUND.music_volume = restoreVolume --unmute the music for the game over screen
 							heatdeath.config.game_over_override = false
 							return true
