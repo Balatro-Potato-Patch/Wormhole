@@ -100,8 +100,10 @@ return {
           {
             "If played hand",
             "is a {C:attention}#2#{},",
-            "last played card gives",
-            "{C:white,X:mult}X#3#{} Mult when scored"
+            "apply a random",
+            "{C:attention}enhancement{}, {C:attention}edition{}",
+            "or {C:attention}seal{} to",
+            "{C:attention}#1#{} card#3# in deck"
           }
         }
       },
@@ -202,7 +204,8 @@ return {
       j_worm_jr_deep_space_probe = {
         name = "Deep Space Probe",
         text = {
-          "Every {C:attention}#2#{} level increases for poker hands,",
+          "Every {C:attention}#2#{} level increases",
+          "for poker hands,",
           "create a {C:worm_jr_satellite}Satellite{} Card",
           "{C:inactive}(Currently {C:attention}#1#{C:inactive}/{C:inactive}#2#)",
         }

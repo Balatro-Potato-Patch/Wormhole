@@ -222,7 +222,7 @@ Wormhole.JR_UTILS.Satellite {
   end,
   loc_vars = function(self, info_queue, card)
     local _level = G.GAME.jr and G.GAME.jr.satellite_hands[card.ability.extra.hand_type].level or 0
-    local num, den = SMODS.get_probability_vars(card, card.ability.extra.num, card.ability.extra.den, "worm_jr_messenger")
+    local num, den = SMODS.get_probability_vars(card, card.ability.extra.num, card.ability.extra.den, "venera_9")
     return {
       vars = {
         _level,
@@ -361,6 +361,53 @@ Wormhole.JR_UTILS.Satellite {
 }
 
 -- Sputnik 1
+Wormhole.JR_UTILS.Satellite {
+  key = 'sputnik_1',
+  name = 'sputnik_1',
+  config = { extra = { hand_type = 'Full House'}, },
+  pos = { x = 6, y = 0 },
+  soul_pos = { x = 6, y = 1, draw = Wormhole.JR_UTILS.draw_satellite_soul },
+  jr_calculate = function(self, context, vars)
+    if context.before then
+      -- eligible cards
+      targets = {}
+      for _, v in pairs(G.deck.cards) do
+        targets[#targets+1] = v
+      end
+
+      -- change cards in deck
+      for _ = 1, G.GAME.jr.satellite_hands[vars.hand_type].level do
+        if #targets == 0 then return end
+        local _card, pos = pseudorandom_element(targets, "worm_jr_sputnik_1")
+        local _rand = pseudorandom("worm_jr_sputnik_1",1,3)
+        if _rand == 1 then
+          _card:set_seal(SMODS.poll_seal({ guaranteed = true, key = 'worm_jr_sputnik_1' }), true, true)
+        elseif _rand == 2 then
+          _card:set_edition(SMODS.poll_edition { key = "worm_jr_sputnik_1", guaranteed = true, no_negative = true, options = { 'e_polychrome', 'e_holo', 'e_foil' } })
+        else
+          _card:set_ability(SMODS.poll_enhancement({guaranteed = true, key = "worm_jr_sputnik_1"}),nil,true)
+        end
+        _card:juice_up()
+        table.remove(targets, pos)
+      end
+
+    end
+  end,
+  loc_vars = function(self, info_queue, card)
+    local _level = G.GAME.jr and G.GAME.jr.satellite_hands[card.ability.extra.hand_type].level or 0
+    return {
+      vars = {
+        _level,
+        localize(card.ability.extra.hand_type, 'poker_hands'),
+        _level <= 1 and '' or 's',
+        colours = { (_level == 1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, _level)]) }
+      }
+    }
+  end,
+  jr_loc_vars = function(self)
+    return {}
+  end
+}
 
 
 -- Mariner 9
