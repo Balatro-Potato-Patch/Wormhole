@@ -129,7 +129,7 @@ return {
 					},
 					{
 						"Developer of {C:incognito}Incognito",
-						"Co-Developer of {C:attention}Hyperfixation{},",
+						"Co-Developer of {C:worm_toma_gradient}Hyperfixation{},",
 						"{C:attention}Bad Director{}, and {C:attention}Tangents",
 					},
 				},
@@ -141,8 +141,14 @@ return {
 						"Programmer, Artist, Composer",
 					},
 					{
-						"{C:inactive}yo phone ringing{}",
-						"{C:inactive,s:0.7}PLEASE CLICK ON THIS{}",
+						"Lead developer of {C:worm_toma_gradient}Hyperfixation{} and {C:attention}that's it{}",
+						"{s:0.8,C:inactive}(A Hyperfixation rework is in development :3)",
+						"on {s:0.95}a {s:0.9}few {s:0.85}dev {s:0.8}teams {s:0.75}of {s:0.7}various {s:0.65}mods{s:0.6} of {s:0.55}sorts...",
+						"{C:attention}Burnt {}some{C:attention} potatoes{} and {C:green}stuffed{} a few {C:red}stockings{}",
+					},
+					{
+						"{C:inactive,s:0.7}yo phone ringing{}",
+						"{C:inactive,s:0.6}(click me twin){}",
 					},
 				},
 			},

@@ -161,9 +161,19 @@ PotatoPatchUtils.Developer({
 	pos = { x = 1, y = 0 },
 })
 
+local toma_colour = SMODS.Gradient({
+	key = "toma_gradient",
+	colours = {
+		HEX("FCB3EA"),
+		HEX("EAB3FC"),
+		HEX("FCB3C5")
+	},
+	cycle = 5,
+})
+
 PotatoPatchUtils.Developer({
 	name = "toma",
-	colour = HEX("FCB3EA"),
+	colour = toma_colour,
 	loc = true,
 	team = "meow",
 	atlas = "worm_meowCreditsJolyne",
