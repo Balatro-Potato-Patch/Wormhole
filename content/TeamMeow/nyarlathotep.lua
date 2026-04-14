@@ -247,7 +247,15 @@ local function generate_exchange_item_ui(card, option)
 	local loc_res = ex_prototype:loc_vars(card) or {}
 	local name_nodes = localize({ type = "name", key = option.key, set = "Other", vars = loc_res.vars or {} })
 	localize({ type = "other", key = option.key, nodes = desc_nodes, vars = loc_res.vars or {} })
-	localize({ type = "other", key = "exc_worm_meow_sanity_cost", nodes = cost_nodes, vars = { ex_prototype.cost } })
+	
+	if ex_prototype.cost > 0 then
+		localize({ type = "other", key = "exc_worm_meow_sanity_cost", nodes = cost_nodes, vars = { ex_prototype.cost } })
+	elseif ex_prototype.cost < 0 then
+		localize({ type = "other", key = "exc_worm_meow_sanity_gain", nodes = cost_nodes, vars = { -ex_prototype.cost } })
+	else
+		localize({ type = "other", key = "exc_worm_meow_sanity_free", nodes = cost_nodes, vars = {} })
+	end
+	
 	local desc = {}
 	for _, v in ipairs(desc_nodes) do
 		desc[#desc + 1] = { n = G.UIT.R, config = { align = "cm" }, nodes = v }
@@ -368,7 +376,7 @@ function G.FUNCS.worm_meow_exchange_reward(e)
 		end
 	end
 	exchange:reward(card)
-	G.GAME.meow_sanity_lost = G.GAME.meow_sanity_lost + exchange.cost
+	G.GAME.meow_sanity_lost = math.max(0, G.GAME.meow_sanity_lost + exchange.cost)
 	e.config.exchange_option.is_exchanged = true
 	local element = G.OVERLAY_MENU:get_UIE_by_ID("meow_exchanges")
 	element.config.object:remove()
@@ -380,7 +388,12 @@ function G.FUNCS.worm_meow_exchange_reward(e)
 end
 
 function G.FUNCS.worm_meow_can_exchange_reward(e)
-	if e.config.exchange_option.is_exchanged then
+	local exchanged = e.config.exchange_option.is_exchanged
+	
+	local exchange = Wormhole.TEAM_MEOW.nyarlathotep_exchanges[e.config.exchange_option.key]
+	local can_afford = G.GAME.meow_sanity_lost + exchange.cost >= 0
+	
+	if exchanged or not can_afford then
 		e.config.colour = G.C.UI.BACKGROUND_INACTIVE
 		e.config.button = nil
 	else
@@ -473,6 +486,86 @@ nyarlathotep_exchange({
 	in_pool = function(self, card, amt)
 		return not G.GAME.meow_remembrance_exchanged
 	end,
+})
+
+nyarlathotep_exchange({
+	key = "gluttony",
+	cost = 1,
+	config = { extracted_mult = 5, extracted_chips = 5 },
+	reward = function(self, card)
+		local cae = card.ability.extra
+		
+		cae.individual.chips = self.config.extracted_chips + (cae.individual.chips or 0)
+		cae.individual.mult = self.config.extracted_mult + (cae.individual.mult or 0)
+	end,
+	loc_vars = function(self, card)
+		return {
+			vars = {
+				self.config.extracted_mult,
+				self.config.extracted_chips
+			}
+		}
+	end
+})
+
+nyarlathotep_exchange({
+	key = "sloth",
+	cost = 2,
+	config = { sloth_xchips = 1.1 },
+	reward = function(self, card)
+		local cae = card.ability.extra
+		
+		cae.held_in_hand.xchips = self.config.sloth_xchips * (cae.held_in_hand.xchips or 1)
+	end,
+	loc_vars = function(self, card)
+		return {
+			vars = {
+				self.config.sloth_xchips
+			}
+		}
+	end
+})
+
+nyarlathotep_exchange({
+	key = "acceptance",
+	cost = -1,
+	config = { xchips_retained = 0.75 },
+	reward = function(self, card)
+		local cae = card.ability.extra
+		
+		cae.joker_main.xchips = self.config.xchips_retained * (cae.joker_main.xchips or 1)
+	end,
+	loc_vars = function(self, card)
+		local cae = card.ability.extra
+		return {
+			vars = {
+				self.config.xchips_retained * 100,
+				cae.joker_main.xchips or 1,
+			}
+		}
+	end,
+	in_pool = function(self, card, amt)
+		return G.GAME.meow_sanity_lost > 0
+	end
+})
+
+nyarlathotep_exchange({
+	key = "reward",
+	cost = 0,
+	config = {},
+	reward = function(self, card)
+		ease_dollars(G.GAME.meow_sanity_lost)
+	end,
+	loc_vars = function(self, card)
+		return {
+			vars = {
+				G.GAME.meow_sanity_lost
+			}
+		}
+	end,
+	in_pool = function(self, card, amt)
+		return G.GAME.meow_sanity_lost > 0
+	end
 })
 
 function Wormhole.TEAM_MEOW.generate_exchange_pool(card, seed)
