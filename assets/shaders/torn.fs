@@ -18,6 +18,7 @@ uniform Image maskTex;
 uniform vec2 maskAtlas;
 uniform vec2 maskUV;
 uniform vec4 maskPos;
+uniform vec2 maskDir;
 
 vec4 RGB(vec4 c);
 
@@ -115,8 +116,8 @@ vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords
     vec4 rmaskUV = vec4(maskPos.x * maskAtlas.x / maskPos.z, maskPos.y * maskAtlas.y / maskPos.w, maskUV.x / maskPos.z, maskUV.y / maskPos.w);
     vec2 onepixel = vec2(1.0,1.0) / maskAtlas.xy;
     vec2 maskuv = vec2(rmaskUV.x, rmaskUV.y) + vec2(uv.x, uv.y) * rmaskUV.zw;
-    float h_dir = 4.0; // Controls horzonal movement and speed (negative vaules move in other direction)
-    float v_dir = 3.0; // Controls vertical movement and speed (negative vaules move in other direction)
+    float h_dir = maskDir.x; // Controls horzonal movement and speed (negative vaules move in other direction)
+    float v_dir = maskDir.y; // Controls vertical movement and speed (negative vaules move in other direction)
     vec4 next_pixel = Texel(maskTex, maskuv+vec2(onepixel.x*torn.y*h_dir,onepixel.x*torn.y*v_dir));
     vec4 replace_color = vec4(239., 239., 239., 27.) / 255.; // Replaces white color
 
