@@ -221,7 +221,7 @@ return {
         },
         Joker = {
             j_worm_ACME_enterprise = {
-                name = "Quality Assurance",
+                name = "Enterprise Joker",
                 text = {
                     '{C:chips}+#1#{} Chips for each',
                     '{C:attention}unique{} {C:planet}Planet{} card',
@@ -295,7 +295,21 @@ return {
             PotatoPatchDev_FlameThrowerFIM = {
                 name = "FlameThrowerFIM",
                 text = {
-                    { "Snowing" },
+                    {
+                        "After my first experience with community mod jam",
+                        "projects through {C:chips}Cold Beans{}, I was excited to sign up",
+                        "for the mod jam that would become {C:attention}Wormhole{}!",
+                    },
+                    {
+                        "I'm the artist behind all the Jokers of this team",
+                        "and the Skip Tag, and I'm very proud of how much",
+                        "we managed to get done as a team!",
+                        "Thank you all for such a great experience! :D"
+                    },
+                    {
+                        "If you're interested in more of my work,",
+                        "check out my mod {C:green}MmmmmJokers{}!"
+                    },
                 },
             },
             PotatoPatchDev_Opal = {
