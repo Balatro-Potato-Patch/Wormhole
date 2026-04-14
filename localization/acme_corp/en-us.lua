@@ -137,6 +137,24 @@ return {
                     '{C:inactive}(Minigame complete!)'
                 }
             },
+            c_worm_acme_printer = {
+                name = 'ACME Counterfeiter 3000',
+                text = {
+                    '{X:attention,C:white}After{} scoring {C:attention}blind requirement{}',
+                    'in a single hand,',
+                    '{X:attention,C:white}Use{} to gain {C:money}$5{} per digit in your',
+                    '{C:attention}max score{} this run',
+                    '{C:inactive}(Currently {C:attention}#1#{C:inactive} digits)'
+                }
+            },
+            c_worm_acme_printer_alt = {
+                name = 'ACME Counterfeiter 3000',
+                text = {
+                    '{X:attention,C:white}Use{} to gain {C:money}$5{} per digit in your',
+                    '{C:attention}max score{} this run',
+                    '{C:inactive}(Currently {C:attention}#1#{C:inactive} digits)'
+                }
+            },
         },
         Joker = {
             j_worm_ACME_enterprise = {

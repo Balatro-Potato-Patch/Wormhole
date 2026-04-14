@@ -37,3 +37,19 @@ else
     )
 end'''
 match_indent = true    
+
+# printer: set flag after hand score is finalized
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = "check_and_set_high_score('hand', hand_chips*mult)"
+position = "after"
+payload = '''if Wormhole and Wormhole.ACME then
+    local _s = hand_chips * mult
+    Wormhole.ACME._last_hand_score = _s
+    Wormhole.ACME._last_blind_req = G.GAME.blind.chips
+    if not Wormhole.ACME._best_hand or _s > Wormhole.ACME._best_hand then
+        Wormhole.ACME._best_hand = _s
+    end
+end'''
+match_indent = true
