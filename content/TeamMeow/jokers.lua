@@ -69,6 +69,8 @@ SMODS.Joker({
             level = 1
         }
     },
+    atlas = "meow_jokers",
+    pos = {x = 3, y = 0},
     cost = 7,
     attributes = {"cat", "space", "spacetart"},
     loc_vars = function(self, info_queue, card)
@@ -77,6 +79,7 @@ SMODS.Joker({
     blueprint_compat = false,
     ppu_team = {"meow"},
 	ppu_coder = { "silverautumn" },
+	ppu_artist = { "gappie" },
 })
 SMODS.Joker({
 	key = "meow_golden_tart",
