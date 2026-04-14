@@ -223,6 +223,15 @@ return {
           "{C:inactive}(Currently {C:attention}#1#{C:inactive}/{C:inactive}#2#)",
         }
       },
+      j_worm_jr_crash_course = {
+        name = "Crash Course",
+        text = {
+          "If hand is played while holding",
+          "its corresponding {C:planet}Planet{} card,",
+          "destroy the {C:planet}Planet{} card and",
+          "create its respective {C:worm_jr_satellite}Satellite{} Card",
+        }
+      },
     },
     Other = {
       p_worm_jr_orbital_normal = {
