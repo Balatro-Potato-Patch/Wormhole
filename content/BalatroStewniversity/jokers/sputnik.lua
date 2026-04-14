@@ -16,7 +16,7 @@ SMODS.Joker {
     perishable_compat = true,
 
     update_mult = function (self, card)
-        card.ability.extra.mult = card.ability.extra.mult_mod * (card.ability.extra.dollars - (G.GAME.dollars + (G.GAME.dollar_buffer or 0)))
+        card.ability.extra.mult = card.ability.extra.mult_mod * math.max(0, card.ability.extra.dollars - (G.GAME.dollars + (G.GAME.dollar_buffer or 0)))
     end,
 
     loc_vars = function (self, info_queue, card)
