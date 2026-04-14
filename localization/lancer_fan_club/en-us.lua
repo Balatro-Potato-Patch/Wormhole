@@ -43,7 +43,7 @@ return {
                         "more of our stuff:",
                         "{s:0.8,X:blue,C:white}Bluesky{s:0.8} @ellestuff.dev",
                         "{s:0.8,X:lfc_discord,C:white}Discord{s:0.8} ellestuff.dev/discord",
-                        "{s:0.8}Play my mod {s:0.8,C:attention}ellejokers.{s:0.8}!",
+                        "{s:0.8}Play our mod {s:0.8,C:attention}ellejokers.{s:0.8}!",
                     }
                 }
             },
