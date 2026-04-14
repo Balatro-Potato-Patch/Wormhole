@@ -398,6 +398,11 @@ return {
                         "this {C:spectral}hexes{} me"
                     },
                     {
+                        "i did a lot of art and code",
+                        "and came up with the {C:worm_c3_junkset}Derelict",
+                        "cards' mechanic"
+                    },
+                    {
                         "{f:worm_emoji}🙂{} Hello I am John Balatro",
                         "Please play Numbergem"
                     }

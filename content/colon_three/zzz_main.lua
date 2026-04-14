@@ -38,7 +38,7 @@ PotatoPatchUtils.Team{
     name = ":3",
     colour = HEX("b52961"),
     loc = "PotatoPatchTeam_colon_three",
-    credit_rows = {3,2}
+    credit_rows = {1,4}
 }
 
 SMODS.Atlas {
