@@ -26,10 +26,10 @@ PotatoPatchUtils.Developer{
 PotatoPatchUtils.Developer{
     name = "Sn0vvBall",
     colour = G.C.MONEY,
-    team = "People Found In Vegas" --[[,
+    team = "People Found In Vegas",
     atlas = "worm_vegas_credits",
     pos = {x = 1, y = 0},
-    soul_pos = {x = 1, y = 1}]]
+    soul_pos = {x = 1, y = 1}
 }
 
 PotatoPatchUtils.Developer{
@@ -1698,4 +1698,3 @@ SMODS.Back {
         SMODS.upgrade_poker_hands(args)
 	end
 }
-
