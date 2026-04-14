@@ -211,7 +211,7 @@ function Moveable:hover()
 		love.mouse.setCursor(Wormhole.TEAM_MEOW.cursor)
 		self.children.center:set_sprite_pos({
 			x = member.pos and member.pos.x or 0,
-			y = member.name == "toma" and 0 or 1,
+			y = 1,
 		})
 		local r = math.random(1, 3)
 		play_sound("worm_meowMeow" .. r, 1 + 0.5 * (math.random() - 0.5), 0.6)
