@@ -524,10 +524,6 @@ SMODS.Consumable {
 
 SMODS.Joker {
     key = 'necrozma',
-    loc_txt = {
-        name = 'Necrozma',
-        text = {"Create a free", "{C:attention}#1#{}", "every round"}
-    },
     atlas = 'worm_asm_ubs',
     rarity = 4,
     cost = 20,

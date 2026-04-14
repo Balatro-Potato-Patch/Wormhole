@@ -19,6 +19,17 @@ SMODS.ConsumableType{
 }
 
 local wormhole_create_card = function (self, card, i)
+    --[[ not sure?
+    if pseudorandom("asm_necrozma") < 0.003 then
+        return {
+            set = "Joker",
+            skip_materialize = true,
+            key = "j_worm_necrozma",
+            area = G.pack_cards,
+            key_append = "worm_wormholepack2"
+        }
+    end
+    ]]
     return {
         set = "worm_ultrabeast",
         soulable = true,
@@ -85,13 +96,6 @@ end
 return {
     SMODS.Tag {
         key = 'ub',
-        loc_txt = {
-          name = 'Ultra Wormhole Tag',
-          text = {
-            "Gives a free",
-            "{C:worm_ultrabeast}Greater Ultra Wormhole"
-        }
-        },
         atlas = 'asm_ubtag', 
         pos = { x = 0, y = 0 },
         in_pool = function()

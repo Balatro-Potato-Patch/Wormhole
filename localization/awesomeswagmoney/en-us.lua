@@ -4,7 +4,12 @@ return {
         Blind = {},
         Edition = {},
         Enhanced = {},
-        Joker = {},
+        Joker = {
+            j_worm_necrozma = {
+                name = 'Necrozma',
+                text = { "Create a free", "{C:attention}#1#{}", "every round" }
+            }
+        },
         Other = {
             undiscovered_worm_ultrabeast = {
                 name = "Not Discovered",
@@ -38,7 +43,15 @@ return {
         Planet = {},
         Spectral = {},
         Stake = {},
-        Tag = {},
+        Tag = {
+            tag_worm_ub = {
+                name = 'Ultra Wormhole Tag',
+                text = {
+                    "Gives a free",
+                    "{C:worm_ultrabeast}Greater Ultra Wormhole"
+                }
+            }
+        },
         Tarot = {},
         Voucher = {},
         PotatoPatch = {
