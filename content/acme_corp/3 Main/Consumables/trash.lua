@@ -42,15 +42,15 @@ SMODS.Consumable{
     end,
     use = function(self, card, area, copier)
         local used = copier or card
-        G.E_MANAGER:add_event(Event{{
+        G.E_MANAGER:add_event(Event({
             trigger = 'after',
             delay = 0.4,
             func = function()
                 play_sound('timpani')
-                SMODS.add_card({set = 'Joker', attributes = {'food'}, edition = 'e_negative'})
+                SMODS.add_card({set = 'Joker', attributes = {'food'}, edition = 'e_negative', stickers = {'perishable'}, force_stickers = true})
                 used:juice_up(0.3, 0.5)
                 return true
             end
-        }})
+        }))
     end,
 }
