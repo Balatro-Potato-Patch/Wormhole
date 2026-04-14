@@ -85,8 +85,6 @@ SMODS.Edition {
 
 -- The Abyss
 SMODS.Consumable {
-	ppu_artist = {"Nogardagem"},
-	ppu_coder = {"Nogardagem"},
 	ppu_team = {"BalatrosAPalindrome"},
 	key = 'bap_abyss',
 	loc_txt = {
@@ -224,8 +222,6 @@ SMODS.PokerHand {
 
 -- Nothing planet card
 SMODS.Consumable {
-	ppu_artist = {"Nogardagem"},
-	ppu_coder = {"Nogardagem"},
 	ppu_team = {"BalatrosAPalindrome"},
     key = "bap_nothing",
     -- loc_txt = {
@@ -296,8 +292,6 @@ SMODS.Consumable {
 
 -- Milky Way
 SMODS.Joker {
-	ppu_artist = {"Nogardagem"},
-	ppu_coder = {"Nogardagem"},
 	ppu_team = {"BalatrosAPalindrome"},
     key = "bap_milky_way",
     blueprint_compat = true,
@@ -310,9 +304,9 @@ SMODS.Joker {
 	loc_txt = {
 		name = 'Milky Way',
 		text = {
-			"Creates a random {C:planet}Planet{}",
-			"card at the end of",
-        	"the next {C:attention}#1#{} rounds",
+			"Create a {C:planet}Planet{} card",
+			"at the end of the",
+        	"next {C:attention}#1#{} rounds",
 			"{C:inactive}(Must have room)",
 		}
 	},
@@ -359,8 +353,6 @@ SMODS.Joker {
 
 -- Andromeda
 SMODS.Joker {
-	ppu_artist = {"Nogardagem"},
-	ppu_coder = {"Knightingale0"},
 	ppu_team = {"BalatrosAPalindrome"},
     key = "bap_andromeda",
     blueprint_compat = true,
@@ -410,8 +402,6 @@ SMODS.Joker {
 
 -- Solar Panels
 SMODS.Joker {
-	ppu_artist = {"Nogardagem"},
-	ppu_coder = {"Knightingale0"},
 	ppu_team = {"BalatrosAPalindrome"},
 	key = "bap_solar_panel",
     blueprint_compat = true,
@@ -473,8 +463,6 @@ for duplicate = 0, 20 do
 
 	-- Space Worm
 	SMODS.Joker {
-		ppu_artist = {"Nogardagem"},
-		ppu_coder = {"Nogardagem"},
 		ppu_team = {"BalatrosAPalindrome"},
 		key = "bap_space_worm"..duplicate,
 		blueprint_compat = true,
