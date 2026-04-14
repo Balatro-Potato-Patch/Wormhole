@@ -8,7 +8,7 @@ priority = -10
 [[patches]]
 [patches.pattern]
 target = '=[SMODS PotatoPatchUtils "src/credits.lua"]'
-pattern = 'colours = { dev and dev.colour or G.C.UI.BACKGROUND_WHITE }, scale = 0.27,'
+pattern = 'AAAAAAcolours = { dev and dev.colour or G.C.UI.BACKGROUND_WHITE }, scale = 0.27,'
 position = 'at'
 payload = '''
 colours = (dev and dev.colours) or { dev and dev.colour or G.C.UI.BACKGROUND_WHITE }, scale = 0.27,
@@ -21,7 +21,7 @@ match_indent = true
 [[patches]]
 [patches.pattern]
 target = '=[SMODS PotatoPatchUtils "src/credits.lua"]'
-pattern = 'name = name[1] and name[1][1] or {n=G.UIT.T, config={scale = 0.47, colour = member.colour, text = member.name}}'
+pattern = 'AAAAAAAAname = name[1] and name[1][1] or {n=G.UIT.T, config={scale = 0.47, colour = member.colour, text = member.name}}'
 position = 'at'
 payload = '''
 if member.always_use_dynatext or member.text_effect or member.shaders then

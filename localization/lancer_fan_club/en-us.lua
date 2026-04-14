@@ -75,7 +75,12 @@ return {
                         "shapeshifting slimegirl!"
                     },
                     {
-                        "proudly a fucked up lil bastard"
+                        "I came up with a few of the ideas here,",
+                        "my favorites being {C:attention}Urination Station{} and {C:attention}Spacebar{}!",
+                        "I also coded {C:attention}Urination Station{}, among plenty of other Jokers.",
+                        "{C:attention}The Fleet{} was entirely done by me, and",
+                        "the background of {C:attention}Eigengrau Emptiness{} is some of",
+                        "my proudest work yet! {s:0.5}(even if others got the same idea...)",
                     },
                     {
                         "lemniscate tomorrow"

@@ -268,3 +268,40 @@ SMODS.DrawSteps.ppu_floating_sprite.func = function(card, layer)
         ppu_floating_sprite_hook(card, layer)
     end
 end
+
+local localize_ref = localize
+function localize(args, misc_cat)
+    local ret = localize_ref(args, misc_cat)
+    if type(args) == "table" and args.type == "name" and args.set == "PotatoPatch"
+        and args.key == "PotatoPatchDev_n" and (args.nodes or {})[1] and args.nodes[1][1] then
+        args.nodes[1][1] = {
+            n = G.UIT.R,
+            nodes = {
+                {
+                    n = G.UIT.C,
+                    nodes = {
+                        {
+                            n = G.UIT.O,
+                            config = {
+                                object = SMODS.create_sprite(0, 0, 0.5, 0.5, "worm_tbp_devs", { x = 6, y = 1 })
+                            }
+                        }
+                    }
+                },
+                args.nodes[1][1],
+                {
+                    n = G.UIT.C,
+                    nodes = {
+                        {
+                            n = G.UIT.O,
+                            config = {
+                                object = SMODS.create_sprite(0, 0, 0.5, 0.5, "worm_tbp_devs", { x = 6, y = 1 })
+                            }
+                        }
+                    }
+                },
+            }
+        }
+    end
+    return ret
+end
