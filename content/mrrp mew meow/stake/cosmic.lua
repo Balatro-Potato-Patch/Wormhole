@@ -1,4 +1,7 @@
 SMODS.Stake{
+    ppu_team = {'Mrrp Mew Meow :3'},
+    ppu_artist = {'Shinku'},
+    ppu_coder = {'Shinku'},
     key = 'mrrp_cosmic',
     atlas = 'mrrp_stake',
     pos = {x = 0, y = 0},

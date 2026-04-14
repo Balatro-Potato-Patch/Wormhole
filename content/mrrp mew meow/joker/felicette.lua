@@ -89,6 +89,7 @@ SMODS.Joker {
 --[[ Simple version ]]
 SMODS.Joker {
     ppu_team = {'Mrrp Mew Meow :3'},
+    ppu_artist = {'Cyan'},
     ppu_coder = {'Cyan'},
     key = 'mrrp_felicette',
     atlas = "mrrp",

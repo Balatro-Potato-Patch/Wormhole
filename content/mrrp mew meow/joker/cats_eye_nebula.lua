@@ -2,6 +2,7 @@
 
 SMODS.Joker {
 	ppu_team = {'Mrrp Mew Meow :3'},
+    ppu_artist = {'Shinku'},
     ppu_coder = {'Minty'},
 	key = 'mrrp_cats_eye_nebula',
 	atlas = "mrrp",

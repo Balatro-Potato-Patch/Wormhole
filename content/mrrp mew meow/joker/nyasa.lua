@@ -1,5 +1,6 @@
 SMODS.Joker {
     ppu_team = {'Mrrp Mew Meow :3'},
+    ppu_artist = {'SarcPot'},
     ppu_coder = {'Minty'},
 	key = 'mrrp_nyasa',
 	atlas = "mrrp", pos = {x=0, y=3},
