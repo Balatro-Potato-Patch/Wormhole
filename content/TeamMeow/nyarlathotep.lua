@@ -2,7 +2,7 @@ local function build_nyarlathotep_entries(all_entries, max_cols, no_commas)
 	max_cols = max_cols or 3
 	local entries_to_organize = {}
 	for _, e in ipairs(all_entries) do
-		local loc_target = G.localization.descriptions.Other["worm_meow_nyarlathotep_" .. e.key].text_parsed
+		local loc_target = G.localization.descriptions.Other[e.no_auto_key and e.key or ("worm_meow_nyarlathotep_" .. e.key)].text_parsed
 		for _, row in ipairs(loc_target) do
 			entries_to_organize[#entries_to_organize + 1] = {
 				n = G.UIT.C,
@@ -122,6 +122,7 @@ SMODS.Joker({
 					entries[#entries + 1] = { vars = { cae.individual[entry] }, key = entry }
 				end
 			end
+			main_end[#main_end + 1] = build_nyarlathotep_entries({ { key = "on_score" } }, 1)
 			main_end[#main_end + 1] = build_nyarlathotep_entries(entries, 3)
 		end
 		if next(cae.held_in_hand) then
@@ -135,9 +136,10 @@ SMODS.Joker({
 				"dollars",
 			}) do
 				if cae.held_in_hand[entry] then
-					entries[#entries + 1] = { vars = { cae.individual[entry] }, key = entry }
+					entries[#entries + 1] = { vars = { cae.held_in_hand[entry] }, key = entry }
 				end
 			end
+			main_end[#main_end + 1] = build_nyarlathotep_entries({ { key = "held_in_hand" } }, 1)
 			main_end[#main_end + 1] = build_nyarlathotep_entries(entries, 3)
 		end
 		if next(cae.misc) then
@@ -149,9 +151,10 @@ SMODS.Joker({
 				entries[#entries + 1] = {
 					vars = vars,
 					key = entry.key,
+					no_auto_key = true,
 				}
 			end
-			main_end[#main_end + 1] = build_nyarlathotep_entries(entries, 1)
+			main_end[#main_end + 1] = build_nyarlathotep_entries(entries, 1, true)
 		end
 		if not seen then
 			return {
@@ -251,7 +254,12 @@ local function generate_exchange_item_ui(card, option)
 	if ex_prototype.cost > 0 then
 		localize({ type = "other", key = "exc_worm_meow_sanity_cost", nodes = cost_nodes, vars = { ex_prototype.cost } })
 	elseif ex_prototype.cost < 0 then
-		localize({ type = "other", key = "exc_worm_meow_sanity_gain", nodes = cost_nodes, vars = { -ex_prototype.cost } })
+		localize({
+			type = "other",
+			key = "exc_worm_meow_sanity_gain",
+			nodes = cost_nodes,
+			vars = { -ex_prototype.cost },
+		})
 	else
 		localize({ type = "other", key = "exc_worm_meow_sanity_free", nodes = cost_nodes, vars = {} })
 	end
@@ -524,10 +532,10 @@ nyarlathotep_exchange({
 		return {
 			vars = {
 				self.config.extracted_mult,
-				self.config.extracted_chips
-			}
+				self.config.extracted_chips,
+			},
 		}
-	end
+	end,
 })
 
 nyarlathotep_exchange({
@@ -542,10 +550,10 @@ nyarlathotep_exchange({
 	loc_vars = function(self, card)
 		return {
 			vars = {
-				self.config.sloth_xchips
-			}
+				self.config.sloth_xchips,
+			},
 		}
-	end
+	end,
 })
 
 nyarlathotep_exchange({
@@ -563,12 +571,12 @@ nyarlathotep_exchange({
 			vars = {
 				self.config.xchips_retained * 100,
 				cae.joker_main.xchips or 1,
-			}
+			},
 		}
 	end,
 	in_pool = function(self, card, amt)
 		return G.GAME.meow_sanity_lost > 0
-	end
+	end,
 })
 
 nyarlathotep_exchange({
@@ -581,13 +589,13 @@ nyarlathotep_exchange({
 	loc_vars = function(self, card)
 		return {
 			vars = {
-				G.GAME.meow_sanity_lost
-			}
+				G.GAME.meow_sanity_lost,
+			},
 		}
 	end,
 	in_pool = function(self, card, amt)
 		return G.GAME.meow_sanity_lost > 0
-	end
+	end,
 })
 
 function Wormhole.TEAM_MEOW.generate_exchange_pool(card, seed)
