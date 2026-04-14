@@ -226,7 +226,7 @@ return {
                     {
                         "Hit {C:attention}Space{} at the",
                         "right time to gain {C:white,X:mult}XMult{},",
-                        "Resets after scoring"
+                        "resets after scoring"
                     }
                 }
             },
