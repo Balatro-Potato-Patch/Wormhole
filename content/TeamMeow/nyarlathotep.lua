@@ -665,6 +665,7 @@ nyarlathotep_exchange({
 			func = function()
 				play_sound("worm_meowDread", 1 + 0.5 * (math.random() - 0.5), 0.6)
 				G.FORCE_BOSS = boss
+				G.from_boss_tag = true
 				G.FUNCS.reroll_boss()
 				G.E_MANAGER:add_event(Event({ --infinite showdown prevention
 					func = function()
