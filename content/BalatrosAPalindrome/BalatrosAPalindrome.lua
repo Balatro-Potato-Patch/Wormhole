@@ -411,24 +411,40 @@ SMODS.Joker {
 	loc_txt = {
 		name = 'Andromeda',
 		text = {
-			"UNFINISHED",
-		}
+			"Gives {C:money}money{} equal ",
+			"to level of first",
+			"{C:attention}poker hand{} played"
+		},
 	},
     loc_vars = function(self, info_queue, card)
         return { vars = {} }
     end,
     calculate = function(self, card, context)
-        if context.after then
-			return {
-				message = "this joker doesn't do anything yet",
-				colour = G.C.FILTER
-			}
+		if context.first_hand_drawn and not context.blueprint then
+            local eval = function() return G.GAME.current_round.hands_played == 0 and not G.RESET_JIGGLES end
+            juice_card_until(card, eval, true)
+        end
+
+        if context.final_scoring_step and G.GAME.current_round.hands_played == 0 then			
+			G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + G.GAME.hands[context.scoring_name].level -- ripped from business card
+            return {
+				    dollars = G.GAME.hands[context.scoring_name].level,
+				    func = function() -- This is for timing purposes, this goes after the dollar modification
+				        G.E_MANAGER:add_event(Event({
+                        func = function()
+                            G.GAME.dollar_buffer = 0
+                            return true
+                        end
+                    }))
+                end
+            }
 		end
-    end,
+	end,
     in_pool = function(self, args) -- equivalent to `yes_pool_flag = 'vremade_gros_michel_extinct'`
         return G.GAME.pool_flags.bap_milky_drank
-    end
+	end
 }
+
 
 -- Solar Panels
 SMODS.Joker {
