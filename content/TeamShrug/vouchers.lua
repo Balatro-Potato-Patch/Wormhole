@@ -3,7 +3,7 @@ SMODS.Atlas {
     key = "shrug_vouchers",
     px = 71,
     py = 95,
-    path = "TeamShrug/jokers.png"
+    path = "TeamShrug/vouchers.png"
 }
 
 
@@ -39,6 +39,9 @@ SMODS.Voucher {
     ppu_coder = {
         "microwave",
     },
+    ppu_artist = {
+        "atiredguy",
+    },
     ppu_team = { "shrug" }
 }
 
@@ -65,6 +68,9 @@ SMODS.Voucher {
     -- Credits
     ppu_coder = {
         "microwave",
+    },
+    ppu_artist = {
+        "atiredguy",
     },
     ppu_team = { "shrug" }
 }
