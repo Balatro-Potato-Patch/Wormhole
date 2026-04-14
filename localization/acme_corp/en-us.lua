@@ -239,13 +239,23 @@ return {
             j_worm_acme_gas_station = {
                 name = 'Interplanetary Gas Station',
                 text = {
-                    'On scoring, played',
-                    'hand {C:red}loses{} a level',
+                    'On scoring, {C:attention}played',
+                    '{C:attention}hand{} loses a level',
                     '{C:attention}Gain #1#{} random {C:planet}hand level{}',
                     'and {X:mult,C:white}X#2#{} Mult',
                     '{C:inactive}(Currently {X:mult,C:white}X#3#{C:inactive} Mult)'
                 }
             },
+	    j_worm_acme_kraft_e_jackal = {
+		name = 'Kraft E. Jackal',
+		text = {
+			'Gives a {C:red}targeted{} gadget',
+			'after beating a {C:attention}boss{}',
+			'{C:red}Targeted{} gadget changes',
+		    	'every ante',
+		    	'{C:inactive}(Gadget: {X:mult,C:white}#1#{C:inactive})'
+		},
+	    },
         },
         Other = {
             undiscovered_acme_gadget = {
@@ -327,9 +337,13 @@ return {
                 },
             },
             PotatoPatchDev_Youh = {
-                name = "Youh !",
+                name = "Youh",
                 text = {
-                    { "Mount" },
+                    {
+			"Thank you to all my wonderful teammates and",
+			"to {C:negative}you{} for playing. It's been such an honor to",
+			"work with {C:attention}ACME{} and code their silly jokers. {E:1,C:chips}Enjoy!{}"
+		    },
                 },
             }
             ,
