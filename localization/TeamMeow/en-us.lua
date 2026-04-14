@@ -392,6 +392,16 @@ return {
 					"Lose {C:purple}#1#{} Sanity",
 				},
 			},
+			exc_worm_meow_sanity_gain = {
+				text = {
+					"Gain {C:purple}#1#{} Sanity",
+				}
+			},
+			exc_worm_meow_sanity_free = {
+				text = {
+					"{C:legendary,E:1}Free Blessing"
+				}
+			},
 			exc_worm_meow_void = {
 				name = "Void",
 				text = {
@@ -413,6 +423,39 @@ return {
 					"Go back",
 					"{C:attention}#1# Ante#2#",
 				},
+			},
+			exc_worm_meow_gluttony = {
+				name = "Gluttony",
+				text = {
+					"{C:attention}Nya-rlathotep{} grants",
+					"{C:mult}+#1#{} Mult and {C:chips}+#2#{} Chips",
+					"whenever a card is scored"
+				}
+			},
+			exc_worm_meow_sloth = {
+				name = "Sloth",
+				text = {
+					"{C:attention}Nya-rlathotep{} grants",
+					"{X:chips,C:white}X#1#{} Chips per card",
+					"held in hand"
+				}
+			},
+			exc_worm_meow_acceptance = {
+				name = "Acceptance",
+				text = {
+					"{C:attention}Nya-rlathotep{} retains ",
+					"{C:attention}#1#%{} of {C:attention}Nya-rlathotep{}'s",
+					"current {C:chips}Chips multiplier{}",
+					"{C:inactive}(Currently {X:chips,C:white}X#2#{C:inactive} Chips)"
+				}
+			},
+			exc_worm_meow_reward = {
+				name = "{C:attention}Nya-rlathotep{}'s Gift",
+				text = {
+					"As a reward for your",
+					"devotion, {C:attention}Nya-rlathotep{} is",
+					"willing to part with {C:money}$#1#{}."
+				}
 			},
 			worm_meow_spacetart_stacks = {
 				text = {
