@@ -247,7 +247,7 @@ return {
 			PotatoPatchDev_jade = {
 				name = "Jade Penguin",
 				text = {
-					"Pupil of Chartreuse Chamber",
+					"{C:green}Pupil of Chartreuse Chamber{}",
 					"Made some of the art, and helped made the ideas of",
 					"some of the stuff you see here from our team!",
 					"{C:dark_edition}+1{} Joker Slot :)",
