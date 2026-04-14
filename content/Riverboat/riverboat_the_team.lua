@@ -21,3 +21,9 @@ PotatoPatchUtils.Developer {
     team = "riverboat",
     loc = true
 }
+
+PotatoPatchUtils.Developer {
+    name = "camo",
+    team = "riverboat",
+    loc = true
+}
