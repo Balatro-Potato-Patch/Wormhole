@@ -27,16 +27,24 @@ return {
                 name = "ellestuff.",
                 text = {
                     {
-                        "full of love.draw",
-                        "and love.update hooks"
+                        "trans plural weirdo that's full of",
+                        "love.draw and love.update hooks"
                     },
                     {
-                        "i made the Meteors",
+                        "we made the Meteors",
                         "and Spacebar lol"
                     },
                     {
                         "also did the shader stuff for",
                         "Urination Station and these Credits!"
+                    },
+                    {
+                        "we're {E:worm_elle_text}@ellestuff.dev{} on",
+                        "both bsky and discord"
+                    },
+                    {
+                        "also check out my very",
+                        "cool mod {E:worm_elle_text}ellejokers.{} :3"
                     }
                 }
             },

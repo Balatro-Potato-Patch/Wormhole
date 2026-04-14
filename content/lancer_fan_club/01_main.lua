@@ -19,10 +19,16 @@ Wormhole.LancerFanClub = PotatoPatchUtils.Team {
     short_credit = true
 }
 
+local was_on_lancer = false
+
 local ctcp = PotatoPatchUtils.CREDITS.create_team_credit_page
 function PotatoPatchUtils.CREDITS.create_team_credit_page(team, ...)
     if team == Wormhole.LancerFanClub then
         play_sound("worm_lfc_splat")
+        was_on_lancer = true
+    elseif was_on_lancer then
+        was_on_lancer = false
+        play_sound("worm_lfc_reverse_splat")
     end
     return ctcp(team, ...)
 end
@@ -109,6 +115,11 @@ SMODS.Sound {
     path = "lfc_splat.wav"
 }
 
+SMODS.Sound {
+    key = "lfc_reverse_splat",
+    path = "lfc_reverse_splat.wav"
+}
+
 -- Colors
 loc_colour('red')
 G.ARGS.LOC_COLOURS.lfc_pkmn_us = HEX('E95B2B')
@@ -144,11 +155,25 @@ PotatoPatchUtils.Developer {
     end
 }
 
+SMODS.DynaTextEffect {
+    key = "elle_text",
+    func = function(dynatext, index, letter)
+        local t = G.TIMERS.REAL*3 + index
+
+        letter.offset = {
+            x = math.sin(t)*9,
+            y = math.cos(t)*9
+        }
+
+        letter.colour = mix_colours(HEX('f25fa8'),HEX('a83c8d'),(math.sin(t*0.437)+1)/2)
+        letter.scale = 1+math.cos(t*0.81)*.1
+    end,
+}
 
 -- Elle
 PotatoPatchUtils.Developer({
     name = "ellestuff.",
-    colour = HEX('ff53a9'),
+    text_effect = "worm_elle_text",
     loc = "PotatoPatchDev_ellestuff",
     team = "Lancer Fan Club",
     atlas = "worm_lfc_devs",
@@ -235,7 +260,7 @@ SMODS.Shader {
         local mx,my = love.mouse.getPosition()
         return {
             mouse_pos = {mx,my},
-            t = G.TIMERS
+            t = G.TIMERS.REAL
         }
     end
 }
