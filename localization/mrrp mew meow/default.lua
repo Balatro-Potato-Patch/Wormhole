@@ -365,7 +365,7 @@ misc={
 		},
 
 	--	MP
-		worm_mrrp_wtmjq = {
+		worm_mrrp_no_wtmjq = {
 			"If you like these",
 			"lines there's more",
 			"where that came from!"
@@ -383,7 +383,7 @@ misc={
 		},
 
 	--	CYAN
-		worm_mrrp_win = {
+		worm_mrrp_cyan_win = {
 			"CAT GANG",
 			"FOREVER!",
 			"RAAAGHHH"

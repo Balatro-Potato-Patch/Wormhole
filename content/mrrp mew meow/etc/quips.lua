@@ -1,5 +1,8 @@
 local menthol = not not next(SMODS.find_mod("Menthol"))
 local sarcpot = not not next(SMODS.find_mod("sarcpot"))
+local wtmjq -- = not not next(SMODS.find_mod("wtmjq")) --id?
+local index = not not next(SMODS.find_mod("Index"))
+local steady = not not next(SMODS.find_mod("steady"))
 
 SMODS.JimboQuip{
     key = "mrrp_menthol",
@@ -41,7 +44,8 @@ SMODS.JimboQuip{
     end
 }
 
-SMODS.JimboQuip{ --HEY COPY THIS ONE FOR SUPER BASIC FUNCTIONALITY THANKS
+--HEY COPY THIS ONE FOR SUPER BASIC FUNCTIONALITY THANKS
+SMODS.JimboQuip{ 
     key = "mrrp_sarcpot",
     extra = {
         text_key = "sarcpot",
@@ -60,6 +64,111 @@ SMODS.JimboQuip{ --HEY COPY THIS ONE FOR SUPER BASIC FUNCTIONALITY THANKS
             key = key.."_loss"
         end
         ]]
+
+        key = "worm_mrrp_"..key
+
+        --print(key)
+        self.extra.text_key = key
+        return not not G.localization.misc.quips[key]
+    end
+}
+
+SMODS.JimboQuip{
+    key = "mrrp_wtmjq",
+    extra = {
+        text_key = "wtmjq",
+        ppu_dev = "worm_MP"
+    },
+    filter = function (self, quip_type)
+        local key = "wtmjq"
+        if not wtmjq then
+            key = "no_"..key
+        end
+
+        --[[
+        if quip_type == "win" then
+            key = key.."_win"
+        elseif quip_type == "loss" then
+            key = key.."_loss"
+        end
+        ]]
+
+        key = "worm_mrrp_"..key
+
+        --print(key)
+        self.extra.text_key = key
+        return not not G.localization.misc.quips[key]
+    end
+}
+
+SMODS.JimboQuip{
+    key = "mrrp_index",
+    extra = {
+        text_key = "index",
+        ppu_dev = "worm_MP"
+    },
+    filter = function (self, quip_type)
+        local key = "index"
+        if not index then
+            key = "no_"..key
+        end
+
+        --[[
+        if quip_type == "win" then
+            key = key.."_win"
+        elseif quip_type == "loss" then
+            key = key.."_loss"
+        end
+        ]]
+
+        key = "worm_mrrp_"..key
+
+        --print(key)
+        self.extra.text_key = key
+        return not not G.localization.misc.quips[key]
+    end
+}
+
+SMODS.JimboQuip{
+    key = "mrrp_cyan",
+    extra = {
+        text_key = "cyan",
+        ppu_dev = "worm_Cyan"
+    },
+    filter = function (self, quip_type)
+        local key = "cyan"
+
+        if quip_type == "win" then
+            key = key.."_win"
+        elseif quip_type == "loss" then
+            key = key.."_loss"
+        end
+
+        key = "worm_mrrp_"..key
+
+        --print(key)
+        self.extra.text_key = key
+        return not not G.localization.misc.quips[key]
+    end
+}
+
+SMODS.JimboQuip{
+    key = "mrrp_steady",
+    extra = {
+        text_key = "steady",
+        ppu_dev = "worm_Cyan"
+    },
+    filter = function (self, quip_type)
+        local key = "cyan"
+        if not steady then
+            key = "no_"..key
+        end
+
+        if quip_type == "win" then
+            key = key.."_win"
+        elseif quip_type == "loss" then
+            key = key.."_loss"
+        end
 
         key = "worm_mrrp_"..key
 
