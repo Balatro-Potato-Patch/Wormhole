@@ -7,34 +7,57 @@ SMODS.ConsumableType {
     shop_rate = 0,
 }
 
-SMODS.Booster {
-    key = "util_spaces_normal_1",
-    kind = 'util_Spaces',
-    cost = 4,
-    pos = { x = 0, y = 0 },
-    config = { extra = 3, choose = 1 },
-    group_key = "k_util_spaces_group",
-    select_card = "consumeables",
-    loc_vars = function(self, info_queue, card)
-	local cfg = (card and card.ability) or self.config
-	return {
-	    vars = { cfg.choose, cfg.extra },
-	    key = self.key:sub(1, -3),
-	}
-    end,
-    create_card = function(self, card, i)
-	return {
-	    set = "util_Spaces",
-	    area = G.pack_cards,
-	    skip_materialize = true,
-	    key_append = "util_spaces_pack"
-	}
-    end,
-}
+local function booster_loc_vars(self, info_queue, card)
+    local cfg = (card and card.ability) or self.config
+    return {
+	vars = { cfg.choose, cfg.extra },
+    }
+end
+local function booster_loc_vars_key(self, info_queue, card)
+    local cfg = (card and card.ability) or self.config
+    return {
+	vars = { cfg.choose, cfg.extra },
+	key = self.key:sub(1, -3),
+    }
+end
+local function booster_create_card(self, card, i)
+    return {
+	set = "util_Spaces",
+	area = G.pack_cards,
+	skip_materialize = true,
+	key_append = "util_spaces_pack"
+    }
+end
+
+for i, v in ipairs({{"normal_1", 4, 3, 1}, {"normal_2", 4, 3, 1}, {"jumbo", 6, 4, 1}, {"mega", 8, 4, 2}}) do
+    local loc_vars = booster_loc_vars
+    if v[2] == 4 then -- Standard
+	loc_vars = booster_loc_vars_key
+    end
+    SMODS.Booster {
+	key = "util_spaces_" .. v[1],
+	kind = 'util_Spaces',
+	atlas = "util_boosters",
+	cost = v[2],
+	pos = { x = i - 1, y = 0 },
+	config = { extra = v[3], choose = v[4] },
+	group_key = "k_util_spaces_group",
+	select_card = "consumeables",
+	loc_vars = loc_vars,
+	create_card = booster_create_card,
+    }
+end
 
 SMODS.Atlas {
     key = "util_spaces",
     path = "util-modders/spaces.png",
+    px = 71,
+    py = 95
+}
+
+SMODS.Atlas {
+    key = "util_boosters",
+    path = "util-modders/boosters.png",
     px = 71,
     py = 95
 }
@@ -208,7 +231,7 @@ SMODS.Consumable {
     set_sprites = setSprites,
     set_ability = initSpace,
     calculate = function(self, card, context)
-	if context.joker_main and next(context.poker_hands[card.ability.extra.poker_hand]) then
+	if context.joker_main and context.scoring_name == card.ability.extra.poker_hand then
 	    local depleted
 	    card.ability.extra.rounds = card.ability.extra.rounds - 1
 	    if card.ability.extra.rounds == 0 then

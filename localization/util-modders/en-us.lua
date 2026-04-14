@@ -71,6 +71,20 @@ return {
 		    "{C:attention}#2#{C:util_spaces} Space Pods",
 		},
 	    },
+	    p_worm_util_spaces_jumbo = {
+		name = "Jumbo Space Pod Pack",
+		text = {
+		    "Choose {C:attention}#1#{} of up to",
+		    "{C:attention}#2#{C:util_spaces} Space Pods",
+		},
+	    },
+	    p_worm_util_spaces_mega = {
+		name = "Mega Space Pod Pack",
+		text = {
+		    "Choose {C:attention}#1#{} of up to",
+		    "{C:attention}#2#{C:util_spaces} Space Pods",
+		},
+	    },
 	},
     },
     misc = {
