@@ -37,6 +37,8 @@ SMODS.Joker({
 	key = "meow_cotobo_box",
 	rarity = 2,
     atlas = "meow_jokers",
+    pos = {x = 2, y = 0},
+    soul_pos = {x = 2, y = 1},
     blueprint_compat = false,
     cost = 5,
     attributes = { "cat", "generation" },
@@ -55,7 +57,8 @@ SMODS.Joker({
         end
     end,
     ppu_team = {"meow"},
-	ppu_coder = { "revo" },
+    ppu_coder = { "revo" },
+    ppu_artist = { "silverautumn" },
 })
 
 SMODS.Joker({
