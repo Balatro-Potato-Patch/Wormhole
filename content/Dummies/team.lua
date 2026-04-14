@@ -15,7 +15,6 @@ SMODS.Atlas {
 }
 
 SMODS.Sound({ key = "dum_ghostclicked", path = "Dummies/worm_dum_ghostclicked.ogg" })
-SMODS.Sound({ key = "dum_flowireclicked", path = "Dummies/worm_dum_flowireclicked.ogg" })
 
 -- GhostSalt
 PotatoPatchUtils.Developer {
@@ -140,6 +139,8 @@ for _, v in ipairs({ "chimes", "chord", "comedy", "dialog-error", "dialog-questi
 	table.insert(sfx_toga_thing, "worm_dum_"..k)
 end
 
+SMODS.Sound({ key = "dum_waw", path = "Dummies/worm_dum_waw.ogg" })
+
 -- baltdev
 PotatoPatchUtils.Developer {
     name = "baltdev",
@@ -148,7 +149,13 @@ PotatoPatchUtils.Developer {
     atlas = "worm_dummies_team",
     pos = { x = 4, y = 0 },
     loc = true,
+	dum_sfx_click = "worm_dum_waw",
+	dum_sfx_pitch = { lower_bound = 0.95, upper_bound = 1.05 },
+	dum_sfx_volume = 0.7
 }
+
+SMODS.Sound({ key = "dum_flowireclicked", path = "Dummies/worm_dum_flowireclicked.ogg" })
+
 -- Flowire
 PotatoPatchUtils.Developer {
     name = "flowire",
@@ -159,7 +166,7 @@ PotatoPatchUtils.Developer {
     loc = true,
 	dum_sfx_click = "worm_dum_flowireclicked",
 	dum_sfx_pitch = { lower_bound = 0.95, upper_bound = 1.1 },
-	dum_sfx_volume = 0.8
+	dum_sfx_volume = 1
 }
 
 -- Member SFX click funnies
