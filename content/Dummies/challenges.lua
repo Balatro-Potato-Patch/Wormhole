@@ -1,4 +1,51 @@
 SMODS.Challenge {
+    key = 'dum_all_star_champion',
+    rules = {
+        custom = {
+            { id = 'worm_dum_all_star_champion_1' },
+            { id = 'worm_dum_space' },
+            { id = 'worm_dum_all_star_champion_2' },
+            { id = 'worm_dum_gold_stake' },
+        },
+        modifiers = {
+            { id = 'consumable_slots', value = 5 },
+        }
+    },
+    jokers = {
+        { id = 'j_oops', eternal = true, edition = "worm_dum_Celestial" },
+    },
+    vouchers = {
+        { id = 'v_planet_merchant' },
+    },
+    consumeables = {
+        { id = 'c_planet_x' },
+    },
+	apply = function(self)
+        -- Gold Stake
+		SMODS.setup_stake(SMODS.Stakes["stake_gold"].order)
+		G.GAME.stake = SMODS.Stakes["stake_gold"].order
+		-- Winning Ante
+		G.GAME.win_ante = (G.GAME.win_ante or 8) + 4
+	end,
+    calculate = function(self, context)
+        if context.using_consumeable and context.consumeable.ability.set == "Planet" then
+			if context.consumeable.ability.trinary and context.consumeable.ability.trinary <= 0 then
+				return
+			end
+            G.E_MANAGER:add_event(Event({
+                func = function()
+					local trinary_planet = SMODS.add_card{ set = 'Planet', soulable = true, key_append = 'dum_trinary_planet' }
+					trinary_planet.ability.trinary = (context.consumeable.ability.trinary or 2) - 1
+					play_sound('tarot'..math.random(1, 2), math.random() + 0.8, 0.5)
+                    return true
+                end
+            }))
+        end
+    end,
+	button_colour = G.C.SECONDARY_SET.Planet
+}
+
+SMODS.Challenge {
     key = 'dum_low_oxygen',
     rules = {
         custom = {

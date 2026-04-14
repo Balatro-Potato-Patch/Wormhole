@@ -147,7 +147,7 @@ return {
                     "for {C:attention}discarded{} poker hand,",
                     "{C:red}destroy{} the {C:planet}Planet{} card and",
                     "gain the {C:attention}per-level{} {C:chips}Chips{}",
-                    "{C:inactive}(Currently {C:chips}#1#{C:inactive} Chips)",
+                    "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips)",
                 },
             },
 			j_worm_dum_timcurry = {
@@ -306,6 +306,7 @@ return {
         challenge_names = {
             c_worm_dum_low_oxygen = "Low Oxygen",
             c_worm_dum_buff_spacesuit = "Buff Space Suit",
+            c_worm_dum_all_star_champion = "All Star Champion",
         },
         v_text = {
             -- Challenge Descs.
@@ -314,6 +315,8 @@ return {
             ch_c_worm_dum_buff_spacesuit_1 = { "Enjoy {C:green,E:1}Pre-Nerfed {C:attention}Space Suit{} stats!", },
             ch_c_worm_dum_buff_spacesuit_2 = { "{C:inactive}Maximum Oxygen: {C:spectral}05:00{C:inactive} minutes", },
             ch_c_worm_dum_buff_spacesuit_3 = { "{C:inactive}Replenish Time: {C:attention}01:00{C:inactive} minute", },
+            ch_c_worm_dum_all_star_champion_1 = { "{C:attention,E:2}Trinary{C:planet} Planet{} cards", },
+            ch_c_worm_dum_all_star_champion_2 = { "{C:attention}+4{} Winning Ante", },
             -- Generic/Misc.
             ch_c_worm_dum_gold_stake = { "Apply {C:money}Gold Stake{} difficulty" },
             ch_c_worm_dum_space = { "{s:0.5} ", },
@@ -359,14 +362,13 @@ return {
 		achievement_names = {
 			ach_worm_dum_timcurry = 'SPAAAAACE!',
 			ach_worm_dum_seriouscredit = 'Dedicated Crediting',
+			ach_worm_dum_unstoppable = 'Unstoppable Force',
 		},
 		achievement_descriptions = {
 			ach_worm_dum_timcurry = 'Find Space Joker whilst holding Tim Curry',
 			ach_worm_dum_timcurry_hidden = "One place that hasn't been corrupted by capitalism...",
 			ach_worm_dum_seriouscredit = 'Click on anyone in Team Credits... a lot...',
-		},
-        labels = {
-            worm_dum_Celestial = 'Celestial'
-        }
+			ach_worm_dum_unstoppable = 'Reach 10,000% and truly beat the Test Flight!',
+		}
     }
 }
