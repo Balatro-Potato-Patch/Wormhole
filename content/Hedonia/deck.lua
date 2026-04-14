@@ -9,6 +9,9 @@ SMODS.Back {
     key = 'hedonia_bar',
     atlas = 'deck',
     pos = {x=0, y=0},
+    ppu_artist = {'qunumeru'},
+    ppu_coder = {'axyraandas', 'wombatcountry'},
+    ppu_team = {'Hedonia'},
     apply = function(self, back)
         G.E_MANAGER:add_event(Event({
             func = function()
