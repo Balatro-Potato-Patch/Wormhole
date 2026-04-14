@@ -32,14 +32,18 @@ SMODS.Challenge {
 			if context.consumeable.ability.trinary and context.consumeable.ability.trinary <= 0 then
 				return
 			end
-            G.E_MANAGER:add_event(Event({
-                func = function()
-					local trinary_planet = SMODS.add_card{ set = 'Planet', soulable = true, key_append = 'dum_trinary_planet' }
-					trinary_planet.ability.trinary = (context.consumeable.ability.trinary or 2) - 1
-					play_sound('tarot'..math.random(1, 2), math.random() + 0.8, 0.5)
-                    return true
-                end
-            }))
+			if G.GAME.consumeable_buffer + #G.consumeables.cards < G.consumeables.config.card_limit then
+				G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+			    		local trinary_planet = SMODS.add_card{ set = 'Planet', soulable = true, key_append = 'dum_trinary_planet' }
+			    		trinary_planet.ability.trinary = (context.consumeable.ability.trinary or 2) - 1
+			    		play_sound('tarot'..math.random(1, 2), math.random() + 0.8, 0.5)
+			    		G.GAME.consumeable_buffer = G.GAME.consumeable_buffer - 1
+                        return true
+                    end
+                }))
+            end
         end
     end,
 	button_colour = G.C.SECONDARY_SET.Planet
