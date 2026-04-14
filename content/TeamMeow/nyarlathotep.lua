@@ -135,7 +135,7 @@ SMODS.Joker({
 				"dollars",
 			}) do
 				if cae.held_in_hand[entry] then
-					entries[#entries + 1] = { vars = { cae.individual[entry] }, key = entry }
+					entries[#entries + 1] = { vars = { cae.held_in_hand[entry] }, key = entry }
 				end
 			end
 			main_end[#main_end + 1] = build_nyarlathotep_entries(entries, 3)
