@@ -157,7 +157,7 @@ PotatoPatchUtils.Developer {
     loc = true,
 	dum_sfx_click = "worm_dum_waw",
 	dum_sfx_pitch = { lower_bound = 0.95, upper_bound = 1.05 },
-	dum_sfx_volume = 0.7
+	dum_sfx_volume = 0.45
 }
 
 SMODS.Sound({ key = "dum_flowireclicked", path = "Dummies/worm_dum_flowireclicked.ogg" })
