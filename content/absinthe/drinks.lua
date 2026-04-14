@@ -236,7 +236,7 @@ function Card:abs_empty_drink()
 end
 
 function Card:abs_toggle_drink_prime()
-    if self.ability.set == 'abs_drinks' then
+    if self.ability.set == 'abs_drinks' or self.config.center.soul_set == 'abs_drinks' then
         self.ability.drink_values.primed = not self.ability.drink_values.primed
         if self.ability.drink_values.primed then
             local eval = function(self) return self.ability.drink_values.primed end
@@ -392,7 +392,7 @@ SMODS.Consumable { -- Moonshine
             primed = false,
             empty_sound = "worm_abs_drink",
         },
-        extra = { xchips = 2, light_counter = 0, light_counter_req = 5 },
+        extra = { chips = 60, light_counter = 0, light_counter_req = 5 },
     },
     cost = 3,
     loc_vars = function(self, info_queue, card)
@@ -405,7 +405,7 @@ SMODS.Consumable { -- Moonshine
         return {
             key = key,
             vars = {
-                card.ability.extra.xchips, card.ability.extra.light_counter, card.ability.extra.light_counter_req
+                card.ability.extra.chips, card.ability.extra.light_counter, card.ability.extra.light_counter_req
             }
         }
     end,
@@ -435,7 +435,7 @@ SMODS.Consumable { -- Moonshine
                     end
                 }))
                 return {
-                    xchips = card.ability.extra.xchips
+                    chips = card.ability.extra.chips
                 }
             end
         end

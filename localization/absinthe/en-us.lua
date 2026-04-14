@@ -63,7 +63,7 @@ return {
                 name = 'Moonshine',
                 text = {
                     {
-                        "When {C:attention}primed{}, {X:chips,C:white}X#1#{} Chips if",
+                        "When {C:attention}primed{}, {C:chips}X#1#{} Chips if",
                         "played hand contains a",
                         "{C:spades}Da{C:clubs}rk{} suit card, then is {C:abs_drinks}drank{}",
                     },
@@ -85,7 +85,7 @@ return {
                     },
                     {
                         "{C:inactive,s:0.8}After being Refilled:{}",
-                        "When {C:attention}primed{}, {X:chips,C:white}X#1#{} Chips if",
+                        "When {C:attention}primed{}, {C:chips}X#1#{} Chips if",
                         "played hand contains a",
                         "{C:spades}Da{C:clubs}rk{} suit card, then is {C:abs_drinks}drank{}",
                     },
