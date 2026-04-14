@@ -4,6 +4,8 @@ return {
             PotatoPatchTeam_lancer_fan_club = { name = "Lancer Fan Club" },
 
             PotatoPatchDev_ProdByProto = {
+                --name = "{IMG:lfc_proot_EarL,s:0.525}a{} ProdByProto {IMG:lfc_proot_EarR,s:0.525}a{}", failed image attempt
+                --name = "#1#ProdByProto#2#", failed loc_vars test
                 name = "ProdByProto",
                 text = {
                     {
@@ -88,7 +90,7 @@ return {
                 text = {
                     "Each modified card drawn",
                     "has a #1# in #2# chance",
-                    "of turning to stone."
+                    "to become a Stone Card"
                 },
             }
         },

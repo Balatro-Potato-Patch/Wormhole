@@ -99,3 +99,13 @@ function Wormhole.LFC_Util.ease_eigengrau_bg_alpha(target)
         delay = 2,
     }))
 end
+
+function Wormhole.LFC_Util.is_card_modified(card)
+    if card.seal or card.edition or next(SMODS.get_enhancements(card)) then
+        return true
+    end
+    for k, _ in pairs(SMODS.Stickers) do
+        if card.ability[k] then return true end
+    end
+    return false
+end

@@ -70,6 +70,20 @@ SMODS.Atlas {
     path = "lancer_fan_club/spacebar.png"
 }
 
+SMODS.Atlas {
+    key = "lfc_proot_EarL",
+    px = 8,
+    py = 12,
+    path = "lancer_fan_club/EarL.png"
+}
+
+SMODS.Atlas {
+    key = "lfc_proot_EarR",
+    px = 8,
+    py = 12,
+    path = "lancer_fan_club/EarR.png"
+}
+
 -- Sounds
 SMODS.Sound {
     key = "lfc_explosion",
@@ -85,12 +99,17 @@ G.ARGS.LOC_COLOURS.lfc_meteor  = HEX('a97a51')
 -- Developers
 PotatoPatchUtils.Developer {
     name = "ProdByProto",
-    colour = HEX("d57a02"),
+    colour = HEX("d66b1c"),
     loc = "PotatoPatchDev_ProdByProto",
     team = "Lancer Fan Club",
     atlas = "worm_lfc_devs",
     pos = { x = 6, y = 0 },
     soul_pos = { x = 7, y = 0 },
+    --[[
+    loc_vars = function(self,  info_queue, card)
+        return{vars = {1,2}}
+    end,
+    ]]
     calculate = function(self, context)
         if context.card_added then
             if context.card.ability.set == "Joker" then
