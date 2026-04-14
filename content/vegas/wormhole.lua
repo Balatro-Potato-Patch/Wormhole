@@ -313,11 +313,12 @@ SMODS.Joker{
 	loc_txt = {
 		name = "Astronaut",
 		text = {
-			"{C:money}$#1#{} for each level",
-			"of the {C:attention}final hand"
+			"Earn {C:money}$#1#{} at end of",
+			"round per level of the",
+			"{C:attention}winning hand"
 		}
 	},
-	config = { extra = { dollars = 1 }},
+	config = { handlvl = 0, extra = { dollars = 1 }},
 	loc_vars = function(self, info_queue, card)
 		return { vars = { card.ability.extra.dollars }}
 	end,
@@ -325,19 +326,20 @@ SMODS.Joker{
 	pos = {x = 0, y = 1},
 	rarity = 2,
 	cost = 6,
-	blueprint_compat = true,
+	blueprint_compat = false,
 	discovered = true,
 	eternal_compat = true,
 	perishable_compat = true,
 	ppu_team = {"People Found In Vegas"},
-	ppu_coder = {"Jammbo"},
+	ppu_coder = {"Jammbo", "Ben Roffey"},
 	ppu_artist = {"Ben Roffey"},
 	calculate = function(self, card, context)
-		if context.joker_main and G.GAME.current_round.hands_left == 0 then
-            return {
-                dollars = G.GAME.hands[context.scoring_name].level
-            }
+		if context.joker_main then
+			card.ability.handlvl = G.GAME.hands[context.scoring_name].level
         end
+	end,
+	calc_dollar_bonus = function(self, card)
+		return card.ability.handlvl
 	end
 }
 
@@ -873,7 +875,7 @@ SMODS.Joker{
 	pos = {x = 2, y = 2},
 	rarity = 3,
 	cost = 5,
-	blueprint_compat = true,
+	blueprint_compat = false,
 	discovered = true,
 	eternal_compat = true,
 	perishable_compat = true,
