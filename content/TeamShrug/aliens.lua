@@ -309,7 +309,7 @@ suit_alien{
 suit_alien{
     key = 'shrug_alien_diamonds',
     atlas = 'shrug_alien_cards',
-    pos = {x = 0, y = 0},
+    pos = {x = 6, y = 0},
     config = {extra = {suit = 'Diamonds', convert = 6}},
     ppu_artist = {"waffle", "microwave"}
 }
@@ -418,7 +418,7 @@ SMODS.Consumable{
     cost = 4,
     set = 'shrug_alien',
     atlas = 'shrug_alien_cards',
-    pos = {x = 0, y = 0},
+    pos = {x = 7, y = 0},
     unlocked = true,
     discovered = true,
     config = {extra = {}},
@@ -437,7 +437,8 @@ SMODS.Consumable{
         SMODS.destroy_cards(to_destroy)
     end,
     ppu_coder = {"randomsongv2"},
-    ppu_team = {"shrug"}
+    ppu_team = {"shrug"},
+    ppu_artist = {"waffle", "microwave"}
 }
 
 -- Skyfish
