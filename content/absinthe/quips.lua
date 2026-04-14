@@ -53,3 +53,16 @@ SMODS.JimboQuip {
         times = 11,
      },
 }
+
+-- pi_cubed quips
+SMODS.JimboQuip {
+    key = 'lq_abs_pi_cubed',
+    type = 'loss',
+    extra = { ppu_dev = 'worm_pi_cubed' },
+}
+
+SMODS.JimboQuip {
+    key = 'wq_abs_pi_cubed',
+    type = 'win',
+    extra = { ppu_dev = 'worm_pi_cubed' },
+}

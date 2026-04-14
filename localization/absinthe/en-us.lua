@@ -657,6 +657,13 @@ return {
                 "Looks like you win this round.",
                 "Next one's on me!",
             },
+            worm_lq_abs_pi_cubed = {
+                "Well... that sucks!",
+            },
+            worm_wq_abs_pi_cubed = {
+                "What a transcendent journey!",
+                "Hope you stayed hydrated!",
+            },
         }
     }
 }
