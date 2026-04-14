@@ -1,0 +1,42 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+# Sprite in description
+[[patches]]
+[patches.pattern]
+target = "functions/misc_functions.lua"
+pattern = "elseif part.control.E then"
+position = "before"
+payload = '''
+elseif part.control.tbp_img then
+    local sprite_mod = (part.control.s and tonumber(part.control.s) or 1) * desc_scale
+    local w_mod = G.ASSET_ATLAS[part.control.tbp_img].px / G.ASSET_ATLAS[part.control.tbp_img].py
+    final_line[#final_line + 1] = {
+        n = G.UIT.O,
+        config = {
+            object = SMODS.create_sprite(0, 0, sprite_mod * w_mod, sprite_mod, part.control.tbp_img, {x = 0, y = 0})
+        }
+    }
+'''
+match_indent = true
+
+# Sprite in description box
+[[patches]]
+[patches.pattern]
+target = '=[SMODS _ "src/utils.lua"]'
+pattern = "elseif part.control.X or part.control.B then"
+position = "before"
+payload = '''
+elseif part.control.tbp_img then
+    local sprite_mod = (part.control.s and tonumber(part.control.s) or 1) * desc_scale
+    local w_mod = G.ASSET_ATLAS[part.control.tbp_img].px / G.ASSET_ATLAS[part.control.tbp_img].py
+    final_line[#final_line + 1] = {
+        n = G.UIT.O,
+        config = {
+            object = SMODS.create_sprite(0, 0, sprite_mod * w_mod, sprite_mod, part.control.tbp_img, {x = 0, y = 0})
+        }
+    }
+'''
+match_indent = true

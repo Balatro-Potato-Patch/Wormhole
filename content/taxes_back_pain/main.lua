@@ -105,7 +105,7 @@ end
 
 SMODS.Atlas {
     key = "tbp_devs",
-    path = "taxes_back_pain/devs.png",
+    path = "taxes_back_pain/portraits.png",
     px = 71,
     py = 95
 }
@@ -162,6 +162,13 @@ SMODS.Atlas {
     py = 15
 }
 
+SMODS.Atlas {
+    key = "tbp_cyclone",
+    path = "taxes_back_pain/cyclone.png",
+    px = 620,
+    py = 491
+}
+
 PotatoPatchUtils.Team({
     name = 'tbp',
     loc = true,
@@ -189,39 +196,51 @@ PotatoPatchUtils.Developer({
     name = 'eremel',
     team = 'tbp',
     loc = true,
-    colour = SMODS.Gradients.worm_eremel
+    colour = SMODS.Gradients.worm_eremel,
+    atlas = 'worm_tbp_devs',
+    pos = { x = 1, y = 1 },
 })
 
 PotatoPatchUtils.Developer({
     name = 'n',
     team = 'tbp',
     loc = true,
-    colour = HEX("F4A6C7")
+    colour = HEX("F4A6C7"),
+    atlas = 'worm_tbp_devs',
+    pos = { x = 6, y = 1 },
 })
 
 PotatoPatchUtils.Developer({
     name = 'sdm',
     team = 'tbp',
     loc = true,
-    colour = SMODS.Gradients.worm_sdm
+    colour = SMODS.Gradients.worm_sdm,
+    atlas = 'worm_tbp_devs',
+    pos = { x = 5, y = 1 },
 })
 
 PotatoPatchUtils.Developer({
     name = 'dilly',
     team = 'tbp',
     loc = true,
+    atlas = 'worm_tbp_devs',
+    pos = { x = 2, y = 1 },
 })
 
 PotatoPatchUtils.Developer({
     name = 'ice',
     team = 'tbp',
     loc = true,
+    atlas = 'worm_tbp_devs',
+    pos = { x = 3, y = 1 },
 })
 
 PotatoPatchUtils.Developer({
     name = 'rsnow',
     team = 'tbp',
     loc = true,
+    atlas = 'worm_tbp_devs',
+    pos = { x = 4, y = 1 },
 })
 
 PotatoPatchUtils.Developer({
@@ -229,7 +248,7 @@ PotatoPatchUtils.Developer({
     team = 'tbp',
     loc = true,
     atlas = 'worm_tbp_devs',
-    pos = { x = 0, y = 0},
+    pos = { x = 0, y = 1 },
 })
 
 SMODS.DrawStep{

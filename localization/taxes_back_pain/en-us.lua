@@ -96,7 +96,14 @@ local other_loc_table = {
             PotatoPatchDev_mythie = {
                 name = 'itsmythie',
                 text = {
-                    'placeholder'
+                    {
+                        'Creator and Artist',
+                        'of Monarchy'
+                    },
+                    {
+                        'the shit i went through to be here',
+                        '{s:4,tbp_img:worm_tbp_cyclone}a{}'
+                    }
                 }
             },
         },
