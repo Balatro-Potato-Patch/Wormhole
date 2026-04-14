@@ -24,6 +24,17 @@ SMODS.Atlas {
 }
 
 SMODS.Sound({
+	key = "abs_drink",
+	path = "absinthe/drink.ogg",
+})
+
+-- can[dy] crush
+SMODS.Sound({
+	key = "abs_crush",
+	path = "absinthe/crush.ogg",
+})
+
+SMODS.Sound({
 	key = "abs_refill",
 	path = "absinthe/refill.ogg",
 })
@@ -214,10 +225,10 @@ function Card:abs_empty_drink()
         if can_drink_twice and not self.first_drink then
             self.first_drink = true
             self.ability.drink_values.filled = true
-            SMODS.calculate_effect({ message = localize('k_worm_abs_sipped_ex'), colour = G.C.SECONDARY_SET.abs_drinks, sound = self.ability.drink_values.empty_sound }, self)
+            SMODS.calculate_effect({ message = localize('k_worm_abs_sipped_ex'), colour = G.C.SECONDARY_SET.abs_drinks, sound = self.ability.drink_values.empty_sound, per = 1 }, self)
         else
             self.first_drink = nil
-            SMODS.calculate_effect({ message = localize('k_worm_abs_emptied_ex'), colour = G.C.SECONDARY_SET.abs_drinks, sound = self.ability.drink_values.empty_sound }, self)
+            SMODS.calculate_effect({ message = localize('k_worm_abs_emptied_ex'), colour = G.C.SECONDARY_SET.abs_drinks, sound = self.ability.drink_values.empty_sound, per = 1 }, self)
         end
 
         SMODS.calculate_context({ abs_drink_emptied = true, card = self })
@@ -252,7 +263,8 @@ SMODS.Consumable { -- Supergiant Cider
             empty_pos = { x = 5, y = 0 },
             filled = true,
             visibly_filled = true,
-            primed = false
+            primed = false,
+            empty_sound = "worm_abs_drink",
         },
         extra = { discards = 1, poker_hand = 'Full House' },
     },
@@ -327,6 +339,7 @@ SMODS.Consumable { -- Hubble Trouble
             filled = true,
             visibly_filled = true,
             primed = false,
+            empty_sound = "worm_abs_drink",
         },
     },
     cost = 3,
@@ -376,7 +389,8 @@ SMODS.Consumable { -- Moonshine
             empty_pos = { x = 1, y = 3 },
             filled = true,
             visibly_filled = true,
-            primed = false
+            primed = false,
+            empty_sound = "worm_abs_drink",
         },
         extra = { xchips = 2, light_counter = 0, light_counter_req = 5 },
     },
@@ -451,7 +465,8 @@ SMODS.Consumable { -- Pina Solada
             empty_pos = { x = 1, y = 0 },
             filled = true,
             visibly_filled = true,
-            primed = false
+            primed = false,
+            empty_sound = "worm_abs_drink",
         },
         extra = { xmult = 2, dark_counter = 0, dark_counter_req = 5 },
     },
@@ -526,7 +541,8 @@ SMODS.Consumable { -- Meteor Sour
             empty_pos = { x = 1, y = 2 },
             filled = true,
             visibly_filled = true,
-            primed = false
+            primed = false,
+            empty_sound = "worm_abs_drink",
         },
         extra = { hands = 1, enh_discarded = 0, goal = 5 },
     },
@@ -593,7 +609,8 @@ SMODS.Consumable { -- Cosmospolitan
             empty_pos = { x = 5, y = 2 },
             filled = true,
             visibly_filled = true,
-            primed = false
+            primed = false,
+            empty_sound = "worm_abs_drink",
         },
         extra = { current_team = nil, planets_used = 0, goal = 2 },
     },
@@ -697,7 +714,8 @@ SMODS.Consumable { -- Voidka
             empty_pos = { x = 3, y = 1 },
             filled = true,
             visibly_filled = true,
-            primed = false
+            primed = false,
+            empty_sound = "worm_abs_drink",
         },
         extra = { dollars_req = 10, dollars_spent = 0 },
     },
@@ -758,7 +776,8 @@ SMODS.Consumable { -- Big Bang Brandy
             empty_pos = { x = 5, y = 1 },
             filled = true,
             visibly_filled = true,
-            primed = false
+            primed = false,
+            empty_sound = "worm_abs_drink",
         },
     },
     cost = 3,
@@ -817,7 +836,8 @@ SMODS.Consumable { -- John Absinthe
             empty_pos = { x = 5, y = 1 },
             filled = true,
             visibly_filled = true,
-            primed = false
+            primed = false,
+            empty_sound = "worm_abs_drink",
         },
         extra = { xmult_mod = 0.2, xmult = 1 },
     },
@@ -897,7 +917,8 @@ SMODS.Consumable {                -- Spacewalk Seltzer
             empty_pos = { x = 3, y = 2 },
             filled = true,
             visibly_filled = true,
-            primed = false
+            primed = false,
+            empty_sound = "worm_abs_drink",
         },
         extra = { reps = 1 },
     },
@@ -951,7 +972,8 @@ SMODS.Consumable { -- Stargarita
             empty_pos = { x = 3, y = 0 },
             filled = true,
             visibly_filled = true,
-            primed = false
+            primed = false,
+            empty_sound = "worm_abs_drink",
         },
         extra = { drawn_cards = 2 },
     },
@@ -1013,7 +1035,8 @@ SMODS.Consumable { -- Nebulager
             empty_pos = { x = 3, y = 3 },
             filled = true,
             visibly_filled = true,
-            primed = false
+            primed = false,
+            empty_sound = "worm_abs_crush",
         },
         extra = { current_sold = 0, sold_goal = 2 },
     },
