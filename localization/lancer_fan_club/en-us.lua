@@ -82,7 +82,7 @@ return {
                 text = {
                     "Each modified card drawn",
                     "has a #1# in #2# chance",
-                    "of turning to stone."
+                    "to become a Stone Card"
                 },
             }
         },

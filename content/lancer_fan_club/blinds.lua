@@ -96,31 +96,29 @@ function Game:start_run(...)
 end
 
 SMODS.Sound {
-  key = "lfc_music_eigengrau",
-  path = "lfc_eigengrau.wav",
-  pitch = 1,
-  select_music_track = function (self)
-    if not G.screenwipe and G.GAME and G.GAME.lfc_eigengrau then
-      return 1.7e307
-    end
-  end,
+    key = "lfc_music_eigengrau",
+    path = "lfc_eigengrau.wav",
+    pitch = 1,
+    select_music_track = function (self)
+        if G.GAME and SMODS.is_active_blind("bl_worm_lfc_eigengrau", true) then
+            return 1.7e306
+        end
+    end,
 }
 
 SMODS.Sound {
-  key = "lfc_music_eigengrau_lo",
-  path = "lfc_eigengrau_lopass.wav",
-  pitch = 1,
-  select_music_track = function (self)
-    if not G.screenwipe and G.GAME and G.GAME.lfc_eigengrau_lo then
-      return 1.7e308
-    end
-  end,
+    key = "lfc_music_eigengrau_lo",
+    path = "lfc_eigengrau_lopass.wav",
+    pitch = 1,
+    select_music_track = function (self)
+        if G.GAME and SMODS.is_active_blind("bl_worm_lfc_eigengrau", true) and G.GAME.lfc_eigengrau_lo then
+            return 1.7e307
+        end
+    end,
 }
 
--- TODO: MAKE LOWPASS MUSIC WORK. ALSO ADD PROPER SPRITE
-
-
-SMODS.Blind{
+-- TODO: ADD PROPER SPRITE
+SMODS.Blind {
     key = "lfc_eigengrau",
     atlas = "lfc_blinds",
     pos = { x = 0, y = 0 }, -- temp
@@ -137,26 +135,20 @@ SMODS.Blind{
         return { vars = { "1","2" } }
     end,
 
-    calculate = function(self, blind, context)
+    defeat = function(self)
+        -- disable shader here
+    end,
 
+    calculate = function(self, blind, context)
         if context.setting_blind then
-            G.GAME.lfc_eigengrau = true
             -- bg shader init goes here
         end
 
+        if blind.disabled then return end
+
         if context.hand_drawn and not blind.disabled then
             for id, card in ipairs(context.hand_drawn) do
-                card.worm_lfc_cardmod = 0
-                if card.seal then
-                    card.worm_lfc_cardmod = card.worm_lfc_cardmod + 1
-                end
-                if card.edition then
-                    card.worm_lfc_cardmod = card.worm_lfc_cardmod + 1
-                end
-                if next(SMODS.get_enhancements(card)) then
-                    card.worm_lfc_cardmod = card.worm_lfc_cardmod + 1
-                end
-                if card.worm_lfc_cardmod > 0 and SMODS.pseudorandom_probability(self,"turn to stone (electric lights orchestra reference)",1,2,"lfc_cardmod_check") then
+                if Wormhole.LFC_Util.is_card_modified(card) and SMODS.pseudorandom_probability(self,"turn to stone (electric lights orchestra reference)",1,2,"lfc_cardmod_check") then
                     card:set_ability('m_stone', nil, true)
                     G.E_MANAGER:add_event(Event({
                         trigger = 'immediate',
@@ -184,25 +176,19 @@ SMODS.Blind{
                 end
             end
             local stones = 0
-            for _, card in ipairs(G.hand) do
-                if (function()
-                    for _, card in ipairs(G.hand.cards) do
-                            if SMODS.get_enhancements(card)["m_stone"] then return true end
-                        end
-                    end)() then
-                        stones = stones + 1
-                end
+            for _, card in ipairs(G.hand.cards) do
+                if SMODS.get_enhancements(card)["m_stone"] then stones = stones + 1 end
             end
-            if stones / #G.hand.cards >= 0.5 then
-                G.GAME.lfc_eigengrau_lo, G.GAME.lfc_eigengrau = true, nil
-            else
-                G.GAME.lfc_eigengrau_lo, G.GAME.lfc_eigengrau = nil, true
-            end
+            G.GAME.lfc_eigengrau_lo = stones > (#G.hand.cards / 2)
         end
+    end,
 
-        if context.end_of_round then
-            G.GAME.lfc_eigengrau, G.GAME.lfc_eigengrau_lo = nil, nil
-        end
-
-    end
+    ppu_coder = { "ProdByProto", "InvalidOS" },
+    ppu_team = { "Lancer Fan Club" },
 }
+
+function IHeartLuckyCards()
+    for _, card in ipairs(G.playing_cards) do
+        card:set_ability("m_lucky")
+    end
+end
