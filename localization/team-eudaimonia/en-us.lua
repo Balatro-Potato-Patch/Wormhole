@@ -192,7 +192,14 @@ return {
                     "Shop cards cost {C:money}$#1#{} less",
                     "Increase both values by 1 per {C:green}reroll"
                 }
-            }
+            },
+            j_worm_euda_csaber = {
+                name = "Cyalume Saber",
+                text = {
+                    "{C:green}#1# in #2#{} chance to add {C:chips}+60{}",
+                    "Chips to a {C:chips}+Chips{} operation"
+                },
+            },
         },
         euda_Fate = {
             c_worm_euda_crunch = {
