@@ -29,9 +29,10 @@ return {
             PotatoPatchDev_theonegoofali = {
                 name = 'TheOneGoofAli',
                 text = {
-					{ "Additionally known under the {C:attention}TOGA{} acronym.", "Very much a nerd about (old) computers." },
+					{ "Additionally known under the {C:attention}TOGA{} acronym." },
+					{ "Very much interested in (old) computers.", "{C:inactive}And older versions of Windows too." },
 					{ "Previously modded {C:attention}Sonic Robo Blast 2{},", "{C:attention}Sonic Robo Blast 2 Kart{} and", "{C:attention}Dr. Robotnik's Ring Racers{}." },
-					{ "Also responsible for loading screen shenanigans.", "{C:inactive,s:0.9}Originally experimented for TOGA's Stuff" }
+					{ "Also responsible for loading screen shenanigans.", "{C:inactive}Originally experimented for TOGA's Stuff" }
 				}
             },
             PotatoPatchDev_baltdev = {
