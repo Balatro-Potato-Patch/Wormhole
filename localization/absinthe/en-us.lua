@@ -631,6 +631,14 @@ return {
                 "A win on the rocks.",
                 "You sure shook up that one!"
             },
+            worm_lq_abs_luna = {
+                "Looks like we've been",
+                "blindsided all along!"
+            },
+            worm_wq_abs_luna = {
+                "Looks like you win this round.",
+                "Next one's on me!",
+            },
         }
     }
 }

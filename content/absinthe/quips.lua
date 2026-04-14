@@ -32,3 +32,24 @@ SMODS.JimboQuip {
         times = 11,
      },
 }
+
+
+-- Luna Quips
+
+SMODS.JimboQuip {
+    key = 'lq_abs_luna',
+    type = 'loss',
+    extra = { 
+        ppu_dev = 'worm_AstraLuna', 
+        times = 10,
+    },
+}
+
+SMODS.JimboQuip {
+    key = 'wq_abs_luna',
+    type = 'win',
+    extra = { 
+        ppu_dev = 'worm_AstraLuna',
+        times = 11,
+     },
+}
