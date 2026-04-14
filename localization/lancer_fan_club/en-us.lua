@@ -35,8 +35,9 @@ return {
                         "and Spacebar lol"
                     },
                     {
-                        "also did the shader stuff",
-                        "Urination Station and these Credits!"
+                        "also did the shader",
+                        "and CanvasSprite for",
+                        "Urination Station.."
                     }
                 }
             },
@@ -97,7 +98,7 @@ return {
             j_worm_lfc_meteor_shower = {
                 name = "Meteor Shower",
                 text = {
-                    "Scored cards cause {C:lfc_meteor}meteors",
+                    "Scored cards cause {C:lfc_meteor,E:1}meteors{}",
                     "to fall on screen that",
                     "give {C:money}#1##2#{} when clicked"
                 }
@@ -236,6 +237,19 @@ return {
                     "an additional {C:chips}+#2#{} Chips",
                     "and {C:mult}+#3#{} when {C:attention}levelling up"
                 },
+            },
+            j_worm_lfc_hitchhiker = {
+                name = {
+                    "Joker's Guide",
+                    "to the Galaxy",
+                },
+                text = {
+                    "Creates a Joker from",
+                    "the {V:2,B:1}#1#{} mod if",
+                    "played hand contains a",
+                    "scoring {C:attention}#2#{} and {C:attention}#3#{}",
+                    "{C:inactive}(Must have room)",
+                }
             }
         },
         Spectral = {
@@ -260,8 +274,8 @@ return {
                 },
             },
             c_worm_lfc_wish = {
-                name="Wish",
-                text={
+                name = "Wish",
+                text = {
                     "Add a {C:lfc_meteor}Meteor Seal{}",
                     "to {C:attention}1{} selected",
                     "card in your hand",
@@ -282,7 +296,7 @@ return {
                 name = "Meteor Seal",
                 text = {
                     "Creates a {C:attention}clickable",
-                    "falling {C:lfc_meteor}meteor{} that",
+                    "{C:lfc_meteor}falling meteor{} that",
                     "gives {C:money}$#1#{} on hit"
                 }
             }
