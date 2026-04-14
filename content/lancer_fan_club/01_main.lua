@@ -90,6 +90,11 @@ SMODS.Sound {
     path = "lfc_explosion.ogg"
 }
 
+SMODS.Sound {
+    key = "lfc_spacebar",
+    path = "lfc_spacebar.ogg"
+}
+
 -- Colors
 loc_colour('red')
 G.ARGS.LOC_COLOURS.lfc_pkmn_us = HEX('E95B2B')
