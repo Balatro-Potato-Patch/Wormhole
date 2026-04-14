@@ -597,6 +597,25 @@ return {
                 }
                 }
             },
+            
+            PotatoPatchDev_AnneBean = {
+                name = 'AnneBean',
+                text = { {
+                    "Hiya, you can call me {E:2,C:purple}Anne{}! Thanks for checking out team {C:absinthe,E:1}Absinthe{}!",
+                    "I'm one of the artists for our team. I made the Spacewalk Seltzer and the",
+                    "pack art for our little mod! I'm quite proud of what I've come up with.",
+                    "This project has really helped me get out of a creative drought,",
+                    "so I look forward to drawing and spriting more in the near future!",
+                }, {
+                    "I couldn't have done this without {E:2,C:green}Luna{}, who helped push me into joining this Jam.",
+                    "I've gotten to meet a lot of lovely and inspired people as a result. {s:0.8}(Who I now consider friends :D)",
+                    "With my creative passion reinvigorated, I hope I get to work with everyone here again in the future!",
+                }, {
+                    "Be kind to yourself, you deserve it <3",
+                    "{f:9,s:0.6}💜"
+                }
+                }
+            },
         }
     },
     misc = {
