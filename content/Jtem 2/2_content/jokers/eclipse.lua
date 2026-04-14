@@ -139,7 +139,7 @@ SMODS.Joker {
 
 	ppu_team = { "jtem2" },
 	ppu_coder = { "aikoyori" },
-	ppu_artist = { "ari" },
+	ppu_artist = { "ari", "aikoyori" },
 	rarity = 3,
 	cost = 9,
 	config = {

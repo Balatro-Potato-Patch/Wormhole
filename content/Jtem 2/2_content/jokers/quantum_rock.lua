@@ -1,6 +1,6 @@
 SMODS.Atlas({
 	key = "jtem2_quantum_rock",
-	path = "Jtem 2/jokers/cosmic_ray.png",
+	path = "Jtem 2/jokers/quantum_rock.png",
 	px = 71,
 	py = 95,
 })
@@ -10,6 +10,7 @@ local rock = SMODS.Joker({
 
 	ppu_team = { "jtem2" },
 	ppu_coder = { "sleepyg11" },
+	ppu_artist = { "aikoyori" },
 
 	replace_base_card = true,
 

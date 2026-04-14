@@ -1,5 +1,13 @@
 return {
 	descriptions = {
+		Back = {
+			b_worm_jtem2_black_hole_deck = {
+				name = "Black Hole Deck",
+				text = {
+					"All {C:attention}Aces{} have {C:red}Black Hole Seal",
+				},
+			}
+		},
 		Joker = {
 			j_worm_jtem2_cosmic_ray = {
 				name = "Cosmic Ray",
@@ -138,6 +146,20 @@ return {
 						"if {C:blue}Hands{} is an {C:attention}even number{}",
 						"turns {C:attention}all cards in hand{} to {C:spades}Spades",
 					},
+				},
+			},
+			j_worm_jtem2_alien_alien = {
+				name = {
+					"{f:5}エイリアンエイリアン{}",
+					"Alien Alien",
+				},
+				text = {
+					{
+						"{C:green}#1# in #2#{} chance to create",
+						"a {C:tarot}Tarot{} card when",
+						"a {C:planet}Planet{} card is used."
+
+					}
 				},
 			},
 		},
