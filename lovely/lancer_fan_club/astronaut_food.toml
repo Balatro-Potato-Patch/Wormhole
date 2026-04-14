@@ -1,0 +1,35 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = -1
+
+# Make Black Hole use SMODS.upgrade_poker_hands
+# Card:use_consumable
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''for k, v in pairs(G.GAME.hands) do
+    level_up_hand(self, k, true)
+end'''
+position = "at"
+payload = '''
+SMODS.upgrade_poker_hands{
+    from = self,
+    level_up = 1,
+    instant = true,
+}
+'''
+match_indent = true
+
+# Add more flags to context.poker_hand_changed
+# SMODS.upgrade_poker_hands
+[[patches]]
+[patches.pattern]
+target = '=[SMODS _ "src/utils.lua"]'
+pattern = '''local context = {card = args.from, poker_hand_changed = true}'''
+position = "after"
+payload = '''
+context.instant = instant
+context.ignore_astronaut_food = args.ignore_astronaut_food
+'''
+match_indent = true
