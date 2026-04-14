@@ -793,16 +793,12 @@ Wormhole.tbp.Module({
     module_calculate = function (self, module, context, card)
         if context.wormhome_tbp_module_uninstall and context.module ~= self.slot and context.type == 'failed' then
             Wormhole.tbp.change_durability(card, self.slot, -1)
-            return {
-                func = function()
-                    local modules = Wormhole.tbp.get_equipped_modules(card)
-                    for key, module in pairs(modules) do
-                        if key ~= self.slot and module ~= context.card and module.durability < module.total_durability then
-                            Wormhole.tbp.change_durability(card, key, module.amount)
-                        end
-                    end
+            local modules = Wormhole.tbp.get_equipped_modules(card)
+            for key, module_data in pairs(modules) do
+                if key ~= self.slot and card == context.card and module_data.durability < module_data.total_durability then
+                    Wormhole.tbp.change_durability(card, key, module.amount)
                 end
-            }
+            end
         end
     end
 })
