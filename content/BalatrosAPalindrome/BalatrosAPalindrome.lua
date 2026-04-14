@@ -560,7 +560,7 @@ for duplicate = 0, 20 do
 						end
 					}))
 					return {
-						message = localize { type = 'variable', key = 'a_mult', vars = { card.ability.extra.x_mult + card.ability.extra.inc_mult } },
+						message = localize { type = 'variable', key = 'a_xmult', vars = { card.ability.extra.x_mult + card.ability.extra.inc_mult } },
 						colour = G.C.RED,
 						no_juice = true
 					}
