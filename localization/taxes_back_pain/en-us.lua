@@ -270,7 +270,7 @@ local descriptions = {
                 'Playing a {C:attention}#2#{}',
                 'increases the durability of',
                 'other {C:spectral}Modules{} by {C:attention}#1#{}',
-                '{s:0.8,C:inactive}(Depletes when triggered)'
+                '{s:0.8,C:inactive}(Depletes each round)'
             }
         },
         black_hole_generator = {
@@ -328,7 +328,7 @@ local descriptions = {
                 'Reduce {C:attention}Blind{}\'s',
                 'requirement by {C:red}#1#%{}',
                 'when {C:attention}Blind{} is selected',
-                '{s:0.8,C:inactive}(Depletes each Blind)'
+                '{s:0.8,C:inactive}(Depletes each round)'
             }
         },
         quantum = {
