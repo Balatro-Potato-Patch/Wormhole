@@ -19,15 +19,6 @@ SMODS.ConsumableType{
 }
 
 local wormhole_create_card = function (self, card, i)
-    if pseudorandom("asm_necrozma") < 0.003 then
-        return {
-            set = "Joker",
-            skip_materialize = true,
-            key = "j_worm_necrozma",
-            area = G.pack_cards,
-            key_append = "worm_wormholepack2"
-        }
-    end
     return {
         set = "worm_ultrabeast",
         soulable = true,
