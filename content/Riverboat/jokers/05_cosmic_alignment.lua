@@ -26,6 +26,7 @@ SMODS.Joker {
     eternal_compat = true,
     perishable_compat = true,
     ppu_coder = { "blamperer" },
+    ppu_artist = { "camo" },
     ppu_team = { "riverboat" },
     attributes = { "xmult", "planet" },
     loc_vars = function(self, info_queue, card)
