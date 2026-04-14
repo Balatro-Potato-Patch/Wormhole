@@ -4,7 +4,7 @@ SMODS.Joker({
     key = 'dum_mouthwash',
     config = { extra = { xmult_gain = 0.15, xmult = 1 } },
     unlocked = true,
-    rarity = 3,
+    rarity = 2,
     atlas = 'DummiesJokers',
     pos = { x = 8, y = 1 },
     cost = 8,
