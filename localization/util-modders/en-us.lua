@@ -38,27 +38,46 @@ return {
 	    },
 	},
 	util_Spaces = {
-	    c_worm_util_spaces_basic = {
-		name = "Basic Space",
+	    c_worm_util_spaces_basic_mult = {
+		name = "Basic Mult Pod",
 		text = {
-		    "Does some cool stuff",
+		    {
+			"When a {C:attention}#1#{} is played",
+			"{C:mult}+#2#{} mult"
+		    },
+		    {
+			"Depleted after {C:attention}#3#{} uses",
+		    }
+		}
+	    },
+	    c_worm_util_spaces_basic_chips = {
+		name = "Basic Chip Pod",
+		text = {
+		    {
+			"When a {C:attention}#1#{} is played",
+			"{C:chips}+#2#{} chips"
+		    },
+		    {
+			"Depleted after {C:attention}#3#{} uses",
+		    }
 		}
 	    }
 	},
 	Other = {
 	    p_worm_util_spaces_normal = {
-		name = "Spaces Pack",
+		name = "Space Pod Pack",
 		text = {
 		    "Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2#{C:util_spaces} Spaces{} cards",
+		    "{C:attention}#2#{C:util_spaces} Space Pods",
 		},
 	    },
 	},
     },
     misc = {
 	dictionary = {
-	    b_util_spaces_cards = "Spaces Cards", -- This sounds stupid, also when is this key used?
-	    k_util_spaces = "Spaces Pack", -- TODO: Don't quite like this name
+	    b_util_spaces_cards = "Space Pods",
+	    k_util_spaces = "Space Pod Pack",
+	    k_depleted = "Depleted!",
 	},
     }
 }

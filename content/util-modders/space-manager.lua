@@ -59,8 +59,8 @@ function manager:run(dt)
 
     if not self.active and self.target then
         self.curr = self.target
-        self.seed = self.target.ability.seed
-        self.conf = self.target.ability.space_conf
+        self.seed = self.target.ability.extra.seed
+        self.conf = self.target.ability.extra.space_conf
         self:recalc_overlay()
         self:run(dt) -- That's two frames per frame
     end

@@ -1,6 +1,6 @@
 SMODS.ConsumableType {
     key = 'util_Spaces',
-    default = 'c_worm_util_spaces_basic',
+    default = 'c_worm_util_spaces_basic_mult',
     primary_colour = G.C.SET.Tarot, -- TODO: Fix me
     secondary_colour = G.C.SECONDARY_SET.Tarot, -- TODO: Fix me
     collection_rows = { 5, 6 }, -- TODO: Set this to something approprate
@@ -54,7 +54,7 @@ local function newDrawSelf(self, overlay)
 	love.graphics.clear(0, 0, 0, 0)
 
 	local shader = G.SHADERS.worm_util_space
-	local conf = self.parent.ability.space_conf
+	local conf = self.parent.ability.extra.space_conf
 	shader:send("screen_scale", scale / .75)
 	shader:send("time", G.TIMERS.REAL)
 	shader:send("transparency", 1)
@@ -90,7 +90,7 @@ local nebulaColors = {
     G.C.ETERNAL,
 }
 local function calcCard(self, card)
-    local seed = card.ability.seed
+    local seed = card.ability.extra.seed
     local opts = copy_table(options)
     local conf = {
 	seed = seed,
@@ -114,24 +114,115 @@ local function calcCard(self, card)
     return conf
 end
 
+local function initSpace(self, card)
+    card.ability.extra.seed = pseudorandom("worm_util_spaces_seed")
+    card.ability.extra.space_conf = calcCard(self, card)
+    local _poker_hands = {}
+    for handname, _ in pairs(G.GAME.hands) do
+	if SMODS.is_poker_hand_visible(handname) then
+	    _poker_hands[#_poker_hands + 1] = handname
+	end
+    end
+    card.ability.extra.poker_hand = pseudorandom_element(_poker_hands, 'util_spaces_hand')
+end
+local function setSprites(self, card, front)
+    local cs = SMODS.CanvasSprite {
+	canvasScale = 2,
+    }
+    cs.center_ref = card.children.center
+    card.children.center = cs
+    cs:set_role({major = card, role_type = 'Glued', draw_major = card})
+    cs.parent = card
+    cs.ds_ref = cs.draw_self
+    cs.draw_self = newDrawSelf
+end
+
 SMODS.Consumable {
-    key = 'util_spaces_basic',
+    key = 'util_spaces_basic_mult',
     set = 'util_Spaces',
     atlas = "util_spaces",
     pos = { x = 0, y = 0 },
     space_conf = {
 	options = 2,
     },
-    set_ability = function(self, card, initial, delay_sprites)
-	card.ability.seed = pseudorandom("worm_util_spaces_seed")
-	card.ability.space_conf = calcCard(self, card)
-	local cs = SMODS.CanvasSprite {
-	    canvasScale = 2,
+    config = {
+	extra = {
+	    mult = 20,
+	    rounds = 3,
+	},
+    },
+    loc_vars = function(self, info_queue, card)
+	return {
+	    vars = {
+		localize(card.ability.extra.poker_hand, 'poker_hands'),
+		card.ability.extra.mult,
+		card.ability.extra.rounds,
+	    },
 	}
-	cs.center_ref = card.children.center
-	card.children.center = cs
-	card.children.center:set_role({major = card, role_type = 'Glued', draw_major = card})
-	cs.ds_ref = cs.draw_self
-	cs.draw_self = newDrawSelf
     end,
+    set_sprites = setSprites,
+    set_ability = initSpace,
+    calculate = function(self, card, context)
+	if context.joker_main and next(context.poker_hands[card.ability.extra.poker_hand]) then
+	    local depleted
+	    card.ability.extra.rounds = card.ability.extra.rounds - 1
+	    if card.ability.extra.rounds == 0 then
+		depleted = {
+		    message = localize("k_depleted"),
+		    func = function()
+			SMODS.destroy_cards(card)
+		    end
+		}
+	    end
+	    return {
+		mult = card.ability.extra.mult,
+		extra = depleted,
+	    }
+	end
+    end
+}
+
+SMODS.Consumable {
+    key = 'util_spaces_basic_chips',
+    set = 'util_Spaces',
+    atlas = "util_spaces",
+    pos = { x = 0, y = 0 },
+    space_conf = {
+	options = 2,
+    },
+    config = {
+	extra = {
+	    chips = 50,
+	    rounds = 3,
+	},
+    },
+    loc_vars = function(self, info_queue, card)
+	return {
+	    vars = {
+		localize(card.ability.extra.poker_hand, 'poker_hands'),
+		card.ability.extra.chips,
+		card.ability.extra.rounds,
+	    },
+	}
+    end,
+    set_sprites = setSprites,
+    set_ability = initSpace,
+    calculate = function(self, card, context)
+	if context.joker_main and next(context.poker_hands[card.ability.extra.poker_hand]) then
+	    local depleted
+	    card.ability.extra.rounds = card.ability.extra.rounds - 1
+	    if card.ability.extra.rounds == 0 then
+		depleted = {
+		    message = localize("k_depleted"),
+		    func = function()
+			SMODS.destroy_cards(card)
+		    end
+		}
+	    end
+	    return {
+		chips = card.ability.extra.chips,
+		extra = depleted,
+	    }
+	end
+    end
 }
