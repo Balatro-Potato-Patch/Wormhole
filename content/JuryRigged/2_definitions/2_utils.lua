@@ -5,8 +5,8 @@ Wormhole.JR_UTILS.ENABLED_SATELLITES = {
   ['Pair'] = 'messenger',
   ['Two Pair'] = 'tianwen_4',
   --['Three of a Kind'] = 'venera_9',
+  ['Straight'] = 'cassini_huygens',
   ['Flush'] = 'galileo',
-  --['Straight'] = 'cassini_huygens',
   ['Full House'] = 'sputnik_1',
   ['Four of a Kind'] = 'mariner_9',
   ['Straight Flush'] = 'voyager_2';
@@ -111,4 +111,13 @@ Wormhole.JR_UTILS.update_transponder = function()
 
     G.GAME.jr.transponder_ct = count
   end
+end
+
+Wormhole.JR_UTILS.table_contains = function(table, element)
+  for _, value in pairs(table) do
+    if value == element then
+      return true
+    end
+  end
+  return false
 end

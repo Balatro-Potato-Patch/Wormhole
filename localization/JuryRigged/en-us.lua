@@ -43,6 +43,21 @@ return {
           }
         }
       },
+      sat_worm_cassini_huygens = {
+        name = "Cassini-Huygens",
+        text = {
+          {
+            "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
+            "{C:attention}#2#",
+          },
+          {
+            "If played hand is a",
+            "{C:attention}#2#{}, destroy {C:attention}#1#{} card#3#",
+            "in full deck of ranks",
+            "not in the {C:attention}#2#"
+          }
+        }
+      },
       sat_worm_galileo = {
         name = "Galileo",
         text = {
