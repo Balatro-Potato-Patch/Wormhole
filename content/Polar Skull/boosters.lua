@@ -14,7 +14,7 @@ SMODS.Booster({
     pos = { x = 0, y = 0 },
     config = { extra = 3, choose = 1 },
     select_card = 'consumeables',
-	--ppu_artist = {"placeholder"},
+	ppu_artist = {"comykel"},
 	ppu_coder = {"cloudzxiii"},
 	ppu_team = {"polar_skull"},
 
@@ -67,7 +67,7 @@ SMODS.Booster({
     pos = { x = 1, y = 0 },
     config = { extra = 3, choose = 1 },
     select_card = 'consumeables',
-	--ppu_artist = {"placeholder"},
+	ppu_artist = {"comykel"},
 	ppu_coder = {"cloudzxiii"},
 	ppu_team = {"polar_skull"},
 
@@ -120,7 +120,7 @@ SMODS.Booster({
     pos = { x = 2, y = 0 },
     config = { extra = 5, choose = 1 },
     select_card = 'consumeables',
-	--ppu_artist = {"placeholder"},
+	ppu_artist = {"comykel"},
 	ppu_coder = {"cloudzxiii"},
 	ppu_team = {"polar_skull"},
 
@@ -173,7 +173,7 @@ SMODS.Booster({
     pos = { x = 3, y = 0 },
     config = { extra = 5, choose = 2 },
     select_card = 'consumeables',
-	--ppu_artist = {"placeholder"},
+	ppu_artist = {"comykel"},
 	ppu_coder = {"cloudzxiii"},
 	ppu_team = {"polar_skull"},
 

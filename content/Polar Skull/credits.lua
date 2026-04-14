@@ -5,6 +5,8 @@ SMODS.Atlas({
     py = 95,
 })
 
+-- these are amazing comykel!!!
+
 PotatoPatchUtils.Team({
     name = "polar_skull",
     colour = HEX("aefffc"),
@@ -18,7 +20,7 @@ PotatoPatchUtils.Developer({
     loc = true,
     team = "polar_skull",
     atlas = "worm_polarskull_credits",
-    pos = { x = 0, y = 0 },
+    pos = { x = 3, y = 0 },
 })
 PotatoPatchUtils.Developer({
     name = "noodlemire",
@@ -26,7 +28,7 @@ PotatoPatchUtils.Developer({
     loc = true,
     team = "polar_skull",
     atlas = "worm_polarskull_credits",
-    pos = { x = 1, y = 0 },
+    pos = { x = 4, y = 0 },
 })
 PotatoPatchUtils.Developer({
     name = "mariofan",
@@ -42,7 +44,7 @@ PotatoPatchUtils.Developer({
     loc = true,
     team = "polar_skull",
     atlas = "worm_polarskull_credits",
-    pos = { x = 3, y = 0 },
+    pos = { x = 0, y = 0 },
 })
 PotatoPatchUtils.Developer({
     name = "jade",
@@ -50,7 +52,7 @@ PotatoPatchUtils.Developer({
     loc = true,
     team = "polar_skull",
     atlas = "worm_polarskull_credits",
-    pos = { x = 4, y = 0 },
+    pos = { x = 1, y = 0 },
 })
 PotatoPatchUtils.Developer({
     name = "rainstar",
