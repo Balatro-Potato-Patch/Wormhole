@@ -200,7 +200,7 @@ return {
                 name = "Pulsar",
                 text = {
                     "{C:attention}Doubles{} the per-level",
-                    "Chips & Mult of {C:attention}#1#{}",
+                    "{C:chips}Chips{} & {C:mult}Mult{} of {C:attention}#1#{}",
                     "and set its level to {C:attention}1"
                 }
             }
@@ -287,7 +287,7 @@ return {
                 text = {
                     "{C:green}#1# in #2#{} chance to",
                     "upgrade a {C:attention}random{}",
-                    "Poker Hand when",
+                    "poker hand when",
                     "using a {C:planet}Planet{} Card"
                 }
             },
