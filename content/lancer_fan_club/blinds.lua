@@ -81,7 +81,7 @@ function Game:start_run(...)
             bond = 'Strong',
             offset = {x=0,y=0}
         })
-        G.ARGS.eigengrau_alpha = 0
+        G.ARGS.eigengrau_alpha = SMODS.is_active_blind("bl_worm_lfc_eigengrau", true) and 1 or 0
         G.LFC_EIGENGRAU_BG:define_draw_steps({{
             shader = 'worm_lfc_eigengrau_bg',
             send = {
@@ -136,12 +136,12 @@ SMODS.Blind {
     end,
 
     defeat = function(self)
-        -- disable shader here
+        Wormhole.LFC_Util.ease_eigengrau_bg_alpha(0)
     end,
 
     calculate = function(self, blind, context)
         if context.setting_blind then
-            -- bg shader init goes here
+            Wormhole.LFC_Util.ease_eigengrau_bg_alpha(1)
         end
 
         if blind.disabled then return end
@@ -184,11 +184,6 @@ SMODS.Blind {
     end,
 
     ppu_coder = { "ProdByProto", "InvalidOS" },
+    ppu_artist = { "InvalidOS" --[[ and also whoever does the sprite]] },
     ppu_team = { "Lancer Fan Club" },
 }
-
-function IHeartLuckyCards()
-    for _, card in ipairs(G.playing_cards) do
-        card:set_ability("m_lucky")
-    end
-end
