@@ -171,7 +171,7 @@ SMODS.DrawStep {
     key = 'abs_drinks',
     order = -9,
     func = function(self, layer)
-        if self.ability.set == 'abs_drinks' and self.config.center.discovered then
+        if (self.ability.set == 'abs_drinks' or self.config.center.soul_set == 'abs_drinks') and self.config.center.discovered then
             if self.ability.drink_values.visibly_filled and self.children.center.sprite_pos ~= self.ability.drink_values.filled_pos then
                 self.children.center:set_sprite_pos(self.ability.drink_values.filled_pos)
             elseif not self.ability.drink_values.visibly_filled and self.children.center.sprite_pos ~= self.ability.drink_values.empty_pos then
@@ -827,7 +827,7 @@ SMODS.Consumable { -- John Absinthe
     set = 'Spectral',
     soul_set = 'abs_drinks',
     key = 'abs_absinthe',
-    ppu_coder = { 'pi_cubed' },
+    ppu_coder = { 'pi_cubed', 'theAstra' },
     ppu_artist = { 'pangaea47' },
     ppu_team = { 'absinthe' },
     pos = { x = 4, y = 3 },
@@ -841,13 +841,12 @@ SMODS.Consumable { -- John Absinthe
             primed = false,
             empty_sound = "worm_abs_drink",
         },
-        extra = { xmult_mod = 0.2, xmult = 1 },
+        extra = { size = 1, gain = 1 },
     },
     hidden = true,
     cost = 10,
     select_card = 'consumeables',
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'e_negative_consumable', set = 'Edition', config = { extra = 1 } }
         local key
         if not card.ability.drink_values.filled then
             key = self.key .. '_empty'
@@ -857,44 +856,41 @@ SMODS.Consumable { -- John Absinthe
         return {
             key = key,
             vars = {
-                card.ability.extra.xmult_mod, card.ability.extra.xmult
+                card.ability.extra.size, card.ability.extra.gain
             }
         }
     end,
     calculate = function(self, card, context)
-        if context.joker_main and card.ability.extra.xmult > 1 then
+
+        if context.drawing_cards and card.ability.drink_values.filled and card.ability.drink_values.primed then
+            G.hand:change_size(card.ability.extra.size)
             return {
-                xmult = card.ability.extra.xmult
+                modify = context.amount + card.ability.extra.size
             }
         end
 
-        if context.setting_blind and G.consumeables.cards[1] and card.ability.drink_values.filled then
+        if context.abs_end_draw and card.ability.drink_values.filled and card.ability.drink_values.primed then
+            card:abs_empty_drink()
             G.E_MANAGER:add_event(Event({
+                trigger = 'after',
                 func = function()
-                    local new_drink = SMODS.add_card({ set = 'abs_drinks' })
-                    new_drink:set_edition("e_negative", true)
-                    return true
+                    G.E_MANAGER:add_event(Event({
+                        trigger = 'after',
+                        func = function()
+                            G.hand:change_size(-card.ability.extra.size)
+                            return true;
+                        end
+                    }))
+                    return true;
                 end
             }))
-            return { message = localize('k_duplicated_ex') }
         end
 
-        if context.abs_drink_emptied and context.card.edition
-            and context.card.edition.key == 'e_negative' and card.ability.drink_values.filled then
-            SMODS.scale_card(card, {
-                ref_table = card.ability.extra,
-                ref_value = "xmult",
-                scalar_value = "xmult_mod",
-            })
-            card:abs_empty_drink()
-        end
-
-        if context.using_consumeable and context.consumeable.config.center.set == 'Spectral'
-            and not card.ability.drink_values.filled then
+        if context.using_consumeable and context.consumeable.config.center.set == 'Spectral' and not card.ability.drink_values.filled then
             card:abs_refill_drink()
         end
     end,
-    --[[use = function(self, card, area, copier)
+    use = function(self, card, area, copier)
         card:abs_toggle_drink_prime()
     end,
     can_use = function(self, card)
@@ -902,7 +898,14 @@ SMODS.Consumable { -- John Absinthe
     end,
     keep_on_use = function(self, card)
         return true;
-    end]]
+    end,
+    refill = function(self, card)
+        SMODS.scale_card(card, {
+            ref_table = card.ability.extra,
+            ref_value = "size",
+            scalar_value = "gain",
+        })
+    end,
 }
 
 SMODS.Consumable {                -- Spacewalk Seltzer

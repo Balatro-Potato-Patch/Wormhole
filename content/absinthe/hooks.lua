@@ -15,3 +15,10 @@ function Card:sell_card()
         return sell_card_ref(self)
     end
 end
+
+-- Adds context.abs_end_draw for Artemisia Absinthe to reset its handsize modifier
+local draw_from_deck_ref = G.FUNCS.draw_from_deck_to_hand
+G.FUNCS.draw_from_deck_to_hand = function(e)
+    draw_from_deck_ref(e)
+    SMODS.calculate_context({abs_end_draw = true})
+end

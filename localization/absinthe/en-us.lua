@@ -443,20 +443,15 @@ return {
                 name = 'Artemisia Absinthe (WIP)',
                 text = {
                     {
-                        "When {C:attention}Blind{} is selected,",
-                        "if this drink is {C:attention}not {C:abs_drink}empty{},",
-                        "create a {C:dark_edition}Negative{C:abs_drink} Drink{}",
-                    },
-                    {
-                        "If this drink is {C:attention}not {C:abs_drink}empty{},",
-                        "when a {C:dark_edition}Negative{C:abs_drink} Drink{} is",
-                        "{C:abs_drinks}drank{}, this drink gains",
-                        "{X:mult,C:white}X#1#{} Mult and is {C:abs_drinks}drank{}",
-                        "{C:inactive}(Currently {{X:mult,C:white}X#2#{C:inactive} Mult)",
+                        "When {C:attention}primed{}, next time",
+                        "cards are drawn, {C:attention}+#1#{} hand size",
+                        "while drawing, then is {C:abs_drinks}drank{}",
                     },
                     {
                         "{C:abs_drinks}Refill{} by using",
-                        "a {C:spectral}Spectral{} card",
+                        "a {C:spectral}Spectral{} card, hand size",
+                        "modifier increases by {C:attention}+#2#{}",
+                        "when {C:abs_drinks}Refilled{}"
                     }
                 }
             },
@@ -466,21 +461,16 @@ return {
                     {
                         "{C:inactive,s:0.8}Currently Empty{}",
                         "{C:abs_drinks}Refill{} by using",
-                        "a {C:spectral}Spectral{} card",
+                        "a {C:spectral}Spectral{} card, hand size",
+                        "modifier increases by {C:attention}+#2#{}",
+                        "when {C:abs_drinks}Refilled{}"
                     },
                     {
                         "{C:inactive}(Currently {{X:mult,C:white}X#2#{C:inactive} Mult)",
                         "{C:inactive,s:0.8}After being Refilled:{}",
-                        "If this drink is {C:attention}not {C:abs_drink}empty{},",
-                        "when a {C:dark_edition}Negative{C:abs_drink} Drink{} is",
-                        "{C:abs_drinks}drank{}, this drink gains",
-                        "{X:mult,C:white}X#1#{} Mult and is {C:abs_drinks}drank{}",
-                    },
-                    {
-                        "{C:inactive,s:0.8}After being Refilled:{}",
-                        "When {C:attention}Blind{} is selected,",
-                        "if this drink is {C:attention}not {C:abs_drink}empty{},",
-                        "create a {C:dark_edition}Negative{C:abs_drink} Drink{}",
+                        "When {C:attention}primed{}, next time",
+                        "cards are drawn, {C:attention}+#1#{} hand size",
+                        "while drawing, then is {C:abs_drinks}drank{}",
                     }
                 }
             },
