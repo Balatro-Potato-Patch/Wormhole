@@ -479,6 +479,14 @@ return {
 					"with a {C:red}Showdown Blind{}",
 				},
 			},
+			exc_worm_meow_macabre = {
+				name = "Macabre",
+				text = {
+					"Destroy {C:attention}#1#{} Jokers",
+					"{C:attention}Nya-rlathotep{} gains {C:mult}+#2#{} Mult",
+					"{C:inactive}(Currently {C:red}+#3#{C:inactive} Mult",
+				},
+			},
 			worm_meow_spacetart_stacks = {
 				text = {
 					"{C:inactive,s:0.8}(Boost level: {C:attention,s:0.8}#2#{C:inactive,s:0.8})",

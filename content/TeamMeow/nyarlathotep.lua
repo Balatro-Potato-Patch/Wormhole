@@ -684,6 +684,36 @@ nyarlathotep_exchange({
 	end
 })
 
+nyarlathotep_exchange({
+	key = "macabre",
+	cost = -3,
+	config = { destroy = 3, mult = 30 },
+	reward = function(self, card)
+		local destroy = {}
+		local cae = card.ability.extra
+		for i = #G.jokers.cards, 2, -1 do
+			local j = math.random(i)
+			G.jokers.cards[i], G.jokers.cards[j] = G.jokers.cards[j], G.jokers.cards[i]
+		end
+		destroy = { G.jokers.cards[1], G.jokers.cards[2], G.jokers.cards[3] }
+		SMODS.destroy_cards(destroy)
+		cae.joker_main.mult = (cae.joker_main.mult or 0) + self.config.mult
+	end,
+	loc_vars = function(self, card)
+		local cae = card.ability.extra
+		return {
+			vars = {
+				self.config.destroy,
+				self.config.mult,
+				cae.joker_main.mult or 0,
+			},
+		}
+	end,
+	in_pool = function(self, card, amt)
+		return #G.jokers.cards > 3
+	end,
+})
+
 function Wormhole.TEAM_MEOW.generate_exchange_pool(card, seed)
 	local results = {}
 	local pool = {}

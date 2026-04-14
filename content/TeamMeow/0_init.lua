@@ -57,7 +57,7 @@ SMODS.Sound({
 SMODS.Sound({
 	key = "meowDread",
 	path = "TeamMeow/dread.ogg",
-	volume = 0.4,
+	volume = 0.25,
 	pitch = 1,
 })
 PotatoPatchUtils.Team({
