@@ -1,14 +1,14 @@
 SMODS.Joker {
 
     ppu_team = { "Balatro Stewniversity" },
-    ppu_artist = { "pending" },
+    ppu_artist = { "tuzzo" },
     ppu_coder = { "stupxd" },
 
     key = 'stew_astrologer',
     rarity = "Common",
     cost = 4,
     atlas = 'stewjokers',
-    pos = {x=0, y=0},
+    pos = {x=0, y=3},
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = true,

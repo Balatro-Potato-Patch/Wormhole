@@ -141,10 +141,17 @@ return {
             },
 
             j_worm_stew_sputnik = {
-                name = 'Sputnik Earth',
+                name = 'Space Probe',
                 text = {
-                    "{C:mult}+#1#{} Mult for every {C:money}${} below {C:money}$#2#{}",
-                    "{C:inactive}(Currently {C:mult}+#3#{C:inactive} Mult)"
+                    "{C:inactive}[Receiving transmission...]"
+                }
+            },
+
+            j_worm_stew_starfish_earth = {
+                name = 'Womp womp',
+                text = {
+                    "testing param #1#",
+                    "test #1#"
                 }
             },
 
