@@ -224,7 +224,8 @@ return {
                     "I did most Joker code",
                     'for our team! Shout out to',
                     'the biggest mother frogger and the',
-                    'cheesiest pear I know'
+                    'cheesiest pear I know, you\'re the',
+                    'goats'
                 }
             },
             dottykitty = {

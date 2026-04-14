@@ -29,21 +29,21 @@ PotatoPatchUtils.Developer {
 
 PotatoPatchUtils.Developer {
   name = 'Wingcap',
-  colour = HEX('ff0000'),
+  colour = HEX('FF1F00'),
   loc = "Wingcap",
   team = 'Balatro Stewniversity'
 }
 
 PotatoPatchUtils.Developer {
   name = 'tuzzo',
-  colour = HEX('ffffff'),
+  colour = HEX('ff7d5b'),
   loc = "tuzzo",
   team = 'Balatro Stewniversity'
 }
 
 PotatoPatchUtils.Developer {
   name = 'HonuKane',
-  colour = HEX('ffffff'),
+  colour = HEX('15A61C'),
   loc = "HonuKane",
   team = 'Balatro Stewniversity'
 }

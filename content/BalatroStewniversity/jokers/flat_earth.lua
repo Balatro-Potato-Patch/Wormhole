@@ -2,7 +2,7 @@ SMODS.Joker {
 
     ppu_team = { "Balatro Stewniversity" },
     ppu_artist = { "PLagger" },
-    ppu_coder = { "PLagger" },
+    ppu_coder = { "PLagger", 'stupxd' },
 
     key = 'stew_flat_earth',
     config = {extra = {chips = 78, chips_mod = 2,}},

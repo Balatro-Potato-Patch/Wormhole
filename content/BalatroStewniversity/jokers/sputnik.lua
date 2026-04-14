@@ -1,4 +1,3 @@
-
 SMODS.Joker {
 
     ppu_team = {'Balatro Stewniversity'},
