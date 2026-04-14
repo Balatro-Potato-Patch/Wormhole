@@ -426,7 +426,7 @@ SMODS.Consumable {
         play_sound('cancel', 0.3)
         check_for_unlock({type = 'have_edition'})
     end, -- that was easy
-    can_use = function(self, card) return (#G.jokers.cards > 0) and G.hand end,
+    can_use = function(self, card) return G.jokers and (#G.jokers.cards > 0) and G.hand and #G.hand.cards > 0 end,
     ppu_artist = {"worm_superb"},
     ppu_coder = {"worm_garb"},
     ppu_team = {"awesomeswagmoney"},
