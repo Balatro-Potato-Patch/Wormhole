@@ -430,6 +430,46 @@ SMODS.Joker {
     end
 }
 
+-- Solar Panels
+SMODS.Joker {
+	key = "bap_solar_panel",
+    blueprint_compat = true,
+    eternal_compat = false,
+    rarity = 1,
+    cost = 6,
+	atlas = 'Palindrome',
+    pos = { x = 0, y = 1 },
+    config = { extra = { s_mult = 4, suitOne = 'Diamonds', s_chips = 25, suitTwo = 'Hearts' }, },
+	loc_txt = {
+		name = 'Solar Panels',
+		text = {
+			"Scored cards with",
+			"{C:hearts}Heart{} suit give",
+			"{C:mult}+4{} Mult when scored,",
+			"Scored cards with",
+			"{C:hearts}Diamond{} suit give",
+			"{C:chips}+25{} Chips when scored,",
+		}
+	},
+    loc_vars = function(self, info_queue, card)
+        return { vars = {} }
+    end,
+    calculate = function(self, card, context)
+        if context.individual and context.cardarea == G.play and
+            context.other_card:is_suit(card.ability.extra.suitTwo) then
+            return {
+                mult = card.ability.extra.s_mult
+            }
+        end
+		if context.individual and context.cardarea == G.play and
+            context.other_card:is_suit(card.ability.extra.suitOne) then
+            return {
+                chips = card.ability.extra.s_chips
+            }
+        end
+    end
+}
+
 
 -- Space Worm
 SMODS.Joker {
