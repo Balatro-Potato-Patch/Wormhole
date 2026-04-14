@@ -45,7 +45,7 @@ function G.FUNCS.worm_jtem2_use_eclipse(e)
 			end
 		end
 		
-	end)
+	end, { stagger = 0.2, finish_flipped_delay = 0.2 })
 	card.ability.extras.eclipse_done = false
 	card.ability.extras.eclipse = "?"
 	card.ability.extras.has_sun = false
