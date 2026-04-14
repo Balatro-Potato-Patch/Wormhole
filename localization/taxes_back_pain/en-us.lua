@@ -314,7 +314,7 @@ local descriptions = {
         salvo = {
             name = 'Overcharged Salvo',
             text = {
-                'Gains {X:mult,C:white}X#1#{} Mult for each',
+                '{X:mult,C:white}X#1#{} Mult for each',
                 '{C:spectral}Module{} installed if scored hand',
                 'contains {C:attention}5{} cards',
                 '{C:inactive}(Currently {X:mult,C:white} X#2# {C:inactive} Mult)',
