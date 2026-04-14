@@ -193,6 +193,68 @@ Wormhole.JR_UTILS.Satellite {
 -- Venera 9
 
 -- Galileo
+Wormhole.JR_UTILS.Satellite {
+  key = 'galileo',
+  name = 'galileo',
+  config = { extra = { hand_type = 'Flush' }, },
+  pos = { x = 4, y = 0 },
+  soul_pos = { x = 4, y = 1, draw = Wormhole.JR_UTILS.draw_satellite_soul },
+  jr_calculate = function(self, context, vars)
+    if context.before then
+      -- get all suits in played hand
+      local suits = {}
+      for _, v in pairs(context.scoring_hand) do
+        if not SMODS.has_no_suit(v) then
+          suits[v.base.suit] = (suits[v.base.suit] or 0) + 1
+        end
+      end
+
+      -- get the highest amount of common suit
+      local _max = 0
+      for _, v in pairs(suits) do
+        if v > _max then _max = v end
+      end
+
+      -- get the target suit
+      local targets = {}
+      for k, v in pairs(suits) do
+        if v == _max then targets[#targets+1] = k end
+      end
+
+      local target = #targets == 1 and targets[1] or pseudorandom_element(targets,"worm_jr_galileo")
+      if not target then return end
+
+      -- change cards in deck
+      local not_suit = {}
+      for _, v in pairs(G.playing_cards) do
+        if v.base.suit ~= target then not_suit[#not_suit+1] = v end
+      end
+
+      for _ = 1, G.GAME.jr.satellite_hands[vars.hand_type].level do
+        if #not_suit == 0 then return end
+        local _card, pos = pseudorandom_element(not_suit,"worm_jr_galileo")
+        _card:change_suit(target)
+        _card:juice_up()
+        table.remove(not_suit,pos)
+      end
+
+    end
+  end,
+  loc_vars = function(self, info_queue, card)
+    local _level = G.GAME.jr and G.GAME.jr.satellite_hands[card.ability.extra.hand_type].level or 0
+    return {
+      vars = {
+        _level,
+        localize(card.ability.extra.hand_type, 'poker_hands'),
+        _level <= 1 and '' or 's',
+        colours = { (_level == 1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, _level)]) }
+      }
+    }
+  end,
+  jr_loc_vars = function(self)
+    return {}
+  end
+}
 
 -- Cassini-Huygens
 

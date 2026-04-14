@@ -43,6 +43,21 @@ return {
           }
         }
       },
+      sat_worm_galileo = {
+        name = "Galileo",
+        text = {
+          {
+            "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
+            "{C:attention}#2#",
+          },
+          {
+            "If played hand is a",
+            "{C:attention}#2#{}, convert {C:attention}#1#{} card#3#",
+            "in full deck to the",
+            "{C:attention}#2#{}'s most common suit"
+          }
+        }
+      },
       sat_worm_sputnik_1 = {
         name = "Sputnik 1",
         text = {
