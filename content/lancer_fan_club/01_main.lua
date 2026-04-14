@@ -89,8 +89,8 @@ PotatoPatchUtils.Developer {
     loc = "PotatoPatchDev_ProdByProto",
     team = "Lancer Fan Club",
     atlas = "worm_lfc_devs",
-    pos = { x = 6, y = 1 },
-    soul_pos = { x = 7, y = 1 },
+    pos = { x = 6, y = 0 },
+    soul_pos = { x = 7, y = 0 },
     calculate = function(self, context)
         if context.card_added then
             if context.card.ability.set == "Joker" then
@@ -114,8 +114,8 @@ PotatoPatchUtils.Developer({
     loc = "PotatoPatchDev_ellestuff",
     team = "Lancer Fan Club",
     atlas = "worm_lfc_devs",
-    pos = { x = 2, y = 1 },
-    soul_pos = { x = 3, y = 1 }
+    pos = { x = 2, y = 0 },
+    soul_pos = { x = 3, y = 0 }
 })
 
 -- J8-Bit
@@ -146,8 +146,8 @@ PotatoPatchUtils.Developer({
     loc = "PotatoPatchDev_j8bit",
     team = "Lancer Fan Club",
     atlas = "worm_lfc_devs",
-    pos = { x = 0, y = 1 },
-    soul_pos = { x = 1, y = 1 }
+    pos = { x = 0, y = 0 },
+    soul_pos = { x = 1, y = 0 }
 
 })
 
@@ -183,6 +183,41 @@ PotatoPatchUtils.Developer {
     loc = "PotatoPatchDev_alexi",
     team = "Lancer Fan Club",
     atlas = "worm_lfc_devs",
-    pos = { x = 4, y = 1 },
-    soul_pos = { x = 5, y = 1 }
+    pos = { x = 4, y = 0 },
+    soul_pos = { x = 5, y = 0 }
 }
+
+-- Credits shader stuff :3
+SMODS.Shader {
+    key = 'lfc_devshader',
+    path = 'lfc_devshader.fs',
+
+    send_vars = function(self, sprite, card)
+        local w,h = love.graphics.getDimensions()
+        local mx,my = love.mouse.getPosition()
+        return {
+            mouse_pos = {mx,my}
+        }
+    end
+}
+
+local ppu_front_hook = SMODS.DrawSteps.center.func
+SMODS.DrawSteps.center.func = function(card,layer)
+    if card.ppu_team and card.ppu_team.name == "Lancer Fan Club" then
+        card.children.center:draw_shader('worm_lfc_devshader', nil, card.ARGS.send_to_shader)
+    else
+        ppu_front_hook(card,layer)
+    end
+end
+
+local ppu_floating_sprite_hook = SMODS.DrawSteps.ppu_floating_sprite.func
+SMODS.DrawSteps.ppu_floating_sprite.func = function(card,layer)
+    if card.ppu_team and card.ppu_team.name == "Lancer Fan Club" then
+        local scale_mod = 0.07 + 0.02*math.sin(1.8*G.TIMERS.REAL) + 0.00*math.sin((G.TIMERS.REAL - math.floor(G.TIMERS.REAL))*math.pi*14)*(1 - (G.TIMERS.REAL - math.floor(G.TIMERS.REAL)))^3
+        local rotate_mod = 0.05*math.sin(1.219*G.TIMERS.REAL) + 0.00*math.sin((G.TIMERS.REAL)*math.pi*5)*(1 - (G.TIMERS.REAL - math.floor(G.TIMERS.REAL)))^2
+        
+        card.children.ppu_floating_sprite:draw_shader('worm_lfc_devshader', nil, nil, nil, card.children.center, scale_mod, rotate_mod)
+    else
+        ppu_floating_sprite_hook(card,layer)
+    end
+end
