@@ -63,7 +63,7 @@ PotatoPatchUtils.Developer({
 
 PotatoPatchUtils.Developer({
   name = "Blanthos",
-  colour = HEX('373ceb'),
+  colour = HEX('0077b6'),
   loc = true,
   team = team,
   atlas = atlas,
