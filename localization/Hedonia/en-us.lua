@@ -1,6 +1,15 @@
 -- I (wombat) used a lot of VanillaRemade as reference throughout this entire file https://github.com/nh6574/VanillaRemade/blob/main/src/tarots.lua https://github.com/nh6574/VanillaRemade/blob/main/localization/en-us.lua
 return {
     descriptions = {
+        Back = {
+            b_worm_hedonia_bar = {
+                name = 'Space Bar',
+                text = {
+                    'Start with a random',
+                    'bartender joker'
+                }
+            }
+        },
         Joker = {
             j_worm_hedonia_casino = {
                 name = 'Casino Bartender',
@@ -13,9 +22,10 @@ return {
             j_worm_hedonia_trash = {
                 name = 'Trash Compactor',
                 text = {
-                    '{C:attention}-1{} {E:2}Joker{} slot',
-                    'Gain effects of all',
-                    'sold {E:2}Jokers{} until end of round'
+                    'stores the chips of all',
+                    'destroyed playing cards until',
+                    'the start of the next ante',
+                    '{C:inactive}(Currently +{C:chips}#1#{C:inactive} chips)'
                 }                
             },
             j_worm_hedonia_patron = {
@@ -117,12 +127,53 @@ return {
                     "be used immediately"
                 }
             }
+        },
+        Potato_Patch = {
+            PotatoPatchTeam_hedonia = {
+                name = "Hedonia"
+            },
+            PotatoPatchDev_alxndr = {
+                name = "Alxndr",
+                text = {
+
+                }
+            },
+            PotatoPatchDev_axyraandas = {
+                name = "Axyraandas",
+                text = {
+                    
+                }
+            },
+            PotatoPatchDev_hellboydante = {
+                name = "Dante",
+                text = {
+                    
+                }
+            },
+            PotatoPatchDev_professorrenderer = {
+                name = "Professor Renderer",
+                text = {
+                    
+                }
+            },
+            PotatoPatchDev_qunumeru = {
+                name = "Qunumeru",
+                text = {
+                    
+                }
+            },
+            PotatoPatchDev_wombatcountry = {
+                name = "Wombat Country",
+                text = {
+                    'skibidi toilet or some shit'
+                }
+            }
         }
     },
     misc = {
         dictionary={
             b_worm_hedonia_menu_cards = "Tonight's Menu",
             k_worm_hedonia_menu = "Menu Item",
-        },
+        }
     },
 }
