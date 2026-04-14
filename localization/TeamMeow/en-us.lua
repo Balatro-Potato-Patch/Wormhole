@@ -417,6 +417,13 @@ return {
 					"Earn {C:money}$#1#",
 				},
 			},
+			exc_worm_meow_silence = {
+				name = "Silence",
+				text = {
+					"Debuff the {C:attention}rightmost{} Joker",
+					"That Joker becomes {C:attention}Eternal{}"
+				},
+			},
 			exc_worm_meow_remembrance = {
 				name = "Remembrance",
 				text = {
@@ -582,7 +589,8 @@ return {
 			k_worm_meow_blind_size_mult = "Blind Size Multiplier",
 			k_worm_meow_exchange = "Exchange",
 			k_worm_meow_exchanged = "Exchanged",
-			k_worm_meow_sanity_blind_mult = "When Blind is selected, each point of Sanity lost multiplies Blind Size by X1.25",
+			k_worm_meow_sanity_blind_mult =
+			"When Blind is selected, each point of Sanity lost multiplies Blind Size by X1.25",
 			k_worm_meow_appease1 = "Appease",
 			k_worm_meow_appease2 = "Nya-rlathotep",
 			k_worm_meow_plural = "s",

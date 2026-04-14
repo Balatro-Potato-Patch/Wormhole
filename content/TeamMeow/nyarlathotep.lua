@@ -247,7 +247,7 @@ local function generate_exchange_item_ui(card, option)
 	local loc_res = ex_prototype:loc_vars(card) or {}
 	local name_nodes = localize({ type = "name", key = option.key, set = "Other", vars = loc_res.vars or {} })
 	localize({ type = "other", key = option.key, nodes = desc_nodes, vars = loc_res.vars or {} })
-	
+
 	if ex_prototype.cost > 0 then
 		localize({ type = "other", key = "exc_worm_meow_sanity_cost", nodes = cost_nodes, vars = { ex_prototype.cost } })
 	elseif ex_prototype.cost < 0 then
@@ -255,7 +255,7 @@ local function generate_exchange_item_ui(card, option)
 	else
 		localize({ type = "other", key = "exc_worm_meow_sanity_free", nodes = cost_nodes, vars = {} })
 	end
-	
+
 	local desc = {}
 	for _, v in ipairs(desc_nodes) do
 		desc[#desc + 1] = { n = G.UIT.R, config = { align = "cm" }, nodes = v }
@@ -389,10 +389,10 @@ end
 
 function G.FUNCS.worm_meow_can_exchange_reward(e)
 	local exchanged = e.config.exchange_option.is_exchanged
-	
+
 	local exchange = Wormhole.TEAM_MEOW.nyarlathotep_exchanges[e.config.exchange_option.key]
 	local can_afford = G.GAME.meow_sanity_lost + exchange.cost >= 0
-	
+
 	if exchanged or not can_afford then
 		e.config.colour = G.C.UI.BACKGROUND_INACTIVE
 		e.config.button = nil
@@ -466,6 +466,28 @@ nyarlathotep_exchange({
 })
 
 nyarlathotep_exchange({
+	key = "silence",
+	cost = -2,
+	config = {},
+	reward = function(self, card)
+		if G.jokers.cards[#G.jokers.cards].config.center.key == 'j_worm_meow_nyarlathotep' then
+			G.jokers.cards[#G.jokers.cards - 1]:juice_up(0.8, 0.8)
+			G.jokers.cards[#G.jokers.cards - 1]:add_sticker('eternal', true)
+			SMODS.debuff_card(G.jokers.cards[#G.jokers.cards - 1], true, 'meow_nyarlathotep_silence')
+		else
+			G.jokers.cards[#G.jokers.cards]:juice_up(0.8, 0.8)
+			G.jokers.cards[#G.jokers.cards]:add_sticker('eternal', true)
+			SMODS.debuff_card(G.jokers.cards[#G.jokers.cards], true, 'meow_nyarlathotep_silence')
+		end
+	end,
+	loc_vars = function(self, card)
+	end,
+	in_pool = function(self, card, amt)
+		return G.GAME.meow_sanity_lost > 0 and #G.jokers.cards > 1
+	end,
+})
+
+nyarlathotep_exchange({
 	key = "remembrance",
 	cost = 2,
 	config = { antes = 1 },
@@ -494,7 +516,7 @@ nyarlathotep_exchange({
 	config = { extracted_mult = 5, extracted_chips = 5 },
 	reward = function(self, card)
 		local cae = card.ability.extra
-		
+
 		cae.individual.chips = self.config.extracted_chips + (cae.individual.chips or 0)
 		cae.individual.mult = self.config.extracted_mult + (cae.individual.mult or 0)
 	end,
@@ -514,7 +536,7 @@ nyarlathotep_exchange({
 	config = { sloth_xchips = 1.1 },
 	reward = function(self, card)
 		local cae = card.ability.extra
-		
+
 		cae.held_in_hand.xchips = self.config.sloth_xchips * (cae.held_in_hand.xchips or 1)
 	end,
 	loc_vars = function(self, card)
@@ -532,7 +554,7 @@ nyarlathotep_exchange({
 	config = { xchips_retained = 0.75 },
 	reward = function(self, card)
 		local cae = card.ability.extra
-		
+
 		cae.joker_main.xchips = self.config.xchips_retained * (cae.joker_main.xchips or 1)
 	end,
 	loc_vars = function(self, card)
