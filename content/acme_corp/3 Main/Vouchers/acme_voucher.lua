@@ -1,20 +1,20 @@
-SMODS.Voucher{
+SMODS.Voucher {
     key = 'ACME_voucher_1',
     atlas = Atlas_AcmeVouchers.key,
-    pos = {x=0, y=0},
-    config = {extra = {}},
+    pos = { x = 0, y = 0 },
+    config = { extra = {} },
     redeem = function(self, card)
-        SMODS.ConsumableTypes['ACME_Gadget'].shop_rate = 1
+        SMODS.ConsumableTypes['ACME_Gadget'].shop_rate = 2
     end
 }
 
-SMODS.Voucher{
+SMODS.Voucher {
     key = 'ACME_voucher_2',
     atlas = Atlas_AcmeVouchers.key,
-    requires = {'v_worm_ACME_voucher_1'},
-    pos = {x=0, y=0},
-    config = {extra = {}},
+    requires = { 'v_worm_ACME_voucher_1' },
+    pos = { x = 0, y = 0 },
+    config = { extra = {} },
     redeem = function(self, card)
-        SMODS.ConsumableTypes['ACME_Gadget'].shop_rate = 2
+        SMODS.ConsumableTypes['ACME_Gadget'].shop_rate = 4
     end
 }

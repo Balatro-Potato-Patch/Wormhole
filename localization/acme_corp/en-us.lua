@@ -151,15 +151,16 @@ return {
             v_worm_ACME_voucher_1 = {
                 name = "Gadget Merchant",
                 text = {
-                    "{C:ACME_Gadget}Gadget{} cards can now",
-                    "appear in the {C:attention}shop"
+                    "{C:ACME_Gadget}Gadget{} cards appear",
+                    "{C:attention}2X{} more frequently",
+                    "in the shop"
                 }
             },
             v_worm_ACME_voucher_2 = {
                 name = "Gadget Tycoon",
                 text = {
                     "{C:ACME_Gadget}Gadget{} cards appear",
-                    "{C:attention}2X{} more frequently",
+                    "{C:attention}4X{} more frequently",
                     "in the shop and activation",
                     "conditions are {C:attention}halved"
                 }
