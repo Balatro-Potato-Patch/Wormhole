@@ -81,9 +81,11 @@ PotatoPatchUtils.Developer {
 PotatoPatchUtils.Developer {
     name = 'base4',
     team = 'absinthe',
+    colour = HEX("6a8a6b"),
     atlas = 'worm_abs_credits',
     pos = { x = 0, y = 1 },
-    soul_pos = { x = 1, y = 1 }
+    soul_pos = { x = 1, y = 1 },
+    loc = true
 }
 
 --#endregion

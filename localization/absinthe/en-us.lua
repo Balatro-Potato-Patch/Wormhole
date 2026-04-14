@@ -605,6 +605,26 @@ return {
                 }
                 }
             },
+
+            PotatoPatchDev_base4 = {
+                name = 'base4',
+                text = { {
+                    "hey, I'm {E:2,C:green}base4{}!",
+                    "i helped with organization when the team really needed it,",
+                    "playtested a bit, and i did the code for stargarita.",
+                    "i'm very proud of the ideas we came up with together.",
+                }, {
+                    "i'd like to thank {E:2,C:green}Luna{} and {E:2,C:enhanced}AnneBean{} and {E:2,C:planet}pangaea{},",
+                    "all of whom i've worked on other projects with,",
+                    "who i'm very grateful to work with again.",
+                    "special thanks to Luna for inviting me!!!",
+                    "i wouldn't've known this was happening otherwise haha"
+                }, {
+                    "find inspiration in the work others do.",
+                    "stay excited."
+                }
+                }
+            },
         }
     },
     misc = {
