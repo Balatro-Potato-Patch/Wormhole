@@ -29,26 +29,14 @@ Wormhole.mrrp_signed = function(val, invert, signlesszero)
     if not val then
         return
     end
-    if next(SMODS.find_mod("Talisman")) then
-        -- temporary
-        return val
-    else
-        if val > 0 then
-            sign = invert and "-" or "+"
-        elseif val < 0 then
-            sign = invert and "+" or "-"
-        elseif val == 0 and not signlesszero then
-            sign = invert and "-" or "+"
-        end
+    if val > 0 then
+        sign = invert and "-" or "+"
+    elseif val < 0 then
+        sign = invert and "+" or "-"
+    elseif val == 0 and not signlesszero then
+        sign = invert and "-" or "+"
     end
     return sign .. math.abs(val)
-end
-
-to_big = to_big or function(x, y)
-    return x 
-end
-to_number = to_number or function(x)
-    return x 
 end
 
 SMODS.Atlas {

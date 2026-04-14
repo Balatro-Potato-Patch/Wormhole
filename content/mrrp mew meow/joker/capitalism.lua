@@ -5,8 +5,8 @@ SMODS.Joker {
 	key = 'mrrp_capitalism',
 	atlas = "mrrp",
     pos = {
-        x=4,
-        y=5
+        x=2,
+        y=3
     },
 	rarity = 2,
 	cost = 7,
