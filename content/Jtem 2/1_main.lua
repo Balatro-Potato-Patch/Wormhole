@@ -22,6 +22,16 @@ SMODS.Gradient({
 	},
 })
 
+SMODS.Gradient({
+	key = "jtem2_lexi",
+	colours = {
+		HEX("ff75c9"),
+		G.C.WHITE,
+		G.C.ORANGE,
+	},
+	cycle = 2,
+})
+
 -- why is smods.color not a thing even tho it's easy to hook for colours variables
 -- the weather was fucking shit okay give me a break
 SMODS.Gradient({
@@ -31,16 +41,6 @@ SMODS.Gradient({
 		HEX("ff4267"),
 		HEX("ff4267"),
 	},
-})
-
-SMODS.Gradient({
-	key = "jtem2_lexi",
-	colours = {
-		HEX("ff75c9"),
-		G.C.WHITE,
-		G.C.ORANGE,
-	},
-	cycle = 2,
 })
 
 PotatoPatchUtils.Team({
