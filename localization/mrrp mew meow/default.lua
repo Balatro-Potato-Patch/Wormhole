@@ -150,6 +150,18 @@ descriptions={
 			}
 		}
 	},
+	Tarot = {
+		c_worm_mrrp_reentry = {
+			name = "Reentry",
+			text = {
+				"Remove enhancements,",
+				"seals, and editions from",
+				"selected playing cards,",
+				"then gain {C:money}#1#{} per",
+				"modification removed"
+			}
+		}
+	},
 	Stake={
 		stake_worm_mrrp_cosmic ={
 			name=
