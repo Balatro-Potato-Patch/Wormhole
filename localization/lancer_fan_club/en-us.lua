@@ -27,24 +27,23 @@ return {
                 name = "ellestuff.",
                 text = {
                     {
-                        "trans plural weirdo that's full of",
-                        "love.draw and love.update hooks"
+                        "{s:1.5,C:attention}8{s:1.5} of us and counting!",
+                        "{s:0.6,C:lfc_elle}elle.{s:0.6} | {s:0.6,C:green}Amber{s:0.6} | Emily | {s:0.6,C:planet}Umbra{s:0.6} | {s:0.6,C:blue}Sara{s:0.6} | {s:0.6,C:legendary}Suzy{s:0.6} | {s:0.6,C:lfc_ash}Ash{s:0.6} | {s:0.6,C:money}Rebecca",
+                        "She/Her | Plural"
                     },
                     {
-                        "we made the Meteors",
-                        "and Spacebar lol"
+                        "{s:0.9}We made the code for",
+                        "{s:0.9}the {s:0.9,C:lfc_meteor}Meteors{s:0.9}, {s:0.9,C:rare}Spacebar{s:0.9}, and",
+                        "{s:0.9,C:uncommon}Astronaut Food{s:0.9}, along with",
+                        "{s:0.9}the shaders for the {s:0.9,C:attention}Credits",
+                        "{s:0.9}and {s:0.9,C:uncommon}Urination Station",
                     },
                     {
-                        "also did the shader stuff for",
-                        "Urination Station and these Credits!"
-                    },
-                    {
-                        "we're {E:worm_elle_text}@ellestuff.dev{} on",
-                        "both bsky and discord"
-                    },
-                    {
-                        "also check out my very",
-                        "cool mod {E:worm_elle_text}ellejokers.{} :3"
+                        "If you're interested in",
+                        "more of our stuff:",
+                        "{s:0.8,X:blue,C:white}Bluesky{s:0.8} @ellestuff.dev",
+                        "{s:0.8,X:lfc_discord,C:white}Discord{s:0.8} ellestuff.dev/discord",
+                        "{s:0.8}Play my mod {s:0.8,C:attention}ellejokers.{s:0.8}!",
                     }
                 }
             },
@@ -66,11 +65,11 @@ return {
                     {
                         "If you're interested in",
                         "more of my stuff:",
-                        "{s:0.8,X:lfc_bluesky,C:white}Bluesky{s:0.8} @j8-bit.bsky.social",
-                        "{s:0.8,X:lfc_youtube,C:white}YouTube{s:0.8} @j8-bitforager842",
-                        "{s:0.8,X:lfc_tumblr,C:white}Tumblr{s:0.8} @aforager",
+                        "{s:0.8,X:blue,C:white}Bluesky{s:0.8} @j8-bit.bsky.social",
+                        "{s:0.8,X:red,C:white}YouTube{s:0.8} @j8-bitforager842",
+                        "{s:0.8,X:lfc_dark,C:white}Tumblr{s:0.8} @aforager",
                         "{s:0.8}Play the {s:0.8,C:attention}Forager Nonessentials{s:0.8} mod!",
-                        "{s:0.8}Play CalvinChess on {s:0.8,X:lfc_steam,C:white}Steam{s:0.8}!",
+                        "{s:0.8}Play CalvinChess on {s:0.8,X:lfc_dark,C:white}Steam{s:0.8}!",
                     }
                 }
             },

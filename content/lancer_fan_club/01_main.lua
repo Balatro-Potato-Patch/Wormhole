@@ -125,10 +125,21 @@ loc_colour('red')
 G.ARGS.LOC_COLOURS.lfc_pkmn_us = HEX('E95B2B')
 G.ARGS.LOC_COLOURS.lfc_pkmn_um = HEX('226DB5')
 G.ARGS.LOC_COLOURS.lfc_meteor  = HEX('a97a51')
-G.ARGS.LOC_COLOURS.lfc_bluesky = HEX('01A6FF')
-G.ARGS.LOC_COLOURS.lfc_youtube = HEX('FF0000')
-G.ARGS.LOC_COLOURS.lfc_tumblr  = HEX('001935')
-G.ARGS.LOC_COLOURS.lfc_steam   = HEX('171D25')
+G.ARGS.LOC_COLOURS.lfc_discord = HEX('5662f6')
+G.ARGS.LOC_COLOURS.lfc_dark    = G.C.BLACK
+G.ARGS.LOC_COLOURS.lfc_elle    = HEX('ff53a9')
+G.ARGS.LOC_COLOURS.lfc_ash     = SMODS.Gradient{
+    key="lfc_ash",
+    colours= {
+        HEX('fd5f55'),
+        HEX('ffe07b'),
+        HEX('81ff70'),
+        HEX('81cefd'),
+        HEX('4b69cf'),
+        HEX('f75eff')
+    },
+    cycle = 4
+}
 
 -- Developers
 PotatoPatchUtils.Developer {
