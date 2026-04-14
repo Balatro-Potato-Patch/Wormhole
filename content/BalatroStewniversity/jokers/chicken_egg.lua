@@ -17,7 +17,7 @@ SMODS.Joker {
     loc_vars = function (self, info_queue, card)
         return {
             vars = { card.ability.extra.Xchips },
-            key = not card.ability.extra.chicken and 'j_worm_stew_chicken_egg_alt' or nil
+            key = card.ability.extra.chicken and 'j_worm_stew_chicken_egg_alt' or nil
         }
     end,
 
