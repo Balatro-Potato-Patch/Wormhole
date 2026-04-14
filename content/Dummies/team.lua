@@ -43,6 +43,8 @@ PotatoPatchUtils.Developer {
 	dum_sfx_volume = 1,
 	dum_sfx_pitch = { lower_bound = 1, upper_bound = 1.3 },
 }
+
+SMODS.Sound({ key = "dum_bagelsclicked", path = "Dummies/worm_dum_bagelsclicked.ogg" })
 -- bakersdozenbagels
 PotatoPatchUtils.Developer {
     name = "bagels",
@@ -51,6 +53,9 @@ PotatoPatchUtils.Developer {
     atlas = "worm_dummies_team",
     pos = { x = 2, y = 0 },
     loc = true,
+	dum_sfx_click = "worm_dum_bagelsclicked",
+	dum_sfx_pitch = { lower_bound = 0.95, upper_bound = 1.05 },
+	dum_sfx_volume = 0.85
 }
 
 -- TheOneGoofAli
@@ -172,7 +177,7 @@ PotatoPatchUtils.Developer {
     loc = true,
 	dum_sfx_click = "worm_dum_flowireclicked",
 	dum_sfx_pitch = { lower_bound = 0.95, upper_bound = 1.1 },
-	dum_sfx_volume = 1
+	dum_sfx_volume = 1.5
 }
 
 -- Member SFX click funnies
