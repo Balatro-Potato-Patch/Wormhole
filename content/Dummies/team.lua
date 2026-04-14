@@ -36,6 +36,12 @@ PotatoPatchUtils.Developer {
     atlas = "worm_dummies_team",
     pos = { x = 1, y = 0 },
     loc = true,
+	dum_sfx_click = {"worm_dum_sfx_worm_gulp",
+					"worm_dum_sfx_greg_nom",
+					"worm_dum_sfx_greg_goodbye",
+					"worm_dum_sfx_carnivore_chomp",},
+	dum_sfx_volume = 1,
+	dum_sfx_pitch = { lower_bound = 1, upper_bound = 1.3 },
 }
 -- bakersdozenbagels
 PotatoPatchUtils.Developer {

@@ -16,7 +16,11 @@ return {
             },
             PotatoPatchDev_vissa = {
                 name = 'vissa',
-                text = { "glorpalicious" }
+                text = {
+                    { "Made {X:green,C:white}Aliens{} that {C:red}eat{} stuff.", "Also did half of the {C:attention}Test Flight{} blind", "and some art."},
+                    { "Please tell me other", "teams added {X:chips,C:white}Fish{} jokers...", "{C:inactive,s:0.9}my carnivore is gonna starve" },
+                    { "{C:red}Eats{} cards while", "you're not looking.", "{C:inactive,s:0.9}glorpalicious"}
+                }
             },
             PotatoPatchDev_bagels = {
                 name = 'BakersDozenBagels',
