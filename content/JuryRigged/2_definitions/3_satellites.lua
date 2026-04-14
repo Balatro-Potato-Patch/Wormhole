@@ -24,7 +24,6 @@ Wormhole.JR_UTILS.Satellite = SMODS.Consumable:extend {
       name = self.name,
       vars = self.config.extra,
       calculate = self.jr_calculate,
-      loc_vars = self.jr_loc_vars
     }
   end,
 
@@ -64,17 +63,6 @@ Wormhole.JR_UTILS.Satellite {
       }
     }
   end,
-  jr_loc_vars = function(self)
-    local _level = G.GAME.jr and G.GAME.jr.satellite_hands[card.ability.extra.hand_type].level or 0
-    return {
-      vars = {
-        _level,
-        localize(card.ability.extra.hand_type, 'poker_hands'),
-        _level <= 1 and '' or 's',
-        colours = { (_level == 1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, _level)]) }
-      }
-    }
-  end
 }
 
 -- MESSENGER
@@ -125,9 +113,6 @@ Wormhole.JR_UTILS.Satellite {
       }
     }
   end,
-  jr_loc_vars = function(self)
-    return {}
-  end
 }
 
 -- Tianwen 4
@@ -185,9 +170,6 @@ Wormhole.JR_UTILS.Satellite {
       }
     }
   end,
-  jr_loc_vars = function(self)
-    return {}
-  end
 }
 
 -- Venera 9
@@ -283,9 +265,7 @@ Wormhole.JR_UTILS.Satellite {
       }
     }
   end,
-  jr_loc_vars = function(self)
-    return {}
-  end
+
 }
 
 -- Mariner 9
@@ -340,9 +320,7 @@ Wormhole.JR_UTILS.Satellite {
       }
     }
   end,
-  jr_loc_vars = function(self)
-    return {}
-  end
+
 }
 
 -- Voyager 2
@@ -355,8 +333,9 @@ Wormhole.JR_UTILS.Satellite {
   jr_calculate = function(self, context, vars)
     if context.before then
       for _, v in pairs(context.scoring_hand) do
-        v.ability.perma_x_mult = (v.ability.perma_x_mult or 1) + vars.xmult * G.GAME.jr.satellite_hands[vars.hand_type].level
-        SMODS.calculate_effect({message = localize('k_upgrade_ex')},v)
+        v.ability.perma_x_mult = (v.ability.perma_x_mult or 1) +
+            vars.xmult * G.GAME.jr.satellite_hands[vars.hand_type].level
+        SMODS.calculate_effect({ message = localize('k_upgrade_ex') }, v)
       end
     end
   end,
@@ -371,9 +350,7 @@ Wormhole.JR_UTILS.Satellite {
       }
     }
   end,
-  jr_loc_vars = function(self)
-    return {}
-  end
+
 }
 
 -- Manhole Cover
@@ -419,7 +396,4 @@ Wormhole.JR_UTILS.Satellite {
       }
     }
   end,
-  jr_loc_vars = function(self)
-    return {}
-  end
 }

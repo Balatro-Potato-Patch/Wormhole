@@ -140,7 +140,7 @@ return {
         name = "Transponder",
         text = {
           "Gains {X:mult,C:white}X#1#{} Mult for",
-          "every {C:attention}Satellite{} above 0",
+          "every {C:worm_jr_satellite}Satellite{} above 0",
           "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)",
         }
       },
@@ -150,6 +150,41 @@ return {
           "After defeating a {C:attention}Boss Blind{}, create the",
           "corresponding {C:worm_jr_satellite}Satellite{} card",
           "for your {C:attention}last played hand",
+        }
+      },
+    },
+    Other = {
+      p_worm_jr_orbital_normal = {
+        name = "Orbital Pack",
+        text = {
+          "Choose {C:attention}#1#{} of up to {C:attention}#2#",
+          "{C:worm_jr_satellite}Satellite{} cards",
+          "to be used immediately"
+        }
+      },
+      p_worm_jr_orbital_jumbo = {
+        name = "Jumbo Orbital Pack",
+        text = {
+          "Choose {C:attention}#1#{} of up to {C:attention}#2#",
+          "{C:worm_jr_satellite}Satellite{} cards",
+          "to be used immediately"
+        }
+      },
+      p_worm_jr_orbital_mega = {
+        name = "Mega Orbital Pack",
+        text = {
+          "Choose {C:attention}#1#{} of up to {C:attention}#2#",
+          "{C:worm_jr_satellite}Satellite{} cards",
+          "to be used immediately"
+        }
+      },
+    },
+    Tag = {
+      tag_worm_jr_planetarium = {
+        name = "Planetarium Tag",
+        text = {
+          "Gives a free",
+          "{C:worm_jr_satellite}Mega Orbital Pack"
         }
       },
     },
@@ -166,10 +201,15 @@ return {
   },
   misc = {
     dictionary = {
+      -- Standard badge text
       k_worm_jr_satellite = "Satellite",
+      -- For Death Egg and Manhole
+      k_worm_jr_satellite_fake = "Satellite..?",
+
       b_worm_jr_satellites = "Satellites",
       b_worm_jr_satellite_cards = "Satellite Cards",
 
+      worm_jr_orbital_pack = "Orbital Pack",
 
       -- Satellite names for Run Info
       worm_jr_satellites_new_horizon = "New Horizon",
