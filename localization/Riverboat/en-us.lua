@@ -158,7 +158,7 @@ return {
                     "Scored cards of {C:spades}Spade",
                     "suit give {X:mult,C:white}X#1#{} Mult",
                     "Selling this card",
-                    "{C:red}destroys {C:attention}2{} other Jokers"
+                    "{C:red}destroys {C:attention}#2#{} other Jokers"
                 }
             }
         },
