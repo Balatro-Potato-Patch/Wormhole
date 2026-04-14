@@ -90,6 +90,7 @@ for _, t in ipairs(wormholes) do
         ease_background_colour = wormhole_colour,
         particles = wormhole_particles,
         create_card = wormhole_create_card,
+        ppu_team = {"awesomeswagmoney"}
     }
 end
 
@@ -124,5 +125,8 @@ return {
                   return true
               end
           end,
+        ppu_artist = {"worm_garb"},
+        ppu_coder = {"worm_garb"},
+        ppu_team = {"awesomeswagmoney"},
       },
     }

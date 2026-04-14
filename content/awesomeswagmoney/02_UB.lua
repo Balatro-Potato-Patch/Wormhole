@@ -69,7 +69,10 @@ SMODS.Consumable {
                 end
             end
         end
-    end
+    end,
+    ppu_artist = {"worm_omega"},
+    ppu_coder = {"worm_garb"},
+    ppu_team = {"awesomeswagmoney"},
 }
 
 SMODS.Sound({key = "asm_buzz", path = 'buzz.ogg'})
@@ -122,7 +125,10 @@ SMODS.Consumable {
                 }))
             end
         end
-    end
+    end,
+    ppu_artist = {"worm_omega"},
+    ppu_coder = {"worm_garb"},
+    ppu_team = {"awesomeswagmoney"},
 }
 
 SMODS.Consumable {
@@ -168,7 +174,10 @@ SMODS.Consumable {
                 }))
             end
         end
-    end
+    end,
+    ppu_artist = {"worm_omega"},
+    ppu_coder = {"worm_garb"},
+    ppu_team = {"awesomeswagmoney"},
 }
 
 SMODS.Consumable {
@@ -196,7 +205,10 @@ SMODS.Consumable {
             end
         }))
         delay(0.6)
-    end
+    end,
+    ppu_artist = {"worm_omega"},
+    ppu_coder = {"worm_garb","worm_eris"},
+    ppu_team = {"awesomeswagmoney"},
 }
 
 SMODS.Consumable {
@@ -227,7 +239,10 @@ SMODS.Consumable {
             end
         }))
         delay(0.6)
-    end
+    end,
+    ppu_artist = {"worm_omega"},
+    ppu_coder = {"worm_eris","worm_poker"},
+    ppu_team = {"awesomeswagmoney"},
 }
 
 function conversionTarot(hand, newcenter)
@@ -318,7 +333,10 @@ SMODS.Consumable {
         }))
         delay(0.6)
 
-    end
+    end,
+    --ppu_artist = {},
+    ppu_coder = {"worm_garb"},
+    ppu_team = {"awesomeswagmoney"},
 }
 
 SMODS.Consumable {
@@ -375,7 +393,10 @@ SMODS.Consumable {
 
         delay(0.3)
     end,
-    can_use = function(self, card) return G.hand and #G.hand.cards > 0 end
+    can_use = function(self, card) return G.hand and #G.hand.cards > 0 end,
+    ppu_artist = {"worm_omega"},
+    ppu_coder = {"worm_eris"},
+    ppu_team = {"awesomeswagmoney"},
 }
 
 SMODS.Consumable {
@@ -397,7 +418,10 @@ SMODS.Consumable {
         play_sound('cancel', 0.3)
         check_for_unlock({type = 'have_edition'})
     end, -- that was easy
-    can_use = function(self, card) return (#G.jokers.cards > 0) and G.hand end
+    can_use = function(self, card) return (#G.jokers.cards > 0) and G.hand end,
+    ppu_artist = {"worm_superb"},
+    ppu_coder = {"worm_garb"},
+    ppu_team = {"awesomeswagmoney"},
 }
 
 SMODS.Consumable {
@@ -420,7 +444,10 @@ SMODS.Consumable {
     end, -- that was easy
     can_use = function(self, card)
         return next(SMODS.Edition:get_edition_cards(G.jokers, true))
-    end
+    end,
+    --ppu_artist = {},
+    ppu_coder = {"worm_garb"},
+    ppu_team = {"awesomeswagmoney"},
 }
 
 SMODS.Consumable {
@@ -444,14 +471,6 @@ SMODS.Consumable {
             }
         }
     end,
-    can_use = function(self, card)
-        if #G.hand.highlighted > 0 and #G.hand.highlighted <
-            card.ability.max_highlighted + 1 then
-            return true
-        else
-            return false
-        end
-    end,
 
     use = function(self, card)
         for k, v in pairs(G.hand.highlighted) do
@@ -471,7 +490,10 @@ SMODS.Consumable {
         delay(0.6)
 
         return true
-    end
+    end,
+    --ppu_artist = {""},
+    ppu_coder = {"worm_garb"},
+    ppu_team = {"awesomeswagmoney"},
 }
 
 SMODS.Sound({key = "asm_clownhonk", path = 'clownhonk.ogg'})
@@ -486,7 +508,7 @@ SMODS.Consumable {
 
     config = {extra_slots_used = 1},
     loc_vars = function(self, info_queue, card) return {vars = {}} end,
-    can_use = function(self, card) return G.hand end,
+    can_use = function(self, card) return G.hand and #G.hand.cards > 0 end,
     use = function(self, card, area, copier)
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
@@ -519,7 +541,10 @@ SMODS.Consumable {
 
         delay(0.6)
 
-    end
+    end,
+    ppu_artist = {"worm_omega"},
+    ppu_coder = {"worm_garb"},
+    ppu_team = {"awesomeswagmoney"},
 }
 
 SMODS.Joker {
@@ -560,5 +585,8 @@ SMODS.Joker {
                 colour = G.C.DARK_EDITION
             }
         end
-    end
+    end,
+    ppu_artist = {"worm_omega"},
+    ppu_coder = {"worm_garb"},
+    ppu_team = {"awesomeswagmoney"},
 }
