@@ -4,47 +4,47 @@ priority = 0
 dump_lua = true
 
 
-# When credits sprite is hovered over
-[[patches]]
-[patches.pattern]
-target = '=[SMODS PotatoPatchUtils "src/credits.lua"]'
-pattern = '''card.hover = function(self)'''
-position = "after"
-payload = '''
-if team.name == "meow" then
-	love.mouse.setCursor( Wormhole.TEAM_MEOW.cursor )
-	card.children.center:set_sprite_pos({ x = member.pos and member.pos.x or 0, y = member.name == "toma" and 0 or 1 })
-	local r = math.random(1, 3)
-	play_sound("worm_meowMeow"..r, 1 + 0.5 * (math.random()-0.5), 0.6)
-end
-'''
-match_indent = true
+# # When credits sprite is hovered over
+# [[patches]]
+# [patches.pattern]
+# target = '=[SMODS PotatoPatchUtils "src/credits.lua"]'
+# pattern = '''card.hover = function(self)'''
+# position = "after"
+# payload = '''
+# if team.name == "meow" then
+# 	love.mouse.setCursor( Wormhole.TEAM_MEOW.cursor )
+# 	card.children.center:set_sprite_pos({ x = member.pos and member.pos.x or 0, y = member.name == "toma" and 0 or 1 })
+# 	local r = math.random(1, 3)
+# 	play_sound("worm_meowMeow"..r, 1 + 0.5 * (math.random()-0.5), 0.6)
+# end
+# '''
+# match_indent = true
 
-# Reset sprites to normal when credits sprite is not hovered anymore
-[[patches]]
-[patches.pattern]
-target = '=[SMODS PotatoPatchUtils "src/credits.lua"]'
-pattern = '''
-			Moveable.hover(self)
-		end
-'''
-position = "after"
-payload = '''
-if team.name == "meow" then
-	card.stop_hover = function(self)
-		love.mouse.setCursor()
-		card.children.center:set_sprite_pos({ x = member.pos and member.pos.x or 0, y = 0 })
-		Moveable.stop_hover(self)
-	end
-end
-if type(member.click_func) == "function" then
-	card.click = function(self, ...)
-		member.click_func(self)
-		Moveable.click(self, ...)
-	end
-end
-'''
-match_indent = true
+# # Reset sprites to normal when credits sprite is not hovered anymore
+# [[patches]]
+# [patches.pattern]
+# target = '=[SMODS PotatoPatchUtils "src/credits.lua"]'
+# pattern = '''
+# 			Moveable.hover(self)
+# 		end
+# '''
+# position = "after"
+# payload = '''
+# if team.name == "meow" then
+# 	card.stop_hover = function(self)
+# 		love.mouse.setCursor()
+# 		card.children.center:set_sprite_pos({ x = member.pos and member.pos.x or 0, y = 0 })
+# 		Moveable.stop_hover(self)
+# 	end
+# end
+# if type(member.click_func) == "function" then
+# 	card.click = function(self, ...)
+# 		member.click_func(self)
+# 		Moveable.click(self, ...)
+# 	end
+# end
+# '''
+# match_indent = true
 
 # Toma card sprite size manipulation
 [[patches]]

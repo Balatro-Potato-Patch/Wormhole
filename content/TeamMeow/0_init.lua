@@ -175,3 +175,39 @@ SMODS.Attribute({
 	key = "spacetart",
 	alias = { "tart" },
 })
+
+local card_click_hook = Card.click
+function Card:click()
+	card_click_hook(self)
+	if (self.ppu_team or {}).name == "meow" then
+		local member = self.ppu_member
+		if member.click_func then
+			member.click_func(self)
+		end
+	end
+end
+
+local hover_hook = Moveable.hover
+function Moveable:hover()
+	hover_hook(self)
+	if (self.ppu_team or {}).name == "meow" then
+		local member = self.ppu_member
+		love.mouse.setCursor(Wormhole.TEAM_MEOW.cursor)
+		self.children.center:set_sprite_pos({
+			x = member.pos and member.pos.x or 0,
+			y = member.name == "toma" and 0 or 1,
+		})
+		local r = math.random(1, 3)
+		play_sound("worm_meowMeow" .. r, 1 + 0.5 * (math.random() - 0.5), 0.6)
+	end
+end
+
+local stop_hover_hook = Card.stop_hover
+function Card:stop_hover()
+	stop_hover_hook(self)
+	if (self.ppu_team or {}).name == "meow" then
+		local member = self.ppu_member
+		love.mouse.setCursor()
+		self.children.center:set_sprite_pos({ x = member.pos and member.pos.x or 0, y = 0 })
+	end
+end
