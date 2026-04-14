@@ -4,14 +4,14 @@ Wormhole.JR_UTILS.ENABLED_SATELLITES = {
   ['High Card'] = 'new_horizon',
   ['Pair'] = 'messenger',
   ['Two Pair'] = 'tianwen_4',
-  --['Three of a Kind'] = 'venera_9',
+  ['Three of a Kind'] = 'venera_9',
   ['Straight'] = 'cassini_huygens',
   ['Flush'] = 'galileo',
-  ['Full House'] = 'sputnik_1',
+  --['Full House'] = 'sputnik_1',
   ['Four of a Kind'] = 'mariner_9',
   ['Straight Flush'] = 'voyager_2';
   --['Five of a Kind'] = 'death_egg',
-  --['Flush House'] = 'dawn',
+  ['Flush House'] = 'dawn',
   ['Flush Five'] = 'manhole_cover',
 }
 

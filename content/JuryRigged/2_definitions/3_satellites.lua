@@ -44,7 +44,6 @@ Wormhole.JR_UTILS.Satellite {
   config = { extra = { hand_type = 'High Card' }, },
   pos = { x = 0, y = 0 },
   soul_pos = { x = 0, y = 1, draw = Wormhole.JR_UTILS.draw_satellite_soul },
-
   jr_calculate = function(self, context, vars)
     if context.drawing_cards and G.GAME.jr.curr_hand then
       return {
@@ -72,7 +71,6 @@ Wormhole.JR_UTILS.Satellite {
   config = { extra = { hand_type = 'Pair', num = 1, den = 2 }, },
   pos = { x = 1, y = 0 },
   soul_pos = { x = 1, y = 1, draw = Wormhole.JR_UTILS.draw_satellite_soul },
-
   jr_calculate = function(self, context, vars)
     if context.cardarea == "unscored" and context.individual then
       if SMODS.pseudorandom_probability(nil, 'worm_jr_messenger', vars.num, vars.den) then
@@ -122,7 +120,6 @@ Wormhole.JR_UTILS.Satellite {
   config = { extra = { hand_type = 'Two Pair' }, },
   pos = { x = 2, y = 0 },
   soul_pos = { x = 2, y = 1, draw = Wormhole.JR_UTILS.draw_satellite_soul },
-
   jr_calculate = function(self, context, vars)
     if context.before then
       for _ = 1, G.GAME.jr.satellite_hands[vars.hand_type].level do
@@ -173,6 +170,74 @@ Wormhole.JR_UTILS.Satellite {
 }
 
 -- Venera 9
+Wormhole.JR_UTILS.Satellite {
+  key = 'venera_9',
+  name = 'venera_9',
+  config = { extra = { hand_type = 'Three of a Kind', num = 1, den = 2 }, },
+  pos = { x = 3, y = 0 },
+  soul_pos = { x = 3, y = 1, draw = Wormhole.JR_UTILS.draw_satellite_soul },
+  jr_calculate = function(self, context, vars)
+    if context.before then
+      -- get all ranks in played hand
+      local ranks = {}
+      for _, v in pairs(context.scoring_hand) do
+        if not SMODS.has_no_rank(v) then
+          ranks[v.base.value] = (ranks[v.base.value] or 0) + 1
+        end
+      end
+
+      -- get the highest amount of common rank
+      local _max = 0
+      for _, v in pairs(ranks) do
+        _max = math.max(_max,v)
+      end
+
+      -- get the target rank
+      local targets = {}
+      for k, v in pairs(ranks) do
+        if v == _max then targets[#targets+1] = k end
+      end
+
+      local target_rank = #targets == 1 and targets[1] or pseudorandom_element(targets,"worm_jr_venera_9")
+      if not target_rank then return end
+
+      -- eligible cards
+      targets = {}
+      for _, v in pairs(G.playing_cards) do
+        if (not SMODS.has_no_rank(v)) and v.base.value ~= target_rank then targets[#targets+1] = v end
+      end
+
+      -- change cards in deck
+      for _ = 1, G.GAME.jr.satellite_hands[vars.hand_type].level do
+        if #targets == 0 then return end
+        if SMODS.pseudorandom_probability(nil, 'worm_jr_venera_9', vars.num, vars.den) then
+          local _card, pos = pseudorandom_element(targets, "worm_jr_venera_9")
+          SMODS.change_base(_card, nil, target_rank)
+          _card:juice_up()
+          table.remove(targets, pos)
+        end
+      end
+
+    end
+  end,
+  loc_vars = function(self, info_queue, card)
+    local _level = G.GAME.jr and G.GAME.jr.satellite_hands[card.ability.extra.hand_type].level or 0
+    local num, den = SMODS.get_probability_vars(card, card.ability.extra.num, card.ability.extra.den, "worm_jr_messenger")
+    return {
+      vars = {
+        _level,
+        localize(card.ability.extra.hand_type, 'poker_hands'),
+        _level <= 1 and '' or 's',
+        num,
+        den,
+        colours = { (_level == 1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, _level)]) }
+      }
+    }
+  end,
+  jr_loc_vars = function(self)
+    return {}
+  end
+}
 
 -- Cassini-Huygens
 Wormhole.JR_UTILS.Satellite {
@@ -296,32 +361,7 @@ Wormhole.JR_UTILS.Satellite {
 }
 
 -- Sputnik 1
-Wormhole.JR_UTILS.Satellite {
-  key = 'sputnik_1',
-  name = 'sputnik_1',
-  config = { extra = { hand_type = 'Full House' }, },
-  pos = { x = 6, y = 0 },
-  soul_pos = { x = 6, y = 1, draw = Wormhole.JR_UTILS.draw_satellite_soul },
-  jr_calculate = function(self, context, vars)
-    if context.individual and context.cardarea == G.play and context.other_card == context.scoring_hand[#context.scoring_hand] then
-      return {
-        xmult = 1 + G.GAME.jr.satellite_hands[vars.hand_type].level * 0.25
-      }
-    end
-  end,
-  loc_vars = function(self, info_queue, card)
-    local _level = G.GAME.jr and G.GAME.jr.satellite_hands[card.ability.extra.hand_type].level or 0
-    return {
-      vars = {
-        _level,
-        localize(card.ability.extra.hand_type, 'poker_hands'),
-        1 + 0.25 * _level,
-        colours = { (_level == 1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, _level)]) }
-      }
-    }
-  end,
 
-}
 
 -- Mariner 9
 Wormhole.JR_UTILS.Satellite {
@@ -375,7 +415,6 @@ Wormhole.JR_UTILS.Satellite {
       }
     }
   end,
-
 }
 
 -- Voyager 2
@@ -405,7 +444,34 @@ Wormhole.JR_UTILS.Satellite {
       }
     }
   end,
+}
 
+-- Dawn
+Wormhole.JR_UTILS.Satellite {
+  key = 'dawn',
+  name = 'dawn',
+  config = { extra = { hand_type = 'Flush House', xmult = 0.2 }, },
+  pos = { x = 10, y = 0 },
+  soul_pos = { x = 10, y = 1, draw = Wormhole.JR_UTILS.draw_satellite_soul },
+  jr_calculate = function(self, context, vars)
+    if context.individual and context.cardarea == G.play and
+    (context.other_card == context.scoring_hand[#context.scoring_hand] or context.other_card == context.scoring_hand[#context.scoring_hand-1]) then
+      return {
+        xmult = 1 + G.GAME.jr.satellite_hands[vars.hand_type].level * vars.xmult
+      }
+    end
+  end,
+  loc_vars = function(self, info_queue, card)
+    local _level = G.GAME.jr and G.GAME.jr.satellite_hands[card.ability.extra.hand_type].level or 0
+    return {
+      vars = {
+        _level,
+        localize(card.ability.extra.hand_type, 'poker_hands'),
+        1 + card.ability.extra.xmult * _level,
+        colours = { (_level == 1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, _level)]) }
+      }
+    }
+  end,
 }
 
 -- Manhole Cover

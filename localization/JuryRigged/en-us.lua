@@ -29,7 +29,7 @@ return {
         }
       },
       sat_worm_tianwen_4 = {
-        name = "Tianwen 4",
+        name = "Tianwen-4",
         text = {
           {
             "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
@@ -40,6 +40,23 @@ return {
             "is a {C:attention}#2#{},",
             "create {C:attention}#1#{} cop#3# of",
             "#4#random scoring card#5#"
+          }
+        }
+      },
+      sat_worm_venera_9 = {
+        name = "Venera 9",
+        text = {
+          {
+            "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
+            "{C:attention}#2#",
+          },
+          {
+            "If played hand",
+            "is a {C:attention}#2#{},",
+            "{C:attention}#1#{} card#3# in full deck",
+            "have a {C:green}#4# in #5#{} change to",
+            "become the rank of",
+            "the {C:attention}#2#"
           }
         }
       },
@@ -115,6 +132,21 @@ return {
             "is a {C:attention}#2#{},",
             "cards in scoring hand",
             "permanently gain {C:white,X:mult}X#3#{} Mult"
+          }
+        }
+      },
+      sat_worm_dawn = {
+        name = "Dawn",
+        text = {
+          {
+            "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
+            "{C:attention}#2#",
+          },
+          {
+            "If played hand",
+            "is a {C:attention}#2#{},",
+            "{C:attention}last 2{} played cards give",
+            "{C:white,X:mult}X#3#{} Mult when scored"
           }
         }
       },
