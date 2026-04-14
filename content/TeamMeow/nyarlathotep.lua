@@ -151,7 +151,7 @@ SMODS.Joker({
 					key = entry.key,
 				}
 			end
-			main_end[#main_end + 1] = build_nyarlathotep_entries(entries, 1)
+			main_end[#main_end + 1] = build_nyarlathotep_entries(entries, 1, true)
 		end
 		if not seen then
 			return {
