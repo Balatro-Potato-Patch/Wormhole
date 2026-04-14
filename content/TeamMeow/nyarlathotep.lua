@@ -2,7 +2,7 @@ local function build_nyarlathotep_entries(all_entries, max_cols, no_commas)
 	max_cols = max_cols or 3
 	local entries_to_organize = {}
 	for _, e in ipairs(all_entries) do
-		local loc_target = G.localization.descriptions.Other["worm_meow_nyarlathotep_" .. e.key].text_parsed
+		local loc_target = G.localization.descriptions.Other[e.no_auto_key and e.key or ("worm_meow_nyarlathotep_" .. e.key)].text_parsed
 		for _, row in ipairs(loc_target) do
 			entries_to_organize[#entries_to_organize + 1] = {
 				n = G.UIT.C,
@@ -151,6 +151,7 @@ SMODS.Joker({
 				entries[#entries + 1] = {
 					vars = vars,
 					key = entry.key,
+					no_auto_key = true,
 				}
 			end
 			main_end[#main_end + 1] = build_nyarlathotep_entries(entries, 1, true)
