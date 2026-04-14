@@ -1,10 +1,10 @@
 PotatoPatchUtils.LOC.process_loc_text('test.lua')
 
 PotatoPatchUtils.Team {
-    name = 'ACME',
-    colour = HEX('fb7025'),
-    loc = true,
-    credit_rows = {3, 2}
+  name = 'ACME',
+  colour = HEX('fb7025'),
+  loc = true,
+  credit_rows = { 3, 2 }
 }
 
 PotatoPatchUtils.Developer {
@@ -33,8 +33,8 @@ PotatoPatchUtils.Developer {
   loc = true,
   team = 'ACME',
   atlas = 'worm_ACME_credits',
-  pos = {x=2, y=0},
-  soul_pos = {x=2, y=1}
+  pos = { x = 2, y = 0 },
+  soul_pos = { x = 2, y = 1 }
 }
 
 PotatoPatchUtils.Developer {
@@ -43,7 +43,7 @@ PotatoPatchUtils.Developer {
   loc = true,
   team = 'ACME',
   atlas = 'worm_ACME_credits',
-  pos = {x=3, y=0},
+  pos = { x = 3, y = 0 },
 }
 
 PotatoPatchUtils.Developer {
