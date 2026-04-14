@@ -14,7 +14,10 @@ payload = '''
 if member == PotatoPatchUtils.Developers.worm_sleepyg11 then
     PotatoPatchUtils.CREDITS.AREAS[i]:remove()
     PotatoPatchUtils.CREDITS.AREAS[i] = CardArea(G.ROOM.T.x, G.ROOM.T.y, G.CARD_W / 1, G.CARD_H / 1.25, {type = 'title_2', card_limit = 1, highlight_limit = 0})
-    PotatoPatchUtils.CREDITS.AREAS[i]:emplace(SMODS.create_card({ key = WORM_JTEM.quantum_rock.center.key, area = PotatoPatchUtils.CREDITS.AREAS[i] }))
+    if WORM_JTEM.quantum_rock.credits_card then WORM_JTEM.quantum_rock.credits_card:remove() end
+    WORM_JTEM.quantum_rock.credits_card = Card(0,0,G.CARD_W * 1.2, G.CARD_H * 1.2, nil, WORM_JTEM.quantum_rock.center)
+    WORM_JTEM.quantum_rock.credits_area = PotatoPatchUtils.CREDITS.AREAS[i]
+    PotatoPatchUtils.CREDITS.AREAS[i]:emplace(WORM_JTEM.quantum_rock.credits_card)
 end
 '''
 
@@ -40,5 +43,24 @@ if member == PotatoPatchUtils.Developers.worm_sleepyg11 then
     node.config.shadow = false
     node = { n = G.UIT.R, config = { padding = 0.15, colour = G.C.L_BLACK, r = 0.25, }, nodes = { node } }
     node.config.shadow = true
+end
+'''
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS PotatoPatchUtils "src/credits.lua"]'''
+pattern = "Moveable.hover(self)"
+position = 'before'
+match_indent = true
+payload = '''
+if member == PotatoPatchUtils.Developers.worm_haya or member == PotatoPatchUtils.Developers.worm_aikoyori then
+    if WORM_JTEM.quantum_rock.credits_card and not WORM_JTEM.quantum_rock.credits_card.REMOVED then
+        WORM_JTEM.quantum_rock.credits_card:remove()
+        WORM_JTEM.quantum_rock.credits_card = nil
+    else
+        WORM_JTEM.quantum_rock.credits_card = Card(0,0,G.CARD_W * 1.2, G.CARD_H * 1.2, nil, WORM_JTEM.quantum_rock.center)
+        WORM_JTEM.quantum_rock.credits_area:emplace(WORM_JTEM.quantum_rock.credits_card)
+        WORM_JTEM.quantum_rock.credits_area:hard_set_cards()
+    end
 end
 '''
