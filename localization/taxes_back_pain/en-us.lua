@@ -132,7 +132,7 @@ local other_loc_table = {
                 name = "Spaceship Deck",
                 text = {
                     "Start with a {T:j_worm_tbp_spaceship,C:attention}#1#{}",
-                    "which always spawns a {C:spectral}Module{}",
+                    "which always spawns a {C:tbp_module}Module{}",
                     "pack at the start of {T:p_worm_module_jumbo_1,C:attention}shop{}"
                 },
             },
@@ -143,7 +143,7 @@ local other_loc_table = {
                 text = {
                     {
                         "Choose {C:attention}#1#{} of up to",
-                        "{C:attention}#2#{C:spectral} Module{} cards to", -- TODO: change color to new Module one if changed
+                        "{C:attention}#2#{C:tbp_module} Module{} cards to",
                         "be used immediately",
                     },
                     {
@@ -158,7 +158,7 @@ local other_loc_table = {
                 text = {
                     {
                         "Choose {C:attention}#1#{} of up to",
-                        "{C:attention}#2#{C:spectral} Module{} cards to", -- TODO: change color to new Module one if changed
+                        "{C:attention}#2#{C:tbp_module} Module{} cards to",
                         "be used immediately",
                     },
                     {
@@ -173,7 +173,7 @@ local other_loc_table = {
                 text = {
                     {
                         "Choose {C:attention}#1#{} of up to",
-                        "{C:attention}#2#{C:spectral} Module{} cards to", -- TODO: change color to new Module one if changed
+                        "{C:attention}#2#{C:tbp_module} Module{} cards to",
                         "be used immediately",
                     },
                     {
@@ -188,7 +188,7 @@ local other_loc_table = {
                 text = {
                     {
                         "Choose {C:attention}#1#{} of up to",
-                        "{C:attention}#2#{C:spectral} Module{} cards to", -- TODO: change color to new Module one if changed
+                        "{C:attention}#2#{C:tbp_module} Module{} cards to",
                         "be used immediately",
                     },
                     {
@@ -204,7 +204,7 @@ local other_loc_table = {
                 name = 'Not Discovered',
                 text = {
                     'Purchase or use',
-                    'this {C:spectral}Module{} card in an',
+                    'this {C:tbp_module}Module{} card in an',
                     'unseeded run to',
                     'learn what it does'
                 }
@@ -214,7 +214,7 @@ local other_loc_table = {
             tag_worm_tbp_rocketry = {
                 name = "Rocketry Tag",
                 text = {
-                    "Gives a free {C:spectral}Mega Module Pack"
+                    "Gives a free {C:tbp_module}Mega Module Pack"
                 }
             }
         }
@@ -250,7 +250,7 @@ local descriptions = {
         nebula = {
             name = "Nebula Core",
             text = {
-                'When a {C:spectral}Module{} is {C:attention}exhausted{},',
+                'When a {C:tbp_module}Module{} is {C:attention}exhausted{},',
                 'level up a random',
                 'poker hand by {C:attention}#1#{}',
                 '{s:0.8,C:inactive}(Depletes when triggered)'
@@ -261,7 +261,7 @@ local descriptions = {
             text = {
                 'Using a {C:planet}Planet{} card',
                 'increases the durability of',
-                'a random {C:spectral}Module{} by {C:attention}#1#{}',
+                'a random {C:tbp_module}Module{} by {C:attention}#1#{}',
                 '{s:0.8,C:inactive}(Depletes when triggered)'
             }
         },
@@ -270,16 +270,16 @@ local descriptions = {
             text = {
                 'Playing a {C:attention}#2#{}',
                 'increases the durability of',
-                'other {C:spectral}Modules{} by {C:attention}#1#{}',
+                'other {C:tbp_module}Modules{} by {C:attention}#1#{}',
                 '{s:0.8,C:inactive}(Depletes each round)'
             }
         },
         black_hole_generator = {
             name = "Black Hole Generator",
             text = {
-                'When a {C:spectral}Module{} is {C:attention}exhausted{},',
+                'When a {C:tbp_module}Module{} is {C:attention}exhausted{},',
                 'increases the durability of',
-                'other {C:spectral}Modules{} by {C:attention}#1#{}',
+                'other {C:tbp_module}Modules{} by {C:attention}#1#{}',
                 '{s:0.8,C:inactive}(Depletes when triggered)'
             }
         },
@@ -307,7 +307,7 @@ local descriptions = {
             name = 'Weaponized Waste Disposal',
             text = {
                 '{C:mult}+#1#{} Mult for every',
-                '{C:spectral}Module{} exhausted this run', -- TODO: change color to new Module one if changed
+                '{C:tbp_module}Module{} exhausted this run',
                 '{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult)',
                 '{s:0.8,C:inactive}(Depletes each hand)'
             }
@@ -316,7 +316,7 @@ local descriptions = {
             name = 'Overcharged Salvo',
             text = {
                 '{X:mult,C:white}X#1#{} Mult for each',
-                '{C:spectral}Module{} installed if scored hand',
+                '{C:tbp_module}Module{} installed if scored hand',
                 'contains {C:attention}5{} cards',
                 '{C:inactive}(Currently {X:mult,C:white} X#2# {C:inactive} Mult)',
                 '{s:0.8,C:inactive}(Depletes all Modules when triggered)'
@@ -352,7 +352,7 @@ local descriptions = {
         redundancy = {
             name = 'Redundancy Battery',
             text = {
-                'When a {C:spectral}Module{} would',
+                'When a {C:tbp_module}Module{} would',
                 '{C:attention}deplete{}, this module',
                 'depletes by {C:attention}#1#{} instead',
             }
@@ -454,7 +454,7 @@ local descriptions = {
         --     name = 'Uncategorized 4',
         --     text = {
         --         "Earn {C:money}+$#1#{}",
-        --         "when a {C:spectral}Module{}",
+        --         "when a {C:tbp_module}Module{}",
         --         "is {C:attention}exhausted{}",
         --         '{s:0.8,C:inactive}(Depletes each time it triggers)'
         --     }
@@ -464,7 +464,7 @@ local descriptions = {
         --     text = {
         --         '{s:1.2,V:1}Uncategorized 4',
         --         "Earn {C:money}+$#1#{}",
-        --         "when a {C:spectral}Module{}",
+        --         "when a {C:tbp_module}Module{}",
         --         "is {C:attention}exhausted{}",
         --         '{s:0.8,C:inactive}(Depletes each time it triggers)'
         --     }

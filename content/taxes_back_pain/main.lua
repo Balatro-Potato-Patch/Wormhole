@@ -354,7 +354,7 @@ SMODS.Joker({
 	key = "tbp_spaceship",
     atlas = "tbp_ship",
     pos = {x=1, y=0},
-	rarity = 4, -- TODO: Does it need its own rarity?
+	rarity = 4,
 	cost = 1,
 	unlocked = true,
 	discovered = false,
@@ -580,8 +580,8 @@ end
 SMODS.ConsumableType {
     key = 'tbp_module',
     collection_rows = { 5, 6 },
-    primary_colour = G.C.SET.Spectral, -- TODO: Change color?
-    secondary_colour = G.C.SECONDARY_SET.Spectral,
+    primary_colour = HEX("7ca3cc"),
+    secondary_colour = HEX("7ca3cc"),
     default = "c_worm_tbp_laser",
 }
 
@@ -680,7 +680,7 @@ end
 Wormhole.tbp.Module({
 	key = "nebula",
     slot = 'core',
-    durability = 5, -- TODO: Durability unspecified, find a proper value for this
+    durability = 5,
     atlas = "tbp_module_frame",
 	pos = { x = 3, y = 1 },
     -- module_pos = { x = 0, y = 1},
@@ -708,12 +708,12 @@ Wormhole.tbp.Module({
 Wormhole.tbp.Module({
 	key = "astrophage",
     slot = 'core',
-    durability = 5, -- TODO: Durability unspecified, find a proper value for this
+    durability = 5,
     atlas = "tbp_module_frame",
 	pos = { x = 3, y = 1 },
 	config = {
 		extra = {
-			amount = 1, -- TODO: Amount unspecified, find a proper value for this
+			amount = 1,
 		},
     },
 	loc_vars = function(self, info_queue, module, card)
@@ -778,7 +778,7 @@ Wormhole.tbp.Module({
 Wormhole.tbp.Module({
 	key = "black_hole_generator",
     slot = 'core',
-    durability = 5, -- TODO: Durability unspecified, find a proper value for this
+    durability = 5,
     atlas = "tbp_module_frame",
 	pos = { x = 3, y = 1 },
     module_pos = { x = 0, y = 1},
