@@ -171,6 +171,24 @@ return {
                     '{C:inactive}(Minigame complete!)'
                 }
             },
+            c_worm_acme_printer = {
+                name = 'ACME Counterfeiter 3000',
+                text = {
+                    '{X:attention,C:white}After{} scoring {C:attention}blind requirement{}',
+                    'in a single hand,',
+                    '{X:attention,C:white}Use{} to gain {C:money}$5{} per digit in your',
+                    '{C:attention}max score{} this run',
+                    '{C:inactive}(Currently {C:attention}#1#{C:inactive} digits)'
+                }
+            },
+            c_worm_acme_printer_alt = {
+                name = 'ACME Counterfeiter 3000',
+                text = {
+                    '{X:attention,C:white}Use{} to gain {C:money}$5{} per digit in your',
+                    '{C:attention}max score{} this run',
+                    '{C:inactive}(Currently {C:attention}#1#{C:inactive} digits)'
+                }
+            },
         },
         Tag = {
             tag_worm_acme_gadget = {
@@ -179,6 +197,26 @@ return {
                     "Gives a free",
                     "{C:attention}Mega Gadget Pack",
                 },
+            }
+        },
+        Voucher = {
+            v_worm_ACME_voucher_1 = {
+                name = "Gadget Merchant",
+                text = {
+                    "{C:ACME_Gadget}Gadget{} cards appear",
+                    "{C:attention}2X{} more frequently",
+                    "in the shop"
+                }
+            },
+            v_worm_ACME_voucher_2 = {
+                name = "Gadget Tycoon",
+                text = {
+                    "{C:ACME_Gadget}Gadget{} cards appear",
+                    "{C:attention}4X{} more frequently",
+                    "in the shop and have a",
+                    "{C:green}#1# in #2#{} chance to",
+                    "survive being destroyed"
+                }
             }
         },
         Joker = {
@@ -198,6 +236,16 @@ return {
                     'when obtained'
                 }
             },
+	    j_worm_acme_gas_station = {
+		name = 'Interplanetary Gas Station',
+		text = {
+			'On scoring, played',
+			'hand {C:red}loses{} a level',
+			'{C:attention}Gain #1#{} random {C:planet}hand level{}',
+			'and {X:mult,C:white}X#2#{} Mult',
+			'{C:inactive}(Currently {X:mult,C:white}X#3#{C:inactive} Mult)'
+		}
+	    },
         },
         Other = {
             undiscovered_acme_gadget = {
@@ -231,7 +279,7 @@ return {
                 name = 'ACME Corporation',
             },
             PotatoPatchDev_RadiationV2 = {
-                name = "ACME Radiation Plushie",
+                name = "RadiationV2",
                 text = {
                     {
                         "This was my {C:attention}first contribution{} to a",

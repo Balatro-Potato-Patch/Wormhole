@@ -11,8 +11,8 @@ SMODS.Booster {
     draw_hand = false,
     unlocked = true,
     discovered = true,
-    ppu_artist = {'RadiationV2'},
-    ppu_coder = {'RadiationV2'},
+    ppu_artist = { 'RadiationV2' },
+    ppu_coder = { 'RadiationV2' },
     loc_vars = function(self, info_queue, card)
         local cfg = (card and card.ability) or self.config
         return {
@@ -61,8 +61,8 @@ SMODS.Booster {
     draw_hand = false,
     unlocked = true,
     discovered = true,
-    ppu_artist = {'RadiationV2'},
-    ppu_coder = {'RadiationV2'},
+    ppu_artist = { 'RadiationV2' },
+    ppu_coder = { 'RadiationV2' },
     loc_vars = function(self, info_queue, card)
         local cfg = (card and card.ability) or self.config
         return {
@@ -110,8 +110,8 @@ SMODS.Booster {
     config = { extra = 4, choose = 1 },
     draw_hand = false,
     unlocked = true,
-    ppu_artist = {'RadiationV2'},
-    ppu_coder = {'RadiationV2'},
+    ppu_artist = { 'RadiationV2' },
+    ppu_coder = { 'RadiationV2' },
     loc_vars = function(self, info_queue, card)
         local cfg = (card and card.ability) or self.config
         return {
@@ -159,8 +159,8 @@ SMODS.Booster {
     config = { extra = 4, choose = 1 },
     draw_hand = false,
     unlocked = true,
-    ppu_artist = {'RadiationV2'},
-    ppu_coder = {'RadiationV2'},
+    ppu_artist = { 'RadiationV2' },
+    ppu_coder = { 'RadiationV2' },
     loc_vars = function(self, info_queue, card)
         local cfg = (card and card.ability) or self.config
         return {
