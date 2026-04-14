@@ -18,6 +18,9 @@ SMODS.Joker { -- :3
             vars = { card.ability.extra.multi, (planets_used + 1) }, 
         }
     end,
+    ppu_team = { "Violent Violets" },
+    ppu_artist = { "FirstTry" },
+    ppu_coder = { "Iso" },
     calculate = function(self, card, context)
         if context.setting_blind then
             G.E_MANAGER:add_event(Event({

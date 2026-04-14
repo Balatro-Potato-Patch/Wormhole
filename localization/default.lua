@@ -1,7 +1,19 @@
 return {
     descriptions = {
         PotatoPatch = {
-            
+            VV = { name =  "Violent Violets" },
+            FireIce = {
+                name = "FireIce",
+            },
+            Gud = {
+                name = "Gup",
+            },
+            Iso = {
+                name = "Isotypical",
+            },
+            FirstTry = {
+                name = "FirstTry",
+            },
         },
         Joker = {
         j_worm_alienx = {

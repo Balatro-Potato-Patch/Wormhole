@@ -11,6 +11,9 @@ SMODS.Joker {
             denom = 4
         }
     },
+    ppu_team = { name = "Violent Violets" },
+    ppu_artist = { "Gud" },
+    ppu_coder = { "FireIce" },
     loc_vars = function(self,info_queue,card)
         info_queue[#info_queue+1] = G.P_CENTERS.c_black_hole
         local oddwin, oddnope = SMODS.get_probability_vars(card, 1, card.ability.extra.denom, self.key)

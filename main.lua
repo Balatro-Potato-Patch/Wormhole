@@ -15,9 +15,34 @@ if PotatoPatchUtils then
     function Wormhole.reset_game_globals(run_start) end
 end
 
-PotatoPatchUtils.Team("Violent Violets", HEX('a83ee7'), false)
 
-PotatoPatchUtils.Developer("FireIce", HEX('AF00AF'), false, nil, "Violent Violets")
-PotatoPatchUtils.Developer("Isotypical", HEX('D781FF'), false, nil, "Violent Violets")
-PotatoPatchUtils.Developer("Gud", HEX("BA89F9"), false, nil, "Violent Violets")
-PotatoPatchUtils.Developer("FirstTry", HEX("FFFFFF"), false, nil, "Violent Violets")
+PotatoPatchUtils.Team {
+  name = 'Violent Violets',
+  colour = HEX('A83EE7'),
+  loc = "VV", -- Can also be `loc = 'k_exampleteam_name'` where the string is an arbitrary localization dictionary entry
+}
+
+PotatoPatchUtils.Developer {
+  name = 'FireIce',
+  colour = HEX('AF00AF'),
+  loc = true, -- Can also be `loc = 'k_doofus_name'` where the string is an arbitrary localization dictionary entry
+  team = 'Violent Violets' -- Must match an already existing Team name
+}
+PotatoPatchUtils.Developer {
+  name = 'Gud',
+  colour = HEX('D781FF'),
+  loc = true, -- Can also be `loc = 'k_doofus_name'` where the string is an arbitrary localization dictionary entry
+  team = 'Violent Violets' -- Must match an already existing Team name
+}
+PotatoPatchUtils.Developer {
+  name = 'Iso',
+  colour = HEX("BA89F9"),
+  loc = true, -- Can also be `loc = 'k_doofus_name'` where the string is an arbitrary localization dictionary entry
+  team = 'Violent Violets' -- Must match an already existing Team name
+}
+PotatoPatchUtils.Developer {
+  name = 'FirstTry',
+  colour = HEX("FFFFFF"),
+  loc = true, -- Can also be `loc = 'k_doofus_name'` where the string is an arbitrary localization dictionary entry
+  team = 'Violent Violets' -- Must match an already existing Team name
+}
