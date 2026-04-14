@@ -12,6 +12,7 @@ SMODS.Joker {
     discovered = true,
     blueprint_compat = true,
     ppu_coder = { "fooping" },
+    ppu_artist = { "fooping" },
     ppu_team = { "riverboat" },
     attributes = { "editions", "chance" },
     loc_vars = function(self, info_queue, card)

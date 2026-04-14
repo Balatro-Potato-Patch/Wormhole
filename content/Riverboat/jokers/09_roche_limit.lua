@@ -14,6 +14,7 @@ SMODS.Joker {
     eternal_compat = true,
     perishable_compat = true,
     ppu_coder = { "blamperer" },
+    ppu_artist = { "blamperer" },
     ppu_team = { "riverboat" },
     attributes = { "planet", "destroy_card" },
     loc_vars = function(self, info_queue, card)
