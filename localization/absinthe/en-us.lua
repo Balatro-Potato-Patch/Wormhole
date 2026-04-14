@@ -601,7 +601,7 @@ return {
             PotatoPatchDev_AnneBean = {
                 name = 'AnneBean',
                 text = { {
-                    "Hiya, you can call me {E:2,C:purple}Anne{}! Thanks for checking out team {C:absinthe,E:1}Absinthe{}!",
+                    "Hiya, you can call me {E:2,C:enhanced}Anne{}! Thanks for checking out team {C:absinthe,E:1}Absinthe{}!",
                     "I'm one of the artists for our team. I made the Spacewalk Seltzer and the",
                     "pack art for our little mod! I'm quite proud of what I've come up with.",
                     "This project has really helped me get out of a creative drought,",
@@ -611,7 +611,7 @@ return {
                     "I've gotten to meet a lot of lovely and inspired people as a result. {s:0.8}(Who I now consider friends :D)",
                     "With my creative passion reinvigorated, I hope I get to work with everyone here again in the future!",
                 }, {
-                    "Be kind to yourself, you deserve it <3",
+                    "Be kind to yourself, you deserve it {C:enhanced}<3{}",
                 }
                 }
             },
