@@ -334,13 +334,11 @@ return {
 					"{C:worm_meow_spacetart}@Spacetart{} by {C:attention}#1# level"
 				}
 			},
-			j_worm_meow_golden_tart = {
-				name = "Golden Tart",
+			j_worm_meow_feli = {
+				name = "Félicette",
 				text = {
-					"Gains {C:gold}1${} of {C:attention}sell value",
-					"per round",
-					"per {C:worm_meow_spacetart}@Spacetart {C:attention}attached",
-					"{C:inactive}(Currently +{C:gold}#1#${C:inactive})"
+					"+{C:mult}#1#{} Mult",
+					"per {C:attention}Cat joker",
 				}
 			},
 		},
@@ -551,10 +549,12 @@ return {
 			worm_meow_spacetart = "Spacetart",
 		},
 		achievement_names = {
-			ach_worm_rainbow = "Rainbow",
+			ach_worm_meow_rainbow = "Rainbow",
+			ach_worm_meow_feli = "Nyan Cat: Origins",
 		},
 		achievement_descriptions = {
-			ach_worm_rainbow = "Have every kind of ©Spacetart on a Joker",
+			ach_worm_meow_rainbow = "Have every kind of ©Spacetart on a Joker",
+			ach_worm_meow_feli = "Have Félicette equip a ©Spacetart",
 		},
 	},
 }

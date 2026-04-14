@@ -571,7 +571,7 @@ SpaceTart({
 	boosted_conds = {
 		-- First condition
 		function(card)
-			return card:has_attribute("mult")
+			return card.config and card.config.center_key == "j_worm_meow_feli"
 		end,
 
 		-- Rainbow condition
@@ -795,7 +795,7 @@ SpaceTart({
 	boosted_conds = {
 		-- First condition
 		function(card)
-			return card.config and card.config.center_key == "j_worm_meow_golden_tart"
+			return card:has_attribute("economy")
 		end,
 
 		-- Rainbow condition
@@ -1156,6 +1156,10 @@ function Card:stop_drag(...)
 			center_key = self.config.center_key,
 		}
 		table.insert(closest.tarts, tart)
+		
+		if closest.config and closest.config.center_key == "j_worm_meow_feli" then
+			check_for_unlock({type = "feli"})
+		end
 		G.E_MANAGER:add_event(Event({
 			trigger = "after",
 			delay = 0,

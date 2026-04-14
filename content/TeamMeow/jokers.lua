@@ -82,22 +82,23 @@ SMODS.Joker({
 	ppu_artist = { "gappie" },
 })
 SMODS.Joker({
-	key = "meow_golden_tart",
-    rarity = 2,
+	key = "meow_feli",
+    rarity = 1,
     cost = 4,
+    config = {
+        extra = {
+            mult = 6
+        }
+    },
     loc_vars = function(self, info_queue, card)
-        return { vars = { #card.tarts } }
+        return { vars = { card.ability.extra.mult } }
     end,
     blueprint_compat = false,
-    attributes = {"cat", "scaling", "economy", "space", "spacetart"},
+    attributes = {"cat", "mult", "space"},
     calculate = function(self, card, context)
-        if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint and #card.tarts > 0 then
-            -- See note about SMODS Scaling Manipulation on the wiki
-            card.ability.extra_value = card.ability.extra_value + #card.tarts
-            card:set_cost()
+        if context.other_joker and (context.other_joker:has_attribute("cat")) then
             return {
-                message = localize('k_val_up'),
-                colour = G.C.MONEY
+                xmult = card.ability.extra.xmult
             }
         end
     end,
