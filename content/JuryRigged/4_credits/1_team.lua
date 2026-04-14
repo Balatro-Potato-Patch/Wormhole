@@ -19,5 +19,6 @@ PotatoPatchUtils.Team({
     end
 
     if context.end_of_round then G.GAME.jr.curr_hand = nil end
-  end
+  end,
+  credit_rows = {4,4},
 })
