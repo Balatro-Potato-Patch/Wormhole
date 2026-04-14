@@ -337,7 +337,7 @@ return {
 			j_worm_meow_feli = {
 				name = "Félicette",
 				text = {
-					"+{C:mult}#1#{} Mult",
+					"{C:mult}+#1#{} Mult",
 					"per {C:attention}Cat joker",
 				}
 			},
