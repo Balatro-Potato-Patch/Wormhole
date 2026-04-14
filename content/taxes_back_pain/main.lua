@@ -69,40 +69,6 @@ function Wormhole.reset_game_globals(run_start)
     return reset_game_globals_ref(run_start)
 end
 
-if Wormhole.tbp.config.swap_buttons == nil then
-    Wormhole.tbp.config.swap_buttons = false
-end
-SMODS.current_mod.config_tab = function()
-    return {
-        n = G.UIT.ROOT,
-        config = {
-            align = "cm",
-            padding = 0.05,
-            colour = G.C.CLEAR,
-        },
-        nodes = {
-            {
-                n = G.UIT.R,
-                config = { align = "cl", padding = 0 },
-                nodes = {
-                    {
-                        n = G.UIT.C,
-                        config = { align = "cl", padding = 0.05 },
-                        nodes = {
-                            create_toggle({
-                                label = "Swap Module Button Layout",
-                                ref_table = Wormhole.tbp.config,
-                                ref_value = "swap_buttons",
-                                info = {"Swaps Yes/No button positions", "in module confirmation dialogs"}
-                            }),
-                        }
-                    }
-                }
-            }
-        }
-    }
-end
-
 SMODS.Atlas {
     key = "tbp_devs",
     path = "taxes_back_pain/portraits.png",
@@ -212,6 +178,15 @@ SMODS.Gradient({
     colours = {
         HEX('a756f9'), HEX('4ee8d3'), HEX('a756f9'), HEX('e8c81b')
     },
+    cycle = 6
+})
+
+SMODS.Gradient({
+    key = 'mythie',
+    colours = {
+        HEX('c4524b'), HEX('fc7067'), HEX('ffe463'), HEX('48a881'), HEX('007ee2')
+    },
+    cycle = 6
 })
 
 SMODS.Gradient({
@@ -296,6 +271,7 @@ PotatoPatchUtils.Developer({
     team = 'tbp',
     loc = true,
     atlas = 'worm_tbp_devs',
+    colour = SMODS.Gradients.worm_mythie,
     pos = { x = 0, y = 1 },
 })
 
@@ -363,7 +339,7 @@ SMODS.Joker({
 	eternal_compat = false,
 	perishable_compat = false,
     ppu_team = {'tbp'},
-    ppu_artist = {'mythie'},
+    ppu_artist = {'ice'},
     module_types = {'core', 'weapons', 'utility', 'thrusters'},
     config = {
         extra_slots_used = -1,
@@ -620,6 +596,7 @@ Wormhole.tbp.Module = SMODS.Consumable:extend{
         for _, obj in pairs(self.obj_table) do
             if obj.set == 'tbp_module' then
                 obj.ppu_team = obj.ppu_team or { 'tbp' }
+                obj.ppu_artist = obj.ppu_artist or {'mythie'}
                 obj.attributes = obj.attributes or {}
                 if obj.slot then table.insert(obj.attributes, "worm_tbp_".. obj.slot) end
             end
@@ -751,7 +728,6 @@ Wormhole.tbp.Module({
             poker_hand = 'High Card'
         },
     },
-    ppu_artist = { 'mythie' },
     loc_vars = function(self, info_queue, module, card)
         return { vars = { module.ability.extra.amount, localize(Wormhole.tbp.get_dellinger_pokerhand() or "High Card", 'poker_hands') } }
     end,
@@ -1348,6 +1324,8 @@ SMODS.Booster({
 	cost = 4,
     kind = "worm_tbp_module",
 	create_card = booster_module_create_card,
+    ppu_team = {'tbp'},
+    ppu_artist = {'mythie'}
 })
 
 SMODS.Booster({
@@ -1360,6 +1338,8 @@ SMODS.Booster({
 	cost = 4,
     kind = "worm_tbp_module",
 	create_card = booster_module_create_card,
+    ppu_team = {'tbp'},
+    ppu_artist = {'mythie'}
 })
 
 SMODS.Booster({
@@ -1372,6 +1352,8 @@ SMODS.Booster({
 	cost = 6,
     kind = "worm_tbp_module",
 	create_card = booster_module_create_card,
+    ppu_team = {'tbp'},
+    ppu_artist = {'mythie'}
 })
 
 SMODS.Booster({
@@ -1384,6 +1366,8 @@ SMODS.Booster({
 	cost = 8,
     kind = "worm_tbp_module",
 	create_card = booster_module_create_card,
+    ppu_team = {'tbp'},
+    ppu_artist = {'mythie'}
 })
 
 -- Tag (Added this to use up the final slot)
@@ -1391,6 +1375,8 @@ SMODS.Tag {
     key = "tbp_rocketry",
     min_ante = 1,
     atlas = "worm_tbp_tag",
+    ppu_team = {'tbp'},
+    ppu_artist = {'ice'},
     pos = { x = 0, y = 0 },
     loc_vars = function(self, info_queue, tag)
         info_queue[#info_queue + 1] = G.P_CENTERS.p_worm_tbp_module_mega_1
