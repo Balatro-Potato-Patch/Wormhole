@@ -225,17 +225,17 @@ SMODS.Consumable {
     cost = 3,
 	atlas = 'Palindrome',
     pos = { x = 0, y = 0 },
-    config = { anim_time = 0 },
+    config = { anim_time = 0, hand_type = "bap_void" },
     can_use = function(self, card) return true end,
-    use = function(self, card, area, copier)
-		G.E_MANAGER:add_event(Event({
-			trigger = 'after',
-			delay = 0.4,
-			func = function()
-				return true
-			end
-		}))
-	end
+    -- use = function(self, card, area, copier)
+	-- 	G.E_MANAGER:add_event(Event({
+	-- 		trigger = 'after',
+	-- 		delay = 0.4,
+	-- 		func = function()
+	-- 			return true
+	-- 		end
+	-- 	}))
+	-- end
 }
 
 
@@ -264,7 +264,7 @@ SMODS.Joker {
         return { vars = { card.ability.extra.hands_left } }
     end,
     calculate = function(self, card, context)
-        if context.after then
+        if context.end_of_round and context.game_over == false and context.main_eval then
 			G.E_MANAGER:add_event(Event({
                 trigger = 'after',
                 delay = 0.4,
