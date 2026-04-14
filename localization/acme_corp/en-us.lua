@@ -209,7 +209,7 @@ return {
                 }
             },
             v_worm_ACME_voucher_2 = {
-                name = "Gadget Tycoon",
+                name = "Mass Gadget Production",
                 text = {
                     "{C:ACME_Gadget}Gadget{} cards appear",
                     "{C:attention}4X{} more frequently",
@@ -221,7 +221,7 @@ return {
         },
         Joker = {
             j_worm_ACME_enterprise = {
-                name = "Enterprise Joker",
+                name = "Quality Assurance",
                 text = {
                     '{C:chips}+#1#{} Chips for each',
                     '{C:attention}unique{} {C:planet}Planet{} card',

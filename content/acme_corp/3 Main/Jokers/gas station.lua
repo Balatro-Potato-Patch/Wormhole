@@ -1,7 +1,7 @@
 SMODS.Joker{
 	key = 'acme_gas_station',
 	atlas = 'ACME_jokers',
-	rarity = 2,
+	rarity = 3,
 	cost = 6,
 	blueprint_compat = true,
 	perishable_compat = true,
@@ -29,6 +29,7 @@ SMODS.Joker{
 						hands = {context.scoring_name},
 						level_up = -1,
 						from = card,
+						instant = true
 					}
 					SMODS.scale_card(card,{
 						ref_table = card.ability.extra,

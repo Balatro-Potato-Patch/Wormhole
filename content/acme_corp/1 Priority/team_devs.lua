@@ -14,10 +14,7 @@ PotatoPatchUtils.Developer {
   team = 'ACME',
   atlas = 'worm_ACME_radi',
   pos = {x=0, y=0},
-  soul_pos = {
-    x=0,
-    y=1
-  }
+  soul_pos = {x=0, y=1}
 }
 
 PotatoPatchUtils.Developer {
@@ -27,6 +24,7 @@ PotatoPatchUtils.Developer {
   team = 'ACME',
   atlas = 'worm_ACME_credits',
   pos = {x=1, y=0},
+  soul_pos = {x=1, y=1}
 }
 
 PotatoPatchUtils.Developer {
@@ -54,5 +52,6 @@ PotatoPatchUtils.Developer {
   loc = true,
   team = 'ACME',
   atlas = 'worm_ACME_credits',
-  pos = {x=4, y=0},
+  pos = {x=0, y=0},
+  soul_pos = {x=0, y=1}
 }
