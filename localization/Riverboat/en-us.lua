@@ -2,8 +2,16 @@ return {
     descriptions = {
         PotatoPatch = {
             PotatoPatchTeam_riverboat = { name = "Riverboat" },
-            PotatoPatchDev_blamperer = { name = "blamperer", text = { "t" } },
+            PotatoPatchDev_blamperer = {
+                name = "blamperer",
+                text = {
+                    "I also made a mod called",
+                    "{C:chips,u:chips}The Latro{}, if you want to",
+                    "try that as well."
+                }
+            },
             PotatoPatchDev_fooping = { name = "fooping", text = { "{X:chips}Programmer{} and {X:purple}Artist{}" } },
+            PotatoPatchDev_snipey = { name = "SnipeyMcButter", text = { "t" } },
         },
         Joker = {
             j_worm_riverboat_the_past = {
@@ -141,6 +149,15 @@ return {
                     "gives {X:mult,C:white} X#1# {} Mult",
                     "{C:inactive}(Currently #2#active)"
                 }
+            },
+            j_worm_riverboat_alien_blood = {
+                name = "Alien Blood",
+                text = {
+                    "Scored cards of {C:spades}Spade",
+                    "suit give {X:mult,C:white}X#1#{} Mult",
+                    "Selling this card",
+                    "{C:red}destroys {C:attention}2{} other Jokers"
+                }
             }
         },
         Enhanced = {
@@ -159,10 +176,10 @@ return {
             k_disintegrated_ex = "Disintegrated!"
         },
         achievement_names = {
-            riverboat_instaplanet = "Clear Sky Tonight"
+            ach_worm_riverboat_instaplanet = "Clear Sky Tonight"
         },
         achievement_descriptions = {
-            riverboat_instaplanet = {
+            ach_worm_riverboat_instaplanet = {
                 "Win a round in 0 hands",
                 "using Astrophotography"
             }

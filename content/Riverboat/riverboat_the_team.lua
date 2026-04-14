@@ -15,3 +15,9 @@ PotatoPatchUtils.Developer {
     team = "riverboat",
     loc = true
 }
+
+PotatoPatchUtils.Developer {
+    name = "snipey",
+    team = "riverboat",
+    loc = true
+}
