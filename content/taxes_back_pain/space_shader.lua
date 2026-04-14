@@ -10,7 +10,9 @@ SMODS.Shader {
     send_vars = function(sprite)
         local atlas = G.ASSET_ATLAS[Wormhole.prefix .."_tbp_big_space_atlas"]
         atlas.image:setWrap("mirroredrepeat", "mirroredrepeat")
-        local pos = {x = 0, y = 0}
+        -- Allows for a random starting point
+        sprite.tbp_space_shader_random_pos = sprite.tbp_space_shader_random_pos or {x = math.random(0, 20) + (math.random()), y = math.random(0, 20) + (math.random())}
+        local pos = sprite.tbp_space_shader_random_pos
         local w, h = 50, 80
         local texW, texH = atlas.image:getDimensions()
     
@@ -35,7 +37,9 @@ SMODS.Shader {
     send_vars = function(sprite)
         local atlas = G.ASSET_ATLAS[Wormhole.prefix .."_tbp_big_space_atlas_neg"]
         atlas.image:setWrap("mirroredrepeat", "mirroredrepeat")
-        local pos = {x = 0, y = 0}
+        -- Allows for a random starting point
+        sprite.tbp_space_shader_random_pos = sprite.tbp_space_shader_random_pos or {x = math.random(0, 20) + (math.random()), y = math.random(0, 20) + (math.random())}
+        local pos = sprite.tbp_space_shader_random_pos
         local w, h = 50, 80
         local texW, texH = atlas.image:getDimensions()
     
