@@ -1,46 +1,13 @@
-sendDebugMessage("BalatrosAPalindrome loading!")
+--sendDebugMessage("BalatrosAPalindrome loading!")
 
-PotatoPatchUtils.Team({name="BalatrosAPalindrome", colour=G.C.BLUE})
-PotatoPatchUtils.Developer({team="BalatrosAPalindrome",name="Nogardagem"})
-PotatoPatchUtils.Developer({team="BalatrosAPalindrome",name="NerdyBread42"})
-PotatoPatchUtils.Developer({team="BalatrosAPalindrome",name="IzzyWizz"})
-PotatoPatchUtils.Developer({team="BalatrosAPalindrome",name="Knightingale0"})
-
-
--- sendDebugMessage("MOD LOADED")
-
--- SMODS.Consumable {
---     key = 'bap_test',
---     set = 'Tarot',
---     loc_txt = {
---         name = 'Test',
---         text = {'Works'}
---     },
---     pos = {x=0,y=0}
--- }
-
--- G.E_MANAGER:add_event(Event({
---     trigger = 'after',
---     delay = 0.1,
---     func = function()
---         sendDebugMessage("POST INIT CENTER:", tostring(G.P_CENTERS["c_bap_test"]))
---         return true
---     end
--- }))
-
--- G.E_MANAGER:add_event(Event({
---     trigger = 'after',
---     delay = 0.5,
---     func = function()
---         for k, v in pairs(G.P_CENTERS) do
---             if string.find(k, "bap") then
---                 sendDebugMessage("FOUND CENTER:", k)
---             end
---         end
---         return true
---     end
--- }))
-
+SMODS.DynaTextEffect {
+    key = "bap_text_funny",
+    func = function (self, index, letter)
+		letter.scale = (math.sin((G.TIMERS.REAL*4.0 + index)*1.9443) + 1.0) * 0.25 + 1.0
+		letter.offset = {x = 0.0, y = math.sin((G.TIMERS.REAL*4.0 + index)) * 20.0}
+        --letter.r = math.sin((G.TIMERS.REAL*4.0 + index)*1.9443) * math.pi / 7
+    end
+}
 
 
 SMODS.Atlas {
@@ -55,29 +22,12 @@ SMODS.Atlas {
 }
 
 
--- OLD ENHANCEMENT
--- SMODS.Enhancement {
---     key = 'bap_void',
---     loc_txt = {
---         name = 'Void',
--- 		text = {
--- 			"{C:chips}#1#{} chips when",
--- 			"{C:attention}held{} or {C:attention}scored{}"
--- 		}
---     },
---     atlas = 'Palindrome',
---     pos = { x = 1, y = 0 },
---     config = { bonus = -25, h_chips = -25 },
--- 	--always_scores = true,
--- 	loc_vars = function(self, info_queue, card)
---         local ability = card and card.ability or self.config
---     	return { vars = { ability.bonus, ability.h_chips } }
---     end,
--- 	-- update= function(self, card, dt)
--- 	-- 	self.edition = "e_negative"
--- 	-- end
--- 	--set_ability = function(self, card, initial, delay_sprites) end
--- }
+PotatoPatchUtils.Team({name="BalatrosAPalindrome", colour=G.C.BLUE})
+PotatoPatchUtils.Developer({team="BalatrosAPalindrome",name="Nogardagem",loc=true,atlas='worm_Palindrome',pos={x=1,y=1}})
+PotatoPatchUtils.Developer({team="BalatrosAPalindrome",name="NerdyBread42",atlas='worm_Palindrome',pos={x=0,y=2}})
+PotatoPatchUtils.Developer({team="BalatrosAPalindrome",name="IzzyWizz",atlas='worm_Palindrome',pos={x=0,y=2}})
+PotatoPatchUtils.Developer({team="BalatrosAPalindrome",name="Knightingale0",atlas='worm_Palindrome',pos={x=1,y=2}})
+
 
 SMODS.Shader {
     key = 'bap_shader_void',
@@ -135,6 +85,9 @@ SMODS.Edition {
 
 -- The Abyss
 SMODS.Consumable {
+	ppu_artist = {"Nogardagem"},
+	ppu_coder = {"Nogardagem"},
+	ppu_team = "BalatrosApalindrome",
 	key = 'bap_abyss',
 	loc_txt = {
 		name = 'The Abyss',
@@ -271,6 +224,9 @@ SMODS.PokerHand {
 
 -- Nothing planet card
 SMODS.Consumable {
+	ppu_artist = {"Nogardagem"},
+	ppu_coder = {"Nogardagem"},
+	ppu_team = "BalatrosApalindrome",
     key = "bap_nothing",
     -- loc_txt = {
 	-- 	name = 'Nothing',
@@ -340,6 +296,9 @@ SMODS.Consumable {
 
 -- Milky Way
 SMODS.Joker {
+	ppu_artist = {"Nogardagem"},
+	ppu_coder = {"Nogardagem"},
+	ppu_team = "BalatrosApalindrome",
     key = "bap_milky_way",
     blueprint_compat = true,
     eternal_compat = false,
@@ -351,9 +310,9 @@ SMODS.Joker {
 	loc_txt = {
 		name = 'Milky Way',
 		text = {
-			"Creates a random {C:planet}Planet{} card",
-			"at end of round",
-        	"{C:inactive}({C:attention}#1#{C:inactive} remaining)",
+			"Creates a random {C:planet}Planet{}",
+			"card at the end of",
+        	"the next {C:attention}#1#{} rounds",
 			"{C:inactive}(Must have room)",
 		}
 	},
@@ -400,6 +359,9 @@ SMODS.Joker {
 
 -- Andromeda
 SMODS.Joker {
+	ppu_artist = {"Nogardagem"},
+	ppu_coder = {"Knightingale0"},
+	ppu_team = "BalatrosApalindrome",
     key = "bap_andromeda",
     blueprint_compat = true,
     eternal_compat = false,
@@ -448,6 +410,9 @@ SMODS.Joker {
 
 -- Solar Panels
 SMODS.Joker {
+	ppu_artist = {"Nogardagem"},
+	ppu_coder = {"Knightingale0"},
+	ppu_team = "BalatrosApalindrome",
 	key = "bap_solar_panel",
     blueprint_compat = true,
     eternal_compat = false,
@@ -508,6 +473,9 @@ for duplicate = 0, 20 do
 
 	-- Space Worm
 	SMODS.Joker {
+		ppu_artist = {"Nogardagem"},
+		ppu_coder = {"Nogardagem"},
+		ppu_team = "BalatrosApalindrome",
 		key = "bap_space_worm"..duplicate,
 		blueprint_compat = true,
 		rarity = 3,
@@ -519,7 +487,7 @@ for duplicate = 0, 20 do
 			name = 'Space Worm'.." "..duplicate,
 			text = {
 				"When {C:attention}Blind{} is selected,",
-				"{C:attention}destroy{} Joker from {V:1,V:2}Wormhole{}",
+				"{C:attention}destroy{} Joker from {B:1,V:2}Wormhole{}",
 				"to the right and gain {X:mult,C:white} X#1# {} Mult",
 				"{C:inactive}(Currently {X:mult,C:white} X#2# {C:inactive} Mult)",
 			}
