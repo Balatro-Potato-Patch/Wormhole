@@ -18,11 +18,14 @@ SMODS.Tag {
         }
     end,
     set_ability = function(self, tag)
-        local new_rank = pseudorandom_element(SMODS.Ranks, pseudoseed('lfc_laser'), {in_pool = function(v, args)
-            for i, v2 in ipairs(G.playing_cards) do
-                if v2:get_id() == v.id then print("found "..v.key) return true end
+        local new_rank = pseudorandom_element(SMODS.Ranks, pseudoseed('lfc_laser'), {
+            in_pool = function(v, args)
+                for i, v2 in ipairs(G.playing_cards) do
+                    if v2:get_id() == v.id then return true end
+                end
+                return false
             end
-        return false end}) or SMODS.Ranks.Ace
+        }) or SMODS.Ranks.Ace
         tag.ability.rank = new_rank
     end,
     apply = function(self, tag, context)

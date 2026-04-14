@@ -27,16 +27,16 @@ return {
                 name = "ellestuff.",
                 text = {
                     {
-                        "full of [REDACTED]",
-                        "and [REDACTED]"
+                        "full of love.draw",
+                        "and love.update hooks"
                     },
                     {
-                        "i made the [REDACTED]",
-                        "and [REDACTED] lol"
+                        "i made the Meteors",
+                        "and Spacebar lol"
                     },
                     {
-                        "also did the shader stuff on",
-                        "[REDACTED] and these Credits!"
+                        "also did the shader stuff",
+                        "Urination Station and these Credits!"
                     }
                 }
             },
