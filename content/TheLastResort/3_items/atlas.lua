@@ -27,6 +27,13 @@ SMODS.Atlas{
 }
 
 SMODS.Atlas{
+	key = "tlr_quinn",
+	path = "TheLastResort/jubilee_balatr.png",
+	px = 71,
+	py = 95
+}
+
+SMODS.Atlas{
 	key = "tlr_starmap",
 	path = "TheLastResort/starmap.png",
 	px = 600,

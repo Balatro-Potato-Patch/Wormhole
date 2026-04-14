@@ -57,7 +57,9 @@ PotatoPatchUtils.Developer({
 PotatoPatchUtils.Developer({
 	name = "Quinn",
 	loc = true,
-	team = "TheLastResort"
+	team = "TheLastResort",
+	atlas = "worm_tlr_quinn",
+	pos = {x=0, y=0}
 })
 
 WORM_TLR = WORM_TLR or {}
