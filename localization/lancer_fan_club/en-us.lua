@@ -35,9 +35,8 @@ return {
                         "and Spacebar lol"
                     },
                     {
-                        "also did the shader",
-                        "and CanvasSprite for",
-                        "Urination Station.."
+                        "also did the shader stuff",
+                        "Urination Station and these Credits!"
                     }
                 }
             },
