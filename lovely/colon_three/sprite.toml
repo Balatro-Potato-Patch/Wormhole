@@ -1,0 +1,26 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 1
+
+[[patches]]
+[patches.pattern]
+target = "engine/animatedsprite.lua"
+pattern = '''
+local new_frame = math.floor(self.current_animation.FPS*(G.TIMERS.REAL - self.offset_seconds))%self.current_animation.frames
+'''
+position = "at"
+payload = '''
+local junks = 0
+local new_frame = 0
+if not self.dont_animate then
+    if self.atlas.dont_loop then
+        new_frame = math.min( math.floor(self.current_animation.FPS*(G.TIMERS.REAL - self.offset_seconds)), self.current_animation.frames)
+    else
+        new_frame = math.floor(self.current_animation.FPS*(G.TIMERS.REAL - self.offset_seconds))%self.current_animation.frames
+    end
+else
+    self.offset_seconds = G.TIMERS.REAL
+end
+'''
+match_indent = true
