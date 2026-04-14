@@ -1,4 +1,14 @@
---SMODS.Sound
+local sounds = {}
+for i = 1, 11 do
+    SMODS.Sound{
+        key = "eviltalk"..i,
+        path = "awesomeswagmoney/voice"..i..".ogg"
+    }
+end
+for i = 11, 1, -1 do
+    sounds[#sounds+1] = "worm_eviltalk"..i
+end
+
 SMODS.JimboQuip{
     key = "kartana_jumpscare",
     type = 'loss',
@@ -13,6 +23,7 @@ SMODS.JimboQuip{
             G.C.ORANGE,
             G.C.GOLD,
             G.C.RED,
-        }
-    }
+        },
+        sound = sounds,
+    },
 }
