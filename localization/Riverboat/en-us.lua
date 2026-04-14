@@ -13,7 +13,7 @@ return {
             },
             PotatoPatchDev_fooping = { name = "fooping", text = { "{X:chips}Programmer{} and {X:purple}Artist{}" } },
             PotatoPatchDev_snipey = { name = "SnipeyMcButter", text = { "t" } },
-            PotatoPatchDev_camo = { name = "Camostar", text = { "t" } }
+            PotatoPatchDev_camo = { name = "Camostar34", text = { "t" } }
         },
         Joker = {
             j_worm_riverboat_the_past = {
