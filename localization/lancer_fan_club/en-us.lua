@@ -91,7 +91,8 @@ return {
                         "my proudest work yet! {s:0.5}(even if others got the same idea...)",
                     },
                     {
-                        "lemniscate tomorrow"
+                        "lemniscate",
+                        "tomorrow"
                     }
                 }
             }

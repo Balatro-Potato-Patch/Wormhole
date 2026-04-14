@@ -99,6 +99,14 @@ SMODS.Atlas {
     path = "lancer_fan_club/EarR.png"
 }
 
+SMODS.Atlas {
+    atlas_table = "ASSET_ATLAS",
+    key = "lfc_lemniscate_atlas",
+    px = 77,
+    py = 95,
+    path = "lancer_fan_club/lemniscate_spectral.png"
+}
+
 -- Sounds
 SMODS.Sound {
     key = "lfc_explosion",
@@ -244,7 +252,7 @@ SMODS.DynaTextEffect {
 --        code credits
 --      - alexi
 --]]
-PotatoPatchUtils.Developer {
+Wormhole.LancerFanClub.Alexi = PotatoPatchUtils.Developer {
     name = "InvalidOS",
     text_effect = "worm_alexi_text",
     loc = "PotatoPatchDev_alexi",
@@ -253,6 +261,56 @@ PotatoPatchUtils.Developer {
     pos = { x = 4, y = 0 },
     soul_pos = { x = 5, y = 0 }
 }
+
+local function floating_sprite(offset)
+    local offset = offset or 0
+    local time = G.TIMERS.REAL + offset
+
+    local scale_mod = 0.07 + 0.02*math.sin(1.8*time) + 0.00*math.sin((time - math.floor(time))*math.pi*14)*(1 - (time - math.floor(time)))^3
+    local rotate_mod = 0.05*math.sin(1.219*time) + 0.00*math.sin((time)*math.pi*5)*(1 - (time - math.floor(time)))^2
+
+    return scale_mod, rotate_mod
+end
+
+SMODS.draw_ignore_keys.worm_lfc_extra_sprite = true
+SMODS.DrawStep {
+    key = "worm_lfc_extra_sprite",
+    order = 61,
+    func = function(self)
+        if self.children.worm_lfc_extra_sprite then
+            local scale_mod, rotate_mod = floating_sprite(-45)
+
+            self.children.worm_lfc_extra_sprite:draw_shader('dissolve',0, nil, nil, self.children.center,scale_mod, rotate_mod,nil, 0.1 + 0.03*math.sin(1.8*G.TIMERS.REAL),nil, 0.6)
+            self.children.worm_lfc_extra_sprite:draw_shader('dissolve', nil, nil, nil, self.children.center, scale_mod, rotate_mod)
+        end
+    end,
+    conditions = { vortex = false, facing = 'front' },
+}
+
+function Wormhole.LancerFanClub.Alexi.create_lemniscate()
+    local card = Card(G.ROOM.T.x, G.ROOM.T.y, G.CARD_W / 1.25, G.CARD_H / 1.25, nil, G.P_CENTERS.c_base)
+    card.T.w = card.T.w*(77/71)
+    card.VT.w = card.T.w
+    card.children.center:remove()
+    card.children.center = SMODS.create_sprite(card.T.x, card.T.y, card.T.w, card.T.h, "worm_lfc_lemniscate_atlas", {x = 0, y = 0})
+    card.children.center.states.hover = card.states.hover
+    card.children.center.states.click = card.states.click
+    card.children.center.states.drag = card.states.drag
+    card.children.center.states.collide.can = true
+    card.children.center:set_role({major = card, role_type = 'Glued', draw_major = card})
+
+    card.children.ppu_floating_sprite = SMODS.create_sprite(card.T.x, card.T.y, card.T.w, card.T.h, "worm_lfc_lemniscate_atlas", {x = 1, y = 0})
+    card.children.ppu_floating_sprite.role.draw_major = card
+    card.children.ppu_floating_sprite.states.hover.can = false
+    card.children.ppu_floating_sprite.states.click.can = false
+
+    card.children.worm_lfc_extra_sprite = SMODS.create_sprite(card.T.x, card.T.y, card.T.w, card.T.h, "worm_lfc_lemniscate_atlas", {x = 2, y = 0})
+    card.children.worm_lfc_extra_sprite.role.draw_major = card
+    card.children.worm_lfc_extra_sprite.states.hover.can = false
+    card.children.worm_lfc_extra_sprite.states.click.can = false
+
+    return card
+end
 
 -- Credits shader stuff :3
 SMODS.Shader {
