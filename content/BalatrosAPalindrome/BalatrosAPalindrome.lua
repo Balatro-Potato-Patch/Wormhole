@@ -360,8 +360,8 @@ SMODS.Joker {
     key = "bap_andromeda",
     blueprint_compat = true,
     eternal_compat = false,
-    rarity = 2,
-    cost = 6,
+    rarity = 1,
+    cost = 0,
 	atlas = 'Palindrome',
     pos = { x = 1, y = 2 },
     config = {  },
@@ -381,12 +381,24 @@ SMODS.Joker {
             local eval = function() return G.GAME.current_round.hands_played == 0 and not G.RESET_JIGGLES end
             juice_card_until(card, eval, true)
         end
-        if context.final_scoring_step and G.GAME.current_round.hands_played == 0 then
-			G.GAME.dollars = (G.GAME.dollars or 0) + G.GAME.hands[context.scoring_name].level
-			
+
+        if context.final_scoring_step and G.GAME.current_round.hands_played == 0 then			
+			G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + G.GAME.hands[context.scoring_name].level -- ripped from business card
+            return {
+				    dollars = G.GAME.hands[context.scoring_name].level,
+				    func = function() -- This is for timing purposes, this goes after the dollar modification
+				        G.E_MANAGER:add_event(Event({
+                        func = function()
+                            G.GAME.dollar_buffer = 0
+                            return true
+                        end
+                    }))
+                end
+            }
 		end
-    end,
+	end,
     in_pool = function(self, args) -- equivalent to `yes_pool_flag = 'vremade_gros_michel_extinct'`
         return G.GAME.pool_flags.bap_milky_drank
-    end
+	end
+
 }
