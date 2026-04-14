@@ -94,7 +94,7 @@ G.FUNCS.module_replace_yes = function(e)
     for k, v in pairs(G.P_CENTERS[module_def.key].config.extra) do
         spaceship.ability.extra.modules[slot][k] = v
     end
-
+    SMODS.calculate_context({wormhole_tbp_module_install = true, card = spaceship, module = slot, type = 'Default'})
     if G.GAME.module_replace_overlay then
         G.GAME.module_replace_overlay:remove()
         G.GAME.module_replace_overlay = nil

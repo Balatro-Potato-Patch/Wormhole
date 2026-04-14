@@ -524,8 +524,6 @@ function Wormhole.tbp.install_module(ship, module, card, install_type, silent)
             G.GAME.tbp.run.modules_installed.total = G.GAME.tbp.run.modules_installed.total + 1
             G.GAME.tbp.run.modules_installed[module.slot] = G.GAME.tbp.run.modules_installed[module.slot] and G.GAME.tbp.run.modules_installed[self.slot] + 1 or 1
             G.GAME.tbp.run.last_module_installed = module.key
-
-            SMODS.calculate_context({wormhome_tbp_module_install = true, card = ship, module = module, type = install_type})
         end
 
         if old_module_key ~= nil then
@@ -941,11 +939,17 @@ Wormhole.tbp.Module({
 		return { vars = { module.ability.extra.percent * 100 } }
     end,
     module_calculate = function (self, module, context, card)
-        if context.setting_blind then
-            Wormhole.tbp.change_durability(card, self.slot, -1)
-            return {
-                xblindsize = 1 - module.percent
-            }
+        if context.setting_blind or context.wormhole_tbp_module_install then
+            if not module.fired_this_blind then
+                module.fired_this_blind = true
+                Wormhole.tbp.change_durability(card, self.slot, -1)
+                return {
+                    xblindsize = 1 - module.percent,
+                }
+            end
+        end
+        if context.end_of_round and not context.blueprint and not context.repetition then
+            module.fired_this_blind = nil
         end
     end
 })
@@ -994,7 +998,7 @@ Wormhole.tbp.Module({
 		return { vars = { } }
     end,
     module_calculate = function (self, module, context, card)
-        if context.setting_blind then -- TODO: Change to activate on install?
+        if context.setting_blind or context.wormhole_tbp_module_install then
             if G.GAME.blind and not G.GAME.blind.disabled and G.GAME.blind.boss then
                 Wormhole.tbp.change_durability(card, self.slot, -1)
                 return {
