@@ -1693,7 +1693,7 @@ SMODS.Joker {
 
 	ppu_team = { "jtem2" },
 	ppu_coder = { "haya" },
-	-- ppu_artist = { "missingnumber" },
+	ppu_artist = { "haya" },
 
 	rarity = 2,
 	cost = 8,

@@ -294,7 +294,22 @@ return {
 			PotatoPatchDev_haya = {
 				name = "Haya",
 				text = {
-					{ "box numero 1" },
+					{
+						"hi i am {s:2,C:edition}Paya{} from {s:2,C:dark_edition}Haya{}",
+						"{s:0.5,C:inactive}Im suffocating please help{}",
+						"{C:worm_jtem2_teamcolor}Jtem{C:worm_jtem2_teamcolor,E:worm_jtem2_exponent}2{} back at it again with the jeans",
+						"",
+						"I mostly took a backseat from coding",
+						"due to time constraints yet I still managed",
+						"to make something really {C:edition,s:1.5,E:worm_jtem2_snaking}funny{} haha 67",
+						"",
+						"My favorite umamusume is Manhattan Cafe"
+					},
+					{
+						"{s:2.3}Play {s:2.3,E:worm_jtem2_rainbow_wiggle}juuyon{} pls",
+						"{s:0.8,C:inactive}https://github.com/hayaunderscore/juu-yon{}",
+						"{s:0.8}I couldn't implement Taiko in Balala in time, sorry",
+					}
 				},
 			},
 			PotatoPatchDev_lexi = {

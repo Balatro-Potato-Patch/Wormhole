@@ -9,12 +9,10 @@ SMODS.Atlas({
 	py = 95,
 })
 
-
-
 local planets = {
 	c_mercury = {
 		speedfactor = 1 / 0.241,
-		radius = 0.6,
+		radius = 0.8,
 		size = 0.7,
 
 		atlas = "worm_jtem2_solar_system_planets",
@@ -23,7 +21,7 @@ local planets = {
 	},
 	c_venus = {
 		speedfactor = 1 / 0.615,
-		radius = 1,
+		radius = 1.2,
 		size = 0.85,
 
 		angle = 150,
@@ -34,7 +32,7 @@ local planets = {
 	},
 	c_earth = {
 		speedfactor = 1,
-		radius = 1.4,
+		radius = 1.6,
 		size = 1,
 
 		angle = 80,
@@ -46,7 +44,7 @@ local planets = {
 	c_mars = {
 		colour = G.C.CHIPS,
 		speedfactor = 1 / 1.881,
-		radius = 1.8,
+		radius = 2.0,
 		size = 1.25,
 
 		angle = 225,
@@ -62,7 +60,7 @@ local planets = {
 	c_ceres = {
 		colour = G.C.CHIPS,
 		speedfactor = 1 / 4.6,
-		radius = 2.1,
+		radius = 2.3,
 		size = 0.8,
 
 		angle = 15,
@@ -72,7 +70,7 @@ local planets = {
 	},
 	c_jupiter = {
 		speedfactor = 1 / 11.86,
-		radius = 2.4,
+		radius = 2.6,
 		size = 1.35,
 
 		angle = 300,
@@ -82,7 +80,7 @@ local planets = {
 	},
 	c_saturn = {
 		speedfactor = 1 / 29.46,
-		radius = 3,
+		radius = 3.2,
 		size = 2,
 		angle = 180,
 		planet_angle = 26.73,
@@ -93,7 +91,7 @@ local planets = {
 	},
 	c_uranus = {
 		speedfactor = 1 / 84.01,
-		radius = 3.4,
+		radius = 3.6,
 		size = 1.8,
 		angle = 35,
 
@@ -102,7 +100,7 @@ local planets = {
 	},
 	c_neptune = {
 		speedfactor = 1 / 164.8,
-		radius = 3.8,
+		radius = 4.0,
 		size = 1.8,
 		angle = 265,
 
@@ -111,7 +109,7 @@ local planets = {
 	},
 	c_pluto = {
 		speedfactor = 1 / 247.7,
-		radius = 4.2,
+		radius = 4.4,
 		size = 0.5,
 		angle = 180,
 
@@ -126,7 +124,7 @@ local planets = {
 	},
 	c_eris = {
 		speedfactor = 1 / 561,
-		radius = 5,
+		radius = 5.2,
 		size = 0.5,
 		angle = 180,
 
@@ -953,6 +951,14 @@ SMODS.DrawStep({
 		end
 	end,
 })
+
+local shadow_step_func = SMODS.DrawSteps.shadow.func
+SMODS.DrawSteps.shadow.func = function(self, ...)
+	if self.config.center_key == "j_worm_jtem2_solar_system" then
+		return
+	end
+	return shadow_step_func(self, ...)
+end
 
 SMODS.DrawStep({
 	key = "jtem2_solar_system_render",
