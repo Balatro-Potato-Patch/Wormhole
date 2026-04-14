@@ -6,6 +6,8 @@
 
 extern vec2 mouse_pos;
 
+#define PI 3.14159265358979323846
+
 extern MY_HIGHP_OR_MEDIUMP vec2 lfc_devshader;
 extern MY_HIGHP_OR_MEDIUMP number dissolve;
 extern MY_HIGHP_OR_MEDIUMP number time;
@@ -99,18 +101,50 @@ vec4 HSL(vec4 c)
 	return hsl;
 }
 
+// 3D Gradient noise from: https://www.shadertoy.com/view/Xsl3Dl
+vec3 hash( vec3 p ) // replace this by something better
+{
+	p = vec3( dot(p,vec3(127.1,311.7, 74.7)),
+			  dot(p,vec3(269.5,183.3,246.1)),
+			  dot(p,vec3(113.5,271.9,124.6)));
+
+	return -1.0 + 2.0*fract(sin(p)*43758.5453123);
+}
+float noise( in vec3 p )
+{
+    vec3 i = floor( p );
+    vec3 f = fract( p );
+	
+	vec3 u = f*f*(3.0-2.0*f);
+
+    return mix( mix( mix( dot( hash( i + vec3(0.0,0.0,0.0) ), f - vec3(0.0,0.0,0.0) ), 
+                          dot( hash( i + vec3(1.0,0.0,0.0) ), f - vec3(1.0,0.0,0.0) ), u.x),
+                     mix( dot( hash( i + vec3(0.0,1.0,0.0) ), f - vec3(0.0,1.0,0.0) ), 
+                          dot( hash( i + vec3(1.0,1.0,0.0) ), f - vec3(1.0,1.0,0.0) ), u.x), u.y),
+                mix( mix( dot( hash( i + vec3(0.0,0.0,1.0) ), f - vec3(0.0,0.0,1.0) ), 
+                          dot( hash( i + vec3(1.0,0.0,1.0) ), f - vec3(1.0,0.0,1.0) ), u.x),
+                     mix( dot( hash( i + vec3(0.0,1.0,1.0) ), f - vec3(0.0,1.0,1.0) ), 
+                          dot( hash( i + vec3(1.0,1.0,1.0) ), f - vec3(1.0,1.0,1.0) ), u.x), u.y), u.z );
+}
+
 vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords )
 {
 	vec2 uv = (((texture_coords)*(image_details)) - texture_details.xy*texture_details.ba)/texture_details.ba;
+	vec2 true_uv = uv;
 
 	vec4 tex = Texel(texture, texture_coords);
 
 	vec4 c = tex*colour;
 
 	if (lfc_devshader.g != 0.0) {
-		vec4 texDW = Texel(texture, texture_coords+vec2(.0,0.5));
+		vec2 uv = texture_coords+vec2(.0,0.5);
+		vec4 texDW = Texel(texture, uv);
 		float fac = distance(screen_coords,mouse_pos);
-		c = (fac>50?tex:texDW)*colour;
+
+		float radius = 75.0;
+		float outline_size  = 1.0;
+		vec3 outline_color = vec3(1.0);
+		c = (fac > radius-outline_size && fac < radius+outline_size)?vec4(outline_color,tex.a):((fac>radius?tex:texDW)*colour);
 	}
 
     return dissolve_mask(c, texture_coords, uv);
