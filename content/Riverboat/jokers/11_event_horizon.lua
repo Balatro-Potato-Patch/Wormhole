@@ -1,7 +1,7 @@
 SMODS.Joker({
     key = 'riverboat_event_horizon',
     atlas = 'worm_jokers',
-    pos = { x = 0, y = 1 },
+    pos = { x = 2, y = 1 },
     rarity = 3,
     cost = 10,
     blueprint_compat = true,

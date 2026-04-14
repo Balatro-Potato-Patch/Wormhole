@@ -1,7 +1,7 @@
 SMODS.Joker({
     key = 'riverboat_solar_flare',
     atlas = 'worm_jokers',
-    pos = { x = 2, y = 1 },
+    pos = { x = 0, y = 1 },
     rarity = 3, -- Rare
     cost = 10,
     blueprint_compat = true,
