@@ -182,6 +182,26 @@ return {
                 },
             }
         },
+        Voucher = {
+            v_worm_ACME_voucher_1 = {
+                name = "Gadget Merchant",
+                text = {
+                    "{C:ACME_Gadget}Gadget{} cards appear",
+                    "{C:attention}2X{} more frequently",
+                    "in the shop"
+                }
+            },
+            v_worm_ACME_voucher_2 = {
+                name = "Gadget Tycoon",
+                text = {
+                    "{C:ACME_Gadget}Gadget{} cards appear",
+                    "{C:attention}4X{} more frequently",
+                    "in the shop and have a",
+                    "{C:green}#1# in #2#{} chance to",
+                    "survive being destroyed"
+                }
+            }
+        },
         Joker = {
             j_worm_ACME_enterprise = {
                 name = "Enterprise Joker",
