@@ -9,9 +9,9 @@ SMODS.Joker {
     key = "hedonia_casino",
     atlas = "joker",
     pos = {x = 0, y = 0},
-    rarity = 3,
-    cost = 6,
-    blueprint_compat = false,
+    rarity = 1,
+    cost = 4,
+    blueprint_compat = true,
     pools = {
         ["Bartender"] = true
     },
@@ -47,131 +47,11 @@ SMODS.Joker {
 }
 
 SMODS.Joker {
-    key = "hedonia_trash",
-    atlas = "joker",
-    pos = {x = 0, y = 1},
-    rarity = 3,
-    cost = 6,
-    blueprint_compat = false,
-    config = { extra = {
-        copied = {}
-    }},
-    loc_vars = function(self,info_queue,center)
-        return {vars = {center.ability.extra.copied}}
-    end,
-    calculate = function(self, card, context) --used a lot of pinkprint for this https://github.com/EremelMods/Ortalab/blob/main/objects/jokers/pinkprint.lua
-        if context.selling_card and context.card.ability.set == 'Joker' then
-            -- table.insert(self.ability.extra.copied, context.card.)
-            print(#card.ability.extra.copied)
-        end
-        if context.joker_main then
-            print(#card.ability.extra.copied)
-            for i = 1, #card.ability.extra.copied do
-                SMODS.blueprint_effect(self.ability.extra.copied[i], card, context)
-                print(i)
-            end
-        end
-        if context.end_of_round and context.game_over == false then
-            local length = #card.ability.extra.copied
-            for i = 1, length do
-               card.ability.extra.copied.remove()
-            end
-            return {
-                message = "Clear!"
-            }
-        end
-        --when scoring
-            --for each item in list
-                --trigger blueprint func
-        --when end of round
-            --empty list
-    end,
-    add_to_deck = function()
-        G.jokers:change_size(-1)
-    end,
-    remove_from_deck = function()
-        G.jokers:change_size(1)
-    end
-}
-
-SMODS.Joker {
-    key = "hedonia_patron",
-    atlas = "joker",
-    pos = {x = 1, y = 1},
-    rarity = 3,
-    cost = 6,
-    blueprint_compat = false,
-    config = { extra = {
-        mult = 10
-    }},
-    loc_vars = function(self,info_queue,center)
-        return {vars = {center.ability.extra.mult}}
-    end,
-    calculate = function(self, card, context)
-        if context.joker_main then
-            local counter = 0
-            for i,v in pairs(G.hand.cards) do
-                if v.edition and (
-                    v.edition.key == 'e_worm_hedonia_tipsy' or
-                    v.edition.key == 'e_worm_hedonia_drunk' or
-                    v.edition.key == 'e_worm_hedonia_very_drunk' or
-                    v.edition.key == 'e_worm_hedonia_blackout'
-                ) then
-                    counter = counter + 1
-                end
-            end
-            if counter > 0 then 
-                return {
-                    mult = card.ability.extra.mult * counter
-                }
-            end
-        end
-    end
-}
-
-SMODS.Joker {
-    key = "hedonia_speed",
-    atlas = "joker",
-    pos = {x = 1, y = 0},
-    rarity = 2,
-    cost = 5,
-    blueprint_compat = false,
-    pools = {
-        ["Bartender"] = true
-    },
-    loc_vars = function(self,info_queue,center)
-        local num, denom
-        if G.jokers ~= nil then
-            num = #G.jokers.cards
-            denom = G.jokers.config.card_limit
-        else
-            num = 1
-            denom = 5
-        end
-        return {vars = {num, denom}}
-    end,
-    calculate = function(self,card,context)
-        if context.joker_main and pseudorandom('speed') < #G.jokers.cards / G.jokers.config.card_limit and 
-        #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
-                G.GAME.consumeable_buffer = (G.GAME.consumeable_buffer or 0) + 1
-                G.E_MANAGER:add_event(Event({
-                    func = function()
-                        play_sound('timpani')
-                        SMODS.add_card({set = "worm_hedonia_menu", area = G.consumeables, key_append = 'speed'})
-                        G.GAME.consumeable_buffer = 0
-                        return true
-                    end
-                }))
-        end
-    end
-}
-
-SMODS.Joker {
     key = "hedonia_bar_mitzvah",
     atlas = "joker",
     pos = {x = 2, y = 0},
-    rarity = 1,
-    cost = 4,
+    rarity = 2,
+    cost = 5,
     blueprint_compat = false,
     pools = {
         ["Bartender"] = true
@@ -204,6 +84,119 @@ SMODS.Joker {
                 card.ability.extra.current = card.ability.extra.current + 1
                 return {
                     message = 'Upgrade!'
+                }
+            end
+        end
+    end
+}
+
+SMODS.Joker {
+    key = "hedonia_speed",
+    atlas = "joker",
+    pos = {x = 1, y = 0},
+    rarity = 3,
+    cost = 6,
+    blueprint_compat = true,
+    pools = {
+        ["Bartender"] = true
+    },
+    loc_vars = function(self,info_queue,center)
+        local num, denom
+        if G.jokers ~= nil then
+            num = #G.jokers.cards
+            denom = G.jokers.config.card_limit
+        else
+            num = 1
+            denom = 5
+        end
+        return {vars = {num, denom}}
+    end,
+    calculate = function(self,card,context)
+        if context.joker_main and pseudorandom('speed') < #G.jokers.cards / G.jokers.config.card_limit and 
+        #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+                G.GAME.consumeable_buffer = (G.GAME.consumeable_buffer or 0) + 1
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        play_sound('timpani')
+                        SMODS.add_card({set = "worm_hedonia_menu", area = G.consumeables, key_append = 'speed'})
+                        G.GAME.consumeable_buffer = 0
+                        return true
+                    end
+                }))
+        end
+    end
+}
+
+SMODS.Joker {
+    key = "hedonia_trash",
+    atlas = "joker",
+    pos = {x = 0, y = 1},
+    rarity = 2,
+    cost = 6,
+    blueprint_compat = false,
+    config = { extra = {
+        chips = 0
+    }},
+    loc_vars = function(self,info_queue,center)
+        return {vars = {center.ability.extra.chips}}
+    end,
+    calculate = function(self, card, context)
+        if context.remove_playing_cards then
+            for i, v in ipairs(context.removed) do
+                card.ability.extra.chips = card.ability.extra.chips + v.base.nominal + v.ability.perma_bonus
+            end
+            return {
+                message = 'Upgraded!',
+                colour = G.C.CHIPS
+            }
+        end
+        if context.joker_main then
+            return {
+                card = card,
+                chip_mod = card.ability.extra.chips,
+                message = '+' .. card.ability.extra.chips,
+                colour = G.C.CHIPS
+            }
+        end
+        if context.end_of_round and G.GAME.blind.boss then
+            card.ability.extra.chips = 0
+            return {
+                message = 'Cleared!',
+                colour = G.C.CHIPS
+            }
+        end
+    end
+}
+
+SMODS.Joker {
+    key = "hedonia_patron",
+    atlas = "joker",
+    pos = {x = 1, y = 1},
+    rarity = 3,
+    cost = 6,
+    blueprint_compat = true,
+    config = { extra = {
+        mult = 10
+    }},
+    loc_vars = function(self,info_queue,center)
+        return {vars = {center.ability.extra.mult}}
+    end,
+    calculate = function(self, card, context)
+        if context.joker_main then
+            local counter = 0
+            for i,v in pairs(G.hand.cards) do
+                if v.edition and (
+                    v.edition.key == 'e_worm_hedonia_tipsy' or
+                    v.edition.key == 'e_worm_hedonia_drunk' or
+                    v.edition.key == 'e_worm_hedonia_very_drunk' or
+                    v.edition.key == 'e_worm_hedonia_blackout'
+                ) then
+                    counter = counter + 1
+                end
+            end
+            if counter > 0 then 
+                return {
+                    mult = card.ability.extra.mult * counter
                 }
             end
         end
