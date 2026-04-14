@@ -15,7 +15,8 @@ Wormhole.LancerFanClub = PotatoPatchUtils.Team {
         end
 
         if #effects > 0 then return SMODS.merge_effects(effects) end
-    end
+    end,
+    short_credit = true
 }
 
 local ctcp = PotatoPatchUtils.CREDITS.create_team_credit_page
@@ -234,7 +235,7 @@ SMODS.Shader {
         local mx,my = love.mouse.getPosition()
         return {
             mouse_pos = {mx,my},
-            t = G.TIMERS.REAL
+            t = G.TIMERS
         }
     end
 }
