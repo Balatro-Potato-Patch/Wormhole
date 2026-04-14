@@ -472,6 +472,13 @@ return {
 					"{C:inactive}(Currently {X:chips,C:white}X#2#{C:inactive} Chips)",
 				},
 			},
+			exc_worm_meow_dread = {
+				name = "Dread",
+				text = {
+					"{C:attention}Replace{} this Boss Blind",
+					"with a {C:red}Showdown Blind{}",
+				},
+			},
 			worm_meow_spacetart_stacks = {
 				text = {
 					"{C:inactive,s:0.8}(Boost level: {C:attention,s:0.8}#2#{C:inactive,s:0.8})",

@@ -54,6 +54,12 @@ SMODS.Sound({
 	key = "meowSanctuary",
 	path = "TeamMeow/3rdSanctuaryJolyne.ogg",
 })
+SMODS.Sound({
+	key = "meowDread",
+	path = "TeamMeow/dread.ogg",
+	volume = 0.4,
+	pitch = 1,
+})
 PotatoPatchUtils.Team({
 	name = "meow",
 	colour = HEX("F9D0D1"),

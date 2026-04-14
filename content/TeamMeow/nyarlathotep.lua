@@ -646,6 +646,44 @@ nyarlathotep_exchange({
 	end,
 })
 
+nyarlathotep_exchange({
+	key = "dread",
+	cost = -2,
+	config = {},
+	reward = function(self, card)
+		local showdowns = {} --filters so it's only the showdown blinds
+		for k, v in pairs(G.P_BLINDS) do
+			if v.boss and v.boss.showdown then
+				showdowns[k] = true
+			end
+		end
+		for k, v in pairs(G.GAME.banned_keys) do --makes sure not to include disabled/banned blinds
+			if showdowns[k] then showdowns[k] = nil end
+		end
+		local ignore, boss = pseudorandom_element(showdowns, 'nyarlathotep_dread') --boss to reroll into
+		G.E_MANAGER:add_event(Event({
+			func = function()
+				play_sound("worm_meowDread", 1 + 0.5 * (math.random() - 0.5), 0.6)
+				G.FORCE_BOSS = boss
+				G.FUNCS.reroll_boss()
+				G.E_MANAGER:add_event(Event({ --infinite showdown prevention
+					func = function()
+						G.FORCE_BOSS = nil
+						return true
+					end
+				}))
+				return true
+			end
+		}))
+	end,
+	loc_vars = function(self, card)
+	end,
+	in_pool = function(self, card, amt)
+		local is_in_blind = G.GAME.blind.in_blind
+		return not is_in_blind
+	end
+})
+
 function Wormhole.TEAM_MEOW.generate_exchange_pool(card, seed)
 	local results = {}
 	local pool = {}
