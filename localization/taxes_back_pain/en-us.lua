@@ -16,7 +16,8 @@ local other_loc_table = {
             tbp_module_store = 'Store',
             tbp_new_module = 'New Module',
             tbp_old_module = 'Currently Equipped',
-            tbp_equipped = ' equipped!'
+            tbp_equipped = ' Equipped!',
+            tbp_durability_restored = 'Repaired!'
         }
     },
     descriptions = {

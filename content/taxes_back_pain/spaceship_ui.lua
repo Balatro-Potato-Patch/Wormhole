@@ -72,6 +72,20 @@ G.FUNCS.module_replace_yes = function(e)
     spaceship_ease(-1)
     local slot = e.config.ref_table.module_slot
     local spaceship = e.config.ref_table.spaceship
+    local current_module = spaceship.ability.extra.modules[slot]
+    if current_module.key == module_def.key then
+        current_module.durability = math.min(current_module.durability + module_def.durability, current_module.total_durability)
+        if G.GAME.module_replace_overlay then
+            G.GAME.module_replace_overlay:remove()
+            G.GAME.module_replace_overlay = nil
+        end
+        SMODS.calculate_effect({
+            message = localize('tbp_durability_restored'),
+            colour = Wormhole.tbp.module_colours[slot],
+            delay = 2
+        }, spaceship)
+        return
+    end
     spaceship.ability.extra.modules[slot] = {
         key = module_def.key,
         durability = module_def.durability,
