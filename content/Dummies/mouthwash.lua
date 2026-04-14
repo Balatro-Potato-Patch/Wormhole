@@ -9,7 +9,7 @@ SMODS.Atlas({
 
 SMODS.Joker({
 	key = 'dum_mouthwash',
-	config = { extra = { xmult_gain = 0.2, xmult = 1 } },
+	config = { extra = { xmult_gain = 0.15, xmult = 1 } },
 	unlocked = true,
 	rarity = 3,
 	atlas = 'MouthwashJoker',
