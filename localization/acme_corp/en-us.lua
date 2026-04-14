@@ -161,8 +161,9 @@ return {
                 text = {
                     "{C:ACME_Gadget}Gadget{} cards appear",
                     "{C:attention}4X{} more frequently",
-                    "in the shop and activation",
-                    "conditions are {C:attention}halved"
+                    "in the shop and have a",
+                    "{C:green}#1# in #2#{} chance to",
+                    "survive being destroyed"
                 }
             }
         },
