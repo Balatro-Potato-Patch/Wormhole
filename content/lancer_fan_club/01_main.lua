@@ -105,6 +105,11 @@ PotatoPatchUtils.Developer {
     atlas = "worm_lfc_devs",
     pos = { x = 6, y = 0 },
     soul_pos = { x = 7, y = 0 },
+    --[[
+    loc_vars = function(self,  info_queue, card)
+        return{vars = {1,2}}
+    end,
+    ]]
     calculate = function(self, context)
         if context.card_added then
             if context.card.ability.set == "Joker" then
