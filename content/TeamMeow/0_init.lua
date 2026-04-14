@@ -55,6 +55,10 @@ SMODS.Sound({
 	path = "TeamMeow/3rdSanctuaryJolyne.ogg",
 })
 SMODS.Sound({
+	key = "meowSwoon",
+	path = "TeamMeow/swoonIncognito.ogg",
+})
+SMODS.Sound({
 	key = "meowDread",
 	path = "TeamMeow/dread.ogg",
 	volume = 0.25,
@@ -100,6 +104,9 @@ PotatoPatchUtils.Developer({
 	team = "meow",
 	atlas = "worm_meowCredits",
 	pos = { x = 3, y = 0 },
+	click_func = function(card)
+		love.system.openURL("https://photonmodmanager.onrender.com/browse")
+	end,
 })
 
 local revo_colour = SMODS.Gradient({
@@ -159,6 +166,10 @@ PotatoPatchUtils.Developer({
 	team = "meow",
 	atlas = "worm_meowCredits",
 	pos = { x = 1, y = 0 },
+	click_func = function(card)
+		play_sound("worm_meowSwoon")
+		love.system.openURL("https://github.com/IncognitoN71/Incognito")
+	end,
 })
 
 local toma_colour = SMODS.Gradient({

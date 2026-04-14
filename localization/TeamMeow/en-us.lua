@@ -70,7 +70,7 @@ return {
 					},
 					{
 						"Developer of {C:mult}Alloy{}, {C:chips}JoJo Mod{},",
-						"and {C:attention}Photon Mod Manager{}",
+						"and {C:attention}Photon Mod Manager{} (click me)",
 						"{C:inactive}Please use Photon i beg, it even has a website",
 						"{C:attention}Meowww nya nyan meoww meowww{} {C:inactive}(meow){}",
 					},
@@ -131,6 +131,9 @@ return {
 						"Developer of {C:incognito}Incognito",
 						"Co-Developer of {C:worm_toma_gradient}Hyperfixation{},",
 						"{C:attention}Bad Director{}, and {C:attention}Tangents",
+					},
+					{
+						"Click me to {C:incognito}SWOON",
 					},
 				},
 			},
