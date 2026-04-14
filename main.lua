@@ -44,6 +44,13 @@ Wormhole.mrrp_signed = function(val, invert, signlesszero)
     return sign .. math.abs(val)
 end
 
+to_big = to_big or function(x, y)
+    return x 
+end
+to_number = to_number or function(x)
+    return x 
+end
+
 SMODS.Atlas {
     key = "mrrp",
     path = "mrrp mew meow/mrrp-cards.png",
