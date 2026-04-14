@@ -331,6 +331,7 @@ SMODS.DrawStep{
 SMODS.Back{
     key = "spaceship_deck",
     atlas = "worm_tbp_launchdeck",
+    discovered = true,
     pos = {x = 0, y = 0},
     config = {jokers = {'j_worm_tbp_spaceship'} },
     loc_vars = function(self, info_queue, card)
