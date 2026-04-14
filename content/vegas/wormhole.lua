@@ -318,7 +318,7 @@ SMODS.Joker{
 			"{C:attention}winning hand"
 		}
 	},
-	config = { handlvl = 0, extra = { dollars = 1 }},
+	config = { hand = nil, extra = { dollars = 1 }},
 	loc_vars = function(self, info_queue, card)
 		return { vars = { card.ability.extra.dollars }}
 	end,
@@ -335,11 +335,11 @@ SMODS.Joker{
 	ppu_artist = {"Ben Roffey"},
 	calculate = function(self, card, context)
 		if context.joker_main then
-			card.ability.handlvl = G.GAME.hands[context.scoring_name].level
+			card.ability.hand = G.GAME.hands[context.scoring_name]
         end
 	end,
 	calc_dollar_bonus = function(self, card)
-		return card.ability.handlvl
+		if card.ability.hand then return card.ability.hand.level end
 	end
 }
 
