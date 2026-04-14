@@ -79,7 +79,7 @@ function Game.init_game_object(self)
         utility = Sprite(0, 0, self.CARD_W, self.CARD_W,
             G.ASSET_ATLAS["worm_tbp_icons_cards"], {
                 x = 3,
-                y = 0
+                y = 1
             }),
         undiscovered = Sprite(0, 0, self.CARD_W, self.CARD_W,
             G.ASSET_ATLAS["worm_tbp_icons_cards"], {
@@ -106,7 +106,7 @@ function Game.init_game_object(self)
             }),
         utility = Sprite(0, 0, self.CARD_W, self.CARD_W,
             G.ASSET_ATLAS["worm_tbp_module_frame"], {
-                x = 3,
+                x = 4,
                 y = 0
             }),
         undiscovered = Sprite(0, 0, self.CARD_W, self.CARD_W,
