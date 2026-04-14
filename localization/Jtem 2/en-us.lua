@@ -266,7 +266,20 @@ return {
 			PotatoPatchDev_sleepyg11 = {
 				name = "SleepyG11",
 				text = {
-					{ "box numero 1" },
+					{
+						"As usual, did some coding.",
+						"I'm proud of {C:attention}Artificial Solar System{} tho.",
+						"Watch out for this rock, it's a bit {C:purple}sus{}",
+						" ",
+						"Cannot wait for {C:chips}fishing{} event",
+						" ",
+						"My favorite umamusume is {C:white,E:1}Oguri Cap{}",
+					},
+					{
+						"You already using or will use {C:chips}Handy{} anyway",
+						"{C:inactive}(You have no choice){}",
+						"So no advertizing here",
+					},
 				},
 			},
 			PotatoPatchDev_haya = {
@@ -281,13 +294,13 @@ return {
 						"due to time constraints yet I still managed",
 						"to make something really {C:edition,s:1.5,E:worm_jtem2_snaking}funny{} haha 67",
 						"",
-						"My favorite umamusume is Manhattan Cafe"
+						"My favorite umamusume is Manhattan Cafe",
 					},
 					{
 						"{s:2.3}Play {s:2.3,E:worm_jtem2_rainbow_wiggle}juuyon{} pls",
 						"{s:0.8,C:inactive}https://github.com/hayaunderscore/juu-yon{}",
 						"{s:0.8}I couldn't implement Taiko in Balala in time, sorry",
-					}
+					},
 				},
 			},
 			PotatoPatchDev_lexi = {

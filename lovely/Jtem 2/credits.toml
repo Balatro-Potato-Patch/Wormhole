@@ -1,0 +1,44 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = -1
+
+# I need a bit wider card area so it can fit quantum rock
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS PotatoPatchUtils "src/credits.lua"]'''
+pattern = "PotatoPatchUtils.CREDITS.AREAS[i] = CardArea(G.ROOM.T.x, G.ROOM.T.y, G.CARD_W / 1.25, G.CARD_H / 1.25, {type = 'title_2', card_limit = 1, highlight_limit = 0})"
+position = 'after'
+match_indent = true
+payload = '''
+if member == PotatoPatchUtils.Developers.worm_sleepyg11 then
+    PotatoPatchUtils.CREDITS.AREAS[i]:remove()
+    PotatoPatchUtils.CREDITS.AREAS[i] = CardArea(G.ROOM.T.x, G.ROOM.T.y, G.CARD_W / 1, G.CARD_H / 1.25, {type = 'title_2', card_limit = 1, highlight_limit = 0})
+    PotatoPatchUtils.CREDITS.AREAS[i]:emplace(SMODS.create_card({ key = WORM_JTEM.quantum_rock.center.key, area = PotatoPatchUtils.CREDITS.AREAS[i] }))
+end
+'''
+
+# I will not accept this giant padding in my credits man
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS PotatoPatchUtils "src/credits.lua"]'''
+pattern = "local node = {n=G.UIT.R, config = {colour = G.C.L_BLACK, r=0.1, padding = 0.15, align = 'cm', shadow = true}, nodes = {}}"
+position = 'after'
+match_indent = true
+payload = '''
+if member == PotatoPatchUtils.Developers.worm_sleepyg11 then node.config.padding = 0.025 end
+'''
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS PotatoPatchUtils "src/credits.lua"]'''
+pattern = "info_nodes.nodes[1].nodes[#info_nodes.nodes[1].nodes + 1] = {n=G.UIT.R, config = {align = 'cm'}, nodes = {{n=G.UIT.C, config = {align = 'cm', colour = G.C.WHITE, r=0.1, padding = 0.025}, nodes = {node}}}}"
+position = 'before'
+match_indent = true
+payload = '''
+if member == PotatoPatchUtils.Developers.worm_sleepyg11 then
+    node.config.shadow = false
+    node = { n = G.UIT.R, config = { padding = 0.15, colour = G.C.L_BLACK, r = 0.25, }, nodes = { node } }
+    node.config.shadow = true
+end
+'''
