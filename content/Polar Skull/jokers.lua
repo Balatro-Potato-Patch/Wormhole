@@ -13,7 +13,7 @@ SMODS.Joker({
     cost = 5,
     discovered = false,
     blueprint_compat = true,
-    ppu_artist = {"jade"},
+    ppu_artist = {"comykel"},
     ppu_coder = { "mariofan" },
     ppu_team = { "polar_skull" },
     config = { extra = { poker_hand = "High Card", cards_created = 2, still_successful = true } },
@@ -160,7 +160,7 @@ SMODS.Joker {
     cost = 6,
     discovered = false,
     blueprint_compat = true,
-    ppu_artist = {"jade"},
+    ppu_artist = {"comykel", "jade"},
     ppu_coder = { "cloudzxiii", "noodlemire" },
     ppu_team = { "polar_skull" },
 
@@ -217,7 +217,7 @@ SMODS.Joker {
     cost = 20,
     discovered = false,
     blueprint_compat = false,
-    ppu_artist = {"mariofan"},
+    ppu_artist = {"mariofan","comykel"},
     ppu_coder = { "cloudzxiii" },
     ppu_team = { "polar_skull" },
 
