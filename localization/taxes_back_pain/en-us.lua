@@ -18,7 +18,14 @@ local other_loc_table = {
             tbp_new_module = 'New Module',
             tbp_old_module = 'Currently Equipped',
             tbp_equipped = ' Equipped!',
-            tbp_durability_restored = 'Repaired!'
+            tbp_durability_restored = 'Repaired!',
+            k_tbp_name_Spaceship = "Modular Spaceship",
+            k_tbp_name_Vaianu = "Vaianu XI",
+            k_tbp_name_Explorer = "Explorer",
+            k_tbp_name_Artemis = "Artemis",
+            k_tbp_name_Galactica = "Galactica",
+            k_tbp_name_Sealab = "Sealab Galactic Travels",
+            k_tbp_name_Eremillenium = "Eremillenium Falcon",
         }
     },
     descriptions = {
@@ -132,7 +139,7 @@ local other_loc_table = {
             b_worm_spaceship_deck = {
                 name = "Spaceship Deck",
                 text = {
-                    "Start with a {T:j_worm_tbp_spaceship,C:attention}Spaceship{}",
+                    "Start with a {T:j_worm_tbp_spaceship,C:attention}Modular Spaceship{}",
                     "which always spawns a {C:tbp_module}Module{}",
                     "pack at the start of {T:p_worm_module_jumbo_1,C:attention}shop{}"
                 },
@@ -149,7 +156,7 @@ local other_loc_table = {
                     },
                     {
                         "When opened,",
-                        "create a {C:attention}Spaceship{}",
+                        "create a {C:attention}Modular Spaceship{}",
                         "if none are owned"
                     }
                 },
@@ -164,7 +171,7 @@ local other_loc_table = {
                     },
                     {
                         "When opened,",
-                        "create a {C:attention}Spaceship{}",
+                        "create a {C:attention}Modular Spaceship{}",
                         "if none are owned"
                     }
                 },
@@ -179,7 +186,7 @@ local other_loc_table = {
                     },
                     {
                         "When opened,",
-                        "create a {C:attention}Spaceship{}",
+                        "create a {C:attention}Modular Spaceship{}",
                         "if none are owned"
                     }
                 },
@@ -194,7 +201,7 @@ local other_loc_table = {
                     },
                     {
                         "When opened,",
-                        "create a {C:attention}Spaceship{}",
+                        "create a {C:attention}Modular Spaceship{}",
                         "if none are owned"
                     }
                 },
@@ -209,7 +216,7 @@ local other_loc_table = {
                     },
                     {
                         "When opened,",
-                        "create a {C:attention}Spaceship{}",
+                        "create a {C:attention}Modular Spaceship{}",
                         "if none are owned"
                     }
                 },
@@ -224,7 +231,7 @@ local other_loc_table = {
                     },
                     {
                         "When opened,",
-                        "create a {C:attention}Spaceship{}",
+                        "create a {C:attention}Modular Spaceship{}",
                         "if none are owned"
                     }
                 },
@@ -239,7 +246,7 @@ local other_loc_table = {
                     },
                     {
                         "When opened,",
-                        "create a {C:attention}Spaceship{}",
+                        "create a {C:attention}Modular Spaceship{}",
                         "if none are owned"
                     }
                 },
@@ -254,7 +261,7 @@ local other_loc_table = {
                     },
                     {
                         "When opened,",
-                        "create a {C:attention}Spaceship{}",
+                        "create a {C:attention}Modular Spaceship{}",
                         "if none are owned"
                     }
                 },
@@ -286,7 +293,7 @@ local other_loc_table = {
 local descriptions = {
     Joker = {
         spaceship = {
-            name = 'Vaianu XI',
+            name = '#2#',
             text = {
                 '{V:1}Adds a {V:2}#1#',
                 '{V:1}to the shop when',
@@ -294,7 +301,7 @@ local descriptions = {
             }
         },
         spaceship_back = {
-            name = 'Vaianu XI',
+            name = '#2#',
             text = {
                 '{V:1}Adds a {V:2}#1#',
                 '{V:1}to the shop'

@@ -150,3 +150,16 @@ self.tbp = {}
 self.tbp.module_sprites = {}
 '''
 match_indent = true
+
+# Temporary patch until SMODS release for info_queue names, expected to fail later
+[[patches]]
+[patches.pattern]
+target = '=[SMODS _ "src/game_object.lua"]'
+pattern = '''
+if (full_UI_table.from_detailed_tooltip and full_UI_table.info[1] == desc_nodes) 
+'''
+position = "at"
+payload = '''
+if (not full_UI_table.from_detailed_tooltip or full_UI_table.info[1] == desc_nodes)
+'''
+match_indent = true

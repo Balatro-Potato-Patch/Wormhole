@@ -349,9 +349,9 @@ SMODS.Joker({
     ppu_artist = {'ice'},
     module_types = {'core', 'weapons', 'utility', 'thrusters'},
     config = {
-        --ship_name = "Spaceship",
         extra_slots_used = -1,
         extra = {
+            ship_name = "Spaceship",
             modules = {
                 core = {},
                 weapons = {},
@@ -383,8 +383,8 @@ SMODS.Joker({
             key = key,
             vars = {
                 colours = {modules and G.ARGS.LOC_COLOURS.inactive or G.C.UI.TEXT_DARK, modules and mix_colours(G.ARGS.LOC_COLOURS.inactive, G.ARGS.LOC_COLOURS.attention, 0.65) or G.ARGS.LOC_COLOURS.attention},
-                localize{type = 'name_text', set = 'Other', key = 'p_worm_module_jumbo_1'}
-                --card.ability.extra.ship_name
+                localize{type = 'name_text', set = 'Other', key = 'p_worm_module_jumbo_1'},
+                localize("k_tbp_name_".. card.ability.extra.ship_name)
             }
         }
     end,
@@ -438,16 +438,15 @@ SMODS.Joker({
         end
 	end,
     add_to_deck = function(self, card, from_debuff)
-        --TODO: Maybe fix this when this becomes a solo mod?
-        --local _list_of_ship_names = {
-        --    "Vaianu XI",
-        --    "Explorer",
-        --    "Artemis",
-        --    "Galactica",
-        --    "Sealab Galactic Travels",
-        --    "Eremillenium Falcon",
-        --}
-        --card.ability.extra.ship_name = pseudorandom_element(_list_of_ship_names, pseudoseed("shipname"))
+        local _list_of_ship_names = {
+           "Vaianu",
+           "Explorer",
+           "Artemis",
+           "Galactica",
+           "Sealab",
+           "Eremillenium",
+        }
+        card.ability.extra.ship_name = pseudorandom_element(_list_of_ship_names, pseudoseed("shipname"))
 
 		if next(SMODS.find_card("j_worm_tbp_spaceship")) then
             G.E_MANAGER:add_event(Event({
