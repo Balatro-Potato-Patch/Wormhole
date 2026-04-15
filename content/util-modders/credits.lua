@@ -21,13 +21,6 @@ PotatoPatchUtils.Developer {
 }
 
 PotatoPatchUtils.Developer {
-    name = 'cg',
-    colour = G.C.WHITE,
-    loc = "d_cg",
-    team = 'util-modders',
-}
-
-PotatoPatchUtils.Developer {
     name = 'frost',
     colour = G.C.WHITE,
     loc = "d_frost",
