@@ -2,7 +2,7 @@ SMODS.ConsumableType {
     key = 'util_Spaces',
     default = 'c_worm_util_spaces_basic_mult',
     primary_colour = G.C.SET.Tarot,
-    secondary_colour = HEX"455a64",
+    secondary_colour = HEX"009688",
     collection_rows = { 4, 4, 4 },
     shop_rate = 0,
 }
