@@ -13,11 +13,12 @@ for k,v in pairs(colours) do
 end
 
 -- for negative hand level compat
+local to_number = to_number or tonumber
 setmetatable(G.C.HAND_LEVELS, {
     __index = function(t,k)
-        if type(k) == 'number' and k <= 0 then
-            k = -k
-            if k >= 7 then k = 7 end
+        k = to_number(k) or k
+        if (to_number(k) or 1) <= 0 then
+            k = math.min(-to_number(k),7)
         end
         return rawget(t,k)
     end
