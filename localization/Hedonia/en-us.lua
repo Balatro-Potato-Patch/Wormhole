@@ -152,6 +152,7 @@ return {
                 text = {
                     'First time doing a mod jam',
                     'Made a couple of pictures',
+                    'and the font for the emote to the left',
                     'Thanks to Astra and Murphy',
                     'Thanks to Team Hedonia 10/10'
                 }
