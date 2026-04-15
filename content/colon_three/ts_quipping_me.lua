@@ -15,7 +15,7 @@ for i = 1, 6 do
             if type == 'loss' then
                 for k, v in pairs(G.playing_cards) do
                     if SMODS.has_enhancement(v, "m_worm_ct_junk_card") then
-                        return true, { weight = 100 }
+                        return true, { weight = 25 }
                     end
                 end
             end
