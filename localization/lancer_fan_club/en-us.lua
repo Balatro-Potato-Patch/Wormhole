@@ -90,6 +90,7 @@ return {
                         "{s:0.8,X:lfc_dark,C:white}Tumblr{s:0.8} @aforager",
                         "{s:0.8}Play the {s:0.8,C:attention}Forager Nonessentials{s:0.8} mod!",
                         "{s:0.8}Play CalvinChess on {s:0.8,X:lfc_dark,C:white}Steam{s:0.8}!",
+                        "{s:0.6}Click 5 times to open the {s:0.6,X:lfc_dark,C:white}Steam{s:0.6} page"
                     }
                 }
             },
