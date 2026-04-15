@@ -99,7 +99,7 @@ SMODS.Booster {
 }
 
 SMODS.Booster {
-    key = "acme_gadget_mega_1",
+    key = "acme_gadget_jumbo",
     atlas = "ACME_boosters",
     kind = 'Gadget',
     group_key = 'k_worm_gadget_pack',
@@ -116,7 +116,7 @@ SMODS.Booster {
         local cfg = (card and card.ability) or self.config
         return {
             vars = { cfg.choose, cfg.extra },
-            key = self.key:sub(1, -3),
+            key = self.key,
         }
     end,
     ease_background_colour = function(self)
@@ -148,15 +148,15 @@ SMODS.Booster {
 }
 
 SMODS.Booster {
-    key = "acme_gadget_mega_2",
+    key = "acme_gadget_mega",
     atlas = "ACME_boosters",
     kind = 'Gadget',
     group_key = 'k_worm_gadget_pack',
     select_card = "consumeables",
-    weight = 0.15,
-    cost = 6,
+    weight = 0.08,
+    cost = 8,
     pos = { x = 3, y = 0 },
-    config = { extra = 4, choose = 1 },
+    config = { extra = 5, choose = 2 },
     draw_hand = false,
     unlocked = true,
     ppu_artist = { 'RadiationV2' },
@@ -165,7 +165,7 @@ SMODS.Booster {
         local cfg = (card and card.ability) or self.config
         return {
             vars = { cfg.choose, cfg.extra },
-            key = self.key:sub(1, -3),
+            key = self.key,
         }
     end,
     ease_background_colour = function(self)
