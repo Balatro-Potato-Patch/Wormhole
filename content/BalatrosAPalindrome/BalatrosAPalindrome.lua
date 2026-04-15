@@ -434,7 +434,7 @@ SMODS.Joker {
 	rarity = 2,
 	cost = 5,
 	atlas = 'Palindrome',
-	pos = { x = 1, y = 0 },
+	pos = { x = 1, y = 3 },
 	config = { extra = { x_mult = 2 } },
 	loc_txt = {
 		name = 'Vacuum',
