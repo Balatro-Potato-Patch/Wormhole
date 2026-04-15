@@ -11,7 +11,7 @@ SMODS.Joker {
     soul_pos = { x=1, y=0},
 	rarity = 2,
 	cost = 6,
-	blueprint_compat = true,
+	blueprint_compat = false,
     discovered = true,
     ppu_coder = {'M0xes'},
     ppu_artist = {'M0xes'},

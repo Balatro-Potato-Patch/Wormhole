@@ -2,7 +2,7 @@ return {
     descriptions = {
         PotatoPatch = {
             PotatoPatchTeam_TeamEudaimonia = {
-                name = "Team Eudaimonia",
+                name = "Eudaimonia",
             },
 
             PotatoPatchDev_LasagnaFelidae = {

@@ -18,8 +18,44 @@ SMODS.Atlas {
 	py = 95,
 }
 SMODS.Atlas {
+	key = "eud_teamTiger",
+	path = "team-eudaimonia/teamcards/tiger.png",
+	px = 71,
+	py = 95,
+}
+SMODS.Atlas {
 	key = "eud_teamTyp0",
 	path = "team-eudaimonia/teamcards/Typ0.png",
+	px = 71,
+	py = 95,
+}
+SMODS.Atlas {
+	key = "eud_teamCosmeggo",
+	path = "team-eudaimonia/teamcards/cosmeggo.png",
+	px = 71,
+	py = 95,
+}
+SMODS.Atlas {
+	key = "eud_teamJewel",
+	path = "team-eudaimonia/teamcards/jewel.png",
+	px = 71,
+	py = 95,
+}
+SMODS.Atlas {
+	key = "eud_teamSoul",
+	path = "team-eudaimonia/teamcards/soulware.png",
+	px = 71,
+	py = 95,
+}
+SMODS.Atlas {
+	key = "eud_teamSillyz",
+	path = "team-eudaimonia/teamcards/sillyz.png",
+	px = 71,
+	py = 95,
+}
+SMODS.Atlas {
+	key = "eud_teamHunter",
+	path = "team-eudaimonia/teamcards/hunter.png",
 	px = 71,
 	py = 95,
 }
@@ -45,8 +81,8 @@ PotatoPatchUtils.Developer({
     colour = HEX('baa1db'),
     loc = true,
     team = "TeamEudaimonia",
-    --atlas_key = "eud_teamCosmeggo"
-    --pos = {x=0,y=0}
+    atlas = "worm_eud_teamCosmeggo",
+    pos = {x=0,y=0}
 })
 
 PotatoPatchUtils.Developer({
@@ -54,16 +90,16 @@ PotatoPatchUtils.Developer({
     colour = HEX('00ff00'),
     loc = true,
     team = "TeamEudaimonia",
-    --atlas_key = "eud_teamSoul"
-    --pos = {x=0,y=0}
+    atlas = "worm_eud_teamSoul",
+    pos = {x=0,y=0}
 })
 PotatoPatchUtils.Developer({
     name = "TigerTHawk",
     colour = HEX('FF00D0'),
     loc = true,
     team = "TeamEudaimonia",
-    --atlas_key = "eud_teamTiger"
-    --pos = {x=0,y=0}
+    atlas = "worm_eud_teamTiger",
+    pos = {x=0,y=0}
 })
 
 PotatoPatchUtils.Developer({
@@ -87,16 +123,16 @@ PotatoPatchUtils.Developer({
     colour = G.C.PURPLE,
     loc = true,
     team = "TeamEudaimonia",
-    --atlas_key = "eud_teamSillyz"
-    --pos = {x=0,y=0}
+    atlas = "worm_eud_teamSillyz",
+    pos = {x=0,y=0}
 })
 PotatoPatchUtils.Developer({
     name = "Hunter",
     colour = G.C.SECONDARY_SET.Planet,
     loc = true,
     team = "TeamEudaimonia",
-    --atlas_key = "eud_teamHunter"
-    --pos = {x=0,y=0}
+    atlas = "worm_eud_teamHunter",
+    pos = {x=0,y=0}
 })
 
 PotatoPatchUtils.Developer({
@@ -113,7 +149,7 @@ PotatoPatchUtils.Developer({
     colour = HEX('F399FF'),
     loc = true,
     team = "TeamEudaimonia",
-    --atlas_key = "eud_teamJewel"
-    --pos = {x=0,y=0}
+    atlas = "worm_eud_teamJewel",
+    pos = {x=0,y=0}
 })
 

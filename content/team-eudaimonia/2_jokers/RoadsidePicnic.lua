@@ -15,6 +15,7 @@ SMODS.Joker {
     ppu_team = {"TeamEudaimonia"},
     ppu_coder = {'M0xes'},
     ppu_artist = {'Jewel'},
+    blueprint_compat = false,
     config = { extra= { currval = 1 } },
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.currval } }
