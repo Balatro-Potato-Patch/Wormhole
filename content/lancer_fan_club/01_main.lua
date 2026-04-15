@@ -79,17 +79,10 @@ SMODS.Atlas {
 }
 
 SMODS.Atlas {
-    key = "lfc_proot_EarL",
-    px = 8,
-    py = 12,
-    path = "lancer_fan_club/EarL.png"
-}
-
-SMODS.Atlas {
-    key = "lfc_proot_EarR",
-    px = 8,
-    py = 12,
-    path = "lancer_fan_club/EarR.png"
+    key = "lfc_proot_Ears",
+    px = 18,
+    py = 24,
+    path = "lancer_fan_club/Ears.png"
 }
 
 -- Sounds
@@ -257,4 +250,41 @@ SMODS.DrawSteps.ppu_floating_sprite.func = function(card,layer)
     else
         ppu_floating_sprite_hook(card,layer)
     end
+end
+
+local localize_ref = localize
+function localize(args, misc_cat)
+    local ret = localize_ref(args, misc_cat)
+    if type(args) == "table" and args.type == "name" and args.set == "PotatoPatch"
+        and args.key == "PotatoPatchDev_ProdByProto" and (args.nodes or {})[1] and args.nodes[1][1] then
+        args.nodes[1][1] = {
+            n = G.UIT.R,
+            nodes = {
+                {
+                    n = G.UIT.C,
+                    nodes = {
+                        {
+                            n = G.UIT.O,
+                            config = {
+                                object = SMODS.create_sprite(0, 0, 0.5, 0.5, "worm_lfc_proot_Ears", { x = 0, y = 0 })
+                            }
+                        }
+                    }
+                },
+                args.nodes[1][1],
+                {
+                    n = G.UIT.C,
+                    nodes = {
+                        {
+                            n = G.UIT.O,
+                            config = {
+                                object = SMODS.create_sprite(0, 0, 0.5, 0.5, "worm_lfc_proot_Ears", { x = 1, y = 0 })
+                            }
+                        }
+                    }
+                },
+            }
+        }
+    end
+    return ret
 end
