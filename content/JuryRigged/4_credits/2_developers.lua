@@ -53,7 +53,7 @@ PotatoPatchUtils.Developer({
 
 PotatoPatchUtils.Developer({
   name = "AbelSketch",
-  colour = HEX('242d2e'),
+  colour = HEX('ffffff'),
   loc = true,
   team = team,
   atlas = atlas,
