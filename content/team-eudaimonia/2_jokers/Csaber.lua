@@ -86,9 +86,15 @@ else
 	    if ret then return ret end
     end
 end
-
+SMODS.Atlas {
+    key = 'euda_csaberatlas',
+    px = 71,
+    py = 95,
+    path = 'team-eudaimonia/CSaber.png', --Update with actual art
+}
 SMODS.Joker {
     key = "euda_csaber",
+    atlas = 'euda_csaberatlas',
     rarity = 2,
     blueprint_compat = true,
     demicolon_compat = true,
@@ -97,6 +103,7 @@ SMODS.Joker {
     config = { extra = { chance = 6, add = 60 }, },
     ppu_team = {"TeamEudaimonia"},
     ppu_coder = {'soulware'},
+    ppu_artist = {'LasagnaFelidae'},
     pronouns = "he_him",
     loc_vars = function(self, info_queue, card)
         local num, denom = SMODS.get_probability_vars(card, 1, card.ability.extra.chance)

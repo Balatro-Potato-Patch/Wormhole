@@ -6,10 +6,17 @@ SMODS.Atlas {
 }
 
 SMODS.Atlas {
-    key = 'euda_bigearatlas',
+    key = 'euda_8tpatlas',
     px = 71,
     py = 95,
-    path = 'team-eudaimonia/bigear.png',
+    path = 'team-eudaimonia/8TP.png',
+}
+
+SMODS.Atlas {
+    key = 'euda_littlelightatlas',
+    px = 71,
+    py = 95,
+    path = 'team-eudaimonia/LittleLight.png',
 }
 
 SMODS.Atlas {
@@ -192,11 +199,12 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "LittleLight",
+    atlas = "euda_littlelightatlas",
     blueprint_compat = false,
     eternal_compat = false,
     rarity = 3,
     cost = 5,
-    pos = { x = 3, y = 4 },
+    pos = { x = 0, y = 0 },
     config = { extra = { deaths_used = 0, xmult = 1, xmult_gain = 0.2} }, --deaths used is useless so
     ppu_coder = {'Typ0'},
     ppu_artist = {'TigerTHawk'},
@@ -241,11 +249,12 @@ SMODS.Joker {
 SMODS.Consumable {
     key = "euda_81p",
     set = "Planet",
+    atlas = "euda_8tpatlas",
     cost = 3,
     ppu_coder = {'Typ0', 'M0xes'},
     ppu_artist = {'LasagnaFelidae'},
     ppu_team = {"TeamEudaimonia"},
-    pos = { x = 9, y = 2 },
+    pos = { x = 0, y = 0 },
     config = { hand_type = 'worm_pkr_euda_nova', softlock = true },
     loc_vars = function(self, info_queue, card)
         return {

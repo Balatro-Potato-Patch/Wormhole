@@ -2,7 +2,7 @@ SMODS.Atlas {
     key = 'euda_ton618atlas',
     px = 71,
     py = 95,
-    path = 'team-eudaimonia/LunarCheese.png', --Update with actual art
+    path = 'team-eudaimonia/Ton618.png', --Update with actual art
 }
 SMODS.Joker {
     key = "euda_ton618",
@@ -19,7 +19,7 @@ SMODS.Joker {
     end,
     ppu_coder = {'M0xes'},
     ppu_team = {"TeamEudaimonia"},
-    ppu_artist = {'Jewel'},
+    ppu_artist = {'LasagnaFelidae'},
     calculate = function(self, card, context)
         if context.joker_main then
             local tot_enchanted = 0
