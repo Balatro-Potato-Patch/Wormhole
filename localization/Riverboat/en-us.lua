@@ -11,7 +11,14 @@ return {
                     "{s:0.8}(Click me to check that out!)"
                 }
             },
-            PotatoPatchDev_fooping = { name = "fooping", text = { "{X:chips}Programmer{} and {X:purple}Artist{}" } },
+            PotatoPatchDev_fooping = { 
+                name = "fooping", 
+                text = {
+                    { "{C:attention,s:1.3}Hello!{}", "I am a programmer and artist for this mod!" },
+                    { "Thank you to the Potato Patch team for the opportunity!" },
+                    { "{C:inactive,s:0.8}Support me on Ko-Fi! https://ko-fi.com/fooping{}" },
+            }
+         },
             PotatoPatchDev_snipey = { name = "SnipeyMcButter", text = { "t" } },
             PotatoPatchDev_camo = { name = "Camostar34", text = { "t" } }
         },
