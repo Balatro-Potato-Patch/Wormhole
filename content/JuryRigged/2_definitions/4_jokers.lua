@@ -195,6 +195,6 @@ SMODS.Joker {
     end
   end,
   ppu_coder = { 'NinjaBanana' },
-  ppu_artist = { 'Inky' },
+  ppu_artist = { 'Inky', 'Maelmc' },
   ppu_team = { 'JuryRigged' },
 }
