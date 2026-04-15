@@ -63,14 +63,14 @@ return {
             c_worm_hedonia_hadron = {
                 name = 'Hadron Colada',
                 text = {
-                    'Add {C:edition,E:2}Tipsy{} to a',
+                    'Add {E:2}Tipsy{} to a',
                     'random card held in hand'
                 }
             },
             c_worm_hedonia_cosmo = {
                 name = 'Cosmopolitan',
                 text = {
-                    'Add {C:edition,E:1}Drunk{} to a',
+                    'Add {E:1}Drunk{} to a',
                     'random card held in hand'
                 }
             },
@@ -104,7 +104,7 @@ return {
                 }
             },
             c_worm_hedonia_debbie = {
-                name = 'Brownies',
+                name = 'Cosmic Brownies',
                 text = {
                     'Converts {C:attention}#1#{} selected cards',
                     'to the same random rank'
