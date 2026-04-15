@@ -257,6 +257,12 @@ SMODS.DynaTextEffect {
     end,
 }
 
+-- putting this here to avoid a merge conflict
+local function alexi_click()
+    play_sound("worm_lfc_splat")
+    love.system.openURL("https://en.pronouns.page/@invalidOS")
+end
+
 --[[
 --  Note: i did code for all the forcetrigger compat stuff,
 --        but it's fairly simple to do and doesn't affect
@@ -271,7 +277,7 @@ Wormhole.LancerFanClub.Alexi = PotatoPatchUtils.Developer {
     team = "Lancer Fan Club",
     atlas = "worm_lfc_devs",
     pos = { x = 4, y = 0 },
-    soul_pos = { x = 5, y = 0 }
+    soul_pos = { x = 5, y = 0 },
 }
 
 local function floating_sprite(offset)
