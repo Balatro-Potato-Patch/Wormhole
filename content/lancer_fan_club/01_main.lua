@@ -194,7 +194,7 @@ PotatoPatchUtils.Developer {
     click = function(self)
         dark_flip(self)
 
-        play_sound(math.random(2) == 1 and "worm_lfc_tada" or "worm_lfc_not_tada",1.5-proot_click_count*0.1)
+        play_sound((math.random(2) == 1 or not proot_first_click) and "worm_lfc_tada" or "worm_lfc_not_tada",1.5-proot_click_count*0.1)
         
         -- Shitpost thing
         if proot_first_click then
