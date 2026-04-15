@@ -612,7 +612,7 @@ SMODS.Consumable { -- Meteor Sour
             primed = false,
             empty_sound = "worm_abs_drink",
         },
-        extra = { hands = 1, enh_discarded = 0, goal = 5 },
+        extra = { hands = 1, enh_discarded = 0, goal = 4 },
     },
     cost = 3,
     loc_vars = function(self, info_queue, card)
