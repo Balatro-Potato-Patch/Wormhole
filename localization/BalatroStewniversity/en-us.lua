@@ -230,7 +230,7 @@ return {
                 name = "PLagger",
                 text = {
                     "Shout out {C:money}Cheese{C:green}Pear{} and {C:green}Phrog{}, you two are",
-                    'the {s:2,E:1,C:attention}GOAT',
+                    'the {s:2,E:1,C:attention}GOAT{s:0.8,C:inactive}Lybear Lybear{}',
                     '',
                     'Also Ado nation rise up'
                 }
