@@ -434,7 +434,7 @@ SMODS.Joker {
 	ppu_team = {"BalatrosAPalindrome"},
 	key = "bap_space_walk",
 	blueprint_compat = true,
-	eternal_compat = true,
+	eternal_compat = false,
 	rarity = 3,
 	cost = 8,
 	atlas = 'Palindrome',
