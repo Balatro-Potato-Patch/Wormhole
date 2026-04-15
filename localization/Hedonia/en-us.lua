@@ -135,37 +135,37 @@ return {
             PotatoPatchDev_alxndr = {
                 name = "Alxndr",
                 text = {
-
+                    'a'
                 }
             },
             PotatoPatchDev_axyraandas = {
                 name = "Axyraandas",
                 text = {
-                    
+                    'a'
                 }
             },
             PotatoPatchDev_hellboydante = {
                 name = "Dante",
                 text = {
-                    
+                    'a'
                 }
             },
             PotatoPatchDev_professorrenderer = {
                 name = "Professor Renderer",
                 text = {
-                    
+                    'a'
                 }
             },
             PotatoPatchDev_qunumeru = {
                 name = "Qunumeru",
                 text = {
-                    
+                    'a'
                 }
             },
             PotatoPatchDev_wombatcountry = {
                 name = "Wombat Country",
                 text = {
-                    'skibidi toilet or some shit'
+                    'a'
                 }
             }
         }
