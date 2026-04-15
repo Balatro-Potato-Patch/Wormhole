@@ -163,3 +163,16 @@ payload = '''
 if (not full_UI_table.from_detailed_tooltip or full_UI_table.info[1] == desc_nodes)
 '''
 match_indent = true
+
+# Fix shadow
+[[patches]]
+[patches.pattern]
+target = '=[SMODS _ "src/card_draw.lua"]'
+pattern = '''
+G.shared_shadow = self.sprite_facing == 'front' and self.children.center or self.children.back
+'''
+position = "after"
+payload = '''
+G.shared_shadow = (self.config.center.set == 'tbp_module' or self.config.center.atlas == 'worm_tbp_ship') and self.children.back or G.shared_shadow 
+'''
+match_indent = true
