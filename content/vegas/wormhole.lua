@@ -314,8 +314,8 @@ SMODS.Joker{
 		name = "Astronaut",
 		text = {
 			"Earn {C:money}$#1#{} at end of",
-			"round per level of the",
-			"{C:attention}winning hand"
+			"round per level of the final",
+			"played {C:attention}poker hand"
 		}
 	},
 	config = { hand = nil, extra = { dollars = 1 }},
