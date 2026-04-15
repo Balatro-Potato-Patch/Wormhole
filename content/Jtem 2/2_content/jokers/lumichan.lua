@@ -7,15 +7,19 @@ SMODS.Atlas({
 
 SMODS.Joker({
 	key = "jtem2_lumichan",
+
 	ppu_team = { "jtem2" },
 	ppu_coder = { "lexi" },
 	ppu_artist = { "missingnumber" },
+
 	rarity = 3,
 	cost = 10,
+
 	blueprint_compat = false,
 	eternal_compat = true,
 	rental_compat = true,
 	perishable_compat = false,
+
 	atlas = "jtem2_lumichan",
 	attributes = {
 		"space",
@@ -35,7 +39,7 @@ SMODS.Joker({
 				card.ability.extra.req,
 				card.ability.extra.used,
 				SMODS.signed(card.ability.extra.gain),
-				(card.ability.extra.slots < 0 and "-" or "+")..card.ability.extra.slots,
+				(card.ability.extra.slots < 0 and "-" or "+") .. card.ability.extra.slots,
 			},
 		}
 	end,
