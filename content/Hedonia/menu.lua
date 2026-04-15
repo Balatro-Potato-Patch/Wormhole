@@ -44,7 +44,7 @@ SMODS.Consumable {
     set = "worm_hedonia_menu",
     atlas = "menu",
     pos = {x = 1, y = 0},
-    ppu_artist = {'hellboydante'},
+    ppu_artist = {'hellboydante', 'qunumeru'},
     ppu_coder = {'wombatcountry', 'professorrenderer'},
     ppu_team = {'Hedonia'},
     use = function(self, card, area, copier)
@@ -80,7 +80,7 @@ SMODS.Consumable {
     set = "worm_hedonia_menu",
     atlas = "menu",
     pos = {x = 3, y = 0},
-    ppu_artist = {},
+    ppu_artist = {'qunumeru'},
     ppu_coder = {'wombatcountry', 'professorrenderer'},
     ppu_team = {'Hedonia'},
     use = function(self, card, area, copier)
@@ -104,7 +104,7 @@ SMODS.Consumable {
     loc_vars = function(self,info_queue,center)
         return {vars = {center.ability.extra.bonus}}
     end,
-    ppu_artist = {'hellboydante'},
+    ppu_artist = {'hellboydante', 'qunumeru'},
     ppu_coder = {'wombatcountry', 'axyraandas'},
     ppu_team = {'Hedonia'},
     use = function(self, card, area, copier)
@@ -178,7 +178,7 @@ SMODS.Consumable {
     loc_vars = function(self,info_queue,center)
         return {vars = {center.ability.extra.cards}}
     end,
-    ppu_artist = {'hellboydante'},
+    ppu_artist = {'hellboydante', 'qunumeru'},
     ppu_coder = {'wombatcountry', 'axyraandas'},
     ppu_team = {'Hedonia'},
     use = function(self, card, area, copier)
