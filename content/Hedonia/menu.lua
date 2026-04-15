@@ -135,10 +135,12 @@ SMODS.Consumable {
     ppu_team = {'Hedonia'},
     use = function(self, card, area, copier)
         for i, v in pairs(G.hand.cards) do
+            local sober = true
             local is_drunk = v.edition and v.edition.key
             local stages = {'e_worm_hedonia_tipsy', 'e_worm_hedonia_drunk', 'e_worm_hedonia_very_drunk', 'e_worm_hedonia_blackout'}
             for i1,v1 in ipairs(stages) do
                 if is_drunk == v1 then
+                    sober = false
                     if i1 == 1 then
                         v:set_edition(nil, true)
                     else
@@ -147,22 +149,27 @@ SMODS.Consumable {
                     end
                 end
             end
+
+            if sober then
+                -- do nothing? Talk to Dante about this.
+            end
         end
     end,
     can_use = function(self, card)
-        local has_drunk = false
-        if G.hand and G.hand.cards then
-            for i,v in pairs(G.hand.cards) do
-                if has_drunk == true then break end
-                has_drunk = v.edition and (
-                    v.edition.key == 'e_worm_hedonia_tipsy' or
-                    v.edition.key == 'e_worm_hedonia_drunk' or
-                    v.edition.key == 'e_worm_hedonia_very_drunk' or
-                    v.edition.key == 'e_worm_hedonia_blackout'
-                )
-            end
-        end
-        return has_drunk
+        -- local has_drunk = false
+        -- if G.hand and G.hand.cards then
+        --     for i,v in pairs(G.hand.cards) do
+        --         if has_drunk == true then break end
+        --         has_drunk = v.edition and (
+        --             v.edition.key == 'e_worm_hedonia_tipsy' or
+        --             v.edition.key == 'e_worm_hedonia_drunk' or
+        --             v.edition.key == 'e_worm_hedonia_very_drunk' or
+        --             v.edition.key == 'e_worm_hedonia_blackout'
+        --         )
+        --     end
+        -- end
+        -- return has_drunk
+        return G.hand and G.hand.cards and #G.hand.cards > 0
     end
 }
 
