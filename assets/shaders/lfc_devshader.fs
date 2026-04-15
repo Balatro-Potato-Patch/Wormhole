@@ -5,6 +5,7 @@
 #endif
 
 extern vec2 mouse_pos;
+extern float t;
 
 #define PI 3.14159265358979323846
 
@@ -101,30 +102,38 @@ vec4 HSL(vec4 c)
 	return hsl;
 }
 
-// 3D Gradient noise from: https://www.shadertoy.com/view/Xsl3Dl
-vec3 hash( vec3 p ) // replace this by something better
-{
-	p = vec3( dot(p,vec3(127.1,311.7, 74.7)),
-			  dot(p,vec3(269.5,183.3,246.1)),
-			  dot(p,vec3(113.5,271.9,124.6)));
+// Copied from https://godotshaders.com/snippet/seamless-perlin-noise/
+uniform int cell_amount = 40;
+uniform vec2 period = vec2(1., 1.);
 
-	return -1.0 + 2.0*fract(sin(p)*43758.5453123);
+vec2 random(vec2 value){
+	value = vec2( dot(value, vec2(127.1,311.7) ),
+				  dot(value, vec2(269.5,183.3) ) );
+	return -1.0 + 2.0 * fract(sin(value) * 43758.5453123);
 }
-float noise( in vec3 p )
-{
-    vec3 i = floor( p );
-    vec3 f = fract( p );
-	
-	vec3 u = f*f*(3.0-2.0*f);
 
-    return mix( mix( mix( dot( hash( i + vec3(0.0,0.0,0.0) ), f - vec3(0.0,0.0,0.0) ), 
-                          dot( hash( i + vec3(1.0,0.0,0.0) ), f - vec3(1.0,0.0,0.0) ), u.x),
-                     mix( dot( hash( i + vec3(0.0,1.0,0.0) ), f - vec3(0.0,1.0,0.0) ), 
-                          dot( hash( i + vec3(1.0,1.0,0.0) ), f - vec3(1.0,1.0,0.0) ), u.x), u.y),
-                mix( mix( dot( hash( i + vec3(0.0,0.0,1.0) ), f - vec3(0.0,0.0,1.0) ), 
-                          dot( hash( i + vec3(1.0,0.0,1.0) ), f - vec3(1.0,0.0,1.0) ), u.x),
-                     mix( dot( hash( i + vec3(0.0,1.0,1.0) ), f - vec3(0.0,1.0,1.0) ), 
-                          dot( hash( i + vec3(1.0,1.0,1.0) ), f - vec3(1.0,1.0,1.0) ), u.x), u.y), u.z );
+float seamless_noise(vec2 uv, vec2 _period) {
+	uv = uv * float(cell_amount);
+	vec2 cellsMinimum = floor(uv);
+	vec2 cellsMaximum = ceil(uv);
+	vec2 uv_fract = fract(uv);
+	
+	cellsMinimum = mod(cellsMinimum, _period);
+	cellsMaximum = mod(cellsMaximum, _period);
+	
+	vec2 blur = smoothstep(0.0, 1.0, uv_fract);
+	
+	vec2 lowerLeftDirection = random(vec2(cellsMinimum.x, cellsMinimum.y));
+	vec2 lowerRightDirection = random(vec2(cellsMaximum.x, cellsMinimum.y));
+	vec2 upperLeftDirection = random(vec2(cellsMinimum.x, cellsMaximum.y));
+	vec2 upperRightDirection = random(vec2(cellsMaximum.x, cellsMaximum.y));
+	
+	vec2 fraction = fract(uv);
+	
+	return mix( mix( dot( lowerLeftDirection, fraction - vec2(0, 0) ),
+                     dot( lowerRightDirection, fraction - vec2(1, 0) ), blur.x),
+                mix( dot( upperLeftDirection, fraction - vec2(0, 1) ),
+                     dot( upperRightDirection, fraction - vec2(1, 1) ), blur.x), blur.y) * 0.8 + 0.5;
 }
 
 vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords )
@@ -141,10 +150,23 @@ vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords
 		vec4 texDW = Texel(texture, uv);
 		float fac = distance(screen_coords,mouse_pos);
 
-		float radius = 75.0;
-		float outline_size  = 1.0;
-		vec3 outline_color = vec3(1.0);
-		c = (fac > radius-outline_size && fac < radius+outline_size)?vec4(outline_color,tex.a):((fac>radius?tex:texDW)*colour);
+		vec2 center_uv = floor((screen_coords-mouse_pos)/2.)*2./image_details;
+		center_uv.y *= image_details.y / image_details.x;
+		
+		float pixel_angle = atan(center_uv.x,center_uv.y) / PI;
+		float pixel_distance = length(center_uv)*4.-t/16.;
+		vec2 polar = vec2(pixel_angle, pixel_distance);
+
+		float noise = seamless_noise(polar,vec2(40.,0.));
+
+		float radius = 75.0+4.*noise;
+		float outline_size  = 16.0;
+		float outline_fac = clamp((fac-radius)/outline_size,0.,1.);
+
+
+		c = (fac>radius?tex:texDW)*colour;
+
+		c = (fac>radius && fac<radius+outline_size && noise>outline_fac) ? vec4(1.,1.,1.,c.a): c;
 	}
 
     return dissolve_mask(c, texture_coords, uv);

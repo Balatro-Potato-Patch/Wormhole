@@ -8,7 +8,7 @@ priority = -10
 [[patches]]
 [patches.pattern]
 target = '=[SMODS PotatoPatchUtils "src/credits.lua"]'
-pattern = 'colours = { dev and dev.colour or G.C.UI.BACKGROUND_WHITE }, scale = 0.27,'
+pattern = 'AAAAAAcolours = { dev and dev.colour or G.C.UI.BACKGROUND_WHITE }, scale = 0.27,'
 position = 'at'
 payload = '''
 colours = (dev and dev.colours) or { dev and dev.colour or G.C.UI.BACKGROUND_WHITE }, scale = 0.27,
@@ -33,6 +33,22 @@ if member.always_use_dynatext or member.text_effect or member.shaders then
     })}}
 else
     name = name[1] and name[1][1] or {n=G.UIT.T, config={scale = 0.47, colour = member.colour, text = member.name}}
+end
+'''
+match_indent = true
+
+# lemniscate tomorrow
+# PotatoPatchUtils.CREDITS.create_team_credit_page
+[[patches]]
+[patches.pattern]
+target = '=[SMODS PotatoPatchUtils "src/credits.lua"]'
+pattern = 'self:juice_up(0.05, 0.03)'
+position = 'before'
+payload = '''
+if member.name == "InvalidOS" and member.team == "Lancer Fan Club" then
+    info_nodes.nodes[1].nodes[3].nodes[1].nodes[1].nodes[1] = { n=G.UIT.R, config = { align="cm" }, nodes = {
+        { n=G.UIT.O, config = { object = Wormhole.LancerFanClub.Alexi.create_lemniscate() }}
+    }}
 end
 '''
 match_indent = true

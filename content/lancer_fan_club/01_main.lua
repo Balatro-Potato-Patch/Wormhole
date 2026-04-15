@@ -15,13 +15,20 @@ Wormhole.LancerFanClub = PotatoPatchUtils.Team {
         end
 
         if #effects > 0 then return SMODS.merge_effects(effects) end
-    end
+    end,
+    short_credit = true
 }
+
+local was_on_lancer = false
 
 local ctcp = PotatoPatchUtils.CREDITS.create_team_credit_page
 function PotatoPatchUtils.CREDITS.create_team_credit_page(team, ...)
     if team == Wormhole.LancerFanClub then
         play_sound("worm_lfc_splat")
+        was_on_lancer = true
+    elseif was_on_lancer then
+        was_on_lancer = false
+        play_sound("worm_lfc_reverse_splat")
     end
     return ctcp(team, ...)
 end
@@ -85,6 +92,22 @@ SMODS.Atlas {
     path = "lancer_fan_club/Ears.png"
 }
 
+SMODS.Atlas {
+    atlas_table = "ASSET_ATLAS",
+    key = "lfc_lemniscate_atlas",
+    px = 77,
+    py = 95,
+    path = "lancer_fan_club/lemniscate_spectral.png"
+}
+
+SMODS.Atlas {
+    atlas_table = "ASSET_ATLAS",
+    key = "lfc_lemniscate_atlas",
+    px = 77,
+    py = 95,
+    path = "lancer_fan_club/lemniscate_spectral.png"
+}
+
 -- Sounds
 SMODS.Sound {
     key = "lfc_explosion",
@@ -101,11 +124,31 @@ SMODS.Sound {
     path = "lfc_splat.wav"
 }
 
+SMODS.Sound {
+    key = "lfc_reverse_splat",
+    path = "lfc_reverse_splat.wav"
+}
+
 -- Colors
 loc_colour('red')
 G.ARGS.LOC_COLOURS.lfc_pkmn_us = HEX('E95B2B')
 G.ARGS.LOC_COLOURS.lfc_pkmn_um = HEX('226DB5')
 G.ARGS.LOC_COLOURS.lfc_meteor  = HEX('a97a51')
+G.ARGS.LOC_COLOURS.lfc_discord = HEX('5662f6')
+G.ARGS.LOC_COLOURS.lfc_dark    = G.C.BLACK
+G.ARGS.LOC_COLOURS.lfc_elle    = HEX('ff53a9')
+G.ARGS.LOC_COLOURS.lfc_ash     = SMODS.Gradient {
+    key = "lfc_ash",
+    colours = {
+        HEX('fd5f55'),
+        HEX('ffe07b'),
+        HEX('81ff70'),
+        HEX('81cefd'),
+        HEX('4b69cf'),
+        HEX('f75eff')
+    },
+    cycle = 4
+}
 
 -- Developers
 PotatoPatchUtils.Developer {
@@ -136,11 +179,25 @@ PotatoPatchUtils.Developer {
     end
 }
 
+SMODS.DynaTextEffect {
+    key = "elle_text",
+    func = function(dynatext, index, letter)
+        local t = G.TIMERS.REAL * 3 + index
+
+        letter.offset = {
+            x = math.sin(t) * 9,
+            y = math.cos(t) * 9
+        }
+
+        letter.colour = mix_colours(HEX('f25fa8'), HEX('a83c8d'), (math.sin(t * 0.437) + 1) / 2)
+        letter.scale = 1 + math.cos(t * 0.81) * .1
+    end,
+}
 
 -- Elle
 PotatoPatchUtils.Developer({
     name = "ellestuff.",
-    colour = HEX('ff53a9'),
+    text_effect = "worm_elle_text",
     loc = "PotatoPatchDev_ellestuff",
     team = "Lancer Fan Club",
     atlas = "worm_lfc_devs",
@@ -171,7 +228,7 @@ SMODS.DynaTextEffect {
 
 PotatoPatchUtils.Developer({
     name = "J8-Bit",
-    --colour = HEX('F1641F'),
+    colour = HEX('F1641F'),
     text_effect = "worm_j8_text",
     loc = "PotatoPatchDev_j8bit",
     team = "Lancer Fan Club",
@@ -207,7 +264,7 @@ SMODS.DynaTextEffect {
 --        code credits
 --      - alexi
 --]]
-PotatoPatchUtils.Developer {
+Wormhole.LancerFanClub.Alexi = PotatoPatchUtils.Developer {
     name = "InvalidOS",
     text_effect = "worm_alexi_text",
     loc = "PotatoPatchDev_alexi",
@@ -217,38 +274,100 @@ PotatoPatchUtils.Developer {
     soul_pos = { x = 5, y = 0 }
 }
 
+local function floating_sprite(offset)
+    local offset = offset or 0
+    local time = G.TIMERS.REAL + offset
+
+    local scale_mod = 0.07 + 0.02 * math.sin(1.8 * time) +
+    0.00 * math.sin((time - math.floor(time)) * math.pi * 14) * (1 - (time - math.floor(time))) ^ 3
+    local rotate_mod = 0.05 * math.sin(1.219 * time) + 0.00 * math.sin((time) * math.pi * 5) *
+    (1 - (time - math.floor(time))) ^ 2
+
+    return scale_mod, rotate_mod
+end
+
+SMODS.draw_ignore_keys.worm_lfc_extra_sprite = true
+SMODS.DrawStep {
+    key = "worm_lfc_extra_sprite",
+    order = 61,
+    func = function(self)
+        if self.children.worm_lfc_extra_sprite then
+            local scale_mod, rotate_mod = floating_sprite(-45)
+
+            self.children.worm_lfc_extra_sprite:draw_shader('dissolve', 0, nil, nil, self.children.center, scale_mod,
+                rotate_mod, nil, 0.1 + 0.03 * math.sin(1.8 * G.TIMERS.REAL), nil, 0.6)
+            self.children.worm_lfc_extra_sprite:draw_shader('dissolve', nil, nil, nil, self.children.center, scale_mod,
+                rotate_mod)
+        end
+    end,
+    conditions = { vortex = false, facing = 'front' },
+}
+
+function Wormhole.LancerFanClub.Alexi.create_lemniscate()
+    local card = Card(G.ROOM.T.x, G.ROOM.T.y, G.CARD_W / 1.25, G.CARD_H / 1.25, nil, G.P_CENTERS.c_base)
+    card.T.w = card.T.w * (77 / 71)
+    card.VT.w = card.T.w
+    card.children.center:remove()
+    card.children.center = SMODS.create_sprite(card.T.x, card.T.y, card.T.w, card.T.h, "worm_lfc_lemniscate_atlas",
+        { x = 0, y = 0 })
+    card.children.center.states.hover = card.states.hover
+    card.children.center.states.click = card.states.click
+    card.children.center.states.drag = card.states.drag
+    card.children.center.states.collide.can = true
+    card.children.center:set_role({ major = card, role_type = 'Glued', draw_major = card })
+
+    card.children.ppu_floating_sprite = SMODS.create_sprite(card.T.x, card.T.y, card.T.w, card.T.h,
+        "worm_lfc_lemniscate_atlas", { x = 1, y = 0 })
+    card.children.ppu_floating_sprite.role.draw_major = card
+    card.children.ppu_floating_sprite.states.hover.can = false
+    card.children.ppu_floating_sprite.states.click.can = false
+
+    card.children.worm_lfc_extra_sprite = SMODS.create_sprite(card.T.x, card.T.y, card.T.w, card.T.h,
+        "worm_lfc_lemniscate_atlas", { x = 2, y = 0 })
+    card.children.worm_lfc_extra_sprite.role.draw_major = card
+    card.children.worm_lfc_extra_sprite.states.hover.can = false
+    card.children.worm_lfc_extra_sprite.states.click.can = false
+
+    return card
+end
+
 -- Credits shader stuff :3
 SMODS.Shader {
     key = 'lfc_devshader',
     path = 'lfc_devshader.fs',
 
     send_vars = function(self, sprite, card)
-        local w,h = love.graphics.getDimensions()
-        local mx,my = love.mouse.getPosition()
+        local w, h = love.graphics.getDimensions()
+        local mx, my = love.mouse.getPosition()
         return {
-            mouse_pos = {mx,my}
+            mouse_pos = { mx, my },
+            t = G.TIMERS.REAL
         }
     end
 }
 
 local ppu_front_hook = SMODS.DrawSteps.center.func
-SMODS.DrawSteps.center.func = function(card,layer)
+SMODS.DrawSteps.center.func = function(card, layer)
     if card.ppu_team and card.ppu_team.name == "Lancer Fan Club" then
         card.children.center:draw_shader('worm_lfc_devshader', nil, card.ARGS.send_to_shader)
     else
-        ppu_front_hook(card,layer)
+        ppu_front_hook(card, layer)
     end
 end
 
 local ppu_floating_sprite_hook = SMODS.DrawSteps.ppu_floating_sprite.func
-SMODS.DrawSteps.ppu_floating_sprite.func = function(card,layer)
+SMODS.DrawSteps.ppu_floating_sprite.func = function(card, layer)
     if card.ppu_team and card.ppu_team.name == "Lancer Fan Club" then
-        local scale_mod = 0.07 + 0.02*math.sin(1.8*G.TIMERS.REAL) + 0.00*math.sin((G.TIMERS.REAL - math.floor(G.TIMERS.REAL))*math.pi*14)*(1 - (G.TIMERS.REAL - math.floor(G.TIMERS.REAL)))^3
-        local rotate_mod = 0.05*math.sin(1.219*G.TIMERS.REAL) + 0.00*math.sin((G.TIMERS.REAL)*math.pi*5)*(1 - (G.TIMERS.REAL - math.floor(G.TIMERS.REAL)))^2
-        
-        card.children.ppu_floating_sprite:draw_shader('worm_lfc_devshader', nil, nil, nil, card.children.center, scale_mod, rotate_mod)
+        local scale_mod = 0.07 + 0.02 * math.sin(1.8 * G.TIMERS.REAL) +
+            0.00 * math.sin((G.TIMERS.REAL - math.floor(G.TIMERS.REAL)) * math.pi * 14) *
+            (1 - (G.TIMERS.REAL - math.floor(G.TIMERS.REAL))) ^ 3
+        local rotate_mod = 0.05 * math.sin(1.219 * G.TIMERS.REAL) +
+            0.00 * math.sin((G.TIMERS.REAL) * math.pi * 5) * (1 - (G.TIMERS.REAL - math.floor(G.TIMERS.REAL))) ^ 2
+
+        card.children.ppu_floating_sprite:draw_shader('worm_lfc_devshader', nil, nil, nil, card.children.center,
+            scale_mod, rotate_mod)
     else
-        ppu_floating_sprite_hook(card,layer)
+        ppu_floating_sprite_hook(card, layer)
     end
 end
 

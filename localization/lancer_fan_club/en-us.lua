@@ -25,17 +25,23 @@ return {
                 name = "ellestuff.",
                 text = {
                     {
-                        "full of love.draw",
-                        "and love.update hooks"
+                        "{s:1.5,C:attention}8{s:1.5} of us and counting!",
+                        "{s:0.6,C:lfc_elle}elle.{s:0.6} | {s:0.6,C:green}Amber{s:0.6} | Emily | {s:0.6,C:planet}Umbra{s:0.6} | {s:0.6,C:blue}Sara{s:0.6} | {s:0.6,C:legendary}Suzy{s:0.6} | {s:0.6,C:lfc_ash}Ash{s:0.6} | {s:0.6,C:money}Rebecca",
+                        "She/Her | Plural"
                     },
                     {
-                        "i made the Meteors",
-                        "and Spacebar lol"
+                        "{s:0.9}We made the code for",
+                        "{s:0.9}the {s:0.9,C:lfc_meteor}Meteors{s:0.9}, {s:0.9,C:rare}Spacebar{s:0.9}, and",
+                        "{s:0.9,C:uncommon}Astronaut Food{s:0.9}, along with",
+                        "{s:0.9}the shaders for the {s:0.9,C:attention}Credits",
+                        "{s:0.9}and {s:0.9,C:uncommon}Urination Station",
                     },
                     {
-                        "also did the shader",
-                        "and CanvasSprite for",
-                        "Urination Station.."
+                        "If you're interested in",
+                        "more of our stuff:",
+                        "{s:0.8,X:blue,C:white}Bluesky{s:0.8} @ellestuff.dev",
+                        "{s:0.8,X:lfc_discord,C:white}Discord{s:0.8} ellestuff.dev/discord",
+                        "{s:0.8}Play our mod {s:0.8,C:attention}ellejokers.{s:0.8}!",
                     }
                 }
             },
@@ -44,13 +50,24 @@ return {
                 name = "J8-Bit",
                 text = {
                     {
-                        "Just happy to be here!",
-                        "{s:0.8,C:inactive}(temp description)"
+                        "{s:1.5}So... {C:purple,s:1.5}chunks{s:1.5}, huh?"
+                    },
+                    {
+                        "{s:0.9}I made most of the artwork,",
+                        "{s:0.9}the shader effects for",
+                        "{C:legendary,s:0.9}Moon Berry{s:0.9}, {C:uncommon,s:0.9}Golden Record{s:0.9},",
+                        "{s:0.9}and {s:0.9,C:common}Magical Girl{s:0.9},",
+                        "{s:0.9}and a good chunk of the",
+                        "{s:0.9}programming/design work"
                     },
                     {
                         "If you're interested in",
                         "more of my stuff:",
-                        "{s:0.8,C:inactive}(add socials later)"
+                        "{s:0.8,X:blue,C:white}Bluesky{s:0.8} @j8-bit.bsky.social",
+                        "{s:0.8,X:red,C:white}YouTube{s:0.8} @j8-bitforager842",
+                        "{s:0.8,X:lfc_dark,C:white}Tumblr{s:0.8} @aforager",
+                        "{s:0.8}Play the {s:0.8,C:attention}Forager Nonessentials{s:0.8} mod!",
+                        "{s:0.8}Play CalvinChess on {s:0.8,X:lfc_dark,C:white}Steam{s:0.8}!",
                     }
                 }
             },
@@ -63,10 +80,16 @@ return {
                         "shapeshifting slimegirl!"
                     },
                     {
-                        "proudly a fucked up lil bastard"
+                        "I came up with a few of the ideas here,",
+                        "my favorites being {C:attention}Urination Station{} and {C:attention}Spacebar{}!",
+                        "I also coded {C:attention}Urination Station{}, among plenty of other Jokers.",
+                        "{C:attention}The Fleet{} was entirely done by me, and",
+                        "the background of {C:attention}Eigengrau Emptiness{} is some of",
+                        "my proudest work yet! {s:0.5}(even if others got the same idea...)",
                     },
                     {
-                        "lemniscate tomorrow"
+                        "lemniscate",
+                        "tomorrow"
                     }
                 }
             }
@@ -96,7 +119,7 @@ return {
             j_worm_lfc_meteor_shower = {
                 name = "Meteor Shower",
                 text = {
-                    "Scored cards cause {C:attention,E:1}meteors{}",
+                    "Scored cards cause {C:lfc_meteor,E:1}meteors{}",
                     "to fall on screen that",
                     "give {C:money}#1##2#{} when clicked"
                 }
@@ -235,6 +258,19 @@ return {
                     "an additional {C:chips}+#2#{} Chips",
                     "and {C:mult}+#3#{} Mult when {C:attention}levelling up"
                 },
+            },
+            j_worm_lfc_hitchhiker = {
+                name = {
+                    "Joker's Guide",
+                    "to the Galaxy",
+                },
+                text = {
+                    "Creates a Joker from",
+                    "the {V:2,B:1}#1#{} mod if",
+                    "played hand contains a",
+                    "scoring {C:attention}#2#{} and {C:attention}#3#{}",
+                    "{C:inactive}(Must have room)",
+                }
             }
         },
         Spectral = {
@@ -259,8 +295,8 @@ return {
                 },
             },
             c_worm_lfc_wish = {
-                name="Wish",
-                text={
+                name = "Wish",
+                text = {
                     "Add a {C:lfc_meteor}Meteor Seal{}",
                     "to {C:attention}1{} selected",
                     "card in your hand",
@@ -281,7 +317,7 @@ return {
                 name = "Meteor Seal",
                 text = {
                     "Creates a {C:attention}clickable",
-                    "falling meteor that",
+                    "{C:lfc_meteor}falling meteor{} that",
                     "gives {C:money}$#1#{} on hit"
                 }
             }
