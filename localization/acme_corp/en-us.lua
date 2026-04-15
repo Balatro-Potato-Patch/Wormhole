@@ -246,6 +246,20 @@ return {
                     '{C:inactive}(Currently {X:mult,C:white}X#3#{C:inactive} Mult)'
                 }
             },
+            j_worm_acme_stargazing = {
+                name = 'Stargazing',
+                text = {
+                    "{C:green}1 in #2#{} chance to upgrade",
+                    "level of played {C:attention}#1#{}"
+                },
+            },
+            j_worm_acme_alien_joker = {
+                name = 'Alien Joker',
+                text = {
+                    "{X:mult,C:white}X#2#{} Mult if played {C:attention}hand{}",
+                    "is above level {C:planet}#1#{}"
+                },
+            }
         },
         Other = {
             undiscovered_acme_gadget = {
