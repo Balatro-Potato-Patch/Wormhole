@@ -18,7 +18,7 @@ G.FUNCS.use_card = function(e, mute, nosave)
         and G.GAME and G.GAME.used_vouchers
         and G.GAME.used_vouchers.v_worm_ACME_voucher_2
         and not card.config.center.keep_on_use then
-        if SMODS.pseudorandom_probability(card, 'acme_gadget_survive', 1, 3) then
+        if SMODS.pseudorandom_probability(card, 'acme_gadget_survive', 1, 2) then
             card.config.center.keep_on_use = function() return true end
             injected = true
         end

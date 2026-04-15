@@ -15,7 +15,7 @@ SMODS.Voucher {
     pos = { x = 1, y = 0 },
     config = { extra = {} },
     loc_vars = function(self, info_queue, card)
-        return { vars = { G.GAME and G.GAME.probabilities.normal or 1, 3 } }
+        return { vars = { G.GAME and G.GAME.probabilities.normal or 1, 2 } }
     end,
     redeem = function(self, card)
         --SMODS.ConsumableTypes['ACME_Gadget'].shop_rate = 4
