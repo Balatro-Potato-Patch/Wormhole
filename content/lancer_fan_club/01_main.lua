@@ -29,6 +29,7 @@ Wormhole.LancerFanClub = PotatoPatchUtils.Team {
 
 local was_on_lancer = false
 local elle_click_count = 5
+local alexi_click_count = 5
 
 local ctcp = PotatoPatchUtils.CREDITS.create_team_credit_page
 function PotatoPatchUtils.CREDITS.create_team_credit_page(team, ...)
@@ -274,7 +275,6 @@ local alexi_text_colors = {
     HEX("FFC7FF"),
 }
 
--- very likely to be changed to fit "InvalidOS"
 SMODS.DynaTextEffect {
     key = "alexi_text",
     func = function(dynatext, index, letter)
@@ -298,7 +298,19 @@ Wormhole.LancerFanClub.Alexi = PotatoPatchUtils.Developer {
     team = "Lancer Fan Club",
     atlas = "worm_lfc_devs",
     pos = { x = 4, y = 0 },
-    soul_pos = { x = 5, y = 0 }
+    soul_pos = { x = 5, y = 0 },
+    click = function(self)
+        dark_flip(self)
+
+        play_sound("worm_lfc_splat")
+        self:juice_up()
+        if alexi_click_count == 1 then
+            love.system.openURL("https://en.pronouns.page/@invalidOS")
+            alexi_click_count = 5
+        else
+            alexi_click_count = alexi_click_count - 1
+        end
+    end
 }
 
 local function floating_sprite(offset)
