@@ -16,6 +16,29 @@ local rock = SMODS.Joker({
 
 	atlas = "worm_jtem2_quantum_rock",
 	pos = { x = 0, y = 0 },
+
+	config = {
+		Xmult = 3,
+	},
+
+	loc_vars = function(self, info_queue, card)
+		return {
+			vars = {
+				card.ability.Xmult,
+				localize("Jack", "ranks"),
+				localize("Spades", "suits_plural"),
+				colours = { G.C.SUITS["Spades"] },
+			},
+		}
+	end,
+
+	calculate = function(self, card, context)
+		if context.joker_main then
+			return {
+				xmult = card.ability.Xmult,
+			}
+		end
+	end,
 })
 
 local function is_rock_present()
@@ -94,7 +117,7 @@ local function spawn_new_rock(protect, whitelist)
 		if not area or not area.cards then
 			return false
 		end
-		local card = Card(area.T.x + area.T.w / 2 - G.CARD_W / 2, area.T.y, G.CARD_W, G.CARD_H, G.P_CARDS["C_J"], rock)
+		local card = Card(area.T.x + area.T.w / 2 - G.CARD_W / 2, area.T.y, G.CARD_W, G.CARD_H, G.P_CARDS["S_J"], rock)
 		if real_emplace == true then
 			area:emplace(card)
 			shuffle_in_area(card, area)
@@ -355,7 +378,7 @@ local function calculate_rock(context)
 						return true
 					end
 					local _area = G.deck
-					local card = Card(_area.T.x, _area.T.y, G.CARD_W, G.CARD_H, G.P_CARDS["C_J"], rock)
+					local card = Card(_area.T.x, _area.T.y, G.CARD_W, G.CARD_H, G.P_CARDS["S_J"], rock)
 					G.worm_quantum_rock = card
 					card.facing = "back"
 					card.sprite_facing = "back"
@@ -409,7 +432,7 @@ local function calculate_rock(context)
 							blocking = false,
 							func = function()
 								local _area = G.pack_cards
-								local card = Card(_area.T.x, _area.T.y, G.CARD_W, G.CARD_H, G.P_CARDS["C_J"], rock)
+								local card = Card(_area.T.x, _area.T.y, G.CARD_W, G.CARD_H, G.P_CARDS["S_J"], rock)
 								G.worm_quantum_rock = card
 								emplace_and_shuffle_in_area(card, _area)
 								card:start_materialize()

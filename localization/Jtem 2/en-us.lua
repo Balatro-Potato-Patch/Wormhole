@@ -6,7 +6,7 @@ return {
 				text = {
 					"All {C:attention}Aces{} have {C:red}Black Hole Seal",
 				},
-			}
+			},
 		},
 		Joker = {
 			j_worm_jtem2_cosmic_ray = {
@@ -22,6 +22,10 @@ return {
 			j_worm_jtem2_quantum_rock = {
 				name = "Quantum Rock",
 				text = {
+					{
+						"{X:mult,C:white}X#1#{}",
+						"{C:attention}#2#{} of {V:1}#3#{}",
+					},
 					{
 						"Exist in all places at the same time",
 						"Only one can be observed",
@@ -157,9 +161,8 @@ return {
 					{
 						"{C:green}#1# in #2#{} chance to create",
 						"a {C:tarot}Tarot{} card when",
-						"a {C:planet}Planet{} card is used."
-
-					}
+						"a {C:planet}Planet{} card is used.",
+					},
 				},
 			},
 		},
