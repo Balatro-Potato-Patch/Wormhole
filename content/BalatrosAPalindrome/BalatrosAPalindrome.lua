@@ -456,12 +456,14 @@ SMODS.Joker {
 				trigger = 'before',
 				delay = 0.4,
 				func = (function()
-					SMODS.add_card {
-						set = 'Joker',
-						key = 'j_space',
-						key_append = 'bap_artemis_3', -- Optional, useful for manipulating the random seed and checking the source of the creation in `in_pool`.
-						--edition = "e_negative"
-					}
+					if G.jokers.config.card_limit < #G.jokers.cards then
+						SMODS.add_card {
+							set = 'Joker',
+							key = 'j_space',
+							key_append = 'bap_artemis_3', -- Optional, useful for manipulating the random seed and checking the source of the creation in `in_pool`.
+							--edition = "e_negative"
+						}
+					end
 					return true
 				end)
 			}))
