@@ -7,6 +7,8 @@ PotatoPatchUtils.Team {
 PotatoPatchUtils.Developer {
     name = "blamperer",
     team = "riverboat",
+    atlas = "worm_riverboat_credits",
+    pos = { x = 0, y = 0 },
     loc = true,
     click = function()
         love.system.openURL("https://github.com/blamperer/The-Latro")
@@ -31,5 +33,7 @@ PotatoPatchUtils.Developer {
 PotatoPatchUtils.Developer {
     name = "camo",
     team = "riverboat",
+    atlas = "worm_riverboat_credits",
+    pos = { x = 3, y = 0 },
     loc = true
 }
