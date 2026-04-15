@@ -232,7 +232,6 @@ return {
                 name = 'Test Dummy',
                 text = {
                     '{C:acme_gadget}Gadgets{} become {C:dark_edition}Negative',
-                    'when obtained'
                 }
             },
             j_worm_ACME_big_joker = {
@@ -247,17 +246,17 @@ return {
             j_worm_acme_gas_station = {
                 name = 'Interplanetary Gas Station',
                 text = {
-                    'On scoring, {C:attention}played',
-                    '{C:attention}hand{} loses a level',
-                    '{C:attention}Gain #1#{} random {C:planet}hand level{}',
-                    'and {X:mult,C:white}X#2#{} Mult',
-                    '{C:inactive}(Currently {X:mult,C:white}X#3#{C:inactive} Mult)'
+                    'On scoring, {C:attention}played hand',
+                    'loses a {C:mult}level',
+                    'Upgrade a random {C:attention}poker hand',
+                    'and gain {X:mult,C:white}X#1#{} Mult',
+                    '{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)'
                 }
             },
             j_worm_acme_kraft_e_jackal = {
                 name = 'Kraft E. Jackal',
                 text = {
-                    'Gives a {E:1, C:red}random Targeted{} {C:ACME_Gadget}Gadget{}',
+                    'Gives a random {E:2,C:mult}Targeted{} {C:ACME_Gadget}Gadget{}',
                     'after beating a {C:attention}Boss Blind',
                     '{C:inactive}(Gadget: {X:mult,C:white}#1#{C:inactive})'
                 },
@@ -269,15 +268,17 @@ return {
             j_worm_acme_stargazing = {
                 name = 'Stargazing',
                 text = {
-                    "{C:green}#1# in #2#{} chance to upgrade",
-                    "level of played {C:attention}#1#{}"
+                    "If {C:attention}played hand{}",
+                    "contains a {C:attention}full house{},",
+                    "{C:green}1 in #2#{} chance to",
+                    "upgrade its level",
                 },
             },
             j_worm_acme_alien_joker = {
                 name = 'Alien Joker',
                 text = {
-                    "{X:mult,C:white}X#2#{} Mult if played {C:attention}hand{}",
-                    "is above level {C:planet}#1#{}"
+                    "{X:mult,C:white}X#2#{} Mult if played",
+                    "{C:planet}hand level{} is {C:attention}#1#{} or over"
                 },
             }
         },

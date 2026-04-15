@@ -17,7 +17,7 @@ SMODS.Joker{
 		},
 	},
 	loc_vars = function(self,info_queue,center)
-		return{vars = {center.ability.extra.lose_level,center.ability.extra.xmult_scale,
+		return{vars = {center.ability.extra.xmult_scale,
 		center.ability.extra.xmult}}
 	end,
 	calculate = function(self,card,context)
