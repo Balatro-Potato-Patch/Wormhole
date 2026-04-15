@@ -30,6 +30,7 @@ PotatoPatchUtils.Developer({team="BalatrosAPalindrome",name="Knightingale0",loc=
 
 
 SMODS.Shader {
+	ppu_team = {"BalatrosAPalindrome"},
     key = 'bap_shader_void',
     path = 'bap_shader_void.fs',
     -- card can be nil if sprite.role.major is not Card
@@ -40,6 +41,7 @@ SMODS.Shader {
     end,
 }
 SMODS.Edition { -- Void card edition
+	ppu_team = {"BalatrosAPalindrome"},
     key = 'bap_void',
     shader = 'worm_bap_shader_void',
 	loc_txt = {
@@ -80,11 +82,11 @@ SMODS.Edition { -- Void card edition
     end
 }
 
-for duplicate = 0, 30 do
+
 -- The Abyss
 SMODS.Consumable {
 	ppu_team = {"BalatrosAPalindrome"},
-	key = 'bap_abyss'..duplicate,
+	key = 'bap_abyss',
 	loc_txt = {
 		name = 'The Abyss',
 		text = {
@@ -141,10 +143,10 @@ SMODS.Consumable {
 		return G.hand and #G.hand.cards > 1
 	end
 }
-end
 
 -- Void hand
 SMODS.PokerHand {
+	ppu_team = {"BalatrosAPalindrome"},
     key = "bap_void",
     visible = false,
     mult = 7,
@@ -346,7 +348,7 @@ SMODS.Joker {
     blueprint_compat = true,
     eternal_compat = false,
     rarity = 1,
-    cost = 6,
+    cost = 5,
 	atlas = 'Palindrome',
     pos = { x = 0, y = 1 },
     config = { extra = { s_mult = 4, suitOne = 'Diamonds', s_chips = 25, suitTwo = 'Hearts' }, },
@@ -468,22 +470,22 @@ SMODS.Joker {
 	end,
 }
 
-function print_table(t, depth)
-	if depth > 3 then return end
+-- function print_table(t, depth)
+-- 	if depth > 3 then return end
 
-	local depth_buffer = ''
-	for i=1,depth do
-		depth_buffer = depth_buffer .. '  '
-	end
-	for key, value in pairs(t) do
-		if type(value) == "table" then
-			print(depth_buffer .. tostring(key) .. ' :')
-			print_table(value, depth + 1)
-		else
-			print(depth_buffer .. tostring(key) .. ' : ' .. tostring(value))
-		end
-	end
-end
+-- 	local depth_buffer = ''
+-- 	for i=1,depth do
+-- 		depth_buffer = depth_buffer .. '  '
+-- 	end
+-- 	for key, value in pairs(t) do
+-- 		if type(value) == "table" then
+-- 			print(depth_buffer .. tostring(key) .. ' :')
+-- 			print_table(value, depth + 1)
+-- 		else
+-- 			print(depth_buffer .. tostring(key) .. ' : ' .. tostring(value))
+-- 		end
+-- 	end
+-- end
 
 -- Space Worm
 SMODS.Joker {
@@ -491,7 +493,7 @@ SMODS.Joker {
 	key = "bap_space_worm",
 	blueprint_compat = true,
 	rarity = 3,
-	cost = 1,
+	cost = 7,
 	atlas = 'Palindrome',
 	pos = { x = 0, y = 2 },
 	config = { extra = { x_mult = 1.0, inc_mult = 0.25 } },
@@ -553,10 +555,11 @@ SMODS.Joker {
 }
 
 SMODS.Joker {
+	ppu_team = {"BalatrosAPalindrome"},
 	key = 'bap_regular_worm',
 	blueprint_compat = true,
 	rarity = 1,
-	cost = 1,
+	cost = 4,
 	atlas = 'Palindrome',
 	pos={x=0,y=4},
 	soul_pos={x=1,y=4},
@@ -590,20 +593,20 @@ SMODS.Joker {
 				end
 			end
 
-		if #voids > 0 then
-			-- See note about SMODS Scaling Manipulation on the wiki
-			card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.inc_x_mult * #voids
+			if #voids > 0 then
+				-- See note about SMODS Scaling Manipulation on the wiki
+				card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.inc_x_mult * #voids
+				return {
+					message = localize { type = 'variable', key = 'a_xmult', vars = { card.ability.extra.x_mult } },
+					colour = G.C.MULT
+				}
+			end
+		end
+		if context.joker_main then
 			return {
-				message = localize { type = 'variable', key = 'a_xmult', vars = { card.ability.extra.x_mult } },
-				colour = G.C.MULT
+				x_mult = card.ability.extra.x_mult
 			}
 		end
 	end
-	if context.joker_main then
-		return {
-			x_mult = card.ability.extra.x_mult
-		}
-	end
-end
 }
 
