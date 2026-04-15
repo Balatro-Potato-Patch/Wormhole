@@ -67,23 +67,23 @@ function Card:load(cardTable, other_card, ...)
 end
 
 local function catelite(card)
-    local pos
-    local ret = 0
-    if G.jokers and G.jokers.cards then
-        for k,v in ipairs(G.jokers.cards) do
-            if v == card then
-                pos = k
-            end
-        end
-        local cad1, cad2 = G.jokers.cards[pos - 1], G.jokers.cards[pos + 1]
-        if cad1 and cad1.config and cad1.config.center_key == "j_worm_meow_catelite" then
-            ret = ret + (cad1.ability.extra.level or 0)
-        end
-        if cad2 and cad2.config and cad2.config.center_key == "j_worm_meow_catelite" then
-            ret = ret + (cad2.ability.extra.level or 0)
-        end
-        return ret
-    end
+	local pos
+	local ret = 0
+	if G.jokers and G.jokers.cards then
+		for k, v in ipairs(G.jokers.cards) do
+			if v == card then
+				pos = k
+			end
+		end
+		local cad1, cad2 = G.jokers.cards[pos - 1], G.jokers.cards[pos + 1]
+		if cad1 and cad1.config and cad1.config.center_key == "j_worm_meow_catelite" then
+			ret = ret + (cad1.ability.extra.level or 0)
+		end
+		if cad2 and cad2.config and cad2.config.center_key == "j_worm_meow_catelite" then
+			ret = ret + (cad2.ability.extra.level or 0)
+		end
+		return ret
+	end
 end
 
 Wormhole.TEAM_MEOW.tartInfo = {}
@@ -430,7 +430,7 @@ local function has_rainbow(card)
 		end
 	end
 	if has_red and has_orange and has_yellow and has_green and has_blue and has_purple then
-		check_for_unlock({type = "rainbow"})
+		check_for_unlock({ type = "rainbow" })
 	end
 	return has_red and has_orange and has_yellow and has_green and has_blue and has_purple
 end
@@ -536,7 +536,7 @@ SpaceTart({
 	config = {
 		reg = 5,
 		boosted = 10,
-		boostinc = 2.5
+		boostinc = 2.5,
 	},
 	credits = {
 		coder = { "corobo" },
@@ -564,7 +564,10 @@ SpaceTart({
 
 	loc_vars = function(self, info_queue, card, tart_config, boost_count)
 		return {
-			vars = { (boost_count or 0 >= 1) and (tart_config.boosted + (boost_count - 1) * tart_config.boostinc) or (tart_config.reg) },
+			vars = {
+				(boost_count or 0 >= 1) and (tart_config.boosted + (boost_count - 1) * tart_config.boostinc)
+					or tart_config.reg,
+			},
 		}
 	end,
 
@@ -835,7 +838,7 @@ SpaceTart({
 	boosted_conds = {
 		-- Rainbow condition
 		has_rainbow,
-		
+
 		function(card)
 			return card.config and card.config.center_key == "j_worm_meow_catelite"
 		end,
@@ -849,7 +852,7 @@ SpaceTart({
 	config = {
 		reg = 25,
 		boosted = 65,
-		boostinc = 30
+		boostinc = 30,
 	},
 	credits = {
 		coder = { "corobo" },
@@ -872,12 +875,15 @@ SpaceTart({
 					chips = tart_config.boosted + (boost_count - 1) * tart_config.boostinc,
 				}
 			end
-		end
+		end,
 	},
 
 	loc_vars = function(self, info_queue, card, tart_config, boost_count)
 		return {
-			vars = { (boost_count or 0 >= 1) and (tart_config.boosted + (boost_count - 1) * tart_config.boostinc) or tart_config.reg },
+			vars = {
+				(boost_count or 0 >= 1) and (tart_config.boosted + (boost_count - 1) * tart_config.boostinc)
+					or tart_config.reg,
+			},
 		}
 	end,
 
@@ -941,6 +947,16 @@ SpaceTart({
 	},
 })
 
+SMODS.Atlas({
+	key = "meow_nyan_cat_trail",
+	path = "TeamMeow/trail.png",
+	px = 71,
+	py = 190,
+	atlas_table = "ANIMATION_ATLAS",
+	frames = 16,
+	fps = 16,
+})
+
 -- Draw the tarts in order
 
 SMODS.DrawStep({
@@ -959,6 +975,24 @@ SMODS.DrawStep({
 				tartSprite:draw_shader("dissolve", 0, nil, nil, card.children.center, 0, 0, 0, yshift, nil, 0.6)
 				tartSprite:draw_shader("dissolve", nil, nil, nil, card.children.center, 0, 0, 0, yshift)
 				yshift = yshift + yinc
+			end
+		end
+	end,
+	conditions = { vortex = false, facing = "front" },
+})
+
+
+SMODS.DrawStep({
+	key = "nyan_cat_trail",
+	order = -15,
+	func = function(card)
+		if card.tarts then
+			Wormhole.TEAM_MEOW.rainbow_trail_sprite = Wormhole.TEAM_MEOW.rainbow_trail_sprite
+				or SMODS.create_sprite(0, 0, G.CARD_W, 2 * G.CARD_H, "worm_meow_nyan_cat_trail", { x = 0, y = 0 })
+			if #card.tarts > 0 then
+				Wormhole.TEAM_MEOW.rainbow_trail_sprite:set_role({ major = card, role_type = "Glued", draw_major = card })
+				Wormhole.TEAM_MEOW.rainbow_trail_sprite:draw_shader("dissolve", 0, nil, nil, card.children.center, -0.15, nil, nil, nil, nil, 0.6)
+				Wormhole.TEAM_MEOW.rainbow_trail_sprite:draw_shader("dissolve", nil, nil, nil, card.children.center, -0.15, nil, nil, nil)
 			end
 		end
 	end,
@@ -1128,8 +1162,8 @@ end
 
 local old = love.mousepressed
 function love.mousepressed(x, y, button, ...)
-	local ret = old(x,y,button,...)
-    local hoveredcard = G.CONTROLLER.hovering.target
+	local ret = old(x, y, button, ...)
+	local hoveredcard = G.CONTROLLER.hovering.target
 	if hoveredcard and hoveredcard.timer then
 		hoveredcard.timer = 0
 	end
@@ -1149,16 +1183,22 @@ function Card:stop_drag(...)
 	local ret = old(self, ...)
 	local closest = Wormhole.TEAM_MEOW.get_closest_joker(self)
 	local collides = closest and meow_cards_are_colliding(self, closest)
-	if self.ability and self.ability.set == "worm_meow_Spacetart" and collides and self.area == G.consumeables and meow_can_apply_foil(closest) then
+	if
+		self.ability
+		and self.ability.set == "worm_meow_Spacetart"
+		and collides
+		and self.area == G.consumeables
+		and meow_can_apply_foil(closest)
+	then
 		local tart = {
 			key = self.ability.extra.tart,
 			config = self.ability.extra.tart_cfg or {},
 			center_key = self.config.center_key,
 		}
 		table.insert(closest.tarts, tart)
-		
+
 		if closest.config and closest.config.center_key == "j_worm_meow_feli" then
-			check_for_unlock({type = "feli"})
+			check_for_unlock({ type = "feli" })
 		end
 		G.E_MANAGER:add_event(Event({
 			trigger = "after",
@@ -1191,7 +1231,16 @@ function Card:stop_drag(...)
 		}))
 	end
 	-- For tart transfer between jokers
-	if self.ability and self.ability.set == "Joker" and collides and self.tarts and #self.tarts > 0 and self.timer and self.timer > 0.5 and meow_can_apply_foil(closest) then
+	if
+		self.ability
+		and self.ability.set == "Joker"
+		and collides
+		and self.tarts
+		and #self.tarts > 0
+		and self.timer
+		and self.timer > 0.5
+		and meow_can_apply_foil(closest)
+	then
 		local tart
 		G.E_MANAGER:add_event(Event({
 			trigger = "after",
@@ -1228,6 +1277,9 @@ end
 local old = Game.update
 function Game:update(dt, ...)
 	local ret = old(self, dt, ...)
+	if Wormhole.TEAM_MEOW.rainbow_trail_sprite then
+		Wormhole.TEAM_MEOW.rainbow_trail_sprite:animate()
+	end
 	local alreadyset = false
 	local dragged = G.CONTROLLER.dragging.target
 	if G.consumeables and G.consumeables.cards and not G.SETTINGS.paused then
