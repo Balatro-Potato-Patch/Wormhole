@@ -29,6 +29,7 @@ Wormhole.LancerFanClub = PotatoPatchUtils.Team {
 
 local was_on_lancer = false
 local elle_click_count = 5
+local alexi_click_count = 5
 
 local ctcp = PotatoPatchUtils.CREDITS.create_team_credit_page
 function PotatoPatchUtils.CREDITS.create_team_credit_page(team, ...)
@@ -284,12 +285,6 @@ SMODS.DynaTextEffect {
     end,
 }
 
--- putting this here to avoid a merge conflict
-local function alexi_click()
-    play_sound("worm_lfc_splat")
-    love.system.openURL("https://en.pronouns.page/@invalidOS")
-end
-
 --[[
 --  Note: i did code for all the forcetrigger compat stuff,
 --        but it's fairly simple to do and doesn't affect
@@ -305,6 +300,16 @@ Wormhole.LancerFanClub.Alexi = PotatoPatchUtils.Developer {
     atlas = "worm_lfc_devs",
     pos = { x = 4, y = 0 },
     soul_pos = { x = 5, y = 0 },
+    click = function(self)
+        play_sound("worm_lfc_splat")
+        self:juice_up()
+        if alexi_click_count == 1 then
+            love.system.openURL("https://en.pronouns.page/@invalidOS")
+            alexi_click_count = 5
+        else
+            alexi_click_count = alexi_click_count - 1
+        end
+    end
 }
 
 local function floating_sprite(offset)
