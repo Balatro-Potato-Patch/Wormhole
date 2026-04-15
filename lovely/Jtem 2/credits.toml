@@ -40,7 +40,7 @@ pattern = "info_nodes.nodes[1].nodes[#info_nodes.nodes[1].nodes + 1] = {n=G.UIT.
 position = 'before'
 match_indent = true
 payload = '''
-if member == PotatoPatchUtils.Developers.worm_sleepyg11 then
+if member == PotatoPatchUtils.Developers.worm_sleepyg11 or member == PotatoPatchUtils.Developers.worm_aikoyori then
     node.config.shadow = false
     node = { n = G.UIT.R, config = { padding = 0.15, colour = G.C.L_BLACK, r = 0.25, }, nodes = { node } }
     node.config.shadow = true

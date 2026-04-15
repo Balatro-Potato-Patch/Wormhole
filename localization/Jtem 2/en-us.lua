@@ -189,7 +189,7 @@ return {
 					"{X:mult,C:white}X#1#{} Mult when held",
 					"Randomize value on any {C:attention}hand drawn{}",
 					"{C:inactive}(from {X:mult,C:white}X#2#{C:inactive} to {X:mult,C:white}X#3#{C:inactive})",
-				}
+				},
 			},
 			m_worm_jtem2_gravacard = {
 				name = "Gravacard",
@@ -197,7 +197,7 @@ return {
 					"Gain {C:money}${} based on how many cards",
 					"are to the {C:attention}right{} when held",
 					"{X:blind,C:white}X#1#{} Blind Size when this is drawn",
-				}
+				},
 			},
 			m_worm_jtem2_neutron_card = {
 				name = "Neutron Card",
@@ -205,7 +205,7 @@ return {
 					"When {C:attention}scored{}",
 					"{X:mult,C:white}X#1#{} Mult if hand score is on fire",
 					"{X:purple,C:white}X#2#{} Score otherwise",
-				}
+				},
 			},
 		},
 		Tarot = {
@@ -339,17 +339,18 @@ return {
 					{
 						"{s:3.2,E:worm_jtem2_rainbow_wiggle}Hello!{}",
 						"This is {E:worm_jtem2_rainbow_wiggle,C:white}Aikoyori{} from {E:worm_jtem2_rainbow_wiggle,C:white}Shenanigans",
+						" ",
 						"Back at it with {C:worm_jtem2_teamcolor}Jtem{C:worm_jtem2_teamcolor,E:worm_jtem2_exponent}2{}after {C:attention,E:worm_jtem2_snaking}Hot Potato{} was not enough",
 						"but I think we cooked. In what essentially is {C:attention,E:worm_jtem2_snaking}Hot Potato{C:attention,E:worm_jtem2_exponent}2{}",
 						"I reduced my role as programmer and worked on",
 						"{C:inactive}(^ this was a lie btw i did more than just art last minute)",
 						"the {C:attention}these credits sprites{} you're looking at!",
 						"That's all from me! See you next time!",
+						" ",
 						"{s:1.5,E:worm_jtem2_rainbow_wiggle}OH AND PLAY MY MOD AIKOYORI'S SHENANIGANS{}",
 						"My favorite umamusume is {C:white,E:1}Kitasan Black{}",
 						"{C:inactive}(was told to add one)",
-					},
-					{
+						" ",
 						"postmortem i just added like a joker ",
 						"and 3 enhancements last minute go figure",
 					},
