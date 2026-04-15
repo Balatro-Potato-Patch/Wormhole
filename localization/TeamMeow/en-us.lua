@@ -283,7 +283,7 @@ return {
 				text = {
 					"{C:attention}Boosts{} other {C:worm_meow_spacetart}©Spacetarts{}",
 					"attached to this {C:attention}Joker{}",
-					"{C:inactive,s:0.8}(Total mint boosts on this Joker: #1#)",
+					"{C:inactive,s:0.8}(Total mint boosts on this Joker: {C:attention,s:0.8}#1#{C:inactive,s:0.8})",
 				},
 			},
 			c_worm_blueshift_blueberry_regular = {

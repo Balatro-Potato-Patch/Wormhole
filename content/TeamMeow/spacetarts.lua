@@ -1174,7 +1174,7 @@ end
 local old = Card.update
 function Card:update(dt, ...)
 	local ret = old(self, dt, ...)
-	self.timer = self.timer and math.max(self.timer + dt, 2) or dt
+	self.timer = self.timer and math.min(self.timer + dt, 2) or 0
 	return ret
 end
 
@@ -1239,7 +1239,7 @@ function Card:stop_drag(...)
 		and self.tarts
 		and #self.tarts > 0
 		and self.timer
-		and self.timer > 0.5
+		and self.timer > 0.6
 		and meow_can_apply_foil(closest)
 	then
 		local tart
