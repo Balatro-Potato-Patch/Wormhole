@@ -153,7 +153,11 @@ return {
             PotatoPatchDev_professorrenderer = {
                 name = "Professor Renderer",
                 text = {
-                    'a'
+                    'This is my first ever mod jam!',
+                    'I did the card text and also came up',
+                    'with the names for the drinks and concepts',
+                    'for the jokers. I\'m happy with everyone\'s work',
+                    'and I hope you enjoyed what we came up with!'
                 }
             },
             PotatoPatchDev_qunumeru = {
