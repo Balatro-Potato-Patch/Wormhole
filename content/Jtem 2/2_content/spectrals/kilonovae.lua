@@ -16,6 +16,8 @@ SMODS.Consumable({
 	ppu_coder = { "aikoyori" },
 	ppu_artist = { "aikoyori" },
 	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue + 1] = G.P_SEALS.worm_jtem2_black_hole
+		info_queue[#info_queue + 1] = G.P_SEALS.worm_jtem2_supermassive_black_hole
 		return {
 			vars = {
 				card.ability.max_highlighted,
