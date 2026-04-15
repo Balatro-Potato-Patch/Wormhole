@@ -66,7 +66,7 @@ SMODS.Joker {
     loc_vars = function(self,info_queue,center)
         return {vars = {center.ability.extra.threshold, center.ability.extra.threshold - center.ability.extra.current}}
     end,
-    ppu_artist = {},
+    ppu_artist = {'hellboydante'},
     ppu_coder = {'wombatcountry'},
     ppu_team = {'Hedonia'},
     calculate = function(self,card,context)
@@ -106,7 +106,7 @@ SMODS.Joker {
     pools = {
         ["Bartender"] = true
     },
-    ppu_artist = {},
+    ppu_artist = {'hellboydante'},
     ppu_coder = {'wombatcountry', 'axyraandas'},
     ppu_team = {'Hedonia'},
     loc_vars = function(self,info_queue,center)
