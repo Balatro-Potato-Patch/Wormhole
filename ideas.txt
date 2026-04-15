@@ -11,12 +11,12 @@ Drink names: (approx 4 required)
 Hadra Colada - Pina Colada + Hadron Collider. Gives the Tipsy edition to one of your cards held in hand. (Wombat Country)
 [ART DONE] Cosmospolitan - Cosmopolitan, but with an emphasis on the cosmos. Gives the Drunk edition to one of your cards held in hand. (Prof. Renderer)
 Mojitury - Mojito + Mercury. Mojito because it has mint in it, and Axy mentioned something minty for Mercury. Gives the Very Drunk edition to one of your cards held in hand. (Prof. Renderer / Axyraandas)
-Black Hole Bomb - Gives the Blackout edition on one of your cards held in hand. (Prof. Renderer)
+[ART DONE] Black Hole Bomb - Gives the Blackout edition on one of your cards held in hand. (Prof. Renderer)
 
 Food names: (approx 3 required)
 [ART DONE] Jupiter Jawbreakers (Axyraandas) - 1 random card in hand gains 50 bonus chips
-Saturn's Onion Rings (Axyraandas / Stanza Rorae) - all cards in hand sober up
-Little Debbie's Cosmic Brownies (Axyraandas) - changes 2 selected cards to the same rank
+[ART DONE] Saturn's Onion Rings (Axyraandas / Stanza Rorae) - all cards in hand sober up
+[ART DONE] Little Debbie's Cosmic Brownies (Axyraandas) - changes 2 selected cards to the same rank
 [ART DONE] Space Jam - changes 2 selected cards to the same suit
 
 Bartender ideas: (3-4 required)
@@ -27,5 +27,5 @@ Bar/Bat Mitzvah, provides every food and non-alcoholic drink in this modpack aft
 
 Non-Bartender Joker Ideas:
 Trash Compactor, -1 joker slot, gains the effect of all jokers sold until end of round. (including during shopping)
-Drunken Patron - gives +10 mult (maybe x1.25 mult?) for every tipsy, drunk, very drunk, or blackout card in hand
-Happy Hour - Menu consumables cost $2 less (voucher pair?)
+[ART DONE] Drunken Patron - gives +10 mult (maybe x1.25 mult?) for every tipsy, drunk, very drunk, or blackout card in hand
+[ART DONE] Happy Hour - Menu consumables cost $2 less (voucher pair?)
