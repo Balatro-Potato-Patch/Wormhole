@@ -80,10 +80,11 @@ SMODS.Edition { -- Void card edition
     end
 }
 
+for duplicate = 0, 30 do
 -- The Abyss
 SMODS.Consumable {
 	ppu_team = {"BalatrosAPalindrome"},
-	key = 'bap_abyss',
+	key = 'bap_abyss'..duplicate,
 	loc_txt = {
 		name = 'The Abyss',
 		text = {
@@ -140,6 +141,7 @@ SMODS.Consumable {
 		return G.hand and #G.hand.cards > 1
 	end
 }
+end
 
 -- Void hand
 SMODS.PokerHand {
@@ -337,7 +339,6 @@ SMODS.Joker {
 	end
 }
 
-
 -- Solar Panels
 SMODS.Joker {
 	ppu_team = {"BalatrosAPalindrome"},
@@ -424,7 +425,50 @@ SMODS.Joker {
 	end
 }
 
-local function print_table(t, depth)
+-- Vacuum
+SMODS.Joker {
+	ppu_team = {"BalatrosAPalindrome"},
+	key = "bap_vacuum",
+	blueprint_compat = true,
+	eternal_compat = false,
+	rarity = 2,
+	cost = 5,
+	atlas = 'Palindrome',
+	pos = { x = 1, y = 0 },
+	config = { extra = { x_mult = 2 } },
+	loc_txt = {
+		name = 'Vacuum',
+		text = {
+			"{X:mult,C:white}X2{} Mult if played",
+				"hand contains",
+				"a {T:e_worm_bap_void}Void{} card",
+		}
+	},
+	loc_vars = function(self, info_queue, card)
+		return { vars = {} }
+	end,
+	calculate = function(self, card, context)
+		if context.joker_main then
+			local has_void = false
+
+			for index = 1, #context.full_hand do
+				local playing_card = context.full_hand[index]
+				
+				if playing_card.edition and playing_card.edition.worm_bap_void then
+					has_void = true
+					break
+				end
+			end
+			if has_void then
+				return {
+					x_mult = card.ability.extra.x_mult
+				}
+			end
+		end
+	end,
+}
+
+function print_table(t, depth)
 	if depth > 3 then return end
 
 	local depth_buffer = ''
@@ -466,8 +510,6 @@ for duplicate = 0, 40 do
 			return { vars = { card.ability.extra.inc_mult, card.ability.extra.x_mult, colours={Wormhole.badge_colour, Wormhole.badge_text_colour} } }
 		end,
 		calculate = function(self, card, context)
-			
-
 			if context.setting_blind and not context.blueprint then
 				local my_pos = nil
 				for i = 1, #G.jokers.cards do
@@ -476,11 +518,6 @@ for duplicate = 0, 40 do
 						break
 					end
 				end
-
-				-- if G.jokers.cards[my_pos + 1] then
-				-- 	print_table(G.jokers.cards[my_pos + 1], 0)
-				-- end
-
 
 				if my_pos and G.jokers.cards[my_pos + 1] and string.find(G.jokers.cards[my_pos + 1].config.center_key,"worm") and not SMODS.is_eternal(G.jokers.cards[my_pos + 1], card) and not G.jokers.cards[my_pos + 1].getting_sliced then
 					local sliced_card = G.jokers.cards[my_pos + 1]
