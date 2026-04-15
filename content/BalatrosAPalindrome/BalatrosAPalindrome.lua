@@ -80,9 +80,6 @@ SMODS.Edition {
     end
 }
 
-
---sendDebugMessage("before abyss")
-
 -- The Abyss
 SMODS.Consumable {
 	ppu_team = {"BalatrosAPalindrome"},
@@ -144,47 +141,6 @@ SMODS.Consumable {
 	end
 }
 
-
---sendDebugMessage("Registered Abyss:", G.P_CENTERS["c_worm_bap_abyss"])
-
--- -- Debug tarot
--- SMODS.Consumable {
---     key = "bap_debug",
---     loc_txt = {
--- 		name = 'Debug',
--- 		text = {
--- 			"UNFINISHED",
--- 		}
--- 	},
---     set = 'Tarot',
---     cost = 3,
---     pos = { x = 0, y = 0 },
---     config = { anim_time = 0 },
---     can_use = function(self, card) return true end,
---     keep_on_use = function(self, card) return true end,
---     use = function(self, card, area, copier)
--- 		G.E_MANAGER:add_event(Event({
--- 			trigger = 'after',
--- 			delay = 0.1,
--- 			func = function()
--- 				if #G.consumeables.cards < G.consumeables.config.card_limit then
--- 					SMODS.add_card({
--- 						area = G.consumeables,
--- 						key = "c_worm_bap_abyss"
--- 					})
--- 				end
--- 				return true
--- 			end
--- 		}))
--- 	end,
---     update = function(self, card, dt)
---         card.ability.anim_time = (card.ability.anim_time or 0) + dt
---         self.pos.x = math.sin(card.ability.anim_time) * 0.5 + 0.5
--- 		self.pos.y = math.cos(card.ability.anim_time) * 0.5 + 0.5
---     end
--- }
-
-
 -- Void hand
 SMODS.PokerHand {
     key = "bap_void",
@@ -224,12 +180,6 @@ SMODS.PokerHand {
 SMODS.Consumable {
 	ppu_team = {"BalatrosAPalindrome"},
     key = "bap_nothing",
-    -- loc_txt = {
-	-- 	name = 'Nothing',
-	-- 	text = {
-	-- 		"Does nothing (real)",
-	-- 	}
-	-- },
     set = 'Planet',
     cost = 3,
 	atlas = 'Palindrome',
@@ -275,20 +225,8 @@ SMODS.Consumable {
 		end
 		return SMODS.is_poker_hand_visible("worm_bap_void")
 
-	end,
-    -- use = function(self, card, area, copier)
-	-- 	G.E_MANAGER:add_event(Event({
-	-- 		trigger = 'after',
-	-- 		delay = 0.4,
-	-- 		func = function()
-	-- 			return true
-	-- 		end
-	-- 	}))
-	-- end
+	end
 }
-
-
-
 
 -- Milky Way
 SMODS.Joker {
@@ -441,6 +379,52 @@ SMODS.Joker {
     end
 }
 
+-- Artemis 3
+SMODS.Joker {
+	ppu_team = {"BalatrosAPalindrome"},
+	key = "bap_artemis_3",
+	blueprint_compat = true,
+	eternal_compat = false,
+	rarity = 2,
+	cost = 6,
+	atlas = 'Palindrome',
+	pos = { x = 0, y = 3 },
+	config = { },
+	loc_txt = {
+		name = 'Artemis III',
+		text = {
+			"When {C:attention}Blind{} is",
+			"selected, creates a",
+			"{C:dark_edition}Negative{} {C:tarot}Moon{} card",
+		}
+	},
+	loc_vars = function(self, info_queue, card)
+		return { vars = {} }
+	end,
+	calculate = function(self, card, context)
+		if context.first_hand_drawn then
+			G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+			G.E_MANAGER:add_event(Event({
+				trigger = 'before',
+				delay = 0.0,
+				func = (function()
+					SMODS.add_card {
+						set = 'Tarot',
+						key = 'c_moon',
+						key_append = 'bap_artemis_3', -- Optional, useful for manipulating the random seed and checking the source of the creation in `in_pool`.
+						edition = "e_negative"
+					}
+					G.GAME.consumeable_buffer = 0
+					return true
+				end)
+			}))
+			return {
+				message = localize('k_plus_tarot'),
+				colour = G.C.PURPLE,
+			}
+		end
+	end
+}
 
 local function print_table(t, depth)
 	if depth > 3 then return end
@@ -536,3 +520,4 @@ for duplicate = 0, 20 do
 	}
 
 end
+
