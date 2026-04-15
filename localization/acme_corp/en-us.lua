@@ -22,14 +22,14 @@ return {
                 name = 'ACME Disintegrator-Inverse-Atron',
                 text = {
                     "{X:attention,C:white}After{} selling {C:attention}#1#{} cards",
-                    "{X:attention,C:white}Use{} to apply a random {C:dark_edition}Edition{}",
+                    "{X:attention,C:white}Use{} to apply a random {C:dark_edition,E:1}Edition{}",
                     "to a random held {C:attention}Joker{}",
                     "{S:0.8,C:inactive}(Currently {C:attention,S:0.8}#2#{}{S:0.8,C:inactive})"
                 }
             },
             c_worm_acme_ray_gun_alt = {
                 name = 'ACME Disintegrator-Inverse-Atron',
-                text = { "Apply a random {C:dark_edition}Edition{}",
+                text = { "Apply a random {C:dark_edition,E:1}Edition{}",
                     "to a random held {C:attention}Joker{}"
                 }
             },
@@ -73,14 +73,14 @@ return {
                 text = {
                     '{X:attention,C:white}After{C:attention} #1#{} #2# are discarded,',
                     '{X:attention,C:white}Use{} to get a random {C:attention}Perishable',
-                    '{C:dark_edition}Negative {C:attention}Food Joker',
+                    '{C:dark_edition,E:1}Negative {C:attention}Food Joker',
                 }
             },
             c_worm_acme_trash_alt = {
                 name = 'ACME Accumulated Resources and Detritus',
                 text = {
                     '{X:attention,C:white}Use{} to get a random {C:attention}Perishable',
-                    '{C:dark_edition}Negative {C:attention}Food Joker',
+                    '{C:dark_edition,E:1}Negative {C:attention}Food Joker',
                 }
             },
             c_worm_acme_brush = {
@@ -106,7 +106,7 @@ return {
                     '{X:attention,C:white}After{} opening {C:attention}#1# #2#{},',
                     '{X:attention,C:white}Use{} to create a random {C:mult}rare{} Joker',
                     '{C:inactive}Fixed {C:green}1 in 25{C:inactive} chance to become',
-                    '{C:Legendary}Legendary{C:inactive} at the end of the shop',
+                    '{C:Legendary,E:1}Legendary{C:inactive} at the end of the shop',
                     '{C:inactive}(Must have room)'
                 }
             },
@@ -114,7 +114,7 @@ return {
                 name = 'Legally Distinct ACME Automated Helper',
                 text = {
                     '{X:attention,C:white}After{} opening {C:attention}#1# #2#{},',
-                    '{X:attention,C:white}Use{} to create a random {C:Legendary}Legendary{} Joker',
+                    '{X:attention,C:white}Use{} to create a random {C:Legendary,E:1}Legendary{} Joker',
                     '{C:inactive}(Must have room)'
                 }
             },
@@ -123,14 +123,14 @@ return {
                 text = {
                     '{X:attention,C:white}Use{} to create a random {C:mult}rare{} Joker',
                     '{C:inactive}Fixed {C:green}1 in 25{C:inactive} chance to become',
-                    '{C:Legendary}Legendary{C:inactive} at the end of the shop',
+                    '{C:Legendary,E:1}Legendary{C:inactive} at the end of the shop',
                     '{C:inactive}(Must have room)'
                 }
             },
             c_worm_acme_mr_jr_legendary_alt = {
                 name = 'Legally Distinct ACME Automated Helper',
                 text = {
-                    '{X:attention,C:white}Use{} to create a random {C:Legendary}Legendary{} Joker',
+                    '{X:attention,C:white}Use{} to create a random {C:Legendary,E:1}Legendary{} Joker',
                     '{C:inactive}(Must have room)'
                 }
             },
@@ -158,7 +158,7 @@ return {
                 text = {
                     '{X:attention,C:white}Use{} to play the {C:attention}bomb minigame{}',
                     'and destroy {C:attention}5{} selected cards in hand',
-                    '{C:inactive}(Once per ante, {C:red}failure destroys this card{C:inactive})'
+                    '{C:inactive}(Once per ante, {E:2,C:mult}failure destroys this card{C:inactive})'
                 }
             },
             c_worm_acme_bombs_alt = {
@@ -201,7 +201,7 @@ return {
             v_worm_ACME_voucher_1 = {
                 name = "ACME Mass Production",
                 text = {
-                    "{C:ACME_Gadget}Gadget{} cards appear",
+                    "{C:acme_gadget}Gadget{} cards appear",
                     "{C:attention}2X{} more frequently",
                     "in the shop"
                 }
@@ -209,10 +209,10 @@ return {
             v_worm_ACME_voucher_2 = {
                 name = "ACME Quality Assurance",
                 text = {
-                    --"{C:ACME_Gadget}Gadget{} cards appear",
+                    --"{C:acme_gadget}Gadget{} cards appear",
                     --"{C:attention}4X{} more frequently",
                     --"in the shop and have a",
-                    "{C:ACME_Gadget}Gadget{} cards have a",
+                    "{C:acme_gadget}Gadget{} cards have a",
                     "{C:green}#1# in #2#{} chance to",
                     "not be destroyed on use"
                 }
@@ -231,44 +231,50 @@ return {
             j_worm_acme_test_dummy = {
                 name = 'Test Dummy',
                 text = {
-                    '{C:acme_gadget}Gadgets{} become {C:dark_edition}Negative',
-                    'when obtained'
-                }
+                    '{C:acme_gadget}Gadgets{} become {E:1,C:dark_edition}Negative',
+                },
             },
+            j_worm_ACME_big_brother = {
+		        name = "Big Joker",
+		        text = {
+			        'Draw {C:attention}#1#{} cards at the',
+			        'start of the {C:attention}blind{}',
+			        'Set {C:blue}hand size{} to {C:attention}0{}', 
+			        'after first hand is drawn'
+		        },	
+	        },
             j_worm_acme_gas_station = {
                 name = 'Interplanetary Gas Station',
                 text = {
-                    'On scoring, {C:attention}played',
-                    '{C:attention}hand{} loses a level',
-                    '{C:attention}Gain #1#{} random {C:planet}hand level{}',
-                    'and {X:mult,C:white}X#2#{} Mult',
-                    '{C:inactive}(Currently {X:mult,C:white}X#3#{C:inactive} Mult)'
+                    'On scoring, {C:attention}played hand',
+                    'loses a {C:mult}level',
+                    'Upgrade a random {C:attention}poker hand',
+                    'and gain {X:mult,C:white}X#1#{} Mult',
+                    '{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)'
                 }
             },
             j_worm_acme_kraft_e_jackal = {
                 name = 'Kraft E. Jackal',
                 text = {
-                    'Gives a {E:1, C:red}random Targeted{} {C:ACME_Gadget}Gadget{}',
-                    'after beating a {C:attention}Boss Blind',
-                    '{C:inactive}(Gadget: {X:mult,C:white}#1#{C:inactive})'
-                },
-                {
-                    '{E:1, C:red}Targeted:{} Gets replaced at',
-                    'the end of each ante',
+                    "If you have no {C:acme_gadget}Gadget{} from this {C:attention}Joker{},",
+                    'gives a random {C:acme_gadget}Gadget{} after beating',
+                    'a {C:attention}Blind'
                 }
             },
             j_worm_acme_stargazing = {
                 name = 'Stargazing',
                 text = {
-                    "{C:green}1 in #2#{} chance to upgrade",
-                    "level of played {C:attention}#1#{}"
+                    "If {C:attention}played hand{}",
+                    "contains a {C:attention}Full House{},",
+                    "{C:green}1 in #2#{} chance to",
+                    "upgrade its level",
                 },
             },
             j_worm_acme_alien_joker = {
                 name = 'Alien Joker',
                 text = {
-                    "{X:mult,C:white}X#2#{} Mult if played {C:attention}hand{}",
-                    "is above level {C:planet}#1#{}"
+                    "{X:mult,C:white}X#2#{} Mult if played",
+                    "{C:planet}hand level{} is {C:attention}#1#{} or over"
                 },
             }
         },
@@ -286,7 +292,7 @@ return {
                 name = "Gadget Pack",
                 text = {
                     "Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2#{C:attention} Gadget{} cards to",
+                    "{C:attention}#2#{C:acme_gadget} Gadget{} cards to",
                     "be held in consumable slots",
                 },
             },
@@ -294,7 +300,7 @@ return {
                 name = "Jumbo Gadget Pack",
                 text = {
                     "Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2#{C:attention} Gadget{} cards to",
+                    "{C:attention}#2#{C:acme_gadget} Gadget{} cards to",
                     "be held in consumable slots",
                 },
             },
@@ -302,7 +308,7 @@ return {
                 name = "Mega Gadget Pack",
                 text = {
                     "Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2#{C:attention} Gadget{} cards to",
+                    "{C:attention}#2#{C:acme_gadget} Gadget{} cards to",
                     "be held in consumable slots",
                 },
             },
@@ -369,7 +375,7 @@ return {
                 text = {
                     {
                         "Thank you to all my wonderful teammates and",
-                        "to {C:negative}you{} for playing. It's been such an honor to",
+                        "to {C:dark_edition}you{} for playing. It's been such an honor to",
                         "work with {C:attention}ACME{} and code their silly jokers. {E:1,C:chips}Enjoy!{}"
                     },
                 },
