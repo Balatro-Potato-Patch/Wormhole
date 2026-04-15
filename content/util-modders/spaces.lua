@@ -141,6 +141,7 @@ local function initSpace(self, card)
     end
     card.ability.extra.poker_hand = pseudorandom_element(_poker_hands, 'util_spaces_hand')
 end
+
 local function setSprites(self, card, front)
     local cs = SMODS.CanvasSprite {
 	canvasScale = 2,
@@ -215,7 +216,7 @@ for i, r in ipairs(ranks) do
 	atlas = "util_spaces",
 	pos = { x = i - 1, y = 1 },
 	space_conf = {
-	    options = 2,
+	    options = 1 + i,
 	},
 	config = {
 	    extra = {
@@ -253,7 +254,7 @@ for i, r in ipairs(ranks) do
 	atlas = "util_spaces",
 	pos = { x = i - 1, y = 2 },
 	space_conf = {
-	    options = 2,
+	    options = 1 + i,
 	},
 	config = {
 	    extra = {
