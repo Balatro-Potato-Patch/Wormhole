@@ -280,13 +280,13 @@ return {
 			},
 		},
 		Spectral = {
-			worm_jtem2_kilonovae = {
+			c_worm_jtem2_kilonovae = {
 				name = "Kilonovae",
 				text = {
 					"Apply {C:attention}Black Hole Seal{}",
-					"to #1# selected cards",
+					"to up to {C:attention}#1#{} selected cards",
 					"Apply {C:spectral}Supermassive Black Hole Seal{}",
-					"if card already has {C:attention}Black Hole Seal{}s",
+					"if card already has {C:attention}Black Hole Seal{}",
 				},
 			},
 		},
