@@ -545,9 +545,9 @@ for duplicate = 0, 40 do
 					if card.edition and card.edition.key == 'e_worm_bap_void' then
 						print("Hello World")
 						voids[#voids + 1] = card
-						card:set_edition(nil, true)
 						G.E_MANAGER:add_event(Event({
 							func = function()
+								card:set_edition(nil, true)
 								card:juice_up()
 								return true
 							end
