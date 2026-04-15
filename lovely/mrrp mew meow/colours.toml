@@ -1,0 +1,11 @@
+[manifest]
+version = '1.0.0'
+dump_lua = true
+priority = -1
+
+[[patches]]
+[patches.regex]
+target = 'functions/common_events.lua'
+pattern = 'G\.GAME\.hands\[cfg\.hand_type\]\.level==1'
+position = 'at'
+payload = 'math.abs(G.GAME.hands[cfg.hand_type].level)==1'
