@@ -32,6 +32,14 @@ return {
                 "to be {C:dark_edition}Negative{} when duplicated"}
                 }
             },
+            j_worm_fraudthird = {
+            name = {'{s:0.8}FRAUD // THIRD',
+                'DISINTEGRATION LOOP'
+            },
+            text = {
+                "{X:mult,C:white}X8{} Mult for every scored {C:attention}3{}"
+                }
+            },
             j_worm_cking = {
             name = "Crescent King",
             text = {
@@ -60,6 +68,21 @@ return {
                     "gives +1 additional Hands and Discards"
                 }
             }
+            },
+            j_worm_spacecadet = {
+                name = "Space Cadet",
+                text = {
+                    {
+                        "{C:green}1 in 3 chance{} to do either of the following:"
+                    },
+                    {
+                        "{C:money}+15$",
+                        "{C:blue}+1 Hand",
+                        "{X:mult,C:white}X2{} Mult",
+                        "{C:attention}Retrigger{} a card once",
+                        "{C:inactive,s:0.8}Multiple can activate at the same time."
+                    }
+                }
             }
         },
         Spectral = {

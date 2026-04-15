@@ -35,3 +35,10 @@ SMODS.Sound {
     pitch = 1,
     volume = 1
 }
+
+SMODS.Atlas {
+    key = 'devs',
+    px = 71,
+    py = 95,
+    path = 'violentviolets/devs.png'
+}

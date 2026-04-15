@@ -12,6 +12,9 @@ SMODS.Joker {
             copies = 2
         }
     },
+    ppu_team = { "Violent Violets" },
+    ppu_artist = { "FirstTry" },
+    ppu_coder = { "FirstTry" },
     loc_vars = function(self,info_queue,card)
         local oddwin, oddnope = SMODS.get_probability_vars(card, 1, card.ability.extra.denom, self.key)
         local copycard = card.ability.extra.copies

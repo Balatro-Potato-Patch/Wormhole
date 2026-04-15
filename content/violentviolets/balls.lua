@@ -6,6 +6,8 @@ SMODS.Joker {
         extra = {
         }
     },
+    ppu_team = { "Violent Violets" },
+    ppu_coder = { "Iso", "FireIce" },
     loc_vars = function(self, info_queue, card)
         return {
             vars = {
