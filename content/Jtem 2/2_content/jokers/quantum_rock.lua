@@ -110,6 +110,10 @@ local function shuffle_in_area(card, area)
 	card:hard_set_T()
 end
 local function roll_new_rock_target()
+	if WORM_JTEM.quantum_rock.force_target then
+		G.worm_quantum_rock_target = WORM_JTEM.quantum_rock.force_target
+		return
+	end
 	local result
 	if not WORM_JTEM.quantum_rock.enabled or pseudorandom("worm_quantum_rock" .. os.time()) < 0.87654321 then
 		result = nil
@@ -125,6 +129,7 @@ local function roll_new_rock_target()
 			"shop_boosters",
 			"shop_vouchers",
 			"title",
+			"screenswipe",
 		}
 		result = pseudorandom_element(targets, "worm_quantum_rock" .. os.time())
 	end
@@ -132,7 +137,7 @@ local function roll_new_rock_target()
 	return result
 end
 local function spawn_new_rock(protect, whitelist)
-	if is_rock_present() then
+	if not WORM_JTEM.quantum_rock.enabled or is_rock_present() then
 		return
 	end
 	local target = G.worm_quantum_rock_target
@@ -394,6 +399,9 @@ end
 --
 
 local function calculate_rock(context)
+	if not WORM_JTEM.quantum_rock.enabled then
+		return
+	end
 	local target = G.worm_quantum_rock_target or roll_new_rock_target()
 	local is_present = is_rock_present()
 	if target == "hand" then
