@@ -25,7 +25,7 @@ SMODS.Atlas {
 PotatoPatchUtils.Team({name="BalatrosAPalindrome", colour=G.C.BLUE, short_credit=true})
 PotatoPatchUtils.Developer({team="BalatrosAPalindrome",name="Nogardagem",loc=true,atlas='worm_Palindrome',pos={x=0,y=4},soul_pos={x=1,y=4}})
 PotatoPatchUtils.Developer({team="BalatrosAPalindrome",name="NerdyBread42",loc=true,atlas='worm_Palindrome',pos={x=1,y=3}})
-PotatoPatchUtils.Developer({team="BalatrosAPalindrome",name="IzzyWizz",loc=true,atlas='worm_Palindrome',pos={x=0,y=3}})
+PotatoPatchUtils.Developer({team="BalatrosAPalindrome",name="IzzyWizz",loc=true,atlas='worm_Palindrome',pos={x=2,y=4}})
 PotatoPatchUtils.Developer({team="BalatrosAPalindrome",name="Knightingale0",loc=true,atlas='worm_Palindrome',pos={x=1,y=2}})
 
 
@@ -428,53 +428,68 @@ SMODS.Joker {
 	end
 }
 
+
 -- Space Walk
 SMODS.Joker {
 	ppu_team = {"BalatrosAPalindrome"},
 	key = "bap_space_walk",
 	blueprint_compat = true,
-	eternal_compat = false,
+	eternal_compat = true,
 	rarity = 3,
 	cost = 8,
 	atlas = 'Palindrome',
 	pos = { x = 2, y = 4 },
-	config = { },
+	config = { extra = { jokers = 5 } },
 	loc_txt = {
 		name = 'Space Walk',
 		text = {
-			"When {C:attention}Blind{} is",
-			"selected, creates a",
-			"{C:attention}Space Joker{}",
-			"{C:inactive}(Must have room){}",
+			"Create a {C:dark_edition}Negative{} {C:attention}Space Joker{}",
+			"at the end of the",
+        	"next {C:attention}#1#{} rounds",
+			"{C:inactive}(Must have room)",
+			-- "When {C:attention}Blind{} is",
+			-- "selected, creates a",
+			-- "{C:attention}Space Joker{}",
+			-- "{C:inactive}(Must have room){}",
 		}
 	},
 	loc_vars = function(self, info_queue, card)
-		return { vars = {} }
+		return { vars = { card.ability.extra.jokers } }
 	end,
 	calculate = function(self, card, context)
-		if context.first_hand_drawn then
+		if context.setting_blind then--and #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
+			--G.GAME.joker_buffer = G.GAME.joker_buffer + 1
 			G.E_MANAGER:add_event(Event({
 				trigger = 'before',
 				delay = 0.4,
 				func = (function()
-					if G.jokers.config.card_limit < #G.jokers.cards then
-						SMODS.add_card {
-							set = 'Joker',
-							key = 'j_space',
-							key_append = 'bap_artemis_3', -- Optional, useful for manipulating the random seed and checking the source of the creation in `in_pool`.
-							--edition = "e_negative"
-						}
-					end
+					SMODS.add_card {
+						set = 'Joker',
+						key = 'j_space',
+						key_append = 'bap_space_walk', -- Optional, useful for manipulating the random seed and checking the source of the creation in `in_pool`.
+						edition = "e_negative"
+					}
+					--G.GAME.joker_buffer = 0
+					
 					return true
 				end)
 			}))
+			if card.ability.extra.jokers - 1 <= 0 then
+                SMODS.destroy_cards(card, nil, nil, true)
+                return {
+                    message = "Walked!",
+                    colour = G.C.FILTER
+                }
+			end
+			card.ability.extra.jokers = card.ability.extra.jokers - 1
 			return {
-				message = "Walked!",
-				colour = G.C.FILTER,
+				message = card.ability.extra.jokers .. '',
+				colour = G.C.FILTER
 			}
 		end
 	end
 }
+
 
 -- Vacuum
 SMODS.Joker {
