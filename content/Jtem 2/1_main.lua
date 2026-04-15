@@ -98,7 +98,7 @@ PotatoPatchUtils.Developer({
 })
 PotatoPatchUtils.Developer({
 	name = "ari",
-	colour = G.C.ORANGE,
+	colour = HEX('09d707'),
 	team = "jtem2",
 	loc = true,
 	pos = { x = 2, y = 1 },

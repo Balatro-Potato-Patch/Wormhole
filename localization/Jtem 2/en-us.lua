@@ -344,7 +344,11 @@ return {
 			PotatoPatchDev_ari = {
 				name = "Ari",
 				text = {
-					{ "box numero 1" },
+					{
+						"Haya forced me to join this jam",
+						"but I owe a lot of money to some very bad people",
+						"so I didn't really do much"
+					},
 				},
 			},
 			PotatoPatchDev_missingnumber = {
