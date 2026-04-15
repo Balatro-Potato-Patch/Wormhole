@@ -139,15 +139,16 @@ float seamless_noise(vec2 uv, vec2 _period) {
 vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords )
 {
 	vec2 uv = (((texture_coords)*(image_details)) - texture_details.xy*texture_details.ba)/texture_details.ba;
-	vec2 true_uv = uv;
+	uv.y = uv.y>1.?uv.y-1.:uv.y;
 
 	vec4 tex = Texel(texture, texture_coords);
 
 	vec4 c = tex*colour;
 
 	if (lfc_devshader.g != 0.0) {
-		vec2 uv = texture_coords+vec2(.0,0.5);
-		vec4 texDW = Texel(texture, uv);
+		vec2 uv2 = texture_coords+vec2(.0,0.5);
+		uv2.y = uv2.y>1.?uv2.y-1.:uv2.y;
+		vec4 texDW = Texel(texture, uv2);
 		float fac = distance(screen_coords,mouse_pos);
 
 		vec2 center_uv = floor((screen_coords-mouse_pos)/2.)*2./image_details;
@@ -159,10 +160,9 @@ vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords
 
 		float noise = seamless_noise(polar,vec2(40.,0.));
 
-		float radius = 75.0+4.*noise;
+		float radius = 50.+4.*noise;
 		float outline_size  = 16.0;
 		float outline_fac = clamp((fac-radius)/outline_size,0.,1.);
-
 
 		c = (fac>radius?tex:texDW)*colour;
 

@@ -1,3 +1,10 @@
+local function dark_flip(card)
+    local pos = card.children.center.sprite_pos
+    card.children.center:set_sprite_pos({x=pos.x,y=1-pos.y})
+    local pos2 = card.children.ppu_floating_sprite.sprite_pos
+    card.children.ppu_floating_sprite:set_sprite_pos({x=pos2.x,y=1-pos2.y})
+end
+
 -- Team
 Wormhole.LancerFanClub = PotatoPatchUtils.Team {
     name = "Lancer Fan Club",
@@ -16,15 +23,19 @@ Wormhole.LancerFanClub = PotatoPatchUtils.Team {
 
         if #effects > 0 then return SMODS.merge_effects(effects) end
     end,
-    short_credit = true
+    short_credit = true,
+    click = function(self) dark_flip(self) end
 }
 
 local was_on_lancer = false
+local elle_click_count = 5
+local alexi_click_count = 5
 
 local ctcp = PotatoPatchUtils.CREDITS.create_team_credit_page
 function PotatoPatchUtils.CREDITS.create_team_credit_page(team, ...)
     if team == Wormhole.LancerFanClub then
         play_sound("worm_lfc_splat")
+        elle_click_count = 5
         was_on_lancer = true
     elseif was_on_lancer then
         was_on_lancer = false
@@ -129,6 +140,11 @@ SMODS.Sound {
     path = "lfc_reverse_splat.wav"
 }
 
+SMODS.Sound {
+    key = "lfc_elle_squeak",
+    path = "lfc_elle_squeak.ogg"
+}
+
 -- Colors
 loc_colour('red')
 G.ARGS.LOC_COLOURS.lfc_pkmn_us = HEX('E95B2B')
@@ -213,7 +229,19 @@ PotatoPatchUtils.Developer({
     team = "Lancer Fan Club",
     atlas = "worm_lfc_devs",
     pos = { x = 2, y = 0 },
-    soul_pos = { x = 3, y = 0 }
+    soul_pos = { x = 3, y = 0 },
+    click = function(self)
+        dark_flip(self)
+
+        play_sound('worm_lfc_elle_squeak',1.5-elle_click_count*0.1)
+        self:juice_up()
+        if elle_click_count == 1 then
+            love.system.openURL("https://ellestuff.dev")
+            elle_click_count = 5
+        else
+            elle_click_count = elle_click_count - 1
+        end
+    end
 })
 
 -- J8-Bit
@@ -258,7 +286,6 @@ local alexi_text_colors = {
     HEX("FFC7FF"),
 }
 
--- very likely to be changed to fit "InvalidOS"
 SMODS.DynaTextEffect {
     key = "alexi_text",
     func = function(dynatext, index, letter)
@@ -282,7 +309,19 @@ Wormhole.LancerFanClub.Alexi = PotatoPatchUtils.Developer {
     team = "Lancer Fan Club",
     atlas = "worm_lfc_devs",
     pos = { x = 4, y = 0 },
-    soul_pos = { x = 5, y = 0 }
+    soul_pos = { x = 5, y = 0 },
+    click = function(self)
+        dark_flip(self)
+
+        play_sound("worm_lfc_splat")
+        self:juice_up()
+        if alexi_click_count == 1 then
+            love.system.openURL("https://en.pronouns.page/@invalidOS")
+            alexi_click_count = 5
+        else
+            alexi_click_count = alexi_click_count - 1
+        end
+    end
 }
 
 local function floating_sprite(offset)
@@ -396,7 +435,7 @@ function localize(args, misc_cat)
                         {
                             n = G.UIT.O,
                             config = {
-                                object = SMODS.create_sprite(0, 0, 0.5, 0.5, "worm_lfc_proot_Ears", { x = 0, y = 0 })
+                                object = SMODS.create_sprite(0, 0, 0.25, 0.25, "worm_lfc_proot_Ears", { x = 0, y = 0 })
                             }
                         }
                     }
@@ -408,7 +447,7 @@ function localize(args, misc_cat)
                         {
                             n = G.UIT.O,
                             config = {
-                                object = SMODS.create_sprite(0, 0, 0.5, 0.5, "worm_lfc_proot_Ears", { x = 1, y = 0 })
+                                object = SMODS.create_sprite(0, 0, 0.25, 0.25, "worm_lfc_proot_Ears", { x = 1, y = 0 })
                             }
                         }
                     }
