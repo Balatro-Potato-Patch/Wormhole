@@ -265,19 +265,17 @@ return {
 			worm_jtem2_black_hole_seal = {
 				name = "Black Hole Seal",
 				text = {
-					"{C:green}#1# in #2#{} chance to",
-					"Upgrade a {C:attention}random{} Poker Hand",
-					"when scored",
-					"{C:green}#3# in #4#{} chance to be {C:attention}destroyed",
+					"{C:green}#1# in #2#{} chance to upgrade a {C:attention}random{}",
+					"poker hand when played and scored",
+					"{C:green}#3# in #4#{} chance to {C:attention}destroy{} card",
 				},
 			},
 			worm_jtem2_supermassive_black_hole_seal = {
 				name = "Supermassive Black Hole Seal",
 				text = {
-					"{C:green}#1# in #2#{} chance to",
-					"Upgrade {C:attention}played{} Poker Hand",
-					"when scored",
-					"{C:green}#3# in #4#{} chance to be {C:attention}destroyed",
+					"{C:green}#1# in #2#{} chance to upgrade {C:attention}played{}",
+					"poker hand when played and scored",
+					"{C:green}#3# in #4#{} chance to {C:attention}destroy{} card",
 				},
 			},
 		},
