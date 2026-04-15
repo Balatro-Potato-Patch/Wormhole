@@ -18,6 +18,8 @@ PotatoPatchUtils.Developer {
 PotatoPatchUtils.Developer {
     name = "fooping",
     team = "riverboat",
+    atlas = "worm_riverboat_credits",
+    pos = { x = 1, y = 0 },
     loc = true,
     click = function()
         love.system.openURL("https://ko-fi.com/fooping")
@@ -35,5 +37,8 @@ PotatoPatchUtils.Developer {
     team = "riverboat",
     atlas = "worm_riverboat_credits",
     pos = { x = 3, y = 0 },
-    loc = true
+    loc = true,
+    click = function()
+        love.system.openURL("https://ko-fi.com/camostar34")
+    end
 }
