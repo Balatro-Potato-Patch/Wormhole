@@ -1411,11 +1411,26 @@ hd = SMODS.Blind{ --unfortunately isn't perfect when returning from save, but sh
 	end
 }
 
---Hook for end_round() so I can play the heat death animation if losing via score on heatdeath blind
+--Hook for end_round() so I can play the heat death animation if losing via score on heatdeath blind (a bit scuffed)
+
 local oldEndRound = end_round
 end_round = function()
 	if G.GAME.blind.config.blind.key == "bl_worm_heatdeath" then
-		cutscene(hd)
+		oldEndRound()
+		G.E_MANAGER:add_event(Event({
+			trigger = 'after',
+			pause_force = true,
+			blockable = false,
+			blocking = false,
+			delay = 0.06,
+			func = function()
+				if G.STATE == G.STATES.GAME_OVER then
+					G.E_MANAGER:clear_queue() 
+					cutscene(hd)
+				end
+				return true
+			end
+		}))
 		return
 	end
 	oldEndRound()
