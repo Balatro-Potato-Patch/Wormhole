@@ -26,7 +26,7 @@ SMODS.Consumable {
     set = "worm_hedonia_menu",
     atlas = "menu",
     pos = {x = 0, y = 0},
-    ppu_artist = {},
+    ppu_artist = {'qunumeru'},
     ppu_coder = {'wombatcountry', 'professorrenderer'},
     ppu_team = {'Hedonia'},
     use = function(self, card, area, copier)
@@ -62,7 +62,7 @@ SMODS.Consumable {
     set = "worm_hedonia_menu",
     atlas = "menu",
     pos = {x = 2, y = 0},
-    ppu_artist = {},
+    ppu_artist = {'qunumeru'},
     ppu_coder = {'wombatcountry', 'professorrenderer'},
     ppu_team = {'Hedonia'},
     use = function(self, card, area, copier)
