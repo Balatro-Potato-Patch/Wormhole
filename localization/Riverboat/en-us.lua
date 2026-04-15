@@ -11,16 +11,35 @@ return {
                     "{s:0.8}(Click me to check that out!)"
                 }
             },
-            PotatoPatchDev_fooping = { 
-                name = "Fooping", 
+            PotatoPatchDev_fooping = {
+                name = "Fooping",
                 text = {
-                    { "{C:attention,s:1.3}Hello!{}", "I am a programmer and artist for this mod!" },
+                    {
+                        "{C:attention,s:1.3}Hello!{}",
+                        "I am a programmer and artist for this mod!"
+                    },
                     { "Thank you to the Potato Patch team for the opportunity!" },
                     { "{C:inactive,s:0.8}Support me on Ko-Fi! https://ko-fi.com/fooping{}" },
-            }
-         },
+                }
+            },
             PotatoPatchDev_snipey = { name = "SnipeyMcButter", text = { "t" } },
-            PotatoPatchDev_camo = { name = "Camostar34", text = { "t" } }
+            PotatoPatchDev_camo = {
+                name = "Camostar34",
+                text = {
+                    {
+                        "{C:attention,s:1.3}Hiya!! <3{}",
+                        "I contributed some Joker",
+                        "ideas and art!"
+                    },
+                    {
+                        "If you want to see more of my stuff,",
+                        "play my mod:",
+                        "{C:attention,s:1.3,E:2}Berries and Honey{}!",
+                        "or check out {C:hearts}Neonflame{} or {C:blue}Starspace{},",
+                        "which are mods I contributed art towards!" },
+                    { "{C:inactive,s:0.8}Support me! https://ko-fi.com/camostar34{}" },
+                }
+            }
         },
         Joker = {
             j_worm_riverboat_the_past = {
