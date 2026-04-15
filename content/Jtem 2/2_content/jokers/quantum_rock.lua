@@ -1,3 +1,23 @@
+SMODS.Gradient({
+	key = "jtem2_quantum",
+	colours = {
+		HEX("000043"),
+		HEX("0f1365"),
+		HEX("242670"),
+		HEX("0f1365"),
+	},
+	cycle = 1,
+})
+
+SMODS.Rarity({
+	key = "jtem2_quantum",
+	default_weight = 0.03,
+	badge_colour = SMODS.Gradients["worm_jtem2_quantum"],
+	get_weight = function(self, weight, object_type)
+		return weight
+	end,
+})
+
 SMODS.Atlas({
 	key = "jtem2_quantum_rock",
 	path = "Jtem 2/jokers/quantum_rock.png",
@@ -16,6 +36,9 @@ local rock = SMODS.Joker({
 
 	atlas = "worm_jtem2_quantum_rock",
 	pos = { x = 0, y = 0 },
+
+	rarity = "worm_jtem2_quantum",
+	cost = 3,
 
 	config = {
 		Xmult = 3,
@@ -38,6 +61,10 @@ local rock = SMODS.Joker({
 				xmult = card.ability.Xmult,
 			}
 		end
+	end,
+
+	add_to_deck = function()
+		G.GAME.worm_quantum_rock_spawned = true
 	end,
 })
 
@@ -84,7 +111,7 @@ local function shuffle_in_area(card, area)
 end
 local function roll_new_rock_target()
 	local result
-	if not WORM_JTEM.quantum_rock.enabled or pseudorandom("worm_quantum_rock" .. os.time()) < 0.95 then
+	if not WORM_JTEM.quantum_rock.enabled or pseudorandom("worm_quantum_rock" .. os.time()) < 0.87654321 then
 		result = nil
 	else
 		local targets = {
@@ -203,6 +230,9 @@ end
 local old_game_update = Game.update
 function Game:update(...)
 	old_game_update(self, ...)
+	if G.GAME.worm_quantum_rock_spawned then
+		WORM_JTEM.quantum_rock.enabled = true
+	end
 	if WORM_JTEM.quantum_rock.enabled then
 		G.worm_quantum_rock_target_dt = G.worm_quantum_rock_target_dt or G.TIMERS.REAL
 		if G.TIMERS.REAL - G.worm_quantum_rock_target_dt > 0.5 then
@@ -453,7 +483,7 @@ local function calculate_rock(context)
 end
 
 WORM_JTEM.quantum_rock = {
-	enabled = true,
+	enabled = false,
 	center = rock,
 	calculate = calculate_rock,
 }

@@ -381,6 +381,11 @@ return {
 
 			k_worm_jtem2_eclipse_solar = "Solar",
 			k_worm_jtem2_eclipse_lunar = "Lunar",
+
+			k_worm_jtem2_quantum = "Quantum",
+		},
+		labels = {
+			k_worm_jtem2_quantum = "Quantum",
 		},
 		-- Mostly taken from Handy
 		jtem2_keybinds = {
