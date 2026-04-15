@@ -110,12 +110,11 @@ local function shuffle_in_area(card, area)
 	card:hard_set_T()
 end
 local function roll_new_rock_target()
-	if WORM_JTEM.quantum_rock.force_target then
-		G.worm_quantum_rock_target = WORM_JTEM.quantum_rock.force_target
-		return
-	end
 	local result
-	if not WORM_JTEM.quantum_rock.enabled or pseudorandom("worm_quantum_rock" .. os.time()) < 0.87654321 then
+	local annoying_level = G.GAME.worm_quantum_rock_spawned and 0.8 or 0.97
+	if WORM_JTEM.quantum_rock.force_target then
+		result = WORM_JTEM.quantum_rock.force_target
+	elseif not WORM_JTEM.quantum_rock.enabled or pseudorandom("worm_quantum_rock" .. os.time()) < annoying_level then
 		result = nil
 	else
 		local targets = {
@@ -145,7 +144,7 @@ local function spawn_new_rock(protect, whitelist)
 		roll_new_rock_target()
 		return
 	end
-	local function simple_create(area, real_emplace)
+	local function simple_create(area, real_emplace, with_shop_ui)
 		if not area or not area.cards then
 			return false
 		end
@@ -173,6 +172,7 @@ local function spawn_new_rock(protect, whitelist)
 				end,
 			}))
 		end
+		create_shop_card_ui(card)
 		return true
 	end
 	if target == "hand" and G.hand and G.STATE == G.STATES.SELECTING_HAND then
@@ -186,11 +186,11 @@ local function spawn_new_rock(protect, whitelist)
 	elseif target == "booster_pack" and G.pack_cards then
 		simple_create(G.pack_cards)
 	elseif target == "shop_jokers" and G.shop_jokers then
-		simple_create(G.shop_jokers)
+		simple_create(G.shop_jokers, nil, true)
 	elseif target == "shop_boosters" and G.shop_booster then
-		simple_create(G.shop_booster)
+		simple_create(G.shop_booster, nil, true)
 	elseif target == "shop_vouchers" and G.shop_vouchers then
-		if simple_create(G.shop_vouchers, true) and G.shop_vouchers.cards then
+		if simple_create(G.shop_vouchers, true, true) and G.shop_vouchers.cards then
 			G.shop_vouchers.config.card_limit = #G.shop_vouchers.cards
 		end
 	elseif target == "title" and G.title_top then
@@ -235,9 +235,6 @@ end
 local old_game_update = Game.update
 function Game:update(...)
 	old_game_update(self, ...)
-	if G.GAME.worm_quantum_rock_spawned then
-		WORM_JTEM.quantum_rock.enabled = true
-	end
 	if G.GAME.used_jokers then
 		G.GAME.used_jokers[rock.key] = nil
 	end
@@ -494,7 +491,7 @@ local function calculate_rock(context)
 end
 
 WORM_JTEM.quantum_rock = {
-	enabled = false,
+	enabled = true,
 	center = rock,
 	calculate = calculate_rock,
 }
