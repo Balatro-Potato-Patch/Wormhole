@@ -102,7 +102,7 @@ return {
 				text = rocket_text,
 			},
 			c_worm_polarskull_titanieee = {
-				name = "Titan IEEE",
+				name = "Titan IIIE",
 				text = rocket_text,
 			},
 			c_worm_polarskull_saturnv = {
