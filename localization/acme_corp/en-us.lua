@@ -201,7 +201,7 @@ return {
             v_worm_ACME_voucher_1 = {
                 name = "ACME Mass Production",
                 text = {
-                    "{C:ACME_Gadget}Gadget{} cards appear",
+                    "{C:acme_gadget}Gadget{} cards appear",
                     "{C:attention}2X{} more frequently",
                     "in the shop"
                 }
@@ -209,10 +209,10 @@ return {
             v_worm_ACME_voucher_2 = {
                 name = "ACME Quality Assurance",
                 text = {
-                    --"{C:ACME_Gadget}Gadget{} cards appear",
+                    --"{C:acme_gadget}Gadget{} cards appear",
                     --"{C:attention}4X{} more frequently",
                     --"in the shop and have a",
-                    "{C:ACME_Gadget}Gadget{} cards have a",
+                    "{C:acme_gadget}Gadget{} cards have a",
                     "{C:green}#1# in #2#{} chance to",
                     "not be destroyed on use"
                 }
@@ -256,7 +256,7 @@ return {
             j_worm_acme_kraft_e_jackal = {
                 name = 'Kraft E. Jackal',
                 text = {
-                    'Gives a random {E:2,C:mult}Targeted{} {C:ACME_Gadget}Gadget{}',
+                    'Gives a random {E:2,C:mult}Targeted{} {C:acme_gadget}Gadget{}',
                     'after beating a {C:attention}Boss Blind',
                     '{C:inactive}(Gadget: {X:mult,C:white}#1#{C:inactive})'
                 },
@@ -269,7 +269,7 @@ return {
                 name = 'Stargazing',
                 text = {
                     "If {C:attention}played hand{}",
-                    "contains a {C:attention}full house{},",
+                    "contains a {C:attention}Full House{},",
                     "{C:green}1 in #2#{} chance to",
                     "upgrade its level",
                 },
@@ -296,7 +296,7 @@ return {
                 name = "Gadget Pack",
                 text = {
                     "Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2#{C:attention} Gadget{} cards to",
+                    "{C:attention}#2#{C:acme_gadget} Gadget{} cards to",
                     "be held in consumable slots",
                 },
             },
@@ -304,7 +304,7 @@ return {
                 name = "Jumbo Gadget Pack",
                 text = {
                     "Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2#{C:attention} Gadget{} cards to",
+                    "{C:attention}#2#{C:acme_gadget} Gadget{} cards to",
                     "be held in consumable slots",
                 },
             },
@@ -312,7 +312,7 @@ return {
                 name = "Mega Gadget Pack",
                 text = {
                     "Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2#{C:attention} Gadget{} cards to",
+                    "{C:attention}#2#{C:acme_gadget} Gadget{} cards to",
                     "be held in consumable slots",
                 },
             },
