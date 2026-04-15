@@ -8,6 +8,7 @@ SMODS.Joker({
     discovered = true,
     config = { extra = { x_mult = 3, active = false } },
     ppu_coder = { "fooping" },
+    ppu_artist = { "camo" },
     ppu_team = { "riverboat" },
     attributes = { "xmult", "planet", "spectral" },
     loc_vars = function(self, info_queue, card)

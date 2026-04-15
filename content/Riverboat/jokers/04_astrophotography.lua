@@ -9,11 +9,13 @@ SMODS.Joker {
     cost = 5,
     atlas = "jokers",
     pos = { x = 3, y = 0 },
+    pixel_size = { w = 71, h = 80 },
     discovered = true,
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = true,
     ppu_coder = { "blamperer" },
+    ppu_artist = { "camo" },
     ppu_team = { "riverboat" },
     attributes = { "score", "planet" },
     loc_vars = function(self, info_queue, card)
