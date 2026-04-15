@@ -271,7 +271,7 @@ return {
     PotatoPatch = {
       PotatoPatchTeam_JuryRigged = { name = "JuryRigged" },
       PotatoPatchDev_DowFrin = { name = "DowFrin", text = { { "Hopefully i {C:red}remember{} to change this after im done testing lol" }, { "oh also we have multi box support" } } },
-      PotatoPatchDev_Maelmc = { name = "Maelmc", text = { "Insert something here" } },
+      PotatoPatchDev_Maelmc = { name = "Maelmc", text = { "Play {C:attention}The Binding of Jimbo{} :)" } },
       PotatoPatchDev_Inky = { name = "Inky", text = { "Got something to say?" } },
       PotatoPatchDev_DoggFly = { name = "DoggFly", text = { "Just here to take up space" } },
 PotatoPatchDev_AbelSketch = { name = "AbelSketch", text = { {"{C:attention}Fun Fact:{} Theres a reason to not share water bottles!" },{"I got Salmonela from one... 3:"} }},
