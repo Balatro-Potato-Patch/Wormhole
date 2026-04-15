@@ -213,6 +213,14 @@ SMODS.Gradient({
 })
 
 SMODS.Gradient({
+    key = 'rsnow',
+    colours = {
+        HEX('1a1a1a'), HEX('c0c0c0'), HEX('1a1a1a')
+    },
+    cycle = 10,
+})
+
+SMODS.Gradient({
     key = "ice",
     colours = { 
         HEX("ff992f"), HEX("a445db")
@@ -269,6 +277,7 @@ PotatoPatchUtils.Developer({
     name = 'rsnow',
     team = 'tbp',
     loc = true,
+    colour = SMODS.Gradients.worm_rsnow,
     atlas = 'worm_tbp_devs',
     pos = { x = 4, y = 1 },
 })

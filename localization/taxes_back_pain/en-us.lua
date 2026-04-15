@@ -118,7 +118,9 @@ local other_loc_table = {
             PotatoPatchDev_rsnow = {
                 name = 'RattlingSnow',
                 text = {
-                    'placeholder'
+                    {
+                        '"Jack of all trades, master of none. though oftentimes better than a master of one"'
+                    }
                 }
             },
             PotatoPatchDev_mythie = {
