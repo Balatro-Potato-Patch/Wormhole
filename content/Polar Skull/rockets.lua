@@ -301,9 +301,10 @@ register_rocket({
 register_rocket({
 	key = "ssdolphin",
 	set = "Spectral",
-	pos = { x = 6, y = 0 },
+	pos = { x = 6, y = 1 },
 	config = { extra = { hand = "Special: Everything", rounds = 3 } },
-	ppu_artist = { "noodlemire", "jade" },
+	--ppu_artist = { "noodlemire", "jade" },
+	ppu_artist = { "comykel" },
 	hidden = true,
 	soul_set = "polarskull_rocket",
 	draw = function(self, card, layer)
