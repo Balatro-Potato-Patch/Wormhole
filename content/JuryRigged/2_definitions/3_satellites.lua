@@ -7,6 +7,12 @@ SMODS.ConsumableType({
   default = 'sat_worm_new_horizon'
 })
 
+SMODS.UndiscoveredSprite {
+  key = 'worm_jr_satellite',
+  atlas = 'jr_Undiscovered',
+  pos = { x = 0, y = 0 },
+}
+
 Wormhole.JR_UTILS.Satellite = SMODS.Consumable:extend {
   set = "worm_jr_satellite",
   class_prefix = "sat",
