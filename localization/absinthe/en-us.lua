@@ -440,37 +440,34 @@ return {
         Spectral = {
 
             c_worm_abs_absinthe = {
-                name = 'Artemisia Absinthe (WIP)',
+                name = 'Artemisia Absinthe',
                 text = {
                     {
-                        "When {C:attention}primed{}, next time",
-                        "cards are drawn, {C:attention}+#1#{} hand size",
-                        "while drawing, then is {C:abs_drinks}drank{}",
+                        "When {C:attention}primed{}, every played",
+                        "and scoring card gains",
+                        "{C:money}+$#1#{} when scored,",
+                        "then is {C:abs_drinks}drank{}",
                     },
                     {
                         "{C:abs_drinks}Refill{} by using",
-                        "a {C:spectral}Spectral{} card, hand size",
-                        "modifier increases by {C:attention}+#2#{}",
-                        "when {C:abs_drinks}Refilled{}"
+                        "a {C:spectral}Spectral{} card"
                     }
                 }
             },
             c_worm_abs_absinthe_empty = {
-                name = 'Artemisia Absinthe (WIP)',
+                name = 'Artemisia Absinthe',
                 text = {
                     {
                         "{C:inactive,s:0.8}Currently Empty{}",
                         "{C:abs_drinks}Refill{} by using",
-                        "a {C:spectral}Spectral{} card, hand size",
-                        "modifier increases by {C:attention}+#2#{}",
-                        "when {C:abs_drinks}Refilled{}"
+                        "a {C:spectral}Spectral{} card"
                     },
                     {
-                        "{C:inactive}(Currently {{X:mult,C:white}X#2#{C:inactive} Mult)",
                         "{C:inactive,s:0.8}After being Refilled:{}",
-                        "When {C:attention}primed{}, next time",
-                        "cards are drawn, {C:attention}+#1#{} hand size",
-                        "while drawing, then is {C:abs_drinks}drank{}",
+                        "When {C:attention}primed{}, every played",
+                        "and scoring card gains",
+                        "{C:money}+$#1#{} when scored,",
+                        "then is {C:abs_drinks}drank{}",
                     }
                 }
             },

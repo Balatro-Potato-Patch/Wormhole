@@ -845,10 +845,10 @@ SMODS.Consumable { -- John Absinthe
             primed = false,
             empty_sound = "worm_abs_drink",
         },
-        extra = { size = 3, gain = 1 },
+        extra = { gain = 2 },
     },
     hidden = true,
-    cost = 10,
+    cost = 20,
     select_card = 'consumeables',
     loc_vars = function(self, info_queue, card)
         local key
@@ -860,34 +860,23 @@ SMODS.Consumable { -- John Absinthe
         return {
             key = key,
             vars = {
-                card.ability.extra.size, card.ability.extra.gain
+                card.ability.extra.gain
             }
         }
     end,
     calculate = function(self, card, context)
 
-        if context.drawing_cards and card.ability.drink_values.filled and card.ability.drink_values.primed then
-            G.hand:change_size(card.ability.extra.size)
-            return {
-                modify = context.amount + card.ability.extra.size
-            }
-        end
-
-        if context.abs_end_draw and card.ability.drink_values.filled and card.ability.drink_values.primed then
+        if context.before and card.ability.drink_values.filled and card.ability.drink_values.primed then
+            for k, v in ipairs(context.scoring_hand) do
+                v.ability.perma_p_dollars = v.ability.perma_p_dollars + card.ability.extra.gain
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        v:juice_up()
+                        return true
+                    end
+                }))
+            end
             card:abs_empty_drink()
-            G.E_MANAGER:add_event(Event({
-                trigger = 'after',
-                func = function()
-                    G.E_MANAGER:add_event(Event({
-                        trigger = 'after',
-                        func = function()
-                            G.hand:change_size(-card.ability.extra.size)
-                            return true;
-                        end
-                    }))
-                    return true;
-                end
-            }))
         end
 
         if context.using_consumeable and context.consumeable.config.center.set == 'Spectral' and not card.ability.drink_values.filled then
@@ -902,13 +891,6 @@ SMODS.Consumable { -- John Absinthe
     end,
     keep_on_use = function(self, card)
         return true;
-    end,
-    refill = function(self, card)
-        SMODS.scale_card(card, {
-            ref_table = card.ability.extra,
-            ref_value = "size",
-            scalar_value = "gain",
-        })
     end,
 }
 
