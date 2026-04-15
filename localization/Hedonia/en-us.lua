@@ -169,7 +169,12 @@ return {
             PotatoPatchDev_qunumeru = {
                 name = "Qunumeru",
                 text = {
-                    'a'
+                    'I did the art for space jam, satonion rings, black hole bomb,',
+                    'hadron colada, mojitury, casino bartender, and the deck.',
+                    'As of writing this (11h before deadline) I\'ve been spriting',
+                    'about 13h straight. It came to this because I got sick.',
+                    'This is the first time I\'ve been in a mod jam(e),',
+                    'hope you enjoy and good night'
                 }
             },
             PotatoPatchDev_wombatcountry = {
