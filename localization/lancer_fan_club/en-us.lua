@@ -28,22 +28,27 @@ return {
                 text = {
                     {
                         "{s:1.5,C:attention}8{s:1.5} of us and counting!",
-                        "{s:0.6,C:lfc_elle}elle.{s:0.6} | {s:0.6,C:green}Amber{s:0.6} | Emily | {s:0.6,C:planet}Umbra{s:0.6} | {s:0.6,C:blue}Sara{s:0.6} | {s:0.6,C:legendary}Suzy{s:0.6} | {s:0.6,C:lfc_ash}Ash{s:0.6} | {s:0.6,C:money}Rebecca",
-                        "She/Her | Plural"
+                        "{s:0.6,C:lfc_elle}elle.{s:0.6} | {s:0.6,C:green}Amber{s:0.6} | Emily | {s:0.6,C:planet}Umbra{s:0.6} | {s:0.6,C:blue}Sara{s:0.6} | {s:0.6,C:legendary}Suzy{s:0.6} | {s:0.6,C:lfc_ash}Ash{s:0.6} | {s:0.6,C:money}Rebecca"
                     },
                     {
-                        "{s:0.9}We made the code for",
-                        "{s:0.9}the {s:0.9,C:lfc_meteor}Meteors{s:0.9}, {s:0.9,C:rare}Spacebar{s:0.9}, and",
-                        "{s:0.9,C:uncommon}Astronaut Food{s:0.9}, along with",
-                        "{s:0.9}the shaders for the {s:0.9,C:attention}Credits",
-                        "{s:0.9}and {s:0.9,C:uncommon}Urination Station",
+                        "{s:0.9}We made the code for the {s:0.9,C:lfc_meteor}Meteors{s:0.9},",
+                        "{s:0.9,C:rare}Spacebar{s:0.9}, and {s:0.9,C:uncommon}Astronaut Food{s:0.9},",
+                        "{s:0.9}along with the shaders for the",
+                        "{s:0.9,C:attention}Credits {s:0.9}and {s:0.9,C:uncommon}Urination Station",
                     },
                     {
                         "If you're interested in",
                         "more of our stuff:",
                         "{s:0.8,X:blue,C:white}Bluesky{s:0.8} @ellestuff.dev",
                         "{s:0.8,X:lfc_discord,C:white}Discord{s:0.8} ellestuff.dev/discord",
-                        "{s:0.8}Play our mod {s:0.8,C:attention}ellejokers.{s:0.8}!",
+                        "{s:0.8,X:lfc_dark,C:white}GitHub{s:0.8} @ellestuff",
+                        "{s:0.8}Play our mod {s:0.8,C:lfc_elle}ellejokers.{s:0.8},",
+                        "{s:0.8}we're adding {s:0.8,C:attention}Tenna{s:0.8} to it :3"
+                    },
+                    {
+                        "{s:0.9}Click 5 times to go to our {s:0.9,C:lfc_elle}website",
+                        "{s:0.6}No, it won't count down. there's no {s:0.6,X:lfc_dark,C:white}loc_vars{s:0.6} on these.",
+                        "{s:0.6}The site is also very outdated rn but it'll be done later"
                     }
                 }
             },
