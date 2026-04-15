@@ -16,7 +16,7 @@ PotatoPatchUtils.Developer {
 PotatoPatchUtils.Developer {
     name = "fooping",
     team = "riverboat",
-    loc = true
+    loc = true,
     click = function()
         love.system.openURL("https://ko-fi.com/fooping")
     end
