@@ -66,7 +66,8 @@ SMODS.Booster {
         return create_card("abs_drinks", G.pack_cards, nil, nil, true, true, nil, "worm_abs_top_shelf")
     end,
     ease_background_colour = function(self)
-
+        ease_colour(G.C.DYN_UI.MAIN, G.C.SET.abs_drinks)
+        ease_background_colour({ new_colour = G.C.SET.abs_drinks, special_colour = G.C.BLACK, contrast = 2 })
     end,
     loc_vars = function(self, info_queue, card)
         return { vars = { math.min(card.ability.choose + (G.GAME.modifiers.booster_choice_mod or 0), math.max(1, card.ability.extra + (G.GAME.modifiers.booster_size_mod or 0))), math.max(1, card.ability.extra + (G.GAME.modifiers.booster_size_mod or 0)) } }
@@ -96,7 +97,8 @@ SMODS.Booster {
         return create_card("abs_drinks", G.pack_cards, nil, nil, true, true, nil, "worm_abs_top_shelf")
     end,
     ease_background_colour = function(self)
-
+        ease_colour(G.C.DYN_UI.MAIN, G.C.SET.abs_drinks)
+        ease_background_colour({ new_colour = G.C.SET.abs_drinks, special_colour = G.C.BLACK, contrast = 2 })
     end,
     loc_vars = function(self, info_queue, card)
         return { vars = { math.min(card.ability.choose + (G.GAME.modifiers.booster_choice_mod or 0), math.max(1, card.ability.extra + (G.GAME.modifiers.booster_size_mod or 0))), math.max(1, card.ability.extra + (G.GAME.modifiers.booster_size_mod or 0)) } }
@@ -126,7 +128,8 @@ SMODS.Booster {
         return create_card("abs_drinks", G.pack_cards, nil, nil, true, true, nil, "worm_abs_top_shelf")
     end,
     ease_background_colour = function(self)
-
+        ease_colour(G.C.DYN_UI.MAIN, G.C.SET.abs_drinks)
+        ease_background_colour({ new_colour = G.C.SET.abs_drinks, special_colour = G.C.BLACK, contrast = 2 })
     end,
     loc_vars = function(self, info_queue, card)
         return { vars = { math.min(card.ability.choose + (G.GAME.modifiers.booster_choice_mod or 0), math.max(1, card.ability.extra + (G.GAME.modifiers.booster_size_mod or 0))), math.max(1, card.ability.extra + (G.GAME.modifiers.booster_size_mod or 0)) } }
@@ -156,7 +159,8 @@ SMODS.Booster {
         return create_card("abs_drinks", G.pack_cards, nil, nil, true, true, nil, "worm_abs_top_shelf")
     end,
     ease_background_colour = function(self)
-
+        ease_colour(G.C.DYN_UI.MAIN, G.C.SET.abs_drinks)
+        ease_background_colour({ new_colour = G.C.SET.abs_drinks, special_colour = G.C.BLACK, contrast = 2 })
     end,
     loc_vars = function(self, info_queue, card)
         return { vars = { math.min(card.ability.choose + (G.GAME.modifiers.booster_choice_mod or 0), math.max(1, card.ability.extra + (G.GAME.modifiers.booster_size_mod or 0))), math.max(1, card.ability.extra + (G.GAME.modifiers.booster_size_mod or 0)) } }
@@ -841,7 +845,7 @@ SMODS.Consumable { -- John Absinthe
             primed = false,
             empty_sound = "worm_abs_drink",
         },
-        extra = { size = 1, gain = 1 },
+        extra = { size = 3, gain = 1 },
     },
     hidden = true,
     cost = 10,

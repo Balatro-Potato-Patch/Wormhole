@@ -681,6 +681,13 @@ return {
                 "What a transcendent journey!",
                 "Hope you stayed hydrated!",
             },
+            worm_lq_abs_argel = {
+                "cataclysmic.",
+            },
+            worm_wq_abs_argel = {
+                "big money big money",
+                "no whammy",
+            },
         }
     }
 }
