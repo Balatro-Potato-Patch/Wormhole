@@ -164,6 +164,24 @@ return {
 		    "played {C:attention}poker hand",
 		}
 	    },
+	},
+	Back = {
+		b_worm_util_black_hole = {
+			name = "Black Hole Deck",
+			text = {
+				"{C:attention}Hand levelups{} gains",
+				"additional {C:blue}+#1# level{}"
+			}
+		}
+	},
+	Stake = {
+		stake_worm_util_void = {
+			name = "Void Stake",
+			text = {
+				"{C:blue}Planet cards{} and {C:blue}celestial boosters{}",
+				"{C:attention}do not appear{} in the shop"
+			}
+		}
 	}
     },
     misc = {

@@ -4,6 +4,18 @@
 --     px = 71,
 --     py = 95
 -- }
+SMODS.Atlas {
+    key = "util_deck",
+    path = "util-modders/deck.png",
+    px = 71,
+    py = 95
+}
+SMODS.Atlas {
+    key = "util_stake",
+    path = "util-modders/stake.png",
+    px = 29,
+    py = 29
+}
 
 SMODS.Joker {
     key = "util_cargo_space",
@@ -48,4 +60,44 @@ SMODS.Voucher {
     -- atlas = "util_extras",
     pos = { x = 2, y = 0 },
     requires = { 'v_worm_util_better_craftmanship' },
+}
+
+local _add_to_pool = SMODS.add_to_pool
+function SMODS.add_to_pool(proto, args)
+    if G.GAME.modifiers.void_stake and (proto.set == "Planet") or (proto.set == "Booster" and proto.kind == 'Celestial') then
+        --print('no pool')
+        return false
+    end
+    return _add_to_pool(proto, args)
+end
+
+SMODS.Stake {
+    key = 'util_void',
+    atlas = 'util_stake',
+    applied_stakes = {'orange'},
+    modifiers = function ()
+        G.GAME.planet_rate = 0
+        G.GAME.modifiers.void_stake = true
+    end
+}
+
+local black_hole_lock = false
+SMODS.Back {
+    key = 'util_black_hole',
+    atlas = 'util_deck',
+    config = {
+        extra = 1
+    },
+    loc_vars = function (self, info_queue, card)
+        return { vars = { self.config.extra } }
+    end,
+
+    calculate = function (self, back, context)
+        if context.poker_hand_changed and not black_hole_lock and context.new_level > context.old_level then
+            --print('levelup hand', context.scoring_name, context.old_level, context.new_level, back.effect.config.extra)
+            black_hole_lock = true
+            SMODS.smart_level_up_hand(context.card, context.scoring_name, false, back.effect.config.extra)
+            black_hole_lock = false
+        end
+    end
 }
