@@ -31,6 +31,7 @@ local was_on_lancer = false
 local elle_click_count = 5
 local alexi_click_count = 5
 local proot_click_count = 5
+local j8_click_count = 5
 
 local ctcp = PotatoPatchUtils.CREDITS.create_team_credit_page
 function PotatoPatchUtils.CREDITS.create_team_credit_page(team, ...)
@@ -149,6 +150,11 @@ SMODS.Sound{
 SMODS.Sound{
     key = "lfc_not_tada",
     path = "lfc_not_tada.ogg"
+}
+
+SMODS.Sound{
+    key = "lfc_j8_click",
+    path = "lfc_j8_click.wav"
 }
 
 -- Colors
@@ -287,8 +293,19 @@ PotatoPatchUtils.Developer({
     team = "Lancer Fan Club",
     atlas = "worm_lfc_devs",
     pos = { x = 0, y = 0 },
-    soul_pos = { x = 1, y = 0 }
+    soul_pos = { x = 1, y = 0 },
+    click = function(self)
+        dark_flip(self)
 
+        play_sound('worm_lfc_j8_click',1.5-j8_click_count*0.1)
+        self:juice_up()
+        if j8_click_count == 1 then
+            love.system.openURL("https://store.steampowered.com/app/4551740/CalvinChess/")
+            j8_click_count = 5
+        else
+            j8_click_count = j8_click_count - 1
+        end
+    end
 })
 
 -- Alexi
