@@ -392,7 +392,7 @@ return {
 						"due to time constraints yet I still managed",
 						"to make something really {C:edition,s:1.5,E:worm_jtem2_snaking}funny{} haha 67",
 						"",
-						"My favorite umamusume is Manhattan Cafe",
+						"My favorite umamusume is {C:white,E:1}Manhattan Cafe{}",
 					},
 					{
 						"{s:2.3}Play {s:2.3,E:worm_jtem2_rainbow_wiggle}juuyon{} pls",
