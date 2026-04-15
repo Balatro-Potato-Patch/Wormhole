@@ -13,7 +13,7 @@ PotatoPatchUtils.Developer {
   colour = G.C.MONEY,
   loc = 'd_twigi', -- Can also be `loc = 'k_doofus_name'` where the string is an arbitrary localization dictionary entry
   team = 'Team Ibuprofen', -- Must match an already existing Team name
-  atlas = 'ibu_Devs',
+  atlas = 'worm_Devs',
   soul_pos = {x = 1, y = 0},
   pos = {x = 0, y = 0}
 }
@@ -23,7 +23,7 @@ PotatoPatchUtils.Developer {
   colour = G.C.PURPLE,
   loc = 'd_joos', -- Can also be `loc = 'k_doofus_name'` where the string is an arbitrary localization dictionary entry
   team = 'Team Ibuprofen', -- Must match an already existing Team name
-  atlas = 'ibu_Devs',
+  atlas = 'worm_Devs',
   pos = {x = 2, y = 0}
 }
 
@@ -32,7 +32,7 @@ PotatoPatchUtils.Developer {
   colour = G.C.SECONDARY_SET.Tarot,
   loc = 'd_avery', -- Can also be `loc = 'k_doofus_name'` where the string is an arbitrary localization dictionary entry
   team = 'Team Ibuprofen', -- Must match an already existing Team name
-  atlas = 'ibu_Devs',
+  atlas = 'worm_Devs',
   pos = {x = 3, y = 0}
 }
 
@@ -43,38 +43,38 @@ PotatoPatchUtils.Developer {
 
 SMODS.Atlas {
     key = 'Jokers',
-    path = 'Jokers.png',
+    path = 'ibuprofen/IbuJokers.png',
     px = 71,
     py = 95
 }
 
 SMODS.Atlas {
     key = 'Devs',
-    path = 'Devs.png',
+    path = 'ibuprofen/IbuDevs.png',
     px = 71,
     py = 95
 }
 
 SMODS.Atlas {
     key = 'Consumables',
-    path = 'Consumables.png',
+    path = 'ibuprofen/IbuConsumables.png',
     px = 71,
     py = 95
 }
 
 SMODS.Sound{
   key = 'boom',
-  path = "boom.ogg",
+  path = "ibuprofen/boom.ogg",
 }
 
 SMODS.Sound{
   key = 'woof',
-  path = "Bark.ogg",
+  path = "ibuprofen/Bark.ogg",
 }
 
 SMODS.Shader{
     key = "cosmic",
-    path = "cosmic.fs",
+    path = "ibuprofen/cosmic.fs",
 }
 
 -- /// consumables ///
@@ -93,7 +93,7 @@ SMODS.Consumable {
   },
     atlas = "Consumables",
     pos = { x = 4, y = 0 },
-    config = { max_highlighted = 2, mod_conv = 'm_ibu_frozen' },
+    config = { max_highlighted = 2, mod_conv = 'm_worm_frozen' },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = G.P_CENTERS[card.ability.mod_conv]
         return { vars = { card.ability.max_highlighted, localize { type = 'name_text', set = 'Enhanced', key = card.ability.mod_conv } } }
@@ -168,7 +168,7 @@ SMODS.Consumable {
   ppu_coder = {'Twigi'},
   config = { extra = {}, max_highlighted = 1 },
   loc_vars = function(self, info_queue, card)
-    info_queue[#info_queue + 1] = { key = 'e_ibu_cosmicedition', set = 'Edition', config = { extra = 1 } }
+    info_queue[#info_queue + 1] = { key = 'e_worm_cosmicedition', set = 'Edition', config = { extra = 1 } }
     return { vars = { card.ability.max_highlighted } }
   end,
   can_use = function(self, card)
@@ -190,7 +190,7 @@ SMODS.Consumable {
       G.E_MANAGER:add_event(Event({
         func = function()
           local highlighted = G.hand.highlighted[i]
-          highlighted:set_edition('e_ibu_cosmicedition', true)
+          highlighted:set_edition('e_worm_cosmicedition', true)
           return true
         end
       }))
@@ -278,7 +278,7 @@ SMODS.Enhancement {
         return { vars = { card.ability.extra.saves} }
     end,
     calculate = function(self, card, context)
-      if next(SMODS.find_card('j_ibu_permafrost')) then card.ability.extra.saves = 1 end
+      if next(SMODS.find_card('j_worm_permafrost')) then card.ability.extra.saves = 1 end
 
       if context.stay_flipped and context.other_card == card and context.to_area == G.discard and card.ability.extra.saves > 0 and G.GAME.blind.in_blind then
         if card.ability.extra.saves == 1 then card.ability.extra.saves = 0 end
@@ -321,7 +321,7 @@ SMODS.Joker {
       if SMODS.last_hand_oneshot then 
         G.E_MANAGER:add_event(Event({
             func = function()
-              play_sound('ibu_boom')
+              play_sound('worm_boom')
               SMODS.destroy_cards(card, nil, true)
               return true
             end
@@ -456,7 +456,7 @@ SMODS.Joker {
   config = { extra = { xmult = 3 } },
 
   loc_vars = function(self, info_queue, center)
-    info_queue[#info_queue + 1] = G.P_CENTERS['m_ibu_frozen']
+    info_queue[#info_queue + 1] = G.P_CENTERS['m_worm_frozen']
     return {  vars = { center.ability.extra.xmult } }
   end,
 
@@ -465,7 +465,7 @@ SMODS.Joker {
   end,
   in_pool = function(self, args) --equivalent to `enhancement_gate = 'm_steel'`
         for _, playing_card in ipairs(G.playing_cards or {}) do
-            if SMODS.has_enhancement(playing_card, 'm_ibu_frozen') then
+            if SMODS.has_enhancement(playing_card, 'm_worm_frozen') then
                 return true
             end
         end
@@ -511,7 +511,7 @@ SMODS.Joker {
 
   if context.joker_main and context.scoring_name == most  then
     card.ability.extra.money = card.ability.extra.money + 1
-    play_sound('ibu_woof')
+    play_sound('worm_woof')
     return{ message = "Woof!"}
   end
 
@@ -633,7 +633,7 @@ SMODS.Joker{
 
 
   loc_vars = function(self, info_queue, card)
-    info_queue[#info_queue + 1] = G.P_CENTERS.m_ibu_frozen
+    info_queue[#info_queue + 1] = G.P_CENTERS.m_worm_frozen
     return {
       vars = {
         
@@ -648,7 +648,7 @@ SMODS.Joker{
     end
     if context.discard and G.GAME.current_round.discards_used <= 0 then
       for k, v in ipairs(context.full_hand) do
-         v:set_ability(G.P_CENTERS.m_ibu_frozen, nil, true) 
+         v:set_ability(G.P_CENTERS.m_worm_frozen, nil, true) 
       end
     end
   end
@@ -770,13 +770,13 @@ SMODS.Joker {
   config = { extra = { xmult = 1, multmod = .33 } },
 
   loc_vars = function(self, info_queue, center)
-    info_queue[#info_queue + 1] = G.P_CENTERS.m_ibu_frozen
+    info_queue[#info_queue + 1] = G.P_CENTERS.m_worm_frozen
     return { vars = { center.ability.extra.xmult, center.ability.extra.multmod } }
   end,
 
   calculate = function(self, card, context)
     if context.individual and context.cardarea == G.play then
-      if context.other_card.config.center.key == "m_ibu_frozen" then
+      if context.other_card.config.center.key == "m_worm_frozen" then
         local rancard = context.other_card
         rancard:set_ability('c_base', nil, true)
         card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.multmod
@@ -793,7 +793,7 @@ SMODS.Joker {
   end,
   in_pool = function(self, args)
         for _, playing_card in ipairs(G.playing_cards or {}) do
-            if SMODS.has_enhancement(playing_card, 'm_ibu_frozen') then
+            if SMODS.has_enhancement(playing_card, 'm_worm_frozen') then
                 return true
             end
         end
@@ -827,13 +827,13 @@ SMODS.Joker {
   config = { extra = { } },
 
   loc_vars = function(self, info_queue, center)
-    info_queue[#info_queue + 1] = G.P_CENTERS.m_ibu_frozen
+    info_queue[#info_queue + 1] = G.P_CENTERS.m_worm_frozen
     return { vars = { } }
   end,
 
   calculate = function(self, card, context)
     if context.individual and context.cardarea == G.play then
-      if context.other_card.config.center.key == "m_ibu_frozen" then
+      if context.other_card.config.center.key == "m_worm_frozen" then
         return {
           ease_dollars(2),
           card = card
@@ -843,7 +843,7 @@ SMODS.Joker {
   end,
   in_pool = function(self, args)
         for _, playing_card in ipairs(G.playing_cards or {}) do
-            if SMODS.has_enhancement(playing_card, 'm_ibu_frozen') then
+            if SMODS.has_enhancement(playing_card, 'm_worm_frozen') then
                 return true
             end
         end
