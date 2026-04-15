@@ -193,6 +193,8 @@ SMODS.Joker {
         end
       end
     end
+
+    if context.after then card.ability.extra.targets = {} end
   end,
   ppu_coder = { 'NinjaBanana' },
   ppu_artist = { 'Inky', 'Maelmc' },
