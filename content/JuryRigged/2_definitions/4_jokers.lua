@@ -162,35 +162,37 @@ SMODS.Joker {
 -- Crash Course
 SMODS.Joker {
   key = "jr_crash_course",
-  config = {
-    extra = {}
-  },
+  config = { extra = {targets = {}} },
   rarity = 3,
   pos = { x = 3, y = 0 },
   atlas = "worm_jr_jokers",
-  cost = 7,
+  cost = 8,
   blueprint_compat = true,
   eternal_compat = true,
   perishable_compat = true,
-
-    calculate = function(self, card, context)
-    if context.other_consumeable and context.other_consumeable.ability.set == 'Planet' and context.other_consumeable.ability.consumeable.hand_type == context.scoring_name then
-      if context.other_consumeable.ability.consumeable.hand_type and context.scoring_name == context.other_consumeable.ability.consumeable.hand_type then
-        return {
-        message = localize('worm_jr_plus_satellite'),
-        colour = G.C.RARITY.Legendary,
-        func = function()
-          G.E_MANAGER:add_event(Event {
-            func = function()
-              SMODS.add_card { key = "sat_worm_" .. Wormhole.JR_UTILS.get_satellite(G.GAME.jr.curr_hand), area = G.consumeables }
-
-              return true
-            end
-          })
+  calculate = function(self, card, context)
+    if context.before then
+      for _, v in pairs(G.consumeables.cards) do
+        if v.ability.set == 'Planet' and v.ability.consumeable.hand_type == context.scoring_name then
+          if not Wormhole.JR_UTILS.table_contains(card.ability.extra.targets, v) then -- this is for blueprint compatibility
+            card.ability.extra.targets[#card.ability.extra.targets+1] = v
+            return {
+              message = localize('worm_jr_plus_satellite'),
+              colour = G.C.RARITY.Legendary,
+              func = function()
+                SMODS.destroy_cards(v)
+                G.E_MANAGER:add_event(Event {
+                  func = function()
+                    SMODS.add_card { key = "sat_worm_" .. Wormhole.JR_UTILS.get_satellite(G.GAME.jr.curr_hand), area = G.consumeables }
+                    return true
+                  end
+                })
+              end
+            }
+          end
         end
-      }
+      end
     end
-  end
   end,
   ppu_coder = { 'NinjaBanana' },
   ppu_artist = { 'Inky' },
