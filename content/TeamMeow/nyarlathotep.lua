@@ -1352,3 +1352,18 @@ SMODS.Sound({
 		end
 	end,
 })
+
+SMODS.ScreenShader({
+	key = "insanity",
+	order = 1,
+	path = "TeamMeow/insanity.fs",
+	send_vars = function(self)
+		return {
+			insanity = G.GAME.meow_sanity_lost or 0,
+			time = G.TIMERS.REAL,
+		}
+	end,
+	should_apply = function(self)
+		return (G.GAME.meow_sanity_lost or 0) > 0
+	end,
+})
