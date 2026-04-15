@@ -4,8 +4,6 @@ return {
             PotatoPatchTeam_lancer_fan_club = { name = "Lancer Fan Club" },
 
             PotatoPatchDev_ProdByProto = {
-                --name = "{IMG:lfc_proot_EarL,s:0.525}a{} ProdByProto {IMG:lfc_proot_EarR,s:0.525}a{}", failed image attempt
-                --name = "#1#ProdByProto#2#", failed loc_vars test
                 name = "ProdByProto",
                 text = {
                     {
@@ -83,19 +81,23 @@ return {
                 name = "Alexi!",
                 text = {
                     {
+                        "{s:1.5,E:worm_alexi_text}Alexi!",
                         "the weird and deranged",
-                        "shapeshifting slimegirl!"
+                        "shapeshifting slimegirl!",
+                        "{s:0.5}see {C:blue,s:0.5}https://en.pronouns.page/@invalidOS",
+                        "{s:0.5}for pronouns and links!"
                     },
                     {
-                        "I came up with a few of the ideas here,",
-                        "my favorites being {C:attention}Urination Station{} and {C:attention}Spacebar{}!",
-                        "I also coded {C:attention}Urination Station{}, among plenty of other Jokers.",
-                        "{C:attention}The Fleet{} was entirely done by me, and",
-                        "the background of {C:attention}Eigengrau Emptiness{} is some of",
-                        "my proudest work yet! {s:0.5}(even if others got the same idea...)",
+                        "{s:0.8}I came up with a few of the ideas here,",
+                        "{s:0.8}my favorites being {C:uncommon,s:0.8}Urination Station{s:0.8} and {C:rare,s:0.8}Spacebar{s:0.8}!",
+                        "{s:0.8}I also coded {C:uncommon,s:0.8}Urination Station{s:0.8}, {C:uncommon,s:0.8}Stakataka{s:0.8}, and a few other things!",
+                        "{C:attention,s:0.8}The Fleet{s:0.8} was entirely done by me, and",
+                        "{s:0.8}the background of {C:attention,s:0.8,E:1}Eigengrau Emptiness{s:0.8} is some of",
+                        "{s:0.8}my proudest work yet! {s:0.5}(even if others got the same idea...)",
                     },
                     {
-                        "lemniscate tomorrow"
+                        "lemniscate",
+                        "{C:dark_edition,E:1}tomorrow"
                     }
                 }
             }
@@ -262,7 +264,7 @@ return {
                 text = {
                     "The next {C:attention}#1#{} hands gain",
                     "an additional {C:chips}+#2#{} Chips",
-                    "and {C:mult}+#3#{} when {C:attention}levelling up"
+                    "and {C:mult}+#3#{} Mult when {C:attention}levelling up"
                 },
             },
             j_worm_lfc_hitchhiker = {
