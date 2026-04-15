@@ -302,8 +302,9 @@ suit_alien{
 suit_alien{
     key = 'shrug_alien_clubs',
     atlas = 'shrug_alien_cards',
-    pos = {x = 0, y = 0},
+    pos = {x = 8, y = 0},
     config = {extra = {suit = 'Clubs', convert = 6}},
+    ppu_artist = {"waffle", "microwave"}
 }
 -- Hopkinsville Goblin
 suit_alien{

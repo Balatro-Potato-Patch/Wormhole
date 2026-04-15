@@ -233,7 +233,7 @@ return {
                 }
             },
             c_worm_shrug_alien_clubs = {
-                name = 'Reptoid',
+                name = 'Reptillian',
                 text = {
                     'Convert up to {C:attention}#1#{} random',
                     'non-{C:clubs}Club{} cards in deck',
