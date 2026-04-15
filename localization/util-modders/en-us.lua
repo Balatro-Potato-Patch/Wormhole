@@ -182,6 +182,15 @@ return {
 				"{C:attention}do not appear{} in the shop"
 			}
 		}
+	},
+	Tag = {
+		tag_worm_util_pod_pack = {
+			name = "Pod Pack",
+			text = {
+				"Gives a free",
+				"{C:attention}Space Pod Pack{}",
+			}
+		}
 	}
     },
     misc = {

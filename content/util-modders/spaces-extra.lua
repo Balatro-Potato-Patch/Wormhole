@@ -16,6 +16,12 @@ SMODS.Atlas {
     px = 29,
     py = 29
 }
+SMODS.Atlas {
+    key = "util_tag",
+    path = "util-modders/tag.png",
+    px = 34,
+    py = 34
+}
 
 SMODS.Joker {
     key = "util_cargo_space",
@@ -98,6 +104,34 @@ SMODS.Back {
             black_hole_lock = true
             SMODS.smart_level_up_hand(context.card, context.scoring_name, false, back.effect.config.extra)
             black_hole_lock = false
+        end
+    end
+}
+
+SMODS.Tag {
+    key = 'util_pod_pack',
+    atlas = 'util_tag',
+    pos = { x = 0, y = 0 },
+
+    apply = function (self, tag, context)
+        if context.type == 'new_blind_choice' then
+            local lock = tag.ID
+            G.CONTROLLER.locks[lock] = true
+            tag:yep('+', G.C.SECONDARY_SET.Spectral, function()
+                local booster = SMODS.create_card { key = 'p_worm_util_spaces_mega', area = G.play }
+                booster.T.x = G.play.T.x + G.play.T.w / 2 - G.CARD_W * 1.27 / 2
+                booster.T.y = G.play.T.y + G.play.T.h / 2 - G.CARD_H * 1.27 / 2
+                booster.T.w = G.CARD_W * 1.27
+                booster.T.h = G.CARD_H * 1.27
+                booster.cost = 0
+                booster.from_tag = true
+                G.FUNCS.use_card({ config = { ref_table = booster } })
+                booster:start_materialize()
+                G.CONTROLLER.locks[lock] = nil
+                return true
+            end)
+            tag.triggered = true
+            return true
         end
     end
 }
