@@ -275,7 +275,6 @@ local alexi_text_colors = {
     HEX("FFC7FF"),
 }
 
--- very likely to be changed to fit "InvalidOS"
 SMODS.DynaTextEffect {
     key = "alexi_text",
     func = function(dynatext, index, letter)
