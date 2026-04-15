@@ -616,27 +616,7 @@ Wormhole.tbp.Module = SMODS.Consumable:extend{
             G.FUNCS.show_module_replace_confirm(card, spaceship[1])
             return {}
         end
-	end,
-    set_ability = function(self, card) -- TODO: remove when art is complete
-        if self.atlas == 'centers' then
-            card.canvas_text = {
-                SMODS.CanvasSprite({
-                    text_colour = G.C.RED,
-                    text = localize('tbp_module_'..self.slot),
-                    text_offset = {x = 36, y = 20},
-                    text_width = 26,
-                    text_height = 20,
-                }),
-                SMODS.CanvasSprite({
-                    text_colour = G.C.BLUE,
-                    text = localize({type = 'name_text', set = 'tbp_module', key = self.key}),
-                    text_offset = {x = 36, y = 60},
-                    text_width = 60,
-                    text_height = 20,
-                })
-            }
-        end
-    end
+	end
 }
 
 -- Autmoatically prefix modules with '_tbp_'

@@ -9,6 +9,9 @@ function Wormhole.tbp.module_tooltip(desc_nodes)
     local col = Wormhole.tbp.module_colours[desc_nodes.tbp_module] -- module colour
     local durability_col = mix_colours(G.C.BLACK, col, 0.8) -- durability bar background
     local discovered = desc_nodes.module_info and G.P_CENTERS[desc_nodes.module_info.key].discovered
+    local module_pos = desc_nodes.module_info and copy_table(G.P_CENTERS[desc_nodes.module_info.key].module_pos) or { x = 2, y = 5}
+    module_pos.y = module_pos.y - 4
+
     local t = {}
     if desc_nodes.module_info then
         t[#t+1] = {n=G.UIT.R, config={align = "cm"}, nodes={
@@ -37,7 +40,7 @@ function Wormhole.tbp.module_tooltip(desc_nodes)
             }},
             desc_nodes.module_info and not desc_nodes.block_image and {n=G.UIT.C, config = {align = 'cm', padding = 0.05, colour = lighten(col, 0.8)}, nodes = {
                 {n=G.UIT.R, config = {align = 'cm', colour = durability_col}, nodes = {
-                    {n=G.UIT.O, config = {outline = 1, outline_colour = darken(col,0.4), object = SMODS.create_sprite(0,0, 0.65*G.CARD_W, 0.65*G.CARD_H, 'worm_tbp_module_no_bg', {x=math.random(1,4)-1,y=math.random(1,2)-1}), align = 'cm'}} -- TODO: fix position to match the actual sprite
+                    {n=G.UIT.O, config = {outline = 1, outline_colour = darken(col,0.4), object = SMODS.create_sprite(0,0, 0.65*G.CARD_W, 0.65*G.CARD_H, 'worm_tbp_module_no_bg', module_pos), align = 'cm'}}
                 }}
             }} or nil
         }},
