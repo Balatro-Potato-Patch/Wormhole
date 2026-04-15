@@ -7,7 +7,15 @@ return {
                 PotatoPatchDev_marie = {
                     name = "Marie",
                     text = {
-                        "Replace this please"
+                        {
+                            "here for the free food"
+                        },
+                        {
+                            "sits there and looks kinda okay i guess"
+                        },
+                        {
+                            "emotional support (derogatory)"
+                        }
                     },
                 },
                 PotatoPatchDev_willow = {
@@ -30,7 +38,15 @@ return {
                 PotatoPatchDev_mtw = {
                     name = "MightyKingWario",
                     text = {
-                        "Replace this please"
+                        {
+                            "{C:red}among us twerk gif{}"
+                        },
+                        {
+                            "I did the the art for:",
+                            "{C:planet}Interplanetary Travel{},",
+                            "{C:purple}Imaginary Purple Deck{},",
+                            "and a {C:attention}couple{} of {C:red}other things{}"
+                        }
                     },
                 },
                 PotatoPatchDev_evgast = {
@@ -65,13 +81,14 @@ return {
                 PotatoPatchDev_hatstack = {
                     name = "Hat Stack",
                     text = {
-                        "Replace this please"
+                        "check out Uncle Grandpa for a Day on youtube.com,",
+                        "I'm not sponsored I'm just a big fan"
                     },
                 }
             },
             Back = {
                 b_worm_thorn_renamelater = {
-                    name = "Unnamed Deck",
+                    name = "Imaginary Purple Deck",
                     text = {
                         "{C:mult}+1{} discard every round",
                         "{C:attention}+1{} hand size",
@@ -177,6 +194,24 @@ return {
                         "{C:red}fucking{} sight before I {C:diamonds}piss{} on you too"
                     }
                 },
-            }
-    },
+            },
+            Voucher = {
+                v_worm_thorn_ip_travel = {
+                    name = "Interplanetary Travel",
+                    text = {
+                        "When using a {C:planet}Planet{} card",
+                        "most played {C:attention}Poker Hand{}",
+                        "gains {C:planet}Pluto's{} values"
+                    }
+                },
+                v_worm_thorn_is_travel = {
+                    name = "Interstellar Travel",
+                    text = {
+                        "When using a {C:planet}Planet{} card",
+                        "most played {C:attention}Poker Hand{}",
+                        "gains values of used {C:planet}Planet{}"
+                    }
+                }
+            },
+        }
 }

@@ -10,6 +10,7 @@ SMODS.Joker {
 	rarity = 1,
     atlas = "thorn_cards",
 	pos = { x = 0, y = 0 },
+    soul_pos = { x = 2, y = 1}, --I don't want to rearange the atlas :з
 	cost = 4,
 	blueprint_compat = true,
 	eternal_compat = false,
@@ -27,7 +28,7 @@ SMODS.Joker {
     set_ability = function(self, card, initial, delay_sprites)
         card:add_sticker("perishable", true)
     end,
-    ppu_artist = {"None, currently"},
+    ppu_artist = {"hatstack"},
     ppu_coder = {"evgast"},
     ppu_team = {"thorn"},
 }
@@ -114,7 +115,7 @@ SMODS.Joker {
             }
         end
     end,
-    ppu_artist = {"This will get replaced by ERROR"},
+    ppu_artist = {"hatstack"},
     ppu_coder = {"evgast"},
     ppu_team = {"thorn"},
 }

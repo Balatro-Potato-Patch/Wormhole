@@ -19,10 +19,11 @@ PotatoPatchUtils.Developer({
     team = "thorn",
     name = "marie",
     loc = true,
-    atlas = 'Joker',
-    pos = {x = 0, y = 0},
-    soul_pos = {x = 0, y = 0},
+    atlas = 'worm_TeamCredits',
+    pos = {x = 5, y = 0},
+    soul_pos = {x = 5, y = 1},
 })
+
 PotatoPatchUtils.Developer({
     team = "thorn",
     name = "willow",
@@ -31,13 +32,16 @@ PotatoPatchUtils.Developer({
     atlas = 'worm_TeamCredits',
     pos = {x = 0, y = 0},
 })
+
 PotatoPatchUtils.Developer({
     team = "thorn",
     name = "mtw",
+    colour = G.C.GOLD,
     loc = true,
     atlas = 'worm_TeamCredits',
     pos = {x = 3, y = 0},
 })
+
 PotatoPatchUtils.Developer({
     team = "thorn",
     name = "evgast",
@@ -46,6 +50,7 @@ PotatoPatchUtils.Developer({
     atlas = 'worm_TeamCredits',
     pos = {x = 4, y = 0},
 })
+
 PotatoPatchUtils.Developer({
     team = "thorn",
     name = "sophie",
@@ -55,10 +60,12 @@ PotatoPatchUtils.Developer({
     pos = {x = 2, y = 0},
     soul_pos = {x = 1, y = 0},
 })
+
 PotatoPatchUtils.Developer({
     team = "thorn",
     name = "hatstack",
+    colour = G.C.PURPLE,
     loc = true,
-    atlas = 'Joker',
-    pos = {x = 0, y = 0},
+    atlas = 'worm_TeamCredits',
+    pos = {x = 0, y = 1},
 })
