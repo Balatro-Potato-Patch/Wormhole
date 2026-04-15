@@ -40,7 +40,9 @@ SMODS.Shader {
         }
     end,
 }
-SMODS.Edition { -- Void card edition
+
+-- Void card edition
+SMODS.Edition { 
 	ppu_team = {"BalatrosAPalindrome"},
     key = 'bap_void',
     shader = 'worm_bap_shader_void',
@@ -81,7 +83,6 @@ SMODS.Edition { -- Void card edition
         end
     end
 }
-
 
 -- The Abyss
 SMODS.Consumable {
@@ -518,23 +519,6 @@ SMODS.Joker {
 	end,
 }
 
--- function print_table(t, depth)
--- 	if depth > 3 then return end
-
--- 	local depth_buffer = ''
--- 	for i=1,depth do
--- 		depth_buffer = depth_buffer .. '  '
--- 	end
--- 	for key, value in pairs(t) do
--- 		if type(value) == "table" then
--- 			print(depth_buffer .. tostring(key) .. ' :')
--- 			print_table(value, depth + 1)
--- 		else
--- 			print(depth_buffer .. tostring(key) .. ' : ' .. tostring(value))
--- 		end
--- 	end
--- end
-
 -- Space Worm
 SMODS.Joker {
 	ppu_team = {"BalatrosAPalindrome"},
@@ -602,6 +586,7 @@ SMODS.Joker {
 	end
 }
 
+-- Worm
 SMODS.Joker {
 	ppu_team = {"BalatrosAPalindrome"},
 	key = 'bap_regular_worm',
