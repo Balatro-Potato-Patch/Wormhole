@@ -1,3 +1,30 @@
+local depleted = {
+    "Depleted after {C:attention}#3#{} uses",
+}
+local pods = {
+    mult = {
+	{
+	    "When a {C:attention}#1#{} is played",
+	    "{C:mult}+#2#{} mult"
+	},
+	depleted
+    },
+    chips = {
+	{
+	    "When a {C:attention}#1#{} is played",
+	    "{C:chips}+#2#{} chips"
+	},
+	depleted
+    },
+    money = {
+	{
+	    "When a {C:attention}#1#{} is played",
+	    "earn {C:money}+$#2#{}"
+	},
+	depleted
+    },
+}
+
 return {
     descriptions = {
 	PotatoPatch = {
@@ -40,28 +67,52 @@ return {
 	util_Spaces = {
 	    c_worm_util_spaces_basic_mult = {
 		name = "Basic Mult Pod",
-		text = {
-		    {
-			"When a {C:attention}#1#{} is played",
-			"{C:mult}+#2#{} mult"
-		    },
-		    {
-			"Depleted after {C:attention}#3#{} uses",
-		    }
-		}
+		text = pods.mult,
+	    },
+	    c_worm_util_spaces_advanced_mult = {
+		name = "Advanced Mult Pod",
+		text = pods.mult,
+	    },
+	    c_worm_util_spaces_pro_mult = {
+		name = "Pro Mult Pod",
+		text = pods.mult,
+	    },
+	    c_worm_util_spaces_luxury_mult = {
+		name = "Luxury Mult Pod",
+		text = pods.mult,
 	    },
 	    c_worm_util_spaces_basic_chips = {
-		name = "Basic Chip Pod",
-		text = {
-		    {
-			"When a {C:attention}#1#{} is played",
-			"{C:chips}+#2#{} chips"
-		    },
-		    {
-			"Depleted after {C:attention}#3#{} uses",
-		    }
-		}
-	    }
+		name = "Basic Chips Pod",
+		text = pods.chips,
+	    },
+	    c_worm_util_spaces_advanced_chips = {
+		name = "Advanced Chips Pod",
+		text = pods.chips,
+	    },
+	    c_worm_util_spaces_pro_chips = {
+		name = "Pro Chips Pod",
+		text = pods.chips,
+	    },
+	    c_worm_util_spaces_luxury_chips = {
+		name = "Luxury Chips Pod",
+		text = pods.chips,
+	    },
+	    c_worm_util_spaces_basic_money = {
+		name = "Basic Money Pod",
+		text = pods.money,
+	    },
+	    c_worm_util_spaces_advanced_money = {
+		name = "Advanced Money Pod",
+		text = pods.money,
+	    },
+	    c_worm_util_spaces_pro_money = {
+		name = "Pro Money Pod",
+		text = pods.money,
+	    },
+	    c_worm_util_spaces_luxury_money = {
+		name = "Luxury Money Pod",
+		text = pods.money,
+	    },
 	},
 	Other = {
 	    p_worm_util_spaces_normal = {

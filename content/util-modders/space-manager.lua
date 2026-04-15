@@ -78,10 +78,6 @@ function manager:run_bg(dt)
     local target = 1.0
     local rate = 3
 
-    -- if self.targetHand and self.handname and self.targetHand ~= self.handname then
-    --     rate = 3
-    -- end
-
     if self.targetHand ~= self.handname or not self.targetHand then
         target = 0.0
     end
@@ -118,7 +114,7 @@ function manager:calc_bg()
     local some = false
     for _, c in ipairs((G.consumeables or {}).cards or {}) do
         local cc = type(c.ability.extra) == "table" and c.ability.extra.space_conf
-        local hand = c.ability.extra.poker_hand
+        local hand = type(c.ability.extra) == "table" and c.ability.extra.poker_hand
         if cc and hand == self.handname then
             some = true
             conf.seed = conf.seed + cc.seed

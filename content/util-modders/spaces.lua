@@ -3,7 +3,7 @@ SMODS.ConsumableType {
     default = 'c_worm_util_spaces_basic_mult',
     primary_colour = G.C.SET.Tarot, -- TODO: Fix me
     secondary_colour = G.C.SECONDARY_SET.Tarot, -- TODO: Fix me
-    collection_rows = { 5, 6 }, -- TODO: Set this to something approprate
+    collection_rows = { 4, 4 },
     shop_rate = 0,
 }
 
@@ -168,72 +168,117 @@ local function doDeplete(card)
     end
 end
 
-SMODS.Consumable {
-    key = 'util_spaces_basic_mult',
-    set = 'util_Spaces',
-    atlas = "util_spaces",
-    pos = { x = 0, y = 0 },
-    space_conf = {
-	options = 2,
-    },
-    config = {
-	extra = {
-	    mult = 20,
-	    rounds = 3,
+local ranks = {"basic", "advanced", "pro", "luxury"}
+local mult = {5, 10, 20, 40}
+for i, r in ipairs(ranks) do
+    SMODS.Consumable {
+	key = 'util_spaces_'..r..'_mult',
+	set = 'util_Spaces',
+	atlas = "util_spaces",
+	pos = { x = i - 1, y = 0 },
+	space_conf = {
+	    options = 1 + i,
 	},
-    },
-    loc_vars = function(self, info_queue, card)
-	return {
-	    vars = {
-		localize(card.ability.extra.poker_hand, 'poker_hands'),
-		card.ability.extra.mult,
-		card.ability.extra.rounds,
+	config = {
+	    extra = {
+		mult = mult[i],
+		rounds = 3,
 	    },
-	}
-    end,
-    set_sprites = setSprites,
-    set_ability = initSpace,
-    calculate = function(self, card, context)
-	if isMatch(context, card) then
+	},
+	loc_vars = function(self, info_queue, card)
 	    return {
-		mult = card.ability.extra.mult,
-		extra = doDeplete(card),
+		vars = {
+		    localize(card.ability.extra.poker_hand, 'poker_hands'),
+		    card.ability.extra.mult,
+		    card.ability.extra.rounds,
+		},
 	    }
+	end,
+	set_sprites = setSprites,
+	set_ability = initSpace,
+	calculate = function(self, card, context)
+	    if isMatch(context, card) then
+		return {
+		    mult = card.ability.extra.mult,
+		    extra = doDeplete(card),
+		}
+	    end
 	end
-    end
-}
+    }
+end
 
-SMODS.Consumable {
-    key = 'util_spaces_basic_chips',
-    set = 'util_Spaces',
-    atlas = "util_spaces",
-    pos = { x = 0, y = 0 },
-    space_conf = {
-	options = 2,
-    },
-    config = {
-	extra = {
-	    chips = 50,
-	    rounds = 3,
+local chips = {50, 100, 200, 250}
+for i, r in ipairs(ranks) do
+    SMODS.Consumable {
+	key = 'util_spaces_'..r..'_chips',
+	set = 'util_Spaces',
+	atlas = "util_spaces",
+	pos = { x = i - 1, y = 1 },
+	space_conf = {
+	    options = 2,
 	},
-    },
-    loc_vars = function(self, info_queue, card)
-	return {
-	    vars = {
-		localize(card.ability.extra.poker_hand, 'poker_hands'),
-		card.ability.extra.chips,
-		card.ability.extra.rounds,
+	config = {
+	    extra = {
+		chips = chips[i],
+		rounds = 3,
 	    },
-	}
-    end,
-    set_sprites = setSprites,
-    set_ability = initSpace,
-    calculate = function(self, card, context)
-	if isMatch(context, card) then
+	},
+	loc_vars = function(self, info_queue, card)
 	    return {
-		chips = card.ability.extra.chips,
-		extra = doDeplete(card),
+		vars = {
+		    localize(card.ability.extra.poker_hand, 'poker_hands'),
+		    card.ability.extra.chips,
+		    card.ability.extra.rounds,
+		},
 	    }
+	end,
+	set_sprites = setSprites,
+	set_ability = initSpace,
+	calculate = function(self, card, context)
+	    if isMatch(context, card) then
+		return {
+		    chips = card.ability.extra.chips,
+		    extra = doDeplete(card),
+		}
+	    end
 	end
-    end
-}
+    }
+end
+
+local chips = {50, 100, 200, 250}
+for i, r in ipairs(ranks) do
+    SMODS.Consumable {
+	key = 'util_spaces_'..r..'_money',
+	set = 'util_Spaces',
+	atlas = "util_spaces",
+	pos = { x = i - 1, y = 2 },
+	space_conf = {
+	    options = 2,
+	},
+	config = {
+	    extra = {
+		chips = chips[i],
+		rounds = 3,
+	    },
+	},
+	loc_vars = function(self, info_queue, card)
+	    return {
+		vars = {
+		    localize(card.ability.extra.poker_hand, 'poker_hands'),
+		    card.ability.extra.chips,
+		    card.ability.extra.rounds,
+		},
+	    }
+	end,
+	set_sprites = setSprites,
+	set_ability = initSpace,
+	calculate = function(self, card, context)
+	    if isMatch(context, card) then
+		return {
+		    chips = card.ability.extra.chips,
+		    extra = doDeplete(card),
+		}
+	    end
+	end
+    }
+end
