@@ -84,7 +84,7 @@ end
 SMODS.Stake {
     key = 'util_void',
     atlas = 'util_stake',
-    applied_stakes = {'orange'},
+    applied_stakes = {'gold'},
     prefix_config = { applied_stakes = { mod = false } },
     modifiers = function ()
         G.GAME.planet_rate = 0
