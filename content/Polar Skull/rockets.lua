@@ -8,10 +8,12 @@ SMODS.Atlas({
 local sounds = NFS.getDirectoryItems(SMODS.current_mod.path .. "assets/sounds")
 for _, filename in pairs(sounds) do
 	if string.sub(filename, string.len(filename) - 3) == ".ogg" then
-		SMODS.Sound({
-			key = string.sub(filename, 1, string.len(filename) - 4),
-			path = filename,
-		})
+		if not string.find(filename, "music") then
+			SMODS.Sound({
+				key = string.sub(filename, 1, string.len(filename) - 4),
+				path = filename,
+			})
+		end
 	end
 end
 
@@ -125,7 +127,7 @@ local function register_rocket(args)
 		local key = self.key
 		if key == "c_worm_polarskull_ssdolphin" and ppm then
 			ppm = false
-			key = key.."_ppm"
+			key = key.."_ppm"string.find(sound_code,'music')
 			table.insert(info_queue, {key = "v_worm_polarskull_prepetual_motion_machine", set = "Voucher"})
 		end
 		return {

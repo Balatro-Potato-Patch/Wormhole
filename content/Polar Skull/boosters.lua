@@ -5,6 +5,18 @@ SMODS.Atlas {
     py = 95,
 }
 
+SMODS.Sound({
+	key = "polarskull_rocketpack_music",
+	path = "polarskull_rocketpack_music.ogg",
+	pitch = 1,
+	volume = 1,
+	select_music_track = function(self)
+		if G.STATE == G.STATES.SMODS_BOOSTER_OPENED and SMODS.OPENED_BOOSTER.config.center.kind == "polarskull_Rocket" then
+			return 10
+		end
+	end
+})
+
 SMODS.Booster({
     key = 'rocket_normal_1',
     group_key = 'k_polarskull_rocket_pack',
