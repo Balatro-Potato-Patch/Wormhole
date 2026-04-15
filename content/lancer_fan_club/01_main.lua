@@ -127,11 +127,6 @@ SMODS.Sound {
 }
 
 SMODS.Sound {
-    key = "lfc_spacebar",
-    path = "lfc_spacebar.ogg"
-}
-
-SMODS.Sound {
     key = "lfc_splat",
     path = "lfc_splat.wav"
 }
