@@ -14,7 +14,8 @@ SMODS.Voucher {
     loc_vars = function(self, info_queue, card)
         return { vars = {  } }
     end,
-	ppu_artist = {"jade", "noodlemire"},
+	--ppu_artist = {"jade", "noodlemire"},
+	ppu_artist = {"comykel"},
 	ppu_coder = {"rainstar"},
     ppu_team = { "polar_skull" },
     -- the code for it is in rockets.lua
@@ -29,7 +30,8 @@ SMODS.Voucher {
     loc_vars = function(self, info_queue, card)
         return { vars = {  } }
     end,
-	ppu_artist = {"jade", "noodlemire"},
+	--ppu_artist = {"jade", "noodlemire"},
+	ppu_artist = {"comykel"},
 	ppu_coder = {"rainstar"},
     ppu_team = { "polar_skull" },
     -- the code for it is in rockets.lua
