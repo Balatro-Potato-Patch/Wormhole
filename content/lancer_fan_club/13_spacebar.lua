@@ -8,6 +8,7 @@ local w = 200 		-- Width of bar
 local len = 2 		-- Duration of minigame
 local count = 5 	-- Amount of hits
 local window = 0.08 -- Timing window in seconds
+local targettimer
 
 Wormhole.LancerFanClub.spacebar = {
 	active = false,
@@ -79,7 +80,7 @@ SMODS.Joker {
 	end,
 
 	ppu_artist = { "J8-Bit" },
-	ppu_coder = { "ellestuff." },
+	ppu_coder = { "ellestuff.", "InvalidOS" },
 	ppu_team = { "Lancer Fan Club" },
 	
 	update = function(self, card, dt) if not Wormhole.LFC_Util.card_obscured(card) then card.children.center:set_sprite_pos({x = 0, y = love.keyboard.isDown("space")and 1 or 0}) end end
