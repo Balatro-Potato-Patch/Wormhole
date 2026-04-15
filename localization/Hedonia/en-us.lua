@@ -55,7 +55,7 @@ return {
                 text = {
                     'Creates a Menu Item',
                     'after {C:attention}#1#{} played hands',
-                    '{C:inactive} currently {C:attention}#2#{C:inactive} hands left{}',
+                    '{C:inactive}(currently {C:attention}#2#{C:inactive} hands left){}',
                     '{C:inactive,s:0.8}(put Aliyah reading here){}'
                 }
             }
