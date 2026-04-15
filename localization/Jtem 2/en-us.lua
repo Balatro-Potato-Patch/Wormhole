@@ -332,15 +332,14 @@ return {
 				name = "lexi",
 				text = {
 					{
-						"wannabe music artist",
-						"dev for jeans alchemy",
+						"wannabe music artist, dev for jeans alchemy",
 						"{s:0.7}I'd rather be topped by 10 {C:worm_jtem2_lexi,s:0.7,E:1}lesbians{s:0.7} than top 10 {C:worm_jtem2_lexi,s:0.7,E:1}lesbians",
 						"{C:worm_jtem2_lexi}triple6lexi.carrd.co{} <- my links and bio",
-						"{s:0.5} ",
-						'{s:0.8}"I had tried my hardest,',
-						"{s:0.8}to give you what you wanted.",
-						"{s:0.8}If you had just been honest,",
-						'{s:0.8}too goddamn cold-hearted."',
+						"{s:0.8}youtu.be/O8uXhKOB3j8",
+					},
+					{
+						'{s:0.8}"I had tried my hardest to give you what you wanted.',
+						'{s:0.8}If you had just been honest, too goddamn cold-hearted."',
 						"{s:0.8}charlie! - Cold Hearted",
 						"{s:0.65}it's a good song",
 					},
@@ -349,7 +348,11 @@ return {
 			PotatoPatchDev_ari = {
 				name = "Ari",
 				text = {
-					{ "box numero 1" },
+					{
+						"Haya forced me to join this jam",
+						"but I owe a lot of money to some very bad people",
+						"so I didn't really do much"
+					},
 				},
 			},
 			PotatoPatchDev_missingnumber = {
