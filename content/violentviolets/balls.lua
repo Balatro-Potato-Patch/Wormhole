@@ -19,7 +19,7 @@ SMODS.Joker {
             if SMODS.pseudorandom_probability(card, "award_a", 1, 3) then
                 G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + 15
                 return {
-                    dollars = card.ability.extra.money
+                    dollars = 15
                 },
                 play_sound('worm_jackpot', 1, 1)
             end
