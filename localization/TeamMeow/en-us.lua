@@ -361,6 +361,9 @@ return {
 			}
 		},
 		Other = {
+			worm_meow_nyarlathotep_commas = {
+				text = {",", ", "}
+			},
 			worm_meow_nyarlathotep_xmult = {
 				text = {
 					"{X:mult,C:white}X#1#{} Mult",
@@ -438,15 +441,19 @@ return {
 				text = {
 					"{C:attention}Nya-rlathotep{} grants",
 					"{C:mult}+#1#{} Mult and {C:chips}+#2#{} Chips",
-					"whenever a card is scored"
+					"whenever a card is scored",
+					"{C:inactive}(Currently {C:red}+#3#{C:inactive} Mult",
+					"{C:inactive}and {C:chips}+#4#{C:inactive} Chips)"
 				}
 			},
 			exc_worm_meow_sloth = {
 				name = "Sloth",
 				text = {
-					"{C:attention}Nya-rlathotep{} grants",
-					"{X:chips,C:white}X#1#{} Chips per card",
-					"held in hand"
+					"{C:attention}Nya-rlathotep{} causes",
+					"cards held in hand",
+					"to give an additional",
+					"{X:chips,C:white}X#1#{} Chips",
+					"{C:inactive}(Currently {X:chips,C:white}X#2#{C:inactive} Chips)"
 				}
 			},
 			exc_worm_meow_acceptance = {
@@ -463,7 +470,7 @@ return {
 				text = {
 					"As a reward for your",
 					"devotion, {C:attention}Nya-rlathotep{} is",
-					"willing to part with {C:money}$#1#{}."
+					"willing to part with {C:money}$#1#{}"
 				}
 			},
 			exc_worm_meow_silence = {
@@ -495,6 +502,36 @@ return {
 					"{C:attention}Nya-rlathotep{} gains {C:mult}+#2#{} Mult",
 					"{C:inactive}(Currently {C:red}+#3#{C:inactive} Mult",
 				},
+			},
+			exc_worm_meow_foresight = {
+				name = "Foresight",
+				text = {
+					"After defeating a {C:attention}Boss",
+					"{C:attention}Blind{}, {C:attention}Nya-rlathotep{} creates",
+					"{C:attention}#1#{} {C:dark_edition,T:e_negative}Negative{} {C:tarot}Tarot{} card#2#",
+				},
+			},
+			exc_worm_meow_apparition = {
+				name = "Apparition",
+				text = {
+					"After {C:attention}skipping{} a {C:attention}Blind{},",
+					"{C:attention}Nya-rlathotep{} creates",
+					"{C:attention}#1#{} {C:spectral}Spectral{} card#2#",
+				},
+			},
+			exc_worm_meow_conquest = {
+				name = "Conquest",
+				text = {
+					"{C:attention}Nya-rlathotep{} causes",
+					"cards held in hand",
+					"and scored cards to",
+					"give an additional",
+					"{X:mult,C:white}X#1#{} Mult",
+					"{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult",
+					"{C:inactive}for cards held in",
+					"{C:inactive}hand, and {X:mult,C:white}X#3#{C:inactive} Mult",
+					"{C:inactive}for scored cards){}"
+				}
 			},
 			worm_meow_spacetart_stacks = {
 				text = {

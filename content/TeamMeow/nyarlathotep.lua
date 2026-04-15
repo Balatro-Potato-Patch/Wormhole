@@ -1,17 +1,39 @@
-local function build_nyarlathotep_entries(all_entries, max_cols, no_commas)
+local function build_nyarlathotep_entries(all_entries, max_cols, no_commas, all_rows)
 	max_cols = max_cols or 3
 	local entries_to_organize = {}
 	for _, e in ipairs(all_entries) do
-		local loc_target = G.localization.descriptions.Other
-			[e.no_auto_key and e.key or ("worm_meow_nyarlathotep_" .. e.key)].text_parsed
-		for _, row in ipairs(loc_target) do
+		local desc_nodes = {}
+		localize({
+			type = "other",
+			key = e.no_auto_key and e.key or ("worm_meow_nyarlathotep_" .. e.key),
+			nodes = desc_nodes,
+			vars = e.vars or {},
+		})
+		for _, row in ipairs(desc_nodes) do
 			entries_to_organize[#entries_to_organize + 1] = {
-				n = G.UIT.C,
+				n = G.UIT.R,
 				config = { align = "cm" },
-				nodes = SMODS.localize_box(row, { text_colour = G.C.UI.TEXT_DARK, vars = e.vars }),
+				nodes = row,
 			}
 		end
 	end
+	local comma_node = {}
+	localize({
+		type = "other",
+		key = "worm_meow_nyarlathotep_commas",
+		nodes = comma_node,
+		vars = {},
+	})
+	local comma_row = {
+		n = G.UIT.R,
+		config = { align = "cm" },
+		nodes = comma_node[1],
+	}
+	local comma_row_with_space = {
+		n = G.UIT.R,
+		config = { align = "cm" },
+		nodes = comma_node[2],
+	}
 	local rows = {
 		{
 			n = G.UIT.R,
@@ -20,18 +42,11 @@ local function build_nyarlathotep_entries(all_entries, max_cols, no_commas)
 		},
 	}
 	for i, e in ipairs(entries_to_organize) do
-		table.insert(rows[#rows].nodes, e)
+		table.insert(rows[#rows].nodes, { n = G.UIT.C, config = { align = "cm" }, nodes = { e } })
 		if i ~= #entries_to_organize then
 			if i % max_cols == 0 then
 				if not no_commas then
-					table.insert(rows[#rows].nodes, {
-						n = G.UIT.C,
-						config = { align = "cm" },
-						nodes = SMODS.localize_box(
-							{ { strings = { "," }, control = {} } },
-							{ text_colour = G.C.UI.TEXT_DARK }
-						),
-					})
+					table.insert(rows[#rows].nodes, { n = G.UIT.C, config = { align = "cm" }, nodes = { comma_row } })
 				end
 				rows[#rows + 1] = {
 					n = G.UIT.R,
@@ -39,29 +54,13 @@ local function build_nyarlathotep_entries(all_entries, max_cols, no_commas)
 					nodes = {},
 				}
 			elseif not no_commas then
-				table.insert(rows[#rows].nodes, {
-					n = G.UIT.C,
-					config = { align = "cm" },
-					nodes = SMODS.localize_box(
-						{ { strings = { ", " }, control = {} } },
-						{ text_colour = G.C.UI.TEXT_DARK }
-					),
-				})
+				table.insert(rows[#rows].nodes, { n = G.UIT.C, config = { align = "cm" }, nodes = { comma_row_with_space } })
 			end
 		end
 	end
-	local ret = {
-		n = G.UIT.R,
-		config = { align = "cm" },
-		nodes = {
-			{
-				n = G.UIT.C,
-				config = { align = "cm" },
-				nodes = rows,
-			},
-		},
-	}
-	return ret
+	for _, r in ipairs(rows) do
+		all_rows[#all_rows + 1] = r
+	end
 end
 
 SMODS.Joker({
@@ -107,7 +106,7 @@ SMODS.Joker({
 					entries[#entries + 1] = { vars = { cae.joker_main[entry] }, key = entry }
 				end
 			end
-			main_end[#main_end + 1] = build_nyarlathotep_entries(entries, 2)
+			build_nyarlathotep_entries(entries, 2, nil, main_end)
 		end
 		if next(cae.individual) then
 			seen = true
@@ -123,8 +122,8 @@ SMODS.Joker({
 					entries[#entries + 1] = { vars = { cae.individual[entry] }, key = entry }
 				end
 			end
-			main_end[#main_end + 1] = build_nyarlathotep_entries({ { key = "on_score" } }, 1)
-			main_end[#main_end + 1] = build_nyarlathotep_entries(entries, 3)
+			build_nyarlathotep_entries({ { key = "on_score" } }, 1, nil, main_end)
+			build_nyarlathotep_entries(entries, 3, nil, main_end)
 		end
 		if next(cae.held_in_hand) then
 			seen = true
@@ -140,8 +139,8 @@ SMODS.Joker({
 					entries[#entries + 1] = { vars = { cae.held_in_hand[entry] }, key = entry }
 				end
 			end
-			main_end[#main_end + 1] = build_nyarlathotep_entries({ { key = "held_in_hand" } }, 1)
-			main_end[#main_end + 1] = build_nyarlathotep_entries(entries, 3)
+			build_nyarlathotep_entries({ { key = "held_in_hand" } }, 1, nil, main_end)
+			build_nyarlathotep_entries(entries, 3, nil, main_end)
 		end
 		if next(cae.misc) then
 			seen = true
@@ -150,12 +149,12 @@ SMODS.Joker({
 				local entry = Wormhole.TEAM_MEOW.nyarlathotep_exchanges[power.key]
 				local vars = entry.loc_vars and entry:loc_vars(card, power.amt) or {}
 				entries[#entries + 1] = {
-					vars = vars,
+					vars = vars.vars,
 					key = entry.key,
 					no_auto_key = true,
 				}
 			end
-			main_end[#main_end + 1] = build_nyarlathotep_entries(entries, 1, true)
+			build_nyarlathotep_entries(entries, 1, true, main_end)
 		end
 		if not seen then
 			return {
@@ -248,7 +247,13 @@ local function generate_exchange_item_ui(card, option)
 	local desc_nodes = {}
 	local cost_nodes = {}
 	local ex_prototype = Wormhole.TEAM_MEOW.nyarlathotep_exchanges[option.key]
-	local loc_res = ex_prototype:loc_vars(card) or {}
+	local amt = nil
+	for _, power in ipairs(card.ability.extra.misc) do
+		if power.key == option.key then
+			amt = power.amt
+		end
+	end
+	local loc_res = ex_prototype:loc_vars(card, amt) or {}
 	local name_nodes = localize({ type = "name", key = option.key, set = "Other", vars = loc_res.vars or {} })
 	localize({ type = "other", key = option.key, nodes = desc_nodes, vars = loc_res.vars or {} })
 
@@ -374,7 +379,7 @@ function G.FUNCS.worm_meow_exchange_reward(e)
 	local exchange = Wormhole.TEAM_MEOW.nyarlathotep_exchanges[e.config.exchange_option.key]
 	if exchange.misc then
 		local found = false
-		for _, power in ipairs(exchange.misc) do
+		for _, power in ipairs(card.ability.extra.misc) do
 			if power.key == e.config.exchange_option.key then
 				power.amt = power.amt + 1
 				found = true
@@ -508,10 +513,13 @@ nyarlathotep_exchange({
 		cae.individual.mult = self.config.extracted_mult + (cae.individual.mult or 0)
 	end,
 	loc_vars = function(self, card)
+		local cae = card.ability.extra
 		return {
 			vars = {
 				self.config.extracted_mult,
 				self.config.extracted_chips,
+				cae.individual.mult or 0,
+				cae.individual.chips or 0,
 			},
 		}
 	end,
@@ -520,16 +528,18 @@ nyarlathotep_exchange({
 nyarlathotep_exchange({
 	key = "sloth",
 	cost = 2,
-	config = { sloth_xchips = 1.1 },
+	config = { sloth_xchips = 0.1 },
 	reward = function(self, card)
 		local cae = card.ability.extra
 
-		cae.held_in_hand.xchips = self.config.sloth_xchips * (cae.held_in_hand.xchips or 1)
+		cae.held_in_hand.xchips = self.config.sloth_xchips + (cae.held_in_hand.xchips or 1)
 	end,
 	loc_vars = function(self, card)
+		local cae = card.ability.extra
 		return {
 			vars = {
 				self.config.sloth_xchips,
+				cae.held_in_hand.xchips or 1,
 			},
 		}
 	end,
@@ -582,18 +592,17 @@ nyarlathotep_exchange({
 	cost = -2,
 	config = {},
 	reward = function(self, card)
-		if G.jokers.cards[#G.jokers.cards].config.center.key == 'j_worm_meow_nyarlathotep' then
+		if G.jokers.cards[#G.jokers.cards].config.center.key == "j_worm_meow_nyarlathotep" then
 			G.jokers.cards[#G.jokers.cards - 1]:juice_up(0.8, 0.8)
-			G.jokers.cards[#G.jokers.cards - 1]:add_sticker('eternal', true)
-			SMODS.debuff_card(G.jokers.cards[#G.jokers.cards - 1], true, 'meow_nyarlathotep_silence')
+			G.jokers.cards[#G.jokers.cards - 1]:add_sticker("eternal", true)
+			SMODS.debuff_card(G.jokers.cards[#G.jokers.cards - 1], true, "meow_nyarlathotep_silence")
 		else
 			G.jokers.cards[#G.jokers.cards]:juice_up(0.8, 0.8)
-			G.jokers.cards[#G.jokers.cards]:add_sticker('eternal', true)
-			SMODS.debuff_card(G.jokers.cards[#G.jokers.cards], true, 'meow_nyarlathotep_silence')
+			G.jokers.cards[#G.jokers.cards]:add_sticker("eternal", true)
+			SMODS.debuff_card(G.jokers.cards[#G.jokers.cards], true, "meow_nyarlathotep_silence")
 		end
 	end,
-	loc_vars = function(self, card)
-	end,
+	loc_vars = function(self, card) end,
 	in_pool = function(self, card, amt)
 		return G.GAME.meow_sanity_lost > 0 and #G.jokers.cards > 1
 	end,
@@ -608,28 +617,29 @@ nyarlathotep_exchange({
 		cae.joker_main.xchips = (cae.joker_main.xchips or 1) + self.config.xchips
 		G.E_MANAGER:add_event(Event({
 			func = function()
-				play_sound('tarot1')
+				play_sound("tarot1")
 				local candidates = {}
 				for _, j in ipairs(G.jokers.cards) do
-					if j.config.center.key ~= 'j_worm_meow_nyarlathotep' then
+					if j.config.center.key ~= "j_worm_meow_nyarlathotep" then
 						table.insert(candidates, j)
 					end
 				end
-				local jokertoflip = #candidates > 0 and
-					pseudorandom_element(candidates, pseudoseed("meow_nyarlathotep")) or nil
+				local jokertoflip = #candidates > 0
+						and pseudorandom_element(candidates, pseudoseed("meow_nyarlathotep"))
+					or nil
 				if jokertoflip then
 					G.E_MANAGER:add_event(Event({
-						trigger = 'after',
+						trigger = "after",
 						delay = 0.3,
 						blockable = false,
 						func = function()
 							jokertoflip:flip()
 							return true
-						end
+						end,
 					}))
 				end
 				return true
-			end
+			end,
 		}))
 	end,
 	loc_vars = function(self, card)
@@ -658,9 +668,11 @@ nyarlathotep_exchange({
 			end
 		end
 		for k, v in pairs(G.GAME.banned_keys) do --makes sure not to include disabled/banned blinds
-			if showdowns[k] then showdowns[k] = nil end
+			if showdowns[k] then
+				showdowns[k] = nil
+			end
 		end
-		local ignore, boss = pseudorandom_element(showdowns, 'nyarlathotep_dread') --boss to reroll into
+		local ignore, boss = pseudorandom_element(showdowns, "nyarlathotep_dread") --boss to reroll into
 		G.E_MANAGER:add_event(Event({
 			func = function()
 				play_sound("worm_meowDread", 1 + 0.5 * (math.random() - 0.5), 0.6)
@@ -671,18 +683,17 @@ nyarlathotep_exchange({
 					func = function()
 						G.FORCE_BOSS = nil
 						return true
-					end
+					end,
 				}))
 				return true
-			end
+			end,
 		}))
 	end,
-	loc_vars = function(self, card)
-	end,
+	loc_vars = function(self, card) end,
 	in_pool = function(self, card, amt)
 		local is_in_blind = G.GAME.blind.in_blind
 		return not is_in_blind
-	end
+	end,
 })
 
 nyarlathotep_exchange({
@@ -714,6 +725,106 @@ nyarlathotep_exchange({
 		return #G.jokers.cards > 3
 	end,
 })
+
+nyarlathotep_exchange({
+	key = "foresight",
+	cost = 3,
+	config = {},
+	misc = true,
+	loc_vars = function(self, card, amt)
+		return {
+			vars = {
+				amt or 1,
+				(amt or 1) > 1 and localize("k_worm_meow_plural") or "",
+			},
+		}
+	end,
+	calculate = function(self, card, context, amt)
+		if context.end_of_round and context.main_eval and context.beat_boss and not context.game_over then
+			G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + amt
+			for _ = 1, amt do
+				G.E_MANAGER:add_event(Event({
+					func = function()
+						G.E_MANAGER:add_event(Event({
+							func = function()
+								SMODS.add_card({
+									set = "Tarot",
+									key_append = "meow_nyarlathotep",
+									edition = "e_negative",
+								})
+								G.GAME.consumeable_buffer = G.GAME.consumeable_buffer - 1
+								return true
+							end,
+						}))
+						SMODS.calculate_effect({ message = localize("k_plus_tarot"), colour = G.C.PURPLE }, card)
+						return true
+					end,
+				}))
+			end
+		end
+	end,
+})
+
+nyarlathotep_exchange({
+	key = "apparition",
+	cost = 2,
+	config = {},
+	misc = true,
+	loc_vars = function(self, card, amt)
+		return {
+			vars = {
+				amt or 1,
+				(amt or 1) > 1 and localize("k_worm_meow_plural") or "",
+			},
+		}
+	end,
+	calculate = function(self, card, context, amt)
+		if context.skip_blind then
+			local created = math.min(amt, G.consumeables.config.card_limit - (#G.consumeables.cards + G.GAME.consumeable_buffer))
+			G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + created
+			for _ = 1, created do
+				G.E_MANAGER:add_event(Event({
+					func = function()
+						G.E_MANAGER:add_event(Event({
+							func = function()
+								SMODS.add_card({
+									set = "Spectral",
+									key_append = "meow_nyarlathotep",
+								})
+								G.GAME.consumeable_buffer = G.GAME.consumeable_buffer - 1
+								return true
+							end,
+						}))
+						SMODS.calculate_effect({ message = localize("k_plus_tarot"), colour = G.C.PURPLE }, card)
+						return true
+					end,
+				}))
+			end
+		end
+	end,
+})
+
+nyarlathotep_exchange({
+	key = "conquest",
+	cost = 4,
+	config = { xmult = 0.2 },
+	reward = function(self, card)
+		local cae = card.ability.extra
+		cae.held_in_hand.xmult = self.config.xmult + (cae.held_in_hand.xmult or 1)
+		cae.individual.xmult = self.config.xmult + (cae.individual.xmult or 1)
+	end,
+	loc_vars = function(self, card)
+		local cae = card.ability.extra
+		return {
+			vars = {
+				self.config.xmult,
+				cae.held_in_hand.xmult or 1,
+				cae.individual.xmult or 1,
+			},
+		}
+	end,
+})
+
 
 function Wormhole.TEAM_MEOW.generate_exchange_pool(card, seed)
 	local results = {}
