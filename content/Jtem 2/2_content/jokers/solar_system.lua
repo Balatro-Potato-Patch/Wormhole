@@ -598,8 +598,8 @@ SMODS.Joker({
 		-- + saturn: adds 12 6 of diamonds as rocks
 		---- (famous circles, hexagon on top, diamond rains, 285 moons WHAT A HELL)
 		--
-		-- uranus: ?
-		---- (planet rotated 98 degrees)
+		-- uranus: x1.5 Chips
+		---- (it is big actually)
 		--
 		-- + neptune: each played or held in hand diamond 1 in 2 chance to give 1 dollar
 		---- (diamond rains)
@@ -607,7 +607,7 @@ SMODS.Joker({
 		-- + pluto: 1 in 4 level up random hand, 1 in 4 decrease level
 		---- (so it's planet or dwarf planet?)
 		--
-		-- + eris: x1.5 Chips
+		-- + eris: Four of a Kind counts as Five of a Kind, single-suit Four of a Kind = Flush Five
 		---- (orbit significantly shifted from Sun, very bright)
 
 		if context.evaluate_poker_hand then

@@ -172,7 +172,9 @@ local function spawn_new_rock(protect, whitelist)
 				end,
 			}))
 		end
-		create_shop_card_ui(card)
+		if with_shop_ui then
+			create_shop_card_ui(card)
+		end
 		return true
 	end
 	if target == "hand" and G.hand and G.STATE == G.STATES.SELECTING_HAND then
@@ -235,20 +237,27 @@ end
 local old_game_update = Game.update
 function Game:update(...)
 	old_game_update(self, ...)
-	if G.GAME.used_jokers then
-		G.GAME.used_jokers[rock.key] = nil
-	end
-	if WORM_JTEM.quantum_rock.enabled then
-		G.worm_quantum_rock_target_dt = G.worm_quantum_rock_target_dt or G.TIMERS.REAL
-		if G.TIMERS.REAL - G.worm_quantum_rock_target_dt > 0.5 then
-			roll_new_rock_target()
-			G.worm_quantum_rock_target_dt = G.TIMERS.REAL
+	if G.GAME then
+		if G.GAME.used_jokers then
+			G.GAME.used_jokers[rock.key] = nil
 		end
-		if G.worm_quantum_rock then
-			if G.worm_quantum_rock.REMOVED and G.worm_quantum_rock.area then
-				G.worm_quantum_rock:remove()
-				G.worm_quantum_rock = nil
+		if G.GAME.worm_quantum_rock_spawned then
+			WORM_JTEM.quantum_rock.enabled = true
+		end
+		if WORM_JTEM.quantum_rock.enabled then
+			G.worm_quantum_rock_target_dt = G.worm_quantum_rock_target_dt or G.TIMERS.REAL
+			if G.TIMERS.REAL - G.worm_quantum_rock_target_dt > 0.5 then
+				roll_new_rock_target()
+				G.worm_quantum_rock_target_dt = G.TIMERS.REAL
 			end
+			if G.worm_quantum_rock then
+				if G.worm_quantum_rock.REMOVED and G.worm_quantum_rock.area then
+					G.worm_quantum_rock:remove()
+					G.worm_quantum_rock = nil
+				end
+			end
+		else
+			G.worm_quantum_rock_target = nil
 		end
 	else
 		G.worm_quantum_rock_target = nil
