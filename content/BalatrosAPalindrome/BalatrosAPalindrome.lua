@@ -485,129 +485,125 @@ function print_table(t, depth)
 	end
 end
 
-for duplicate = 0, 40 do
-
-	-- Space Worm
-	SMODS.Joker {
-		ppu_team = {"BalatrosAPalindrome"},
-		key = "bap_space_worm"..duplicate,
-		blueprint_compat = true,
-		rarity = 3,
-		cost = 1,
-		atlas = 'Palindrome',
-		pos = { x = 0, y = 2 },
-		config = { extra = { x_mult = 1.0, inc_mult = 0.25 } },
-		loc_txt = {
-			name = 'Space Worm'.." "..duplicate,
-			text = {
-				"When {C:attention}Blind{} is selected,",
-				"{C:attention}destroy{} Joker from {B:1,V:2}Wormhole{}",
-				"to the right and gain {X:mult,C:white} X#1# {} Mult",
-				"{C:inactive}(Currently {X:mult,C:white} X#2# {C:inactive} Mult)",
-			}
-		},
-		loc_vars = function(self, info_queue, card)
-			return { vars = { card.ability.extra.inc_mult, card.ability.extra.x_mult, colours={Wormhole.badge_colour, Wormhole.badge_text_colour} } }
-		end,
-		calculate = function(self, card, context)
-			if context.setting_blind and not context.blueprint then
-				local my_pos = nil
-				for i = 1, #G.jokers.cards do
-					if G.jokers.cards[i] == card then
-						my_pos = i
-						break
-					end
+-- Space Worm
+SMODS.Joker {
+	ppu_team = {"BalatrosAPalindrome"},
+	key = "bap_space_worm",
+	blueprint_compat = true,
+	rarity = 3,
+	cost = 1,
+	atlas = 'Palindrome',
+	pos = { x = 0, y = 2 },
+	config = { extra = { x_mult = 1.0, inc_mult = 0.25 } },
+	loc_txt = {
+		name = 'Space Worm',
+		text = {
+			"When {C:attention}Blind{} is selected,",
+			"{C:attention}destroy{} Joker from {B:1,V:2}Wormhole{}",
+			"to the right and gain {X:mult,C:white} X#1# {} Mult",
+			"{C:inactive}(Currently {X:mult,C:white} X#2# {C:inactive} Mult)",
+		}
+	},
+	loc_vars = function(self, info_queue, card)
+		return { vars = { card.ability.extra.inc_mult, card.ability.extra.x_mult, colours={Wormhole.badge_colour, Wormhole.badge_text_colour} } }
+	end,
+	calculate = function(self, card, context)
+		if context.setting_blind and not context.blueprint then
+			local my_pos = nil
+			for i = 1, #G.jokers.cards do
+				if G.jokers.cards[i] == card then
+					my_pos = i
+					break
 				end
+			end
 
-				if my_pos and G.jokers.cards[my_pos + 1] and string.find(G.jokers.cards[my_pos + 1].config.center_key,"worm") and not SMODS.is_eternal(G.jokers.cards[my_pos + 1], card) and not G.jokers.cards[my_pos + 1].getting_sliced then
-					local sliced_card = G.jokers.cards[my_pos + 1]
-					sliced_card.getting_sliced = true -- Make sure to do this on destruction effects
-					G.GAME.joker_buffer = G.GAME.joker_buffer - 1
+			if my_pos and G.jokers.cards[my_pos + 1] and string.find(G.jokers.cards[my_pos + 1].config.center_key,"worm") and not SMODS.is_eternal(G.jokers.cards[my_pos + 1], card) and not G.jokers.cards[my_pos + 1].getting_sliced then
+				local sliced_card = G.jokers.cards[my_pos + 1]
+				sliced_card.getting_sliced = true -- Make sure to do this on destruction effects
+				G.GAME.joker_buffer = G.GAME.joker_buffer - 1
+				G.E_MANAGER:add_event(Event({
+					func = function()
+						G.GAME.joker_buffer = 0
+						-- See note about SMODS Scaling Manipulation on the wiki
+						card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.inc_mult
+						card:juice_up(0.8, 0.8)
+						sliced_card:start_dissolve({ HEX("57ecab") }, nil, 1.6)
+						play_sound('slice1', 0.96 + math.random() * 0.08)
+						return true
+					end
+				}))
+				return {
+					message = localize { type = 'variable', key = 'a_xmult', vars = { card.ability.extra.x_mult + card.ability.extra.inc_mult } },
+					colour = G.C.RED,
+					no_juice = true
+				}
+			else if my_pos and G.jokers.cards[my_pos + 1] then
+					return {
+						message = { G.jokers.cards[my_pos + 1].config.center_key }
+					}
+				end
+			end
+		end
+		if context.joker_main then
+			return {
+				x_mult = card.ability.extra.x_mult
+			}
+		end
+	end
+}
+
+SMODS.Joker {
+	key = 'bap_regular_worm',
+	blueprint_compat = true,
+	rarity = 1,
+	cost = 1,
+	atlas = 'Palindrome',
+	pos={x=0,y=4},
+	soul_pos={x=1,y=4},
+	config = { extra = { x_mult = 1.0, inc_x_mult = 0.10 } },
+	loc_txt = {
+		name = 'Worm',
+		text = {
+			"This Joker gains {X:mult,C:white} X#1# {} Mult",
+			"per {T:e_worm_bap_void}Void{} card played,",
+			"{C:attention}removes{} {T:e_worm_bap_void}Void{} edition",
+			"{C:inactive}(Currently {X:mult,C:white} X#2# {C:inactive} Mult)"
+		}
+	},
+	loc_vars = function(self, info_queue, card)
+		return { vars = { card.ability.extra.inc_x_mult, card.ability.extra.x_mult } }
+	end,
+	calculate = function(self, card, context)
+		if context.before and not context.blueprint then
+			local voids = {}
+			for _, card in ipairs(context.full_hand) do
+				if card.edition and card.edition.key == 'e_worm_bap_void' then
+					print("Hello World")
+					voids[#voids + 1] = card
 					G.E_MANAGER:add_event(Event({
 						func = function()
-							G.GAME.joker_buffer = 0
-							-- See note about SMODS Scaling Manipulation on the wiki
-							card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.inc_mult
-							card:juice_up(0.8, 0.8)
-							sliced_card:start_dissolve({ HEX("57ecab") }, nil, 1.6)
-							play_sound('slice1', 0.96 + math.random() * 0.08)
+							card:set_edition(nil, true)
+							card:juice_up()
 							return true
 						end
 					}))
-					return {
-						message = localize { type = 'variable', key = 'a_xmult', vars = { card.ability.extra.x_mult + card.ability.extra.inc_mult } },
-						colour = G.C.RED,
-						no_juice = true
-					}
-				else if my_pos and G.jokers.cards[my_pos + 1] then
-						return {
-							message = { G.jokers.cards[my_pos + 1].config.center_key }
-						}
-					end
 				end
 			end
-			if context.joker_main then
-				return {
-					x_mult = card.ability.extra.x_mult
-				}
-			end
-		end
-	}
 
-	SMODS.Joker {
-		key = 'regular_worm'..duplicate,
-		blueprint_compat = true,
-		rarity = 1,
-		cost = 1,
-		atlas = 'Palindrome',
-		pos={x=0,y=4},
-		soul_pos={x=1,y=4},
-		config = { extra = { x_mult = 1.0, inc_x_mult = 0.10 } },
-		loc_txt = {
-			name = 'Worm'.." "..duplicate,
-			text = {
-				"This Joker gains {X:mult,C:white} X#1# {} Mult",
-				"per {T:e_worm_bap_void}Void{} card played,",
-				"{C:attention}removes{} {T:e_worm_bap_void}Void{} edition",
-				"{C:inactive}(Currently {X:mult,C:white} X#2# {C:inactive} Mult)"
+		if #voids > 0 then
+			-- See note about SMODS Scaling Manipulation on the wiki
+			card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.inc_x_mult * #voids
+			return {
+				message = localize { type = 'variable', key = 'a_xmult', vars = { card.ability.extra.x_mult } },
+				colour = G.C.MULT
 			}
-		},
-		loc_vars = function(self, info_queue, card)
-        	return { vars = { card.ability.extra.inc_x_mult, card.ability.extra.x_mult } }
-		end,
-		calculate = function(self, card, context)
-			if context.before and not context.blueprint then
-				local voids = {}
-				for _, card in ipairs(context.full_hand) do
-					if card.edition and card.edition.key == 'e_worm_bap_void' then
-						print("Hello World")
-						voids[#voids + 1] = card
-						G.E_MANAGER:add_event(Event({
-							func = function()
-								card:set_edition(nil, true)
-								card:juice_up()
-								return true
-							end
-						}))
-					end
-				end
-
-            if #voids > 0 then
-                -- See note about SMODS Scaling Manipulation on the wiki
-                card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.inc_x_mult * #voids
-                return {
-                    message = localize { type = 'variable', key = 'a_xmult', vars = { card.ability.extra.x_mult } },
-                    colour = G.C.MULT
-                }
-            end
-        end
-        if context.joker_main then
-            return {
-                x_mult = card.ability.extra.x_mult
-            }
-        end
+		end
 	end
-	}
-
+	if context.joker_main then
+		return {
+			x_mult = card.ability.extra.x_mult
+		}
+	end
 end
+}
 
