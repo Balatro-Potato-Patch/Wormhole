@@ -871,6 +871,7 @@ SMODS.Consumable { -- John Absinthe
                 v.ability.perma_p_dollars = v.ability.perma_p_dollars + card.ability.extra.gain
                 G.E_MANAGER:add_event(Event({
                     func = function()
+                        v.absinthe_modified = true
                         v:juice_up()
                         return true
                     end

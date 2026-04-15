@@ -7,6 +7,13 @@ SMODS.Atlas {
     py = 95
 }
 
+SMODS.Atlas {
+    key = "abs_modifier",
+    path = 'absinthe/abs_modifier.png',
+    px = 71,
+    py = 95
+}
+
 --#endregion
 
 --#region Team and Dev Objects
@@ -187,4 +194,35 @@ function Wormhole.Absinthe.alert_no_space(card, area, colour)
     return true end}))
 end
 
+SMODS.DrawStep {
+    key = 'absinthe_modified',
+    order = 25,
+    func = function(self, layer)
+        if self.absinthe_modified then
+            if not Wormhole.Absinthe.modifier_sprite then
+                Wormhole.Absinthe.modifier_sprite = Sprite(0, 0, G.CARD_W, G.CARD_H, G.ASSET_ATLAS['worm_abs_modifier'], { x = 0, y = 0 })
+            end
+            Wormhole.Absinthe.modifier_sprite.role.draw_major = self
+            if self.edition and not self.delay_edition then
+                for k, v in pairs(G.P_CENTER_POOLS.Edition) do
+                    if self.edition[v.key:sub(3)] and v.shader then
+                    if type(v.draw) == 'function' then
+                        v:draw(self, layer)
+                    else
+                        Wormhole.Absinthe.modifier_sprite:draw_shader(v.shader, nil, self.ARGS.send_to_shader, nil, self.children.center)
+                    end
+                    end
+                end
+                if self.edition.negative then
+                    Wormhole.Absinthe.modifier_sprite:draw_shader('negative_shine', nil, self.ARGS.send_to_shader, nil, self.children.center)
+                end
+            elseif not self:should_draw_base_shader() then
+            -- Don't render base dissolve shader.
+            elseif not self.greyed then
+            Wormhole.Absinthe.modifier_sprite:draw_shader('dissolve', nil, nil, nil, self.children.center)
+            end
+        end
+    end,
+    conditions = { vortex = false, facing = 'front' },
+}
 --#endregion

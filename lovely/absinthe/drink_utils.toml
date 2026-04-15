@@ -137,3 +137,17 @@ elseif v.hidden and not args.allow_legendaries then
   add = nil
 '''
 match_indent = true
+
+
+# Make deck view render absinthe modifiers
+[[patches]]
+[patches.pattern]
+target = '''functions/common_events.lua'''
+pattern = '''
+    new_card.pinned = other.pinned
+'''
+position = 'after'
+payload = '''
+    new_card.absinthe_modified = other.absinthe_modified
+'''
+match_indent = true
