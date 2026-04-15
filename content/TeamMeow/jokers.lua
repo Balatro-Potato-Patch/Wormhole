@@ -90,6 +90,8 @@ SMODS.Joker({
             mult = 6
         }
     },
+    atlas = "meow_jokers",
+    pos = {x = 4, y = 0},
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.mult } }
     end,
