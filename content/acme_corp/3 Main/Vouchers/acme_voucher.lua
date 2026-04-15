@@ -18,6 +18,6 @@ SMODS.Voucher {
         return { vars = { G.GAME and G.GAME.probabilities.normal or 1, 3 } }
     end,
     redeem = function(self, card)
-        SMODS.ConsumableTypes['ACME_Gadget'].shop_rate = 4
+        --SMODS.ConsumableTypes['ACME_Gadget'].shop_rate = 4
     end
 }

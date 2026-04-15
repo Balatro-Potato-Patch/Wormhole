@@ -31,9 +31,7 @@ return {
                 name = 'ACME Disintegrator-Inverse-Atron',
                 text = { "Apply a random {C:dark_edition}Edition{}",
                     "to a random held {C:attention}Joker{}"
-
                 }
-
             },
 
 
@@ -201,7 +199,7 @@ return {
         },
         Voucher = {
             v_worm_ACME_voucher_1 = {
-                name = "Gadget Merchant",
+                name = "ACME Mass Production",
                 text = {
                     "{C:ACME_Gadget}Gadget{} cards appear",
                     "{C:attention}2X{} more frequently",
@@ -209,13 +207,14 @@ return {
                 }
             },
             v_worm_ACME_voucher_2 = {
-                name = "Mass Gadget Production",
+                name = "ACME Quality Assurance",
                 text = {
-                    "{C:ACME_Gadget}Gadget{} cards appear",
-                    "{C:attention}4X{} more frequently",
-                    "in the shop and have a",
+                    --"{C:ACME_Gadget}Gadget{} cards appear",
+                    --"{C:attention}4X{} more frequently",
+                    --"in the shop and have a",
+                    "{C:ACME_Gadget}Gadget{} cards have a",
                     "{C:green}#1# in #2#{} chance to",
-                    "survive being destroyed"
+                    "not be destroyed on use"
                 }
             }
         },
@@ -246,17 +245,18 @@ return {
                     '{C:inactive}(Currently {X:mult,C:white}X#3#{C:inactive} Mult)'
                 }
             },
-	    j_worm_acme_kraft_e_jackal = {
-		name = 'Kraft E. Jackal',
-		text = {
-			'Gives a {C:red}random{} gadget',
-			'after beating a {C:attention}Boss',
-			'{C:attention}Blind',
-			'{C:red}Targeted{} gadget changes',
-		    	'every ante',
-		    	'{C:inactive}(Gadget: {X:mult,C:white}#1#{C:inactive})'
-		},
-	    },
+            j_worm_acme_kraft_e_jackal = {
+            name = 'Kraft E. Jackal',
+            text = {
+                'Gives a {E:1, C:red}random Targeted{} {C:ACME_Gadget}Gadget{}',
+                'after beating a {C:attention}Boss Blind',
+                '{C:inactive}(Gadget: {X:mult,C:white}#1#{C:inactive})'
+                },
+                {
+                    '{E:1, C:red}Targeted:{} Gets replaced at',
+                    'the end of each ante',
+                }
+	        },
         },
         Other = {
             undiscovered_acme_gadget = {
@@ -270,6 +270,14 @@ return {
             },
             p_worm_acme_gadget_normal = {
                 name = "Gadget Pack",
+                text = {
+                    "Choose {C:attention}#1#{} of up to",
+                    "{C:attention}#2#{C:attention} Gadget{} cards to",
+                    "be held in consumable slots",
+                },
+            },
+            p_worm_acme_gadget_jumbo = {
+                name = "Jumbo Gadget Pack",
                 text = {
                     "Choose {C:attention}#1#{} of up to",
                     "{C:attention}#2#{C:attention} Gadget{} cards to",
@@ -295,11 +303,16 @@ return {
                     {
                         "This was my {C:attention}first contribution{} to a",
                         "a full public Balatro content mod!",
-                        "Thanks to {C:legendary}Astra{} and the {C:attention}ACME{} team",
-                        "for putting up with the barrage of {C:mult}yaps,",
-                        "{C:mult}questions{} and {C:mult}reworks{} I brought upon.",
-                        "I think we made something special.",
-                        "{C:inactive}Also, yeah, I'm the GD guy, iykyk :)"
+                        "Thanks to the {C:attention}ACME{} team",
+                        "for putting up with the barrage of {C:mult}yaps",
+                        "and {C:mult}reworks{} I brought upon.",
+                        "I think we made something special."
+                    },
+                    {
+                        "To see more of my work, you can go",
+                        "look at {C:attention}Collab++{}, my simple card suit mod,",
+                        "or look out for {C:green}House Rules{}, whenever that comes out!",
+                        "{C:inactive}Also check out my GD stuff oc, iykyk :)"
                     },
                 },
             },
@@ -341,10 +354,10 @@ return {
                 name = "Youh",
                 text = {
                     {
-			"Thank you to all my wonderful teammates and",
-			"to {C:negative}you{} for playing. It's been such an honor to",
-			"work with {C:attention}ACME{} and code their silly jokers. {E:1,C:chips}Enjoy!{}"
-		    },
+                        "Thank you to all my wonderful teammates and",
+                        "to {C:negative}you{} for playing. It's been such an honor to",
+                        "work with {C:attention}ACME{} and code their silly jokers. {E:1,C:chips}Enjoy!{}"
+                    },
                 },
             }
             ,

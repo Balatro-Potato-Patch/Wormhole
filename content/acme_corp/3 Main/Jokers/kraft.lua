@@ -1,8 +1,8 @@
 SMODS.Joker{
 	key = 'acme_kraft_e_jackal',
 	atlas = 'ACME_jokers',
-	rarity = 3,
-	cost = 6,
+	rarity = 2,
+	cost = 5,
 	blueprint_compat = true,
 	perishable_compat = true,
 	eternal_compat = true,
