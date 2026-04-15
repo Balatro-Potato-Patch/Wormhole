@@ -12,7 +12,7 @@ return {
                 }
             },
             PotatoPatchDev_fooping = { 
-                name = "fooping", 
+                name = "Fooping", 
                 text = {
                     { "{C:attention,s:1.3}Hello!{}", "I am a programmer and artist for this mod!" },
                     { "Thank you to the Potato Patch team for the opportunity!" },
