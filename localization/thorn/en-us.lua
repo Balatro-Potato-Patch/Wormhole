@@ -67,15 +67,8 @@ return {
                     name = "Sophie",
                     text = {
                         {
-                            "Hello it is me {C:attention}Jimbo",
-                        },
-                        {
-                            "I have {C:edition,E:2}ascended{} past",
-                            "the limits of {C:attention}Balatro"
-                        },
-                        {
-                            "{C:inactive,E:2}replace this later"
-                        },
+                            "play cracker mod please",
+                        }
                     }
                 },
                 PotatoPatchDev_hatstack = {
@@ -194,6 +187,28 @@ return {
                         "{C:red}fucking{} sight before I {C:diamonds}piss{} on you too"
                     }
                 },
+                j_worm_thorn_devils_machine = {
+                    name = "Devil's Machine",
+                    text = {
+                        {
+                            "Rescore all played cards",
+                            "in {C:attention}reverse order",
+                            "{C:green}#1# in #2#{} chance this card",
+                            "is destroyed at end of round..."
+                        },
+                    }
+                },
+                j_worm_thorn_giygas = {
+                    name = "Giygas",
+                    text = {
+                        {
+                            "Rescore all played cards",
+                            "in {C:attention}random order",
+                            "{C:green}#1# in #2#{} chance for each scored card",
+                            "to be changed to a {C:attention}random enhancement{}"
+                        },
+                    }
+                },
             },
             Voucher = {
                 v_worm_thorn_ip_travel = {
@@ -213,5 +228,11 @@ return {
                     }
                 }
             },
+        },
+        misc = {
+            dictionary = {
+                k_thorn_giygas_reveal = 'Revealed!',
+                k_thorn_giygas_enhanced = 'Enhanced!',
+            }
         }
 }

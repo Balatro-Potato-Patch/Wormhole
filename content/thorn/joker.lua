@@ -11,7 +11,7 @@ SMODS.Joker {
     atlas = "thorn_cards",
 	pos = { x = 0, y = 0 },
     soul_pos = { x = 2, y = 1}, --I don't want to rearange the atlas :з
-	cost = 4,
+	cost = 5,
 	blueprint_compat = true,
 	eternal_compat = false,
 	perishable_compat = true,
@@ -82,7 +82,7 @@ SMODS.Joker {
 	rarity = 2,
     atlas = "thorn_cards",
 	pos = { x = 2, y = 0 },
-	cost = 5,
+	cost = 7,
 	blueprint_compat = true,
 	eternal_compat = false,
 	perishable_compat = true,
@@ -125,7 +125,7 @@ SMODS.Joker { --Moved here for the sake of them being close on atlas
 	rarity = 2,
     atlas = "thorn_cards",
 	pos = { x = 1, y = 1 },
-	cost = 5,
+	cost = 7,
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable_compat = false,
@@ -225,7 +225,7 @@ SMODS.Joker {
 	    local quip = {}
 	    localize{type = "descriptions", key = "thorn_piss_rant", set = "Joker", default_col = G.C.UI.TEXT_DARK, nodes = loc, vars = {}, scale = 0.7}
 	    quip = {transparent_multiline_text(loc)}
-        return { vars = { localize(card.ability.extra.suit_old, 'suits_plural'), localize(card.ability.extra.suit_old, 'suits_plural'), card.ability.extra.chips }, main_end = {
+        return { vars = { localize(card.ability.extra.suit_old, 'suits_plural'), localize(card.ability.extra.suit_new, 'suits_plural'), card.ability.extra.chips }, main_end = {
             {n=G.UIT.C, config = {align = "cm", minh = 1, minw = 5, r = 0.3, padding = 0.07, colour = G.C.JOKER_GREY, shadow = true}, nodes={
 				{n=G.UIT.R, config={align = "cm" , r = 0.2, padding = 0.1, colour = G.C.WHITE}, nodes=
 					quip
@@ -255,4 +255,118 @@ SMODS.Joker {
     ppu_artist = {"hatstack"},
     ppu_coder = {"evgast"},
     ppu_team = {"thorn"},
+}
+
+SMODS.Joker {
+	key = 'thorn_devils_machine',
+	rarity = 3,
+    atlas = "thorn_cards",
+	pos = { x = 3, y = 1 },
+	cost = 7,
+	blueprint_compat = true,
+	eternal_compat = false,
+	perishable_compat = true,
+    jand_gemini_compat = true,
+    config = { extra = { stop = false, odds = 4 } },
+    loc_vars = function(self, info_queue, card)
+        local new_numerator, new_denominator = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, 'devils_machine')
+        return {vars = {new_numerator, new_denominator}}
+    end,
+    calculate = function(self, card, context, effect)
+        if (not card.ability.extra.stop) and context.individual and context.cardarea == G.play then
+            if context.other_card == context.scoring_hand[#context.scoring_hand] then
+                return {
+                    func = function()
+                        SMODS.calculate_effect({message = localize('k_again_ex')}, card)
+                        for i=#context.scoring_hand, 1, -1 do
+                            local passed_context = context
+                            card.ability.extra.stop = true
+                            SMODS.score_card(context.scoring_hand[i], passed_context)
+                        end
+                        card.ability.extra.stop = false
+                    end
+                }
+            end
+        elseif context.end_of_round and not context.blueprint and not context.repetition and not context.individual then
+            if SMODS.pseudorandom_probability(card, 'devils_machine', 1, card.ability.extra.odds, 'devils_machine') then
+                SMODS.destroy_cards(card, nil, nil, true)
+                SMODS.add_card { set = 'Joker', key = 'j_worm_thorn_giygas' }
+                return {
+                    message = localize('k_thorn_giygas_reveal')
+                }
+            else
+                return {
+                    message = localize('k_safe_ex')
+                }
+            end
+        end
+    end,
+    ppu_artist = {"hatstack"},
+    ppu_coder = {"sophie"},
+    ppu_team = {"mtw"},
+}
+
+SMODS.Joker {
+	key = 'thorn_giygas',
+	rarity = 3,
+    atlas = "thorn_cards",
+	pos = { x = 4, y = 1 },
+	cost = 7,
+	blueprint_compat = true,
+	eternal_compat = false,
+	perishable_compat = true,
+    jand_gemini_compat = true,
+    no_collection = true,
+    in_pool = function(self)
+        return false
+    end,
+    config = { extra = { stop = false, odds = 4 } },
+    loc_vars = function(self, info_queue, card)
+        local new_numerator, new_denominator = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, 'giygas')
+        return {vars = {new_numerator, new_denominator}}
+    end,
+    calculate = function(self, card, context, effect)
+        if (not card.ability.extra.stop) and context.individual and context.cardarea == G.play then
+            if context.other_card == context.scoring_hand[#context.scoring_hand] then
+                return {
+                    func = function()
+                        SMODS.calculate_effect({message = localize('k_again_ex')}, card)
+                        local scoring_hand_giygas = {}
+                        for i, v in ipairs(context.scoring_hand) do
+                            scoring_hand_giygas[i] = v
+                        end
+                        pseudoshuffle(scoring_hand_giygas, 'giygas')
+                        for i=1, #scoring_hand_giygas do
+                            local passed_context = context
+                            card.ability.extra.stop = true
+                            SMODS.score_card(scoring_hand_giygas[i], passed_context)
+                        end
+                        card.ability.extra.stop = false
+                    end
+                }
+            end
+        elseif context.before and not context.blueprint then
+            local triggered = false
+            for _, scored_card in ipairs(context.scoring_hand) do
+                if SMODS.pseudorandom_probability(card, 'giygas', 1, card.ability.extra.odds, 'giygas') then
+                    triggered = true
+                    scored_card:set_ability(SMODS.poll_enhancement{key = "giygas", guaranteed = true}, nil, true)
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            scored_card:juice_up()
+                            return true
+                        end
+                    }))
+                end
+                if triggered then
+                    return {
+                        message = localize('k_thorn_giygas_enhanced')
+                    }
+                end
+            end
+        end
+    end,
+    ppu_artist = {"hatstack"},
+    ppu_coder = {"sophie"},
+    ppu_team = {"mtw"},
 }

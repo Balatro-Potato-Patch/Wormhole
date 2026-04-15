@@ -10,9 +10,7 @@ function thorn_most_played()
     local hand_key = nil
     local order = #G.handlist + 1
     for k, v in pairs(G.GAME.hands) do
-        print(v.order)
         if (v.played ~= 0) and (v.played >= played) and (v.order < order) then
-            print("tis!")
             order = v.order
             played = v.played
             hand_key = k
@@ -28,7 +26,6 @@ SMODS.Voucher {
     attributes = {'space', 'planet'},
 	calculate = function(self, card, context)
         if (thorn_most_played() and context.using_consumeable and context.consumeable.config.center.set == "Planet") and not G.GAME.used_vouchers["v_worm_thorn_is_travel"] then
-            print("fart")
             SMODS.upgrade_poker_hands{
                 hands = thorn_most_played(),
                 func = function(current, base, parameter, level_up)
