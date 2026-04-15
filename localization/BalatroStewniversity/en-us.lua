@@ -241,7 +241,10 @@ return {
             dottykitty = {
                 name = "dottykitty",
                 text = {
-                    "womp womp",
+                    "\"Some fall for eternal sleep",
+                    "Their eulogies turn into gleaming stars\"",
+                    "{s:0.4} ",
+                    "{s:0.6,C:stew_inactive_lighter}if you recognise the lyrics no you don't",
                 }
             },
             Wingcap = {

@@ -22,7 +22,7 @@ PotatoPatchUtils.Developer {
 
 PotatoPatchUtils.Developer {
   name = 'dottykitty',
-  colour = HEX('ffffff'),
+  colour = HEX('62afe3'),
   loc = "dottykitty",
   team = 'Balatro Stewniversity'
 }
@@ -55,4 +55,11 @@ PotatoPatchUtils.Developer {
   team = 'Balatro Stewniversity'
 }
 
+local custom_colours = {
+  stew_inactive_lighter = lighten(G.C.UI.TEXT_INACTIVE, 0.8)
+}
 
+local loc_col_ref = loc_colour
+function loc_colour(_c, _default)
+  return custom_colours[_c] or  loc_col_ref(_c, _default)
+end
