@@ -277,7 +277,8 @@ return {
     misc = {
         dictionary = {
             k_worm_stew_dinos_extinct = 'Extinct',
-            k_worm_stew_yum = 'Yum!'
+            k_worm_stew_yum = 'Yum!',
+            k_worm_stew_cook = 'Let Him Cook!',
         },
         labels = {
             worm_stew_stellar = 'Stellar'
@@ -285,12 +286,14 @@ return {
         achievement_names = {
             ach_worm_stew_spaced_joker = 'Spaced Joker',
             ach_worm_stew_extinction_event = 'Extinction Event',
-            ach_worm_stew_true_communist = 'True Communist'
+            ach_worm_stew_true_communist = 'True Communist',
+            ach_worm_stew_perpetual_stew = 'Perpetual Stew',
         },
         achievement_descriptions = {
             ach_worm_stew_spaced_joker = 'Have a Space Joker with the Stellar edition',
             ach_worm_stew_extinction_event = 'Force an extinction event',
-            ach_worm_stew_true_communist = 'Have Uncorrupted Joker give +750 or more Chips'
+            ach_worm_stew_true_communist = 'Have Uncorrupted Joker give +750 or more Chips',
+            ach_worm_stew_perpetual_stew = 'Have Stew Earth give X10 or more Mult',
         }
         
 

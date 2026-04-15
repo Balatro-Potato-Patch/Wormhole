@@ -25,8 +25,10 @@ SMODS.Joker {
         if context.after and not context.blueprint then
             if SMODS.last_hand_oneshot then
                 card.ability.extra.Xmult = card.ability.extra.Xmult + card.ability.extra.Xmult_up
+
                 return{
-                    message = (localize{type = 'variable', key = 'a_xmult', vars = {card.ability.extra.Xmult_up}} .. ' Gained'),
+                    message = localize('k_worm_stew_cook'),
+                    -- message = (localize{type = 'variable', key = 'a_xmult', vars = {card.ability.extra.Xmult_up}} .. ' Gained'),
                     colour = G.C.RED,
                 }
                 
@@ -46,6 +48,7 @@ SMODS.Joker {
         end
 
         if context.joker_main then
+            check_for_unlock({type = 'stew_stew', value = card.ability.extra.Xmult })
             return{
                     xmult = card.ability.extra.Xmult
             }
