@@ -1,9 +1,3 @@
--- SMODS.Atlas {
---     key = "util_extras",
---     path = "util-modders/extra.png",
---     px = 71,
---     py = 95
--- }
 SMODS.Atlas {
     key = "util_deck",
     path = "util-modders/deck.png",
@@ -22,11 +16,21 @@ SMODS.Atlas {
     px = 34,
     py = 34
 }
+SMODS.Atlas {
+    key = "util_extras",
+    path = "util-modders/extra.png",
+    px = 71,
+    py = 95
+}
 
 SMODS.Joker {
     key = "util_cargo_space",
-    -- atlas = "util_extras",
+    atlas = "util_extras",
     pos = { x = 0, y = 0 },
+    rarity = 3,
+    blueprint_compat = false,
+    cost = 7,
+    attributes = {"passive", "space"},
     add_to_deck = function(self, card, from_debuff)
         for i,v in ipairs(SMODS.find_card("j_worm_util_cargo_space")) do
             if v ~= card then return end
@@ -57,13 +61,13 @@ SMODS.Joker {
 
 SMODS.Voucher {
     key = "util_better_craftmanship",
-    -- atlas = "util_extras",
+    atlas = "util_extras",
     pos = { x = 1, y = 0 },
 }
 
 SMODS.Voucher {
     key = "util_dealer_contact",
-    -- atlas = "util_extras",
+    atlas = "util_extras",
     pos = { x = 2, y = 0 },
     requires = { 'v_worm_util_better_craftmanship' },
 }
