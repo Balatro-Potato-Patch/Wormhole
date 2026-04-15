@@ -412,7 +412,7 @@ function localize(args, misc_cat)
                         {
                             n = G.UIT.O,
                             config = {
-                                object = SMODS.create_sprite(0, 0, 0.5, 0.5, "worm_lfc_proot_Ears", { x = 0, y = 0 })
+                                object = SMODS.create_sprite(0, 0, 0.25, 0.25, "worm_lfc_proot_Ears", { x = 0, y = 0 })
                             }
                         }
                     }
@@ -424,7 +424,7 @@ function localize(args, misc_cat)
                         {
                             n = G.UIT.O,
                             config = {
-                                object = SMODS.create_sprite(0, 0, 0.5, 0.5, "worm_lfc_proot_Ears", { x = 1, y = 0 })
+                                object = SMODS.create_sprite(0, 0, 0.25, 0.25, "worm_lfc_proot_Ears", { x = 1, y = 0 })
                             }
                         }
                     }

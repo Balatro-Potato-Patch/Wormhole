@@ -44,8 +44,8 @@ return {
                         "{s:0.8}we're adding {s:0.8,C:attention}Tenna{s:0.8} to it :3"
                     },
                     {
-                        "{s:0.9}Click 5 times to go to our {s:0.9,C:lfc_elle}website",
-                        "{s:0.6}No, it won't count down. there's no {s:0.6,X:lfc_dark,C:white}loc_vars{s:0.6} on these.",
+                        "{s:0.9}Click 5 times to go to our {s:0.9,E:worm_elle_text}website",
+                        "{s:0.6}No, it won't count down. There's no {s:0.6,X:lfc_dark,C:white}loc_vars{s:0.6} on these.",
                         "{s:0.6}The site is also very outdated rn but it'll be done later"
                     }
                 }
