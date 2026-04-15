@@ -160,10 +160,11 @@ return {
                 name = "Professor Renderer",
                 text = {
                     'This is my first ever mod jam!',
-                    'I did the card text and also came up',
-                    'with the names for the drinks and concepts',
-                    'for the jokers. I\'m happy with everyone\'s work',
-                    'and I hope you enjoyed what we came up with!'
+                    'I did the card text and the names/effects of',
+                    'the drinks. I also came up with the effects for',
+                    'the Casino Bartender and Happy Hour jokers.',
+                    'I\'m happy with everyone\'s work and I hope',
+                    'you enjoyed what we came up with!'
                 }
             },
             PotatoPatchDev_qunumeru = {
