@@ -101,7 +101,8 @@ return {
                         "the weird and deranged",
                         "shapeshifting slimegirl!",
                         "{s:0.5}see {C:blue,s:0.5}https://en.pronouns.page/@invalidOS",
-                        "{s:0.5}for pronouns and links!"
+                        "{s:0.5}for pronouns and links!",
+                        "just click me 5 times!",
                     },
                     {
                         "{s:0.8}I came up with a few of the ideas here,",
@@ -111,10 +112,11 @@ return {
                         "{s:0.8}the background of {C:attention,s:0.8,E:1}Eigengrau Emptiness{s:0.8} is some of",
                         "{s:0.8}my proudest work yet! {s:0.5}(even if others got the same idea...)",
                     },
+                    +
                     {
                         "lemniscate",
                         "{C:dark_edition,E:1}tomorrow"
-                    }
+                    },
                 }
             }
         },
