@@ -20,20 +20,23 @@ SMODS.Joker {
                 G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + 15
                 return {
                     dollars = card.ability.extra.money
-                }
+                },
+                play_sound('worm_jackpot', 1, 1)
             end
             if SMODS.pseudorandom_probability(card, "award_b", 1, 3) then
                 ease_hands_played(1)
                 return {
                     message = "+1 Hand",
                     colour = G.C.BLUE
-                }
+                },
+                play_sound('worm_extrahand', 1, 1)
             end
             if SMODS.pseudorandom_probability(card, "b", 1, 3) then 
                 retrig_all = true
                 return {
-                    message = "Wormhole!"
-                }
+                    message = "Wormhole!",
+                },
+                play_sound('worm_wormhole', 1, 1)
             end
         end
         if context.repetition and retrig_all == true then
@@ -44,8 +47,9 @@ SMODS.Joker {
         if context.individual and context.cardarea == G.play then
             if SMODS.pseudorandom_probability(card, "c", 1, 3) then
                 return {
-                    xmult = 2
-                }
+                    xmult = 2,
+                },
+                play_sound('worm_hyperspace', 1, 1)
             end
         end
         if context.after then
