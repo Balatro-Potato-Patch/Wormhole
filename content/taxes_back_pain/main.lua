@@ -605,7 +605,7 @@ Wormhole.tbp.Module = SMODS.Consumable:extend{
     inject = function(self)
         SMODS.Consumable.inject(self)
         G.tbp.module_sprites[self.key] = Sprite(0, 0, G.CARD_W, G.CARD_H,
-            G.ASSET_ATLAS['worm_tbp_module_sprite_only'], self.module_pos or {x=9, y=1})
+            G.ASSET_ATLAS['worm_tbp_module'], self.module_pos or {x=9, y=1})
     end,
     can_use = function(self, card)
 		return next(SMODS.find_card("j_worm_tbp_spaceship"))
@@ -659,7 +659,7 @@ Wormhole.tbp.Module({
     durability = 5,
     atlas = "tbp_module_frame",
 	pos = { x = 3, y = 1 },
-    -- module_pos = { x = 0, y = 1},
+    module_pos = { x = 7, y = 5},
 	config = {
 		extra = {
 			amount = 1,
@@ -687,6 +687,7 @@ Wormhole.tbp.Module({
     durability = 5,
     atlas = "tbp_module_frame",
 	pos = { x = 3, y = 1 },
+    module_pos = { x = 6, y = 4},
 	config = {
 		extra = {
 			amount = 1,
@@ -721,7 +722,9 @@ Wormhole.tbp.Module({
     key = "dellinger",
     slot = 'core',
     durability = 3,
-    -- pos = { x = 0, y = 0 },
+    atlas = "tbp_module_frame",
+	pos = { x = 3, y = 1 },
+    module_pos = { x = 6, y = 5},
     config = {
         extra = {
             amount = 1,
@@ -756,7 +759,7 @@ Wormhole.tbp.Module({
     durability = 5,
     atlas = "tbp_module_frame",
 	pos = { x = 3, y = 1 },
-    module_pos = { x = 0, y = 1},
+    module_pos = { x = 0, y = 5},
 	config = {
 		extra = {
 			amount = 2,
@@ -788,7 +791,7 @@ Wormhole.tbp.Module({
     durability = 20,
     atlas = "tbp_module_frame",
 	pos = { x = 3, y = 1 },
-    module_pos = { x = 2, y = 1},
+    module_pos = { x = 2, y = 5},
 	config = {
 		extra = {
 			percent = 0.05,
@@ -818,7 +821,9 @@ Wormhole.tbp.Module({
 	key = "ballistics",
     slot = 'weapons',
     durability = 25,
-	-- pos = { x = 0, y = 0 },
+	atlas = "tbp_module_frame",
+	pos = { x = 3, y = 1 },
+    module_pos = { x = 7, y = 4},
 	config = {
 		extra = {
 			perma_bonus = 50,
@@ -842,7 +847,7 @@ Wormhole.tbp.Module({
     durability = 5,
     atlas = "tbp_module_frame",
 	pos = { x = 3, y = 1 },
-    module_pos = { x = 3, y = 0},
+    module_pos = { x = 3, y = 4},
 	config = {
 		extra = {
 			mult = 15,
@@ -867,7 +872,9 @@ Wormhole.tbp.Module({
 	key = "salvo",
     slot = 'weapons',
     durability = 4,
-	-- pos = { x = 0, y = 0 },
+	atlas = "tbp_module_frame",
+	pos = { x = 3, y = 1 },
+    module_pos = { x = 4, y = 5},
 	config = {
 		extra = {
 			xmult = 2,
@@ -906,7 +913,7 @@ Wormhole.tbp.Module({
     durability = 5,
     atlas = "tbp_module_frame",
 	pos = { x = 3, y = 1 },
-    module_pos = { x = 0, y = 0},
+    module_pos = { x = 0, y = 4},
 	config = {
 		extra = {
 			percent = 0.2,
@@ -937,7 +944,7 @@ Wormhole.tbp.Module({
     durability = 5,
     atlas = "tbp_module_frame",
 	pos = { x = 3, y = 1 },
-    module_pos = { x = 1, y = 1},
+    module_pos = { x = 1, y = 4},
 	config = {
 		extra = {
 			money = 3,
@@ -966,7 +973,7 @@ Wormhole.tbp.Module({
     durability = 1,
     atlas = "tbp_module_frame",
 	pos = { x = 3, y = 1 },
-    module_pos = { x = 3, y = 1},
+    module_pos = { x = 3, y = 5},
 	config = {
 		extra = {
 		},
@@ -995,7 +1002,7 @@ Wormhole.tbp.Module({
     durability = 5,
     atlas = "tbp_module_frame",
 	pos = { x = 3, y = 1 },
-    module_pos = { x = 4, y = 0},
+    module_pos = { x = 4, y = 4},
 	config = {
         extra = {
             depletes = 1
@@ -1026,7 +1033,7 @@ Wormhole.tbp.Module({
     durability = 5,
     atlas = "tbp_module_frame",
 	pos = { x = 3, y = 1 },
-    module_pos = { x = 1, y = 1},
+    module_pos = { x = 1, y = 5},
 	config = {
 		extra = {
             xmult_gain = 1.5,
@@ -1066,7 +1073,9 @@ Wormhole.tbp.Module({
 	key = "temporal_jump",
     slot = 'thrusters',
     durability = 5,
-	-- pos = { x = 0, y = 0 },
+	atlas = "tbp_module_frame",
+	pos = { x = 3, y = 1 },
+    module_pos = { x = 5, y = 5},
 	config = {
 		extra = {
             tags = 2
@@ -1094,7 +1103,9 @@ Wormhole.tbp.Module({
 	key = "repeater",
     slot = 'thrusters',
     durability = 10,
-	-- pos = { x = 0, y = 0 },
+	atlas = "tbp_module_frame",
+	pos = { x = 3, y = 1 },
+    module_pos = { x = 5, y = 4},
 	config = {
 		extra = {
 			repetitions = 2,
@@ -1122,7 +1133,7 @@ Wormhole.tbp.Module({
     durability = 4,
     atlas = "tbp_module_frame",
 	pos = { x = 3, y = 1 },
-    module_pos = { x = 2, y = 0},
+    module_pos = { x = 2, y = 4},
 	config = {
 		extra = {},
     },
