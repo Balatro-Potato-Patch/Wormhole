@@ -12,6 +12,9 @@ SMODS.Consumable({
 	config = {
 		max_highlighted = 2,
 	},
+	ppu_team = { "jtem2" },
+	ppu_coder = { "aikoyori" },
+	ppu_artist = { "aikoyori" },
 	loc_vars = function(self, info_queue, card)
 		return {
 			vars = {
