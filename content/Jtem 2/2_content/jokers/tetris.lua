@@ -1680,7 +1680,7 @@ SMODS.Joker {
 		card.children.jtem2_tetris_canvas.role.draw_major = card
 		card.children.jtem2_tetris_canvas.states.hover.can = false
 		card.children.jtem2_tetris_canvas.states.click.can = false
-		if card.ability then
+		if card.ability and card.ability.extra then
 			if card.ability.extra.game_state then
 				card.ability.extra.game_state.grade_quad = love.graphics.newQuad(0, 0, 20, 20,
 					JtemTGM.grades_graph:getWidth(),
