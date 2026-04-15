@@ -194,6 +194,15 @@ descriptions={
 				"levels when bought"
 			}
 		},
+		worm_mrrp_cosmic_sticker ={
+			name=
+				"Cosmic Sticker"
+			, text={
+				"Used this Joker",
+				"to win on {C:attention}Cosmic{}",
+				"{C:attention}Stake{} difficulty"
+			}
+		},
 		worm_mrrp_cookie_cat_song ={
 			name=
 				"Cookie Cat"
@@ -223,7 +232,7 @@ descriptions={
 			text = {
 				{
 					"Hey, i'm {C:attention}SarcasticPotato{} (aka. {C:attention}Sarc{})",
-					"{C:mrrp_orange,s:0.9}Like. you know. from the mod. {C:attention,s:0.9}SarcPot{C:mrrp_orange,s:0.9}{}"
+					"{C:mrrp_orange2,s:0.9}Like. you know. from the mod. {C:attention,s:0.9}SarcPot{}"
 				},
 				{
 					"I did most of the {C:attention}art{} for our portion",
