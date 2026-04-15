@@ -10,7 +10,7 @@ SMODS.Joker({
     ppu_coder = { "fooping" },
     ppu_artist = { "fooping" },
     ppu_team = { "riverboat" },
-    attributes = { "chips", "scaling", "destroy_card" },
+    attributes = { "chips", "scaling", "destroy_card", "space" },
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.x_chips, card.ability.extra.gain } }
     end,
