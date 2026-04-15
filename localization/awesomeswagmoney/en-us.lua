@@ -7,7 +7,7 @@ return {
         Joker = {
             j_worm_necrozma = {
                 name = 'Necrozma',
-                text = { "Create a free", "{C:attention}#1#{}", "every round" }
+                text = { "Create a free", "{C:attention}#1#{}", "every ante" }
             }
         },
         Other = {
@@ -89,7 +89,12 @@ return {
             }},
             PotatoPatchDev_worm_superb = {
                 name = "Superb Thing",
-                text = {"TEMP"}
+                text = {
+                    "Hello, I'm Superb Thing",
+                    "I exist, apparently",
+                    'I made a mod called "Electrum"',
+                    "That's all, I think"
+                }
             },
             PotatoPatchDev_worm_eris = {name = "Eris", text = {
                 {"we outta ultra wormholes"},
