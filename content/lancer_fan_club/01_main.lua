@@ -179,6 +179,17 @@ PotatoPatchUtils.Developer {
     end
 }
 
+local custom_colours = {
+    trans_blue = HEX("75cdf3"),
+    trans_pink = HEX("edbac7"),
+    fox = HEX("d66b1c")
+}
+
+local loc_col_ref = loc_colour
+function loc_colour(_c, _default)
+return custom_colours[_c] or loc_col_ref(_c, _default)
+end
+
 SMODS.DynaTextEffect {
     key = "elle_text",
     func = function(dynatext, index, letter)
