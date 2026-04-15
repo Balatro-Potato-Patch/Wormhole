@@ -205,9 +205,9 @@ return {
 			PotatoPatchDev_cloudzxiii = {
 				name = "cloudzXIII",
 				text = {
-          "{C:gold,E:1}May your heart be your guiding key",
-          "Helped with brainstorming and",
-          "coding the Jokers for our team!",
+					"{C:gold,E:1}May your heart be your guiding key",
+					"Helped with brainstorming and",
+					"coding the Jokers for our team!",
 				},
 			},
 			PotatoPatchDev_noodlemire = {
@@ -241,7 +241,6 @@ return {
 				text = {
 					"{C:attention}Sick pixel artist!{}",
 					"The one who did almost all of the {C:polarskull_rocket}Rockets'{} art!",
-
 				},
 			},
 			PotatoPatchDev_jade = {
@@ -272,14 +271,24 @@ return {
 			k_polarskull_martian_inactive = "Inactive",
 			k_polarskull_martian_active = "Active",
 		},
-    v_text = {
-      ch_c_rocket_paper_scissors = { "All {C:attention}Boss Blinds{} are {C:attention,T:bl_mouth}The Mouth{} or {C:attention,T:bl_eye}The Eye{}" },
-      ch_c_polarskull_credits_1 = {"          {C:inactive,s:0.9}Made by Team {C:polarskull_rocket,s:0.9}Polar Skull{}"},
-      ch_c_polarskull_credits_2 = {"           {C:inactive,s:0.9}Idea by {C:red,s:0.9}MarioFan597{}"},
-      ch_c_polarskull_credits_3 = {"           {C:inactive,s:0.9}Coded by {C:gold,s:0.9}cloudzXIII{}"}
-    },
+		v_text = {
+			ch_c_rocket_paper_scissors = { "All {C:attention}Boss Blinds{} are {C:attention,T:bl_mouth}The Mouth{} or {C:attention,T:bl_eye}The Eye{}" },
+			ch_c_polarskull_credits_1 = {"          {C:inactive,s:0.9}Made by Team {C:polarskull_rocket,s:0.9}Polar Skull{}"},
+			ch_c_polarskull_credits_2 = {"           {C:inactive,s:0.9}Idea by {C:red,s:0.9}MarioFan597{}"},
+			ch_c_polarskull_credits_3 = {"           {C:inactive,s:0.9}Coded by {C:gold,s:0.9}cloudzXIII{}"}
+		},
 		challenge_names = {
 			c_worm_rocket_paper_scissors = "Rocket Paper Scissors",
+		},
+		quips = {
+			worm_polarskull_martian_party = {"{f:worm_polarskull_noto}🥳🎉🎊"},
+			worm_polarskull_martian_music = {"{f:worm_polarskull_noto}🤙👽🎸🎶"},
+			worm_polarskull_martian_world = {"{f:worm_polarskull_noto}🧑🌍👍👏"},
+			worm_polarskull_martian_workout = {"{f:worm_polarskull_noto}💪🃏🏋️🏙️"},
+			worm_polarskull_martian_plsrocket = {"{f:worm_polarskull_noto}👎👉🚀🙏"},
+			worm_polarskull_martian_dumbass = {"{f:worm_polarskull_noto}🤦🤷"},
+			worm_polarskull_martian_broke = {"{f:worm_polarskull_noto}💀🪦💔😢"},
+			worm_polarskull_martian_retry = {"{f:worm_polarskull_noto}🚮🔁🚶"},
 		},
 	},
 }
