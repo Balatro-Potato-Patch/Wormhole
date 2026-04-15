@@ -52,11 +52,23 @@ return {
 		}
 	    },
 	    d_frost = {
-		name = "frost",
-		text = {
-		    "hi"
-		}
-	    },
+			name = "frost",
+			text = {
+				{"i do {E:1,C:blue,s:2}stuff{}"},
+				not Talisman and {
+					"check out {E:1,C:blue}amulet{}",
+					"{s:0.8,C:inactive}https://github.com/frostice482/amulet{}"
+				}
+				or not Talisman.Amulet and {
+					"what? u stil use {C:red}talisman{}??",
+					"use {E:1,C:blue}amulet{} instead!!!!!",
+					"{s:0.8,C:inactive}https://github.com/frostice482/amulet{}"
+				}
+				or {
+					"thx for using {E:1,C:blue}amulet{} :)"
+				}
+			},
+		},
 	    d_metherul = {
 		name = "metherul",
 		text = {
