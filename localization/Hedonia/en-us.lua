@@ -45,7 +45,7 @@ return {
             j_worm_hedonia_speed = {
                 name = 'Sous Chef',
                 text = {
-                    'Creates a Menu Item when scoring',
+                    'Creates a Food Menu Item when scoring',
                     'based on how many jokers you have',
                     '{C:inactive}(currently {C:green}#1# in #2#{C:inactive} chance){}'
                 }
