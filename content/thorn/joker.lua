@@ -91,7 +91,7 @@ SMODS.Joker {
     config = { extra = { xmult_base = 1, xmult_gain = 0.1, xmult = 1, percentage_floor = 45 } },
     loc_vars = function(self, info_queue, card)
         if card.area.config.type == "Joker" then
-            local percentage = ((suit_count("dark")/#G.playing_cards)*100)
+            local percentage = math.floor(((suit_count("dark")/#G.playing_cards)*100)+0.5)
             if percentage >= card.ability.extra.percentage_floor then
                 card.ability.extra.xmult = card.ability.extra.xmult_base + ((percentage - card.ability.extra.percentage_floor) * card.ability.extra.xmult_gain)
             else
@@ -104,7 +104,7 @@ SMODS.Joker {
     end,
     calculate = function(self, card, context)
         if context.joker_main then
-            local percentage = ((suit_count("dark")/#G.playing_cards)*100)
+            local percentage = math.floor(((suit_count("dark")/#G.playing_cards)*100)+0.5)
             if percentage >= card.ability.extra.percentage_floor then
                 card.ability.extra.xmult = card.ability.extra.xmult_base + ((percentage - card.ability.extra.percentage_floor) * card.ability.extra.xmult_gain)
             else
