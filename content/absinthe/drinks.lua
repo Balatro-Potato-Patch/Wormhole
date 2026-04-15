@@ -66,8 +66,25 @@ SMODS.Booster {
         return create_card("abs_drinks", G.pack_cards, nil, nil, true, true, nil, "worm_abs_top_shelf")
     end,
     ease_background_colour = function(self)
-        ease_colour(G.C.DYN_UI.MAIN, G.C.SET.abs_drinks)
-        ease_background_colour({ new_colour = G.C.SET.abs_drinks, special_colour = G.C.BLACK, contrast = 2 })
+        ease_colour(G.C.DYN_UI.MAIN, G.C.SECONDARY_SET.abs_drinks)
+        ease_background_colour({ new_colour = G.C.SECONDARY_SET.abs_drinks, special_colour = G.C.BLACK, contrast = 1 })
+    end,
+    particles = function(self)
+        G.booster_pack_stars = Particles(1, 1, 0, 0, {
+            timer = 0.03,
+            scale = 0.3,
+            lifespan = 5,
+            speed = 3,
+            vel_variation = 0.3,
+            padding = -2,
+            r_vel = 0,
+            attach = G.ROOM_ATTACH,
+            colours = { adjust_alpha(G.C.WHITE, 0.4), adjust_alpha(HEX('fddca0'), 0.2), adjust_alpha(G.C.SET.abs_drinks, 0.3) },
+            fill = true,
+            rotation = math.pi,
+            rotation_variance = 0,
+            shape = 'circle',
+        })
     end,
     loc_vars = function(self, info_queue, card)
         return { vars = { math.min(card.ability.choose + (G.GAME.modifiers.booster_choice_mod or 0), math.max(1, card.ability.extra + (G.GAME.modifiers.booster_size_mod or 0))), math.max(1, card.ability.extra + (G.GAME.modifiers.booster_size_mod or 0)) } }
@@ -97,8 +114,25 @@ SMODS.Booster {
         return create_card("abs_drinks", G.pack_cards, nil, nil, true, true, nil, "worm_abs_top_shelf")
     end,
     ease_background_colour = function(self)
-        ease_colour(G.C.DYN_UI.MAIN, G.C.SET.abs_drinks)
-        ease_background_colour({ new_colour = G.C.SET.abs_drinks, special_colour = G.C.BLACK, contrast = 2 })
+        ease_colour(G.C.DYN_UI.MAIN, G.C.SECONDARY_SET.abs_drinks)
+        ease_background_colour({ new_colour = G.C.SECONDARY_SET.abs_drinks, special_colour = G.C.BLACK, contrast = 1 })
+    end,
+    particles = function(self)
+        G.booster_pack_stars = Particles(1, 1, 0, 0, {
+            timer = 0.03,
+            scale = 0.3,
+            lifespan = 5,
+            speed = 3,
+            vel_variation = 0.3,
+            padding = -2,
+            r_vel = 0,
+            attach = G.ROOM_ATTACH,
+            colours = { adjust_alpha(G.C.WHITE, 0.4), adjust_alpha(HEX('fddca0'), 0.2), adjust_alpha(G.C.SET.abs_drinks, 0.3) },
+            fill = true,
+            rotation = math.pi,
+            rotation_variance = 0,
+            shape = 'circle',
+        })
     end,
     loc_vars = function(self, info_queue, card)
         return { vars = { math.min(card.ability.choose + (G.GAME.modifiers.booster_choice_mod or 0), math.max(1, card.ability.extra + (G.GAME.modifiers.booster_size_mod or 0))), math.max(1, card.ability.extra + (G.GAME.modifiers.booster_size_mod or 0)) } }
@@ -128,8 +162,25 @@ SMODS.Booster {
         return create_card("abs_drinks", G.pack_cards, nil, nil, true, true, nil, "worm_abs_top_shelf")
     end,
     ease_background_colour = function(self)
-        ease_colour(G.C.DYN_UI.MAIN, G.C.SET.abs_drinks)
-        ease_background_colour({ new_colour = G.C.SET.abs_drinks, special_colour = G.C.BLACK, contrast = 2 })
+        ease_colour(G.C.DYN_UI.MAIN, G.C.SECONDARY_SET.abs_drinks)
+        ease_background_colour({ new_colour = G.C.SECONDARY_SET.abs_drinks, special_colour = G.C.BLACK, contrast = 1 })
+    end,
+    particles = function(self)
+        G.booster_pack_stars = Particles(1, 1, 0, 0, {
+            timer = 0.03,
+            scale = 0.3,
+            lifespan = 5,
+            speed = 3,
+            vel_variation = 0.3,
+            padding = -2,
+            r_vel = 0,
+            attach = G.ROOM_ATTACH,
+            colours = { adjust_alpha(G.C.WHITE, 0.4), adjust_alpha(HEX('fddca0'), 0.2), adjust_alpha(G.C.SET.abs_drinks, 0.3) },
+            fill = true,
+            rotation = math.pi,
+            rotation_variance = 0,
+            shape = 'circle',
+        })
     end,
     loc_vars = function(self, info_queue, card)
         return { vars = { math.min(card.ability.choose + (G.GAME.modifiers.booster_choice_mod or 0), math.max(1, card.ability.extra + (G.GAME.modifiers.booster_size_mod or 0))), math.max(1, card.ability.extra + (G.GAME.modifiers.booster_size_mod or 0)) } }
@@ -159,8 +210,25 @@ SMODS.Booster {
         return create_card("abs_drinks", G.pack_cards, nil, nil, true, true, nil, "worm_abs_top_shelf")
     end,
     ease_background_colour = function(self)
-        ease_colour(G.C.DYN_UI.MAIN, G.C.SET.abs_drinks)
-        ease_background_colour({ new_colour = G.C.SET.abs_drinks, special_colour = G.C.BLACK, contrast = 2 })
+        ease_colour(G.C.DYN_UI.MAIN, G.C.SECONDARY_SET.abs_drinks)
+        ease_background_colour({ new_colour = G.C.SECONDARY_SET.abs_drinks, special_colour = G.C.BLACK, contrast = 1 })
+    end,
+    particles = function(self)
+        G.booster_pack_stars = Particles(1, 1, 0, 0, {
+            timer = 0.03,
+            scale = 0.3,
+            lifespan = 5,
+            speed = 3,
+            vel_variation = 0.3,
+            padding = -2,
+            r_vel = 0,
+            attach = G.ROOM_ATTACH,
+            colours = { adjust_alpha(G.C.WHITE, 0.4), adjust_alpha(HEX('fddca0'), 0.2), adjust_alpha(G.C.SET.abs_drinks, 0.3) },
+            fill = true,
+            rotation = math.pi,
+            rotation_variance = 0,
+            shape = 'circle',
+        })
     end,
     loc_vars = function(self, info_queue, card)
         return { vars = { math.min(card.ability.choose + (G.GAME.modifiers.booster_choice_mod or 0), math.max(1, card.ability.extra + (G.GAME.modifiers.booster_size_mod or 0))), math.max(1, card.ability.extra + (G.GAME.modifiers.booster_size_mod or 0)) } }
@@ -396,7 +464,7 @@ SMODS.Consumable { -- Moonshine
             primed = false,
             empty_sound = "worm_abs_drink",
         },
-        extra = { chips = 60, light_counter = 0, light_counter_req = 5 },
+        extra = { chips = 60, light_counter = 0, light_counter_req = 5, dark_counter = 0 },
     },
     cost = 3,
     loc_vars = function(self, info_queue, card)
@@ -422,26 +490,22 @@ SMODS.Consumable { -- Moonshine
                 card:abs_refill_drink()
             end
         end
-        if context.joker_main and card.ability.drink_values.filled and card.ability.drink_values.primed and not context.repetition then
-            local has_black = false
-            for k, v in ipairs(G.hand.cards) do
-                if v:is_suit('Clubs', nil, true) or v:is_suit('Spades', nil, true) then
-                    has_black = true
-                    break
+        if context.individual and context.cardarea == G.play and card.ability.drink_values.filled and card.ability.drink_values.primed and
+            (context.other_card:is_suit("Clubs") or context.other_card:is_suit("Spades")) then
+            card.ability.extra.dark_counter = card.ability.extra.dark_counter + 1
+            return {
+                chips = card.ability.extra.chips
+            }
+        end
+        if context.after and card.ability.drink_values.filled and card.ability.drink_values.primed 
+        and card.ability.extra.dark_counter > 0 and not context.repetition then
+            card.ability.extra.dark_counter = 0
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    card:abs_empty_drink()
+                    return true
                 end
-            end
-            if has_black then
-                card.ability.extra.light_counter = 0
-                G.E_MANAGER:add_event(Event({
-                    func = function()
-                        card:abs_empty_drink()
-                        return true
-                    end
-                }))
-                return {
-                    chips = card.ability.extra.chips
-                }
-            end
+            }))
         end
     end,
     use = function(self, card, area, copier)
@@ -880,7 +944,7 @@ SMODS.Consumable { -- John Absinthe
             card:abs_empty_drink()
         end
 
-        if context.using_consumeable and context.consumeable.config.center.set == 'Spectral' and not card.ability.drink_values.filled then
+        if context.using_consumeable and context.consumeable.config.center.set == 'Spectral' and not context.consumeable.ability.drink_values and not card.ability.drink_values.filled then
             card:abs_refill_drink()
         end
     end,

@@ -58,13 +58,13 @@ SMODS.JimboQuip {
 SMODS.JimboQuip {
     key = 'lq_abs_pi_cubed',
     type = 'loss',
-    extra = { ppu_dev = 'worm_pi_cubed' },
+    extra = { ppu_dev = 'worm_pi_cubed', times = 6 },
 }
 
 SMODS.JimboQuip {
     key = 'wq_abs_pi_cubed',
     type = 'win',
-    extra = { ppu_dev = 'worm_pi_cubed' },
+    extra = { ppu_dev = 'worm_pi_cubed', times = 13 },
 }
 
 -- base4 quips

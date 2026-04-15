@@ -1,0 +1,65 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 1
+
+# add optional parameters to particles' config
+# ('shape', 'rotation', 'rotation_variance', & 'r_vel')
+[[patches]]
+[patches.pattern]
+target = "engine/particles.lua"
+pattern = '''
+self.padding = config.padding or 0
+'''
+position = "after"
+payload = '''
+self.shape = config.shape or 'rectangle'
+self.rotation = config.rotation or 0
+self.rotation_variance = config.rotation_variance or 2*math.pi
+self.r_vel = config.r_vel or 0.2
+'''
+match_indent = true
+
+# apply optional initial rotation parameters to particles
+[[patches]]
+[patches.pattern]
+target = "engine/particles.lua"
+pattern = '''
+dir = math.random()*2*math.pi,
+'''
+position = "at"
+payload = '''
+dir = self.rotation + math.random()*self.rotation_variance,
+shape = self.shape,
+'''
+match_indent = true
+
+# apply optional non-initial rotation parameters to particles
+[[patches]]
+[patches.pattern]
+target = "engine/particles.lua"
+pattern = '''
+r_vel = 0.2*(0.5 - math.random()),
+'''
+position = "at"
+payload = '''
+r_vel = self.r_vel*(0.5 - math.random()),
+'''
+match_indent = true
+
+# apply shape parameter to particles
+[[patches]]
+[patches.pattern]
+target = "engine/particles.lua"
+pattern = '''
+love.graphics.rectangle('fill', -v.scale/2, -v.scale/2, v.scale, v.scale) -- origin in the middle
+'''
+position = "at"
+payload = '''
+if self.shape ~= 'circle' then
+    love.graphics.rectangle('fill', -v.scale/2, -v.scale/2, v.scale, v.scale) -- origin in the middle
+else
+    love.graphics.circle('fill', -v.scale/2, -v.scale/2, v.scale)
+end
+'''
+match_indent = true

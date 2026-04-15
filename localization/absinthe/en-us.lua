@@ -63,9 +63,9 @@ return {
                 name = 'Moonshine',
                 text = {
                     {
-                        "When {C:attention}primed{}, {C:chips}+#1#{} Chips if",
-                        "played hand contains a",
-                        "{C:spades}Da{C:clubs}rk{} suit card, then is {C:abs_drinks}drank{}",
+                        "When {C:attention}primed{}, played {C:spades}Da{C:clubs}rk{} suit",
+                        "cards give {C:chips}+#1#{} Chips",
+                        "when scored, then is {C:abs_drinks}drank{}"
                     },
                     {
                         "{C:abs_drinks}Refill{} by {C:attention}scoring{}",
@@ -85,9 +85,9 @@ return {
                     },
                     {
                         "{C:inactive,s:0.8}After being Refilled:{}",
-                        "When {C:attention}primed{}, {C:chips}X#1#{} Chips if",
-                        "played hand contains a",
-                        "{C:spades}Da{C:clubs}rk{} suit card, then is {C:abs_drinks}drank{}",
+                        "When {C:attention}primed{}, played {C:spades}Da{C:clubs}rk{} suit",
+                        "cards give {C:chips}+#1#{} Chips",
+                        "when scored, then is {C:abs_drinks}drank{}"
                     },
                 }
             },
@@ -443,14 +443,14 @@ return {
                 name = 'Artemisia Absinthe',
                 text = {
                     {
-                        "When {C:attention}primed{}, every played",
-                        "and scoring card gains",
-                        "{C:money}+$#1#{} when scored,",
-                        "then is {C:abs_drinks}drank{}",
+                        "When {C:attention}primed{}, next hand",
+                        "each played and scoring card",
+                        "{C:attention}permanently{} earns an additional",
+                        "{C:money}$#1#{} when scored, then is {C:abs_drinks}drank{}",
                     },
                     {
-                        "{C:abs_drinks}Refill{} by using",
-                        "a {C:spectral}Spectral{} card"
+                        "{C:abs_drinks}Refill{} by using a {C:spectral}Spectral{} card",
+                        "{C:inactive}(excluding Artemisia Absinthe)",
                     }
                 }
             },
@@ -459,15 +459,15 @@ return {
                 text = {
                     {
                         "{C:inactive,s:0.8}Currently Empty{}",
-                        "{C:abs_drinks}Refill{} by using",
-                        "a {C:spectral}Spectral{} card"
+                        "{C:abs_drinks}Refill{} by using a {C:spectral}Spectral{} card",
+                        "{C:inactive}(excluding Artemisia Absinthe)",
                     },
                     {
                         "{C:inactive,s:0.8}After being Refilled:{}",
-                        "When {C:attention}primed{}, every played",
-                        "and scoring card gains",
-                        "{C:money}+$#1#{} when scored,",
-                        "then is {C:abs_drinks}drank{}",
+                        "When {C:attention}primed{}, next hand",
+                        "each played and scoring card",
+                        "{C:attention}permanently{} earns an additional",
+                        "{C:money}$#1#{} when scored, then is {C:abs_drinks}drank{}",
                     }
                 }
             },
