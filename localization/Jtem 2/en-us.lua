@@ -261,6 +261,35 @@ return {
 					"then counts as {C:attention}#3#{}",
 				},
 			},
+			worm_jtem2_black_hole_seal = {
+				name = "Black Hole Seal",
+				text = {
+					"{C:green}#1# in #2#{} chance to",
+					"Upgrade a {C:attention}random{} Poker Hand",
+					"when scored",
+					"{C:green}#3# in #4#{} chance to be {C:attention}destroyed",
+				},
+			},
+			worm_jtem2_supermassive_black_hole_seal = {
+				name = "Supermassive Black Hole Seal",
+				text = {
+					"{C:green}#1# in #2#{} chance to",
+					"Upgrade {C:attention}played{} Poker Hand",
+					"when scored",
+					"{C:green}#3# in #4#{} chance to be {C:attention}destroyed",
+				},
+			},
+		},
+		Spectral = {
+			worm_jtem2_kilonovae = {
+				name = "Kilonovae",
+				text = {
+					"Apply {C:attention}Black Hole Seal{}",
+					"to #1# selected cards",
+					"Apply {C:spectral}Supermassive Black Hole Seal{}",
+					"if card already has {C:attention}Black Hole Seal{}s",
+				},
+			},
 		},
 		PotatoPatch = {
 			PotatoPatchTeam_jtem2 = { name = "Jtem 2" },
@@ -386,6 +415,8 @@ return {
 		},
 		labels = {
 			k_worm_jtem2_quantum = "Quantum",
+			worm_jtem2_black_hole_seal = "Black Hole Seal",
+			worm_jtem2_supermassive_black_hole_seal = "Supermassive Black Hole Seal",
 		},
 		-- Mostly taken from Handy
 		jtem2_keybinds = {
