@@ -61,7 +61,7 @@ return {
         },
         worm_hedonia_menu={
             c_worm_hedonia_hadron = {
-                name = 'Hadron Colida',
+                name = 'Hadron Colada',
                 text = {
                     'Add {C:edition}{E:2}Tipsy{} to a',
                     'random card held in hand'
@@ -89,14 +89,14 @@ return {
                 }
             },
             c_worm_hedonia_jawbreaker = {
-                name = 'Jupiter Jawbreakers',
+                name = 'Jawbreaker',
                 text = {
                     'Add {C:chips}#1#{} bonus Chips to a',
                     'random card held in hand'
                 }
             },
             c_worm_hedonia_rings = {
-                name = 'Saturn\'s Onion Rings',
+                name = 'Satonion Rings',
                 text = {
                     'All cards held in',
                     'hand sober up',
@@ -104,7 +104,7 @@ return {
                 }
             },
             c_worm_hedonia_debbie = {
-                name = 'Cosmic Brownies',
+                name = 'Brownies',
                 text = {
                     'Converts {C:attention}#1#{} selected cards',
                     'to the same random rank'
@@ -150,7 +150,10 @@ return {
             PotatoPatchDev_hellboydante = {
                 name = "Dante",
                 text = {
-                    'a'
+                    'First time doing a mod jam',
+                    'Made a couple of pictures',
+                    'Thanks to Astra and Murphy',
+                    'Thanks to Team Hedonia 10/10'
                 }
             },
             PotatoPatchDev_professorrenderer = {
