@@ -379,7 +379,7 @@ return {
                 text = {
                     {
                         "Thank you to all my wonderful teammates and",
-                        "to {C:negative}you{} for playing. It's been such an honor to",
+                        "to {C:dark_edition}you{} for playing. It's been such an honor to",
                         "work with {C:attention}ACME{} and code their silly jokers. {E:1,C:chips}Enjoy!{}"
                     },
                 },
