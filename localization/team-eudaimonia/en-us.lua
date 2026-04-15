@@ -237,7 +237,9 @@ return {
                 text = {
                     "{C:attention}Destroys{} all cards in",
                     "deck and {C:attention}replaces{} them with",
-                    "one card of each {C:attention}rank{} and {C:attention}suit"
+                    "one card of each {C:attention}rank{} and {C:attention}suit{},",
+                    "then earns {C:money}money{} equal to the",
+                    "{C:attention}difference{} in amount"
                 }
             }
         },

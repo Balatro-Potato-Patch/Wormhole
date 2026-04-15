@@ -138,8 +138,11 @@ SMODS.Consumable{
     ppu_artist = {"cosmeggo"},
     ppu_team = {"TeamEudaimonia"},
     use = function(self, card, area, copier)
+        local old_count = 0
+        local new_count = 0
         for _, _card in ipairs(G.deck.cards) do
             SMODS.destroy_cards(_card, nil, nil, true)
+            old_count = old_count + 1
         end
         for i, _suit in pairs(SMODS.Suits) do
             for j, _rank in pairs(SMODS.Ranks) do
@@ -154,8 +157,19 @@ SMODS.Consumable{
                 G.deck.config.card_limit = G.deck.config.card_limit + 1
                 table.insert(G.playing_cards, _card)
                 G.deck:emplace(_card)
+                new_count = new_count + 1
             end
         end
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.4,
+            func = function()
+                card:juice_up(0.3, 0.5)
+                ease_dollars(math.max(new_count - old_count, old_count - new_count), true)
+                return true
+            end
+        }))
+        delay(0.6)
     end,
     can_use = function(self, card)
         return true
