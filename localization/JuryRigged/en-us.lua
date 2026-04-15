@@ -284,11 +284,11 @@ return {
     },
     PotatoPatch = {
       PotatoPatchTeam_JuryRigged = { name = "JuryRigged" },
-      PotatoPatchDev_DowFrin = { name = "DowFrin", text = { { "Hopefully i {C:red}remember{} to change this after im done testing lol" }, { "oh also we have multi box support" } } },
+      PotatoPatchDev_DowFrin = { name = "DowFrin", text = { { "Listen to {C:red}Fire4Fun{} by {C:money}Jhariah{} :7", "Credit to {C:chips}Inky{} for this credit art" }, { "I coded the framework + utils for the {C:worm_jr_satellite}Satellite{} cards,", "the vouchers and most of the jokers", }, { "All things considered this team was pretty amazing to work with!" } } },
       PotatoPatchDev_Maelmc = { name = "Maelmc", text = { "Play {C:attention}The Binding of Jimbo{} :)" } },
-      PotatoPatchDev_Inky = { name = "Inky", text = { {"Did most of the satellite art and drew some joker art"}, {"(...yes, the Square Joker guy. That's him.)"} } },
+      PotatoPatchDev_Inky = { name = "Inky", text = { { "Did most of the satellite art and drew some joker art" }, { "(...yes, the Square Joker guy. That's him.)" } } },
       PotatoPatchDev_DoggFly = { name = "DoggFly", text = { "Just here to take up space" } },
-PotatoPatchDev_AbelSketch = { name = "AbelSketch", text = { {"{C:attention}Fun Fact:{} Theres a reason to not share water bottles!" },{"I got Salmonela from one... 3:"} }},
+      PotatoPatchDev_AbelSketch = { name = "AbelSketch", text = { { "{C:attention}Fun Fact:{} Theres a reason to not share water bottles!" }, { "I got Salmonela from one... 3:" } } },
       PotatoPatchDev_Blanthos = { name = "Blanthos", text = { "First we Gneep, then we Gnarp. Lets Gneep Gnarp." } },
       PotatoPatchDev_NinjaBanana = { name = "NinjaBanana", text = { "GUYS I'M NOT THE IMPOSTOR PLEASE DON'T EJECT ME" } },
     }
