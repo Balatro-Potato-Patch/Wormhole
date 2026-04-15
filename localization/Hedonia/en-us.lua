@@ -63,21 +63,21 @@ return {
             c_worm_hedonia_hadron = {
                 name = 'Hadron Colada',
                 text = {
-                    'Add {C:edition}{E:2}Tipsy{} to a',
+                    'Add {C:edition,E:2}Tipsy{} to a',
                     'random card held in hand'
                 }
             },
             c_worm_hedonia_cosmo = {
                 name = 'Cosmopolitan',
                 text = {
-                    'Add {C:edition}{E:1}Drunk{} to a',
+                    'Add {C:edition,E:1}Drunk{} to a',
                     'random card held in hand'
                 }
             },
             c_worm_hedonia_mojitury = {
                 name = 'Mojitury',
                 text = {
-                    'Add {C:dark_edition}{E:1}Very Drunk{} to a',
+                    'Add {C:dark_edition,E:1}Very Drunk{} to a',
                     'random card held in hand'
                 }
             },
