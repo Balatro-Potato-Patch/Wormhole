@@ -256,13 +256,9 @@ return {
             j_worm_acme_kraft_e_jackal = {
                 name = 'Kraft E. Jackal',
                 text = {
-                    'Gives a random {E:2,C:mult}Targeted{} {C:acme_gadget}Gadget{}',
-                    'after beating a {C:attention}Boss Blind',
-                    '{C:inactive}(Gadget: {X:mult,C:white}#1#{C:inactive})'
-                },
-                {
-                    '{E:1, C:red}Targeted:{} Gets replaced at',
-                    'the end of each ante',
+                    "If you have no {C:acme_gadget}Gadget{} from this {C:attention}Joker{},",
+                    'gives a random {C:acme_gadget}Gadget{} after beating',
+                    'a {C:attention}Blind'
                 }
             },
             j_worm_acme_stargazing = {
