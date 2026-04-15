@@ -32,7 +32,6 @@ SMODS.Achievement{
 	atlas = "polarskull_achievements",
 	pos = {x = 0, y = 0},
 	hidden_pos = {x = 1, y = 0},
-    bypass_all_unlocked = true,
 	unlock_condition = function(self, args)
 		if args.type == "discover_amount" then
 			for _, tbl in pairs(G.P_CENTERS) do
