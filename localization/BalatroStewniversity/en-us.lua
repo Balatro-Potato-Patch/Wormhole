@@ -279,6 +279,7 @@ return {
             k_worm_stew_dinos_extinct = 'Extinct',
             k_worm_stew_yum = 'Yum!',
             k_worm_stew_cook = 'Let Him Cook!',
+            k_worm_stew_uncook = 'Stove\'s Off...',
         },
         labels = {
             worm_stew_stellar = 'Stellar'

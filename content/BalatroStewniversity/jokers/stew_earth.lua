@@ -41,7 +41,8 @@ SMODS.Joker {
             else
                 card.ability.extra.Xmult = card.ability.extra.Xmult - card.ability.extra.Xmult_down
                 return{
-                    message = localize{type = 'variable', key = 'a_xmult_minus', vars = {card.ability.extra.Xmult_down}},
+                    message = localize('k_worm_stew_uncook'),
+                    -- message = localize{type = 'variable', key = 'a_xmult_minus', vars = {card.ability.extra.Xmult_down}},
                     colour = G.C.RED,
                 }
             end
