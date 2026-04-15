@@ -25,7 +25,7 @@ SMODS.Voucher {
     atlas = "polarskull_vouchers",
     pos = { x = 1, y = 0 },
     config = { extra = { } },
-	requires = { },
+	requires = { "v_worm_polarskull_gravitational_slingshot" },
     loc_vars = function(self, info_queue, card)
         return { vars = {  } }
     end,
