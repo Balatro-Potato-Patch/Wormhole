@@ -64,9 +64,17 @@ return {
 			},
 		},
 	    d_metherul = {
-		name = "metherul",
+		name = "ethangreen-dev",
 		text = {
-		    "hi"
+		    {
+			" /\\_/\\",
+			" ( o.o )",
+			" > ^ <",
+		    },
+		    {
+			"Try out",
+			"{C:attention}lovely-injector{}",
+		    },
 		}
 	    },
 	},

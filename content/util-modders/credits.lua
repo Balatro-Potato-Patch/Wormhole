@@ -28,7 +28,7 @@ PotatoPatchUtils.Developer {
 }
 
 PotatoPatchUtils.Developer {
-    name = 'metherul',
+    name = 'ethangreen-dev',
     colour = G.C.WHITE,
     loc = "d_metherul",
     team = 'util-modders',
