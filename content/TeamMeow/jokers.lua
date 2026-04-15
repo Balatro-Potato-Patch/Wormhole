@@ -106,4 +106,5 @@ SMODS.Joker({
     end,
     ppu_team = {"meow"},
 	ppu_coder = { "silverautumn" },
+	ppu_artist = { "gappie" }
 })

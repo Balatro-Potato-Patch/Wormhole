@@ -682,7 +682,7 @@ SpaceTart({
 
 SpaceTart({
 	key = "lunar_lemon",
-	tart_pos = { x = 2, y = 2 },
+	tart_pos = { x = 3, y = 2 },
 	foil_pos = { x = 3, y = 0 },
 	config = {
 		reg = 1,
