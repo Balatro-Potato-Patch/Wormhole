@@ -540,6 +540,8 @@ return {
                     'Thank you so much for checking out our work,',
                     'and keep an eye out for whatever thing',
                     'we decide to do {C:attention}next!!{} {f:9,s:0.6}🐟'
+                }, {
+                    '{C:inactive,s:0.8}Also play {C:purple,E:2,s:0.8}Maximus{C:inactive,s:0.8} :)'
                 }
                 }
             },
