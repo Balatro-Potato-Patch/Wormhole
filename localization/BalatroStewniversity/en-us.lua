@@ -222,8 +222,8 @@ return {
             stupxd = {
                 name = "stupxd",
                 text = {
-                    "Play Balatro, I heard",
-                    "it's a great game.",
+                    "Play {C:red}Balatro{}, I heard",
+                    "it's a great game!",
                 }
             },
             PLagger = {
