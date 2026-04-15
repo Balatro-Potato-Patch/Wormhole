@@ -371,7 +371,8 @@ function Card:calculate_joker(context, ...)
 
 			local boost_count = 0
 			if type(entry.boosted_conds) == "function" then
-				local v = entry.boosted_conds(self)
+				local joker = self
+				local v = entry.boosted_conds(joker)
 
 				if type(v) == "boolean" and v then
 					boost_count = boost_count + 1
@@ -380,7 +381,8 @@ function Card:calculate_joker(context, ...)
 				end
 			else
 				for _, boost_test in pairs(entry.boosted_conds) do
-					local v = boost_test(self)
+					local joker = self
+					local v = boost_test(joker)
 
 					if type(v) == "boolean" and v then
 						boost_count = boost_count + 1
@@ -830,7 +832,7 @@ SpaceTart({
 	loc_vars = function(self, info_queue, card, tart_config, boost_count)
 		return {
 			vars = {
-				math.max(1, count_green_bonus(card)),
+				math.max(1, count_green_bonus((card.fake_card and G.CONTROLLER.hovering.target.tarts) and G.CONTROLLER.hovering.target or card)),
 			},
 		}
 	end,
@@ -838,9 +840,6 @@ SpaceTart({
 	boosted_conds = {
 		-- Rainbow condition
 		has_rainbow,
-
-		-- Green bonus condition
-		count_green_bonus,
 
 		function(card)
 			return card.config and card.config.center_key == "j_worm_meow_catelite"
