@@ -1,46 +1,13 @@
-sendDebugMessage("BalatrosAPalindrome loading!")
+--sendDebugMessage("BalatrosAPalindrome loading!")
 
-PotatoPatchUtils.Team({name="BalatrosAPalindrome", colour=G.C.BLUE})
-PotatoPatchUtils.Developer({team="BalatrosAPalindrome",name="Nogardagem"})
-PotatoPatchUtils.Developer({team="BalatrosAPalindrome",name="NerdyBread42"})
-PotatoPatchUtils.Developer({team="BalatrosAPalindrome",name="IzzyWizz"})
-PotatoPatchUtils.Developer({team="BalatrosAPalindrome",name="Knightingale0"})
-
-
--- sendDebugMessage("MOD LOADED")
-
--- SMODS.Consumable {
---     key = 'bap_test',
---     set = 'Tarot',
---     loc_txt = {
---         name = 'Test',
---         text = {'Works'}
---     },
---     pos = {x=0,y=0}
--- }
-
--- G.E_MANAGER:add_event(Event({
---     trigger = 'after',
---     delay = 0.1,
---     func = function()
---         sendDebugMessage("POST INIT CENTER:", tostring(G.P_CENTERS["c_bap_test"]))
---         return true
---     end
--- }))
-
--- G.E_MANAGER:add_event(Event({
---     trigger = 'after',
---     delay = 0.5,
---     func = function()
---         for k, v in pairs(G.P_CENTERS) do
---             if string.find(k, "bap") then
---                 sendDebugMessage("FOUND CENTER:", k)
---             end
---         end
---         return true
---     end
--- }))
-
+SMODS.DynaTextEffect {
+    key = "bap_text_funny",
+    func = function (self, index, letter)
+		letter.scale = (math.sin((G.TIMERS.REAL*4.0 + index)*1.9443) + 1.0) * 0.25 + 1.0
+		letter.offset = {x = 0.0, y = math.sin((G.TIMERS.REAL*4.0 + index)) * 20.0}
+        --letter.r = math.sin((G.TIMERS.REAL*4.0 + index)*1.9443) * math.pi / 7
+    end
+}
 
 
 SMODS.Atlas {
@@ -55,29 +22,12 @@ SMODS.Atlas {
 }
 
 
--- OLD ENHANCEMENT
--- SMODS.Enhancement {
---     key = 'bap_void',
---     loc_txt = {
---         name = 'Void',
--- 		text = {
--- 			"{C:chips}#1#{} chips when",
--- 			"{C:attention}held{} or {C:attention}scored{}"
--- 		}
---     },
---     atlas = 'Palindrome',
---     pos = { x = 1, y = 0 },
---     config = { bonus = -25, h_chips = -25 },
--- 	--always_scores = true,
--- 	loc_vars = function(self, info_queue, card)
---         local ability = card and card.ability or self.config
---     	return { vars = { ability.bonus, ability.h_chips } }
---     end,
--- 	-- update= function(self, card, dt)
--- 	-- 	self.edition = "e_negative"
--- 	-- end
--- 	--set_ability = function(self, card, initial, delay_sprites) end
--- }
+PotatoPatchUtils.Team({name="BalatrosAPalindrome", colour=G.C.BLUE, short_credit=true})
+PotatoPatchUtils.Developer({team="BalatrosAPalindrome",name="Nogardagem",loc=true,atlas='worm_Palindrome',pos={x=1,y=1}})
+PotatoPatchUtils.Developer({team="BalatrosAPalindrome",name="NerdyBread42",atlas='worm_Palindrome',pos={x=0,y=2}})
+PotatoPatchUtils.Developer({team="BalatrosAPalindrome",name="IzzyWizz",atlas='worm_Palindrome',pos={x=0,y=2}})
+PotatoPatchUtils.Developer({team="BalatrosAPalindrome",name="Knightingale0",atlas='worm_Palindrome',pos={x=1,y=2}})
+
 
 SMODS.Shader {
     key = 'bap_shader_void',
@@ -130,11 +80,9 @@ SMODS.Edition { -- Void card edition
     end
 }
 
-
---sendDebugMessage("before abyss")
-
 -- The Abyss
 SMODS.Consumable {
+	ppu_team = {"BalatrosAPalindrome"},
 	key = 'bap_abyss',
 	loc_txt = {
 		name = 'The Abyss',
@@ -193,47 +141,6 @@ SMODS.Consumable {
 	end
 }
 
-
---sendDebugMessage("Registered Abyss:", G.P_CENTERS["c_worm_bap_abyss"])
-
--- -- Debug tarot
--- SMODS.Consumable {
---     key = "bap_debug",
---     loc_txt = {
--- 		name = 'Debug',
--- 		text = {
--- 			"UNFINISHED",
--- 		}
--- 	},
---     set = 'Tarot',
---     cost = 3,
---     pos = { x = 0, y = 0 },
---     config = { anim_time = 0 },
---     can_use = function(self, card) return true end,
---     keep_on_use = function(self, card) return true end,
---     use = function(self, card, area, copier)
--- 		G.E_MANAGER:add_event(Event({
--- 			trigger = 'after',
--- 			delay = 0.1,
--- 			func = function()
--- 				if #G.consumeables.cards < G.consumeables.config.card_limit then
--- 					SMODS.add_card({
--- 						area = G.consumeables,
--- 						key = "c_worm_bap_abyss"
--- 					})
--- 				end
--- 				return true
--- 			end
--- 		}))
--- 	end,
---     update = function(self, card, dt)
---         card.ability.anim_time = (card.ability.anim_time or 0) + dt
---         self.pos.x = math.sin(card.ability.anim_time) * 0.5 + 0.5
--- 		self.pos.y = math.cos(card.ability.anim_time) * 0.5 + 0.5
---     end
--- }
-
-
 -- Void hand
 SMODS.PokerHand {
     key = "bap_void",
@@ -271,13 +178,8 @@ SMODS.PokerHand {
 
 -- Nothing planet card
 SMODS.Consumable {
+	ppu_team = {"BalatrosAPalindrome"},
     key = "bap_nothing",
-    -- loc_txt = {
-	-- 	name = 'Nothing',
-	-- 	text = {
-	-- 		"Does nothing (real)",
-	-- 	}
-	-- },
     set = 'Planet',
     cost = 3,
 	atlas = 'Palindrome',
@@ -323,23 +225,12 @@ SMODS.Consumable {
 		end
 		return SMODS.is_poker_hand_visible("worm_bap_void")
 
-	end,
-    -- use = function(self, card, area, copier)
-	-- 	G.E_MANAGER:add_event(Event({
-	-- 		trigger = 'after',
-	-- 		delay = 0.4,
-	-- 		func = function()
-	-- 			return true
-	-- 		end
-	-- 	}))
-	-- end
+	end
 }
-
-
-
 
 -- Milky Way
 SMODS.Joker {
+	ppu_team = {"BalatrosAPalindrome"},
     key = "bap_milky_way",
     blueprint_compat = true,
     eternal_compat = false,
@@ -351,9 +242,9 @@ SMODS.Joker {
 	loc_txt = {
 		name = 'Milky Way',
 		text = {
-			"Creates a random {C:planet}Planet{} card",
-			"at end of round",
-        	"{C:inactive}({C:attention}#1#{C:inactive} remaining)",
+			"Create a {C:planet}Planet{} card",
+			"at the end of the",
+        	"next {C:attention}#1#{} rounds",
 			"{C:inactive}(Must have room)",
 		}
 	},
@@ -400,6 +291,7 @@ SMODS.Joker {
 
 -- Andromeda
 SMODS.Joker {
+	ppu_team = {"BalatrosAPalindrome"},
     key = "bap_andromeda",
     blueprint_compat = true,
     eternal_compat = false,
@@ -448,6 +340,7 @@ SMODS.Joker {
 
 -- Solar Panels
 SMODS.Joker {
+	ppu_team = {"BalatrosAPalindrome"},
 	key = "bap_solar_panel",
     blueprint_compat = true,
     eternal_compat = false,
@@ -485,6 +378,52 @@ SMODS.Joker {
     end
 }
 
+-- Artemis 3
+SMODS.Joker {
+	ppu_team = {"BalatrosAPalindrome"},
+	key = "bap_artemis_3",
+	blueprint_compat = true,
+	eternal_compat = false,
+	rarity = 2,
+	cost = 6,
+	atlas = 'Palindrome',
+	pos = { x = 0, y = 3 },
+	config = { },
+	loc_txt = {
+		name = 'Artemis III',
+		text = {
+			"When {C:attention}Blind{} is",
+			"selected, creates a",
+			"{C:dark_edition}Negative{} {C:tarot}Moon{} card",
+		}
+	},
+	loc_vars = function(self, info_queue, card)
+		return { vars = {} }
+	end,
+	calculate = function(self, card, context)
+		if context.first_hand_drawn then
+			G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+			G.E_MANAGER:add_event(Event({
+				trigger = 'before',
+				delay = 0.0,
+				func = (function()
+					SMODS.add_card {
+						set = 'Tarot',
+						key = 'c_moon',
+						key_append = 'bap_artemis_3', -- Optional, useful for manipulating the random seed and checking the source of the creation in `in_pool`.
+						edition = "e_negative"
+					}
+					G.GAME.consumeable_buffer = 0
+					return true
+				end)
+			}))
+			return {
+				message = localize('k_plus_tarot'),
+				colour = G.C.PURPLE,
+			}
+		end
+	end
+}
 
 local function print_table(t, depth)
 	if depth > 3 then return end
@@ -507,7 +446,8 @@ for duplicate = 0, 40 do
 
 	-- Space Worm
 	SMODS.Joker {
-		key = "bap_space_worm",
+		ppu_team = {"BalatrosAPalindrome"},
+		key = "bap_space_worm"..duplicate,
 		blueprint_compat = true,
 		rarity = 3,
 		cost = 1,
@@ -518,7 +458,7 @@ for duplicate = 0, 40 do
 			name = 'Space Worm'.." "..duplicate,
 			text = {
 				"When {C:attention}Blind{} is selected,",
-				"{C:attention}destroy{} Joker from {V:1,V:2}Wormhole{}",
+				"{C:attention}destroy{} Joker from {B:1,V:2}Wormhole{}",
 				"to the right and gain {X:mult,C:white} X#1# {} Mult",
 				"{C:inactive}(Currently {X:mult,C:white} X#2# {C:inactive} Mult)",
 			}
@@ -633,3 +573,4 @@ for duplicate = 0, 40 do
 	}
 
 end
+
