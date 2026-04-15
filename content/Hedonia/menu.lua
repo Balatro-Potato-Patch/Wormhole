@@ -130,12 +130,16 @@ SMODS.Consumable {
     set = "worm_hedonia_menu",
     atlas = "menu",
     pos = {x = 1, y = 1},
+    config = {extra = {cash = 5}},
+    loc_vars = function(self,info_queue,center)
+        return {vars = {center.ability.extra.cash}}
+    end,
     ppu_artist = {'qunumeru'},
     ppu_coder = {'wombatcountry', 'axyraandas'},
     ppu_team = {'Hedonia'},
     use = function(self, card, area, copier)
+        local sober = true
         for i, v in pairs(G.hand.cards) do
-            local sober = true
             local is_drunk = v.edition and v.edition.key
             local stages = {'e_worm_hedonia_tipsy', 'e_worm_hedonia_drunk', 'e_worm_hedonia_very_drunk', 'e_worm_hedonia_blackout'}
             for i1,v1 in ipairs(stages) do
@@ -149,10 +153,19 @@ SMODS.Consumable {
                     end
                 end
             end
+        end
 
-            if sober then
-                -- do nothing? Talk to Dante about this.
-            end
+        if sober then
+            G.E_MANAGER:add_event(Event({ --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/tarots.lua#L602-L611
+                trigger = 'after',
+                delay = 0.4,
+                func = function()
+                    play_sound('timpani')
+                    card:juice_up(0.3, 0.5)
+                    ease_dollars(card.ability.extra.cash, true)
+                    return true
+                end
+            }))
         end
     end,
     can_use = function(self, card)
@@ -189,8 +202,42 @@ SMODS.Consumable {
     ppu_team = {'Hedonia'},
     use = function(self, card, area, copier)
         local rank = pseudorandom_element(SMODS.Ranks, 'debbie').key
+        --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/tarots.lua#L695-L732
+        for i = 1, #G.hand.highlighted do 
+            local percent = 1.15 - (i - 0.999) / (#G.hand.highlighted - 0.998) * 0.3
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.15,
+                func = function()
+                    G.hand.highlighted[i]:flip()
+                    play_sound('card1', percent)
+                    G.hand.highlighted[i]:juice_up(0.3, 0.3)
+                    return true
+                end
+            }))
+        end
+        delay(0.2)
         for i = 1, #G.hand.highlighted do
-            SMODS.change_base(G.hand.highlighted[i], nil, rank)
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.1,
+                func = function()
+                    assert(SMODS.change_base(G.hand.highlighted[i], nil, rank))
+                    return true
+                end
+            }))
+        end
+        for i = 1, #G.hand.highlighted do
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.15,
+                func = function()
+                    G.hand.highlighted[i]:flip()
+                    play_sound('timpani')
+                    G.hand.highlighted[i]:juice_up(0.3, 0.3)
+                    return true
+                end
+            }))
         end
     end,
     can_use = function(self, card)
@@ -214,8 +261,42 @@ SMODS.Consumable {
     ppu_team = {'Hedonia'},
     use = function(self, card, area, copier)
         local suit = pseudorandom_element(SMODS.Suits, 'space_jam').key
+        --https://github.com/nh6574/VanillaRemade/blob/369e7c28f3cf9a0c6976f84bacaf4a17cfe7c3aa/src/tarots.lua#L695-L732
+        for i = 1, #G.hand.highlighted do 
+            local percent = 1.15 - (i - 0.999) / (#G.hand.highlighted - 0.998) * 0.3
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.15,
+                func = function()
+                    G.hand.highlighted[i]:flip()
+                    play_sound('card1', percent)
+                    G.hand.highlighted[i]:juice_up(0.3, 0.3)
+                    return true
+                end
+            }))
+        end
+        delay(0.2)
         for i = 1, #G.hand.highlighted do
-            SMODS.change_base(G.hand.highlighted[i], suit)
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.1,
+                func = function()
+                    assert(SMODS.change_base(G.hand.highlighted[i], suit))
+                    return true
+                end
+            }))
+        end
+        for i = 1, #G.hand.highlighted do
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.15,
+                func = function()
+                    G.hand.highlighted[i]:flip()
+                    play_sound('timpani')
+                    G.hand.highlighted[i]:juice_up(0.3, 0.3)
+                    return true
+                end
+            }))
         end
     end,
     can_use = function(self, card)
