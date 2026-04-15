@@ -120,19 +120,23 @@ function love.keypressed( key, scancode, isrepeat )
 		local ht = nil
 		-- Get nearest hitmarker
 		for k, v in pairs(space.hitmarkers) do
-			if v and (not ht or math.abs(t-k)<math.abs(t-ht)) then
+			if v and v ~= "miss" and (not ht or math.abs(t-k)<math.abs(t-ht)) then
 				ht = k
 			end
 		end
 
-		if ht and math.abs(t-ht)<window then
-			space.hitmarkers[ht] = false
-			space.card:juice_up()
-			space.timingoffset = t-ht
-			space.hits = space.hits+1
-			play_sound("paper1",1,8)
-		else
-			play_sound("paper1",2,8)
+		if ht then
+			if math.abs(t-ht)<window then
+				space.hitmarkers[ht] = false
+				space.card:juice_up()
+				space.timingoffset = t-ht
+				space.hits = space.hits+1
+				play_sound("paper1",1,8)
+			else
+				space.card:juice_up()
+				space.hitmarkers[ht] = "miss"
+				play_sound("paper1",2,8)
+			end
 		end
 	else
 		keypressed_hook(key, scancode, isrepeat)
