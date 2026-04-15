@@ -64,6 +64,13 @@ SMODS.Font {
 loc_colour()
 G.ARGS.LOC_COLOURS.pure_black = HEX("000000ff")
 
+SMODS.DynaTextEffect {
+	key = "mf_credits",
+	func = function(dynatext, index, letter)
+		letter.offset.y = math.sin((G.TIMERS.REAL + index * 0.1) * 2) * 16
+	end,
+}
+
 PotatoPatchUtils.Developer {
     name = "notmario",
     loc = true,
@@ -75,6 +82,7 @@ PotatoPatchUtils.Developer {
             HEX("ff6868")
         }
     },
+    text_effect = "worm_mf_credits",
     atlas = "worm_ct_credits",
     pos = { x = 3, y = 0 }
 }
