@@ -4,8 +4,6 @@ return {
             PotatoPatchTeam_lancer_fan_club = { name = "Lancer Fan Club" },
 
             PotatoPatchDev_ProdByProto = {
-                --name = "{IMG:lfc_proot_EarL,s:0.525}a{} ProdByProto {IMG:lfc_proot_EarR,s:0.525}a{}", failed image attempt
-                --name = "#1#ProdByProto#2#", failed loc_vars test
                 name = "ProdByProto",
                 text = {
                     {
@@ -261,7 +259,7 @@ return {
                 text = {
                     "The next {C:attention}#1#{} hands gain",
                     "an additional {C:chips}+#2#{} Chips",
-                    "and {C:mult}+#3#{} when {C:attention}levelling up"
+                    "and {C:mult}+#3#{} Mult when {C:attention}levelling up"
                 },
             },
             j_worm_lfc_hitchhiker = {

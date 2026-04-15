@@ -86,17 +86,18 @@ SMODS.Atlas {
 }
 
 SMODS.Atlas {
-    key = "lfc_proot_EarL",
-    px = 8,
-    py = 12,
-    path = "lancer_fan_club/EarL.png"
+    key = "lfc_proot_Ears",
+    px = 18,
+    py = 24,
+    path = "lancer_fan_club/Ears.png"
 }
 
 SMODS.Atlas {
-    key = "lfc_proot_EarR",
-    px = 8,
-    py = 12,
-    path = "lancer_fan_club/EarR.png"
+    atlas_table = "ASSET_ATLAS",
+    key = "lfc_lemniscate_atlas",
+    px = 77,
+    py = 95,
+    path = "lancer_fan_club/lemniscate_spectral.png"
 }
 
 SMODS.Atlas {
@@ -136,9 +137,9 @@ G.ARGS.LOC_COLOURS.lfc_meteor  = HEX('a97a51')
 G.ARGS.LOC_COLOURS.lfc_discord = HEX('5662f6')
 G.ARGS.LOC_COLOURS.lfc_dark    = G.C.BLACK
 G.ARGS.LOC_COLOURS.lfc_elle    = HEX('ff53a9')
-G.ARGS.LOC_COLOURS.lfc_ash     = SMODS.Gradient{
-    key="lfc_ash",
-    colours= {
+G.ARGS.LOC_COLOURS.lfc_ash     = SMODS.Gradient {
+    key = "lfc_ash",
+    colours = {
         HEX('fd5f55'),
         HEX('ffe07b'),
         HEX('81ff70'),
@@ -181,15 +182,15 @@ PotatoPatchUtils.Developer {
 SMODS.DynaTextEffect {
     key = "elle_text",
     func = function(dynatext, index, letter)
-        local t = G.TIMERS.REAL*3 + index
+        local t = G.TIMERS.REAL * 3 + index
 
         letter.offset = {
-            x = math.sin(t)*9,
-            y = math.cos(t)*9
+            x = math.sin(t) * 9,
+            y = math.cos(t) * 9
         }
 
-        letter.colour = mix_colours(HEX('f25fa8'),HEX('a83c8d'),(math.sin(t*0.437)+1)/2)
-        letter.scale = 1+math.cos(t*0.81)*.1
+        letter.colour = mix_colours(HEX('f25fa8'), HEX('a83c8d'), (math.sin(t * 0.437) + 1) / 2)
+        letter.scale = 1 + math.cos(t * 0.81) * .1
     end,
 }
 
@@ -227,7 +228,7 @@ SMODS.DynaTextEffect {
 
 PotatoPatchUtils.Developer({
     name = "J8-Bit",
-    --colour = HEX('F1641F'),
+    colour = HEX('F1641F'),
     text_effect = "worm_j8_text",
     loc = "PotatoPatchDev_j8bit",
     team = "Lancer Fan Club",
@@ -277,8 +278,10 @@ local function floating_sprite(offset)
     local offset = offset or 0
     local time = G.TIMERS.REAL + offset
 
-    local scale_mod = 0.07 + 0.02*math.sin(1.8*time) + 0.00*math.sin((time - math.floor(time))*math.pi*14)*(1 - (time - math.floor(time)))^3
-    local rotate_mod = 0.05*math.sin(1.219*time) + 0.00*math.sin((time)*math.pi*5)*(1 - (time - math.floor(time)))^2
+    local scale_mod = 0.07 + 0.02 * math.sin(1.8 * time) +
+    0.00 * math.sin((time - math.floor(time)) * math.pi * 14) * (1 - (time - math.floor(time))) ^ 3
+    local rotate_mod = 0.05 * math.sin(1.219 * time) + 0.00 * math.sin((time) * math.pi * 5) *
+    (1 - (time - math.floor(time))) ^ 2
 
     return scale_mod, rotate_mod
 end
@@ -291,8 +294,10 @@ SMODS.DrawStep {
         if self.children.worm_lfc_extra_sprite then
             local scale_mod, rotate_mod = floating_sprite(-45)
 
-            self.children.worm_lfc_extra_sprite:draw_shader('dissolve',0, nil, nil, self.children.center,scale_mod, rotate_mod,nil, 0.1 + 0.03*math.sin(1.8*G.TIMERS.REAL),nil, 0.6)
-            self.children.worm_lfc_extra_sprite:draw_shader('dissolve', nil, nil, nil, self.children.center, scale_mod, rotate_mod)
+            self.children.worm_lfc_extra_sprite:draw_shader('dissolve', 0, nil, nil, self.children.center, scale_mod,
+                rotate_mod, nil, 0.1 + 0.03 * math.sin(1.8 * G.TIMERS.REAL), nil, 0.6)
+            self.children.worm_lfc_extra_sprite:draw_shader('dissolve', nil, nil, nil, self.children.center, scale_mod,
+                rotate_mod)
         end
     end,
     conditions = { vortex = false, facing = 'front' },
@@ -300,22 +305,25 @@ SMODS.DrawStep {
 
 function Wormhole.LancerFanClub.Alexi.create_lemniscate()
     local card = Card(G.ROOM.T.x, G.ROOM.T.y, G.CARD_W / 1.25, G.CARD_H / 1.25, nil, G.P_CENTERS.c_base)
-    card.T.w = card.T.w*(77/71)
+    card.T.w = card.T.w * (77 / 71)
     card.VT.w = card.T.w
     card.children.center:remove()
-    card.children.center = SMODS.create_sprite(card.T.x, card.T.y, card.T.w, card.T.h, "worm_lfc_lemniscate_atlas", {x = 0, y = 0})
+    card.children.center = SMODS.create_sprite(card.T.x, card.T.y, card.T.w, card.T.h, "worm_lfc_lemniscate_atlas",
+        { x = 0, y = 0 })
     card.children.center.states.hover = card.states.hover
     card.children.center.states.click = card.states.click
     card.children.center.states.drag = card.states.drag
     card.children.center.states.collide.can = true
-    card.children.center:set_role({major = card, role_type = 'Glued', draw_major = card})
+    card.children.center:set_role({ major = card, role_type = 'Glued', draw_major = card })
 
-    card.children.ppu_floating_sprite = SMODS.create_sprite(card.T.x, card.T.y, card.T.w, card.T.h, "worm_lfc_lemniscate_atlas", {x = 1, y = 0})
+    card.children.ppu_floating_sprite = SMODS.create_sprite(card.T.x, card.T.y, card.T.w, card.T.h,
+        "worm_lfc_lemniscate_atlas", { x = 1, y = 0 })
     card.children.ppu_floating_sprite.role.draw_major = card
     card.children.ppu_floating_sprite.states.hover.can = false
     card.children.ppu_floating_sprite.states.click.can = false
 
-    card.children.worm_lfc_extra_sprite = SMODS.create_sprite(card.T.x, card.T.y, card.T.w, card.T.h, "worm_lfc_lemniscate_atlas", {x = 2, y = 0})
+    card.children.worm_lfc_extra_sprite = SMODS.create_sprite(card.T.x, card.T.y, card.T.w, card.T.h,
+        "worm_lfc_lemniscate_atlas", { x = 2, y = 0 })
     card.children.worm_lfc_extra_sprite.role.draw_major = card
     card.children.worm_lfc_extra_sprite.states.hover.can = false
     card.children.worm_lfc_extra_sprite.states.click.can = false
@@ -332,7 +340,7 @@ SMODS.Shader {
         local w, h = love.graphics.getDimensions()
         local mx, my = love.mouse.getPosition()
         return {
-            mouse_pos = {mx,my},
+            mouse_pos = { mx, my },
             t = G.TIMERS.REAL
         }
     end
@@ -363,3 +371,39 @@ SMODS.DrawSteps.ppu_floating_sprite.func = function(card, layer)
     end
 end
 
+local localize_ref = localize
+function localize(args, misc_cat)
+    local ret = localize_ref(args, misc_cat)
+    if type(args) == "table" and args.type == "name" and args.set == "PotatoPatch"
+        and args.key == "PotatoPatchDev_ProdByProto" and (args.nodes or {})[1] and args.nodes[1][1] then
+        args.nodes[1][1] = {
+            n = G.UIT.R,
+            nodes = {
+                {
+                    n = G.UIT.C,
+                    nodes = {
+                        {
+                            n = G.UIT.O,
+                            config = {
+                                object = SMODS.create_sprite(0, 0, 0.5, 0.5, "worm_lfc_proot_Ears", { x = 0, y = 0 })
+                            }
+                        }
+                    }
+                },
+                args.nodes[1][1],
+                {
+                    n = G.UIT.C,
+                    nodes = {
+                        {
+                            n = G.UIT.O,
+                            config = {
+                                object = SMODS.create_sprite(0, 0, 0.5, 0.5, "worm_lfc_proot_Ears", { x = 1, y = 0 })
+                            }
+                        }
+                    }
+                },
+            }
+        }
+    end
+    return ret
+end
