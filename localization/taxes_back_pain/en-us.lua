@@ -131,7 +131,7 @@ local other_loc_table = {
             b_worm_spaceship_deck = {
                 name = "Spaceship Deck",
                 text = {
-                    "Start with a {T:j_worm_tbp_spaceship,C:attention}#1#{}",
+                    "Start with a {T:j_worm_tbp_spaceship,C:attention}Spaceship{}",
                     "which always spawns a {C:tbp_module}Module{}",
                     "pack at the start of {T:p_worm_module_jumbo_1,C:attention}shop{}"
                 },
@@ -168,7 +168,52 @@ local other_loc_table = {
                     }
                 },
             },
+            p_worm_module_normal_3 = {
+                name = "Module Pack",
+                text = {
+                    {
+                        "Choose {C:attention}#1#{} of up to",
+                        "{C:attention}#2#{C:tbp_module} Module{} cards to",
+                        "be used immediately",
+                    },
+                    {
+                        "When opened,",
+                        "create a {C:attention}Spaceship{}",
+                        "if none are owned"
+                    }
+                },
+            },
+            p_worm_module_normal_4 = {
+                name = "Module Pack",
+                text = {
+                    {
+                        "Choose {C:attention}#1#{} of up to",
+                        "{C:attention}#2#{C:tbp_module} Module{} cards to",
+                        "be used immediately",
+                    },
+                    {
+                        "When opened,",
+                        "create a {C:attention}Spaceship{}",
+                        "if none are owned"
+                    }
+                },
+            },
             p_worm_module_jumbo_1 = {
+                name = "Jumbo Module Pack",
+                text = {
+                    {
+                        "Choose {C:attention}#1#{} of up to",
+                        "{C:attention}#2#{C:tbp_module} Module{} cards to",
+                        "be used immediately",
+                    },
+                    {
+                        "When opened,",
+                        "create a {C:attention}Spaceship{}",
+                        "if none are owned"
+                    }
+                },
+            },
+            p_worm_module_jumbo_2 = {
                 name = "Jumbo Module Pack",
                 text = {
                     {
@@ -198,6 +243,21 @@ local other_loc_table = {
                     }
                 },
             },
+            p_worm_module_mega_2 = {
+                name = "Mega Module Pack",
+                text = {
+                    {
+                        "Choose {C:attention}#1#{} of up to",
+                        "{C:attention}#2#{C:tbp_module} Module{} cards to",
+                        "be used immediately",
+                    },
+                    {
+                        "When opened,",
+                        "create a {C:attention}Spaceship{}",
+                        "if none are owned"
+                    }
+                },
+            },
 
             -- Undiscovered Modules
             undiscovered_tbp_module = {
@@ -209,6 +269,7 @@ local other_loc_table = {
                     'learn what it does'
                 }
             },
+            
         },
         Tag = {
             tag_worm_tbp_rocketry = {
@@ -224,7 +285,7 @@ local other_loc_table = {
 local descriptions = {
     Joker = {
         spaceship = {
-            name = 'Spaceship',
+            name = '#2#',
             text = {
                 '{V:1}Adds a {V:2}#1#',
                 '{V:1}to the shop when',
@@ -232,7 +293,7 @@ local descriptions = {
             }
         },
         spaceship_back = {
-            name = 'Spaceship',
+            name = '#2#',
             text = {
                 '{V:1}Adds a {V:2}#1#',
                 '{V:1}to the shop'

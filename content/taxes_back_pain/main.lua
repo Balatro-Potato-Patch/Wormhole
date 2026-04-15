@@ -344,6 +344,7 @@ SMODS.Joker({
     config = {
         extra_slots_used = -1,
         extra = {
+            ship_name = "Spaceship",
             modules = {
                 core = {},
                 weapons = {},
@@ -375,7 +376,8 @@ SMODS.Joker({
             key = key,
             vars = {
                 colours = {modules and G.ARGS.LOC_COLOURS.inactive or G.C.UI.TEXT_DARK, modules and mix_colours(G.ARGS.LOC_COLOURS.inactive, G.ARGS.LOC_COLOURS.attention, 0.65) or G.ARGS.LOC_COLOURS.attention},
-                localize{type = 'name_text', set = 'Other', key = 'p_worm_module_jumbo_1'}
+                localize{type = 'name_text', set = 'Other', key = 'p_worm_module_jumbo_1'},
+                card.ability.extra.ship_name
             }
         }
     end,
@@ -429,6 +431,16 @@ SMODS.Joker({
         end
 	end,
     add_to_deck = function(self, card, from_debuff)
+        local _list_of_ship_names = {
+            "Vaianu XI",
+            "Explorer",
+            "Artemis",
+            "Galactica",
+            "Sealab Galactic Travels",
+            "Eremillenium Falcon",
+        }
+        card.ability.extra.ship_name = pseudorandom_element(_list_of_ship_names, pseudoseed("shipname"))
+
 		if next(SMODS.find_card("j_worm_tbp_spaceship")) then
             G.E_MANAGER:add_event(Event({
                 func = function()
@@ -1304,6 +1316,7 @@ local booster_loc_vars = function(self, info_queue, card)
     return { vars = { card.ability.choose, card.ability.extra } }
 end
 
+tbp_booster_weight_base = 0.5
 -- Module boosters
 SMODS.Booster({
 	key = "module_normal_1",
@@ -1312,6 +1325,7 @@ SMODS.Booster({
     pos = { x = 1, y = 0},
     loc_vars = booster_loc_vars,
 	group_key = "k_worm_tbp_module",
+    weight = tbp_booster_weight_base,
 	cost = 4,
     kind = "worm_tbp_module",
 	create_card = booster_module_create_card,
@@ -1326,6 +1340,37 @@ SMODS.Booster({
     pos = { x = 0, y = 0},
     loc_vars = booster_loc_vars,
 	group_key = "k_worm_tbp_module",
+    weight = tbp_booster_weight_base,
+	cost = 4,
+    kind = "worm_tbp_module",
+	create_card = booster_module_create_card,
+    ppu_team = {'tbp'},
+    ppu_artist = {'mythie'}
+})
+
+SMODS.Booster({
+	key = "module_normal_3",
+    config = { extra = 3, choose = 1 },
+    atlas = "tbp_boosters",
+    pos = { x = 0, y = 1},
+    loc_vars = booster_loc_vars,
+	group_key = "k_worm_tbp_module",
+    weight = tbp_booster_weight_base,
+	cost = 4,
+    kind = "worm_tbp_module",
+	create_card = booster_module_create_card,
+    ppu_team = {'tbp'},
+    ppu_artist = {'mythie'}
+})
+
+SMODS.Booster({
+	key = "module_normal_4",
+	config = { extra = 3, choose = 1 },
+    atlas = "tbp_boosters",
+    pos = { x = 1, y = 1},
+    loc_vars = booster_loc_vars,
+	group_key = "k_worm_tbp_module",
+    weight = tbp_booster_weight_base,
 	cost = 4,
     kind = "worm_tbp_module",
 	create_card = booster_module_create_card,
@@ -1340,6 +1385,22 @@ SMODS.Booster({
     pos = { x = 2, y = 0},
     loc_vars = booster_loc_vars,
 	group_key = "k_worm_tbp_module",
+    weight = tbp_booster_weight_base,
+	cost = 6,
+    kind = "worm_tbp_module",
+	create_card = booster_module_create_card,
+    ppu_team = {'tbp'},
+    ppu_artist = {'mythie'}
+})
+
+SMODS.Booster({
+	key = "module_jumbo_2",
+	config = { extra = 5, choose = 1 },
+    atlas = "tbp_boosters",
+    pos = { x = 2, y = 1},
+    loc_vars = booster_loc_vars,
+	group_key = "k_worm_tbp_module",
+    weight = tbp_booster_weight_base,
 	cost = 6,
     kind = "worm_tbp_module",
 	create_card = booster_module_create_card,
@@ -1354,6 +1415,22 @@ SMODS.Booster({
     pos = { x = 3, y = 0},
     loc_vars = booster_loc_vars,
 	group_key = "k_worm_tbp_module",
+    weight = tbp_booster_weight_base / 4,
+	cost = 8,
+    kind = "worm_tbp_module",
+	create_card = booster_module_create_card,
+    ppu_team = {'tbp'},
+    ppu_artist = {'mythie'}
+})
+
+SMODS.Booster({
+	key = "module_mega_2",
+	config = { extra = 5, choose = 2 },
+    atlas = "tbp_boosters",
+    pos = { x = 3, y = 1},
+    loc_vars = booster_loc_vars,
+	group_key = "k_worm_tbp_module",
+    weight = tbp_booster_weight_base / 4,
 	cost = 8,
     kind = "worm_tbp_module",
 	create_card = booster_module_create_card,
