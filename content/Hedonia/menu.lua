@@ -219,6 +219,7 @@ SMODS.Consumable {
 
 SMODS.Booster {
     key = "hedonia_menu_normal_1",
+    group_key = 'hedonia_menu',
     kind = "hedonia_menu",
     cost = 4,
     atlas = "booster_placeholder",
@@ -241,6 +242,7 @@ SMODS.Booster {
 
 SMODS.Booster {
     key = "hedonia_menu_normal_2",
+    group_key = 'hedonia_menu',
     kind = "hedonia_menu",
     cost = 4,
     atlas = "booster_placeholder",
@@ -263,6 +265,7 @@ SMODS.Booster {
 
 SMODS.Booster {
     key = "hedonia_menu_normal_3",
+    group_key = 'hedonia_menu',
     kind = "hedonia_menu",
     cost = 4,
     atlas = "booster_placeholder",
@@ -285,6 +288,7 @@ SMODS.Booster {
 
 SMODS.Booster {
     key = "hedonia_menu_normal_4",
+    group_key = 'hedonia_menu',
     kind = "hedonia_menu",
     cost = 4,
     atlas = "booster_placeholder",
@@ -307,6 +311,7 @@ SMODS.Booster {
 
 SMODS.Booster {
     key = "hedonia_menu_jumbo_1",
+    group_key = 'hedonia_menu',
     kind = "hedonia_menu",
     cost = 6,
     atlas = "booster_placeholder",
@@ -329,6 +334,7 @@ SMODS.Booster {
 
 SMODS.Booster {
     key = "hedonia_menu_jumbo_2",
+    group_key = 'hedonia_menu',
     kind = "hedonia_menu",
     cost = 6,
     atlas = "booster_placeholder",
@@ -351,6 +357,7 @@ SMODS.Booster {
 
 SMODS.Booster {
     key = "hedonia_menu_mega_1",
+    group_key = 'hedonia_menu',
     kind = "hedonia_menu",
     cost = 8,
     atlas = "booster_placeholder",
@@ -373,6 +380,7 @@ SMODS.Booster {
 
 SMODS.Booster {
     key = "hedonia_menu_mega_2",
+    group_key = 'hedonia_menu',
     kind = "hedonia_menu",
     cost = 8,
     atlas = "booster_placeholder",

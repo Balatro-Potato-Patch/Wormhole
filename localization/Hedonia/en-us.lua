@@ -187,14 +187,7 @@ return {
         dictionary={
             b_worm_hedonia_menu_cards = "Tonight's Menu",
             k_worm_hedonia_menu = "Menu Item",
-            k_booster_group_p_worm_hedonia_menu_normal_1 = "Tonight's Menu",
-            k_booster_group_p_worm_hedonia_menu_normal_2 = "Tonight's Menu",
-            k_booster_group_p_worm_hedonia_menu_normal_3 = "Tonight's Menu",
-            k_booster_group_p_worm_hedonia_menu_normal_4 = "Tonight's Menu",
-            k_booster_group_p_worm_hedonia_menu_jumbo_1 = "Tonight's Menu",
-            k_booster_group_p_worm_hedonia_menu_jumbo_2 = "Tonight's Menu",
-            k_booster_group_p_worm_hedonia_menu_mega_1 = "Tonight's Menu",
-            k_booster_group_p_worm_hedonia_menu_mega_2 = "Tonight's Menu",
+            hedonia_menu = "Tonight's Menu",
         }
     },
 }
