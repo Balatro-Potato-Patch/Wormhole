@@ -136,11 +136,19 @@ return {
                     "every other {C:attention}unique{} rank scored"
                 }
             },
+            j_worm_euda_ton618 = {
+                name = "Ton 618",
+                text = {
+                    "If at least two {C:attention}Enhanced{} cards",
+                    "are scored, {X:mult,C:white}X#1#{} Mult and destroy",
+                    "the scored {C:attention}Enhanced{} cards"
+                },
+            },
             j_worm_euda_cometwild = {
                 name = "Comet Wild",
                 text = {
                     "{C:attention}Wild{} cards can't be debuffed and",
-                    "give {X:mult,C:white}x#1#{} Mult when scored"
+                    "give {X:mult,C:white}X#1#{} Mult when scored"
                 },
             },
 			j_worm_euda_bitflip = {
@@ -184,7 +192,14 @@ return {
                     "Shop cards cost {C:money}$#1#{} less",
                     "Increase both values by 1 per {C:green}reroll"
                 }
-            }
+            },
+            j_worm_euda_csaber = {
+                name = "Cyalume Saber",
+                text = {
+                    "{C:green}#1# in #2#{} chance to add {C:chips}+60{}",
+                    "Chips to a {C:chips}+Chips{} operation"
+                },
+            },
         },
         euda_Fate = {
             c_worm_euda_crunch = {

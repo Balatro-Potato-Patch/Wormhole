@@ -12,6 +12,7 @@ SMODS.Joker {
     rarity = 2,
     cost = 6,
     discovered = true,
+    ppu_team = {"TeamEudaimonia"},
     ppu_coder = {'M0xes'},
     ppu_artist = {'Jewel'},
     config = { extra= { currval = 1 } },
