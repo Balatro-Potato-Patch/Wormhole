@@ -17,7 +17,6 @@ SMODS.Voucher {
     atlas = "shrug_vouchers",
     pos = { x = 0, y = 0 },
     cost = 10,
-    discovered = true,
 
     -- Replace 1/5 booster cards (same odds as Omen Globe)
     calculate = function(self, card, context)
@@ -58,7 +57,6 @@ SMODS.Voucher {
     cost = 10,
     requires = { "v_worm_shrug_first_contact" },
     config = { extra = { alien_rate = 3 } },
-    discovered = true,
 
     -- Redeeming
     redeem = function(self, card)

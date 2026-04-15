@@ -1,6 +1,5 @@
 -- Set all Jokers to properly discovered, removable with ease if at the end of testing we decide we don't want them to be discovered
 Wormhole.SHRUG_Joker = SMODS.Joker:extend{
-    discovered = true
 }
 
 

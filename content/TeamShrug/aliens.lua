@@ -31,7 +31,6 @@ SMODS.Atlas{
 local alien_booster = SMODS.Booster:extend{
     group_key = "shrug_alien_pack",
     kind = "shrug_alien_pack",
-    discovered = true,
     draw_hand = true,
     loc_vars = function(self, info_queue, center)
         return {vars = {center.ability.choose, center.ability.extra}}
@@ -91,7 +90,6 @@ SMODS.Tag{
     key = "shrug_conspiracy",
     min_ante = 2,
     atlas = 'shrug_alien_tag',
-    discovered = true,
     pos = {x = 0, y = 0},
     loc_vars = function(self, info_queue, tag)
         info_queue[#info_queue + 1] = G.P_CENTERS.p_worm_shrug_alien_normal_1
@@ -278,7 +276,6 @@ local suit_alien = SMODS.Consumable:extend{
         alien_suit_convert(card.ability.consumeable.extra.suit, card.ability.consumeable.extra.convert)
     end,
     unlocked = true,
-    discovered = true,
     cost = 4,
     set = 'shrug_alien',
     ppu_coder = {"randomsongv2"},
@@ -343,7 +340,6 @@ SMODS.Consumable{
     atlas = 'shrug_alien_cards',
     pos = {x = 1, y = 0},
     unlocked = true,
-    discovered = true,
     config = {extra = {selection = 4}},
     loc_vars = function(self, info_queue, card)
         return {vars = {card.ability.extra.selection}}
@@ -387,7 +383,6 @@ SMODS.Consumable{
     atlas = 'shrug_alien_cards',
     pos = {x = 5, y = 0},
     unlocked = true,
-    discovered = true,
     config = {extra = {odds = 2}},
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = G.P_CENTERS.m_worm_shrug_nebulous
@@ -424,7 +419,6 @@ SMODS.Consumable{
     atlas = 'shrug_alien_cards',
     pos = {x = 7, y = 0},
     unlocked = true,
-    discovered = true,
     config = {extra = {}},
     loc_vars = function(self, info_queue, card)
     end,
@@ -453,7 +447,6 @@ SMODS.Consumable{
     atlas = 'shrug_alien_cards',
     pos = {x = 3, y = 0},
     unlocked = true,
-    discovered = true,
     config = {extra = {}},
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = {key = 'perishable', set = 'Other', vars = {5, 5}}

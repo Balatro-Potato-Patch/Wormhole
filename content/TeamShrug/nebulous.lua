@@ -9,7 +9,6 @@ SMODS.Enhancement {
     key = 'shrug_nebulous',
     atlas = "shrug_enhancements",
     pos = { x = 0, y = 0 },
-    discovered = true,
     config = { extra = { levels = 1 } },
 
     -- Return localization
