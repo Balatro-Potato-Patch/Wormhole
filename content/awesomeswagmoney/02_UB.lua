@@ -414,7 +414,11 @@ SMODS.Consumable {
     soul_pos = {x = 1, y = 5},
     display_size = { w = 89, h = 109 },
     config = {extra_slots_used = 1},
-    loc_vars = function(self, info_queue, card) return {vars = {}} end,
+    loc_vars = function(self, info_queue, card)
+        if not (card.edition and card.edition.holo) then
+            info_queue[#info_queue+1] = G.P_CENTERS.e_holo
+        end
+    end,
     use = function(self, card, area, copier)
         local eligible_card = pseudorandom_element(G.jokers.cards, 'popo')
         local playing = pseudorandom_element(G.hand.cards, 'popo')
@@ -440,7 +444,14 @@ SMODS.Consumable {
     soul_pos = {x = 3, y = 4},
     display_size = {w = 89, h = 109},
     config = {extra_slots_used = 1},
-    loc_vars = function(self, info_queue, card) return {vars = {}} end,
+    loc_vars = function(self, info_queue, card)
+        if not (card.edition and card.edition.polychrome) then
+            info_queue[#info_queue+1] = G.P_CENTERS.e_polychrome
+        end
+        if not (card.ability and card.ability.eternal) then
+            info_queue[#info_queue+1] = { set = "Other", key = "eternal" }
+        end
+    end,
     use = function(self, card, area, copier)
         local editionless_jokers = SMODS.Edition:get_edition_cards(G.jokers,
                                                                    true)
@@ -469,7 +480,9 @@ SMODS.Consumable {
     config = {extra_slots_used = 1, max_highlighted = 3, mod_conv = 'm_stone'},
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = G.P_CENTERS[card.ability.mod_conv]
-        info_queue[#info_queue + 1] = G.P_CENTERS['e_polychrome']
+        if not (card.edition and card.edition.polychrome) then
+            info_queue[#info_queue + 1] = G.P_CENTERS['e_polychrome']
+        end
         return {
             vars = {
                 card.ability.max_highlighted,
@@ -517,7 +530,11 @@ SMODS.Consumable {
     soul_pos = {x = 1, y = 1},
     display_size = { w = 89, h = 109 },
     config = {extra_slots_used = 1},
-    loc_vars = function(self, info_queue, card) return {vars = {}} end,
+    loc_vars = function(self, info_queue, card)
+        if not (card.edition and card.edition.polychrome) then
+            info_queue[#info_queue+1] = G.P_CENTERS.e_polychrome
+        end
+    end,
     can_use = function(self, card) return G.hand and #G.hand.cards > 0 end,
     use = function(self, card, area, copier)
         G.E_MANAGER:add_event(Event({
