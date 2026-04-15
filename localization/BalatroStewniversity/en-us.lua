@@ -148,10 +148,10 @@ return {
             },
 
             j_worm_stew_starfish_earth = {
-                name = 'Womp womp',
+                name = 'Ocean Earthfish',
                 text = {
-                    "testing param #1#",
-                    "test #1#"
+                    "Earn {C:money}$#1#{} for every",
+                    "{C:money}$#2#{} that you have",
                 }
             },
 
@@ -244,7 +244,10 @@ return {
             Wingcap = {
                 name = "Wingcap",
                 text = {
-                    "womp womp",
+                    "Did you know you can",
+                    "play RuneScape on your",
+                    "phone as well as your",
+                    "second monitor?",
                 }
             },
             tuzzo = {
