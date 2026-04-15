@@ -144,7 +144,9 @@ return {
                     'Second published Balatro mod, yay',
                     'Helped bugfix when other coders needed help',
                     'and coded some of the jokers/consumables',
-                    'instead of brownies, eat {C:edition,s:1.1,E:1}grilled{} brownies'
+                    'instead of brownies, eat {C:edition,s:1.1,E:1}grilled{} brownies',
+                    "{s:5,f:worm_axy_font}A",
+                    "{s:0.7}Emote Art by SoftySapphie"
                 }
             },
             PotatoPatchDev_hellboydante = {
