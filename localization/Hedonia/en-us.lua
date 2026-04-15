@@ -169,7 +169,10 @@ return {
             PotatoPatchDev_wombatcountry = {
                 name = "Wombat Country",
                 text = {
-                    'a'
+                    'I coded a bunch of cards and then my teammates',
+                    'recoded better ones. Please enjoy our bar-themed',
+                    'additions! Or don\'t. I don\'t care. I\'m just',
+                    'happy I\'m in the same mod as SarcPot and Revo.'
                 }
             }
         }
