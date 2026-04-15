@@ -529,9 +529,9 @@ for duplicate = 0, 40 do
 		loc_txt = {
 			name = 'Worm'.." "..duplicate,
 			text = {
-				"When {T:e_worm_bap_void}Void card{} is played",
-				"{C:attention}remove{} {T:e_worm_bap_void}Void{} edition from the",
-				"card and gains {X:mult,C:white} X#1# {} Mult",
+				"This Joker gains {X:mult,C:white} X#1# {} Mult",
+				"per {T:e_worm_bap_void}Void{} card played,",
+				"{C:attention}removes{} {T:e_worm_bap_void}Void{} edition",
 				"{C:inactive}(Currently {X:mult,C:white} X#2# {C:inactive} Mult)"
 			}
 		},
