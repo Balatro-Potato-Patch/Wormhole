@@ -222,7 +222,8 @@ descriptions={
 			name = 'SarcPot',
 			text = {
 				{
-					"Hey, i'm {C:attention}SarcasticPotato{} (aka. {C:attention}Sarc{})"
+					"Hey, i'm {C:attention}SarcasticPotato{} (aka. {C:attention}Sarc{})",
+					"{C:mrrp_orange,s:0.9}Like. you know. from the mod. {C:attention,s:0.9}SarcPot{C:mrrp_orange,s:0.9}{}"
 				},
 				{
 					"I did most of the {C:attention}art{} for our portion",
@@ -408,19 +409,24 @@ misc={
 		},
 
 	--	CYAN
-		worm_mrrp_cyan_win = {
-			"CAT GANG",
-			"FOREVER!",
-			"RAAAGHHH"
+		worm_mrrp_mmm_win = {
+			"Hey! One of",
+			"those Jokers",
+			"is {C:mrrp_pink}ours{}!! :D"
 		},
-		worm_mrrp_no_steady_lose = {
-			"Augh! If only",
-			"you had held a",
-			"{C:mrrp_cyan,E:2}Steady Hand{}...",
+		worm_mrrp_mmm_loss = {
+			"It wasn't {C:mrrp_pink}our{}",
+			"Joker's fault,",
+			"was it? :<",
+		},
+		worm_mrrp_no_steady_loss = {
+			"Augh! If only you",
+			"were able to hold",
+			"a {C:mrrp_cyan,E:2}Steady Hand{}...",
 		},
 		worm_mrrp_no_steady_win = {
-			"Keep vanilla+",
-			"fun going with",
+			"Awesome job",
+			"holding a",
 			"{C:mrrp_cyan,E:2}Steady Hand{}!",
 		},
 
