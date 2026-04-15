@@ -1,6 +1,7 @@
 local colours = {
     mrrp_pink = HEX("CA7CA7"),
     mrrp_orange = HEX('C47C47'),
+    mrrp_orange2 = HEX('FCC603'),
     mrrp_blue = HEX('7994C1'),
     mrrp_green = HEX('82A356'),
     mrrp_cyan = HEX('7AC7AC'),

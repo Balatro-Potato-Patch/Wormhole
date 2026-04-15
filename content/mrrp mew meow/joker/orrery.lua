@@ -78,7 +78,7 @@ calculate = function(self, card, context)
                     if #G.consumeables.cards < G.consumeables.config.card_limit then
 
                     --  this compiles which sets (and therefore pools) the cards belong to, by indices for convenience.
-                    --  under normal circumstances, there should only be one set, being Planet cards.
+                    --  under normal circumstances, there should only be one set, being Tarot cards.
                     --  however, this supports modularity for anything that could change these cards.
                         local pollsets = {}
                         for k,v in ipairs(orrery_cards) do
@@ -128,18 +128,18 @@ calculate = function(self, card, context)
 
                     --  this decides which cards will get made by choosing at random between the cards that can be made.
                     --  it limits itself to however many cards can be made (whether by availability or area capacity).
-                    --  once a key is chosen, if it can't have duplicates then it's removed from the list to prevent that.
+                    --  once a key is chosen, it's removed from the list to prevent duplicates and allow up to all 4.
                         local cardstocreate = {}
                         for i = 1, math.min(#avail_cards, G.consumeables.config.card_limit-#G.consumeables.cards) do
                             local key, indx = pseudorandom_element(avail_cards, pseudoseed("orrery"))
                             cardstocreate[#cardstocreate+1] = key
-                            avail_cards[indx] = (SMODS.showman(key) and avail_cards[indx]) or nil
+                            avail_cards[indx] = nil
                         end
 
                     --  this spawns all of the cards that were chosen in the end.
-                    --  they all spawn in the same instant, rather than with small pauses like The High Priestess does.
+                    --  they all spawn in the same instant, rather than with small pauses like The Emperor does.
                     --  I just thought it would flow better and feel more polished if it behaved in this way.
-                        --  to replicate The High Priestess, put play_sound and SMODS.add_card in the Event,
+                        --  to replicate The Emperor, put play_sound and SMODS.add_card in the Event,
                         --  then put the Event in the for loop, and put SMODS.calculate_effect before the for loop.
                         --  the Event delay should only be 0.6 on the last card (i==#cardstocreate) and 0.4 otherwise.  
                         play_sound('timpani')
