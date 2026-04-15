@@ -31,7 +31,7 @@ SMODS.calculate_context({using_consumeable = true, consumeable = card, area = ca
 '''
 position = 'at'
 payload = '''
-if card.ability.set ~= 'abs_drinks' then
+if card.ability.set ~= 'abs_drinks' or card.config.center.soul_set == 'abs_drinks' then
   SMODS.calculate_context({using_consumeable = true, consumeable = card, area = card.from_area})
 end
 '''

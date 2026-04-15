@@ -944,7 +944,7 @@ SMODS.Consumable { -- John Absinthe
             card:abs_empty_drink()
         end
 
-        if context.using_consumeable and context.consumeable.config.center.set == 'Spectral' and not context.consumeable.ability.drink_values and not card.ability.drink_values.filled then
+        if context.using_consumeable and context.consumeable.config.center.set == 'Spectral' and not card.ability.drink_values.filled then
             card:abs_refill_drink()
         end
     end,
