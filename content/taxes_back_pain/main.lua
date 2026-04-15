@@ -174,6 +174,13 @@ PotatoPatchUtils.Team({
 })
 
 SMODS.Gradient({
+    key = 'tbp_spaceship_badge',
+    colours = {
+        HEX('8677AF'), HEX('6499A4')
+    },
+})
+
+SMODS.Gradient({
     key = 'eremel',
     colours = {
         HEX('a756f9'), HEX('4ee8d3'), HEX('a756f9'), HEX('e8c81b')
@@ -342,9 +349,9 @@ SMODS.Joker({
     ppu_artist = {'ice'},
     module_types = {'core', 'weapons', 'utility', 'thrusters'},
     config = {
+        --ship_name = "Spaceship",
         extra_slots_used = -1,
         extra = {
-            ship_name = "Spaceship",
             modules = {
                 core = {},
                 weapons = {},
@@ -376,8 +383,8 @@ SMODS.Joker({
             key = key,
             vars = {
                 colours = {modules and G.ARGS.LOC_COLOURS.inactive or G.C.UI.TEXT_DARK, modules and mix_colours(G.ARGS.LOC_COLOURS.inactive, G.ARGS.LOC_COLOURS.attention, 0.65) or G.ARGS.LOC_COLOURS.attention},
-                localize{type = 'name_text', set = 'Other', key = 'p_worm_module_jumbo_1'},
-                card.ability.extra.ship_name
+                localize{type = 'name_text', set = 'Other', key = 'p_worm_module_jumbo_1'}
+                --card.ability.extra.ship_name
             }
         }
     end,
@@ -431,15 +438,16 @@ SMODS.Joker({
         end
 	end,
     add_to_deck = function(self, card, from_debuff)
-        local _list_of_ship_names = {
-            "Vaianu XI",
-            "Explorer",
-            "Artemis",
-            "Galactica",
-            "Sealab Galactic Travels",
-            "Eremillenium Falcon",
-        }
-        card.ability.extra.ship_name = pseudorandom_element(_list_of_ship_names, pseudoseed("shipname"))
+        --TODO: Maybe fix this when this becomes a solo mod?
+        --local _list_of_ship_names = {
+        --    "Vaianu XI",
+        --    "Explorer",
+        --    "Artemis",
+        --    "Galactica",
+        --    "Sealab Galactic Travels",
+        --    "Eremillenium Falcon",
+        --}
+        --card.ability.extra.ship_name = pseudorandom_element(_list_of_ship_names, pseudoseed("shipname"))
 
 		if next(SMODS.find_card("j_worm_tbp_spaceship")) then
             G.E_MANAGER:add_event(Event({
@@ -457,7 +465,7 @@ SMODS.Joker({
 		return false
     end,
     set_card_type_badge = function (self, card, badges)
-        -- TODO: Do we give it a custom badge?
+        badges[#badges + 1] = create_badge(localize("k_tbp_spaceship"), SMODS.Gradients["worm_tbp_spaceship_badge"], nil, 1.2)
     end
 })
 

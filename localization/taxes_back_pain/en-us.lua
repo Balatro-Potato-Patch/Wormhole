@@ -5,6 +5,7 @@ local other_loc_table = {
         },
         dictionary = {
             b_tbp_module_cards = "Modules",
+            k_tbp_spaceship = "Spaceship",
             k_tbp_module = "Module",
             k_worm_tbp_module = "Module Pack",
             tbp_module_weapons = 'WEAPON',
@@ -285,7 +286,7 @@ local other_loc_table = {
 local descriptions = {
     Joker = {
         spaceship = {
-            name = '#2#',
+            name = 'Vaianu XI',
             text = {
                 '{V:1}Adds a {V:2}#1#',
                 '{V:1}to the shop when',
@@ -293,7 +294,7 @@ local descriptions = {
             }
         },
         spaceship_back = {
-            name = '#2#',
+            name = 'Vaianu XI',
             text = {
                 '{V:1}Adds a {V:2}#1#',
                 '{V:1}to the shop'
