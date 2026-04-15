@@ -26,7 +26,10 @@ PotatoPatchUtils.Developer {
   name = 'FireIce',
   colour = HEX('AF00AF'),
   loc = 'FireIce', -- Can also be `loc = 'k_doofus_name'` where the string is an arbitrary localization dictionary entry
-  team = 'Violent Violets' -- Must match an already existing Team name
+  team = 'Violent Violets', -- Must match an already existing Team name
+  atlas = 'worm_devs',
+  pos = {x = 1, y = 0},
+  soul_pos = {x = 2, y = 0}
 }
 PotatoPatchUtils.Developer {
   name = 'Gud',
