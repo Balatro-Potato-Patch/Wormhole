@@ -120,12 +120,12 @@ function love.keypressed( key, scancode, isrepeat )
 		local ht = nil
 		-- Get nearest hitmarker
 		for k, v in pairs(space.hitmarkers) do
-			if v and v ~= "miss" and (not ht or math.abs(t-k)<math.abs(t-ht)) then
+			if v and (not ht or math.abs(t-k)<math.abs(t-ht)) then
 				ht = k
 			end
 		end
 
-		if ht then
+		if ht and space.hitmarkers[ht] ~= "miss" then
 			if math.abs(t-ht)<window then
 				space.hitmarkers[ht] = false
 				space.card:juice_up()
