@@ -299,17 +299,17 @@ SMODS.Joker {
     cost = 6,
 	atlas = 'Palindrome',
     pos = { x = 1, y = 2 },
-    config = {  },
+    config = { extra = { money_per=1 } },
 	loc_txt = {
 		name = 'Andromeda',
 		text = {
-			"Gives {C:money}money{} equal ",
-			"to level of first",
-			"{C:attention}poker hand{} played"
+			"Gives {C:money}$#1#{} per level ",
+			"of first played",
+			"{C:attention}poker hand{} each round"
 		},
 	},
     loc_vars = function(self, info_queue, card)
-        return { vars = {} }
+        return { vars = { card.ability.extra.money_per } }
     end,
     calculate = function(self, card, context)
 		if context.first_hand_drawn and not context.blueprint then
@@ -352,11 +352,10 @@ SMODS.Joker {
 	loc_txt = {
 		name = 'Solar Panels',
 		text = {
-			"When scored, played cards with",
-			"{C:hearts}Heart{} suit give",
-			"{C:mult}+4{} Mult and cards with",
-			"{C:diamonds}Diamond{} suit give",
-			"{C:chips}+25{} Chips"
+			"Played cards with {C:hearts}Heart{} suit",
+			"give {C:mult}+4{} Mult when scored",
+			"Played cards with {C:diamonds}Diamond{} suit",
+			"give {C:chips}+25{} Chips when scored"
 		}
 	},
     loc_vars = function(self, info_queue, card)
@@ -524,7 +523,8 @@ for duplicate = 0, 40 do
 		rarity = 1,
 		cost = 1,
 		atlas = 'Palindrome',
-		pos = {x = 2, y = 3},
+		pos={x=0,y=4},
+		soul_pos={x=1,y=4},
 		config = { extra = { x_mult = 1.0, inc_x_mult = 0.10 } },
 		loc_txt = {
 			name = 'Worm'.." "..duplicate,
