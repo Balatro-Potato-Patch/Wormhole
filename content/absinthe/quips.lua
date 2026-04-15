@@ -79,7 +79,7 @@ SMODS.JimboQuip {
     key = 'wq_abs_base4',
     type = 'win',
     extra = { ppu_dev = 'worm_base4' },
-    
+}
 -- argel quips
 
 SMODS.JimboQuip {
