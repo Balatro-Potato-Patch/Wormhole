@@ -190,8 +190,9 @@ return {
 		stake_worm_util_void = {
 			name = "Void Stake",
 			text = {
-				"{C:blue}Planet cards{} and {C:blue}celestial boosters{}",
-				"{C:attention}do not appear{} in the shop"
+				"{C:blue}Planet Cards{} and {C:blue}Celestial Boosters{}",
+				"{C:attention}do not appear{} in the shop",
+				"{s:0.8}Applies all previous Stakes"
 			}
 		}
 	},
