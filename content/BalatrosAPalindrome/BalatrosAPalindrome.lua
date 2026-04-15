@@ -89,7 +89,7 @@ SMODS.Shader {
         }
     end,
 }
-SMODS.Edition {
+SMODS.Edition { -- Void card edition
     key = 'bap_void',
     shader = 'worm_bap_shader_void',
 	loc_txt = {
@@ -459,12 +459,11 @@ SMODS.Joker {
 	loc_txt = {
 		name = 'Solar Panels',
 		text = {
-			"Scored cards with",
+			"When scored, played cards with",
 			"{C:hearts}Heart{} suit give",
-			"{C:mult}+4{} Mult when scored,",
-			"Scored cards with",
-			"{C:hearts}Diamond{} suit give",
-			"{C:chips}+25{} Chips when scored,",
+			"{C:mult}+4{} Mult and cards with",
+			"{C:diamonds}Diamond{} suit give",
+			"{C:chips}+25{} Chips"
 		}
 	},
     loc_vars = function(self, info_queue, card)
@@ -504,11 +503,11 @@ local function print_table(t, depth)
 	end
 end
 
-for duplicate = 0, 20 do
+for duplicate = 0, 40 do
 
 	-- Space Worm
 	SMODS.Joker {
-		key = "bap_space_worm"..duplicate,
+		key = "bap_space_worm",
 		blueprint_compat = true,
 		rarity = 3,
 		cost = 1,
@@ -577,6 +576,60 @@ for duplicate = 0, 20 do
 				}
 			end
 		end
+	}
+
+	SMODS.Joker {
+		key = 'regular_worm'..duplicate,
+		blueprint_compat = true,
+		rarity = 1,
+		cost = 1,
+		atlas = 'Palindrome',
+		pos = {x = 2, y = 3},
+		config = { extra = { x_mult = 1.0, inc_x_mult = 0.10 } },
+		loc_txt = {
+			name = 'Worm'.." "..duplicate,
+			text = {
+				"When {T:e_worm_bap_void}Void card{} is played",
+				"{C:attention}remove{} {T:e_worm_bap_void}Void{} edition from the",
+				"card and gains {X:mult,C:white} X#1# {} Mult",
+				"{C:inactive}(Currently {X:mult,C:white} X#2# {C:inactive} Mult)"
+			}
+		},
+		loc_vars = function(self, info_queue, card)
+        	return { vars = { card.ability.extra.inc_x_mult, card.ability.extra.x_mult } }
+		end,
+		calculate = function(self, card, context)
+			if context.before and not context.blueprint then
+				local voids = {}
+				for _, card in ipairs(context.full_hand) do
+					if card.edition and card.edition.key == 'e_worm_bap_void' then
+						print("Hello World")
+						voids[#voids + 1] = card
+						card:set_edition(nil, true)
+						G.E_MANAGER:add_event(Event({
+							func = function()
+								card:juice_up()
+								return true
+							end
+						}))
+					end
+				end
+
+            if #voids > 0 then
+                -- See note about SMODS Scaling Manipulation on the wiki
+                card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.inc_x_mult * #voids
+                return {
+                    message = localize { type = 'variable', key = 'a_xmult', vars = { card.ability.extra.x_mult } },
+                    colour = G.C.MULT
+                }
+            end
+        end
+        if context.joker_main then
+            return {
+                x_mult = card.ability.extra.x_mult
+            }
+        end
+	end
 	}
 
 end
