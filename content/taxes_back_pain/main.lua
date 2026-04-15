@@ -582,7 +582,7 @@ end
 
 SMODS.ConsumableType {
     key = 'tbp_module',
-    collection_rows = { 5, 6 },
+    collection_rows = { 4, 4 },
     primary_colour = HEX("7ca3cc"),
     secondary_colour = HEX("7ca3cc"),
     default = "c_worm_tbp_laser",
