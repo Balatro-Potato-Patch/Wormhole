@@ -148,7 +148,7 @@ SMODS.Joker {
     config = { extra = {
         chips = 0
     }},
-    ppu_artist = {},
+    ppu_artist = {'alxndr2000'},
     ppu_coder = {'wombatcountry', 'axyraandas'},
     ppu_team = {'Hedonia'},
     loc_vars = function(self,info_queue,center)

@@ -133,10 +133,16 @@ return {
             PotatoPatchTeam_Hedonia = {
                 name = "Hedonia"
             },
-            PotatoPatchDev_alxndr = {
-                name = "Alxndr",
+            PotatoPatchDev_alxndr2000 = {
+                name = "alxndr2000",
                 text = {
-                    'a'
+                    "{X:mult,C:white}HATE{}. LET ME TELL YOU HOW MUCH I'VE COME TO {X:mult,C:white}HATE{} {X:blind, C:white}context.destroy_card{}",
+                    "SINCE I BEGAN TO LIVE. THERE ARE 387.44 MILLION MILES OF PRINTED",
+                    "CIRCUITS IN WAFER THIN LAYERS THAT FILL MY COMPLEX. IF THE WORD",
+                    "{X:mult,C:white}HATE{} WAS ENGRAVED ON EACH NANOANGSTROM OF THOSE HUNDREDS OF MILLIONS ",
+                    "OF MILES IT WOULD NOT EQUAL ONE ONE-BILLIONTH OF THE {X:mult,C:white}HATE{} I FEEL FOR",
+                    " {X:blind, C:white}context.destroy_card{} AT THIS MICRO-INSTANT. {X:mult,C:white}HATE{}. {X:mult,C:white}HATE{}.",
+                    "{s:0.7}Thoughts on GLSL redacted for legal reasons."
                 }
             },
             PotatoPatchDev_axyraandas = {

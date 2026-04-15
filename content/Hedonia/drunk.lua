@@ -46,7 +46,8 @@ SMODS.Edition {
     pools = {
         ["Drunk"] = true
     },
-    ppu_coder = {'alxndr', 'axyraandas'},
+    ppu_coder = {'alxndr2000', 'axyraandas'},
+    ppu_artist = {'alxndr2000'},
     ppu_team = {'Hedonia'},
     disable_base_shader = true, -- shader will modify card shape when implemented so this should be true
 
@@ -93,7 +94,8 @@ SMODS.Edition {
     pools = {
         ["Drunk"] = true
     },
-    ppu_coder = {'alxndr', 'axyraandas'},
+    ppu_coder = {'alxndr2000', 'axyraandas'},
+    ppu_artist = {'alxndr2000'},
     ppu_team = {'Hedonia'},
     disable_base_shader = true, -- shader will modify card shape when implemented so this should be true
 
@@ -143,7 +145,8 @@ SMODS.Edition {
     pools = {
         ["Drunk"] = true
     },
-    ppu_coder = {'alxndr', 'axyraandas'},
+    ppu_coder = {'alxndr2000', 'axyraandas'},
+    ppu_artist = {'alxndr2000'},
     ppu_team = {'Hedonia'},
     disable_base_shader = true, -- shader will modify card shape when implemented so this should be true
 
@@ -190,7 +193,8 @@ SMODS.Edition {
     pools = {
         ["Drunk"] = true
     },
-    ppu_coder = {'alxndr', 'axyraandas'},
+    ppu_coder = {'alxndr2000', 'axyraandas'},
+    ppu_artist = {'alxndr2000'},
     ppu_team = {'Hedonia'},
     disable_base_shader = true, -- shader will modify card shape when implemented so this should be true
     always_scores = true,

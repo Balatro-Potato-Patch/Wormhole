@@ -24,17 +24,17 @@ PotatoPatchUtils.Team {
 }
 
 PotatoPatchUtils.Developer {
-  name = 'alxndr',
-  atlas = 'worm_credits',
-  pos = {x = 0, y = 0},
-  loc = true,
-  team = 'Hedonia'
+    name = 'alxndr2000',
+    atlas = 'worm_credits',
+    pos = {x = 1, y = 0},
+    loc = true,
+    team = 'Hedonia'
 }
 
 PotatoPatchUtils.Developer {
   name = 'axyraandas',
   atlas = 'worm_credits',
-  pos = {x=1, y=0},
+  pos = {x=0, y=0},
   loc = true,
   team = 'Hedonia'
 }
