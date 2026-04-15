@@ -152,6 +152,7 @@ return {
                 text = {
                     "Earn {C:money}$#1#{} for every",
                     "{C:money}$#2#{} that you have",
+                    'at end of round'
                 }
             },
 
