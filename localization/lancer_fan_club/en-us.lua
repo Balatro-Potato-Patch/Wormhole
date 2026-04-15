@@ -27,7 +27,8 @@ return {
                         "Lots of challenges and achievements to be had.",
                         "{s:0.5} ",
                         "Shoutouts to {C:lfc_trans_blue}T{C:lfc_trans_pink}r{}a{C:lfc_trans_pink}n{C:lfc_trans_blue}s {C:lfc_fox}Foxgirls!",
-                        "{C:dark_edition,E:1}Click on Clippy!Ralsei to make a thing happen"
+                        "{C:dark_edition,E:1}Click on Clippy!Ralsei to make a thing happen",
+                        "{C:dark_edition,E:1,s:0.75}Click 5 times for something else"
                     },
                     {
                         "So what's the deal with spaceport food?",

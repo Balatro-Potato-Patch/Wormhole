@@ -125,7 +125,7 @@ SMODS.Sound {
 SMODS.Blind {
     key = "lfc_eigengrau",
     atlas = "lfc_blinds",
-    pos = { x = 0, y = 0 }, -- temp
+    pos = { x = 0, y = 1 },
 
     dollars = 8,
     boss = { showdown = true },
@@ -188,6 +188,6 @@ SMODS.Blind {
     end,
 
     ppu_coder = { "ProdByProto", "InvalidOS" },
-    ppu_artist = { "InvalidOS" --[[ and also whoever does the sprite]] },
+    ppu_artist = { "ellestuff.", "InvalidOS" },
     ppu_team = { "Lancer Fan Club" },
 }

@@ -130,7 +130,7 @@ function love.keypressed( key, scancode, isrepeat )
 			space.card:juice_up()
 			space.timingoffset = t-ht
 			space.hits = space.hits+1
-			play_sound("worm_lfc_spacebar",1,1)
+			play_sound("paper1",1,8)
 		else
 			play_sound("paper1",2,8)
 		end
