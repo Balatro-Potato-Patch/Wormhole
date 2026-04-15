@@ -46,6 +46,7 @@ if member == PotatoPatchUtils.Developers.worm_sleepyg11 then
 end
 '''
 
+# Teleport quantum rock when it covered by other member's description
 [[patches]]
 [patches.pattern]
 target = '''=[SMODS PotatoPatchUtils "src/credits.lua"]'''
@@ -53,11 +54,11 @@ pattern = "Moveable.hover(self)"
 position = 'before'
 match_indent = true
 payload = '''
-if member == PotatoPatchUtils.Developers.worm_haya or member == PotatoPatchUtils.Developers.worm_aikoyori then
+if member == PotatoPatchUtils.Developers.worm_haya or member == PotatoPatchUtils.Developers.worm_aikoyori or member == PotatoPatchUtils.Developers.worm_lexi then
     if WORM_JTEM.quantum_rock.credits_card and not WORM_JTEM.quantum_rock.credits_card.REMOVED then
         WORM_JTEM.quantum_rock.credits_card:remove()
         WORM_JTEM.quantum_rock.credits_card = nil
-    else
+    elseif WORM_JTEM.quantum_rock.credits_area then
         WORM_JTEM.quantum_rock.credits_card = Card(0,0,G.CARD_W * 1.2, G.CARD_H * 1.2, nil, WORM_JTEM.quantum_rock.center)
         WORM_JTEM.quantum_rock.credits_area:emplace(WORM_JTEM.quantum_rock.credits_card)
         WORM_JTEM.quantum_rock.credits_area:hard_set_cards()

@@ -296,7 +296,7 @@ return {
 						"I'm proud of {C:attention}Artificial Solar System{} tho.",
 						"Watch out for this rock, it's a bit {C:purple}sus{}",
 						" ",
-						"Cannot wait for {C:chips}fishing{} event",
+						"Cannot wait for {C:chips}f***ing{} event",
 						" ",
 						"My favorite umamusume is {C:white,E:1}Oguri Cap{}",
 					},
@@ -351,7 +351,7 @@ return {
 					{
 						"Haya forced me to join this jam",
 						"but I owe a lot of money to some very bad people",
-						"so I didn't really do much"
+						"so I didn't really do much",
 					},
 				},
 			},
