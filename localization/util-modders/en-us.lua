@@ -45,12 +45,6 @@ return {
 		    },
 		}
 	    },
-	    d_cg = {
-		name = "cg",
-		text = {
-		    "hi"
-		}
-	    },
 	    d_frost = {
 			name = "frost",
 			text = {
