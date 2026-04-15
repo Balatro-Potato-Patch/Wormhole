@@ -221,7 +221,7 @@ return {
                 text = {
                     'Convert up to {C:attention}#1#{} random',
                     'non-{C:spades}Spade{} cards in deck',
-                    'into {C:spades}Spades{}',
+                    'into {C:spades}Spades{}, lose {C:money}$#2#',
                 }
             },
             c_worm_shrug_alien_hearts = {
@@ -229,7 +229,7 @@ return {
                 text = {
                     'Convert up to {C:attention}#1#{} random',
                     'non-{C:hearts}Heart{} cards in deck',
-                    'into {C:hearts}Hearts{}',
+                    'into {C:hearts}Hearts{}, lose {C:money}$#2#',
                 }
             },
             c_worm_shrug_alien_clubs = {
@@ -237,7 +237,7 @@ return {
                 text = {
                     'Convert up to {C:attention}#1#{} random',
                     'non-{C:clubs}Club{} cards in deck',
-                    'into {C:clubs}Clubs{}',
+                    'into {C:clubs}Clubs{}, lose {C:money}$#2#',
                 }
             },
             c_worm_shrug_alien_diamonds = {
@@ -245,7 +245,7 @@ return {
                 text = {
                     'Convert up to {C:attention}#1#{} random',
                     'non-{C:diamonds}Diamond{} cards in deck',
-                    'into {C:diamonds}Diamonds{}',
+                    'into {C:diamonds}Diamonds{}, lose {C:money}$#2#',
                 }
             },
             c_worm_shrug_alien_martian = {

@@ -128,8 +128,8 @@ local function reset_suit_conv_cardarea(offset)
     G.worm_shrug_alien_suit_conv = CardArea(
         G.CARD_W * 0.495 * (5.5 + offset), -- x coordinate
         G.CARD_H * 0.95 + 0.5, -- y coordinate
-        G.CARD_W * 4.95 / 5 * 0.75, -- width
-        G.CARD_H * 0.95, -- height
+        G.CARD_W * 0.75, -- width
+        G.CARD_H,--height
         {
             type = 'play',
             highlight_limit = 0,
@@ -140,8 +140,8 @@ local function reset_suit_conv_cardarea(offset)
     G.worm_shrug_alien_suit_conv2 = CardArea(
         G.CARD_W * 0.495 * (5.5 + offset),
         G.CARD_H * 0.95 * 2 + 0.25,
-        G.CARD_W * 4.95 / 5 * 0.75,
-        G.CARD_H * 0.95,
+        G.CARD_W * 0.75,
+        G.CARD_H,
         {
             card_limit = 0,
             type = 'play',
@@ -208,7 +208,7 @@ local function draw_card_back(from, to, percent, card, no_ui)
       }))
 end
 local function alien_suit_convert(suit, amount)
-    local line_size = amount >= 3 and math.max(math.ceil(amount / 2), 3) or amount
+    local line_size = amount > 5 and math.max(math.ceil(amount / 2), 3) or amount
     reset_suit_conv_cardarea((5 - line_size) / 2)
     local _cards = {}
     for _, c in ipairs(G.playing_cards) do
@@ -263,7 +263,8 @@ local suit_alien = SMODS.Consumable:extend{
     loc_vars = function(self, info_queue, card)
         return {
             vars = {
-                card.ability.consumeable.extra.convert
+                card.ability.consumeable.extra.convert,
+                card.ability.consumeable.extra.pay
             }
         }
     end,
@@ -272,6 +273,8 @@ local suit_alien = SMODS.Consumable:extend{
     end,
     use = function(self, card, area, copier)
         card:juice_up(0.3, 0.5)
+        ease_dollars(-card.ability.consumeable.extra.pay)
+        delay(0.6)
         alien_suit_convert(card.ability.consumeable.extra.suit, card.ability.consumeable.extra.convert)
     end,
     unlocked = true,
@@ -287,7 +290,7 @@ suit_alien{
     key = 'shrug_alien_spades',
     atlas = 'shrug_alien_cards',
     pos = {x = 2, y = 0},
-    config = {extra = {suit = 'Spades', convert = 6}},
+    config = {extra = {suit = 'Spades', convert = 6, pay = 3}},
     ppu_artist = {"waffle", "microwave"}
 }
 -- Fresno Nightcrawlers
@@ -295,7 +298,7 @@ suit_alien{
     key = 'shrug_alien_hearts',
     atlas = 'shrug_alien_cards',
     pos = {x = 4, y = 0},
-    config = {extra = {suit = 'Hearts', convert = 6}},
+    config = {extra = {suit = 'Hearts', convert = 6, pay = 3}},
     ppu_artist = {"waffle", "microwave"}
 }
 -- Reptiloid
@@ -303,7 +306,7 @@ suit_alien{
     key = 'shrug_alien_clubs',
     atlas = 'shrug_alien_cards',
     pos = {x = 8, y = 0},
-    config = {extra = {suit = 'Clubs', convert = 6}},
+    config = {extra = {suit = 'Clubs', convert = 6, pay = 3}},
     ppu_artist = {"waffle", "microwave"}
 }
 -- Hopkinsville Goblin
@@ -311,7 +314,7 @@ suit_alien{
     key = 'shrug_alien_diamonds',
     atlas = 'shrug_alien_cards',
     pos = {x = 6, y = 0},
-    config = {extra = {suit = 'Diamonds', convert = 6}},
+    config = {extra = {suit = 'Diamonds', convert = 6, pay = 3}},
     ppu_artist = {"waffle", "microwave"}
 }
 
