@@ -18,7 +18,7 @@ SMODS.Atlas {
     key = "booster_placeholder",
     px = 71,
     py = 95,
-    path = "Hedonia/boosters placeholder.png"
+    path = "Hedonia/boosters.png"
 }
 
 SMODS.Consumable {
