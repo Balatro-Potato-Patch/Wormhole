@@ -636,13 +636,13 @@ SMODS.Joker {
         card:set_edition('e_negative', true, true)
     end,
     calculate = function(self, card, context)
-        if context.end_of_round and context.main_eval then
+        if context.end_of_round and context.main_eval and context.beat_boss then
             add_tag(Tag(card.ability.extra.tag))
             play_sound('generic1', 0.9 + math.random() * 0.1, 0.8)
             play_sound('holo1', 1.2 + math.random() * 0.1, 0.4)
             return {
                 card = card,
-                message = 'WORMHOLE!',
+                message = localize("k_asm_necrozmaspawn"),
                 colour = G.C.DARK_EDITION
             }
         end

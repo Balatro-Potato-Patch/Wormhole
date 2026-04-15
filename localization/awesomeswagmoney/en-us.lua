@@ -7,7 +7,7 @@ return {
         Joker = {
             j_worm_necrozma = {
                 name = 'Necrozma',
-                text = { "Create a free", "{C:attention}#1#{}", "every ante" }
+                text = { "Create a free", "{C:attention}#1#{}", "when {C:attention}Boss Blind", "is defeated" }
             }
         },
         Other = {
@@ -208,6 +208,7 @@ return {
             b_worm_ultrabeast_cards = "Ultra Beasts",
             k_worm_ultrawormhole = "Ultra Wormhole",
             k_worm_necrozma_r = "UB-BLACK",
+            k_asm_necrozmaspawn = "WORMHOLE!"
         },
         high_scores = {},
         labels = {
