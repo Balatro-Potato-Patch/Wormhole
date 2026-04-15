@@ -259,7 +259,8 @@ return {
             tuzzo = {
                 name = "tuzzo",
                 text = {
-                    "womp womp",
+                    "This stew is new to me,",
+                    "but I am honored to be a part of it",
                 }
             },
             HonuKane = {
