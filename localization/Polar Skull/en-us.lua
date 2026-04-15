@@ -239,8 +239,9 @@ return {
 			PotatoPatchDev_comykel = {
 				name = "Comykel",
 				text = {
-					"{C:attention}Sick pixel artist!{}",
-					"The one who did almost all of the {C:polarskull_rocket}Rockets'{} art!",
+					"{C:attention,s:0.9,E:1}Throughout Heaven and Earth, I alone am the jobless one.{}",
+					"The one who did almost all of the art!",
+					"if you're interested in his works, see CMYKL (the mod!)",
 				},
 			},
 			PotatoPatchDev_jade = {
