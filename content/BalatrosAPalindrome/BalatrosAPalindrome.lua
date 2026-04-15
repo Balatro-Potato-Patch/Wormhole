@@ -23,7 +23,7 @@ SMODS.Atlas {
 
 
 PotatoPatchUtils.Team({name="BalatrosAPalindrome", colour=G.C.BLUE, short_credit=true})
-PotatoPatchUtils.Developer({team="BalatrosAPalindrome",name="Nogardagem",loc=true,atlas='worm_Palindrome',pos={x=1,y=1}})
+PotatoPatchUtils.Developer({team="BalatrosAPalindrome",name="Nogardagem",loc=true,atlas='worm_Palindrome',pos={x=0,y=4},soul_pos={x=1,y=4}})
 PotatoPatchUtils.Developer({team="BalatrosAPalindrome",name="NerdyBread42",atlas='worm_Palindrome',pos={x=0,y=2}})
 PotatoPatchUtils.Developer({team="BalatrosAPalindrome",name="IzzyWizz",atlas='worm_Palindrome',pos={x=0,y=2}})
 PotatoPatchUtils.Developer({team="BalatrosAPalindrome",name="Knightingale0",atlas='worm_Palindrome',pos={x=1,y=2}})
