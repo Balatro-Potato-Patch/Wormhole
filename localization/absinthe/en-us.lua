@@ -648,6 +648,13 @@ return {
                 "Take it from me, you know",
                 "how to navigate Outer Space!"
             },
+            worm_lq_abs_base4 = {
+                "What, did you space out!?",
+            },
+            worm_wq_abs_base4 = {
+                "I'd like to propose a toast.",
+                "To you!",
+            },
             worm_lq_abs_nix = {
                 "You took the moon,",
                 "but couldn't take the sun..."

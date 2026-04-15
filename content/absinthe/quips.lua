@@ -67,6 +67,19 @@ SMODS.JimboQuip {
     extra = { ppu_dev = 'worm_pi_cubed' },
 }
 
+-- base4 quips
+
+SMODS.JimboQuip {
+    key = 'lq_abs_base4',
+    type = 'loss',
+    extra = { ppu_dev = 'worm_base4' },
+}
+
+SMODS.JimboQuip {
+    key = 'wq_abs_base4',
+    type = 'win',
+    extra = { ppu_dev = 'worm_base4' },
+    
 -- argel quips
 
 SMODS.JimboQuip {
