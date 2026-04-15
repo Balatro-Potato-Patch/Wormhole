@@ -3,8 +3,8 @@
 SMODS.DynaTextEffect {
     key = "bap_text_funny",
     func = function (self, index, letter)
-		letter.scale = (math.sin((G.TIMERS.REAL*4.0 + index)*1.9443) + 1.0) * 0.25 + 1.0
-		letter.offset = {x = 0.0, y = math.sin((G.TIMERS.REAL*4.0 + index)) * 20.0}
+		letter.scale = (math.sin((G.TIMERS.REAL*4.0 + index)*1.9443) + 1.0) * 0.25 + 0.9
+		letter.offset = {x = 0.0, y = math.sin((G.TIMERS.REAL*4.0 + index)) * 10.0}
         --letter.r = math.sin((G.TIMERS.REAL*4.0 + index)*1.9443) * math.pi / 7
     end
 }
@@ -24,9 +24,9 @@ SMODS.Atlas {
 
 PotatoPatchUtils.Team({name="BalatrosAPalindrome", colour=G.C.BLUE, short_credit=true})
 PotatoPatchUtils.Developer({team="BalatrosAPalindrome",name="Nogardagem",loc=true,atlas='worm_Palindrome',pos={x=0,y=4},soul_pos={x=1,y=4}})
-PotatoPatchUtils.Developer({team="BalatrosAPalindrome",name="NerdyBread42",atlas='worm_Palindrome',pos={x=0,y=2}})
-PotatoPatchUtils.Developer({team="BalatrosAPalindrome",name="IzzyWizz",atlas='worm_Palindrome',pos={x=0,y=2}})
-PotatoPatchUtils.Developer({team="BalatrosAPalindrome",name="Knightingale0",atlas='worm_Palindrome',pos={x=1,y=2}})
+PotatoPatchUtils.Developer({team="BalatrosAPalindrome",name="NerdyBread42",loc=true,atlas='worm_Palindrome',pos={x=1,y=3}})
+PotatoPatchUtils.Developer({team="BalatrosAPalindrome",name="IzzyWizz",loc=true,atlas='worm_Palindrome',pos={x=0,y=3}})
+PotatoPatchUtils.Developer({team="BalatrosAPalindrome",name="Knightingale0",loc=true,atlas='worm_Palindrome',pos={x=1,y=2}})
 
 
 SMODS.Shader {
