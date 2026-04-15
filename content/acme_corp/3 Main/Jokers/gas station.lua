@@ -24,7 +24,12 @@ SMODS.Joker{
 		if context.before then
 			if not context.blueprint and 
 				G.GAME.hands[context.scoring_name].level > 1 then
-					local rand = pseudorandom_element(G.GAME.hands,'acme_gas_station').key
+					unlockedHands = G.GAME.hands
+					local names = {}
+					for k, v in ipairs(G.handlist) do
+						if G.GAME.hands[v] and G.GAME.hands[v].visible then names[#names+1] = v end
+					end
+					local rand = pseudorandom_element(names,'acme_gas_station')
 					SMODS.upgrade_poker_hands{
 						hands = {context.scoring_name},
 						level_up = -1,

@@ -44,6 +44,7 @@ PotatoPatchUtils.Developer {
   team = 'ACME',
   atlas = 'worm_ACME_credits',
   pos = { x = 3, y = 0 },
+  soul_pos = { x = 3, y = 1 }
 }
 
 PotatoPatchUtils.Developer {
