@@ -306,8 +306,8 @@ SMODS.Consumable {
     key = "kartana",
     set = "worm_ultrabeast",
     atlas = 'worm_asm_ubs',
-    pos = {x = 2, y = 0},
-    soul_pos = {x = 3, y = 0},
+    pos = {x = 2, y = 5},
+    soul_pos = {x = 3, y = 5},
     display_size = { w = 89, h = 109 },
     config = {extra_slots_used = 1, extra = {copies = 3, reduction = 2}},
     loc_vars = function(self, info_queue, card)

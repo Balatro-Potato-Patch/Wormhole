@@ -19,6 +19,10 @@ PotatoPatchUtils.Developer{
 
 PotatoPatchUtils.Developer{
     name = "worm_poker",
+    atlas = 'worm_asm_credits',
+    pos = { x = 0, y = 3 },
+    soul_pos = { x = 1, y = 3 },
+    display_size = { w = 89, h = 109 },
     team = "awesomeswagmoney",
     loc = true,
 }
@@ -41,6 +45,10 @@ PotatoPatchUtils.Developer{
 
 PotatoPatchUtils.Developer{
     name = "worm_eris",
+    atlas = 'worm_asm_credits',
+    pos = { x = 0, y = 2 },
+    soul_pos = { x = 1, y = 2 },
+    display_size = { w = 89, h = 109 },
     team = "awesomeswagmoney",
     loc = true,
 }

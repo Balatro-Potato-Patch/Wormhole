@@ -75,7 +75,7 @@ return {
             },
             PotatoPatchDev_worm_poker = {
                 name = "Poker The Poker",
-                text = {":chud:"}
+                text = {"{C:legendary,E:1}:chud:"}
             },
             PotatoPatchDev_worm_omega = {name = "Omegaflowey18", text = {
                 {
@@ -92,6 +92,7 @@ return {
                 text = {"TEMP"}
             },
             PotatoPatchDev_worm_eris = {name = "Eris", text = {
+                {"we outta ultra wormholes"},
                 {
                     "Mod dev for {C:spectral}Spectrallib{} and {C:spectral}Cryptid{},",
                     "and my solo-dev mod {C:planet}Hypernova{}.",
