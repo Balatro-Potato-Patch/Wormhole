@@ -35,7 +35,7 @@ SMODS.Consumable {
         card_to_drink:set_edition(edition,true)
     end,
     can_use = function(self, card)
-        return G.hand and G.hand.cards
+        return G.hand and G.hand.cards and #G.hand.cards > 0
     end
 }
 
@@ -53,7 +53,7 @@ SMODS.Consumable {
         card_to_drink:set_edition(edition,true) 
     end,
     can_use = function(self, card)
-        return G.hand and G.hand.cards
+        return G.hand and G.hand.cards and #G.hand.cards > 0
     end
 }
 
@@ -71,7 +71,7 @@ SMODS.Consumable {
         card_to_drink:set_edition(edition,true) 
     end,
     can_use = function(self, card)
-        return G.hand and G.hand.cards
+        return G.hand and G.hand.cards and #G.hand.cards > 0
     end
 }
 
@@ -89,7 +89,7 @@ SMODS.Consumable {
         card_to_drink:set_edition(edition,true) 
     end,
     can_use = function(self, card)
-        return G.hand and G.hand.cards
+        return G.hand and G.hand.cards and #G.hand.cards > 0
     end
 }
 
@@ -121,7 +121,7 @@ SMODS.Consumable {
         }
     end,
     can_use = function(self, card)
-        return G.hand and G.hand.cards
+        return G.hand and G.hand.cards and #G.hand.cards > 0
     end
 }
 
