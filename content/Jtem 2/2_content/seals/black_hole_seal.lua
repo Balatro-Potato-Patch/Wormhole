@@ -23,7 +23,6 @@ SMODS.Seal {
 			}
 		}
 	end,
-    sound = { sound = 'generic1', per = 1.2, vol = 0.4 },
 	calculate = function (self, card, context)
 		if context.before and context.cardarea == G.play and SMODS.pseudorandom_probability(card, "jtem2_black_hole_seal_upgrade", 1, 3) then
 			local visible_hands = WORM_JTEM.filter_table(G.handlist, function (hand, i)
