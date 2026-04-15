@@ -19,7 +19,7 @@ return {
             d_avery = {
                 name = "AveryIGuess",
                 text = {
-                    "Concept Art","Frozen Card Idea","Laika, Shining Star, Permafrost","Space Heater & Jettison","Mechanic Ideas"
+                    "Concept Art","Frozen Card Idea","Laika, Shining Star, Permafrost","Space Heater & Jettison","Mechanic Ideas","Chomping Rocks"
                 }
             },
         }
