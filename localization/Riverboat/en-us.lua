@@ -160,6 +160,16 @@ return {
                     "Selling this card",
                     "{C:red}destroys {C:attention}#2#{} other Jokers"
                 }
+            },
+            j_worm_riverboat_abandoned = {
+                name = "Abandoned Joker",
+                text = {
+                    "{C:green}#1# in #2#{} chance to",
+                    "{C:red}downgrade{} level of",
+                    "played {C:attention}poker hand",
+                    "and convert scoring cards",
+                    "into {C:attention}Stardust Cards"
+                }
             }
         },
         Enhanced = {
