@@ -73,7 +73,6 @@ PotatoPatchUtils.Developer({
     name = "edwardrobinson",
     loc = true,
     colour = HEX("ffffff"),
-    atlas = 'Joker',
-    pos = {x = 3, y = 8},
-    soul_pos = {x = 3, y = 9},
+    atlas = 'worm_shrug_developers',
+    pos = {x = 0, y = 2},
 })
