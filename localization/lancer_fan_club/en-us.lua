@@ -37,8 +37,9 @@ return {
                 name = "ellestuff.",
                 text = {
                     {
-                        "{s:1.5,C:attention}8{s:1.5} of us and counting!",
-                        "{s:0.6,C:lfc_elle}elle.{s:0.6} | {s:0.6,C:green}Amber{s:0.6} | Emily | {s:0.6,C:planet}Umbra{s:0.6} | {s:0.6,C:blue}Sara{s:0.6} | {s:0.6,C:legendary}Suzy{s:0.6} | {s:0.6,C:lfc_ash}Ash{s:0.6} | {s:0.6,C:money}Rebecca"
+                        "{s:1.5,C:lfc_ash}8{s:1.5} of us and counting!",
+                        "{s:0.6,C:lfc_elle}elle.{s:0.6} | {s:0.6,C:green}Amber{s:0.6} | Emily | {s:0.6,C:planet}Umbra{s:0.6} | {s:0.6,C:blue}Sara{s:0.6} | {s:0.6,C:legendary}Suzy{s:0.6} | {s:0.6,C:lfc_ash}Ash{s:0.6} | {s:0.6,C:money}Rebecca",
+                        "{s:0.9}She/Her | Plural"
                     },
                     {
                         "{s:0.9}We made the code for the {s:0.9,C:lfc_meteor}Meteors{s:0.9},",
