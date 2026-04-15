@@ -43,7 +43,7 @@ return {
                 }
             },
             j_worm_hedonia_speed = {
-                name = 'Speed Bartender',
+                name = 'Sous Chef',
                 text = {
                     'Creates a Menu Item when scoring',
                     'based on how many jokers you have',

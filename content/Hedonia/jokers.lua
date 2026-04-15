@@ -110,28 +110,30 @@ SMODS.Joker {
     ppu_coder = {'wombatcountry', 'axyraandas'},
     ppu_team = {'Hedonia'},
     loc_vars = function(self,info_queue,center)
-        local num, denom
-        if G.jokers ~= nil then
-            num = #G.jokers.cards
-            denom = G.jokers.config.card_limit
-        else
-            num = 1
-            denom = 5
+        local num = 1
+        local denom = 5
+        if G.jokers and G.jokers.cards then
+            num, denom = SMODS.get_probability_vars(card, #G.jokers.cards, G.jokers.config.card_limit)
         end
         return {vars = {num, denom}}
     end,
     calculate = function(self,card,context)
-        if context.joker_main and pseudorandom('speed') < #G.jokers.cards / G.jokers.config.card_limit and 
-        #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+        if context.joker_main then
+            local can_spawn = #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit
+            local can_spawn = can_spawn and SMODS.pseudorandom_probability(card, 'rings', #G.jokers.cards, G.jokers.config.card_limit)
+            if can_spawn then
                 G.GAME.consumeable_buffer = (G.GAME.consumeable_buffer or 0) + 1
+                local candidates = {'c_worm_hedonia_jawbreaker','c_worm_hedonia_rings','c_worm_hedonia_debbie','c_worm_hedonia_jam'}
+
                 G.E_MANAGER:add_event(Event({
                     func = function()
                         play_sound('timpani')
-                        SMODS.add_card({set = "worm_hedonia_menu", area = G.consumeables, key_append = 'speed'})
+                        SMODS.add_card({area = G.consumeables, key_append = 'speed', key = pseudorandom_element(candidates)})
                         G.GAME.consumeable_buffer = 0
                         return true
                     end
                 }))
+            end
         end
     end
 }
