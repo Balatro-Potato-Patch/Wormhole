@@ -21,7 +21,7 @@ SMODS.Atlas {
 Wormhole.SHRUG_Joker {
     key = "shrug_spacewalk",
     atlas = "shrug_jokers",
-    pos = { x = 0, y = 0 },
+    pos = { x = 5, y = 0 },
     rarity = 2,
     cost = 6,
     config = { extra = { used = false } },
@@ -67,6 +67,9 @@ Wormhole.SHRUG_Joker {
     ppu_coder = {
         "microwave",
         "randomsongv2"
+    },
+    ppu_artist = {
+        "microwave",
     },
     ppu_team = { "shrug" }
 }
