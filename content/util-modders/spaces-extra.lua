@@ -36,3 +36,16 @@ SMODS.Joker {
         end
     end,
 }
+
+SMODS.Voucher {
+    key = "util_better_craftmanship",
+    -- atlas = "util_extras",
+    pos = { x = 1, y = 0 },
+}
+
+SMODS.Voucher {
+    key = "util_dealer_contact",
+    -- atlas = "util_extras",
+    pos = { x = 2, y = 0 },
+    requires = { 'v_worm_util_better_craftmanship' },
+}

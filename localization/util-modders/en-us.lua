@@ -146,6 +146,24 @@ return {
 		    "{C:inactive,s:0.8}No, car go road!",
 		}
 	    },
+	},
+	Voucher = {
+	    v_worm_util_better_craftmanship = {
+		name = "Better Craftmanship",
+		text = {
+		    "{C:util_spaces}Space Pods{} start with",
+		    "twice as many uses",
+		}
+	    },
+	    v_worm_util_dealer_contact = {
+		name = "Dealer Contact",
+		text = {
+		    "{C:attention}Space Pod Packs{} always",
+		    "contain a {C:util_spaces}Space Pod",
+		    "for your most",
+		    "played {C:attention}poker hand",
+		}
+	    },
 	}
     },
     misc = {

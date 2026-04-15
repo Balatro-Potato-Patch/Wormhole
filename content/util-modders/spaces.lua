@@ -1,9 +1,9 @@
 SMODS.ConsumableType {
     key = 'util_Spaces',
     default = 'c_worm_util_spaces_basic_mult',
-    primary_colour = G.C.SET.Tarot, -- TODO: Fix me
-    secondary_colour = G.C.SECONDARY_SET.Tarot, -- TODO: Fix me
-    collection_rows = { 4, 4 },
+    primary_colour = G.C.SET.Tarot,
+    secondary_colour = HEX"455a64",
+    collection_rows = { 4, 4, 4 },
     shop_rate = 0,
 }
 
@@ -21,6 +21,17 @@ local function booster_loc_vars_key(self, info_queue, card)
     }
 end
 local function booster_create_card(self, card, i)
+
+    if G.GAME.used_vouchers.v_worm_util_dealer_contact and i == 1 then
+	local _hand, _tally = nil, 0
+	for _, handname in ipairs(G.handlist) do
+	    if SMODS.is_poker_hand_visible(handname) and G.GAME.hands[handname].played > _tally then
+		_hand = handname
+		_tally = G.GAME.hands[handname].played
+	    end
+	end
+	G.GAME.worm_util_spaces_force_hand = _hand
+    end
     return {
 	set = "util_Spaces",
 	area = G.pack_cards,
@@ -133,16 +144,24 @@ end
 local function initSpace(self, card)
     card.ability.extra.seed = pseudorandom("worm_util_spaces_seed")
     card.ability.extra.space_conf = calcCard(self, card)
-    local _poker_hands = {}
-    for handname, _ in pairs(G.GAME.hands) do
-	if SMODS.is_poker_hand_visible(handname) then
-	    _poker_hands[#_poker_hands + 1] = handname
+    if G.GAME.worm_util_spaces_force_hand then
+	card.ability.extra.poker_hand = G.GAME.worm_util_spaces_force_hand
+	G.GAME.worm_util_spaces_force_hand = nil
+    else
+	local _poker_hands = {}
+	for handname, _ in pairs(G.GAME.hands) do
+	    if SMODS.is_poker_hand_visible(handname) then
+		_poker_hands[#_poker_hands + 1] = handname
+	    end
 	end
+	card.ability.extra.poker_hand = pseudorandom_element(_poker_hands, 'util_spaces_hand')
     end
-    card.ability.extra.poker_hand = pseudorandom_element(_poker_hands, 'util_spaces_hand')
     if next(SMODS.find_card("j_worm_util_cargo_space")) and not card.ability.util_cargo_spaced then
 	card.ability.util_cargo_spaced = true
 	card.ability.extra_slots_used = card.ability.extra_slots_used - 1
+    end
+    if G.GAME.used_vouchers.v_worm_util_better_craftmanship then
+	card.ability.extra.rounds = card.ability.extra.rounds * 2
     end
 end
 
@@ -181,6 +200,7 @@ for i, r in ipairs(ranks) do
 	set = 'util_Spaces',
 	atlas = "util_spaces",
 	pos = { x = i - 1, y = 0 },
+	cost = i * 2,
 	space_conf = {
 	    options = 1 + i,
 	},
@@ -219,6 +239,7 @@ for i, r in ipairs(ranks) do
 	set = 'util_Spaces',
 	atlas = "util_spaces",
 	pos = { x = i - 1, y = 1 },
+	cost = i * 2,
 	space_conf = {
 	    options = 1 + i,
 	},
@@ -257,6 +278,7 @@ for i, r in ipairs(ranks) do
 	set = 'util_Spaces',
 	atlas = "util_spaces",
 	pos = { x = i - 1, y = 2 },
+	cost = i * 2,
 	space_conf = {
 	    options = 1 + i,
 	},
