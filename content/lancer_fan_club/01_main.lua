@@ -145,6 +145,16 @@ SMODS.Sound {
     path = "lfc_elle_squeak.ogg"
 }
 
+SMODS.Sound{
+    key = "lfc_tada",
+    path = "lfc_tada.ogg"
+}
+
+SMODS.Sound{
+    key = "lfc_not_tada",
+    path = "lfc_not_tada.ogg"
+}
+
 -- Colors
 loc_colour('red')
 G.ARGS.LOC_COLOURS.lfc_pkmn_us = HEX('E95B2B')
@@ -175,11 +185,30 @@ PotatoPatchUtils.Developer {
     atlas = "worm_lfc_devs",
     pos = { x = 6, y = 0 },
     soul_pos = { x = 7, y = 0 },
-    --[[
-    loc_vars = function(self,  info_queue, card)
-        return{vars = {1,2}}
+    click = function(self)
+        dark_flip(self)
+        if math.random(2) == 1 then
+            play_sound("worm_lfc_tada",1)
+        else
+            play_sound("worm_lfc_not_tada",1)
+        end
+        love.system.openURL("https://www.youtube.com/watch?v=FbOy5CsWxXA")
+        if not G.proot_url then
+            G.proot_url = true
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 30,
+                blockable = false,
+                blocking = false,
+                pause_force = true,
+                func = function()
+                    if not love.window.hasFocus() then love.system.openURL("https://www.youtube.com/@Prod_by_proto") end
+                    G.proot_url = nil
+                    return true
+                end
+            }))
+        end
     end,
-    ]]
     calculate = function(self, context)
         if context.card_added then
             if context.card.ability.set == "Joker" then

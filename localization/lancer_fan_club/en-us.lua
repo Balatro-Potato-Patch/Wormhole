@@ -7,6 +7,7 @@ return {
                 name = "ProdByProto",
                 text = {
                     {
+                        "{s:2} {}",
                         "There's at least {s:1.5,C:attention}a few{} of us",
                         "Most of us go by the names Ash or Memphis, interchangeably.",
                         "One of us chose not to have a name.",
@@ -15,7 +16,7 @@ return {
                     {
                         "Made the music for {C:attention}Eigengrau Emptiness,{} came up with initial ideas for",
                         "{C:attention}Hitchhiker's Guide{} and {C:attention} Moon Berry{}. {C:inactive,s:0.85}Did some other things as well.{}",
-                        "Also did programming, hunting for the sfx, and art {s:1.25{}direction{} for moon berry.",
+                        "Also did programming, hunting for the sfx, and art {s:1.25}direction{} for moon berry.",
                         "Pretty proud of all the details I added in the way the joker works.",
                         "{s:0.5} {}",
                         "{C:inactive}It looks like you're trying to seal the {}{C:dark_edition,E:1}Dark Fountain{}{C:inactive}, would you like some help?{}",
@@ -25,7 +26,8 @@ return {
                         "{C:dark_edition,E:2,s:1.75}Trials Of The Protogen{} {C:attention}coming soon!{}",
                         "Lots of challenges and achievements to be had.",
                         "{s:0.5} {}",
-                        "Shoutouts to {E:1,s:1.5}{C:trans_blue}T{}{C:trans_pink}r{}a{C:trans_pink}n{}{C:trans_blue}s{} {C:fox}Foxgirls!{}{}"
+                        "Shoutouts to {E:1,s:1.5}{C:trans_blue}T{}{C:trans_pink}r{}a{C:trans_pink}n{}{C:trans_blue}s{} {C:fox}Foxgirls!{}{}",
+                        "{C:dark_edition,E:1}Click on Clippy!Ralsei to make a thing happen"
                     },
                     {
                         "So what's the deal with spaceport food?",
