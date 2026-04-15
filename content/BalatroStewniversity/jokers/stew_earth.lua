@@ -7,13 +7,13 @@ SMODS.Joker {
 
     key = 'stew_stew_earth', -- haha
     config = {extra = {Xmult = 1.5, Xmult_up = 0.5, Xmult_down = 0.25}},
-    rarity = 2,
-    cost = 4,
+    rarity = "Uncommon",
+    cost = 8,
     atlas = 'stewjokers',
     pos = {x=1, y=0},
     blueprint_compat = true,
     eternal_compat = false,
-    perishable_compat = false,
+    perishable_compat = true,
 
     loc_vars = function (self, info_queue, card)
         return{

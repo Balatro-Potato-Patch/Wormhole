@@ -26,7 +26,14 @@ SMODS.Joker {
         if context.destroy_card then 
             if context.cardarea == G.play and context.destroy_card == context.scoring_hand[#context.scoring_hand] and
             SMODS.pseudorandom_probability(card, 'worm_stew_cheese_moon', 1, card.ability.extra.odds) then
-                return{
+
+                G.E_MANAGER:add_event(Event({
+                    func = function ()
+                    card:juice_up(0.3, 0.5)
+                    return true
+                end }))
+                card_eval_status_text(context.destroy_card, 'extra', nil, nil, nil, {message = localize('k_worm_stew_yum'), colour = G.C.MONEY})
+                return {
                     remove = true,
                     delay = 0.4
                 }

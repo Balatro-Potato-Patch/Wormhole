@@ -269,8 +269,8 @@ return {
     },
     misc = {
         dictionary = {
-            k_worm_texttexttext = "Flavor Text Example",
-            k_worm_stew_dinos_extinct = 'Extinct'
+            k_worm_stew_dinos_extinct = 'Extinct',
+            k_worm_stew_yum = 'Yum!'
         },
         labels = {
             worm_stew_stellar = 'Stellar'
