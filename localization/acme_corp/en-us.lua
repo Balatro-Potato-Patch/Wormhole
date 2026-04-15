@@ -235,6 +235,15 @@ return {
                     'when obtained'
                 }
             },
+            j_worm_ACME_big_joker = {
+		        name = "Big Joker",
+		        text = {
+			        'Draw {C:attention}#1#{} cards at the',
+			        'start of the {C:attention}blind{}',
+			        'Set {C:blue}hand size{} to {C:attention}0{}', 
+			        'after first hand is drawn'
+		        },	
+	        },
             j_worm_acme_gas_station = {
                 name = 'Interplanetary Gas Station',
                 text = {
@@ -260,7 +269,7 @@ return {
             j_worm_acme_stargazing = {
                 name = 'Stargazing',
                 text = {
-                    "{C:green}1 in #2#{} chance to upgrade",
+                    "{C:green}#1# in #2#{} chance to upgrade",
                     "level of played {C:attention}#1#{}"
                 },
             },
