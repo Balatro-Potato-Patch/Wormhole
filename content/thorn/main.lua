@@ -18,6 +18,7 @@ PotatoPatchUtils.Team({
 PotatoPatchUtils.Developer({
     team = "thorn",
     name = "marie",
+    colour = G.C.BLUE,
     loc = true,
     atlas = 'worm_TeamCredits',
     pos = {x = 5, y = 0},
