@@ -13,4 +13,5 @@ SMODS.Back {
 	ppu_artist = {"noodlemire"},
 	ppu_coder = {"rainstar"},
     ppu_team = { "polar_skull" },
+	discovered = true
 }

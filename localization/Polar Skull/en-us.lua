@@ -290,5 +290,21 @@ return {
 			worm_polarskull_martian_broke = {"{f:worm_polarskull_noto}💀🪦💔😢"},
 			worm_polarskull_martian_retry = {"{f:worm_polarskull_noto}🚮🔁🚶"},
 		},
+		achievement_names = {
+			ach_worm_polarskull_dandori = "Dandori",
+			ach_worm_polarskull_sschamp = "Space Station Champ",
+			ach_worm_polarskull_completion = "Polar Skull Completionist",
+		},
+		achievement_descriptions = {
+			ach_worm_polarskull_dandori = "Discover Olimar in a run.",
+			ach_worm_polarskull_sschamp = {
+				"Win a run using the Space Station",
+				"Deck on Gold Stake or higher."
+			},
+			ach_worm_polarskull_completion = {
+				"Discover 100% of Team",
+				"Polar Skull's content."
+			},
+		},
 	},
 }

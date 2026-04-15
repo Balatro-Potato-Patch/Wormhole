@@ -225,6 +225,7 @@ SMODS.Joker {
 
     add_to_deck = function(self, card, from_debuff)
         G.GAME.polarskull_rockets_stack = true
+		if not from_debuff then check_for_unlock({type = "j_worm_polarskull_olimar"}) end
     end,
     remove_from_deck = function(self, card, from_debuff)
         if not next(SMODS.find_card("j_worm_polarskull_olimar")) then
