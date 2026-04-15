@@ -137,6 +137,20 @@ return {
           }
         }
       },
+      sat_worm_death_egg = {
+        name = "Death Egg",
+        text = {
+          {
+            "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
+            "{C:attention}#2#",
+          },
+          {
+            "If played hand",
+            "is a {C:attention}#2#{},",
+            "all Jokers give {C:white,X:mult}X#3#{} Mult"
+          }
+        }
+      },
       sat_worm_dawn = {
         name = "Dawn",
         text = {
@@ -272,10 +286,10 @@ return {
       PotatoPatchTeam_JuryRigged = { name = "JuryRigged" },
       PotatoPatchDev_DowFrin = { name = "DowFrin", text = { { "Hopefully i {C:red}remember{} to change this after im done testing lol" }, { "oh also we have multi box support" } } },
       PotatoPatchDev_Maelmc = { name = "Maelmc", text = { "Play {C:attention}The Binding of Jimbo{} :)" } },
-      PotatoPatchDev_Inky = { name = "Inky", text = { "Got something to say?" } },
+      PotatoPatchDev_Inky = { name = "Inky", text = { {"Did most of the satellite art and drew some joker art"}, {"(...yes, the Square Joker guy. That's him.)"} } },
       PotatoPatchDev_DoggFly = { name = "DoggFly", text = { "Just here to take up space" } },
 PotatoPatchDev_AbelSketch = { name = "AbelSketch", text = { {"{C:attention}Fun Fact:{} Theres a reason to not share water bottles!" },{"I got Salmonela from one... 3:"} }},
-      PotatoPatchDev_Blanthos = { name = "Blanthos", text = { " First we Gneep, then we Gnarp. Lets Gneep Gnarp." } },
+      PotatoPatchDev_Blanthos = { name = "Blanthos", text = { "First we Gneep, then we Gnarp. Lets Gneep Gnarp." } },
       PotatoPatchDev_NinjaBanana = { name = "NinjaBanana", text = { "GUYS I'M NOT THE IMPOSTOR PLEASE DON'T EJECT ME" } },
     }
   },

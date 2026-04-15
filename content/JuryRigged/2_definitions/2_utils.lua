@@ -10,7 +10,7 @@ Wormhole.JR_UTILS.ENABLED_SATELLITES = {
   ['Full House'] = 'sputnik_1',
   ['Four of a Kind'] = 'mariner_9',
   ['Straight Flush'] = 'voyager_2';
-  --['Five of a Kind'] = 'death_egg',
+  ['Five of a Kind'] = 'death_egg',
   ['Flush House'] = 'dawn',
   ['Flush Five'] = 'manhole_cover',
 }

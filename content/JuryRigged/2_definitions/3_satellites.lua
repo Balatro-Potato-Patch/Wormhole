@@ -495,6 +495,35 @@ Wormhole.JR_UTILS.Satellite {
   ppu_artist = { 'DoggFly', 'Inky' },
 }
 
+-- Death Egg
+Wormhole.JR_UTILS.Satellite {
+  key = 'death_egg',
+  name = 'death_egg',
+  config = { extra = { hand_type = 'Five of a Kind', xmult = 0.2 }, },
+  pos = { x = 9, y = 0 },
+  soul_pos = { x = 9, y = 1, draw = Wormhole.JR_UTILS.draw_satellite_soul },
+  jr_calculate = function(self, context, vars)
+    if context.other_joker then
+      return {
+        xmult = 1 + G.GAME.jr.satellite_hands[vars.hand_type].level * vars.xmult,
+        message_card = context.other_joker
+      }
+    end
+  end,
+  loc_vars = function(self, info_queue, card)
+    local _level = G.GAME.jr and G.GAME.jr.satellite_hands[card.ability.extra.hand_type].level or 0
+    return {
+      vars = {
+        _level,
+        localize(card.ability.extra.hand_type, 'poker_hands'),
+        1 + card.ability.extra.xmult * _level,
+        colours = { (_level == 1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, _level)]) }
+      }
+    }
+  end,
+  ppu_artist = { 'AbelSketch', 'DoggFly', 'Inky' },
+}
+
 -- Dawn
 Wormhole.JR_UTILS.Satellite {
   key = 'dawn',
