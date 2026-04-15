@@ -140,6 +140,10 @@ local function initSpace(self, card)
 	end
     end
     card.ability.extra.poker_hand = pseudorandom_element(_poker_hands, 'util_spaces_hand')
+    if next(SMODS.find_card("j_worm_util_cargo_space")) and not card.ability.util_cargo_spaced then
+	card.ability.util_cargo_spaced = true
+	card.ability.extra_slots_used = card.ability.extra_slots_used - 1
+    end
 end
 
 local function setSprites(self, card, front)
@@ -246,7 +250,7 @@ for i, r in ipairs(ranks) do
     }
 end
 
-local chips = {50, 100, 200, 250}
+local money = {3, 5, 10, 15}
 for i, r in ipairs(ranks) do
     SMODS.Consumable {
 	key = 'util_spaces_'..r..'_money',
@@ -258,7 +262,7 @@ for i, r in ipairs(ranks) do
 	},
 	config = {
 	    extra = {
-		chips = chips[i],
+		money = money[i],
 		rounds = 3,
 	    },
 	},
@@ -266,7 +270,7 @@ for i, r in ipairs(ranks) do
 	    return {
 		vars = {
 		    localize(card.ability.extra.poker_hand, 'poker_hands'),
-		    card.ability.extra.chips,
+		    card.ability.extra.money,
 		    card.ability.extra.rounds,
 		},
 	    }
@@ -276,7 +280,7 @@ for i, r in ipairs(ranks) do
 	calculate = function(self, card, context)
 	    if isMatch(context, card) then
 		return {
-		    chips = card.ability.extra.chips,
+		    dollars = card.ability.extra.money,
 		    extra = doDeplete(card),
 		}
 	    end

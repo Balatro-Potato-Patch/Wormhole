@@ -19,7 +19,7 @@ local pods = {
     money = {
 	{
 	    "When a {C:attention}#1#{} is played",
-	    "earn {C:money}+$#2#{}"
+	    "earn {C:money}$#2#{}"
 	},
 	depleted
     },
@@ -137,6 +137,16 @@ return {
 		},
 	    },
 	},
+	Joker = {
+	    j_worm_util_cargo_space = {
+		name = "Cargo Space",
+		text = {
+		    "{C:util_spaces}Space Pods{} take up no space.",
+		    " ",
+		    "{C:inactive,s:0.8}No, car go road!",
+		}
+	    },
+	}
     },
     misc = {
 	dictionary = {

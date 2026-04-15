@@ -32,3 +32,14 @@ match_indent = true
 pattern = '''if not G.debug_UI_toggle then '''
 position = 'before'
 payload = '''Wormhole.util_space_manager:draw_background()'''
+
+# G.FUNCS.can_select_from_booster
+# Fix booster selection with extra_slots_used
+# TODO: Remove me when depend on a smods version with https://github.com/Steamodded/smods/pull/1337 merged
+[[patches]]
+[patches.pattern]
+target = '=[SMODS _ "src/utils.lua"]'
+match_indent = true
+pattern = '''local edition_card_limit = card.ability.card_limit'''
+position = 'at'
+payload = '''local edition_card_limit = card.ability.card_limit - card.ability.extra_slots_used'''
