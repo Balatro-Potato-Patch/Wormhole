@@ -300,6 +300,8 @@ Wormhole.LancerFanClub.Alexi = PotatoPatchUtils.Developer {
     pos = { x = 4, y = 0 },
     soul_pos = { x = 5, y = 0 },
     click = function(self)
+        dark_flip(self)
+
         play_sound("worm_lfc_splat")
         self:juice_up()
         if alexi_click_count == 1 then
