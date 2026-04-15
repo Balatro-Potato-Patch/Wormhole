@@ -256,7 +256,7 @@ SMODS.Booster({
 	end,
 	ppu_team = { "meow" },
 	ppu_coder = { "revo" },
-	ppu_artist = { "silverautumn", "gappie" },
+	ppu_artist = { "gappie" },
 })
 
 SMODS.Booster({
@@ -282,7 +282,7 @@ SMODS.Booster({
 	end,
 	ppu_team = { "meow" },
 	ppu_coder = { "revo" },
-	ppu_artist = { "silverautumn", "gappie" },
+	ppu_artist = { "gappie" },
 })
 
 SMODS.Booster({
@@ -308,7 +308,7 @@ SMODS.Booster({
 	end,
 	ppu_team = { "meow" },
 	ppu_coder = { "revo" },
-	ppu_artist = { "silverautumn", "gappie" },
+	ppu_artist = { "gappie" },
 })
 
 SMODS.Booster({
@@ -334,5 +334,5 @@ SMODS.Booster({
 	end,
 	ppu_team = { "meow" },
 	ppu_coder = { "revo" },
-	ppu_artist = { "silverautumn", "gappie" },
+	ppu_artist = { "gappie" },
 })
