@@ -229,11 +229,8 @@ return {
             PLagger = {
                 name = "PLagger",
                 text = {
-                    "I did most Joker code",
-                    'for our team! Shout out to',
-                    'the biggest mother frogger and the',
-                    'cheesiest pear I know, you\'re both the',
-                    'GOAT!',
+                    "Shout out {C:money}Cheese{C:green}Pear{} and {C:green}Phrog{}, you two are",
+                    'the {s:2,E:1,C:attention}GOAT',
                     '',
                     'Also Ado nation rise up'
                 }

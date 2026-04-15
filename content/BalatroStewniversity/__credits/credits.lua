@@ -56,7 +56,8 @@ PotatoPatchUtils.Developer {
 }
 
 local custom_colours = {
-  stew_inactive_lighter = lighten(G.C.UI.TEXT_INACTIVE, 0.8)
+  stew_inactive_lighter = lighten(G.C.UI.TEXT_INACTIVE, 0.8),
+  -- stew_yellow = lighten(G.C.YELLOW, 0.1)
 }
 
 local loc_col_ref = loc_colour
