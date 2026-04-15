@@ -441,6 +441,8 @@ SMODS.Joker{
     end
 }
 
+local spinning = false
+
 local space_roulette
 space_roulette = function(card, time, index)
 
@@ -472,34 +474,33 @@ space_roulette = function(card, time, index)
 		return true
 	end
 
-	if card.facing == "front" then
-		G.E_MANAGER:add_event(Event{
-			trigger = 'after',
-			delay = 0.5,
-			func = function()
-				SMODS.calculate_effect(
-				{ 
-					dollars = card.ability.gain * #G.jokers.cards
-				}, card)
-				return true
+	
+	G.E_MANAGER:add_event(Event{
+		blockable = false,
+		blocking = false,
+		pause_force = true,
+		no_delete = true,
+		trigger = 'after',
+		delay = 1.0,
+		func = function()
+			for i = 1, #G.jokers.cards do
+				if G.jokers.cards[i].facing == "front" and G.jokers.cards[i].config.center.key == "j_worm_vegas" then
+					SMODS.calculate_effect(
+					{ 
+						dollars = card.ability.gain * #G.jokers.cards
+					}, G.jokers.cards[i])
+					return true
+				end
 			end
-		})
-	else
-		G.E_MANAGER:add_event(Event{
-			trigger = 'after',
-			delay = 0.5,
-			func = function()
-				SMODS.calculate_effect(
+			SMODS.calculate_effect(
 				{ 
 					message = "Unlucky!",
 					colour = G.C.ATTENTION
 				}, 
 				card)
-				return true
-			end
-		})
-		
-	end
+			return true
+		end
+	})
 
 	G.E_MANAGER:add_event(Event{
 		blockable = false,
@@ -507,7 +508,7 @@ space_roulette = function(card, time, index)
 		pause_force = true,
 		no_delete = true,
 		trigger = 'after',
-		delay = 1,
+		delay = 2,
 		func = function()
 			play = false
 			for i = 1, #G.jokers.cards do
@@ -517,6 +518,8 @@ space_roulette = function(card, time, index)
 				end
 			end
 			if play then play_sound("cardSlide1") end
+			spinning = false
+			save_run()
 			return true
 		end
 	})
@@ -558,6 +561,8 @@ SMODS.Joker{
 	ppu_artist = {"Ben Roffey", "Jammbo"},
 	calculate = function(self, card, context)
 		if context.setting_blind and not context.blueprint then
+			if spinning then return end
+			spinning = true
 			G.E_MANAGER:add_event(Event{
 				blockable = false,
 				blocking = false,
@@ -566,12 +571,22 @@ SMODS.Joker{
 				trigger = 'after',
 				delay = 1,
 				func = function()
+					local index = 1
 					if #G.jokers.cards > 1 then
-						for i = 2, #G.jokers.cards do
-							G.jokers.cards[i]:flip()
+						for i = 1, #G.jokers.cards do
+							if G.jokers.cards[i] == card then 
+								index = i
+								if G.jokers.cards[i].facing == "back" then
+									G.jokers.cards[i]:flip()
+								end
+							else
+								if G.jokers.cards[i].facing == "front" then
+									G.jokers.cards[i]:flip()
+								end
+							end
 						end
 					end
-					space_roulette(card, 0.01, 1)
+					space_roulette(card, 0.01, index)
 					return true
 				end
 			})
