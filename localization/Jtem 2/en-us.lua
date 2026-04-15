@@ -4,7 +4,9 @@ return {
 			b_worm_jtem2_black_hole_deck = {
 				name = "Black Hole Deck",
 				text = {
-					"All {C:attention}Aces{} have {C:red}Black Hole Seal",
+					"{C:spectral}Spectral Cards{} may appear in shop",
+					"but no {C:tarot}Tarot Cards{} can",
+					"Start with {C:attention}2{} {C:spectral,T:c_worm_jtem2_kilonovae}Kilonovae{}",
 				},
 			},
 		},
