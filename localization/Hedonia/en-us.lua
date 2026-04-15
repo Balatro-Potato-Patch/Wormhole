@@ -99,9 +99,9 @@ return {
             c_worm_hedonia_rings = {
                 name = 'Satonion Rings',
                 text = {
-                    'All cards held in',
-                    'hand sober up',
-                    '{s:0.8}{C:inactive}(must be drunk)'
+                    'All cards held in hand sober up',
+                    'if any {C:red}OR{} gain {C:money}$#1#{} if there are',
+                    'no drunk cards in hand'
                 }
             },
             c_worm_hedonia_debbie = {
