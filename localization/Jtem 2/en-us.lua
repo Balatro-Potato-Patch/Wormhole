@@ -29,6 +29,7 @@ return {
 					{
 						"Exist in all places at the same time",
 						"Only one can be observed",
+						"{C:inactive}(Can be disabled in mod config){}",
 					},
 				},
 			},
