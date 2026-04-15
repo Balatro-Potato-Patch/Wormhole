@@ -207,6 +207,7 @@ for i, v in pairs({
     "junk/tag",
 
     "challenges",
+    "ts_quipping_me",
 })  do
     assert(SMODS.load_file("content/colon_three/"..v..".lua"))()
 end

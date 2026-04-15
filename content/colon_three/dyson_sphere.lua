@@ -16,7 +16,7 @@ SMODS.Joker {
 
     loc_vars = function(self, q, card)
         q[#q+1] = { key = "worm_clean_up_reminder", set="Other", specific_vars = { } }
-        q[#q+1] = G.P_CENTERS.m_worm_junk_card
+        q[#q+1] = G.P_CENTERS.m_worm_ct_junk_card
         return { vars = { card.ability.extra.mult, card.ability.extra.mult_per } }
     end,
     calculate = function(self, card, context)

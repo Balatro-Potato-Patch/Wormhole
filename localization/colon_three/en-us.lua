@@ -420,6 +420,14 @@ return {
         }
     },
     misc = {
+        quips = {
+            worm_c3_mf_junk_1 = {"That run was {C:worm_c3_junkset}trash{}!"},
+            worm_c3_mf_junk_2 = {"That run was {C:worm_c3_junkset}garbage{}!"},
+            worm_c3_mf_junk_3 = {"That run was {C:worm_c3_junkset}rubbish{}!"},
+            worm_c3_mf_junk_4 = {"You {C:worm_c3_junkset}wasted{} that run..."},
+            worm_c3_mf_junk_5 = {"That run went to {C:worm_c3_junkset}the dump{}!"},
+            worm_c3_mf_junk_6 = {"That run was a lot of {C:worm_c3_junkset}junk{}!"},
+        },
         dictionary = {
             k_junkset = "Derelict",
             b_junkset_cards = "Derelict Cards",
