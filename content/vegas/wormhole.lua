@@ -579,12 +579,9 @@ SMODS.Joker{
 	end
 }
 
-local move_consumeables
-move_consumeables = function()
 
-end
-
-SMODS.Joker{
+local wormhole_joker
+wormhole_joker = SMODS.Joker{
 	key = "wormhole",
 	loc_txt = {
 		name = "Wormhole",
@@ -594,7 +591,7 @@ SMODS.Joker{
 			"your {C:attention}deck{} when it is used"
 		}
 	},
-	config = { sets = { "Tarot", "Planet", "Spectral" }},
+	config = { extra = { sets = { "Tarot", "Planet", "Spectral" }}},
 	loc_vars = function(self, info_queue, card)
 		info_queue[#info_queue + 1] = {key = 'e_negative_consumable', set = 'Edition', config = {extra = 1}}
 		return { vars = {  }}
@@ -614,70 +611,50 @@ SMODS.Joker{
 	calculate = function(self, card, context)
 		if context.using_consumeable then
 			SMODS.add_card({ key = context.consumeable.config.center.key, edition = "e_negative", area = G.deck})
-			for i = 1, #self.config.sets do
-				if context.consumeable.ability.set == self.config.sets[i] then
+			for i = 1, #self.config.extra.sets do
+				if context.consumeable.ability.set == self.config.extra.sets[i] then
 					return { 
 						message = "Wormhole!", 
 						colour = G.C.SECONDARY_SET.Tarot
 					}
 				end
 			end
-			self.config.sets[#self.config.sets + 1] = context.consumeable.ability.set --keeps track of any modded sets for drawing cards
+			self.config.extra.sets[#self.config.extra.sets + 1] = context.consumeable.ability.set --keeps track of any modded sets for drawing cards
 			return { 
 				message = "Wormhole!", 
 				colour = G.C.SECONDARY_SET.Tarot
 			}
 		end
-		if context.drawing_cards and not context.blueprint then
-			G.E_MANAGER:add_event(Event{
-				trigger = 'after',
-				blockable = true,
-				blocking = false,
-				delay = 2,
-				func = function()
-					local remove = {}
-					for i = 1, #G.hand.cards do
-						for j = 1, #self.config.sets do
-							if G.hand.cards[i].ability and G.hand.cards[i].ability.set and G.hand.cards[i].ability.set == self.config.sets[j] then --if the card is actually a consumable card,
-								SMODS.add_card({ key = G.hand.cards[i].config.center.key, edition = "e_negative", area = G.consumeable}) --create a copy in the consumeable area
-								remove[#remove + 1] = i -- mark the card for removal
-							end
-						end
-					end
-					for i = #remove, 1, -1 do
-						if i < #G.hand.cards then
-							G.hand.cards[remove[i]]:remove() --remove the marked cards from the hand
-						end
-					end
-					return true
-				end
-			})
-			G.E_MANAGER:add_event(Event{ --do it again after 5 seconds just to be safe (the player could have massive hand size)
-				trigger = 'after',
-				blockable = true,
-				blocking = false,
-				delay = 5,
-				func = function()
-					local remove = {}
-					for i = 1, #G.hand.cards do
-						for j = 1, #self.config.sets do
-							if G.hand.cards[i].ability and G.hand.cards[i].ability.set and G.hand.cards[i].ability.set == self.config.sets[j] then --if the card is actually a consumable card,
-								SMODS.add_card({ key = G.hand.cards[i].config.center.key, edition = "e_negative", area = G.consumeable}) --create a copy in the consumeable area
-								remove[#remove + 1] = i -- mark the card for removal
-							end
-						end
-					end
-					for i = #remove, 1, -1 do
-						if i < #G.hand.cards then
-							G.hand.cards[remove[i]]:remove() --remove the marked cards from the hand
-						end
-					end
-					return true
-				end
-			})
-		end
 	end
 }
+
+--Hooking the draw_card() function to handle drawing consumeables from your deck, moving them to consumeables area
+local oldDrawCard = draw_card
+draw_card = function(from, to, percent, dir, sort, card, delay, mute, stay_flipped, vol, discarded_only)
+	oldDrawCard(from, to, percent, dir, sort, card, delay, mute, stay_flipped, vol, discarded_only)
+	if from == G.deck then --if drawing from deck, check if any of the cards in hand are from a consumable set, and if so, draw it from the hand into the consumeable area
+		G.E_MANAGER:add_event(Event{
+			trigger = 'after',
+			blockable = true,
+			blocking = false,
+			delay = 1,
+			func = function()
+				for i = 1, #G.hand.cards do
+					for j = 1, #wormhole_joker.config.extra.sets do
+						if G.hand.cards[i].ability and G.hand.cards[i].ability.set and G.hand.cards[i].ability.set == wormhole_joker.config.extra.sets[j] then --if the card is actually a consumable card,
+							local ccard = G.hand.cards[i]
+							G.hand:remove_card(ccard) --remove it from your G.hand
+							G.consumeables:emplace(ccard) --move it to your G.consumables area
+							return true
+						end
+					end
+				end
+				return true
+			end
+		})
+	end
+end
+
 
 SMODS.Joker{
 	key = "inthesky",
@@ -976,7 +953,7 @@ SMODS.DynaTextEffect {
     func = function (self, index, letter)
 		local minutes = math.floor(TIMERTIME/60)
 		local seconds = TIMERTIME - minutes*60
-		if TIMERTIME > 59 then 
+		if TIMERTIME > 60 then 
 			letter.colour = G.C.WHITE 
 		else
 			letter.colour = G.C.RED
@@ -1117,15 +1094,144 @@ reset_hd = function(heatdeath)
 	heatdeath.config.timing = false
 	heatdeath.config.extra.current = heatdeath.config.time
 	heatdeath.config.extra.gamespeed = heatdeath.config.base_speed
-	if G.GAME.blind.config.blind.key ~= "bl_worm_heatdeath" then G.GAME.blind.children.animatedSprite.T.scale = 1 end
+	if G.GAME.blind and G.GAME.blind.config.blind.key ~= "bl_worm_heatdeath" then G.GAME.blind.children.animatedSprite.T.scale = 1 end
 	if source:isPlaying() then 
 		source:stop()
 	end
 end
 
+local cutscene
+cutscene = function(heatdeath)
+	G.SETTINGS.paused = true --stop any events
+	heatdeath.config.timing = false --stop the timer
+	heatdeath.config.game_over_override = true --prevents the timer being restarted on game_over screen (I think it calls loc_vars)
+
+	ease_background_colour({new_colour = G.C.BLACK}) --turn the screen black (in case player was not on the boss blind)
+	if G.GAME.blind.config.blind.key == "bl_worm_heatdeath" then
+		G.GAME.blind.children.animatedSprite.VT.scale = 60 --fully black background if on the boss blind
+	end
+
+	source:stop() --stop the noise
+	restoreVolume = G.SETTINGS.SOUND.music_volume
+	G.SETTINGS.SOUND.music_volume = 0 -- mute all music
+	G.STATE = G.STATES.GAME_OVER --Slow down the music for game over
+	restoreSFX = G.SETTINGS.SOUND.game_sounds_volume
+	G.SETTINGS.SOUND.game_sounds_volume = 0 --mute all sfx
+
+	G.hand.states.visible = false --make cardareas invisible
+	G.jokers.states.visible = false
+	G.consumeables.states.visible = false
+	G.deck.states.visible = false
+	G.play.states.visible = false
+	G.discard.states.visible = false
+	if G.buttons then G.buttons:remove() end
+	tags_visible(false)
+	G.HUD.states.visible = false
+	if G.GAME.blind.config.blind.key ~= "bl_worm_heatdeath" then 
+		G.HUD_blind.states.visible = false
+	end
+	if G.blind_prompt_box then
+		G.blind_prompt_box.states.visible = false
+	end
+	if G.blind_select_opts then
+		G.blind_select_opts.small.states.visible = false
+		G.blind_select_opts.big.states.visible = false
+		G.blind_select_opts.boss.states.visible = false
+	end
+
+	G.GAME.blind.config.blind = heatdeath --Set this for correct reason for death
+
+	G.FUNCS.overlay_menu{ --Create an overlay menu with a jimbo spot
+		definition = create_space_cutscene(),
+		config = {no_esc = true}
+	}
+	local spot = G.OVERLAY_MENU:get_UIE_by_ID('jimbo_spot')
+	spot.config.object:remove()
+
+	--Add particles in the background (stars)
+	spot.particles = Particles(0, 0, 0, 0, {
+		timer = 0.03,
+		scale = 0.1,
+		speed = 0.1,
+		lifespan = 2,
+		attach = spot,
+		colours = {G.C.WHITE},
+		fill = true
+	})
+	spot.particles.T.x = 0
+	spot.particles.T.y = 0
+	spot.particles.T.w = 20 --fill the screen
+	spot.particles.T.h = 10
+
+	Jimbo = Card_Character({y = 15}) --Create a space joker offscreen
+	Jimbo.children.card:set_sprites(G.P_CENTERS.j_space)
+	Jimbo.children.particles:remove() --default particles are red/orange
+
+	--have Space Joker float up 
+	float_in(Jimbo, 1000)
+
+	quipvalue = math.random(1,10)
+
+	G.E_MANAGER:add_event(Event{ --After some more time, space jimbo says a quip
+		blockable = false,
+		blocking = false,
+		pause_force = true,
+		no_delete = true,
+		trigger = 'after',
+		delay = 4,
+		func = function()
+			G.SETTINGS.SOUND.game_sounds_volume = restoreSFX
+			Jimbo:add_speech_bubble('lq_'..quipvalue, nil, {quip = true})
+			Jimbo:say_stuff(5)
+			return true
+		end
+	})
+
+	--display the usual death screen after some time
+	G.E_MANAGER:add_event(Event{
+		blockable = false,
+		blocking = false,
+		pause_force = true,
+		no_delete = true,
+		trigger = 'after',
+		delay = 11,
+		func = function()
+			Jimbo:remove() --jimbo is off screen now
+			lose_the_game(quipvalue) --display game over menu, spawns a space joker with the same quip
+			G.hand.states.visible = true --restore visibiliy and volume
+			G.jokers.states.visible = true
+			G.consumeables.states.visible = true
+			G.deck.states.visible = true
+			G.play.states.visible = true
+			G.discard.states.visible = true
+			tags_visible(true)
+			G.HUD.states.visible = true
+			G.HUD_blind.states.visible = true
+			if G.blind_prompt_box then
+				G.blind_prompt_box.states.visible = true
+			end
+			if G.blind_select_opts then
+				G.blind_select_opts.small.states.visible = true
+				G.blind_select_opts.big.states.visible = true
+				G.blind_select_opts.boss.states.visible = true
+			end
+			G.SETTINGS.SOUND.music_volume = restoreVolume --unmute the music for the game over screen
+			heatdeath.config.game_over_override = false
+			return true
+		end
+	})
+
+	--Reset variables for next time Heat Death shows up
+	reset_hd(heatdeath)
+end
+
 --Recursive Event for Heat Death Blind
 local heatdeath_timer 
 heatdeath_timer = function(heatdeath)
+	if G.STATE == G.STATES.GAME_OVER then
+		reset_hd(heatdeath)
+		return
+	end
     G.E_MANAGER:add_event(Event {
         blockable = false,
         blocking = false,
@@ -1134,6 +1240,7 @@ heatdeath_timer = function(heatdeath)
         trigger = "after",
         delay = 1,
         func = function()
+			
 			if heatdeath.config.timing then
 				
 				--stop if Heat Death is rerolled
@@ -1153,6 +1260,12 @@ heatdeath_timer = function(heatdeath)
 					play_sound("worm_vegas_tick")
 				else
 					play_sound("worm_vegas_tock")
+				end
+
+				if heatdeath.config.extra.current == 60 then --display 60 second warning
+					attention_text({
+						scale = 0.7, text = "1:00", colour = G.C.MULT, maxw = 12, hold = 2, align = 'cm', offset = {x = 0,y = -1},major = G.play
+					})
 				end
 
 				if heatdeath.config.extra.current == 20 then --display 20 second warning
@@ -1180,7 +1293,7 @@ heatdeath_timer = function(heatdeath)
 					end
 				end
 				
-				if heatdeath.config.extra.current == 0 then ------------ IF TIMER REACHES 0
+				if heatdeath.config.extra.current <= 0 then ------------ IF TIMER REACHES 0
 					
 					--see if any jokers would save the run
 					for i = 1, #G.jokers.cards do
@@ -1194,127 +1307,8 @@ heatdeath_timer = function(heatdeath)
 						end
 					end
 
-					G.SETTINGS.paused = true --stop any events
-					heatdeath.config.timing = false --stop the timer
-					heatdeath.config.game_over_override = true --prevents the timer being restarted on game_over screen (I think it calls loc_vars)
-
-					ease_background_colour({new_colour = G.C.BLACK}) --turn the screen black (in case player was not on the boss blind)
-					if G.GAME.blind.config.blind.key == "bl_worm_heatdeath" then
-						G.GAME.blind.children.animatedSprite.T.scale = 60 --fully black background if on the boss blind
-					end
-
-					source:stop() --stop the noise
-					restoreVolume = G.SETTINGS.SOUND.music_volume
-					G.SETTINGS.SOUND.music_volume = 0 -- mute all music
-					G.STATE = G.STATES.GAME_OVER --Slow down the music for game over
-					restoreSFX = G.SETTINGS.SOUND.game_sounds_volume
-					G.SETTINGS.SOUND.game_sounds_volume = 0 --mute all sfx
-
-					G.hand.states.visible = false --make cardareas invisible
-					G.jokers.states.visible = false
-					G.consumeables.states.visible = false
-					G.deck.states.visible = false
-					G.play.states.visible = false
-					if G.buttons then G.buttons:remove() end
-					tags_visible(false)
-					G.HUD.states.visible = false
-					if G.GAME.blind.config.blind.key ~= "bl_worm_heatdeath" then 
-						G.HUD_blind.states.visible = false
-					end
-					if G.blind_prompt_box then
-						G.blind_prompt_box.states.visible = false
-					end
-					if G.blind_select_opts then
-						G.blind_select_opts.small.states.visible = false
-						G.blind_select_opts.big.states.visible = false
-						G.blind_select_opts.boss.states.visible = false
-					end
-
-					G.GAME.blind.config.blind = heatdeath --Set this for correct reason for death
-
-					G.FUNCS.overlay_menu{ --Create an overlay menu with a jimbo spot
-						definition = create_space_cutscene(),
-						config = {no_esc = true}
-					}
-					local spot = G.OVERLAY_MENU:get_UIE_by_ID('jimbo_spot')
-					spot.config.object:remove()
-
-					--Add particles in the background (stars)
-					spot.particles = Particles(0, 0, 0, 0, {
-						timer = 0.03,
-						scale = 0.1,
-						speed = 0.1,
-						lifespan = 2,
-						attach = spot,
-						colours = {G.C.WHITE},
-						fill = true
-					})
-					spot.particles.T.x = 0
-					spot.particles.T.y = 0
-					spot.particles.T.w = 20 --fill the screen
-					spot.particles.T.h = 10
-
-					Jimbo = Card_Character({y = 15}) --Create a space joker offscreen
-					Jimbo.children.card:set_sprites(G.P_CENTERS.j_space)
-					Jimbo.children.particles:remove() --default particles are red/orange
-
-					--have Space Joker float up 
-					float_in(Jimbo, 1000)
-
-					quipvalue = math.random(1,10)
-
-					G.E_MANAGER:add_event(Event{ --After some more time, space jimbo says a quip
-						blockable = false,
-						blocking = false,
-						pause_force = true,
-						no_delete = true,
-						trigger = 'after',
-						delay = 4,
-						func = function()
-							G.SETTINGS.SOUND.game_sounds_volume = restoreSFX
-							Jimbo:add_speech_bubble('lq_'..quipvalue, nil, {quip = true})
-							Jimbo:say_stuff(5)
-							return true
-						end
-					})
-
-					--display the usual death screen after some time
-					G.E_MANAGER:add_event(Event{
-						blockable = false,
-						blocking = false,
-						pause_force = true,
-						no_delete = true,
-						trigger = 'after',
-						delay = 11,
-						func = function()
-							Jimbo:remove() --jimbo is off screen now
-							lose_the_game(quipvalue) --display game over menu, spawns a space joker with the same quip
-							G.hand.states.visible = true --restore visibiliy and volume
-							G.jokers.states.visible = true
-							G.consumeables.states.visible = true
-							G.deck.states.visible = true
-							G.play.states.visible = true
-							tags_visible(true)
-							G.HUD.states.visible = true
-							G.HUD_blind.states.visible = true
-							if G.blind_prompt_box then
-								G.blind_prompt_box.states.visible = true
-							end
-							if G.blind_select_opts then
-								G.blind_select_opts.small.states.visible = true
-								G.blind_select_opts.big.states.visible = true
-								G.blind_select_opts.boss.states.visible = true
-							end
-							G.SETTINGS.SOUND.music_volume = restoreVolume --unmute the music for the game over screen
-							heatdeath.config.game_over_override = false
-							return true
-						end
-					})
-
-					--Reset variables for next time Heat Death shows up
-					reset_hd(heatdeath)
-
-					return true
+					cutscene(heatdeath)
+					
 				end
 
 				--repeat
@@ -1337,7 +1331,8 @@ SMODS.Sound{
 	path = "vegas/tock.wav"
 }
 
-SMODS.Blind{
+local hd
+hd = SMODS.Blind{ --unfortunately isn't perfect when returning from save, but should be fine in normal play. Give losing a go!
 	key = "heatdeath",
 	loc_txt = {
 		name = "Heat Death",
@@ -1353,7 +1348,8 @@ SMODS.Blind{
 		local minutes = math.floor(self.config.extra.current/60)
 		local seconds = self.config.extra.current - minutes*60
 		
-		if self.config.timing == false and self.config.game_over_override == false then
+
+		if self.config.timing == false and not G.OVERLAY_MENU then
 			TIMERTIME = self.config.extra.current
 
 			self.config.timing = true
@@ -1363,6 +1359,12 @@ SMODS.Blind{
 		return { vars = { minutes, string.format("%02d", seconds), colours = {HEX("73fdff")} }}
 	end,
 	get_loc_debuff_text = function(self)
+		if self.config.timing == false and self.config.game_over_override == false then
+			TIMERTIME = self.config.extra.current
+
+			self.config.timing = true
+			heatdeath_timer(self)
+		end
 		local minutes = math.floor(self.config.extra.current/60)
 		local seconds = self.config.extra.current - minutes*60
 		disp_text = minutes..":".. string.format("%02d", seconds)
@@ -1389,6 +1391,12 @@ SMODS.Blind{
 	calculate = function(self, blind, context)
 		if context.end_of_round then
 			reset_hd(self)
+			return
+		end	
+		if self.config.timing == false then
+			TIMERTIME = self.config.extra.current
+			heatdeath_timing = true
+			heatdeath_timer(self)
 		end
 	end,
 	disable = function(self)
@@ -1398,9 +1406,21 @@ SMODS.Blind{
 		end
 	end,
 	defeat = function(self)
+		self.config.timing = false
 		reset_hd(self)
 	end
 }
+
+--Hook for end_round() so I can play the heat death animation if losing via score on heatdeath blind
+local oldEndRound = end_round
+end_round = function()
+	if G.GAME.blind.config.blind.key == "bl_worm_heatdeath" then
+		cutscene(hd)
+		return
+	end
+	oldEndRound()
+end
+
 
 --Consumeables
 SMODS.Consumable {
