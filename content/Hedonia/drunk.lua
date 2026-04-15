@@ -1,7 +1,7 @@
 ---@diagnostic disable: undefined-field
 
-local function drunk_level_chance(card, probability_numerator, probaility_denominator, next_edition, seed)
-    if SMODS.pseudorandom_probability(card, seed or "hedonia_drunk", probability_numerator, probaility_denominator) then
+local function drunk_level_chance(card, probability_numerator, probability_denominator, next_edition, seed)
+    if SMODS.pseudorandom_probability(card, seed or "hedonia_drunk", probability_numerator, probability_denominator) then
             card:set_edition(next_edition, true) --TODO add timer call so the return text happens at the same time
         return true
     end
@@ -48,7 +48,7 @@ SMODS.Edition {
     },
     ppu_coder = {'alxndr', 'axyraandas'},
     ppu_team = {'Hedonia'},
-    disable_base_shader = true, -- shader will modify card shape when implimented so this should be true
+    disable_base_shader = true, -- shader will modify card shape when implemented so this should be true
 
     on_apply = function(card)
         card.edition.drunk_wobble_strength = 0.6
@@ -95,7 +95,7 @@ SMODS.Edition {
     },
     ppu_coder = {'alxndr', 'axyraandas'},
     ppu_team = {'Hedonia'},
-    disable_base_shader = true, -- shader will modify card shape when implimented so this should be true
+    disable_base_shader = true, -- shader will modify card shape when implemented so this should be true
 
     on_apply = function(card)
         card.edition.drunk_wobble_strength = 1.0
@@ -145,7 +145,7 @@ SMODS.Edition {
     },
     ppu_coder = {'alxndr', 'axyraandas'},
     ppu_team = {'Hedonia'},
-    disable_base_shader = true, -- shader will modify card shape when implimented so this should be true
+    disable_base_shader = true, -- shader will modify card shape when implemented so this should be true
 
     on_apply = function(card)
         card.edition.drunk_wobble_strength = 1.5
@@ -192,7 +192,7 @@ SMODS.Edition {
     },
     ppu_coder = {'alxndr', 'axyraandas'},
     ppu_team = {'Hedonia'},
-    disable_base_shader = true, -- shader will modify card shape when implimented so this should be true
+    disable_base_shader = true, -- shader will modify card shape when implemented so this should be true
     always_scores = true,
     on_apply = function(card)
         card.edition.drunk_wobble_strength = 20.0

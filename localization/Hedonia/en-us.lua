@@ -141,7 +141,10 @@ return {
             PotatoPatchDev_axyraandas = {
                 name = "Axyraandas",
                 text = {
-                    'a'
+                    'Second published Balatro mod, yay',
+                    'Helped bugfix when other coders needed help',
+                    'and coded some of the jokers/consumables',
+                    'instead of brownies, eat {C:edition,s:1.1,E:1}grilled{} brownies'
                 }
             },
             PotatoPatchDev_hellboydante = {
