@@ -297,7 +297,7 @@ PotatoPatchUtils.Developer({
     click = function(self)
         dark_flip(self)
 
-        play_sound('worm_lfc_j8_click',1.5-j8_click_count*0.1)
+        play_sound('worm_lfc_j8_click',1.5-j8_click_count*0.1,2)
         self:juice_up()
         if j8_click_count == 1 then
             love.system.openURL("https://store.steampowered.com/app/4551740/CalvinChess/")
