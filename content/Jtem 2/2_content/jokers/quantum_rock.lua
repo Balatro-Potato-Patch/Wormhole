@@ -172,7 +172,9 @@ local function spawn_new_rock(protect, whitelist)
 				end,
 			}))
 		end
-		create_shop_card_ui(card)
+		if with_shop_ui then
+			create_shop_card_ui(card)
+		end
 		return true
 	end
 	if target == "hand" and G.hand and G.STATE == G.STATES.SELECTING_HAND then
