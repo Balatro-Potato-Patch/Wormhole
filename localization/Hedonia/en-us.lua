@@ -6,7 +6,7 @@ return {
                 name = 'Space Bar',
                 text = {
                     'Start with a random',
-                    'bartender joker'
+                    'Bartender joker'
                 }
             }
         },
@@ -14,7 +14,7 @@ return {
             j_worm_hedonia_casino = {
                 name = 'Casino Bartender',
                 text = {
-                    'Add Drunk to Lucky Cards',
+                    'Add {C:edition}{E:1}Drunk{} to Lucky Cards',
                     'Creates Menu Items',
                     'when Lucky Card triggers',
                 }
@@ -22,9 +22,9 @@ return {
             j_worm_hedonia_trash = {
                 name = 'Trash Compactor',
                 text = {
-                    'stores the chips of all',
-                    'destroyed playing cards until',
-                    'the start of the next ante',
+                    'Stores all destroyed',
+                    'cards\' Chips until',
+                    'the start of the next Ante',
                     '{C:inactive}(Currently +{C:chips}#1#{C:inactive} chips)'
                 }                
             },
@@ -32,8 +32,8 @@ return {
                 name = 'Drunken Patron',
                 text = {
                     '{C:mult}+#1#{} Mult for every',
-                    'Tipsy, Drunk, Very Drunk,',
-                    'or Blackout card held in hand'
+                    '{C:edition}{E:2}Tipsy{}, {C:edition}{E:1}Drunk{}, {C:dark_edition}{E:1}Very Drunk{},',
+                    'or {C:dark_edition}Blackout{} card held in hand'
                 }
             },
             j_worm_hedonia_happy_hour = {
@@ -45,15 +45,15 @@ return {
             j_worm_hedonia_speed = {
                 name = 'Speed Bartender',
                 text = {
-                    'creates a menu item during scoring',
+                    'Creates a Menu Item when scoring',
                     'based on how many jokers you have',
-                    '{C:inactive} currently {C:green}#1# in #2#{C:inactive} chance{}'
+                    '{C:inactive}(currently {C:green}#1# in #2#{C:inactive} chance){}'
                 }
             },
             j_worm_hedonia_bar_mitzvah = {
                 name = 'Bar Mitzvah',
                 text = {
-                    'creates a menu item',
+                    'Creates a Menu Item',
                     'after {C:attention}#1#{} played hands',
                     '{C:inactive} currently {C:attention}#2#{C:inactive} hands left{}'
                 }
@@ -63,28 +63,28 @@ return {
             c_worm_hedonia_hadron = {
                 name = 'Hadron Colida',
                 text = {
-                    'Add Tipsy to a',
+                    'Add {C:edition}{E:2}Tipsy{} to a',
                     'random card held in hand'
                 }
             },
             c_worm_hedonia_cosmo = {
                 name = 'Cosmopolitan',
                 text = {
-                    'Add Drunk to a',
+                    'Add {C:edition}{E:1}Drunk{} to a',
                     'random card held in hand'
                 }
             },
             c_worm_hedonia_mojitury = {
                 name = 'Mojitury',
                 text = {
-                    'Add Very Drunk to a',
+                    'Add {C:dark_edition}{E:1}Very Drunk{} to a',
                     'random card held in hand'
                 }
             },
             c_worm_hedonia_blackHoleBomb = {
                 name = 'Black Hole Bomb',
                 text = {
-                    'Add Blackout to a',
+                    'Add {C:dark_edition}Blackout{} to a',
                     'random card held in hand'
                 }
             },
