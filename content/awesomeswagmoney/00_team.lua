@@ -39,6 +39,10 @@ PotatoPatchUtils.Developer{
 
 PotatoPatchUtils.Developer{
     name = "worm_superb",
+    atlas = 'worm_asm_credits',
+    pos = { x = 0, y = 4 },
+    soul_pos = { x = 1, y = 4 },
+    display_size = { w = 89, h = 109 },
     team = "awesomeswagmoney",
     loc = true,
 }
