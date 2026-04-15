@@ -151,3 +151,30 @@ payload = '''
     new_card.absinthe_modified = other.absinthe_modified
 '''
 match_indent = true
+
+
+# save absinthe modifiers between runs
+[[patches]]
+[patches.pattern]
+target = '''card.lua'''
+pattern = '''
+    self.pinned = cardTable.pinned
+'''
+position = 'after'
+payload = '''
+    self.absinthe_modified = cardTable.absinthe_modified
+'''
+match_indent = true
+
+# save absinthe modifiers between runs
+[[patches]]
+[patches.pattern]
+target = '''card.lua'''
+pattern = '''
+        pinned = self.pinned,
+'''
+position = 'after'
+payload = '''
+        absinthe_modified = self.absinthe_modified,
+'''
+match_indent = true
