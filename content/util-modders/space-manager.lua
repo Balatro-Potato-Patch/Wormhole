@@ -145,18 +145,10 @@ end
 function manager:draw_background()
     if not self.bg_active then return end
 
-    local shader = G.SHADERS.worm_util_space
     local conf = self.bg_conf
 
     if not conf then return sendWarnMessage("BG Shader active but no conf??", "SpaceManager") end
-    shader:send("screen_scale", G.TILESCALE*G.TILESIZE*G.CANV_SCALE / 15)
-    shader:send("time", G.TIMERS.REAL)
-    shader:send("transparency", self.bg_transparency)
-    shader:send("seed", conf.seed)
-    shader:send("nebula_color1", conf.nebula1)
-    shader:send("nebula_color2", conf.nebula2)
-    shader:send("nebula_color3", conf.nebula3)
-    shader:send("shooting", conf.shooting)
+    local shader = self.manualSend(conf, nil, self.bg_transparency)
     if self.bg_transparency == 1 then
         local w, h = love.graphics.getDimensions()
         love.graphics.setShader(shader)
@@ -192,6 +184,21 @@ function manager:reset()
     self.handname = nil
     self.targtHand = nil
     self.bg_conf = nil
+end
+
+function manager.manualSend(conf, scale, transparency)
+    local shader = G.SHADERS.worm_util_space
+    scale = scale or G.TILESCALE*G.TILESIZE*G.CANV_SCALE / 15
+    transparency = transparency or 1.0
+    shader:send("screen_scale", scale)
+    shader:send("time", G.TIMERS.REAL)
+    shader:send("transparency", transparency)
+    shader:send("seed", conf.seed)
+    shader:send("nebula_color1", conf.nebula1)
+    shader:send("nebula_color2", conf.nebula2)
+    shader:send("nebula_color3", conf.nebula3)
+    shader:send("shooting", conf.shooting)
+    return shader
 end
 
 local game_delete_run = Game.delete_run

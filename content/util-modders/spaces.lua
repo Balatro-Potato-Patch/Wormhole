@@ -76,16 +76,9 @@ local function newDrawSelf(self, overlay)
 
 	love.graphics.clear(0, 0, 0, 0)
 
-	local shader = G.SHADERS.worm_util_space
 	local conf = self.parent.ability.extra.space_conf
-	shader:send("screen_scale", scale / .75)
-	shader:send("time", G.TIMERS.REAL)
-	shader:send("transparency", 1)
-	shader:send("seed", conf.seed)
-	shader:send("nebula_color1", conf.nebula1)
-	shader:send("nebula_color2", conf.nebula2)
-	shader:send("nebula_color3", conf.nebula3)
-	shader:send("shooting", conf.shooting)
+	local shader = Wormhole.util_space_manager.manualSend(conf, scale / .75)
+
 	love.graphics.setShader(shader)
 	love.graphics.rectangle("fill", 2 * scale, 2 * scale, (s.atlas.px - 4) * scale, (s.atlas.py - 4) * scale)
 	love.graphics.setShader()
@@ -160,6 +153,21 @@ local function setSprites(self, card, front)
     cs.draw_self = newDrawSelf
 end
 
+local function isMatch(context, card)
+    return context.joker_main and context.scoring_name == card.ability.extra.poker_hand
+end
+local function doDeplete(card)
+    card.ability.extra.rounds = card.ability.extra.rounds - 1
+    if card.ability.extra.rounds == 0 then
+	return {
+	    message = localize("k_depleted"),
+	    func = function()
+		SMODS.destroy_cards(card)
+	    end
+	}
+    end
+end
+
 SMODS.Consumable {
     key = 'util_spaces_basic_mult',
     set = 'util_Spaces',
@@ -186,20 +194,10 @@ SMODS.Consumable {
     set_sprites = setSprites,
     set_ability = initSpace,
     calculate = function(self, card, context)
-	if context.joker_main and context.scoring_name == card.ability.extra.poker_hand then
-	    local depleted
-	    card.ability.extra.rounds = card.ability.extra.rounds - 1
-	    if card.ability.extra.rounds == 0 then
-		depleted = {
-		    message = localize("k_depleted"),
-		    func = function()
-			SMODS.destroy_cards(card)
-		    end
-		}
-	    end
+	if isMatch(context, card) then
 	    return {
 		mult = card.ability.extra.mult,
-		extra = depleted,
+		extra = doDeplete(card),
 	    }
 	end
     end
@@ -231,20 +229,10 @@ SMODS.Consumable {
     set_sprites = setSprites,
     set_ability = initSpace,
     calculate = function(self, card, context)
-	if context.joker_main and context.scoring_name == card.ability.extra.poker_hand then
-	    local depleted
-	    card.ability.extra.rounds = card.ability.extra.rounds - 1
-	    if card.ability.extra.rounds == 0 then
-		depleted = {
-		    message = localize("k_depleted"),
-		    func = function()
-			SMODS.destroy_cards(card)
-		    end
-		}
-	    end
+	if isMatch(context, card) then
 	    return {
 		chips = card.ability.extra.chips,
-		extra = depleted,
+		extra = doDeplete(card),
 	    }
 	end
     end
