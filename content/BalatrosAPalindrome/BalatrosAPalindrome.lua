@@ -421,7 +421,53 @@ SMODS.Joker {
 			}))
 			return {
 				message = localize('k_plus_tarot'),
-				colour = G.C.PURPLE,
+				colour = G.C.SECONDARY_SET.Tarot,
+			}
+		end
+	end
+}
+
+-- Space Walk
+SMODS.Joker {
+	ppu_team = {"BalatrosAPalindrome"},
+	key = "bap_space_walk",
+	blueprint_compat = true,
+	eternal_compat = false,
+	rarity = 3,
+	cost = 8,
+	atlas = 'Palindrome',
+	pos = { x = 2, y = 4 },
+	config = { },
+	loc_txt = {
+		name = 'Space Walk',
+		text = {
+			"When {C:attention}Blind{} is",
+			"selected, creates a",
+			"{C:attention}Space Joker{}",
+			"{C:inactive}(Must have room){}",
+		}
+	},
+	loc_vars = function(self, info_queue, card)
+		return { vars = {} }
+	end,
+	calculate = function(self, card, context)
+		if context.first_hand_drawn then
+			G.E_MANAGER:add_event(Event({
+				trigger = 'before',
+				delay = 0.4,
+				func = (function()
+					SMODS.add_card {
+						set = 'Joker',
+						key = 'j_space',
+						key_append = 'bap_artemis_3', -- Optional, useful for manipulating the random seed and checking the source of the creation in `in_pool`.
+						--edition = "e_negative"
+					}
+					return true
+				end)
+			}))
+			return {
+				message = "Walked!",
+				colour = G.C.FILTER,
 			}
 		end
 	end
