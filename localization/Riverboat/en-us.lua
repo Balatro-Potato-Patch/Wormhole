@@ -8,7 +8,7 @@ return {
                     "I also made a mod called",
                     "{C:chips}The Latro{}, if you want to",
                     "try that as well.",
-                    "{s:0.8}(Check the Modded Balatro Wiki!)"
+                    "{s:0.8}(Click me to check that out!)"
                 }
             },
             PotatoPatchDev_fooping = { name = "fooping", text = { "{X:chips}Programmer{} and {X:purple}Artist{}" } },

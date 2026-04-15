@@ -7,7 +7,10 @@ PotatoPatchUtils.Team {
 PotatoPatchUtils.Developer {
     name = "blamperer",
     team = "riverboat",
-    loc = true
+    loc = true,
+    click = function()
+        love.system.openURL("https://github.com/blamperer/The-Latro")
+    end
 }
 
 PotatoPatchUtils.Developer {
