@@ -340,7 +340,7 @@ SMODS.Consumable {
         delay(0.6)
 
     end,
-    --ppu_artist = {},
+    ppu_artist = {"worm_superb"},
     ppu_coder = {"worm_garb"},
     ppu_team = {"awesomeswagmoney"},
 }
