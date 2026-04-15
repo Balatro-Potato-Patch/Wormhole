@@ -565,7 +565,7 @@ SpaceTart({
 	loc_vars = function(self, info_queue, card, tart_config, boost_count)
 		return {
 			vars = {
-				(boost_count or 0 >= 1) and (tart_config.boosted + (boost_count - 1) * tart_config.boostinc)
+				((boost_count or 0) >= 1) and (tart_config.boosted + (boost_count - 1) * tart_config.boostinc)
 					or tart_config.reg,
 			},
 		}
@@ -839,6 +839,9 @@ SpaceTart({
 		-- Rainbow condition
 		has_rainbow,
 
+		-- Green bonus condition
+		count_green_bonus,
+
 		function(card)
 			return card.config and card.config.center_key == "j_worm_meow_catelite"
 		end,
@@ -881,7 +884,7 @@ SpaceTart({
 	loc_vars = function(self, info_queue, card, tart_config, boost_count)
 		return {
 			vars = {
-				(boost_count or 0 >= 1) and (tart_config.boosted + (boost_count - 1) * tart_config.boostinc)
+				((boost_count or 0) >= 1) and (tart_config.boosted + (boost_count - 1) * tart_config.boostinc)
 					or tart_config.reg,
 			},
 		}
