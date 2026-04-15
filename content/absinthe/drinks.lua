@@ -841,7 +841,7 @@ SMODS.Consumable { -- John Absinthe
             primed = false,
             empty_sound = "worm_abs_drink",
         },
-        extra = { size = 1, gain = 1 },
+        extra = { size = 3, gain = 1 },
     },
     hidden = true,
     cost = 10,
