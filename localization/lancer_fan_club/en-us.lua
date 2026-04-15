@@ -14,19 +14,19 @@ return {
                         "It/They | Plural"
                     },
                     {
-                        "Made the music for {C:attention}Eigengrau Emptiness,{} came up with initial ideas for",
-                        "{C:attention}Hitchhiker's Guide{} and {C:attention} Moon Berry{}. {C:inactive,s:0.85}Did some other things as well.{}",
+                        "Made the music for {C:attention}Eigengrau Emptiness{}, came up with initial ideas for",
+                        "{C:attention}Hitchhiker's Guide{} and {C:attention} Moon Berry{}. {C:inactive,s:0.85}Did some other things as well.",
                         "Also did programming, hunting for the sfx, and art {s:1.25}direction{} for moon berry.",
                         "Pretty proud of all the details I added in the way the joker works.",
                         "{s:0.5} {}",
-                        "{C:inactive}It looks like you're trying to seal the {}{C:dark_edition,E:1}Dark Fountain{}{C:inactive}, would you like some help?{}",
-                        "{C:inactive}Make sure to thank j8-bit for making Clippy!Ralsei so cute!{}"
+                        "{C:inactive}It looks like you're trying to seal the {C:dark_edition,E:1}Dark Fountain{C:inactive}, would you like some help?",
+                        "{C:inactive}Make sure to thank j8-bit for making Clippy!Ralsei so cute!"
                     },
                     {
-                        "{C:dark_edition,E:2,s:1.75}Trials Of The Protogen{} {C:attention}coming soon!{}",
+                        "{C:dark_edition,E:2,s:1.75}Trials Of The Protogen {C:attention}coming soon!",
                         "Lots of challenges and achievements to be had.",
-                        "{s:0.5} {}",
-                        "Shoutouts to {E:1,s:1.5}{C:trans_blue}T{}{C:trans_pink}r{}a{C:trans_pink}n{}{C:trans_blue}s{} {C:fox}Foxgirls!{}{}",
+                        "{s:0.5} ",
+                        "Shoutouts to {C:lfc_trans_blue}T{C:lfc_trans_pink}r{}a{C:lfc_trans_pink}n{C:lfc_trans_blue}s {C:lfc_fox}Foxgirls!",
                         "{C:dark_edition,E:1}Click on Clippy!Ralsei to make a thing happen"
                     },
                     {
@@ -61,7 +61,8 @@ return {
                     {
                         "{s:0.9}Click 5 times to go to our {s:0.9,E:worm_elle_text}website",
                         "{s:0.6}No, it won't count down. There's no {s:0.6,X:lfc_dark,C:white}loc_vars{s:0.6} on these.",
-                        "{s:0.6}The site is also very outdated rn but it'll be done later"
+                        "{s:0.6}The site is also very outdated rn but it'll be done later",
+                        "{s:0.6}This works on all 4 devs btw, check it out!"
                     }
                 }
             },

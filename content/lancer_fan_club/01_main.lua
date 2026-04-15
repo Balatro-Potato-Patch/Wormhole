@@ -30,6 +30,7 @@ Wormhole.LancerFanClub = PotatoPatchUtils.Team {
 local was_on_lancer = false
 local elle_click_count = 5
 local alexi_click_count = 5
+local proot_click_count = 5
 
 local ctcp = PotatoPatchUtils.CREDITS.create_team_credit_page
 function PotatoPatchUtils.CREDITS.create_team_credit_page(team, ...)
@@ -175,6 +176,11 @@ G.ARGS.LOC_COLOURS.lfc_ash     = SMODS.Gradient {
     },
     cycle = 4
 }
+G.ARGS.LOC_COLOURS.lfc_trans_blue = HEX("75cdf3")
+G.ARGS.LOC_COLOURS.lfc_trans_pink = HEX("edbac7")
+G.ARGS.LOC_COLOURS.lfc_fox = HEX("d66b1c")
+
+local proot_first_click = true
 
 -- Developers
 PotatoPatchUtils.Developer {
@@ -187,26 +193,21 @@ PotatoPatchUtils.Developer {
     soul_pos = { x = 7, y = 0 },
     click = function(self)
         dark_flip(self)
-        if math.random(2) == 1 then
-            play_sound("worm_lfc_tada",1)
-        else
-            play_sound("worm_lfc_not_tada",1)
+
+        play_sound(math.random(2) == 1 and "worm_lfc_tada" or "worm_lfc_not_tada",1.5-proot_click_count*0.1)
+        
+        -- Shitpost thing
+        if proot_first_click then
+            proot_first_click = false
+            love.system.openURL("https://youtu.be/FbOy5CsWxXA")
         end
-        love.system.openURL("https://www.youtube.com/watch?v=FbOy5CsWxXA")
-        if not G.proot_url then
-            G.proot_url = true
-            G.E_MANAGER:add_event(Event({
-                trigger = 'after',
-                delay = 30,
-                blockable = false,
-                blocking = false,
-                pause_force = true,
-                func = function()
-                    if not love.window.hasFocus() then love.system.openURL("https://www.youtube.com/@Prod_by_proto") end
-                    G.proot_url = nil
-                    return true
-                end
-            }))
+
+        self:juice_up()
+        if proot_click_count == 1 then
+            love.system.openURL("https://www.youtube.com/@Prod_by_proto")
+            proot_click_count = 5
+        else
+            proot_click_count = proot_click_count - 1
         end
     end,
     calculate = function(self, context)
@@ -223,17 +224,6 @@ PotatoPatchUtils.Developer {
         end
     end
 }
-
-local custom_colours = {
-    trans_blue = HEX("75cdf3"),
-    trans_pink = HEX("edbac7"),
-    fox = HEX("d66b1c")
-}
-
-local loc_col_ref = loc_colour
-function loc_colour(_c, _default)
-return custom_colours[_c] or loc_col_ref(_c, _default)
-end
 
 SMODS.DynaTextEffect {
     key = "elle_text",
@@ -342,7 +332,7 @@ Wormhole.LancerFanClub.Alexi = PotatoPatchUtils.Developer {
     click = function(self)
         dark_flip(self)
 
-        play_sound("worm_lfc_splat")
+        play_sound("worm_lfc_splat",1.5-alexi_click_count*0.1)
         self:juice_up()
         if alexi_click_count == 1 then
             love.system.openURL("https://en.pronouns.page/@invalidOS")
