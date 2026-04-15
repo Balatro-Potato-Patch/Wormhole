@@ -15,7 +15,7 @@ return {
             },
             PotatoPatchDev_Knightingale0 = {
                 name = "{E:worm_bap_text_funny}Knightingale0{}",
-                text = {"Knightingale0"}
+                text = {"<3"}
             }
         }
     }
