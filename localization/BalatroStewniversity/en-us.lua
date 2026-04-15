@@ -232,8 +232,10 @@ return {
                     "I did most Joker code",
                     'for our team! Shout out to',
                     'the biggest mother frogger and the',
-                    'cheesiest pear I know, you\'re the',
-                    'goats'
+                    'cheesiest pear I know, you\'re both the',
+                    'GOAT!',
+                    '',
+                    'Also Ado nation rise up'
                 }
             },
             dottykitty = {
