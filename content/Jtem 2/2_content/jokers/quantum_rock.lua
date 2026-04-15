@@ -238,6 +238,9 @@ function Game:update(...)
 	if G.GAME.worm_quantum_rock_spawned then
 		WORM_JTEM.quantum_rock.enabled = true
 	end
+	if G.GAME.used_jokers then
+		G.GAME.used_jokers[rock.key] = nil
+	end
 	if WORM_JTEM.quantum_rock.enabled then
 		G.worm_quantum_rock_target_dt = G.worm_quantum_rock_target_dt or G.TIMERS.REAL
 		if G.TIMERS.REAL - G.worm_quantum_rock_target_dt > 0.5 then
