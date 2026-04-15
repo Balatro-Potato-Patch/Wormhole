@@ -953,8 +953,8 @@ SMODS.Atlas({
 	px = 71,
 	py = 190,
 	atlas_table = "ANIMATION_ATLAS",
-	frames = 16,
-	fps = 16,
+	frames = 4,
+	fps = 8,
 })
 
 -- Draw the tarts in order
@@ -989,10 +989,9 @@ SMODS.DrawStep({
 		if card.tarts then
 			Wormhole.TEAM_MEOW.rainbow_trail_sprite = Wormhole.TEAM_MEOW.rainbow_trail_sprite
 				or SMODS.create_sprite(0, 0, G.CARD_W, 2 * G.CARD_H, "worm_meow_nyan_cat_trail", { x = 0, y = 0 })
-			if #card.tarts > 0 then
+			if #card.tarts > 0 or card.config.center.key == 'j_worm_meow_nyan_cat' then
 				Wormhole.TEAM_MEOW.rainbow_trail_sprite:set_role({ major = card, role_type = "Glued", draw_major = card })
-				Wormhole.TEAM_MEOW.rainbow_trail_sprite:draw_shader("dissolve", 0, nil, nil, card.children.center, -0.15, nil, nil, nil, nil, 0.6)
-				Wormhole.TEAM_MEOW.rainbow_trail_sprite:draw_shader("dissolve", nil, nil, nil, card.children.center, -0.15, nil, nil, nil)
+				Wormhole.TEAM_MEOW.rainbow_trail_sprite:draw_shader("dissolve", nil, nil, true, card.children.center, 0.05, nil, nil, nil)
 			end
 		end
 	end,
