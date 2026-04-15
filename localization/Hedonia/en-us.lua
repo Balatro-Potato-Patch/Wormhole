@@ -154,6 +154,7 @@ return {
                 text = {
                     'First time doing a mod jam',
                     'Made a couple of pictures',
+                    'and the font for the emote to the left',
                     'Thanks to Astra and Murphy',
                     'Thanks to Team Hedonia 10/10'
                 }
@@ -162,16 +163,22 @@ return {
                 name = "Professor Renderer",
                 text = {
                     'This is my first ever mod jam!',
-                    'I did the card text and also came up',
-                    'with the names for the drinks and concepts',
-                    'for the jokers. I\'m happy with everyone\'s work',
-                    'and I hope you enjoyed what we came up with!'
+                    'I did the card text and the names/effects of',
+                    'the drinks. I also came up with the effects for',
+                    'the Casino Bartender and Happy Hour jokers.',
+                    'I\'m happy with everyone\'s work and I hope',
+                    'you enjoyed what we came up with!'
                 }
             },
             PotatoPatchDev_qunumeru = {
                 name = "Qunumeru",
                 text = {
-                    'a'
+                    'I did the art for space jam, satonion rings, black hole bomb,',
+                    'hadron colada, mojitury, casino bartender, and the deck.',
+                    'As of writing this (11h before deadline) I\'ve been spriting',
+                    'about 13h straight. It came to this because I got sick.',
+                    'This is the first time I\'ve been in a mod jam(e),',
+                    'hope you enjoy and good night'
                 }
             },
             PotatoPatchDev_wombatcountry = {
