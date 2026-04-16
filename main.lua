@@ -35,13 +35,17 @@ PotatoPatchUtils.Developer {
   name = 'Gud',
   colour = HEX('D781FF'),
   loc = 'Gud', -- Can also be `loc = 'k_doofus_name'` where the string is an arbitrary localization dictionary entry
-  team = 'Violent Violets' -- Must match an already existing Team name
+  team = 'Violent Violets', -- Must match an already existing Team name
+  atlas = 'worm_devs',
+  pos = { x = 3, y = 0 }
 }
 PotatoPatchUtils.Developer {
   name = 'Iso',
   colour = HEX("BA89F9"),
   loc = 'Iso', -- Can also be `loc = 'k_doofus_name'` where the string is an arbitrary localization dictionary entry
-  team = 'Violent Violets' -- Must match an already existing Team name
+  team = 'Violent Violets', -- Must match an already existing Team name
+  atlas = 'worm_devs',
+  pos = { x = 4, y = 0 }
 }
 PotatoPatchUtils.Developer {
   name = 'FirstTry',

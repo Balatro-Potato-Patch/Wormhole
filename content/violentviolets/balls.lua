@@ -8,6 +8,8 @@ SMODS.Joker {
     },
     ppu_team = { "Violent Violets" },
     ppu_coder = { "Iso", "FireIce" },
+    atlas = 'VVjokers',
+    pos = {x = 0, y = 2},
     loc_vars = function(self, info_queue, card)
         return {
             vars = {
