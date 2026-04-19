@@ -2,21 +2,38 @@ return {
     descriptions = {
         PotatoPatch = {
             VV = { name =  "Violent Violets" },
-            PotatoPatchTeam_FireIce = {
+            PotatoPatchDev_FireIce = {
                 name = "FireIce",
                 text = {
-                        { "the power of 12 gay cats" }, -- 1st textbox
-                        { "may or may not have been used" } -- 2nd textbox
+                        { 
+                            "the power of 12 gay cats",
+                            "may or may not have been used" 
+                        }
+                },
+            },
+            PotatoPatchDev_Gud = {
+                name = "Gup",
+                text = {
+                        { 
+                            "{C:inactive,E:1}Developer has not left a quote..." 
                         }
             },
-            Gud = {
-                name = "Gup",
-            },
-            Iso = {
+        },
+            PotatoPatchDev_Iso = {
                 name = "Isotypical",
+                text = {
+                        { 
+                            "{C:inactive,E:1}Developer has not left a quote..." 
+                        }
             },
-            FirstTry = {
+            },
+            PotatoPatchDev_FirstTry = {
                 name = "FirstTry",
+                text = {
+                        { 
+                            "Tried too hard, even on vacation" 
+                        }
+            },
             },
         },
         Joker = {
