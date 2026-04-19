@@ -24,8 +24,8 @@ SMODS.Joker {
     calculate = function(self,card,context)
     if context.joker_main then
         return {
-            xchips = G.GAME.hands["Straight"].chips,
-            xmult = G.GAME.hands["Straight"].mult,
+            chips = G.GAME.hands["Straight"].chips,
+            mult = G.GAME.hands["Straight"].mult,
         }
     end
     end
