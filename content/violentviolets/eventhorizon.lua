@@ -3,7 +3,7 @@ SMODS.Joker {
     loc_vars = function(self, info_queue, card)
     return { vars = { card.ability.extra.x_mult } }
     end,
-    config = { extra = { x_mult = 8 } },
+    config = { extra = { x_mult = 1.75 } },
     rarity = 3,
     cost = 8,
     atlas = 'VVjokers',
@@ -12,8 +12,8 @@ SMODS.Joker {
     ppu_artist = { "Gud" },
     ppu_coder = { "FireIce" },
     calculate = function(self, card, context)
-        if context.cardarea == G.play then
-            if context.other_card:get_id() == 3 then
+        if context.individual and context.cardarea == G.play then
+            if context.other_card:get_id() == 3 and context.other_card:get_id() == 8 then
                 return {
                 x_mult = card.ability.extra.x_mult
                 }

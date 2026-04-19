@@ -2,8 +2,12 @@ return {
     descriptions = {
         PotatoPatch = {
             VV = { name =  "Violent Violets" },
-            FireIce = {
+            PotatoPatchTeam_FireIce = {
                 name = "FireIce",
+                text = {
+                        { "the power of 12 gay cats" }, -- 1st textbox
+                        { "may or may not have been used" } -- 2nd textbox
+                        }
             },
             Gud = {
                 name = "Gup",
@@ -26,7 +30,7 @@ return {
             j_worm_sttgl = {
             name = "Super Tengen Toppa Gurren Lagann",
             text = {
-                {"Creates {C:attention}#3#{} duplicates of",
+                {"{C:green}#1# in #3# {}chance to create {C:attention}#4#{} duplicates of",
                 "used non-{C:dark_edition}Negative{} {C:planet}Planet Cards{}"},
                 {"{C:planet}Planet Cards{} have a {C:green}#1# in #2#{} Chance",
                 "to be {C:dark_edition}Negative{} when duplicated"}
@@ -37,7 +41,7 @@ return {
                 'DISINTEGRATION LOOP'
             },
             text = {
-                "{X:mult,C:white}X8{} Mult for every scored {C:attention}3{}"
+                "{X:mult,C:white}X#1#{} Mult for every scored {C:attention}3{} and {C:attention}8{}"
                 }
             },
             j_worm_cking = {
@@ -52,7 +56,7 @@ return {
             name = "Tek It",
             text = {
                 "Using {C:tarot}The Moon{} increases this",
-                "Joker's chips by {C:white,X:dark_edition}X#2#",
+                "Joker's chips by {C:white,X:dark_edition}+X#2#",
                 "{C:inactive}(Currently: {C:white,X:chips}X#1#{C:inactive})",
                 }
             },
@@ -76,10 +80,10 @@ return {
                         "{C:green}1 in 3 chance{} to do either of the following:"
                     },
                     {
-                        "{C:money}+15$",
-                        "{C:blue}+1 Hand",
-                        "{X:mult,C:white}X2{} Mult",
-                        "{C:attention}Retrigger{} a card once",
+                        "{C:money}+#1#$",
+                        "{C:blue}+#2# Hand",
+                        "{X:mult,C:white}X#3#{} Mult",
+                        "{C:attention}Retrigger{} a card #4# time",
                         "{C:inactive,s:0.8}Multiple can activate at the same time."
                     }
                 }

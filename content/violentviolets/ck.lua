@@ -1,8 +1,8 @@
 SMODS.Joker {
     key = "cking",
     atlas = 'VVjokers',
-    rarity = 'worm_otherworldly',
-    cost = 30,
+    rarity = 4,
+    cost = 20,
     pos = {x = 2, y = 1},
     soul_pos = {x = 3, y = 1},
     config = {
@@ -53,7 +53,7 @@ SMODS.Joker {
 --                message = card.ability.immutable.roll_rounds .."/".. card.ability.immutable.total_rounds,
 --                colour = G.C.RED
             })
-        if (to_big(card.ability.immutable.roundup) >= to_big(card.ability.immutable.rounds)) then
+        if (card.ability.immutable.roundup >= card.ability.immutable.rounds) then
             SMODS.upgrade_poker_hands{
                         from = card,
                         parameters = { "chips", "mult"},

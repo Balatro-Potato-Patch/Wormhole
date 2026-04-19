@@ -4,16 +4,23 @@ SMODS.Joker {
     cost = 10,
     config = {
         extra = {
+            dollars = 4,
+            x_mult = 1.25,
+            repetitions = 1
         }
     },
     ppu_team = { "Violent Violets" },
     ppu_coder = { "Iso", "FireIce" },
     atlas = 'VVjokers',
     pos = {x = 0, y = 2},
+    blueprint_compat = false,
     loc_vars = function(self, info_queue, card)
         return {
             vars = {
-
+                card.ability.extra.dollars,
+                card.ability.extra.hands,
+                card.ability.extra.x_mult,
+                card.ability.extra.repetitions
             }
         }
     end,
@@ -23,17 +30,9 @@ SMODS.Joker {
             if SMODS.pseudorandom_probability(card, "award_a", 1, 3) then
                 G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + 15
                 return {
-                    dollars = 15
+                    dollars = card.ability.extra.hands
                 },
                 play_sound('worm_jackpot', 1, 1)
-            end
-            if SMODS.pseudorandom_probability(card, "award_b", 1, 3) then
-                ease_hands_played(1)
-                return {
-                    message = "+1 Hand",
-                    colour = G.C.BLUE
-                },
-                play_sound('worm_extrahand', 1, 1)
             end
             if SMODS.pseudorandom_probability(card, "b", 1, 3) then 
                 retrig_all = true
@@ -45,13 +44,13 @@ SMODS.Joker {
         end
         if context.repetition and retrig_all == true then
             return {
-                repetitions = 1
+                repetitions = card.ability.extra.repetitions
             }
         end
         if context.individual and context.cardarea == G.play then
             if SMODS.pseudorandom_probability(card, "c", 1, 3) then
                 return {
-                    xmult = 2,
+                    xmult = card.ability.extra.x_mult,
                 },
                 play_sound('worm_hyperspace', 1, 1)
             end

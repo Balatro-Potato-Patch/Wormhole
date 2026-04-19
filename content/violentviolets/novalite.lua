@@ -4,7 +4,7 @@ SMODS.Joker { -- :3
     cost = 30,
     config = {
         extra = {
-            multi = 1
+            multi = 0
         }
     },
     atlas = 'VVjokers',
@@ -15,7 +15,7 @@ SMODS.Joker { -- :3
         local planets_used = 0
         for k, v in pairs(G.GAME.consumeable_usage) do if v.set == 'Planet' then planets_used = planets_used + 1 end end
         return { 
-            vars = { card.ability.extra.multi, (planets_used + 1) }, 
+            vars = { card.ability.extra.multi, (planets_used) }, 
         }
     end,
     ppu_team = { "Violent Violets" },
