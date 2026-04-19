@@ -6,7 +6,7 @@ return {
                 name = "FireIce",
                 text = {
                         { 
-                            "the power of 12 gay cats",
+                            "the power of {s:1.5,C:dark_edition,E:1}12 gay cats{}",
                             "may or may not have been used" 
                         }
                 },
@@ -15,7 +15,11 @@ return {
                 name = "Gup",
                 text = {
                         { 
-                            "{C:inactive,E:1}Developer has not left a quote..." 
+                            "meowmeowmeowmeowmeowmeowmeowmeow",
+                            "meowmeowmeowmeowmeowmeowmeowmeow",
+                            "meowmeowmeowmeowmeowmeowmeowmeow",
+                            "meowmeowmeowmeowmeowmeowmeowmeow"
+                            
                         }
             },
         },
