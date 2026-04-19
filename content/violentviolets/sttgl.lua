@@ -11,16 +11,22 @@ SMODS.Joker {
     },
     ppu_team = { "Violent Violets" },
     ppu_artist = { "FirstTry" },
-    ppu_coder = { "FireIce" },
+    ppu_coder = { "FirstTry" },
     loc_vars = function(self,info_queue,card)
         return {
             vars = {
+                G.GAME.hands["Straight"].chips,
+                G.GAME.hands["Straight"].mult,
+                "   "
             }
         }
     end,
     calculate = function(self,card,context)
-    if context.ante_change then
-        SMODS.add_card{ key = "c_black_hole" }
+    if context.joker_main then
+        return {
+            xchips = G.GAME.hands["Straight"].chips,
+            xmult = G.GAME.hands["Straight"].mult,
+        }
     end
     end
 }
