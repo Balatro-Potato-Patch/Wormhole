@@ -51,10 +51,9 @@ return {
             j_worm_sttgl = {
             name = "Super Tengen Toppa Gurren Lagann",
             text = {
-                {"{C:green}#1# in #3# {}chance to create {C:attention}#4#{} duplicates of",
-                "used non-{C:dark_edition}Negative{} {C:planet}Planet Cards{}"},
-                {"{C:planet}Planet Cards{} have a {C:green}#1# in #2#{} Chance",
-                "to be {C:dark_edition}Negative{} when duplicated"}
+                {"Gives the current {C:chips}Chips{} and {C:mult}Mult{}",
+                "of a {C:attention}Straight"},
+                {"{C:white,X:chips,s:1.5}#3##1#{}{C:red,s:1.5} X {C:white,X:mult,s:1.5}#2##3#{}"}
                 }
             },
             j_worm_fraudthird = {
@@ -102,7 +101,6 @@ return {
                     },
                     {
                         "{C:money}+#1#$",
-                        "{C:blue}+#2# Hand",
                         "{X:mult,C:white}X#3#{} Mult",
                         "{C:attention}Retrigger{} a card #4# time",
                         "{C:inactive,s:0.8}Multiple can activate at the same time."
