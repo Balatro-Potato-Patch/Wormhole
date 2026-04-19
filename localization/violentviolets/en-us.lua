@@ -97,13 +97,7 @@ return {
                 name = "Space Cadet",
                 text = {
                     {
-                        "{C:green}1 in 3 chance{} to do either of the following:"
-                    },
-                    {
-                        "{C:money}+#1#$",
-                        "{X:mult,C:white}X#3#{} Mult",
-                        "{C:attention}Retrigger{} a card #4# time",
-                        "{C:inactive,s:0.8}Multiple can activate at the same time."
+                        "{C:green}1 in 3 chance{} to give {X:mult,C:white}X2.25{} Mult per card"
                     }
                 }
             }
