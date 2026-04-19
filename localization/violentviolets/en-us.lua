@@ -101,7 +101,6 @@ return {
                     },
                     {
                         "{C:money}+#1#$",
-                        "{C:blue}+#2# Hand",
                         "{X:mult,C:white}X#3#{} Mult",
                         "{C:attention}Retrigger{} a card #4# time",
                         "{C:inactive,s:0.8}Multiple can activate at the same time."
