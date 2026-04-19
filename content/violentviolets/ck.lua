@@ -1,8 +1,8 @@
 SMODS.Joker {
     key = "cking",
     atlas = 'VVjokers',
-    rarity = 3,
-    cost = 8,
+    rarity = 2,
+    cost = 4,
     pos = {x = 2, y = 1},
     soul_pos = {x = 3, y = 1},
     config = {
