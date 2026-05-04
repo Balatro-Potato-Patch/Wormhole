@@ -28,40 +28,46 @@ SMODS.Consumable{
 			end
 		}))
 		for _, _card in ipairs(G.consumeables.cards) do
-			G.E_MANAGER:add_event(Event({
-				trigger = 'after',
-				delay = 0.15,
-				func = function()
-					_card:flip()
-					play_sound('card1')
-					_card:juice_up(0.3, 0.3)
-					return true
-				end
-			}))
+			if card.config.center.set == "worm_tlr_constellation" then
+				G.E_MANAGER:add_event(Event({
+					trigger = 'after',
+					delay = 0.15,
+					func = function()
+						_card:flip()
+						play_sound('card1')
+						_card:juice_up(0.3, 0.3)
+						return true
+					end
+				}))
+			end
 		end
 		delay(0.2)
 		for _, _card in ipairs(G.consumeables.cards) do
-			G.E_MANAGER:add_event(Event({
-				trigger = 'after',
-				delay = 0.1,
-				func = function()
-					_card.ability.tier = 4
-					_card.config.center:update_sprites(_card) -- we don't use the helper function here so the event runs at the right time
-					return true
-				end
-			}))
+			if card.config.center.set == "worm_tlr_constellation" then
+				G.E_MANAGER:add_event(Event({
+					trigger = 'after',
+					delay = 0.1,
+					func = function()
+						_card.ability.tier = 4
+						_card.config.center:update_sprites(_card) -- we don't use the helper function here so the event runs at the right time
+						return true
+					end
+				}))
+			end
 		end
 		for _, _card in ipairs(G.consumeables.cards) do
-			G.E_MANAGER:add_event(Event({
-				trigger = 'after',
-				delay = 0.15,
-				func = function()
-					_card:flip()
-					play_sound('tarot2', 1, 0.6)
-					_card:juice_up(0.3, 0.3)
-					return true
-				end
-			}))
+			if card.config.center.set == "worm_tlr_constellation" then
+				G.E_MANAGER:add_event(Event({
+					trigger = 'after',
+					delay = 0.15,
+					func = function()
+						_card:flip()
+						play_sound('tarot2', 1, 0.6)
+						_card:juice_up(0.3, 0.3)
+						return true
+					end
+				}))
+			end
 		end
 		G.E_MANAGER:add_event(Event({
 			trigger = 'after',
