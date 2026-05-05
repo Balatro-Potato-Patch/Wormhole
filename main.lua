@@ -20,6 +20,21 @@ if PotatoPatchUtils then
 	SMODS.current_mod.extra_tabs = PotatoPatchUtils.CREDITS.register_page(SMODS.current_mod)
 end
 
+if ((SMODS.Mods["Talisman"] or {}).can_load and not (SMODS.Mods["Amulet"] or {}).can_load) then error([[TALISMAN detected!
+
+
+
+
+====== HOW TO FIX THIS CRASH ======
+1. Uninstall Talisman
+2. Install Amulet
+https://github.com/frostice482/amulet
+
+
+
+]])
+end
+
 SMODS.Atlas {
 	key = "modicon",
 	path = "modicon.png",
