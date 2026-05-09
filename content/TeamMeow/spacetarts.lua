@@ -614,8 +614,10 @@ SpaceTart({
 				end
 			end
 			if context.post_trigger and context.other_card.worm_meow_cinnamon_noped then
+				local ref_card = context.other_card
 				return {
 					func = function()
+						ref_card.worm_meow_cinnamon_noped = false
 						G.E_MANAGER:add_event(Event({
 							trigger = "after",
 							delay = 0.4,
