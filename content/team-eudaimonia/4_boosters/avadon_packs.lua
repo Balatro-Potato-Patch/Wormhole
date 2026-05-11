@@ -57,7 +57,7 @@ Wormhole.EUDA_Avadon = SMODS.Booster:extend{
 
 Wormhole.EUDA_Avadon {
     key = "euda_avadon_normal_1",
-    weight = 1,
+    weight = 0.2,
     pos = {x=0, y=0},
     cost = 8,
     config = { extra = 2, choose = 1 },
@@ -73,7 +73,7 @@ Wormhole.EUDA_Avadon {
 
 Wormhole.EUDA_Avadon {
     key = "euda_avadon_normal_2",
-    weight = 1,
+    weight = 0.2,
     pos = {x=1, y=0},
     cost = 8,
     config = { extra = 2, choose = 1 },
@@ -88,7 +88,7 @@ Wormhole.EUDA_Avadon {
 
 Wormhole.EUDA_Avadon {
     key = "euda_avadon_jumbo",
-    weight = 1,
+    weight = 0.1,
     pos = {x=2, y=0},
     cost = 10,
     config = { extra = 3, choose = 1 },
@@ -103,7 +103,7 @@ Wormhole.EUDA_Avadon {
 
 Wormhole.EUDA_Avadon {
     key = "euda_avadon_mega",
-    weight = 0.25,
+    weight = 0.04,
     pos = {x=3, y=0},
     cost = 12,
     config = { extra = 3, choose = 2 },
