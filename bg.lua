@@ -1,59 +1,61 @@
-local manager = {}
-local effects = {"tbp"}
+local manager = { lag_scale = 1 }
+local effects = {"lfc", "tbp", "util"}
 Wormhole.bg_manager = manager
 local conf = Wormhole.config
-local lag_scale = 1
 local cooldown = 1.1
 local target = 0.016
+local lw, lh
+
+function manager:smart_scale(shader)
+    if not self.lag_scale then
+        self.lag_scale = 1
+    end
+    if not self.canvas then
+        self.canvas_scale = self.lag_scale
+        self.canvas_w = math.ceil(lw / self.canvas_scale)
+        self.canvas_h = math.ceil(lh / self.canvas_scale)
+        self.canvas = love.graphics.newCanvas(self.canvas_w, self.canvas_h)
+    end
+    love.graphics.push("all")
+    love.graphics.setCanvas(self.canvas)
+    love.graphics.clear()
+    love.graphics.setShader(shader)
+    love.graphics.rectangle("fill", 0, 0, self.canvas_w, self.canvas_h)
+    love.graphics.setCanvas()
+    love.graphics.pop()
+    love.graphics.draw(self.canvas, 0, 0, 0, self.canvas_scale, self.canvas_scale)
+    if cooldown <= 0 and self.lag_scale < 6 then
+        local time = love.timer.getAverageDelta()
+        if time > target and time < 3 then -- Big time like this is likely we got backgrounded
+            local difference = time - target
+            local times = (difference / target)
+            if times > 0.2 then
+                self.lag_scale = self.lag_scale + math.min((times / 3), 1)
+                self.canvas = nil
+            end
+        end
+        cooldown = 1.2
+    end
+    cooldown = cooldown - love.timer.getDelta()
+end
 
 function manager:draw()
     if G.STAGE ~= G.STAGES.MAIN_MENU then return end
     if not conf.menu then return end
     if not self.chosen then manager:reset() end
-    local w, h = love.graphics.getDimensions()
 
     if self.chosen == "util" then
-	Wormhole.util_space_manager:draw_background(true)
+        Wormhole.util_space_manager:draw_background(true)
     elseif self.chosen == "tbp" then
-        if not self.tbp_canvas then
-            self.canvas_scale = lag_scale
-            self.canvas_w = math.ceil(w / self.canvas_scale)
-            self.canvas_h = math.ceil(h / self.canvas_scale)
-            self.tbp_canvas = love.graphics.newCanvas(self.canvas_w, self.canvas_h)
-        end
         local shader = G.SHADERS.worm_tbp_space_warp
-        love.graphics.push("all")
-        love.graphics.setCanvas(self.tbp_canvas)
-        love.graphics.clear()
         shader:send("time", G.TIMERS.REAL)
         shader:send("transparency", 1)
-        love.graphics.setShader(shader)
-        love.graphics.rectangle("fill", 0, 0, self.canvas_w, self.canvas_h)
-        love.graphics.setCanvas()
-        love.graphics.pop()
-        love.graphics.draw(self.tbp_canvas, 0, 0, 0, self.canvas_scale, self.canvas_scale)
-        if cooldown <= 0 then
-            local time = love.timer.getAverageDelta()
-            if time > target and time < 3 then -- Big time like this is likely we got backgrounded
-                local difference = time - target
-                local times = (difference / target)
-                if times > 0.2 then
-                    print(string.format("Time is %.2fx above target", times))
-                    lag_scale = lag_scale + math.min((times / 3), 1)
-                    print(lag_scale - (times / 3), ">", lag_scale)
-                    self.tbp_canvas = nil
-                end
-            end
-            cooldown = 1.2
-        end
-        cooldown = cooldown - love.timer.getDelta()
+        self:smart_scale(shader)
     elseif self.chosen == "lfc" then
         local shader = G.SHADERS.worm_lfc_eigengrau_bg
         shader:send("time", G.TIMERS.REAL_SHADER)
         shader:send("alpha", 1)
-        love.graphics.setShader(shader)
-        love.graphics.rectangle("fill", 0, 0, w, h)
-        love.graphics.setShader()
+        self:smart_scale(shader)
     end
 
     if self.splash_args then
@@ -63,7 +65,7 @@ function manager:draw()
             local opacity = self.splash_args.mid_flash / 1.6
             love.graphics.setColor({1, 1, 1, opacity})
 
-            love.graphics.rectangle("fill", 0, 0, w, h)
+            love.graphics.rectangle("fill", 0, 0, lw, lh)
             love.graphics.setColor(G.C.WHITE)
         end
     end
@@ -74,6 +76,7 @@ function manager:reset()
         Wormhole.util_space_manager:reset()
     end
     self.chosen = pseudorandom_element(effects)
+    self.lag_scale = 1
 end
 
 local game_delete_run = Game.delete_run
@@ -87,12 +90,9 @@ end
 local love_resize_ref = love.resize
 function love.resize(w, h)
     if love_resize_ref then love_resize_ref(w, h) end
-    lag_scale = 1
-    manager.tbp_canvas = nil
-    -- if manager.tbp_canvas then
-    --     manager.canvas_scale = h / target_height
-    --     manager.canvas_w = math.ceil(w / manager.canvas_scale)
-    --     manager.canvas_h = target_height
-    --     manager.tbp_canvas = love.graphics.newCanvas(manager.canvas_w, manager.canvas_h)
-    -- end
+    if lw == w and lh == h then return end
+    lw = w
+    lh = h
+    manager.lag_scale = 1
+    manager.canvas = nil
 end
