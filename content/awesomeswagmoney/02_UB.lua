@@ -602,6 +602,9 @@ SMODS.Consumable{
     can_use = function(self, card)
         return G.jokers and #G.jokers.cards < G.jokers.config.card_limit
     end,
+    in_pool = function (self, args)
+        return not next(SMODS.find_card('j_worm_necrozma'))
+    end,
     ppu_artist = {"worm_omega"},
     ppu_coder = {"worm_eris"},
     ppu_team = {"awesomeswagmoney"},
