@@ -1187,7 +1187,7 @@ function Card:stop_drag(...)
 		}
 		table.insert(closest.tarts, tart)
 
-		if closest.config and closest.config.center_key == "j_worm_meow_feli" then
+		if closest.config and (closest.config.center_key == "j_worm_meow_feli" or closest.config.center_key == "j_worm_mrrp_felicette") then
 			check_for_unlock({ type = "feli" })
 		end
 		G.E_MANAGER:add_event(Event({
