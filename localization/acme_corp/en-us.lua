@@ -38,7 +38,8 @@ return {
             c_worm_acme_jam = {
                 name = 'ACME Spreadable Berry Conserve',
                 text = {
-                    '{X:attention,C:white}After{C:attention} #1# #2#{} trigger in hand,',
+                    '{X:attention,C:white}After{C:attention} #1# #2#{} trigger',
+                    'while held in hand,',
                     '{X:attention,C:white}Use{} to {C:attention}upgrade{} every',
                     '{E:1,C:legendary}poker hand{} by {C:attention}1 Level'
                 }
