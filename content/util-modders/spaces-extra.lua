@@ -75,9 +75,20 @@ SMODS.Voucher {
     ppu_team = {"util-modders"},
 }
 
+local random_planet_sources = { --This is really not an ideal way to handle this but I couldn't think of a better one
+    pri = true,
+    astrologer = true,
+    bap_milky_way = true,
+    worm_stew_8_ball_earth = true,
+    final_frontier = true,
+    dum_trinary_planet = true,
+    thorn_jimbo = true,
+}
+
 local _add_to_pool = SMODS.add_to_pool
 function SMODS.add_to_pool(proto, args)
-    if G.GAME.modifiers.void_stake and (proto.set == "Planet") or (proto.set == "Booster" and proto.kind == 'Celestial') then
+    local source = args and args.source or "nooooooope"
+    if G.GAME.modifiers.void_stake and not random_planet_sources[source] and (proto.set == "Planet") or (proto.set == "Booster" and proto.kind == 'Celestial') then
         --print('no pool')
         return false
     end

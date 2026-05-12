@@ -22,7 +22,7 @@ SMODS.Joker {
     end,
     calculate = function(self, card, context)
         if context.joker_main and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
-            SMODS.add_card { set = "Planet" }
+            SMODS.add_card { set = "Planet", "thorn_jimbo" }
         end
     end,
     set_ability = function(self, card, initial, delay_sprites)
