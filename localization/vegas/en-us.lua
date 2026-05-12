@@ -190,5 +190,10 @@ return {
                 }
             }
         }
+    },
+    misc = {
+		dictionary = {
+			k_vegas_bazinga = "Bazinga!",
+		},
     }
 }

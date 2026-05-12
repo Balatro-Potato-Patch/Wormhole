@@ -166,6 +166,8 @@ function Wormhole.Absinthe.get_card_area_to_emplace(key)
             area = 'jokers'
         elseif center.consumeable or center.set == 'Voucher' or center.set == 'Booster' then
             area = 'consumeables'
+        elseif center.set == 'Enhanced' then
+            area = 'deck'
         end
     end
 

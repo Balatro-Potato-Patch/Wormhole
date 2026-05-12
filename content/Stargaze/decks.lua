@@ -42,8 +42,9 @@ SMODS.Back({
 	end,
 
 	calculate = function(self, back, context)
-		if context.using_consumeable then
+		if context.using_consumeable and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
 			if context.consumeable and context.consumeable.ability and context.consumeable.ability.set == "Planet" then
+				G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
 				G.E_MANAGER:add_event(Event({
 					func = function()
 						local num, den = self.config.extra.num, self.config.extra.den
@@ -71,7 +72,7 @@ SMODS.Back({
 						else -- This is ridiculously unlikely
 							nope(G.deck.cards[1])
 						end
-
+                        G.GAME.consumeable_buffer = 0
 						return true
 					end
 				}))

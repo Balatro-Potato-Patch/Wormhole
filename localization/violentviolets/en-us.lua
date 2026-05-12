@@ -76,9 +76,9 @@ return {
             j_worm_tekit = {
             name = "Tek It",
             text = {
-                "This Joker gains {C:white,X:chips}X#2#{} chips",
+                "This Joker gains {C:white,X:chips}X#2#{} Chips",
                 "when {C:tarot}The Moon{} is used",
-                "{C:inactive}(Currently: {C:white,X:chips}X#1#{C:inactive})",
+                "{C:inactive}(Currently {C:white,X:chips}X#1#{C:inactive} Chips)",
                 }
             },
             j_worm_astro_n = {

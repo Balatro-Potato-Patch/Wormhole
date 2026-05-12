@@ -1,5 +1,5 @@
 local function count_score_digits(score)
-    if not score then return 1 end
+    if not score or score < 1 then return 0 end
     return math.floor(math.log(score, 10)) + 1
 end
 
@@ -42,6 +42,10 @@ SMODS.Consumable {
             if nu_chips then final_chips = nu_chips end
             if nu_mult then final_mult = nu_mult end
             local score = final_chips * final_mult
+
+            if Talisman then
+                score = to_number(score)
+            end
 
 
             if score > (card.ability.extra.best_hand or 0) then

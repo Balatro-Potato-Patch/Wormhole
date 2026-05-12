@@ -345,7 +345,7 @@ return {
 				name = "Félicette",
 				text = {
 					"{C:mult}+#1#{} Mult",
-					"per {C:attention}Cat joker",
+					"per {C:attention}Cat{} Joker",
 				}
 			},
 		},

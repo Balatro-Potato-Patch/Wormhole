@@ -81,7 +81,7 @@ return {
 					"{s:0.8}({X:chips,C:white,s:0.8}X#3#{s:0.8} instead if all Joker slots filled)",
 					"if {C:attention}poker hand{} has not",
 					"been played {C:attention}this round{}",
-					"{C:inactive}(Currently: {X:chips,C:white}X#1#{} {C:inactive}Chips){}"
+					"{C:inactive}(Currently {X:chips,C:white}X#1#{} {C:inactive}Chips){}"
 				},
 			},
 
@@ -110,7 +110,7 @@ return {
 					"Start with a {C:dark_edition}Negative{} {C:attention,T:j_space}Space Joker{}",
 					"Planet cards have a {C:green}#1# in #2#{} chance",
 					"to create a {C:tarot}Tarot{} or {C:spectral}Spectral{} card",
-					"{C:inactive}(Ignores Consumable limit){}"
+					"{C:inactive}(Must have room!){}"
 				},
 			},
 		},

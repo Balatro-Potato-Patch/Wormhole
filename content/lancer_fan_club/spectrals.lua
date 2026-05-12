@@ -77,7 +77,14 @@ SMODS.Consumable {
         G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante + card.ability.extra.ante_inc
         G.GAME.win_ante = G.GAME.win_ante + card.ability.extra.win_ante_inc
         -- Joker banning
-        local target = pseudorandom_element(G.jokers.cards, "lfc_time_dilation")
+        local ban_candidates = {}
+        for _, joker in ipairs(G.jokers.cards) do
+            local center_key = joker and joker.config and joker.config.center and joker.config.center.key
+            if center_key and center_key ~= "j_worm_tbp_spaceship" then
+                ban_candidates[#ban_candidates + 1] = joker
+            end
+        end
+        local target = pseudorandom_element(ban_candidates, "lfc_time_dilation")
         if target ~= nil then
             local cards_to_destroy = {}
             for index, joker in ipairs(G.jokers.cards) do
@@ -105,7 +112,16 @@ SMODS.Consumable {
         end
     end,
     can_use = function(self, card)
-        return G.jokers and #G.jokers.cards > 0
+        if not G.jokers or not G.jokers.cards then
+            return false
+        end
+        for _, joker in ipairs(G.jokers.cards) do
+            local center_key = joker and joker.config and joker.config.center and joker.config.center.key
+            if center_key and center_key ~= "j_worm_tbp_spaceship" then
+                return true
+            end
+        end
+        return false
     end,
     ppu_artist = { "J8-Bit" },
     ppu_coder = { "J8-Bit" },

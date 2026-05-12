@@ -1,5 +1,8 @@
 Wormhole = SMODS.current_mod
 
+assert(SMODS.current_mod.lovely,
+    "Lovely modules were not loaded.\nMake sure your Wormhole folder is not nested (there should be a bunch of files in the Wormhole folder and not just another folder).")
+
 -- Reset Game Globals func to hook
 function Wormhole.reset_game_globals(run_start) end
 

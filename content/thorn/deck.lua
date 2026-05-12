@@ -5,6 +5,13 @@ SMODS.Atlas {
     py = 95
 }
 
+function thorn_renamelater_deck_played_this_ante(handname)
+    if G.GAME and G.GAME.selected_back and G.GAME.selected_back.effect.center.key == 'b_worm_thorn_renamelater' 
+    and G.GAME.hands[handname] and G.GAME.hands[handname].played_this_ante >= 1 then
+        return true
+    end
+    return false
+end
 
 SMODS.Back{
     name = "Unnamed Deck", 

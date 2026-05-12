@@ -287,8 +287,7 @@ return {
                 name = 'Stargarita',
                 text = {
                     {
-                        "When {C:attention}primed{}, next time",
-                        "cards are drawn, draw {C:attention}#1#{}",
+                        "When {C:attention}primed{}, draw {C:attention}#1#{}",
                         "additional cards, then is {C:abs_drinks}drank{}",
                     },
                     {
@@ -305,8 +304,7 @@ return {
                     },
                     {
                         "{C:inactive,s:0.8}After being Refilled:{}",
-                        "When {C:attention}primed{}, next time",
-                        "cards are drawn, draw {C:attention}#1#{}",
+                        "When {C:attention}primed{}, draw {C:attention}#1#{}",
                         "additional cards, then is {C:abs_drinks}drank{}",
                     }
                 }

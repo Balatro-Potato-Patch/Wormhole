@@ -405,9 +405,12 @@ SMODS.Joker({
         -- temporary code to test module destruction
         if not modules then modules = self.module_types end
         for _, module in ipairs(modules) do
-            if card.ability.extra.modules[module].durability and not card.ability.extra.modules[module].durability_loss_odds then
-                card.ability.extra.modules[module].durability = card.ability.extra.modules[module].durability + change
-                if card.ability.extra.modules[module].durability <= 0 then
+            local module_data = card.ability.extra.modules[module]
+            local current_durability = module_data and tonumber(module_data.durability)
+            if current_durability and not module_data.durability_loss_odds then
+                module_data.durability = current_durability + (tonumber(change) or 0)
+                if module_data.durability <= 0 then
+                    local lost_key = module_data.key
                     if card.ability.extra.modules.core.key == 'c_worm_tbp_salvage_core' and card.ability.extra.modules.core.money_per_destruction then
                         ease_dollars(card.ability.extra.modules.core.money_per_destruction)
                         SMODS.calculate_effect({
@@ -417,7 +420,7 @@ SMODS.Joker({
                     end
                     card.ability.extra.modules[module] = {}
                     SMODS.calculate_effect({
-                        message = localize({type='name_text', set='tbp_module', key=card.ability.extra.modules[module].key}) .. ' lost!',
+                        message = localize({type='name_text', set='tbp_module', key=lost_key}) .. ' lost!',
                         colour = G.C.RED
                     }, card)
                 end
@@ -487,17 +490,22 @@ SMODS.Joker({
 ---@param silent any
 function Wormhole.tbp.change_durability(ship, module_type, change, abs, silent)
     ship = ship or SMODS.find_card("j_worm_tbp_spaceship")[1]
-    if ship and ship.ability.extra.modules[module_type] and ship.ability.extra.modules[module_type].durability then
+    local module_data = ship and ship.ability and ship.ability.extra and ship.ability.extra.modules and ship.ability.extra.modules[module_type]
+    local current_durability = module_data and tonumber(module_data.durability)
+    if current_durability then
         local flags = SMODS.calculate_context({ wormhome_tbp_module_change_durability = true, amount = change, module = module_type, card = ship, during_uninstall = G.GAME.tbp_during_uninstall })
-        change = flags.modify ~= nil and flags.modify or change
-        
-        ship.ability.extra.modules[module_type].durability = ship.ability.extra.modules[module_type].durability + change
+        change = tonumber(flags.modify ~= nil and flags.modify or change) or 0
+        module_data = ship and ship.ability and ship.ability.extra and ship.ability.extra.modules and ship.ability.extra.modules[module_type]
+        current_durability = module_data and tonumber(module_data.durability)
+        if not current_durability then
+            return
+        end
+        module_data.durability = abs and change or (current_durability + change)
         if change < 0 then
             G.GAME.tbp.run.durability_lost.total = G.GAME.tbp.run.durability_lost.total + change
             G.GAME.tbp.run.durability_lost[module_type] = G.GAME.tbp.run.durability_lost[module_type] and G.GAME.tbp.run.durability_lost[module_type] + 1 or change
         end
-
-        if ship.ability.extra.modules[module_type].durability <= 0 then
+        if module_data.durability <= 0 then
             Wormhole.tbp.uninstall_module(ship, module_type, "failed", silent)
         elseif not silent then
             SMODS.calculate_effect({
@@ -720,7 +728,7 @@ Wormhole.tbp.Module({
                     local modules = Wormhole.tbp.get_equipped_modules(card)
                     local used_modules = {}
                     for key, module in pairs(modules) do
-                        if module ~= self.slot and module.durability < module.total_durability then
+                        if key ~= self.slot and module.durability < module.total_durability then
                             used_modules[#used_modules+1] = key
                         end
                     end
@@ -1142,7 +1150,7 @@ Wormhole.tbp.Module({
 		return { vars = { module.ability.extra.repetitions } }
     end,
     module_calculate = function (self, module, context, card)
-        if context.repetition and context.cardarea == G.play and next(SMODS.get_enhancements(context.other_card)) then
+        if context.repetition and context.cardarea == G.play and context.other_card and next(SMODS.get_enhancements(context.other_card)) then
             return {
                 repetitions = module.repetitions
             }

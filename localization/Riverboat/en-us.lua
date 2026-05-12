@@ -45,7 +45,7 @@ return {
             j_worm_riverboat_the_past = {
                 name = "The Past",
                 text = {
-                    "Tracks total {C:attention}Hands{} played this run",
+                    "Tracks total {C:blue}Hands{} played this run",
                     "Currently: {C:attention}#1#",
                     "{C:inactive}Yearns for the Future."
                 }

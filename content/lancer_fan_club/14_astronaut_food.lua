@@ -35,7 +35,7 @@ SMODS.Joker({
 		} }
 	end,
 	calculate = function(self, card, context)
-		if context.poker_hand_changed and context.card and context.card.config.center.key ~= "j_worm_lfc_astronaut_food" then
+		if context.poker_hand_changed and context.card and context.card.config and context.card.config.center and context.card.config.center.key ~= "j_worm_lfc_astronaut_food" then
 			local count = math.min(context.new_level-context.old_level,card.ability.extra.remaining)
 			SMODS.upgrade_poker_hands {
 				hands = context.scoring_name,

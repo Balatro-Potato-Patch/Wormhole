@@ -150,7 +150,7 @@ local function register_rocket(args)
 		return true
 	end
 	args.can_use = args.can_use or function(self, card)
-		return not card.ability.extra.active and (#G.consumeables.cards < G.consumeables.config.card_limit or card.area == G.consumeables)
+		return not card.ability.extra.active and card.area == G.consumeables
 	end
 	args.use = args.use or function(self, card, area)
 		local other = false

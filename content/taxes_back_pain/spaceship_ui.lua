@@ -285,45 +285,6 @@ G.FUNCS.module_can_store = function(e)
     end
 end
 
-
-
-local tbp_shader_canvas = {}
-local target_height = 720
-
-local function init_canvas()
-    local screen_w, screen_h = love.graphics.getDimensions()
-    local scale = screen_h / target_height
-    local canvas_w = math.ceil(screen_w / scale)
-    local canvas_h = target_height
-    
-    if not tbp_shader_canvas.canvas or 
-       tbp_shader_canvas.w ~= canvas_w or 
-       tbp_shader_canvas.h ~= canvas_h then
-        tbp_shader_canvas.canvas = love.graphics.newCanvas(canvas_w, canvas_h, {})
-        tbp_shader_canvas.w = canvas_w
-        tbp_shader_canvas.h = canvas_h
-        tbp_shader_canvas.scale = scale
-    end
-end
-
-local love_resize_ref = love.resize
-function love.resize(w, h)
-    if love_resize_ref then love_resize_ref(w, h) end
-    if tbp_shader_canvas.canvas then
-        tbp_shader_canvas.scale = h / target_height
-        tbp_shader_canvas.w = math.ceil(w / tbp_shader_canvas.scale)
-        tbp_shader_canvas.h = target_height
-        tbp_shader_canvas.canvas = love.graphics.newCanvas(tbp_shader_canvas.w, tbp_shader_canvas.h, {})
-    end
-end
-
-local game_init_ref = Game.init_game_object
-function Game:init_game_object()
-    local ret = game_init_ref(self)
-    init_canvas()
-    return ret
-end
-
 --Can be enabled later at any time by setting G.GAME.tbp_module_replace_active = true
 SMODS.ScreenShader{
     key = 'tbp_space_warp',
@@ -333,16 +294,8 @@ SMODS.ScreenShader{
         return G.GAME and G.GAME.tbp_module_replace_active and G.GAME.tbp_module_replace_active > 0
     end,
     draw = function(self, shader, canvas)
-        init_canvas()
-        love.graphics.push("all")
-        love.graphics.setCanvas(tbp_shader_canvas.canvas)
-        love.graphics.clear()
-        love.graphics.setShader(shader)
-        love.graphics.draw(canvas, 0, 0, 0, 1/tbp_shader_canvas.scale, 1/tbp_shader_canvas.scale)
-        love.graphics.setCanvas()
-        love.graphics.pop()
+        Wormhole.bg_manager:smart_scale(shader, w, h)
         love.graphics.setShader()
-        love.graphics.draw(tbp_shader_canvas.canvas, 0, 0, 0, tbp_shader_canvas.scale, tbp_shader_canvas.scale)
 
         love.graphics.setCanvas({love.graphics.getCanvas(), stencil = true})
         for k, v in ipairs(Wormhole.tbp.shader_draw_stuff) do

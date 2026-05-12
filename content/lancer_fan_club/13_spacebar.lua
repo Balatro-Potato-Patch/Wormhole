@@ -150,6 +150,8 @@ local spr = love.graphics.newImage(love.image.newImageData(SMODS.NFS.newFileData
 local quad = love.graphics.newQuad(0, 0, 1, 1, 1, 1)
 local sx,sy = spr:getDimensions()
 
+spr:setFilter("nearest","nearest")
+
 if not love.draw then function love.draw() end end
 local draw_hook = love.draw
 function love.draw()

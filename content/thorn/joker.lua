@@ -334,7 +334,7 @@ SMODS.Joker {
             end
         end
     end,
-    ppu_artist = { "hatstack" },
+    ppu_artist = { "mtw" },
     ppu_coder = { "sophie" },
     ppu_team = { "thorn" },
 }
@@ -400,7 +400,7 @@ SMODS.Joker {
             end
         end
     end,
-    ppu_artist = { "hatstack" },
+    ppu_artist = { "mtw" },
     ppu_coder = { "sophie" },
     ppu_team = { "thorn" },
 }

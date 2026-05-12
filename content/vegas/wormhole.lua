@@ -608,8 +608,8 @@ SMODS.Joker{
 	end,
 	atlas = "vegas_jokers",
 	pos = {x = 0, y = 2},
-	rarity = 2,
-	cost = 6,
+	rarity = 3,
+	cost = 7,
 	blueprint_compat = false,
 	discovered = true,
 	eternal_compat = true,
@@ -771,12 +771,17 @@ SMODS.Joker{
 	end
 }
 
+SMODS.Sound {
+    key = 'vegas_bazinga',
+    path = 'vegas/bazinga.ogg'
+}
+
 SMODS.Joker{
 	key = "bigbang",
 	attributes = {"generation", "joker", "on_sell", "space"},
 	config = { extra = {JokerCount = 0, JokerNeed = 15}},
 	loc_vars = function(self, info_queue, card)
-		return { vars = { card.ability.extra.JokerNeed, colours = {G.C.RARITY.Legendary} }}
+		return { vars = { card.ability.extra.JokerNeed - card.ability.extra.JokerCount, colours = {G.C.RARITY.Legendary} }}
 	end,
 	atlas = "vegas_jokers",
 	pos = {x = 2, y = 2},
@@ -792,7 +797,9 @@ SMODS.Joker{
 	calculate = function(self, card, context)
 		if context.selling_card and context.card.ability.set == 'Joker' then
 			card.ability.extra.JokerCount = card.ability.extra.JokerCount + 1
-			if card.ability.extra.JokerCount == 15 then
+			SMODS.calculate_effect({ message = card.ability.extra.JokerCount .. '/' .. card.ability.extra.JokerNeed, colour = G.C.ATTENTION },card)
+			if card.ability.extra.JokerCount >= card.ability.extra.JokerNeed then
+				SMODS.calculate_effect({ message = localize('k_vegas_bazinga'), sound = 'worm_vegas_bazinga', volume = 0.8 },card)
 				G.E_MANAGER:add_event(Event({
 					trigger = 'after',
 					delay = 0.4,
@@ -804,12 +811,7 @@ SMODS.Joker{
 						return true
 					end
 				}))
-				delay(0.6)
-				return {
-					message = "Bazinga!"
-				}
 			end
-		card.ability.extra.JokerNeed = 15 - card.ability.extra.JokerCount
 		end
 	end
 }

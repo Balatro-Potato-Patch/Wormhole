@@ -46,27 +46,36 @@ SMODS.Consumable{
         return card.ability.extra.effects_triggered >= card.ability.extra.effects_required
     end,
     calculate = function(self, card, context)
-        if context.repetition and context.cardarea == G.hand and context.full_hand then
-            if next(context.card_effects[1]) or (#context.card_effects > 1) then
-                card.ability.extra.effects_triggered = card.ability.extra.effects_triggered + 1
-                if card.ability.extra.effects_triggered >= card.ability.extra.effects_required then
-                    card_eval_status_text(card, 'extra', nil, 1, nil, {
-                        message = localize('k_active_ex'),
-                        colour = G.C.RED
-                    })
-                    return {
-                        repetitions = 0,
-                    }
-                else
-                    card_eval_status_text(card, 'extra', nil, 1, nil, {
-                        message = localize{type = 'variable', key = 'a_remaining', vars = {card.ability.extra.effects_required - card.ability.extra.effects_triggered}},
-                        colour = G.C.ORANGE
-                    })
-                    return {
-                        repetitions = 0,
-                    }
-                end
+        if context.worm_hand_trigger then
+            card.ability.extra.effects_triggered = card.ability.extra.effects_triggered + 1
+            if card.ability.extra.effects_triggered >= card.ability.extra.effects_required then
+                card_eval_status_text(card, 'extra', nil, 1, nil, {
+                    message = localize('k_active_ex'),
+                    colour = G.C.RED
+                })
+                return {
+                    repetitions = 0,
+                }
+            else
+                card_eval_status_text(card, 'extra', nil, 1, nil, {
+                    message = localize{type = 'variable', key = 'a_remaining', vars = {card.ability.extra.effects_required - card.ability.extra.effects_triggered}},
+                    colour = G.C.ORANGE
+                })
+                return {
+                    repetitions = 0,
+                }
             end
         end
     end,
 }
+
+local ste = SMODS.trigger_effects
+SMODS.trigger_effects = function(effects, card)
+    local ret = ste(effects, card)
+
+    if card and card.area and card.area == G.hand and next(ret) then
+        SMODS.calculate_context({worm_hand_trigger = true, card = card})
+    end
+
+    return ret
+end

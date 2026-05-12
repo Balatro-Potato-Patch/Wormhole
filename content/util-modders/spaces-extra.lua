@@ -98,7 +98,7 @@ end
 SMODS.Stake {
     key = 'util_void',
     atlas = 'util_stake',
-    applied_stakes = {'gold'},
+    applied_stakes = {'gold', 'worm_mrrp_cosmic'},
     prefix_config = { applied_stakes = { mod = false } },
     ppu_team = {"util-modders"},
     modifiers = function ()
@@ -123,7 +123,7 @@ SMODS.Back {
         if context.poker_hand_changed and not black_hole_lock and context.new_level and context.new_level > context.old_level then
             --print('levelup hand', context.scoring_name, context.old_level, context.new_level, back.effect.config.extra)
             black_hole_lock = true
-            SMODS.smart_level_up_hand(context.card, context.scoring_name, false, back.effect.config.extra)
+            SMODS.smart_level_up_hand(context.card, context.scoring_name, context.card and context.card.config.center_key == "c_black_hole", back.effect.config.extra)
             black_hole_lock = false
         end
     end

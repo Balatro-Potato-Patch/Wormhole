@@ -697,12 +697,28 @@ SMODS.Consumable { -- Cosmospolitan
     end,
     calculate = function(self, card, context)
         if context.setting_blind and card.ability.drink_values.primed and card.ability.drink_values.filled then
-            local key = SMODS.poll_object({ attributes = { card.ability.extra.current_team }, rarity = false })
+            local cosmos_filter = function(pool)
+                local all_unavailable = true
+                for i, v in ipairs(pool) do
+                    if G.P_CENTERS[v.key] and G.P_CENTERS[v.key].set == 'Back' then
+                        pool[i] = 'UNAVAILABLE'
+                    elseif v.key ~= 'UNAVAILABLE' then
+                        all_unavailable = false
+                    end
+                end
+
+                if all_unavailable then pool = {{key = 'j_joker', type = 'Joker'}} end
+
+                return pool
+            end
+            local key = SMODS.poll_object({ attributes = { card.ability.extra.current_team }, rarity = false, filter = cosmos_filter })
             local area = G[Wormhole.Absinthe.get_card_area_to_emplace(key)]
             if area then
-                local buffer = area == G.jokers and 'joker_buffer' or 'consumeable_buffer'
-                if #area.cards + G.GAME[buffer] < area.config.card_limit then
-                    G.GAME[buffer] = G.GAME[buffer] + 1
+                local buffer = area == G.jokers and 'joker_buffer' or area == G.consumeables and 'consumeable_buffer'
+                if buffer and #area.cards + G.GAME[buffer] < area.config.card_limit or not buffer then
+                    if buffer then
+                        G.GAME[buffer] = G.GAME[buffer] + 1
+                    end
                     G.E_MANAGER:add_event(Event({
                         func = function()
                             local _card = SMODS.add_card({ key = key, area = area })
@@ -1032,7 +1048,7 @@ SMODS.Consumable { -- Stargarita
             primed = false,
             empty_sound = "worm_abs_drink",
         },
-        extra = { drawn_cards = 2 },
+        extra = { drawn_cards = 3 },
     },
     cost = 3,
     loc_vars = function(self, info_queue, card)
@@ -1058,8 +1074,9 @@ SMODS.Consumable { -- Stargarita
         if context.drawing_cards and card.ability.drink_values.filled and card.ability.drink_values.primed and not context.repetition then
             G.E_MANAGER:add_event(Event({
                 func = function()
-                    draw_card(G.deck, G.hand)
-                    draw_card(G.deck, G.hand)
+                    for i = 1, card.ability.extra.drawn_cards do
+                        draw_card(G.deck, G.hand)
+                    end
                     SMODS.calculate_effect({ message = localize { type = 'variable', key = 'a_drawn', vars = { card.ability.extra.drawn_cards } }, colour = G.C.BLUE, }, card)
                     card:abs_empty_drink()
                     return true
@@ -1068,7 +1085,20 @@ SMODS.Consumable { -- Stargarita
         end
     end,
     use = function(self, card, area, copier)
-        card:abs_toggle_drink_prime()
+        if G.hand.cards and #G.hand.cards > 0 and card.ability.drink_values.filled then
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    for i = 1, card.ability.extra.drawn_cards do
+                        draw_card(G.deck, G.hand)
+                    end
+                    SMODS.calculate_effect({ message = localize { type = 'variable', key = 'a_drawn', vars = { card.ability.extra.drawn_cards } }, colour = G.C.BLUE, }, card)
+                    card:abs_empty_drink()
+                    return true
+                end
+            }))
+        else
+            card:abs_toggle_drink_prime()
+        end
     end,
     can_use = function(self, card)
         return card.ability.drink_values.filled

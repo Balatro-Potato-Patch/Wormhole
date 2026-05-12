@@ -10,7 +10,7 @@ function thorn_most_played()
     local hand_key = nil
     local order = #G.handlist + 1
     for k, v in pairs(G.GAME.hands) do
-        if (v.played ~= 0) and (v.played >= played) and (v.order < order) then
+        if (v.played ~= 0) and (v.played >= played) or (v.played == played) and (v.order < order) then
             order = v.order
             played = v.played
             hand_key = k

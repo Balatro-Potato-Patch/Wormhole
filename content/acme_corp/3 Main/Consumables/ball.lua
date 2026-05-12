@@ -20,9 +20,15 @@ local card_click_ref = Card.click
 function Card:click()
     if self.config.center.key == 'c_worm_acme_ball' and not self.highlighted then
         self.worm_ACME_last_T = G.TIMERS.REAL
+        play_sound('worm_acme_ball_bounce')
     end
     card_click_ref(self)
 end
+
+SMODS.Sound {
+    key = 'acme_ball_bounce',
+    path = 'acme_corp/ball.ogg'
+}
 
 SMODS.Consumable{
     key = 'acme_ball',

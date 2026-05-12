@@ -1,6 +1,6 @@
 local upgrade_hook = SMODS.upgrade_poker_hands
 function SMODS.upgrade_poker_hands(args)
-    if next(SMODS.find_card("j_worm_thorn_binary")) and args.from.config.center.set == "Planet" then
+    if next(SMODS.find_card("j_worm_thorn_binary")) and args.from and args.from.config and args.from.config.center and args.from.config.center.set == "Planet" then
         local level_down = false
         for k, v in pairs(SMODS.find_card("j_worm_thorn_binary")) do
             if v.area.config.type == "joker" and not level_down then

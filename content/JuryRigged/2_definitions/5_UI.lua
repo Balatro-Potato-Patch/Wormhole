@@ -22,6 +22,7 @@ end
 Wormhole.JR_UTILS.create_UIBox_current_satellites = function(simple)
   local names = {
     "Flush Five",
+    "Flush House",
     "Five of a Kind",
     "Straight Flush",
     "Four of a Kind",
@@ -36,7 +37,7 @@ Wormhole.JR_UTILS.create_UIBox_current_satellites = function(simple)
   local hands = {}
 
   for i, hand in ipairs(names) do
-    if Wormhole.JR_UTILS.get_satellite(hand) then
+    if Wormhole.JR_UTILS.get_satellite(hand) and G.GAME.hands[hand].visible then
       table.insert(hands, Wormhole.JR_UTILS.create_UIBox_current_hand_row(hand, simple))
     end
   end
