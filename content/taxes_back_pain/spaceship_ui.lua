@@ -418,7 +418,7 @@ end
 
 local localize_hook = localize
 function localize(args, misc_cat)
-    if args.type == 'name' and (args.set == 'tbp_module' or args.key == 'undiscovered_tbp_module') then return end
+    if type(args) == "table" and args.type == 'name' and (args.set == 'tbp_module' or args.key == 'undiscovered_tbp_module') then return end
     return localize_hook(args, misc_cat)
 end
 
