@@ -15,6 +15,12 @@ SMODS.Joker {
     pools = {
         ["Bartender"] = true
     },
+    config = {
+        extra = {
+            prob = 1,
+            odds = 3
+        }
+    },
     attributes = {"editions", "enhancements", "generation", "space"},
     ppu_artist = {'qunumeru'},
     ppu_coder = {'axyraandas', 'professorrenderer'},
@@ -22,20 +28,23 @@ SMODS.Joker {
     loc_vars = function(self,info_queue,card)
         info_queue[#info_queue + 1] = G.P_CENTERS.m_lucky
         info_queue[#info_queue + 1] = G.P_CENTERS.e_worm_hedonia_drunk
+        return { vars = { card.ability.extra.prob, card.ability.extra.odds } }
     end,
     calculate = function(self, card, context)
         if context.before and not context.blueprint then
             local num_drunk_cards = 0
             for k,v in ipairs(context.scoring_hand) do
                 if v.edition and string.sub(v.edition.key, 1, 15) == 'e_worm_hedonia_' then
-                    num_drunk_cards = num_drunk_cards + 1
-                    v:set_ability('m_lucky', nil, true)
-                    G.E_MANAGER:add_event(Event({
-                        func = function()
-                            v:juice_up()
-                            return true
-                        end
-                    }))
+                    if SMODS.pseudorandom_probability(card, 'hedonia_casino', card.ability.extra.prob, card.ability.extra.odds) then
+                        num_drunk_cards = num_drunk_cards + 1
+                        v:set_ability('m_lucky', nil, true)
+                        G.E_MANAGER:add_event(Event({
+                            func = function()
+                                v:juice_up()
+                                return true
+                            end
+                        }))
+                    end
                 end
             end
             if num_drunk_cards > 0 then

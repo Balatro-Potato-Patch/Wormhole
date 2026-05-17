@@ -16,7 +16,8 @@ return {
                 text = {
                     {
                         'Played {C:edition}{E:2}Tipsy{}, {C:edition}{E:1}Drunk{}, {C:dark_edition}{E:1}Very Drunk{},',
-                        'and {C:dark_edition}Blackout{} cards become',
+                        'and {C:dark_edition}Blackout{} cards have',
+                        'a {C:green}#1# in #2#{} chance to become',
                         '{C:attention}Lucky Cards{} when scored',
                     },
                     {
