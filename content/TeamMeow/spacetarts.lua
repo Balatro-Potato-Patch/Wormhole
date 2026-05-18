@@ -71,8 +71,9 @@ end
 local function catelite(card)
 	local pos
 	local ret = 0
-	if G.jokers and G.jokers.cards then
-		for k, v in ipairs(G.jokers.cards) do
+	--if G.jokers and G.jokers.cards then
+	if card.area and card.area.cards then
+		for k, v in ipairs(card.area.cards) do
 			if v == card then
 				pos = k
 			end
