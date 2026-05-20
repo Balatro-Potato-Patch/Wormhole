@@ -148,7 +148,7 @@ return {
             j_worm_euda_cometwild = {
                 name = "野性彗星",
                 text = {
-                    "{C:attention}百搭{}牌不会被削弱，",
+                    "{C:attention}万能{}牌不会被削弱，",
                     "计分时提供{X:mult,C:white}X#1#{}倍率"
                 },
             },
