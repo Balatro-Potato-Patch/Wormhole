@@ -19,7 +19,7 @@ SMODS.JimboQuip {
     key = 'lq_abs_nix',
     type = 'loss',
     extra = { 
-        ppu_dev = 'worm_nixthatoneartist', 
+        ppu_dev = 'worm_squeax09', 
         times = 10,
     },
 }
@@ -28,7 +28,7 @@ SMODS.JimboQuip {
     key = 'wq_abs_nix',
     type = 'win',
     extra = { 
-        ppu_dev = 'worm_nixthatoneartist',
+        ppu_dev = 'worm_squeax09',
         times = 11,
      },
 }

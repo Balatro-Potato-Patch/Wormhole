@@ -11,7 +11,7 @@ SMODS.Joker {
     cost = 5,
     atlas = 'worm_abs_jokers',
     pos = { x = 0, y = 0 },
-    ppu_artist = { 'nixthatoneartist' },
+    ppu_artist = { 'squeax09' },
     ppu_coder = { 'theAstra' },
     ppu_team = { 'absinthe' },
     attributes = {
@@ -133,7 +133,7 @@ SMODS.Joker {
     cost = 5,
     atlas = 'worm_abs_jokers',
     pos = { x = 3, y = 0 },
-    ppu_artist = { 'nixthatoneartist' },
+    ppu_artist = { 'squeax09' },
     ppu_coder = { 'pi_cubed' },
     ppu_team = { 'absinthe' },
     attributes = {

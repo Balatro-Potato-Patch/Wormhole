@@ -542,11 +542,10 @@ return {
                 }
                 }
             },
-            PotatoPatchDev_nixthatoneartist = {
-                name = 'nixthatoneartist',
+            PotatoPatchDev_squeax09 = {
+                name = 'squeax09',
                 text = { {
-                    'Some call me {C:green}Nix{}, some call me {C:green}Gabriella{}, but I certainly exist in any case.',
-                    '{s:0.75}(One could say I {C:edition,E:1,s:0.6}nixist...{}{s:0.6})',
+                    'Some call me {C:green}Gabriella{}, and some call me {C:green}Gabby{}, but I certainly exist in any case.',
                 }, {
                     '{s:0.6}i could squeak on about how technically this is my public debut Balatrowise cuz my own mod is taking a while but i digress{}',
                     'Most of my contributions were art-related, for the most part, albeit I dabbled in some sound, too.',

@@ -1010,7 +1010,7 @@ SMODS.Consumable { -- Nebulager
     set = 'abs_drinks',
     key = 'abs_nebulager',
     ppu_coder = { 'theAstra' },
-    ppu_artist = { 'nixthatoneartist' },
+    ppu_artist = { 'squeax09' },
     ppu_team = { 'absinthe' },
     pos = { x = 2, y = 3 },
     atlas = 'abs_drinks',

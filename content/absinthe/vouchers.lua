@@ -12,7 +12,7 @@ SMODS.Voucher {
     key = 'abs_happy_hour',
     atlas = 'abs_vouchers',
     pos = {x = 0, y = 0},
-    ppu_artist = { 'nixthatoneartist' },
+    ppu_artist = { 'squeax09' },
     ppu_coder = { 'theAstra' },
     ppu_team = { 'absinthe' },
     redeem = function(self, card)

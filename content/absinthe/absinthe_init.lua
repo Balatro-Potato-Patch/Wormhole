@@ -76,9 +76,9 @@ PotatoPatchUtils.Developer {
 }
 
 PotatoPatchUtils.Developer {
-    name = 'nixthatoneartist',
+    name = 'squeax09',
     team = 'absinthe',
-    colour = HEX("0db829"),
+    colour = HEX("c551bd"),
     atlas = 'worm_abs_credits',
     pos = { x = 0, y = 3 },
     soul_pos = { x = 1, y = 3 },
