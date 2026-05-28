@@ -328,7 +328,7 @@ return {
     misc = {
             poker_hand_descriptions = {
                 worm_pkr_euda_nova = {
-                    "5 cards that are {C:attention}Wild{}",
+                    "5 cards that are Wild",
                 },
             },
             poker_hands = {
