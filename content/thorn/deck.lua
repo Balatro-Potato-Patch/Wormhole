@@ -14,7 +14,6 @@ function thorn_renamelater_deck_played_this_ante(handname)
 end
 
 SMODS.Back{
-    name = "Unnamed Deck", 
     key = "thorn_renamelater",
     
     pos = {
@@ -22,10 +21,8 @@ SMODS.Back{
         y = 0,
     },
     atlas = 'thorn_back',
-    
-    loc_vars = function(self, info_queue, center)
-        return {vars = {}}
-    end,
+
+    ppu_team = { "thorn" },
     
     config = {
         requirement = 3,

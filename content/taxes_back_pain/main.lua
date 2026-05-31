@@ -332,6 +332,7 @@ SMODS.Back{
     apply = function(self, back)
         G.GAME.starting_params.tbp_booster_always_spawn = true
     end,
+    ppu_team = { "tbp" },
 }
 
 ---

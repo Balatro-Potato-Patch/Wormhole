@@ -13,4 +13,5 @@ SMODS.Back {
             }
         }
 	end,
+    ppu_team = { "TheLastResort" },
 }
