@@ -47,7 +47,7 @@ SMODS.Joker {
                         G.GAME.consumeable_buffer = (G.GAME.consumeable_buffer or 0) + 1
                         G.E_MANAGER:add_event(Event{
                             func = function ()
-                                G.GAME.consumeable_buffer = G.GAME.consumeable_buffer - 1
+                                G.GAME.consumeable_buffer = 0
                                 SMODS.add_card{
                                     set = "Planet"
                                 }
