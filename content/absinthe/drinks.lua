@@ -212,6 +212,7 @@ function Card:abs_toggle_drink_prime()
             local eval = function(self) return self.ability.drink_values.primed end
             juice_card_until(self, eval, true)
         end
+        SMODS.calculate_effect({ message = self.ability.drink_values.primed and localize('k_worm_abs_primed') or localize('k_worm_abs_unprimed'), colour = G.C.ATTENTION }, self)
     end
 end
 

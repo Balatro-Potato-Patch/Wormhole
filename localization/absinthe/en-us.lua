@@ -631,6 +631,8 @@ return {
             k_worm_abs_emptied_ex = 'Emptied!',
             k_worm_abs_sipped_ex = 'Sipped!',
             k_worm_abs_refilled_ex = 'Refilled!',
+            k_worm_abs_primed = 'Primed',
+            k_worm_abs_unprimed = 'Unprimed',
             k_worm_abs_top_shelf_pack = 'Top Shelf Pack'
         },
         v_dictionary = {
