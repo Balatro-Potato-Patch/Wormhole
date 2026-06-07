@@ -310,6 +310,7 @@ register_rocket({
 	ppu_artist = { "comykel" },
 	hidden = true,
 	soul_set = "polarskull_rocket",
+    select_card = 'consumeables',
 	draw = function(self, card, layer)
 		if (layer == "card" or layer == "both") and card.sprite_facing == "front" then
 			card.children.center:draw_shader("booster", nil, card.ARGS.send_to_shader)
