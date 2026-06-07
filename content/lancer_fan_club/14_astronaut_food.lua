@@ -8,6 +8,7 @@ SMODS.Joker({
 	rarity = 2,
 	cost = 7,
 	blueprint_compat = true,
+	eternal_compat = false,
 	demicoloncompat = false,
 	atlas = "lfc_jokers",
 	ppu_coder = { "ellestuff.", "InvalidOS" },
