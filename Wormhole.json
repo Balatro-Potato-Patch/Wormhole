@@ -9,11 +9,11 @@
 	"priority": 0,
 	"badge_colour": "011638",
 	"badge_text_colour": "73fdff",
-	"version": "1.0.8",
+	"version": "1.0.8b",
 	"dependencies": [
 		"Steamodded (>=1.0.0~BETA-1620a)",
 		"Lovely (>=0.9)",
-		"PotatoPatchUtils (>=1.0.11)"
+		"PotatoPatchUtils (>=1.0.11b)"
 	],
 	"conflicts": [
 		"SilkTouch (<<1.2)",

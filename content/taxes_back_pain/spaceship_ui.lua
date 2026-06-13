@@ -387,18 +387,6 @@ function G.UIDEF.card_h_popup(card)
         end
         SMODS.create_mod_badges(card.config.center, badges)
         badges.mod_set = nil
-        if card.config.center and card.config.center.ppu_team then
-            local str = PotatoPatchUtils.CREDITS.generate_string(card.config.center.ppu_team, 'ppu_team_credit', card.config.center.mod.prefix)
-            if str then
-                table.insert(badges, str)
-            end
-        end
-        if card.config.center and card.config.center.ppu_artist then
-            local str = PotatoPatchUtils.CREDITS.generate_string(card.config.center.ppu_artist, 'ppu_art_credit', card.config.center.mod.prefix)
-            if str then
-                table.insert(badges, str)
-            end
-        end
 
         return {n=G.UIT.C, config = {align='cm', colour = G.C.CLEAR, padding = 0.05}, nodes = {
             {n=G.UIT.R, config = {align = 'cm', func = 'show_infotip',object = Moveable(),ref_table = next(info_boxes) and info_boxes or nil}, nodes = {
