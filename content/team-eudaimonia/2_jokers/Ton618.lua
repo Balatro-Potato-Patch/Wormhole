@@ -13,7 +13,7 @@ SMODS.Joker {
     eternal_compat = false,
     cost = 8,
     discovered = true,
-    config = {extra= {xmult=2} },
+    config = {extra= {xmult=2, enhanced = 0} },
     loc_vars = function(self, info_queue, card)
         return { vars = {card.ability.extra.xmult} }
     end,
@@ -22,32 +22,29 @@ SMODS.Joker {
     ppu_artist = {'LasagnaFelidae'},
     attributes = {"enhancements", "xmult", "destroy_card", "space"},
     calculate = function(self, card, context)
-        if context.joker_main then
-            local tot_enchanted = 0
-            for _, p_card in ipairs(context.scoring_hand or {}) do
-                if next(SMODS.get_enhancements(p_card)) then
-                    tot_enchanted = tot_enchanted + 1
-                end
-            end
-            if tot_enchanted then
-                return {
-                    xmult = card.ability.extra.xmult
-                }
-            end
+        if context.individual and context.cardarea == G.play and next(SMODS.get_enhancements(context.other_card)) then
+            context.other_card.worm_marked_by_ton = true
+            card.ability.extra.enhanced = card.ability.extra.enhanced + 1
         end
-        if context.destroy_card and context.cardarea == G.play then
-            if not next(SMODS.get_enhancements(context.destroy_card)) then return end
-            local tot_enchanted = 0
-            for _, p_card in ipairs(context.scoring_hand or {}) do
-                if next(SMODS.get_enhancements(p_card)) then
-                    tot_enchanted = tot_enchanted + 1
-                end
-            end
-            if tot_enchanted then
+
+        if context.joker_main and card.ability.extra.enhanced >= 2 then
+            return {
+                xmult = card.ability.extra.xmult
+            }
+        end
+
+        if context.destroy_card and context.destroy_card.worm_marked_by_ton and context.cardarea == G.play then
+            if card.ability.extra.enhanced >= 2 then
                 return {
                     remove = true
                 }
+            else
+                context.destroy_card.worm_marked_by_ton = nil
             end
+        end
+
+        if context.after then
+            card.ability.extra.enhanced = 0
         end
     end
 }
