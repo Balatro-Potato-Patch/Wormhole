@@ -29,11 +29,7 @@ SMODS.Consumable {
                     local new_cards = {}
                     for i = 1, #cards do
                         G.playing_card = (G.playing_card and G.playing_card + 1) or 1
-                        local _card = copy_card(cards[i], nil, nil, G.playing_card)
-                        _card:add_to_deck()
-                        G.deck.config.card_limit = G.deck.config.card_limit + 1
-                        table.insert(G.playing_cards, _card)
-                        G.hand:emplace(_card)
+                        local _card = SMODS.copy_card(cards[i])
                         _card:start_materialize(nil, _first_dissolve)
                         _first_dissolve = true
                         new_cards[#new_cards + 1] = _card

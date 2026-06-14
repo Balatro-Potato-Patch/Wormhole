@@ -238,13 +238,7 @@ SMODS.Joker({
                     end
 
                     if highest and highest.area == G.hand then
-                        local copy = copy_card(highest, nil, nil, G.deck)
-
-                        copy:add_to_deck()
-                        table.insert(G.playing_cards, copy)
-
-
-                        G.hand:emplace(copy)
+                        local copy = SMODS.copy_card(highest)
                         copy:start_materialize()
                     end
 

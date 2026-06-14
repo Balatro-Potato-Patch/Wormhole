@@ -472,15 +472,13 @@ SMODS.Consumable{
     end,
     use = function(self, card, area, copier)
         local selected = pseudorandom_element(G.jokers.cards, 'worm_shrug_alien_joker_copy')
-        local copied = copy_card(selected)
+        local copied = SMODS.copy_card(selected)
         if copied.ability.eternal then copied:remove_sticker('eternal') end
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             delay = 0.4,
             func = function()
                 card:juice_up(0.3, 0.5)
-                copied:add_to_deck()
-                G.jokers:emplace(copied)
                 attention_text({
                     text = localize('k_duplicated_ex'),
                     scale = 1.3,

@@ -134,11 +134,8 @@ Wormhole.JR_UTILS.Satellite {
       for _ = 1, Wormhole.JR_UTILS.get_level(vars.hand_type) do
         local _target = pseudorandom_element(context.scoring_hand, "worm_jr_tianwen_4")
         G.playing_card = (G.playing_card and G.playing_card + 1) or 1
-        local card_copied = copy_card(_target, nil, nil, G.playing_card)
+        local card_copied = SMODS.copy_card(_target)
         card_copied:add_to_deck()
-        G.deck.config.card_limit = G.deck.config.card_limit + 1
-        table.insert(G.playing_cards, card_copied)
-        G.hand:emplace(card_copied)
         card_copied.states.visible = nil
 
         G.E_MANAGER:add_event(Event({

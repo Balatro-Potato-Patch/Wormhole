@@ -328,13 +328,8 @@ SMODS.Consumable {
                 local _card = G.hand.highlighted[1]
                 play_sound('slice1', 0.96 + math.random() * 0.08)
                 for i = 1, card.ability.extra.copies do
-                    local copy = copy_card(_card, nil, nil, G.playing_card)
-                    copy:add_to_deck()
-                    G.deck.config.card_limit = G.deck.config.card_limit + 1
-                    table.insert(G.playing_cards, copy)
-                    G.hand:emplace(copy)
-                    assert(
-                        SMODS.modify_rank(copy, -card.ability.extra.reduction))
+                    local copy = SMODS.copy_card(_card)
+                    assert(SMODS.modify_rank(copy, -card.ability.extra.reduction))
                 end
                 _card:juice_up(0.3, 0.5)
                 SMODS.destroy_cards(G.hand.highlighted)

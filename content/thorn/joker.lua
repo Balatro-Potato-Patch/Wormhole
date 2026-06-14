@@ -192,11 +192,7 @@ SMODS.Joker {
         if context.individual and context.cardarea == "unscored" and next(context.poker_hands["Four of a Kind"]) then
             if context.other_card:is_face() then
                 G.playing_card = (G.playing_card and G.playing_card + 1) or 1
-                local card_copied = copy_card(context.other_card, nil, nil, G.playing_card)
-                card_copied:add_to_deck()
-                G.deck.config.card_limit = G.deck.config.card_limit + 1
-                table.insert(G.playing_cards, card_copied)
-                G.hand:emplace(card_copied)
+                local card_copied = SMODS.copy_card(context.other_card)
                 card_copied.states.visible = nil
 
                 G.E_MANAGER:add_event(Event({

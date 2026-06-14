@@ -37,7 +37,7 @@ SMODS.Consumable{
         for i = 1, card.ability.extra.numBreaks do
             G.E_MANAGER:add_event(Event({
                 func = function()
-                    local curCopy = copy_card(G.hand.highlighted[1],  nil, nil, G.playing_card)
+                    local curCopy = SMODS.copy_card(G.hand.highlighted[1])
                     curCopy.states.visible = nil
                     G.E_MANAGER:add_event(Event({
                         trigger = 'before',
@@ -49,9 +49,6 @@ SMODS.Consumable{
                     }))
                     curCopy:juice_up(0.2, 0.2)
                     curCopy:set_ability(card.ability.extra.mod_conv)
-                    curCopy:add_to_deck()
-                    G.deck.config.card_limit = G.deck.config.card_limit + 1
-                    G.hand:emplace(curCopy)
                     return true
                 end
             }))

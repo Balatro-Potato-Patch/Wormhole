@@ -221,8 +221,7 @@ SMODS.Joker {
                     random_drink:abs_refill_drink()
                     G.E_MANAGER:add_event(Event({
                         func = function()
-                            local new_drink = copy_card(random_drink)
-                            G.consumeables:emplace(new_drink)
+                            SMODS.copy_card(random_drink)
                             G.GAME.consumeable_buffer = 0
                             return true;
                         end

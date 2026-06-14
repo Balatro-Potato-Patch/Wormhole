@@ -36,10 +36,9 @@ SMODS.Joker {
               G.GAME.worm_euda_COLONYID = G.GAME.worm_euda_COLONYID + 1
               for _, stored_joker in ipairs(G.worm_euda_colony and G.worm_euda_colony.cards or {}) do
                 if stored_joker.ability.worm_euda_colonycitizen == joker.ability.extra.colonyid then
-                  local stored_joker_copy = copy_card(stored_joker, nil, nil, nil, nil)
+                  local stored_joker_copy = SMODS.copy_card(stored_joker, {area = G.worm_euda_colony})
                   stored_joker_copy.ability.worm_euda_colonycitizen = card.ability.extra.colonyid
                   stored_joker_copy.ability.worm_euda_already_shipped = nil
-                  G.worm_euda_colony:emplace(stored_joker_copy)
                 end
               end
               break
@@ -96,10 +95,9 @@ local function create_leave_colony_view(card)
     )
     for _, joker in ipairs(G.worm_euda_colony and G.worm_euda_colony.cards or {}) do
         if joker.ability.worm_euda_colonycitizen == card.ability.extra.colonyid then
-            local copied_joker = copy_card(joker, nil, nil, nil, nil)
+            local copied_joker = SMODS.copy_card(joker, {area = G.worm_euda_specificcolony})
             copied_joker.ability.source_joker = joker
             copied_joker.ability.worm_euda_colonycitizen = card.ability.extra.colonyid
-            G.worm_euda_specificcolony:emplace(copied_joker)
         end
     end
     return create_UIBox_generic_options({
@@ -138,10 +136,9 @@ local function create_join_colony_view(card)
     )
     for _, joker in ipairs(G.jokers and G.jokers.cards or {}) do
         if joker.config.center.key ~= "j_worm_euda_jokecolony" and not joker.ability.worm_euda_already_shipped then
-            local copied_joker = copy_card(joker, nil, nil, nil, nil)
+            local copied_joker = SMODS.copy_card(joker, {area = G.worm_euda_specificcolony})
             copied_joker.ability.source_joker = joker
             copied_joker.ability.worm_euda_colonycitizen = card.ability.extra.colonyid
-            G.worm_euda_specificcolony:emplace(copied_joker)
         end
     end
     return create_UIBox_generic_options({
