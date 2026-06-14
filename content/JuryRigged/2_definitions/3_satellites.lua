@@ -135,7 +135,6 @@ Wormhole.JR_UTILS.Satellite {
         local _target = pseudorandom_element(context.scoring_hand, "worm_jr_tianwen_4")
         G.playing_card = (G.playing_card and G.playing_card + 1) or 1
         local card_copied = SMODS.copy_card(_target)
-        card_copied:add_to_deck()
         card_copied.states.visible = nil
 
         G.E_MANAGER:add_event(Event({
