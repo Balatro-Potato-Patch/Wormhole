@@ -6,6 +6,9 @@ SMODS.ConsumableType({
 	collection_rows = { 3, 3 },
 	shop_rate = 1.5,
 	text_colour = G.C.UI.TEXT_DARK,
+	select_card = function()
+		return 'consumeables', true
+	end
 })
 
 SMODS.Atlas({

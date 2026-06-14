@@ -15,7 +15,10 @@ SMODS.ConsumableType{
     key = "worm_ultrabeast",
     primary_colour = HEX("345678"),
     secondary_colour = HEX("3e36c9"),
-    default = "c_worm_pheromosa" --CHANGE LATER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    default = "c_worm_pheromosa",
+    select_card = function()
+        return 'consumeables', true
+    end
 }
 
 local wormhole_create_card = function (self, card, i)

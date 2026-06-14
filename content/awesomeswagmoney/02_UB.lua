@@ -14,7 +14,6 @@ SMODS.Consumable {
     soul_pos = {x = 3, y = 2},
     display_size = {w = 89, h = 109},
     config = {extra_slots_used = 1, extra = {Xmult = 3, counter = 2}},
-    select_card = 'consumeables',
 
     loc_vars = function(self, info_queue, card)
         return {vars = {card.ability.extra.Xmult}}
@@ -86,7 +85,6 @@ SMODS.Consumable {
     soul_pos = {x = 1, y = 2},
     display_size = {w = 89, h = 109},
     config = {extra_slots_used = 1, extra = {mult = 53}},
-    select_card = 'consumeables',
 
     loc_vars = function(self, info_queue, card)
         return {vars = {card.ability.extra.mult}}
@@ -143,7 +141,6 @@ SMODS.Consumable {
     soul_pos = {x = 1, y = 0},
     display_size = {w = 89, h = 109},
     config = {extra_slots_used = 1, extra = {chips = 251}},
-    select_card = 'consumeables',
 
     loc_vars = function(self, info_queue, card)
         return {vars = {card.ability.extra.chips}}
@@ -226,7 +223,6 @@ SMODS.Consumable {
     soul_pos = {x = 1, y = 4},
     display_size = {w = 89, h = 109},
     config = {extra_slots_used = 1},
-    select_card = 'consumeables',
     loc_vars = function(self, info_queue, card)
         return {vars = {PRIMES[G.GAME.asm_celesteela] or 2}}
     end,
