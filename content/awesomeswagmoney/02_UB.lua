@@ -553,7 +553,7 @@ SMODS.Consumable {
                     if v ~= _card then
                         v:juice_up(5, 0.5)
                         delay(0.5 / #G.hand.cards)
-                        SMODS.destroy_cards(v, nil, true)
+                        SMODS.destroy_cards(v, {immediate = true})
                     end
                 end
                 return true

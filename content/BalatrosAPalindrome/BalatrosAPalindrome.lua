@@ -235,7 +235,7 @@ SMODS.Joker {
 			if context.blueprint then return end
 
 			if card.ability.extra.hands_left - 1 <= 0 then
-				SMODS.destroy_cards(card, nil, nil, true)
+				SMODS.destroy_cards(card, {pinch_anim = true})
 				G.GAME.pool_flags.bap_milky_drank = true;
 				return {
 					message = "Drank!",
@@ -404,7 +404,7 @@ SMODS.Joker {
 				end)
 			}))
 			if card.ability.extra.jokers - 1 <= 0 then
-				SMODS.destroy_cards(card, nil, nil, true)
+				SMODS.destroy_cards(card, {pinch_anim = true})
 				return {
 					message = "Walked!",
 					colour = G.C.FILTER

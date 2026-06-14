@@ -117,7 +117,7 @@ SMODS.Consumable {
 
                     last_card.ability.extra.junk_mult = junk_mult_count
 
-                    SMODS.destroy_cards(destroyed_cards, nil, true, true)
+                    SMODS.destroy_cards(destroyed_cards, {immediate = true, pinch_anim = true})
                     return true
                 end
             }))

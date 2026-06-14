@@ -56,7 +56,7 @@ SMODS.Joker({
 			
 			if context.blueprint or Wormhole.LancerFanClub.levels_all_hands[context.card.config.center.key] then return end
 			if card.ability.extra.remaining <= count then
-				SMODS.destroy_cards(card, nil, nil, false)
+				SMODS.destroy_cards(card)
 
 				return {
 					message = localize('k_eaten_ex')
@@ -76,7 +76,7 @@ function SMODS.upgrade_poker_hands(args, ...)
 		for _, card in ipairs(SMODS.find_card("j_worm_lfc_astronaut_food")) do
 			local count = math.min(args.level_up or 0, card.ability.extra.remaining)
 			if card.ability.extra.remaining <= count then
-				SMODS.destroy_cards(card, nil, nil, false)
+				SMODS.destroy_cards(card)
 				SMODS.calculate_effect({message = localize('k_eaten_ex')}, card)
 			else
 				card.ability.extra.remaining = card.ability.extra.remaining-count

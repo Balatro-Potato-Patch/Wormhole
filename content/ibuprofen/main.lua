@@ -291,7 +291,7 @@ SMODS.Joker {
         G.E_MANAGER:add_event(Event({
           func = function()
             play_sound('worm_ibu_boom')
-            SMODS.destroy_cards(card, nil, true)
+            SMODS.destroy_cards(card, {immediate = true})
             return true
           end
         }))

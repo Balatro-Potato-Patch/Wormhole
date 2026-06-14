@@ -52,7 +52,7 @@ SMODS.Joker {
         end
         if context.end_of_round and context.main_eval then
             if card.ability.extra.level - card.ability.extra.level_mod <= 0 then
-                SMODS.destroy_cards(card, nil, nil, true)
+                SMODS.destroy_cards(card, {pinch_anim = true})
                 return {
                     message = localize("k_eaten_ex")
                 }

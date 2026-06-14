@@ -35,7 +35,7 @@ SMODS.Joker {
                 }
                 
             elseif card.ability.extra.Xmult - card.ability.extra.Xmult_down <= 1 then
-                SMODS.destroy_cards(card, nil, nil, true)
+                SMODS.destroy_cards(card, {pinch_anim = true})
                 return{
                     message = localize('k_eaten_ex'),
                     colour = G.C.FILTER

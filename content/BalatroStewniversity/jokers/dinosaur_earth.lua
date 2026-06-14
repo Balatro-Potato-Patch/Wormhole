@@ -43,7 +43,7 @@ SMODS.Joker {
             func = function()
                 ExtinctionEvent.play_video()
 
-                SMODS.destroy_cards(dinosaur_earths, nil, nil, true)
+                SMODS.destroy_cards(dinosaur_earths, {pinch_anim = true})
                 return true
             end
         })

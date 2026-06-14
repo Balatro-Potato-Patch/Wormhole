@@ -50,7 +50,7 @@ SMODS.Tag {
                         end
                     end
                     if #cards_to_destroy > 0 then
-                        SMODS.destroy_cards(cards_to_destroy, true, true, false)
+                        SMODS.destroy_cards(cards_to_destroy, {bypass_eternal = true, immediate = true})
                     end
                     return true
                 end

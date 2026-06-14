@@ -322,7 +322,7 @@ SMODS.Joker {
             end
         elseif context.end_of_round and not context.blueprint and not context.repetition and not context.individual then
             if SMODS.pseudorandom_probability(card, 'devils_machine', 1, card.ability.extra.odds, 'devils_machine') then
-                SMODS.destroy_cards(card, nil, nil, true)
+                SMODS.destroy_cards(card, {pinch_anim = true})
                 SMODS.add_card { set = 'Joker', key = 'j_worm_thorn_giygas' }
                 return {
                     message = localize('k_thorn_giygas_reveal')

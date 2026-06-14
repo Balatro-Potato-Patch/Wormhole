@@ -145,7 +145,7 @@ SMODS.Consumable{
             if not removed[_card] then
                 removed[_card] = true
                 removedCount = removedCount + 1
-                SMODS.destroy_cards(_card, nil, nil, true)
+                SMODS.destroy_cards(_card, {pinch_anim = true})
             end
         end
     end,
@@ -167,7 +167,7 @@ SMODS.Consumable{
         local old_count = 0
         local new_count = 0
         for _, _card in ipairs(G.deck.cards) do
-            SMODS.destroy_cards(_card, nil, nil, true)
+            SMODS.destroy_cards(_card, {pinch_anim = true})
             old_count = old_count + 1
         end
         for i, _suit in pairs(SMODS.Suits) do
@@ -216,7 +216,7 @@ SMODS.Consumable{
     use = function(self, card, area, copier)
         local cardCount = #G.deck.cards
         for _, _card in ipairs(G.deck.cards) do
-            SMODS.destroy_cards(_card, nil, nil, true)
+            SMODS.destroy_cards(_card, {pinch_anim = true})
         end
         for i = 1, cardCount do
             local _card = SMODS.create_card({

@@ -104,7 +104,7 @@ SMODS.Consumable {
 
                 G.E_MANAGER:add_event(Event({
                     func = function()
-                        SMODS.destroy_cards(joker, nil, nil, true)
+                        SMODS.destroy_cards(joker, {pinch_anim = true})
                         return true
                     end
                 }))
