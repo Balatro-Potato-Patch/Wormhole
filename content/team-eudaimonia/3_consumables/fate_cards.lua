@@ -110,7 +110,13 @@ SMODS.Consumable{
             SMODS.modify_rank(_card, -rankMod)
         end
         for _, _card in ipairs(G.deck.cards) do
-            tempDeck[#tempDeck+1] = SMODS.copy_card(_card)
+            tempDeck[#tempDeck+1] = copy_card(_card, nil, nil, G.playing_card)
+        end
+        for _, _card in ipairs(tempDeck) do
+            _card:add_to_deck()
+            G.deck.config.card_limit = G.deck.config.card_limit + 1
+            table.insert(G.playing_cards, _card)
+            G.deck:emplace(_card)
         end
     end,
     can_use = function(self, card)
