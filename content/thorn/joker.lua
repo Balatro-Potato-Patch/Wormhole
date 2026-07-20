@@ -191,8 +191,7 @@ SMODS.Joker {
     calculate = function(self, card, context) --Most of this is vremade code for DNA :Þ
         if context.individual and context.cardarea == "unscored" and next(context.poker_hands["Four of a Kind"]) then
             if context.other_card:is_face() then
-                G.playing_card = (G.playing_card and G.playing_card + 1) or 1
-                local card_copied = SMODS.copy_card(context.other_card)
+                local card_copied = SMODS.copy_card(context.other_card, {area = G.hand})
                 card_copied.states.visible = nil
 
                 G.E_MANAGER:add_event(Event({
