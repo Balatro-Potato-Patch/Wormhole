@@ -462,7 +462,7 @@ SMODS.Joker({
         }
         card.ability.extra.ship_name = pseudorandom_element(_list_of_ship_names, pseudoseed("shipname"))
 
-		if next(SMODS.find_card("j_worm_tbp_spaceship")) then
+		if next(SMODS.find_card("j_worm_tbp_spaceship")) and card.area == G.jokers then
             G.E_MANAGER:add_event(Event({
                 func = function()
                     if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
