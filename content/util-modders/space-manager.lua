@@ -183,11 +183,12 @@ function manager:draw_background(title)
     if not conf then return sendWarnMessage("BG Shader active but no conf??", "SpaceManager") end
     local shader = self.manualSend(conf, 1)
     local w, h = love.graphics.getDimensions()
-    local scale = G.TILESCALE*G.TILESIZE*G.CANV_SCALE / 15
+    local scale = love.window.toPixels(G.TILESCALE*G.TILESIZE*G.CANV_SCALE / 15)
     local cw = math.ceil(w / scale)
     local ch = math.ceil(h / scale)
     if not manager.canvas then
         manager.canvas = love.graphics.newCanvas(cw, ch)
+        manager.canvas:setFilter("nearest", "nearest")
     end
     love.graphics.push("all")
     love.graphics.setCanvas(manager.canvas)
