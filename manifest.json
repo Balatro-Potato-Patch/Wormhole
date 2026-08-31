@@ -1,6 +1,7 @@
 {
 	"name": "Wormhole",
 	"description": "The mod created during MurphyObv's Sealab Joker Jam! ",
+    "website_url": "https://github.com/Balatro-Potato-Patch/Wormhole",
 	"version_number": "1.1.0",
 	"dependencies": [
 		"Steamodded-26.829.0",
