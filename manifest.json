@@ -1,0 +1,9 @@
+{
+	"name": "Wormhole",
+	"description": "The mod created during MurphyObv's Sealab Joker Jam! ",
+	"version_number": "1.1.0",
+	"dependencies": [
+		"Steamodded-26.829.0",
+		"PotatoPatchUtils-1.0.16"
+	]
+}
