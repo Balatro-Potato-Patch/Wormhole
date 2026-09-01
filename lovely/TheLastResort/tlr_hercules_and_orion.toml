@@ -44,42 +44,46 @@ match_indent = true
 [[patches]]
 [patches.pattern]
 target = 'functions/state_events.lua'
-pattern = '''if G.GAME.round_resets.blind == G.P_BLINDS.bl_small then
-                            G.GAME.round_resets.blind_states.Small = 'Defeated'
-                        elseif G.GAME.round_resets.blind == G.P_BLINDS.bl_big then
-                            G.GAME.round_resets.blind_states.Big = 'Defeated'
-                        else
-                            G.GAME.current_round.voucher = SMODS.get_next_vouchers()
-                            G.GAME.round_resets.blind_states.Boss = 'Defeated'
-                            for k, v in ipairs(G.playing_cards) do
-                                v.ability.played_this_ante = nil
-                            end
-                        end'''
+pattern = '''
+if G.GAME.round_resets.blind_states.Small == 'Current' then
+    G.GAME.round_resets.blind_states.Small = 'Defeated'
+elseif G.GAME.round_resets.blind_states.Big == 'Current' then
+    G.GAME.round_resets.blind_states.Big = 'Defeated'
+else
+    G.GAME.current_round.voucher = SMODS.get_next_vouchers()
+    G.GAME.round_resets.blind_states.Boss = 'Defeated'
+    for k, v in ipairs(G.playing_cards) do
+        v.ability.played_this_ante = nil
+    end
+end
+'''
 position = 'at'
-payload = '''if not G.GAME.worm_tlr_hercules_blind then
-        --print(G.GAME.round_resets.blind_states)
-        --print(G.GAME.worm_tlr_orion_original_blind)
-        --print((G.P_BLINDS[G.GAME.worm_tlr_orion_original_blind] or {}).boss)
-        if ((G.GAME.round_resets.blind_states.Small == "Defeated" or G.GAME.round_resets.blind_states.Small == "Skipped") and (G.GAME.round_resets.blind_states.Big == "Defeated" or G.GAME.round_resets.blind_states.Big == "Skipped") and (G.P_BLINDS[G.GAME.worm_tlr_orion_original_blind] or {}).boss) then
-            --print("wtf")
-            G.GAME.current_round.voucher = SMODS.get_next_vouchers()
-            G.GAME.round_resets.blind_states.Boss = 'Defeated'
-            for k, v in ipairs(G.playing_cards) do
-                v.ability.played_this_ante = nil
-            end
-            G.GAME.worm_tlr_orion_original_blind = "bl_small"
-		elseif G.GAME.round_resets.blind == G.P_BLINDS.bl_small then
-				G.GAME.round_resets.blind_states.Small = 'Defeated'
-		elseif G.GAME.round_resets.blind == G.P_BLINDS.bl_big then
-				G.GAME.round_resets.blind_states.Big = 'Defeated'
-		else
-				G.GAME.current_round.voucher = SMODS.get_next_vouchers()
-				G.GAME.round_resets.blind_states.Boss = 'Defeated'
-				for k, v in ipairs(G.playing_cards) do
-						v.ability.played_this_ante = nil
-				end
-		end
-end'''
+payload = '''
+if not G.GAME.worm_tlr_hercules_blind then
+    --print(G.GAME.round_resets.blind_states)
+    --print(G.GAME.worm_tlr_orion_original_blind)
+    --print((G.P_BLINDS[G.GAME.worm_tlr_orion_original_blind] or {}).boss)
+    if ((G.GAME.round_resets.blind_states.Small == "Defeated" or G.GAME.round_resets.blind_states.Small == "Skipped") and (G.GAME.round_resets.blind_states.Big == "Defeated" or G.GAME.round_resets.blind_states.Big == "Skipped") and (G.P_BLINDS[G.GAME.worm_tlr_orion_original_blind] or {}).boss) then
+        --print("wtf")
+        G.GAME.current_round.voucher = SMODS.get_next_vouchers()
+        G.GAME.round_resets.blind_states.Boss = 'Defeated'
+        for k, v in ipairs(G.playing_cards) do
+            v.ability.played_this_ante = nil
+        end
+        G.GAME.worm_tlr_orion_original_blind = "bl_small"
+	elseif G.GAME.round_resets.blind_states.Small == 'Current' then
+        G.GAME.round_resets.blind_states.Small = 'Defeated'
+    elseif G.GAME.round_resets.blind_states.Big == 'Current' then
+        G.GAME.round_resets.blind_states.Big = 'Defeated'
+    else
+        G.GAME.current_round.voucher = SMODS.get_next_vouchers()
+        G.GAME.round_resets.blind_states.Boss = 'Defeated'
+        for k, v in ipairs(G.playing_cards) do
+            v.ability.played_this_ante = nil
+        end
+    end
+end
+'''
 match_indent = true
 
 #prevent rewards on t1-2
@@ -110,31 +114,35 @@ match_indent = true
 [[patches]]
 [patches.pattern]
 target = 'functions/state_events.lua'
-pattern = '''if G.GAME.round_resets.blind == G.P_BLINDS.bl_small then
-                G.GAME.round_resets.blind_states.Small = 'Current'
-                G.GAME.current_boss_streak = 0
-                blhash = 'S'
-            elseif G.GAME.round_resets.blind == G.P_BLINDS.bl_big then
-                G.GAME.round_resets.blind_states.Big = 'Current'
-                G.GAME.current_boss_streak = 0
-                blhash = 'B'
-            else
-                G.GAME.round_resets.blind_states.Boss = 'Current'
-                blhash = 'L'
-            end'''
-position = 'at'
-payload = '''if G.GAME.round_resets.blind == G.P_BLINDS.bl_small then
-		if not G.GAME.worm_tlr_hercules_blind and not ((G.GAME.round_resets.blind_states.Small == "Defeated" or G.GAME.round_resets.blind_states.Small == "Skipped") and (G.GAME.round_resets.blind_states.Big == "Defeated" or G.GAME.round_resets.blind_states.Big == "Skipped") and (G.P_BLINDS[G.GAME.worm_tlr_orion_original_blind] or {}).boss) then G.GAME.round_resets.blind_states.Small = 'Current' end
-		G.GAME.current_boss_streak = 0
-		blhash = 'S'
-elseif G.GAME.round_resets.blind == G.P_BLINDS.bl_big then
-		if not G.GAME.worm_tlr_hercules_blind and not ((G.GAME.round_resets.blind_states.Small == "Defeated" or G.GAME.round_resets.blind_states.Small == "Skipped") and (G.GAME.round_resets.blind_states.Big == "Defeated" or G.GAME.round_resets.blind_states.Big == "Skipped") and (G.P_BLINDS[G.GAME.worm_tlr_orion_original_blind] or {}).boss) then G.GAME.round_resets.blind_states.Big = 'Current' end
-		G.GAME.current_boss_streak = 0
-		blhash = 'B'
+pattern = '''
+if G.GAME.round_resets.blind_states.Small == 'Current' then
+    G.GAME.round_resets.blind_states.Small = 'Current'
+    G.GAME.current_boss_streak = 0
+    blhash = 'S'
+elseif G.GAME.round_resets.blind_states.Big == 'Current' then
+    G.GAME.round_resets.blind_states.Big = 'Current'
+    G.GAME.current_boss_streak = 0
+    blhash = 'B'
 else
-		if not G.GAME.worm_tlr_hercules_blind then G.GAME.round_resets.blind_states.Boss = 'Current' end
-		blhash = 'L'
-end'''
+    G.GAME.round_resets.blind_states.Boss = 'Current'
+    blhash = 'L'
+end
+'''
+position = 'at'
+payload = '''
+if G.GAME.round_resets.blind_states.Small == 'Current' then
+	if not G.GAME.worm_tlr_hercules_blind and not ((G.GAME.round_resets.blind_states.Small == "Defeated" or G.GAME.round_resets.blind_states.Small == "Skipped") and (G.GAME.round_resets.blind_states.Big == "Defeated" or G.GAME.round_resets.blind_states.Big == "Skipped") and (G.P_BLINDS[G.GAME.worm_tlr_orion_original_blind] or {}).boss) then G.GAME.round_resets.blind_states.Small = 'Current' end
+	G.GAME.current_boss_streak = 0
+	blhash = 'S'
+elseif G.GAME.round_resets.blind_states.Big == 'Current' then
+	if not G.GAME.worm_tlr_hercules_blind and not ((G.GAME.round_resets.blind_states.Small == "Defeated" or G.GAME.round_resets.blind_states.Small == "Skipped") and (G.GAME.round_resets.blind_states.Big == "Defeated" or G.GAME.round_resets.blind_states.Big == "Skipped") and (G.P_BLINDS[G.GAME.worm_tlr_orion_original_blind] or {}).boss) then G.GAME.round_resets.blind_states.Big = 'Current' end
+	G.GAME.current_boss_streak = 0
+	blhash = 'B'
+else
+	if not G.GAME.worm_tlr_hercules_blind then G.GAME.round_resets.blind_states.Boss = 'Current' end
+	blhash = 'L'
+end
+'''
 match_indent = true
 
 

@@ -42,7 +42,7 @@ match_indent = true
 [[patches]]
 [patches.pattern]
 target = "functions/state_events.lua"
-pattern = "check_and_set_high_score('hand', hand_chips*mult)"
+pattern = "check_and_set_high_score('hand',  SMODS.calculate_round_score() )"
 position = "after"
 payload = '''if Wormhole and Wormhole.ACME then
     local _s = hand_chips * mult
