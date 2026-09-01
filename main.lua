@@ -252,6 +252,46 @@ Wormhole.config_tab = function()
 		}
 	}
 end
+
+SMODS.RunSelectPage({
+    key = 'shop_modding',
+    start_run = function(self, choice)
+        if Wormhole.config.bonus_booster then SMODS.change_booster_limit(1) end
+        if Wormhole.config.bonus_slot then change_shop_size(1) end
+        if Wormhole.config.consumable_slots > 0 then
+            G.consumeables:change_size(Wormhole.config.consumable_slots)
+        end
+		if Wormhole.config.tarot_rate then
+			G.GAME.tarot_rate = G.GAME.tarot_rate * Wormhole.config.tarot_rate
+		end
+		if Wormhole.config.planet_rate then
+			G.GAME.planet_rate = G.GAME.planet_rate * Wormhole.config.planet_rate
+		end
+    end,
+    settings = function(self)
+        Wormhole.config.consumable_slots = Wormhole.config.consumable_slots or 0
+        Wormhole.config.planet_rate = Wormhole.config.planet_rate or 1
+        Wormhole.config.tarot_rate = Wormhole.config.tarot_rate or 1
+        return {
+            {n=G.UIT.C, nodes = {
+                {n=G.UIT.R, config = {align = 'cm'}, nodes = {{n=G.UIT.T, config = {text = localize('wormhole_explain_1'), scale = 0.37, colour = G.C.WHITE}}}},
+                {n=G.UIT.R, config = {align = 'cm'}, nodes = {{n=G.UIT.T, config = {text = localize('wormhole_explain_2'), scale = 0.37, colour = G.C.WHITE}}}},
+                {n=G.UIT.R, config = {align = 'cm'}, nodes = {{n=G.UIT.T, config = {text = localize('wormhole_explain_3'), scale = 0.37, colour = G.C.WHITE}}}},
+            }},
+            {n=G.UIT.R, nodes = {
+                {n=G.UIT.C, nodes = {create_toggle({label = localize('b_wormhole_shop_slots'), ref_table = Wormhole.config, label_scale = 0.3, ref_value = 'bonus_slot', active_colour = HEX('3FC7EB'), right = true}),}},
+                {n=G.UIT.C, nodes = {create_toggle({label = localize('b_wormhole_bonus_boosters'), ref_table = Wormhole.config, label_scale = 0.3, ref_value = 'bonus_booster', active_colour = HEX('3FC7EB'), right = true}),}}
+            }},        
+            {n=G.UIT.R, nodes = {
+                {n=G.UIT.C, nodes = {create_slider({label = localize('b_wormhole_planet_rate'), w = 3, h = 0.3, text_scale = 0.25, label_scale = 0.3, ref_table = Wormhole.config, ref_value = 'planet_rate', colour = HEX('3FC7EB'), background_colour = darken(HEX('3FC7EB'), 0.4), min = 1, max = 2, decimal_places = 1})}},
+                {n=G.UIT.C, nodes = {create_slider({label = localize('b_wormhole_tarot_rate'), w = 3, h = 0.3, text_scale = 0.25, label_scale = 0.3, ref_table = Wormhole.config, ref_value = 'tarot_rate', colour = HEX('3FC7EB'), background_colour = darken(HEX('3FC7EB'), 0.4), min = 1, max = 2, decimal_places = 1  })}}
+            }},
+            create_slider({label = localize('b_wormhole_consumable_slots'), w = 3, h = 0.3, text_scale = 0.25, label_scale = 0.3, ref_table = Wormhole.config, ref_value = 'consumable_slots', colour = HEX('3FC7EB'), background_colour = darken(HEX('3FC7EB'), 0.4), min = 0, max = 2}),
+        }
+    end
+})
+
+
 --#endregion
 
 assert(SMODS.load_file("bg.lua"))()
