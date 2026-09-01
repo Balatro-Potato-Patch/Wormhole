@@ -38,9 +38,7 @@ SMODS.Atlas {
     path = "colon_three/disintegration_loop.png",
     key = "ct_event_horizon",
     px = 71, py = 95,
-    frames = 7,
-    atlas_table = "ANIMATION_ATLAS",
-    dont_loop = true
+    atlas_table = "STATE_ATLAS",
 }
 
 PotatoPatchUtils.Team{

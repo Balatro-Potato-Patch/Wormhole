@@ -3,6 +3,24 @@ if not Wormhole.COLON_THREE or not Wormhole.COLON_THREE.loaded then return end
 SMODS.Joker {
     key = "ct_event_horizon",
     atlas = "ct_event_horizon",
+    sprite_args = {
+        states = {
+            witless = {
+                start_pos = { x = 0, y = 0 },
+                frames = 1
+            },
+            transition = {
+                start_pos = { x = 0, y = 0 },
+                frames = 7,
+                exit_to = 'horizon'
+            },
+            horizon = {
+                start_pos = { x = 7, y = 0 },
+                frames = 1
+            },
+        },
+        default_state = 'witless'
+    },
     pos = { x = 2, y = 0 },
     config = { extra = { levels = 0, rotation = 0 } },
     attributes = { "space", "hand_type", "passive"},
@@ -26,15 +44,13 @@ SMODS.Joker {
             return nil, true
         end
     end,
+    add_to_deck = function(self, card, from_debuff)
+        card:set_sprite_state('transition')
+    end,
     update = function(self, card, dt)
         if card.ability and card.ability.extra and card.ability.extra.levels then
             local mix_fac = 0.3 ^ dt
             card.ability.extra.rotation = mix_fac * (card.ability.extra.rotation or 0) + (1 - mix_fac) * card.ability.extra.levels * math.pi * 5 / 4 * 9 / 10
-        end
-        if card.area == G.jokers then
-            card.children.center.dont_animate = false
-        else
-            card.children.center.dont_animate = true
         end
     end,
 }
