@@ -19,5 +19,6 @@
 		"SilkTouch (<<1.2)",
 		"Talisman (<=2.7)"
 	],
-	"allow_redistribution": true
+	"allow_redistribution": true,
+	"icon_path": "modicon.png"
 }

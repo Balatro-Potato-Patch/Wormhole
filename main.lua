@@ -23,13 +23,6 @@ if PotatoPatchUtils then
 	SMODS.current_mod.extra_tabs = PotatoPatchUtils.CREDITS.register_page(SMODS.current_mod)
 end
 
-SMODS.Atlas {
-	key = "modicon",
-	path = "modicon.png",
-	px = 34,
-	py = 34
-}
-
 --#region Custom Menu
 SMODS.Atlas {
 	key = 'logo',
