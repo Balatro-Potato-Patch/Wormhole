@@ -23,6 +23,13 @@ SMODS.Atlas {
     py = 95
 }
 
+SMODS.Atlas {
+    key = "util_sticker",
+    path = "util-modders/void-sticker.png",
+    px = 71,
+    py = 95
+}
+
 SMODS.Joker {
     key = "util_cargo_space",
     atlas = "util_extras",
@@ -87,6 +94,8 @@ end
 SMODS.Stake {
     key = 'util_void',
     atlas = 'util_stake',
+    sticker_atlas = 'util_sticker',
+    sticker_pos = { x = 0, y = 0},
     applied_stakes = {'gold', 'worm_mrrp_cosmic'},
     prefix_config = { applied_stakes = { mod = false } },
     ppu_team = {"util-modders"},
