@@ -222,8 +222,8 @@ SMODS.Consumable{
             local _card = SMODS.create_card({
                 set = "Playing Card",
                 skip_materialize = true,
-                edition = SMODS.poll_edition("euda_bang", nil, true),
-                seal = SMODS.poll_seal("euda_bang", nil, false, nil, "euda_bang")
+                edition = SMODS.poll_edition({key = "euda_bang", no_negative = true}),
+                seal = SMODS.poll_seal({key = "euda_bang", type_key = "euda_bang"})
             })
             _card:add_to_deck()
             G.deck.config.card_limit = G.deck.config.card_limit + 1
