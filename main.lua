@@ -256,16 +256,18 @@ end
 SMODS.RunSelectPage({
     key = 'shop_modding',
     start_run = function(self, choice)
-        if Wormhole.config.bonus_booster then SMODS.change_booster_limit(1) end
-        if Wormhole.config.bonus_slot then change_shop_size(1) end
-        if Wormhole.config.consumable_slots > 0 then
-            G.consumeables:change_size(Wormhole.config.consumable_slots)
-        end
-		if Wormhole.config.tarot_rate then
-			G.GAME.tarot_rate = G.GAME.tarot_rate * Wormhole.config.tarot_rate
-		end
-		if Wormhole.config.planet_rate then
-			G.GAME.planet_rate = G.GAME.planet_rate * Wormhole.config.planet_rate
+		if not G.GAME.challenge then
+			if Wormhole.config.bonus_booster then SMODS.change_booster_limit(1) end
+			if Wormhole.config.bonus_slot then change_shop_size(1) end
+			if Wormhole.config.consumable_slots and Wormhole.config.consumable_slots > 0 then
+				G.consumeables:change_size(Wormhole.config.consumable_slots)
+			end
+			if Wormhole.config.tarot_rate then
+				G.GAME.tarot_rate = G.GAME.tarot_rate * Wormhole.config.tarot_rate
+			end
+			if Wormhole.config.planet_rate then
+				G.GAME.planet_rate = G.GAME.planet_rate * Wormhole.config.planet_rate
+			end
 		end
     end,
     settings = function(self)
